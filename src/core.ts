@@ -2,8 +2,8 @@
 export const WIDTH = 1280, FLOOR = 578, TICK_RATE = 60;
 export const A = { left: 1, right: 2, up: 4, down: 8, light: 16, medium: 32, heavy: 64, launcher: 128, bolt: 256, grab: 512, special: 1024, dash: 2048 } as const;
 export type Action = keyof typeof A;
-export type FighterId = 'rivet' | 'vela' | 'bront' | 'zephyr' | 'mox' | 'rune' | 'guest07' | 'guest08' | 'guest09' | 'guest10' | 'guest11' | 'guest12' | 'guest13' | 'guest14' | 'dumpstar';
-export const PLAYABLE_FIGHTERS = ['rivet', 'vela', 'bront', 'zephyr', 'mox', 'rune', 'guest07', 'guest08', 'guest09', 'guest10', 'guest11', 'guest12', 'guest13', 'guest14', 'dumpstar'] as const;
+export type FighterId = 'rivet' | 'vela' | 'bront' | 'zephyr' | 'mox' | 'rune' | 'guest07' | 'guest08' | 'guest09' | 'guest10' | 'guest11' | 'guest12' | 'guest13' | 'guest14' | 'dumpstar' | 'crapto' | 'vamp' | 'alpha777' | 'mandela' | 'bigswole' | 'nate';
+export const PLAYABLE_FIGHTERS = ['rivet', 'vela', 'bront', 'zephyr', 'mox', 'rune', 'guest07', 'guest08', 'guest09', 'guest10', 'guest11', 'guest12', 'guest13', 'guest14', 'dumpstar', 'crapto', 'vamp', 'alpha777', 'mandela', 'bigswole', 'nate'] as const;
 export type PlayableFighterId = typeof PLAYABLE_FIGHTERS[number];
 export type Mode = 'cpu' | 'dummy' | 'guard';
 export type MoveId = 'light' | 'medium' | 'heavy' | 'low' | 'sweep' | 'airLight' | 'airMedium' | 'airHeavy' | 'launcher' | 'bolt' | 'grab' | 'special';
@@ -53,14 +53,20 @@ export const ROSTER: Record<FighterId, {
     zephyr: { name: 'ZEPHYR', color: '#ffa74f', dark: '#bd5929', speed: 5.1, jump: 15.8, partner: 'vela', special: 'HARVEST MOON', role: 'AERIAL', description: 'Double-jump through the air and turn pumpkin strikes into a Harvest Moon relay.' },
     mox: { name: 'Yannix', color: '#a49eff', dark: '#4d468a', speed: 4.9, jump: 15.2, partner: 'bront', special: 'ECHO DRIVE', role: 'REACH', description: 'Catch an opening with longer-reaching light and medium attacks.' },
     rune: { name: 'Bongraker', color: '#f1b2d6', dark: '#895072', speed: 4.6, jump: 15.1, partner: 'zephyr', special: 'NIGHT BURST', role: 'BALANCED', description: 'Mix steady movement, close-range chains, and stronger, slower bolts.' },
-    guest07: { name: 'Juicy', color: '#c3d3df', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 7 is preserved for the finished sprite.' },
-    guest08: { name: 'Yoyo', color: '#accdbf', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 8 is preserved for the finished sprite.' },
-    guest09: { name: 'Red Kev', color: '#d4bdc8', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 9 is preserved for the finished sprite.' },
-    guest10: { name: 'FIGHTER 10', color: '#d9ccaa', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 10 is preserved for the finished sprite.' },
-    guest11: { name: 'Chode Adoration', color: '#b8bedb', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 11 is preserved for the finished sprite.' },
-    guest12: { name: '$Bitcoin Obama', color: '#c4d5b5', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Shared moveset, generic placeholder art; reference saved.' },
-    guest13: { name: 'Jahon', color: '#d6c3ad', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Shared moveset, generic placeholder art; reference saved.' },
- guest14:{name:'Virtuagram',color:'#becfce',dark:'#526070',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Shared moveset, generic placeholder art; reference saved.'},
+    guest07: { name: 'Juicy', color: '#c3d3df', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Individual reference-based sprites and shared combat kit.' },
+    guest08: { name: 'Yoyo', color: '#accdbf', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Individual reference-based sprites and shared combat kit.' },
+    guest09: { name: 'Red Kev', color: '#d4bdc8', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Individual reference-based sprites and shared combat kit.' },
+    guest10: { name: 'FIGHTER 10', color: '#d9ccaa', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Individual reference-based sprites and shared combat kit.' },
+    guest11: { name: 'Chode Adoration', color: '#b8bedb', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Individual reference-based sprites and shared combat kit.' },
+    guest12: { name: '$Bitcoin Obama', color: '#c4d5b5', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Individual reference-based sprites and shared combat kit.' },
+    guest13: { name: 'Jahon', color: '#d6c3ad', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Individual reference-based sprites and shared combat kit.' },
+ guest14:{name:'Virtuagram',color:'#becfce',dark:'#526070',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites and shared combat kit.'},
+ vamp:{name:'VAMP',color:'#5b83f4',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
+ alpha777:{name:'Alpha 777',color:'#98aa6c',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
+ mandela:{name:'Bitcoin Mandela',color:'#5288ef',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
+ bigswole:{name:'Big Swole',color:'#4395fb',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
+ nate:{name:'Little Foot Nate',color:'#97aee7',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
+ crapto:{name:'Crapto',color:'#d1a86c',dark:'#745137',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprite art with shared powers and animation timing.'},
  dumpstar:{name:'Dumpstar',color:'#77a9ff',dark:'#345bb3',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Shared Golden Sproto movement and attacks. Face and attire from the supplied reference; shoulder objects omitted.'},
 };
 for (const id of PLAYABLE_FIGHTERS) {
@@ -68,7 +74,7 @@ for (const id of PLAYABLE_FIGHTERS) {
         ROSTER[id].speed = 5.5;
         ROSTER[id].jump = 15.8;
         ROSTER[id].role = 'SHARED KIT';
-        ROSTER[id].description = 'Shared Golden Sproto movement, attacks, and Team Special behavior. ' + (id.startsWith('guest') ? 'Generic placeholder art; the reference is saved for later.' : 'Individual sprite art; unique powers are deferred.');
+        ROSTER[id].description = 'Shared Golden Sproto movement, attacks, and Team Special behavior. ' + 'Individual reference-based sprite art; unique powers are deferred.';
     }
 }
 ROSTER.dumpstar.description = 'Shared Golden Sproto movement, attacks, and Team Special behavior. Reference face and attire; objects above shoulders omitted.';

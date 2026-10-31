@@ -13,7 +13,7 @@
     "local_reference": "art/references/rivet.png",
     "inspected": true,
     "requirement": "First playable: yellow body, same face and clothing style; menu/combat sprites and animations. Exact user-provided name: Golden Sproto.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Golden Sproto"
   },
   {
@@ -22,7 +22,7 @@
     "local_reference": "art/references/vela.png",
     "inspected": true,
     "requirement": "Second playable: preserve reference, no clothes; menu/combat sprites and animations. Exact user-provided name: Morelight.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Morelight"
   },
   {
@@ -31,7 +31,7 @@
     "local_reference": "art/references/bront.png",
     "inspected": true,
     "requirement": "Later roster: buff and muscular; same sprite/animation deliverables. Exact user-provided name: Fat Head Dave.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Fat Head Dave"
   },
   {
@@ -40,7 +40,7 @@
     "local_reference": "art/references/zephyr.png",
     "inspected": true,
     "requirement": "Later roster: main character only; ignore mini pumpkin; pumpkin-related attacks.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers"
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior"
   },
   {
     "name": "mox",
@@ -48,7 +48,7 @@
     "local_reference": "art/references/mox.png",
     "inspected": true,
     "requirement": "Later roster: preserve distinguishing features; same sprite/animation deliverables. Exact user-provided name: Yannix.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Yannix"
   },
   {
@@ -57,7 +57,7 @@
     "local_reference": "art/references/rune.png",
     "inspected": true,
     "requirement": "Later roster: preserve distinguishing features; same sprite/animation deliverables. Exact user-provided name: Bongraker.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Bongraker"
   },
   {
@@ -66,7 +66,7 @@
     "local_reference": "art/references/reference-07.png",
     "inspected": true,
     "requirement": "Later roster: same menu/combat sprite and movement/attack animation guidelines. Exact user-provided name: Juicy.",
-    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Juicy"
   },
   {
@@ -75,7 +75,7 @@
     "local_reference": "art/references/reference-08.png",
     "inspected": true,
     "requirement": "Eventual playable fighter; keep first build restricted to first two. Exact user-provided name: Yoyo.",
-    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Yoyo"
   },
   {
@@ -84,7 +84,7 @@
     "local_reference": "art/references/reference-09.png",
     "inspected": true,
     "requirement": "Ignore red background; use head and create similar clothing. Exact user-provided name: Red Kev.",
-    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Red Kev"
   },
   {
@@ -93,7 +93,7 @@
     "local_reference": "art/references/reference-10.png",
     "inspected": true,
     "requirement": "Keep the Christmas hat; same sprite/animation guidelines.",
-    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred"
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior"
   },
   {
     "name": "reference-11",
@@ -101,7 +101,7 @@
     "local_reference": "art/references/reference-11.png",
     "inspected": true,
     "requirement": "Playable using shared powers and animations; preserve individual reference for finished art. User explicitly named this exact eleventh reference Chode Adoration.",
-    "status": "playable generic placeholder; finished appearance deferred",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Chode Adoration"
   },
   {
@@ -110,7 +110,7 @@
     "local_reference": "art/references/reference-12.png",
     "inspected": true,
     "requirement": "Playable using shared powers and animations; preserve individual reference for finished art. User explicitly named this exact twelfth reference $Bitcoin Obama.",
-    "status": "playable generic placeholder; finished appearance deferred",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "$Bitcoin Obama"
   },
   {
@@ -119,7 +119,7 @@
     "local_reference": "art/references/reference-13.png",
     "inspected": true,
     "requirement": "Playable using shared powers and animations; preserve individual reference for finished art. User explicitly named this exact thirteenth reference Jahon.",
-    "status": "playable generic placeholder; finished appearance deferred",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Jahon"
   },
   {
@@ -128,7 +128,7 @@
     "local_reference": "art/references/reference-14.png",
     "inspected": true,
     "requirement": "Playable using shared powers and animations; preserve individual appearance for finished art. User explicitly named this exact fourteenth reference Virtuagram.",
-    "status": "playable generic placeholder; exact reference preserved and inspected; finished appearance deferred",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior",
     "display_name": "Virtuagram"
   },
   {
@@ -138,6 +138,60 @@
     "local_reference": "art/references/dumpstar.png",
     "inspected": true,
     "requirement": "Use only face and attire; ignore objects above his shoulder. Shared powers and animation behavior.",
-    "status": "playable reference-based pixel sprite set"
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior"
+  },
+  {
+    "name": "crapto",
+    "display_name": "Crapto",
+    "library_file_id": "libfile_88cb1c608bc481918f8e01437ba67ec8",
+    "local_reference": "art/references/crapto.png",
+    "inspected": true,
+    "requirement": "Preserve blue bare body, yellow goggles with red irises and long red lips.",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior"
+  },
+  {
+    "name": "vamp",
+    "display_name": "VAMP",
+    "library_file_id": "libfile_6cd38533290481918cccf22efba08902",
+    "local_reference": "art/references/vamp.png",
+    "inspected": true,
+    "requirement": "Preserve blue feline head, narrow eyes, black jacket and yellow collar.",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior"
+  },
+  {
+    "name": "alpha777",
+    "display_name": "Alpha 777",
+    "library_file_id": "libfile_7c88596f7d1c8191ad91c5fddefb4c34",
+    "local_reference": "art/references/alpha777.png",
+    "inspected": true,
+    "requirement": "Preserve olive skin, blue goggles, red scarf and striped shirt.",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior"
+  },
+  {
+    "name": "bitcoin-mandela",
+    "display_name": "Bitcoin Mandela",
+    "library_file_id": "libfile_8ddab40bc32c819183d8bf1939f6300c",
+    "local_reference": "art/references/bitcoin-mandela.png",
+    "inspected": true,
+    "requirement": "Ignore white/black background; preserve face and attire.",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior"
+  },
+  {
+    "name": "big-swole",
+    "display_name": "Big Swole",
+    "library_file_id": "libfile_c4b1aa0404408191a2d54f3e23587d9b",
+    "local_reference": "art/references/big-swole.png",
+    "inspected": true,
+    "requirement": "Preserve blue body, huge white eyes, red nose and neck ring, crescent earring.",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior"
+  },
+  {
+    "name": "little-foot-nate",
+    "display_name": "Little Foot Nate",
+    "library_file_id": "libfile_313b9a1068e481919386d21b07824a60",
+    "local_reference": "art/references/little-foot-nate.png",
+    "inspected": true,
+    "requirement": "Preserve blue face, yellow spikes/hood, yellow eyes, red grin with pale-blue teeth.",
+    "status": "playable with individual reference-based menu and combat pixel sprites; shared animation behavior"
   }
 ]

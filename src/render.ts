@@ -1,32 +1,11 @@
-import {drawDumpstar} from './dumpstarArt';
-import { drawBront } from './brontArt';
-import { drawZephyr } from './zephyrArt';
-import { drawMox } from './moxArt';
-import { drawRune } from './runeArt';
-import { drawPlaceholder } from './placeholderArt';
-import { drawVela } from './velaArt';
-import { drawRivet } from './fighterArt';
+import { drawSprite } from './spriteRoster';
 import { drawStage } from './stage';
 import { FLOOR, ROSTER, type CombatState, type Fighter } from './core';
 function text(c: CanvasRenderingContext2D, str: string, x: number, y: number, size = 14, color = '#93a5bd', align: CanvasTextAlign = 'left', weight = 600) { c.fillStyle = color; c.font = `${weight} ${size}px system-ui, sans-serif`; c.textAlign = align; c.fillText(str, x, y); }
 function line(c: CanvasRenderingContext2D, x: number, y: number, x2: number, y2: number, color: string, width = 1) { c.beginPath(); c.moveTo(x, y); c.lineTo(x2, y2); c.strokeStyle = color; c.lineWidth = width; c.stroke(); }
 function poly(c: CanvasRenderingContext2D, points: number[][], color: string) { c.beginPath(); points.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath(); c.fillStyle = color; c.fill(); }
 function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false) {
-    if (f.id === 'rivet')
-        drawRivet(c, f, frame, ghost);
-    else if (f.id === 'vela')
-        drawVela(c, f, frame, ghost);
-    else if (f.id === 'bront')
-        drawBront(c, f, frame, ghost);
-    else if (f.id === 'zephyr')
-        drawZephyr(c, f, frame, ghost);
-    else if (f.id === 'mox')
-        drawMox(c, f, frame, ghost);
-    else if (f.id === 'rune')
-        drawRune(c, f, frame, ghost);
-    else if(f.id==='dumpstar')drawDumpstar(c,f,frame,ghost);
-    else
-        drawPlaceholder(c, f, frame, ghost);
+    drawSprite(c,f,frame,ghost);
     if (f.blockstun > 0) {
         c.save();
         c.strokeStyle = '#85c8ff';
