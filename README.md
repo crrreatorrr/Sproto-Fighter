@@ -104,3 +104,7 @@ Browser checks cover all 21 player/opponent selections, representative live move
 `art/exports/` and the older `art/*-preview.html` pages preserve the **superseded procedural artwork** for provenance; they do not represent the current Higgsfield rigs. The running game loads local assets and needs no external image service.
 
 `art/roster-manifest.json` preserves all 21 exact Library reference IDs, local paths, appearance constraints and names. No remote repository, deployment, publication or merge was created.
+
+### Current movement and rig repair
+
+See [movement tuning](docs/MOVEMENT-TUNING.md) and the [coverage/findings ledger](docs/MOVEMENT-RIG-QA.md). The persistent [movement lab](http://127.0.0.1:5173/art/higgsfield/movement-lab.html) runs the real simulation for all 21 fighters; the pose lab remains useful for isolated joints. Add `?qa` to the main game URL for visible status, freeze and single-frame controls. Normal play does not show these controls.

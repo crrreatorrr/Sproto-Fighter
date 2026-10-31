@@ -2,6 +2,8 @@
 export const WIDTH = 1280, FLOOR = 578, TICK_RATE = 60;
 // Keep broad heads and throw poses inside the arena camera.
 export const WALL = 80;
+/** Firm neutral jumps; launch/chase impulses retain their combo-specific values. */
+export const GRAVITY = .85;
 export const A = { left: 1, right: 2, up: 4, down: 8, light: 16, medium: 32, heavy: 64, launcher: 128, bolt: 256, grab: 512, special: 1024, dash: 2048 } as const;
 export type Action = keyof typeof A;
 export type FighterId = 'rivet' | 'vela' | 'bront' | 'zephyr' | 'mox' | 'rune' | 'guest07' | 'guest08' | 'guest09' | 'guest10' | 'guest11' | 'guest12' | 'guest13' | 'guest14' | 'dumpstar' | 'crapto' | 'vamp' | 'alpha777' | 'mandela' | 'bigswole' | 'nate';
@@ -79,6 +81,9 @@ for (const id of PLAYABLE_FIGHTERS) {
         ROSTER[id].description = 'Shared Golden Sproto movement, attacks, and Team Special behavior. ' + 'Individual reference-based sprite art; unique powers are deferred.';
     }
 }
+// Controlled walking contrasts with the unchanged burst dash. These are the
+// final roster values consumed by movement, UI and replay checks.
+for(const id of PLAYABLE_FIGHTERS){ROSTER[id].speed*=.8;ROSTER[id].jump*=.98;}
 ROSTER.dumpstar.description = 'Shared Golden Sproto movement, attacks, and Team Special behavior. Reference face and attire; objects above shoulders omitted.';
 /** Individual kits: mechanics are simulation data; the renderer uses the same identity. */
 export interface CombatStyle {
@@ -151,6 +156,8 @@ export interface Fighter {
     dash: number;
     dashLock: number;
     dashBuffer:number;
+    /** Direction at the dash press, preserved through hitstop/recovery. */
+    dashDirection:number;
     pips: number;
     combo: number;
     comboDamage: number;
@@ -193,7 +200,7 @@ export interface CombatState {
     notice: string;
     noticeLife: number;
 }
-const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
+const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
 export function createState(id: PlayableFighterId = 'rivet', mode: Mode = 'cpu', opponent?: PlayableFighterId): CombatState { if (!PLAYABLE_FIGHTERS.includes(id) || (opponent && !PLAYABLE_FIGHTERS.includes(opponent)))
     throw new Error('Unknown roster selection.'); return { throwState:null, frame: 0, fighters: [makeFighter(id, 380, 1), makeFighter(opponent ?? (id === 'rivet' ? 'vela' : 'rivet'), 900, -1)], projectiles: [], effects: [], freeze: 0, mode, winner: null, clock: 99 * 60, notice: 'LIGHT → MEDIUM → FINISHER', noticeLife: 220 }; }
 export const grounded = (f: Fighter) => f.y >= FLOOR;
@@ -369,13 +376,14 @@ function act(s: CombatState, f: Fighter) {
             f.y -= 1;
             f.jumpBuffer = 0;
             f.dash = 0;
+            f.dashBuffer = 0;
             f.move = null;
             if (chasing)
                 f.vx = f.facing * 3;
         }
     }
     // Resolve a last-instant landing press as a grounded move after physics.
-    const landingThisFrame = !grounded(f) && f.vy >= 0 && f.y + f.vy + .65 >= FLOOR;
+    const landingThisFrame = !grounded(f) && f.vy >= 0 && f.y + f.vy + GRAVITY >= FLOOR;
     if (f.bufferLife > 0 && !landingThisFrame) {
         const id = chooseMove(f, f.buffer, f.bufferInput);
         if (id) {
@@ -397,6 +405,8 @@ function act(s: CombatState, f: Fighter) {
                 const vertical = directions&A.up?-1:directions&A.down?1:0;
                 const horizontal = vertical ? ((directions&A.left)?-1:(directions&A.right)?1:0) : f.facing;
                 f.dash = 0;
+                // The selected attack wins a simultaneous dash/attack chord.
+                f.dashBuffer = 0;
                 f.move = { id, t: 0, hit: false, connected: false, wave: -1, aim: id==='launcher' && aim==='level'?'up':aim, shotX:horizontal,shotY:vertical, throwDirection:id==='grab'?(directions&A.up?'up':directions&A.down?'down':directions&(f.facing===1?A.left:A.right)?'back':'forward'):undefined };
                 if(!grounded(f) && aim==='down' && (id==='airHeavy'||id==='airMedium'))f.vy=Math.max(f.vy,8);
 
@@ -406,11 +416,11 @@ function act(s: CombatState, f: Fighter) {
         }
     }
     if (f.dashBuffer>0 && f.dashLock===0 && f.move?.connected && f.combo>0 && !f.dashCanceled && f.move.id!=='special') { f.move=null; f.dashCanceled=true; }
-    if (!f.move && f.dashBuffer>0 && f.dashLock === 0) {
+    if (!f.move && !f.jumpBuffer && f.dashBuffer>0 && f.dashLock === 0) {
         f.dash = 11;
         f.dashBuffer=0;
         f.dashLock = 35;
-        f.vx = ((f.input & A.left) ? -1 : (f.input & A.right) ? 1 : f.facing) * (f.id === 'vela' ? 12 : 14);
+        f.vx = f.dashDirection * (f.id === 'vela' ? 12 : 14);
         effect(s, f.x, f.y - 50, 'dash', ROSTER[f.id].color);
     }
 }
@@ -473,7 +483,13 @@ export function step(s: CombatState, inputs: [
             f.buffer=0;f.bufferLife=0;f.jumpBuffer=0;f.jumpDelay=0;f.dashBuffer=0;f.prev=f.input;continue;
         }
         const pressed = f.input & ~f.prev;
-        if(pressed&A.dash)f.dashBuffer=8;
+        if(pressed&A.dash){
+            // Vertical+dash is not stored as a surprise dash after the vertical
+            // direction is released. Up retains jump/chord priority; Down crouches.
+            f.dashBuffer=(f.input&(A.up|A.down))?0:8;
+            const horizontal=((f.input&A.right)?1:0)-((f.input&A.left)?1:0);
+            f.dashDirection=horizontal||f.facing;
+        }
         if (pressed & A.up) { f.jumpBuffer = 10; f.jumpDelay = 2; }
         const attacks = pressed & (A.light | A.medium | A.heavy | A.launcher | A.bolt | A.grab | A.special);
         if (attacks) {
@@ -503,8 +519,14 @@ export function step(s: CombatState, inputs: [
         if (f.dashLock > 0)
             f.dashLock--;
         if(s.throwState && (i===s.throwState.attacker || (s.throwState.phase==='hold'&&i===s.throwState.victim))){f.vx=0;f.vy=0;f.prev=f.input;continue;}
-        if (!f.move && !f.stun && !f.blockstun && !f.dash)
+        if (grounded(f) && !f.move && !f.stun && !f.blockstun && !f.dash)
             f.facing = other.x >= f.x ? 1 : -1;
+        // Once its three committed frames finish, crouch or an opposite
+        // direction can brake a dash. Neutral release alone keeps the tap dash.
+        const horizontal=((f.input&A.right)?1:0)-((f.input&A.left)?1:0);
+        if(f.dash>0&&f.dash<=8&&((f.input&A.down)||(horizontal&&horizontal*f.vx<0))){
+            f.dash=0;f.dashBuffer=0;
+        }
         act(s, f);
         if (f.dash > 0) {
             f.dash--;
@@ -516,7 +538,10 @@ export function step(s: CombatState, inputs: [
             const approach = (target:number, amount:number) => f.vx += clamp(target - f.vx, -amount, amount);
             if (!grounded(f)) {
                 // Preserve takeoff/dash momentum; attacks permit reduced steering, not braking.
-                if (dir) approach(dir * speed, f.move ? .18 : .55);
+                const steering=f.move?.18:.55;
+                // Holding the travel direction must not brake a dash-jump more
+                // than releasing it; opposite input still reverses gradually.
+                if (dir && (dir*f.vx<=0 || Math.abs(f.vx)<speed)) approach(dir * speed, steering);
                 else f.vx *= .995;
             } else if (!f.move) {
                 const target = (f.input & A.down) ? 0 : dir * speed;
@@ -527,9 +552,11 @@ export function step(s: CombatState, inputs: [
         }
         else
             f.vx *= .84;
-        f.x = clamp(f.x + f.vx, WALL, WIDTH - WALL);
+        const nextX=f.x+f.vx;
+        f.x = clamp(nextX, WALL, WIDTH - WALL);
+        if(nextX!==f.x){f.vx=0;f.dash=0;f.dashBuffer=0;}
         if (!grounded(f) || f.vy < 0) {
-            f.vy += .65;
+            f.vy += GRAVITY;
             f.y += f.vy;
             if (f.y >= FLOOR) {
                 f.y = FLOOR;
@@ -537,6 +564,8 @@ export function step(s: CombatState, inputs: [
                 f.vy = 0;
                 if (f.move && MOVES[f.move.id].air)
                     f.move = null;
+                // Resolve a cross-up before executing a buffered grounded action.
+                if(!f.move&&!f.stun&&!f.blockstun&&!f.dash)f.facing=other.x>=f.x?1:-1;
                 // Consume buffered jump/attack on touchdown, not one input frame later.
                 act(s, f);
             }

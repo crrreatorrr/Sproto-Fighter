@@ -1,0 +1,15 @@
+{
+  "samples": 1134,
+  "fighters": 21,
+  "facings": 2,
+  "moveTypes": 9,
+  "phases": 3,
+  "maxTextureStretch": 1.4500000732916387,
+  "checks": [
+    "finite transforms",
+    "texture cap 1.45",
+    "rear working hand foreground",
+    "kicking leg foreground"
+  ],
+  "limitation": "Structural draw-order checks only; not pixel visibility, anatomy or aesthetic approval."
+}

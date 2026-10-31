@@ -7,7 +7,7 @@ type Vec = [number, number];
 interface Part { url: string; rect: number[]; pivot: Vec; bindPivot: Vec; end: Vec|null; bindAngle: number; image?: HTMLImageElement }
 interface Rig { colors:{arm:string;leg:string;hand:string}; neckColor?:string; ground: number; root: Vec; neck: Vec; shoulders: [Vec,Vec]; elbows: [Vec,Vec]; wrists: [Vec,Vec]; hips: [Vec,Vec]; knees: [Vec,Vec]; ankles: [Vec,Vec]; parts: Record<string,Part> }
 interface RigFile { version:number; fighters: Record<string,Rig> }
-interface Pose { root:Vec; bodyAngle:number; lean:number; headTilt:number; hands:[Vec,Vec]; feet:[Vec,Vec]; footAngles:[number,number]; handAngles:[number,number]; air:boolean }
+interface Pose { root:Vec; bodyAngle:number; lean:number; headTilt:number; hands:[Vec,Vec]; feet:[Vec,Vec]; footAngles:[number,number]; handAngles:[number,number]; air:boolean; reach:number; kick:number; rearFront:boolean }
 const rigs = new Map<string,Rig>();
 let loading:Promise<void>|null=null;
 const SCALE=1.35;
@@ -51,7 +51,15 @@ function chain(start:Vec,goal:Vec,l1:number,l2:number,bend:number):[Vec,Vec,Vec]
   return [start,middle,end];
 }
 function sourceLength(r:Rig,name:string){const p=r.parts[name];return p.end?length(sub(p.end,p.bindPivot)):0;}
-function armLength(r:Rig,name:string){const side=name.startsWith('back')?'back':'front',total=sourceLength(r,side+'UpperArm')+sourceLength(r,side+'Forearm'),span=Math.abs(r.shoulders[1][0]-r.shoulders[0][0]);return sourceLength(r,name)*clamp(span*.8/Math.max(1,total),1,1.35);}
+function armLength(r:Rig,name:string){
+  const side=name.startsWith('back')?'back':'front';
+  const upper=sourceLength(r,side+'UpperArm'),lower=sourceLength(r,side+'Forearm');
+  // The input is a foreshortened three-quarter guard, not anatomical bone lengths.
+  // Restore a stable upper/lower ratio rather than letting a tiny painted wrist
+  // constrain every punch. These lengths remain constant throughout animation.
+  const total=Math.max(upper+lower,sourceLength(r,'torso')*1.12);
+  return total*(name.endsWith('UpperArm')?.52:.48);
+}
 // Authored choreography: gameplay owns damage/projectiles; these profiles only
 // describe attached limb targets. Each entry has a distinct guard and movement.
 interface Choreography { guard:[Vec,Vec]; lean:number; lift:number; stride:number; strike:'jab'|'hook'|'palm'|'hammer'|'elbow'|'claw'; kick:'side'|'round'|'knee'|'stomp'|'heel'; cast:'palm'|'twoHand'|'overhead'|'underhand'|'cross'; rear:boolean }
@@ -119,41 +127,66 @@ function specialChoreography(pose:Pose,r:Rig,f:Fighter,frame:number):Pose{
   pose.handAngles=hands.map(h=>Math.atan2(h[1]-y+24,h[0]-10)) as [number,number];
   return pose;
 }
+interface Gait { x:number; travel:number; frame:number }
+const gait=new WeakMap<Fighter,Gait>();
+function strideTravel(f:Fighter,frame:number){
+  let g=gait.get(f);
+  if(!g||frame<g.frame){g={x:f.x,travel:f.x*f.facing/SCALE,frame};gait.set(f,g);}
+  else if(frame!==g.frame){
+    // Preserve phase when facing changes; advance only for actual travel, so
+    // pushing into a wall does not cycle the feet in place.
+    if(f.y>=FLOOR&&!f.move&&!f.stun&&!f.blockstun&&!f.dash)g.travel+=(f.x-g.x)*f.facing/SCALE;g.x=f.x;g.frame=frame;
+  }
+  return g.travel;
+}
 function basePose(r:Rig,f:Fighter,frame:number):Pose{
   const hipY=r.root[1]-r.ground,style=styleOf(f);
   const breathing=Math.sin(frame*Math.PI/75);
+  const stanceSpread=8;
+  const restY=Math.max(hipY,...r.hips.map((hip,i)=>{
+    const side=i===0?'back':'front',leg=sourceLength(r,side+'Thigh')+sourceLength(r,side+'Shin')-1;
+    return -7-(hip[1]-r.root[1])-Math.sqrt(Math.max(1,leg*leg-stanceSpread*stanceSpread));
+  }));
   const frontShoulder=sub(r.shoulders[1],r.root),backShoulder=sub(r.shoulders[0],r.root);
   const frontReach=armLength(r,'frontUpperArm')+armLength(r,'frontForearm'),backReach=armLength(r,'backUpperArm')+armLength(r,'backForearm');
-  const pose:Pose={root:[0,hipY+breathing*.45],bodyAngle:0,lean:breathing*.012,headTilt:-breathing*.008,
+  const pose:Pose={root:[0,restY+Math.max(0,breathing)*.3],bodyAngle:0,lean:breathing*.012,headTilt:-breathing*.008,
     hands:[[backShoulder[0]-Math.min(7,backReach*.2),hipY+backShoulder[1]+Math.min(14,backReach*.5)],[frontShoulder[0]+Math.min(14,frontReach*.43),hipY+frontShoulder[1]+frontReach*.25]],
-    feet:[[-22,-7],[20,-7]],footAngles:[0,0],handAngles:[-.2,-.2],air:f.y<FLOOR};
+    feet:[[r.hips[0][0]-r.root[0]-stanceSpread,-7],[r.hips[1][0]-r.root[0]+stanceSpread,-7]],footAngles:[0,0],handAngles:[-.2,-.2],air:f.y<FLOOR,reach:0,kick:0,rearFront:false};
   pose.hands=[mix(pose.hands[0],[style.guard[0][0],hipY+style.guard[0][1]],.7),mix(pose.hands[1],[style.guard[1][0],hipY+style.guard[1][1]],.7)];
+  // Keep neutral hands outside the torso silhouette. The source guard was
+  // frontal; simply copying its wrist targets hides the far hand behind clothes.
+  pose.hands[0][0]=Math.min(pose.hands[0][0],backShoulder[0]-10);
+  pose.hands[1][0]=Math.max(pose.hands[1][0],frontShoulder[0]+7);
   pose.lean+=style.lean;
+  strideTravel(f,frame);
   const moving=Math.abs(f.vx)>1&&!f.move&&!f.stun&&!f.blockstun&&!pose.air;
   if(moving){
     // During stance footX = constant - traveled distance, so feet stay planted
     // in world space. Only the swing foot follows the raised return arc.
-    pose.root[1]=hipY+5;
-    const reach=[0,1].map(i=>{const side=i===0?'back':'front',leg=sourceLength(r,side+'Thigh')+sourceLength(r,side+'Shin')-.3,vertical=Math.abs(pose.root[1]+r.hips[i][1]-r.root[1]+7);return Math.sqrt(Math.max(64,leg*leg-vertical*vertical));});
-    const stride=clamp(Math.min(...reach)*.88*style.stride,9,22),cycle=stride*4;
-    const phase=mod(f.x*f.facing/SCALE,cycle)/cycle;
+    pose.root[1]=restY+3;
+    const reach=[0,1].map(i=>{const side=i===0?'back':'front',leg=sourceLength(r,side+'Thigh')+sourceLength(r,side+'Shin')-.3,vertical=Math.abs(pose.root[1]+r.hips[i][1]-r.root[1]+7);return Math.sqrt(Math.max(0,leg*leg-vertical*vertical));});
+    const stride=clamp(Math.min(...reach)*.88*style.stride,3,22),cycle=Math.max(stride*4,72*style.stride),stance=2*stride/cycle;
+    const phase=mod(strideTravel(f,frame),cycle)/cycle;
     for(let i=0;i<2;i++){
       const p=mod(phase+i*.5,1),center=r.hips[i][0]-r.root[0];
-      if(p<.5){pose.feet[i]=[center+stride-p*cycle,-7];}
-      else{const t=(p-.5)*2;pose.feet[i]=[center-stride+stride*2*smooth(t),-7-Math.sin(Math.PI*t)*style.lift];pose.footAngles[i]=Math.sin(Math.PI*t)*-.12;}
+      if(p<stance){pose.feet[i]=[center+stride-p*cycle,-7];}
+      else{const t=(p-stance)/(1-stance);pose.feet[i]=[center-stride+stride*2*smooth(t),-7-Math.sin(Math.PI*t)*Math.max(10,style.lift)];pose.footAngles[i]=Math.sin(Math.PI*t)*-.2;}
     }
-    pose.root[1]+=Math.sin(phase*Math.PI*4)*.7;
+    // Fast travel uses a run cadence with short planted contacts and a longer
+    // raised return. Avoid the old 8-frame shuffling cycle on short-legged rigs.
+    const inFlight=phase>stance&&phase<.5||phase>.5+stance;
+    if(inFlight)pose.root[1]-=2*Math.sin(Math.PI*(mod(phase,.5)-stance)/(.5-stance));
     pose.lean=style.lean+.06*Math.sign(f.vx*f.facing);
-    pose.hands[0][0]+=Math.sin(phase*Math.PI*2)*4;pose.hands[1][0]-=Math.sin(phase*Math.PI*2)*4;
+    pose.hands[0][0]+=Math.sin(phase*Math.PI*2)*7;pose.hands[1][0]-=Math.sin(phase*Math.PI*2)*7;
   }
-  if((f.input&A.down)&&!pose.air&&!f.move){pose.root[1]+=10;pose.lean=.1;pose.hands[0][1]+=10;pose.hands[1][1]+=7;pose.feet=[[-25,-7],[25,-7]];}
+  if((f.input&A.down)&&!pose.air&&!f.move){pose.root[1]+=10;pose.lean=.1;pose.hands[0][1]+=10;pose.hands[1][1]+=7;pose.feet=[[pose.feet[0][0]-3,-7],[pose.feet[1][0]+3,-7]];}
   if(f.jumpDelay>0&&!pose.air){pose.root[1]+=4;pose.lean=-.05;pose.hands[0][1]+=3;pose.hands[1][1]+=3;}
   if(pose.air){
     const rise=clamp(-f.vy/14,-1,1);pose.root[1]=hipY+2;pose.lean=-.04*rise;
     pose.feet=[[-21,-17+rise*3],[24,-12-rise*5]];pose.footAngles=[-.22,.18];
     pose.hands[0][1]-=5;pose.hands[1][1]-=7;
   }
-  if(f.dash>0){pose.root[1]+=7;pose.lean=.23;pose.headTilt=-.17;pose.hands=[[-25,hipY-4],[-13,hipY]];pose.feet=[[-29,-7],[26,-7]];}
+  if(f.dash>0){pose.root[1]+=7;pose.lean=.23;pose.headTilt=-.17;pose.hands=[[-25,hipY-4],[-13,hipY]];pose.feet=[[pose.feet[0][0]-4,-7],[pose.feet[1][0]+4,-7]];}
   if(f.blockstun>0){pose.lean=-.08;pose.headTilt=.04;pose.hands=[[15,hipY-33],[27,hipY-38]];pose.handAngles=[-.65,-.8];}
   if(f.stun>0){const recoil=clamp(f.stun/18);pose.lean=-.14*recoil;pose.headTilt=-.07;pose.hands=[[-26,hipY-8],[27,hipY-9]];}
   return pose;
@@ -164,12 +197,15 @@ function attackPose(r:Rig,f:Fighter,frame:number):Pose{
   const prep=smooth(t/Math.max(1,m.startup));
   const active=t>=m.startup&&t<m.startup+m.active;
   const recovery=smooth((t-m.startup-m.active)/Math.max(1,m.recovery));
-  const extension=t<m.startup?0:active?1:1-recovery;
+  // Load, accelerate over the last three startup frames, then recoil before
+  // returning to guard. Contact still coincides with simulation startup.
+  const extension=t<m.startup?smooth((t-m.startup+3)/3):active?1:1-recovery;
   const anticipation=t<m.startup?prep:0;
   const bodyY=pose.root[1],idleFront:Vec=[...pose.hands[1]];
   pose.hands[1]=mix(idleFront,[-2,bodyY-15],anticipation*.6);
   pose.lean-=anticipation*.08;
   const id=attack.id,style=styleOf(f);
+  pose.reach=extension;pose.rearFront=style.rear||id==='grab'||id==='bolt';
   let goal:Vec=[64,bodyY-23];
   if(id==='low'){pose.root[1]+=8;goal=[58,bodyY-3];}
   if(id==='launcher')goal=[29,bodyY-74];
@@ -187,7 +223,7 @@ function attackPose(r:Rig,f:Fighter,frame:number):Pose{
     goal=[18+dx/d*65,bodyY-25+dy/d*65];
   }
   if(id==='grab'){goal=[49,bodyY-19];pose.hands[0]=mix(pose.hands[0],[43,bodyY-13],extension);}
-  if(id==='special')return specialChoreography(pose,r,f,frame);
+  if(id==='special'){pose.rearFront=true;pose.reach=.8;return specialChoreography(pose,r,f,frame);}
   pose.hands[1]=mix(pose.hands[1],goal,extension);
   pose.lean+=extension*(id==='launcher'?-.06:id==='heavy'?.24:.15);
   pose.headTilt-=extension*.1;
@@ -229,11 +265,33 @@ function attackPose(r:Rig,f:Fighter,frame:number):Pose{
     if(['medium','airMedium','airHeavy'].includes(id)){
       let foot:Vec=[62,bodyY-21];
       if(style.kick==='round')foot=[54,bodyY-38];
-      if(style.kick==='knee')foot=[26,bodyY-22];
+      if(style.kick==='knee')foot=[36,bodyY-15];
       if(style.kick==='stomp')foot=[42,bodyY+22];
       if(style.kick==='heel')foot=[57,bodyY-7];
       pose.feet[1]=mix(pose.feet[1],foot,extension);pose.footAngles[1]=(style.kick==='stomp'?.5:style.kick==='heel'?-.5:0)*extension;
     }
+  }
+  const kicking=['medium','airMedium','sweep','airHeavy'].includes(id);
+  if(kicking){
+    pose.kick=extension;pose.reach=extension*.2;
+    const chamber=smooth(t/Math.max(1,m.startup-3));
+    const rest=basePose(r,f,frame);
+    // Lift knee first; extend only once the supporting hip has accepted weight.
+    // Early recovery folds the knee before placing the foot back on the floor.
+    const chamberFoot:Vec=[19,bodyY+8];
+    const end=pose.feet[1];
+    if(t<m.startup)pose.feet[1]=mix(mix(rest.feet[1],chamberFoot,chamber),end,extension);
+    else if(!active){
+      const q=clamp((t-m.startup-m.active)/Math.max(1,m.recovery));
+      pose.feet[1]=q<.45?mix(end,chamberFoot,smooth(q/.45)):mix(chamberFoot,rest.feet[1],smooth((q-.45)/.55));
+    }
+    pose.root[0]+=8*extension;pose.root[1]+=4*extension; // transfer through the planted support hip
+    pose.lean-=.16*extension;
+    const knee=style.kick==='knee';
+    pose.hands=[mix(rest.hands[0],[-24,bodyY-18],extension),mix(rest.hands[1],knee?[4,bodyY-40]:[20,bodyY-34],extension)];
+  }else if(id!=='bolt'){
+    // Transfer weight into the strike; do not ask IK for an impossible arm.
+    pose.root[0]+=10*extension;pose.hands[0][0]+=10*extension;pose.hands[1][0]+=10*extension;
   }
   return pose;
 }
@@ -245,10 +303,11 @@ function evaluatedPose(r:Rig,f:Fighter,frame:number):Pose{
   const pose=attackPose(r,f,frame),scene=throwScene;if(!scene)return pose;
   const {state,fighters}=scene,attacker=fighters[state.attacker],victim=fighters[state.victim];
   if(f===attacker){
+    pose.rearFront=true;pose.reach=1;
     const y=pose.root[1];
     if(state.phase==='hold'){
       const vx=(victim.x-f.x)*f.facing/SCALE,vy=(victim.y-f.y)/SCALE+(rigs.get(victim.id)?.root[1]??88)-(rigs.get(victim.id)?.ground??125);
-      pose.hands=[[vx-17,vy-8],[vx+8,vy-12]];pose.lean=.12;pose.headTilt=-.08;pose.feet=[[-24,-7],[23,-7]];
+      pose.hands=[[vx-17,vy-8],[vx+8,vy-12]];pose.lean=.12;pose.headTilt=-.08;pose.feet=[[pose.feet[0][0]-2,-7],[pose.feet[1][0]+2,-7]];
     }else{
       const q=1-smooth(state.t/18),goal:Vec=state.direction==='back'?[-54,y-24]:state.direction==='up'?[6,y-78]:state.direction==='down'?[43,y+15]:[67,y-15];
       pose.hands[0]=mix(pose.hands[0],[goal[0]-12,goal[1]+5],q);pose.hands[1]=mix(pose.hands[1],goal,q);pose.lean=(state.direction==='back'?-.18:.2)*q;
@@ -264,13 +323,13 @@ function evaluatedPose(r:Rig,f:Fighter,frame:number):Pose{
 interface Memory { combatStamp?:string; signature:string; frame:number; changed:number; current:Pose; from:Pose }
 const memory=new WeakMap<Fighter,Memory>();
 function poseSignature(f:Fighter){if(throwScene&&(f===throwScene.fighters[throwScene.state.attacker]||f===throwScene.fighters[throwScene.state.victim]))return 'throw:'+throwScene.state.phase;return f.move?`move:${f.move.id}:${f.move.aim??'level'}`:f.stun?'hit':f.blockstun?'block':f.dash?'dash':f.y<FLOOR?'air':f.input&A.down?'crouch':Math.abs(f.vx)>1?'walk':'idle';}
-function blendPose(a:Pose,b:Pose,t:number):Pose{return {root:mix(a.root,b.root,t),bodyAngle:lerp(a.bodyAngle,b.bodyAngle,t),lean:lerp(a.lean,b.lean,t),headTilt:lerp(a.headTilt,b.headTilt,t),hands:[mix(a.hands[0],b.hands[0],t),mix(a.hands[1],b.hands[1],t)],feet:[mix(a.feet[0],b.feet[0],t),mix(a.feet[1],b.feet[1],t)],footAngles:[lerp(a.footAngles[0],b.footAngles[0],t),lerp(a.footAngles[1],b.footAngles[1],t)],handAngles:[lerp(a.handAngles[0],b.handAngles[0],t),lerp(a.handAngles[1],b.handAngles[1],t)],air:b.air};}
+function blendPose(a:Pose,b:Pose,t:number):Pose{return {root:mix(a.root,b.root,t),bodyAngle:lerp(a.bodyAngle,b.bodyAngle,t),lean:lerp(a.lean,b.lean,t),headTilt:lerp(a.headTilt,b.headTilt,t),hands:[mix(a.hands[0],b.hands[0],t),mix(a.hands[1],b.hands[1],t)],feet:[mix(a.feet[0],b.feet[0],t),mix(a.feet[1],b.feet[1],t)],footAngles:[lerp(a.footAngles[0],b.footAngles[0],t),lerp(a.footAngles[1],b.footAngles[1],t)],handAngles:[lerp(a.handAngles[0],b.handAngles[0],t),lerp(a.handAngles[1],b.handAngles[1],t)],air:b.air,reach:lerp(a.reach,b.reach,t),kick:lerp(a.kick,b.kick,t),rearFront:b.rearFront};}
 function sample(r:Rig,f:Fighter,frame:number):Pose{
   const target=evaluatedPose(r,f,frame),signature=poseSignature(f);let previous=memory.get(f);
   if(!previous||frame<previous.frame){previous={signature,frame,changed:frame-5,current:target,from:target};memory.set(f,previous);}
   if(frame===previous.frame)return previous.current;
   if(signature!==previous.signature){previous.from=previous.current;previous.changed=frame;previous.signature=signature;}
-  previous.current=blendPose(previous.from,target,smooth((frame-previous.changed+1)/5));previous.frame=frame;return previous.current;
+  previous.current=blendPose(previous.from,target,smooth((frame-previous.changed+1)/(f.move?2:3)));previous.frame=frame;return previous.current;
 }
 function part(c:CanvasRenderingContext2D,r:Rig,name:string,position:Vec,angle=0,stretch=1){
   const p=r.parts[name];if(!p?.image)return;
@@ -282,9 +341,11 @@ function support(c:CanvasRenderingContext2D,a:Vec,b:Vec,color:string,width:numbe
 function segment(c:CanvasRenderingContext2D,r:Rig,name:string,a:Vec,b:Vec){
   const p=r.parts[name];if(!p.image)return;
   const angle=Math.atan2(b[1]-a[1],b[0]-a[0]),stretch=length(sub(b,a))/Math.max(.01,sourceLength(r,name));
-  // Preserve character proportions; only foreshortened arms receive a modest,
-  // consistent <=1.35 longitudinal extension. Width and the face are unchanged.
-  c.save();c.translate(a[0],a[1]);c.rotate(angle);c.scale(stretch,1);c.rotate(-p.bindAngle);c.drawImage(p.image,-p.pivot[0],-p.pivot[1]);c.restore();
+  // Short painted forearms are foreshortened. Stretching their whole texture
+  // threefold turns sleeve edges into ribbons. Keep the distal source detail at
+  // bounded scale; the source-colored joint support bridges the hidden surface.
+  const textureScale=Math.min(stretch,1.45),offset=Math.max(0,length(sub(b,a))-sourceLength(r,name)*textureScale);
+  c.save();c.translate(a[0],a[1]);c.rotate(angle);c.translate(offset,0);c.scale(textureScale,1);c.rotate(-p.bindAngle);c.drawImage(p.image,-p.pivot[0],-p.pivot[1]);c.restore();
 }
 function rigChains(r:Rig,pose:Pose){
   const root=pose.root;
@@ -292,7 +353,11 @@ function rigChains(r:Rig,pose:Pose){
   const arms:[Vec,Vec,Vec][]=[],legs:[Vec,Vec,Vec][]=[];
   for(let i=0;i<2;i++){
     const side=i===0?'back':'front';
-    arms.push(chain(attach(r.shoulders[i]),pose.hands[i],armLength(r,side+'UpperArm'),armLength(r,side+'Forearm'),i===0?1:1));
+    const shoulder=attach(r.shoulders[i]);
+    // Shoulder girdle rotates/protracts with a crossing punch. A rear fist must
+    // not be anchored behind the entire chest while it attacks in front.
+    shoulder[0]+=(i===0?24:5)*pose.reach;
+    arms.push(chain(shoulder,pose.hands[i],armLength(r,side+'UpperArm'),armLength(r,side+'Forearm'),i===0?-1:1));
     legs.push(chain(add(root,sub(r.hips[i],r.root)),pose.feet[i],sourceLength(r,side+'Thigh'),sourceLength(r,side+'Shin'),i===0?1:-1));
   }
   return {root,neck:attach(r.neck),arms,legs};
@@ -301,9 +366,16 @@ function drawRig(c:CanvasRenderingContext2D,r:Rig,f:Fighter,pose:Pose){
   const {root,neck,arms,legs}=rigChains(r,pose);
   c.save();c.translate(root[0],root[1]);c.rotate(pose.bodyAngle);c.translate(-root[0],-root[1]);
   const leg=(i:number)=>{const side=i===0?'back':'front',[a,b,end]=legs[i];support(c,root,a,r.colors.leg,8);support(c,a,b,r.colors.leg,7);support(c,b,end,r.colors.leg,6);segment(c,r,side+'Thigh',a,b);segment(c,r,side+'Shin',b,end);part(c,r,side+'Foot',end,pose.footAngles[i]);};
-  const arm=(i:number)=>{const side=i===0?'back':'front',[a,b,end]=arms[i];support(c,a,b,r.colors.arm,6);support(c,b,end,r.colors.arm,5);segment(c,r,side+'UpperArm',a,b);segment(c,r,side+'Forearm',b,end);part(c,r,side+'Hand',end,pose.handAngles[i]);};
-  leg(0);arm(0);leg(1);support(c,add(neck,rotate([0,-3],pose.lean)),add(neck,rotate([0,11],pose.lean)),r.neckColor??r.colors.arm,11);part(c,r,'pelvis',root);part(c,r,'torso',root,pose.lean);
-  part(c,r,'head',neck,pose.lean+pose.headTilt);arm(1);c.restore();
+  const upperArm=(i:number)=>{const side=i===0?'back':'front',[a,b]=arms[i];support(c,a,b,r.colors.arm,6);segment(c,r,side+'UpperArm',a,b);};
+  const forearm=(i:number)=>{const side=i===0?'back':'front',[,b,end]=arms[i];support(c,b,end,r.colors.arm,5);segment(c,r,side+'Forearm',b,end);part(c,r,side+'Hand',end,pose.handAngles[i]);};
+  leg(0);upperArm(0);if(!pose.rearFront)forearm(0);
+  if(pose.kick<.05)leg(1);
+  support(c,add(neck,rotate([0,-3],pose.lean)),add(neck,rotate([0,11],pose.lean)),r.neckColor??r.colors.arm,11);
+  part(c,r,'pelvis',root);part(c,r,'torso',root,pose.lean);
+  if(pose.kick>=.05)leg(1);
+  // Head remains above shoulder roots; working forearms and hands cross in front.
+  upperArm(1);part(c,r,'head',neck,pose.lean+pose.headTilt);
+  if(pose.rearFront){upperArm(0);forearm(0);}forearm(1);c.restore();
 }
 /** Returns false while missing/loading, so the caller can show a loading state. */
 export function drawHiggsfieldFighter(c:CanvasRenderingContext2D,f:Fighter,frame:number,ghost=false,frozen=false):boolean{

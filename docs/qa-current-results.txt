@@ -51,7 +51,20 @@ PASS: up+attack on touchdown remains a rising attack and suppresses jump
 PASS: stun and attack recovery cannot be bypassed with dash/jump buffers
 PASS: movement input replay remains deterministic through air, dash, landing and attack
 PASS: human-paced launcher route retains vertical alignment through finisher
-12 focused movement checks passed.
+PASS: hitstop buffers dash direction at press, not at later execution
+PASS: recovery-buffered dash keeps its world direction across a side change
+PASS: vertical dash chords cannot leak an unintended dash after release
+PASS: attack wins simultaneous dash chord without a delayed second action
+PASS: tap dash keeps commitment, then opposite input brakes and reverses
+PASS: wall collision clears outward dash velocity for immediate departure
+PASS: holding forward in a dash jump preserves the same momentum as neutral
+PASS: airborne facing stays stable across opponent, then resolves on touchdown
+PASS: frozen-frame attack tap survives and executes once after hitstop
+PASS: firm jump arc measures 134px and 35 airborne frames for Golden Sproto
+PASS: all fighters retain controlled 31–35-frame neutral arcs and untouched dash impulse
+PASS: firmer gravity preserves the human-paced four-hit aerial route for all21 fighters
+Measured trajectories: [{"id":"rivet","height":134.36200000000002,"airFrames":35,"takeoff":2},{"id":"vela","height":117.51800000000003,"airFrames":33,"takeoff":2}]
+24 focused movement checks passed.
 
 > sproto-arena@0.1.0 story-smoke
 > node scripts/story-smoke.mjs

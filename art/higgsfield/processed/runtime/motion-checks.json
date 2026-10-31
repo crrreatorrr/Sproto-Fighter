@@ -2,16 +2,112 @@
   "revision": "24495940b540c6d6",
   "firstContactThenFrozen": 21,
   "freezeFramesPerFighter": 8,
+  "groundedPoseChecks": 63,
   "plantedFeet": [
     {
       "id": "rivet",
-      "comparisons": 85,
-      "maxDrift": 0.0000024442319954687264
+      "comparisons": 75,
+      "maxDrift": 0.10314346778204708
     },
     {
       "id": "vela",
+      "comparisons": 58,
+      "maxDrift": 0.03403259620017707
+    },
+    {
+      "id": "alpha777",
+      "comparisons": 56,
+      "maxDrift": 0.0000024442319954687264
+    },
+    {
+      "id": "bigswole",
+      "comparisons": 65,
+      "maxDrift": 0.07625357091433216
+    },
+    {
+      "id": "bront",
+      "comparisons": 77,
+      "maxDrift": 0.05058676137900875
+    },
+    {
+      "id": "crapto",
+      "comparisons": 77,
+      "maxDrift": 0.0000024442319954687264
+    },
+    {
+      "id": "dumpstar",
+      "comparisons": 70,
+      "maxDrift": 0.0000011567716455829213
+    },
+    {
+      "id": "guest07",
       "comparisons": 85,
-      "maxDrift": 0.15529422184351915
+      "maxDrift": 0.0000011567716455829213
+    },
+    {
+      "id": "guest08",
+      "comparisons": 62,
+      "maxDrift": 0.0000024442319954687264
+    },
+    {
+      "id": "guest09",
+      "comparisons": 75,
+      "maxDrift": 0.04732433685239812
+    },
+    {
+      "id": "guest10",
+      "comparisons": 58,
+      "maxDrift": 0.0000024442319954687264
+    },
+    {
+      "id": "guest11",
+      "comparisons": 60,
+      "maxDrift": 0.0000011567716455829213
+    },
+    {
+      "id": "guest12",
+      "comparisons": 68,
+      "maxDrift": 0.14863459178491212
+    },
+    {
+      "id": "guest13",
+      "comparisons": 61,
+      "maxDrift": 0.0000014181490541886888
+    },
+    {
+      "id": "guest14",
+      "comparisons": 64,
+      "maxDrift": 0.0000014181490541886888
+    },
+    {
+      "id": "mandela",
+      "comparisons": 74,
+      "maxDrift": 0.0000011567716455829213
+    },
+    {
+      "id": "mox",
+      "comparisons": 86,
+      "maxDrift": 0.0000024442319954687264
+    },
+    {
+      "id": "nate",
+      "comparisons": 68,
+      "maxDrift": 0.0000024442319954687264
+    },
+    {
+      "id": "rune",
+      "comparisons": 78,
+      "maxDrift": 0.0701098101246771
+    },
+    {
+      "id": "vamp",
+      "comparisons": 65,
+      "maxDrift": 0.0000011567716455829213
+    },
+    {
+      "id": "zephyr",
+      "comparisons": 78,
+      "maxDrift": 0.019860232668634126
     }
   ]
 }

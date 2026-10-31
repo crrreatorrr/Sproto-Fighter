@@ -8,8 +8,14 @@ const art=require('/tmp/higgsfield-rig-qa/build/higgsfieldRig.js'),core=require(
 for(const id of ids){const f=core.createState(id,'dummy').fighters[0];f.x=450;const m=core.getMove(f,'light');f.move={id:'light',t:m.startup-1,hit:false,connected:false,wave:0};
  const render=(frame,frozen)=>{const canvas=createCanvas(900,720),c=canvas.getContext('2d');art.drawHiggsfieldFighter(c,f,frame,false,frozen);return canvas.toBuffer('image/png');};
  const windup=render(100,false);f.move.t=m.startup;const contact=render(101,true);assert.ok(!windup.equals(contact),id+' contact must replace windup');for(let frame=102;frame<109;frame++)assert.ok(contact.equals(render(frame,true)),id+' hitstop must not breathe/drift');freeze.push(id);}
-const foot=[];for(const id of ['rivet','vela']){const f=core.createState(id,'dummy').fighters[0];f.vx=5.5;let previous={},maxDrift=0,comparisons=0;
+const idle=[];
+for(const id of ids)for(const state of ['idle','crouch','dash']){const f=core.createState(id,'dummy').fighters[0];if(state==='crouch')f.input=core.A.down;if(state==='dash')f.dash=8;const c=createCanvas(1000,720).getContext('2d'),draw=c.drawImage.bind(c),ys=[];
+ c.drawImage=(im,...args)=>{if(im.assetUrl?.includes('Foot.png'))ys.push(c.getTransform().f);return draw(im,...args);};art.drawHiggsfieldRigSample(c,f,0);
+ for(const y of ys)assert.ok(Math.abs(y-(core.FLOOR-7*1.35))<.1,id+' '+state+' foot must reach ground: '+y);
+ idle.push(id);
+}
+const foot=[];for(const id of ids){const f=core.createState(id,'dummy').fighters[0];f.vx=5.5;let previous={},maxDrift=0,comparisons=0;
  for(let i=0;i<90;i++){f.x=350+i*2;const canvas=createCanvas(1000,720),c=canvas.getContext('2d'),draw=c.drawImage.bind(c),current={};c.drawImage=(im,...args)=>{if(im.assetUrl?.includes('Foot.png')){const t=c.getTransform();current[im.assetUrl]={x:t.e,y:t.f};}return draw(im,...args);};art.drawHiggsfieldRigSample(c,f,100+i);
  for(const [name,p]of Object.entries(current)){const prev=previous[name],ground=core.FLOOR-7*1.35;if(prev&&Math.abs(p.y-ground)<.12&&Math.abs(prev.y-ground)<.12){maxDrift=Math.max(maxDrift,Math.abs(p.x-prev.x));comparisons++;}}previous=current;}
  assert.ok(comparisons>20,id+' stance samples');assert.ok(maxDrift<.5,id+' planted foot drift '+maxDrift);foot.push({id,comparisons,maxDrift});}
-const result={revision:JSON.parse(fs.readFileSync(path.join(root,'public/fighters/rig-data.json'))).revision,firstContactThenFrozen:freeze.length,freezeFramesPerFighter:8,plantedFeet:foot};fs.writeFileSync(path.join(__dirname,'runtime','motion-checks.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));})();
+const result={revision:JSON.parse(fs.readFileSync(path.join(root,'public/fighters/rig-data.json'))).revision,firstContactThenFrozen:freeze.length,freezeFramesPerFighter:8,groundedPoseChecks:idle.length,plantedFeet:foot};fs.writeFileSync(path.join(__dirname,'runtime','motion-checks.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result));})();

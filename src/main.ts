@@ -243,8 +243,16 @@ function pollPad(): number {
 }
 // Optional, visible read-only diagnostics for manual QA; never changes combat state.
 const qaPanel = new URLSearchParams(location.search).has('qa') ? document.createElement('pre') : null;
+let qaFrozen=false,qaSingleStep=false;
 const qaEvents:string[]=[];
-if(qaPanel){qaPanel.id='qa-status';qaPanel.style.cssText='white-space:pre-wrap;color:#dceafa;background:#13202d;padding:16px;font:12px monospace';document.querySelector('#app')!.append(qaPanel);}
+if(qaPanel){
+    const bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;padding:12px';
+    const freeze=document.createElement('button'),single=document.createElement('button');
+    freeze.textContent='Freeze QA frame';single.textContent='Advance QA frame';
+    freeze.onclick=()=>{qaFrozen=!qaFrozen;freeze.textContent=qaFrozen?'Resume QA playback':'Freeze QA frame';accumulator=0;};
+    single.onclick=()=>{qaFrozen=true;qaSingleStep=true;freeze.textContent='Resume QA playback';};
+    bar.append(freeze,single);document.querySelector('#app')!.append(bar);
+    qaPanel.id='qa-status';qaPanel.style.cssText='white-space:pre-wrap;color:#dceafa;background:#13202d;padding:16px;font:12px monospace';document.querySelector('#app')!.append(qaPanel);}
 function qaRecord(before:string){
     if(!qaPanel)return;
     const f=state.fighters[0],after=[f.move?.id,f.combo,f.pips,f.hp,state.fighters[1].hp].join('|');
@@ -254,8 +262,9 @@ function tick(now: number) {
     const elapsed = Math.min((now - lastTime) / 1000, .1);
     lastTime = now;
     const pad = pollPad();
-    if (running) {
-        accumulator += elapsed;
+    if (running && (!qaFrozen||qaSingleStep)) {
+        accumulator = qaSingleStep?1/60:accumulator+elapsed;
+        qaSingleStep=false;
         while (accumulator >= 1 / 60) {
             let input = pad | queued;
             queued = 0;
@@ -280,7 +289,7 @@ function tick(now: number) {
         }
     }
     render(ctx, state);
-    if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips}`).join('\n')+'\n'+qaEvents.join('\n');
+    if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips}`).join('\n')+'\n'+qaEvents.join('\n');
     $('coach').textContent = state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);
 }
