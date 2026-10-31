@@ -1,3 +1,4 @@
+import {drawDumpstarPortrait} from './dumpstarArt';
 import { drawBrontPortrait } from './brontArt';
 import { drawZephyrPortrait } from './zephyrArt';
 import { drawMoxPortrait } from './moxArt';
@@ -108,6 +109,7 @@ $('pause').onclick = pause;
 $('reset').onclick = restart;
 $('mode').onchange = () => { mode = ($('mode') as HTMLSelectElement).value as Mode; $('mode-label').textContent = mode === 'cpu' ? 'CPU SPARRING' : mode === 'guard' ? 'GUARD PRACTICE' : 'COMBO PRACTICE'; restart(); };
 const fighterOptions = document.querySelector('.fighter-options')!;
+$('roster-count').textContent = `${PLAYABLE_FIGHTERS.length} PLAYABLE / ${PLAYABLE_FIGHTERS.filter(id=>!id.startsWith('guest')).length} SPRITE SETS`;
 fighterOptions.innerHTML = PLAYABLE_FIGHTERS.map(id => `<button data-fighter="${id}" class="fighter ${id === chosen ? 'selected' : ''}"><canvas id="${id}-portrait" class="portrait" width="96" height="112" aria-label="${ROSTER[id].name} portrait"></canvas><span><b>${ROSTER[id].name}</b><small>${id.startsWith('guest') ? 'PLACEHOLDER ART' : ROSTER[id].role}</small></span><span class="selection-dot"></span></button>`).join('');
 ($('opponent') as HTMLSelectElement).innerHTML = '<option value="">Auto matchup</option>' + PLAYABLE_FIGHTERS.map(id => `<option value="${id}">${ROSTER[id].name}${id.startsWith('guest') ? ' · placeholder' : ''}</option>`).join('');
 document.querySelectorAll<HTMLButtonElement>('[data-fighter]').forEach(b => b.onclick = () => { chosen = b.dataset.fighter as FighterId; document.querySelectorAll('[data-fighter]').forEach(el => el.classList.toggle('selected', el === b)); $('fighter-copy').textContent = ROSTER[chosen].description; restart(); });
@@ -254,7 +256,7 @@ const portrait = $<HTMLCanvasElement>('rivet-portrait');
 drawRivetPortrait(portrait.getContext('2d')!, portrait.width, portrait.height);
 const velaPortrait = $<HTMLCanvasElement>('vela-portrait');
 drawVelaPortrait(velaPortrait.getContext('2d')!, velaPortrait.width, velaPortrait.height);
-for (const [id, draw] of [['bront', drawBrontPortrait], ['zephyr', drawZephyrPortrait], ['mox', drawMoxPortrait], ['rune', drawRunePortrait]] as const) {
+for (const [id, draw] of [['bront', drawBrontPortrait], ['zephyr', drawZephyrPortrait], ['mox', drawMoxPortrait], ['rune', drawRunePortrait],['dumpstar',drawDumpstarPortrait]] as const) {
     const c = $<HTMLCanvasElement>(id + '-portrait');
     draw(c.getContext('2d')!, c.width, c.height);
 }

@@ -12,24 +12,27 @@
     "library_file_id": "libfile_589b206f4f408191ad99c687726d5180",
     "local_reference": "art/references/rivet.png",
     "inspected": true,
-    "requirement": "First playable: yellow body, same face and clothing style; menu/combat sprites and animations.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers"
+    "requirement": "First playable: yellow body, same face and clothing style; menu/combat sprites and animations. Exact user-provided name: Golden Sproto.",
+    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "display_name": "Golden Sproto"
   },
   {
     "name": "vela",
     "library_file_id": "libfile_889aeefde3908191a76b91223a747617",
     "local_reference": "art/references/vela.png",
     "inspected": true,
-    "requirement": "Second playable: preserve reference, no clothes; menu/combat sprites and animations.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers"
+    "requirement": "Second playable: preserve reference, no clothes; menu/combat sprites and animations. Exact user-provided name: Morelight.",
+    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "display_name": "Morelight"
   },
   {
     "name": "bront",
     "library_file_id": "libfile_bcbe24ebfc308191adff0f3cd7b3a1bb",
     "local_reference": "art/references/bront.png",
     "inspected": true,
-    "requirement": "Later roster: buff and muscular; same sprite/animation deliverables.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers"
+    "requirement": "Later roster: buff and muscular; same sprite/animation deliverables. Exact user-provided name: Fat Head Dave.",
+    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "display_name": "Fat Head Dave"
   },
   {
     "name": "zephyr",
@@ -44,40 +47,45 @@
     "library_file_id": "libfile_2519ff9a03b88191bfcffae87e6a26a5",
     "local_reference": "art/references/mox.png",
     "inspected": true,
-    "requirement": "Later roster: preserve distinguishing features; same sprite/animation deliverables.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers"
+    "requirement": "Later roster: preserve distinguishing features; same sprite/animation deliverables. Exact user-provided name: Yannix.",
+    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "display_name": "Yannix"
   },
   {
     "name": "rune",
     "library_file_id": "libfile_19b00a2db07c8191abf8a42dd67fdf2b",
     "local_reference": "art/references/rune.png",
     "inspected": true,
-    "requirement": "Later roster: preserve distinguishing features; same sprite/animation deliverables.",
-    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers"
+    "requirement": "Later roster: preserve distinguishing features; same sprite/animation deliverables. Exact user-provided name: Bongraker.",
+    "status": "playable with reference-based pixel sprites; later fighters share Rivet combat powers",
+    "display_name": "Bongraker"
   },
   {
     "name": "reference-7",
     "library_file_id": "libfile_7622e9cc3a8c8191844b31d9a603bf9b",
     "local_reference": "art/references/reference-07.png",
     "inspected": true,
-    "requirement": "Later roster: same menu/combat sprite and movement/attack animation guidelines.",
-    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred"
+    "requirement": "Later roster: same menu/combat sprite and movement/attack animation guidelines. Exact user-provided name: Juicy.",
+    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred",
+    "display_name": "Juicy"
   },
   {
     "name": "reference-8",
     "library_file_id": "libfile_93d978dddd8c8191bdb2e4ef8dfe3f50",
     "local_reference": "art/references/reference-08.png",
     "inspected": true,
-    "requirement": "Eventual playable fighter; keep first build restricted to first two.",
-    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred"
+    "requirement": "Eventual playable fighter; keep first build restricted to first two. Exact user-provided name: Yoyo.",
+    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred",
+    "display_name": "Yoyo"
   },
   {
     "name": "reference-9",
     "library_file_id": "libfile_d8399e2a279081918e6f8d6cf7cda3e2",
     "local_reference": "art/references/reference-09.png",
     "inspected": true,
-    "requirement": "Ignore red background; use head and create similar clothing.",
-    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred"
+    "requirement": "Ignore red background; use head and create similar clothing. Exact user-provided name: Red Kev.",
+    "status": "playable with generic placeholder art and shared powers/animation behavior; finished appearance deferred",
+    "display_name": "Red Kev"
   },
   {
     "name": "reference-10",
@@ -92,31 +100,44 @@
     "library_file_id": "libfile_8b401e87a0f081919200ef2937ae7c8b",
     "local_reference": "art/references/reference-11.png",
     "inspected": true,
-    "requirement": "Playable using shared powers and animations; preserve individual reference for finished art.",
-    "status": "playable generic placeholder; finished appearance deferred"
+    "requirement": "Playable using shared powers and animations; preserve individual reference for finished art. User explicitly named this exact eleventh reference Chode Adoration.",
+    "status": "playable generic placeholder; finished appearance deferred",
+    "display_name": "Chode Adoration"
   },
   {
     "name": "reference-12",
     "library_file_id": "libfile_90cad33d7d048191905ea6b564bfdd42",
     "local_reference": "art/references/reference-12.png",
     "inspected": true,
-    "requirement": "Playable using shared powers and animations; preserve individual reference for finished art.",
-    "status": "playable generic placeholder; finished appearance deferred"
+    "requirement": "Playable using shared powers and animations; preserve individual reference for finished art. User explicitly named this exact twelfth reference $Bitcoin Obama.",
+    "status": "playable generic placeholder; finished appearance deferred",
+    "display_name": "$Bitcoin Obama"
   },
   {
     "name": "reference-13",
     "library_file_id": "libfile_b20eb955f55c819191c62089747c4a3c",
     "local_reference": "art/references/reference-13.png",
     "inspected": true,
-    "requirement": "Playable using shared powers and animations; preserve individual reference for finished art.",
-    "status": "playable generic placeholder; finished appearance deferred"
+    "requirement": "Playable using shared powers and animations; preserve individual reference for finished art. User explicitly named this exact thirteenth reference Jahon.",
+    "status": "playable generic placeholder; finished appearance deferred",
+    "display_name": "Jahon"
   },
   {
     "name": "reference-14",
     "library_file_id": "libfile_32eb57d26d1c81918fcc3ff179450f5e",
     "local_reference": "art/references/reference-14.png",
     "inspected": true,
-    "requirement": "Playable using shared powers and animations; preserve individual appearance for finished art.",
-    "status": "playable generic placeholder; exact reference preserved and inspected; finished appearance deferred"
+    "requirement": "Playable using shared powers and animations; preserve individual appearance for finished art. User explicitly named this exact fourteenth reference Virtuagram.",
+    "status": "playable generic placeholder; exact reference preserved and inspected; finished appearance deferred",
+    "display_name": "Virtuagram"
+  },
+  {
+    "name": "dumpstar",
+    "display_name": "Dumpstar",
+    "library_file_id": "libfile_a289c194b9ec8191987123e1ced7a5e8",
+    "local_reference": "art/references/dumpstar.png",
+    "inspected": true,
+    "requirement": "Use only face and attire; ignore objects above his shoulder. Shared powers and animation behavior.",
+    "status": "playable reference-based pixel sprite set"
   }
 ]

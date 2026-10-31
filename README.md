@@ -1,6 +1,6 @@
 # Neon Relay — local combat prototype
 
-Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline first slice, with a pixel-art **Amber Ranch** stage and animated pixel sprites based on the first two supplied references. The latest scope includes **14 selectable fighters**: six reference-based pixel sprite sets and eight clearly labeled generic placeholders. Fighters 3–14 use the shared Rivet combat kit.
+Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline first slice, with a pixel-art **Amber Ranch** stage and animated pixel sprites based on the first two supplied references. The latest scope includes **15 selectable fighters**: seven reference-based pixel sprite sets and eight clearly labeled generic placeholders. Fighters 3–15 use the shared Golden Sproto combat kit.
 
 ## Run
 
@@ -16,7 +16,7 @@ Open the local URL printed by Vite (normally http://127.0.0.1:5173). Click **Ent
 
 ## Play
 
-Choose **Rivet** (faster movement and dash), **Vela** (faster, stronger projectile), or any later roster slot using the shared Rivet powers. Choose the opponent explicitly or use Auto matchup for the other fighter. The roster shares a foundation move set; full individual move lists remain future work.
+Choose **Golden Sproto** (faster movement and dash), **Morelight** (faster, stronger projectile), or any later roster slot using the shared Golden Sproto powers. Choose the opponent explicitly or use Auto matchup for the other fighter. The roster shares a foundation move set; full individual move lists remain future work.
 
 | Action | Keyboard | Standard gamepad |
 | --- | --- | --- |
@@ -62,9 +62,9 @@ Development console helpers: `neonRelay.snapshot()` returns a copied state, `neo
 
 ## Scope and next steps
 
-Implemented: 14 selectable player/opponent slots; CPU and standing/guard practice; ground/air chains; launcher chase; grabs; ranged attacks; dash; blocking; combo-earned Team Special; keyboard/gamepad polling; remapping; pause/restart; original ranch stage.
+Implemented: 15 selectable player/opponent slots; CPU and standing/guard practice; ground/air chains; launcher chase; grabs; ranged attacks; dash; blocking; combo-earned Team Special; keyboard/gamepad polling; remapping; pause/restart; original ranch stage.
 
-Rivet and Vela preserve the first two references: Rivet has yellow skin with the requested face/clothing; Vela has blue skin and no clothes. Bront is visibly muscular. Zephyr omits the mini pumpkin companion and uses pumpkin-themed sprite poses. Mox and Rune retain their own reference features. All six have separate menu and combat sprites, animated movement/defense states, and startup/active/recovery attack phases. Later fighter abilities and animation timing reuse the Rivet kit, including Zephyr; there is no unique pumpkin gameplay system or double-jump in this shared-kit build.
+Golden Sproto and Morelight preserve the first two references: Golden Sproto has yellow skin with the requested face/clothing; Morelight has blue skin and no clothes. Fat Head Dave is visibly muscular. Zephyr omits the mini pumpkin companion and uses pumpkin-themed sprite poses. Yannix (internal ID `mox`) and Bongraker (`rune`) retain their own reference features. Dumpstar uses his supplied face and attire, omitting the objects above his shoulders. All seven authored fighters have separate menu and combat sprites, animated movement/defense states, and startup/active/recovery attack phases. Later fighter abilities and animation timing reuse the Golden Sproto kit, including Zephyr; there is no unique pumpkin gameplay system or double-jump in this shared-kit build.
 
 **Slots 07–14 are playable generic numbered placeholders, not finished interpretations of their references.** Their exact images and requirements are preserved for replacing the art. In particular, reference 09 must omit the red backdrop and retain similar clothing, and reference 10 must retain its Christmas hat when illustrated. The placeholders do not yet satisfy those appearance details.
 
@@ -75,7 +75,7 @@ Deferred: finished sprite art for 07–14, unique powers, richer animation chore
 Practical checks were run without creating a formal testing/review workstream:
 
 - TypeScript compilation and Vite production build passed.
-- Ground three-hit finisher routes for all 14 selectable slots earned one pip.
+- Ground three-hit finisher routes for the original 14 selectable slots earned one pip; the added Dumpstar route also passed with three hits and one pip.
 - Buffered launcher → jump → air light → air medium → air finisher produced four hits and one pip.
 - Three completed qualifying combos charged three pips; Team Special consumed them and did not refill itself.
 - Blocked chains, whiffs, and single-hit finishers granted zero charge; an uncharged special did not activate.
@@ -83,12 +83,13 @@ Practical checks were run without creating a formal testing/review workstream:
 - An 8,000-input simulation/replay produced identical serialized state, a resolved round, and finite positions.
 - Browser keyboard play visibly produced a three-hit / 173-damage combo. Control remapping changed J to H, then defaults were restored. No warning/error console entries were captured during that check.
 - Browser checks also covered Bront/Zephyr, Mox/Rune, and Fighter 14 versus Fighter 07; the placeholder matchup visibly produced a three-hit / 173-damage combo. No warning/error console entries were captured.
+- Dumpstar’s shared move data and three-hit charge route passed; his selected portrait and combat sprite were verified in the running browser with no warning/error logs. See `docs/dumpstar-match.jpg`.
 - No physical gamepad was available for hands-on verification; controller support is implemented but hardware behavior remains unverified.
 
 ## Sprite assets and roster references
 
-`art/exports/` contains transparent menu, combat-idle, and animation-sheet PNGs for Rivet, Vela, Bront, Zephyr, Mox, and Rune. Each has a dev-server preview at `/art/<name>-preview.html` with PNG download links. Atlas rows follow the exported `*_ANIMATIONS` maps. These are compact authored pose animations, not hand-painted in-between animation for every simulation frame. The game creates and caches the same pixel frames at runtime; there are no external art/network dependencies.
+`art/exports/` contains transparent menu, combat-idle, and animation-sheet PNGs for Golden Sproto (`rivet`), Morelight (`vela`), Fat Head Dave (`bront`), Zephyr, Yannix (`mox`), Bongraker (`rune`), and Dumpstar. Each has a dev-server preview at `/art/<name>-preview.html` with PNG download links. Atlas rows follow the exported `*_ANIMATIONS` maps. These are compact authored pose animations, not hand-painted in-between animation for every simulation frame. The game creates and caches the same pixel frames at runtime; there are no external art/network dependencies.
 
-`art/roster-manifest.json` preserves all fourteen exact Library reference IDs, local readable image paths, and appearance constraints. `art/references/` also includes the ranch reference. All have been visually inspected. Working fighter names are project labels, not user-specified names.
+`art/roster-manifest.json` preserves all fifteen exact Library reference IDs, local readable image paths, and appearance constraints. `art/references/` also includes the ranch reference. All have been visually inspected. User-specified names are mapped to exact reference IDs in the manifest; other names remain working project labels. References 07–14 still use clearly labeled placeholder sprites.
 
 `docs/ROSTER.md` records the latest scope. `docs/playable-build.jpg` shows the actual browser build. No remote repository, deployment, publication, or merge was created.

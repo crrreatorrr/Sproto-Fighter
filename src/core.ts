@@ -2,8 +2,8 @@
 export const WIDTH = 1280, FLOOR = 578, TICK_RATE = 60;
 export const A = { left: 1, right: 2, up: 4, down: 8, light: 16, medium: 32, heavy: 64, launcher: 128, bolt: 256, grab: 512, special: 1024, dash: 2048 } as const;
 export type Action = keyof typeof A;
-export type FighterId = 'rivet' | 'vela' | 'bront' | 'zephyr' | 'mox' | 'rune' | 'guest07' | 'guest08' | 'guest09' | 'guest10' | 'guest11' | 'guest12' | 'guest13' | 'guest14';
-export const PLAYABLE_FIGHTERS = ['rivet', 'vela', 'bront', 'zephyr', 'mox', 'rune', 'guest07', 'guest08', 'guest09', 'guest10', 'guest11', 'guest12', 'guest13', 'guest14'] as const;
+export type FighterId = 'rivet' | 'vela' | 'bront' | 'zephyr' | 'mox' | 'rune' | 'guest07' | 'guest08' | 'guest09' | 'guest10' | 'guest11' | 'guest12' | 'guest13' | 'guest14' | 'dumpstar';
+export const PLAYABLE_FIGHTERS = ['rivet', 'vela', 'bront', 'zephyr', 'mox', 'rune', 'guest07', 'guest08', 'guest09', 'guest10', 'guest11', 'guest12', 'guest13', 'guest14', 'dumpstar'] as const;
 export type PlayableFighterId = typeof PLAYABLE_FIGHTERS[number];
 export type Mode = 'cpu' | 'dummy' | 'guard';
 export type MoveId = 'light' | 'medium' | 'heavy' | 'low' | 'sweep' | 'airLight' | 'airMedium' | 'airHeavy' | 'launcher' | 'bolt' | 'grab' | 'special';
@@ -47,29 +47,31 @@ export const ROSTER: Record<FighterId, {
     role: string;
     description: string;
 }> = {
-    rivet: { name: 'RIVET', color: '#ffda55', dark: '#98702e', speed: 5.5, jump: 15.8, partner: 'vela', special: 'CROSSCURRENT', role: 'RUSHDOWN', description: 'Close the gap with fast chains, a quick dash, and an explosive launcher.' },
-    vela: { name: 'VELA', color: '#6ba9ff', dark: '#244da8', speed: 4.4, jump: 14.8, partner: 'rivet', special: 'PRISM BREAK', role: 'ZONING', description: 'Control space with faster bolts, then turn an opening into a full combo.' },
-    bront: { name: 'BRONT', color: '#ed9471', dark: '#8b493f', speed: 3.7, jump: 13.6, partner: 'rivet', special: 'FAULT LINE', role: 'POWER', description: 'Stand your ground with heavier blows and a longer-reaching command grab.' },
+    rivet: { name: 'Golden Sproto', color: '#ffda55', dark: '#98702e', speed: 5.5, jump: 15.8, partner: 'vela', special: 'CROSSCURRENT', role: 'RUSHDOWN', description: 'Close the gap with fast chains, a quick dash, and an explosive launcher.' },
+    vela: { name: 'Morelight', color: '#6ba9ff', dark: '#244da8', speed: 4.4, jump: 14.8, partner: 'rivet', special: 'PRISM BREAK', role: 'ZONING', description: 'Control space with faster bolts, then turn an opening into a full combo.' },
+    bront: { name: 'Fat Head Dave', color: '#ed9471', dark: '#8b493f', speed: 3.7, jump: 13.6, partner: 'rivet', special: 'FAULT LINE', role: 'POWER', description: 'Stand your ground with heavier blows and a longer-reaching command grab.' },
     zephyr: { name: 'ZEPHYR', color: '#ffa74f', dark: '#bd5929', speed: 5.1, jump: 15.8, partner: 'vela', special: 'HARVEST MOON', role: 'AERIAL', description: 'Double-jump through the air and turn pumpkin strikes into a Harvest Moon relay.' },
-    mox: { name: 'MOX', color: '#a49eff', dark: '#4d468a', speed: 4.9, jump: 15.2, partner: 'bront', special: 'ECHO DRIVE', role: 'REACH', description: 'Catch an opening with longer-reaching light and medium attacks.' },
-    rune: { name: 'RUNE', color: '#f1b2d6', dark: '#895072', speed: 4.6, jump: 15.1, partner: 'zephyr', special: 'NIGHT BURST', role: 'BALANCED', description: 'Mix steady movement, close-range chains, and stronger, slower bolts.' },
-    guest07: { name: 'FIGHTER 07', color: '#c3d3df', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 7 is preserved for the finished sprite.' },
-    guest08: { name: 'FIGHTER 08', color: '#accdbf', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 8 is preserved for the finished sprite.' },
-    guest09: { name: 'FIGHTER 09', color: '#d4bdc8', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 9 is preserved for the finished sprite.' },
+    mox: { name: 'Yannix', color: '#a49eff', dark: '#4d468a', speed: 4.9, jump: 15.2, partner: 'bront', special: 'ECHO DRIVE', role: 'REACH', description: 'Catch an opening with longer-reaching light and medium attacks.' },
+    rune: { name: 'Bongraker', color: '#f1b2d6', dark: '#895072', speed: 4.6, jump: 15.1, partner: 'zephyr', special: 'NIGHT BURST', role: 'BALANCED', description: 'Mix steady movement, close-range chains, and stronger, slower bolts.' },
+    guest07: { name: 'Juicy', color: '#c3d3df', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 7 is preserved for the finished sprite.' },
+    guest08: { name: 'Yoyo', color: '#accdbf', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 8 is preserved for the finished sprite.' },
+    guest09: { name: 'Red Kev', color: '#d4bdc8', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 9 is preserved for the finished sprite.' },
     guest10: { name: 'FIGHTER 10', color: '#d9ccaa', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 10 is preserved for the finished sprite.' },
-    guest11: { name: 'FIGHTER 11', color: '#b8bedb', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 11 is preserved for the finished sprite.' },
-    guest12: { name: 'FIGHTER 12', color: '#c4d5b5', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Shared moveset, generic placeholder art; reference saved.' },
-    guest13: { name: 'FIGHTER 13', color: '#d6c3ad', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Shared moveset, generic placeholder art; reference saved.' },
- guest14:{name:'FIGHTER 14',color:'#becfce',dark:'#526070',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Shared moveset, generic placeholder art; reference saved.'},
+    guest11: { name: 'Chode Adoration', color: '#b8bedb', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Playable shared moveset. Generic placeholder art; reference 11 is preserved for the finished sprite.' },
+    guest12: { name: '$Bitcoin Obama', color: '#c4d5b5', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Shared moveset, generic placeholder art; reference saved.' },
+    guest13: { name: 'Jahon', color: '#d6c3ad', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Shared moveset, generic placeholder art; reference saved.' },
+ guest14:{name:'Virtuagram',color:'#becfce',dark:'#526070',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Shared moveset, generic placeholder art; reference saved.'},
+ dumpstar:{name:'Dumpstar',color:'#77a9ff',dark:'#345bb3',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Shared Golden Sproto movement and attacks. Face and attire from the supplied reference; shoulder objects omitted.'},
 };
 for (const id of PLAYABLE_FIGHTERS) {
     if (id !== 'rivet' && id !== 'vela') {
         ROSTER[id].speed = 5.5;
         ROSTER[id].jump = 15.8;
         ROSTER[id].role = 'SHARED KIT';
-        ROSTER[id].description = 'Shared Rivet movement, attacks, and Team Special behavior. ' + (id.startsWith('guest') ? 'Generic placeholder art; the reference is saved for later.' : 'Individual sprite art; unique powers are deferred.');
+        ROSTER[id].description = 'Shared Golden Sproto movement, attacks, and Team Special behavior. ' + (id.startsWith('guest') ? 'Generic placeholder art; the reference is saved for later.' : 'Individual sprite art; unique powers are deferred.');
     }
 }
+ROSTER.dumpstar.description = 'Shared Golden Sproto movement, attacks, and Team Special behavior. Reference face and attire; objects above shoulders omitted.';
 export interface Attack {
     id: MoveId;
     t: number;

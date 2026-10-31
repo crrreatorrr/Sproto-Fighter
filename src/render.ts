@@ -1,3 +1,4 @@
+import {drawDumpstar} from './dumpstarArt';
 import { drawBront } from './brontArt';
 import { drawZephyr } from './zephyrArt';
 import { drawMox } from './moxArt';
@@ -23,6 +24,7 @@ function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost =
         drawMox(c, f, frame, ghost);
     else if (f.id === 'rune')
         drawRune(c, f, frame, ghost);
+    else if(f.id==='dumpstar')drawDumpstar(c,f,frame,ghost);
     else
         drawPlaceholder(c, f, frame, ghost);
     if (f.blockstun > 0) {
