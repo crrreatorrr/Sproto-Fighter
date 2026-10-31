@@ -159,7 +159,7 @@ function buildScenery(): HTMLCanvasElement {
     rect(0, 0, 320, 41, '#15192370');
     return canvas;
 }
-export function drawStage(ctx: CanvasRenderingContext2D, frame: number): void {
+function drawRanch(ctx: CanvasRenderingContext2D, frame: number): void {
     scenery ??= buildScenery();
     ctx.save();
     ctx.imageSmoothingEnabled = false;
@@ -172,4 +172,58 @@ export function drawStage(ctx: CanvasRenderingContext2D, frame: number): void {
         ctx.fillRect(x, y, 4, 4);
     }
     ctx.restore();
+}
+
+export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch';
+export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:number|null}[] = [
+    {id:'yacht',name:'Tidebreak Marina',theme:'Yacht / beach',accent:'#66d7e8',chapter:1},
+    {id:'bar',name:'Last Light Bar',theme:'Bar',accent:'#efaa65',chapter:2},
+    {id:'castle',name:'Moonkeep Castle',theme:'Castle',accent:'#adabed',chapter:3},
+    {id:'retro',name:'Neon Tomorrow',theme:'Retrofuturistic city',accent:'#df86de',chapter:4},
+    {id:'ranch',name:'Amber Ranch',theme:'Bonus / original ranch',accent:'#efbd7a',chapter:null},
+];
+let currentStage:StageId='ranch';
+const placeholderScenery=new Map<StageId,HTMLCanvasElement>();
+export function setStage(id:StageId){currentStage=id;}
+export function getStage(){return currentStage;}
+export function drawStage(ctx:CanvasRenderingContext2D,frame:number):void {
+    if(currentStage==='ranch'){drawRanch(ctx,frame);return;}
+    let scene=placeholderScenery.get(currentStage);
+    if(!scene){scene=buildPlaceholder(currentStage);placeholderScenery.set(currentStage,scene);}
+    ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(scene,0,0,1280,720);
+    ctx.fillStyle='#0b101acc';ctx.fillRect(24,630,430,35);ctx.fillStyle='#d7e3ef';ctx.font='12px monospace';ctx.textAlign='left';
+    ctx.fillText('PLACEHOLDER STAGE / '+STAGES.find(s=>s.id===currentStage)!.theme.toUpperCase(),36,652);ctx.restore();
+}
+/** Deliberately static layout studies. These are not final level art or cutscene animation. */
+function buildPlaceholder(id:StageId):HTMLCanvasElement {
+    const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;const c=canvas.getContext('2d')!;
+    const r=(x:number,y:number,w:number,h:number,color:string)=>{c.fillStyle=color;c.fillRect(x,y,w,h);};
+    const p=(points:number[][],color:string)=>{c.fillStyle=color;c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();c.fill();};
+    if(id==='yacht'){
+        r(0,0,320,180,'#406978');r(0,42,320,39,'#89b4b9');r(0,81,320,63,'#397b89');r(255,51,22,22,'#eed49c');
+        for(let i=0;i<18;i++)r((i*43)%320,89+(i*7)%44,17+i%12,1,'#75a8ab');
+        p([[72,103],[211,103],[190,118],[88,118]],'#d7d3bd');r(100,82,75,21,'#ded9c2');r(113,70,42,12,'#cfceb9');r(119,73,30,7,'#416477');r(106,89,60,9,'#355d70');r(156,62,2,20,'#c1c1ab');
+        p([[0,134],[45,127],[90,135],[320,137],[320,180],[0,180]],'#bea57b');r(0,143,320,2,'#e4cba0');
+        for(const x of [25,294]){r(x,72,5,61,'#725f48');p([[x+2,72],[x-22,67],[x-30,75],[x+1,70],[x+20,62],[x+31,68],[x+3,76],[x+19,85],[x+8,81]],'#35564c');}
+        for(let i=0;i<45;i++)r((i*53)%320,149+(i*17)%29,3,1,'#a68e6e');
+    }else if(id==='bar'){
+        r(0,0,320,180,'#302c39');r(0,45,320,96,'#52434a');
+        for(const x of [25,126,230]){r(x,55,65,62,'#242b39');r(x+3,58,59,55,'#343343');for(let j=0;j<3;j++){r(x,70+j*15,65,3,'#8a6b54');for(let k=0;k<6;k++){r(x+6+k*9,61+j*15,4,9,k%2?'#6e9087':'#af8868');r(x+7+k*9,58+j*15,2,3,'#9db3a0');}}}
+        r(14,114,292,9,'#bd9366');r(18,123,284,20,'#694939');r(18,138,284,5,'#50372e');
+        for(const x of [52,153,255]){r(x,126,19,4,'#b58b69');r(x+7,130,4,14,'#39323a');r(x+3,142,12,2,'#292832');r(x+8,42,2,15,'#7a6d69');p([[x+9,55],[x-1,63],[x+19,63]],'#dda96a');}
+        r(0,144,320,36,'#453635');for(let y=150;y<180;y+=8)r(0,y,320,1,'#685044');for(let x=0;x<320;x+=40)r(x,144,1,36,'#352b2e');
+    }else if(id==='castle'){
+        r(0,0,320,180,'#272b47');r(0,64,320,80,'#474865');r(236,48,22,22,'#c9c8cf');
+        for(const x of [15,130,260]){r(x,78,44,66,'#66677b');for(let j=0;j<4;j++)r(x+j*12,69,8,12,'#77788a');r(x+15,93,14,30,'#2d304b');p([[x+15,93],[x+22,84],[x+29,93]],'#2d304b');}
+        r(0,126,320,18,'#777585');for(let x=0;x<320;x+=18)r(x,119,11,10,'#888591');
+        r(0,144,320,36,'#62616f');for(let y=145;y<180;y+=9){r(0,y,320,1,'#85828b');for(let x=(y%2)*12;x<320;x+=24)r(x,y,1,9,'#454654');}
+        for(const x of [82,224]){r(x,100,3,31,'#7f695c');r(x-2,94,7,10,'#b5825e');r(x,91,3,10,'#d5ae78');}
+    }else{
+        r(0,0,320,180,'#272541');r(0,65,320,79,'#443553');r(144,53,31,31,'#c38b9f');
+        for(let i=0;i<10;i++){const x=i*35-6,h=26+(i*17)%45;r(x,134-h,25,h,'#292d43');r(x+4,130-h,2,h,'#74738b');for(let j=0;j<5;j++)r(x+8,138-h+j*7,12,2,j%2?'#9c7ca1':'#679b9c');}
+        r(0,128,320,5,'#7c8ca0');r(0,135,320,9,'#34374c');r(0,144,320,36,'#262a3e');r(0,144,320,2,'#d786c0');
+        for(let y=152;y<180;y+=9)r(0,y,320,1,'#5f547e');for(let x=-160;x<480;x+=40)p([[160,145],[x,180],[x+1,180]],'#5e557d');
+        r(27,92,43,16,'#53536d');r(30,95,37,10,'#8e98a5');r(254,101,37,15,'#4d566b');r(257,104,31,9,'#ae8fa8');
+    }
+    r(0,0,320,42,'#11182799');return canvas;
 }

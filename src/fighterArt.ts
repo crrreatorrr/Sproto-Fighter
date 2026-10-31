@@ -131,7 +131,7 @@ function animation(f:Fighter,frame:number):[Pose,number]{
   if(f.y<FLOOR)return [f.vy<0?'jump':'fall',Math.floor(frame/8)%2];
   if(f.input&A.down)return ['crouch',Math.floor(frame/12)%2];
   if(Math.abs(f.vx)>1)return ['walk',Math.floor(frame/5)%6];
-  return ['idle',Math.floor(frame/13)%4];
+  return ['idle',frame%180>=176?3:Math.floor(frame/18)%3];
 }
 /** Draw in world coordinates. Atlas origin is the character's grounded feet. */
 export function drawRivet(c:CanvasRenderingContext2D,f:Fighter,frame:number,ghost=false){

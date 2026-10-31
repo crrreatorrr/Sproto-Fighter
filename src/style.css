@@ -10,3 +10,6 @@
 #mode{margin-bottom:2px}#opponent{margin-bottom:12px}.fighter-options{gap:7px}
 
 .workbench{grid-template-columns:1fr 1fr}.roster{grid-column:1/-1}.fighter-options{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.fighter small{font-size:7px}.fighter .portrait{width:48px;flex-basis:48px}@media(max-width:550px){.workbench{grid-template-columns:1fr}}
+
+/* Keep supplied character references intact in selection cards. */
+.fighter-options{grid-template-columns:repeat(auto-fit,minmax(185px,1fr))}.fighter img.portrait{width:64px;height:72px;flex-basis:64px;object-fit:contain;transform:none;background:#0d1420;border-radius:3px}.fighter b{overflow-wrap:anywhere}

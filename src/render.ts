@@ -1,11 +1,14 @@
+import { drawPower } from './powerArt';
+import { setHiggsfieldThrowState } from './higgsfieldRig';
+import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
 import { drawSprite } from './spriteRoster';
 import { drawStage } from './stage';
-import { FLOOR, ROSTER, type CombatState, type Fighter } from './core';
+import { FLOOR, ROSTER, COMBAT_STYLES, type CombatState, type Fighter } from './core';
 function text(c: CanvasRenderingContext2D, str: string, x: number, y: number, size = 14, color = '#93a5bd', align: CanvasTextAlign = 'left', weight = 600) { c.fillStyle = color; c.font = `${weight} ${size}px system-ui, sans-serif`; c.textAlign = align; c.fillText(str, x, y); }
 function line(c: CanvasRenderingContext2D, x: number, y: number, x2: number, y2: number, color: string, width = 1) { c.beginPath(); c.moveTo(x, y); c.lineTo(x2, y2); c.strokeStyle = color; c.lineWidth = width; c.stroke(); }
 function poly(c: CanvasRenderingContext2D, points: number[][], color: string) { c.beginPath(); points.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath(); c.fillStyle = color; c.fill(); }
-function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false) {
-    drawSprite(c,f,frame,ghost);
+function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false) {
+    drawSprite(c,f,frame,ghost,frozen);
     if (f.blockstun > 0) {
         c.save();
         c.strokeStyle = '#85c8ff';
@@ -37,6 +40,7 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#7088a3', right ? 'right' : 'left');
 }
 export function render(c: CanvasRenderingContext2D, s: CombatState) {
+    setHiggsfieldThrowState(s.throwState,s.fighters);
     drawStage(c, s.frame);
     for (const f of s.fighters) {
         c.fillStyle = '#040b1366';
@@ -44,23 +48,16 @@ export function render(c: CanvasRenderingContext2D, s: CombatState) {
         c.ellipse(f.x, FLOOR + 5, 53 - Math.min(25, (FLOOR - f.y) / 10), 10, 0, 0, Math.PI * 2);
         c.fill();
     }
-    for (const f of s.fighters) {
-        if (f.move?.id === 'special') {
-            const teammate = { ...f, id: ROSTER[f.id].partner, x: f.x - f.facing * 100, y: FLOOR } as Fighter;
-            fighter(c, teammate, s.frame, true);
-            c.fillStyle = ROSTER[f.id].color + '18';
-            c.fillRect(Math.min(f.x, f.x + f.facing * 600), 180, 600, 398);
-        }
-    }
-    fighter(c, s.fighters[0], s.frame);
-    fighter(c, s.fighters[1], s.frame);
+    drawTeamSpecialBack(c,s);
+    fighter(c, s.fighters[0], s.frame, false, s.freeze > 0);
+    fighter(c, s.fighters[1], s.frame, false, s.freeze > 0);
+    drawTeamSpecialFront(c,s);
+    for(const f of s.fighters)if(f.slow>0)text(c,'MELANCHOLY · SLOWED',f.x,f.y-170,9,'#c7a5eb','center',800);
     for (const p of s.projectiles) {
         c.save();
         c.translate(p.x, p.y);
-        c.scale(Math.sign(p.vx), 1);
-        c.shadowColor = ROSTER[s.fighters[p.owner].id].color;
-        c.shadowBlur = 20;
-        poly(c, [[-30, -11], [17, -7], [31, 0], [17, 7], [-30, 11], [-17, 0]], c.shadowColor);
+        c.rotate(Math.atan2(p.vy,p.vx));
+        drawPower(c,p.shape??'spark',p.age??0,ROSTER[s.fighters[p.owner].id].color);
         c.restore();
     }
     for (const e of s.effects) {
@@ -97,16 +94,22 @@ export function render(c: CanvasRenderingContext2D, s: CombatState) {
     text(c, 'ROUND 01', 640, 116, 9, '#7b8fa9', 'center');
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
+        if(f.move && f.move.t>0){
+            const aim=f.move.aim, label=f.move.id==='grab'?(f.move.throwDirection??'forward').toUpperCase()+' THROW':f.move.id==='bolt'?COMBAT_STYLES[f.id].projectile.shape.replace(/([A-Z])/g,' $1').toUpperCase():aim==='upForward'?'DIAGONAL STRIKE':aim==='up'?'RISING STRIKE':aim==='down'?(f.y<FLOOR?'DIVE STRIKE':'LOW STRIKE'):'';
+            if(label)text(c,label,f.x,f.y-200,10,'#e8e4cc','center',750);
+            if(f.move.connected&&f.move.id!=='special'&&f.move.id!=='grab')text(c,f.dashCanceled?'CHAIN READY':'CHAIN / DASH CANCEL',f.x,f.y+35,9,'#b4f8c8','center',750);
+        }
         if (f.combo > 1) {
             const x = i === 0 ? 65 : 1215;
             c.fillStyle = '#17202bd9';
-            c.fillRect(i === 0 ? 48 : 1057, 188, 175, 112);
+            c.fillRect(i === 0 ? 48 : 1022, 188, 210, 138);
             text(c, String(f.combo).padStart(2, '0'), x, 244, 61, ROSTER[f.id].color, i === 0 ? 'left' : 'right', 900);
             text(c, 'HIT COMBO', x, 266, 12, '#d8e4f0', i === 0 ? 'left' : 'right');
             text(c, f.comboDamage + ' DAMAGE', x, 287, 11, '#7d93ab', i === 0 ? 'left' : 'right');
+            text(c,!f.chargeEligible?'TEAM SPECIAL · NO RECHARGE':f.combo>=3&&f.lastFinisher?'CLEAN FINISH · +1 AT END':f.combo>=3?'FINISHER TO EARN CHARGE':'EXTEND → FINISH',x,309,9,f.lastFinisher?'#b4f8c8':'#efd69b',i===0?'left':'right');
         }
     }
-    if (s.noticeLife > 0) {
+    if (s.noticeLife > 0 && !s.fighters.some(f=>f.move?.id==='special')) {
         c.globalAlpha = Math.min(1, s.noticeLife / 20);
         c.fillStyle = '#17202bce';
         c.fillRect(390, 176, 500, 32);

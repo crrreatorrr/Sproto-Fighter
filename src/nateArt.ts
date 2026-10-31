@@ -122,7 +122,7 @@ function animation(f:Fighter,frame:number):[string,number]{
   if(f.y<FLOOR)return [f.vy<0?'jump':'fall',Math.floor(frame/6)%2];
   if(f.input&A.down)return ['crouch',Math.floor(frame/12)%2];
   if(Math.abs(f.vx)>1)return ['walk',Math.floor(frame/6)%4];
-  return ['idle',Math.floor(frame/18)%4];
+  return ['idle',frame%180>=176?3:Math.floor(frame/18)%3];
 }
 
 export function drawNate(ctx:CanvasRenderingContext2D,f:Fighter,frame:number,ghost=false):void{

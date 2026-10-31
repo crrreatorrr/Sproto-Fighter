@@ -28,7 +28,7 @@ try {
   }
   const s = createState('crapto', 'dummy');
   tick(s, 10, A.right); assert.ok(s.fighters[0].x > 380, 'move');
-  step(s, [A.up, 0]); assert.ok(s.fighters[0].y < FLOOR, 'jump');
+  tick(s, 3, A.up); assert.ok(s.fighters[0].y < FLOOR, 'jump');
   tick(s, 80); assert.equal(s.fighters[0].y, FLOOR, 'land');
   chain(s); chain(s); chain(s);
   assert.equal(s.fighters[0].pips, 3, 'three combos charge special');

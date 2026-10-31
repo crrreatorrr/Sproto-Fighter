@@ -1,0 +1,267 @@
+{
+  "renderer": "actual src/higgsfieldRig.ts compiled toCommonJS with native Canvas",
+  "revision": "24495940b540c6d6",
+  "ids": [
+    "rivet",
+    "vela",
+    "alpha777",
+    "bigswole",
+    "bront",
+    "crapto",
+    "dumpstar",
+    "guest07",
+    "guest08",
+    "guest09",
+    "guest10",
+    "guest11",
+    "guest12",
+    "guest13",
+    "guest14",
+    "mandela",
+    "mox",
+    "nate",
+    "rune",
+    "vamp",
+    "zephyr"
+  ],
+  "sets": [
+    {
+      "name": "poses",
+      "poses": [
+        "idle 0",
+        "walk 4",
+        "walk 12",
+        "walk 20",
+        "jump 12",
+        "fall 25",
+        "crouch 20",
+        "dash 10",
+        "light 0",
+        "light 1",
+        "light 2",
+        "medium 1",
+        "heavy 1",
+        "launcher 1",
+        "bolt-level 1",
+        "bolt-up 1",
+        "bolt-upForward 1",
+        "bolt-down 1",
+        "airLight 1",
+        "airMedium 1",
+        "airHeavy 1",
+        "grab 1",
+        "hit 15",
+        "block 12",
+        "special 12",
+        "special 27",
+        "special 42",
+        "special 65",
+        "throw-hold 6",
+        "throw-release 6",
+        "victim-hold 6",
+        "victim-release 6"
+      ]
+    },
+    {
+      "name": "combat",
+      "poses": [
+        "light 0",
+        "light 1",
+        "light 2",
+        "medium 0",
+        "medium 1",
+        "medium 2",
+        "heavy 0",
+        "heavy 1",
+        "heavy 2",
+        "low 0",
+        "low 1",
+        "low 2",
+        "sweep 0",
+        "sweep 1",
+        "sweep 2",
+        "airLight 0",
+        "airLight 1",
+        "airLight 2",
+        "airMedium 0",
+        "airMedium 1",
+        "airMedium 2",
+        "airHeavy 0",
+        "airHeavy 1",
+        "airHeavy 2",
+        "launcher 0",
+        "launcher 1",
+        "launcher 2",
+        "bolt 0",
+        "bolt 1",
+        "bolt 2",
+        "grab 0",
+        "grab 1",
+        "grab 2",
+        "special-phase 0",
+        "special-phase 1",
+        "special-phase 2",
+        "light-up 1",
+        "light-upForward 1",
+        "light-down 1",
+        "medium-up 1",
+        "medium-upForward 1",
+        "medium-down 1",
+        "heavy-up 1",
+        "heavy-upForward 1",
+        "heavy-down 1",
+        "launcher-up 1",
+        "launcher-upForward 1",
+        "launcher-down 1",
+        "airLight-up 1",
+        "airLight-upForward 1",
+        "airLight-down 1",
+        "airMedium-up 1",
+        "airMedium-upForward 1",
+        "airMedium-down 1",
+        "airHeavy-up 1",
+        "airHeavy-upForward 1",
+        "airHeavy-down 1"
+      ]
+    },
+    {
+      "name": "throws",
+      "poses": [
+        "throw-forward-hold 6",
+        "throw-forward-release 6",
+        "victim-forward-hold 6",
+        "victim-forward-release 6",
+        "throw-back-hold 6",
+        "throw-back-release 6",
+        "victim-back-hold 6",
+        "victim-back-release 6",
+        "throw-up-hold 6",
+        "throw-up-release 6",
+        "victim-up-hold 6",
+        "victim-up-release 6",
+        "throw-down-hold 6",
+        "throw-down-release 6",
+        "victim-down-hold 6",
+        "victim-down-release 6"
+      ]
+    }
+  ],
+  "specialContacts": {
+    "rivet": [
+      12,
+      22,
+      32,
+      42
+    ],
+    "vela": [
+      16,
+      32,
+      48
+    ],
+    "alpha777": [
+      14,
+      21,
+      28,
+      35,
+      42,
+      49
+    ],
+    "bigswole": [
+      20,
+      44
+    ],
+    "bront": [
+      18,
+      40
+    ],
+    "crapto": [
+      18,
+      34,
+      50
+    ],
+    "dumpstar": [
+      18,
+      36,
+      48
+    ],
+    "guest07": [
+      12,
+      26,
+      42
+    ],
+    "guest08": [
+      15,
+      30,
+      45
+    ],
+    "guest09": [
+      12,
+      24,
+      36
+    ],
+    "guest10": [
+      16,
+      26,
+      36,
+      46
+    ],
+    "guest11": [
+      20,
+      40
+    ],
+    "guest12": [
+      14,
+      28,
+      42
+    ],
+    "guest13": [
+      16,
+      32,
+      48
+    ],
+    "guest14": [
+      12,
+      30,
+      48
+    ],
+    "mandela": [
+      18,
+      34,
+      50
+    ],
+    "mox": [
+      12,
+      20,
+      28,
+      36,
+      44
+    ],
+    "nate": [
+      10,
+      24,
+      38
+    ],
+    "rune": [
+      18,
+      36,
+      48
+    ],
+    "vamp": [
+      20,
+      36,
+      50
+    ],
+    "zephyr": [
+      14,
+      28,
+      42
+    ]
+  },
+  "specialSampling": "each contact -3, exact, +3; anticipation; recovery",
+  "orientations": [
+    "right",
+    "left"
+  ],
+  "draws": 4896,
+  "errors": 0
+}

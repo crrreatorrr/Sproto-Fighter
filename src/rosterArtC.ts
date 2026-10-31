@@ -124,7 +124,7 @@ function sprite(id:RosterCId,kind:string,phase:number,flash=false):HTMLCanvasEle
 function animation(f:Fighter,frame:number):[string,number]{
   if(f.stun>0)return ['hit',Math.floor(frame/4)%2];if(f.blockstun>0)return ['block',Math.floor(frame/6)%2];
   if(f.move){const m=getMove(f,f.move.id),t=f.move.t;let phase=t<m.startup?0:t<m.startup+m.active?1:2;if(f.move.id==='special'&&phase===1)phase=1+Math.floor((t-m.startup)/7)%3;return [f.move.id,phase];}
-  if(f.dash>0)return ['dash',Math.floor(frame/3)%2];if(f.y<FLOOR)return [f.vy<0?'jump':'fall',Math.floor(frame/6)%2];if(f.input&A.down)return ['crouch',Math.floor(frame/12)%2];if(Math.abs(f.vx)>1)return ['walk',Math.floor(frame/6)%4];return ['idle',Math.floor(frame/18)%4];
+  if(f.dash>0)return ['dash',Math.floor(frame/3)%2];if(f.y<FLOOR)return [f.vy<0?'jump':'fall',Math.floor(frame/6)%2];if(f.input&A.down)return ['crouch',Math.floor(frame/12)%2];if(Math.abs(f.vx)>1)return ['walk',Math.floor(frame/6)%4];return ['idle',frame%180>=176?3:Math.floor(frame/18)%3];
 }
 function identity(id:FighterId):RosterCId{return id==='guest13'||id==='guest14'?id:'crapto';}
 export function drawRosterC(ctx:CanvasRenderingContext2D,f:Fighter,frame:number,ghost=false):void{
