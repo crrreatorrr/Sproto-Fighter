@@ -4,15 +4,20 @@ Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game 
 
 ## Run
 
-Requires Node.js 22+ and npm. Dependencies are already installed in this checkout.
+On this Mac, double-click **Play Sproto Arena.command** in this project folder. It opens the browser if the game is already running; otherwise it starts the local server and opens the game. Keep its Terminal window open while playing. Control-C stops a server started by the launcher.
+
+Manual alternative (Node.js 22+; dependencies already installed):
 
 ```sh
 cd /Users/kenhiraoka/Documents/Codex/2026-10-31/task/neon-relay
-npm install
-npm run dev
+npm run dev -- --port 5173 --strictPort
 ```
 
-Open the local URL printed by Vite (normally http://127.0.0.1:5173). Click **Enter the arena**. `npm run build` checks TypeScript and creates `dist/`; `npm run preview` serves that build locally. The dev server binds only to loopback.
+Open **http://127.0.0.1:5173/** in Chrome, Safari or Edge on this same Mac, then click **Enter the arena**. The URL only works while the local server is running; it is not a published website. Chrome was verified directly after recovery from a stopped server.
+
+The current recovery session runs under macOS launchd job `com.sprotoarena.local`, independent of the assistant's temporary shell. It remains available for this login session; after logout/reboot use the launcher above. To stop that background job deliberately, run `launchctl remove com.sprotoarena.local` in Terminal. Its logs are `/tmp/sproto-arena-server.log` and `/tmp/sproto-arena-server-error.log`. No boot/login startup file or external hosting was installed.
+
+`npm run build` checks TypeScript and creates the production bundle. `npm run qa` repeats the current-update checks.
 
 ## Play
 
