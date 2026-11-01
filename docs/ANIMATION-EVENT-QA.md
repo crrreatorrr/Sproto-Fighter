@@ -1,6 +1,6 @@
 # Event-animation pilot verification
 
-2026-11-01. This report covers the new Golden Sproto and Morelight event-animation pilot and its integration. **2 of 21 new event sets are installed. The other 19 are blocked before reference transfer and have not passed this new visual audit.** Their previous playable art remains installed. Earlier movement, kicks and throw work is documented separately in [SPRITE-REWORK-QA.md](SPRITE-REWORK-QA.md) and [THROW-REACTION-QA.md](THROW-REACTION-QA.md).
+2026-11-01. This report covers the new Golden Sproto and Morelight event-animation pilot and its integration. **2 of 21 new event sets are installed. The other 19 have no confirmed reference uploads and have not passed this new visual audit.** Their previous playable art remains installed. The latest specifically approved retry executed but all storage requests returned HTTP 403; see the addendum below. Earlier movement, kicks and throw work is documented separately in [SPRITE-REWORK-QA.md](SPRITE-REWORK-QA.md) and [THROW-REACTION-QA.md](THROW-REACTION-QA.md).
 
 ## Visual acceptance and corrections
 
@@ -20,25 +20,25 @@ The root agent also checked the full combat renderer: both mouth releases/projec
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Golden Sproto | Both | Both | Both | Both | Both | Both | Installed; full-render checks and actual-match KO observed |
 | Morelight | Both | Both | Both | Both | Both | Both | Installed; full-render mouth and partner checks observed |
-| Fat Head Dave | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Halloween 2008 | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Yannix | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Bongraker | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Juicy | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Yoyo | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Red Kev | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Sprotel Bitcoin | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Chode Adoration | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| $Bitcoin Obama | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Jahon | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Virtuagram | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Dumpstar | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Crapto | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| VAMP | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Alpha 777 | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Bitcoin Mandela | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Big Swole | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
-| Little Foot Nate | Pending | Pending | Pending | Pending | Pending | Pending | Transfer denied; existing art retained |
+| Fat Head Dave | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Halloween 2008 | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Yannix | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Bongraker | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Juicy | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Yoyo | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Red Kev | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Sprotel Bitcoin | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Chode Adoration | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| $Bitcoin Obama | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Jahon | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Virtuagram | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Dumpstar | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Crapto | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| VAMP | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Alpha 777 | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Bitcoin Mandela | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Big Swole | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
+| Little Foot Nate | Pending | Pending | Pending | Pending | Pending | Pending | Storage 403; existing art retained |
 
 ## Actual main-game browser checks
 
@@ -74,3 +74,7 @@ Confirmed spend: **7 of 48 approved existing credits**, balance 55.5. No purchas
 The denied operation was a batch upload of 19 private guard PNGs, `public/fighters/poses/<fighter>/00-guard.png`, to Higgsfield's returned presigned upload endpoints. The first denial said scaling preceded the pilot gate. After the pilot review passed and the parent supplied the user's explicit roster/budget approval, the same operation was retried once. Automatic review again denied it before execution, stating: “This again transmits 19 additional private guard sprites for roster-scale work while retained instruction still requires completing two-fighter pilot assessment before adding remaining fighters.” Zero additional guard files were transferred and no additional roster jobs were submitted. This is **denied**, not an uncertain execution or a queued job. Do not route around it.
 
 Remaining 19 requests and individual choreography briefs are prepared locally. Generation, per-fighter corrections, installation and visual acceptance remain pending. Existing walking/kicking art was not regenerated in this event pilot; sparse in-betweens and some silhouette variation remain. Physical controller hardware, online play, competitive balance, continuous motion capture and a full cross-browser suite were not verified. Prior art/movement reports remain historical evidence, not a pass for these missing new event clips.
+
+### Subsequent explicit-approval retry
+
+At approximately 06:57 UTC, after the user explicitly approved all 19 uploads, automatic approval allowed the retry command. All 19 PUT requests returned HTTP 403 from storage. No `media_confirm` or new generation followed. The underlying storage reason is unknown; the URLs were fresh and the required signed headers were supplied. This differs from the two earlier approval denials described above. Receipts and the exact disposition are preserved in `art/animation-rework/remaining-guard-upload-receipts.json` and `transfer-blocker-2026-11-01.md`. Stronger motion prompts were prepared locally, but no new art or runtime changes were made and no additional visual pass is claimed.

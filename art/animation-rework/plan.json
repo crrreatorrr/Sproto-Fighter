@@ -1,5 +1,5 @@
 {
-  "status": "Two-fighter pilot passed with corrections; remaining19 transfer denied after authorized retry",
+  "status": "Two-fighter pilot installed; latest authorized remaining-roster transfer returned HTTP 403 for all 19 files",
   "model": {
     "id": "nano_banana_2_1",
     "resolution": "1k",
@@ -16,7 +16,7 @@
   "source": "Original user reference plus inspected installed full-body guard for consistent proportions; excluded withdrawn rigging image and bug screenshots.",
   "format": "One4x8 complete-body32-cell sheet per fighter; retain inspected source draws only, repeat holds explicitly.",
   "pilot": "Morelight and Golden Sproto first; validate likeness, connected anatomy, extraction and live motion before the remaining roster.",
-  "billing": "48existingcredits approved;7spent,55.5balance confirmed. Planned19remaining\u00d71.5=28.5, projected35.5total. No purchases or subscription changes. Remaining19 guard-reference upload denied twice; do not retry or use another path without new relevant authorization/evidence.",
+  "billing": "48 existing credits approved; 7 spent, 55.5 balance confirmed. Planned 19 remaining at 1.5 each = 28.5, projected 35.5 total. No purchase or subscription change. Latest specifically approved upload retry ran but all 19 PUT requests returned HTTP 403; no confirmations or new generation. No further retry or alternate route attempted.",
   "fighters": {
     "rivet": {
       "intro": "Straighten red tie, roll shoulders and raise a confident guard.",
@@ -260,5 +260,6 @@
       31
     ],
     "runtime_mapping": "See per-fighter corrections JSON. Rejected defeat cels are replaced with explicit accepted holds."
-  }
+  },
+  "latest_motion_direction": "Flashier full-body anticipation, weight transfer, distinct contact silhouettes and recovery; stronger specific intros/defeats without altered likeness, detached limbs or baked-in effects."
 }

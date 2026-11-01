@@ -2,7 +2,7 @@
 
 Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline first slice, with a pixel-art **Amber Ranch** stage and animated pixel sprites based on all supplied references. The latest scope includes **21 selectable fighters**, each with its original supplied image on the selection screen and a fighting animation set. All 21 have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Four selectable story worlds use static placeholder scenes and stages; the ranch remains a free-play bonus.
 
-**Latest animation update: 2 of 21 new event sets are installed.** Golden Sproto and Morelight now have new intro, special, cast, recoil and defeat frames, with separate presentation timing and a visible defeat sequence before results. The other 19 retain their existing playable art; their new generation is blocked by reference-upload approval. See [current event QA](docs/ANIMATION-EVENT-QA.md) and [handoff](docs/CLAUDE-HANDOFF.md) for exact coverage, cost and limitations.
+**Latest animation update: 2 of 21 new event sets are installed.** Golden Sproto and Morelight now have new intro, special, cast, recoil and defeat frames, with separate presentation timing and a visible defeat sequence before results. The other 19 retain their existing playable art; their latest authorized reference-upload retry received HTTP 403 from storage, blocking new generation. See [current event QA](docs/ANIMATION-EVENT-QA.md) and [handoff](docs/CLAUDE-HANDOFF.md) for exact coverage, cost and limitations.
 
 ## Run
 

@@ -1,6 +1,6 @@
 # Sproto Arena — current local handoff
 
-2026-11-01. **The newest animation request is partly complete: Golden Sproto and Morelight have the new event clips; the other 19 fighters retain their existing playable art.** The remaining reference upload was denied by automatic approval review, including one authorized retry. This is a factual checkpoint, not a claim that all requested animations are finished. Nothing was sent to Claude.
+2026-11-01. **The newest animation request is partly complete: Golden Sproto and Morelight have the new event clips; the other 19 fighters retain their existing playable art.** After the user explicitly approved all 19 transfers, the latest retry passed automatic approval but every storage PUT returned HTTP 403. No new uploads were confirmed or generation jobs submitted. This is a factual checkpoint, not a claim that all requested animations are finished. Nothing was sent to Claude.
 
 ## Run
 
@@ -12,7 +12,7 @@ cd /Users/kenhiraoka/Documents/Codex/2026-10-31/task/neon-relay
 npm run dev -- --port 5173 --strictPort
 ```
 
-Base checkpoint: `c0413f2`. Final delivery records the new commit. No remote, publication, deployment or subscription change.
+Base checkpoint: `c0413f2`; integrated pilot checkpoint: `84b0521`. No remote, publication, deployment or subscription change.
 
 Controls remain A/D move, W jump, J/K/L attacks, U launcher, I power, O directional throw, P charged partner special, Shift dash. Remapping remains available. Physical gamepad hardware was not verified.
 
@@ -57,8 +57,8 @@ npm run build
 
 Opening 62.5 credits; confirmed 55.5: **7 credits spent of 48 approved**. Two filtered jobs were uncharged. No credits purchased, subscription changed or Unlimited website allowance used. Revised quote 1.5 credits per sheet; remaining 19 would cost 28.5, projected base total 35.5 before revisions.
 
-**Denied action:** upload 19 existing private guard PNGs from `public/fighters/poses/<fighter>/00-guard.png` to Higgsfield's returned presigned upload endpoints. Initial attempt and authorized retry both stopped before execution. Review stated roster scaling preceded completion of the pilot gate. The concrete pilot checks are recorded, but the transfer remains denied. No additional roster jobs submitted. Do not bypass via another executor, endpoint, attachment helper or website.
+**Blocked action:** upload 19 existing private guard PNGs from `public/fighters/poses/<fighter>/00-guard.png` to Higgsfield's returned presigned upload endpoints. Two earlier attempts stopped at automatic approval before execution. The user then specifically approved all 19 uploads; the latest permitted retry executed, but all 19 storage requests returned HTTP 403. No uploads were confirmed or additional roster jobs submitted. Detailed storage rejection reasons were not captured. See `art/animation-rework/transfer-blocker-2026-11-01.md` and its JSON receipts. Do not bypass via another executor, endpoint, attachment helper or website.
 
-Remaining: unblock transfer, generate/inspect/correct each of the 19 sheets, normalize/install only accepted clips, perform individual browser motion and power-origin checks, rerun affected regressions. Prepared requests are local only. The remaining 19 event sets are **pending**, not passed or placeholder-complete.
+Remaining: resolve the storage transfer rejection, generate/inspect/correct each of the 19 sheets, normalize/install only accepted clips, perform individual browser motion and power-origin checks, rerun affected regressions. Prepared local prompts now emphasize stronger full-body anticipation, weight transfer, distinct special impacts and continuous defeat settling, following the user's request for flashier movement. These prompts have not produced new assets. The remaining 19 event sets are **pending**, not passed or placeholder-complete.
 
 Limitations: sparse authored key poses, explicit terminal holds and minor silhouette variation; no full in-betweened studio-animation claim. No controller hardware, online or competitive-balance claim. Prior delivered roster/throw work and evidence are preserved in `docs/CLAUDE-HANDOFF-THROWS.md`, `docs/SPRITE-REWORK-QA.md`, `docs/THROW-REACTION-QA.md`.

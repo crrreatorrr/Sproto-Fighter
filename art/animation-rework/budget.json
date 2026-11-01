@@ -134,6 +134,8 @@
   "remainingApprovedCredits": 41,
   "plannedRemainingBaseCost": 28.5,
   "projectedBaseTotal": 35.5,
-  "remainingUploadStatus": "denied; zero transferred; approved retry also denied",
-  "activeJobs": 0
+  "remainingUploadStatus": "Latest specifically authorized retry executed; all 19 storage PUT requests returned HTTP 403; none confirmed; no new jobs.",
+  "activeJobs": 0,
+  "latestRetryAdditionalSpend": 0,
+  "latestRetryReceipt": "remaining-guard-upload-receipts.json"
 }
