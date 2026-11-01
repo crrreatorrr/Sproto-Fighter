@@ -1,0 +1,8 @@
+MANUAL QA · frame 184 · running
+P1 vela: x=856.6 y=578.0 vx=0.00 vy=0.00 grab t=9 input=0 hp=1000 combo=1 best=0 pips=0 reaction=-/-:0
+P2 rivet: x=1084.8 y=523.0 vx=12.22 vy=-0.35 neutral t=0 input=0 hp=885 combo=0 best=0 pips=0 reaction=knockdown/flight:9
+Throw: {"attacker":0,"victim":1,"phase":"release","t":9,"direction":"forward","facing":1,"startAttackerX":856.6122496560001,"startVictimX":911.6122496560001,"startVictimY":578,"gripAttackerX":856.6122496560001,"gripVictimX":967.8622496560001,"gripVictimY":556.75}
+Projectiles: 
+f150: grab level hits=0 pips=0 hp=1000/1000 x=854 y=578 input=512 throw=-/- reaction2=-/-
+f155: grab level hits=0 pips=0 hp=1000/1000 x=857 y=578 input=512 throw=forward/hold reaction2=-/-
+f170: grab level hits=1 pips=0 hp=1000/885 x=857 y=578 input=0 throw=forward/release reaction2=knockdown/flight

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 const source = ts.transpileModule(readFileSync(new URL('../src/core.ts', import.meta.url), 'utf8'), { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText;
-const { A, FLOOR, PLAYABLE_FIGHTERS, createState, getMove, step, cpuInput } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+const { A, FLOOR, PLAYABLE_FIGHTERS, HORIZONTAL_SPIT_FIGHTERS, createState, getMove, step, cpuInput } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 let failures=0;
 function check(label, fn) { try { fn(); console.log('PASS:',label); } catch(error) { failures++; console.error('FAIL:',label,'—',error.message); } }
 function fresh(mode='dummy'){const s=createState('rivet',mode);s.fighters[0].x=380;s.fighters[1].x=440;return s;}
@@ -17,7 +17,21 @@ check('Up + forward + medium selects diagonal rising strike without jump',()=>{c
 check('down + medium is a low attack',()=>{const s=fresh();tick(s,1,A.down|A.medium);assert.equal(s.fighters[0].move?.id,'medium');assert.equal(getMove(s.fighters[0],'medium').low,true);});
 check('air down + heavy dives, hits below, and remains a finisher',()=>{const s=fresh();s.fighters[0].y=FLOOR-125;s.fighters[0].vy=-2;tick(s,1,A.down|A.heavy);assert.equal(s.fighters[0].move?.id,'airHeavy');assert.equal(s.fighters[0].move?.aim,'down');assert.ok(s.fighters[0].vy<8,'dive waits for the active strike');assert.equal(getMove(s.fighters[0],'airHeavy').finisher,true);until(s,()=>s.fighters[1].hp<1000);});
 check('all 21 downward heavies become active from an ordinary jump before landing',()=>{for(const id of PLAYABLE_FIGHTERS){const s=createState(id,'dummy');s.fighters[0].x=380;s.fighters[1].x=440;tick(s,1,A.up);tick(s,8);assert.ok(s.fighters[0].y<FLOOR,id+' jump');tick(s,1,A.down|A.heavy);assert.equal(s.fighters[0].move?.id,'airHeavy');until(s,()=>s.fighters[1].hp<1000,60);assert.ok(s.fighters[0].y<FLOOR,id+' must strike while airborne');}});
-for(const [label,input,dx,dy] of [['level',A.bolt,1,0],['up',A.up|A.bolt,0,-1],['up-forward',A.up|A.right|A.bolt,1,-1],['down',A.down|A.bolt,0,1]])check(`${label} spit has directional velocity`,()=>{const s=fresh();s.fighters[1].x=1000;tick(s,1,input);until(s,()=>s.projectiles.length>0,50);const p=s.projectiles[0];assert.equal(Math.sign(p.vx),dx);assert.equal(Math.sign(p.vy),dy);assert.ok(Math.abs(Math.hypot(p.vx,p.vy)-9)<1e-9);assert.equal(s.fighters[0].y,FLOOR);});
+check('organic spit is strictly horizontal: all five fighters, both facings, ground/air and nine direction masks',()=>{
+ for(const id of HORIZONTAL_SPIT_FIGHTERS)for(const facing of [1,-1])for(const air of [false,true])for(const direction of [0,A.up,A.down,A.left,A.right,A.up|A.left,A.up|A.right,A.down|A.left,A.down|A.right]){
+  const s=createState(id,'cpu');const [a,b]=s.fighters;a.x=facing===1?200:1080;b.x=facing===1?1200:80;a.facing=facing;b.facing=-facing;
+  if(air){a.y=FLOOR-150;a.vy=-4;}
+  tick(s,1,direction|A.bolt);until(s,()=>s.projectiles.length>0,50);const p=s.projectiles[0],y=p.y;
+  assert.equal(Math.sign(p.vx),facing,id);assert.equal(p.vy,0,id);assert.equal(p.gravity,0);assert.equal(p.wave,0);assert.equal(p.bounces,0);
+  for(let frame=0;frame<25&&s.projectiles.includes(p);frame++){tick(s);assert.equal(p.y,y,id+' entire trajectory');}
+  if(!air)assert.equal(a.y,FLOOR,id+' direction chord must not jump');
+ }
+});
+check('pumpkin still supports directional trajectories and gravity',()=>{
+ for(const [input,dx,dy] of [[A.bolt,1,-1],[A.up|A.bolt,0,-1],[A.up|A.right|A.bolt,1,-1],[A.down|A.bolt,0,1]]){
+  const s=createState('zephyr','cpu');s.fighters[0].x=100;s.fighters[1].x=1200;tick(s,1,input);until(s,()=>s.projectiles.length>0,50);const p=s.projectiles[0];assert.equal(Math.sign(p.vx),dx);assert.equal(Math.sign(p.vy),dy);assert.ok(p.gravity>0);
+ }
+});
 check('light → light → low → medium → heavy: five hits, one finisher pip',()=>{const s=fresh();const result=route(s,[A.light,A.light,A.down|A.light,A.medium,A.heavy]);assert.equal(result.hits,5,JSON.stringify(result));assert.equal(result.pips,1,JSON.stringify(result));});
 check('light → medium → bolt → heavy converts projectile hit into finisher',()=>{const s=fresh();const result=route(s,[A.light,A.medium,A.bolt,A.heavy]);assert.equal(result.hits,4,JSON.stringify(result));assert.equal(result.pips,1,JSON.stringify(result));});
 check('launcher → jump → air light → air medium → air heavy: four hits, one pip',()=>{const s=fresh();tick(s,1,A.launcher);until(s,()=>s.fighters[0].combo===1);tick(s,1,A.up);until(s,()=>s.fighters[0].y<FLOOR);tick(s,5);const inputs=[A.light,A.medium,A.heavy];let next=0,maxCombo=1;for(let i=0;i<190;i++){let input=0;if(next<inputs.length&&s.fighters[0].combo===next+1)input=inputs[next++];tick(s,1,input);maxCombo=Math.max(maxCombo,s.fighters[0].combo);}assert.equal(maxCombo,4,`hits=${maxCombo}, attempted=${next}`);assert.equal(s.fighters[0].pips,1);});

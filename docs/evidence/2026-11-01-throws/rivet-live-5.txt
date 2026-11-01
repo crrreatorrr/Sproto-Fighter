@@ -1,0 +1,8 @@
+Browser tab: 4, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~	199 text Core frame 68 · scenario frame 68 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 940.4 y 400.3 facing 1
+Move none t=- 
+Throw none
+Reactions 0: {"kind":"knockdown","phase":"flight","t":42,"direction":1} hp=885 x=940.41 y=400.30 vx=8.25 vy=13.70 | 1: null hp=1000 x=660.00 y=578.00 vx=0.00 vy=0.00
+The focused UI element is 116 button Pause, ID: play

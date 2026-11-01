@@ -32,7 +32,7 @@ Choose any of the 21 fighters; each selection describes its attack and power sty
 | Medium | K | West (2) |
 | Finisher / crouching sweep | L | East (1) |
 | Launcher | U | North (3) |
-| Spit (also usable in air) | I | Right bumper (5) |
+| Ranged power (ground / air) | I | Right bumper (5) |
 | Ground grab | O | Left bumper (4) |
 | Team Special | P | Right trigger (7) |
 | Dash | Left Shift | Left trigger (6) |
@@ -51,10 +51,16 @@ Try U → W → J → K → L for a four-hit aerial route. The launcher can canc
 - W jumps; tap it again only after releasing. Holding W through landing never repeats the jump. Controller stick/D-pad up follows the same rule, including diagonals.
 - Press W + J together for a rising strike. W + forward (D when facing right, A when facing left) + K gives an upward diagonal strike. U is the dedicated rising-strike shortcut. A two-frame chord window gives the attack priority over jumping; W by itself jumps.
 - S + J/K gives low attacks, S + L sweeps. In the air, S + K/L chambers in the jump arc, then dives on the first active strike frame; L remains a finisher.
-- I casts the selected fighter’s ranged spit/power. Hold direction(s) with I to aim straight up, diagonally up/down, straight down, or horizontally. Directions are captured on press, so buffered attacks retain their intended aim.
+- I casts the selected fighter’s ranged power. Golden Sproto, Morelight, Juicy, Jahon and Crapto always spit horizontally, including in the air and while holding a direction. Other powers retain directional aiming and their own trajectories, including Halloween 2008’s arcing pumpkins. Directions are captured on press, so buffered attacks retain their intended aim.
 - After a damaging hit, Shift can cancel the attack into one dash per combo. Then continue with another move. Repeating light is limited to two hits per combo; other moves can connect once per route. Damage scales down as the combo grows.
 
 Verified routes, timed on contact: J → J → S+J → K → L; J → K → I → L at close range; U → W → J → K → L in the air. One dash cancel per combo and input retention through hit-stop also pass focused checks.
+
+### Throws and hit reactions
+
+O catches at close range. Hold forward/neutral for a forward toss, back for an overhead side-switch, W for a high lift, or S for a short downward slam. The four-frame catch settles the hand against the opponent before the contact pause; damage occurs once at release. Back throws first lift the victim clear of the holder. A miss recovers normally. An opponent projectile can interrupt the holder; simultaneous grabs break without damage. Up + O chooses the throw and suppresses a jump.
+
+Ordinary hits recoil and push the opponent back. Launchers send them upward into a fall; finishers and the last Team Special contact cause a knockdown. The floor phase lasts 14 simulation frames and get-up lasts six, with damage protection during both and brief throw protection afterward. These limits prevent immediate floor/regrab loops while allowing movement as recovery ends. Throws and reactions use complete-body poses; the fall/get-up drawings remain a prototype limitation.
 
 ### Relay charge
 
@@ -84,7 +90,7 @@ Implemented: 21 selectable player/opponent slots; CPU and standing/guard practic
 
 All 21 fighters now use complete-body pose atlases generated through Higgsfield from their original references, with local pixel corrections. Each has 32 main pose slots and eight additional guarded-step frames derived from its neutral art. Four main walk slots duplicate selected step frames; these are not 40 independently hand-drawn poses. Runtime limb cutouts are bypassed for the installed roster. This is a substantial prototype art rework, but sparse attack in-betweens, direction-specific paired throws and some air-pose proportions remain limited. Do not treat successful loading or tests as artistic approval.
 
-Character selection uses the original submitted images with preserved aspect ratio. The withdrawn rigging diagram and bug screenshots are excluded. Halloween 2008 throws bouncing pumpkins; VAMP uses broken-heart waves that temporarily slow movement. Other kits include returning shots, ground attacks, pulls, drain and advancing specials. The current whole-pose audit is recorded in [SPRITE-REWORK-QA.md](docs/SPRITE-REWORK-QA.md). Earlier ART_QA and MOVEMENT-RIG-QA documents describe the superseded cutout implementation, not acceptance of this rework.
+Character selection uses the original submitted images with preserved aspect ratio. The withdrawn rigging diagram and bug screenshots are excluded. Halloween 2008 throws bouncing pumpkins; VAMP uses broken-heart waves that temporarily slow movement. Other kits include returning shots, ground attacks, pulls, drain and advancing specials. The whole-pose audit is recorded in [SPRITE-REWORK-QA.md](docs/SPRITE-REWORK-QA.md), with the later throw/reaction and horizontal-spit pass in [THROW-REACTION-QA.md](docs/THROW-REACTION-QA.md). Earlier ART_QA and MOVEMENT-RIG-QA documents describe the superseded cutout implementation, not acceptance of this rework.
 
 Deferred: sound, physical-controller verification, local versus, online 1v1, multi-round sets, final story/cutscenes and competitive balance. The deterministic core is a foundation for later networking exploration, not proof of online readiness.
 

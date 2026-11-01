@@ -99,13 +99,13 @@ export const COMBAT_STYLES:Record<FighterId,CombatStyle>={
  zephyr:kit('PUMPKIN','HARVEST MOON','Lob bouncing pumpkins; the relay launches then drops its victim.',92,{launch:9,damage:88},{startup:19,damage:65},{speed:7,shape:'pumpkin',gravity:.16,bounces:2},[14,28,42],{range:580,damage:88,launch:12},0,'slam'),
  mox:kit('FENCER','ECHO DRIVE','Long light pokes, narrow fast darts and five piercing relay strikes.',112,{range:155,damage:80,push:10},{startup:12,damage:40,recovery:22},{speed:14,shape:'needle'},[12,20,28,36,44],{range:460,damage:50,push:2},1),
  rune:kit('GRAVITY','NIGHT BURST','Slow drifting orbs and a relay that pulls foes into its final blast.',90,{push:-9,damage:90},{damage:68,stun:32},{speed:5,shape:'orb',wave:.8},[18,36,48],{range:650,damage:86,push:-12},0,'pull'),
- guest07:kit('UPPERCUT','CITRUS RUSH','Rising heavy punch, fast arcing juice and an advancing uppercut relay.',82,{launch:13,push:4,damage:88},{startup:13,damage:49},{speed:10,shape:'drop',gravity:.05},[12,26,42],{range:390,damage:84,launch:13},4,'launch'),
+ guest07:kit('UPPERCUT','CITRUS RUSH','Rising heavy punch, fast straight juice and an advancing uppercut relay.',82,{launch:13,push:4,damage:88},{startup:13,damage:49},{speed:10,shape:'drop'},[12,26,42],{range:390,damage:84,launch:13},4,'launch'),
  guest08:kit('RETURN','ROUND TRIP','Returning rings control both directions; relay sweeps then pulls back.',100,{range:150,push:7,damage:82},{damage:48,recovery:23},{speed:9,shape:'ring',returnAt:28},[15,30,45],{range:590,damage:86,push:-7},0,'pull'),
  guest09:kit('MOMENTUM','REDLINE','Driving cross, accelerating shots and a three-burst forward relay.',78,{push:25,damage:100},{startup:18,damage:58},{speed:5,shape:'arrow',accel:.22},[12,24,36],{range:340,damage:95,push:9},6),
  guest10:kit('BARRAGE','GIFT STORM','Gift-box lobs, overhead hammer and four rising festive impacts.',86,{launch:7,damage:96},{startup:20,damage:72},{speed:6,shape:'gift',gravity:.2,bounces:1},[16,26,36,46],{range:640,damage:65,launch:8}),
  guest11:kit('RECOVERY','HEARTBREAK','Wide palm strike, fluttering hearts and a health-draining two-pulse relay.',96,{stun:39,damage:80},{damage:48,stun:31},{speed:7,shape:'heart',wave:1.8},[20,40],{range:530,damage:125,push:6},0,'drain'),
  guest12:kit('RICOCHET','COIN ADDRESS','Low skipping coins and three diagonal palm launches.',91,{range:145,launch:6,damage:87},{startup:14,damage:51},{speed:10,shape:'coin',gravity:.18,bounces:3},[14,28,42],{range:660,damage:82,launch:9},0,'launch'),
- guest13:kit('COIL','SERPENT COIL','Long hook, weaving spit and an inward-pulling spiral relay.',107,{range:160,push:-5,damage:85},{damage:53,stun:30},{speed:8,shape:'serpent',wave:2.4},[16,32,48],{range:560,damage:90,push:-10},0,'pull'),
+ guest13:kit('COIL','SERPENT COIL','Long hook, straight serpent spit and an inward-pulling spiral relay.',107,{range:160,push:-5,damage:85},{damage:53,stun:30},{speed:8,shape:'serpent'},[16,32,48],{range:560,damage:90,push:-10},0,'pull'),
  guest14:kit('PHASE','PHASE SHIFT','Fast palm finisher, accelerating pixels and three long phase dashes.',85,{startup:8,damage:76,recovery:19},{startup:10,damage:38},{speed:8,shape:'pixel',accel:.12},[12,30,48],{range:270,damage:92,push:4},8),
  dumpstar:kit('GROUND','CLEANUP CREW','Heavy low sweep and ground debris; relay punishes standing guard.',84,{low:true,push:19,damage:103},{startup:22,damage:70,low:true},{speed:7,shape:'scrap',ground:true},[18,36,48],{range:570,damage:92,low:true,push:11}),
  crapto:kit('ACID','ACID TEST','Acid spit drains health on a hit; the relay siphons three times.',80,{damage:91,stun:36},{startup:18,damage:56},{speed:8,shape:'acid',gravity:.07},[18,34,50],{range:510,damage:80,push:5},0,'drain'),
@@ -119,7 +119,19 @@ for(const id of PLAYABLE_FIGHTERS){const style=COMBAT_STYLES[id];ROSTER[id].role
 export type AttackAim = 'level' | 'up' | 'upForward' | 'down';
 export type ThrowDirection = 'forward' | 'back' | 'up' | 'down';
 export const THROW_HOLD_FRAMES=12, THROW_RECOVERY_FRAMES=18;
-export interface ThrowState { attacker:number; victim:number; phase:'hold'|'release'; t:number; direction:ThrowDirection; facing:number; }
+export const THROW_CATCH_FRAMES=4, BACK_THROW_LIFT_FRAMES=6, KNOCKDOWN_FRAMES=14, GETUP_FRAMES=6;
+export interface HitReaction { kind:'recoil'|'launch'|'knockdown'; phase:'flight'|'down'|'rise'; t:number; direction:number; }
+export interface ThrowState {
+    attacker:number; victim:number; phase:'hold'|'release'; t:number; direction:ThrowDirection; facing:number;
+    startAttackerX:number; startVictimX:number; startVictimY:number;
+    gripAttackerX:number; gripVictimX:number; gripVictimY:number;
+}
+/** Authored gameplay grip geometry in world pixels, independent of image loading.
+ * Matched to the installed reaching-hand / hit-torso anchors by contract tests. */
+export const THROW_GRIPS:Record<FighterId,{hand:[number,number];torso:[number,number]}> = {"rivet":{"hand":[65.0,-66.25],"torso":[35.0,-57.5]},"vela":{"hand":[76.25,-78.75],"torso":[43.75,-58.75]},"bront":{"hand":[86.25,-73.75],"torso":[65.0,-67.5]},"zephyr":{"hand":[72.5,-68.75],"torso":[45.0,-57.5]},"mox":{"hand":[63.75,-71.25],"torso":[33.75,-55.0]},"rune":{"hand":[53.75,-57.5],"torso":[38.75,-47.5]},"guest07":{"hand":[83.75,-75.0],"torso":[48.75,-58.75]},"guest08":{"hand":[67.5,-70.0],"torso":[40.0,-55.0]},"guest09":{"hand":[76.25,-76.25],"torso":[47.5,-55.0]},"guest10":{"hand":[63.75,-68.75],"torso":[21.25,-48.75]},"guest11":{"hand":[41.25,-68.75],"torso":[31.25,-53.75]},"guest12":{"hand":[50.0,-75.0],"torso":[37.5,-57.5]},"guest13":{"hand":[40.0,-73.75],"torso":[20.0,-61.25]},"guest14":{"hand":[60.0,-62.5],"torso":[35.0,-48.75]},"dumpstar":{"hand":[53.75,-87.5],"torso":[27.5,-66.25]},"crapto":{"hand":[63.75,-86.25],"torso":[35.0,-61.25]},"vamp":{"hand":[75.0,-81.25],"torso":[42.5,-51.25]},"alpha777":{"hand":[43.75,-66.25],"torso":[33.75,-51.25]},"mandela":{"hand":[73.75,-57.5],"torso":[50.0,-52.5]},"bigswole":{"hand":[52.5,-66.25],"torso":[37.5,-51.25]},"nate":{"hand":[66.25,-47.5],"torso":[42.5,-28.75]}};
+/** Only organic spit loses vertical aiming. Other individual powers retain their trajectories. */
+export const HORIZONTAL_SPIT_FIGHTERS:readonly FighterId[] = ['rivet','vela','guest07','guest13','crapto'];
+export const isHorizontalSpit = (id:FighterId) => HORIZONTAL_SPIT_FIGHTERS.includes(id);
 export interface Attack {
     id: MoveId;
     t: number;
@@ -140,6 +152,8 @@ export interface Fighter {
     facing: number;
     hp: number;
     slow: number;
+    reaction:HitReaction|null;
+    throwInvuln:number;
     stun: number;
     blockstun: number;
     move: Attack | null;
@@ -200,7 +214,7 @@ export interface CombatState {
     notice: string;
     noticeLife: number;
 }
-const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
+const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, reaction:null, throwInvuln:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
 export function createState(id: PlayableFighterId = 'rivet', mode: Mode = 'cpu', opponent?: PlayableFighterId): CombatState { if (!PLAYABLE_FIGHTERS.includes(id) || (opponent && !PLAYABLE_FIGHTERS.includes(opponent)))
     throw new Error('Unknown roster selection.'); return { throwState:null, frame: 0, fighters: [makeFighter(id, 380, 1), makeFighter(opponent ?? (id === 'rivet' ? 'vela' : 'rivet'), 900, -1)], projectiles: [], effects: [], freeze: 0, mode, winner: null, clock: 99 * 60, notice: 'LIGHT → MEDIUM → FINISHER', noticeLife: 220 }; }
 export const grounded = (f: Fighter) => f.y >= FLOOR;
@@ -225,67 +239,86 @@ function finishCombo(s: CombatState, attacker: Fighter) {
     attacker.lastFinisher = false;
     attacker.chargeEligible = true;
 }
-/** Release a latched pair on interruption. No throw damage is awarded. */
+/** Cancel an interrupted catch without teleporting the victim or awarding damage. */
 function interruptThrow(s:CombatState):void {
     const hold=s.throwState;if(!hold)return;
     const a=s.fighters[hold.attacker],b=s.fighters[hold.victim];
     if(hold.phase==='hold'){
-        b.x=clamp(a.x+hold.facing*60,WALL,WIDTH-WALL);b.vx=hold.facing*3;b.vy=0;
-        b.stun=Math.max(b.stun,8);b.buffer=0;b.bufferLife=0;b.jumpBuffer=0;b.dashBuffer=0;
+        b.vx=0;b.vy=grounded(b)?0:2;b.stun=Math.max(b.stun,8);b.throwInvuln=20;
+        b.reaction={kind:'recoil',phase:'flight',t:0,direction:hold.facing};
+        b.buffer=0;b.bufferLife=0;b.jumpBuffer=0;b.dashBuffer=0;
     }
     if(a.move?.id==='grab')a.move=null;
     s.throwState=null;
 }
 function positionHeldVictim(s:CombatState):void {
     const hold=s.throwState;if(!hold||hold.phase!=='hold')return;
-    const a=s.fighters[hold.attacker],b=s.fighters[hold.victim],progress=hold.t/THROW_HOLD_FRAMES;
-    const side=hold.direction==='back'?48*Math.cos(progress*Math.PI):48;
-    const lift=hold.direction==='back'||hold.direction==='down'?Math.sin(progress*Math.PI)*55:hold.direction==='up'?progress*35:0;
-    b.x=clamp(a.x+hold.facing*side,WALL,WIDTH-WALL);b.y=a.y-26-lift;b.vx=0;b.vy=0;b.facing=-hold.facing;b.stun=1;
+    const a=s.fighters[hold.attacker],b=s.fighters[hold.victim];
+    const t=Math.min(1,hold.t/THROW_CATCH_FRAMES),ease=t*t*(3-2*t);
+    a.x=hold.startAttackerX+(hold.gripAttackerX-hold.startAttackerX)*ease;
+    b.x=hold.startVictimX+(hold.gripVictimX-hold.startVictimX)*ease;
+    b.y=hold.startVictimY+(hold.gripVictimY-hold.startVictimY)*ease;
+    a.facing=hold.facing;b.facing=-hold.facing;b.vx=0;b.vy=0;b.stun=1;
 }
 function beginThrow(s:CombatState,index:number):void {
     const a=s.fighters[index],b=s.fighters[1-index];
-    if(s.throwState||a.stun||a.blockstun||!a.move||a.move.id!=='grab'||!grounded(a)||!grounded(b)||b.stun||b.blockstun||a.hp<=0||b.hp<=0)return;
-    s.throwState={attacker:index,victim:1-index,phase:'hold',t:0,direction:a.move.throwDirection??'forward',facing:a.facing};
+    if(s.throwState||a.stun||a.blockstun||!a.move||a.move.id!=='grab'||!grounded(a)||!grounded(b)||b.stun||b.blockstun||b.throwInvuln||a.hp<=0||b.hp<=0)return;
+    const hand=THROW_GRIPS[a.id].hand,torso=THROW_GRIPS[b.id].torso;
+    const gap=hand[0]+torso[0];
+    // Clamp the pair as a unit. Four catch frames settle into the authored grip;
+    // the victim is never independently squashed into the holder at a corner.
+    const ax=clamp(a.x,a.facing===-1?WALL+gap:WALL,a.facing===1?WIDTH-WALL-gap:WIDTH-WALL);
+    s.throwState={attacker:index,victim:1-index,phase:'hold',t:0,direction:a.move.throwDirection??'forward',facing:a.facing,
+        startAttackerX:a.x,startVictimX:b.x,startVictimY:b.y,
+        gripAttackerX:ax,gripVictimX:ax+a.facing*gap,gripVictimY:Math.min(FLOOR,a.y+hand[1]-torso[1])};
     a.vx=0;a.vy=0;a.move.hit=true;a.move.connected=false;
-    b.move=null;b.dash=0;b.blockstun=0;
+    b.move=null;b.dash=0;b.blockstun=0;b.reaction=null;
     for(const f of [a,b]){f.buffer=0;f.bufferLife=0;f.jumpBuffer=0;f.jumpDelay=0;f.dashBuffer=0;}
-    positionHeldVictim(s);effect(s,b.x,b.y-65,'block',ROSTER[a.id].color);s.freeze=Math.max(s.freeze,3);
+    positionHeldVictim(s);
 }
 function updateThrow(s:CombatState):void {
     const hold=s.throwState;if(!hold)return;
     const a=s.fighters[hold.attacker],b=s.fighters[hold.victim];
-    if(a.hp<=0||b.hp<=0||a.stun||a.blockstun){interruptThrow(s);return;}
+    if(a.hp<=0||(hold.phase==='hold'&&b.hp<=0)||a.stun||a.blockstun){interruptThrow(s);return;}
     hold.t++;
     if(hold.phase==='hold'){
         positionHeldVictim(s);
+        if(hold.t===THROW_CATCH_FRAMES){effect(s,b.x,b.y-65,'block',ROSTER[a.id].color);s.freeze=Math.max(s.freeze,3);}
         if(hold.t>=THROW_HOLD_FRAMES){
             hold.phase='release';hold.t=0;
-            damage(s,hold.attacker,getMove(a,'grab'),'grab');
             const direction=hold.direction==='back'?-hold.facing:hold.facing;
-            b.x=clamp(a.x+direction*60,WALL,WIDTH-WALL);
-            b.y=Math.min(b.y,FLOOR-26);
-            b.vx=direction*(hold.direction==='up'?2:hold.direction==='down'?5:14);
-            b.vy=hold.direction==='up'?-18:hold.direction==='down'?15:-8;
-            b.stun=Math.max(b.stun,hold.direction==='up'?42:35);
+            a.facing=direction;
+            damage(s,hold.attacker,getMove(a,'grab'),'grab');
+            // Release exactly where the catch ended. Back throws travel over
+            // the shoulder instead of teleporting to the other side.
+            b.vx=hold.direction==='back'?0:direction*(hold.direction==='up'?3:hold.direction==='down'?6:14);
+            b.vy=hold.direction==='up'?-18:hold.direction==='down'?12:hold.direction==='back'?-22:-8;
+            b.y=Math.min(b.y,FLOOR-1);
+            b.stun=35;b.reaction={kind:'knockdown',phase:'flight',t:0,direction};
             if(a.move)a.move.t=MOVES.grab.startup+MOVES.grab.active;
-            effect(s,b.x,b.y-45,'hit',ROSTER[a.id].color);
         }
     }else if(hold.t>=THROW_RECOVERY_FRAMES){
         if(a.move?.id==='grab')a.move=null;
         s.throwState=null;
     }
 }
+function throwDirection(input:number,facing:number):ThrowDirection {
+    const vertical=((input&A.up)?1:0)-((input&A.down)?1:0);
+    if(vertical)return vertical>0?'up':'down';
+    const horizontal=((input&A.right)?1:0)-((input&A.left)?1:0);
+    return horizontal*facing<0?'back':'forward';
+}
+export const isDown = (f:Fighter) => !!f.reaction && f.reaction.phase!=='flight';
 function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile = false): boolean {
     const a = s.fighters[index], b = s.fighters[1 - index];
-    if (b.hp <= 0)
+    if (b.hp <= 0 || isDown(b))
         return false;
     const hold=s.throwState;
     // A held victim cannot take incidental projectile damage; only release hits.
     if(hold?.phase==='hold' && hold.victim===1-index && kind!=='grab')return false;
-    if(hold && hold.attacker===1-index)interruptThrow(s);
+    const heldAttacker=!!hold && hold.attacker===1-index;
     const back = b.facing === 1 ? A.left : A.right;
-    const guarding = kind !== 'grab' && b.stun === 0 && !b.move && b.dash === 0 && (b.input & back) !== 0 && (!m.low || (b.input & A.down) !== 0) && (!m.air || (b.input & A.down) === 0);
+    const guarding = !heldAttacker && kind !== 'grab' && b.stun === 0 && !b.move && b.dash === 0 && (b.input & back) !== 0 && (!m.low || (b.input & A.down) !== 0) && (!m.air || (b.input & A.down) === 0);
     if (guarding) {
         b.blockstun = 15;
         b.vx = a.facing * m.push * .45;
@@ -293,6 +326,7 @@ function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile
         s.freeze = Math.max(s.freeze, 3);
         return false;
     }
+    if(heldAttacker)interruptThrow(s);
     const scaling = Math.max(.45, 1 - a.combo * .08), amount = Math.round(m.damage * scaling);
     b.hp = Math.max(0, b.hp - amount);
     b.stun = m.stun;
@@ -318,6 +352,12 @@ function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile
       if(kind==='special'&&power==='pull'&&a.move?.wave===COMBAT_STYLES[a.id].specialFrames.length-1)b.vx=a.facing*18;
       if(kind==='special'&&power==='slam'&&a.move?.wave===COMBAT_STYLES[a.id].specialFrames.length-1)b.vy=16;
     }
+    const finalSpecial=kind==='special' && a.move?.wave===COMBAT_STYLES[a.id].specialFrames.length-1;
+    const hard=!!m.finisher||finalSpecial||b.hp===0||b.reaction?.kind==='knockdown';
+    if(hard && grounded(b) && !m.launch){
+        b.y=FLOOR-1;b.vy=kind==='sweep'?-5:kind==='airHeavy'?6:-8;
+    }
+    b.reaction={kind:hard?'knockdown':!grounded(b)?'launch':'recoil',phase:'flight',t:0,direction:a.facing};
     a.combo++;
     a.usedMoves[kind]=(a.usedMoves[kind]??0)+1;
     if(projectile && a.move?.id==='bolt')a.move.connected=true;
@@ -364,7 +404,7 @@ export function getMove(f: Fighter, id: MoveId): Move {
  return m;
 }
 function act(s: CombatState, f: Fighter) {
-    if (f.stun || f.blockstun || (s.throwState && (s.fighters[s.throwState.attacker]===f || (s.throwState.phase==='hold'&&s.fighters[s.throwState.victim]===f))))
+    if (f.hp<=0 || s.fighters.some(other=>other.hp<=0) || f.stun || f.blockstun || (s.throwState && (s.fighters[s.throwState.attacker]===f || (s.throwState.phase==='hold'&&s.fighters[s.throwState.victim]===f))))
         return;
     const just = f.input & ~f.prev;
     const directionalChord = (f.input & A.up) && (just & (A.light|A.medium|A.heavy|A.bolt|A.grab));
@@ -402,12 +442,13 @@ function act(s: CombatState, f: Fighter) {
                 const forward = f.facing===1?A.right:A.left;
                 const directions=f.bufferInput;
                 const aim:AttackAim = directions&A.up ? (directions&forward?'upForward':'up') : directions&A.down?'down':'level';
-                const vertical = directions&A.up?-1:directions&A.down?1:0;
+                const spit=id==='bolt' && isHorizontalSpit(f.id);
+                const vertical = spit?0:directions&A.up?-1:directions&A.down?1:0;
                 const horizontal = vertical ? ((directions&A.left)?-1:(directions&A.right)?1:0) : f.facing;
                 f.dash = 0;
                 // The selected attack wins a simultaneous dash/attack chord.
                 f.dashBuffer = 0;
-                f.move = { id, t: 0, hit: false, connected: false, wave: -1, aim: id==='launcher' && aim==='level'?'up':aim, shotX:horizontal,shotY:vertical, throwDirection:id==='grab'?(directions&A.up?'up':directions&A.down?'down':directions&(f.facing===1?A.left:A.right)?'back':'forward'):undefined };
+                f.move = { id, t: 0, hit: false, connected: false, wave: -1, aim: spit?'level':id==='launcher' && aim==='level'?'up':aim, shotX:horizontal,shotY:vertical, throwDirection:id==='grab'?throwDirection(directions,f.facing):undefined };
 
                 f.buffer = 0;
                 f.bufferLife = 0;
@@ -471,6 +512,8 @@ export function step(s: CombatState, inputs: [
 ]): void {
     if (s.winner !== null)
         return;
+    const endingKO=s.fighters.some(f=>f.hp<=0);
+    if(endingKO)inputs=[0,0];
     s.frame++;
     s.effects = s.effects.filter(e => --e.life > 0);
     if (s.noticeLife > 0)
@@ -478,7 +521,7 @@ export function step(s: CombatState, inputs: [
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
         f.input = inputs[i];
-        if(s.throwState && (i===s.throwState.attacker || (s.throwState.phase==='hold'&&i===s.throwState.victim))){
+        if(s.throwState && ((i===s.throwState.attacker && (s.throwState.phase==='hold'||s.throwState.t<THROW_RECOVERY_FRAMES-6)) || (s.throwState.phase==='hold'&&i===s.throwState.victim))){
             f.buffer=0;f.bufferLife=0;f.jumpBuffer=0;f.jumpDelay=0;f.dashBuffer=0;f.prev=f.input;continue;
         }
         const pressed = f.input & ~f.prev;
@@ -509,6 +552,15 @@ export function step(s: CombatState, inputs: [
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i], other = s.fighters[1 - i];
         if(f.slow>0)f.slow--;
+        if(f.throwInvuln>0)f.throwInvuln--;
+        if(f.reaction){
+            f.reaction.t++;
+            if(f.reaction.kind==='knockdown'){
+                if(f.reaction.phase==='flight')f.stun=Math.max(f.stun,2);
+                else if(f.reaction.phase==='down'&&f.reaction.t>=KNOCKDOWN_FRAMES){f.reaction.phase='rise';f.reaction.t=0;f.stun=GETUP_FRAMES+1;}
+                else if(f.reaction.phase==='rise'&&f.reaction.t>=GETUP_FRAMES){f.reaction=null;f.stun=0;f.throwInvuln=Math.max(f.throwInvuln,12);}
+            }else if(f.stun<=1)f.reaction=null;
+        }
         if (f.flash > 0)
             f.flash--;
         if (f.stun > 0)
@@ -550,7 +602,15 @@ export function step(s: CombatState, inputs: [
             else f.vx *= .7;
         }
         else
-            f.vx *= .84;
+            // Airborne hit reactions retain their release momentum. Ground
+            // friction must not stop a back throw before it crosses the holder.
+            f.vx *= !grounded(f) && f.reaction?.phase==='flight' ? .985 : .84;
+        const release=s.throwState;
+        if(release?.phase==='release'&&release.direction==='back'&&release.victim===i){
+            // Clear the holder's head before travelling behind their shoulder.
+            if(release.t<BACK_THROW_LIFT_FRAMES)f.vx=0;
+            else if(release.t===BACK_THROW_LIFT_FRAMES)f.vx=-release.facing*14;
+        }
         const nextX=f.x+f.vx;
         f.x = clamp(nextX, WALL, WIDTH - WALL);
         if(nextX!==f.x){f.vx=0;f.dash=0;f.dashBuffer=0;}
@@ -563,6 +623,10 @@ export function step(s: CombatState, inputs: [
                 f.vy = 0;
                 if (f.move && MOVES[f.move.id].air)
                     f.move = null;
+                if(f.reaction?.kind==='knockdown'&&f.reaction.phase==='flight'){
+                    f.reaction.phase='down';f.reaction.t=0;f.stun=KNOCKDOWN_FRAMES+GETUP_FRAMES+1;
+                    f.vx*=.25;effect(s,f.x,FLOOR-8,'hit',ROSTER[f.id].color);
+                }
                 // Resolve a cross-up before executing a buffered grounded action.
                 if(!f.move&&!f.stun&&!f.blockstun&&!f.dash)f.facing=other.x>=f.x?1:-1;
                 // Consume buffered jump/attack on touchdown, not one input frame later.
@@ -579,8 +643,22 @@ export function step(s: CombatState, inputs: [
     }
     updateThrow(s);
     const [a, b] = s.fighters;
-    if (s.throwState?.phase!=='hold' && Math.abs(a.x - b.x) < 55 && Math.abs(a.y - b.y) < 65) {
-        const d = a.x <= b.x ? 1 : -1, overlap = (55 - Math.abs(a.x - b.x)) / 2;
+    // A falling/grounded body occupies more floor space than a standing pair.
+    // Start separating just before touchdown so the landing does not bury the
+    // victim under the standing fighter, especially after a wall back throw.
+    const descendingBody=(f:Fighter)=>f.reaction?.kind==='knockdown'&&
+        (f.reaction.phase==='down'||(f.reaction.phase==='flight'&&f.reaction.t>0&&f.vy>=0));
+    const settling=descendingBody(a)||descendingBody(b);
+    const pairGap=(descendingBody(a)&&a.y>FLOOR-40)||(descendingBody(b)&&b.y>FLOOR-40)?115:55;
+    if (s.throwState?.phase!=='hold' && Math.abs(a.x - b.x) < pairGap && Math.abs(a.y - b.y) < 65) {
+        // At a flush wall a back throw can land exactly on the holder's x.
+        // Preserve the throw's side in that tie; do not send the victim back
+        // to the front merely because player zero is processed first.
+        const tieDirection=a.reaction?.kind==='knockdown'?-a.reaction.direction:b.reaction?.kind==='knockdown'?b.reaction.direction:1;
+        const d = Math.abs(a.x-b.x)<.001 ? tieDirection : a.x<b.x?1:-1;
+        // Expand the floor contact over several ticks; a full-width correction
+        // on touchdown would jerk a stationary holder sideways in one frame.
+        const overlap = Math.min((pairGap - Math.abs(a.x - b.x)) / 2,settling?8:Infinity);
         a.x = clamp(a.x - overlap * d, WALL, WIDTH - WALL);
         b.x = clamp(b.x + overlap * d, WALL, WIDTH - WALL);
     }
@@ -601,7 +679,9 @@ export function step(s: CombatState, inputs: [
         if (!grounded(f) && attack.aim === 'down' &&
             (attack.id === 'airHeavy' || attack.id === 'airMedium') && attack.t === m.startup) f.vy = Math.max(f.vy, 8);
         if (m.projectile && attack.t === m.startup) {
-            const style=COMBAT_STYLES[f.id].projectile,dx=attack.shotX??f.facing,dy=attack.shotY??0,length=Math.hypot(dx,dy)||1,speed=style.speed;
+            const rawStyle=COMBAT_STYLES[f.id].projectile,spit=isHorizontalSpit(f.id);
+            const style=spit?{...rawStyle,gravity:0,wave:0,bounces:0,ground:false}:rawStyle;
+            const dx=attack.shotX??f.facing,dy=spit?0:attack.shotY??0,length=Math.hypot(dx,dy)||1,speed=style.speed;
             s.projectiles.push({...style,owner:i,x:f.x+f.facing*34,y:style.ground&&dy===0?FLOOR-22:f.y-95,vx:dx/length*speed,vy:dy/length*speed-(style.bounces&&dy===0&&!style.ground?3:0),life:100,damage:m.damage,age:0});
         }
         let active = attack.t >= m.startup && attack.t < m.startup + m.active && !attack.hit;
@@ -615,8 +695,8 @@ export function step(s: CombatState, inputs: [
         const ahead = (other.x - f.x) * f.facing;
         const crouched = (other.input & A.down) && grounded(other);
         const dy=other.y-f.y;
-        const vertical = attack.id === 'special' ? true : attack.id === 'grab' ? !s.throwState && grounded(f) && grounded(other) && other.stun === 0 && other.blockstun === 0 : attack.aim==='upForward' ? Math.abs(dy+10+Math.max(0,ahead)*.65)<65 : attack.aim==='up' ? dy>-190&&dy<45 : attack.aim==='down'&&!grounded(f) ? dy>-25&&dy<165 : Math.abs(dy)<85;
-        if (active && !m.projectile && ahead >= -22 && ahead < m.range && vertical && !(crouched && m.air && grounded(f))) {
+        const vertical = attack.id === 'special' ? true : attack.id === 'grab' ? !s.throwState && grounded(f) && grounded(other) && other.stun === 0 && other.blockstun === 0 && other.throwInvuln===0 : attack.aim==='upForward' ? Math.abs(dy+10+Math.max(0,ahead)*.65)<65 : attack.aim==='up' ? dy>-190&&dy<45 : attack.aim==='down'&&!grounded(f) ? dy>-25&&dy<165 : Math.abs(dy)<85;
+        if (!endingKO && !isDown(other) && active && !m.projectile && ahead >= -22 && ahead < m.range && vertical && !(crouched && m.air && grounded(f))) {
             attack.hit = true;
             attack.connected = true;
             hits.push({ i, m, id: attack.id });
@@ -645,7 +725,7 @@ export function step(s: CombatState, inputs: [
         p.life--;
         const target = s.fighters[1 - p.owner];
         const crouching = (target.input & A.down) && grounded(target);
-        if (Math.abs(p.x - target.x) < 34 && Math.abs(p.y - (target.y - (crouching ? 30 : 65))) < (crouching ? 25 : 50)) {
+        if (!endingKO && !isDown(target) && Math.abs(p.x - target.x) < 34 && Math.abs(p.y - (target.y - (crouching ? 30 : 65))) < (crouching ? 25 : 50)) {
             damage(s, p.owner, { ...getMove(s.fighters[p.owner],'bolt'), damage: p.damage }, 'bolt', true);
             p.life = 0;
         }
@@ -656,7 +736,14 @@ export function step(s: CombatState, inputs: [
         if (target.stun === 0)
             finishCombo(s, s.fighters[i]);
     }
-    if (a.hp <= 0 || b.hp <= 0 || s.clock <= 0) {
+    const koFalling=s.fighters.some(f=>f.hp<=0&&f.reaction?.kind==='knockdown'&&f.reaction.phase==='flight'&&!grounded(f));
+    if ((a.hp <= 0 || b.hp <= 0 || s.clock <= 0) && !koFalling) {
+        if(s.throwState?.phase==='hold'){
+            const held=s.fighters[s.throwState.victim];
+            held.y=FLOOR;held.vx=0;held.vy=0;held.stun=0;held.reaction=null;
+        }
+        s.throwState=null;
+        for(const f of s.fighters)if(f.move?.id==='grab')f.move=null;
         finishCombo(s, a);
         finishCombo(s, b);
         s.winner = a.hp === b.hp ? 2 : a.hp > b.hp ? 0 : 1;

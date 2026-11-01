@@ -13,8 +13,8 @@ globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/js
 globalThis.Image=class {
   set src(value){this.url=value;try{const p=value.split('?')[0];const b=readFileSync(new URL('../public'+p,import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}catch{queueMicrotask(()=>this.onerror());}}
 };
-const {A,FLOOR,createState,step,PLAYABLE_FIGHTERS}=core;
-const {loadPoseAtlases,getPoseAtlasDebug,drawPoseAtlas,setPoseAtlasThrowState,getPoseAtlasLoadStatus,isPoseAtlasDeclared}=poses;
+const {A,FLOOR,createState,step,PLAYABLE_FIGHTERS,THROW_GRIPS,WIDTH}=core;
+const {loadPoseAtlases,getPoseAtlasDebug,drawPoseAtlas,setPoseAtlasThrowState,getPoseAtlasLoadStatus,isPoseAtlasDeclared,getPoseAtlasReactionTransform}=poses;
 await loadPoseAtlases();assert.equal(getPoseAtlasLoadStatus().ids.length,21);
 let count=0;
 const check=(name,fn)=>{fn();count++;console.log('PASS:',name);};
@@ -35,20 +35,36 @@ check('all 21: forward/reverse gait, hitstop, and neutral guard after stopping',
   assert.equal(f.vx,0);assert.equal(getPoseAtlasDebug(f,s.frame).slot,0,id+' stop must enter guard, not global-clock breath');
  }
 });
-check('all 441 held pairs: contact transform finite/bounded, floor-safe, no core mutation',()=>{
+check('all 21 core grips agree with installed per-fighter hand/torso art metadata',()=>{
+ for(const id of PLAYABLE_FIGHTERS){const cfg=original.fighters[id];for(const [label,slot]of [['hand',26],['torso',24]]){
+  const point=cfg.holdContact[label],anchor=cfg.frames[slot].anchor??cfg.anchor;
+  assert.deepEqual(THROW_GRIPS[id][label],[(point[0]-anchor[0])*cfg.scale,(point[1]-anchor[1])*cfg.scale],id+' '+label);
+ }}
+});
+check('all 441 held pairs: draw uses actual core placement without secondary offsets or core mutation',()=>{
  for(const aid of PLAYABLE_FIGHTERS)for(const bid of PLAYABLE_FIGHTERS){
-  const s=createState(aid,'dummy',bid),[a,b]=s.fighters;a.x=500;b.x=548;b.y=FLOOR-26;b.facing=-1;
-  const scene={attacker:0,victim:1,phase:'hold',t:0,direction:'forward',facing:1};setPoseAtlasThrowState(scene,s.fighters);
-  let translation;const ctx={save(){},restore(){},scale(){},drawImage(){},translate(x,y){translation=[x,y]}};
-  const before=JSON.stringify(s);drawPoseAtlas(ctx,b,1);assert.equal(JSON.stringify(s),before);
-  assert.ok(translation.every(Number.isFinite));assert.ok(Math.abs(translation[0]-b.x)<=61);assert.ok(Math.abs(translation[1]-b.y)<=27);assert.ok(translation[1]<=FLOOR);
-  assert.equal(getPoseAtlasDebug(a,1).slot,26,'reaching hands must contact opponent');
-  scene.phase='release';scene.t=8;drawPoseAtlas(ctx,b,2);assert.deepEqual(translation,[Math.round(b.x),Math.round(b.y)],'release must return to core trajectory');
+  const s=createState(aid,'dummy',bid);s.fighters[0].x=500;s.fighters[1].x=560;step(s,[A.grab,0]);
+  for(let t=0;t<50&&!(s.throwState?.phase==='hold'&&s.throwState.t===5);t++)step(s,[0,0]);
+  assert.equal(s.throwState?.phase,'hold');setPoseAtlasThrowState(s.throwState,s.fighters);
+  const [a,b]=s.fighters;let translation;const ctx={save(){},restore(){},scale(){},rotate(){},drawImage(){},translate(x,y){translation=[x,y]}};
+  const before=JSON.stringify(s);drawPoseAtlas(ctx,b,s.frame);assert.equal(JSON.stringify(s),before);
+  assert.deepEqual(translation,[Math.round(b.x),Math.round(b.y)],'no presentation-only contact correction');
+  assert.equal(getPoseAtlasDebug(a,s.frame).slot,26);
  }
  setPoseAtlasThrowState(null,[]);
 });
+check('all 21 knockdown transforms: both facings, flight/down/rise, floor/camera bounds and nonmutation',()=>{
+ for(const id of PLAYABLE_FIGHTERS)for(const facing of [1,-1])for(const x of [80,600,1200])for(const phase of ['flight','down','rise'])for(const t of [0,4,10,18,35]){
+  const s=createState(id,'cpu'),f=s.fighters[0];f.x=x;f.facing=facing;f.y=phase==='flight'?FLOOR-80:FLOOR;f.stun=20;f.reaction={kind:'knockdown',phase,t,direction:-facing};
+  const before=JSON.stringify(s);const transform=getPoseAtlasReactionTransform(f);assert.equal(JSON.stringify(s),before);assert.ok([transform.x,transform.y,transform.angle].every(Number.isFinite));
+  if(transform.angle){for(const [cx,cy]of transform.corners){assert.ok(transform.y+cy<=FLOOR+1e-8,id+' floor');assert.ok(transform.x+cx>=5.999&&transform.x+cx<=WIDTH-5.999,id+' camera');}}
+  if(phase==='down')assert.ok(Math.abs(Math.max(...transform.corners.map(p=>transform.y+p[1]))-FLOOR)<1e-7,'body rests on floor');
+  if(phase==='rise')assert.equal(getPoseAtlasDebug(f,t).slot,t<4?10:0);
+ }
+});
 for(const [name,mutate] of [
  ['missing image',m=>{m.fighters.rivet.frames[0].url='/fighters/poses/missing.png';}],
+ ['invalid opaque bounds',m=>{m.fighters.rivet.frames[24].bounds=[10,5,2,0];}],
  ['invalid walk count',m=>{m.fighters.rivet.walkFrames=[];}],
  ['out-of-bounds contact',m=>{m.fighters.rivet.holdContact.hand=[999,2];}],
 ]){

@@ -1,0 +1,9 @@
+MANUAL QA · frame 126 · QA frozen
+P1 rivet: x=844.8 y=578.0 vx=0.07 vy=0.00 medium t=7 input=0 hp=1000 combo=2 best=0 pips=0 reaction=-/-:0
+P2 vela: x=918.5 y=578.0 vx=4.40 vy=0.00 neutral t=0 input=0 hp=907 combo=0 best=0 pips=0 reaction=recoil/flight:0
+Throw: null
+Projectiles: 
+f107: light level hits=0 pips=0 hp=1000/1000 x=837 y=578 input=16 throw=-/- reaction2=-/-
+f111: light level hits=1 pips=0 hp=1000/962 x=843 y=578 input=16 throw=-/- reaction2=recoil/flight
+f117: medium level hits=1 pips=0 hp=1000/962 x=844 y=578 input=32 throw=-/- reaction2=recoil/flight
+f123: medium level hits=2 pips=0 hp=1000/907 x=845 y=578 input=64 throw=-/- reaction2=recoil/flight

@@ -1,0 +1,12 @@
+MANUAL QA · frame 223 · running
+P1 vela: x=856.6 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=1 pips=0 reaction=-/-:0
+P2 rivet: x=1200.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=885 combo=0 best=0 pips=0 reaction=-/-:0
+Throw: null
+Projectiles: 
+f150: grab level hits=0 pips=0 hp=1000/1000 x=854 y=578 input=512 throw=-/- reaction2=-/-
+f155: grab level hits=0 pips=0 hp=1000/1000 x=857 y=578 input=512 throw=forward/hold reaction2=-/-
+f170: grab level hits=1 pips=0 hp=1000/885 x=857 y=578 input=0 throw=forward/release reaction2=knockdown/flight
+f193: neutral  hits=1 pips=0 hp=1000/885 x=857 y=578 input=0 throw=-/- reaction2=knockdown/flight
+f196: neutral  hits=1 pips=0 hp=1000/885 x=857 y=578 input=0 throw=-/- reaction2=knockdown/down
+f210: neutral  hits=1 pips=0 hp=1000/885 x=857 y=578 input=0 throw=-/- reaction2=knockdown/rise
+f216: neutral  hits=0 pips=0 hp=1000/885 x=857 y=578 input=0 throw=-/- reaction2=-/-

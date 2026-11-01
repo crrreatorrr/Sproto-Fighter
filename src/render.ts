@@ -4,7 +4,7 @@ import { setHiggsfieldThrowState } from './higgsfieldRig';
 import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
 import { drawSprite } from './spriteRoster';
 import { drawStage } from './stage';
-import { FLOOR, ROSTER, COMBAT_STYLES, type CombatState, type Fighter } from './core';
+import { FLOOR, ROSTER, COMBAT_STYLES, isDown, type CombatState, type Fighter } from './core';
 function text(c: CanvasRenderingContext2D, str: string, x: number, y: number, size = 14, color = '#93a5bd', align: CanvasTextAlign = 'left', weight = 600) { c.fillStyle = color; c.font = `${weight} ${size}px system-ui, sans-serif`; c.textAlign = align; c.fillText(str, x, y); }
 function line(c: CanvasRenderingContext2D, x: number, y: number, x2: number, y2: number, color: string, width = 1) { c.beginPath(); c.moveTo(x, y); c.lineTo(x2, y2); c.strokeStyle = color; c.lineWidth = width; c.stroke(); }
 function poly(c: CanvasRenderingContext2D, points: number[][], color: string) { c.beginPath(); points.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath(); c.fillStyle = color; c.fill(); }
@@ -52,9 +52,10 @@ export function render(c: CanvasRenderingContext2D, s: CombatState) {
     }
     drawTeamSpecialBack(c,s);
     // A fixed player-two foreground hid player one's extended hand at contact.
-    // Paint the attacking/holding actor last; this affects presentation only.
-    const foreground = s.throwState?.attacker ??
-        (s.fighters[0].move && !s.fighters[0].stun && !s.fighters[1].move ? 0 : 1);
+    // Keep the standing actor above a downed body, then prefer the attacker/holder.
+    const down0=isDown(s.fighters[0]),down1=isDown(s.fighters[1]);
+    const foreground = s.throwState?.attacker ?? (down0!==down1?(down0?1:0):
+        (s.fighters[0].move && !s.fighters[0].stun && !s.fighters[1].move ? 0 : 1));
     fighter(c, s.fighters[1 - foreground], s.frame, false, s.freeze > 0);
     fighter(c, s.fighters[foreground], s.frame, false, s.freeze > 0);
     drawTeamSpecialFront(c,s);

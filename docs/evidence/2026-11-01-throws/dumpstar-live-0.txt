@@ -1,0 +1,18 @@
+Browser tab: 4, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 197-199
+~		8 pop up button (collapsed, settable) Fighter, Value: Dumpstar · dumpstar, ID: fighter, Secondary Actions: Expand
+~				23 Virtuagram · guest14
+~				24 (selected) Dumpstar · dumpstar
+~		96 pop up button (collapsed, settable) Start facing, Value: Right, ID: facing, Secondary Actions: Expand
+~				98 (selected) Right
+~				99 Left
+~	116 button Pause, ID: play
++	185 text victimThrow · back · cycle 1
++	186 text ready: 21/21 installed atlases. Selected: available.
++	187 text Core frame 15 · scenario frame 15 · frozen 0
+Sequence poses · frame 24/31 · pose slot 24: hit · gait phase 0.000 · x 567.5 y 578.0 facing 1
+Move none t=- 
+Throw {"attacker":1,"victim":0,"phase":"hold","t":6,"direction":"back","facing":-1,"startAttackerX":660,"startVictimX":600,"startVictimY":578,"gripAttackerX":660,"gripVictimX":567.5,"gripVictimY":578}
+Reactions 0: null hp=1000 x=567.50 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=660.00 y=578.00 vx=0.00 vy=0.00
+The focused UI element is 116 button Pause, ID: play

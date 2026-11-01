@@ -2,6 +2,8 @@
 
 Updated: 2026-11-01. This ledger supersedes visual acceptance statements in the older cutout-rig audits. The game is a playable local prototype; this pass does **not** establish production animation quality or competitive balance.
 
+The later [throw/reaction follow-up](THROW-REACTION-QA.md) supersedes this ledger's original throw-contact implementation, ranged-spit behavior and test counts. It includes actual left- and right-facing simulation samples for all 21 fighters, a normal-speed back-throw sample run for each, revised knockdowns, and final browser verification. Earlier evidence is retained as history, not evidence of the final throw implementation.
+
 ## Installed result
 
 All 21 supplied fighters have a complete-body Higgsfield pose atlas mapped to the correct original reference. Each declares 32 main slots and eight locally derived guarded-step frames, for 840 installed frame entries. Four main walk slots duplicate selected step images. These are not 40 independently drawn poses or generated animation clips. Original supplied images remain on the selection screen. The withdrawn rigging diagram is excluded.
@@ -20,7 +22,7 @@ Combat simulation remains fixed-step, serializable and independent of rendering.
 | Wrong footwear and missing identity marks | Targeted Bongraker/VAMP shoe corrections; Virtuagram four pupils; Yannix fangs; Yoyo teeth/nose; Juicy mouth/creases. Baselines and explicit correction regions retained. |
 | Deep squat after every medium kick | Recovery now retracts, briefly chambers, plants and returns to guard. All 21 final recovery checkpoints rechecked. Move startup/active/recovery durations unchanged. |
 | Player-one attacking arm hidden behind opponent | Main renderer paints the active attacker/holder last. Main-game contact and special screenshots inspected. |
-| Unsupported forward hold overlap | Uses reaching pose 26 with individually inspected hand/torso points and a bounded victim presentation offset. Forward offset fades over eight release frames; other directions retain core arcs. No limb deformation or simulation mutation. Main Morelight hold/release checked; per-group post-fix checks recorded below. |
+| Unsupported hold overlap | Initially corrected with a bounded presentation offset; superseded by per-fighter core contact placement in the throw follow-up. No second render offset remains. Both actual facings were checked for all 21; see the follow-up ledger. |
 | Immediate different-hand pose on stopping | Idle phase now starts at guard after locomotion/actions, instead of jumping directly to a breathing pose based on global match time. Post-fix stop samples recorded below. |
 | Reported November1 walking artifacts | Preserved whole pelvis/coat contours and pinned the leg displacement at individually inspected joins for Morelight, Fat Head Dave, Yoyo, Sprotel Bitcoin, $Bitcoin Obama, Jahon, Bitcoin Mandela and Big Swole. All eight affected gait frames and normal-speed reversal/stop samples rechecked. Includes the two exact user Morelight screenshots. |
 | Dive landing during startup | Downward aerial kicks now start their dive at the first active frame. All21 real-jump regression cases passed; Big Swole's slow heavy hit for132damage in actual browser play. |
@@ -94,8 +96,8 @@ These are documentation comparisons, not firsthand side-by-side retail-game play
 
 1. The eight-frame gait reads as guarded stance footwork with shallow clearance and limited upper-body counter-motion. World-space foot locking has not been established. It should not be described as a natural running cycle or polished commercial animation.
 2. Attack anticipation/contact/recovery now use connected whole poses, but there are few in-between drawings. Body/face proportions vary in some generated cells. Directional attacks reuse the common pose vocabulary; individual mechanics do not mean every direction has bespoke art.
-3. Forward hold contact is clearer. Back/up/down still share the release drawing and generic victim reaction. Presentation alignment is not fully authored paired throw choreography.
-4. Both-facing panels are mirrors. Asymmetric designs reverse with facing. Full left-facing authored art, every sprite/hitbox alignment and every possible inter-character overlap are not validated.
+3. All directions now use core-aligned catch/release and distinct trajectories. They still share release drawings and reuse a rotated fall pose; there is no fully authored paired throw/fall/get-up atlas. See the later ledger for the observed states.
+4. This baseline's both-facing panels are mirrors. The later throw follow-up additionally ran actual left/right-facing simulations for all 21. Asymmetric designs still reverse with facing; separately authored left-facing art, every sprite/hitbox alignment and every possible inter-character overlap are not validated.
 5. Normal-speed playback was sampled and actual keyboard play performed; no continuous-video review of every intermediate frame or human feel approval is claimed. Physical gamepad hardware, other browsers, long sessions and online play were not verified. No online system exists.
 6. Higgsfield AutoSprite jobs `ee12eef7-bdb2-4373-a2ee-300986a9d895`, `47693f50-c24c-4e5e-ba80-71d99dcd3284` and `4c0aa353-f6a8-4be5-a47a-5a1226545059` each ended **failed** with no reason/result supplied. No AutoSprite animation was installed. The successful complete-pose generations are separate. There is no current reference-access/permission blocker.
 

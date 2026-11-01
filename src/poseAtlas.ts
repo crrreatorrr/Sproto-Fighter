@@ -1,4 +1,4 @@
-import { A, COMBAT_STYLES, FLOOR, THROW_HOLD_FRAMES, getMove, type Fighter, type ThrowState } from './core';
+import { A, COMBAT_STYLES, FLOOR, WIDTH, getMove, type Fighter, type ThrowState } from './core';
 
 /** Complete-character frames, never articulated cutouts. Thirty-two authored poses
  * cover shared actions only; this does not invent missing per-character animation. */
@@ -19,6 +19,12 @@ export interface PoseFrameConfig {
   height?: number;
   /** Foot contact point in this frame's source pixels. */
   anchor?: Point;
+  /** Opaque pixel bounds [left, top, right, bottom] for floor-safe reactions. */
+  bounds?: [number, number, number, number];
+  /** Lean of a reaction pose axis; aligns head-to-feet when resting sideways. */
+  fallLean?: number;
+  /** Convex opaque-pixel outline: rotated bounds alone can leave a body floating. */
+  contactHull?: Point[];
 }
 export interface PoseAtlasConfig {
   frames: (string | PoseFrameConfig)[];
@@ -41,7 +47,7 @@ export interface PoseAtlasManifest {
   revision?: string;
   fighters: Record<string, PoseAtlasConfig>;
 }
-interface LoadedFrame { image: HTMLImageElement; anchor: Point; width: number; height: number }
+interface LoadedFrame { image: HTMLImageElement; anchor: Point; width: number; height: number; bounds: [number,number,number,number]; fallLean:number; contactHull?:Point[] }
 interface Atlas { frames: LoadedFrame[]; walkFrames?: LoadedFrame[]; scale: number; facing: number; cycle: number; holdContact?: { hand:Point; torso:Point } }
 export interface PoseAtlasDebug {
   available: boolean;
@@ -85,6 +91,10 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
     if (!f || typeof f.url !== 'string') throw new Error(`Atlas ${id}, ${label} frame ${slot}: missing frame URL`);
     const width = f.width ?? cfg.width, height = f.height ?? cfg.height, anchor = f.anchor ?? cfg.anchor;
     if (!positive(width) || !positive(height) || !point(anchor)) throw new Error(`Atlas ${id}, ${label} frame ${slot}: invalid dimensions or anchor`);
+    const bounds = f.bounds ?? [0, 0, width, height];
+    if (!Array.isArray(bounds) || bounds.length !== 4 || !bounds.every(Number.isFinite) || bounds[0] < 0 || bounds[1] < 0 || bounds[2] > width || bounds[3] > height || bounds[0] >= bounds[2] || bounds[1] >= bounds[3]) throw new Error(`Atlas ${id}, ${label} frame ${slot}: invalid opaque bounds`);
+    if(f.fallLean!==undefined&&(!Number.isFinite(f.fallLean)||Math.abs(f.fallLean)>Math.PI/3))throw new Error(`Atlas ${id}: invalid fall lean`);
+    if(f.contactHull&&(!Array.isArray(f.contactHull)||f.contactHull.length<3||f.contactHull.length>128||f.contactHull.some(p=>!point(p)||p[0]<0||p[1]<0||p[0]>width||p[1]>height)))throw new Error(`Atlas ${id}: invalid contact hull`);
     const image = await new Promise<HTMLImageElement>((resolve, reject) => {
       const img = new Image();
       img.onload = () => resolve(img);
@@ -92,7 +102,7 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
       img.src = localUrl(f.url, revision);
     });
     if (image.naturalWidth !== width || image.naturalHeight !== height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: image dimensions differ from metadata`);
-    return { image, width, height, anchor: [...anchor] as Point };
+    return { image, width, height, anchor: [...anchor] as Point, bounds: [...bounds] as LoadedFrame['bounds'], fallLean:f.fallLean??0, contactHull:f.contactHull };
   }));
   const [frames, walkFrames] = await Promise.all([loadFrames(cfg.frames, 'poses'), cfg.walkFrames ? loadFrames(cfg.walkFrames, 'walk') : undefined]);
   return { frames, walkFrames, scale: cfg.scale ?? cfg.worldHeight! / cfg.height, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact };
@@ -131,14 +141,22 @@ export function setPoseAtlasThrowState(state:ThrowState|null,fighters:readonly F
 function walking(f: Fighter): boolean { return f.y >= FLOOR && Math.abs(f.vx) > .5 && !f.move && !f.stun && !f.blockstun && !f.dash && !(f.input & A.down); }
 function selectSlot(f:Fighter,phase:number,frame:number,landedAt:number,idleSince:number):PoseSlot {
   const S=POSE_SLOTS;
+  if(f.reaction?.phase==='rise')return f.reaction.t<4?S.crouchLanding:S.guard;
+  // Let the impact silhouette relax into a complete falling pose. A rotated
+  // braced hit pose reads as balancing on its palm rather than lying down.
+  if(f.reaction?.kind==='knockdown'&&(f.reaction.phase==='down'||f.reaction.t>=6))return S.airFall;
   if(throwScene){
     const {state,fighters}=throwScene;
     // The clasped pose has both fists at the actor's own sternum. The reaching
     // pose actually puts the hands on the opponent rather than hiding them.
-    if(f===fighters[state.attacker])return state.phase==='hold'?S.grabReach:S.throwRelease;
+    if(f===fighters[state.attacker]){
+      if(state.phase==='hold')return S.grabReach;
+      if(state.t<6)return state.direction==='up'?S.uppercut:S.throwRelease;
+      return state.t<10?S.grabHold:S.punchRecover;
+    }
     // No invented victim-specific pose: the authored full-body hit reaction is
     // carried at the actual core hold/release position without limb deformation.
-    if(f===fighters[state.victim]&&(state.phase==='hold'||f.stun))return S.hit;
+    if(f===fighters[state.victim]&&state.phase==='hold')return S.hit;
   }
   if(f.stun)return S.hit;
   if(f.blockstun)return S.block;
@@ -201,30 +219,50 @@ function sample(f:Fighter,frame:number,frozen:boolean):PoseAtlasDebug {
   return {available:!!atlas,slot:state.slot,name:names.find(([,slot])=>slot===state.slot)![0],walkPhase:phase,sequence,frameIndex,sequenceLength,source:'authored-full-pose'};
 }
 export function getPoseAtlasDebug(f: Fighter, frame: number, frozen = false): PoseAtlasDebug { return sample(f, frame, frozen); }
-/** Presentation-only contact correction. It neither edits limbs nor changes
- * combat positions/collision. Other-direction lifts retain their core arc;
- * forward release blends back to the actual trajectory over eight frames. */
-function holdOffset(f:Fighter):Point {
-  if(!throwScene||f!==throwScene.fighters[throwScene.state.victim])return [0,0];
-  const {state,fighters}=throwScene,a=atlases.get(fighters[state.attacker].id),b=atlases.get(f.id);
-  if(!a?.holdContact||!b?.holdContact)return [0,0];
-  const hand=a.holdContact.hand,torso=b.holdContact.torso,reach=a.frames[POSE_SLOTS.grabReach],hit=b.frames[POSE_SLOTS.hit];
-  const hX=(hand[0]-reach.anchor[0])*a.scale*a.facing,hY=(hand[1]-reach.anchor[1])*a.scale;
-  const bX=(torso[0]-hit.anchor[0])*b.scale*b.facing,bY=(torso[1]-hit.anchor[1])*b.scale;
-  const progress=Math.min(1,state.t/THROW_HOLD_FRAMES),smooth=progress*progress*(3-2*progress);
-  const weight=state.phase==='hold'?(state.direction==='forward'?1:1-smooth):state.direction==='forward'?Math.max(0,1-state.t/8):0;
-  const x=Math.max(-60,Math.min(60,state.facing*(hX+bX-48)))*weight;
-  const y=Math.max(-26,Math.min(26,26+hY-bY))*weight;
-  return [x,Math.min(y,FLOOR-f.y)];
+/** One connected body rotates around its opaque center. The core owns throw
+ * contact; no secondary hand offset or independently animated limb remains.
+ * Bounds keep a knocked-down body on the floor and inside the camera. */
+function reactionTransform(f:Fighter,atlas:Atlas,source:LoadedFrame,enabled:boolean) {
+  const r=enabled?f.reaction:null;
+  let angle=0;
+  const restAngle=r?r.direction*Math.PI/2+f.facing*atlas.facing*source.fallLean:0;
+  if(r?.phase==='down')angle=restAngle;
+  else if(r?.phase==='flight'){
+    if(r.kind==='knockdown')angle=restAngle*.96*Math.min(1,r.t/18);
+    else if(r.kind==='launch')angle=r.direction*Math.min(.42,r.t*.035);
+    else angle=r.direction*.13*Math.sin(Math.PI*Math.min(1,r.t/12));
+  }
+  if(!angle)return {x:f.x,y:f.y,angle:0,pivotX:0,pivotY:0,corners:[[0,0]]};
+  const pivotX=(source.bounds[0]+source.bounds[2])/2-source.anchor[0];
+  const pivotY=(source.bounds[1]+source.bounds[3])/2-source.anchor[1];
+  const flip=f.facing*atlas.facing,scale=atlas.scale;
+  let x=f.x+flip*scale*pivotX,y=f.y+scale*pivotY;
+  const corners=(source.contactHull??[[source.bounds[0],source.bounds[1]],[source.bounds[2],source.bounds[1]],[source.bounds[2],source.bounds[3]],[source.bounds[0],source.bounds[3]]]).map(([bx,by])=>{
+    const px=(bx-source.anchor[0]-pivotX)*flip*scale,py=(by-source.anchor[1]-pivotY)*scale;
+    return [px*Math.cos(angle)-py*Math.sin(angle),px*Math.sin(angle)+py*Math.cos(angle)];
+  });
+  if(angle){
+    const left=Math.min(...corners.map(p=>p[0])),right=Math.max(...corners.map(p=>p[0])),bottom=Math.max(...corners.map(p=>p[1]));
+    x=Math.max(6-left,Math.min(WIDTH-6-right,x));
+    // A floor knockdown rests on the ground, rather than hovering at the
+    // original standing foot anchor. Flight only clamps at floor contact.
+    y=r?.kind==='knockdown'?(r.phase==='down'?FLOOR:f.y)-bottom:Math.min(y,FLOOR-bottom);
+  }
+  return {x,y,angle,pivotX,pivotY,corners};
+}
+export function getPoseAtlasReactionTransform(f:Fighter,slot?:PoseSlot){
+  slot??=f.reaction?.kind==='knockdown'&&(f.reaction.phase==='down'||f.reaction.t>=6)?POSE_SLOTS.airFall:POSE_SLOTS.hit;
+  const atlas=atlases.get(f.id);return atlas?reactionTransform(f,atlas,atlas.frames[slot],true):null;
 }
 function paint(c: CanvasRenderingContext2D, f: Fighter, slot: PoseSlot, ghost: boolean, sampled?: PoseAtlasDebug): boolean {
   const atlas = atlases.get(f.id); if (!atlas) return false;
   const source = sampled?.sequence === 'walk' ? atlas.walkFrames![sampled.frameIndex] : atlas.frames[slot];
-  const offset=sampled?holdOffset(f):[0,0];
-  c.save(); c.translate(Math.round(f.x+offset[0]),Math.round(f.y+offset[1])); c.scale(f.facing * atlas.facing * atlas.scale, atlas.scale); c.imageSmoothingEnabled = false;
+  const transform=reactionTransform(f,atlas,source,!!sampled);
+  c.save(); c.translate(Math.round(transform.x),Math.round(transform.y));
+  c.rotate(transform.angle); c.scale(f.facing * atlas.facing * atlas.scale, atlas.scale); c.imageSmoothingEnabled = false;
   if (ghost) c.globalAlpha *= .55;
   if (f.flash > 0 && f.flash % 4 < 2) c.filter = 'brightness(1.8)';
-  c.drawImage(source.image, -source.anchor[0], -source.anchor[1]); c.restore(); return true;
+  c.drawImage(source.image, -source.anchor[0]-transform.pivotX, -source.anchor[1]-transform.pivotY); c.restore(); return true;
 }
 /** False means no installed complete atlas; caller decides the fallback. */
 export function drawPoseAtlas(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false): boolean {
