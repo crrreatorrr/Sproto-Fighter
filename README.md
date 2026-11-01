@@ -2,6 +2,8 @@
 
 Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline first slice, with a pixel-art **Amber Ranch** stage and animated pixel sprites based on all supplied references. The latest scope includes **21 selectable fighters**, each with its original supplied image on the selection screen and a fighting animation set. All 21 have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Four selectable story worlds use static placeholder scenes and stages; the ranch remains a free-play bonus.
 
+**Latest animation update: 2 of 21 new event sets are installed.** Golden Sproto and Morelight now have new intro, special, cast, recoil and defeat frames, with separate presentation timing and a visible defeat sequence before results. The other 19 retain their existing playable art; their new generation is blocked by reference-upload approval. See [current event QA](docs/ANIMATION-EVENT-QA.md) and [handoff](docs/CLAUDE-HANDOFF.md) for exact coverage, cost and limitations.
+
 ## Run
 
 On this Mac, double-click **Play Sproto Arena.command** in this project folder. It opens the browser if the game is already running; otherwise it starts the local server and opens the game. Keep its Terminal window open while playing. Control-C stops a server started by the launcher.
@@ -18,6 +20,8 @@ Open **http://127.0.0.1:5173/** in Chrome, Safari or Edge on this same Mac, then
 The current recovery session runs under macOS launchd job `com.sprotoarena.local`, independent of the assistant's temporary shell. It remains available for this login session; after logout/reboot use the launcher above. To stop that background job deliberately, run `launchctl remove com.sprotoarena.local` in Terminal. Its logs are `/tmp/sproto-arena-server.log` and `/tmp/sproto-arena-server-error.log`. No boot/login startup file or external hosting was installed.
 
 `npm run build` checks TypeScript and creates the production bundle. `npm run qa` repeats the current-update checks. `node scripts/pose-atlas-smoke.mjs` checks pose playback and loading failures; `python3 art/pose-atlases/verify_pose_assets.py` checks the installed image contract.
+
+For the new event pilot, run `node scripts/presentation-smoke.mjs` and `node scripts/event-clips-smoke.mjs`. The [event review lab](http://127.0.0.1:5173/art/animation-event-lab.html) shows both facings, frame stepping, normal playback and full combat rendering; missing new clips are labeled. It is a development fixture, not a normal match.
 
 ## Play
 

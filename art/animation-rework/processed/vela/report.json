@@ -1,0 +1,1193 @@
+{
+  "source": "art/animation-rework/raw/vela-events-nano.png",
+  "uniformScale": 0.8089171974522293,
+  "config": {
+    "maps": {
+      "defeat": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        24,
+        27,
+        27,
+        27,
+        27,
+        27,
+        27
+      ]
+    },
+    "rejected": {
+      "28-31": "Source-image edge contact; use intact frame27 for final rest",
+      "25-26": "Alert upper-body rise reads as recovery; omit from terminal defeat"
+    },
+    "note": "Terminal repeats are deliberate holds. Review failed-rise25/26 in browser before acceptance."
+  },
+  "frames": [
+    {
+      "sourceCell": 0,
+      "sourceBounds": [
+        37,
+        11,
+        168,
+        168
+      ],
+      "sourceAnchor": [
+        101.6732283464567,
+        168
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        60,
+        83,
+        166,
+        210
+      ]
+    },
+    {
+      "sourceCell": 1,
+      "sourceBounds": [
+        250,
+        11,
+        385,
+        168
+      ],
+      "sourceAnchor": [
+        313.6732283464567,
+        168
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        60,
+        83,
+        169,
+        210
+      ]
+    },
+    {
+      "sourceCell": 2,
+      "sourceBounds": [
+        432,
+        11,
+        619,
+        168
+      ],
+      "sourceAnchor": [
+        525.6732283464567,
+        168
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        36,
+        83,
+        187,
+        210
+      ]
+    },
+    {
+      "sourceCell": 3,
+      "sourceBounds": [
+        679,
+        11,
+        805,
+        168
+      ],
+      "sourceAnchor": [
+        737.6732283464567,
+        168
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        65,
+        83,
+        167,
+        210
+      ]
+    },
+    {
+      "sourceCell": 4,
+      "sourceBounds": [
+        46,
+        203,
+        164,
+        334
+      ],
+      "sourceAnchor": [
+        101.6732283464567,
+        334
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        67,
+        104,
+        162,
+        210
+      ]
+    },
+    {
+      "sourceCell": 5,
+      "sourceBounds": [
+        254,
+        177,
+        381,
+        334
+      ],
+      "sourceAnchor": [
+        313.6732283464567,
+        334
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        64,
+        83,
+        167,
+        210
+      ]
+    },
+    {
+      "sourceCell": 6,
+      "sourceBounds": [
+        458,
+        186,
+        596,
+        334
+      ],
+      "sourceAnchor": [
+        525.6732283464567,
+        334
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        57,
+        90,
+        169,
+        210
+      ]
+    },
+    {
+      "sourceCell": 7,
+      "sourceBounds": [
+        670,
+        179,
+        811,
+        334
+      ],
+      "sourceAnchor": [
+        737.6732283464567,
+        334
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        57,
+        85,
+        171,
+        210
+      ]
+    },
+    {
+      "sourceCell": 8,
+      "sourceBounds": [
+        22,
+        346,
+        178,
+        493
+      ],
+      "sourceAnchor": [
+        101.6732283464567,
+        493
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        48,
+        91,
+        174,
+        210
+      ]
+    },
+    {
+      "sourceCell": 9,
+      "sourceBounds": [
+        254,
+        349,
+        379,
+        493
+      ],
+      "sourceAnchor": [
+        313.6732283464567,
+        493
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        64,
+        94,
+        165,
+        210
+      ]
+    },
+    {
+      "sourceCell": 10,
+      "sourceBounds": [
+        453,
+        347,
+        597,
+        493
+      ],
+      "sourceAnchor": [
+        525.6732283464567,
+        493
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        53,
+        92,
+        169,
+        210
+      ]
+    },
+    {
+      "sourceCell": 11,
+      "sourceBounds": [
+        680,
+        342,
+        803,
+        493
+      ],
+      "sourceAnchor": [
+        737.6732283464567,
+        493
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        65,
+        88,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 12,
+      "sourceBounds": [
+        46,
+        499,
+        168,
+        649
+      ],
+      "sourceAnchor": [
+        101.6732283464567,
+        649
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        67,
+        89,
+        166,
+        210
+      ]
+    },
+    {
+      "sourceCell": 13,
+      "sourceBounds": [
+        257,
+        499,
+        380,
+        649
+      ],
+      "sourceAnchor": [
+        313.6732283464567,
+        649
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        66,
+        89,
+        165,
+        210
+      ]
+    },
+    {
+      "sourceCell": 14,
+      "sourceBounds": [
+        445,
+        501,
+        618,
+        649
+      ],
+      "sourceAnchor": [
+        525.6732283464567,
+        649
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        47,
+        90,
+        187,
+        210
+      ]
+    },
+    {
+      "sourceCell": 15,
+      "sourceBounds": [
+        680,
+        499,
+        803,
+        649
+      ],
+      "sourceAnchor": [
+        737.6732283464567,
+        649
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        65,
+        89,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 16,
+      "sourceBounds": [
+        39,
+        652,
+        174,
+        806
+      ],
+      "sourceAnchor": [
+        101.6732283464567,
+        806
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        61,
+        85,
+        170,
+        210
+      ]
+    },
+    {
+      "sourceCell": 17,
+      "sourceBounds": [
+        246,
+        658,
+        389,
+        806
+      ],
+      "sourceAnchor": [
+        313.6732283464567,
+        806
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        57,
+        90,
+        173,
+        210
+      ]
+    },
+    {
+      "sourceCell": 18,
+      "sourceBounds": [
+        463,
+        655,
+        595,
+        808
+      ],
+      "sourceAnchor": [
+        525.6732283464567,
+        808
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        62,
+        86,
+        168,
+        210
+      ]
+    },
+    {
+      "sourceCell": 19,
+      "sourceBounds": [
+        680,
+        655,
+        803,
+        806
+      ],
+      "sourceAnchor": [
+        737.6732283464567,
+        806
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        65,
+        88,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 20,
+      "sourceBounds": [
+        48,
+        811,
+        166,
+        963
+      ],
+      "sourceAnchor": [
+        101.6732283464567,
+        963
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        69,
+        87,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 21,
+      "sourceBounds": [
+        260,
+        814,
+        378,
+        963
+      ],
+      "sourceAnchor": [
+        313.6732283464567,
+        963
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        69,
+        89,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 22,
+      "sourceBounds": [
+        431,
+        832,
+        629,
+        962
+      ],
+      "sourceAnchor": [
+        525.6732283464567,
+        962
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        35,
+        105,
+        195,
+        210
+      ]
+    },
+    {
+      "sourceCell": 23,
+      "sourceBounds": [
+        644,
+        852,
+        840,
+        961
+      ],
+      "sourceAnchor": [
+        737.6732283464567,
+        961
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        36,
+        122,
+        195,
+        210
+      ]
+    },
+    {
+      "sourceCell": 24,
+      "sourceBounds": [
+        8,
+        1003,
+        205,
+        1113
+      ],
+      "sourceAnchor": [
+        101.6732283464567,
+        1113
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        36,
+        121,
+        195,
+        210
+      ]
+    },
+    {
+      "sourceCell": 25,
+      "sourceBounds": [
+        219,
+        986,
+        409,
+        1109
+      ],
+      "sourceAnchor": [
+        313.6732283464567,
+        1109
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        35,
+        111,
+        189,
+        210
+      ]
+    },
+    {
+      "sourceCell": 26,
+      "sourceBounds": [
+        431,
+        985,
+        620,
+        1109
+      ],
+      "sourceAnchor": [
+        525.6732283464567,
+        1109
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        35,
+        110,
+        188,
+        210
+      ]
+    },
+    {
+      "sourceCell": 27,
+      "sourceBounds": [
+        643,
+        1004,
+        841,
+        1113
+      ],
+      "sourceAnchor": [
+        737.6732283464567,
+        1113
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        35,
+        122,
+        195,
+        210
+      ]
+    },
+    {
+      "sourceCell": 28,
+      "sourceBounds": [
+        8,
+        1156,
+        205,
+        1264
+      ],
+      "sourceAnchor": [
+        101.6732283464567,
+        1264
+      ],
+      "flipped": false,
+      "touchesImageEdge": true,
+      "canonicalBounds": [
+        36,
+        123,
+        195,
+        210
+      ]
+    },
+    {
+      "sourceCell": 29,
+      "sourceBounds": [
+        219,
+        1156,
+        417,
+        1264
+      ],
+      "sourceAnchor": [
+        313.6732283464567,
+        1264
+      ],
+      "flipped": false,
+      "touchesImageEdge": true,
+      "canonicalBounds": [
+        35,
+        123,
+        195,
+        210
+      ]
+    },
+    {
+      "sourceCell": 30,
+      "sourceBounds": [
+        431,
+        1156,
+        629,
+        1264
+      ],
+      "sourceAnchor": [
+        525.6732283464567,
+        1264
+      ],
+      "flipped": false,
+      "touchesImageEdge": true,
+      "canonicalBounds": [
+        35,
+        123,
+        195,
+        210
+      ]
+    },
+    {
+      "sourceCell": 31,
+      "sourceBounds": [
+        643,
+        1156,
+        841,
+        1264
+      ],
+      "sourceAnchor": [
+        737.6732283464567,
+        1264
+      ],
+      "flipped": false,
+      "touchesImageEdge": true,
+      "canonicalBounds": [
+        35,
+        123,
+        195,
+        210
+      ]
+    }
+  ],
+  "clips": {
+    "intro": [
+      {
+        "url": "/fighters/events/vela/00.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          60,
+          83,
+          166,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/01.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          60,
+          83,
+          169,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/02.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          36,
+          83,
+          187,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/03.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          65,
+          83,
+          167,
+          210
+        ]
+      }
+    ],
+    "special": [
+      {
+        "url": "/fighters/events/vela/04.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          67,
+          104,
+          162,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/05.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          64,
+          83,
+          167,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/06.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          57,
+          90,
+          169,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/07.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          57,
+          85,
+          171,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/08.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          48,
+          91,
+          174,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/09.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          64,
+          94,
+          165,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/10.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          53,
+          92,
+          169,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/11.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          65,
+          88,
+          164,
+          210
+        ]
+      }
+    ],
+    "cast": [
+      {
+        "url": "/fighters/events/vela/12.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          67,
+          89,
+          166,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/13.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          66,
+          89,
+          165,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/14.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          47,
+          90,
+          187,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/15.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          65,
+          89,
+          164,
+          210
+        ]
+      }
+    ],
+    "recoil": [
+      {
+        "url": "/fighters/events/vela/16.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          61,
+          85,
+          170,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/17.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          57,
+          90,
+          173,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/18.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          62,
+          86,
+          168,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/19.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          65,
+          88,
+          164,
+          210
+        ]
+      }
+    ],
+    "defeat": [
+      {
+        "url": "/fighters/events/vela/20.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          69,
+          87,
+          164,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/21.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          69,
+          89,
+          164,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/22.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          35,
+          105,
+          195,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/23.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          36,
+          122,
+          195,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/24.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          36,
+          121,
+          195,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/24.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          36,
+          121,
+          195,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          35,
+          122,
+          195,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          35,
+          122,
+          195,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          35,
+          122,
+          195,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          35,
+          122,
+          195,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          35,
+          122,
+          195,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/vela/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          35,
+          122,
+          195,
+          210
+        ]
+      }
+    ]
+  }
+}

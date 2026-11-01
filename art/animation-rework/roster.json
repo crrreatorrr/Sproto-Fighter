@@ -1,0 +1,212 @@
+[
+  {
+    "name": "rivet",
+    "library_file_id": "libfile_589b206f4f408191ad99c687726d5180",
+    "local_reference": "art/references/rivet.png",
+    "inspected": true,
+    "requirement": "First playable: yellow body, same face and clothing style; menu/combat sprites and animations. Exact user-provided name: Golden Sproto.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Golden Sproto",
+    "runtime_id": "rivet"
+  },
+  {
+    "name": "vela",
+    "library_file_id": "libfile_889aeefde3908191a76b91223a747617",
+    "local_reference": "art/references/vela.png",
+    "inspected": true,
+    "requirement": "Second playable: preserve reference, no clothes; menu/combat sprites and animations. Exact user-provided name: Morelight.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Morelight",
+    "runtime_id": "vela"
+  },
+  {
+    "name": "bront",
+    "library_file_id": "libfile_bcbe24ebfc308191adff0f3cd7b3a1bb",
+    "local_reference": "art/references/bront.png",
+    "inspected": true,
+    "requirement": "Later roster: buff and muscular; same sprite/animation deliverables. Exact user-provided name: Fat Head Dave.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Fat Head Dave",
+    "runtime_id": "bront"
+  },
+  {
+    "name": "zephyr",
+    "library_file_id": "libfile_37cde1fc236c8191bef08877e14e2a26",
+    "local_reference": "art/references/zephyr.png",
+    "inspected": true,
+    "requirement": "Later roster: main character only; ignore mini pumpkin; pumpkin-related attacks.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Halloween 2008",
+    "runtime_id": "zephyr"
+  },
+  {
+    "name": "mox",
+    "library_file_id": "libfile_2519ff9a03b88191bfcffae87e6a26a5",
+    "local_reference": "art/references/mox.png",
+    "inspected": true,
+    "requirement": "Later roster: preserve distinguishing features; same sprite/animation deliverables. Exact user-provided name: Yannix.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Yannix",
+    "runtime_id": "mox"
+  },
+  {
+    "name": "rune",
+    "library_file_id": "libfile_19b00a2db07c8191abf8a42dd67fdf2b",
+    "local_reference": "art/references/rune.png",
+    "inspected": true,
+    "requirement": "Later roster: preserve distinguishing features; same sprite/animation deliverables. Exact user-provided name: Bongraker.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Bongraker",
+    "runtime_id": "rune"
+  },
+  {
+    "name": "reference-7",
+    "library_file_id": "libfile_7622e9cc3a8c8191844b31d9a603bf9b",
+    "local_reference": "art/references/reference-07.png",
+    "inspected": true,
+    "requirement": "Later roster: same menu/combat sprite and movement/attack animation guidelines. Exact user-provided name: Juicy.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Juicy",
+    "runtime_id": "guest07"
+  },
+  {
+    "name": "reference-8",
+    "library_file_id": "libfile_93d978dddd8c8191bdb2e4ef8dfe3f50",
+    "local_reference": "art/references/reference-08.png",
+    "inspected": true,
+    "requirement": "Eventual playable fighter; keep first build restricted to first two. Exact user-provided name: Yoyo.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Yoyo",
+    "runtime_id": "guest08"
+  },
+  {
+    "name": "reference-9",
+    "library_file_id": "libfile_d8399e2a279081918e6f8d6cf7cda3e2",
+    "local_reference": "art/references/reference-09.png",
+    "inspected": true,
+    "requirement": "Ignore red background; use head and create similar clothing. Exact user-provided name: Red Kev.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Red Kev",
+    "runtime_id": "guest09"
+  },
+  {
+    "name": "reference-10",
+    "library_file_id": "libfile_665ce7ab0da48191a4ae047bdbfcd68c",
+    "local_reference": "art/references/reference-10.png",
+    "inspected": true,
+    "requirement": "Keep the Christmas hat; same sprite/animation guidelines.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Sprotel Bitcoin",
+    "runtime_id": "guest10"
+  },
+  {
+    "name": "reference-11",
+    "library_file_id": "libfile_8b401e87a0f081919200ef2937ae7c8b",
+    "local_reference": "art/references/reference-11.png",
+    "inspected": true,
+    "requirement": "Playable using shared powers and animations; preserve individual reference for finished art. User explicitly named this exact eleventh reference Chode Adoration.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Chode Adoration",
+    "runtime_id": "guest11"
+  },
+  {
+    "name": "reference-12",
+    "library_file_id": "libfile_90cad33d7d048191905ea6b564bfdd42",
+    "local_reference": "art/references/reference-12.png",
+    "inspected": true,
+    "requirement": "Playable using shared powers and animations; preserve individual reference for finished art. User explicitly named this exact twelfth reference $Bitcoin Obama.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "$Bitcoin Obama",
+    "runtime_id": "guest12"
+  },
+  {
+    "name": "reference-13",
+    "library_file_id": "libfile_b20eb955f55c819191c62089747c4a3c",
+    "local_reference": "art/references/reference-13.png",
+    "inspected": true,
+    "requirement": "Playable using shared powers and animations; preserve individual reference for finished art. User explicitly named this exact thirteenth reference Jahon.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Jahon",
+    "runtime_id": "guest13"
+  },
+  {
+    "name": "reference-14",
+    "library_file_id": "libfile_32eb57d26d1c81918fcc3ff179450f5e",
+    "local_reference": "art/references/reference-14.png",
+    "inspected": true,
+    "requirement": "Playable using shared powers and animations; preserve individual appearance for finished art. User explicitly named this exact fourteenth reference Virtuagram.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "display_name": "Virtuagram",
+    "runtime_id": "guest14"
+  },
+  {
+    "name": "dumpstar",
+    "display_name": "Dumpstar",
+    "library_file_id": "libfile_a289c194b9ec8191987123e1ced7a5e8",
+    "local_reference": "art/references/dumpstar.png",
+    "inspected": true,
+    "requirement": "Use only face and attire; ignore objects above his shoulder. Shared powers and animation behavior.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "runtime_id": "dumpstar"
+  },
+  {
+    "name": "crapto",
+    "display_name": "Crapto",
+    "library_file_id": "libfile_88cb1c608bc481918f8e01437ba67ec8",
+    "local_reference": "art/references/crapto.png",
+    "inspected": true,
+    "requirement": "Preserve blue bare body, yellow goggles with red irises and long red lips.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "runtime_id": "crapto"
+  },
+  {
+    "name": "vamp",
+    "display_name": "VAMP",
+    "library_file_id": "libfile_6cd38533290481918cccf22efba08902",
+    "local_reference": "art/references/vamp.png",
+    "inspected": true,
+    "requirement": "Preserve blue feline head, narrow eyes, black jacket and yellow collar.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "runtime_id": "vamp"
+  },
+  {
+    "name": "alpha777",
+    "display_name": "Alpha 777",
+    "library_file_id": "libfile_7c88596f7d1c8191ad91c5fddefb4c34",
+    "local_reference": "art/references/alpha777.png",
+    "inspected": true,
+    "requirement": "Preserve olive skin, blue goggles, red scarf and striped shirt.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "runtime_id": "alpha777"
+  },
+  {
+    "name": "bitcoin-mandela",
+    "display_name": "Bitcoin Mandela",
+    "library_file_id": "libfile_8ddab40bc32c819183d8bf1939f6300c",
+    "local_reference": "art/references/bitcoin-mandela.png",
+    "inspected": true,
+    "requirement": "Ignore white/black background; preserve face and attire.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "runtime_id": "mandela"
+  },
+  {
+    "name": "big-swole",
+    "display_name": "Big Swole",
+    "library_file_id": "libfile_c4b1aa0404408191a2d54f3e23587d9b",
+    "local_reference": "art/references/big-swole.png",
+    "inspected": true,
+    "requirement": "Preserve blue body, huge white eyes, red nose and neck ring, crescent earring.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "runtime_id": "bigswole"
+  },
+  {
+    "name": "little-foot-nate",
+    "display_name": "Little Foot Nate",
+    "library_file_id": "libfile_313b9a1068e481919386d21b07824a60",
+    "local_reference": "art/references/little-foot-nate.png",
+    "inspected": true,
+    "requirement": "Preserve blue face, yellow spikes/hood, yellow eyes, red grin with pale-blue teeth.",
+    "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md",
+    "runtime_id": "nate"
+  }
+]

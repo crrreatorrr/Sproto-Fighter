@@ -1,9 +1,13 @@
 import {drawPower} from './powerArt';
 import { FLOOR, ROSTER, COMBAT_STYLES, type CombatState, type Fighter } from './core';
 import { drawSprite } from './spriteRoster';
+import { setPoseAtlasAssistTiming } from './poseAtlas';
 const clamp=(n:number)=>Math.max(0,Math.min(1,n));
 const ease=(n:number)=>{n=clamp(n);return n*n*(3-2*n);};
-/** Timed to combat waves12/27/42. This is runtime choreography, not generated video. */
+// Retain object identity so complete-body playback and event clocks do not reset
+// on every draw. Assists follow the owner's contacts, not their own kit's clock.
+const assists=new WeakMap<Fighter,Fighter>();
+/** Runtime choreography follows each kit's actual contact frames. */
 export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
  for(const f of s.fighters){
   if(f.move?.id!=='special')continue;
@@ -15,7 +19,10 @@ export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
   if(t<4||t>65)continue;
   const entry=ease((t-4)/8),exit=ease((t-48)/17);
   const offset=-250+(entry*160)+(t>=27?ease((t-27)/12)*65:0)-exit*220;
-  const teammate: Fighter={...f,id:ROSTER[f.id].partner,x:f.x+f.facing*offset,y:FLOOR,flash:0,stun:0,blockstun:0,vx:0,move:{...f.move,t:Math.max(0,t-3)}};
+  let teammate=assists.get(f);
+  if(!teammate){teammate={...f};assists.set(f,teammate);}
+  Object.assign(teammate,f,{id:ROSTER[f.id].partner,x:f.x+f.facing*offset,y:FLOOR,hp:1000,flash:0,stun:0,blockstun:0,reaction:null,vx:0,vy:0,move:{...f.move,t}});
+  setPoseAtlasAssistTiming(teammate,COMBAT_STYLES[f.id].specialFrames);
   c.save();c.globalAlpha=clamp(entry*(1-exit))*.93;drawSprite(c,teammate,s.frame,false,s.freeze>0);c.restore();
  }
 }
@@ -23,7 +30,7 @@ export function drawTeamSpecialFront(c:CanvasRenderingContext2D,s:CombatState){
  for(const f of s.fighters){
   if(f.move?.id!=='special')continue;const t=f.move.t,color=ROSTER[f.id].color;
   for(const [i,hit] of COMBAT_STYLES[f.id].specialFrames.entries()){
-   const age=t-hit;if(age<0||age>10)continue;const progress=age/10,reach=70+progress*560;
+   const age=t-hit;if(age<0||age>10)continue;const progress=age/10;
    c.save();c.globalAlpha=(1-progress)*.72;c.strokeStyle=color;c.lineWidth=(i===2?10:6)*(1-progress)+1;
    const style=COMBAT_STYLES[f.id];
    const reachNow=70+progress*(style.special.range??580),x=f.x+f.facing*reachNow,y=style.special.low?FLOOR-22:f.y-80;

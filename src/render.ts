@@ -1,4 +1,5 @@
-import { setPoseAtlasThrowState } from './poseAtlas';
+import { setPoseAtlasThrowState, setPoseAtlasPresentation } from './poseAtlas';
+import type { RoundPresentation } from './animationEvents';
 import { drawPower } from './powerArt';
 import { setHiggsfieldThrowState } from './higgsfieldRig';
 import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
@@ -40,9 +41,10 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     }
     text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#7088a3', right ? 'right' : 'left');
 }
-export function render(c: CanvasRenderingContext2D, s: CombatState) {
+export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation) {
     setHiggsfieldThrowState(s.throwState,s.fighters);
     setPoseAtlasThrowState(s.throwState,s.fighters);
+    setPoseAtlasPresentation(presentation??null,s.fighters);
     drawStage(c, s.frame);
     for (const f of s.fighters) {
         c.fillStyle = '#040b1366';
@@ -126,4 +128,12 @@ export function render(c: CanvasRenderingContext2D, s: CombatState) {
     c.fillStyle = '#18202cba';
     c.fillRect(425, 678, 430, 25);
     text(c, 'HOLD AWAY: BLOCK  /  DOWN: CROUCH', 640, 694, 9, '#b4c3d3', 'center', 500);
+    if(presentation?.phase==='intro'){
+        c.fillStyle='#101725e0';c.fillRect(435,175,410,66);
+        text(c,'GET READY',640,204,24,'#f4e8c5','center',900);
+        text(c,'MOVE OR ATTACK TO START',640,227,10,'#b4c3d3','center');
+    }else if(presentation?.phase==='outro'){
+        const draw=presentation.winner===2;
+        text(c,draw?'DOUBLE DOWN':s.clock<=0?'TIME':'K.O.',640,220,40,'#f4e8c5','center',900);
+    }
 }

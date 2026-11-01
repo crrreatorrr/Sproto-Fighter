@@ -1,3 +1,4 @@
+import { EVENT_CLIP_LENGTHS, introFrame, defeatFrame, specialFrame, castFrame, recoilFrame, type EventClipName, type RoundPresentation } from './animationEvents';
 import { A, COMBAT_STYLES, FLOOR, WIDTH, getMove, type Fighter, type ThrowState } from './core';
 
 /** Complete-character frames, never articulated cutouts. Thirty-two authored poses
@@ -30,6 +31,8 @@ export interface PoseAtlasConfig {
   frames: (string | PoseFrameConfig)[];
   /** Optional complete-body walk cycle, 2–64 frames, sharing atlas scale. */
   walkFrames?: (string | PoseFrameConfig)[];
+  /** Optional complete-body event sequences; each supplied clip must be complete. */
+  clips?: Partial<Record<EventClipName, (string | PoseFrameConfig)[]>>;
   width: number;
   height: number;
   anchor: Point;
@@ -48,14 +51,14 @@ export interface PoseAtlasManifest {
   fighters: Record<string, PoseAtlasConfig>;
 }
 interface LoadedFrame { image: HTMLImageElement; anchor: Point; width: number; height: number; bounds: [number,number,number,number]; fallLean:number; contactHull?:Point[] }
-interface Atlas { frames: LoadedFrame[]; walkFrames?: LoadedFrame[]; scale: number; facing: number; cycle: number; holdContact?: { hand:Point; torso:Point } }
+interface Atlas { clips: Partial<Record<EventClipName, LoadedFrame[]>>; frames: LoadedFrame[]; walkFrames?: LoadedFrame[]; scale: number; facing: number; cycle: number; holdContact?: { hand:Point; torso:Point } }
 export interface PoseAtlasDebug {
   available: boolean;
   slot: PoseSlot;
   name: string;
   walkPhase: number;
   /** Main pose slot remains available even when a walk sequence replaces it. */
-  sequence: 'poses' | 'walk';
+  sequence: 'poses' | 'walk' | EventClipName;
   frameIndex: number;
   sequenceLength: number;
   source: 'authored-full-pose';
@@ -67,6 +70,7 @@ export const isPoseAtlasDeclared = (id:string) => declaredAtlases.has(id);
 let pending: Promise<boolean> | null = null;
 let loadState: 'unrequested' | 'loading' | 'absent' | 'ready' | 'error' = 'unrequested';
 let loadError: string | null = null;
+export const getPoseAtlasClipInventory = () => Object.fromEntries([...atlases].map(([id,a])=>[id,Object.fromEntries(Object.entries(a.clips).map(([name,frames])=>[name,frames.length]))]));
 export const getPoseAtlasLoadStatus = () => ({ state: loadState, error: loadError, ids: [...atlases.keys()] });
 const positive = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v) && v > 0;
 const point = (v: unknown): v is Point => Array.isArray(v) && v.length === 2 && v.every(x => typeof x === 'number' && Number.isFinite(x));
@@ -86,6 +90,10 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
   if (cfg.walkCycleDistance !== undefined && !positive(cfg.walkCycleDistance)) throw new Error(`Atlas ${id}: invalid walkCycleDistance`);
   if(cfg.holdContact && (![cfg.holdContact.hand,cfg.holdContact.torso].every(p=>point(p)&&p[0]>=0&&p[0]<cfg.width&&p[1]>=0&&p[1]<cfg.height)))throw new Error(`Atlas ${id}: invalid hold contact points`);
   if (cfg.walkFrames !== undefined && (!Array.isArray(cfg.walkFrames) || cfg.walkFrames.length < 2 || cfg.walkFrames.length > 64)) throw new Error(`Atlas ${id}: walkFrames must contain 2–64 frames`);
+  if(cfg.clips!==undefined && (!cfg.clips || typeof cfg.clips!=='object' || Array.isArray(cfg.clips)))throw new Error(`Atlas ${id}: clips must be an object`);
+  for(const [name,entries] of Object.entries(cfg.clips??{})){
+    if(!(name in EVENT_CLIP_LENGTHS)||!Array.isArray(entries)||entries.length!==EVENT_CLIP_LENGTHS[name as EventClipName])throw new Error(`Atlas ${id}: invalid ${name} clip length`);
+  }
   const loadFrames = (entries: (string | PoseFrameConfig)[], label:string) => Promise.all(entries.map(async (entry, slot): Promise<LoadedFrame> => {
     const f = typeof entry === 'string' ? { url: entry } : entry;
     if (!f || typeof f.url !== 'string') throw new Error(`Atlas ${id}, ${label} frame ${slot}: missing frame URL`);
@@ -104,8 +112,8 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
     if (image.naturalWidth !== width || image.naturalHeight !== height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: image dimensions differ from metadata`);
     return { image, width, height, anchor: [...anchor] as Point, bounds: [...bounds] as LoadedFrame['bounds'], fallLean:f.fallLean??0, contactHull:f.contactHull };
   }));
-  const [frames, walkFrames] = await Promise.all([loadFrames(cfg.frames, 'poses'), cfg.walkFrames ? loadFrames(cfg.walkFrames, 'walk') : undefined]);
-  return { frames, walkFrames, scale: cfg.scale ?? cfg.worldHeight! / cfg.height, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact };
+  const [frames, walkFrames, clipEntries] = await Promise.all([loadFrames(cfg.frames, 'poses'), cfg.walkFrames ? loadFrames(cfg.walkFrames, 'walk') : undefined, Promise.all(Object.entries(cfg.clips??{}).map(async ([name,entries])=>[name,await loadFrames(entries!,name)] as const))]);
+  return { frames, walkFrames, clips:Object.fromEntries(clipEntries), scale: cfg.scale ?? cfg.worldHeight! / cfg.height, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact };
 }
 /** Optional installation: 404 or an empty roster returns false. Invalid manifests
  * and failed assets reject and expose an error status; no partial atlas is used.
@@ -138,6 +146,29 @@ const playback = new WeakMap<Fighter, Playback>();
 let throwScene: {state:ThrowState; fighters:readonly Fighter[]}|null = null;
 /** Set once per render using actual core fighter objects. */
 export function setPoseAtlasThrowState(state:ThrowState|null,fighters:readonly Fighter[]):void { throwScene=state?{state,fighters}:null; }
+let presentationScene:{presentation:RoundPresentation;fighters:readonly Fighter[]}|null=null;
+/** Stable actual fighter identities prevent presentation clips affecting assists. */
+export function setPoseAtlasPresentation(presentation:RoundPresentation|null,fighters:readonly Fighter[]):void {presentationScene=presentation?{presentation,fighters}:null;}
+const assistTiming=new WeakMap<Fighter,readonly number[]>();
+const floorDefeat=(f:Fighter,p:RoundPresentation)=>p.fromFloor||(f.reaction?.kind==='knockdown'&&f.reaction.phase==='down');
+/** The caller updates the stable assist object's move.t from its owner's clock. */
+export function setPoseAtlasAssistTiming(f:Fighter,contacts:readonly number[]):void {assistTiming.set(f,contacts);}
+function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:EventClipName;frameIndex:number}|null {
+  if(!atlas)return null;
+  const choose=(sequence:EventClipName,frameIndex:number)=>atlas.clips[sequence]?{sequence,frameIndex}:null;
+  const p=presentationScene?.presentation,index=presentationScene?.fighters.indexOf(f)??-1;
+  if(p&&index>=0){
+    if(p.phase==='intro')return choose('intro',introFrame(p.frame));
+    if((p.phase==='outro'||p.phase==='result')&&p.winner!==null&&(p.winner===2||index!==p.winner))return choose('defeat',defeatFrame(p.frame,floorDefeat(f,p)));
+  }
+  // Held/released throw participants retain their authored throw/fall path.
+  if(throwScene&&throwScene.fighters.some((actor,i)=>actor===f&&(i===throwScene!.state.attacker||i===throwScene!.state.victim)))return null;
+  if(f.reaction?.kind==='recoil'&&f.y>=FLOOR&&!f.blockstun)return choose('recoil',recoilFrame(f.reaction.t));
+  if(f.stun||f.blockstun||f.reaction?.kind==='knockdown')return null;
+  if(f.move?.id==='special')return choose('special',specialFrame(f.move.t,assistTiming.get(f)??COMBAT_STYLES[f.id].specialFrames));
+  if(f.move?.id==='bolt'){const move=getMove(f,'bolt');return choose('cast',castFrame(f.move.t,move.startup,move.active));}
+  return null;
+}
 function walking(f: Fighter): boolean { return f.y >= FLOOR && Math.abs(f.vx) > .5 && !f.move && !f.stun && !f.blockstun && !f.dash && !(f.input & A.down); }
 function selectSlot(f:Fighter,phase:number,frame:number,landedAt:number,idleSince:number):PoseSlot {
   const S=POSE_SLOTS;
@@ -216,6 +247,8 @@ function sample(f:Fighter,frame:number,frozen:boolean):PoseAtlasDebug {
   const sequence = atlas?.walkFrames && state.slot >= POSE_SLOTS.walkNear && state.slot <= POSE_SLOTS.passFar ? 'walk' : 'poses';
   const sequenceLength = sequence === 'walk' ? atlas!.walkFrames!.length : 32;
   const frameIndex = sequence === 'walk' ? Math.min(sequenceLength - 1, Math.floor(phase * sequenceLength)) : state.slot;
+  const event=eventSelection(f,atlas);
+  if(event)return {available:true,slot:state.slot,name:event.sequence,walkPhase:phase,...event,sequenceLength:atlas!.clips[event.sequence]!.length,source:'authored-full-pose'};
   return {available:!!atlas,slot:state.slot,name:names.find(([,slot])=>slot===state.slot)![0],walkPhase:phase,sequence,frameIndex,sequenceLength,source:'authored-full-pose'};
 }
 export function getPoseAtlasDebug(f: Fighter, frame: number, frozen = false): PoseAtlasDebug { return sample(f, frame, frozen); }
@@ -256,10 +289,22 @@ export function getPoseAtlasReactionTransform(f:Fighter,slot?:PoseSlot){
 }
 function paint(c: CanvasRenderingContext2D, f: Fighter, slot: PoseSlot, ghost: boolean, sampled?: PoseAtlasDebug): boolean {
   const atlas = atlases.get(f.id); if (!atlas) return false;
-  const source = sampled?.sequence === 'walk' ? atlas.walkFrames![sampled.frameIndex] : atlas.frames[slot];
-  const transform=reactionTransform(f,atlas,source,!!sampled);
+  const event=sampled && sampled.sequence!=='poses' && sampled.sequence!=='walk' ? sampled.sequence : null;
+  const source = event ? atlas.clips[event]![sampled!.frameIndex] : sampled?.sequence === 'walk' ? atlas.walkFrames![sampled.frameIndex] : atlas.frames[slot];
+  // Event drawings already contain their authored body attitude and floor anchor.
+  const transform=reactionTransform(f,atlas,source,!!sampled && !event);
+  // A knocked-back body already landed head-first in its impact direction.
+  // Preserve that whole-body orientation when entering the authored floor rest;
+  // otherwise the defeated fighter flips ends at the KO presentation boundary.
+  const p=presentationScene?.presentation;
+  const facing=event==='defeat'&&p&&floorDefeat(f,p)?f.reaction?.direction??f.facing:f.facing;
+  if(event==='defeat'){
+    const flip=facing*atlas.facing*atlas.scale;
+    const x0=(source.bounds[0]-source.anchor[0])*flip,x1=(source.bounds[2]-source.anchor[0])*flip;
+    transform.x=Math.max(Math.ceil(6-Math.min(x0,x1)),Math.min(Math.floor(WIDTH-6-Math.max(x0,x1)),Math.round(transform.x)));
+  }
   c.save(); c.translate(Math.round(transform.x),Math.round(transform.y));
-  c.rotate(transform.angle); c.scale(f.facing * atlas.facing * atlas.scale, atlas.scale); c.imageSmoothingEnabled = false;
+  c.rotate(transform.angle); c.scale(facing * atlas.facing * atlas.scale, atlas.scale); c.imageSmoothingEnabled = false;
   if (ghost) c.globalAlpha *= .55;
   if (f.flash > 0 && f.flash % 4 < 2) c.filter = 'brightness(1.8)';
   c.drawImage(source.image, -source.anchor[0]-transform.pivotX, -source.anchor[1]-transform.pivotY); c.restore(); return true;

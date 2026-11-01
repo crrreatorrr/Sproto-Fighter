@@ -4,6 +4,7 @@ import { originalPortraits } from './originalPortraits';
 import './style.css';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
+import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
 import { STAGES, setStage } from './stage';
 import { createStoryMode } from './storyMode';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
@@ -29,6 +30,7 @@ let state = createState(), chosen: FighterId = 'rivet', mode: Mode = 'cpu', oppo
     action: Action;
     device: 'key' | 'pad';
 } | null = null;
+let presentation = createRoundPresentation();
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousStart = false;
 const held = new Set<string>();
 let queued = 0;
@@ -77,7 +79,7 @@ function bind(value: string | number) {
 function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; held.clear(); queued = 0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; }
 function start() {
     if (story.isOpen || ($('start') as HTMLButtonElement).disabled) return;
-    if (state.winner !== null)
+    if (presentation.phase === 'result')
         restart();
     started = true;
     running = true;
@@ -89,7 +91,7 @@ function start() {
     canvas.focus();
 }
 function pause() {
-    if (!started || state.winner !== null)
+    if (!started || presentation.phase === 'result')
         return;
     if (running)
         showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume →');
@@ -98,6 +100,7 @@ function pause() {
 }
 function restart() {
     state = createState(chosen, mode, opponent);
+    presentation = createRoundPresentation();
     frames.length = 0;
     qaEvents.length = 0;
     accumulator = 0;
@@ -110,7 +113,7 @@ let resumeAfterJourney = false, freePlayMode: Mode | null = null;
 const story = createStoryMode({
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
-    resume: () => { if (resumeAfterJourney && started && state.winner === null) start(); },
+    resume: () => { if (resumeAfterJourney && started && presentation.phase !== 'result') start(); },
     launch: (stage, isStory) => {
         setStage(stage);
         const location = STAGES.find(s => s.id === stage)!;
@@ -221,7 +224,7 @@ function pollPad(): number {
     }
     const menu = !!buttons[9];
     if (menu && !previousStart && !dialog.open && !story.isOpen) {
-        if (!started || state.winner !== null)
+        if (!started || presentation.phase === 'result')
             start();
         else
             pause();
@@ -245,6 +248,7 @@ function pollPad(): number {
 // Optional, visible read-only diagnostics for manual QA; never changes combat state.
 const qaPanel = new URLSearchParams(location.search).has('qa') ? document.createElement('pre') : null;
 let qaFrozen=false,qaSingleStep=false;
+let qaStopAtOutro=()=>{};
 const qaEvents:string[]=[];
 if(qaPanel){
     const bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;padding:12px';
@@ -252,12 +256,44 @@ if(qaPanel){
     freeze.textContent='Freeze QA frame';single.textContent='Advance QA frame';
     freeze.onclick=()=>{qaFrozen=!qaFrozen;freeze.textContent=qaFrozen?'Resume QA playback':'Freeze QA frame';accumulator=0;};
     single.onclick=()=>{qaFrozen=true;qaSingleStep=true;freeze.textContent='Resume QA playback';};
-    bar.append(freeze,single);document.querySelector('#app')!.append(bar);
+    const koLabel=document.createElement('label'),koStop=document.createElement('input');koStop.type='checkbox';
+    koLabel.append(koStop,document.createTextNode(' Freeze on KO presentation'));
+    qaStopAtOutro=()=>{if(koStop.checked){qaFrozen=true;accumulator=0;freeze.textContent='Resume QA playback';}};
+    bar.append(freeze,single,koLabel);document.querySelector('#app')!.append(bar);
     qaPanel.id='qa-status';qaPanel.style.cssText='white-space:pre-wrap;color:#dceafa;background:#13202d;padding:16px;font:12px monospace';document.querySelector('#app')!.append(qaPanel);}
 function qaRecord(before:string){
     if(!qaPanel)return;
     const f=state.fighters[0],after=[f.move?.id,f.combo,f.pips,f.hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|');
     if(before!==after){qaEvents.push(`f${state.frame}: ${f.move?.id??'neutral'} ${f.move?.aim??''} hits=${f.combo} pips=${f.pips} hp=${f.hp}/${state.fighters[1].hp} x=${Math.round(f.x)} y=${Math.round(f.y)} input=${f.input} throw=${state.throwState?.direction??'-'}/${state.throwState?.phase??'-'} reaction2=${state.fighters[1].reaction?.kind??'-'}/${state.fighters[1].reaction?.phase??'-'}`);if(qaEvents.length>48)qaEvents.shift();}
+}
+// A presentation frame never enters the deterministic combat/replay stream.
+function advanceRoundFrame(input: number) {
+    if (presentation.phase === 'intro') {
+        advanceRoundPresentation(presentation, input !== 0);
+        if ((presentation as RoundPresentation).phase !== 'fight') return;
+        // A skip preserves this exact input for the first combat step.
+    }
+    if (presentation.phase === 'outro') {
+        advanceRoundPresentation(presentation);
+        if ((presentation as RoundPresentation).phase !== 'result') return;
+        if (story.onRoundEnd(state.winner!)) return;
+        const won = state.winner === 0;
+        showOverlay(state.winner === 2 ? (state.clock <= 0 ? 'Time up — draw.' : 'Double knockout.') : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again →', 'ROUND COMPLETE');
+        return;
+    }
+    if (presentation.phase !== 'fight') return;
+    const pair: [number, number] = [input, cpuInput(state)];
+    frames.push(pair);
+    const qaBefore = qaPanel ? [state.fighters[0].move?.id,state.fighters[0].combo,state.fighters[0].pips,state.fighters[0].hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|') : '';
+    step(state, pair);
+    qaRecord(qaBefore);
+    if (state.winner !== null) {
+        const losers = state.fighters.filter((_, i) => state.winner === 2 || i !== state.winner);
+        const fromFloor = losers.every(f => f.reaction?.kind === 'knockdown' && f.reaction.phase === 'down');
+        beginRoundOutro(presentation, state.winner as 0 | 1 | 2, fromFloor);
+        qaStopAtOutro();
+        held.clear(); queued = 0;
+    }
 }
 function tick(now: number) {
     const elapsed = Math.min((now - lastTime) / 1000, .1);
@@ -272,25 +308,13 @@ function tick(now: number) {
             for (const a of Object.keys(A) as Action[])
                 if (held.has(keys[a]))
                     input |= A[a];
-            const pair: [
-                number,
-                number
-            ] = [input, cpuInput(state)];
-            frames.push(pair);
-            const qaBefore=qaPanel?[state.fighters[0].move?.id,state.fighters[0].combo,state.fighters[0].pips,state.fighters[0].hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|'):'';
-            step(state, pair);
-            qaRecord(qaBefore);
             accumulator -= 1 / 60;
-            if (state.winner !== null) {
-                if (story.onRoundEnd(state.winner)) break;
-                const won = state.winner === 0;
-                showOverlay(state.winner === 2 ? (state.clock <= 0 ? 'Time up — draw.' : 'Double knockout.') : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again →', 'ROUND COMPLETE');
-                break;
-            }
+            advanceRoundFrame(input);
+            if (!running || presentation.phase === 'result') break;
         }
     }
-    render(ctx, state);
-    if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
+    render(ctx, state, presentation);
+    if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);
 }
@@ -300,7 +324,7 @@ $('start').textContent='Loading fighter sprites…';
 loadPoseAtlases().then(()=>{const installed=getPoseAtlasLoadStatus().ids;return PLAYABLE_FIGHTERS.some(id=>!installed.includes(id))?loadHiggsfieldRigs():undefined;}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Enter the arena →';}).catch(error=>{$('overlay-copy').textContent='Fighter art could not load. Restart the local server and reload.';console.error(error);});
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
-Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), storySnapshot: story.snapshot, replay: () => ({ version: 1, fighter: chosen, mode, opponent, frames: frames.map(f => [...f]) }), verifyReplay: () => {
+Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, replay: () => ({ version: 1, fighter: chosen, mode, opponent, frames: frames.map(f => [...f]) }), verifyReplay: () => {
             const replay = createState(chosen, mode, opponent);
             for (const frame of frames)
                 step(replay, frame);

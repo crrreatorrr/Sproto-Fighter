@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": "whole-pose-throw-reaction-6",
+  "revision": "whole-body-events-pilot-1",
   "fighters": {
     "rivet": {
       "frames": [
@@ -530,6 +530,498 @@
         "torso": [
           140,
           164
+        ]
+      },
+      "clips": {
+        "intro": [
+          {
+            "url": "/fighters/events/rivet/00.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              82,
+              83,
+              153,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/01.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              83,
+              82,
+              157,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/02.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              71,
+              83,
+              165,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/03.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              77,
+              84,
+              164,
+              210
+            ]
+          }
+        ],
+        "special": [
+          {
+            "url": "/fighters/events/rivet/04.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              86,
+              103,
+              163,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/05.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              75,
+              80,
+              167,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/06.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              68,
+              85,
+              188,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/07.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              76,
+              84,
+              164,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/08.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              76,
+              83,
+              187,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/09.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              77,
+              79,
+              166,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/10.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              57,
+              83,
+              187,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/11.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              77,
+              82,
+              165,
+              210
+            ]
+          }
+        ],
+        "cast": [
+          {
+            "url": "/fighters/events/rivet/12.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              75,
+              81,
+              163,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/13.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              76,
+              81,
+              164,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/14.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              75,
+              81,
+              164,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/15.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              76,
+              81,
+              164,
+              210
+            ]
+          }
+        ],
+        "recoil": [
+          {
+            "url": "/fighters/events/rivet/16.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              67,
+              74,
+              173,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/17.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              62,
+              73,
+              173,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/18.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              82,
+              83,
+              165,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/19.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              75,
+              80,
+              164,
+              210
+            ]
+          }
+        ],
+        "defeat": [
+          {
+            "url": "/fighters/events/rivet/20.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              80,
+              76,
+              160,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/21.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              77,
+              81,
+              172,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/22.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              61,
+              91,
+              175,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/23.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              37,
+              132,
+              204,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/24.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              38,
+              133,
+              204,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/24.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              38,
+              133,
+              204,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              37,
+              133,
+              203,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              37,
+              133,
+              203,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              37,
+              133,
+              203,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              37,
+              133,
+              203,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              37,
+              133,
+              203,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/rivet/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              37,
+              133,
+              203,
+              210
+            ]
+          }
         ]
       }
     },
@@ -1125,6 +1617,498 @@
         "torso": [
           147,
           163
+        ]
+      },
+      "clips": {
+        "intro": [
+          {
+            "url": "/fighters/events/vela/00.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              60,
+              83,
+              166,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/01.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              60,
+              83,
+              169,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/02.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              36,
+              83,
+              187,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/03.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              65,
+              83,
+              167,
+              210
+            ]
+          }
+        ],
+        "special": [
+          {
+            "url": "/fighters/events/vela/04.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              67,
+              104,
+              162,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/05.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              64,
+              83,
+              167,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/06.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              57,
+              90,
+              169,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/07.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              57,
+              85,
+              171,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/08.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              48,
+              91,
+              174,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/09.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              64,
+              94,
+              165,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/10.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              53,
+              92,
+              169,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/11.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              65,
+              88,
+              164,
+              210
+            ]
+          }
+        ],
+        "cast": [
+          {
+            "url": "/fighters/events/vela/12.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              67,
+              89,
+              166,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/13.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              66,
+              89,
+              165,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/14.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              47,
+              90,
+              187,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/15.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              65,
+              89,
+              164,
+              210
+            ]
+          }
+        ],
+        "recoil": [
+          {
+            "url": "/fighters/events/vela/16.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              61,
+              85,
+              170,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/17.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              57,
+              90,
+              173,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/18.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              62,
+              86,
+              168,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/19.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              65,
+              88,
+              164,
+              210
+            ]
+          }
+        ],
+        "defeat": [
+          {
+            "url": "/fighters/events/vela/20.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              69,
+              87,
+              164,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/21.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              69,
+              89,
+              164,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/22.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              35,
+              105,
+              195,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/23.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              36,
+              122,
+              195,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/24.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              36,
+              121,
+              195,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/24.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              36,
+              121,
+              195,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              35,
+              122,
+              195,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              35,
+              122,
+              195,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              35,
+              122,
+              195,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              35,
+              122,
+              195,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              35,
+              122,
+              195,
+              210
+            ]
+          },
+          {
+            "url": "/fighters/events/vela/27.png",
+            "width": 256,
+            "height": 256,
+            "anchor": [
+              112,
+              210
+            ],
+            "bounds": [
+              35,
+              122,
+              195,
+              210
+            ]
+          }
         ]
       }
     },

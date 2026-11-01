@@ -682,7 +682,10 @@ export function step(s: CombatState, inputs: [
             const rawStyle=COMBAT_STYLES[f.id].projectile,spit=isHorizontalSpit(f.id);
             const style=spit?{...rawStyle,gravity:0,wave:0,bounces:0,ground:false}:rawStyle;
             const dx=attack.shotX??f.facing,dy=spit?0:attack.shotY??0,length=Math.hypot(dx,dy)||1,speed=style.speed;
-            s.projectiles.push({...style,owner:i,x:f.x+f.facing*34,y:style.ground&&dy===0?FLOOR-22:f.y-95,vx:dx/length*speed,vy:dy/length*speed-(style.bounces&&dy===0&&!style.ground?3:0),life:100,damage:m.damage,age:0});
+            // Reviewed mouth positions in the complete-body cast release cels.
+            // Keep this immutable combat data; rendering never moves a hitbox.
+            const origin=f.id==='rivet'?{forward:44,height:109}:f.id==='vela'?{forward:59,height:103}:{forward:34,height:95};
+            s.projectiles.push({...style,owner:i,x:f.x+f.facing*origin.forward,y:style.ground&&dy===0?FLOOR-22:f.y-origin.height,vx:dx/length*speed,vy:dy/length*speed-(style.bounces&&dy===0&&!style.ground?3:0),life:100,damage:m.damage,age:0});
         }
         let active = attack.t >= m.startup && attack.t < m.startup + m.active && !attack.hit;
         if (attack.id === 'special') {

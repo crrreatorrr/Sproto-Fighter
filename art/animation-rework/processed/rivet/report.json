@@ -1,0 +1,1194 @@
+{
+  "source": "art/animation-rework/raw/rivet-events-nano.png",
+  "uniformScale": 0.8410596026490066,
+  "config": {
+    "maps": {
+      "defeat": [
+        20,
+        21,
+        22,
+        23,
+        24,
+        24,
+        27,
+        27,
+        27,
+        27,
+        27,
+        27
+      ]
+    },
+    "rejected": {
+      "25": "Marked head shrink",
+      "26": "Torso rises too far after collapse",
+      "28-31": "Opposite floor orientation and source-image edge contact"
+    },
+    "note": "Repeated final floor drawings are intentional holds, not newly generated in-between frames. Browser pilot still required."
+  },
+  "frames": [
+    {
+      "sourceCell": 0,
+      "sourceBounds": [
+        62,
+        13,
+        147,
+        164
+      ],
+      "sourceAnchor": [
+        97.08267716535433,
+        164
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        82,
+        83,
+        153,
+        210
+      ]
+    },
+    {
+      "sourceCell": 1,
+      "sourceBounds": [
+        275,
+        12,
+        363,
+        164
+      ],
+      "sourceAnchor": [
+        309.0826771653543,
+        164
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        83,
+        82,
+        157,
+        210
+      ]
+    },
+    {
+      "sourceCell": 2,
+      "sourceBounds": [
+        472,
+        13,
+        584,
+        164
+      ],
+      "sourceAnchor": [
+        521.0826771653543,
+        164
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        71,
+        83,
+        165,
+        210
+      ]
+    },
+    {
+      "sourceCell": 3,
+      "sourceBounds": [
+        691,
+        14,
+        794,
+        164
+      ],
+      "sourceAnchor": [
+        733.0826771653543,
+        164
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        77,
+        84,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 4,
+      "sourceBounds": [
+        66,
+        204,
+        158,
+        331
+      ],
+      "sourceAnchor": [
+        97.08267716535433,
+        331
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        86,
+        103,
+        163,
+        210
+      ]
+    },
+    {
+      "sourceCell": 5,
+      "sourceBounds": [
+        265,
+        176,
+        374,
+        331
+      ],
+      "sourceAnchor": [
+        309.0826771653543,
+        331
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        75,
+        80,
+        167,
+        210
+      ]
+    },
+    {
+      "sourceCell": 6,
+      "sourceBounds": [
+        469,
+        181,
+        612,
+        330
+      ],
+      "sourceAnchor": [
+        521.0826771653543,
+        330
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        68,
+        85,
+        188,
+        210
+      ]
+    },
+    {
+      "sourceCell": 7,
+      "sourceBounds": [
+        690,
+        180,
+        795,
+        330
+      ],
+      "sourceAnchor": [
+        733.0826771653543,
+        330
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        76,
+        84,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 8,
+      "sourceBounds": [
+        54,
+        347,
+        186,
+        498
+      ],
+      "sourceAnchor": [
+        97.08267716535433,
+        498
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        76,
+        83,
+        187,
+        210
+      ]
+    },
+    {
+      "sourceCell": 9,
+      "sourceBounds": [
+        267,
+        343,
+        373,
+        499
+      ],
+      "sourceAnchor": [
+        309.0826771653543,
+        499
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        77,
+        79,
+        166,
+        210
+      ]
+    },
+    {
+      "sourceCell": 10,
+      "sourceBounds": [
+        456,
+        347,
+        611,
+        498
+      ],
+      "sourceAnchor": [
+        521.0826771653543,
+        498
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        57,
+        83,
+        187,
+        210
+      ]
+    },
+    {
+      "sourceCell": 11,
+      "sourceBounds": [
+        691,
+        346,
+        796,
+        498
+      ],
+      "sourceAnchor": [
+        733.0826771653543,
+        498
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        77,
+        82,
+        165,
+        210
+      ]
+    },
+    {
+      "sourceCell": 12,
+      "sourceBounds": [
+        53,
+        514,
+        158,
+        667
+      ],
+      "sourceAnchor": [
+        97.08267716535433,
+        667
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        75,
+        81,
+        163,
+        210
+      ]
+    },
+    {
+      "sourceCell": 13,
+      "sourceBounds": [
+        266,
+        514,
+        371,
+        667
+      ],
+      "sourceAnchor": [
+        309.0826771653543,
+        667
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        76,
+        81,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 14,
+      "sourceBounds": [
+        477,
+        514,
+        583,
+        667
+      ],
+      "sourceAnchor": [
+        521.0826771653543,
+        667
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        75,
+        81,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 15,
+      "sourceBounds": [
+        690,
+        514,
+        795,
+        667
+      ],
+      "sourceAnchor": [
+        733.0826771653543,
+        667
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        76,
+        81,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 16,
+      "sourceBounds": [
+        43,
+        672,
+        169,
+        834
+      ],
+      "sourceAnchor": [
+        97.08267716535433,
+        834
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        67,
+        74,
+        173,
+        210
+      ]
+    },
+    {
+      "sourceCell": 17,
+      "sourceBounds": [
+        250,
+        671,
+        382,
+        834
+      ],
+      "sourceAnchor": [
+        309.0826771653543,
+        834
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        62,
+        73,
+        173,
+        210
+      ]
+    },
+    {
+      "sourceCell": 18,
+      "sourceBounds": [
+        486,
+        681,
+        585,
+        832
+      ],
+      "sourceAnchor": [
+        521.0826771653543,
+        832
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        82,
+        83,
+        165,
+        210
+      ]
+    },
+    {
+      "sourceCell": 19,
+      "sourceBounds": [
+        689,
+        681,
+        795,
+        835
+      ],
+      "sourceAnchor": [
+        733.0826771653543,
+        835
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        75,
+        80,
+        164,
+        210
+      ]
+    },
+    {
+      "sourceCell": 20,
+      "sourceBounds": [
+        59,
+        842,
+        154,
+        1001
+      ],
+      "sourceAnchor": [
+        97.08267716535433,
+        1001
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        80,
+        76,
+        160,
+        210
+      ]
+    },
+    {
+      "sourceCell": 21,
+      "sourceBounds": [
+        268,
+        848,
+        381,
+        1001
+      ],
+      "sourceAnchor": [
+        309.0826771653543,
+        1001
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        77,
+        81,
+        172,
+        210
+      ]
+    },
+    {
+      "sourceCell": 22,
+      "sourceBounds": [
+        460,
+        857,
+        595,
+        999
+      ],
+      "sourceAnchor": [
+        521.0826771653543,
+        999
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        61,
+        91,
+        175,
+        210
+      ]
+    },
+    {
+      "sourceCell": 23,
+      "sourceBounds": [
+        644,
+        909,
+        842,
+        1002
+      ],
+      "sourceAnchor": [
+        733.0826771653543,
+        1002
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        37,
+        132,
+        204,
+        210
+      ]
+    },
+    {
+      "sourceCell": 24,
+      "sourceBounds": [
+        9,
+        1040,
+        206,
+        1131
+      ],
+      "sourceAnchor": [
+        97.08267716535433,
+        1131
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        38,
+        133,
+        204,
+        210
+      ]
+    },
+    {
+      "sourceCell": 25,
+      "sourceBounds": [
+        221,
+        1061,
+        398,
+        1131
+      ],
+      "sourceAnchor": [
+        309.0826771653543,
+        1131
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        38,
+        151,
+        187,
+        210
+      ]
+    },
+    {
+      "sourceCell": 26,
+      "sourceBounds": [
+        433,
+        1021,
+        610,
+        1131
+      ],
+      "sourceAnchor": [
+        521.0826771653543,
+        1131
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        38,
+        117,
+        187,
+        210
+      ]
+    },
+    {
+      "sourceCell": 27,
+      "sourceBounds": [
+        644,
+        1039,
+        842,
+        1131
+      ],
+      "sourceAnchor": [
+        733.0826771653543,
+        1131
+      ],
+      "flipped": false,
+      "touchesImageEdge": false,
+      "canonicalBounds": [
+        37,
+        133,
+        203,
+        210
+      ]
+    },
+    {
+      "sourceCell": 28,
+      "sourceBounds": [
+        7,
+        1172,
+        205,
+        1264
+      ],
+      "sourceAnchor": [
+        97.08267716535433,
+        1264
+      ],
+      "flipped": false,
+      "touchesImageEdge": true,
+      "canonicalBounds": [
+        36,
+        133,
+        203,
+        210
+      ]
+    },
+    {
+      "sourceCell": 29,
+      "sourceBounds": [
+        218,
+        1172,
+        417,
+        1264
+      ],
+      "sourceAnchor": [
+        309.0826771653543,
+        1264
+      ],
+      "flipped": false,
+      "touchesImageEdge": true,
+      "canonicalBounds": [
+        35,
+        133,
+        202,
+        210
+      ]
+    },
+    {
+      "sourceCell": 30,
+      "sourceBounds": [
+        430,
+        1172,
+        630,
+        1264
+      ],
+      "sourceAnchor": [
+        521.0826771653543,
+        1264
+      ],
+      "flipped": false,
+      "touchesImageEdge": true,
+      "canonicalBounds": [
+        35,
+        133,
+        203,
+        210
+      ]
+    },
+    {
+      "sourceCell": 31,
+      "sourceBounds": [
+        643,
+        1172,
+        841,
+        1264
+      ],
+      "sourceAnchor": [
+        733.0826771653543,
+        1264
+      ],
+      "flipped": false,
+      "touchesImageEdge": true,
+      "canonicalBounds": [
+        36,
+        133,
+        203,
+        210
+      ]
+    }
+  ],
+  "clips": {
+    "intro": [
+      {
+        "url": "/fighters/events/rivet/00.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          82,
+          83,
+          153,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/01.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          83,
+          82,
+          157,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/02.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          71,
+          83,
+          165,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/03.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          77,
+          84,
+          164,
+          210
+        ]
+      }
+    ],
+    "special": [
+      {
+        "url": "/fighters/events/rivet/04.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          86,
+          103,
+          163,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/05.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          75,
+          80,
+          167,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/06.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          68,
+          85,
+          188,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/07.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          76,
+          84,
+          164,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/08.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          76,
+          83,
+          187,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/09.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          77,
+          79,
+          166,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/10.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          57,
+          83,
+          187,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/11.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          77,
+          82,
+          165,
+          210
+        ]
+      }
+    ],
+    "cast": [
+      {
+        "url": "/fighters/events/rivet/12.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          75,
+          81,
+          163,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/13.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          76,
+          81,
+          164,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/14.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          75,
+          81,
+          164,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/15.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          76,
+          81,
+          164,
+          210
+        ]
+      }
+    ],
+    "recoil": [
+      {
+        "url": "/fighters/events/rivet/16.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          67,
+          74,
+          173,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/17.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          62,
+          73,
+          173,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/18.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          82,
+          83,
+          165,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/19.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          75,
+          80,
+          164,
+          210
+        ]
+      }
+    ],
+    "defeat": [
+      {
+        "url": "/fighters/events/rivet/20.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          80,
+          76,
+          160,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/21.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          77,
+          81,
+          172,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/22.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          61,
+          91,
+          175,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/23.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          37,
+          132,
+          204,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/24.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          38,
+          133,
+          204,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/24.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          38,
+          133,
+          204,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          37,
+          133,
+          203,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          37,
+          133,
+          203,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          37,
+          133,
+          203,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          37,
+          133,
+          203,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          37,
+          133,
+          203,
+          210
+        ]
+      },
+      {
+        "url": "/fighters/events/rivet/27.png",
+        "width": 256,
+        "height": 256,
+        "anchor": [
+          112,
+          210
+        ],
+        "bounds": [
+          37,
+          133,
+          203,
+          210
+        ]
+      }
+    ]
+  }
+}

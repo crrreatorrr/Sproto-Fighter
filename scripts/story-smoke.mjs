@@ -8,6 +8,7 @@ const compile=source=>ts.transpileModule(source,{compilerOptions:{module:ts.Modu
 const asModule=source=>'data:text/javascript;base64,'+Buffer.from(source).toString('base64');
 const stageURL=asModule(compile(read('src/stage.ts')));
 const {STAGES}=await import(stageURL);
+const {createRoundPresentation,beginRoundOutro}=await import(asModule(compile(read('src/animationEvents.ts'))));
 const {createStoryMode}=await import(asModule(compile(read('src/storyMode.ts')).replace("'./stage'",JSON.stringify(stageURL))));
 class Element{
  children=[];open=false;disabled=false;dataset={};textContent='';value='';events={};style={setProperty(){}};
@@ -43,10 +44,31 @@ check('explicit leaveStory stops story results; snapshots do not expose mutable 
 function integration(wasRunning,initialMode='guard'){
  const d=dom(),main=read('src/main.ts');const start=main.indexOf('let resumeAfterJourney ='),end=main.indexOf("$('start').onclick = start;",start);assert.ok(start>=0&&end>start);
  const code=compile(main.slice(start,end));
- const fixture=new Function('createStoryMode','STAGES','$','initialMode','wasRunning',`let mode=initialMode,running=wasRunning,started=true,state={winner:null},starts=0,restarts=0;const setStage=()=>{};const showOverlay=()=>{running=false;};const start=()=>{starts++;running=true;};const restart=()=>{restarts++;};${code};return {story,inspect:()=>({mode,running,starts,restarts}),finish:()=>state.winner=0};`)(createStoryMode,STAGES,d.$,initialMode,wasRunning);
+ const fixture=new Function('createStoryMode','STAGES','$','initialMode','wasRunning','createRoundPresentation','beginRoundOutro',`
+ let mode=initialMode,running=wasRunning,started=true,state={winner:null},starts=0,restarts=0;
+ let presentation=createRoundPresentation();presentation.phase='fight';
+ const setStage=()=>{};const showOverlay=()=>{running=false;};
+ const start=()=>{starts++;running=true;};
+ const restart=()=>{restarts++;state={winner:null};presentation=createRoundPresentation();};
+ ${code};return {story,inspect:()=>({mode,running,starts,restarts,winner:state.winner,presentation:{...presentation}}),
+ finish:()=>{state.winner=0;presentation.phase='result';},
+ outro:()=>{state.winner=0;beginRoundOutro(presentation,0,false);presentation.frame=30;},
+ intro:()=>{presentation=createRoundPresentation();presentation.frame=17;}};
+ `)(createStoryMode,STAGES,d.$,initialMode,wasRunning,createRoundPresentation,beginRoundOutro);
  return {...d,...fixture};
 }
 check('actual main hooks preserve paused/running status after nested destination browsing',()=>{for(const running of [false,true]){const t=integration(running);t.$('story-worlds').onclick();t.pick(0);t.$('journey-back').onclick();t.$('journey-back').onclick();assert.equal(t.inspect().running,running);assert.equal(t.inspect().starts,running?1:0);}});
 check('actual main hooks never resume a completed round from menu Back',()=>{const t=integration(true);t.finish();t.$('story-worlds').onclick();t.$('journey-back').onclick();assert.equal(t.inspect().starts,0);});
+check('actual main hooks resume an unfinished outro without restarting presentation',()=>{for(const running of [false,true]){
+ const t=integration(running);t.outro();const before=t.inspect().presentation;
+ t.$('story-worlds').onclick();t.pick(0);t.$('journey-back').onclick();t.$('journey-back').onclick();
+ assert.equal(t.inspect().running,running);assert.equal(t.inspect().starts,running?1:0);assert.equal(t.inspect().restarts,0);
+ assert.equal(t.inspect().winner,0);assert.deepEqual(t.inspect().presentation,before);assert.equal(t.inspect().presentation.phase,'outro');
+}});
+check('actual main hooks preserve intro progress while browsing and reset it on a new stage',()=>{
+ const t=integration(true);t.intro();t.$('story-worlds').onclick();t.$('journey-back').onclick();
+ assert.equal(t.inspect().presentation.phase,'intro');assert.equal(t.inspect().presentation.frame,17);
+ t.$('free-levels').onclick();t.pick(4);assert.equal(t.inspect().presentation.phase,'intro');assert.equal(t.inspect().presentation.frame,0);assert.equal(t.inspect().restarts,1);
+});
 check('actual main hooks force CPU for story and restore each prior free-play behavior',()=>{for(const mode of ['cpu','guard','dummy']){const t=integration(false,mode);t.$('story-worlds').onclick();t.pick(0);t.action(0);assert.equal(t.inspect().mode,'cpu');t.story.onRoundEnd(0);t.action(0);assert.equal(t.inspect().mode,'cpu');t.$('free-levels').onclick();t.pick(4);assert.equal(t.inspect().mode,mode);assert.equal(t.$('mode').value,mode);assert.equal(t.inspect().restarts,3);}});
 console.log(`${count} story/navigation checks passed (controller + actual main hooks; DOM stub, no browser claim).`);
