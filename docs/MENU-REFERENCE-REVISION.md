@@ -1,6 +1,6 @@
 # Reference-led selection revision — November 1, 2026
 
-The selection layout is implemented and browser-checked. The proposed additional Higgsfield decorative artwork is **awaiting separate approval**; no generation was submitted and no credits were spent during this revision. The earlier fighter-upload HTTP 403 remains unresolved.
+The selection layout and the separately approved Higgsfield decorative artwork are **installed and browser-checked**. Exactly one image was generated for the authorized **2 credits**. The earlier fighter-upload HTTP 403 remains unresolved.
 
 ## Composition and implementation
 
@@ -49,10 +49,12 @@ Coverage: 7 selection/main integration groups; 2 stage-preview groups covering a
 
 This layout pass did not repeat every combat move, every fighter's motion audit, all five stages in live matches, a full manual campaign or controller hardware testing. A W-jump input was sent during launch checks, but a clean airborne frame was not captured in this revision, so no new visual jump-verification claim is made. Existing gameplay and animation limitations remain in [CLAUDE-HANDOFF.md](CLAUDE-HANDOFF.md).
 
-## Proposed Higgsfield artwork and access status
+## Approved Higgsfield artwork and access status
 
-Read-only model lookup and exact cost preflight returned **2 credits** for one **Nano Banana 2.1**, **2K**, **16:9**, high-thinking image. The proposal is an empty pixel-art ornamental menu background in red, blue, yellow and charcoal, with no baked-in controls, portraits, text or logos. Working buttons and statistics remain real DOM elements. There is no revision allowance in this proposal.
+Read-only model lookup and exact cost preflight returned **2 credits** for one **Nano Banana 2.1**, **2K**, **16:9**, high-thinking image. The user separately approved that amount. Job `558ee637-d69a-480a-a5e5-329b41dbd6e1` completed and its actual 2752×1536 RGB image was inspected. The ornamental background uses red, blue, yellow and charcoal, with no baked-in controls, portraits, text or logos. Working buttons and statistics remain real DOM elements. No additional image or revision was submitted.
 
-The prompt, returned quote and status are saved in `art/menu-reference-revision/proposal.json`. No reference image or media URL was sent; the local reference informed the authored layout and descriptive prompt only. Approval was requested for these 2 menu-art credits separately from the 48-credit fighter-animation authorization. **Pending approval is not a completed generation.**
+The prompt, returned quote, submission and completion are saved in `art/menu-reference-revision/`. The unmodified generated original and installed `public/menu/higgsfield/arcade-frame.png` have identical SHA-256 hashes. No reference image or media URL was sent; the local reference informed the authored layout and descriptive prompt only. These 2 credits belong to a separate approved menu-art budget. Balance changed from 49.5 to 47.5, matching the quote.
 
-No fighter upload was retried. The earlier 19 failed uploads were already separate sequential PUT requests, each returning HTTP 403, so the user's one-by-one suggestion does not change that operation. Their retained responses provide no specific provider remediation. Upload access still needs Higgsfield resolution; no alternate transfer route was used. The previous cost ledger remains 7 fighter-pilot credits plus 6 stage credits, with the stage-budget scope error disclosed in the prior report.
+After installation, actual browser screenshots were checked at desktop size and 390×844, including the scrolled mobile stage/launch area. A dark backing and brighter control-help text improve readability over the border. Last Light Bar was selected and launched; its actual arena, CPU projectile and player damage were observed before returning to selection. The final menu was restored to the yacht stage and left open. The viewport override was reset. Evidence: `higgsfield-desktop.png`, `higgsfield-mobile.png`, `higgsfield-mobile-lower.png`, and `higgsfield-match.png` under `docs/evidence/menu-reference-revision/`. Build, seven selection/controller regressions and diff whitespace checks passed after the integration. The earlier all-21 selection checks remain applicable; fighter code and portraits were not changed by the art layer.
+
+No fighter upload was retried. The earlier 19 failed uploads were already separate sequential PUT requests, each returning HTTP 403, so the user's one-by-one suggestion does not change that operation. Their retained responses provide no specific provider remediation. Upload access still needs Higgsfield resolution; no alternate transfer route was used. Total observed account spend is now 15: 7 fighter-pilot credits, 6 earlier stage credits, and these 2 separately approved menu credits. The earlier stage-budget scope error remains disclosed in the prior report.

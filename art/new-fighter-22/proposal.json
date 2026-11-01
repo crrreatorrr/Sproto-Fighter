@@ -1,0 +1,123 @@
+{
+  "status": "prepared; not playable; no fighter generation submitted",
+  "reference": {
+    "library_file_id": "libfile_93cd6daf56a48191a895f354e1f1bdda",
+    "version": 0,
+    "local_path": "art/new-fighter-22/reference/original.png",
+    "sha256": "a6ef88b6518903ce5a43be02f09408eaadd6d01a3e98a5937f7515582ab3a05e",
+    "width": 1000,
+    "height": 1000,
+    "pixelsInspected": true
+  },
+  "identity": {
+    "subject": "Both figures, two separate visual entities acting as one selectable fighter",
+    "displayName": null,
+    "clarificationRequested": false,
+    "observedLeft": "Slim bright-red figure with swept spiked head, large yellow oval eyes, black pupils, rounded nose, smiling mouth, long narrow neck, bent arm and a small yellow curved hand-held shape. Lower feet are cropped.",
+    "observedRight": "Blue spiked figure with a small yellow top hat, yellow eyes and muzzle area, smiling mouth, long neck and red circular shapes at the front; lower red feet are cropped.",
+    "anatomyRequirement": "Each body has its own legs attached low on the lower body. Do not merge torsos, necks, hips, limbs or feet."
+  },
+  "model": "nano_banana_2_1",
+  "baseCredits": 16,
+  "optionalCorrection": {
+    "maximumSheets": 2,
+    "resolution": "4k",
+    "aspect_ratio": "9:16",
+    "creditsPerSheet": 3,
+    "totalCredits": 6,
+    "limit": "At most one correction sheet per entity, only if approved and needed."
+  },
+  "requestedCap": 22,
+  "approvedCredits": 0,
+  "spentCredits": 0,
+  "quote4k": {
+    "cost": {
+      "credits": 3,
+      "credits_exact": 3
+    }
+  },
+  "quote2k": {
+    "cost": {
+      "credits": 2,
+      "credits_exact": 2
+    }
+  },
+  "readiness": {
+    "characterChoice": "confirmed duo, separate bodies",
+    "name": "pending",
+    "budget": "revised 22-credit cap approval requested; pending",
+    "referenceUpload": "not attempted; prior Higgsfield storage denial unresolved",
+    "generatedAssets": "none",
+    "runtimeIntegration": "pending accepted art and identity",
+    "individualVisualQA": "not run; no new animation assets"
+  },
+  "accountInspection": {
+    "authenticatedReadAccess": true,
+    "sameAccountAsPriorAssets": true,
+    "availableWorkspaceType": "private",
+    "role": "owner",
+    "plan": "plus",
+    "balanceAfterApprovedMenu": 47.5,
+    "reconnectPrompt": false,
+    "storageRepairEvidence": false
+  },
+  "menuBudget": "Separate. Exactly 2 credits approved and spent on job 558ee637-d69a-480a-a5e5-329b41dbd6e1. Does not authorize this fighter.",
+  "baseRequestsPerEntity": [
+    {
+      "purpose": "32 complete-body core combat poses in runtime slot order",
+      "resolution": "4k",
+      "thinking_level": "high",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "grid": {
+        "columns": 4,
+        "rows": 8
+      },
+      "quotedCredits": 3
+    },
+    {
+      "purpose": "8 complete-body guarded movement drawings with fixed pelvis continuity and alternating foot plants",
+      "resolution": "2k",
+      "thinking_level": "high",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "grid": {
+        "columns": 4,
+        "rows": 2
+      },
+      "quotedCredits": 2
+    },
+    {
+      "purpose": "32 event drawings: intro 4, special 8, cast 4, recoil 4, defeat 12",
+      "resolution": "4k",
+      "thinking_level": "high",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "grid": {
+        "columns": 4,
+        "rows": 8
+      },
+      "quotedCredits": 3
+    }
+  ],
+  "entities": [
+    "red-left",
+    "blue-yellow-hat-right"
+  ],
+  "supersedes": "Earlier 8-credit base / 11-credit cap proposal covered one animation set and is withdrawn after the two-separate-entities clarification.",
+  "runtimeDesign": {
+    "selectableSlots": 1,
+    "healthPools": 1,
+    "inputOwners": 1,
+    "visualBodies": 2,
+    "independentAnimationSets": 2,
+    "combatState": "one deterministic fighter root",
+    "visualOffsets": "bounded duo spacing and phase offsets; authored attack leader owns the visible contact",
+    "throws": "one attack transaction and one damage release; inspect both bodies and caught opponent together",
+    "hitboxPolicy": "One health/meter state and one damage transaction. Inspect a shared collision envelope or union of the two deterministic body regions against actual art; individual visual bodies must not produce double damage. Final geometry remains unmeasured.",
+    "runtimeStatus": "design only; not installed"
+  }
+}

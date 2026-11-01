@@ -160,9 +160,9 @@
   ],
   "confirmedSpentCreditsBeforeNanoPilot": 4,
   "latestConfirmedBalanceBeforeNanoPilot": 58.5,
-  "accounting": "Opening 62.5 minus observed 49.5 = 13 credits. Fighter pilot 7; four independent text-prompted menu/stage panoramas 6. No successful remaining-roster uploads or new fighter generation.",
-  "confirmedSpentCredits": 13,
-  "latestConfirmedBalance": 49.5,
+  "accounting": "Opening 62.5 minus latest observed 47.5 = 15 credits total. Fighter pilot 7; earlier stage scope error 6; separately approved menu background 2. The existing 13-credit conservative commitment bucket and 35-credit headroom remain separate from the completed 2-credit menu authorization. No new duo-fighter jobs or successful remaining-roster uploads.",
+  "confirmedSpentCredits": 15,
+  "latestConfirmedBalance": 47.5,
   "remainingApprovedCredits": 35,
   "plannedRemainingBaseCost": 28.5,
   "projectedBaseTotal": 41.5,
@@ -173,5 +173,7 @@
   "stageArtSpend": 6,
   "fighterAnimationSpentCredits": 7,
   "stageSpendingAuthorized": false,
-  "spendingClarification": "The 48-credit authorization applies only to fighter animation sheets. Six stage credits were already spent before this was clarified; this scope error was disclosed. No further stage/menu spending is authorized. Retain the more conservative 35-credit aggregate headroom until clarified; do not treat stage art as approved fighter work."
+  "spendingClarification": "The original 48-credit authorization applies only to existing fighter animation sheets. Six stage credits had been spent before clarification and were disclosed as a scope error. A later separate 2-credit menu authorization was fully used. No additional stage/menu spend is authorized. Retain the conservative 35-credit headroom for the existing roster; the new duo-fighter proposal has no approved budget yet.",
+  "separatelyApprovedMenuCredits": 2,
+  "separatelyApprovedMenuJob": "558ee637-d69a-480a-a5e5-329b41dbd6e1"
 }

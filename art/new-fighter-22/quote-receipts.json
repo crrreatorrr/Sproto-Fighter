@@ -1,0 +1,50 @@
+{
+  "date": "2026-11-01",
+  "model": "nano_banana_2_1",
+  "four4kSheets": {
+    "params": {
+      "resolution": "4k",
+      "thinking_level": "high",
+      "aspect_ratio": "9:16",
+      "count": 4,
+      "use_unlim": false
+    },
+    "result": {
+      "cost": {
+        "credits": 12,
+        "credits_exact": 12
+      }
+    }
+  },
+  "two2kSheets": {
+    "params": {
+      "resolution": "2k",
+      "thinking_level": "high",
+      "aspect_ratio": "4:3",
+      "count": 2,
+      "use_unlim": false
+    },
+    "result": {
+      "cost": {
+        "credits": 4,
+        "credits_exact": 4
+      }
+    }
+  },
+  "one4kCorrection": {
+    "params": {
+      "resolution": "4k",
+      "thinking_level": "high",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false
+    },
+    "result": {
+      "cost": {
+        "credits": 3,
+        "credits_exact": 3
+      }
+    }
+  },
+  "submittedJobs": 0
+}

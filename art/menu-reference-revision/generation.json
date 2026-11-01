@@ -1,0 +1,43 @@
+{
+  "approval": "Separate explicit approval for exactly one 2-credit menu image, received 2026-11-01",
+  "params": {
+    "model": "nano_banana_2_1",
+    "resolution": "2k",
+    "thinking_level": "high",
+    "aspect_ratio": "16:9",
+    "count": 1,
+    "use_unlim": false,
+    "prompt": "Original pixel-art decorative background plate for a classic 2D arcade fighting-game character selection interface. No text, numbers, logo, portraits, characters, buttons, cards or user-interface controls. A blackened gunmetal surface, fine angular engraved geometric filigree and symmetrical chamfered frame lines near the perimeter; saturated scarlet-red light from the left, cobalt-blue light from the right, thin golden-yellow highlights. Dark quiet center and lower two-thirds so live fighter previews and a dense portrait grid can be placed above it. Subtle diagonal mechanical texture, stepped pixel clusters, high-quality 1990s/early-2000s arcade pixel aesthetic, crisp edges, flat orthographic view. Use only charcoal-black neutrals with red, blue and yellow accent hues. Ornamental empty border rather than a complete screenshot. Keep all decoration within outer ten percent; very low-contrast central texture. 16:9."
+  },
+  "submission": {
+    "results": [
+      {
+        "id": "558ee637-d69a-480a-a5e5-329b41dbd6e1",
+        "type": "image",
+        "status": "pending",
+        "model": "nano_banana_2_1",
+        "params": {
+          "prompt": "Original pixel-art decorative background plate for a classic 2D arcade fighting-game character selection interface. No text, numbers, logo, portraits, characters, buttons, cards or user-interface controls. A blackened gunmetal surface, fine angular engraved geometric filigree and symmetrical chamfered frame lines near the perimeter; saturated scarlet-red light from the left, cobalt-blue light from the right, thin golden-yellow highlights. Dark quiet center and lower two-thirds so live fighter previews and a dense portrait grid can be placed above it. Subtle diagonal mechanical texture, stepped pixel clusters, high-quality 1990s/early-2000s arcade pixel aesthetic, crisp edges, flat orthographic view. Use only charcoal-black neutrals with red, blue and yellow accent hues. Ornamental empty border rather than a complete screenshot. Keep all decoration within outer ten percent; very low-contrast central texture. 16:9.",
+          "aspect_ratio": "16:9",
+          "resolution": "2k",
+          "thinking_level": "high"
+        }
+      }
+    ]
+  },
+  "completion": {
+    "status": "completed",
+    "jobId": "558ee637-d69a-480a-a5e5-329b41dbd6e1",
+    "sourceUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261101_080121_558ee637-d69a-480a-a5e5-329b41dbd6e1.png",
+    "dimensions": [
+      2752,
+      1536
+    ],
+    "sha256": "5de560152b95005735fbd4b309ae09e8c8c1f97e7c3423c76978bc1c0a160e6d",
+    "installed": "public/menu/higgsfield/arcade-frame.png",
+    "balanceBefore": 49.5,
+    "balanceAfter": 47.5,
+    "spentCredits": 2,
+    "pixelInspection": "Accepted decorative border; no text or controls baked into the image. Existing DOM controls remain operational. Desktop/mobile checked."
+  }
+}
