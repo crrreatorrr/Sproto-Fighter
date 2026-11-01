@@ -8,10 +8,10 @@ let checks=0;
 const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};
 function fresh(id='rivet'){const s=createState(id,'dummy');s.fighters[0].x=180;s.fighters[1].x=850;return s;}
 function tick(s,n=1,input=0){for(let i=0;i<n;i++)step(s,[input,0]);}
-check('all 21 fighters reach full run in 3 frames, reverse in 3, brake in 2',()=>{
+check('all 21 fighters reach full run in 2 frames, reverse in 2, brake in 2',()=>{
  for(const id of Object.keys(ROSTER)){const s=fresh(id),f=s.fighters[0],speed=ROSTER[id].speed;
  tick(s,1,A.right);assert.ok(f.vx>0&&f.vx<speed,id+' ramps instead of snapping');
- tick(s,2,A.right);assert.equal(f.vx,speed,id+' full speed');tick(s,3,A.left);assert.equal(f.vx,-speed,id+' reverse');
+ tick(s,1,A.right);assert.equal(f.vx,speed,id+' full speed');tick(s,2,A.left);assert.equal(f.vx,-speed,id+' reverse');
  tick(s,2);assert.equal(f.vx,0,id+' brake');}
 });
 check('jump release preserves takeoff momentum instead of stopping in midair',()=>{
@@ -131,14 +131,14 @@ check('firm jump arc measures 134px and 35 airborne frames for Golden Sproto',()
  const result=jumpTrajectory('rivet');assert.equal(GRAVITY,.85);
  assert.ok(Math.abs(result.height-134.362)<.01,JSON.stringify(result));
  assert.equal(result.airFrames,35);assert.equal(result.takeoff,2,'preserve directional chord window');
- assert.equal(ROSTER.rivet.speed,4.4);assert.ok(Math.abs(ROSTER.rivet.jump-15.484)<.001);
+ assert.ok(Math.abs(ROSTER.rivet.speed-5.06)<.001);assert.ok(Math.abs(ROSTER.rivet.jump-15.484)<.001);
 });
-check('all fighters retain controlled 31–35-frame neutral arcs and untouched dash impulse',()=>{
+check('all fighters retain controlled 31–35-frame neutral arcs and faster dash impulse',()=>{
  for(const id of Object.keys(ROSTER)){
   const result=jumpTrajectory(id);assert.ok(result.airFrames>=31&&result.airFrames<=35,JSON.stringify(result));
   assert.ok(result.height>=115&&result.height<=135,JSON.stringify(result));
   const s=fresh(id),f=s.fighters[0];tick(s,1,A.right|A.dash);
-  assert.ok(Math.abs(f.vx-(id==='vela'?12:14)*.94)<.00001,id+' dash impulse changed');assert.equal(f.dash,10);
+  assert.ok(Math.abs(f.vx-(id==='vela'?13:15)*.94)<.00001,id+' dash impulse changed');assert.equal(f.dash,10);
  }
 });
 check('firmer gravity preserves the human-paced four-hit aerial route for all21 fighters',()=>{

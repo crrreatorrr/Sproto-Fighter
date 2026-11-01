@@ -1,6 +1,6 @@
 # Sproto Arena — local combat prototype
 
-Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline first slice, with a pixel-art **Amber Ranch** stage and animated pixel sprites based on all supplied references. The latest scope includes **21 selectable fighters**, each with its original supplied image on the selection screen and a fighting animation set. All 21 have individual attack profiles, powers and runtime choreography; see [fighter kits](docs/FIGHTER_KITS.md). Four selectable story worlds use static placeholder scenes and stages; the ranch remains a free-play bonus.
+Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline first slice, with a pixel-art **Amber Ranch** stage and animated pixel sprites based on all supplied references. The latest scope includes **21 selectable fighters**, each with its original supplied image on the selection screen and a fighting animation set. All 21 have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Four selectable story worlds use static placeholder scenes and stages; the ranch remains a free-play bonus.
 
 ## Run
 
@@ -13,11 +13,11 @@ cd /Users/kenhiraoka/Documents/Codex/2026-10-31/task/neon-relay
 npm run dev -- --port 5173 --strictPort
 ```
 
-Open **http://127.0.0.1:5173/** in Chrome, Safari or Edge on this same Mac, then click **Enter the arena**. The URL only works while the local server is running; it is not a published website. Chrome was verified directly after recovery from a stopped server.
+Open **http://127.0.0.1:5173/** in Chrome, Safari or Edge on this same Mac, then click **Enter the arena**. The URL only works while the local server is running; it is not a published website. Chrome was verified earlier; the ordinary game was reloaded and played in the in-app browser on November1. No full cross-browser compatibility suite was performed.
 
 The current recovery session runs under macOS launchd job `com.sprotoarena.local`, independent of the assistant's temporary shell. It remains available for this login session; after logout/reboot use the launcher above. To stop that background job deliberately, run `launchctl remove com.sprotoarena.local` in Terminal. Its logs are `/tmp/sproto-arena-server.log` and `/tmp/sproto-arena-server-error.log`. No boot/login startup file or external hosting was installed.
 
-`npm run build` checks TypeScript and creates the production bundle. `npm run qa` repeats the current-update checks.
+`npm run build` checks TypeScript and creates the production bundle. `npm run qa` repeats the current-update checks. `node scripts/pose-atlas-smoke.mjs` checks pose playback and loading failures; `python3 art/pose-atlases/verify_pose_assets.py` checks the installed image contract.
 
 ## Play
 
@@ -50,17 +50,17 @@ Try U → W → J → K → L for a four-hit aerial route. The launcher can canc
 
 - W jumps; tap it again only after releasing. Holding W through landing never repeats the jump. Controller stick/D-pad up follows the same rule, including diagonals.
 - Press W + J together for a rising strike. W + forward (D when facing right, A when facing left) + K gives an upward diagonal strike. U is the dedicated rising-strike shortcut. A two-frame chord window gives the attack priority over jumping; W by itself jumps.
-- S + J/K gives low attacks, S + L sweeps. In the air, S + K/L commits to a downward dive; L remains a finisher.
-- I spits an original green glob from the mouth. Hold direction(s) with I to aim straight up, diagonally up/down, straight down, or horizontally. Directions are captured on press, so buffered attacks retain their intended aim.
+- S + J/K gives low attacks, S + L sweeps. In the air, S + K/L chambers in the jump arc, then dives on the first active strike frame; L remains a finisher.
+- I casts the selected fighter’s ranged spit/power. Hold direction(s) with I to aim straight up, diagonally up/down, straight down, or horizontally. Directions are captured on press, so buffered attacks retain their intended aim.
 - After a damaging hit, Shift can cancel the attack into one dash per combo. Then continue with another move. Repeating light is limited to two hits per combo; other moves can connect once per route. Damage scales down as the combo grows.
 
 Verified routes, timed on contact: J → J → S+J → K → L; J → K → I → L at close range; U → W → J → K → L in the air. One dash cancel per combo and input retention through hit-stop also pass focused checks.
 
 ### Relay charge
 
-A combo is consecutive damaging hits before the opponent exits hit-stun. **At least three hits, with the final damaging hit a designated finisher**, earn one pip when the combo ends. Heavy, sweep, and aerial heavy are finishers (grab is designated too, but cannot grab out of hit-stun). At three pips, P consumes all charge to call a brief articulated teammate and three attack waves. There is no tag switch or teammate player. Team Specials cannot earn their own charge. No passive recharge, chip damage, blocked-hit charge, or whiff charge.
+A combo is consecutive damaging hits before the opponent exits hit-stun. **At least three hits, with the final damaging hit a designated finisher**, earn one pip when the combo ends. Heavy, sweep, and aerial heavy are finishers (grab is designated too, but cannot grab out of hit-stun). At three pips, P consumes all charge to call a brief teammate cameo and the selected fighter’s attack sequence. There is no tag switch or teammate player. Team Specials cannot earn their own charge. No passive recharge, chip damage, blocked-hit charge, or whiff charge.
 
-The Team Special has a forward range and can miss or be blocked. The partner enters with a dash, joins two strikes and a final burst at combat frames 12/27/42, then exits during recovery. The art uses runtime articulated cutouts and effects, not a generated animation video. Each fighter has an individual contact schedule, range, trajectory or status effect and matching choreography. All specials use the same readable charge rule.
+The Team Special has a forward range and can miss or be blocked. The partner enters, joins the fighter’s contact sequence, then exits during recovery. The art uses complete pose frames and Canvas effects, not a generated animation video. Each fighter has an individual contact schedule, range, trajectory or status effect and matching choreography. All specials use the same readable charge rule.
 
 CPU mode has a 99-second round and a result/restart screen. Practice has no timer and restores dummy health periodically outside a combo. A knockout still ends the practice round; Restart resets health and meter. Pause also happens when the window loses focus. Changing fighter or opponent behavior starts a fresh round.
 
@@ -69,9 +69,10 @@ CPU mode has a 99-second round and a result/restart screen. Practice has no time
 - `src/core.ts`: serializable combat state, move data, deterministic CPU, and `step(state, [p1Mask, p2Mask])` at 60 Hz. No wall clock, DOM, renderer, or random calls.
 - `src/main.ts`: keyboard/gamepad input, fixed-step accumulator, menus, control storage, and frame-indexed recording. Pauses while hidden; catches up at most 100 ms after a delayed animation callback.
 - `src/render.ts`: HUD, impact effects, and teammate cue.
-- `src/higgsfieldRig.ts`: source-derived 15-part rigs, two-bone limb placement, pose transitions and combat choreography.
+- `src/poseAtlas.ts`: complete-body pose playback, optional eight-frame footwork sequences, signed gait phase, foot anchors and atomic asset loading.
+- `src/higgsfieldRig.ts`: superseded cutout renderer retained for provenance/undeclared-art fallback; the installed 21-fighter manifest takes priority.
 - `src/originalPortraits.ts`: explicit mapping of the 21 original references used by character selection.
-- `art/higgsfield/processed/build_rigs.py`: reproducible alpha cleanup, masks and hidden-surface repairs.
+- `art/pose-atlases/`: source sheets, connected-component importer, targeted identity/footwear corrections and reproducible guarded-step authoring.
 - `src/stage.ts`: original ranch environment plus four clearly labeled placeholder stages; `src/storyMode.ts` controls world selection and static scene/progression panels.
 - `src/style.css` / `index.html`: responsive combat-lab shell.
 
@@ -81,9 +82,9 @@ Development console helpers: `neonRelay.snapshot()` returns a copied state, `neo
 
 Implemented: 21 selectable player/opponent slots; CPU and standing/guard practice; ground/air chains; launcher chase; grabs; ranged attacks; dash; blocking; combo-earned Team Special; keyboard/gamepad polling; remapping; pause/restart; original ranch stage.
 
-All 21 fighters use individual Higgsfield reference-based combat art. Each supplied generation is a single pose, segmented into 15 parts and animated in Canvas; these are **not generated animation sheets**. Faces, clothing, body proportions and special appearance requirements are preserved in individual masks. Hidden surfaces are reconstructed with nearby source palette colors because the original guard poses conceal them. This remains a prototype cutout animation system, not hand-drawn animation for every move.
+All 21 fighters now use complete-body pose atlases generated through Higgsfield from their original references, with local pixel corrections. Each has 32 main pose slots and eight additional guarded-step frames derived from its neutral art. Four main walk slots duplicate selected step frames; these are not 40 independently hand-drawn poses. Runtime limb cutouts are bypassed for the installed roster. This is a substantial prototype art rework, but sparse attack in-betweens, direction-specific paired throws and some air-pose proportions remain limited. Do not treat successful loading or tests as artistic approval.
 
-Character selection uses the original submitted images with preserved aspect ratio. The withdrawn rigging diagram and bug screenshots are excluded. Halloween 2008 throws bouncing pumpkins; VAMP uses broken-heart waves that temporarily slow movement. Other kits include returning shots, ground attacks, pulls, drain and advancing specials. The current-update audit is recorded in [ART_QA.md](docs/ART_QA.md), with per-fighter findings in the linked batch reports.
+Character selection uses the original submitted images with preserved aspect ratio. The withdrawn rigging diagram and bug screenshots are excluded. Halloween 2008 throws bouncing pumpkins; VAMP uses broken-heart waves that temporarily slow movement. Other kits include returning shots, ground attacks, pulls, drain and advancing specials. The current whole-pose audit is recorded in [SPRITE-REWORK-QA.md](docs/SPRITE-REWORK-QA.md). Earlier ART_QA and MOVEMENT-RIG-QA documents describe the superseded cutout implementation, not acceptance of this rework.
 
 Deferred: sound, physical-controller verification, local versus, online 1v1, multi-round sets, final story/cutscenes and competitive balance. The deterministic core is a foundation for later networking exploration, not proof of online readiness.
 
@@ -95,16 +96,18 @@ Deferred: sound, physical-controller verification, local versus, online 1v1, mul
 
 `npm run build` checks TypeScript and the production bundle. `npm run qa` runs combat, direction, throw, movement, story and per-fighter power checks. The broad scripted matrix covers all 441 player/opponent pairings in three behavior modes for 360 frames each (476,280 interaction frames). This is systematic coverage, not every possible input sequence or matchup outcome.
 
-Browser checks cover all 21 player/opponent selections, representative live movement/combos/throws/specials, original portraits, stages, story entry/retry/back and controls. Full progression/ending/timeout branches are covered by controller/core checks; the campaign was not won end-to-end manually. Physical controller hardware, other browsers, network play and long-duration performance remain unverified. See the audit for exact coverage, issues fixed and cutout-art limitations.
+Current browser checks cover all 21 player selections, per-fighter motion samples, representative keyboard movement/combos/throws/specials, original portraits, stages, story entry/back and controls. Opponent combinations and retry/result branches also have systematic core/controller checks. Full progression/ending/timeout branches are covered by controller/core checks; the campaign was not won end-to-end manually. Physical controller hardware, a systematic cross-browser suite, network play and long-duration performance remain unverified. See the current audit for exact coverage, issues fixed and remaining animation limitations. The visual reports distinguish static sheets, stepped browser frames and sampled normal-speed playback; they do not claim continuous human playtesting of every frame.
 
 ## Sprite assets and roster references
 
-`art/higgsfield/raw/` preserves the 21 supplied Higgsfield outputs. `public/fighters/` contains 315 segmented pixel-grid PNGs plus rig metadata. `art/higgsfield/processed/configs/` stores individual semantic masks; the first two configurations are in the builder. `art/higgsfield/quality-lab.html` previews every current rig with exact move frames, directions, facing, skeleton overlay and throw states. `art/higgsfield/processed/runtime/` contains actual-renderer pose/contact/throw audit sheets, not alternative game assets.
+`art/pose-atlases/raw/` preserves the new Higgsfield whole-pose sheets and focused correction sheets. `public/fighters/pose-atlas.json` selects 32 local full-body PNGs plus eight footwork PNGs per fighter, all on a 256×256 canvas. `art/pose-atlases/processed/` contains normalized art, authoring metadata and review evidence. The [whole-pose review lab](http://127.0.0.1:5173/art/pose-atlas-lab.html) runs the real combat core with stepping, looping scenarios and mirrored facing views. See [sequence format](docs/pose-atlas-sequences.md).
 
-`art/exports/` and the older `art/*-preview.html` pages preserve the **superseded procedural artwork** for provenance; they do not represent the current Higgsfield rigs. The running game loads local assets and needs no external image service.
+`art/higgsfield/`, its older rig labs, and `art/exports/` preserve superseded artwork and implementation for provenance. They are not the currently installed whole-pose renderer. The running game loads only local assets and needs no image-generation service.
 
 `art/roster-manifest.json` preserves all 21 exact Library reference IDs, local paths, appearance constraints and names. No remote repository, deployment, publication or merge was created.
 
 ### Current movement and rig repair
 
-See [movement tuning](docs/MOVEMENT-TUNING.md) and the [coverage/findings ledger](docs/MOVEMENT-RIG-QA.md). The persistent [movement lab](http://127.0.0.1:5173/art/higgsfield/movement-lab.html) runs the real simulation for all 21 fighters; the pose lab remains useful for isolated joints. Add `?qa` to the main game URL for visible status, freeze and single-frame controls. Normal play does not show these controls.
+See [current movement tuning](docs/MOVEMENT-TUNING.md) and [current sprite QA](docs/SPRITE-REWORK-QA.md). The older [cutout ledger](docs/MOVEMENT-RIG-QA.md) and old movement lab describe the prior rig. Use the whole-pose review lab linked above for current sprite evidence. Add `?qa` to the main game URL for visible status, freeze and single-frame controls. Normal play does not show these controls.
+
+The November1 update repairs eight observed walking-frame defects and increases walk speed15%, with faster starts/reversals and a shorter dash cooldown. All21 fighters received individual current movement checks, including the repaired downward aerial attacks. [Detailed factual handoff](docs/CLAUDE-HANDOFF.md) records changed files, evidence and residual limits.

@@ -1,3 +1,4 @@
+import { setPoseAtlasThrowState } from './poseAtlas';
 import { drawPower } from './powerArt';
 import { setHiggsfieldThrowState } from './higgsfieldRig';
 import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
@@ -41,6 +42,7 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
 }
 export function render(c: CanvasRenderingContext2D, s: CombatState) {
     setHiggsfieldThrowState(s.throwState,s.fighters);
+    setPoseAtlasThrowState(s.throwState,s.fighters);
     drawStage(c, s.frame);
     for (const f of s.fighters) {
         c.fillStyle = '#040b1366';
@@ -49,8 +51,12 @@ export function render(c: CanvasRenderingContext2D, s: CombatState) {
         c.fill();
     }
     drawTeamSpecialBack(c,s);
-    fighter(c, s.fighters[0], s.frame, false, s.freeze > 0);
-    fighter(c, s.fighters[1], s.frame, false, s.freeze > 0);
+    // A fixed player-two foreground hid player one's extended hand at contact.
+    // Paint the attacking/holding actor last; this affects presentation only.
+    const foreground = s.throwState?.attacker ??
+        (s.fighters[0].move && !s.fighters[0].stun && !s.fighters[1].move ? 0 : 1);
+    fighter(c, s.fighters[1 - foreground], s.frame, false, s.freeze > 0);
+    fighter(c, s.fighters[foreground], s.frame, false, s.freeze > 0);
     drawTeamSpecialFront(c,s);
     for(const f of s.fighters)if(f.slow>0)text(c,'MELANCHOLY · SLOWED',f.x,f.y-170,9,'#c7a5eb','center',800);
     for (const p of s.projectiles) {

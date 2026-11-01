@@ -1,0 +1,6 @@
+PASS: all 21: forward/reverse gait, hitstop, and neutral guard after stopping
+PASS: all 441 held pairs: contact transform finite/bounded, floor-safe, no core mutation
+PASS: missing image fails atomically and retains declared-art no-fallback guard
+PASS: invalid walk count fails atomically and retains declared-art no-fallback guard
+PASS: out-of-bounds contact fails atomically and retains declared-art no-fallback guard
+PASS: 5 pose playback/contract groups. No visual-quality claim from these checks.

@@ -1,0 +1,844 @@
+{
+  "source": "art/pose-atlases/raw/rivet-32.png",
+  "sourceSize": [
+    2336,
+    3504
+  ],
+  "uniformScale": 0.3359580052493438,
+  "threshold": 96,
+  "status": "requires visual acceptance and authored anchors",
+  "frames": [
+    {
+      "slot": 0,
+      "name": "guard",
+      "bounds": [
+        148,
+        64,
+        409,
+        445
+      ],
+      "sourceAnchor": [
+        256.75766423357663,
+        445
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        76,
+        82,
+        163,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 1,
+      "name": "breathe",
+      "bounds": [
+        738,
+        64,
+        983,
+        445
+      ],
+      "sourceAnchor": [
+        843.0076642335766,
+        445
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        77,
+        82,
+        159,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 2,
+      "name": "walkNear",
+      "bounds": [
+        1287,
+        64,
+        1569,
+        452
+      ],
+      "sourceAnchor": [
+        1428.0076642335766,
+        452
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        65,
+        80,
+        159,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 3,
+      "name": "passNear",
+      "bounds": [
+        1874,
+        64,
+        2154,
+        453
+      ],
+      "sourceAnchor": [
+        2008.0076642335766,
+        453
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        67,
+        80,
+        160,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 4,
+      "name": "walkFar",
+      "bounds": [
+        125,
+        517,
+        409,
+        901
+      ],
+      "sourceAnchor": [
+        259.00766423357663,
+        901
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        67,
+        81,
+        162,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 5,
+      "name": "passFar",
+      "bounds": [
+        713,
+        517,
+        991,
+        904
+      ],
+      "sourceAnchor": [
+        844.0076642335766,
+        904
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        68,
+        80,
+        161,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 6,
+      "name": "dash",
+      "bounds": [
+        1270,
+        545,
+        1603,
+        901
+      ],
+      "sourceAnchor": [
+        1485.7576642335766,
+        901
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        40,
+        91,
+        151,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 7,
+      "name": "jumpAnticipation",
+      "bounds": [
+        1908,
+        588,
+        2140,
+        913
+      ],
+      "sourceAnchor": [
+        2017.2576642335766,
+        913
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        76,
+        101,
+        153,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 8,
+      "name": "airRise",
+      "bounds": [
+        141,
+        944,
+        416,
+        1368
+      ],
+      "sourceAnchor": [
+        259.50766423357663,
+        1368
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        73,
+        68,
+        165,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 9,
+      "name": "airFall",
+      "bounds": [
+        703,
+        965,
+        1009,
+        1365
+      ],
+      "sourceAnchor": [
+        859.5076642335766,
+        1365
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        60,
+        76,
+        162,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 10,
+      "name": "crouchLanding",
+      "bounds": [
+        1324,
+        1057,
+        1570,
+        1365
+      ],
+      "sourceAnchor": [
+        1440.7576642335766,
+        1365
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        73,
+        107,
+        155,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 11,
+      "name": "punchWindup",
+      "bounds": [
+        1881,
+        1016,
+        2156,
+        1366
+      ],
+      "sourceAnchor": [
+        2000.5076642335766,
+        1366
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        72,
+        93,
+        164,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 12,
+      "name": "punchExtended",
+      "bounds": [
+        125,
+        1451,
+        483,
+        1820
+      ],
+      "sourceAnchor": [
+        250.00766423357663,
+        1820
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        70,
+        86,
+        190,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 13,
+      "name": "punchRecover",
+      "bounds": [
+        740,
+        1449,
+        991,
+        1817
+      ],
+      "sourceAnchor": [
+        843.0076642335766,
+        1817
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        78,
+        87,
+        162,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 14,
+      "name": "upperWindup",
+      "bounds": [
+        1299,
+        1465,
+        1567,
+        1818
+      ],
+      "sourceAnchor": [
+        1432.5076642335766,
+        1818
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        67,
+        92,
+        156,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 15,
+      "name": "uppercut",
+      "bounds": [
+        1911,
+        1442,
+        2170,
+        1821
+      ],
+      "sourceAnchor": [
+        2029.0076642335766,
+        1821
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        73,
+        83,
+        159,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 16,
+      "name": "kickChamber",
+      "bounds": [
+        153,
+        1897,
+        382,
+        2269
+      ],
+      "sourceAnchor": [
+        239.50766423357663,
+        2269
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        83,
+        85,
+        159,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 17,
+      "name": "kickHalf",
+      "bounds": [
+        718,
+        1894,
+        1013,
+        2269
+      ],
+      "sourceAnchor": [
+        810.5076642335766,
+        2269
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        81,
+        84,
+        179,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 18,
+      "name": "kickFull",
+      "bounds": [
+        1240,
+        1897,
+        1683,
+        2269
+      ],
+      "sourceAnchor": [
+        1331.5076642335766,
+        2269
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        82,
+        85,
+        230,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 19,
+      "name": "kickRecover",
+      "bounds": [
+        1907,
+        1898,
+        2135,
+        2273
+      ],
+      "sourceAnchor": [
+        1996.0076642335766,
+        2273
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        82,
+        84,
+        158,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 20,
+      "name": "sweep",
+      "bounds": [
+        141,
+        2427,
+        503,
+        2728
+      ],
+      "sourceAnchor": [
+        258.50766423357663,
+        2728
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        73,
+        109,
+        194,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 21,
+      "name": "sweepRecover",
+      "bounds": [
+        741,
+        2427,
+        983,
+        2728
+      ],
+      "sourceAnchor": [
+        851.5076642335766,
+        2728
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        75,
+        109,
+        156,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 22,
+      "name": "airKickChamber",
+      "bounds": [
+        1342,
+        2321,
+        1587,
+        2699
+      ],
+      "sourceAnchor": [
+        1455.7576642335766,
+        2699
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        74,
+        83,
+        156,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 23,
+      "name": "airKickFull",
+      "bounds": [
+        1921,
+        2327,
+        2198,
+        2712
+      ],
+      "sourceAnchor": [
+        2005.5076642335766,
+        2712
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        84,
+        81,
+        176,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 24,
+      "name": "hit",
+      "bounds": [
+        148,
+        2794,
+        464,
+        3116
+      ],
+      "sourceAnchor": [
+        239.25766423357663,
+        3116
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        82,
+        102,
+        188,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 25,
+      "name": "block",
+      "bounds": [
+        757,
+        2795,
+        980,
+        3111
+      ],
+      "sourceAnchor": [
+        843.5076642335766,
+        3111
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        83,
+        104,
+        157,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 26,
+      "name": "grabReach",
+      "bounds": [
+        1305,
+        2795,
+        1623,
+        3111
+      ],
+      "sourceAnchor": [
+        1421.0076642335766,
+        3111
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        73,
+        104,
+        179,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 27,
+      "name": "grabHold",
+      "bounds": [
+        1888,
+        2798,
+        2127,
+        3111
+      ],
+      "sourceAnchor": [
+        1994.0076642335766,
+        3111
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        77,
+        105,
+        157,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 28,
+      "name": "throwRelease",
+      "bounds": [
+        144,
+        3170,
+        455,
+        3474
+      ],
+      "sourceAnchor": [
+        270.00766423357663,
+        3474
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        70,
+        108,
+        174,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 29,
+      "name": "powerCharge",
+      "bounds": [
+        732,
+        3168,
+        996,
+        3472
+      ],
+      "sourceAnchor": [
+        882.5076642335766,
+        3472
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        62,
+        108,
+        150,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 30,
+      "name": "powerRelease",
+      "bounds": [
+        1283,
+        3171,
+        1623,
+        3474
+      ],
+      "sourceAnchor": [
+        1421.5076642335766,
+        3474
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        66,
+        109,
+        180,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 31,
+      "name": "special",
+      "bounds": [
+        1885,
+        3168,
+        2215,
+        3474
+      ],
+      "sourceAnchor": [
+        1994.5076642335766,
+        3474
+      ],
+      "anchorStatus": "upper-trunk-estimate-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        76,
+        108,
+        186,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    }
+  ]
+}

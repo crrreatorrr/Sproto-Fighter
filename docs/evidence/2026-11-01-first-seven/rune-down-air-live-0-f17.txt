@@ -1,0 +1,146 @@
+Browser tab: 1760303274, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+1 AXWebArea Full-pose atlas review, URL: 127.0.0.1:5173/art/pose-atlas-lab.html
+	2 heading Full-pose atlas review, Value: 1
+		3 text Full-pose atlas review
+	4 text Complete authored frames only. The live panels advance the real combat core with persistent fighter objects. The second panel mirrors the same state for facing inspection. Frame inspection below bypasses action selection. Missing atlases are labelled; no old cutout art is drawn here.
+	5 button Previous fighter, ID: prev
+	6 container
+		7 text Fighter
+		8 pop up button (collapsed, settable) Fighter, Value: Bongraker · rune, ID: fighter, Secondary Actions: Expand
+			9 menu
+				10 Golden Sproto · rivet
+				11 Morelight · vela
+				12 Fat Head Dave · bront
+				13 Halloween 2008 · zephyr
+				14 Yannix · mox
+				15 (selected) Bongraker · rune
+				16 Juicy · guest07
+				17 Yoyo · guest08
+				18 Red Kev · guest09
+				19 Sprotel Bitcoin · guest10
+				20 Chode Adoration · guest11
+				21 $Bitcoin Obama · guest12
+				22 Jahon · guest13
+				23 Virtuagram · guest14
+				24 Dumpstar · dumpstar
+				25 Crapto · crapto
+				26 VAMP · vamp
+				27 Alpha 777 · alpha777
+				28 Bitcoin Mandela · mandela
+				29 Big Swole · bigswole
+				30 Little Foot Nate · nate
+	31 button Next fighter, ID: next
+	32 container
+		33 text Action
+		34 pop up button (collapsed, settable) Action, Value: airHeavy, ID: action, Secondary Actions: Expand
+			35 menu
+				36 Full motion review
+				37 idle
+				38 walk
+				39 dash
+				40 jump
+				41 crouch
+				42 light
+				43 medium
+				44 heavy
+				45 low
+				46 sweep
+				47 launcher
+				48 bolt
+				49 airLight
+				50 airMedium
+				51 (selected) airHeavy
+				52 grab
+				53 victimThrow
+				54 hit
+				55 block
+				56 special
+				57 keyboard
+	58 container
+		59 text Aim / throw direction
+		60 pop up button (collapsed, settable) Aim / throw direction, Value: down, ID: direction, Secondary Actions: Expand
+			61 menu
+				62 forward
+				63 back
+				64 up
+				65 upForward
+				66 (selected) down
+	67 container
+		68 text Playback speed
+		69 pop up button (collapsed, settable) Playback speed, Value: 1×, ID: speed, Secondary Actions: Expand
+			70 menu
+				71 ¼×
+				72 ½×
+				73 (selected) 1×
+				74 2×
+	75 checkbox (settable, integer) Description: Loop action, Value: 1, ID: loopAction
+	76 button Pause, ID: play
+	77 button Step 1 frame, ID: step
+	78 button Restart action, ID: reset
+	79 button Reload assets, ID: reload
+	153 text airHeavy · down · cycle 1
+	154 text ready: 21/21 installed atlases. Selected: available.
+	82 text Keyboard mode: A/D move · W jump · S crouch · J/K/L attacks · U launcher · I power · O grab · P special · Shift dash. Test special starts with three pips. This review fixture does not alter the game's charging rules. Each scripted scenario resets positions and test meter, then advances persistent core state through recovery. Full review checks both walking directions and all four attacker/victim throw directions.
+	83 container live
+		84 container
+			85 image normal
+			86 text Actual state · original facing
+		87 container
+			88 image mirror
+			89 text Same state · opposite facing
+	155 text Core frame 19 · scenario frame 19 · frozen 0
+Sequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 465.3 facing 1
+Move airHeavy t=10 startup/active/recovery 8/7/21
+Throw none
+	91 button Previous frame page, ID: pagePrev
+	144 text Slots 0–7 / 31
+	93 button Next frame page, ID: pageNext
+	94 container
+		95 text Inspect exact slot
+		96 pop up button (collapsed, settable) Inspect exact slot, Value: 0 · guard, ID: slot, Secondary Actions: Expand
+			97 menu
+				98 (selected) 0 · guard
+				99 1 · breathe
+				100 2 · walkNear
+				101 3 · passNear
+				102 4 · walkFar
+				103 5 · passFar
+				104 6 · dash
+				105 7 · jumpAnticipation
+				106 8 · airRise
+				107 9 · airFall
+				108 10 · crouchLanding
+				109 11 · punchWindup
+				110 12 · punchExtended
+				111 13 · punchRecover
+				112 14 · upperWindup
+				113 15 · uppercut
+				114 16 · kickChamber
+				115 17 · kickHalf
+				116 18 · kickFull
+				117 19 · kickRecover
+				118 20 · sweep
+				119 21 · sweepRecover
+				120 22 · airKickChamber
+				121 23 · airKickFull
+				122 24 · hit
+				123 25 · block
+				124 26 · grabReach
+				125 27 · grabHold
+				126 28 · throwRelease
+				127 29 · powerCharge
+				128 30 · powerRelease
+				129 31 · special
+	130 button Show slot page, ID: slotPreview
+	131 container frames
+		145 text 0 · guard
+		146 text 1 · breathe
+		147 text 2 · walkNear
+		148 text 3 · passNear
+		149 text 4 · walkFar
+		150 text 5 · passFar
+		151 text 6 · dash
+		152 text 7 · jumpAnticipation
+	140 text Thirty-two poses do not constitute hand-drawn full-action animation. Directional attacks share authored punch/kick poses; victim throws use the hit pose with a bounded hand-to-torso contact correction that fades into the core release trajectory. Direction-specific paired throw art remains limited. Projectile and power mechanics remain distinct in the game. Judge anatomy, foot anchors, timing, motion continuity and missing states separately.
+
+The focused UI element is 76 button Pause, ID: play

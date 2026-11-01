@@ -1,0 +1,1141 @@
+fighter,capture,core_frame,displayed_debug
+bigswole,before-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,before-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,before-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,before-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,before-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,before-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,before-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,before-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,walk-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,walk-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,walk-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,walk-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,walk-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,walk-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,walk-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,walk-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,medium-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=3 startup/active/recovery 7/5/17
+Throw none"
+dumpstar,medium-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+dumpstar,medium-recovery,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=17 startup/active/recovery 7/5/17
+Throw none"
+dumpstar,light-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=3 startup/active/recovery 5/4/13
+Throw none"
+dumpstar,light-contact,6,"Core frame 6 · scenario frame 6 · frozen 4
+Sequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=5 startup/active/recovery 5/4/13
+Throw none"
+dumpstar,light-recovery,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=9 startup/active/recovery 5/4/13
+Throw none"
+dumpstar,airMedium-contact,16,"Core frame 16 · scenario frame 16 · frozen 0
+Sequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1
+Move airMedium t=7 startup/active/recovery 6/6/14
+Throw none"
+dumpstar,walk-reversal,66,"Core frame 66 · scenario frame 66 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,walk-stop,125,"Core frame 125 · scenario frame 125 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,walk-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,walk-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,walk-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,walk-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,walk-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,walk-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,walk-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,walk-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,medium-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=3 startup/active/recovery 7/5/17
+Throw none"
+crapto,medium-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+crapto,medium-recovery,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=18 startup/active/recovery 7/5/17
+Throw none"
+crapto,light-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=3 startup/active/recovery 5/4/13
+Throw none"
+crapto,light-contact,7,"Core frame 7 · scenario frame 7 · frozen 3
+Sequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=5 startup/active/recovery 5/4/13
+Throw none"
+crapto,light-recovery,15,"Core frame 15 · scenario frame 15 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=10 startup/active/recovery 5/4/13
+Throw none"
+crapto,airMedium-contact,16,"Core frame 16 · scenario frame 16 · frozen 0
+Sequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1
+Move airMedium t=7 startup/active/recovery 6/6/14
+Throw none"
+crapto,walk-reversal,66,"Core frame 66 · scenario frame 66 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,walk-stop,125,"Core frame 125 · scenario frame 125 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,walk-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,walk-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,walk-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,walk-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,walk-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,walk-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,walk-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,walk-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,medium-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=3 startup/active/recovery 7/5/17
+Throw none"
+vamp,medium-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+vamp,medium-recovery,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=17 startup/active/recovery 7/5/17
+Throw none"
+vamp,light-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=3 startup/active/recovery 5/4/13
+Throw none"
+vamp,light-contact,6,"Core frame 6 · scenario frame 6 · frozen 4
+Sequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=5 startup/active/recovery 5/4/13
+Throw none"
+vamp,light-recovery,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=9 startup/active/recovery 5/4/13
+Throw none"
+vamp,airMedium-contact,16,"Core frame 16 · scenario frame 16 · frozen 0
+Sequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1
+Move airMedium t=7 startup/active/recovery 6/6/14
+Throw none"
+vamp,walk-reversal,66,"Core frame 66 · scenario frame 66 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,walk-stop,126,"Core frame 126 · scenario frame 126 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,walk-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,walk-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,walk-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,walk-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,walk-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,walk-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,walk-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,walk-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,medium-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=3 startup/active/recovery 7/5/17
+Throw none"
+alpha777,medium-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+alpha777,medium-recovery,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=18 startup/active/recovery 7/5/17
+Throw none"
+alpha777,light-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=3 startup/active/recovery 5/4/13
+Throw none"
+alpha777,light-contact,7,"Core frame 7 · scenario frame 7 · frozen 3
+Sequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=5 startup/active/recovery 5/4/13
+Throw none"
+alpha777,light-recovery,15,"Core frame 15 · scenario frame 15 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=10 startup/active/recovery 5/4/13
+Throw none"
+alpha777,airMedium-contact,16,"Core frame 16 · scenario frame 16 · frozen 0
+Sequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1
+Move airMedium t=7 startup/active/recovery 6/6/14
+Throw none"
+alpha777,walk-reversal,66,"Core frame 66 · scenario frame 66 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,walk-stop,124,"Core frame 124 · scenario frame 124 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,walk-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,walk-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,walk-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,walk-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,walk-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,walk-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,walk-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,walk-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,medium-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=3 startup/active/recovery 7/5/17
+Throw none"
+mandela,medium-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+mandela,medium-recovery,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=18 startup/active/recovery 7/5/17
+Throw none"
+mandela,light-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=3 startup/active/recovery 5/4/13
+Throw none"
+mandela,light-contact,7,"Core frame 7 · scenario frame 7 · frozen 3
+Sequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=5 startup/active/recovery 5/4/13
+Throw none"
+mandela,light-recovery,15,"Core frame 15 · scenario frame 15 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=10 startup/active/recovery 5/4/13
+Throw none"
+mandela,airMedium-contact,17,"Core frame 17 · scenario frame 17 · frozen 0
+Sequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 446.7 facing 1
+Move airMedium t=8 startup/active/recovery 6/6/14
+Throw none"
+mandela,walk-reversal,66,"Core frame 66 · scenario frame 66 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,walk-stop,126,"Core frame 126 · scenario frame 126 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,walk-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,walk-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,walk-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,walk-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,walk-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,walk-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,walk-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,walk-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,medium-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=3 startup/active/recovery 7/5/17
+Throw none"
+nate,medium-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+nate,medium-recovery,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=18 startup/active/recovery 7/5/17
+Throw none"
+nate,light-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=3 startup/active/recovery 5/4/13
+Throw none"
+nate,light-contact,7,"Core frame 7 · scenario frame 7 · frozen 3
+Sequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=5 startup/active/recovery 5/4/13
+Throw none"
+nate,light-recovery,15,"Core frame 15 · scenario frame 15 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=10 startup/active/recovery 5/4/13
+Throw none"
+nate,airMedium-contact,16,"Core frame 16 · scenario frame 16 · frozen 0
+Sequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1
+Move airMedium t=7 startup/active/recovery 6/6/14
+Throw none"
+nate,walk-reversal,66,"Core frame 66 · scenario frame 66 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,walk-stop,126,"Core frame 126 · scenario frame 126 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,walk-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,walk-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,walk-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,walk-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,walk-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,walk-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,walk-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,walk-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,medium-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=3 startup/active/recovery 7/5/17
+Throw none"
+bigswole,medium-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+bigswole,medium-recovery,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=18 startup/active/recovery 7/5/17
+Throw none"
+bigswole,light-startup,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=3 startup/active/recovery 5/4/13
+Throw none"
+bigswole,light-contact,7,"Core frame 7 · scenario frame 7 · frozen 3
+Sequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=5 startup/active/recovery 5/4/13
+Throw none"
+bigswole,light-recovery,15,"Core frame 15 · scenario frame 15 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move light t=10 startup/active/recovery 5/4/13
+Throw none"
+bigswole,airMedium-contact,16,"Core frame 16 · scenario frame 16 · frozen 0
+Sequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1
+Move airMedium t=7 startup/active/recovery 6/6/14
+Throw none"
+bigswole,walk-reversal,67,"Core frame 67 · scenario frame 67 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.682 · x 736.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,walk-stop,127,"Core frame 127 · scenario frame 127 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-0,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-1,3,"Core frame 3 · scenario frame 3 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-2,5,"Core frame 5 · scenario frame 5 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-3,7,"Core frame 7 · scenario frame 7 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-4,8,"Core frame 8 · scenario frame 8 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-5,10,"Core frame 10 · scenario frame 10 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-6,12,"Core frame 12 · scenario frame 12 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-7,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-0,13,"Core frame 13 · scenario frame 13 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.849 · x 554.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-1,17,"Core frame 17 · scenario frame 17 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.124 · x 571.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-2,19,"Core frame 19 · scenario frame 19 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.262 · x 580.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-3,21,"Core frame 21 · scenario frame 21 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.399 · x 589.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-4,24,"Core frame 24 · scenario frame 24 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.605 · x 602.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-5,26,"Core frame 26 · scenario frame 26 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.743 · x 611.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-6,27,"Core frame 27 · scenario frame 27 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.812 · x 615.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-7,29,"Core frame 29 · scenario frame 29 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.949 · x 624.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-8,30,"Core frame 30 · scenario frame 30 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.018 · x 629.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-9,32,"Core frame 32 · scenario frame 32 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.155 · x 637.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-10,35,"Core frame 35 · scenario frame 35 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.362 · x 651.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-11,37,"Core frame 37 · scenario frame 37 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.499 · x 659.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-12,40,"Core frame 40 · scenario frame 40 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.705 · x 673.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-13,43,"Core frame 43 · scenario frame 43 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.912 · x 686.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-14,45,"Core frame 45 · scenario frame 45 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.049 · x 695.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-15,48,"Core frame 48 · scenario frame 48 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.255 · x 708.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-16,51,"Core frame 51 · scenario frame 51 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.462 · x 721.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-17,53,"Core frame 53 · scenario frame 53 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.599 · x 730.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-18,56,"Core frame 56 · scenario frame 56 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.805 · x 743.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-19,58,"Core frame 58 · scenario frame 58 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.943 · x 752.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-20,61,"Core frame 61 · scenario frame 61 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.080 · x 761.6 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-21,62,"Core frame 62 · scenario frame 62 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.025 · x 758.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-22,65,"Core frame 65 · scenario frame 65 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.819 · x 744.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-23,67,"Core frame 67 · scenario frame 67 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.682 · x 736.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-24,69,"Core frame 69 · scenario frame 69 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.544 · x 727.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-25,72,"Core frame 72 · scenario frame 72 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.338 · x 714.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-26,73,"Core frame 73 · scenario frame 73 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.269 · x 709.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-27,76,"Core frame 76 · scenario frame 76 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.063 · x 696.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-28,78,"Core frame 78 · scenario frame 78 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.925 · x 687.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-29,81,"Core frame 81 · scenario frame 81 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.719 · x 674.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-30,83,"Core frame 83 · scenario frame 83 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.582 · x 665.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-31,85,"Core frame 85 · scenario frame 85 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.444 · x 656.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-32,86,"Core frame 86 · scenario frame 86 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.375 · x 652.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-33,88,"Core frame 88 · scenario frame 88 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.238 · x 643.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,fixed-live-34,90,"Core frame 90 · scenario frame 90 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.100 · x 634.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-0,14,"Core frame 14 · scenario frame 14 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-1,17,"Core frame 17 · scenario frame 17 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.124 · x 571.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-2,19,"Core frame 19 · scenario frame 19 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.262 · x 580.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-3,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.468 · x 593.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-4,24,"Core frame 24 · scenario frame 24 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.605 · x 602.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-5,26,"Core frame 26 · scenario frame 26 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.743 · x 611.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-6,28,"Core frame 28 · scenario frame 28 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.880 · x 620.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-7,30,"Core frame 30 · scenario frame 30 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.018 · x 629.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-8,31,"Core frame 31 · scenario frame 31 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.087 · x 633.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-9,38,"Core frame 38 · scenario frame 38 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.568 · x 664.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-10,41,"Core frame 41 · scenario frame 41 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.774 · x 677.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-11,44,"Core frame 44 · scenario frame 44 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.980 · x 690.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-12,47,"Core frame 47 · scenario frame 47 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.187 · x 703.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-13,49,"Core frame 49 · scenario frame 49 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.324 · x 712.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-14,53,"Core frame 53 · scenario frame 53 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.599 · x 730.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-15,55,"Core frame 55 · scenario frame 55 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.737 · x 739.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-16,57,"Core frame 57 · scenario frame 57 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.874 · x 747.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-17,59,"Core frame 59 · scenario frame 59 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.012 · x 756.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-18,61,"Core frame 61 · scenario frame 61 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.080 · x 761.6 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-19,64,"Core frame 64 · scenario frame 64 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.888 · x 749.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-20,66,"Core frame 66 · scenario frame 66 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-21,71,"Core frame 71 · scenario frame 71 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.407 · x 718.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-22,73,"Core frame 73 · scenario frame 73 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.269 · x 709.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-23,76,"Core frame 76 · scenario frame 76 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.063 · x 696.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-24,78,"Core frame 78 · scenario frame 78 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.925 · x 687.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-25,80,"Core frame 80 · scenario frame 80 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.788 · x 678.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-26,82,"Core frame 82 · scenario frame 82 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.650 · x 670.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-27,84,"Core frame 84 · scenario frame 84 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.513 · x 661.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-28,86,"Core frame 86 · scenario frame 86 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.375 · x 652.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-29,88,"Core frame 88 · scenario frame 88 · frozen 0
+Sequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.238 · x 643.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-30,91,"Core frame 91 · scenario frame 91 · frozen 0
+Sequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.032 · x 630.5 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-31,93,"Core frame 93 · scenario frame 93 · frozen 0
+Sequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.894 · x 621.7 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-32,95,"Core frame 95 · scenario frame 95 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.757 · x 612.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-33,97,"Core frame 97 · scenario frame 97 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.619 · x 604.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,fixed-live-34,99,"Core frame 99 · scenario frame 99 · frozen 0
+Sequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.482 · x 595.3 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,tuned-forward,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.783 · x 614.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,tuned-reverse,65,"Core frame 65 · scenario frame 65 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.356 · x 778.8 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,tuned-stop,124,"Core frame 124 · scenario frame 124 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,tuned-jump-rise,4,"Core frame 4 · scenario frame 4 · frozen 0
+Sequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1
+Move none t=- 
+Throw none"
+dumpstar,tuned-jump-fall,26,"Core frame 26 · scenario frame 26 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1
+Move none t=- 
+Throw none"
+dumpstar,tuned-jump-land,48,"Core frame 48 · scenario frame 48 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,tuned-dash-start,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,tuned-dash-end,17,"Core frame 17 · scenario frame 17 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1
+Move none t=- 
+Throw none"
+dumpstar,tuned-kick-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+dumpstar,tuned-kick-recovery,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=18 startup/active/recovery 7/5/17
+Throw none"
+crapto,tuned-forward,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,tuned-reverse,62,"Core frame 62 · scenario frame 62 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.594 · x 794.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,tuned-stop,123,"Core frame 123 · scenario frame 123 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,tuned-jump-rise,4,"Core frame 4 · scenario frame 4 · frozen 0
+Sequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1
+Move none t=- 
+Throw none"
+crapto,tuned-jump-fall,25,"Core frame 25 · scenario frame 25 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 455.5 facing 1
+Move none t=- 
+Throw none"
+crapto,tuned-jump-land,47,"Core frame 47 · scenario frame 47 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,tuned-dash-start,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,tuned-dash-end,18,"Core frame 18 · scenario frame 18 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1
+Move none t=- 
+Throw none"
+crapto,tuned-kick-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+crapto,tuned-kick-recovery,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=18 startup/active/recovery 7/5/17
+Throw none"
+vamp,tuned-forward,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.783 · x 614.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,tuned-reverse,65,"Core frame 65 · scenario frame 65 · frozen 0
+Sequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.356 · x 778.8 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,tuned-stop,125,"Core frame 125 · scenario frame 125 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,tuned-jump-rise,4,"Core frame 4 · scenario frame 4 · frozen 0
+Sequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1
+Move none t=- 
+Throw none"
+vamp,tuned-jump-fall,26,"Core frame 26 · scenario frame 26 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1
+Move none t=- 
+Throw none"
+vamp,tuned-jump-land,48,"Core frame 48 · scenario frame 48 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,tuned-dash-start,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,tuned-dash-end,17,"Core frame 17 · scenario frame 17 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1
+Move none t=- 
+Throw none"
+vamp,tuned-kick-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+vamp,tuned-kick-recovery,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=17 startup/active/recovery 7/5/17
+Throw none"
+alpha777,tuned-forward,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,tuned-reverse,62,"Core frame 62 · scenario frame 62 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.594 · x 794.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,tuned-stop,122,"Core frame 122 · scenario frame 122 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,tuned-jump-rise,4,"Core frame 4 · scenario frame 4 · frozen 0
+Sequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1
+Move none t=- 
+Throw none"
+alpha777,tuned-jump-fall,26,"Core frame 26 · scenario frame 26 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1
+Move none t=- 
+Throw none"
+alpha777,tuned-jump-land,48,"Core frame 48 · scenario frame 48 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,tuned-dash-start,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,tuned-dash-end,17,"Core frame 17 · scenario frame 17 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1
+Move none t=- 
+Throw none"
+alpha777,tuned-kick-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+alpha777,tuned-kick-recovery,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=17 startup/active/recovery 7/5/17
+Throw none"
+mandela,tuned-forward,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,tuned-reverse,63,"Core frame 63 · scenario frame 63 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.514 · x 788.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,tuned-stop,122,"Core frame 122 · scenario frame 122 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,tuned-jump-rise,4,"Core frame 4 · scenario frame 4 · frozen 0
+Sequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1
+Move none t=- 
+Throw none"
+mandela,tuned-jump-fall,26,"Core frame 26 · scenario frame 26 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1
+Move none t=- 
+Throw none"
+mandela,tuned-jump-land,47,"Core frame 47 · scenario frame 47 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,tuned-dash-start,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,tuned-dash-end,17,"Core frame 17 · scenario frame 17 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1
+Move none t=- 
+Throw none"
+mandela,tuned-kick-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+mandela,tuned-kick-recovery,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=18 startup/active/recovery 7/5/17
+Throw none"
+bigswole,tuned-forward,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-reverse,294,"Core frame 294 · scenario frame 294 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-forward,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-reverse,63,"Core frame 63 · scenario frame 63 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.514 · x 788.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-stop,122,"Core frame 122 · scenario frame 122 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-jump-rise,4,"Core frame 4 · scenario frame 4 · frozen 0
+Sequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-jump-fall,26,"Core frame 26 · scenario frame 26 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-jump-land,48,"Core frame 48 · scenario frame 48 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-dash-start,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-dash-end,17,"Core frame 17 · scenario frame 17 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1
+Move none t=- 
+Throw none"
+bigswole,tuned-kick-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+bigswole,tuned-kick-recovery,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=17 startup/active/recovery 7/5/17
+Throw none"
+nate,tuned-forward,22,"Core frame 22 · scenario frame 22 · frozen 0
+Sequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,tuned-reverse,63,"Core frame 63 · scenario frame 63 · frozen 0
+Sequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.514 · x 788.9 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,tuned-stop,123,"Core frame 123 · scenario frame 123 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,tuned-jump-rise,4,"Core frame 4 · scenario frame 4 · frozen 0
+Sequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1
+Move none t=- 
+Throw none"
+nate,tuned-jump-fall,26,"Core frame 26 · scenario frame 26 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1
+Move none t=- 
+Throw none"
+nate,tuned-jump-land,48,"Core frame 48 · scenario frame 48 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,tuned-dash-start,1,"Core frame 1 · scenario frame 1 · frozen 0
+Sequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,tuned-dash-end,16,"Core frame 16 · scenario frame 16 · frozen 0
+Sequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1
+Move none t=- 
+Throw none"
+nate,tuned-kick-contact,8,"Core frame 8 · scenario frame 8 · frozen 4
+Sequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=7 startup/active/recovery 7/5/17
+Throw none"
+nate,tuned-kick-recovery,23,"Core frame 23 · scenario frame 23 · frozen 0
+Sequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1
+Move medium t=18 startup/active/recovery 7/5/17
+Throw none"

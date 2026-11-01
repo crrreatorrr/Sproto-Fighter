@@ -81,9 +81,9 @@ for (const id of PLAYABLE_FIGHTERS) {
         ROSTER[id].description = 'Shared Golden Sproto movement, attacks, and Team Special behavior. ' + 'Individual reference-based sprite art; unique powers are deferred.';
     }
 }
-// Controlled walking contrasts with the unchanged burst dash. These are the
-// final roster values consumed by movement, UI and replay checks.
-for(const id of PLAYABLE_FIGHTERS){ROSTER[id].speed*=.8;ROSTER[id].jump*=.98;}
+// Faster footwork retains a distinct burst dash. Final values are shared by
+// movement, UI and deterministic replay; the neutral jump arc stays fixed.
+for(const id of PLAYABLE_FIGHTERS){ROSTER[id].speed*=.92;ROSTER[id].jump*=.98;}
 ROSTER.dumpstar.description = 'Shared Golden Sproto movement, attacks, and Team Special behavior. Reference face and attire; objects above shoulders omitted.';
 /** Individual kits: mechanics are simulation data; the renderer uses the same identity. */
 export interface CombatStyle {
@@ -408,7 +408,6 @@ function act(s: CombatState, f: Fighter) {
                 // The selected attack wins a simultaneous dash/attack chord.
                 f.dashBuffer = 0;
                 f.move = { id, t: 0, hit: false, connected: false, wave: -1, aim: id==='launcher' && aim==='level'?'up':aim, shotX:horizontal,shotY:vertical, throwDirection:id==='grab'?(directions&A.up?'up':directions&A.down?'down':directions&(f.facing===1?A.left:A.right)?'back':'forward'):undefined };
-                if(!grounded(f) && aim==='down' && (id==='airHeavy'||id==='airMedium'))f.vy=Math.max(f.vy,8);
 
                 f.buffer = 0;
                 f.bufferLife = 0;
@@ -419,8 +418,8 @@ function act(s: CombatState, f: Fighter) {
     if (!f.move && !f.jumpBuffer && f.dashBuffer>0 && f.dashLock === 0) {
         f.dash = 11;
         f.dashBuffer=0;
-        f.dashLock = 35;
-        f.vx = f.dashDirection * (f.id === 'vela' ? 12 : 14);
+        f.dashLock = 28;
+        f.vx = f.dashDirection * (f.id === 'vela' ? 13 : 15);
         effect(s, f.x, f.y - 50, 'dash', ROSTER[f.id].color);
     }
 }
@@ -538,14 +537,14 @@ export function step(s: CombatState, inputs: [
             const approach = (target:number, amount:number) => f.vx += clamp(target - f.vx, -amount, amount);
             if (!grounded(f)) {
                 // Preserve takeoff/dash momentum; attacks permit reduced steering, not braking.
-                const steering=f.move?.18:.55;
+                const steering=f.move?.22:.65;
                 // Holding the travel direction must not brake a dash-jump more
                 // than releasing it; opposite input still reverses gradually.
                 if (dir && (dir*f.vx<=0 || Math.abs(f.vx)<speed)) approach(dir * speed, steering);
                 else f.vx *= .995;
             } else if (!f.move) {
                 const target = (f.input & A.down) ? 0 : dir * speed;
-                const acceleration = target === 0 ? speed * .6 : target * f.vx < 0 ? speed * .9 : speed * .45;
+                const acceleration = target === 0 ? speed * .7 : target * f.vx < 0 ? speed * 1.45 : speed * .55;
                 approach(target, acceleration);
             } else if(f.move.id==='special' && f.move.t>=6 && f.move.t<=COMBAT_STYLES[f.id].specialFrames.at(-1)!){f.vx=f.facing*Math.min(COMBAT_STYLES[f.id].advance??0,Math.max(0,(other.x-f.x)*f.facing-65));}
             else f.vx *= .7;
@@ -597,6 +596,10 @@ export function step(s: CombatState, inputs: [
             continue;
         attack.t++;
         const m = getMove(f, attack.id);
+        // Chamber in the current jump arc. Diving at the button press could
+        // land before a slower fighter's heavy attack ever became active.
+        if (!grounded(f) && attack.aim === 'down' &&
+            (attack.id === 'airHeavy' || attack.id === 'airMedium') && attack.t === m.startup) f.vy = Math.max(f.vy, 8);
         if (m.projectile && attack.t === m.startup) {
             const style=COMBAT_STYLES[f.id].projectile,dx=attack.shotX??f.facing,dy=attack.shotY??0,length=Math.hypot(dx,dy)||1,speed=style.speed;
             s.projectiles.push({...style,owner:i,x:f.x+f.facing*34,y:style.ground&&dy===0?FLOOR-22:f.y-95,vx:dx/length*speed,vy:dy/length*speed-(style.bounces&&dy===0&&!style.ground?3:0),life:100,damage:m.damage,age:0});

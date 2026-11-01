@@ -1,0 +1,120 @@
+
+> sproto-arena@0.1.0 qa
+> npm run smoke && npm run story-smoke && node scripts/game-qa.mjs && node scripts/fighter-qa.mjs
+
+
+> sproto-arena@0.1.0 smoke
+> node scripts/smoke.mjs && node scripts/directional-smoke.mjs && node scripts/throw-smoke.mjs && node scripts/movement-smoke.mjs
+
+PASS: 21 roster combos; movement/jump; three-combo special; guard/grab; CPU round and replay; fresh round.
+PASS: holding Up jumps once after two neutral chord frames
+PASS: Up + light within 0-frame chord window is rising attack without jump
+PASS: Up + light within 1-frame chord window is rising attack without jump
+PASS: Up + light within 2-frame chord window is rising attack without jump
+PASS: Up + forward + medium selects diagonal rising strike without jump
+PASS: down + medium is a low attack
+PASS: air down + heavy dives, hits below, and remains a finisher
+PASS: all 21 downward heavies become active from an ordinary jump before landing
+PASS: level spit has directional velocity
+PASS: up spit has directional velocity
+PASS: up-forward spit has directional velocity
+PASS: down spit has directional velocity
+PASS: light → light → low → medium → heavy: five hits, one finisher pip
+PASS: light → medium → bolt → heavy converts projectile hit into finisher
+PASS: launcher → jump → air light → air medium → air heavy: four hits, one pip
+PASS: one dash cancel is available during a live combo
+PASS: Up + light captured during hit-stop stays a rising strike, not auto-jump
+PASS: dash cancel input survives hit-stop
+PASS: guarded chain causes no damage or charge
+PASS: single finisher never earns a pip
+All focused directional checks passed.
+PASS: forward grab visibly holds first, damages once on release, then recovers
+PASS: back + grab throws behind the captured facing
+PASS: down + grab lifts then slams downward
+PASS: up + grab suppresses jump and launches victim upward
+PASS: grab beats standing guard and still earns no single-hit charge
+PASS: missed grab completes ordinary recovery with no latch or damage
+PASS: cannot grab an airborne or hit-stunned target
+PASS: opponent projectile interrupts hold and aborts pending throw damage
+PASS: held victim is protected from incidental attacker projectiles
+PASS: simultaneous grabs break evenly without a latch
+PASS: throw state stays serializable and replayable
+11 focused throw checks passed (12-frame hold, 18-frame recovery).
+PASS: all 21 fighters reach full run in 2 frames, reverse in 2, brake in 2
+PASS: jump release preserves takeoff momentum instead of stopping in midair
+PASS: air attack preserves travel and allows restrained steering
+PASS: neutral air steering can reverse travel without instant velocity flip
+PASS: dash has 3 committed frames then consumes a buffered attack
+PASS: dash tap-jump transitions after commitment and retains dash momentum
+PASS: last-frame landing strike becomes a grounded attack without disappearing
+PASS: tap-jump shortly before landing fires on touchdown, held Up never repeats
+PASS: up+attack on touchdown remains a rising attack and suppresses jump
+PASS: stun and attack recovery cannot be bypassed with dash/jump buffers
+PASS: movement input replay remains deterministic through air, dash, landing and attack
+PASS: human-paced launcher route retains vertical alignment through finisher
+PASS: hitstop buffers dash direction at press, not at later execution
+PASS: recovery-buffered dash keeps its world direction across a side change
+PASS: vertical dash chords cannot leak an unintended dash after release
+PASS: attack wins simultaneous dash chord without a delayed second action
+PASS: tap dash keeps commitment, then opposite input brakes and reverses
+PASS: wall collision clears outward dash velocity for immediate departure
+PASS: holding forward in a dash jump preserves the same momentum as neutral
+PASS: airborne facing stays stable across opponent, then resolves on touchdown
+PASS: frozen-frame attack tap survives and executes once after hitstop
+PASS: firm jump arc measures 134px and 35 airborne frames for Golden Sproto
+PASS: all fighters retain controlled 31–35-frame neutral arcs and faster dash impulse
+PASS: firmer gravity preserves the human-paced four-hit aerial route for all21 fighters
+Measured trajectories: [{"id":"rivet","height":134.36200000000002,"airFrames":35,"takeoff":2},{"id":"vela","height":117.51800000000003,"airFrames":33,"takeoff":2}]
+24 focused movement checks passed.
+
+> sproto-arena@0.1.0 story-smoke
+> node scripts/story-smoke.mjs
+
+PASS: four story worlds and five free-play stages have distinct stable IDs
+PASS: each story world can be selected directly, showing a placeholder before launch
+PASS: wins advance through three transitions to ending without autostart
+PASS: defeat and draw retry the same world without clearing it, for every world
+PASS: starting at final world does not mark earlier worlds cleared
+PASS: cleared world badges survive revisiting and repeated victories are idempotent
+PASS: restart from ending or world selector clears progress and returns to World 1 scene
+PASS: all five free-play choices launch without scenes or story result interception
+PASS: story to free-play leaves progression inactive while retaining earned session badges
+PASS: Back and Escape return scene/result to worlds then close to arena
+PASS: selector cross-links and Back-to-arena buttons work without launching a match
+PASS: navigation pauses only once per modal visit, preserving pre-navigation running state
+PASS: readiness gate blocks every story and free-play launch and allows later retry
+PASS: explicit leaveStory stops story results; snapshots do not expose mutable progress
+PASS: actual main hooks preserve paused/running status after nested destination browsing
+PASS: actual main hooks never resume a completed round from menu Back
+PASS: actual main hooks force CPU for story and restore each prior free-play behavior
+17 story/navigation checks passed (controller + actual main hooks; DOM stub, no browser claim).
+PASS: timeout chooses higher health and equal health draws; completed round is immutable
+PASS: KO resolves both sides and simultaneous zero health draws
+PASS: practice has no time limit; CPU timeout runs a full 99 seconds
+PASS: held attack triggers once, released/repressed attack repeats
+PASS: special without three charges is rejected; whiffs grant no charge
+PASS: horizontal spit hits standing target and passes over grounded crouch
+PASS: all 441 player/opponent combinations across CPU/dummy/guard retain finite bounded state and replay identically
+PASS: 7 broad QA groups; 476,280 scripted interaction frames plus focused outcomes. Physical input and visual quality require browser checks.
+PASS: rivet: four aimed spark casts, 4-contact CROSSCURRENT, spend/recovery/no self charge
+PASS: vela: four aimed prism casts, 3-contact PRISM BREAK, spend/recovery/no self charge
+PASS: bront: four aimed boulder casts, 2-contact FAULT LINE, spend/recovery/no self charge
+PASS: zephyr: four aimed pumpkin casts, 3-contact HARVEST MOON, spend/recovery/no self charge
+PASS: mox: four aimed needle casts, 5-contact ECHO DRIVE, spend/recovery/no self charge
+PASS: rune: four aimed orb casts, 3-contact NIGHT BURST, spend/recovery/no self charge
+PASS: guest07: four aimed drop casts, 3-contact CITRUS RUSH, spend/recovery/no self charge
+PASS: guest08: four aimed ring casts, 3-contact ROUND TRIP, spend/recovery/no self charge
+PASS: guest09: four aimed arrow casts, 3-contact REDLINE, spend/recovery/no self charge
+PASS: guest10: four aimed gift casts, 4-contact GIFT STORM, spend/recovery/no self charge
+PASS: guest11: four aimed heart casts, 2-contact HEARTBREAK, spend/recovery/no self charge
+PASS: guest12: four aimed coin casts, 3-contact COIN ADDRESS, spend/recovery/no self charge
+PASS: guest13: four aimed serpent casts, 3-contact SERPENT COIL, spend/recovery/no self charge
+PASS: guest14: four aimed pixel casts, 3-contact PHASE SHIFT, spend/recovery/no self charge
+PASS: dumpstar: four aimed scrap casts, 3-contact CLEANUP CREW, spend/recovery/no self charge
+PASS: crapto: four aimed acid casts, 3-contact ACID TEST, spend/recovery/no self charge
+PASS: vamp: four aimed brokenHeart casts, 3-contact BLACK PARADE, spend/recovery/no self charge
+PASS: alpha777: four aimed seven casts, 6-contact LUCKY SEVENS, spend/recovery/no self charge
+PASS: mandela: four aimed chain casts, 3-contact FREEDOM CHAIN, spend/recovery/no self charge
+PASS: bigswole: four aimed rock casts, 2-contact ATLAS CRASH, spend/recovery/no self charge
+PASS: nate: four aimed paw casts, 3-contact SMALL STEPS, spend/recovery/no self charge
+PASS: 105 per-fighter cases, 21 unique mechanical profiles, 8 trajectory/power interaction checks.

@@ -1,0 +1,8091 @@
+{
+  "version": 1,
+  "revision": "whole-pose-pelvis-4",
+  "fighters": {
+    "rivet": {
+      "frames": [
+        {
+          "url": "/fighters/poses/rivet/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/rivet/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rivet/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          164,
+          157
+        ],
+        "torso": [
+          140,
+          164
+        ]
+      }
+    },
+    "vela": {
+      "frames": [
+        {
+          "url": "/fighters/poses/vela/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/vela/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vela/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          173,
+          147
+        ],
+        "torso": [
+          147,
+          163
+        ]
+      }
+    },
+    "bront": {
+      "frames": [
+        {
+          "url": "/fighters/poses/bront/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/bront/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bront/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          181,
+          151
+        ],
+        "torso": [
+          164,
+          156
+        ]
+      }
+    },
+    "zephyr": {
+      "frames": [
+        {
+          "url": "/fighters/poses/zephyr/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/zephyr/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/zephyr/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          170,
+          155
+        ],
+        "torso": [
+          148,
+          164
+        ]
+      }
+    },
+    "mox": {
+      "frames": [
+        {
+          "url": "/fighters/poses/mox/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/mox/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mox/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          163,
+          153
+        ],
+        "torso": [
+          139,
+          166
+        ]
+      }
+    },
+    "rune": {
+      "frames": [
+        {
+          "url": "/fighters/poses/rune/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/rune/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/rune/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          155,
+          164
+        ],
+        "torso": [
+          143,
+          172
+        ]
+      }
+    },
+    "guest07": {
+      "frames": [
+        {
+          "url": "/fighters/poses/guest07/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/guest07/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest07/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          179,
+          150
+        ],
+        "torso": [
+          151,
+          163
+        ]
+      }
+    },
+    "guest08": {
+      "frames": [
+        {
+          "url": "/fighters/poses/guest08/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/guest08/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest08/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          166,
+          154
+        ],
+        "torso": [
+          144,
+          166
+        ]
+      }
+    },
+    "guest09": {
+      "frames": [
+        {
+          "url": "/fighters/poses/guest09/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/guest09/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest09/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          173,
+          149
+        ],
+        "torso": [
+          150,
+          166
+        ]
+      }
+    },
+    "guest10": {
+      "frames": [
+        {
+          "url": "/fighters/poses/guest10/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/guest10/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest10/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          163,
+          155
+        ],
+        "torso": [
+          129,
+          171
+        ]
+      }
+    },
+    "guest11": {
+      "frames": [
+        {
+          "url": "/fighters/poses/guest11/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/guest11/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest11/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          145,
+          155
+        ],
+        "torso": [
+          137,
+          167
+        ]
+      }
+    },
+    "guest12": {
+      "frames": [
+        {
+          "url": "/fighters/poses/guest12/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/guest12/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest12/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          152,
+          150
+        ],
+        "torso": [
+          142,
+          164
+        ]
+      }
+    },
+    "guest13": {
+      "frames": [
+        {
+          "url": "/fighters/poses/guest13/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/guest13/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest13/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          144,
+          151
+        ],
+        "torso": [
+          128,
+          161
+        ]
+      }
+    },
+    "guest14": {
+      "frames": [
+        {
+          "url": "/fighters/poses/guest14/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/guest14/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/guest14/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          160,
+          160
+        ],
+        "torso": [
+          140,
+          171
+        ]
+      }
+    },
+    "dumpstar": {
+      "frames": [
+        {
+          "url": "/fighters/poses/dumpstar/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/dumpstar/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/dumpstar/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          155,
+          140
+        ],
+        "torso": [
+          134,
+          157
+        ]
+      }
+    },
+    "crapto": {
+      "frames": [
+        {
+          "url": "/fighters/poses/crapto/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/crapto/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/crapto/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          163,
+          141
+        ],
+        "torso": [
+          140,
+          161
+        ]
+      }
+    },
+    "vamp": {
+      "frames": [
+        {
+          "url": "/fighters/poses/vamp/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/vamp/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/vamp/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          172,
+          145
+        ],
+        "torso": [
+          146,
+          169
+        ]
+      }
+    },
+    "alpha777": {
+      "frames": [
+        {
+          "url": "/fighters/poses/alpha777/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/alpha777/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/alpha777/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          147,
+          157
+        ],
+        "torso": [
+          139,
+          169
+        ]
+      }
+    },
+    "mandela": {
+      "frames": [
+        {
+          "url": "/fighters/poses/mandela/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/mandela/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/mandela/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          171,
+          164
+        ],
+        "torso": [
+          152,
+          168
+        ]
+      }
+    },
+    "bigswole": {
+      "frames": [
+        {
+          "url": "/fighters/poses/bigswole/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/bigswole/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/bigswole/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          154,
+          157
+        ],
+        "torso": [
+          142,
+          169
+        ]
+      }
+    },
+    "nate": {
+      "frames": [
+        {
+          "url": "/fighters/poses/nate/00-guard.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/01-breathe.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/02-walkNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/03-passNear.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/04-walkFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/05-passFar.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/06-dash.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/07-jumpAnticipation.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/08-airRise.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/09-airFall.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/10-crouchLanding.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/11-punchWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/12-punchExtended.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/13-punchRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/14-upperWindup.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/15-uppercut.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/16-kickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/17-kickHalf.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/18-kickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/19-kickRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/20-sweep.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/21-sweepRecover.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/22-airKickChamber.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/23-airKickFull.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/24-hit.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/25-block.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/26-grabReach.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/27-grabHold.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/28-throwRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/29-powerCharge.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/30-powerRelease.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/31-special.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "width": 256,
+      "height": 256,
+      "anchor": [
+        112,
+        210
+      ],
+      "scale": 1.25,
+      "facing": 1,
+      "walkCycleDistance": 64,
+      "walkFrames": [
+        {
+          "url": "/fighters/poses/nate/walk/00.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/walk/01.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/walk/02.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/walk/03.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/walk/04.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/walk/05.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/walk/06.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        },
+        {
+          "url": "/fighters/poses/nate/walk/07.png",
+          "width": 256,
+          "height": 256,
+          "anchor": [
+            112,
+            210
+          ]
+        }
+      ],
+      "holdContact": {
+        "hand": [
+          165,
+          172
+        ],
+        "torso": [
+          146,
+          187
+        ]
+      }
+    }
+  }
+}

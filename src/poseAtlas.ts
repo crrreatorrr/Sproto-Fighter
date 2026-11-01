@@ -1,0 +1,240 @@
+import { A, COMBAT_STYLES, FLOOR, THROW_HOLD_FRAMES, getMove, type Fighter, type ThrowState } from './core';
+
+/** Complete-character frames, never articulated cutouts. Thirty-two authored poses
+ * cover shared actions only; this does not invent missing per-character animation. */
+export const POSE_SLOTS = {
+  guard:0, breathe:1, walkNear:2, passNear:3, walkFar:4, passFar:5,
+  dash:6, jumpAnticipation:7, airRise:8, airFall:9, crouchLanding:10,
+  punchWindup:11, punchExtended:12, punchRecover:13, upperWindup:14, uppercut:15,
+  kickChamber:16, kickHalf:17, kickFull:18, kickRecover:19,
+  sweep:20, sweepRecover:21, airKickChamber:22, airKickFull:23,
+  hit:24, block:25, grabReach:26, grabHold:27, throwRelease:28,
+  powerCharge:29, powerRelease:30, special:31,
+} as const;
+export type PoseSlot = typeof POSE_SLOTS[keyof typeof POSE_SLOTS];
+type Point = [number, number];
+export interface PoseFrameConfig {
+  url: string;
+  width?: number;
+  height?: number;
+  /** Foot contact point in this frame's source pixels. */
+  anchor?: Point;
+}
+export interface PoseAtlasConfig {
+  frames: (string | PoseFrameConfig)[];
+  /** Optional complete-body walk cycle, 2–64 frames, sharing atlas scale. */
+  walkFrames?: (string | PoseFrameConfig)[];
+  width: number;
+  height: number;
+  anchor: Point;
+  /** Choose exactly one: source-pixel scale, or canonical frame world height. */
+  scale?: number;
+  worldHeight?: number;
+  facing?: 1 | -1;
+  /** World travel for one complete L/pass/R/pass cycle; defaults to 72. */
+  walkCycleDistance?: number;
+  /** Inspected contact points: reaching hands (26), victim torso (24). */
+  holdContact?: { hand: Point; torso: Point };
+}
+export interface PoseAtlasManifest {
+  version: 1;
+  revision?: string;
+  fighters: Record<string, PoseAtlasConfig>;
+}
+interface LoadedFrame { image: HTMLImageElement; anchor: Point; width: number; height: number }
+interface Atlas { frames: LoadedFrame[]; walkFrames?: LoadedFrame[]; scale: number; facing: number; cycle: number; holdContact?: { hand:Point; torso:Point } }
+export interface PoseAtlasDebug {
+  available: boolean;
+  slot: PoseSlot;
+  name: string;
+  walkPhase: number;
+  /** Main pose slot remains available even when a walk sequence replaces it. */
+  sequence: 'poses' | 'walk';
+  frameIndex: number;
+  sequenceLength: number;
+  source: 'authored-full-pose';
+}
+const atlases = new Map<string, Atlas>();
+const declaredAtlases = new Set<string>();
+/** Declared but loading/broken art must never silently reveal the old rig. */
+export const isPoseAtlasDeclared = (id:string) => declaredAtlases.has(id);
+let pending: Promise<boolean> | null = null;
+let loadState: 'unrequested' | 'loading' | 'absent' | 'ready' | 'error' = 'unrequested';
+let loadError: string | null = null;
+export const getPoseAtlasLoadStatus = () => ({ state: loadState, error: loadError, ids: [...atlases.keys()] });
+const positive = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v) && v > 0;
+const point = (v: unknown): v is Point => Array.isArray(v) && v.length === 2 && v.every(x => typeof x === 'number' && Number.isFinite(x));
+const modulo = (n: number, m: number) => ((n % m) + m) % m;
+const names = Object.entries(POSE_SLOTS);
+function localUrl(path: string, revision?: string): string {
+  // Atlas assets are local application files. No external source is fetched.
+  if (!path || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(path) || path.includes('\\')) throw new Error('Atlas frame must use a local URL');
+  const url = path.startsWith('/') ? path : '/fighters/' + path;
+  return revision ? url + (url.includes('?') ? '&' : '?') + 'v=' + encodeURIComponent(revision) : url;
+}
+async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): Promise<Atlas> {
+  if (!cfg || !Array.isArray(cfg.frames) || cfg.frames.length !== 32 || !positive(cfg.width) || !positive(cfg.height) || !point(cfg.anchor)) throw new Error(`Atlas ${id}: expected 32 frames, positive dimensions and foot anchor`);
+  if ((cfg.scale !== undefined && cfg.worldHeight !== undefined) || (cfg.scale !== undefined && !positive(cfg.scale)) || (cfg.worldHeight !== undefined && !positive(cfg.worldHeight))) throw new Error(`Atlas ${id}: specify one positive scale or worldHeight`);
+  if (cfg.scale === undefined && cfg.worldHeight === undefined) throw new Error(`Atlas ${id}: scale or worldHeight is required`);
+  if (cfg.facing !== undefined && cfg.facing !== 1 && cfg.facing !== -1) throw new Error(`Atlas ${id}: facing must be 1 or -1`);
+  if (cfg.walkCycleDistance !== undefined && !positive(cfg.walkCycleDistance)) throw new Error(`Atlas ${id}: invalid walkCycleDistance`);
+  if(cfg.holdContact && (![cfg.holdContact.hand,cfg.holdContact.torso].every(p=>point(p)&&p[0]>=0&&p[0]<cfg.width&&p[1]>=0&&p[1]<cfg.height)))throw new Error(`Atlas ${id}: invalid hold contact points`);
+  if (cfg.walkFrames !== undefined && (!Array.isArray(cfg.walkFrames) || cfg.walkFrames.length < 2 || cfg.walkFrames.length > 64)) throw new Error(`Atlas ${id}: walkFrames must contain 2–64 frames`);
+  const loadFrames = (entries: (string | PoseFrameConfig)[], label:string) => Promise.all(entries.map(async (entry, slot): Promise<LoadedFrame> => {
+    const f = typeof entry === 'string' ? { url: entry } : entry;
+    if (!f || typeof f.url !== 'string') throw new Error(`Atlas ${id}, ${label} frame ${slot}: missing frame URL`);
+    const width = f.width ?? cfg.width, height = f.height ?? cfg.height, anchor = f.anchor ?? cfg.anchor;
+    if (!positive(width) || !positive(height) || !point(anchor)) throw new Error(`Atlas ${id}, ${label} frame ${slot}: invalid dimensions or anchor`);
+    const image = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error(`Atlas ${id}, ${label} frame ${slot}: failed to load ${f.url}`));
+      img.src = localUrl(f.url, revision);
+    });
+    if (image.naturalWidth !== width || image.naturalHeight !== height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: image dimensions differ from metadata`);
+    return { image, width, height, anchor: [...anchor] as Point };
+  }));
+  const [frames, walkFrames] = await Promise.all([loadFrames(cfg.frames, 'poses'), cfg.walkFrames ? loadFrames(cfg.walkFrames, 'walk') : undefined]);
+  return { frames, walkFrames, scale: cfg.scale ?? cfg.worldHeight! / cfg.height, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact };
+}
+/** Optional installation: 404 or an empty roster returns false. Invalid manifests
+ * and failed assets reject and expose an error status; no partial atlas is used.
+ * Calling again after absence/error retries, allowing later asset installation. */
+export function loadPoseAtlases(): Promise<boolean> {
+  if (pending) return pending;
+  loadState = 'loading'; loadError = null;
+  pending = (async () => {
+    const response = await fetch('/fighters/pose-atlas.json', { cache: 'no-store' });
+    if (response.status === 404 || (response.ok && response.headers.get('content-type')?.includes('text/html'))) {
+      // Development SPA servers can return their HTML shell for missing files.
+      atlases.clear(); declaredAtlases.clear(); loadState = 'absent'; return false;
+    }
+    if (!response.ok) throw new Error(`Pose atlas metadata: HTTP ${response.status}`);
+    const manifest = await response.json() as PoseAtlasManifest;
+    if (manifest?.version !== 1 || !manifest.fighters || typeof manifest.fighters !== 'object' || Array.isArray(manifest.fighters)) throw new Error('Unsupported pose atlas manifest');
+    declaredAtlases.clear(); for(const id of Object.keys(manifest.fighters))declaredAtlases.add(id);
+    atlases.clear();
+    const loaded = await Promise.all(Object.entries(manifest.fighters).map(async ([id, cfg]) => [id, await loadAtlas(id, cfg, manifest.revision)] as const));
+    atlases.clear(); for (const [id, atlas] of loaded) atlases.set(id, atlas);
+    loadState = loaded.length ? 'ready' : 'absent';
+    return loaded.length > 0;
+  })().catch((error: unknown) => {
+    loadState = 'error'; loadError = error instanceof Error ? error.message : String(error); throw error;
+  }).finally(() => { pending = null; });
+  return pending;
+}
+interface Playback { frame:number; x:number; y:number; travel:number; stamp:string; slot:PoseSlot; landedAt:number; idleSince:number }
+const playback = new WeakMap<Fighter, Playback>();
+let throwScene: {state:ThrowState; fighters:readonly Fighter[]}|null = null;
+/** Set once per render using actual core fighter objects. */
+export function setPoseAtlasThrowState(state:ThrowState|null,fighters:readonly Fighter[]):void { throwScene=state?{state,fighters}:null; }
+function walking(f: Fighter): boolean { return f.y >= FLOOR && Math.abs(f.vx) > .5 && !f.move && !f.stun && !f.blockstun && !f.dash && !(f.input & A.down); }
+function selectSlot(f:Fighter,phase:number,frame:number,landedAt:number,idleSince:number):PoseSlot {
+  const S=POSE_SLOTS;
+  if(throwScene){
+    const {state,fighters}=throwScene;
+    // The clasped pose has both fists at the actor's own sternum. The reaching
+    // pose actually puts the hands on the opponent rather than hiding them.
+    if(f===fighters[state.attacker])return state.phase==='hold'?S.grabReach:S.throwRelease;
+    // No invented victim-specific pose: the authored full-body hit reaction is
+    // carried at the actual core hold/release position without limb deformation.
+    if(f===fighters[state.victim]&&(state.phase==='hold'||f.stun))return S.hit;
+  }
+  if(f.stun)return S.hit;
+  if(f.blockstun)return S.block;
+  const attack=f.move;
+  if(attack){
+    const move=getMove(f,attack.id),t=attack.t;
+    const startup=t<move.startup,active=t>=move.startup&&t<move.startup+move.active;
+    if(attack.id==='special'){
+      const contacts=COMBAT_STYLES[f.id].specialFrames,last=contacts[contacts.length-1];
+      if(t<contacts[0])return S.powerCharge;
+      if(t>=last&&t<last+3)return S.special;
+      if(contacts.some(hit=>t>=hit&&t<hit+3))return S.powerRelease;
+      return t>last+2?S.punchRecover:S.powerCharge;
+    }
+    if(attack.id==='bolt')return startup?S.powerCharge:active?S.powerRelease:S.punchRecover;
+    if(attack.id==='launcher')return startup?S.upperWindup:active?S.uppercut:S.punchRecover;
+    if(attack.id==='grab')return startup||active?S.grabReach:S.punchRecover;
+    if(attack.id==='sweep')return startup?S.kickChamber:active?S.sweep:S.sweepRecover;
+    if(attack.id==='airMedium'||attack.id==='airHeavy')return startup?S.airKickChamber:active?S.airKickFull:S.airFall;
+    if(attack.id==='medium'){
+      if(startup)return t<move.startup*.55?S.kickChamber:S.kickHalf;
+      if(active)return S.kickFull;
+      const recover=t-move.startup-move.active;
+      // Unwind extension, rechamber briefly, then plant. The landing/crouch
+      // pose caused an unrelated deep squat after every kick. A grounded
+      // recovery pose also keeps commitment visible until the last frames.
+      return recover<2?S.kickHalf:recover<5?S.kickRecover:
+        recover<move.recovery-3?S.punchRecover:S.guard;
+    }
+    return startup?S.punchWindup:active?S.punchExtended:S.punchRecover;
+  }
+  if(f.y<FLOOR)return f.vy<0?S.airRise:S.airFall;
+  if(f.jumpDelay>0)return S.jumpAnticipation;
+  if((f.input&A.down)||frame-landedAt<3)return S.crouchLanding;
+  if(f.dash)return S.dash;
+  if(walking(f))return [S.walkNear,S.passNear,S.walkFar,S.passFar][Math.floor(phase*4)%4];
+  // Re-enter the authored guard after locomotion/recovery. Using global time
+  // could jump straight to a differently posed breath on the stop frame.
+  return Math.floor(Math.max(0,frame-idleSince)/36)%2?S.breathe:S.guard;
+}
+function sample(f:Fighter,frame:number,frozen:boolean):PoseAtlasDebug {
+  const atlas=atlases.get(f.id),cycle=atlas?.cycle??72;
+  const scene=throwScene?.state;
+  const stamp=[f.x,f.y,f.move?.id,f.move?.t,f.stun,f.blockstun,f.dash,scene?.phase,scene?.t].join(':');
+  let state=playback.get(f);
+  if(!state||frame<state.frame){state={frame,x:f.x,y:f.y,travel:0,stamp:'',slot:0,landedAt:-100,idleSince:frame};playback.set(f,state);}
+  if(frame!==state.frame&&!frozen){
+    // Backsteps reverse the authored gait instead of moonwalking the forward
+    // cycle. This is rendering state only; combat and replay inputs are untouched.
+    if(walking(f))state.travel+=(f.x-state.x)*f.facing;
+    if(state.y<FLOOR&&f.y>=FLOOR)state.landedAt=frame;
+    if(f.move||f.stun||f.blockstun||f.dash||f.y<FLOOR||Math.abs(f.vx)>.5||(f.input&A.down))state.idleSince=frame;
+  }
+  const phase=modulo(state.travel,cycle)/cycle;
+  if(!frozen||state.stamp!==stamp)state.slot=selectSlot(f,phase,frame,state.landedAt,state.idleSince);
+  state.frame=frame;state.x=f.x;state.y=f.y;state.stamp=stamp;
+  const sequence = atlas?.walkFrames && state.slot >= POSE_SLOTS.walkNear && state.slot <= POSE_SLOTS.passFar ? 'walk' : 'poses';
+  const sequenceLength = sequence === 'walk' ? atlas!.walkFrames!.length : 32;
+  const frameIndex = sequence === 'walk' ? Math.min(sequenceLength - 1, Math.floor(phase * sequenceLength)) : state.slot;
+  return {available:!!atlas,slot:state.slot,name:names.find(([,slot])=>slot===state.slot)![0],walkPhase:phase,sequence,frameIndex,sequenceLength,source:'authored-full-pose'};
+}
+export function getPoseAtlasDebug(f: Fighter, frame: number, frozen = false): PoseAtlasDebug { return sample(f, frame, frozen); }
+/** Presentation-only contact correction. It neither edits limbs nor changes
+ * combat positions/collision. Other-direction lifts retain their core arc;
+ * forward release blends back to the actual trajectory over eight frames. */
+function holdOffset(f:Fighter):Point {
+  if(!throwScene||f!==throwScene.fighters[throwScene.state.victim])return [0,0];
+  const {state,fighters}=throwScene,a=atlases.get(fighters[state.attacker].id),b=atlases.get(f.id);
+  if(!a?.holdContact||!b?.holdContact)return [0,0];
+  const hand=a.holdContact.hand,torso=b.holdContact.torso,reach=a.frames[POSE_SLOTS.grabReach],hit=b.frames[POSE_SLOTS.hit];
+  const hX=(hand[0]-reach.anchor[0])*a.scale*a.facing,hY=(hand[1]-reach.anchor[1])*a.scale;
+  const bX=(torso[0]-hit.anchor[0])*b.scale*b.facing,bY=(torso[1]-hit.anchor[1])*b.scale;
+  const progress=Math.min(1,state.t/THROW_HOLD_FRAMES),smooth=progress*progress*(3-2*progress);
+  const weight=state.phase==='hold'?(state.direction==='forward'?1:1-smooth):state.direction==='forward'?Math.max(0,1-state.t/8):0;
+  const x=Math.max(-60,Math.min(60,state.facing*(hX+bX-48)))*weight;
+  const y=Math.max(-26,Math.min(26,26+hY-bY))*weight;
+  return [x,Math.min(y,FLOOR-f.y)];
+}
+function paint(c: CanvasRenderingContext2D, f: Fighter, slot: PoseSlot, ghost: boolean, sampled?: PoseAtlasDebug): boolean {
+  const atlas = atlases.get(f.id); if (!atlas) return false;
+  const source = sampled?.sequence === 'walk' ? atlas.walkFrames![sampled.frameIndex] : atlas.frames[slot];
+  const offset=sampled?holdOffset(f):[0,0];
+  c.save(); c.translate(Math.round(f.x+offset[0]),Math.round(f.y+offset[1])); c.scale(f.facing * atlas.facing * atlas.scale, atlas.scale); c.imageSmoothingEnabled = false;
+  if (ghost) c.globalAlpha *= .55;
+  if (f.flash > 0 && f.flash % 4 < 2) c.filter = 'brightness(1.8)';
+  c.drawImage(source.image, -source.anchor[0], -source.anchor[1]); c.restore(); return true;
+}
+/** False means no installed complete atlas; caller decides the fallback. */
+export function drawPoseAtlas(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false): boolean {
+  if (!atlases.has(f.id)) return false;
+  const sampled = sample(f, frame, frozen);
+  return paint(c, f, sampled.slot, ghost, sampled);
+}
+/** Explicit slot sampling for an atlas review page, or ordinary playback when omitted. */
+export function drawPoseAtlasSample(c: CanvasRenderingContext2D, f: Fighter, frame: number, slotOverride?: PoseSlot): boolean {
+  if (slotOverride !== undefined && (!Number.isInteger(slotOverride) || slotOverride < 0 || slotOverride > 31)) throw new Error('Pose slot must be 0–31');
+  const sampled = slotOverride === undefined ? sample(f, frame, false) : undefined;
+  return paint(c, f, slotOverride ?? sampled!.slot, false, sampled);
+}

@@ -1,3 +1,4 @@
+import { loadPoseAtlases, getPoseAtlasLoadStatus } from './poseAtlas';
 import { loadHiggsfieldRigs } from './higgsfieldRig';
 import { originalPortraits } from './originalPortraits';
 import './style.css';
@@ -295,7 +296,8 @@ function tick(now: number) {
 }
 updateControls();
 $('start').setAttribute('disabled','');
-loadHiggsfieldRigs().then(()=>{$('start').removeAttribute('disabled');}).catch(error=>{$('overlay-copy').textContent='Fighter art could not load. Restart the local server and reload.';console.error(error);});
+$('start').textContent='Loading fighter sprites…';
+loadPoseAtlases().then(()=>{const installed=getPoseAtlasLoadStatus().ids;return PLAYABLE_FIGHTERS.some(id=>!installed.includes(id))?loadHiggsfieldRigs():undefined;}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Enter the arena →';}).catch(error=>{$('overlay-copy').textContent='Fighter art could not load. Restart the local server and reload.';console.error(error);});
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
 Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), storySnapshot: story.snapshot, replay: () => ({ version: 1, fighter: chosen, mode, opponent, frames: frames.map(f => [...f]) }), verifyReplay: () => {

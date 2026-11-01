@@ -1,0 +1,9 @@
+Observed 2026-11-01 00:28 UTC
+launchctl job com.sprotoarena.local: PID72746, LastExitStatus0
+Program /Users/kenhiraoka/.local/bin/node
+Arguments local Vite, repo neon-relay, --host127.0.0.1 --port5173 --strictPort
+lsof: node72746 LISTEN127.0.0.1:5173
+curl HTTP/1.1 200OK
+Ordinary browser URL verified: http://127.0.0.1:5173/
+Last browser practice: Big Swole versus Morelight; movement accepted; error/warning log empty.
+Background job independent of tool shell; login-session persistence only. Use Play Sproto Arena.command after logout/reboot.

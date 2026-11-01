@@ -1,3 +1,4 @@
+import { drawPoseAtlas, isPoseAtlasDeclared } from './poseAtlas';
 import { drawHiggsfieldFighter } from './higgsfieldRig';
 import { animationFrame } from './animationClock';
 import { drawBigSwole, drawBigSwolePortrait } from './bigSwoleArt';
@@ -18,6 +19,8 @@ import { drawRosterB, drawRosterBPortrait } from './rosterArtB';
 import { drawRosterC, drawRosterCPortrait } from './rosterArtC';
 const original = {bigswole:[drawBigSwole,drawBigSwolePortrait],nate:[drawNate,drawNatePortrait],vamp:[drawVamp,drawVampPortrait],alpha777:[drawAlpha777,drawAlpha777Portrait],mandela:[drawMandela,drawMandelaPortrait],rivet:[drawRivet,drawRivetPortrait],vela:[drawVela,drawVelaPortrait],bront:[drawBront,drawBrontPortrait],zephyr:[drawZephyr,drawZephyrPortrait],mox:[drawMox,drawMoxPortrait],rune:[drawRune,drawRunePortrait],dumpstar:[drawDumpstar,drawDumpstarPortrait]} as const;
 export function drawSprite(c:CanvasRenderingContext2D,f:Fighter,frame:number,ghost=false,frozen=false){
+ if(drawPoseAtlas(c,f,frame,ghost,frozen))return;
+ if(isPoseAtlasDeclared(f.id))return; // Loading/error is surfaced by startup; never draw an old rig beneath it.
  if(drawHiggsfieldFighter(c,f,frame,ghost,frozen))return;
  frame=animationFrame(f,frame,frozen);
  if(f.id in original) original[f.id as keyof typeof original][0](c,f,frame,ghost);

@@ -1,0 +1,28 @@
+MANUAL QA · frame 199 · running
+P1 rivet: x=948.5 y=462.3 vx=2.58 vy=8.50 airHeavy t=18 input=0 hp=1000 combo=4 best=0 pips=0
+P2 vela: x=1037.8 y=565.0 vx=2.45 vy=18.50 neutral t=0 input=0 hp=784 combo=0 best=0 pips=0
+f137: launcher up hits=0 pips=0 hp=1000/1000 x=878 y=578 input=128
+f144: launcher up hits=1 pips=0 hp=1000/936 x=879 y=578 input=128
+f152: neutral  hits=1 pips=0 hp=1000/936 x=883 y=561 input=4
+f154: airLight level hits=1 pips=0 hp=1000/936 x=888 y=531 input=16
+f157: airLight level hits=2 pips=0 hp=1000/903 x=894 y=493 input=16
+f163: airMedium level hits=2 pips=0 hp=1000/903 x=896 y=482 input=32
+f168: airMedium level hits=3 pips=0 hp=1000/854 x=906 y=439 input=32
+f174: airHeavy level hits=3 pips=0 hp=1000/854 x=908 y=433 input=64
+f181: airHeavy level hits=4 pips=0 hp=1000/784 x=922 y=416 input=0
+
+MANUAL QA · frame 1051 · running
+P1 rivet: x=973.6 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=4 pips=1
+P2 vela: x=1050.3 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0
+f137: launcher up hits=0 pips=0 hp=1000/1000 x=878 y=578 input=128
+f144: launcher up hits=1 pips=0 hp=1000/936 x=879 y=578 input=128
+f152: neutral  hits=1 pips=0 hp=1000/936 x=883 y=561 input=4
+f154: airLight level hits=1 pips=0 hp=1000/936 x=888 y=531 input=16
+f157: airLight level hits=2 pips=0 hp=1000/903 x=894 y=493 input=16
+f163: airMedium level hits=2 pips=0 hp=1000/903 x=896 y=482 input=32
+f168: airMedium level hits=3 pips=0 hp=1000/854 x=906 y=439 input=32
+f174: airHeavy level hits=3 pips=0 hp=1000/854 x=908 y=433 input=64
+f181: airHeavy level hits=4 pips=0 hp=1000/784 x=922 y=416 input=0
+f209: neutral  hits=4 pips=0 hp=1000/784 x=974 y=578 input=0
+f222: neutral  hits=0 pips=1 hp=1000/784 x=974 y=578 input=0
+f270: neutral  hits=0 pips=1 hp=1000/1000 x=974 y=578 input=0

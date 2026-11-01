@@ -1,0 +1,469 @@
+{
+  "version": 1,
+  "notes": "Authored full lower-body silhouettes from observed source palettes; preserve guard anchor for slots2\u20135. Requires visual review, not automatic approval.",
+  "fighters": {
+    "rivet": {
+      "cut": 168,
+      "center": 118,
+      "waist": [
+        95,
+        140
+      ],
+      "thigh": 15,
+      "stride": 21,
+      "lift": 7,
+      "leg": "#080808",
+      "shoe": "#080808",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 30,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "e33fe057f360cb3195cd01313c8d4a240e509d9ee9d7514028d99513608b4b09"
+    },
+    "vela": {
+      "cut": 184,
+      "center": 115,
+      "waist": [
+        91,
+        151
+      ],
+      "thigh": 18,
+      "stride": 22,
+      "lift": 7,
+      "leg": "#0028f0",
+      "shoe": "#0028f0",
+      "outline": "#030811",
+      "footStyle": "bare",
+      "footLength": 33,
+      "footHeight": 11,
+      "floor": 208,
+      "belly": [
+        94,
+        168,
+        146,
+        185
+      ],
+      "guardSha256": "7efa667f7f3ab17356aff315437d97781e405683dab1c6acc59bddda085e6aea",
+      "pinPelvis": true,
+      "reachLimit": 6
+    },
+    "bront": {
+      "cut": 170,
+      "center": 139,
+      "waist": [
+        116,
+        161
+      ],
+      "thigh": 18,
+      "stride": 18,
+      "lift": 7,
+      "leg": "#0038d8",
+      "shoe": "#0038d8",
+      "outline": "#030811",
+      "footStyle": "bare",
+      "footLength": 26,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "69a0e6d371b2e624efa9e98abadcb186a86a77e0d9dd737ec3bc0e81a2d94688",
+      "pinPelvis": true
+    },
+    "zephyr": {
+      "cut": 167,
+      "center": 125,
+      "waist": [
+        108,
+        141
+      ],
+      "thigh": 15,
+      "stride": 18,
+      "lift": 7,
+      "leg": "#c00000",
+      "shoe": "#c00000",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 26,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "62a870f5dafb2376212e846ceca22a9b84546d5ab54007ecacc6ffd727bd562b"
+    },
+    "mox": {
+      "cut": 162,
+      "center": 117,
+      "waist": [
+        104,
+        130
+      ],
+      "thigh": 10,
+      "stride": 16,
+      "lift": 7,
+      "leg": "#1828a0",
+      "shoe": "#101c75",
+      "outline": "#030811",
+      "footStyle": "bare",
+      "footLength": 22,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "a6af212239140b70b3f2fad0a5879c3ff9cba440a587e10eee893fa3c01e6173"
+    },
+    "rune": {
+      "cut": 174,
+      "center": 106,
+      "waist": [
+        84,
+        128
+      ],
+      "thigh": 15,
+      "stride": 19,
+      "lift": 7,
+      "leg": "#080810",
+      "shoe": "#080808",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 27,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "405f98f0f51635bbe97e210a626bdb4bbb766b8dfd718be4c6109d5e044434f3"
+    },
+    "guest07": {
+      "cut": 157,
+      "center": 140,
+      "waist": [
+        124,
+        156
+      ],
+      "thigh": 12,
+      "stride": 16,
+      "lift": 7,
+      "leg": "#0060ed",
+      "shoe": "#0050d8",
+      "outline": "#030811",
+      "footStyle": "bare",
+      "footLength": 22,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "ecd5d7685711395702a5a50db43759cf2d1c94aa902b11e210a493d8712b5011"
+    },
+    "guest08": {
+      "cut": 182,
+      "center": 116,
+      "waist": [
+        94,
+        138
+      ],
+      "thigh": 15,
+      "stride": 20,
+      "lift": 7,
+      "leg": "#b80008",
+      "shoe": "#ac0008",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 28,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "1bca6a7ff3679381f0c384d0fce16e3e5aaf6e12698718d6ffc3f8dd3ea83d49",
+      "pinPelvis": true,
+      "reachLimit": 8
+    },
+    "guest09": {
+      "cut": 170,
+      "center": 118,
+      "waist": [
+        97,
+        138
+      ],
+      "thigh": 16,
+      "stride": 18,
+      "lift": 7,
+      "leg": "#080c0c",
+      "shoe": "#f2c900",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 25,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "91502982212f3f9bb592f291485cc3402d862dfe23d227e2283af9eb10458395"
+    },
+    "guest10": {
+      "cut": 182,
+      "center": 122,
+      "waist": [
+        98,
+        145
+      ],
+      "thigh": 15,
+      "stride": 18,
+      "lift": 7,
+      "leg": "#c80000",
+      "shoe": "#a80008",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 25,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "76304af8df3282f97c6714336a48682fc67dc883c6def9e348e01ad90f0b5518",
+      "pinPelvis": true,
+      "reachLimit": 8
+    },
+    "guest11": {
+      "cut": 168,
+      "center": 113,
+      "waist": [
+        96,
+        129
+      ],
+      "thigh": 13,
+      "stride": 18,
+      "lift": 7,
+      "leg": "#1850a8",
+      "shoe": "#c82f35",
+      "outline": "#080606",
+      "footStyle": "sneaker",
+      "footLength": 26,
+      "footHeight": 9,
+      "floor": 208,
+      "sole": "#dce1de",
+      "guardSha256": "b17ff8505026029fcdffcc3292f90ecf3e06d870035cbf4d1542b66f5beb10ab"
+    },
+    "guest12": {
+      "cut": 181,
+      "center": 116,
+      "waist": [
+        103,
+        128
+      ],
+      "thigh": 11,
+      "stride": 17,
+      "lift": 7,
+      "leg": "#0028d8",
+      "shoe": "#001b88",
+      "outline": "#030811",
+      "footStyle": "bare",
+      "footLength": 24,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "94f7be31be6ce44c87f963ad182f0457769f8189c877c3bc698039b9917376bd",
+      "pinPelvis": true,
+      "reachLimit": 8
+    },
+    "guest13": {
+      "cut": 192,
+      "center": 111,
+      "waist": [
+        84,
+        138
+      ],
+      "thigh": 15,
+      "stride": 20,
+      "lift": 7,
+      "leg": "#b00000",
+      "shoe": "#780016",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 28,
+      "footHeight": 9,
+      "floor": 208,
+      "preservePolygons": [
+        [
+          [
+            87,
+            169
+          ],
+          [
+            113,
+            169
+          ],
+          [
+            110,
+            181
+          ],
+          [
+            99,
+            187
+          ],
+          [
+            83,
+            189
+          ]
+        ],
+        [
+          [
+            125,
+            169
+          ],
+          [
+            136,
+            169
+          ],
+          [
+            141,
+            182
+          ],
+          [
+            130,
+            180
+          ]
+        ]
+      ],
+      "guardSha256": "36177803422a43c0641f7485a08e7d0b6f2ef1899416bb59c5d637801a99d6ea",
+      "pinPelvis": true,
+      "reachLimit": 5
+    },
+    "guest14": {
+      "cut": 174,
+      "center": 116,
+      "waist": [
+        96,
+        135
+      ],
+      "thigh": 15,
+      "stride": 20,
+      "lift": 7,
+      "leg": "#080810",
+      "shoe": "#080808",
+      "outline": "#080606",
+      "footStyle": "sneaker",
+      "footLength": 28,
+      "footHeight": 9,
+      "floor": 208,
+      "sole": "#dce1de",
+      "guardSha256": "136e44c670849d3497adb9843765fe2de74e3f36fbdea7c742a3ed1b64726dc2"
+    },
+    "dumpstar": {
+      "cut": 167,
+      "center": 115,
+      "waist": [
+        95,
+        135
+      ],
+      "thigh": 13,
+      "stride": 17,
+      "lift": 7,
+      "leg": "#502810",
+      "shoe": "#241009",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 24,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "109480ff71989fddecd698434f0011a6210ae051d70b046b308327de7f75c484"
+    },
+    "crapto": {
+      "cut": 158,
+      "center": 120,
+      "waist": [
+        106,
+        134
+      ],
+      "thigh": 10,
+      "stride": 16,
+      "lift": 7,
+      "leg": "#0030f0",
+      "shoe": "#0028d0",
+      "outline": "#030811",
+      "footStyle": "bare",
+      "footLength": 23,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "0cdfd70483f6b7ba534663bb335bc323ffbee8d43020b8b72a785add13a72ed8"
+    },
+    "vamp": {
+      "cut": 173,
+      "center": 132,
+      "waist": [
+        107,
+        157
+      ],
+      "thigh": 17,
+      "stride": 20,
+      "lift": 7,
+      "leg": "#080808",
+      "shoe": "#080808",
+      "outline": "#080606",
+      "footStyle": "trim",
+      "footLength": 29,
+      "footHeight": 9,
+      "floor": 208,
+      "sole": "#f2d100",
+      "guardSha256": "611c67ec8a0b9d9277d9dfcec7a6296a466dc860a7d171ddffe948c6b2e2bd57"
+    },
+    "alpha777": {
+      "cut": 172,
+      "center": 113,
+      "waist": [
+        91,
+        135
+      ],
+      "thigh": 16,
+      "stride": 20,
+      "lift": 7,
+      "leg": "#182028",
+      "shoe": "#c8000c",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 29,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "3eacd5f85f296e051d124cf074aca82a6301477f6acbf2e5047cf2a0f603eca6"
+    },
+    "mandela": {
+      "cut": 174,
+      "center": 126,
+      "waist": [
+        105,
+        147
+      ],
+      "thigh": 16,
+      "stride": 19,
+      "lift": 7,
+      "leg": "#0048d8",
+      "shoe": "#f2b900",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 27,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "e30f6a2513694cd49900028aa60fee1afc49dccc2071300255fcd570a2b70eb7",
+      "pinPelvis": true
+    },
+    "bigswole": {
+      "cut": 176,
+      "center": 117,
+      "waist": [
+        102,
+        131
+      ],
+      "thigh": 16,
+      "stride": 17,
+      "lift": 7,
+      "leg": "#0058f0",
+      "shoe": "#0050e0",
+      "outline": "#030811",
+      "footStyle": "bare",
+      "footLength": 24,
+      "footHeight": 9,
+      "floor": 208,
+      "guardSha256": "ad53a4e51b594b5e6b161d4ee48931d47859d462965cd4a74baa36c260413708",
+      "pinPelvis": true
+    },
+    "nate": {
+      "cut": 175,
+      "center": 125,
+      "waist": [
+        101,
+        149
+      ],
+      "thigh": 17,
+      "stride": 20,
+      "lift": 7,
+      "leg": "#f8c800",
+      "shoe": "#dca800",
+      "outline": "#080606",
+      "footStyle": "dress",
+      "footLength": 28,
+      "footHeight": 11,
+      "floor": 208,
+      "guardSha256": "c1cccc99f1ebf6f4b2c1afe80f2634f69de31f1eecfc3a72b2535f8f847996e8"
+    }
+  }
+}

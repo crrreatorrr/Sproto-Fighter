@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Full-pose atlas review</title><style>
+:root{font:14px system-ui;color:#e9edf4;background:#101722;color-scheme:dark}body{max-width:1320px;margin:24px auto;padding:0 16px}h1{font-size:25px}p{color:#aebed0;line-height:1.5}.bar{display:flex;gap:12px;flex-wrap:wrap;align-items:end;padding:14px;background:#1d293b;border:1px solid #42556e}label{display:grid;gap:5px;font-size:12px}select,button{font:inherit;padding:8px;background:#283c53;color:white;border:1px solid #60758d;border-radius:4px;cursor:pointer}button:disabled{opacity:.5}#live{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}canvas{width:100%;image-rendering:pixelated;background:#273345;border:1px solid #64758b}#frames{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}figure{margin:14px 0}figcaption{font-size:12px;padding:5px}#status,#debug{white-space:pre-wrap;font:12px ui-monospace,monospace;line-height:1.6}.error{color:#ffad9e}a{color:#a9d8ff}@media(max-width:760px){#live{grid-template-columns:1fr}#frames{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style></head><body>
+<h1>Full-pose atlas review</h1><p>Complete authored frames only. The live panels advance the real combat core with persistent fighter objects. The second panel mirrors the same state for facing inspection. Frame inspection below bypasses action selection. Missing atlases are labelled; no old cutout art is drawn here.</p>
+<div class="bar"><button id="prev">Previous fighter</button><label>Fighter<select id="fighter"></select></label><button id="next">Next fighter</button><label>Action<select id="action"><option value="fullReview">Full motion review</option><option selected>idle</option><option>walk</option><option>dash</option><option>jump</option><option>crouch</option><option>light</option><option>medium</option><option>heavy</option><option>low</option><option>sweep</option><option>launcher</option><option>bolt</option><option>airLight</option><option>airMedium</option><option>airHeavy</option><option>grab</option><option>victimThrow</option><option>hit</option><option>block</option><option>special</option><option>keyboard</option></select></label><label>Aim / throw direction<select id="direction"><option>forward</option><option>back</option><option>up</option><option>upForward</option><option>down</option></select></label><label>Playback speed<select id="speed"><option value=".25">¼×</option><option value=".5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><label style="display:flex;align-items:center;gap:6px"><input id="loopAction" type="checkbox" checked> Loop action</label><button id="play">Play</button><button id="step">Step 1 frame</button><button id="reset">Restart action</button><button id="reload">Reload assets</button></div>
+<p id="scenario" role="status" style="font-weight:600;color:#fff"></p><p id="status" role="status">Loading optional atlas manifest…</p><p>Keyboard mode: A/D move · W jump · S crouch · J/K/L attacks · U launcher · I power · O grab · P special · Shift dash. Test special starts with three pips. This review fixture does not alter the game's charging rules. Each scripted scenario resets positions and test meter, then advances persistent core state through recovery. Full review checks both walking directions and all four attacker/victim throw directions.</p>
+<div id="live"><figure><canvas id="normal" width="640" height="360"></canvas><figcaption>Actual state · original facing</figcaption></figure><figure><canvas id="mirror" width="640" height="360"></canvas><figcaption>Same state · opposite facing</figcaption></figure></div><pre id="debug"></pre>
+<div class="bar"><button id="pagePrev">Previous frame page</button><span id="pageLabel"></span><button id="pageNext">Next frame page</button><label>Inspect exact slot<select id="slot"></select></label><button id="slotPreview">Show slot page</button></div><div id="frames"></div>
+<p>Thirty-two poses do not constitute hand-drawn full-action animation. Directional attacks share authored punch/kick poses; victim throws use the hit pose with a bounded hand-to-torso contact correction that fades into the core release trajectory. Direction-specific paired throw art remains limited. Projectile and power mechanics remain distinct in the game. Judge anatomy, foot anchors, timing, motion continuity and missing states separately.</p>
+<script type="module">
+import {A,FLOOR,ROSTER,PLAYABLE_FIGHTERS,createState,step,getMove} from '/src/core.ts';
+import {loadPoseAtlases,drawPoseAtlas,drawPoseAtlasSample,getPoseAtlasDebug,getPoseAtlasLoadStatus,setPoseAtlasThrowState,POSE_SLOTS} from '/src/poseAtlas.ts';
+const $=id=>document.getElementById(id),names=Object.entries(POSE_SLOTS),keys=new Set();
+for(const id of PLAYABLE_FIGHTERS){const o=new Option(ROSTER[id].name+' · '+id,id);$('fighter').add(o);} $('fighter').value='vela';
+for(const [name,n]of names)$('slot').add(new Option(n+' · '+name,String(n)));
+let s,age=0,playing=false,last=0,accumulator=0,page=0,error='',reviewIndex=0,cycle=0,reviewComplete=false;
+const motionReview=[
+ {action:'idle',label:'Idle / breathing'},
+ {action:'walkForward',label:'Walk forward'},
+ {action:'walkBack',label:'Walk backward'},
+ ...['dash','jump','light','medium','sweep','launcher','bolt','airMedium','hit','block'].map(action=>({action,label:action})),
+ ...['forward','back','up','down'].map(direction=>({action:'grab',direction,label:'Attacker throw · '+direction})),
+ ...['forward','back','up','down'].map(direction=>({action:'victimThrow',direction,label:'Victim throw · '+direction})),
+ {action:'special',label:'Team special'},
+];
+function scenario(){return $('action').value==='fullReview'?motionReview[reviewIndex]:{action:$('action').value,direction:$('direction').value,label:$('action').selectedOptions[0].textContent};}
+const keymap={KeyA:A.left,KeyD:A.right,KeyW:A.up,KeyS:A.down,KeyJ:A.light,KeyK:A.medium,KeyL:A.heavy,KeyU:A.launcher,KeyI:A.bolt,KeyO:A.grab,KeyP:A.special,ShiftLeft:A.dash};
+window.addEventListener('keydown',e=>{if($('action').value==='keyboard'&&keymap[e.code]&&!['SELECT','INPUT','BUTTON'].includes(e.target.tagName)){keys.add(e.code);e.preventDefault();}});
+window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>keys.clear());
+function beginScenario(){
+ const a=scenario().action;s=createState($('fighter').value,'dummy');s.fighters[0].x=500;s.fighters[1].x=1000;s.fighters[0].pips=3;
+ if(['light','medium','heavy','low','sweep','grab','victimThrow','hit','block','launcher'].includes(a))s.fighters[1].x=560;
+ if(a==='bolt'||a==='special')s.fighters[1].x=850;
+ age=0;keys.clear();draw();gallery();
+}
+function reset(){reviewIndex=0;cycle=0;reviewComplete=false;accumulator=0;beginScenario();}
+function direction(f){const d=scenario().direction??'forward',forward=f.facing===1?A.right:A.left,back=f.facing===1?A.left:A.right;return d==='up'?A.up:d==='down'?A.down:d==='back'?back:d==='upForward'?A.up|forward:0;}
+function input(){const a=scenario().action,f=s.fighters[0];let first=0,second=0;
+ if(a==='keyboard')for(const code of keys)first|=keymap[code]??0;
+ else if(a==='walk')first=age<60?A.right:age<120?A.left:0;
+ else if(a==='walkForward')first=age<60?A.right:0;
+ else if(a==='walkBack')first=age<60?A.left:0;
+ else if(a==='crouch')first=age<75?A.down:0;
+ else if(a==='jump')first=age===0?A.up:0;
+ else if(a==='dash')first=age===0?A.right|A.dash:0;
+ else if(a==='hit'||a==='block'){second=age===0?A.light:0;if(a==='block'&&age<35)first=A.left;}
+ else if(a==='victimThrow')second=age===0?A.grab|direction(s.fighters[1]):0;
+ else if(a.startsWith('air')){if(age===0)first=A.up;else if(age===9)first=A[a==='airLight'?'light':a==='airMedium'?'medium':'heavy']|direction(f);}
+ else if(age===0){first=(A[a]??(a==='low'?A.light:a==='sweep'?A.heavy:0))|(['low','sweep'].includes(a)?A.down:direction(f));}
+ return[first,second];
+}
+function settled(){return !s.freeze&&!s.throwState&&!s.projectiles.length&&s.fighters.every(f=>!f.move&&!f.stun&&!f.blockstun&&!f.dash&&f.y>=FLOOR&&f.vy===0&&Math.abs(f.vx)<.1);}
+function advance(){
+ if(reviewComplete)return;
+ step(s,input());age++;
+ const a=scenario().action,minFrames=a==='walk'?150:120;
+ if(a!=='keyboard'&&age>=minFrames&&settled()){
+  if($('action').value==='fullReview'){
+   if(reviewIndex<motionReview.length-1){reviewIndex++;beginScenario();return;}
+   if($('loopAction').checked){reviewIndex=0;cycle++;beginScenario();return;}
+   reviewComplete=true;playing=false;$('play').textContent='Play';
+  }else if($('loopAction').checked){cycle++;beginScenario();return;}
+ }
+ draw();
+}
+function checker(c,w,h){for(let y=0;y<h;y+=20)for(let x=0;x<w;x+=20){c.fillStyle=(x/20+y/20)%2?'#303e50':'#253243';c.fillRect(x,y,20,20);}}
+function missing(c,x,y,id){c.fillStyle='#f6b1a5';c.font='14px system-ui';c.textAlign='center';c.fillText('No installed 32-frame atlas: '+id,x,y);c.textAlign='left';}
+function draw(){if(!s)return;const current=scenario();$('scenario').textContent=`${$('action').value==='fullReview'?'Full motion review · '+(reviewIndex+1)+'/'+motionReview.length+' · ':''}${current.label}${current.direction&&$('action').value!=='fullReview'?' · '+current.direction:''} · cycle ${cycle+1}${reviewComplete?' · COMPLETE (not an approval)':''}`;setPoseAtlasThrowState(s.throwState,s.fighters);const f=s.fighters[0];
+ for(const [id,flip]of [['normal',1],['mirror',-1]]){const c=$(id).getContext('2d');checker(c,640,360);c.save();c.translate(320,310);c.scale(flip*.95,.95);c.translate(-f.x,-FLOOR);c.strokeStyle='#a0b1c4';c.beginPath();c.moveTo(f.x-330,FLOOR);c.lineTo(f.x+330,FLOOR);c.stroke();for(let i=1;i>=0;i--)drawPoseAtlas(c,s.fighters[i],s.frame,i===1,s.freeze>0);c.restore();if(!getPoseAtlasDebug(f,s.frame,s.freeze>0).available)missing(c,320,165,f.id);}
+ const d=getPoseAtlasDebug(f,s.frame,s.freeze>0),m=f.move?getMove(f,f.move.id):null;
+ $('debug').textContent=`Core frame ${s.frame} · scenario frame ${age} · frozen ${s.freeze}\nSequence ${d.sequence} · frame ${d.frameIndex}/${d.sequenceLength-1} · pose slot ${d.slot}: ${d.name} · gait phase ${d.walkPhase.toFixed(3)} · x ${f.x.toFixed(1)} y ${f.y.toFixed(1)} facing ${f.facing}\nMove ${f.move?.id??'none'} t=${f.move?.t??'-'} ${m?'startup/active/recovery '+m.startup+'/'+m.active+'/'+m.recovery:''}\nThrow ${s.throwState?JSON.stringify(s.throwState):'none'}`;
+ const load=getPoseAtlasLoadStatus();$('status').className=error?'error':'';$('status').textContent=error||`${load.state}: ${load.ids.length}/21 installed atlases. Selected: ${d.available?'available':'absent — no fallback shown'}.`;
+}
+function gallery(){$('frames').replaceChildren();$('pageLabel').textContent=`Slots ${page*8}–${page*8+7} / 31`;for(let n=page*8;n<page*8+8;n++){const fig=document.createElement('figure'),cv=document.createElement('canvas'),cap=document.createElement('figcaption');cv.width=300;cv.height=300;const c=cv.getContext('2d');checker(c,300,300);const f={...s.fighters[0],x:150,y:270,facing:1,flash:0};if(!drawPoseAtlasSample(c,f,s.frame,n))missing(c,150,135,f.id);cap.textContent=n+' · '+names.find(([,slot])=>slot===n)[0];fig.append(cv,cap);$('frames').append(fig);}}
+async function load(){try{error='';await loadPoseAtlases();}catch(e){error='Atlas load failed (no fallback): '+e.message;}draw();gallery();}
+$('fighter').onchange=reset;$('action').onchange=reset;$('direction').onchange=reset;$('reset').onclick=reset;
+$('prev').onclick=()=>{$('fighter').selectedIndex=($('fighter').selectedIndex+20)%21;reset();};$('next').onclick=()=>{$('fighter').selectedIndex=($('fighter').selectedIndex+1)%21;reset();};
+$('play').onclick=()=>{if(reviewComplete)reset();playing=!playing;$('play').textContent=playing?'Pause':'Play';last=0;accumulator=0;};$('step').onclick=()=>{playing=false;$('play').textContent='Play';advance();};$('reload').onclick=load;
+$('pagePrev').onclick=()=>{page=(page+3)%4;gallery();};$('pageNext').onclick=()=>{page=(page+1)%4;gallery();};$('slotPreview').onclick=()=>{page=Math.floor(Number($('slot').value)/8);gallery();};
+function loop(now){if(last&&playing){accumulator+=Math.min(100,now-last)*Number($('speed').value);while(playing&&accumulator>=1000/60){advance();accumulator-=1000/60;}}last=now;requestAnimationFrame(loop);}reset();load();requestAnimationFrame(loop);
+</script></body></html>

@@ -1,0 +1,4 @@
+# Browser AX captures are verbatim evidence; retain their trailing blanks.
+docs/evidence/**/*.txt whitespace=-blank-at-eol,-blank-at-eof
+# CSV evidence includes verbatim multiline AX fields and CRLF row endings.
+docs/evidence/**/*.csv whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
