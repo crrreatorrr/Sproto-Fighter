@@ -18,7 +18,7 @@ class Element{
  querySelector(s){if(s==='.selection-grid')return this.grid;if(s==='.stage-rail')return this.rail;if(s==='canvas')return this.canvas;return null;}
  querySelectorAll(s){return s==='button'?this.children.filter(c=>c.tagName==='BUTTON'):[];}
  getBoundingClientRect(){const i=root.grid?.children.indexOf(this)??-1;return {top:Math.floor(i/11)*100};}
- getContext(){return {fillRect(){},save(){},restore(){},translate(){},scale(){}};}
+ getContext(){return {fillRect(){},save(){},restore(){},translate(){},scale(){},beginPath(){},ellipse(){},fill(){}};}
  matches(s){return s==='button'&&this.tagName==='BUTTON';}
 }
 class Select extends Element{constructor(){super('select');this.options=[{value:'cpu'},{value:'dummy'},{value:'guard'}];this.selectedIndex=0;}get value(){return this.options[this.selectedIndex].value;}set value(v){this.selectedIndex=this.options.findIndex(o=>o.value===v);}}

@@ -1,0 +1,152 @@
+{
+  "note": "Name comparison distinguishes preserved source text from CSS-uppercase presentation.",
+  "rows": [
+    {
+      "id": "rivet",
+      "expected": "Golden Sproto",
+      "sourceName": "Golden Sproto",
+      "visibleName": "GOLDEN SPROTO",
+      "pass": true
+    },
+    {
+      "id": "vela",
+      "expected": "Morelight",
+      "sourceName": "Morelight",
+      "visibleName": "MORELIGHT",
+      "pass": true
+    },
+    {
+      "id": "bront",
+      "expected": "Fat Head Dave",
+      "sourceName": "Fat Head Dave",
+      "visibleName": "FAT HEAD DAVE",
+      "pass": true
+    },
+    {
+      "id": "zephyr",
+      "expected": "Halloween 2008",
+      "sourceName": "Halloween 2008",
+      "visibleName": "HALLOWEEN 2008",
+      "pass": true
+    },
+    {
+      "id": "mox",
+      "expected": "Yannix",
+      "sourceName": "Yannix",
+      "visibleName": "YANNIX",
+      "pass": true
+    },
+    {
+      "id": "rune",
+      "expected": "Bongraker",
+      "sourceName": "Bongraker",
+      "visibleName": "BONGRAKER",
+      "pass": true
+    },
+    {
+      "id": "guest07",
+      "expected": "Juicy",
+      "sourceName": "Juicy",
+      "visibleName": "JUICY",
+      "pass": true
+    },
+    {
+      "id": "guest08",
+      "expected": "Yoyo",
+      "sourceName": "Yoyo",
+      "visibleName": "YOYO",
+      "pass": true
+    },
+    {
+      "id": "guest09",
+      "expected": "Red Kev",
+      "sourceName": "Red Kev",
+      "visibleName": "RED KEV",
+      "pass": true
+    },
+    {
+      "id": "guest10",
+      "expected": "Sprotel Bitcoin",
+      "sourceName": "Sprotel Bitcoin",
+      "visibleName": "SPROTEL BITCOIN",
+      "pass": true
+    },
+    {
+      "id": "guest11",
+      "expected": "Chode Adoration",
+      "sourceName": "Chode Adoration",
+      "visibleName": "CHODE ADORATION",
+      "pass": true
+    },
+    {
+      "id": "guest12",
+      "expected": "$Bitcoin Obama",
+      "sourceName": "$Bitcoin Obama",
+      "visibleName": "$BITCOIN OBAMA",
+      "pass": true
+    },
+    {
+      "id": "guest13",
+      "expected": "Jahon",
+      "sourceName": "Jahon",
+      "visibleName": "JAHON",
+      "pass": true
+    },
+    {
+      "id": "guest14",
+      "expected": "Virtuagram",
+      "sourceName": "Virtuagram",
+      "visibleName": "VIRTUAGRAM",
+      "pass": true
+    },
+    {
+      "id": "dumpstar",
+      "expected": "Dumpstar",
+      "sourceName": "Dumpstar",
+      "visibleName": "DUMPSTAR",
+      "pass": true
+    },
+    {
+      "id": "crapto",
+      "expected": "Crapto",
+      "sourceName": "Crapto",
+      "visibleName": "CRAPTO",
+      "pass": true
+    },
+    {
+      "id": "vamp",
+      "expected": "VAMP",
+      "sourceName": "VAMP",
+      "visibleName": "VAMP",
+      "pass": true
+    },
+    {
+      "id": "alpha777",
+      "expected": "Alpha 777",
+      "sourceName": "Alpha 777",
+      "visibleName": "ALPHA 777",
+      "pass": true
+    },
+    {
+      "id": "mandela",
+      "expected": "Bitcoin Mandela",
+      "sourceName": "Bitcoin Mandela",
+      "visibleName": "BITCOIN MANDELA",
+      "pass": true
+    },
+    {
+      "id": "bigswole",
+      "expected": "Big Swole",
+      "sourceName": "Big Swole",
+      "visibleName": "BIG SWOLE",
+      "pass": true
+    },
+    {
+      "id": "nate",
+      "expected": "Little Foot Nate",
+      "sourceName": "Little Foot Nate",
+      "visibleName": "LITTLE FOOT NATE",
+      "pass": true
+    }
+  ]
+}

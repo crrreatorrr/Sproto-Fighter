@@ -2,7 +2,7 @@
 
 Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline prototype with **21 selectable fighters**, each with its original supplied image on the selection screen and a fighting animation set. All 21 have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Four story worlds now have static Higgsfield pixel-art stage panoramas; story text and cutscenes remain explicit placeholders. The original pixel-art **Amber Ranch** remains a free-play bonus.
 
-The selection screen uses blue, red and yellow, opposing fighter previews, real move statistics, random fighter/stage choices and an explicit **Start fight** button. Selecting a stage changes the preview and the arena used for the next match. All rounds are untimed and end on knockout. See [menu verification](docs/MENU-QA.md).
+The selection screen follows the supplied reference's compact arcade composition: centered **MEMBER SELECT**, opposing fighters, side statistics and a dense portrait grid in red, blue and yellow. It retains random fighter/stage choices and an explicit **Start fight** button. Selecting a stage changes the preview and the next match's arena. All rounds are untimed and end on knockout. See the [latest layout verification](docs/MENU-REFERENCE-REVISION.md) and [prior menu/gameplay checks](docs/MENU-QA.md). Additional Higgsfield menu artwork is quoted but awaits separate credit approval.
 
 **Latest animation update: 2 of 21 new event sets are installed.** Golden Sproto and Morelight now have new intro, special, cast, recoil and defeat frames, with separate presentation timing and a visible defeat sequence before results. The other 19 retain their existing playable art; their latest authorized reference-upload retry received HTTP 403 from storage, blocking new generation. See [current event QA](docs/ANIMATION-EVENT-QA.md) and [handoff](docs/CLAUDE-HANDOFF.md) for exact coverage, cost and limitations.
 
@@ -91,7 +91,7 @@ CPU and practice rounds have no timer or timeout result. A knockout ends the rou
 - `src/originalPortraits.ts`: explicit mapping of the 21 original references used by character selection.
 - `art/pose-atlases/`: source sheets, connected-component importer, targeted identity/footwear corrections and reproducible guarded-step authoring.
 - `src/stage.ts`: original ranch plus four static Higgsfield stage images, shared between previews and combat. Procedural labeled fallbacks remain available if optional stage images fail to load. `src/storyMode.ts` controls world selection and placeholder scene/progression panels.
-- `src/style.css` / `index.html`: responsive arcade selection and combat shell.
+- `src/style.css` / `index.html`: combat/menu shell; `src/arcadeSelection.css` supplies the latest reference-led selection composition and mobile overrides.
 
 Development console helpers: `neonRelay.snapshot()` returns a copied state, `neonRelay.replay()` returns initial configuration + input masks, and `neonRelay.verifyReplay()` re-simulates recorded input and compares state. This structure makes later rollback exploration easier; it does **not** establish cross-browser determinism or online readiness. There is no transport, matchmaking, synchronization, rollback, or remote input handling yet.
 

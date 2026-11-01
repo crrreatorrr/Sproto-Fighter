@@ -1,0 +1,186 @@
+/* Character-select composition: compact arcade frame, side readouts and two-row roster.
+   Keep combat/dialog styling in style.css. The optional paid art layer is not installed. */
+body { background: #07080b; }
+.arena-header { max-width: 1360px; padding: 8px 24px; min-height: 45px; border-bottom: 1px solid #3f2531; }
+.brand { font-size: 14px; letter-spacing: 1.6px; }
+.brand-icon { width: 26px; height: 25px; font-size: 13px; }
+.top-navigation .quiet { padding: 6px 11px; border-radius: 0; border-color: #55454b; background: #10121a; font-size: 10px; }
+.offline-label { font-size: 8px; }
+main { max-width: 1360px; padding: 12px 18px 0; }
+#selection-view {
+  position: relative; isolation: isolate; overflow: hidden;
+  padding: 15px 6.5% 10px; border: 2px solid #8f2736;
+  box-shadow: inset 0 0 0 3px #0b0b0e, inset 0 0 0 4px #493d36, 0 0 0 1px #26141b;
+  background:
+    linear-gradient(135deg, transparent 48%, #4b3d3218 49%, #4b3d3218 50%, transparent 51%) 0 0 / 38px 38px,
+    radial-gradient(ellipse at 15% 22%, #a51e3030, transparent 44%),
+    radial-gradient(ellipse at 85% 25%, #125cbf30, transparent 44%),
+    #090b10;
+}
+#selection-view::before, #selection-view::after {
+  content: ''; position: absolute; inset: 6px; pointer-events: none; z-index: 4;
+  border: 1px solid #822635;
+  clip-path: polygon(0 0, 19% 0, 19% 1%, 1% 1%, 1% 18%, 0 18%, 0 0, 100% 0, 100% 18%, 99% 18%, 99% 1%, 81% 1%, 81% 0, 100% 0, 100% 100%, 81% 100%, 81% 99%, 99% 99%, 99% 82%, 100% 82%, 100% 100%, 0 100%, 0 82%, 1% 82%, 1% 99%, 19% 99%, 19% 100%);
+}
+#selection-view::after { inset: 10px; border-color: #6b5734; opacity: .65; }
+.arcade-echoes { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.arcade-echoes img { position: absolute; top: 18px; width: 31%; height: 74%; object-fit: contain; opacity: .10; filter: saturate(.3); }
+#player-echo { left: -14%; transform: rotate(-6deg); }
+#rival-echo { right: -14%; transform: scaleX(-1) rotate(-6deg); }
+.selection-heading { display: flex; justify-content: center; align-items: center; gap: 18px; padding: 1px 0 9px; }
+.selection-heading h1 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(20px,2.2vw,29px); font-weight: 700; font-style: normal; letter-spacing: 5px; line-height: 1.1; margin: 0; color: #f2edcf; white-space: nowrap; text-shadow: 2px 2px #000; }
+.selection-heading h1 em { color: inherit; font-style: normal; }
+.heading-rule { height: 18px; flex: 1; max-width: 210px; border-top: 2px solid #a8a5a0; border-bottom: 1px solid #4c4846; transform: skew(-38deg); }
+.heading-rule:first-child { transform: skew(38deg); }
+.match-preview { height: clamp(242px,24vw,305px); border: 0; overflow: hidden; background: #0c101a; }
+.match-preview::after { height: 1px; background: #77736b; }
+#selection-stage { z-index: 2; }
+.preview-shade { z-index: 1; background: linear-gradient(90deg,#07090feb 0%,#07090fa8 18%,transparent 34%,transparent 66%,#07090fa8 82%,#07090feb 100%); }
+.versus { z-index: 3; width: 86px; height: 86px; top: 32%; left: 50%; display: grid; place-items: center; transform: translateX(-50%) rotate(45deg); border: 3px double #ccb765; border-radius: 0; background: #090c16d9; box-shadow: 0 0 0 5px #090c16,0 0 0 6px #4d5364; font-size: 38px; text-shadow: 2px 3px #823a2a; }
+.versus b { display: block; transform: rotate(-45deg); font-weight: 950; font-style: italic; }
+.fighter-summary { top: 15px; bottom: 14px; width: 20%; max-width: 218px; padding: 8px 11px; background: linear-gradient(90deg,#06070bee,#06070bb8); border-top: 1px solid #878581; border-bottom: 1px solid #504a43; z-index: 3; }
+.fighter-summary.red { left: 0; right: auto; text-align: left; border-right: 2px solid #ed3749; }
+.fighter-summary.blue { right: 0; left: auto; text-align: right; border-left: 2px solid #377ef4; }
+.summary-top { display: block; font-family: Georgia,serif; font-size: 11px; letter-spacing: 1.2px; }
+.summary-top small { display: block; margin-top: 4px; font: 8px ui-monospace,monospace; color: #c2bdba; letter-spacing: 1.1px; }
+.fighter-summary h2 { font-family: Georgia,serif; font-size: clamp(12px,1.6vw,20px); font-weight: 700; text-transform: uppercase; margin: 7px 0 5px; letter-spacing: 1px; line-height: 1.05; overflow-wrap: anywhere; }
+.fighter-summary > p { font-size: 8px; letter-spacing: .7px; margin: 0 0 10px; color: #ffdc54; }
+.fighter-summary dl { display: grid; grid-template-columns: 1fr; gap: 5px; }
+.fighter-summary dl > div { min-height: 27px; padding: 5px 6px; display: flex; align-items: center; justify-content: space-between; gap: 3px; background: linear-gradient(90deg,#712136,#20121f); border: 1px solid #9a7d78; box-shadow: inset 0 0 0 2px #0c0d12; }
+.fighter-summary.blue dl > div { background: linear-gradient(90deg,#102745,#1a4b8f); }
+.fighter-summary dl > div:nth-child(2n) { border-color: #a29260; background: linear-gradient(90deg,#574526,#211d16); }
+.fighter-summary dt { font-size: 7px; letter-spacing: .3px; color: #f4e9d5; margin: 0; }
+.fighter-summary dd { font-size: 13px; white-space: nowrap; font-family: ui-monospace,monospace; color: #fff1be; }
+.fighter-summary dd small { font-size: 7px; color: #cfbf99; margin-left: 3px; }
+.preview-stage-label { min-width: 0; width: 22%; bottom: 17px; padding: 5px 6px; background: #070b14e8; border: 1px solid #7f7047; z-index: 3; }
+.preview-stage-label span { font-size: 6px; letter-spacing: 1.7px; }
+.preview-stage-label b { font-size: 9px; letter-spacing: .6px; }
+.selection-roster { margin-top: 0; }
+.selection-section-heading { position: relative; margin: 0 0 6px; gap: 7px; min-height: 28px; }
+.selection-roster > .selection-section-heading { background: #07080b; border-top: 2px solid #868584; border-bottom: 1px solid #67635d; margin: 0 0 9px; }
+.side-switch { width: 100%; justify-content: space-between; }
+.side-tab { width: 25%; border-radius: 0; border: 1px solid #aeaba4; padding: 5px 9px; font-size: 8px; background: #111218; box-shadow: inset 0 0 0 2px #050609; }
+.side-tab span { font-family: Georgia,serif; font-size: clamp(9px,1.1vw,14px); text-transform: uppercase; margin-left: 7px; letter-spacing: 1px; }
+.side-tab.red { color: #ff6275; }
+.side-tab.blue { color: #64b5ff; }
+.side-tab.red[aria-pressed=true] { background: linear-gradient(90deg,#7b1428,#19101b); color: #ffdb54; border-color: #ffdd65; box-shadow: inset 0 0 0 2px #08090c; }
+.side-tab.blue[aria-pressed=true] { background: linear-gradient(90deg,#0f1a34,#174b8d); color: #ffdb54; border-color: #ffdd65; box-shadow: inset 0 0 0 2px #08090c; }
+.selection-roster #roster-heading { position: absolute; left: 27%; right: 27%; text-align: center; font-size: 9px; letter-spacing: 1.5px; pointer-events: none; }
+.roster-total { display: none; }
+.selection-grid { grid-template-columns: repeat(11,minmax(0,1fr)); gap: 6px; padding: 0 2px; }
+.portrait-choice { height: clamp(76px,7.3vw,97px); border: 3px double #9a9691; border-radius: 0; background: #080a10; box-shadow: 2px 2px #000; }
+.portrait-choice img { padding: 0 1px 15px; }
+.portrait-name { min-height: 17px; padding: 3px 1px 2px; font-size: 7px; background: #04060ce6; border-top: 1px solid #504c44; }
+.portrait-choice:hover { border-color: #f7e6a4; background: #1f2532; }
+.portrait-choice[aria-pressed=true] { outline: 2px solid #ffdb49; outline-offset: 1px; border-color: #ffdc4c; background: #5d2732; }
+#selection-view[data-side=opponent] .portrait-choice[aria-pressed=true] { background: #16396e; }
+.side-marker { top: 0; padding: 2px 3px; font-size: 7px; border-radius: 0; }
+.side-marker.p1 { left: 0; background: #d91c36; }
+.side-marker.cpu { right: 0; background: #235fe1; }
+.random-choice { background: repeating-linear-gradient(135deg,#070b14 0 6px,#111b2c 6px 7px); border-style: double; }
+.random-choice strong { font-family: Georgia,serif; font-size: 38px; color: #777b88; }
+.random-choice > span { font-family: Georgia,serif; font-size: 9px; letter-spacing: 1px; color: #e6d6a9; }
+.selection-hint { margin: 5px 2px; min-height: 14px; font-size: 9px; line-height: 1.3; color: #bcb9b1; }
+.selection-locations { border-top: 1px solid #55504a; padding-top: 6px; margin-top: 2px; }
+.selection-locations .selection-section-heading { min-height: 18px; margin-bottom: 3px; }
+.selection-locations h2 { font-family: Georgia,serif; font-size: 10px; letter-spacing: 2px; color: #e9d7a6; }
+.text-button { color: #ffe479; font-size: 8px; letter-spacing: 1px; padding: 3px 0; }
+.stage-rail { gap: 6px; }
+.stage-choice { height: 52px; border: 3px double #8a8985; border-radius: 0; }
+.stage-choice > span { padding: 4px 6px; background: linear-gradient(transparent,#05070a); }
+.stage-choice small { display: none; }
+.stage-choice b { font-family: Georgia,serif; font-size: 11px; font-weight: 700; }
+.stage-choice[aria-pressed=true] { border: 3px double #ffdd4c; }
+.stage-choice[aria-pressed=true]::after { font-size: 10px; width: 13px; right: 3px; top: 3px; border-radius: 0; }
+.selection-launch { margin-top: 7px; padding: 6px 0 0; border-top: 1px solid #5b5143; gap: 16px; }
+.selection-launch label { min-width: 178px; font-size: 7px; color: #bdb8ab; }
+.selection-launch select { margin-top: 3px; padding: 5px 7px; border-radius: 0; font-size: 9px; background: #111a2d; border-color: #73664a; }
+.menu-instructions span { font-size: 8px; line-height: 1.4; color: #a7a8ac; }
+.start-fight { padding: 10px 25px; font-size: 15px; border: 3px double #f4e5ad; border-radius: 0; background: linear-gradient(#f9db57,#c18c24); box-shadow: 0 2px #675021; }
+#selection-loading { text-align: center; color: #888c96; font-size: 7px; margin: 6px 0 0; min-height: 9px; letter-spacing: .7px; }
+footer { padding: 8px 0 10px; font-size: 7px; color: #727580; }
+
+@media (min-width: 900px) and (max-height: 800px) {
+  main { padding-top: 7px; }
+  #selection-view { padding-top: 10px; }
+  .match-preview { height: 238px; }
+  .fighter-summary { top: 6px; bottom: 9px; }
+  .fighter-summary h2 { font-size: 16px; }
+  .fighter-summary > p { margin-bottom: 6px; }
+  .fighter-summary dl { gap: 3px; }
+  .fighter-summary dl > div { min-height: 24px; padding: 3px 5px; }
+  .portrait-choice { height: 73px; }
+  .stage-choice { height: 46px; }
+  .selection-hint { font-size: 8px; }
+}
+@media (max-width: 899px) {
+  .arena-header { padding: 7px 12px; }
+  .offline-label { display: none; }
+  main { padding: 8px 9px 0; }
+  #selection-view { padding: 12px 18px 10px; }
+  .match-preview { height: 255px; }
+  .fighter-summary { width: 22%; padding: 8px 6px; }
+  .fighter-summary dt { font-size: 6px; letter-spacing: 0; }
+  .fighter-summary dd { font-size: 11px; }
+  .fighter-summary h2 { font-size: 15px; }
+  .fighter-summary > p { font-size: 6px; }
+  .selection-grid { gap: 4px; }
+  .portrait-choice { height: 74px; }
+  .portrait-name { font-size: 6px; }
+  .side-tab { width: 28%; }
+  .side-tab span { font-size: 10px; letter-spacing: 0; }
+  .selection-roster #roster-heading { left: 30%; right: 30%; font-size: 7px; letter-spacing: .5px; }
+  .stage-choice b { font-size: 9px; }
+  .menu-instructions { display: block; }
+}
+@media (max-width: 650px) {
+  .arena-header { gap: 7px; }
+  .brand { font-size: 12px; gap: 7px; }
+  .top-navigation { margin-left: auto; }
+  .top-navigation .quiet { font-size: 8px; padding: 6px; }
+  main { padding: 5px 5px 0; }
+  #selection-view { padding: 12px 10px 8px; }
+  .selection-heading { gap: 10px; padding-bottom: 9px; }
+  .selection-heading h1 { font-size: 18px; letter-spacing: 3px; }
+  .heading-rule { height: 12px; }
+  .match-preview { height: 360px; }
+  #selection-stage { height: 100%; }
+  .preview-shade { height: 100%; }
+  .fighter-summary { top: auto; bottom: 0; height: 121px; width: 49%; max-width: none; padding: 6px 7px; background: #070a12f5; }
+  .summary-top { display: flex; justify-content: space-between; font-size: 8px; }
+  .summary-top small { font-size: 6px; margin: 0; }
+  .fighter-summary h2 { font-size: 14px; margin: 5px 0 3px; }
+  .fighter-summary > p { font-size: 6px; margin: 0 0 5px; }
+  .fighter-summary dl { grid-template-columns: 1fr 1fr; gap: 3px; }
+  .fighter-summary dl > div { padding: 3px; min-height: 24px; }
+  .fighter-summary dt { font-size: 5px; max-width: 35px; }
+  .fighter-summary dd { font-size: 10px; }
+  .fighter-summary dd small { display: inline; font-size: 5px; margin-left: 1px; }
+  .versus { top: 69px; width: 43px; height: 43px; font-size: 23px; border-width: 2px; box-shadow: 0 0 0 3px #090c16,0 0 0 4px #4d5364; }
+  .preview-stage-label { width: auto; max-width: 75%; top: 4px; bottom: auto; padding: 4px 12px; }
+  .preview-stage-label span { display: none; }
+  .preview-stage-label b { font-size: 8px; }
+  .side-tab { width: 49%; padding: 6px 4px; font-size: 7px; }
+  .side-tab span { font-size: 9px; margin-left: 4px; }
+  .selection-roster > .selection-section-heading { padding-bottom: 18px; margin-bottom: 6px; }
+  .selection-roster #roster-heading { bottom: 3px; left: 0; right: 0; font-size: 7px; }
+  .selection-grid { grid-template-columns: repeat(6,minmax(0,1fr)); gap: 4px; }
+  .portrait-choice { height: 72px; border-width: 2px; }
+  .portrait-name { font-size: 6px; min-height: 18px; }
+  .portrait-choice img { padding-bottom: 16px; }
+  .random-choice strong { font-size: 30px; }
+  .random-choice > span { font-size: 6px; letter-spacing: 0; }
+  .selection-hint { font-size: 8px; margin: 6px 2px; }
+  .stage-rail { grid-template-columns: repeat(5,125px); gap: 6px; padding-bottom: 5px; }
+  .stage-choice { height: 60px; }
+  .stage-choice b { font-size: 10px; }
+  .stage-swipe-cue { margin: 3px 0; font-size: 8px; }
+  .selection-launch { flex-wrap: wrap; gap: 8px; }
+  .selection-launch label { min-width: 0; width: 46%; font-size: 6px; }
+  .selection-launch select { font-size: 8px; padding: 6px 4px; }
+  .start-fight { font-size: 12px; padding: 10px 8px; flex: 1; }
+  .menu-instructions { order: 3; flex-basis: 100%; text-align: center; }
+  .menu-instructions span { font-size: 7px; }
+  #selection-loading { font-size: 6px; }
+  footer { font-size: 6px; }
+}

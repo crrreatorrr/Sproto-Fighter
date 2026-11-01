@@ -1,6 +1,8 @@
 # Sproto Arena — current local handoff
 
-**Latest local update: the character/stage selection redesign and untimed-round rules are implemented.** It uses blue/red/yellow, original portrait images, opposing fighter previews, real combat stats, random fighter/stage selection and five scenery choices shared by menu and arena. See [MENU-QA.md](MENU-QA.md) for actual browser observations, regression coverage, cost disclosure and limitations. Nothing was sent to Claude.
+**Latest local update: selection now follows the supplied reference's compact arcade composition more closely.** It has a centered MEMBER SELECT masthead, narrow stat panels, selected-name bars, two-row portrait grid and red/blue/yellow framing. Desktop/mobile browser review, all 21 player selections and focused regressions pass; a mobile label overlap was fixed and independently rechecked. See [MENU-REFERENCE-REVISION.md](MENU-REFERENCE-REVISION.md) for exact coverage. One additional Nano Banana 2.1 menu background is quoted at **2 credits, awaiting separate approval**; no generation was submitted or new credits spent in this revision. Nothing was sent to Claude.
+
+The prior [menu/no-timer update](MENU-QA.md) remains installed: original portrait images, opposing fighter previews, real combat stats, random fighter/stage selection and five scenery choices shared by menu and arena.
 
 2026-11-01. **The newest animation request is partly complete: Golden Sproto and Morelight have the new event clips; the other 19 fighters retain their existing playable art.** After the user explicitly approved all 19 transfers, the latest retry passed automatic approval but every storage PUT returned HTTP 403. No new uploads were confirmed or generation jobs submitted. This is a factual checkpoint, not a claim that all requested animations are finished. Nothing was sent to Claude.
 
@@ -14,7 +16,7 @@ cd /Users/kenhiraoka/Documents/Codex/2026-10-31/task/neon-relay
 npm run dev -- --port 5173 --strictPort
 ```
 
-Base checkpoint: `c0413f2`; integrated pilot checkpoint: `84b0521`; upload-blocker checkpoint: `c3b7955`. The later menu checkpoint is reported in the delivery message and Git log. No remote, publication, deployment or subscription change.
+Base checkpoint: `c0413f2`; integrated pilot checkpoint: `84b0521`; upload-blocker checkpoint: `c3b7955`; first menu/no-timer checkpoint: `bc45fc7`. The reference-layout revision checkpoint is reported in the delivery message and Git log. No remote, publication, deployment or subscription change.
 
 Controls remain A/D move, W jump, J/K/L attacks, U launcher, I power, O directional throw, P charged partner special, Shift dash. Remapping remains available. Physical gamepad hardware was not verified.
 
@@ -22,7 +24,7 @@ Controls remain A/D move, W jump, J/K/L attacks, U launcher, I power, O directio
 
 Current menu update:
 
-- `src/selectionMenu.ts` owns setup state, original portrait buttons, both fighter previews, real statistics, random controls, and keyboard/controller focus. It only launches through an explicit callback. `index.html` and `src/style.css` supply the responsive arcade layout.
+- `src/selectionMenu.ts` owns setup state, original portrait buttons, both fighter previews, real statistics, random controls, and keyboard/controller focus. It only launches through an explicit callback. `index.html` and `src/style.css` supply the shell; `src/arcadeSelection.css` adds the latest reference-led composition and responsive overrides.
 - `src/main.ts` applies the chosen fighter, rival, mode and stage at launch; returning stops combat. Dialogs and result/pause overlays have controller navigation; menu inputs must be released before combat. Existing story and remapping hooks are retained.
 - `src/core.ts` no longer contains a round clock or expiry outcome. `src/render.ts` removes the timer and improves HUD contrast. KO/double-KO and presentation duration remain.
 - `src/stage.ts` shares five-stage rendering across menus and arena, with aspect-preserving previews and optional-image fallback. Four static images are under `public/stages/higgsfield/`; raw generation provenance is in `art/menu-art/`. A code-drawn floor apron prevents the bar's booth art from occupying the fighting groundline.
