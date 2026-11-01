@@ -1,11 +1,11 @@
 import { loadPoseAtlases, getPoseAtlasLoadStatus } from './poseAtlas';
 import { loadHiggsfieldRigs } from './higgsfieldRig';
-import { originalPortraits } from './originalPortraits';
+import { createSelectionMenu, type SelectionSetup } from './selectionMenu';
 import './style.css';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
-import { STAGES, setStage } from './stage';
+import { STAGES, setStage, loadStageArt, type StageId } from './stage';
 import { createStoryMode } from './storyMode';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
@@ -26,11 +26,12 @@ try {
     }
 }
 catch { /* Storage may be disabled. Defaults still work. */ }
-let state = createState(), chosen: FighterId = 'rivet', mode: Mode = 'cpu', opponent: FighterId | undefined = undefined, running = false, started = false, remapping: {
+let state = createState(), chosen: FighterId = 'rivet', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
     action: Action;
     device: 'key' | 'pad';
 } | null = null;
 let presentation = createRoundPresentation();
+let modalDirection='',modalRepeatAt=0,padNeedsRelease=true;
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousStart = false;
 const held = new Set<string>();
 let queued = 0;
@@ -38,6 +39,28 @@ const frames: [
     number,
     number
 ][] = [];
+const selection = createSelectionMenu({start:setup=>launchSelection(setup)});
+function updateStage(stage:StageId) {
+    setStage(stage);
+    const location=STAGES.find(s=>s.id===stage)!;
+    $('stage-title').textContent=location.name.toUpperCase();
+    $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
+}
+function launchSelection(setup:SelectionSetup,isStory=false) {
+    chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
+    if(!isStory){story.leaveStory();freePlayMode=null;}
+    updateStage(setup.stage);
+    selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
+    started=false;restart();start();
+    $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
+}
+function returnToSelection() {
+    running=false;started=false;held.clear();queued=0;accumulator=0;qaSingleStep=false;
+    resumeAfterSettings=false;resumeAfterJourney=false;
+    $('fight-view').hidden=true;$('overlay').hidden=true;
+    selection.show();
+}
+$('back-select').onclick=returnToSelection;$('overlay-select').onclick=returnToSelection;
 function keyName(code: string) { return code.replace('Key', '').replace('Digit', '').replace('Arrow', '').replace('Left', '').replace('Right', ''); }
 function save() {
     try {
@@ -76,13 +99,14 @@ function bind(value: string | number) {
     updateControls();
     $('binding-status').textContent = 'Saved on this browser.';
 }
-function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; held.clear(); queued = 0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; }
+function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; held.clear(); queued = 0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; if(!selection.isOpen)$('start').focus(); }
 function start() {
-    if (story.isOpen || ($('start') as HTMLButtonElement).disabled) return;
+    if (selection.isOpen || story.isOpen || dialog.open || ($('start') as HTMLButtonElement).disabled) return;
     if (presentation.phase === 'result')
         restart();
     started = true;
     running = true;
+    padNeedsRelease = true;
     accumulator = 0;
     held.clear();
     queued = 0;
@@ -115,27 +139,16 @@ const story = createStoryMode({
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
     resume: () => { if (resumeAfterJourney && started && presentation.phase !== 'result') start(); },
     launch: (stage, isStory) => {
-        setStage(stage);
-        const location = STAGES.find(s => s.id === stage)!;
-        $('stage-title').textContent = location.name.toUpperCase();
-        $('stage-subtitle').textContent = stage === 'ranch' ? '/ BONUS STAGE / ORIGINAL RANCH' : '/ PLACEHOLDER STAGE / ' + location.theme.toUpperCase();
-        if (isStory) { freePlayMode ??= mode; mode = 'cpu'; }
-        else if (freePlayMode !== null) { mode = freePlayMode; freePlayMode = null; }
-        ($('mode') as HTMLSelectElement).value = mode;
-        $('mode-label').textContent = isStory ? 'STORY / WORLD ' + location.chapter : mode === 'cpu' ? 'CPU SPARRING' : mode === 'guard' ? 'GUARD PRACTICE' : 'COMBO PRACTICE';
-        restart(); start();
+        if(isStory)freePlayMode??=selection.getSetup().mode;
+        const setup=selection.getSetup();
+        setup.stage=stage;setup.mode=isStory?'cpu':freePlayMode??setup.mode;
+        if(!isStory)freePlayMode=null;
+        launchSelection(setup,isStory);
     },
 });
 $('start').onclick = start;
 $('pause').onclick = pause;
 $('reset').onclick = restart;
-$('mode').onchange = () => { story.leaveStory(); freePlayMode = null; mode = ($('mode') as HTMLSelectElement).value as Mode; $('mode-label').textContent = mode === 'cpu' ? 'CPU SPARRING' : mode === 'guard' ? 'GUARD PRACTICE' : 'COMBO PRACTICE'; restart(); };
-const fighterOptions = document.querySelector('.fighter-options')!;
-$('roster-count').textContent = `${PLAYABLE_FIGHTERS.length} PLAYABLE / ${PLAYABLE_FIGHTERS.length} SPRITE SETS`;
-fighterOptions.innerHTML = PLAYABLE_FIGHTERS.map(id => `<button data-fighter="${id}" class="fighter ${id === chosen ? 'selected' : ''}"><img id="${id}-portrait" class="portrait" src="${originalPortraits[id]}" alt="${ROSTER[id].name} original reference" width="96" height="112"/><span><b>${ROSTER[id].name}</b><small>${ROSTER[id].role}</small></span><span class="selection-dot"></span></button>`).join('');
-($('opponent') as HTMLSelectElement).innerHTML = '<option value="">Auto matchup</option>' + PLAYABLE_FIGHTERS.map(id => `<option value="${id}">${ROSTER[id].name}</option>`).join('');
-document.querySelectorAll<HTMLButtonElement>('[data-fighter]').forEach(b => b.onclick = () => { chosen = b.dataset.fighter as FighterId; document.querySelectorAll('[data-fighter]').forEach(el => el.classList.toggle('selected', el === b)); $('fighter-copy').textContent = ROSTER[chosen].description; restart(); });
-$('opponent').onchange = () => { opponent = ($('opponent') as HTMLSelectElement).value as FighterId || undefined; restart(); };
 const dialog = $<HTMLDialogElement>('controls-dialog');
 $('settings').onclick = () => {
     resumeAfterSettings = running;
@@ -177,6 +190,7 @@ window.addEventListener('keydown', e => {
         }
         return;
     }
+    if (selection.isOpen) return;
     if (e.code === 'Escape') {
         e.preventDefault();
         if (!e.repeat)
@@ -210,6 +224,8 @@ canvas.addEventListener('pointerdown', () => canvas.focus());
 function pollPad(): number {
     const pads = navigator.getGamepads?.() || [];
     const pad = Array.from(pads).find(p => p?.connected);
+    const wasSelection=selection.isOpen,wasModal=story.isOpen||dialog.open,wasOverlay=!running&&!selection.isOpen;
+    selection.pollPad(pad??null);
     if (!pad) {
         $('device').textContent = 'KEYBOARD READY';
         previousPad = [];
@@ -217,11 +233,38 @@ function pollPad(): number {
     }
     $('device').textContent = 'CONTROLLER CONNECTED';
     const buttons = pad.buttons.map(b => b.pressed ? 1 : 0);
+    let boundPadThisFrame=false;
     if (remapping?.device === 'pad') {
         const index = buttons.findIndex((b, i) => b && !previousPad[i]);
-        if (index >= 0 && index !== 9)
-            bind(index);
+        if (index >= 0 && index !== 9){bind(index);boundPadThisFrame=true;}
     }
+    if(wasModal&&(story.isOpen||dialog.open)&&!remapping&&!boundPadThisFrame){
+        const activeDialog=document.querySelector<HTMLDialogElement>('dialog[open]')!;
+        const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
+        const now=performance.now();
+        if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
+            const controls=Array.from(activeDialog.querySelectorAll<HTMLElement>('button:not(:disabled), select, input')).filter(el=>el.offsetParent!==null);
+            const index=controls.indexOf(document.activeElement as HTMLElement);controls[(index+(direction==='previous'?-1:1)+controls.length)%controls.length]?.focus();
+            modalRepeatAt=now+(direction===modalDirection?160:360);
+        }
+        modalDirection=direction;
+        if(buttons[1]&&!previousPad[1])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
+        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLButtonElement)document.activeElement.click();
+    }else if(!wasOverlay)modalDirection='';
+    if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen){
+        const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
+        const now=performance.now();
+        if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
+            const choices=[$('start'),$('overlay-select')],index=choices.indexOf(document.activeElement as HTMLElement);
+            choices[(index+(direction==='previous'?-1:1)+choices.length)%choices.length].focus();modalRepeatAt=now+250;
+        }
+        modalDirection=direction;
+        if(buttons[1]&&!previousPad[1])returnToSelection();
+        else if(buttons[9]&&!previousPad[9])start();
+        else if(buttons[0]&&!previousPad[0]){const active=document.activeElement;if(active===$('start')||active===$('overlay-select'))(active as HTMLElement).click();else $('start').focus();}
+    }
+    if(wasSelection||wasModal||wasOverlay||selection.isOpen||story.isOpen||dialog.open){padNeedsRelease=true;previousStart=!!buttons[9];previousPad=buttons;return 0;}
+    if(padNeedsRelease){previousStart=!!buttons[9];previousPad=buttons;if(!buttons.some(Boolean)&&pad.axes.every(axis=>Math.abs(axis)<.3))padNeedsRelease=false;return 0;}
     const menu = !!buttons[9];
     if (menu && !previousStart && !dialog.open && !story.isOpen) {
         if (!started || presentation.phase === 'result')
@@ -278,7 +321,7 @@ function advanceRoundFrame(input: number) {
         if ((presentation as RoundPresentation).phase !== 'result') return;
         if (story.onRoundEnd(state.winner!)) return;
         const won = state.winner === 0;
-        showOverlay(state.winner === 2 ? (state.clock <= 0 ? 'Time up — draw.' : 'Double knockout.') : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again →', 'ROUND COMPLETE');
+        showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again →', 'ROUND COMPLETE');
         return;
     }
     if (presentation.phase !== 'fight') return;
@@ -299,7 +342,7 @@ function tick(now: number) {
     const elapsed = Math.min((now - lastTime) / 1000, .1);
     lastTime = now;
     const pad = pollPad();
-    if (running && (!qaFrozen||qaSingleStep)) {
+    if (running && !selection.isOpen && !dialog.open && !story.isOpen && (!qaFrozen||qaSingleStep)) {
         accumulator = qaSingleStep?1/60:accumulator+elapsed;
         qaSingleStep=false;
         while (accumulator >= 1 / 60) {
@@ -313,7 +356,7 @@ function tick(now: number) {
             if (!running || presentation.phase === 'result') break;
         }
     }
-    render(ctx, state, presentation);
+    if(!selection.isOpen) render(ctx, state, presentation);
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);
@@ -321,7 +364,8 @@ function tick(now: number) {
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
-loadPoseAtlases().then(()=>{const installed=getPoseAtlasLoadStatus().ids;return PLAYABLE_FIGHTERS.some(id=>!installed.includes(id))?loadHiggsfieldRigs():undefined;}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Enter the arena →';}).catch(error=>{$('overlay-copy').textContent='Fighter art could not load. Restart the local server and reload.';console.error(error);});
+loadPoseAtlases().then(()=>{const installed=getPoseAtlasLoadStatus().ids;return PLAYABLE_FIGHTERS.some(id=>!installed.includes(id))?loadHiggsfieldRigs():undefined;}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+loadStageArt().then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
 Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, replay: () => ({ version: 1, fighter: chosen, mode, opponent, frames: frames.map(f => [...f]) }), verifyReplay: () => {

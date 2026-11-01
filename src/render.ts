@@ -33,19 +33,22 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     c.fillRect(right ? x + width - w : x, 88, w, 19);
     for (let i = 1; i < 10; i++)
         line(c, x + i * 46, 88, x + i * 46, 107, '#101b2b55');
-    text(c, `${f.hp} / 1000`, right ? x : x + width, 126, 10, '#7e92ad', right ? 'left' : 'right');
+    text(c, `${f.hp} / 1000`, right ? x : x + width, 126, 10, '#c3d2e5', right ? 'left' : 'right');
     for (let i = 0; i < 3; i++) {
         const px = right ? x + width - 34 - i * 41 : x + i * 41;
         c.fillStyle = i < f.pips ? color : '#25354a';
         poly(c, [[px + 5, 120], [px + 34, 120], [px + 29, 130], [px, 130]], c.fillStyle as string);
     }
-    text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#7088a3', right ? 'right' : 'left');
+    text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
 export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation) {
     setHiggsfieldThrowState(s.throwState,s.fighters);
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
     drawStage(c, s.frame);
+    // Keep the HUD legible over the bright sky and moon without covering fighters.
+    c.fillStyle='#071224b8';c.fillRect(0,0,1280,162);
+    c.fillStyle='#07122455';c.fillRect(0,162,1280,10);
     for (const f of s.fighters) {
         c.fillStyle = '#040b1366';
         c.beginPath();
@@ -99,8 +102,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     }
     health(c, s.fighters[0], false, s.mode);
     health(c, s.fighters[1], true, s.mode);
-    text(c, s.mode === 'cpu' ? String(Math.ceil(s.clock / 60)).padStart(2, '0') : '∞', 640, 92, 50, '#e1e9f2', 'center', 750);
-    text(c, 'ROUND 01', 640, 116, 9, '#7b8fa9', 'center');
+    text(c, 'ROUND 01', 640, 116, 9, '#b9cbdc', 'center');
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
         if(f.move && f.move.t>0){
@@ -134,6 +136,6 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         text(c,'MOVE OR ATTACK TO START',640,227,10,'#b4c3d3','center');
     }else if(presentation?.phase==='outro'){
         const draw=presentation.winner===2;
-        text(c,draw?'DOUBLE DOWN':s.clock<=0?'TIME':'K.O.',640,220,40,'#f4e8c5','center',900);
+        text(c,draw?'DOUBLE DOWN':'K.O.',640,220,40,'#f4e8c5','center',900);
     }
 }

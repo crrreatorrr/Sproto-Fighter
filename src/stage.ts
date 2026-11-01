@@ -184,14 +184,61 @@ export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:
 ];
 let currentStage:StageId='ranch';
 const placeholderScenery=new Map<StageId,HTMLCanvasElement>();
+const stageImages=new Map<StageId,HTMLImageElement>();
+const stageArtErrors=new Map<StageId,string>();
+let stageArtPromise:Promise<void>|undefined;
+/** Independent, text-prompted Higgsfield scenery. No fighter references are uploaded. */
+export function loadStageArt():Promise<void>{
+    return stageArtPromise??=Promise.all(STAGES.filter(s=>s.id!=='ranch').map(async stage=>{
+        const image=new Image();
+        try{
+            await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=()=>reject(new Error('Stage image could not load'));image.src=`/stages/higgsfield/${stage.id}.png`;});
+            stageImages.set(stage.id,image);
+        }catch(error){stageArtErrors.set(stage.id,String(error));}
+    })).then(()=>undefined);
+}
+export const getStageArtStatus=()=>({loaded:[...stageImages.keys()],errors:Object.fromEntries(stageArtErrors)});
 export function setStage(id:StageId){currentStage=id;}
 export function getStage(){return currentStage;}
+/** Menu thumbnails and the arena share scenery without changing the active stage. */
+export function drawStagePreview(ctx:CanvasRenderingContext2D,id:StageId,width:number,height:number,frame=0):void{
+    // Wide menu panels crop scenery instead of vertically flattening it.
+    const scale=Math.max(width/1280,height/720);
+    ctx.save();ctx.beginPath();ctx.rect(0,0,width,height);ctx.clip();
+    ctx.translate((width-1280*scale)/2,(height-720*scale)*.6);ctx.scale(scale,scale);ctx.imageSmoothingEnabled=false;
+    if(id==='ranch'){drawRanch(ctx,frame);ctx.restore();return;}
+    const art=stageImages.get(id);
+    if(art){
+        ctx.drawImage(art,0,0,1280,720);
+        if(id==='bar')drawBarApron(ctx);
+    }
+    else{
+        let scene=placeholderScenery.get(id);
+        if(!scene){scene=buildPlaceholder(id);placeholderScenery.set(id,scene);}
+        ctx.drawImage(scene,0,0,1280,720);
+    }
+    ctx.restore();
+}
+/** A clear fighting floor in front of the bar's side booths, including both corners. */
+function drawBarApron(ctx:CanvasRenderingContext2D):void{
+    ctx.fillStyle='#63442f';ctx.fillRect(0,530,1280,190);
+    ctx.fillStyle='#916747';ctx.fillRect(0,530,1280,4);
+    ctx.fillStyle='#302720';ctx.fillRect(0,534,1280,2);
+    for(let i=0;i<7;i++){
+        const y=538+i*20+i*i;
+        ctx.fillStyle=i%2?'#684832':'#5b3e2d';ctx.fillRect(0,y,1280,18+i*2);
+        ctx.fillStyle='#392d24';ctx.fillRect(0,y,1280,2);
+        ctx.fillStyle='#856044';ctx.fillRect(0,y+2,1280,1);
+    }
+    ctx.strokeStyle='#392c23';ctx.lineWidth=2;
+    for(let i=-5;i<=5;i++){
+        ctx.beginPath();ctx.moveTo(640+i*88,530);ctx.lineTo(640+i*210,720);ctx.stroke();
+    }
+}
 export function drawStage(ctx:CanvasRenderingContext2D,frame:number):void {
-    if(currentStage==='ranch'){drawRanch(ctx,frame);return;}
-    let scene=placeholderScenery.get(currentStage);
-    if(!scene){scene=buildPlaceholder(currentStage);placeholderScenery.set(currentStage,scene);}
-    ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(scene,0,0,1280,720);
-    ctx.fillStyle='#0b101acc';ctx.fillRect(24,630,430,35);ctx.fillStyle='#d7e3ef';ctx.font='12px monospace';ctx.textAlign='left';
+    drawStagePreview(ctx,currentStage,1280,720,frame);
+    if(currentStage==='ranch'||stageImages.has(currentStage))return;
+    ctx.save();ctx.fillStyle='#0b101acc';ctx.fillRect(24,630,430,35);ctx.fillStyle='#d7e3ef';ctx.font='12px monospace';ctx.textAlign='left';
     ctx.fillText('PLACEHOLDER STAGE / '+STAGES.find(s=>s.id===currentStage)!.theme.toUpperCase(),36,652);ctx.restore();
 }
 /** Deliberately static layout studies. These are not final level art or cutscene animation. */

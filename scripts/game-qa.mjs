@@ -7,15 +7,17 @@ const {A,FLOOR,WALL,WIDTH,PLAYABLE_FIGHTERS,createState,step}=await import('data
 let checks=0,frames=0;
 const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};
 const tick=(s,n,a=0,b=0)=>{for(let i=0;i<n;i++)step(s,[a,b]);};
-check('timeout chooses higher health and equal health draws; completed round is immutable',()=>{
- for(const [hp,winner] of [[1000,2],[999,1]]){const s=createState();s.clock=1;s.fighters[0].hp=hp;step(s,[0,0]);assert.equal(s.winner,winner);const ended=JSON.stringify(s);tick(s,60,4095,4095);assert.equal(JSON.stringify(s),ended);}
+check('KO resolves either side and simultaneous zero health draws; completed rounds are immutable',()=>{
+ for(const [a,b,w] of [[0,1000,1],[1000,0,0],[0,0,2]]){const s=createState();s.fighters[0].hp=a;s.fighters[1].hp=b;step(s,[0,0]);assert.equal(s.winner,w);assert.equal(s.throwState,null);const ended=JSON.stringify(s);tick(s,60,4095,4095);assert.equal(JSON.stringify(s),ended);}
 });
-check('KO resolves both sides and simultaneous zero health draws',()=>{
- for(const [a,b,w] of [[0,1000,1],[1000,0,0],[0,0,2]]){const s=createState();s.fighters[0].hp=a;s.fighters[1].hp=b;step(s,[0,0]);assert.equal(s.winner,w);assert.equal(s.throwState,null);}
-});
-check('practice has no time limit; CPU timeout runs a full 99 seconds',()=>{
- const practice=createState('rivet','dummy');tick(practice,6100);assert.equal(practice.winner,null);
- const cpu=createState();tick(cpu,5940);assert.equal(cpu.winner,2);assert.equal(cpu.clock,0);
+check('every mode continues beyond the old 99-second boundary regardless of health advantage',()=>{
+ for(const mode of ['cpu','dummy','guard'])for(const hp of [1000,999]){
+  const s=createState('rivet',mode),replay=createState('rivet',mode);s.fighters[0].hp=replay.fighters[0].hp=hp;
+  assert.equal('clock' in s,false);tick(s,12000);tick(replay,12000);
+  assert.equal(s.frame,12000);assert.equal(s.winner,null);assert.equal(s.fighters[0].hp,hp);assert.deepEqual(s,replay);
+  // Unlimited duration must not disable subsequent knockout resolution.
+  s.fighters[1].hp=0;step(s,[0,0]);assert.equal(s.winner,0);
+ }
 });
 check('held attack triggers once, released/repressed attack repeats',()=>{
  const s=createState('rivet','dummy');let starts=0,last=null;

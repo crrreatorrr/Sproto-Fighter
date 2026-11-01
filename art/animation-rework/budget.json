@@ -1,7 +1,7 @@
 {
   "cap": 48,
   "openingBalance": 62.5,
-  "committedCredits": 7,
+  "committedCredits": 13,
   "jobs": [
     {
       "index": 0,
@@ -124,18 +124,54 @@
       },
       "charged_credits": 1.5,
       "quality_disposition": "accepted with explicit cell exclusions"
+    },
+    {
+      "index": 200,
+      "job_id": "c220a294-440b-48e8-aec6-2e67e4347403",
+      "status": "completed",
+      "purpose": "menu and arena stage panorama",
+      "charged_credits": 1.5,
+      "quality_disposition": "individually inspected; installed for stage preview and combat"
+    },
+    {
+      "index": 201,
+      "job_id": "0365e904-1d69-4dca-8a4c-d6bf987c0ace",
+      "status": "completed",
+      "purpose": "menu and arena stage panorama",
+      "charged_credits": 1.5,
+      "quality_disposition": "individually inspected; installed for stage preview and combat"
+    },
+    {
+      "index": 202,
+      "job_id": "c252a976-cb11-4655-88bb-8d56bf5fed22",
+      "status": "completed",
+      "purpose": "menu and arena stage panorama",
+      "charged_credits": 1.5,
+      "quality_disposition": "individually inspected; installed for stage preview and combat"
+    },
+    {
+      "index": 203,
+      "job_id": "f56b2052-c363-46c2-9746-31ae8169456f",
+      "status": "completed",
+      "purpose": "menu and arena stage panorama",
+      "charged_credits": 1.5,
+      "quality_disposition": "individually inspected; installed for stage preview and combat"
     }
   ],
   "confirmedSpentCreditsBeforeNanoPilot": 4,
   "latestConfirmedBalanceBeforeNanoPilot": 58.5,
-  "accounting": "Opening 62.5 minus observed 55.5 = 7 credits. Two FLUX.2 completions: 2; two filtered jobs: 0; two Seedream completions: 2; two Nano Banana completions: 3.",
-  "confirmedSpentCredits": 7,
-  "latestConfirmedBalance": 55.5,
-  "remainingApprovedCredits": 41,
+  "accounting": "Opening 62.5 minus observed 49.5 = 13 credits. Fighter pilot 7; four independent text-prompted menu/stage panoramas 6. No successful remaining-roster uploads or new fighter generation.",
+  "confirmedSpentCredits": 13,
+  "latestConfirmedBalance": 49.5,
+  "remainingApprovedCredits": 35,
   "plannedRemainingBaseCost": 28.5,
-  "projectedBaseTotal": 35.5,
+  "projectedBaseTotal": 41.5,
   "remainingUploadStatus": "Latest specifically authorized retry executed; all 19 storage PUT requests returned HTTP 403; none confirmed; no new jobs.",
   "activeJobs": 0,
   "latestRetryAdditionalSpend": 0,
-  "latestRetryReceipt": "remaining-guard-upload-receipts.json"
+  "latestRetryReceipt": "remaining-guard-upload-receipts.json",
+  "stageArtSpend": 6,
+  "fighterAnimationSpentCredits": 7,
+  "stageSpendingAuthorized": false,
+  "spendingClarification": "The 48-credit authorization applies only to fighter animation sheets. Six stage credits were already spent before this was clarified; this scope error was disclosed. No further stage/menu spending is authorized. Retain the more conservative 35-credit aggregate headroom until clarified; do not treat stage art as approved fighter work."
 }

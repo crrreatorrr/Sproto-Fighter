@@ -1,6 +1,8 @@
 # Sproto Arena — local combat prototype
 
-Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline first slice, with a pixel-art **Amber Ranch** stage and animated pixel sprites based on all supplied references. The latest scope includes **21 selectable fighters**, each with its original supplied image on the selection screen and a fighting animation set. All 21 have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Four selectable story worlds use static placeholder scenes and stages; the ranch remains a free-play bonus.
+Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline prototype with **21 selectable fighters**, each with its original supplied image on the selection screen and a fighting animation set. All 21 have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Four story worlds now have static Higgsfield pixel-art stage panoramas; story text and cutscenes remain explicit placeholders. The original pixel-art **Amber Ranch** remains a free-play bonus.
+
+The selection screen uses blue, red and yellow, opposing fighter previews, real move statistics, random fighter/stage choices and an explicit **Start fight** button. Selecting a stage changes the preview and the arena used for the next match. All rounds are untimed and end on knockout. See [menu verification](docs/MENU-QA.md).
 
 **Latest animation update: 2 of 21 new event sets are installed.** Golden Sproto and Morelight now have new intro, special, cast, recoil and defeat frames, with separate presentation timing and a visible defeat sequence before results. The other 19 retain their existing playable art; their latest authorized reference-upload retry received HTTP 403 from storage, blocking new generation. See [current event QA](docs/ANIMATION-EVENT-QA.md) and [handoff](docs/CLAUDE-HANDOFF.md) for exact coverage, cost and limitations.
 
@@ -15,17 +17,21 @@ cd /Users/kenhiraoka/Documents/Codex/2026-10-31/task/neon-relay
 npm run dev -- --port 5173 --strictPort
 ```
 
-Open **http://127.0.0.1:5173/** in Chrome, Safari or Edge on this same Mac, then click **Enter the arena**. The URL only works while the local server is running; it is not a published website. Chrome was verified earlier; the ordinary game was reloaded and played in the in-app browser on November1. No full cross-browser compatibility suite was performed.
+Open **http://127.0.0.1:5173/** in Chrome, Safari or Edge on this same Mac. Choose your fighter, CPU rival, stage and rival behavior, then click **START FIGHT**. The URL only works while the local server is running; it is not a published website. The new menu was checked in Chrome and the in-app browser on November 1. No full cross-browser compatibility suite was performed.
 
 The current recovery session runs under macOS launchd job `com.sprotoarena.local`, independent of the assistant's temporary shell. It remains available for this login session; after logout/reboot use the launcher above. To stop that background job deliberately, run `launchctl remove com.sprotoarena.local` in Terminal. Its logs are `/tmp/sproto-arena-server.log` and `/tmp/sproto-arena-server-error.log`. No boot/login startup file or external hosting was installed.
 
 `npm run build` checks TypeScript and creates the production bundle. `npm run qa` repeats the current-update checks. `node scripts/pose-atlas-smoke.mjs` checks pose playback and loading failures; `python3 art/pose-atlases/verify_pose_assets.py` checks the installed image contract.
 
+For selection and stage regressions, run `node scripts/selection-menu-smoke.mjs` and `node scripts/stage-preview-smoke.mjs`.
+
 For the new event pilot, run `node scripts/presentation-smoke.mjs` and `node scripts/event-clips-smoke.mjs`. The [event review lab](http://127.0.0.1:5173/art/animation-event-lab.html) shows both facings, frame stepping, normal playback and full combat rendering; missing new clips are labeled. It is a development fixture, not a normal match.
 
 ## Play
 
-Choose any of the 21 fighters; each selection describes its attack and power style. Choose an opponent explicitly or use Auto matchup. Common controls and combo rules make it easy to switch fighters, while attack profiles, projectile behavior and specials differ. See the fighter-kit guide for the full roster.
+Choose any of the 21 fighters; each selection describes its attack and power style. Use **P1 / Your fighter** and **CPU / Your rival** to choose either side, or use **Random fighter** for the selected side. **Random stage** picks from all five stages. Common controls and combo rules make it easy to switch fighters, while attack profiles, projectile behavior and specials differ. See the fighter-kit guide for the full roster.
+
+In selection, use arrows to move focus, Enter to select and Tab to change sections. On a controller, stick/D-pad navigate, A selects, B returns to the player side, X switches side and Start focuses the launch button. Release menu inputs before entering combat. **Fighter select** returns from a match without automatically starting another round. The header also opens the four-world story selector and standalone level selector.
 
 | Action | Keyboard | Standard gamepad |
 | --- | --- | --- |
@@ -72,19 +78,20 @@ A combo is consecutive damaging hits before the opponent exits hit-stun. **At le
 
 The Team Special has a forward range and can miss or be blocked. The partner enters, joins the fighter’s contact sequence, then exits during recovery. The art uses complete pose frames and Canvas effects, not a generated animation video. Each fighter has an individual contact schedule, range, trajectory or status effect and matching choreography. All specials use the same readable charge rule.
 
-CPU mode has a 99-second round and a result/restart screen. Practice has no timer and restores dummy health periodically outside a combo. A knockout still ends the practice round; Restart resets health and meter. Pause also happens when the window loses focus. Changing fighter or opponent behavior starts a fresh round.
+CPU and practice rounds have no timer or timeout result. A knockout ends the round; a simultaneous knockout draws. Practice restores dummy health periodically outside a combo. Restart resets health and meter. Pause also happens when the window loses focus. Selection changes take effect when explicitly launching a fresh match.
 
 ## Implementation
 
 - `src/core.ts`: serializable combat state, move data, deterministic CPU, and `step(state, [p1Mask, p2Mask])` at 60 Hz. No wall clock, DOM, renderer, or random calls.
 - `src/main.ts`: keyboard/gamepad input, fixed-step accumulator, menus, control storage, and frame-indexed recording. Pauses while hidden; catches up at most 100 ms after a delayed animation callback.
+- `src/selectionMenu.ts`: player/rival choices, original portrait grid, combat-data statistics, stage previews, randomization and keyboard/controller menu focus. Selection state is separate from the deterministic match.
 - `src/render.ts`: HUD, impact effects, and teammate cue.
 - `src/poseAtlas.ts`: complete-body pose playback, optional eight-frame footwork sequences, signed gait phase, foot anchors and atomic asset loading.
 - `src/higgsfieldRig.ts`: superseded cutout renderer retained for provenance/undeclared-art fallback; the installed 21-fighter manifest takes priority.
 - `src/originalPortraits.ts`: explicit mapping of the 21 original references used by character selection.
 - `art/pose-atlases/`: source sheets, connected-component importer, targeted identity/footwear corrections and reproducible guarded-step authoring.
-- `src/stage.ts`: original ranch environment plus four clearly labeled placeholder stages; `src/storyMode.ts` controls world selection and static scene/progression panels.
-- `src/style.css` / `index.html`: responsive combat-lab shell.
+- `src/stage.ts`: original ranch plus four static Higgsfield stage images, shared between previews and combat. Procedural labeled fallbacks remain available if optional stage images fail to load. `src/storyMode.ts` controls world selection and placeholder scene/progression panels.
+- `src/style.css` / `index.html`: responsive arcade selection and combat shell.
 
 Development console helpers: `neonRelay.snapshot()` returns a copied state, `neonRelay.replay()` returns initial configuration + input masks, and `neonRelay.verifyReplay()` re-simulates recorded input and compares state. This structure makes later rollback exploration easier; it does **not** establish cross-browser determinism or online readiness. There is no transport, matchmaking, synchronization, rollback, or remote input handling yet.
 
@@ -106,7 +113,7 @@ Deferred: sound, physical-controller verification, local versus, online 1v1, mul
 
 `npm run build` checks TypeScript and the production bundle. `npm run qa` runs combat, direction, throw, movement, story and per-fighter power checks. The broad scripted matrix covers all 441 player/opponent pairings in three behavior modes for 360 frames each (476,280 interaction frames). This is systematic coverage, not every possible input sequence or matchup outcome.
 
-Current browser checks cover all 21 player selections, per-fighter motion samples, representative keyboard movement/combos/throws/specials, original portraits, stages, story entry/back and controls. Opponent combinations and retry/result branches also have systematic core/controller checks. Full progression/ending/timeout branches are covered by controller/core checks; the campaign was not won end-to-end manually. Physical controller hardware, a systematic cross-browser suite, network play and long-duration performance remain unverified. See the current audit for exact coverage, issues fixed and remaining animation limitations. The visual reports distinguish static sheets, stepped browser frames and sampled normal-speed playback; they do not claim continuous human playtesting of every frame.
+Cumulative browser checks cover all 21 player selections, per-fighter motion samples, representative keyboard movement/combos/throws/specials, original portraits, stages, story entry/back and controls. See the dated reports for which checks were repeated in each update. Opponent combinations, progression/ending and retry/result branches also have systematic core/controller checks; the campaign was not won end-to-end manually. The current no-timeout rule is covered by long-round core checks. Physical controller hardware, a systematic cross-browser suite, network play and long-duration performance remain unverified. The visual reports distinguish static sheets, stepped browser frames and sampled normal-speed playback; they do not claim continuous human playtesting of every frame.
 
 ## Sprite assets and roster references
 

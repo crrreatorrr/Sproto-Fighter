@@ -52,7 +52,7 @@ await check('defeat floor starts at4+, never rotates authored art, rests at sour
  for(let t=0;t<140;t++){const d=debug(f,s.frame),c=ctx();assert.equal(d.sequence,'defeat');assert.equal(d.frameIndex,defeatFrame(p.frame,fromFloor));if(fromFloor)assert.ok(d.frameIndex>=4);seen.add(d.frameIndex);draw(c,f,s.frame);assert.deepEqual(c.angles,[0]);assert.equal(c.translations[0][1],FLOOR);const cfg=original.fighters[id],frame=cfg.clips.defeat[d.frameIndex],anchor=frame.anchor??cfg.anchor,scale=cfg.scale??cfg.worldHeight/cfg.height;assert.deepEqual(c.scales,[[(fromFloor?-face:face)*(cfg.facing??1)*scale,scale]],id+' floor impact direction / standing facing');assert.equal(c.images[0][2],-anchor[1]);if(d.frameIndex>=4){assert.ok(Math.abs((frame.bounds[3]-anchor[1])*(cfg.scale??cfg.worldHeight/cfg.height))<=1,id+' authored floor bound');}advanceRoundPresentation(p);}
  assert.equal(p.phase,'result');assert.equal(debug(f,1).frameIndex,11);assert.ok(seen.has(11));assert.equal(debug(s.fighters[1],0).sequence,'poses');p.winner=2;assert.equal(debug(f,0).sequence,'defeat');present(null,[]);}
 }));
-await check('mixed-state timeout draws detect prone losers individually and retain opposite impact orientation',()=>each('defeat',(id,face)=>{
+await check('mixed-state double-KO presentation detect prone losers individually and retain opposite impact orientation',()=>each('defeat',(id,face)=>{
  for(const proneIndex of [0,1]){
   const s=fresh(id,face);s.fighters[1].id=id;const p=createRoundPresentation();const prone=s.fighters[proneIndex],upright=s.fighters[1-proneIndex];prone.reaction={kind:'knockdown',phase:'down',t:8,direction:-prone.facing};upright.reaction=null;
   // Global false is intentional: only one participant is already on the floor.

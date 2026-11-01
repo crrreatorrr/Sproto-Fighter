@@ -210,13 +210,12 @@ export interface CombatState {
     freeze: number;
     mode: Mode;
     winner: number | null;
-    clock: number;
     notice: string;
     noticeLife: number;
 }
 const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, reaction:null, throwInvuln:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
 export function createState(id: PlayableFighterId = 'rivet', mode: Mode = 'cpu', opponent?: PlayableFighterId): CombatState { if (!PLAYABLE_FIGHTERS.includes(id) || (opponent && !PLAYABLE_FIGHTERS.includes(opponent)))
-    throw new Error('Unknown roster selection.'); return { throwState:null, frame: 0, fighters: [makeFighter(id, 380, 1), makeFighter(opponent ?? (id === 'rivet' ? 'vela' : 'rivet'), 900, -1)], projectiles: [], effects: [], freeze: 0, mode, winner: null, clock: 99 * 60, notice: 'LIGHT → MEDIUM → FINISHER', noticeLife: 220 }; }
+    throw new Error('Unknown roster selection.'); return { throwState:null, frame: 0, fighters: [makeFighter(id, 380, 1), makeFighter(opponent ?? (id === 'rivet' ? 'vela' : 'rivet'), 900, -1)], projectiles: [], effects: [], freeze: 0, mode, winner: null, notice: 'LIGHT → MEDIUM → FINISHER', noticeLife: 220 }; }
 export const grounded = (f: Fighter) => f.y >= FLOOR;
 const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 function effect(s: CombatState, x: number, y: number, kind: Effect['kind'], color: string) { const life = kind === 'charge' ? 45 : kind === 'special' ? 28 : 16; s.effects.push({ x, y, kind, color, life, max: life }); }
@@ -547,8 +546,6 @@ export function step(s: CombatState, inputs: [
             f.prev = f.input;
         return;
     }
-    if (s.mode === 'cpu')
-        s.clock--;
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i], other = s.fighters[1 - i];
         if(f.slow>0)f.slow--;
@@ -740,7 +737,7 @@ export function step(s: CombatState, inputs: [
             finishCombo(s, s.fighters[i]);
     }
     const koFalling=s.fighters.some(f=>f.hp<=0&&f.reaction?.kind==='knockdown'&&f.reaction.phase==='flight'&&!grounded(f));
-    if ((a.hp <= 0 || b.hp <= 0 || s.clock <= 0) && !koFalling) {
+    if ((a.hp <= 0 || b.hp <= 0) && !koFalling) {
         if(s.throwState?.phase==='hold'){
             const held=s.fighters[s.throwState.victim];
             held.y=FLOOR;held.vx=0;held.vy=0;held.stun=0;held.reaction=null;

@@ -18,8 +18,8 @@ class Element{
  addEventListener(event,fn){this.events[event]=fn;}
 }
 function dom(){
- const elements=new Map([...read('index.html').matchAll(/\bid="([^"]+)"/g)].map(m=>[m[1],new Element()]));
- const $=id=>{assert.ok(elements.has(id),`index.html missing #${id}`);return elements.get(id);};
+ const elements=new Map([...(read('index.html')+read('src/selectionMenu.ts')).matchAll(/\bid="([^"]+)"/g)].map(m=>[m[1],new Element()]));
+ const $=id=>{assert.ok(elements.has(id),`page/template missing #${id}`);return elements.get(id);};
  globalThis.document={getElementById:$,createElement:tag=>{assert.notEqual(tag,'canvas','story controller must not need a Canvas');return new Element();}};
  return {$,pick:i=>$('journey-content').children[0].children[i].onclick(),action:i=>$('journey-actions').children[i].onclick(),escape:()=>{let prevented=false;$('journey-dialog').events.cancel({preventDefault(){prevented=true;}});assert.ok(prevented);}};
 }
@@ -41,20 +41,25 @@ check('navigation pauses only once per modal visit, preserving pre-navigation ru
 check('readiness gate blocks every story and free-play launch and allows later retry',()=>{for(const story of [true,false])for(let i=0;i<(story?4:5);i++){const t=fresh();t.setReady(false);t.$(story?'story-worlds':'free-levels').onclick();t.pick(i);if(story)t.action(0);assert.equal(t.launches().length,0);assert.equal(t.story.isOpen,true);assert.match(t.$('journey-copy').textContent,/loading/);t.setReady(true);if(story)t.action(0);else t.pick(i);assert.equal(t.launches().length,1);assert.equal(t.story.isOpen,false);}});
 check('explicit leaveStory stops story results; snapshots do not expose mutable progress',()=>{const t=fresh();t.$('story-worlds').onclick();t.pick(0);t.action(0);t.story.onRoundEnd(0);t.story.snapshot().cleared.push('castle');assert.deepEqual(t.story.snapshot().cleared,['yacht']);t.story.leaveStory();assert.equal(t.story.onRoundEnd(0),false);assert.match(t.$('journey-status').textContent,/FREE PLAY/);});
 // Exercise the actual small main.ts integration block with isolated game callbacks.
-function integration(wasRunning,initialMode='guard'){
+function integration(wasRunning,initialMode='guard',menuOpen=false){
  const d=dom(),main=read('src/main.ts');const start=main.indexOf('let resumeAfterJourney ='),end=main.indexOf("$('start').onclick = start;",start);assert.ok(start>=0&&end>start);
- const code=compile(main.slice(start,end));
- const fixture=new Function('createStoryMode','STAGES','$','initialMode','wasRunning','createRoundPresentation','beginRoundOutro',`
- let mode=initialMode,running=wasRunning,started=true,state={winner:null},starts=0,restarts=0;
+ const parsed=ts.createSourceFile('main.ts',main,ts.ScriptTarget.Latest,true);
+ const launches=parsed.statements.filter(n=>ts.isFunctionDeclaration(n)&&['launchSelection','updateStage','returnToSelection'].includes(n.name?.text)).map(n=>n.getText(parsed)).join('\n');
+ const code=compile(launches+'\n'+main.slice(start,end));
+ const fixture=new Function('createStoryMode','STAGES','$','initialMode','wasRunning','createRoundPresentation','beginRoundOutro','menuOpen',`
+ let mode=initialMode,running=wasRunning,started=!menuOpen,state={winner:null},starts=0,restarts=0,chosen='rivet',opponent='vela',selectedStage='ranch';
+ let resumeAfterSettings=false,queued=0,accumulator=0,qaSingleStep=false;const held=new Set();
+ let setup={fighter:'rivet',opponent:'vela',stage:'ranch',mode:initialMode};
+ const selection={isOpen:menuOpen,getSetup:()=>({...setup}),setSetup(next){setup={...setup,...next};$('mode').value=setup.mode;},hide(){this.isOpen=false;},show(){this.isOpen=true;}};
  let presentation=createRoundPresentation();presentation.phase='fight';
- const setStage=()=>{};const showOverlay=()=>{running=false;};
- const start=()=>{starts++;running=true;};
+ const setStage=id=>{selectedStage=id;};const showOverlay=()=>{running=false;};
+ const start=()=>{if(selection.isOpen)return;starts++;running=true;started=true;};
  const restart=()=>{restarts++;state={winner:null};presentation=createRoundPresentation();};
- ${code};return {story,inspect:()=>({mode,running,starts,restarts,winner:state.winner,presentation:{...presentation}}),
+ ${code};return {story,inspect:()=>({mode,running,starts,restarts,winner:state.winner,presentation:{...presentation},selectedStage,chosen,opponent,menuOpen:selection.isOpen,setup:{...setup}}),returnToSelection,launchSelection,
  finish:()=>{state.winner=0;presentation.phase='result';},
  outro:()=>{state.winner=0;beginRoundOutro(presentation,0,false);presentation.frame=30;},
  intro:()=>{presentation=createRoundPresentation();presentation.frame=17;}};
- `)(createStoryMode,STAGES,d.$,initialMode,wasRunning,createRoundPresentation,beginRoundOutro);
+ `)(createStoryMode,STAGES,d.$,initialMode,wasRunning,createRoundPresentation,beginRoundOutro,menuOpen);
  return {...d,...fixture};
 }
 check('actual main hooks preserve paused/running status after nested destination browsing',()=>{for(const running of [false,true]){const t=integration(running);t.$('story-worlds').onclick();t.pick(0);t.$('journey-back').onclick();t.$('journey-back').onclick();assert.equal(t.inspect().running,running);assert.equal(t.inspect().starts,running?1:0);}});
@@ -71,4 +76,6 @@ check('actual main hooks preserve intro progress while browsing and reset it on 
  t.$('free-levels').onclick();t.pick(4);assert.equal(t.inspect().presentation.phase,'intro');assert.equal(t.inspect().presentation.frame,0);assert.equal(t.inspect().restarts,1);
 });
 check('actual main hooks force CPU for story and restore each prior free-play behavior',()=>{for(const mode of ['cpu','guard','dummy']){const t=integration(false,mode);t.$('story-worlds').onclick();t.pick(0);t.action(0);assert.equal(t.inspect().mode,'cpu');t.story.onRoundEnd(0);t.action(0);assert.equal(t.inspect().mode,'cpu');t.$('free-levels').onclick();t.pick(4);assert.equal(t.inspect().mode,mode);assert.equal(t.$('mode').value,mode);assert.equal(t.inspect().restarts,3);}});
+check('selection-first story browsing and Back never start combat',()=>{const t=integration(false,'dummy',true);t.$('story-worlds').onclick();t.pick(0);t.$('journey-back').onclick();t.$('journey-back').onclick();assert.equal(t.inspect().menuOpen,true);assert.equal(t.inspect().running,false);assert.equal(t.inspect().starts,0);assert.equal(t.inspect().restarts,0);});
+check('explicit selection applies both fighters, behavior and stage; return stops without restarting',()=>{const t=integration(false,'dummy',true);t.launchSelection({fighter:'bront',opponent:'mox',stage:'castle',mode:'guard'});const x=t.inspect();assert.equal(x.chosen,'bront');assert.equal(x.opponent,'mox');assert.equal(x.selectedStage,'castle');assert.equal(x.mode,'guard');assert.equal(x.running,true);assert.equal(x.menuOpen,false);assert.equal(x.restarts,1);t.returnToSelection();assert.equal(t.inspect().running,false);assert.equal(t.inspect().menuOpen,true);assert.equal(t.inspect().restarts,1);assert.deepEqual(t.inspect().setup,{fighter:'bront',opponent:'mox',stage:'castle',mode:'guard'});});
 console.log(`${count} story/navigation checks passed (controller + actual main hooks; DOM stub, no browser claim).`);

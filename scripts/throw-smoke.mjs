@@ -77,8 +77,8 @@ check('flush-wall back throws swap sides for all attackers, both player indices 
   assert.ok((b.x-a.x)*face< -50,`${id}/index${index}/face${face}: ${(b.x-a.x)*face}`);assert.equal(s.throwState,null);assert.equal(b.stun,0);
  }
 });
-check('timeout during hold clears contact and puts the held victim on the floor without damage',()=>{
- const s=fresh();catchTarget(s);until(s,()=>s.throwState.t===6);s.clock=1;tick(s);assert.equal(s.winner,2);assert.equal(s.throwState,null);const b=s.fighters[1];assert.equal(b.y,FLOOR);assert.equal(b.hp,1000);assert.equal(b.reaction,null);assert.equal(b.stun,0);assert.equal(s.fighters[0].move,null);
+check('KO during hold cancels the latch without teleporting or damaging the victim',()=>{
+ const s=fresh();catchTarget(s);until(s,()=>s.throwState.t===6);const beforeY=s.fighters[1].y;s.fighters[0].hp=0;tick(s);assert.equal(s.winner,1);assert.equal(s.throwState,null);const b=s.fighters[1];assert.ok(Math.abs(b.y-beforeY)<4);assert.ok(b.y<=FLOOR);assert.equal(b.hp,1000);assert.equal(b.reaction?.kind,'recoil');assert.equal(s.fighters[0].move,null);
 });
 check('throw state remains deterministic through JSON snapshot and replay',()=>{const a=fresh(),b=fresh();for(let i=0;i<160;i++){const input=[i===0?A.left|A.grab:0,0];step(a,input);step(b,input);assert.deepEqual(JSON.parse(JSON.stringify(a)),b);}assert.equal(a.throwState,null);});
 console.log(`${count} throw groups passed; ${failures} failed.`);if(failures)process.exitCode=1;
