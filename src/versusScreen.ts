@@ -1,8 +1,7 @@
 import {ROSTER,isPairedFighter,type PlayableFighterId} from './core';
 import {originalPortraits} from './originalPortraits';
 
-/** UI time only: never enters the deterministic combat or replay stream. */
-export const VERSUS_FRAMES=132;
+/** Explicit confirmation only; never enters the deterministic combat/replay stream. */
 export function createVersusScreen(host:HTMLElement,onFinish:()=>void){
  const root=document.createElement('section');root.className='versus-screen';root.hidden=true;
  root.setAttribute('aria-label','Matchup preview');root.setAttribute('aria-live','polite');
@@ -20,11 +19,11 @@ export function createVersusScreen(host:HTMLElement,onFinish:()=>void){
  const versus=document.createElement('strong');versus.className='versus-mark';versus.textContent='VS';versus.setAttribute('aria-hidden','true');
  lineup.append(sides[0].card,versus,sides[1].card);
  const skip=document.createElement('button');skip.type='button';skip.className='versus-skip';skip.textContent='Continue · Enter / A';
- const hint=document.createElement('p');hint.className='versus-hint';hint.textContent='Starting automatically · Esc pauses';
+ const hint=document.createElement('p');hint.className='versus-hint';hint.textContent='Press Enter or A when you’re ready · Esc pauses';
  root.append(heading,lineup,skip,hint);host.append(root);
- let age=0,suspended=false;
+ let suspended=false;
  function suspend(value:boolean){suspended=value;root.classList.toggle('is-suspended',value);root.setAttribute('aria-hidden',String(value));}
- function hide(){root.hidden=true;age=0;suspend(false);}
+ function hide(){root.hidden=true;suspend(false);}
  function finish(){if(root.hidden||suspended)return;hide();onFinish();}
  skip.onclick=finish;
  return {
@@ -36,10 +35,10 @@ export function createVersusScreen(host:HTMLElement,onFinish:()=>void){
     side.image.hidden=false;side.card.classList.remove('portrait-unavailable');
     side.image.src=originalPortraits[id];side.card.classList.toggle('is-paired',isPairedFighter(id));
    });
-   age=0;suspend(false);root.hidden=false;
+   suspend(false);root.hidden=false;skip.focus({preventScroll:true});
   },
   /** Always consumes the frame in which the preview closes. */
-  advance(){if(root.hidden)return false;if(!suspended&&++age>=VERSUS_FRAMES)finish();return true;},
+  advance(){return !root.hidden;},
   skip:finish,
   suspend,
   hide,

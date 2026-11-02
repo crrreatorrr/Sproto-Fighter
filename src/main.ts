@@ -272,8 +272,8 @@ window.addEventListener('keydown', e => {
     if (!running)
         return;
     if(blockedKeys.has(e.code)){e.preventDefault();return;}
-    if(versus.isOpen&&(e.code==='Enter'||e.code==='Space')){
-        e.preventDefault();if(!e.repeat){blockedKeys.add(e.code);versus.skip();}return;
+    if(versus.isOpen){
+        e.preventDefault();if(e.code==='Enter'&&!e.repeat){blockedKeys.add(e.code);versus.skip();}return;
     }
     if (Object.values(keys).includes(e.code)) {
         e.preventDefault();
@@ -343,7 +343,7 @@ function pollPad(): number {
     if(wasSelection||wasModal||wasOverlay||selection.isOpen||story.isOpen||dialog.open){padNeedsRelease=true;previousStart=!!buttons[9];previousPad=buttons;return 0;}
     if(padNeedsRelease){previousStart=!!buttons[9];previousPad=buttons;if(!buttons.some(Boolean)&&pad.axes.every(axis=>Math.abs(axis)<.3))padNeedsRelease=false;return 0;}
     if(versus.isOpen){
-        const skip=!!buttons[0]&&!previousPad[0]||!!buttons[9]&&!previousPad[9];
+        const skip=!!buttons[0]&&!previousPad[0];
         previousStart=!!buttons[9];previousPad=buttons;
         if(skip)versus.skip();
         return 0;
