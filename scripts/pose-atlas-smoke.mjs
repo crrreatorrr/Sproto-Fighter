@@ -50,10 +50,11 @@ check('organic crouched casts retain the complete crouch pose instead of the sta
   assert.ok(sawRelease,id+' actual crouched projectile');
  }
 });
-check('all 21 core grips agree with installed per-fighter hand/torso art metadata',()=>{
+check('all roster core grips agree with installed per-fighter hand/torso art metadata',()=>{
  for(const id of PLAYABLE_FIGHTERS.filter(id=>id!=='duo')){const cfg=original.fighters[id];for(const [label,slot]of [['hand',26],['torso',24]]){
-  const point=cfg.holdContact[label],anchor=cfg.frames[slot].anchor??cfg.anchor;
-  assert.deepEqual(THROW_GRIPS[id][label],[(point[0]-anchor[0])*cfg.scale,(point[1]-anchor[1])*cfg.scale],id+' '+label);
+  const point=cfg.holdContact[label],anchor=cfg.frames[slot].anchor??cfg.anchor,reg=cfg.poseRegistration?.[label==='hand'?'grabReach':'hit'],density=reg?.pixelScale??1,offset=reg?.anchorOffset??[0,0];
+  const expected=point.map((v,i)=>(v-anchor[i]-offset[i])*cfg.scale*density);
+  assert.ok(THROW_GRIPS[id][label].every((v,i)=>Math.abs(v-expected[i])<1e-8),id+' '+label);
  }}
 });
 check('all single-body held pairs: draw uses actual core placement without secondary offsets or core mutation',()=>{

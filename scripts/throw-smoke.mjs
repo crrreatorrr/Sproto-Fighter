@@ -43,7 +43,7 @@ check('all roster pairs × 4 directions × 2 facings × 3 locations: bounded fin
   const [p,q]=s.fighters,gap=getThrowGrip(p,'hand')[0]+getThrowGrip(q,'torso')[0];
   assert.ok(Math.abs((q.x-p.x)*f-gap)<1e-7,`${a}/${b}/${d}/${f}/${location} grip`);
   let crossed=false;
-  for(let t=0;t<150;t++){tick(s);for(const x of s.fighters){assert.ok([x.x,x.y,x.vx,x.vy].every(Number.isFinite));assert.ok(x.x>=fighterWall(x.id)&&x.x<=WIDTH-fighterWall(x.id));assert.ok(x.y<=FLOOR);}crossed ||= (q.x-p.x)*f<0;}
+  for(let t=0;t<150;t++){tick(s);for(const x of s.fighters){assert.ok([x.x,x.y,x.vx,x.vy].every(Number.isFinite));assert.ok(x.x>=fighterWall(x.id)&&x.x<=WIDTH-fighterWall(x.id),`${a}/${b}/${d}/${f}/${location} tick ${t}: ${x.id} x=${x.x} bounds=${fighterWall(x.id)}..${WIDTH-fighterWall(x.id)}`);assert.ok(x.y<=FLOOR);}crossed ||= (q.x-p.x)*f<0;}
   assert.equal(s.throwState,null);assert.equal(q.stun,0);assert.equal(q.reaction,null);assert.equal(q.hp,885);
   // Corner-facing-away back throws hit the wall, so a side swap is impossible.
   if(d==='back' && location==='center')assert.ok(crossed,`${a}/${b} back must cross`);

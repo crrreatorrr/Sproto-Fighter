@@ -668,7 +668,7 @@ danocrypto:{"hand": [100.0, -98.75], "torso": [0.0, -65.0]},
 /* BUDDHASHADOW GRIP BEGIN */
 buddhashadow:{"hand": [70.0, -97.5], "torso": [0.0, -60.0]},
 /* BUDDHASHADOW GRIP END */
-"duo":{"hand":[111.25,-75],"torso":[65,-62.5]},"rivet":{"hand":[65.0,-66.25],"torso":[35.0,-57.5]},"vela":{"hand":[76.25,-78.75],"torso":[43.75,-58.75]},"bront":{"hand":[86.25,-73.75],"torso":[65.0,-67.5]},"zephyr":{"hand":[72.5,-68.75],"torso":[45.0,-57.5]},"mox":{"hand": [82.5, -118.75], "torso": [0.0, -65.0]},"rune":{"hand":[53.75,-57.5],"torso":[38.75,-47.5]},"guest07":{"hand":[83.75,-75.0],"torso":[48.75,-58.75]},"guest08":{"hand":[67.5,-70.0],"torso":[40.0,-55.0]},"guest09":{"hand": [72.5, -112.5], "torso": [0.0, -67.5]},"guest10":{"hand": [68.75, -103.75], "torso": [0.0, -58.75]},"guest11":{"hand":[41.25,-68.75],"torso":[31.25,-53.75]},"guest12":{"hand":[50.0,-75.0],"torso":[37.5,-57.5]},"guest13":{"hand":[40.0,-73.75],"torso":[20.0,-61.25]},"guest14":{"hand":[60.0,-62.5],"torso":[35.0,-48.75]},"dumpstar":{"hand":[53.75,-87.5],"torso":[27.5,-66.25]},"crapto":{"hand":[63.75,-86.25],"torso":[35.0,-61.25]},"vamp":{"hand": [71.25, -111.25], "torso": [0.0, -62.5]},"alpha777":{"hand":[43.75,-66.25],"torso":[33.75,-51.25]},"mandela":{"hand":[73.75,-57.5],"torso":[50.0,-52.5]},"bigswole":{"hand":[52.5,-66.25],"torso":[37.5,-51.25]},"nate":{"hand":[66.25,-47.5],"torso":[42.5,-28.75]}};
+"duo":{"hand":[111.25,-75],"torso":[65,-62.5]},"rivet":{"hand":[65.0,-66.25],"torso":[38.5,-63.25]},"vela":{"hand":[76.25,-78.75],"torso":[47.25,-63.45]},"bront":{"hand":[86.25,-73.75],"torso":[79.3,-82.35]},"zephyr":{"hand":[72.5,-68.75],"torso":[50.4,-64.4]},"mox":{"hand": [82.5, -118.75], "torso": [0.0, -65.0]},"rune":{"hand":[53.75,-57.5],"torso":[42.625,-52.25]},"guest07":{"hand":[83.75,-75.0],"torso":[60.45,-72.85]},"guest08":{"hand":[67.5,-70.0],"torso":[44.0,-60.5]},"guest09":{"hand": [72.5, -112.5], "torso": [0.0, -67.5]},"guest10":{"hand": [68.75, -103.75], "torso": [0.0, -58.75]},"guest11":{"hand":[41.25,-68.75],"torso":[35.625,-61.275]},"guest12":{"hand":[50.0,-75.0],"torso":[37.5,-57.5]},"guest13":{"hand":[40.0,-73.75],"torso":[20.0,-61.25]},"guest14":{"hand":[60.0,-62.5],"torso":[37.8,-52.65]},"dumpstar":{"hand":[53.75,-87.5],"torso":[30.8,-74.2]},"crapto":{"hand":[63.75,-86.25],"torso":[37.8,-66.15]},"vamp":{"hand": [71.25, -111.25], "torso": [0.0, -62.5]},"alpha777":{"hand":[43.75,-66.25],"torso":[38.475,-58.425]},"mandela":{"hand":[73.75,-57.5],"torso":[58.0,-60.9]},"bigswole":{"hand":[52.5,-66.25],"torso":[42.0,-57.4]},"nate":{"hand":[66.25,-47.5],"torso":[42.5,-28.75]}};
 /** Organic spit follows stance height and always travels horizontally. */
 export const HORIZONTAL_SPIT_FIGHTERS:readonly FighterId[] = ['rivet','vela','guest07','guest13','crapto','reverend','zepump','sprotopotamus','willuminati','prim','benjamin','maxbiggums','xav','emix','peterpan','anni','pinewaffle','rainman','wifebeater','fiatfudder','moonshiller','godether','aleksander','cyberviber','realityarchitect','mrgoldrobe','solanadelray'];
 export const isHorizontalSpit = (id:FighterId) => HORIZONTAL_SPIT_FIGHTERS.includes(id);
@@ -882,8 +882,11 @@ function positionHeldVictim(s:CombatState):void {
     const hold=s.throwState;if(!hold||hold.phase!=='hold')return;
     const a=s.fighters[hold.attacker],b=s.fighters[hold.victim];
     const t=Math.min(1,hold.t/THROW_CATCH_FRAMES),ease=t*t*(3-2*t);
-    a.x=hold.startAttackerX+(hold.gripAttackerX-hold.startAttackerX)*ease;
-    b.x=hold.startVictimX+(hold.gripVictimX-hold.startVictimX)*ease;
+    // The pair's endpoints are already bounded together. Clamp the interpolated
+    // values too: fractional authored grips can round a wall endpoint below
+    // its bound by one floating-point unit (for example 79.99999999999999).
+    a.x=clamp(hold.startAttackerX+(hold.gripAttackerX-hold.startAttackerX)*ease,fighterWall(a.id),WIDTH-fighterWall(a.id));
+    b.x=clamp(hold.startVictimX+(hold.gripVictimX-hold.startVictimX)*ease,fighterWall(b.id),WIDTH-fighterWall(b.id));
     b.y=hold.startVictimY+(hold.gripVictimY-hold.startVictimY)*ease;
     a.facing=hold.facing;b.facing=-hold.facing;b.vx=0;b.vy=0;b.stun=1;
 }

@@ -77,7 +77,8 @@ for (const [id, cfg] of Object.entries(manifest.fighters)) {
   bodies[id] = {scale, authoredFacing:cfg.facing ?? 1, owners:core.PLAYABLE_FIGHTERS.filter(owner => core.bodyAtlasIds(owner).includes(id)), sequences:{}, runtimeTransforms:{}};
   for (const [sequence, frames] of Object.entries(sequences)) for (const [index, entry] of frames.entries()) {
     const frame = typeof entry === 'string' ? {url:entry} : entry;
-    const registration=cfg.clipRegistration?.[sequence],pixelScale=registration?.pixelScale??1,offset=registration?.anchorOffset??[0,0],sourceAnchor=frame.anchor??cfg.anchor;
+    const pose=sequence==='poses'?Object.keys(poses.POSE_SLOTS).find(name=>poses.POSE_SLOTS[name]===index):null;
+    const registration=pose?cfg.poseRegistration?.[pose]:cfg.clipRegistration?.[sequence],pixelScale=registration?.pixelScale??1,offset=registration?.anchorOffset??[0,0],sourceAnchor=frame.anchor??cfg.anchor;
     const row = {key:`${id}/${sequence}/${index}`, body:id, sequence, index, pose:sequence === 'poses' ? Object.keys(poses.POSE_SLOTS).find(name => poses.POSE_SLOTS[name] === index) : null,
       url:localPath(frame.url), width:frame.width ?? cfg.width, height:frame.height ?? cfg.height,
       anchor:sourceAnchor.map((v,i)=>v+offset[i]), bounds:frame.bounds ?? [0, 0, frame.width ?? cfg.width, frame.height ?? cfg.height],
@@ -99,9 +100,9 @@ check('every selectable fighter and partner has installed bodies', () => {
 });
 for(const id of core.PLAYABLE_FIGHTERS)for(const facing of [-1,1])for(const [part,slot] of [['hand',26],['torso',24]])check(`${id} facing ${facing} ${part} grip`,()=>{
   const ids=core.bodyAtlasIds(id),cfg=manifest.fighters[ids[facing===1?ids.length-1:0]],frame=cfg.frames[slot];
-  const anchor=frame.anchor??cfg.anchor,contact=cfg.holdContact?.[part],scale=cfg.scale??cfg.worldHeight/cfg.height;
+  const anchor=frame.anchor??cfg.anchor,contact=cfg.holdContact?.[part],registration=cfg.poseRegistration?.[part==='hand'?'grabReach':'hit'],density=registration?.pixelScale??1,offset=registration?.anchorOffset??[0,0],scale=(cfg.scale??cfg.worldHeight/cfg.height)*density;
   assert.ok(contact,'installed hand/torso contact metadata is required');
-  const expected=[core.bodySpread(id)+(contact[0]-anchor[0])*scale*(cfg.facing??1),(contact[1]-anchor[1])*scale],actual=core.getThrowGrip({id,facing},part);
+  const expected=[core.bodySpread(id)+(contact[0]-anchor[0]-offset[0])*scale*(cfg.facing??1),(contact[1]-anchor[1]-offset[1])*scale],actual=core.getThrowGrip({id,facing},part);
   near(actual[0],expected[0],'core grip x agrees with front body art metadata');near(actual[1],expected[1],'core grip y agrees with front body art metadata');
   counters.throwGripChecks++;
 });

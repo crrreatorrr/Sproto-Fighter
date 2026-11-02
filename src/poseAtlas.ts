@@ -37,6 +37,9 @@ export interface PoseAtlasConfig {
    * Corrects a differently drawn pixel density/origin; never auto-fits a pose.
    * Raw PNGs and their metadata stay in source pixels. */
   clipRegistration?: Partial<Record<AtlasClipName, { pixelScale:number; anchorOffset:Point }>>;
+  /** Explicitly reviewed source-density correction for an older standalone
+   * pose. Never inferred from the current silhouette or changed during play. */
+  poseRegistration?: Partial<Record<keyof typeof POSE_SLOTS, { pixelScale:number; anchorOffset:Point }>>;
   width: number;
   height: number;
   anchor: Point;
@@ -102,6 +105,10 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
   for(const [name,registration] of Object.entries(cfg.clipRegistration??{})){
     if(!cfg.clips?.[name as AtlasClipName] || !registration || !positive(registration.pixelScale) || registration.pixelScale<.5 || registration.pixelScale>2 || !point(registration.anchorOffset))throw new Error(`Atlas ${id}: invalid ${name} source registration`);
   }
+  if(cfg.poseRegistration!==undefined && (!cfg.poseRegistration || typeof cfg.poseRegistration!=='object' || Array.isArray(cfg.poseRegistration)))throw new Error(`Atlas ${id}: poseRegistration must be an object`);
+  for(const [name,registration] of Object.entries(cfg.poseRegistration??{})){
+    if(!Object.hasOwn(POSE_SLOTS,name) || !registration || !positive(registration.pixelScale) || registration.pixelScale<.5 || registration.pixelScale>2 || !point(registration.anchorOffset))throw new Error(`Atlas ${id}: invalid ${name} pose registration`);
+  }
   const loadFrames = (entries: (string | PoseFrameConfig)[], label:string) => Promise.all(entries.map(async (entry, slot): Promise<LoadedFrame> => {
     const f = typeof entry === 'string' ? { url: entry } : entry;
     if (!f || typeof f.url !== 'string') throw new Error(`Atlas ${id}, ${label} frame ${slot}: missing frame URL`);
@@ -118,7 +125,7 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
       img.src = localUrl(f.url, revision);
     });
     if (image.naturalWidth !== width || image.naturalHeight !== height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: image dimensions differ from metadata`);
-    const registration=cfg.clipRegistration?.[label as AtlasClipName], density=registration?.pixelScale??1, offset=registration?.anchorOffset??[0,0];
+    const registration=label==='poses'?cfg.poseRegistration?.[names[slot][0] as keyof typeof POSE_SLOTS]:cfg.clipRegistration?.[label as AtlasClipName], density=registration?.pixelScale??1, offset=registration?.anchorOffset??[0,0];
     // All geometry uses the same calibrated coordinates as the drawn bitmap.
     // Keeping the foot origin, bounds and hull together also preserves camera
     // packing and floor/throw placement. Combat never reads this registration.
