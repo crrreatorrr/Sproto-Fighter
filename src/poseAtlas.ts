@@ -1,5 +1,5 @@
 import { EVENT_CLIP_LENGTHS, introFrame, defeatFrame, specialFrame, castFrame, recoilFrame, type EventClipName, type RoundPresentation } from './animationEvents';
-import { A, COMBAT_STYLES, FLOOR, WIDTH, getMove, type Fighter, type ThrowState } from './core';
+import { A, COMBAT_STYLES, FLOOR, WIDTH, getMove, isCrouchingSpit, type Fighter, type ThrowState } from './core';
 
 /** Complete-character frames, never articulated cutouts. Thirty-two authored poses
  * cover shared actions only; this does not invent missing per-character animation. */
@@ -166,6 +166,7 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:EventClipName
   if(f.reaction?.kind==='recoil'&&f.y>=FLOOR&&!f.blockstun)return choose('recoil',recoilFrame(f.reaction.t));
   if(f.stun||f.blockstun||f.reaction?.kind==='knockdown')return null;
   if(f.move?.id==='special')return choose('special',specialFrame(f.move.t,assistTiming.get(f)??COMBAT_STYLES[f.id].specialFrames));
+  if(isCrouchingSpit(f))return null;
   if(f.move?.id==='bolt'){const move=getMove(f,'bolt');return choose('cast',castFrame(f.move.t,move.startup,move.active));}
   return null;
 }
@@ -202,6 +203,7 @@ function selectSlot(f:Fighter,phase:number,frame:number,landedAt:number,idleSinc
       if(contacts.some(hit=>t>=hit&&t<hit+3))return S.powerRelease;
       return t>last+2?S.punchRecover:S.powerCharge;
     }
+    if(isCrouchingSpit(f))return S.crouchLanding;
     if(attack.id==='bolt')return startup?S.powerCharge:active?S.powerRelease:S.punchRecover;
     if(attack.id==='launcher')return startup?S.upperWindup:active?S.uppercut:S.punchRecover;
     if(attack.id==='grab')return startup||active?S.grabReach:S.punchRecover;

@@ -36,6 +36,20 @@ check('all 21: forward/reverse gait, hitstop, and neutral guard after stopping',
   assert.equal(f.vx,0);assert.equal(getPoseAtlasDebug(f,s.frame).slot,0,id+' stop must enter guard, not global-clock breath');
  }
 });
+check('organic crouched casts retain the complete crouch pose instead of the standing cast clip',()=>{
+ for(const id of core.HORIZONTAL_SPIT_FIGHTERS)for(const face of [1,-1]){
+  const s=createState(id,'cpu'),f=s.fighters[0];f.x=face===1?200:1080;s.fighters[1].x=face===1?1100:180;f.facing=face;
+  step(s,[A.down|A.bolt,0]);let sawRelease=false;
+  while(f.move){
+   const before=JSON.stringify(s),d=getPoseAtlasDebug(f,s.frame);
+   assert.equal(d.sequence,'poses');assert.equal(d.slot,10,id+' crouched cast');
+   drawPoseAtlas({save(){},restore(){},translate(){},rotate(){},scale(){},drawImage(){}},f,s.frame);
+   assert.equal(JSON.stringify(s),before,'rendering cannot change collision geometry');
+   sawRelease ||= s.projectiles.length>0;step(s,[0,0]);
+  }
+  assert.ok(sawRelease,id+' actual crouched projectile');
+ }
+});
 check('all 21 core grips agree with installed per-fighter hand/torso art metadata',()=>{
  for(const id of PLAYABLE_FIGHTERS){const cfg=original.fighters[id];for(const [label,slot]of [['hand',26],['torso',24]]){
   const point=cfg.holdContact[label],anchor=cfg.frames[slot].anchor??cfg.anchor;

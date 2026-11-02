@@ -24,7 +24,7 @@ check('organic spit is strictly horizontal: all five fighters, both facings, gro
   tick(s,1,direction|A.bolt);until(s,()=>s.projectiles.length>0,50);const p=s.projectiles[0],y=p.y;
   assert.equal(Math.sign(p.vx),facing,id);assert.equal(p.vy,0,id);assert.equal(p.gravity,0);assert.equal(p.wave,0);assert.equal(p.bounces,0);
   for(let frame=0;frame<25&&s.projectiles.includes(p);frame++){tick(s);assert.equal(p.y,y,id+' entire trajectory');}
-  if(!air)assert.equal(a.y,FLOOR,id+' direction chord must not jump');
+  if(!air&&!(direction&A.up))assert.equal(a.y,FLOOR,id+' non-jump cast stays grounded');
  }
 });
 check('pumpkin still supports directional trajectories and gravity',()=>{

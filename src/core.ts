@@ -129,9 +129,15 @@ export interface ThrowState {
 /** Authored gameplay grip geometry in world pixels, independent of image loading.
  * Matched to the installed reaching-hand / hit-torso anchors by contract tests. */
 export const THROW_GRIPS:Record<FighterId,{hand:[number,number];torso:[number,number]}> = {"rivet":{"hand":[65.0,-66.25],"torso":[35.0,-57.5]},"vela":{"hand":[76.25,-78.75],"torso":[43.75,-58.75]},"bront":{"hand":[86.25,-73.75],"torso":[65.0,-67.5]},"zephyr":{"hand":[72.5,-68.75],"torso":[45.0,-57.5]},"mox":{"hand":[63.75,-71.25],"torso":[33.75,-55.0]},"rune":{"hand":[53.75,-57.5],"torso":[38.75,-47.5]},"guest07":{"hand":[83.75,-75.0],"torso":[48.75,-58.75]},"guest08":{"hand":[67.5,-70.0],"torso":[40.0,-55.0]},"guest09":{"hand":[76.25,-76.25],"torso":[47.5,-55.0]},"guest10":{"hand":[63.75,-68.75],"torso":[21.25,-48.75]},"guest11":{"hand":[41.25,-68.75],"torso":[31.25,-53.75]},"guest12":{"hand":[50.0,-75.0],"torso":[37.5,-57.5]},"guest13":{"hand":[40.0,-73.75],"torso":[20.0,-61.25]},"guest14":{"hand":[60.0,-62.5],"torso":[35.0,-48.75]},"dumpstar":{"hand":[53.75,-87.5],"torso":[27.5,-66.25]},"crapto":{"hand":[63.75,-86.25],"torso":[35.0,-61.25]},"vamp":{"hand":[75.0,-81.25],"torso":[42.5,-51.25]},"alpha777":{"hand":[43.75,-66.25],"torso":[33.75,-51.25]},"mandela":{"hand":[73.75,-57.5],"torso":[50.0,-52.5]},"bigswole":{"hand":[52.5,-66.25],"torso":[37.5,-51.25]},"nate":{"hand":[66.25,-47.5],"torso":[42.5,-28.75]}};
-/** Only organic spit loses vertical aiming. Other individual powers retain their trajectories. */
+/** Organic spit follows stance height and always travels horizontally. */
 export const HORIZONTAL_SPIT_FIGHTERS:readonly FighterId[] = ['rivet','vela','guest07','guest13','crapto'];
 export const isHorizontalSpit = (id:FighterId) => HORIZONTAL_SPIT_FIGHTERS.includes(id);
+/** Mouth anchors in the existing full-body crouch pose, in world pixels. */
+const CROUCH_SPIT_ORIGINS:Partial<Record<FighterId,{forward:number;height:number}>> = {
+    rivet:{forward:44,height:74}, vela:{forward:49,height:85},
+    guest07:{forward:65,height:79}, guest13:{forward:30,height:78}, crapto:{forward:39,height:80},
+};
+export const isCrouchingSpit = (f:Fighter) => isHorizontalSpit(f.id) && f.y>=FLOOR && f.move?.id==='bolt' && f.move.aim==='down';
 export interface Attack {
     id: MoveId;
     t: number;
@@ -406,7 +412,9 @@ function act(s: CombatState, f: Fighter) {
     if (f.hp<=0 || s.fighters.some(other=>other.hp<=0) || f.stun || f.blockstun || (s.throwState && (s.fighters[s.throwState.attacker]===f || (s.throwState.phase==='hold'&&s.fighters[s.throwState.victim]===f))))
         return;
     const just = f.input & ~f.prev;
-    const directionalChord = (f.input & A.up) && (just & (A.light|A.medium|A.heavy|A.bolt|A.grab));
+    // Up + organic spit is a jump-and-fire input, not a grounded aiming chord.
+    const chordAttacks=A.light|A.medium|A.heavy|A.grab|(isHorizontalSpit(f.id)?0:A.bolt);
+    const directionalChord = (f.input & A.up) && (just & chordAttacks);
     if (directionalChord) f.jumpBuffer = 0;
     if (f.jumpBuffer > 0 && f.jumpDelay === 0) {
         if (grounded(f) && f.dash <= 8 && (!f.move || (f.move.id === 'launcher' && f.move.connected))) {
@@ -423,7 +431,9 @@ function act(s: CombatState, f: Fighter) {
     }
     // Resolve a last-instant landing press as a grounded move after physics.
     const landingThisFrame = !grounded(f) && f.vy >= 0 && f.y + f.vy + GRAVITY >= FLOOR;
-    if (f.bufferLife > 0 && !landingThisFrame) {
+    // Keep the spit buffered through the normal two-frame jump chord window.
+    const waitingForSpitJump = grounded(f) && f.jumpBuffer>0 && isHorizontalSpit(f.id) && chooseMove(f,f.buffer,f.bufferInput)==='bolt' && (f.bufferInput&A.up);
+    if (f.bufferLife > 0 && !landingThisFrame && !waitingForSpitJump) {
         const id = chooseMove(f, f.buffer, f.bufferInput);
         if (id) {
             const m = getMove(f, id);
@@ -447,7 +457,7 @@ function act(s: CombatState, f: Fighter) {
                 f.dash = 0;
                 // The selected attack wins a simultaneous dash/attack chord.
                 f.dashBuffer = 0;
-                f.move = { id, t: 0, hit: false, connected: false, wave: -1, aim: spit?'level':id==='launcher' && aim==='level'?'up':aim, shotX:horizontal,shotY:vertical, throwDirection:id==='grab'?throwDirection(directions,f.facing):undefined };
+                f.move = { id, t: 0, hit: false, connected: false, wave: -1, aim: spit?(grounded(f)&&(directions&A.down)&&!(directions&A.up)?'down':'level'):id==='launcher' && aim==='level'?'up':aim, shotX:horizontal,shotY:vertical, throwDirection:id==='grab'?throwDirection(directions,f.facing):undefined };
 
                 f.buffer = 0;
                 f.bufferLife = 0;
@@ -537,7 +547,7 @@ export function step(s: CombatState, inputs: [
             f.buffer = attacks;
             f.bufferLife = 14;
             f.bufferInput = f.input;
-            if(f.input&A.up && attacks&(A.light|A.medium|A.heavy|A.bolt|A.grab)){f.jumpBuffer=0;f.jumpDelay=0;}
+            if(f.input&A.up && attacks&(A.light|A.medium|A.heavy|A.grab|(isHorizontalSpit(f.id)?0:A.bolt))){f.jumpBuffer=0;f.jumpDelay=0;}
         }
     }
     if (s.freeze > 0) {
@@ -681,7 +691,7 @@ export function step(s: CombatState, inputs: [
             const dx=attack.shotX??f.facing,dy=spit?0:attack.shotY??0,length=Math.hypot(dx,dy)||1,speed=style.speed;
             // Reviewed mouth positions in the complete-body cast release cels.
             // Keep this immutable combat data; rendering never moves a hitbox.
-            const origin=f.id==='rivet'?{forward:44,height:109}:f.id==='vela'?{forward:59,height:103}:{forward:34,height:95};
+            const origin=isCrouchingSpit(f)?CROUCH_SPIT_ORIGINS[f.id]!:f.id==='rivet'?{forward:44,height:109}:f.id==='vela'?{forward:59,height:103}:{forward:34,height:95};
             s.projectiles.push({...style,owner:i,x:f.x+f.facing*origin.forward,y:style.ground&&dy===0?FLOOR-22:f.y-origin.height,vx:dx/length*speed,vy:dy/length*speed-(style.bounces&&dy===0&&!style.ground?3:0),life:100,damage:m.damage,age:0});
         }
         let active = attack.t >= m.startup && attack.t < m.startup + m.active && !attack.hit;
@@ -725,7 +735,12 @@ export function step(s: CombatState, inputs: [
         p.life--;
         const target = s.fighters[1 - p.owner];
         const crouching = (target.input & A.down) && grounded(target);
-        if (!endingKO && !isDown(target) && Math.abs(p.x - target.x) < 34 && Math.abs(p.y - (target.y - (crouching ? 30 : 65))) < (crouching ? 25 : 50)) {
+        // Organic spit meets the authored crouched torso/head. Neutral mouth
+        // heights (95+ pixels) still pass above it; other powers keep their bounds.
+        const crouchedSpitTarget=crouching && isHorizontalSpit(s.fighters[p.owner].id);
+        const targetHeight=crouchedSpitTarget?60:crouching?30:65;
+        const targetRadius=crouchedSpitTarget?32:crouching?25:50;
+        if (!endingKO && !isDown(target) && Math.abs(p.x - target.x) < 34 && Math.abs(p.y - (target.y - targetHeight)) < targetRadius) {
             damage(s, p.owner, { ...getMove(s.fighters[p.owner],'bolt'), damage: p.damage }, 'bolt', true);
             p.life = 0;
         }
