@@ -63,11 +63,12 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
         $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. Defeat this fighter in story mode, or choose an unlocked P1 fighter.`;
         return false;
     }
-    try{await Promise.all([ensurePoseAtlases(isStory&&setup.opponent==='vela'?[setup.fighter,'vela','vaudream']:[setup.fighter,setup.opponent]),[setup.fighter,setup.opponent].some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
-    const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponent===setup.opponent):undefined;
+    const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
+    const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
+    try{await Promise.all([ensurePoseAtlases(requiredFighters),requiredFighters.some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
-    matchEarnedGodMode=storyProgress.snapshot().completed&&!!setup.godMode;
+    matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);setActiveStoryLocation(scenery);
@@ -75,7 +76,10 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
     started=false;restart();start();
     $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
-    if(isStory&&setup.opponent==='vaudream')$('mode-label').textContent+=' / FINAL GAUNTLET / HEALTH REFILLED';
+    if(encounter&&encounter.opponents.length>1){
+        const bout=encounter.opponents.indexOf(setup.opponent)+1;
+        $('mode-label').textContent+=` / ${encounter.gauntlet==='art'?'ART DUO':'FINAL GAUNTLET'} / BOUT ${bout} OF ${encounter.opponents.length}${bout>1?' / HEALTH REFILLED':''}`;
+    }
     updateGodModeLabel();
     return true;
 }

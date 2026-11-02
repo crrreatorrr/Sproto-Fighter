@@ -22,36 +22,42 @@ origin: 5173 and 5187 have separate progression. This is not a hosted website.
 
 ## Campaign and testing
 
-**Story worlds** opens an illustrated map with 100 rivals, initially fitted so
-the entire world is visible. High Sproto is the default starting fighter; Fat
-Head Dave is also available. Every story victory, including God Mode victories,
-permanently recruits that rival on this browser and opens the next encounter.
-Arrow keys move between map nodes; Enter selects. Selecting a rival or region
-zooms to readable detail; **Find next fight** locates your next rival and
-**Fit map** restores the full overview.
+**Story worlds** opens the expanded illustrated world, fully fitted on first
+open. Select a rival or region for detail; **Fit map** restores the overview.
+The route grows from actual registered fighters, without inventing opponents.
+High Sproto starts the campaign; Fat Head Dave is also available. Golden Sproto
+is a late rival. Every story win, including a God Mode win, recruits the defeated
+fighter and opens the next encounter. Locked fighters can be previewed but
+cannot be P1 until recruited; CPU rival selection is unrestricted.
 
-Locked fighters can be clicked to preview their art and stats, but cannot start
-a fight as P1 until recruited. CPU rival selection remains unrestricted. Saves
-refresh when returning to the page and before selection/launch. Existing v1
-saves migrate by fighter identity into `sproto-arena-story-v2`; the original
-key stays untouched. Earned recruits and completed campaigns are retained,
-including Golden Sproto for returning players who already had him.
+The route runs Trenches → City → Yacht → Castle → Bar → Verse → Hatchery,
+using the existing approved stage variations. The end of Verse is a sequential
+Artdude → Artchick encounter. The final encounter is Morelight → VMU. Each
+refills health for its second bout. Losing, restarting, leaving or reloading
+restarts that encounter from its first opponent; the first fighter's earned
+recruitment is retained. There is no saved halfway checkpoint.
 
-The route runs through Trenches → City/Circuit Gate → Yacht → Castle/Crown Relay
-→ Bar → Verse → Hatchery. The 24 approved variations appear in regional blocks;
-Bar and Hatchery retain their detailed originals. Encounters 82–97 face paired
-Sprotos; Golden Sproto is encounter 98 and a late unlock for new saves. The last
-two form one gauntlet: Morelight, then a health refill and
-Vaudream. Losing, reloading or leaving this pair requires starting again from
-Morelight; his fighter unlock is retained. Scenes remain placeholders pending
-script approval. No cutscene videos were generated during integration.
+Saves migrate by fighter identity into `sproto-arena-story-v3`, retaining the
+original v1/v2 keys, completed encounters, recruits and previously earned God
+Mode. Newly installed rivals create new gaps to clear without erasing old wins.
+Continue selects the first uncleared encounter, not the number of old wins.
 
 **Settings → Testing → God Mode for testing** is immediately available. It
-prevents health loss and refills special charge. Choose any CPU rival in the
-menu. Changing this setting restarts the match. Story victories recruit fighters
-and advance the campaign in either mode; free-play wins do not. Testing God Mode
-turns off on reload. Finishing all 100 encounters also unlocks the God Mode
-checkbox in fighter select. God Mode does not bypass P1 recruitment locks.
+prevents health loss and refills Team Special charge; changing it restarts the
+current encounter. Story wins persist in either mode; free-play wins do not.
+Testing mode turns off on reload. Completing the campaign also grants a durable
+God Mode selection reward. God Mode does not bypass P1 recruitment locks.
+
+This branch targets a future 150-entry roster. Its committed baseline has 102
+fighters, while the inspected concurrent local roster has 127 (125 rivals across
+123 nodes).23 more roster entries/assets are needed for150; no fake characters
+were added. At 150 installed entries the route has 148 rivals across 146 nodes,
+including the two two-opponent encounters. The map geometry also has a focused
+150-node fixture. Scenes remain placeholders pending script approval; no videos
+or paid generations were made by this update.
+
+See [campaign expansion and browser QA](docs/CAMPAIGN-EXPANSION-UPDATE.md) for
+exact coverage, isolated preview commands and pending integration work.
 
 ## Controls
 
