@@ -5,7 +5,8 @@ export default defineConfig({
   server: {
     // The retained art sources, QA evidence and runtime frame library contain
     // tens of thousands of files. Watch application code, not this static
-    // archive. Reload the page explicitly after installing new sprite assets.
+    // archive. Restart Vite after adding public files so its public-file index
+    // includes them; reload the page after changing existing sprite assets.
     watch: {ignored: ['**/art/**', '**/docs/**', '**/public/**']},
   },
 });
