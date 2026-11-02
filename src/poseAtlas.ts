@@ -469,16 +469,18 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
     // into unused silhouette clearance, so unlike a fixed offset this also
     // works for wide bodies and at the arena edges.
     {
-      const lead=duoLeadIndex(owner),gap=6,maxShift=20;
+      const lead=duoLeadIndex(owner),gap=6,maxShift=60;
+      // A broad strike can already overlap before any inward adjustment.
+      // Open only supporting bodies enough to preserve the readable gap.
       // A special's drawings extend much farther than its current keyframe.
       // Limit any inward shift by the full clip envelope, so a later strike
       // cannot overlap its partner after the formation closes.
-      // Idle and walking share one envelope. Changing a gait cel must not
-      // slide the supporting body sideways once per step.
+      // Pack idle and the entire gait together. Per-cel inward limits caused
+      // visible lateral snaps on footfall, even when every pose had a clear gap.
       const neutral=samples.every(s=>s.sequence==='walk'||(s.sequence==='poses'&&s.slot<=5));
       const specialEnvelope=neutral ? actors.map((actor,i)=>{
         const atlas=atlases.get(bodyAtlasIds(owner.id)[i])!,flip=actor.facing*atlas.facing*atlas.scale;
-        const sources=[...atlas.frames.slice(0,6),...(atlas.walkFrames??[])];
+        const sources=atlas.walkFrames?.length?[...atlas.frames.slice(0,2),...atlas.walkFrames]:atlas.frames.slice(0,6);
         const xs=sources.flatMap(s=>[(s.bounds[0]-s.anchor[0])*flip+actor.x,(s.bounds[2]-s.anchor[0])*flip+actor.x]);
         return [Math.min(...xs),Math.max(...xs)] as [number,number];
       }):owner.move?.id==='special' ? actors.map((actor,i)=>{
@@ -486,13 +488,16 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
         const xs=(assistTiming.has(owner)?atlas.clips.assistAttack??atlas.clips.special??[]:atlas.clips.special??[]).flatMap(s=>[(s.bounds[0]-s.anchor[0])*flip+actor.x,(s.bounds[2]-s.anchor[0])*flip+actor.x]);
         return xs.length?[Math.min(...xs),Math.max(...xs)] as [number,number]:bounds[i];
       }):bounds;
+      const packing=neutral?specialEnvelope:bounds;
+      for(let i=lead-1;i>=0;i--){const clear=packing[i+1][0]+offsets[i+1]-packing[i][1]-offsets[i];offsets[i]-=Math.max(0,gap-clear);}
+      for(let i=lead+1;i<actors.length;i++){const clear=packing[i][0]+offsets[i]-packing[i-1][1]-offsets[i-1];offsets[i]+=Math.max(0,gap-clear);}
       for(let i=lead-1;i>=0;i--){
-        const available=Math.min(bounds[i+1][0]-bounds[i][1],specialEnvelope[i+1][0]-specialEnvelope[i][1])+offsets[i+1]-offsets[i]-gap;
-        offsets[i]+=Math.max(neutral?-20:0,Math.min(maxShift,available));
+        const available=Math.min(packing[i+1][0]-packing[i][1],specialEnvelope[i+1][0]-specialEnvelope[i][1])+offsets[i+1]-offsets[i]-gap;
+        offsets[i]+=Math.max(0,Math.min(maxShift,available));
       }
       for(let i=lead+1;i<actors.length;i++){
-        const available=Math.min(bounds[i][0]-bounds[i-1][1],specialEnvelope[i][0]-specialEnvelope[i-1][1])+offsets[i]-offsets[i-1]-gap;
-        offsets[i]-=Math.max(neutral?-20:0,Math.min(maxShift,available));
+        const available=Math.min(packing[i][0]-packing[i-1][1],specialEnvelope[i][0]-specialEnvelope[i-1][1])+offsets[i]-offsets[i-1]-gap;
+        offsets[i]-=Math.max(0,Math.min(maxShift,available));
       }
     }
     return {data,offsets,bounds:bounds.map(([l,r],i)=>[l+offsets[i],r+offsets[i]])};
@@ -584,18 +589,34 @@ export function drawPoseAtlasSample(c: CanvasRenderingContext2D, f: Fighter, fra
   return paint(c, f, slotOverride ?? sampled!.slot, false, sampled);
 }
 
-/** Menu-only full-body framing. No combat actor, scale or anchor is mutated.
- * Equal body height, a small readable gap, and a final width fit for unusually
- * broad silhouettes replace the old blanket 60% paired-fighter reduction. */
+/** Cache actual opaque standing bounds, including atlases without bounds metadata.
+ * Reading alpha here leaves the combat atlas, anchors and scale untouched. */
+const menuBounds=new WeakMap<LoadedFrame,readonly number[]>();
+function selectionBounds(source:LoadedFrame):readonly number[] {
+  let bounds=menuBounds.get(source);if(bounds)return bounds;
+  const canvas=document.createElement('canvas');canvas.width=source.image.naturalWidth;canvas.height=source.image.naturalHeight;
+  const context=canvas.getContext('2d',{willReadFrequently:true})!;context.drawImage(source.image,0,0);
+  const {data}=context.getImageData(0,0,canvas.width,canvas.height);
+  let l=canvas.width,t=canvas.height,r=0,b=0;
+  for(let y=0;y<canvas.height;y++)for(let x=0;x<canvas.width;x++)if(data[(y*canvas.width+x)*4+3]>0){l=Math.min(l,x);t=Math.min(t,y);r=Math.max(r,x+1);b=Math.max(b,y+1);}
+  bounds=r>l&&b>t?[l,t,r,b]:source.bounds;menuBounds.set(source,bounds);return bounds;
+}
+/** Menu-only framing: every visible body has the same standing height.
+ * Pack opaque silhouettes, then fit the complete team within its preview area. */
 export function drawSelectionPose(c:CanvasRenderingContext2D,f:Fighter,scale:number,maxWidth:number):boolean {
   const ids=bodyAtlasIds(f.id);if(ids.some(id=>!atlases.has(id)))return false;
-  const actors=ids.map(()=>({...f,x:0,y:FLOOR,move:null,reaction:null,stun:0,blockstun:0,flash:0}));
-  const data=actors.map((actor,i)=>paintData(actor,0,undefined,ids[i])!);
-  const bounds=data.map(paintBounds),offsets=actors.map(()=>0),gap=10;
-  for(let i=1;i<actors.length;i++)offsets[i]=bounds[i-1][1]+offsets[i-1]+gap-bounds[i][0];
-  const left=bounds[0][0],right=bounds.at(-1)![1]+offsets.at(-1)!,center=(left+right)/2;
-  const fitted=Math.min(scale,maxWidth/Math.max(1,right-left));
-  c.save();c.scale(fitted,fitted);c.translate(0,-FLOOR);
-  for(let i=0;i<actors.length;i++)paint(c,actors[i],0,false,undefined,ids[i],offsets[i]-center);
+  const bodies=ids.map(id=>{
+    const atlas=atlases.get(id)!,source=atlas.frames[0],bounds=selectionBounds(source);
+    const zoom=160/(bounds[3]-bounds[1]);
+    return {atlas,source,bounds,zoom,width:(bounds[2]-bounds[0])*zoom};
+  });
+  const gap=6,width=bodies.reduce((sum,b)=>sum+b.width,0)+gap*(bodies.length-1);
+  const fitted=Math.min(scale,maxWidth/Math.max(1,width));
+  c.save();c.scale(fitted,fitted);c.imageSmoothingEnabled=false;
+  let left=-width/2;
+  for(const {atlas,source,bounds,zoom,width:bodyWidth} of bodies){
+    c.save();c.translate(left+bodyWidth/2,0);c.scale(f.facing*atlas.facing*zoom,zoom);
+    c.drawImage(source.image,-(bounds[0]+bounds[2])/2,-bounds[3]);c.restore();left+=bodyWidth+gap;
+  }
   c.restore();return true;
 }
