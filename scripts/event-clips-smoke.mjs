@@ -13,7 +13,7 @@ globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/js
 globalThis.Image=class{set src(value){this.url=value;try{const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}catch{queueMicrotask(()=>this.onerror());}}};
 const {A,FLOOR,WIDTH,createState,step,getMove,COMBAT_STYLES}=core;
 const {loadPoseAtlases,getPoseAtlasDebug:debug,drawPoseAtlas:draw,setPoseAtlasPresentation:present,setPoseAtlasThrowState:throwScene,setPoseAtlasAssistTiming:assistTiming}=poses;
-const {EVENT_CLIP_LENGTHS,createRoundPresentation,advanceRoundPresentation,beginRoundOutro,specialFrame,castFrame,recoilFrame,defeatFrame}=events;
+const {EVENT_CLIP_LENGTHS,IDENTITY_CLIP_LENGTHS,createRoundPresentation,advanceRoundPresentation,beginRoundOutro,specialFrame,castFrame,recoilFrame,defeatFrame}=events;
 // Paired-body pose ownership is checked by duo/expansion QA; these assertions
 // inspect one actor and one drawing per call.
 await loadPoseAtlases();const installed=Object.keys(original.fighters).filter(id=>core.PLAYABLE_FIGHTERS.includes(id)&&!core.isPairedFighter(id)&&Object.keys(original.fighters[id].clips??{}).length);
@@ -21,10 +21,15 @@ assert.ok(installed.length,'No installed event clips to test');
 let count=0;const check=async(name,fn)=>{await fn();count++;console.log('PASS:',name);};
 function fresh(id,face=1,distance=60){present(null,[]);throwScene(null,[]);const s=createState(id,'dummy');const[a,b]=s.fighters;a.x=640;b.x=640+face*distance;a.facing=face;b.facing=-face;return s;}
 function ctx(){return {angles:[],translations:[],scales:[],images:[],globalAlpha:1,save(){},restore(){},translate(x,y){this.translations.push([x,y]);},rotate(a){this.angles.push(a);},scale(x,y){this.scales.push([x,y]);},drawImage(...a){this.images.push(a);}};}
-const each=(clip,fn)=>{for(const id of installed)if(original.fighters[id].clips[clip]&&!(clip==='intro'&&original.fighters[id].clips.entrance)&&!(clip==='defeat'&&original.fighters[id].clips.death)&&!(clip==='cast'&&(original.fighters[id].clips.ranged||original.fighters[id].clips.signatureCast)))for(const face of [1,-1])fn(id,face);};
+const each=(clip,fn)=>{for(const id of installed)if(original.fighters[id].clips[clip]&&!(clip==='defeat'&&id==='sprotosales'))for(const face of [1,-1])fn(id,face);};
 await check('installed optional clips have exact current counts and inventory; absent roster entries remain absent',()=>{
- const inv=poses.getPoseAtlasClipInventory();for(const[id,cfg]of Object.entries(original.fighters))for(const[name,n]of Object.entries(EVENT_CLIP_LENGTHS)){if(cfg.clips?.[name]){assert.equal(cfg.clips[name].length,n);assert.equal(inv[id][name],n);}else assert.equal(inv[id][name],undefined);}
+ const inv=poses.getPoseAtlasClipInventory();for(const[id,cfg]of Object.entries(original.fighters))for(const[name,n]of Object.entries({...EVENT_CLIP_LENGTHS,...IDENTITY_CLIP_LENGTHS})){if(cfg.clips?.[name]){assert.equal(cfg.clips[name].length,n);assert.equal(inv[id][name],n);}else assert.equal(inv[id][name],undefined);}
 });
+// Explicit legacy fixture keeps these contracts exercised even when every
+// installed character also has replacement entrance8/death16/ranged8.
+// Actual new clips are tested by identity-presentation/ranged QA separately.
+manifest=structuredClone(original);for(const cfg of Object.values(manifest.fighters))for(const name of ['entrance','death','ranged','signatureCast'])if(cfg.clips)delete cfg.clips[name];
+await loadPoseAtlases();
 await check('intro clocks cover four frames without core mutation; identity excludes same-ID assist',()=>each('intro',(id,face)=>{
  const s=fresh(id,face),f=s.fighters[0],copy=structuredClone(f),p=createRoundPresentation(),before=JSON.stringify(s),seen=new Set();present(p,s.fighters);
  for(let t=0;t<events.INTRO_FRAMES;t++){const d=debug(f,s.frame);assert.equal(d.sequence,'intro');seen.add(d.frameIndex);draw(ctx(),f,s.frame);assert.notEqual(debug(copy,0).sequence,'intro');advanceRoundPresentation(p);}

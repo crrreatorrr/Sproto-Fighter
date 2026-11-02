@@ -6,6 +6,11 @@ audit=json.loads((HERE/'audit.json').read_text());profiles=json.loads((HERE/'pro
 ready={}
 for path in HERE.glob('batch_*/processed/*-identity/metadata.json'):
  body=path.parent.name.removesuffix('-identity');meta=json.loads(path.read_text());clips=meta.get('clips',{})
+ ledger=path.parents[2]/'jobs.json'
+ if ledger.exists():
+  latest=next((j for j in reversed(json.loads(ledger.read_text())) if j.get('entity')==body and j.get('job_id')),None)
+  marker=path.parent/'source-job.txt'
+  if latest and (latest.get('status')!='completed' or not marker.exists() or marker.read_text().strip()!=latest['job_id']):continue
  if len(clips.get('entrance',[]))==8 and len(clips.get('death',[]))==16:ready[body]=(path.parent,meta)
 missing=[];selected=[]
 for row in audit:
@@ -27,6 +32,6 @@ for row in selected:
   if 'ranged' in clips:cfg['clips'].pop('signatureCast',None)
   count+=1
 manifest['revision']='identity-'+digest.hexdigest()[:16]
-path.write_text(json.dumps(manifest,indent=2)+'\n')
+path.write_text(json.dumps(manifest,separators=(',',':'))+'\n')
 (HERE/'installation.json').write_text(json.dumps({'fighters':len(selected),'bodies':count,'missing':missing,'revision':manifest['revision']},indent=2)+'\n')
 print(f'Installed complete identity animation sets: {len(selected)} fighters / {count} bodies; remaining {len(missing)}.')

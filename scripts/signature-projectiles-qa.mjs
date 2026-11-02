@@ -14,6 +14,11 @@ for(const[id,shape]of Object.entries(changes)){
  assert.ok(colors.size>=3,id+' outlined color details');
  if(shape.startsWith('signature:')){const n=Number(shape.split(':')[1]);assert.ok(module.SIGNATURE_OBJECTS[n]);assert.ok(catalog.icons[module.SIGNATURE_OBJECTS[n].icon]);}
 }
-assert.equal(seen.size,78);assert.equal(changes.sproto651,'painting');
+assert.equal(seen.size,78);
+// Older semantic names must not secretly share the same fallback rectangle.
+const retained=new Map();for(const shape of ['egg','drop','acid','needle','prism','rock','boulder','scrap']){
+ const points=[];const c=new Proxy({fillStyle:'',fillRect(...a){points.push(a)}},{get:(o,k)=>k in o?o[k]:()=>{},set:(o,k,v)=>(o[k]=v,true)});module.drawPower(c,shape,0,'#638aff');const signature=JSON.stringify(points);assert.ok(!retained.has(signature),'distinct retained silhouette '+shape);retained.set(signature,shape);
+}
+assert.equal(changes.sproto651,'painting');
 for(const id of ['sproto3152','sisma','captain','highsproto','michael','sproto2531','sproto3106'])assert.ok(!(id in changes),'existing signature preserved: '+id);
 console.log('PASS: 78 individually visible projectile silhouettes, reference object catalog, outlined pixel palettes, Picasso painting, and protected signature exclusions.');

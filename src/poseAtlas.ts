@@ -546,21 +546,12 @@ function paint(c: CanvasRenderingContext2D, f: Fighter, slot: PoseSlot, ghost: b
   c.save(); c.translate(Math.round(transform.x+offsetX),Math.round(transform.y));
   c.rotate(transform.angle); c.scale(facing * atlas.facing * atlas.scale, atlas.scale); c.imageSmoothingEnabled = false;
   const owner=sceneActor(f),scene=presentationScene,q=CHARACTER_ACTIONS[owner.id as keyof typeof CHARACTER_ACTIONS];
-  if(scene?.fighters.includes(owner)&&q&&scene.presentation.phase==='intro'&&!atlas.clips.entrance){
-    const u=Math.min(1,scene.presentation.frame/44),kind=q.entrance;
-    c.translate((kind%3-1)*q.entranceDistance*(1-u),-Math.abs(Math.sin(u*Math.PI*(kind%3+1)))*q.entranceHeight*(1-u));
-    c.rotate((kind%2?1:-1)*Math.sin(u*Math.PI)*(.02+kind*.008));
-  }
   if(scene?.fighters.includes(owner)&&scene.presentation.phase==='outro'&&scene.presentation.winner!==scene.fighters.indexOf(owner)&&owner.id==='sprotosales'&&!atlas.clips.death){
     const base=atlas.frames[0],u=Math.min(1,Math.max(0,scene.presentation.frame-12)/48);
     const parts=[[0,0,256,125,0,34],[0,125,94,51,-70,34],[94,125,42,51,0,34],[136,125,120,51,70,34],[0,176,112,80,-48,0],[112,176,144,80,48,0]];
     for(const[x,y,w,h,dx,dy]of parts){c.save();c.translate(dx*u,dy*u);c.drawImage(base.image,x,y,w,h,x-base.anchor[0],y-base.anchor[1],w,h);c.restore();}c.restore();return true;
   }
-  if(scene?.fighters.includes(owner)&&q&&scene.presentation.phase==='outro'&&scene.presentation.winner!==scene.fighters.indexOf(owner)&&!atlas.clips.death){
-    const u=Math.min(1,scene.presentation.frame/80),wave=Math.sin(u*Math.PI);
-    c.translate((q.defeat%2?1:-1)*wave*(q.defeat+3),-Math.abs(wave)*(q.defeat%4));c.rotate((q.defeat%3-1)*wave*.035);
-  }
-  if(q?.replaceRanged&&f.move?.id==='bolt'){
+  if(q?.replaceRanged&&f.move?.id==='bolt'&&!atlas.clips.ranged){
     const m=getMove(f,'bolt'),u=Math.min(1,f.move.t/(m.startup+m.active+m.recovery)),wave=Math.sin(u*Math.PI);
     c.translate((q.ranged%3-1)*wave*(3+q.ranged),-wave*(q.ranged%4));c.rotate((q.ranged%2?1:-1)*wave*.015*q.ranged);
   }

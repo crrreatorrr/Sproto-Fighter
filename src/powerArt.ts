@@ -76,6 +76,13 @@ export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,col
   for(const[x,y]of pixels)box(x-1,y-1,5,5,'#17132c');for(const[x,y]of pixels)box(x,y,3,3,'#ffe66b');
  }
  else if(shape==='joint'){box(-18,-4,37,8,'#978c79');box(-16,-3,34,6,'#f5efd9');box(-16,-3,8,6,'#c7a478');box(-7,-2,23,1,'#fffef0');box(17,-3,4,6,'#65605a');box(20,-2,3,4,age%6<3?'#ff7040':'#eb492c');box(22,-1,2,2,'#ffcb70');const rise=Math.round(age*.4)%7;box(16,-9-rise,3,3,'#c8cbd0');box(10,-14-rise,3,3,'#949ba5');}
+ else if(shape==='egg'){box(-8,-12,16,24,'#e6d5ac');box(-12,-7,24,17,'#fff6de');box(-6,-15,12,6,'#fff6de');box(-3,-7,7,10,'#f3cf4a');box(-7,10,14,4,'#d7c39d');}
+ else if(shape==='drop'){box(-2,-17,4,6,'#8bdcf5');box(-5,-11,10,6,'#51b5f1');box(-9,-5,18,6,'#3089db');box(-12,1,24,9,'#2073c6');box(-8,10,16,5,'#15539b');box(-5,-2,4,8,'#d6f8ff');}
+ else if(shape==='acid'){box(-14,-6,27,12,'#76a72b');box(-9,-10,19,21,'#b4e862');box(-4,-13,10,6,'#dcff8d');box(12,-2,7,8,'#8eca3e');box(-8,8,5,7,'#91c73b');box(4,10,4,9,'#b4e862');box(-20,-3,4,5,'#b4e862');}
+ else if(shape==='needle'){box(-24,-2,36,4,'#c7dbef');box(-18,-1,35,2,'#f7ffff');box(-26,-5,8,3,color);box(-26,2,8,3,color);box(12,-1,10,2,'#9baec9');box(21,0,4,1,'#ffffff');}
+ else if(shape==='prism'){for(let row=-12;row<=12;row+=3){const width=26-Math.abs(row)*2;box(-width/2,row,width,3,row<0?'#b3edff':'#698be7');}box(-2,-10,3,21,'#edfaff');box(-9,-2,18,3,'#d8c8ff');}
+ else if(shape==='rock'){box(-14,-5,28,13,'#626b7b');box(-10,-12,17,22,'#9a9ba7');box(7,-7,8,12,'#858a9b');box(-7,-10,8,4,'#dedbcc');box(-2,4,13,5,'#555d6f');}
+ else if(shape==='boulder'){box(-19,-10,36,24,'#737880');box(-12,-18,24,34,'#a9aa9e');box(-23,-3,7,14,'#72746f');box(15,-9,7,20,'#6c7169');box(-11,-15,11,6,'#e0d9b9');box(0,-5,4,17,'#575e61');box(3,-5,9,3,'#575e61');box(-4,10,8,5,'#737a76');}
  else if(shape==='laser'){box(-58,-6,78,12,'#f13d35');box(-51,-3,73,6,'#ffd45b');box(-43,-1,65,2,'#fffbe2');box(20,-3,4,6,'#fffbe2');}
  else if(shape==='twin'){const wave=Math.round(Math.sin(age*.4)*6);box(-15,-9+wave,19,8,'#ff414e');box(-15,1-wave,19,8,'#3e9eff');box(4,-6,12,12,'#ffe07a');box(16,-3,6,6,'#fff3c3');}
  else if(shape==='pumpkin'){box(-13,-10,26,20,'#eb842c');box(-8,-13,16,26,'#ffad42');box(-2,-18,5,7,'#527f3b');box(-7,-5,4,4,'#34213d');box(5,-5,4,4,'#34213d');box(-5,4,12,3,'#34213d');}

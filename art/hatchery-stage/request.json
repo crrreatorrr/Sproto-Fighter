@@ -1,0 +1,21 @@
+{
+  "index": 0,
+  "id": "hatchery",
+  "name": "The Hatchery",
+  "params": {
+    "model": "gpt_image_2_5",
+    "variant": "sunburst",
+    "quality": "high",
+    "resolution": "4k",
+    "aspect_ratio": "16:9",
+    "count": 1,
+    "use_unlim": false,
+    "medias": [
+      {
+        "role": "image",
+        "value": "2a2d41a0-b121-4568-8bf4-f398d38aafb5"
+      }
+    ],
+    "prompt": "Use the attached screenshot ONLY as an ENVIRONMENT VISUAL reference. IGNORE AND REMOVE EVERY PIECE OF TEXT AND ALL INTERFACE CONTENT. Create a new SIDE-VIEW 2D fighting-game arena from this dark alien hatchery environment, named only in game code (do NOT render any title). Transform the top-down/isometric reference into a fixed horizontal side-on arcade fighting stage, not a strategy-game map. Preserve its visual identity: midnight-navy and charcoal biomechanical ground, indigo-purple organic creep patches, low segmented gothic/alien perimeter walls with tiny cyan lights, scattered jagged ICY BLUE crystal growths in the background, small ochre/gold egg-like organic growths, and the huge CENTRAL ORGANIC HATCHERY as the background landmark. The hatchery has brown/rust ribbed chitin, orange-red fleshy central core, tall curled asymmetrical horn/blade fins and vivid yellow/lime armor sacs and glowing growths. It sits on a broad dark raised octagonal stone/metal dais with purple organic growth around its base. Make the structure visibly alien and architectural, not a human character or boss. No soldiers, units, creatures or people. Frame the hive slightly behind the play space, filling the middle distance with depth and dark alien cavern terrain stretching away. The outer corners of the arena should have small blue crystal clusters and low wall segments FAR BEHIND the fighters. Atmospheric deep navy ambient light, restrained cyan crystal highlights and yellow/green bioluminescent growth accents, no bright daylight. The center structure may glow softly but not obscure the fighters. Crisp rich 1990s arcade PIXEL ART scenery, deliberately stepped pixel clusters, sharp dark edges, flat/cel-shaded color bands, restrained limited palette, no smooth 3D rendering or photorealism, no blurry texture or noise. WIDE 16:9 panorama, intended for 1280x720 Canvas arena. Perfectly flat unobstructed horizontal foreground combat lane across the FULL width; the fighters' foot line is y=578 (80.3% image height), with empty low-contrast charcoal/indigo paving/organic soil extending to the bottom. Keep x=80..1200,y=350..600 readable and free of any foreground props that could cover fighters. Put all hive buildings, crystals, pods, railings and steps BEHIND that lane. Keep top22% dark/simple for HUD overlay, clear left and right playable corners, no pits or foreground pillars. EXACTLY ONE complete environment image. ABSOLUTELY NO text, letters, words, numbers, currencies, names, coin/token badges, logos, portraits, health bars, green meters, selection rings/circles, UI, HUD, cursor, panels, borders or watermarks. Do not copy or infer any wording from the source screenshot."
+  }
+}

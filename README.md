@@ -1,14 +1,16 @@
 # Sproto Arena — local combat prototype
 
-Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline prototype with an expanded selectable roster, each with its original supplied image on the selection screen and a fighting animation set. The fighters have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Nine arenas now include four new story-based Higgsfield pixel-art panoramas, with a six-chapter route; story text and cutscenes remain explicit placeholders. The original pixel-art **Amber Ranch** remains a free-play bonus.
+Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline prototype with an expanded selectable roster, each with its original supplied image on the selection screen and a fighting animation set. The fighters have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Ten arenas include story-based and reference-derived Higgsfield pixel-art panoramas, with a seven-chapter route; story text and cutscenes remain explicit placeholders. The original pixel-art **Amber Ranch** remains a free-play bonus.
 
-The selection screen follows the supplied reference's compact arcade composition: centered **MEMBER SELECT**, opposing fighters, side statistics and a dense portrait grid in red, blue and yellow, with an approved Higgsfield pixel-art border. It retains random fighter/stage choices and an explicit **Start fight** button. Selecting a stage changes the preview and the next match's arena. All rounds are untimed and end on knockout. See the [latest layout verification](docs/MENU-REFERENCE-REVISION.md) and [prior menu/gameplay checks](docs/MENU-QA.md).
+The selection screen follows the supplied reference's compact arcade composition: centered **MEMBER SELECT**, opposing fighters, side statistics and a dense portrait grid in red, blue and yellow, with a code-drawn pixel frame, square buttons and a locally bundled Pixelify Sans font across menus, dialogs and the combat HUD. **Stage selection and Start fight sit above the fighter preview and roster**, with keyboard/gamepad routes matching that order. It retains random fighter/stage choices. The font and its SIL Open Font License are bundled under public/fonts; runtime font loading needs no external service. See [pixel menu QA](docs/PIXEL-MENU-NOV02-QA.md). Selecting a stage changes the preview and the next match's arena. All rounds are untimed and end on knockout. See the [latest layout verification](docs/MENU-REFERENCE-REVISION.md) and [prior menu/gameplay checks](docs/MENU-QA.md).
 
 The original Sproto Duo and the new twin/triple selections use separate animated bodies with shared health and controls. The November 2 expansion adds all 47 folder references and the subsequent named submissions. [Expansion verification and limitations](docs/SPROTOS-EXPANSION-QA.md).
 
 **November 2 roster update:** reference-based core, guarded movement and event animation sets are installed for the expansion. Twins receive additional dash, jump, heavy, aerial and victory drawings. See [expansion QA](docs/SPROTOS-EXPANSION-QA.md) for exact coverage and corrections. Earlier dated reports below describe prior builds.
 
 **Pissing Sproto update:** #3152 now has 32 dedicated assist drawings and partners with 34 Sprotos, including #2322. [Partner animation QA](docs/PISSING-SPROTO-ASSIST-QA.md).
+
+**Partner relay:** 34 Sprotos, including #2322, now coordinate Pissing Sproto, Vmudream screen lasers, the small #3181 yellow strike and the large stomach-creature finisher. [Relay QA](docs/PARTNER-RELAY-QA.md).
 
 ## Run
 
@@ -35,7 +37,7 @@ For the new event pilot, run `node scripts/presentation-smoke.mjs` and `node scr
 
 Choose any fighter in the roster; each selection describes its attack and power style. Use **P1 / Your fighter** and **CPU / Your rival** to choose either side, or use **Random fighter** for the selected side. **Random stage** picks from all installed stages. Common controls and combo rules make it easy to switch fighters, while attack profiles, projectile behavior and specials differ. See the fighter-kit guide for the full roster.
 
-In selection, use arrows to move focus, Enter to select and Tab to change sections. On a controller, stick/D-pad navigate, A selects, B returns to the player side, X switches side and Start focuses the launch button. Release menu inputs before entering combat. **Fighter select** returns from a match without automatically starting another round. The header also opens the six-chapter story selector and standalone level selector.
+In selection, use arrows to move focus, Enter to select and Tab to change sections. On a controller, stick/D-pad navigate, A selects, B returns to the player side, X switches side and Start focuses the launch button. Release menu inputs before entering combat. **Fighter select** returns from a match without automatically starting another round. The header also opens the seven-chapter story selector and standalone level selector.
 
 | Action | Keyboard | Standard gamepad |
 | --- | --- | --- |
@@ -58,15 +60,14 @@ In selection, use arrows to move focus, Enter to select and Tab to change sectio
 
 Select **Practice · standing dummy**, walk close, then tap J → K → L as each hit connects (roughly 0.18–0.22 seconds apart). Don't press all three simultaneously. Confirmed hits or blocks allow ascending attack cancels. Light can also chain to a second light or crouching light. Attacks buffer for 14 simulation frames; hit-stop adds a short impact pause.
 
-Try U → W → J → K → L for a four-hit aerial route. The launcher can cancel into a chase jump after connecting. Jump input also buffers through hit-stop. Light, medium, and finisher become distinct aerial attacks when airborne. Crouching light and sweep provide low options. Standing horizontal spit can be ducked; crouched spit meets crouching opponents. Ground throws beat guard at close range, but cannot throw a target already in hit/block stun or in the air. O catches and holds the opponent, then releases a throw: neutral/forward sends them forward; hold back to switch sides; W lifts upward; S slams down. Direction is captured when pressing O. Damage happens on release, and incoming projectiles can interrupt the hold. Controller directions + left bumper use the same variations.
+Try U → W → J → K → L for a four-hit aerial route. The launcher can cancel into a chase jump after connecting. Jump input also buffers through hit-stop. Light, medium, and finisher become distinct aerial attacks when airborne. Crouching light and sweep provide low options. Horizontal spit can be ducked. Ground throws beat guard at close range, but cannot throw a target already in hit/block stun or in the air. O catches and holds the opponent, then releases a throw: neutral/forward sends them forward; hold back to switch sides; W lifts upward; S slams down. Direction is captured when pressing O. Damage happens on release, and incoming projectiles can interrupt the hold. Controller directions + left bumper use the same variations.
 
 ### Directional attacks and routes
 
 - W jumps; tap it again only after releasing. Holding W through landing never repeats the jump. Controller stick/D-pad up follows the same rule, including diagonals.
 - Press W + J together for a rising strike. W + forward (D when facing right, A when facing left) + K gives an upward diagonal strike. U is the dedicated rising-strike shortcut. A two-frame chord window gives the attack priority over jumping; W by itself jumps.
 - S + J/K gives low attacks, S + L sweeps. In the air, S + K/L chambers in the jump arc, then dives on the first active strike frame; L remains a finisher.
-- I casts the selected fighter’s ranged power. Golden Sproto, Morelight, Juicy, Jahon and Crapto always spit horizontally, including in the air and while holding a direction. S + I fires from the crouched mouth at a lower height. W + I jumps and fires horizontally from the jump arc; holding W never raises a grounded shot. Down in the air does not lower the mouth or aim downward. Other powers retain directional aiming and their own trajectories, including Halloween 2008’s arcing pumpkins. Directions are captured on press, so buffered attacks retain their intended aim.
-- Yannix uses a horizontal mind beam from his forehead instead of spit. It stays attached during the jump arc, reaches 520 world pixels, and hits once per cast. Standing guard blocks it and crouching ducks it.
+- I casts the selected fighter’s ranged power. Golden Sproto, Morelight, Juicy, Jahon and Crapto always spit horizontally, including in the air and while holding a direction. Other powers retain directional aiming and their own trajectories, including Halloween 2008’s arcing pumpkins. Directions are captured on press, so buffered attacks retain their intended aim.
 - After a damaging hit, Shift can cancel the attack into one dash per combo. Then continue with another move. Repeating light is limited to two hits per combo; other moves can connect once per route. Damage scales down as the combo grows.
 
 Verified routes, timed on contact: J → J → S+J → K → L; J → K → I → L at close range; U → W → J → K → L in the air. One dash cancel per combo and input retention through hit-stop also pass focused checks.
@@ -95,7 +96,7 @@ CPU and practice rounds have no timer or timeout result. A knockout ends the rou
 - `src/higgsfieldRig.ts`: superseded cutout renderer retained for provenance/undeclared-art fallback; the installed 21-fighter manifest takes priority.
 - `src/originalPortraits.ts`: explicit mapping of the 21 original references used by character selection.
 - `art/pose-atlases/`: source sheets, connected-component importer, targeted identity/footwear corrections and reproducible guarded-step authoring.
-- `src/stage.ts`: original ranch plus eight static Higgsfield stage images, shared between previews and combat. Procedural labeled fallbacks remain available if optional stage images fail to load. `src/storyMode.ts` controls world selection and placeholder scene/progression panels.
+- `src/stage.ts`: original ranch plus nine static Higgsfield stage images, shared between previews and combat. Procedural labeled fallbacks remain available if optional stage images fail to load. `src/storyMode.ts` controls world selection and placeholder scene/progression panels.
 - `src/style.css` / `index.html`: combat/menu shell; `src/arcadeSelection.css` supplies the latest reference-led selection composition and mobile overrides.
 
 Development console helpers: `neonRelay.snapshot()` returns a copied state, `neonRelay.replay()` returns initial configuration + input masks, and `neonRelay.verifyReplay()` re-simulates recorded input and compares state. This structure makes later rollback exploration easier; it does **not** establish cross-browser determinism or online readiness. There is no transport, matchmaking, synchronization, rollback, or remote input handling yet.
@@ -112,7 +113,7 @@ Deferred: sound, physical-controller verification, local versus, online 1v1, mul
 
 ## Story and stage selection
 
-**Story worlds** follows the six chapters of *Out of the Trenches*: Mudline Trenches → Circuit Gate → Tidebreak Marina → Crown Relay Chamber → Last Light Bar → Verse Gate. All chapters are directly selectable; wins advance to the next scene and losses/draws offer retry. Scene panels remain explicit placeholders, and progress lasts for the session. **Free-play levels** also includes the original Neon Tomorrow, Moonkeep Castle and Amber Ranch, for nine selectable arenas. Back/Escape preserves pause state and leaving story restores the previous practice behavior.
+**Story worlds** follows seven chapter arenas of *Out of the Trenches*: Mudline Trenches → Circuit Gate → Tidebreak Marina → Crown Relay Chamber → Last Light Bar → Verse Gate → The Hatchery. All chapters are directly selectable; wins advance to the next scene and losses/draws offer retry. Scene panels remain explicit placeholders, and progress lasts for the session. **Free-play levels** also includes the original Neon Tomorrow, Moonkeep Castle and Amber Ranch, for ten selectable arenas. Back/Escape preserves pause state and leaving story restores the previous practice behavior.
 
 ## Current-update verification
 
@@ -133,3 +134,5 @@ Cumulative browser checks cover all 21 player selections, per-fighter motion sam
 See [current movement tuning](docs/MOVEMENT-TUNING.md) and [current sprite QA](docs/SPRITE-REWORK-QA.md). The older [cutout ledger](docs/MOVEMENT-RIG-QA.md) and old movement lab describe the prior rig. Use the whole-pose review lab linked above for current sprite evidence. Add `?qa` to the main game URL for visible status, freeze and single-frame controls. Normal play does not show these controls.
 
 The November1 update repairs eight observed walking-frame defects and increases walk speed15%, with faster starts/reversals and a shorter dash cooldown. All21 fighters received individual current movement checks, including the repaired downward aerial attacks. [Detailed factual handoff](docs/CLAUDE-HANDOFF.md) records changed files, evidence and residual limits.
+
+- Yannix uses a horizontal mind beam from his forehead instead of spit. It stays attached during the jump arc, reaches 520 world pixels, and hits once per cast. Standing guard blocks it and crouching ducks it.

@@ -3,7 +3,7 @@ from pathlib import Path
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[3];HERE=Path(__file__).resolve().parent
 rows=json.load(open(ROOT/'art/identity-actions/audit.json'))[:51];profiles=json.load(open(ROOT/'art/identity-actions/profiles.json'));inventory=json.load(open(ROOT/'art/sprotos-expansion/inventory.json'));desc={b['id']:b['description'] for r in inventory for b in r['entities']}
-legacy={x['id']:x['job'] for x in json.load(open(ROOT/'art/pose-atlases/generations.json'))}
+legacy={x['id']:x['job'] for x in json.load(open(ROOT/'art/pose-atlases/generations.json'))};legacy.update(vela='e128cc32-b361-451a-be1e-1bb654e1c6af',duo='7a271219-45aa-44c3-8f9c-05eb213ee40f',**{'duo-blue':'6e705245-be1a-427d-bee5-6d33ca406f6f'});desc['duo']='ONLY RED character LEFT: bright red swept spiky head, huge yellow eyes, red nose, broad smile, thin red body and arms, red feet, EMPTY RED hands with no hook token. Yellow only in eyes. Preserve huge head and compact torso. Exclude blue figure.';desc['duo-blue']='ONLY BLUE figure RIGHT: very large blue swept spiky head, tiny attached yellow top hat, huge yellow eyes with black pupils, yellow muzzle and broad smile, rounded low blue belly, RED BOXING GLOVES with yellow cuffs on both hands and RED SHOES. Never yellow hands/feet. Preserve huge head, compact small torso and short low legs. Exclude red figure.'
 # Character-specific gestures and collapses, kept distinct from shared mechanics.
 acts=[
 ('crack knuckles then drive one fist into the opposite palm','proud chest brace fails, sink onto one knee then roll onto shoulder','wind a fist behind hip and snap a golden knuckle shot'),

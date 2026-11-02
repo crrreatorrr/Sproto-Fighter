@@ -148,7 +148,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         const f = s.fighters[i];
         if(f.move && f.move.t>0){
             const aim=f.move.aim,powerShape=COMBAT_STYLES[f.id].projectile.shape;
-            const label=f.move.id==='grab'?(f.move.throwDirection??'forward').toUpperCase()+' THROW':f.move.id==='bolt'?(powerShape==='yellowEight'?'YELLOW 8':powerShape.replace(/([A-Z])/g,' $1').toUpperCase()):aim==='upForward'?'DIAGONAL STRIKE':aim==='up'?'RISING STRIKE':aim==='down'?(f.y<FLOOR?'DIVE STRIKE':'LOW STRIKE'):'';
+            const label=f.move.id==='grab'?(f.move.throwDirection??'forward').toUpperCase()+' THROW':f.move.id==='bolt'?(powerShape==='yellowEight'?'YELLOW 8':powerShape.startsWith('signature:')?'RANGED ATTACK':powerShape==='painting'?'PAINTING THROW':powerShape.replace(/([A-Z])/g,' $1').toUpperCase()):aim==='upForward'?'DIAGONAL STRIKE':aim==='up'?'RISING STRIKE':aim==='down'?(f.y<FLOOR?'DIVE STRIKE':'LOW STRIKE'):'';
             if(label&&!(f.id==='michael'&&f.move.id==='bolt'&&f.move.t<38))text(c,label,f.x,f.y-200,10,'#e8e4cc','center',750);
             if(f.move.connected&&f.move.id!=='special'&&f.move.id!=='grab')text(c,f.dashCanceled?'CHAIN READY':'CHAIN / DASH CANCEL',f.x,f.y+35,9,'#b4f8c8','center',750);
         }

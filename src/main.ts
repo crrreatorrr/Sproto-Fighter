@@ -3,6 +3,7 @@ import { createSelectionMenu, type SelectionSetup } from './selectionMenu';
 import './style.css';
 import './arcadeSelection.css';
 import './pixelUI.css';
+import './mysticUI.css';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
