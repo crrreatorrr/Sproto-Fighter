@@ -34,7 +34,7 @@ export function createStoryMode(hooks:Hooks){
         view=story?'worlds':'levels';
         $('journey-kicker').textContent=story?'STORY FRAMEWORK / FOUR SELECTABLE WORLDS':'FREE PLAY / LEVEL SELECT';
         $('journey-title').textContent=story?'Choose your starting world.':'Pick a place to fight.';
-        $('journey-copy').textContent=story?'All four worlds are available. Win to advance, lose to retry. Story and cutscenes are labeled placeholders; progress lasts for this browser session.':'Standalone matches with your sparring settings. Four stage concepts and the original ranch bonus. No story scenes or progression.';
+        $('journey-copy').textContent=story?'All four worlds are available. Win to advance, lose to retry. Win World 1 on a visit from the hub\'s Bar arcade to earn the Tidebreaker Belt Relic. Story and cutscenes are labeled placeholders; progress lasts for this browser session.':'Standalone matches with your sparring settings. Four stage concepts and the original ranch bonus. No story scenes or progression.';
         const content=$('journey-content');content.replaceChildren();const grid=document.createElement('div');grid.className='world-grid';content.append(grid);
         for(const level of story?worlds:STAGES){const button=document.createElement('button');button.className='world-card';button.style.setProperty('--stage-accent',level.accent);button.dataset.stage=level.id;
             button.innerHTML=`<span>${level.chapter?'WORLD 0'+level.chapter:'BONUS STAGE'}${story&&cleared.has(level.id)?' / CLEARED':''}</span><strong>${level.name}</strong><small>${level.theme}</small><em>${level.id==='ranch'?'ORIGINAL RANCH ART':'STAGE CONCEPT ART'}</em>`;

@@ -1,5 +1,7 @@
 import { EVENT_CLIP_LENGTHS, introFrame, defeatFrame, specialFrame, castFrame, recoilFrame, type EventClipName, type RoundPresentation } from './animationEvents';
 import { A, COMBAT_STYLES, DUO_SPREAD, FLOOR, WIDTH, getMove, type Fighter, type ThrowState } from './core';
+/** Public-folder URL under the build base, so the game also runs below /play/sproto-fighter/. Node smoke scripts have no import.meta.env and keep the root path. */
+const asset=(path:string)=>(typeof import.meta.env==='undefined'?'/':import.meta.env.BASE_URL)+path.replace(/^\/+/,'');
 
 /** Complete-character frames, never articulated cutouts. Thirty-two authored poses
  * cover shared actions only; this does not invent missing per-character animation. */
@@ -79,7 +81,7 @@ const names = Object.entries(POSE_SLOTS);
 function localUrl(path: string, revision?: string): string {
   // Atlas assets are local application files. No external source is fetched.
   if (!path || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(path) || path.includes('\\')) throw new Error('Atlas frame must use a local URL');
-  const url = path.startsWith('/') ? path : '/fighters/' + path;
+  const url = asset(path.startsWith('/') ? path : 'fighters/' + path);
   return revision ? url + (url.includes('?') ? '&' : '?') + 'v=' + encodeURIComponent(revision) : url;
 }
 async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): Promise<Atlas> {
@@ -122,7 +124,7 @@ export function loadPoseAtlases(): Promise<boolean> {
   if (pending) return pending;
   loadState = 'loading'; loadError = null;
   pending = (async () => {
-    const response = await fetch('/fighters/pose-atlas.json', { cache: 'no-store' });
+    const response = await fetch(asset('fighters/pose-atlas.json'), { cache: 'no-store' });
     if (response.status === 404 || (response.ok && response.headers.get('content-type')?.includes('text/html'))) {
       // Development SPA servers can return their HTML shell for missing files.
       atlases.clear(); declaredAtlases.clear(); loadState = 'absent'; return false;

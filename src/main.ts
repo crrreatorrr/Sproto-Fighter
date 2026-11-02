@@ -8,6 +8,8 @@ import { render } from './render';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
 import { STAGES, setStage, loadStageArt, type StageId } from './stage';
 import { createStoryMode } from './storyMode';
+import { connectHub, hubConfigured, type HubLink } from './hub/link';
+import { lockReason, readRelicCache, writeRelicCache } from './hub/roster';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
 const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: 'ShiftLeft' };
@@ -40,7 +42,46 @@ const frames: [
     number,
     number
 ][] = [];
-const selection = createSelectionMenu({start:setup=>launchSelection(setup)});
+// Relics from the hub unlock some fighters (hub/roster.ts). Until the hub answers, the last
+// confirmed list from this browser applies; a standalone launch keeps using it.
+const storage = (() => { try { return window.localStorage; } catch { return null; } })();
+let hubRelics: string[] = readRelicCache(storage);
+let hub: HubLink | null = null;
+const selection = createSelectionMenu({start:setup=>launchSelection(setup),locked:id=>lockReason(id,hubRelics)});
+let toastTimer = 0;
+function hubToast(title: string, sub: string) {
+    const toast = $('hub-toast');
+    toast.replaceChildren();
+    const head = document.createElement('b');
+    head.textContent = title;
+    toast.append(head, document.createTextNode(sub));
+    toast.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => { toast.hidden = true; }, 6000);
+}
+$('return-hub').onclick = () => { if (hub) hub.exitHub(); };
+if (hubConfigured()) $('return-hub').hidden = false;
+void connectHub().then(link => {
+    hub = link;
+    if (link.connected) {
+        hubRelics = link.relics;
+        writeRelicCache(storage, hubRelics);
+        selection.refreshLocks();
+        $('return-hub').hidden = false;
+        $('hub-label').textContent = '● HUB LINKED / BAR ARCADE';
+        $('hub-label').classList.add('linked');
+    } else if (link.error) {
+        $('hub-label').textContent = '● HUB OFFLINE / 1V1';
+        console.warn('Hub ticket was not redeemed:', link.error);
+    }
+});
+/** Tickets for CPU wins and the Tidebreaker Belt for Story World 1. Standalone play reports nothing. */
+function reportRound() {
+    if (!hub?.connected || state.winner === null) return;
+    const active = story.snapshot().active;
+    const storyWorld = active ? STAGES.find(s => s.id === active)?.chapter ?? null : null;
+    void hub.onRoundEnd({ winner: state.winner, mode, storyWorld, stage: active ?? selection.getSetup().stage, fighter: chosen }, hubToast);
+}
 function updateStage(stage:StageId) {
     setStage(stage);
     const location=STAGES.find(s=>s.id===stage)!;
@@ -320,6 +361,7 @@ function advanceRoundFrame(input: number) {
     if (presentation.phase === 'outro') {
         advanceRoundPresentation(presentation);
         if ((presentation as RoundPresentation).phase !== 'result') return;
+        reportRound();
         if (story.onRoundEnd(state.winner!)) return;
         const won = state.winner === 0;
         showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again →', 'ROUND COMPLETE');

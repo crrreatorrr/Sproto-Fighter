@@ -184,3 +184,13 @@ footer { padding: 8px 0 10px; font-size: 7px; color: #727580; }
   #selection-loading { font-size: 6px; }
   footer { font-size: 6px; }
 }
+
+/* Hub Relic unlocks: locked fighters stay visible, greyed, and are still pickable as the CPU rival. */
+.lock-badge { display: none; position: absolute; left: 50%; top: 38%; transform: translate(-50%, -50%) rotate(-8deg); padding: 3px 5px; background: #0b0d14e6; border: 1px solid #ffdb49; color: #ffdb49; font-size: 7px; font-weight: 900; letter-spacing: 1px; pointer-events: none; }
+.portrait-choice.locked img { filter: grayscale(1) brightness(.45); }
+.portrait-choice.locked .lock-badge { display: block; }
+#selection-view[data-side=opponent] .portrait-choice.locked img { filter: grayscale(.6) brightness(.7); }
+.hub-label.linked { color: #7fe8a8; }
+#return-hub { border-color: #ff3d6e; }
+#hub-toast { position: fixed; right: 18px; bottom: 18px; z-index: 50; max-width: 340px; padding: 12px 16px; background: #13101fef; border: 2px solid #ffdb49; box-shadow: 3px 3px #000; color: #f6efd2; font-size: 12px; line-height: 1.45; }
+#hub-toast b { display: block; color: #ffdb49; font-size: 13px; letter-spacing: .5px; }

@@ -1,3 +1,5 @@
+/** Public-folder URL under the build base, so the game also runs below /play/sproto-fighter/. Node smoke scripts have no import.meta.env and keep the root path. */
+const asset=(path:string)=>(typeof import.meta.env==='undefined'?'/':import.meta.env.BASE_URL)+path.replace(/^\/+/,'');
 /** Original ranch pixel art, drawn at 320×180 then nearest-neighbor scaled.
  * Reference motifs: amber dusk, stone farmhouse, grassy fields, muddy lane,
  * dry-stone boundary and distant weathered farm buildings. No reference pixels,
@@ -192,7 +194,7 @@ export function loadStageArt():Promise<void>{
     return stageArtPromise??=Promise.all(STAGES.filter(s=>s.id!=='ranch').map(async stage=>{
         const image=new Image();
         try{
-            await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=()=>reject(new Error('Stage image could not load'));image.src=`/stages/higgsfield/${stage.id}.png`;});
+            await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=()=>reject(new Error('Stage image could not load'));image.src=asset(`stages/higgsfield/${stage.id}.png`);});
             stageImages.set(stage.id,image);
         }catch(error){stageArtErrors.set(stage.id,String(error));}
     })).then(()=>undefined);

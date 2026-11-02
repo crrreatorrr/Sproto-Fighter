@@ -26,7 +26,7 @@ The production preview is then available at http://127.0.0.1:4173/.
 
 ## Play
 
-Select your fighter, CPU rival, stage and rival behavior, then choose **Start fight**. Random fighter changes the selected side; random stage changes both the preview and next arena. Practice offers standing and guarding dummies. Rounds have **no timer** and end on knockout. There is no local second-player or online mode.
+Select your fighter, CPU rival, stage and rival behavior, then choose **Start fight**. Random fighter changes the selected side; random stage changes both the preview and next arena. Practice offers standing and guarding dummies. Rounds have **no timer** and end on knockout. There is no local second-player or online mode. Five fighters are locked until you own the matching hub Relics (see Hub link).
 
 | Action | Keyboard | Standard gamepad |
 | --- | --- | --- |
@@ -53,6 +53,27 @@ Keyboard and gamepad attack buttons can be remapped in **Controls**. Settings pe
 
 Try J → K → L close to a standing dummy, pressing each as the previous hit connects. Then try U → W → J → K → L for an aerial route. A completed combo of **at least three damaging hits ending with a finisher earns one pip**. Three pips allow P to call a partner cameo and the selected fighter's Team Special. Whiffs, blocks, time and the special itself do not charge it. There is no teammate switching or second teammate player.
 
+## Hub link (Metaverse Hub)
+
+Sproto Fighter is the fifth game in [Metaverse Hub](https://github.com/crrreatorrr/metaverse-hub). In the hub you enter it by walking up to the arcade cabinet in the **Bar** and pressing **E**. The hub opens this game with a one-time portal ticket (`#t=`), the same flow as the other games. The vendored client is `vendor/hub-sdk` (see its `VENDOR.md`); the hub game id is `sproto-fighter`.
+
+- **Relic:** win **Story World 1 (Tidebreaker Marina)** on a hub visit to earn the **Tidebreaker Belt**. The server grants it once per player. It sits on a plinth beside the Bar's arcade cabinet.
+- **Tickets:** every win against a fighting CPU (story or CPU sparring) earns 20 Tickets. Practice dummies, losses and draws earn nothing.
+- **Return to hub:** the header button closes the hub session and opens `<hub>#from=sproto-fighter`, which puts you back at the cabinet.
+- **Fighters unlocked by other games' Relics.** The other 17 fighters are always playable, and the CPU rival can use any fighter.
+
+| Relic (game) | Unlocks |
+| --- | --- |
+| HPOS10I Core (HPOS10I) | Halloween 2008 |
+| Genesis Block Shard (The People's Bitcoin) | $Bitcoin Obama |
+| Cone's Tip (NOBU: Saviour Dog) | Big Swole |
+| Tinubu's Crown (Sproto Duel) | Bongraker |
+| All four of the above | Sproto Duo |
+
+The Tidebreaker Belt unlocks nothing here (a Relic never unlocks things in the game that awards it). Played without the hub, the game uses the Relic list from this browser's last hub visit, so fighters locked on a fresh browser stay locked until a hub visit confirms the Relics. The mapping is `src/hub/roster.ts`.
+
+Build settings: `VITE_HUB_URL` (hub page, default `/hub/`) and `VITE_NAKAMA_URL` (default `http://127.0.0.1:7350`). The build uses a relative base, so it runs at the site root, at the hub's dev path `/play/sproto-fighter/`, or at `https://play.<domain>/sproto-fighter/`. The `Web build` workflow uploads `dist` as the `web-build` artifact that the hub's `npm run fetch:sproto-fighter` downloads.
+
 ## Worlds and presentation
 
 Four story worlds are selectable: Tidebreak Marina, Last Light Bar, Moonkeep Castle and Neon Tomorrow. Story text and between-level scenes are explicitly static placeholders. Wins progress; losses/draws retry. Progress lasts for the current session. Free play also offers Amber Ranch. Stage panoramas are static pixel art.
@@ -75,6 +96,7 @@ The fixed-step core supports later networking experiments; it is **not online-re
 
 ```sh
 npm run check
+npm test        # Vitest: hub roster locks, round reporting, hub link
 npm run qa
 node scripts/duo-smoke.mjs
 node scripts/pose-atlas-smoke.mjs
