@@ -1,0 +1,421 @@
+[
+  {
+    "index": 0,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "core",
+    "job_id": "79f880b9-15cc-4344-aae7-550f526d85ba",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "superseded": true
+  },
+  {
+    "index": 4,
+    "entity": "solanadelray-companion",
+    "fighter": "solanadelray",
+    "kind": "core",
+    "status": "submission_failed",
+    "error": "gpt_image_2_5 backend request failed (429): not_enough_boost_credits",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "superseded": true
+  },
+  {
+    "index": 8,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "core",
+    "job_id": "a134b6f8-2509-4184-9249-37ceecb08a5c",
+    "status": "completed",
+    "retry": 1,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_172331_a134b6f8-2509-4184-9249-37ceecb08a5c.png",
+    "superseded": true
+  },
+  {
+    "index": 12,
+    "entity": "solanadelray-companion",
+    "fighter": "solanadelray",
+    "kind": "core",
+    "job_id": "524138b7-654e-44de-8cf0-3c892d5a9787",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "retry": 1,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "superseded": true
+  },
+  {
+    "index": 16,
+    "entity": "solanadelray-companion",
+    "fighter": "solanadelray",
+    "kind": "core",
+    "job_id": "a22d14ac-59b0-48ba-93b5-5f8f8ebe94d4",
+    "status": "completed",
+    "retry": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_172438_a22d14ac-59b0-48ba-93b5-5f8f8ebe94d4.png"
+  },
+  {
+    "index": 1,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "walk",
+    "job_id": "786c7bbc-d698-46f2-8c0f-bc39ff2a6c25",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_172506_786c7bbc-d698-46f2-8c0f-bc39ff2a6c25.png",
+    "superseded": true
+  },
+  {
+    "index": 2,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "events",
+    "job_id": "88d91aa3-76ea-431e-8f5d-beeec4a0e789",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_172505_88d91aa3-76ea-431e-8f5d-beeec4a0e789.png"
+  },
+  {
+    "index": 3,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "motion",
+    "job_id": "84d6e9ea-aef6-4c2c-8375-81b86afe174a",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "superseded": true
+  },
+  {
+    "index": 5,
+    "entity": "solanadelray-companion",
+    "fighter": "solanadelray",
+    "kind": "walk",
+    "job_id": "e237a454-f71b-4314-b265-86d8a9da9ab8",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_172641_e237a454-f71b-4314-b265-86d8a9da9ab8.png"
+  },
+  {
+    "index": 6,
+    "entity": "solanadelray-companion",
+    "fighter": "solanadelray",
+    "kind": "events",
+    "job_id": "343d4f06-baa9-4a67-8fca-4e73b1fcd99f",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_172642_343d4f06-baa9-4a67-8fca-4e73b1fcd99f.png"
+  },
+  {
+    "index": 19,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "motion",
+    "job_id": "6cf3ce9a-f24a-4f9e-bd5d-85e2d2b544a7",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_172642_6cf3ce9a-f24a-4f9e-bd5d-85e2d2b544a7.png",
+    "superseded": true
+  },
+  {
+    "index": 7,
+    "entity": "solanadelray-companion",
+    "fighter": "solanadelray",
+    "kind": "motion",
+    "job_id": "6e7156a1-9ffc-4a9c-9cd4-896c2075a568",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_172641_6e7156a1-9ffc-4a9c-9cd4-896c2075a568.png"
+  },
+  {
+    "index": 20,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "core",
+    "job_id": "42160163-19f5-4542-98a9-42e6443247f0",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "revision": "face-revision",
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173343_42160163-19f5-4542-98a9-42e6443247f0.png",
+    "qaVerdict": "Approved likeness revision."
+  },
+  {
+    "index": 21,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "walk",
+    "revision": "face-revision",
+    "job_id": "f1a3fb40-ae8d-4aa3-b5b5-0b10064406b6",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173632_f1a3fb40-ae8d-4aa3-b5b5-0b10064406b6.png",
+    "qaVerdict": "Approved likeness revision."
+  },
+  {
+    "index": 22,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "events",
+    "revision": "face-revision",
+    "job_id": "399e4d49-5d08-4c0e-b4b4-e08b11f3aed9",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "superseded": true,
+    "qaVerdict": "Rejected by generation service."
+  },
+  {
+    "index": 23,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "motion",
+    "revision": "face-revision",
+    "job_id": "f636b269-b0b1-49ca-b9e8-3f3a8aaecf89",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173635_f636b269-b0b1-49ca-b9e8-3f3a8aaecf89.png",
+    "qaVerdict": "Approved likeness revision."
+  },
+  {
+    "index": 24,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "events",
+    "revision": "face-revision",
+    "job_id": "9e1d2c98-3d98-403a-9f10-63ea7b70f7f7",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "superseded": true,
+    "qaVerdict": "Rejected by generation service."
+  },
+  {
+    "index": 25,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "events",
+    "revision": "face-revision",
+    "job_id": "7bddc08d-35a3-417f-9660-ebf0bfe3d9e2",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "superseded": true,
+    "qaVerdict": "Rejected by generation service."
+  },
+  {
+    "index": 26,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "events",
+    "revision": "face-revision",
+    "job_id": "edef3f3a-d31a-473e-9e94-efd5de4a8cfa",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_174337_edef3f3a-d31a-473e-9e94-efd5de4a8cfa.png",
+    "superseded": true,
+    "qaVerdict": "Rejected: body proportions, outfit and horns changed."
+  },
+  {
+    "index": 27,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "events",
+    "revision": "face-revision",
+    "job_id": "2f4cc9ce-d96c-4828-b023-a153329db048",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "FLUX 3 Image backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "FLUX 3 Image backend expects schema-key media roles"
+      },
+      "medias[2].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "FLUX 3 Image backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "flux_3_image",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_174721_2f4cc9ce-d96c-4828-b023-a153329db048.png",
+    "superseded": true,
+    "qaVerdict": "Rejected: combat poses replaced the required event actions."
+  },
+  {
+    "index": 28,
+    "entity": "solanadelray",
+    "fighter": "solanadelray",
+    "kind": "events",
+    "revision": "face-revision",
+    "job_id": "86ceb3ea-25ac-4862-ad39-f3dfe95d150d",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "FLUX 3 Image backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "FLUX 3 Image backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "flux_3_image",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_175422_86ceb3ea-25ac-4862-ad39-f3dfe95d150d.png",
+    "superseded": true,
+    "qaVerdict": "Rejected: facial colors and identity drifted."
+  }
+]

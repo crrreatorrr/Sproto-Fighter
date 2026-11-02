@@ -1,0 +1,177 @@
+{
+  "entity": "wifebeater",
+  "kind": "walk",
+  "source": "art/wifebeater/raw/wifebeater-walk.png",
+  "uniformSourceScale": 0.3069544364508393,
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        44,
+        126,
+        365,
+        543
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        154.31698113207548,
+        417
+      ],
+      "canonicalBounds": [
+        65,
+        82,
+        164,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        451,
+        126,
+        767,
+        543
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        150.81698113207548,
+        417
+      ],
+      "canonicalBounds": [
+        66,
+        82,
+        163,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        874,
+        126,
+        1165,
+        543
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        128.06698113207548,
+        417
+      ],
+      "canonicalBounds": [
+        73,
+        82,
+        162,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1244,
+        126,
+        1567,
+        544
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        154.56698113207548,
+        418
+      ],
+      "canonicalBounds": [
+        65,
+        82,
+        164,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        42,
+        681,
+        366,
+        1102
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        156.06698113207548,
+        421
+      ],
+      "canonicalBounds": [
+        64,
+        81,
+        163,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        459,
+        681,
+        766,
+        1102
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        139.56698113207548,
+        421
+      ],
+      "canonicalBounds": [
+        69,
+        81,
+        163,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        871,
+        681,
+        1165,
+        1102
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        127.06698113207548,
+        421
+      ],
+      "canonicalBounds": [
+        73,
+        81,
+        163,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1246,
+        681,
+        1571,
+        1101
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        152.56698113207548,
+        420
+      ],
+      "canonicalBounds": [
+        65,
+        81,
+        165,
+        210
+      ]
+    }
+  ]
+}

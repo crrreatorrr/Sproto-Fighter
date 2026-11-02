@@ -19,7 +19,7 @@ def install():
     if "'erik'" not in line.group(1):s=s[:line.end()-1]+" | 'erik'"+s[line.end()-1:]
     line=re.search(r'export const PLAYABLE_FIGHTERS = \[(.*?)\] as const;',s)
     if "'erik'" not in line.group(1):s=s[:line.end()-len('] as const;')]+", 'erik'"+s[line.end()-len('] as const;'):]
-    roster="erik:{name:'Erik Stevens Sproto',color:'#f0c94d',dark:'#192944',speed:5.5,jump:15.8,partner:'rivet',special:'EXECUTIVE FINISH',role:'FORMAL',description:'Tailored navy suit, yellow dress shirt and red tie; composed strikes and a four-contact finish.'},"
+    roster="erik:{name:'Erik Stevens',color:'#f0c94d',dark:'#192944',speed:5.5,jump:15.8,partner:'rivet',special:'EXECUTIVE FINISH',role:'FORMAL',description:'Tailored navy suit, yellow dress shirt and red tie; composed strikes and a four-contact finish.'},"
     s=s.replace('    duo: { name:', '/* ERIK ROSTER BEGIN */\n'+roster+'\n/* ERIK ROSTER END */\n    duo: { name:',1)
     kit=" erik:kit('FORMAL','EXECUTIVE FINISH','Composed formal footwork, precise strikes and a four-contact Executive Finish.',90,{range:136,damage:96},{startup:16,damage:55},{speed:10,shape:'spark'},[14,24,36,48],{range:510,damage:81,push:5},2),"
     s=s.replace(' duo:kit(', '/* ERIK KIT BEGIN */\n'+kit+'\n/* ERIK KIT END */\n duo:kit(',1)

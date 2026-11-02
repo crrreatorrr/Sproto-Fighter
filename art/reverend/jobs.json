@@ -1,0 +1,115 @@
+[
+  {
+    "index": 0,
+    "entity": "reverend",
+    "fighter": "reverend",
+    "kind": "core",
+    "job_id": "3f1de24a-c705-4e04-9b08-5454d2a17822",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162252_3f1de24a-c705-4e04-9b08-5454d2a17822.png"
+  },
+  {
+    "index": 1,
+    "entity": "reverend",
+    "fighter": "reverend",
+    "kind": "walk",
+    "job_id": "8e187fcf-da0e-4888-8497-3b2fbe943649",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "superseded": true
+  },
+  {
+    "index": 2,
+    "entity": "reverend",
+    "fighter": "reverend",
+    "kind": "events",
+    "job_id": "9a61856d-44f6-4a1e-9f54-04e21cd2bd69",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162652_9a61856d-44f6-4a1e-9f54-04e21cd2bd69.png",
+    "superseded": true
+  },
+  {
+    "index": 1,
+    "entity": "reverend",
+    "fighter": "reverend",
+    "kind": "walk",
+    "job_id": "3637681b-9249-49e9-ba84-d85fea1754c8",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "retry": 1,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163404_3637681b-9249-49e9-ba84-d85fea1754c8.png"
+  },
+  {
+    "index": 2,
+    "entity": "reverend",
+    "fighter": "reverend",
+    "kind": "events",
+    "job_id": "e447af59-bd53-42cb-9c7d-50b592e8e34e",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163458_e447af59-bd53-42cb-9c7d-50b592e8e34e.png"
+  }
+]

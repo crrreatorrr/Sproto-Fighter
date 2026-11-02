@@ -204,5 +204,45 @@
     "inspected": true,
     "requirement": "Two distinct entities acting as one fighter; legs attach low on each separate body. Working name.",
     "status": "Playable; two whole-body atlases, four-key gaits, individual event clips; current local follow-up QA recorded in docs/DUO-QA.md."
+  },
+  {
+    "name": "satoshi",
+    "display_name": "Satoshi Sprototo",
+    "local_reference": "art/satoshi/reference.png",
+    "inspected": true,
+    "requirement": "Reference identity, custom entrance8, mouth-spit8 and death16; one complete actor.",
+    "status": "Playable free-play addition; 104 authored drawings. See docs/LATE-NAMED-NOV02-QA.md."
+  },
+  {
+    "name": "xalt",
+    "display_name": "Xalt",
+    "local_reference": "art/xalt/reference.png",
+    "inspected": true,
+    "requirement": "Reference identity, custom entrance8, mouth-spit8 and death16; one complete actor.",
+    "status": "Playable free-play addition; 104 authored drawings. See docs/LATE-NAMED-NOV02-QA.md."
+  },
+  {
+    "name": "potocaicai",
+    "display_name": "Poto Cai Cai",
+    "local_reference": "art/potocaicai/reference.png",
+    "inspected": true,
+    "requirement": "Reference identity, custom entrance8, mouth-spit8 and death16; one complete actor.",
+    "status": "Playable free-play addition; 104 authored drawings. See docs/LATE-NAMED-NOV02-QA.md."
+  },
+  {
+    "name": "sproteth",
+    "display_name": "sprot.eth",
+    "local_reference": "art/sproteth/reference.png",
+    "inspected": true,
+    "requirement": "Reference identity, custom entrance8, mouth-spit8 and death16; one complete actor.",
+    "status": "Playable free-play addition; 104 authored drawings. See art/sproteth/QA.md."
+  },
+  {
+    "name": "danocrypto",
+    "display_name": "Dano Crypto",
+    "local_reference": "art/danocrypto/reference.png",
+    "inspected": true,
+    "requirement": "Reference identity, complete body, guarded walk, entrance8, palm-cast8 and death16.",
+    "status": "Playable free-play addition; 104 authored drawings. See art/danocrypto/qa.json."
   }
 ]

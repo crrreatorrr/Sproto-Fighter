@@ -6,7 +6,7 @@ import './pixelUI.css';
 import './mysticUI.css';
 import './campaignMap.css';
 import {mountCampaignMap} from './campaignMap';
-import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
+import { A, ROSTER, PLAYABLE_FIGHTERS, isFreePlayAddition, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
 import { playRetainCallout } from './characterVoice';
@@ -59,7 +59,7 @@ function updateStage(stage:StageId) {
 async function launchSelection(setup:SelectionSetup,isStory=false) {
     // Reconcile wins from another tab or a restored page before the final P1 gate.
     storyProgress.sync();
-    if(!storyProgress.isUnlocked(setup.fighter)){
+    if(!storyProgress.isUnlocked(setup.fighter)&&(isStory||!isFreePlayAddition(setup.fighter))){
         $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. Defeat this fighter in story mode, or choose an unlocked P1 fighter.`;
         return false;
     }
@@ -67,7 +67,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponent===setup.opponent):undefined;
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
-    matchEarnedGodMode=storyProgress.snapshot().completed&&!!setup.godMode;
+    matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);setActiveStoryLocation(scenery);

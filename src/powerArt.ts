@@ -49,12 +49,33 @@ export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,col
   const turn=Math.cos(age*.22);c.rotate(age*.09);c.scale(Math.sign(turn)*Math.max(.16,Math.abs(turn)),1);
   if(retainCoin?.complete&&retainCoin.naturalWidth)c.drawImage(retainCoin,-24,-24,48,48);
  }
+ else if(shape==='sun'){
+  c.rotate(age*.055);
+  for(let ray=0;ray<8;ray++)for(let tip=0;tip<4;tip++){
+   const angle=ray*Math.PI/4,r=21+tip*3,size=6-tip;
+   box(Math.round(Math.cos(angle)*r-size/2),Math.round(Math.sin(angle)*r-size/2),size,size,tip<2?'#ef8d18':'#ffc52e');
+  }
+  for(let y=-6;y<=6;y++)for(let x=-6;x<=6;x++){
+   const r=Math.hypot(x,y);if(r>6)continue;
+   box(x*3-1,y*3-1,3,3,r>5.5?'#a44a12':r>4.8?'#f5a51e':x<0&&y<0?'#fff49b':'#ffdf36');
+  }
+ }
  else if(shape==='yellowEight'){
   const rows=['001111100','011111110','111000111','110000011','110000011','111000111','011111110','001111100','011111110','111000111','110000011','110000011','110000011','111000111','011111110','001111100'];
   // Keep the numeral upright and readable, with a small throwing wobble.
   c.rotate(Math.sin(age*.24)*.12);
   for(let y=0;y<rows.length;y++)for(let x=0;x<9;x++)if(rows[y][x]==='1')box((x-4)*3-1,(y-8)*3-1,5,5,'#111828');
   for(let y=0;y<rows.length;y++)for(let x=0;x<9;x++)if(rows[y][x]==='1')box((x-4)*3,(y-8)*3,3,3,x>=6||y===15?'#d6a020':x<=2&&y<12?'#fff48a':'#ffe23b');
+ }
+ else if(shape==='skullBones'){
+  // A complete pixel Jolly Roger tumbles as one hand-thrown object.
+  c.rotate(age*.19);
+  for(const direction of [-1,1])for(let i=-9;i<=9;i++)box(i*2-2,direction*i+10-2,5,5,'#172035');
+  for(const direction of [-1,1])for(let i=-9;i<=9;i++)box(i*2-1,direction*i+10-1,3,3,'#fff3d5');
+  for(const x of [-18,18])for(const y of [1,19]){box(x-3,y-3,6,6,'#172035');box(x-2,y-2,4,4,'#fff3d5');}
+  box(-12,-17,24,20,'#172035');box(-15,-13,30,13,'#172035');box(-10,-15,20,18,'#fff3d5');box(-13,-11,26,11,'#fff3d5');
+  box(-9,-9,6,6,'#090e1c');box(3,-9,6,6,'#090e1c');box(-2,-3,4,3,'#090e1c');
+  box(-9,1,18,6,'#172035');for(const x of [-7,-2,3])box(x,1,4,4,'#fff3d5');
  }
  else if(shape==='egg'){
   // A pointed crown and broad rounded base keep the tumbling shell readable.

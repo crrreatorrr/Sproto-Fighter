@@ -1,0 +1,25 @@
+[
+  {
+    "index": 2312,
+    "entity": "sproto1625",
+    "fighter": "sproto1625",
+    "kind": "core",
+    "revision": "schizos-yellow-arm-1",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "099cf3bc-8421-403c-8891-c25b06483397"
+        }
+      ],
+      "prompt": "Repair the anatomy of the YELLOW actor in this pixel-art full-body fighting-game pose sheet. Preserve the exact identity: tall pointed yellow spiky head, two white eyes with black pupils, red round nose and broad red lips, long yellow neck/torso with horizontal dark contour lines, black/yellow belt, blue trousers and red/white shoes. Same head and body scale and same long proportions in every figure. The blue companion must NOT appear. MAIN CORRECTION: exactly TWO clearly readable YELLOW arms, each connected at its own shoulder, with a visible elbow/forearm and RED glove. In guard show one raised front red glove to the right and the other red glove to the left of the torso at lower chest level; both arms visible outside the torso silhouette. Do NOT let the rear arm disappear behind the huge head, neck or torso. In attacks the striking arm extends while the other distinctly covers at chest/face, with both shoulders and elbow connections preserved. Exactly two arms and two legs in every pose. Keep the supplied face and outfit. Make an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid of 32 complete figures, facing RIGHT. Some source rows overflow; recompose into exactly four figures per row, eight rows, preserving the following runtime sequence. Pure flat magenta #ff00ff background, generous empty margins, dark outlines, crisp stepped pixel edges, limited colors, no labels, grid lines, particles or detached pieces.\nRow1 guard with TWO arms and gloves; breathe guard with TWO arms and gloves; forward step near foot; passing weight.\nRow2 far-foot step; passing weight; low dash; jump anticipation.\nRow3 rise jump; falling jump; crouched landing; punch anticipation.\nRow4 straight punch; retract; uppercut windup; uppercut strike.\nRow5 side kick chamber; half extension; full waist-high side kick; knee retract.\nRow6 low sweep; sweep recovery; airborne kick chamber; airborne kick extension.\nRow7 hit recoil; two-arm guard; grab reach with other glove covering chest; close grab hold with both arms visible.\nRow8 planted forward throw release; ranged windup; ranged release; triumphant team-special impact. Both yellow arms and red gloves remain visible in all 32 complete figures."
+    }
+  }
+]

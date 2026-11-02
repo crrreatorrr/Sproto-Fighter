@@ -31,7 +31,8 @@
     "VAMP": "Spikes attached to body outfit",
     "BIMBA": "Full ankle-length robe",
     "Bitcoin MLK": "Reduce excess purple toward reference indigo blue hue",
-    "vaudream": "Improve legless floating-machine melee animations: deep banking windup, explosive chassis rams, rising strikes, low swoops and aerial dives."
+    "vaudream": "Improve legless floating-machine melee animations: deep banking windup, explosive chassis rams, rising strikes, low swoops and aerial dives.",
+    "1625": "Rename schizos and repair missing yellow actor arm; exactly two visible connected arms and two red gloves throughout affected poses."
   },
   "preserveExternalWork": "Vaudream is being added in another chat; preserve its inventory, art and integration.",
   "expectedSprotoBodyCount": 59,
@@ -51,9 +52,10 @@
     "Brain Sprot": "single, orange nose and broad red mouth",
     "GodMod3D.eth": "interpreted as twin; left two eyes/right one eye",
     "Sober": "single with sleepy eyes/red collar",
-    "𝕹𝖔𝖘𝖒𝖎𝖑𝖊𝖈𝖑𝖔𝖜𝖓": "double, pink clown much smaller (.55 vs 1.25 scale), spacing112",
-    "ol’ no name": "One body, two separated mouths",
-    "Great Charly.eth": "One body with yellow two-dot belly patch"
+    "\ud835\udd79\ud835\udd94\ud835\udd98\ud835\udd92\ud835\udd8e\ud835\udd91\ud835\udd8a\ud835\udd88\ud835\udd91\ud835\udd94\ud835\udd9c\ud835\udd93": "double, pink clown much smaller (.55 vs 1.25 scale), spacing112",
+    "ol\u2019 no name": "One body, two separated mouths",
+    "Great Charly.eth": "One body with yellow two-dot belly patch",
+    "Dano Crypto": "Single playable fighter from attached reference: cobalt blue swept head, two red eye surrounds with narrow yellow inner eyes, broad closed red smile, thick yellow collar and red outfit. Full authored combat, guarded walk, entrance, palm-cast and death animation."
   },
   "pissingSprotoPartners": [
     "sproto102",
@@ -401,5 +403,17 @@
     },
     "selection": "Random sample from the existing single-body and paired Sproto inventories, excluding already-used partners. Assignments are fixed after sampling.",
     "rule": "One partner identity per special. Both members of each twin partner perform their own attack on alternating main-fighter contacts."
+  },
+  "names": {
+    "1625": "schizos",
+    "1601": "888",
+    "1499": "Dancing Partners",
+    "1477": "Stalker",
+    "1870": "Error 333",
+    "1414": "Chiller",
+    "1345": "whale head",
+    "1335": "Crackhead",
+    "1187": "Dad",
+    "102": "Collector"
   }
 }

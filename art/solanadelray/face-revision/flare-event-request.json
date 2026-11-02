@@ -1,0 +1,27 @@
+{
+  "index": 25,
+  "entity": "solanadelray",
+  "fighter": "solanadelray",
+  "kind": "events",
+  "revision": "face-revision",
+  "params": {
+    "model": "gpt_image_2_5",
+    "variant": "flare",
+    "quality": "high",
+    "resolution": "4k",
+    "aspect_ratio": "9:16",
+    "count": 1,
+    "use_unlim": false,
+    "medias": [
+      {
+        "role": "image",
+        "value": "88d91aa3-76ea-431e-8f5d-beeec4a0e789"
+      },
+      {
+        "role": "image",
+        "value": "68d85ec9-c63f-4c14-a7d1-0b3aa768b74d"
+      }
+    ],
+    "prompt": "Sprite-sheet face correction. Reference 1 is the existing finished sheet: retain its exact 32 complete figures in four columns and eight rows, poses, opaque red athletic uniforms, margins and magenta background. Reference 2 supplies the cartoon face: replace each face with its broad round red smile, round yellow eyes, black pupils, tiny nostril dots, swept red forelock and blue chin band. Preserve the face through every action and floor pose. Keep all other pixels and clothing design consistent with reference 1. No extra figure or text. Crisp pixel-art game asset."
+  }
+}

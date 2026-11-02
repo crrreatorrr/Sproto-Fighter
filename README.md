@@ -1,8 +1,10 @@
 # Sproto Arena
 
-A local TypeScript / Canvas 2D fighting game with **102 installed fighters**,
-CPU/practice opponents, ten base arenas and a linear 100-encounter campaign.
+A local TypeScript / Canvas 2D fighting game with an expanding roster of installed fighters,
+CPU/practice opponents, ten base arenas and a campaign that grows with the installed roster.
 No game engine, multiplayer transport or deployment.
+
+**Satoshi Sprototo, Xalt and Poto Cai Cai** are campaign opponents with 104 drawings each, including custom entrance8, mouth-spit8 and death16 sequences. Defeat each in the Verse to recruit them for play. [Animation and combat QA](docs/LATE-NAMED-NOV02-QA.md).
 
 ## Play locally
 

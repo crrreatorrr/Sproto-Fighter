@@ -57,7 +57,7 @@ persists even if the pair must be restarted.
 
 ## Verification performed
 
-Automated checks on the final code are recorded in `evidence/story-update/`:
+Focused checks on an isolated source snapshot are recorded in `evidence/story-update/`:
 
 - Production build and TypeScript.
 - 39 story/persistence/God Mode groups: ordinary/God wins, reload, old-save
@@ -107,10 +107,21 @@ The separate **Convert sproto sprites to fighters (6)** task was active during
 this update. Its `hly3` rename in `src/core.ts` / expansion inventory and its
 new authoring folders were preserved and excluded from this focused checkpoint.
 The production snapshot includes the observed name but no unfinished new roster
-integration is claimed. During final verification the parallel task also installed
-`satoshi`, `xalt` and `potocaicai`, taking the live working tree to 105 fighters.
-These three are not yet in the 100-encounter route. Their code/assets are outside
-this checkpoint, and the fixed preview preserves the 102-fighter tested snapshot. No other task was interrupted or merged by this pass.
+integration is claimed. The parallel task continued adding fighters: the live working tree had 127
+playable entries at the later count, while this focused checkpoint retains the
+102-fighter baseline. New additions are not silently inserted into the fixed
+100-encounter route. Their code/assets remain outside this checkpoint. The
+fixed preview preserves the baseline used for these checks. No other task was
+interrupted or merged by this pass.
+
+An isolated TypeScript check caught an overlap in the first local checkpoint
+`44a04564`: concurrent free-play additions in the selection/story launch files
+depended on the other task's uncommitted `core.ts` export. Checkpoint `17f35080`
+separates those dependency hunks without writing to the four live files; their
+SHA-256 hashes were identical before and after. The other task's complete live
+changes remain unstaged. The isolated corrected source then passed TypeScript,
+39 story groups, 14 selection groups and the map checks. Do not use the first
+checkpoint on its own; use the corrected tip or later checkpoints.
 
 The newly requested 150-fighter campaign is separate pending clarification and
 asset work. At this checkpoint the installed baseline is 102 fighters and 100

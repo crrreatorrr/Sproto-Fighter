@@ -1,0 +1,21 @@
+{
+  "library_file_id": "libfile_a298a00fdb9c819192fb54eabf3f0ae2",
+  "source": "art/story-map/expanded/Sproto-Arena-Expanded-Campaign-Map-150.png",
+  "source_size": [
+    3840,
+    2160
+  ],
+  "source_sha256": "64e976565eade643db3e32d15e49fb44c0cf10cb449e2f9c13c8b1969ede4ed7",
+  "runtime": "public/story/campaign-map-expanded.webp",
+  "runtime_sha256": "1798925fb10e4778d1f29dd5a02f4a16669373fd046c5d145aa905169a9233a8",
+  "conversion": "Lossless WebP; no resizing, cropping or artwork edits",
+  "retained_original_runtime": "public/story/campaign-map.webp",
+  "geometry_capacity_target": 150,
+  "campaign_scope": "Map renders registered story encounters; no fighters or save IDs are created by the map.",
+  "actual_encounters_at_geometry_check": 123,
+  "lossless_pixel_verification": "Decoded source and runtime RGBA pixels compare equal",
+  "runtime_size_bytes": 14157968,
+  "original_runtime_sha256": "c7a3431c7304bc5c8394acf8ccaa79a61199d283815215f134d8b90e2420d9d1",
+  "route_metadata": "art/story-map/expanded/routes.json",
+  "road_overlay": "One independent trace per stage; no straight water-crossing connector between regions"
+}

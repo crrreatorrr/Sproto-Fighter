@@ -1,0 +1,27 @@
+{
+  "index": 24,
+  "entity": "solanadelray",
+  "fighter": "solanadelray",
+  "kind": "events",
+  "revision": "face-revision",
+  "params": {
+    "model": "gpt_image_2_5",
+    "variant": "sunburst",
+    "quality": "high",
+    "resolution": "4k",
+    "aspect_ratio": "9:16",
+    "count": 1,
+    "use_unlim": false,
+    "medias": [
+      {
+        "role": "image",
+        "value": "88d91aa3-76ea-431e-8f5d-beeec4a0e789"
+      },
+      {
+        "role": "image",
+        "value": "42160163-19f5-4542-98a9-42e6443247f0"
+      }
+    ],
+    "prompt": "Edit reference 1, the existing 32-cell pixel-art sprite sheet. Keep its EXACT four-column eight-row layout, complete poses, body proportions, high-neck RED athletic uniform, long sleeves, red leggings, red shoes, magenta background and empty margins. Change ONLY the red cartoon monster's FACE in every cell to match reference 2: large round YELLOW eyes with black round pupils, a WIDE broad rounded RED smiling muzzle, TWO tiny nostril dots, round red ears, sharp swept red forelock and BLUE band beneath chin. The same recognizable broad face must appear in all 32 cells including the last floor poses. All bodies keep their fully opaque athletic clothing with visible collar, cuffs and seams. No additional people. Keep the four mouth-spit poses in row 4, the intro gestures in row 1, special strikes in rows 2-3, recoil row 5, collapse row 6 and side-lying rest rows 7-8. A single complete dressed cartoon character per cell; no particles, props, letters or text. Crisp limited-color fighting-game pixel art."
+  }
+}

@@ -1,0 +1,114 @@
+[
+  {
+    "index": 4,
+    "entity": "zepump",
+    "fighter": "zepump",
+    "kind": "core",
+    "job_id": "13599d9b-ceb4-4f6b-a4a3-e35bc211e010",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162253_13599d9b-ceb4-4f6b-a4a3-e35bc211e010.png"
+  },
+  {
+    "index": 5,
+    "entity": "zepump",
+    "fighter": "zepump",
+    "kind": "walk",
+    "job_id": "9a3e3c5d-b911-4d34-9c6c-3b949e8e8c1d",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162639_9a3e3c5d-b911-4d34-9c6c-3b949e8e8c1d.png"
+  },
+  {
+    "index": 6,
+    "entity": "zepump",
+    "fighter": "zepump",
+    "kind": "events",
+    "job_id": "0d76e682-933f-4657-8f4f-90b31bc16d03",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162651_0d76e682-933f-4657-8f4f-90b31bc16d03.png",
+    "superseded": true
+  },
+  {
+    "index": 7,
+    "entity": "zepump",
+    "fighter": "zepump",
+    "kind": "motion",
+    "job_id": "31b51b17-546e-411c-9fd4-f8a95ea00f30",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162700_31b51b17-546e-411c-9fd4-f8a95ea00f30.png"
+  },
+  {
+    "index": 6,
+    "entity": "zepump",
+    "fighter": "zepump",
+    "kind": "events",
+    "job_id": "36acf337-e0a2-4acf-bdf5-746dd56fab8c",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163456_36acf337-e0a2-4acf-bdf5-746dd56fab8c.png"
+  }
+]

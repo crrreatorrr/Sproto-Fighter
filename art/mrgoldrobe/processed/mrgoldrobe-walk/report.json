@@ -1,0 +1,177 @@
+{
+  "entity": "mrgoldrobe",
+  "kind": "walk",
+  "source": "art/mrgoldrobe/raw/mrgoldrobe-walk.png",
+  "uniformSourceScale": 0.2876404494382023,
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        42,
+        101,
+        358,
+        546
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        154.6662546353523,
+        445
+      ],
+      "canonicalBounds": [
+        68,
+        82,
+        159,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        447,
+        101,
+        751,
+        545
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        141.1662546353523,
+        444
+      ],
+      "canonicalBounds": [
+        71,
+        82,
+        158,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        837,
+        101,
+        1138,
+        546
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        140.6662546353523,
+        445
+      ],
+      "canonicalBounds": [
+        72,
+        82,
+        159,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1210,
+        99,
+        1552,
+        545
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        160.6662546353523,
+        446
+      ],
+      "canonicalBounds": [
+        66,
+        82,
+        164,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        38,
+        653,
+        358,
+        1098
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        163.1662546353523,
+        445
+      ],
+      "canonicalBounds": [
+        65,
+        82,
+        157,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        449,
+        653,
+        751,
+        1097
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        142.1662546353523,
+        444
+      ],
+      "canonicalBounds": [
+        71,
+        82,
+        158,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        832,
+        653,
+        1137,
+        1098
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        141.9162546353523,
+        445
+      ],
+      "canonicalBounds": [
+        71,
+        82,
+        159,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1212,
+        653,
+        1548,
+        1098
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        157.6662546353523,
+        445
+      ],
+      "canonicalBounds": [
+        67,
+        82,
+        164,
+        210
+      ]
+    }
+  ]
+}

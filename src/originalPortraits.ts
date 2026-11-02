@@ -1,6 +1,33 @@
 import { type FighterId } from './core';
 /** Original user-supplied fighter references only. No rigging diagram. */
 export const originalPortraits:Record<FighterId,string> = {
+/* SOLANA PORTRAITS BEGIN */
+ solanadelray:new URL('../art/solanadelray/reference.png',import.meta.url).href,
+/* SOLANA PORTRAITS END */
+/* MIDDAY PORTRAITS BEGIN */
+ reverend:new URL('../art/reverend/reference.png',import.meta.url).href,
+ zepump:new URL('../art/zepump/reference.png',import.meta.url).href,
+ sprotopotamus:new URL('../art/sprotopotamus/reference.png',import.meta.url).href,
+ willuminati:new URL('../art/willuminati/reference.png',import.meta.url).href,
+ pirate:new URL('../art/pirate/reference.png',import.meta.url).href,
+ prim:new URL('../art/prim/reference.png',import.meta.url).href,
+ benjamin:new URL('../art/benjamin/reference.png',import.meta.url).href,
+ maxbiggums:new URL('../art/maxbiggums/reference.png',import.meta.url).href,
+ xav:new URL('../art/xav/reference.png',import.meta.url).href,
+ emix:new URL('../art/emix/reference.png',import.meta.url).href,
+ peterpan:new URL('../art/peterpan/reference.png',import.meta.url).href,
+ anni:new URL('../art/anni/reference.png',import.meta.url).href,
+ pinewaffle:new URL('../art/pinewaffle/reference.png',import.meta.url).href,
+ rainman:new URL('../art/rainman/reference.png',import.meta.url).href,
+ wifebeater:new URL('../art/wifebeater/reference.png',import.meta.url).href,
+ fiatfudder:new URL('../art/fiatfudder/reference.png',import.meta.url).href,
+ moonshiller:new URL('../art/moonshiller/reference.png',import.meta.url).href,
+ godether:new URL('../art/godether/reference.png',import.meta.url).href,
+ aleksander:new URL('../art/aleksander/reference.png',import.meta.url).href,
+ cyberviber:new URL('../art/cyberviber/reference.png',import.meta.url).href,
+ realityarchitect:new URL('../art/realityarchitect/reference.png',import.meta.url).href,
+ mrgoldrobe:new URL('../art/mrgoldrobe/reference.png',import.meta.url).href,
+/* MIDDAY PORTRAITS END */
 /* SPROTOS PORTRAITS BEGIN */
  sproto102:new URL('../art/sprotos-expansion/references/sproto-gremlin-102.png',import.meta.url).href,
  sproto215:new URL('../art/sprotos-expansion/references/sproto-gremlin-215.png',import.meta.url).href,
@@ -111,6 +138,21 @@ export const originalPortraits:Record<FighterId,string> = {
 /* CAPTAIN PORTRAIT BEGIN */
  captain:new URL('../art/captain/reference.png',import.meta.url).href,
 /* CAPTAIN PORTRAIT END */
+/* SATOSHI PORTRAIT BEGIN */
+ satoshi:new URL('../art/satoshi/reference.png',import.meta.url).href,
+/* SATOSHI PORTRAIT END */
+/* XALT PORTRAIT BEGIN */
+ xalt:new URL('../art/xalt/reference.png',import.meta.url).href,
+/* XALT PORTRAIT END */
+/* POTOCAICAI PORTRAIT BEGIN */
+ potocaicai:new URL('../art/potocaicai/reference.png',import.meta.url).href,
+/* POTOCAICAI PORTRAIT END */
+/* SPROTETH PORTRAIT BEGIN */
+ sproteth:new URL('../art/sproteth/reference.png',import.meta.url).href,
+/* SPROTETH PORTRAIT END */
+/* DANOCRYPTO PORTRAIT BEGIN */
+ danocrypto:new URL('../art/danocrypto/reference.png',import.meta.url).href,
+/* DANOCRYPTO PORTRAIT END */
  duo:new URL('../art/new-fighter-22/reference/original.png',import.meta.url).href,
  rivet:new URL('../art/references/rivet.png',import.meta.url).href,
  vela:new URL('../art/references/vela.png',import.meta.url).href,

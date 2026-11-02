@@ -1,0 +1,113 @@
+[
+  {
+    "index": 12,
+    "entity": "sprotopotamus",
+    "fighter": "sprotopotamus",
+    "kind": "core",
+    "job_id": "b105e5ad-bce5-410f-8a01-708ae0269299",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162253_b105e5ad-bce5-410f-8a01-708ae0269299.png"
+  },
+  {
+    "index": 13,
+    "entity": "sprotopotamus",
+    "fighter": "sprotopotamus",
+    "kind": "walk",
+    "job_id": "73091d2a-1cb2-40f0-9583-476bdbcb4afa",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162642_73091d2a-1cb2-40f0-9583-476bdbcb4afa.png"
+  },
+  {
+    "index": 14,
+    "entity": "sprotopotamus",
+    "fighter": "sprotopotamus",
+    "kind": "events",
+    "job_id": "2d2b589b-d269-4842-a6ba-e7a51b363c26",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162651_2d2b589b-d269-4842-a6ba-e7a51b363c26.png",
+    "superseded": true
+  },
+  {
+    "index": 14,
+    "entity": "sprotopotamus",
+    "fighter": "sprotopotamus",
+    "kind": "events",
+    "status": "submission_failed",
+    "error": "gpt_image_2_5 backend request failed (503): Generation creation is busy. Please try again.",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "superseded": true
+  },
+  {
+    "index": 14,
+    "entity": "sprotopotamus",
+    "fighter": "sprotopotamus",
+    "kind": "events",
+    "job_id": "46b05ebc-d20b-41ac-8aa3-b912d769a12c",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163747_46b05ebc-d20b-41ac-8aa3-b912d769a12c.png"
+  }
+]

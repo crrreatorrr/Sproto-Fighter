@@ -1,0 +1,28 @@
+{
+  "id": "satoshi",
+  "name": "Satoshi Sprototo",
+  "media": "77241ed7-79cf-4302-b886-9c6deaf1e478",
+  "role": "ORIGIN",
+  "special": "GENESIS RELAY",
+  "color": "#ffd347",
+  "identity": "Broad smooth rounded BLUE head, narrowed slanting YELLOW almond eyes with large BLACK oval pupils and small white glints, deep asymmetric BLUE brow creases, tiny orange-red bridge of nose, an ENORMOUS wide thick RED smiling mouth occupying the lower half of the face. Preserve the huge mouth, never reduce it to a small beak. Thick bright YELLOW folded collar framing the blue neck. Extend the crop conservatively as a simple dark-red tunic and trousers, BLUE bare hands and yellow boots. No crown, rear spikes, hair, beard, gloves, cape or weapons.",
+  "intro": "INTRO: relaxed sly half-smile with arms low; slowly raise one blue index finger beside the huge mouth in a knowing hush gesture; lower that hand and open both palms with a confident grin; settle into two-fist guard. Hands remain attached, no text or effects.",
+  "cast": "CAST: lean head back slightly and puff the huge red-lipped cheeks; roll shoulders forward with both elbows tucked BACK and lips purse; forceful open-mouth SPIT to RIGHT with a sharp forward neck and torso snap, both hands still near ribs, never a palm shot; chin lowers and huge smile returns while weight settles. No projectile drawn.",
+  "defeat": "DEFEAT START: startled narrowed eyes widen while the enormous red smile sags; one palm rises to the mouth as both knees buckle; hips collapse backward with both arms balancing; roll onto left side, huge head to LEFT and feet to RIGHT, collar attached. DEFEAT FLOOR: side-lying body with one elbow briefly propping the heavy head; elbow bends and head lowers; hand loosens by the enormous red mouth; fully side-lying body settles. DEFEAT REST: huge head and red lips relax against the floor; near hand opens; tiny final shoulder drop; completely still side-lying rest. Crownless throughout.",
+  "ordinal": 0,
+  "artDirectory": "art/satoshi",
+  "reference": "art/satoshi/reference.png",
+  "referenceSHA256": "02d54fe46c31dd8e80f2b554b2fe7e2a5fcef8767d78c580b841080eb1957a60",
+  "status": "installed-playable",
+  "appearanceRule": " Preserve the same costume and face across every frame. Same-hue limited palette shading; no white clothing patches, text, floating effects, detached accessories or additional actors.",
+  "mouthPoint": [
+    160,
+    124
+  ],
+  "mouthOrigin": {
+    "forward": 60.0,
+    "height": 107.5
+  },
+  "installedFrames": 104,
+  "unlockRule": "Defeat this fighter in its campaign encounter to recruit for P1 play."
+}

@@ -285,15 +285,15 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:AtlasClipName
   if(isCrouchingSpit(f))return null;
   if(f.move?.id==='bolt'){
     const move=getMove(f,'bolt');
-    if(atlas.clips.ranged){const age=f.move.t,start=move.startup,end=start+move.active+move.recovery;return choose('ranged',age<start?Math.min(3,Math.floor(age/start*4)):age<start+5?4:age<end-8?5:age<end-4?6:7);}
-    if(atlas.clips.signatureCast){const age=f.move.t,start=move.startup,end=start+move.active+move.recovery;return choose('signatureCast',age<start?Math.min(3,Math.floor(age/start*4)):age<start+5?4:age<end-8?5:age<end-4?6:7);}
+    if(atlas.clips.ranged&&COMBAT_STYLES[f.id].projectile.shape!=='sun'){const age=f.move.t,start=move.startup,end=start+move.active+move.recovery;return choose('ranged',age<start?Math.min(3,Math.floor(age/start*4)):age<start+5?4:age<end-8?5:age<end-4?6:7);}
+    if(atlas.clips.signatureCast&&COMBAT_STYLES[f.id].projectile.shape!=='sun'){const age=f.move.t,start=move.startup,end=start+move.active+move.recovery;return choose('signatureCast',age<start?Math.min(3,Math.floor(age/start*4)):age<start+5?4:age<end-8?5:age<end-4?6:7);}
     if(COMBAT_STYLES[f.id].projectile.shape==='pelvicStream'){
       const t=f.move.t,total=move.startup+move.active+move.recovery;
       return choose('cast',t<move.startup*.5?0:t<move.startup?1:t<total-7?2:3);
     }
     // Both custom projectiles and mind beams retain their authored release hold.
     const style=COMBAT_STYLES[f.id].projectile;
-    const releaseWindow=style.beamFrames??(['miniSproto','yellowEight'].includes(style.shape)?Math.max(8,move.active):move.active);
+    const releaseWindow=style.beamFrames??(['miniSproto','yellowEight','sun'].includes(style.shape)?Math.max(8,move.active):move.active);
     return choose('cast',castFrame(f.move.t,move.startup,releaseWindow));
   }
   if(f.move?.id==='heavy'||f.move?.id==='airMedium'||f.move?.id==='airHeavy'){

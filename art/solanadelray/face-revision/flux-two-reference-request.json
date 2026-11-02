@@ -1,0 +1,25 @@
+{
+  "index": 28,
+  "entity": "solanadelray",
+  "fighter": "solanadelray",
+  "kind": "events",
+  "revision": "face-revision",
+  "params": {
+    "model": "flux_3_image",
+    "resolution": "4k",
+    "aspect_ratio": "9:16",
+    "count": 1,
+    "use_unlim": false,
+    "medias": [
+      {
+        "role": "image",
+        "value": "88d91aa3-76ea-431e-8f5d-beeec4a0e789"
+      },
+      {
+        "role": "image",
+        "value": "68d85ec9-c63f-4c14-a7d1-0b3aa768b74d"
+      }
+    ],
+    "prompt": "IMAGE EDIT: image 1 is the ONLY body and pose layout reference. It is the complete final event sprite sheet. Image 2 is ONLY a head portrait and must never change body pose, proportions or outfit. Keep every one of image 1's 32 poses exactly in its existing cell. Change ONLY facial identity to the wider round RED face with huge round YELLOW eyes, black pupils, broad smiling RED muzzle, tiny black nostril dots, red ears, swept red forelock and BLUE chin band from image 2. No horns or yellow spikes on this red actor. Do not invent poses or copy any 32-pose combat atlas. Preserve body height, long limbs, torso, opaque red suit, sleeves, leggings, shoes, outlines, fixed four-column/eight-row grid and magenta background of image 1. FACE CHANGE ONLY. Row 1 keeps its intro gestures. Rows 2-3 keep the special strikes. Row 4 MUST retain the inhale, puffed cheeks, MOUTH SPIT release facing right, and mouth recovery. Row 5 keeps four recoil poses. Row 6 keeps stagger, knees folding, side collapse, and first complete side-lying pose. EVERY FIGURE IN ROWS 7 AND 8 MUST REMAIN COMPLETELY LYING ON ITS SIDE with head LEFT and feet RIGHT, dressed red body stretched horizontally on the ground. Absolutely no standing, guard, punches or kicks in those final eight cells. Those are resting frames, not combat poses. Crisp pixel-art game asset, dark outlines, no words or effects."
+  }
+}

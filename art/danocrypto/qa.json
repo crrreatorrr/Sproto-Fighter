@@ -1,0 +1,55 @@
+{
+  "fighter": "danocrypto",
+  "name": "Dano Crypto",
+  "status": "playable-free-play",
+  "model": {
+    "provider": "Higgsfield",
+    "model": "gpt_image_2_5",
+    "variant": "sunburst",
+    "quality": "high",
+    "resolution": "4k core/events/identity; 2k walk"
+  },
+  "frames": {
+    "combat": 32,
+    "walk": 8,
+    "events": 32,
+    "identity": 32,
+    "total": 104
+  },
+  "reference": "art/danocrypto/reference.png",
+  "requests": [
+    "art/danocrypto/core-request.json",
+    "art/danocrypto/sequence-requests.json"
+  ],
+  "visualReview": {
+    "contactSheets": "All 104 drawings inspected for reference identity, complete limbs, consistent outfit and floor poses.",
+    "runtime": [
+      "guard in both facings",
+      "guarded walking frame",
+      "palm release from ranged clip",
+      "grounded heavy punch",
+      "medium side kick",
+      "left-facing grab hold and mirrored contact",
+      "jump rise in both facings"
+    ]
+  },
+  "checks": {
+    "productionBuild": "passed",
+    "posePlaybackContractGroups": 9,
+    "fighterCases": 650,
+    "uniqueMechanicalProfiles": 130,
+    "movementChecks": 24,
+    "throwGroups": 15,
+    "assetEntries": 15352,
+    "bodyAtlases": 149,
+    "identityPresentation": {
+      "owners": 107,
+      "entranceLoops": 214,
+      "deathCases": 1712,
+      "result": "passed"
+    },
+    "campaignControllerChecks": 16
+  },
+  "previewServing": "Restarted existing localhost preview after Vite ignored newly installed public files; PNG responses now confirmed image/png.",
+  "screenshot": "/Users/kenhiraoka/Documents/Codex/2026-11-01/u/outputs/dano-crypto-playable.png"
+}

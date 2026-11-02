@@ -1,0 +1,48 @@
+[
+  {
+    "index": 0,
+    "entity": "danocrypto",
+    "fighter": "danocrypto",
+    "kind": "core",
+    "job_id": "baef9142-4b9a-4fca-8931-d1a2ff9a96dd",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173355_baef9142-4b9a-4fca-8931-d1a2ff9a96dd.png"
+  },
+  {
+    "index": 1,
+    "entity": "danocrypto",
+    "fighter": "danocrypto",
+    "kind": "walk",
+    "job_id": "d7d62da7-7082-4b5b-ac2e-6e20992ec07f",
+    "status": "completed",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173508_d7d62da7-7082-4b5b-ac2e-6e20992ec07f.png"
+  },
+  {
+    "index": 2,
+    "entity": "danocrypto",
+    "fighter": "danocrypto",
+    "kind": "events",
+    "job_id": "5250ae86-20c9-4533-b905-c047aa9938d9",
+    "status": "completed",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173513_5250ae86-20c9-4533-b905-c047aa9938d9.png"
+  },
+  {
+    "index": 3,
+    "entity": "danocrypto",
+    "fighter": "danocrypto",
+    "kind": "identity",
+    "ranged": true,
+    "deathStart": 16,
+    "frameCount": 32,
+    "job_id": "a1249c91-cdbb-46a3-8bad-7cc949538d9b",
+    "status": "completed",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173511_a1249c91-cdbb-46a3-8bad-7cc949538d9b.png"
+  }
+]

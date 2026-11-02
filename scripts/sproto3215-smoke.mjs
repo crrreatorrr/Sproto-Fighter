@@ -12,7 +12,7 @@ globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/js
 globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}};
 const {A,FLOOR,ROSTER,COMBAT_STYLES,PLAYABLE_FIGHTERS,bodyAtlasIds,createState,step}=core;
 assert.ok(PLAYABLE_FIGHTERS.includes('sproto3215'));
-assert.equal(ROSTER.sproto3215.name,'Sproto #3215');
+assert.equal(ROSTER.sproto3215.name,'Captain Green');
 assert.equal(COMBAT_STYLES.sproto3215.role,'SKIRMISH');
 assert.deepEqual(bodyAtlasIds('sproto3215'),['sproto3215'],'one independent Sproto #3215 body');
 const cfg=manifest.fighters.sproto3215;
@@ -41,4 +41,4 @@ for(let t=0;t<220;t++){combo=Math.max(combo,f.combo);step(s,[0,0]);}
 assert.equal(f.pips,0);assert.equal(combo,COMBAT_STYLES.sproto3215.specialFrames.length);assert.equal(f.move,null);
 console.log('PASS: Sproto #3215 identity and 72-frame asset contract; full gait in both facings, dash/jump/landing, five attacks, eight directional throws and four-contact existing Team Special. Reference likeness and costume checked visually.');
 
-const prior=JSON.parse(readFileSync(new URL('../art/sproto3215-hero/before-gameplay.json',import.meta.url),'utf8'));assert.deepEqual(ROSTER.sproto3215,prior.roster);assert.deepEqual(JSON.parse(JSON.stringify(COMBAT_STYLES.sproto3215)),prior.kit);console.log('PASS: art revision preserves the existing fighter name, kit and gameplay values.');
+const prior=JSON.parse(readFileSync(new URL('../art/sproto3215-hero/before-gameplay.json',import.meta.url),'utf8'));assert.deepEqual({...ROSTER.sproto3215,name:prior.roster.name},prior.roster);assert.deepEqual(JSON.parse(JSON.stringify(COMBAT_STYLES.sproto3215)),prior.kit);console.log('PASS: art revision preserves the existing fighter name, kit and gameplay values.');

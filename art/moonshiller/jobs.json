@@ -1,0 +1,68 @@
+[
+  {
+    "index": 72,
+    "entity": "moonshiller",
+    "fighter": "moonshiller",
+    "kind": "core",
+    "job_id": "7ce10ca9-3153-4d6d-b953-d8f7f38732e6",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163057_7ce10ca9-3153-4d6d-b953-d8f7f38732e6.png"
+  },
+  {
+    "index": 73,
+    "entity": "moonshiller",
+    "fighter": "moonshiller",
+    "kind": "walk",
+    "job_id": "c351acab-0fa1-4f51-8161-e676c483ead3",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163735_c351acab-0fa1-4f51-8161-e676c483ead3.png"
+  },
+  {
+    "index": 74,
+    "entity": "moonshiller",
+    "fighter": "moonshiller",
+    "kind": "events",
+    "job_id": "b0014daa-4178-46d4-b3c7-d5805cef56ab",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163750_b0014daa-4178-46d4-b3c7-d5805cef56ab.png"
+  }
+]

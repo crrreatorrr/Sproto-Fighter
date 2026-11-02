@@ -36,6 +36,8 @@
 #journey-dialog .campaign-window{height:auto;min-height:120px}
 #journey-dialog .campaign-rival{padding:9px 12px;min-height:86px;gap:10px}
 #journey-dialog .campaign-rival>img{width:62px;height:62px}
+.campaign-rival>.campaign-rival-portraits{display:flex;flex:0 0 auto;gap:6px;max-width:100%;flex-wrap:wrap}
+.campaign-rival-portraits img{display:block;width:62px;height:62px;object-fit:contain;background:#111e34;border:2px solid #5d6b83}
 #journey-dialog .campaign-rival h3{font-size:20px;margin:0 0 4px}
 #journey-dialog .campaign-rival p{font-size:12px;margin:3px 0}
 @media(max-width:650px){

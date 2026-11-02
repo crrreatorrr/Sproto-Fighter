@@ -1,0 +1,71 @@
+[
+  {
+    "entity": "satoshi",
+    "kind": "core",
+    "status": "already-normalized"
+  },
+  {
+    "entity": "xalt",
+    "kind": "core",
+    "status": "already-normalized"
+  },
+  {
+    "entity": "potocaicai",
+    "kind": "core",
+    "status": "already-normalized"
+  },
+  {
+    "entity": "satoshi",
+    "kind": "walk",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "satoshi",
+    "kind": "events",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "satoshi",
+    "kind": "identity",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "xalt",
+    "kind": "walk",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "xalt",
+    "kind": "events",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "xalt",
+    "kind": "identity",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "potocaicai",
+    "kind": "walk",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "potocaicai",
+    "kind": "events",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "potocaicai",
+    "kind": "identity",
+    "status": "normalized",
+    "issues": 0
+  }
+]

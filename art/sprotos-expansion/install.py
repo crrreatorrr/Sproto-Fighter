@@ -57,7 +57,9 @@ def install():
     typeblock='\n/* SPROTOS TYPE BEGIN */\nexport type SprotoFighterId = '+' | '.join(repr(x) for x in ids)+';\n/* SPROTOS TYPE END */\n'
     core=core.replace('export type FighterId',typeblock+'export type FighterId',1)
     playable=re.search(r'export const PLAYABLE_FIGHTERS = \[(.*?)\] as const;',core)
-    old=[x for x in re.findall(r"'([^']+)'",playable.group(1)) if not x.startswith('sproto') and x not in expansion_ids]
+    # Only this installer's owned identities are replaced. Other additions,
+    # including Sprotopotamus, can legitimately begin with "sproto" too.
+    old=[x for x in re.findall(r"'([^']+)'",playable.group(1)) if x not in expansion_ids]
     core=core[:playable.start()]+'export const PLAYABLE_FIGHTERS = '+repr(old+ids)+' as const;'+core[playable.end():]
     # Explicit keys keep the serializable core self-contained for deterministic
     # replay tools and the existing data-URL test harness.
@@ -82,6 +84,7 @@ def install():
         elif ref.get('power')=='miniSproto':data.update(role='SPITTER',description='Sharp white eyes and red boxing gloves; spits a complete miniature Sproto from the mouth.')
         elif ref.get('power')=='referenceB':data.update(role='THROWER',description='Throws the exact yellow, red-accented B from the supplied original reference.')
         elif ref.get('power')=='yellowEight':data.update(role='THROWER',description='Hand-thrown yellow 8s, a heavy kick and a four-contact ranged relay.')
+        elif ref.get('power')=='sun':data.update(role='STAFF',description='Full-length staff strikes and a radiant sun projectile launched from the staff tip.')
         elif ref.get('weapon')=='halberd':data.update(role='HALBERD',description='Hooked halberd thrusts, overhead swings, low sweeps and aerial strikes.')
         elif ref.get('weapon'):data.update(role='STAFF',description='Full-length staff thrusts, overhead swings, low sweeps and aerial strikes.')
         elif len(ref['entities'])==3:data.update(role='TRIO',description='Three separate bodies share one health pool and alternate attack contacts.')
@@ -95,6 +98,7 @@ def install():
         elif ref.get('power')=='miniSproto':signature='Mouth-spit releases a miniature Sproto; boxing gloves and sharp white eyes retain the reference identity.'
         elif ref.get('power')=='referenceB':signature='Hand windup releases the original yellow B, retaining its tilted serif shape, red accents and black outline.'
         elif ref.get('power')=='yellowEight':signature='Hand windup throws a bright yellow 8, with a heavy kick and four-contact relay.'
+        elif ref.get('power')=='sun':signature='Full-length staff strikes and a radiant sun cast from its curled tip.'
         elif ref.get('weapon')=='halberd':signature='Full-length hooked halberd thrusts, overhead swings, low sweeps and airborne strikes.'
         elif ref.get('weapon'):signature='Full-length staff thrusts, overhead swings, low sweeps and airborne staff strikes.'
         elif len(ref['entities'])==3:signature='Three separate Sprotos coordinate alternating contacts with one shared health bar.'
@@ -106,6 +110,7 @@ def install():
         if ref.get('power')=='miniSproto':shot.update(shape='miniSproto',horizontal=True,origin=ref.get('projectileOrigin',{'forward':50,'height':100}))
         if ref.get('power')=='referenceB':shot.update(shape='referenceB',origin=ref.get('projectileOrigin',{'forward':86.25,'height':106.25}))
         if ref.get('power')=='yellowEight':shot.update(shape='yellowEight',origin=ref.get('projectileOrigin',{'forward':77.5,'height':105}))
+        if ref.get('power')=='sun':shot.update(shape='sun',origin=ref.get('projectileOrigin',{'forward':157.5,'height':80}))
         kits.append(f" {ident}:kit({data['role']!r},{name!r},{signature!r},82,{{range:{125+i%20},damage:{78+i}}},{{startup:{13+i%7},damage:{46+i%13}}},{json.dumps(shot)},[14,24,36,48],{{range:{440+i},damage:{61+i},push:3}},2),")
         cfg=configs[ident]
         def grip(config,part):

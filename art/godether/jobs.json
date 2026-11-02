@@ -1,0 +1,91 @@
+[
+  {
+    "index": 76,
+    "entity": "godether",
+    "fighter": "godether",
+    "kind": "core",
+    "job_id": "d7ec5882-0d79-4e79-afdc-272de2f7eed0",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163119_d7ec5882-0d79-4e79-afdc-272de2f7eed0.png"
+  },
+  {
+    "index": 77,
+    "entity": "godether",
+    "fighter": "godether",
+    "kind": "walk",
+    "job_id": "cf015dde-69ad-4484-896b-c8cb030dfd4c",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163734_cf015dde-69ad-4484-896b-c8cb030dfd4c.png"
+  },
+  {
+    "index": 78,
+    "entity": "godether",
+    "fighter": "godether",
+    "kind": "events",
+    "status": "submission_failed",
+    "error": "gpt_image_2_5 backend request failed (503): Generation creation is busy. Please try again.",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "superseded": true
+  },
+  {
+    "index": 78,
+    "entity": "godether",
+    "fighter": "godether",
+    "kind": "events",
+    "job_id": "5669ea4f-cf8f-4bc2-8308-9e9a3f7b8068",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 3,
+    "retry": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_164142_5669ea4f-cf8f-4bc2-8308-9e9a3f7b8068.png"
+  }
+]

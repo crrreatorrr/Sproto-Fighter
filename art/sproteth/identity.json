@@ -1,0 +1,39 @@
+{
+  "id": "sproteth",
+  "name": "sprot.eth",
+  "media": "c5e15ac0-2a7a-4817-bb91-f07f1704aeb0",
+  "ordinal": 0,
+  "role": "GOLD COLLAR",
+  "special": "GOLDEN GREETING",
+  "color": "#ffe34d",
+  "artDirectory": "art/sproteth",
+  "reference": "art/sproteth/reference.png",
+  "status": "installed-playable",
+  "identity": "Royal cobalt BLUE oversized rounded head with long angular swept BLUE spikes at the rear and a small blue top forelock. TWO enormous touching circular YELLOW eye regions, BLACK round pupils and tiny white glints, blue curved eyelids and brows. Very broad thick projecting RED smiling lips with a curved closed seam. Smooth YELLOW crescent below the mouth along the lower jaw, not white teeth. BLUE neck. BLACK shirt with a very thick rolled YELLOW GOLD collar exactly like reference. Tiny paired yellow decorative strokes on chest, no lettering. Conservatively extend the cropped lower body as BLACK long trousers and simple BLACK shoes with subtle yellow soles. BLUE bare arms and hands, no gloves. One actor with exactly two attached arms and two attached legs. No crown, red spikes, cape, weapon, white teeth or additional accessories.",
+  "appearanceRule": " Preserve huge circular yellow eyes, cobalt swept head, broad red smile, yellow jaw crescent and thick gold collar in every frame. BLACK clothing throughout, no white patches. Crisp flat limited same-hue shading, no soft gradients. Do not draw pink reference background, text, effects or projectiles.",
+  "referenceSHA256": "55901feb88980856424d32e84d19d8b7bd6002e3a333cc8218f9a900ff6fa054",
+  "palette": [
+    "#080c14",
+    "#191c20",
+    "#2c2f32",
+    "#414449",
+    "#002581",
+    "#003fcb",
+    "#0a50ef",
+    "#2769ff",
+    "#7e0917",
+    "#c50920",
+    "#f32327",
+    "#b29315",
+    "#edcc25",
+    "#ffeb3b",
+    "#fff574",
+    "#ffffff"
+  ],
+  "mouthOrigin": {
+    "forward": 56.25,
+    "height": 105.0
+  },
+  "review": "All 104 normalized drawings visually reviewed. Complete limbs, consistent black clothing/gold collar, mouth-spit frame12 outer lip [157,126], grounded walk, side-lying rest. Shared 16-color palette; alpha unchanged.",
+  "installedFrames": 104
+}

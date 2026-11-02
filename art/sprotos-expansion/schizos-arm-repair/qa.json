@@ -1,0 +1,37 @@
+{
+  "fighter": "sproto1625",
+  "name": "schizos",
+  "revision": "schizos-yellow-arm-1",
+  "generationJob": "178c3e4c-0c10-4b3a-8172-e062cad5e0ba",
+  "repairedCoreFrames": 32,
+  "unchangedClips": [
+    "walk",
+    "events",
+    "motion"
+  ],
+  "visualReview": [
+    "32-frame core contact sheet: both yellow arms present",
+    "Runtime guard in both facings",
+    "Runtime yellow-side punch, grab hold and walking frame"
+  ],
+  "checks": {
+    "productionBuild": "passed",
+    "poseContractGroups": 9,
+    "throwGroups": 15,
+    "assetEntries": 14936,
+    "bodyAtlases": 145,
+    "rosterNames": {
+      "102": "Collector",
+      "1187": "Dad",
+      "1335": "Crackhead",
+      "1345": "whale head",
+      "1414": "Chiller",
+      "1477": "Stalker",
+      "1499": "Dancing Partners",
+      "1601": "888",
+      "1625": "schizos",
+      "1870": "Error 333"
+    }
+  },
+  "screenshot": "/Users/kenhiraoka/Documents/Codex/2026-11-01/u/outputs/schizos-arm-fixed.png"
+}
