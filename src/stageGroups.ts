@@ -10,6 +10,7 @@ export const STAGE_ZONES = [
 ] as const;
 export type StageZoneId = typeof STAGE_ZONES[number]['id'];
 export function stageZone(id:StageId):StageZoneId {
+ const parent=STAGES.find(stage=>stage.id===id)?.parent;if(parent)return stageZone(parent);
  if(id==='retro')return 'circuit';
  if(id==='castle')return 'throne';
  if(STAGE_ZONES.some(zone=>zone.id===id))return id as StageZoneId;

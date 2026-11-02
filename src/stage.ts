@@ -174,10 +174,11 @@ function drawRanch(ctx: CanvasRenderingContext2D, frame: number): void {
     ctx.restore();
 }
 
-export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch' | 'trenches' | 'circuit' | 'throne' | 'verse' | 'hatchery' | 'rainworks' | 'scrapyard' | 'skyrail' | 'nightmarket' | 'sundeck' | 'drydock' | 'glassgarden' | 'chainforge' | 'cellar' | 'rooftop' | 'starbridge' | 'observatory' | 'sporegrove' | 'ambernursery' | 'rustcanal' | 'ashstation' | 'culvertgarden' | 'datavault' | 'ionplaza' | 'stormarcade' | 'coralsalon' | 'helipad' | 'regatta' | 'lunarchapel' | 'royallibrary' | 'frostbastion' | 'backstage' | 'lanterncourt' | 'aquariumbar' | 'gravityarchive' | 'auroragate' | 'sundial' | 'pearlchamber' | 'rootreservoir' | 'moltinghall' | 'bluebar';
+export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch' | 'trenches' | 'circuit' | 'throne' | 'verse' | 'hatchery' | 'rainworks' | 'scrapyard' | 'skyrail' | 'nightmarket' | 'sundeck' | 'drydock' | 'glassgarden' | 'chainforge' | 'cellar' | 'rooftop' | 'starbridge' | 'observatory' | 'sporegrove' | 'ambernursery' | 'rustcanal' | 'ashstation' | 'culvertgarden' | 'datavault' | 'ionplaza' | 'stormarcade' | 'coralsalon' | 'helipad' | 'regatta' | 'lunarchapel' | 'royallibrary' | 'frostbastion' | 'backstage' | 'lanterncourt' | 'aquariumbar' | 'gravityarchive' | 'auroragate' | 'sundial' | 'pearlchamber' | 'rootreservoir' | 'moltinghall' | 'bluebar' | '00-trenches-drainage-floodgate' | '01-trenches-sun-baked-scrapworks' | '02-trenches-canal-underpass' | '03-circuit-checkpoint-lockdown' | '04-circuit-daylight-maglev-terminal' | '05-circuit-underground-control-bunker' | '06-midnight-market-alley' | '07-antenna-rooftop-at-dawn' | '08-night-transit-tunnel' | '09-sunlit-cargo-pier' | '10-upper-deck-in-a-storm' | '11-grand-salon-after-dark' | '12-throne-furnace-relay-vault' | '13-throne-power-conduit-gallery' | '14-throne-broken-crown-sanctuary' | '15-castle-stained-glass-great-hall' | '16-castle-smoky-armory-forge' | '17-castle-snow-swept-battlements' | '18-verse-red-sun-asteroid-causeway' | '19-verse-cosmic-crystal-cavern' | '20-verse-beyond-the-dimensional-sea' | '21-ranch-lantern-lit-barn' | '22-ranch-green-paddock-at-midday' | '23-ranch-dusty-farmhouse-yard';
 /** Canonical chapter order; encounter assignments and gates derive from this route. */
 export const STORY_STAGE_IDS:readonly StageId[] = ['trenches','circuit','yacht','throne','bar','verse','hatchery'];
-export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:number|null}[] = [
+export interface StageDefinition {id:StageId;name:string;theme:string;accent:string;chapter:number|null;image?:string;parent?:StageId}
+export const STAGES: StageDefinition[] = [
     {id:'trenches',name:'Mudline Trenches',theme:'The Trenches / city below',accent:'#d6a05c',chapter:1},
     {id:'circuit',name:'Circuit Gate',theme:'The City / challenge gate',accent:'#64d7df',chapter:2},
     {id:'retro',name:'Neon Tomorrow',theme:'Retrofuturistic city',accent:'#df86de',chapter:2},
@@ -224,20 +225,54 @@ export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:
     {"id": "rootreservoir", "name": "Root Reservoir", "theme": "Hatchery / Root Reservoir", "accent": "#c4d75c", "chapter": null},
     {"id": "moltinghall", "name": "Molting Hall", "theme": "Hatchery / Molting Hall", "accent": "#c4d75c", "chapter": null},
     {"id": "bluebar", "name": "Blue Terrace Bar", "theme": "Bar / Blue Terrace Bar", "accent": "#efaa65", "chapter": null},
+    // Approved story panoramas are also selectable free-play arenas.
+    {"id":"00-trenches-drainage-floodgate","name":"Drainage floodgate","theme":"Trenches / Drainage floodgate","accent":"#d6a05c","chapter":null,"image":"/stages/variations-v2/trenches/00-trenches-drainage-floodgate.png","parent":"trenches"},
+    {"id":"01-trenches-sun-baked-scrapworks","name":"Sun-baked scrapworks","theme":"Trenches / Sun-baked scrapworks","accent":"#d6a05c","chapter":null,"image":"/stages/variations-v2/trenches/01-trenches-sun-baked-scrapworks.png","parent":"trenches"},
+    {"id":"02-trenches-canal-underpass","name":"Canal underpass","theme":"Trenches / Canal underpass","accent":"#d6a05c","chapter":null,"image":"/stages/variations-v2/trenches/02-trenches-canal-underpass.png","parent":"trenches"},
+    {"id":"03-circuit-checkpoint-lockdown","name":"Checkpoint lockdown","theme":"Circuit / Checkpoint lockdown","accent":"#64d7df","chapter":null,"image":"/stages/variations-v2/circuit/03-circuit-checkpoint-lockdown.png","parent":"circuit"},
+    {"id":"04-circuit-daylight-maglev-terminal","name":"Daylight maglev terminal","theme":"Circuit / Daylight maglev terminal","accent":"#64d7df","chapter":null,"image":"/stages/variations-v2/circuit/04-circuit-daylight-maglev-terminal.png","parent":"circuit"},
+    {"id":"05-circuit-underground-control-bunker","name":"Underground control bunker","theme":"Circuit / Underground control bunker","accent":"#64d7df","chapter":null,"image":"/stages/variations-v2/circuit/05-circuit-underground-control-bunker.png","parent":"circuit"},
+    {"id":"06-midnight-market-alley","name":"Midnight market alley","theme":"Retro / Midnight market alley","accent":"#df86de","chapter":null,"image":"/stages/variations-v2/retro/06-midnight-market-alley.png","parent":"retro"},
+    {"id":"07-antenna-rooftop-at-dawn","name":"Antenna rooftop at dawn","theme":"Retro / Antenna rooftop at dawn","accent":"#df86de","chapter":null,"image":"/stages/variations-v2/retro/07-antenna-rooftop-at-dawn.png","parent":"retro"},
+    {"id":"08-night-transit-tunnel","name":"Night transit tunnel","theme":"Retro / Night transit tunnel","accent":"#df86de","chapter":null,"image":"/stages/variations-v2/retro/08-night-transit-tunnel.png","parent":"retro"},
+    {"id":"09-sunlit-cargo-pier","name":"Sunlit cargo pier","theme":"Yacht / Sunlit cargo pier","accent":"#66d7e8","chapter":null,"image":"/stages/variations-v2/yacht/09-sunlit-cargo-pier.png","parent":"yacht"},
+    {"id":"10-upper-deck-in-a-storm","name":"Upper deck in a storm","theme":"Yacht / Upper deck in a storm","accent":"#66d7e8","chapter":null,"image":"/stages/variations-v2/yacht/10-upper-deck-in-a-storm.png","parent":"yacht"},
+    {"id":"11-grand-salon-after-dark","name":"Grand salon after dark","theme":"Yacht / Grand salon after dark","accent":"#66d7e8","chapter":null,"image":"/stages/variations-v2/yacht/11-grand-salon-after-dark.png","parent":"yacht"},
+    {"id":"12-throne-furnace-relay-vault","name":"Furnace relay vault","theme":"Throne / Furnace relay vault","accent":"#e5b65f","chapter":null,"image":"/stages/variations-v2/throne/12-throne-furnace-relay-vault.png","parent":"throne"},
+    {"id":"13-throne-power-conduit-gallery","name":"Power conduit gallery","theme":"Throne / Power conduit gallery","accent":"#e5b65f","chapter":null,"image":"/stages/variations-v2/throne/13-throne-power-conduit-gallery.png","parent":"throne"},
+    {"id":"14-throne-broken-crown-sanctuary","name":"Broken crown sanctuary","theme":"Throne / Broken crown sanctuary","accent":"#e5b65f","chapter":null,"image":"/stages/variations-v2/throne/14-throne-broken-crown-sanctuary.png","parent":"throne"},
+    {"id":"15-castle-stained-glass-great-hall","name":"Stained-glass great hall","theme":"Castle / Stained-glass great hall","accent":"#adabed","chapter":null,"image":"/stages/variations-v2/castle/15-castle-stained-glass-great-hall.png","parent":"castle"},
+    {"id":"16-castle-smoky-armory-forge","name":"Smoky armory forge","theme":"Castle / Smoky armory forge","accent":"#adabed","chapter":null,"image":"/stages/variations-v2/castle/16-castle-smoky-armory-forge.png","parent":"castle"},
+    {"id":"17-castle-snow-swept-battlements","name":"Snow-swept battlements","theme":"Castle / Snow-swept battlements","accent":"#adabed","chapter":null,"image":"/stages/variations-v2/castle/17-castle-snow-swept-battlements.png","parent":"castle"},
+    {"id":"18-verse-red-sun-asteroid-causeway","name":"Red-sun asteroid causeway","theme":"Verse / Red-sun asteroid causeway","accent":"#ad92f4","chapter":null,"image":"/stages/variations-v2/verse/18-verse-red-sun-asteroid-causeway.png","parent":"verse"},
+    {"id":"19-verse-cosmic-crystal-cavern","name":"Cosmic crystal cavern","theme":"Verse / Cosmic crystal cavern","accent":"#ad92f4","chapter":null,"image":"/stages/variations-v2/verse/19-verse-cosmic-crystal-cavern.png","parent":"verse"},
+    {"id":"20-verse-beyond-the-dimensional-sea","name":"Beyond the dimensional sea","theme":"Verse / Beyond the dimensional sea","accent":"#ad92f4","chapter":null,"image":"/stages/variations-v2/verse/20-verse-beyond-the-dimensional-sea.png","parent":"verse"},
+    {"id":"21-ranch-lantern-lit-barn","name":"Lantern-lit barn","theme":"Ranch / Lantern-lit barn","accent":"#efbd7a","chapter":null,"image":"/stages/variations-v2/ranch/21-ranch-lantern-lit-barn.png","parent":"ranch"},
+    {"id":"22-ranch-green-paddock-at-midday","name":"Green paddock at midday","theme":"Ranch / Green paddock at midday","accent":"#efbd7a","chapter":null,"image":"/stages/variations-v2/ranch/22-ranch-green-paddock-at-midday.png","parent":"ranch"},
+    {"id":"23-ranch-dusty-farmhouse-yard","name":"Dusty farmhouse yard","theme":"Ranch / Dusty farmhouse yard","accent":"#efbd7a","chapter":null,"image":"/stages/variations-v2/ranch/23-ranch-dusty-farmhouse-yard.png","parent":"ranch"},
 ];
+export function stageImageSource(id:StageId):string {
+    const stage=STAGES.find(stage=>stage.id===id);
+    if(!stage)throw new Error(`Unknown stage: ${id}`);
+    return stage.image??`/stages/higgsfield/${id}.png`;
+}
 let currentStage:StageId='ranch';
 const placeholderScenery=new Map<StageId,HTMLCanvasElement>();
 const stageImages=new Map<StageId,HTMLImageElement>();
 const stageArtErrors=new Map<StageId,string>();
-let stageArtPromise:Promise<void>|undefined;
-/** Higgsfield scenery from text or environmental references, never fighter atlases. */
-export function loadStageArt():Promise<void>{
-    return stageArtPromise??=Promise.all(STAGES.map(async stage=>{
+const stageArtPending=new Map<StageId,Promise<void>>();
+/** Load only requested scenery, deduplicating menu, launch and repeated requests. */
+export function loadStageArt(ids:readonly StageId[]=STAGES.map(stage=>stage.id)):Promise<void>{
+    return Promise.all(ids.map(id=>{
+        if(stageImages.has(id))return Promise.resolve();
+        const pending=stageArtPending.get(id);if(pending)return pending;
         const image=new Image();
-        try{
-            await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=()=>reject(new Error('Stage image could not load'));image.src=`/stages/higgsfield/${stage.id}.png`;});
-            stageImages.set(stage.id,image);
-        }catch(error){stageArtErrors.set(stage.id,String(error));}
+        const load=new Promise<void>((resolve,reject)=>{
+            image.onload=()=>resolve();image.onerror=()=>reject(new Error(`Stage image could not load: ${id}`));image.src=stageImageSource(id);
+        }).then(()=>{stageImages.set(id,image);stageArtErrors.delete(id);})
+          .catch(error=>{stageArtErrors.set(id,String(error));})
+          .finally(()=>{stageArtPending.delete(id);});
+        stageArtPending.set(id,load);return load;
     })).then(()=>undefined);
 }
 export const getStageArtStatus=()=>({loaded:[...stageImages.keys()],errors:Object.fromEntries(stageArtErrors)});
@@ -249,14 +284,15 @@ export function drawStagePreview(ctx:CanvasRenderingContext2D,id:StageId,width:n
     const scale=Math.max(width/1280,height/720);
     ctx.save();ctx.beginPath();ctx.rect(0,0,width,height);ctx.clip();
     ctx.translate((width-1280*scale)/2,(height-720*scale)*.6);ctx.scale(scale,scale);ctx.imageSmoothingEnabled=false;
-    const art=stageImages.get(id);
+    const base=STAGES.find(stage=>stage.id===id)?.parent??id;
+    const art=stageImages.get(id)??stageImages.get(base);
     if(art){
-        drawArenaScenery(ctx,id,art);
+        drawArenaScenery(ctx,stageImages.has(id)?id:base,art);
     }
-    else if(id==='ranch'){drawRanch(ctx,frame);}
+    else if(base==='ranch'){drawRanch(ctx,frame);}
     else{
         let scene=placeholderScenery.get(id);
-        if(!scene){scene=buildPlaceholder(id);placeholderScenery.set(id,scene);}
+        if(!scene){scene=buildPlaceholder(base);placeholderScenery.set(id,scene);}
         ctx.drawImage(scene,0,0,1280,720);
     }
     ctx.restore();

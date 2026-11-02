@@ -42,11 +42,11 @@ export function mountCampaignMap(parent:HTMLElement,progress:StoryProgress,choos
  const select=(index:number,showDetail=false)=>{selected=Math.max(0,Math.min(STORY_ENCOUNTERS.length-1,index));for(const [i,b] of buttons.entries()){b.tabIndex=i===selected?0:-1;b.setAttribute('aria-pressed',String(i===selected));}if(showDetail)detail();if(Number(zoom.value)>100)pan();preview();};
  const focus=(index:number)=>{select(index,true);buttons[selected].focus({preventScroll:true});};
  function preview(){
-  const encounter=STORY_ENCOUNTERS[selected],level=STAGES.find(s=>s.id===encounter.stage)!,location=storyLocationForEncounter(encounter,STORY_ENCOUNTERS),available=progress.canPlay(selected),cleared=progress.isCleared(selected);
+  const encounter=STORY_ENCOUNTERS[selected],level=STAGES.find(s=>s.id===encounter.stage)!,locations=encounter.opponents.map((_,bout)=>storyLocationForEncounter(encounter,STORY_ENCOUNTERS,bout)).filter(location=>location!==null),available=progress.canPlay(selected),cleared=progress.isCleared(selected);
   const names=encounter.opponents.map(id=>ROSTER[id].name),portraits=document.createElement('div');portraits.className='campaign-rival-portraits';
   rival.replaceChildren();for(const id of encounter.opponents){const portrait=document.createElement('img');portrait.src=originalPortraits[id];portrait.alt=ROSTER[id].name;portrait.dataset.fighter=id;portraits.append(portrait);}
   const copy=document.createElement('div'),heading=document.createElement('h3');heading.textContent=`${String(selected+1).padStart(3,'0')} / ${names.join(' → ')}`;
-  const info=document.createElement('p');info.textContent=`${level.name}${location?' · '+location.title:''} · ${cleared?'RECRUITED':available?'READY TO CHALLENGE':'LOCKED'}`;
+  const info=document.createElement('p');info.textContent=`${level.name}${locations.length?' · '+[...new Set(locations.map(location=>location.title))].join(' → '):''} · ${cleared?'RECRUITED':available?'READY TO CHALLENGE':'LOCKED'}`;
   const note=document.createElement('p');note.textContent=encounter.opponents.length>1?`Gauntlet: defeat ${names.join(', then ')}. Health refills between bouts. Win both without leaving or losing.`:available?'Victory recruits this fighter and opens the next encounter, including in God Mode.':'Clear preceding encounters to unlock this fight.';
   copy.append(heading,info,note);const start=document.createElement('button');start.className='primary';start.disabled=!available;start.textContent=available?(cleared?'Replay encounter':encounter.opponents.length>1?'Challenge gauntlet':'Challenge rival'):'Locked';start.onclick=()=>choose(encounter);rival.append(portraits,copy,start);
  }

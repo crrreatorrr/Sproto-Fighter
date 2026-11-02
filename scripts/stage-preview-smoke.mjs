@@ -16,7 +16,7 @@ for(const id of stage.STAGES.map(s=>s.id)){
  assert.equal(stage.getStage(),'ranch','preview must not switch the fight stage');
  assert.deepEqual(preview.calls.find(x=>x[0]==='scale'),['scale',.25,.25]);
  const image=preview.calls.find(x=>x[0]==='drawImage')[1];
- assert.equal(image.url,`/stages/higgsfield/${id}.png`);
+ assert.equal(image.url,stage.stageImageSource(id));
  stage.setStage(id);const arena=ctx();stage.drawStage(arena,100);
  assert.equal(arena.calls.find(x=>x[0]==='drawImage')[1],image,'arena and preview must share the exact loaded image');
  assert.equal(arena.calls.filter(x=>x[0]==='fillText').length,0,'loaded art must not show a placeholder warning');

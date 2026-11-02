@@ -18,7 +18,8 @@
     "aerial-kick-art-smoke": "node scripts/aerial-kick-art-smoke.mjs",
     "motion-review-smoke": "node scripts/motion-review-smoke.mjs",
     "motion-fix-smoke": "node scripts/motion-fix-smoke.mjs",
-    "motion-visual-coverage": "node scripts/movement-visual-coverage.mjs"
+    "motion-visual-coverage": "node scripts/movement-visual-coverage.mjs",
+    "stage-catalog-smoke": "node scripts/stage-catalog-smoke.mjs"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

@@ -14,7 +14,7 @@ import { render } from './render';
 import { ensurePowerArt } from './powerArt';
 import { playRetainCallout } from './characterVoice';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
-import { STAGES, setStage, loadStageArt, type StageId } from './stage';
+import { STAGES, setStage, loadStageArt, getStageArtStatus, type StageId } from './stage';
 import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
 import { createStoryMode } from './storyMode';
@@ -76,10 +76,15 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
         $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. Defeat this fighter in story mode, or choose an unlocked P1 fighter.`;
         return false;
     }
+    await loadStageArt([setup.stage]);
+    if(getStageArtStatus().errors[setup.stage]){
+        $('selection-loading').textContent='Selected stage art could not load. Choose another stage or press Start Fight to retry.';
+        return false;
+    }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
     try{await Promise.all([ensurePoseAtlases(requiredFighters),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
-    let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS):null;
+    let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
@@ -267,8 +272,8 @@ window.addEventListener('keydown', e => {
     if (!running)
         return;
     if(blockedKeys.has(e.code)){e.preventDefault();return;}
-    if(versus.isOpen&&(e.code==='Enter'||e.code==='Space')){
-        e.preventDefault();if(!e.repeat){blockedKeys.add(e.code);versus.skip();}return;
+    if(versus.isOpen){
+        e.preventDefault();if(e.code==='Enter'&&!e.repeat){blockedKeys.add(e.code);versus.skip();}return;
     }
     if (Object.values(keys).includes(e.code)) {
         e.preventDefault();
@@ -338,7 +343,7 @@ function pollPad(): number {
     if(wasSelection||wasModal||wasOverlay||selection.isOpen||story.isOpen||dialog.open){padNeedsRelease=true;previousStart=!!buttons[9];previousPad=buttons;return 0;}
     if(padNeedsRelease){previousStart=!!buttons[9];previousPad=buttons;if(!buttons.some(Boolean)&&pad.axes.every(axis=>Math.abs(axis)<.3))padNeedsRelease=false;return 0;}
     if(versus.isOpen){
-        const skip=!!buttons[0]&&!previousPad[0]||!!buttons[9]&&!previousPad[9];
+        const skip=!!buttons[0]&&!previousPad[0];
         previousStart=!!buttons[9];previousPad=buttons;
         if(skip)versus.skip();
         return 0;
@@ -455,7 +460,7 @@ $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
 ensurePoseAtlases(['highsproto','vela']).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
-loadStageArt().then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
+loadStageArt(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
 Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, godMode:matchGodMode, frames: frames.map(f => [...f]) }), verifyReplay: () => {

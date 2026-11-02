@@ -1,0 +1,19 @@
+PASS: zone selection filters variations and preserves launch identity
+PASS: all 24 approved story panoramas are selectable, including Ranch’s three variations
+PASS: High starts fresh; locked Golden can be previewed but cannot launch
+PASS: keyboard grid exits reach variation then its zone
+PASS: Random Stage returns through zone selection
+PASS: stage down reaches mode then CTA; mode changes only the future setup
+PASS: every installed campaign rival can be previewed but stays locked until recruited
+PASS: gamepad exits variation and enters zone row
+PASS: upper launch controls lead down to side tabs and roster, and back up
+PASS: locked P1 can be previewed; random P1 uses recruits and CPU choices do not unlock P1
+PASS: recruitment updates selection immediately and God Mode is gated until completion
+PASS: earned God Mode remains selectable when roster growth leaves new campaign gaps
+PASS: gamepad Start focuses CTA; A launches once and held A does not repeat
+PASS: each main selection announces exactly its own assigned partner
+PASS: actual main pollPad blocks menu-confirm and held controls until a neutral release
+PASS: actual main overlay pad navigation can return to selection without leaking attacks
+PASS: actual main settings confirm toggles the testing checkbox once per controller press
+PASS: saved recruits refresh before preview/start and the actual hook receives that fighter
+18 selection/controller integration checks passed. Stub DOM/gamepad only; no browser or physical-controller claim.
