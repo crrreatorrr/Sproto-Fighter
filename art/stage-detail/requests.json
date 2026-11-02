@@ -1,0 +1,51 @@
+[
+  {
+    "id": "hatchery",
+    "reference_files": [
+      "references/hatchery-original.png",
+      "references/hatchery-current.png"
+    ],
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Create one complete wide 16:9 side-view 2D fighting-game arena environment. Rich detailed arcade PIXEL ART with deliberate sharp stepped clusters, 2-3 tone material shading, controlled dithering, rich limited palette, detailed craftsmanship at an approximately 640x360 pixel working scale. No smooth painting, no 3D render, no photographic texture or blur. Preserve the original reference environment identity. Fixed horizontal camera at fighter height. Flat walkable fighting lane spanning every pixel of the width, foot contact line at 80.3 percent image height (y=578 in a 1280x720 game). Foreground continues to bottom, no raised props, fences, bushes, crystal clusters or pits in front of fighters. Keep central combat area x=80..1200, y=350..600 low contrast and unobstructed. Put dense material detail in middle/far background and side framing behind lane. Top 22 percent subdued for HUD. No characters, people, units, creatures, portraits, text, letters, badges, panels, logos, watermarks, UI or HUD. No reference screenshot overlays. Detail should describe architecture and terrain, not random visual noise.\n\nHATCHERY: Use original environment screenshot as primary identity reference, existing side-view image only for camera and arena staging. Dark charcoal/navy octagonal alien courtyard and indigo-purple organic creep. Monumental CENTRAL organic hatchery behind the fighting lane: intricate rust-brown segmented chitin ribs, asymmetrical tall curled blade/horn fins, orange-red fleshy core, vivid yellow/lime armor sacs. Increase fidelity of the hatchery structure: layered armor plates, ridged carapace, recessed warm fissures, tendon roots and egg chambers. Layered gothic perimeter walls with tiny cyan inset lamps, jagged icy blue mineral clusters, ochre/gold incubating pods, far shadowed hive spires and bridges. Crisp mineral facets, worn carved masonry, luminous membranes, and purple growth veins, all with intentional pixel clusters. Keep the ground beneath fighters restrained; concentrate bright detail on the central hive and distant crystals. Central hatchery is an alien building, no eyes, face or humanoid anatomy. Deep midnight atmosphere with localized blue and yellow light, no global bloom. Avoid adding foreground crystals at bottom corners.",
+      "medias": [
+        {
+          "role": "image",
+          "value": "2a2d41a0-b121-4568-8bf4-f398d38aafb5"
+        },
+        {
+          "role": "image",
+          "value": "bfca6752-5b73-4735-8d31-21faef3e5062"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ranch",
+    "reference_files": [
+      "references/ranch-original.jpg"
+    ],
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Create one complete wide 16:9 side-view 2D fighting-game arena environment. Rich detailed arcade PIXEL ART with deliberate sharp stepped clusters, 2-3 tone material shading, controlled dithering, rich limited palette, detailed craftsmanship at an approximately 640x360 pixel working scale. No smooth painting, no 3D render, no photographic texture or blur. Preserve the original reference environment identity. Fixed horizontal camera at fighter height. Flat walkable fighting lane spanning every pixel of the width, foot contact line at 80.3 percent image height (y=578 in a 1280x720 game). Foreground continues to bottom, no raised props, fences, bushes, crystal clusters or pits in front of fighters. Keep central combat area x=80..1200, y=350..600 low contrast and unobstructed. Put dense material detail in middle/far background and side framing behind lane. Top 22 percent subdued for HUD. No characters, people, units, creatures, portraits, text, letters, badges, panels, logos, watermarks, UI or HUD. No reference screenshot overlays. Detail should describe architecture and terrain, not random visual noise.\n\nSPROTO RANCH: Use ONLY the scenic rural background of original ranch livestream screenshot. Remove the cowboy presenter, monkey portrait, chat, names, banners and all other overlays. Preserve the weathered two-storey pale gray stone farmhouse left of center, attached low red-tile roof wing, steep reddish tiled main roof, dark timber doors and mullioned windows, low dry-stone wall, rough timber fence posts, lush green rolling pasture, muddy winding track with shallow sunset-reflecting puddles on the right, distant ruined stone tower and tall chimney, and dramatic amber-orange clouded evening sky. Transform this into detailed arcade pixel art: individually shaped irregular masonry, moss in stone joints, chipped roof tile rows, weathered timber grain, iron gate hinges, layered grass tufts and tiny field flowers BEHIND the fighting lane, small warm window lights, distant hedge bands, broken ruin masonry, beautiful stepped amber/copper clouds and cool olive shadows. Side-view lane is flat compacted earthy farmyard across full width; winding road stays in the background. Place fence and low wall behind fighters rather than through their torsos. Compose a rural ranch with believable depth, original picturesque building silhouette and rich sunset materials, no desert saloon, no generic western town.",
+      "medias": [
+        {
+          "role": "image",
+          "value": "2f78b1dc-510a-4061-830c-ec1f69e2599d"
+        }
+      ]
+    }
+  }
+]

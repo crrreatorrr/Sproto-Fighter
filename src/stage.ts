@@ -1,4 +1,4 @@
-/** Original ranch pixel art, drawn at 320×180 then nearest-neighbor scaled.
+/** Fallback ranch pixel art, drawn at 320×180 then nearest-neighbor scaled.
  * Reference motifs: amber dusk, stone farmhouse, grassy fields, muddy lane,
  * dry-stone boundary and distant weathered farm buildings. No reference pixels,
  * people, text overlays or logos are reused. Purely visual; never changes combat.
@@ -187,7 +187,7 @@ export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:
     {id:'bar',name:'Last Light Bar',theme:'The Bar / hidden doorway',accent:'#efaa65',chapter:5},
     {id:'verse',name:'Verse Gate',theme:'The Verse / open every gate',accent:'#ad92f4',chapter:6},
     {id:'hatchery',name:'The Hatchery',theme:'Beyond the portal / alien hive',accent:'#c4d75c',chapter:7},
-    {id:'ranch',name:'Amber Ranch',theme:'Bonus / original ranch',accent:'#efbd7a',chapter:null},
+    {id:'ranch',name:'Sproto Ranch',theme:'Bonus / sunset farmstead',accent:'#efbd7a',chapter:null},
 ];
 let currentStage:StageId='ranch';
 const placeholderScenery=new Map<StageId,HTMLCanvasElement>();
@@ -196,7 +196,7 @@ const stageArtErrors=new Map<StageId,string>();
 let stageArtPromise:Promise<void>|undefined;
 /** Higgsfield scenery from text or environmental references, never fighter atlases. */
 export function loadStageArt():Promise<void>{
-    return stageArtPromise??=Promise.all(STAGES.filter(s=>s.id!=='ranch').map(async stage=>{
+    return stageArtPromise??=Promise.all(STAGES.map(async stage=>{
         const image=new Image();
         try{
             await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=()=>reject(new Error('Stage image could not load'));image.src=`/stages/higgsfield/${stage.id}.png`;});
@@ -213,18 +213,43 @@ export function drawStagePreview(ctx:CanvasRenderingContext2D,id:StageId,width:n
     const scale=Math.max(width/1280,height/720);
     ctx.save();ctx.beginPath();ctx.rect(0,0,width,height);ctx.clip();
     ctx.translate((width-1280*scale)/2,(height-720*scale)*.6);ctx.scale(scale,scale);ctx.imageSmoothingEnabled=false;
-    if(id==='ranch'){drawRanch(ctx,frame);ctx.restore();return;}
     const art=stageImages.get(id);
     if(art){
-        ctx.drawImage(art,0,0,1280,720);
+        drawArenaScenery(ctx,id,art);
         if(id==='bar')drawBarApron(ctx);
     }
+    else if(id==='ranch'){drawRanch(ctx,frame);}
     else{
         let scene=placeholderScenery.get(id);
         if(!scene){scene=buildPlaceholder(id);placeholderScenery.set(id,scene);}
         ctx.drawImage(scene,0,0,1280,720);
     }
     ctx.restore();
+}
+/** Reframe depth bands around the unchanged y=578 gameplay floor.
+ * Verse's deck surrounds the fighters rather than ending at their heels;
+ * the castle's courtyard begins before their feet instead of after the curb.
+ * Source coordinates use the same 1280×720 space as the unmodified panorama.
+ */
+function drawArenaScenery(ctx:CanvasRenderingContext2D,id:StageId,art:HTMLImageElement):void{
+    const sourceWidth=art.naturalWidth,sourceHeight=art.naturalHeight;
+    const bands=id==='verse'?[[0,0],[480,480],[570,676],[720,720]]:
+        id==='castle'?[[0,0],[596,520],[692,704],[720,720]]:null;
+    if(bands){
+        for(let i=1;i<bands.length;i++){
+            const [sourceTop,targetTop]=bands[i-1],[sourceBottom,targetBottom]=bands[i];
+            ctx.drawImage(art,0,sourceTop/720*sourceHeight,sourceWidth,(sourceBottom-sourceTop)/720*sourceHeight,
+                0,targetTop,1280,targetBottom-targetTop);
+        }
+    }else ctx.drawImage(art,0,0,1280,720);
+    if(id==='yacht'){
+        // The source pier turns into water on the right. Continue its own timber
+        // across the foreground so the entire walkable arena stays on the dock.
+        ctx.drawImage(art,0,532/720*sourceHeight,650/1280*sourceWidth,188/720*sourceHeight,
+            0,532,1280,188);
+        ctx.fillStyle='#594531';ctx.fillRect(0,532,1280,3);
+        ctx.fillStyle='#d5b87c';ctx.fillRect(0,535,1280,2);
+    }
 }
 /** A clear fighting floor in front of the bar's side booths, including both corners. */
 function drawBarApron(ctx:CanvasRenderingContext2D):void{
