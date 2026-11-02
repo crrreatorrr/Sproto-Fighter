@@ -4,6 +4,11 @@ This records work and checks already performed, not checks delegated to Claude.
 No external reviewer was contacted. Earlier export documentation is preserved
 in `archive/CLAUDE-HANDOFF-22-fighter-export.md`.
 
+The later [story/UI update](STORY-UI-UPDATE.md) records the current High Sproto
+starter, late Golden encounter, preserved legacy saves, God Mode recruitment,
+locked previews, fitted map and text-layout corrections. Its focused checks
+and browser evidence are separate from the earlier integration coverage below.
+
 ## Current integrated scope
 
 102 fighter owners / 118 body atlases; original portraits; individual mechanical
@@ -17,7 +22,8 @@ poses remain: these are not continuous generated animation videos.
 Ten base stages remain available in free play; 24 approved variations appear in
 regional story blocks. Bar/Hatchery retain their detailed originals. The final
 Morelight/Vaudream gauntlet and immediate Settings testing mode are installed.
-God Mode testing does not grant story progress. Scene panels remain placeholders
+God Mode testing now grants story progress and recruits, like regular story wins.
+Scene panels remain placeholders
 pending script approval; this integration generated no video or paid artwork.
 
 All task tips, including final partner `c4263cb8`, appear in

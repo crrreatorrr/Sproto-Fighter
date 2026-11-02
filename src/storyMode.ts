@@ -1,14 +1,14 @@
 import {STAGES,STORY_STAGE_IDS,type StageId} from './stage';
-import {ROSTER,type PlayableFighterId} from './core';
+import {ROSTER,isFreePlayAddition,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,FINALE_START,storyProgress,type Encounter,type StoryProgress} from './storyProgress';
 
-type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
+type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;selectedFighter?:()=>PlayableFighterId;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
 /** Story scenes are placeholders until the separate cutscene script is approved. */
 export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
     const modal=$<HTMLDialogElement>('journey-dialog');
     const worlds=STORY_STAGE_IDS.map(id=>STAGES.find(s=>s.id===id)!);
-    let active:Encounter|null=null,settled:number|null=null,settledTesting=false,launching=false;
+    let active:Encounter|null=null,settled:number|null=null,launching=false;
     let view:'worlds'|'levels'|'scene'|'result'='worlds';
     let back:()=>void=()=>{};
     const storageNote=()=>progress.snapshot().persistent?'Progress saves on this browser.':'Browser saving is unavailable. Progress lasts only while this page stays open.';
@@ -18,6 +18,12 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     async function launch(id:StageId,encounter?:Encounter){
         if(launching)return;
         if(!hooks.ready()){$('journey-copy').textContent='Fighter sprites are still loading. Try again in a moment.';return;}
+        progress.sync();
+        const selectedFighter=hooks.selectedFighter?.();
+        if(selectedFighter&&!progress.isUnlocked(selectedFighter)&&(encounter||!isFreePlayAddition(selectedFighter))){
+            $('journey-copy').textContent=isFreePlayAddition(selectedFighter)?`${ROSTER[selectedFighter].name} is available in free play. Choose High Sproto, Fat Head Dave or a recruited fighter for the campaign.`:`${ROSTER[selectedFighter].name} is a locked P1 preview. Return to the arena menu and choose an unlocked P1 fighter, then start this encounter. Defeat ${ROSTER[selectedFighter].name} in story mode to recruit them.`;
+            return;
+        }
         if(encounter&&!progress.canPlay(encounter.index))return;
         if(encounter?.index===FINALE_START)progress.abandonFinale();
         launching=true;modal.close();
@@ -51,7 +57,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         view=story?'worlds':'levels';modal.classList.toggle('story-map-open',story);const save=progress.snapshot();
         $('journey-kicker').textContent=story?`STORY / ${save.cleared.length} OF 100 CLEARED`:'FREE PLAY / LEVEL SELECT';
         $('journey-title').textContent=story?'The road to the Hatchery.':'Pick a place to fight.';
-        $('journey-copy').textContent=story?`Defeat 100 different rivals. Each victory permanently recruits that fighter; clear each location to open the next. Finish the route to unlock God Mode for free play. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
+        $('journey-copy').textContent=story?`Defeat 100 different rivals. Each victory permanently recruits that fighter; clear each location to open the next. Finish the route to unlock God Mode in fighter select. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
         const content=$('journey-content');content.replaceChildren();const grid=document.createElement('div');grid.className='world-grid'+(story?' campaign-chapter-list':'');content.append(grid);
         for(const level of story?worlds:STAGES){
             const encounters=STORY_ENCOUNTERS.filter(e=>e.stage===level.id),first=encounters[0],last=encounters.at(-1),locked=story&&!progress.canPlay(first.index),done=story&&save.cleared.length>last!.index;
@@ -73,22 +79,18 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     // Called at KO, before the presentation outro: reloading during the outro keeps a win.
     function finishMatch(winner:number){
         if(!active||launching||settled!==null||![0,1,2].includes(winner))return false;
-        settled=winner;settledTesting=hooks.testing?.()??false;if(settledTesting)progress.abandonFinale();else if(winner===0)progress.win(active.index);else if(active.index>=FINALE_START)progress.abandonFinale();status();return true;
+        settled=winner;if(winner===0)progress.win(active.index);else if(active.index>=FINALE_START)progress.abandonFinale();status();return true;
     }
     function onRoundEnd(winner:number):boolean{
         if(!active||launching)return false;
-        finishMatch(winner);const encounter=active,result=settled,wasTesting=settledTesting;active=null;settled=null;settledTesting=false;
+        finishMatch(winner);const encounter=active,result=settled;active=null;settled=null;
         view='result';$('journey-content').replaceChildren();$('journey-kicker').textContent=`STORY / ENCOUNTER ${encounter.index+1} OF 100`;
-        if(wasTesting){
-            $('journey-title').textContent='God Mode test complete.';
-            $('journey-copy').textContent='Story progress and fighter unlocks are unchanged. Turn off God Mode for testing in Settings to earn recruits and advance the route.';
-            buttons([{label:'Test again →',run:()=>{const retry=encounter.index>=FINALE_START?STORY_ENCOUNTERS[FINALE_START]:encounter;void launch(retry.stage,retry);}},{label:'Story route',run:()=>selector(true)}]);
-        }else if(result===0){
+        if(result===0){
             const next=STORY_ENCOUNTERS[encounter.index+1];
             if(encounter.index===FINALE_START){void launch(next.stage,next);return true;}
             if(next&&next.stage!==encounter.stage){scene(next,true);return true;}
             $('journey-title').textContent=next?`${ROSTER[encounter.opponent].name} recruited!`:'The route is complete. God Mode unlocked!';
-            $('journey-copy').textContent=next?`${progress.snapshot().cleared.length} of 100 encounters cleared. ${ROSTER[encounter.opponent].name} is now available as your fighter. ${storageNote()}`:`All 100 rivals defeated. Every fighter is available. Enable God Mode in fighter select for invulnerability and unlimited Team Special charge in free play. Ending cutscene pending script approval. ${storageNote()}`;
+            $('journey-copy').textContent=next?`${progress.snapshot().cleared.length} of 100 encounters cleared. ${ROSTER[encounter.opponent].name} is now available as your fighter. ${storageNote()}`:`All 100 rivals defeated. Every fighter is available. Enable God Mode in fighter select for invulnerability and unlimited Team Special charge in any mode. Ending cutscene pending script approval. ${storageNote()}`;
             buttons(next?[{label:`Next: ${ROSTER[next.opponent].name} →`,run:()=>{void launch(next.stage,next);}},{label:'Story route',run:()=>selector(true)}]:[{label:'Story route',run:()=>selector(true)},{label:'Free-play levels',run:()=>selector(false)}]);
         }else{
             $('journey-title').textContent=result===2?'Draw — try this encounter again.':'Retry this encounter.';

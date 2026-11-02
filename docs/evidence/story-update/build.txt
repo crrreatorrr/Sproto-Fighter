@@ -1,0 +1,115 @@
+
+> sproto-arena@0.1.0 build
+> tsc --noEmit && vite build --outDir /tmp/sproto-story-ui-20261102 --emptyOutDir
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 47 modules transformed.
+rendering chunks...
+computing gzip size...
+../../../../../../../tmp/sproto-story-ui-20261102/index.html                                   5.54 kB │ gzip:   2.43 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/vamp-BaeOEztd.png                   139.00 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/crapto-FNpOZbve.png                 154.40 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/bront-DteFAF3E.png                  162.49 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-10-B5-oEtaA.png           163.31 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-12-6wV5RYig.png           163.76 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/urmom-eth-BIwf42S5.png              163.90 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/vela-CGtUalaX.png                   165.20 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-13-Dz2ae4Do.png           168.91 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/greatcharly-DxsdxpiU.png            171.60 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/rune-jVDtMYdV.png                   172.32 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-B-KgMgYi.png              179.30 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/dumpstar-CmD4GGls.png               179.71 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-yonpaqeP.png              179.74 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/zephyr-Tba9MykT.png                 179.90 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-2KP9Sf-E.png              190.16 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/captainhowdy-COeRcv_W.png           190.76 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/jasper-Dq2pjOjL.png                 193.62 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-C3SZLqg5.png              194.21 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sprotosales-JVwv8Kaz.png            196.15 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sprog-BZbthyEk.png                  199.93 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-DvJUmd1p.png              203.15 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-CHLf_7wC.png              205.01 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-CPIGgUwK.png              206.09 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-09-BCSaVj0w.png           207.04 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/bitcoin-mandela-DO_aCktm.png        207.63 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/chaton-von-sproto-BpG4j4Qv.png      207.99 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sisma-DNQG4ifZ.png                  209.15 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/alpha777-BCx0W5uA.png               209.34 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-BnHOl4Kq.png              209.72 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/unc-master-flex-OlWvHUzO.png        211.39 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/aaron-Bng5ADiM.png                  214.09 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-ywqLEyos.png              217.61 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-B1w9JE4j.png              219.29 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-DSkZUAPW.png              219.87 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/gryph-DSm4XOQR.png                  220.85 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-DjF8pOiW.png              221.47 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-xypFoqHE.png              222.10 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/brainsprot-BeXR35hJ.png             227.65 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-BfwYCzOu.png              239.27 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/vaudream-CLR4hAyu.png               257.00 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/nosmileclown-Dyf_5Ayz.png           257.17 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/big-swole-C2xwIUcj.png              311.83 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/godmod3d-eth-DCU4hPdF.png           320.15 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-07-CoVicEY8.png           360.87 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/mox-qwB03yJ5.png                    375.62 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-14-CR1iOM4m.png           415.41 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-11-CXMKeMAk.png           517.09 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/rivet-BJlkhZRu.png                  530.12 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/little-foot-nate-D4Dy1rV3.png       550.88 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/vitalik-eth-CkNovvJL.png            551.05 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sober-DHmp6MTf.png                  576.30 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/original-BBXtRW_w.png               631.66 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/loadthebags-IlxaAw3w.png            633.45 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/olnoname-DC_33VlA.png               802.20 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/reference-08-DKccusL_.png           852.34 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2531-BTyN_q31.png    912.40 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-763-DQ37QLt1.png     920.03 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2884-EZ6rCANP.png    947.30 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-818-f7lizTY7.png     985.05 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2010-D0nBGy_T.png  1,030.72 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1601-CvQP-6uv.png  1,045.02 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2344-3gTY1g-l.png  1,108.05 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-215-CG7t85fw.png   1,114.03 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2177-DB_EySPv.png  1,115.06 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2322-Clkes1nB.png  1,133.38 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-3106-BcRMI3da.png  1,141.04 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-3224-CVh1_RcX.png  1,141.59 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1815-CasipxxO.png  1,152.13 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2789-mnLV9bef.png  1,153.71 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-943-BjH4WkI5.png   1,161.01 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-3235-DD5RjaF6.png  1,162.43 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1668-CYIVITM0.png  1,205.49 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1093-CaTolUXk.png  1,231.91 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-834-BtiOmmAr.png   1,244.32 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2101-tmpb38ok.png  1,246.05 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-865-CsSPIpOQ.png   1,261.23 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-651-oaLuAKHF.png   1,262.56 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2381-D79LZ6_n.png  1,297.22 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1414-Baeg3lz7.png  1,299.84 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-999-C3BjjnIM.png   1,302.60 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-3215-CVtEP338.png  1,308.94 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1870-ahgS7HIk.png  1,315.78 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-837-CmnyHI1M.png   1,333.15 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2210-C5MXNxdV.png  1,334.39 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-832-Cn4N6TmK.png   1,343.19 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1477-Bd2h6fk-.png  1,348.62 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-3181-C_wKYMz7.png  1,358.07 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2569-Dhv9KDUM.png  1,368.04 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-704-CP7XGbtM.png   1,376.03 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-282-DrBuSJSI.png   1,388.22 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1345-DXRRBtEo.png  1,399.32 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1335-CkANQLG7.png  1,401.47 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-3152-CxtDaQVZ.png  1,421.23 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-313-riomaB7t.png   1,437.77 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2616-ChxmlOg-.png  1,465.40 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-102-DGWeQU0b.png   1,477.85 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1625-BviaVSep.png  1,533.42 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-831-CbnULMCG.png   1,540.26 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1187-CkJt48qq.png  1,567.57 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1499-7jeffLlM.png  1,587.64 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-1011-ml_-OB5t.png  1,600.75 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/sproto-gremlin-2075-CmarkKUT.png  1,709.49 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/index-D0WDtKGF.css                   65.46 kB │ gzip:  14.22 kB
+../../../../../../../tmp/sproto-story-ui-20261102/assets/index-CAXCgNoj.js                   381.82 kB │ gzip: 104.28 kB
+✓ built in 2.58s

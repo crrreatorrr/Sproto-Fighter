@@ -22,25 +22,36 @@ origin: 5173 and 5187 have separate progression. This is not a hosted website.
 
 ## Campaign and testing
 
-**Story worlds** opens an illustrated, scrollable map with 100 numbered rivals.
-Start with Golden Sproto or Fat Head Dave. Each normal story victory permanently
-recruits that rival on this browser and opens the next encounter. Arrow keys
-move between map nodes; Enter selects. Region buttons jump across the map;
-**Find next fight** returns to the next available rival.
+**Story worlds** opens an illustrated map with 100 rivals, initially fitted so
+the entire world is visible. High Sproto is the default starting fighter; Fat
+Head Dave is also available. Every story victory, including God Mode victories,
+permanently recruits that rival on this browser and opens the next encounter.
+Arrow keys move between map nodes; Enter selects. Selecting a rival or region
+zooms to readable detail; **Find next fight** locates your next rival and
+**Fit map** restores the full overview.
+
+Locked fighters can be clicked to preview their art and stats, but cannot start
+a fight as P1 until recruited. CPU rival selection remains unrestricted. Saves
+refresh when returning to the page and before selection/launch. Existing v1
+saves migrate by fighter identity into `sproto-arena-story-v2`; the original
+key stays untouched. Earned recruits and completed campaigns are retained,
+including Golden Sproto for returning players who already had him.
 
 The route runs through Trenches → City/Circuit Gate → Yacht → Castle/Crown Relay
 → Bar → Verse → Hatchery. The 24 approved variations appear in regional blocks;
-Bar and Hatchery retain their detailed originals. Encounters 83–98 face paired
-Sprotos. The last two form one gauntlet: Morelight, then a health refill and
+Bar and Hatchery retain their detailed originals. Encounters 82–97 face paired
+Sprotos; Golden Sproto is encounter 98 and a late unlock for new saves. The last
+two form one gauntlet: Morelight, then a health refill and
 Vaudream. Losing, reloading or leaving this pair requires starting again from
 Morelight; his fighter unlock is retained. Scenes remain placeholders pending
 script approval. No cutscene videos were generated during integration.
 
 **Settings → Testing → God Mode for testing** is immediately available. It
 prevents health loss and refills special charge. Choose any CPU rival in the
-menu. Changing this setting restarts the match; testing victories never recruit
-fighters or advance the campaign. It turns off on reload. Finishing all 100
-encounters also unlocks a separate free-play God Mode reward.
+menu. Changing this setting restarts the match. Story victories recruit fighters
+and advance the campaign in either mode; free-play wins do not. Testing God Mode
+turns off on reload. Finishing all 100 encounters also unlocks the God Mode
+checkbox in fighter select. God Mode does not bypass P1 recruitment locks.
 
 ## Controls
 
@@ -94,6 +105,8 @@ reloads normally; dependency scanning starts at `index.html`.
 
 See [the factual handoff](docs/CLAUDE-HANDOFF.md) for integrated branches,
 checks and limitations, and [per-pair coverage](docs/PAIRED-QA-COVERAGE.csv).
+The latest progression, preview-lock and responsive-map changes are recorded in
+[the story/UI update](docs/STORY-UI-UPDATE.md).
 Older dated reports and authoring sources are preserved as history.
 
 No physical-controller test, per user instruction. A full manual 100-match

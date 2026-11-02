@@ -6,7 +6,7 @@ import './pixelUI.css';
 import './mysticUI.css';
 import './campaignMap.css';
 import {mountCampaignMap} from './campaignMap';
-import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
+import { A, ROSTER, PLAYABLE_FIGHTERS, isFreePlayAddition, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
 import { playRetainCallout } from './characterVoice';
@@ -35,7 +35,7 @@ try {
     }
 }
 catch { /* Storage may be disabled. Defaults still work. */ }
-let state = createState(), chosen: FighterId = 'rivet', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
+let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
     action: Action;
     device: 'key' | 'pad';
 } | null = null;
@@ -57,12 +57,17 @@ function updateStage(stage:StageId) {
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
 async function launchSelection(setup:SelectionSetup,isStory=false) {
-    if(!storyProgress.isUnlocked(setup.fighter))return false;
+    // Reconcile wins from another tab or a restored page before the final P1 gate.
+    storyProgress.sync();
+    if(!storyProgress.isUnlocked(setup.fighter)&&(isStory||!isFreePlayAddition(setup.fighter))){
+        $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. Defeat this fighter in story mode, or choose an unlocked P1 fighter.`;
+        return false;
+    }
     try{await Promise.all([ensurePoseAtlases(isStory&&setup.opponent==='vela'?[setup.fighter,'vela','vaudream']:[setup.fighter,setup.opponent]),[setup.fighter,setup.opponent].some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponent===setup.opponent):undefined;
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
-    matchEarnedGodMode=!isStory&&storyProgress.snapshot().completed&&!!setup.godMode;
+    matchEarnedGodMode=storyProgress.snapshot().completed&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);setActiveStoryLocation(scenery);
@@ -169,6 +174,7 @@ function setTestingGodMode(enabled:boolean){
 let resumeAfterJourney = false, freePlayMode: Mode | null = null;
 const story = createStoryMode({
     map:mountCampaignMap,
+    selectedFighter:()=>selection.getSetup().fighter,
     testing:()=>matchTesting,
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
@@ -405,7 +411,7 @@ function tick(now: number) {
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
-ensurePoseAtlases(['rivet','vela']).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+ensurePoseAtlases(['highsproto','vela']).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStageArt().then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);

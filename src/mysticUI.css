@@ -308,3 +308,117 @@ kbd { background: #1c1929; border-color: #8f7b5a; color: #f3deb3; }
 .portrait-name { left: 5px; right: 5px; bottom: 4px; min-height: 19px; padding: 3px 2px; line-height: 12px; font-size: 10px; }
 .random-choice { min-height: 110px; padding: 8px 5px 23px; }
 @media (max-width:650px) { .portrait-choice { height: auto; } }
+
+/* Keep text inside the usable center of the ornate frames. Content stays in
+   normal flow and can grow; long fighter names are never ellipsized away. */
+:root { --ornate-text-inset: 32px; }
+.quiet, .primary, .text-button, .side-tab, .start-fight {
+  max-width: 100%; white-space: normal; overflow-wrap: anywhere; line-height: 1.25;
+}
+.top-navigation .quiet, .text-button, .side-tab,
+dialog .quiet, dialog .primary, .overlay .quiet, .overlay .primary {
+  padding-inline: var(--ornate-text-inset);
+}
+.arena-header, .top-navigation { flex-wrap: wrap; }
+.brand, .top-navigation, .selection-section-heading > *, .selection-launch > *,
+.fighter-summary, .fighter-summary dl > div, .dialog-top > div,
+.dialog-bottom > *, .binding-row > *, .fight-heading > *, .arena-bar > *,
+.arena-footer > *, footer > * { min-width: 0; }
+.selection-heading h1, .selection-section-heading h2, .selection-hint,
+.fighter-summary h2, .fighter-summary > p, .summary-top,
+.stage-choice b, .preview-stage-label b, .world-card, .story-slate,
+dialog h2, dialog p, .eyebrow, .micro, .overlay h2, .overlay p,
+.fight-heading, .arena-bar, .arena-footer, footer { overflow-wrap: anywhere; }
+.selection-heading h1 { white-space: normal; text-align: center; }
+.selection-locations .selection-section-heading { flex-wrap: wrap; }
+.selection-launch { flex-wrap: wrap; align-items: center; }
+.selection-launch label { flex: 1 1 180px; min-width: 0; max-width: none; }
+.selection-launch select { min-width: 0; max-width: 100%; }
+.selection-launch .god-mode-control { max-width: 280px; }
+.selection-launch .menu-instructions { flex: 1 1 220px; }
+.selection-launch .start-fight { flex: 1 1 250px; min-width: 0; padding-inline: 40px; }
+.summary-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+.fighter-summary.blue .summary-top { justify-content: flex-end; }
+.fighter-summary dt { min-width: 0; overflow-wrap: anywhere; }
+.fighter-summary dd { flex-shrink: 0; }
+.preview-stage-label { max-width: 45%; }
+.stage-choice > span { padding-inline: 9px; }
+
+/* A caption has its own row below the square portrait, instead of an absolute
+   strip whose fixed reserved height cuts off long and locked fighter names. */
+.portrait-choice:not(.random-choice) {
+  display: flex; flex-direction: column; justify-content: flex-start;
+  padding: 5px; height: auto; min-width: 0;
+}
+.portrait-choice:not(.random-choice) img { flex: 0 0 auto; }
+.portrait-choice .portrait-name {
+  position: static; width: 100%; flex: 1; min-height: 28px;
+  padding: 5px 2px; line-height: 1.2; overflow-wrap: anywhere;
+}
+.selection-roster > .selection-section-heading {
+  display: flex; flex-direction: column; align-items: stretch; gap: 8px;
+  padding: 12px 8px;
+}
+.selection-roster #roster-heading { position: static; order: -1; text-align: center; }
+.side-switch { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.side-tab { width: 100%; min-width: 0; }
+.side-tab span { margin-left: 4px; overflow-wrap: anywhere; }
+
+dialog { overflow-y: auto; }
+.dialog-top { align-items: flex-start; }
+.dialog-top > div { flex: 1; }
+.dialog-top > button { flex-shrink: 0; }
+.dialog-bottom, .fight-heading, .arena-bar, .arena-footer, footer { flex-wrap: wrap; }
+.binding-row { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.binding-row button { min-width: 0; padding-inline: 18px; }
+.story-slate > *, .world-card > * { min-width: 0; max-width: 100%; }
+.story-slate strong { line-height: 1.15; }
+#journey-actions > button { min-width: 0; max-width: 100%; }
+.overlay > div { min-width: 0; max-width: 100%; max-height: 100%; overflow-y: auto; }
+.overlay h2, .overlay p { max-width: 100%; }
+.arena-footer > div { display: flex; flex-wrap: wrap; gap: 6px; }
+.arena-footer .quiet { padding-inline: 26px; }
+
+@media (max-width: 650px) {
+  :root { --ornate-text-inset: 26px; }
+  .top-navigation .quiet { padding-inline: 20px; }
+  .selection-launch { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+  .selection-launch label { width: auto; min-width: 0; }
+  .selection-launch .god-mode-control { max-width: none; }
+  .selection-launch .start-fight { grid-column: 1 / -1; width: 100%; }
+  .selection-launch .menu-instructions { grid-column: 1 / -1; }
+  .selection-heading { gap: 6px; }
+  .selection-heading h1 { font-size: clamp(22px,7vw,28px); letter-spacing: 2px; }
+  .heading-rule { min-width: 0; max-width: 24px; }
+  /* Mobile stat cells are too narrow for a label and numeric value beside
+     one another. Keep complete words above their value, including paired UI. */
+  .fighter-summary dl > div,
+  #selection-view[data-paired=true] .fighter-summary dl > div {
+    display: flex; flex-direction: column; align-items: stretch;
+    justify-content: flex-start; gap: 3px; min-height: 41px; padding: 4px;
+  }
+  .fighter-summary dt {
+    width: 100%; max-width: none; min-height: 17px;
+    font-size: 8px; line-height: 1.1; letter-spacing: 0;
+    white-space: normal; overflow-wrap: normal; word-break: normal;
+  }
+  .fighter-summary dd { margin: 0; line-height: 1.05; font-size: 14px; }
+  .fighter-summary dd small { display: inline; font-size: 8px; margin-left: 2px; }
+  #selection-view[data-paired=true] .fighter-summary {
+    height: 196px; width: calc(50% - 18px); bottom: 10px; padding: 8px 9px;
+  }
+  .fighter-summary dl, #selection-view[data-paired=true] .fighter-summary dl {
+    margin: 0; min-width: 0; align-content: start;
+  }
+  /* Renderer measures summary height and reserves an additional safety gap. */
+  #selection-view[data-paired=true] .match-preview { height: 704px; }
+  .side-switch { gap: 8px; }
+  .side-tab { width: 100%; padding-inline: 26px; }
+  .dialog-top { gap: 8px; }
+  .dialog-top > button { padding-inline: 24px; }
+  .dialog-top h2 { line-height: 1.15; }
+  .binding-row button { padding-inline: 14px; }
+  .world-card strong { line-height: 1.15; }
+  .story-slate { padding: 18px; }
+  .story-slate strong { font-size: clamp(23px,7vw,32px); }
+}
