@@ -1,4 +1,4 @@
-/** Original ranch pixel art, drawn at 320×180 then nearest-neighbor scaled.
+/** Fallback ranch pixel art, drawn at 320×180 then nearest-neighbor scaled.
  * Reference motifs: amber dusk, stone farmhouse, grassy fields, muddy lane,
  * dry-stone boundary and distant weathered farm buildings. No reference pixels,
  * people, text overlays or logos are reused. Purely visual; never changes combat.
@@ -187,7 +187,7 @@ export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:
     {id:'bar',name:'Last Light Bar',theme:'The Bar / hidden doorway',accent:'#efaa65',chapter:5},
     {id:'verse',name:'Verse Gate',theme:'The Verse / open every gate',accent:'#ad92f4',chapter:6},
     {id:'hatchery',name:'The Hatchery',theme:'Beyond the portal / alien hive',accent:'#c4d75c',chapter:7},
-    {id:'ranch',name:'Amber Ranch',theme:'Bonus / original ranch',accent:'#efbd7a',chapter:null},
+    {id:'ranch',name:'Sproto Ranch',theme:'Bonus / sunset farmstead',accent:'#efbd7a',chapter:null},
 ];
 let currentStage:StageId='ranch';
 const placeholderScenery=new Map<StageId,HTMLCanvasElement>();
@@ -196,7 +196,7 @@ const stageArtErrors=new Map<StageId,string>();
 let stageArtPromise:Promise<void>|undefined;
 /** Higgsfield scenery from text or environmental references, never fighter atlases. */
 export function loadStageArt():Promise<void>{
-    return stageArtPromise??=Promise.all(STAGES.filter(s=>s.id!=='ranch').map(async stage=>{
+    return stageArtPromise??=Promise.all(STAGES.map(async stage=>{
         const image=new Image();
         try{
             await new Promise<void>((resolve,reject)=>{image.onload=()=>resolve();image.onerror=()=>reject(new Error('Stage image could not load'));image.src=`/stages/higgsfield/${stage.id}.png`;});
@@ -213,12 +213,12 @@ export function drawStagePreview(ctx:CanvasRenderingContext2D,id:StageId,width:n
     const scale=Math.max(width/1280,height/720);
     ctx.save();ctx.beginPath();ctx.rect(0,0,width,height);ctx.clip();
     ctx.translate((width-1280*scale)/2,(height-720*scale)*.6);ctx.scale(scale,scale);ctx.imageSmoothingEnabled=false;
-    if(id==='ranch'){drawRanch(ctx,frame);ctx.restore();return;}
     const art=stageImages.get(id);
     if(art){
         ctx.drawImage(art,0,0,1280,720);
         if(id==='bar')drawBarApron(ctx);
     }
+    else if(id==='ranch'){drawRanch(ctx,frame);}
     else{
         let scene=placeholderScenery.get(id);
         if(!scene){scene=buildPlaceholder(id);placeholderScenery.set(id,scene);}
