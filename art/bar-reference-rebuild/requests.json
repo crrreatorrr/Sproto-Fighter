@@ -1,0 +1,162 @@
+[
+  {
+    "index": 0,
+    "id": "bar",
+    "name": "Last Light Bar",
+    "zone": "bar",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "c7201dc8-3b68-49e2-90d5-3bf9e09a72b7"
+        }
+      ],
+      "prompt": "Production background for the existing side-view 2D PIXEL ART fighting game, WIDE16:9. Clean 1990s arcade stepped pixel clusters, restrained 32/64-color shading and strong architectural shapes, no photography, painterly rendering or 3D. Reference images supply architecture, lighting and wall decorations; expand them into a complete playable arena, not a photo crop. IGNORE AND REMOVE ALL HUMANS in references, including people on television, plus all screenshot navigation arrows, page borders and image counters. NO human, living mascot, animal, fighter or crowd appears in the generated environment. Flat mascot illustrations and the reference neon sign are allowed as attached background decoration. Camera level side-on at fighter height, NO fisheye, no tilted perspective. Compose1280x720: flat horizontal walking ground at y578 with generous continuous foreground down to bottom. Keep both corners and x80..1200 y420..640 clear of props/steps/obstacles, no foreground chairs/tables or tree trunks. Strong details behind combat lane, walls/setpieces generally above y500, subdued upper22% for HUD legibility. No gameplay hazards, no UI, no watermark. One complete seamless still environment.\n\nSCENE: PRIMARY ARENA. Faithfully recreate and EXPAND image1 into a wide side-on complete bar room. The defining central BACK-WALL neon artwork is a blue spiky yellow-faced red-shoed cartoon mascot with an orange Bitcoin coin, red Harry Potter lettering above and vertically stacked multicolored OBAMA at left, matching image1 as closely as pixel art allows. It is a FIXED NEON WALL SIGN, never a living character. Dark brown rectangular wood shelving densely lined with bottles, mirrors at left/right, long amber ceiling strip, exposed dark rafters and shiny metal countertop. Widen the wall to both sides and reveal a broad clear dark wood fighting floor in front of the counter. Preserve the intimate real neighborhood bar proportions and warm amber smoky light, not a grand fantasy saloon. Counter, stools and glassware all BEHIND the combat lane."
+    }
+  },
+  {
+    "index": 1,
+    "id": "cellar",
+    "name": "Bottle Vault Cellar",
+    "zone": "bar",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "c7201dc8-3b68-49e2-90d5-3bf9e09a72b7"
+        },
+        {
+          "role": "image",
+          "value": "ffbf5122-fb76-4314-9eca-c0eb8fcfb752"
+        }
+      ],
+      "prompt": "Production background for the existing side-view 2D PIXEL ART fighting game, WIDE16:9. Clean 1990s arcade stepped pixel clusters, restrained 32/64-color shading and strong architectural shapes, no photography, painterly rendering or 3D. Reference images supply architecture, lighting and wall decorations; expand them into a complete playable arena, not a photo crop. IGNORE AND REMOVE ALL HUMANS in references, including people on television, plus all screenshot navigation arrows, page borders and image counters. NO human, living mascot, animal, fighter or crowd appears in the generated environment. Flat mascot illustrations and the reference neon sign are allowed as attached background decoration. Camera level side-on at fighter height, NO fisheye, no tilted perspective. Compose1280x720: flat horizontal walking ground at y578 with generous continuous foreground down to bottom. Keep both corners and x80..1200 y420..640 clear of props/steps/obstacles, no foreground chairs/tables or tree trunks. Strong details behind combat lane, walls/setpieces generally above y500, subdued upper22% for HUD legibility. No gameplay hazards, no UI, no watermark. One complete seamless still environment.\n\nSCENE: Expand these same real bar interiors downward into an intimate cellar tasting room: low exposed dark beams, warm amber tube lights, dark wood bottle shelving and mirrored recesses, beer kegs, a small back-wall blue/red/yellow mascot neon echo of image1 with orange Bitcoin coin, wide low counter against far wall. Bottle storage and old brick alcoves create depth. Same neighborhood bar identity, richer burgundy shadows. Leave full-width dark wooden fighting lane empty in front."
+    }
+  },
+  {
+    "index": 2,
+    "id": "rooftop",
+    "name": "Oakshade Patio",
+    "zone": "bar",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "7e1f40ab-3c4f-4aec-9ff2-cd507024c27c"
+        },
+        {
+          "role": "image",
+          "value": "7b29481a-079d-4cba-8c51-37270ac2224e"
+        }
+      ],
+      "prompt": "Production background for the existing side-view 2D PIXEL ART fighting game, WIDE16:9. Clean 1990s arcade stepped pixel clusters, restrained 32/64-color shading and strong architectural shapes, no photography, painterly rendering or 3D. Reference images supply architecture, lighting and wall decorations; expand them into a complete playable arena, not a photo crop. IGNORE AND REMOVE ALL HUMANS in references, including people on television, plus all screenshot navigation arrows, page borders and image counters. NO human, living mascot, animal, fighter or crowd appears in the generated environment. Flat mascot illustrations and the reference neon sign are allowed as attached background decoration. Camera level side-on at fighter height, NO fisheye, no tilted perspective. Compose1280x720: flat horizontal walking ground at y578 with generous continuous foreground down to bottom. Keep both corners and x80..1200 y420..640 clear of props/steps/obstacles, no foreground chairs/tables or tree trunks. Strong details behind combat lane, walls/setpieces generally above y500, subdued upper22% for HUD legibility. No gameplay hazards, no UI, no watermark. One complete seamless still environment.\n\nSCENE: Expand the outdoor patio in image1 under its HUGE living oak tree and broad green canopy: white rectangular outdoor bar at REAR, thin aluminum high stools set behind the lane, timber privacy railings, pale brick ground, multicolored tall vertical fabric banners, strings of tiny hanging warm bulbs. Airy sunny afternoon and leafy shade, neighborhood street glimpsed beyond railings. Stretch to a broad side-view patio with the tree trunk entirely behind fighting lane. No people, no parked vehicle in lane."
+    }
+  },
+  {
+    "index": 3,
+    "id": "backstage",
+    "name": "Mural Games Room",
+    "zone": "bar",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "ffbf5122-fb76-4314-9eca-c0eb8fcfb752"
+        },
+        {
+          "role": "image",
+          "value": "c7201dc8-3b68-49e2-90d5-3bf9e09a72b7"
+        }
+      ],
+      "prompt": "Production background for the existing side-view 2D PIXEL ART fighting game, WIDE16:9. Clean 1990s arcade stepped pixel clusters, restrained 32/64-color shading and strong architectural shapes, no photography, painterly rendering or 3D. Reference images supply architecture, lighting and wall decorations; expand them into a complete playable arena, not a photo crop. IGNORE AND REMOVE ALL HUMANS in references, including people on television, plus all screenshot navigation arrows, page borders and image counters. NO human, living mascot, animal, fighter or crowd appears in the generated environment. Flat mascot illustrations and the reference neon sign are allowed as attached background decoration. Camera level side-on at fighter height, NO fisheye, no tilted perspective. Compose1280x720: flat horizontal walking ground at y578 with generous continuous foreground down to bottom. Keep both corners and x80..1200 y420..640 clear of props/steps/obstacles, no foreground chairs/tables or tree trunks. Strong details behind combat lane, walls/setpieces generally above y500, subdued upper22% for HUD legibility. No gameplay hazards, no UI, no watermark. One complete seamless still environment.\n\nSCENE: Expand the actual indoor bar games room from image1: foosball table set well BACK at far right, illuminated arcade/ATM-shaped cabinet far left, dark rafters with warm string-light swags, long bar shelving and rear stools. Huge vivid flat blue/yellow/red Sproto-style cartoon mural covers the back-right wall, referencing the mural graphic in image1. TVs show abstract colors only, no humans. Cozy dim amber and cool blue light. Entire foreground broad dark wooden floor is EMPTY, foosball and cabinets safely behind fighting lane."
+    }
+  },
+  {
+    "index": 4,
+    "id": "lanterncourt",
+    "name": "Treehouse Club Exterior",
+    "zone": "bar",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "a915e141-4032-45d0-8adc-6138251358a8"
+        },
+        {
+          "role": "image",
+          "value": "7b29481a-079d-4cba-8c51-37270ac2224e"
+        },
+        {
+          "role": "image",
+          "value": "7e1f40ab-3c4f-4aec-9ff2-cd507024c27c"
+        }
+      ],
+      "prompt": "Production background for the existing side-view 2D PIXEL ART fighting game, WIDE16:9. Clean 1990s arcade stepped pixel clusters, restrained 32/64-color shading and strong architectural shapes, no photography, painterly rendering or 3D. Reference images supply architecture, lighting and wall decorations; expand them into a complete playable arena, not a photo crop. IGNORE AND REMOVE ALL HUMANS in references, including people on television, plus all screenshot navigation arrows, page borders and image counters. NO human, living mascot, animal, fighter or crowd appears in the generated environment. Flat mascot illustrations and the reference neon sign are allowed as attached background decoration. Camera level side-on at fighter height, NO fisheye, no tilted perspective. Compose1280x720: flat horizontal walking ground at y578 with generous continuous foreground down to bottom. Keep both corners and x80..1200 y420..640 clear of props/steps/obstacles, no foreground chairs/tables or tree trunks. Strong details behind combat lane, walls/setpieces generally above y500, subdued upper22% for HUD legibility. No gameplay hazards, no UI, no watermark. One complete seamless still environment.\n\nSCENE: Expand the whimsical cartoon exterior in image1 into a coherent real side-view pixel-art neighborhood bar exterior at NIGHT, informed by the real building image2. A huge branching leafy oak grows through/behind a rambling two-storey timber bar with raised balcony, colorful red/yellow/blue picket fence, mismatched colorful facade panels, warm string lights wrapped around branches and deck railings. Fixed painted Sproto mascot wall posters and one large HPOS10I club sign allowed. No living characters on balconies, behind fence or anywhere. Broad clear level brick sidewalk fighting lane in front, parked cars and street poles excluded from foreground. Navy sky and lively warm lantern light."
+    }
+  },
+  {
+    "index": 5,
+    "id": "aquariumbar",
+    "name": "Neon Mural Lounge",
+    "zone": "bar",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "ffbf5122-fb76-4314-9eca-c0eb8fcfb752"
+        },
+        {
+          "role": "image",
+          "value": "a915e141-4032-45d0-8adc-6138251358a8"
+        },
+        {
+          "role": "image",
+          "value": "c7201dc8-3b68-49e2-90d5-3bf9e09a72b7"
+        }
+      ],
+      "prompt": "Production background for the existing side-view 2D PIXEL ART fighting game, WIDE16:9. Clean 1990s arcade stepped pixel clusters, restrained 32/64-color shading and strong architectural shapes, no photography, painterly rendering or 3D. Reference images supply architecture, lighting and wall decorations; expand them into a complete playable arena, not a photo crop. IGNORE AND REMOVE ALL HUMANS in references, including people on television, plus all screenshot navigation arrows, page borders and image counters. NO human, living mascot, animal, fighter or crowd appears in the generated environment. Flat mascot illustrations and the reference neon sign are allowed as attached background decoration. Camera level side-on at fighter height, NO fisheye, no tilted perspective. Compose1280x720: flat horizontal walking ground at y578 with generous continuous foreground down to bottom. Keep both corners and x80..1200 y420..640 clear of props/steps/obstacles, no foreground chairs/tables or tree trunks. Strong details behind combat lane, walls/setpieces generally above y500, subdued upper22% for HUD legibility. No gameplay hazards, no UI, no watermark. One complete seamless still environment.\n\nSCENE: Expand the references into an adjacent colorful mural lounge of the SAME neighborhood bar: huge painted blue/yellow/red spiky mascot mural with geometric lightning on back wall, warm fairy-light loops under black exposed rafters, dark wood bottle cabinets, a small repeating Bitcoin coin neon motif, empty low booths placed deeply behind the fighting lane. Tall old windows reveal the treehouse balcony and oak branches outside. Dark teal and rich red wall accents under amber lighting, one flat clear low-contrast wooden foreground fighting floor. Cartoon figures permitted ONLY as flat painted mural/wall art; no living creatures."
+    }
+  }
+]

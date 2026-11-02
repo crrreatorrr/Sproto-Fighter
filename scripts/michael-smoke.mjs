@@ -54,8 +54,16 @@ for(const face of [-1,1])for(const guard of [false,true]){
  step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(s.fighters[1].hp,guard?1000:1000-COMBAT_STYLES.michael.bolt.damage);
 }
 const art=await import(url(compile('../src/powerArt.ts')));await art.ensurePowerArt();
-const draws=[],widths=[],angles=[];const c={save(){},restore(){},rotate(a){angles.push(a);},scale(x,y){widths.push(x);},drawImage(image,x,y,w,h){draws.push({image,x,y,w,h});}};
+const draws=[],widths=[],angles=[];const c={save(){},restore(){},translate(){},rotate(a){angles.push(a);},scale(x,y){widths.push(x);},drawImage(image,x,y,w,h){draws.push({image,x,y,w,h});}};
 for(const age of [0,7,14])art.drawPower(c,'chadCoin',age,'#fff');
-assert.equal(draws.length,3);assert.ok(draws.every(d=>d.image.naturalWidth===64&&d.w===48&&d.h===48));assert.ok(new Set(widths).size===3&&widths.some(x=>x<0));assert.equal(new Set(angles).size,3,'coin face rotates with projectile age');
+assert.equal(draws.length,3);assert.ok(draws.every(d=>d.image.naturalWidth===64&&d.w===48&&d.h===48));assert.equal(widths.length,0,'circle never foreshortens or flips');assert.equal(new Set(angles).size,3,'coin face rotates with projectile age');
 const wav=readFileSync(new URL('../public/fighters/voices/retain.wav',import.meta.url));assert.equal(wav.toString('ascii',0,4),'RIFF');assert.ok(wav.length>10000);
-console.log(`PASS: ${spitCases} straight mouth-spit cases; hit/block outcomes; exact supplied coin image at distinct rotation/edge/reverse phases; local RETAIN voice asset.`);
+console.log(`PASS: ${spitCases} straight mouth-spit cases; hit/block outcomes; exact supplied full-circle icon at distinct in-plane rotation phases; local RETAIN voice asset.`);
+// The KO replaces the body only for Michael, including double-KO and result frames.
+for(const age of [0,12,36,96,144]){
+ const n=draws.length;assert.equal(art.drawRetainDefeat(c,'michael',0,600,FLOOR,age),true);assert.equal(draws.length,n+1);assert.equal(draws.at(-1).w,112);assert.equal(draws.at(-1).h,112);
+}
+assert.equal(art.drawRetainDefeat(c,'michael',1,600,FLOOR,10),false);
+assert.equal(art.drawRetainDefeat(c,'rivet',0,600,FLOOR,10),false);
+assert.equal(widths.length,0,'neither ranged nor defeat icon scales or flips');
+console.log('PASS: Michael KO replaces the body with a complete 112px rotating circle; alive/other fighters stay unchanged; rotation continues past the result boundary.');

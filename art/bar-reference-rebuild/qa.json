@@ -1,0 +1,23 @@
+{
+  "scope": "Rebuilt all six Bar arenas from five user references, ignoring people; main Bar matches first reference.",
+  "model": "Higgsfield GPT Image 2.5 Sunburst high /4k",
+  "ids": [
+    "bar",
+    "cellar",
+    "rooftop",
+    "backstage",
+    "lanterncourt",
+    "aquariumbar"
+  ],
+  "visualReview": "Six panoramas inspected; no living people. Main neon/bottle-wall fidelity, oak patio, games mural and treehouse facade verified. Browser6/6 loaded with zero errors; sampled fighters at y578 and clear foreground floor.",
+  "mainStoryLocation": "First Bar regional location now uses the main reference bar.",
+  "checks": [
+    "production build",
+    "60 locations: hashes, dimensions, deterministic contiguous mapping",
+    "45 stages: loading, preview, fallback and floor checks",
+    "story progression/migration smoke"
+  ],
+  "backups": "art/bar-reference-rebuild/before/",
+  "gallery": "/Users/kenhiraoka/Documents/Codex/2026-11-01/u/outputs/bar-reference-stages.png",
+  "runtimeScreenshot": "/Users/kenhiraoka/Documents/Codex/2026-11-01/u/outputs/bar-reference-runtime.png"
+}

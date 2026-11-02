@@ -174,7 +174,7 @@ function drawRanch(ctx: CanvasRenderingContext2D, frame: number): void {
     ctx.restore();
 }
 
-export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch' | 'trenches' | 'circuit' | 'throne' | 'verse' | 'hatchery';
+export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch' | 'trenches' | 'circuit' | 'throne' | 'verse' | 'hatchery' | 'rainworks' | 'scrapyard' | 'skyrail' | 'nightmarket' | 'sundeck' | 'drydock' | 'glassgarden' | 'chainforge' | 'cellar' | 'rooftop' | 'starbridge' | 'observatory' | 'sporegrove' | 'ambernursery' | 'rustcanal' | 'ashstation' | 'culvertgarden' | 'datavault' | 'ionplaza' | 'stormarcade' | 'coralsalon' | 'helipad' | 'regatta' | 'lunarchapel' | 'royallibrary' | 'frostbastion' | 'backstage' | 'lanterncourt' | 'aquariumbar' | 'gravityarchive' | 'auroragate' | 'sundial' | 'pearlchamber' | 'rootreservoir' | 'moltinghall' | 'bluebar';
 /** Canonical chapter order; encounter assignments and gates derive from this route. */
 export const STORY_STAGE_IDS:readonly StageId[] = ['trenches','circuit','yacht','throne','bar','verse','hatchery'];
 export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:number|null}[] = [
@@ -188,6 +188,42 @@ export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:
     {id:'verse',name:'Verse Gate',theme:'The Verse / open every gate',accent:'#ad92f4',chapter:6},
     {id:'hatchery',name:'The Hatchery',theme:'Beyond the portal / alien hive',accent:'#c4d75c',chapter:7},
     {id:'ranch',name:'Sproto Ranch',theme:'Bonus / sunset farmstead',accent:'#efbd7a',chapter:null},
+    {"id": "rainworks", "name": "Rainworks Spillway", "theme": "Trenches / Rainworks Spillway", "accent": "#d6a05c", "chapter": null},
+    {"id": "scrapyard", "name": "Copperbone Scrapyard", "theme": "Trenches / Copperbone Scrapyard", "accent": "#d6a05c", "chapter": null},
+    {"id": "skyrail", "name": "Skyrail Junction", "theme": "Circuit / Skyrail Junction", "accent": "#64d7df", "chapter": null},
+    {"id": "nightmarket", "name": "Neon Night Market", "theme": "Circuit / Neon Night Market", "accent": "#64d7df", "chapter": null},
+    {"id": "sundeck", "name": "Gilded Sun Deck", "theme": "Yacht / Gilded Sun Deck", "accent": "#66d7e8", "chapter": null},
+    {"id": "drydock", "name": "Moonlit Dry Dock", "theme": "Yacht / Moonlit Dry Dock", "accent": "#66d7e8", "chapter": null},
+    {"id": "glassgarden", "name": "Royal Glass Garden", "theme": "Throne / Royal Glass Garden", "accent": "#e5b65f", "chapter": null},
+    {"id": "chainforge", "name": "Crown Chainforge", "theme": "Throne / Crown Chainforge", "accent": "#e5b65f", "chapter": null},
+    {"id": "cellar", "name": "Bottle Vault Cellar", "theme": "The Bar / Bottle Vault Cellar", "accent": "#efaa65", "chapter": null},
+    {"id": "rooftop", "name": "Oakshade Patio", "theme": "The Bar / Oakshade Patio", "accent": "#efaa65", "chapter": null},
+    {"id": "starbridge", "name": "Prismatic Starbridge", "theme": "Verse / Prismatic Starbridge", "accent": "#ad92f4", "chapter": null},
+    {"id": "observatory", "name": "Event Horizon Observatory", "theme": "Verse / Event Horizon Observatory", "accent": "#ad92f4", "chapter": null},
+    {"id": "sporegrove", "name": "Bioluminescent Spore Grove", "theme": "Hatchery / Bioluminescent Spore Grove", "accent": "#c4d75c", "chapter": null},
+    {"id": "ambernursery", "name": "Amber Egg Cathedral", "theme": "Hatchery / Amber Egg Cathedral", "accent": "#c4d75c", "chapter": null},
+    {"id": "rustcanal", "name": "Rustwater Canal", "theme": "Trenches / Rustwater Canal", "accent": "#d6a05c", "chapter": null},
+    {"id": "ashstation", "name": "Ashfall Pump Station", "theme": "Trenches / Ashfall Pump Station", "accent": "#d6a05c", "chapter": null},
+    {"id": "culvertgarden", "name": "Culvert Wildgarden", "theme": "Trenches / Culvert Wildgarden", "accent": "#d6a05c", "chapter": null},
+    {"id": "datavault", "name": "Municipal Data Vault", "theme": "Circuit / Municipal Data Vault", "accent": "#64d7df", "chapter": null},
+    {"id": "ionplaza", "name": "Ion Fountain Plaza", "theme": "Circuit / Ion Fountain Plaza", "accent": "#64d7df", "chapter": null},
+    {"id": "stormarcade", "name": "Stormlit Arcade", "theme": "Circuit / Stormlit Arcade", "accent": "#64d7df", "chapter": null},
+    {"id": "coralsalon", "name": "Coral Glass Salon", "theme": "Yacht / Coral Glass Salon", "accent": "#66d7e8", "chapter": null},
+    {"id": "helipad", "name": "Oceanwind Helipad", "theme": "Yacht / Oceanwind Helipad", "accent": "#66d7e8", "chapter": null},
+    {"id": "regatta", "name": "Regatta Anchorage", "theme": "Yacht / Regatta Anchorage", "accent": "#66d7e8", "chapter": null},
+    {"id": "lunarchapel", "name": "Lunar Relay Chapel", "theme": "Throne / Lunar Relay Chapel", "accent": "#e5b65f", "chapter": null},
+    {"id": "royallibrary", "name": "Clockwork Royal Library", "theme": "Throne / Clockwork Royal Library", "accent": "#e5b65f", "chapter": null},
+    {"id": "frostbastion", "name": "Frostglass Bastion", "theme": "Throne / Frostglass Bastion", "accent": "#e5b65f", "chapter": null},
+    {"id": "backstage", "name": "Mural Games Room", "theme": "The Bar / Mural Games Room", "accent": "#efaa65", "chapter": null},
+    {"id": "lanterncourt", "name": "Treehouse Club Exterior", "theme": "The Bar / Treehouse Club Exterior", "accent": "#efaa65", "chapter": null},
+    {"id": "aquariumbar", "name": "Neon Mural Lounge", "theme": "The Bar / Neon Mural Lounge", "accent": "#efaa65", "chapter": null},
+    {"id": "gravityarchive", "name": "Gravity Archive", "theme": "Verse / Gravity Archive", "accent": "#ad92f4", "chapter": null},
+    {"id": "auroragate", "name": "Aurora Gate Terrace", "theme": "Verse / Aurora Gate Terrace", "accent": "#ad92f4", "chapter": null},
+    {"id": "sundial", "name": "Shattered Sun Dial", "theme": "Verse / Shattered Sun Dial", "accent": "#ad92f4", "chapter": null},
+    {"id": "pearlchamber", "name": "Pearl Incubation Chamber", "theme": "Hatchery / Pearl Incubation Chamber", "accent": "#c4d75c", "chapter": null},
+    {"id": "rootreservoir", "name": "Root Reservoir", "theme": "Hatchery / Root Reservoir", "accent": "#c4d75c", "chapter": null},
+    {"id": "moltinghall", "name": "Molting Hall", "theme": "Hatchery / Molting Hall", "accent": "#c4d75c", "chapter": null},
+    {"id": "bluebar", "name": "Blue Terrace Bar", "theme": "Bar / Blue Terrace Bar", "accent": "#efaa65", "chapter": null},
 ];
 let currentStage:StageId='ranch';
 const placeholderScenery=new Map<StageId,HTMLCanvasElement>();
@@ -216,7 +252,6 @@ export function drawStagePreview(ctx:CanvasRenderingContext2D,id:StageId,width:n
     const art=stageImages.get(id);
     if(art){
         drawArenaScenery(ctx,id,art);
-        if(id==='bar')drawBarApron(ctx);
     }
     else if(id==='ranch'){drawRanch(ctx,frame);}
     else{
@@ -249,22 +284,6 @@ function drawArenaScenery(ctx:CanvasRenderingContext2D,id:StageId,art:HTMLImageE
             0,532,1280,188);
         ctx.fillStyle='#594531';ctx.fillRect(0,532,1280,3);
         ctx.fillStyle='#d5b87c';ctx.fillRect(0,535,1280,2);
-    }
-}
-/** A clear fighting floor in front of the bar's side booths, including both corners. */
-function drawBarApron(ctx:CanvasRenderingContext2D):void{
-    ctx.fillStyle='#63442f';ctx.fillRect(0,530,1280,190);
-    ctx.fillStyle='#916747';ctx.fillRect(0,530,1280,4);
-    ctx.fillStyle='#302720';ctx.fillRect(0,534,1280,2);
-    for(let i=0;i<7;i++){
-        const y=538+i*20+i*i;
-        ctx.fillStyle=i%2?'#684832':'#5b3e2d';ctx.fillRect(0,y,1280,18+i*2);
-        ctx.fillStyle='#392d24';ctx.fillRect(0,y,1280,2);
-        ctx.fillStyle='#856044';ctx.fillRect(0,y+2,1280,1);
-    }
-    ctx.strokeStyle='#392c23';ctx.lineWidth=2;
-    for(let i=-5;i<=5;i++){
-        ctx.beginPath();ctx.moveTo(640+i*88,530);ctx.lineTo(640+i*210,720);ctx.stroke();
     }
 }
 export function drawStage(ctx:CanvasRenderingContext2D,frame:number):void {
