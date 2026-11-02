@@ -29,7 +29,7 @@ check('special without three charges is rejected; whiffs grant no charge',()=>{
 check('horizontal spit hits standing target and passes over grounded crouch',()=>{
  for(const crouch of [false,true]){const s=createState('rivet','cpu');s.fighters[1].x=600;step(s,[A.bolt,crouch?A.down:0]);tick(s,65,0,crouch?A.down:0);assert.equal(s.fighters[1].hp<1000,!crouch);}
 });
-check('all 441 player/opponent combinations across CPU/dummy/guard retain finite bounded state and replay identically',()=>{
+check('all roster player/opponent combinations across CPU/dummy/guard retain finite bounded state and replay identically',()=>{
  const pattern=[0,A.right,A.left,A.up,A.down,A.light,A.medium,A.heavy,A.launcher,A.bolt,A.grab,A.special,A.dash,A.left|A.right,A.up|A.down,4095,A.up|A.right|A.medium,A.down|A.heavy];
  for(const [ai,id] of PLAYABLE_FIGHTERS.entries())for(const [bi,opponent] of PLAYABLE_FIGHTERS.entries())for(const mode of ['cpu','dummy','guard']){
   const s=createState(id,mode,opponent),r=createState(id,mode,opponent);s.fighters[1].x=r.fighters[1].x=455;

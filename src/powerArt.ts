@@ -1,8 +1,84 @@
-/** Small original Canvas pixel motifs for individual powers; no external assets. */
+/** Pixel motifs and reference-derived projectile sprites. */
+let retainCoin: HTMLImageElement | undefined;
+let referenceB: HTMLImageElement | undefined;
+let miniSproto: HTMLImageElement | undefined;
+let coinReady: Promise<void> | undefined;
+export function ensurePowerArt(): Promise<void> {
+ const load=(url:string)=>new Promise<HTMLImageElement>((resolve,reject)=>{
+  const image=new Image();image.onload=()=>resolve(image);
+  image.onerror=()=>reject(new Error('Projectile sprite could not load: '+url));image.src=url;
+ });
+ return coinReady ??= Promise.all([
+  load('/fighters/powers/chad-retain-coin.png'),
+  load('/fighters/powers/sproto3106-reference-b.png'),
+  load('/fighters/powers/sproto2531-mini.png'),
+ ]).then(([coin,b,mini])=>{retainCoin=coin;referenceB=b;miniSproto=mini;}).catch(error=>{coinReady=undefined;throw error;});
+}
+/** A pixel stream starts exactly at the caller's covered pelvic anchor. */
+export function drawPelvicStream(c:CanvasRenderingContext2D,reach:number,age:number){
+ c.save();c.imageSmoothingEnabled=false;
+ for(let x=0;x<=reach;x+=4){
+  const u=x/Math.max(1,reach),y=Math.round(-10*Math.sin(u*Math.PI)+Math.sin((x+age*7)*.12)*u*2);
+  c.fillStyle='#b68b16';c.fillRect(Math.round(x),y-3,5,7);
+  c.fillStyle='#ffe65b';c.fillRect(Math.round(x),y-2,5,4);
+  c.fillStyle='#fff6ab';c.fillRect(Math.round(x),y-2,4,1);
+ }
+ c.fillStyle='#ffe65b';for(let i=0;i<4;i++){const x=reach+3+i*5,y=Math.round(Math.sin(age*.8+i)*5+i*2);c.fillRect(Math.round(x),y,3,3);}
+ c.restore();
+}
 export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,color:string){
  c.save();c.imageSmoothingEnabled=false;c.fillStyle=color;c.strokeStyle=color;c.lineWidth=3;
  const box=(x:number,y:number,w:number,h:number,fill:string)=>{c.fillStyle=fill;c.fillRect(x,y,w,h);};
- if(shape==='pumpkin'){box(-13,-10,26,20,'#eb842c');box(-8,-13,16,26,'#ffad42');box(-2,-18,5,7,'#527f3b');box(-7,-5,4,4,'#34213d');box(5,-5,4,4,'#34213d');box(-5,4,12,3,'#34213d');}
+ if(shape==='painting'){
+  box(-23,-18,46,36,'#40221c');box(-21,-16,42,32,'#eab34d');box(-17,-12,34,24,'#fff0ce');
+  box(-14,-10,12,13,'#2655da');box(-2,-8,15,8,'#ec3e42');box(-8,3,20,6,'#e3b42c');box(6,-4,5,15,'#252744');
+ }
+ else if(shape.startsWith('signature:')){
+  drawSignatureObject(c,Number(shape.split(':')[1]),age,color);
+ }
+ else if(shape==='referenceB'||shape==='miniSproto'){
+  const image=shape==='referenceB'?referenceB:miniSproto;
+  if(image?.complete&&image.naturalWidth){
+   const h=shape==='referenceB'?52:46,w=image.naturalWidth*h/image.naturalHeight;
+   c.drawImage(image,-w/2,-h/2,w,h);
+  }else if(!coinReady)void ensurePowerArt().catch(error=>console.error(error));
+ }
+ else if(shape==='pelvicStream'){box(-8,-2,16,4,'#ffe65b');box(-4,-2,9,1,'#fff6ab');box(10,3,3,3,'#ffe65b');}
+ else if(shape==='chadCoin'){
+  // A half turn reveals the reverse; the in-plane turn also rotates the supplied face.
+  const turn=Math.cos(age*.22);c.rotate(age*.09);c.scale(Math.sign(turn)*Math.max(.16,Math.abs(turn)),1);
+  if(retainCoin?.complete&&retainCoin.naturalWidth)c.drawImage(retainCoin,-24,-24,48,48);
+ }
+ else if(shape==='yellowEight'){
+  const rows=['001111100','011111110','111000111','110000011','110000011','111000111','011111110','001111100','011111110','111000111','110000011','110000011','110000011','111000111','011111110','001111100'];
+  // Keep the numeral upright and readable, with a small throwing wobble.
+  c.rotate(Math.sin(age*.24)*.12);
+  for(let y=0;y<rows.length;y++)for(let x=0;x<9;x++)if(rows[y][x]==='1')box((x-4)*3-1,(y-8)*3-1,5,5,'#111828');
+  for(let y=0;y<rows.length;y++)for(let x=0;x<9;x++)if(rows[y][x]==='1')box((x-4)*3,(y-8)*3,3,3,x>=6||y===15?'#d6a020':x<=2&&y<12?'#fff48a':'#ffe23b');
+ }
+ else if(shape==='egg'){
+  // A pointed crown and broad rounded base keep the tumbling shell readable.
+  const rows=[[7,9],[6,10],[5,11],[4,12],[4,12],[3,13],[3,13],[2,14],[2,14],[1,15],[1,15],[1,15],[0,16],[0,16],[0,16],[0,16],[1,15],[1,15],[2,14],[4,12],[6,10]];
+  const inside=(x:number,y:number)=>y>=0&&y<rows.length&&x>=rows[y][0]&&x<=rows[y][1];
+  c.rotate(age*.14);
+  for(let y=0;y<rows.length;y++)for(let x=rows[y][0];x<=rows[y][1];x++){
+   const edge=!inside(x-1,y)||!inside(x+1,y)||!inside(x,y-1)||!inside(x,y+1);
+   const shell=edge?'#293042':x>=11||y>=17?'#d5bf91':x>=4&&x<=7&&y>=5&&y<=13?'#fffef7':'#fff0cd';
+   box((x-8)*2,(y-10)*2,2,2,shell);
+  }
+ }
+ else if(shape==='eyeLaser'){
+  for(const [x,y] of [[-22,-4],[-36,3]]){box(x,y-2,66,4,'#f13d35');box(x+3,y-1,64,2,'#fffbe2');}
+ }
+ else if(shape==='retain'){
+  const font:Record<string,string[]>={R:['11110','10001','10001','11110','10100','10010','10001'],E:['11111','10000','10000','11110','10000','10000','11111'],T:['11111','00100','00100','00100','00100','00100','00100'],A:['01110','10001','10001','11111','10001','10001','10001'],I:['11111','00100','00100','00100','00100','00100','11111'],N:['10001','11001','11001','10101','10011','10011','10001']};
+  const pixels:number[][]=[];for(const[letterIndex,letter]of [...'RETAIN'].entries())font[letter].forEach((row,y)=>[...row].forEach((bit,x)=>{if(bit==='1')pixels.push([-53+letterIndex*18+x*3,-10+y*3]);}));
+  for(const[x,y]of pixels)box(x-1,y-1,5,5,'#17132c');for(const[x,y]of pixels)box(x,y,3,3,'#ffe66b');
+ }
+ else if(shape==='joint'){box(-18,-4,37,8,'#978c79');box(-16,-3,34,6,'#f5efd9');box(-16,-3,8,6,'#c7a478');box(-7,-2,23,1,'#fffef0');box(17,-3,4,6,'#65605a');box(20,-2,3,4,age%6<3?'#ff7040':'#eb492c');box(22,-1,2,2,'#ffcb70');const rise=Math.round(age*.4)%7;box(16,-9-rise,3,3,'#c8cbd0');box(10,-14-rise,3,3,'#949ba5');}
+ else if(shape==='laser'){box(-58,-6,78,12,'#f13d35');box(-51,-3,73,6,'#ffd45b');box(-43,-1,65,2,'#fffbe2');box(20,-3,4,6,'#fffbe2');}
+ else if(shape==='twin'){const wave=Math.round(Math.sin(age*.4)*6);box(-15,-9+wave,19,8,'#ff414e');box(-15,1-wave,19,8,'#3e9eff');box(4,-6,12,12,'#ffe07a');box(16,-3,6,6,'#fff3c3');}
+ else if(shape==='pumpkin'){box(-13,-10,26,20,'#eb842c');box(-8,-13,16,26,'#ffad42');box(-2,-18,5,7,'#527f3b');box(-7,-5,4,4,'#34213d');box(5,-5,4,4,'#34213d');box(-5,4,12,3,'#34213d');}
  else if(shape==='heart'||shape==='brokenHeart'){const fill=shape==='heart'?'#f29aa8':'#ac88c5';box(-12,-9,10,10,fill);box(2,-9,10,10,fill);box(-12,0,24,5,fill);box(-8,5,16,5,fill);box(-3,10,6,4,fill);if(shape==='brokenHeart'){box(0,-8,4,7,'#251b38');box(-3,-1,4,7,'#251b38');box(0,6,3,7,'#251b38');}}
  else if(shape==='gift'){box(-12,-12,24,24,'#de4f5d');box(-3,-12,6,24,'#ffdc70');box(-12,-3,24,6,'#ffdc70');box(-8,-17,6,5,'#ffdc70');box(2,-17,6,5,'#ffdc70');}
  else if(shape==='coin'||shape==='ring'||shape==='chain'){c.strokeStyle=shape==='coin'?'#ffd84f':color;c.lineWidth=shape==='coin'?6:4;c.beginPath();c.ellipse(0,0,shape==='chain'?15:11,10,0,0,Math.PI*2);c.stroke();if(shape==='coin')box(-2,-6,4,12,'#fff2a4');if(shape==='chain'){c.beginPath();c.ellipse(-20,0,12,8,0,0,Math.PI*2);c.stroke();}}
@@ -15,4 +91,25 @@ export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,col
  else if(shape==='orb'){c.beginPath();c.arc(0,0,13,0,Math.PI*2);c.stroke();box(-4,-4,8,8,'#ded2ff');}
  else {box(-9,-9,22,18,shape==='acid'?'#b7ec68':color);box(11,-5,7,10,shape==='acid'?'#8abb37':color);box(-4,-6,9,4,'#efffc2');for(let j=1;j<=3;j++)box(-10-j*9,Math.round(Math.sin(age*.3+j)*5),6-j,6-j,color);}
  c.restore();
+}
+
+
+
+
+/** Individually selected object silhouettes, tied to costume, anatomy and props. */
+const SIGNATURE_ICONS:Record<string,string[]> = {"fist": [" aaaa", "aaaaaa", "abbbbbba", "abbbbbba", " abbbba", "  aaaa"], "bottle": ["  aa", "  ab", " aaaa", "abbbba", "abccba", "abccba", " abba"], "yoyo": ["  aaaa", " abbbba", "abcaacba", "abcaacba", " abbbba", "  aaaa"], "grin": ["aa      aa", "abbaaaabba", " abbbbbba", "  acccca", "   aaaa"], "camera": ["   aaa", " aaaaaaaa", "abbbbbbbba", "abbaccabba", "abbaccabba", "abbbbbbbba", " aaaaaaaa"], "chain": [" aaa   aaa", "abbba abbba", "ab abbba ba", "abbba abbba", " aaa   aaa"], "case": ["   aaaa", "  aaaaaa", " aaaaaaaa", "abbbbbbbba", "abbbccbbba", "abbbbbbbba", " aaaaaaaa"], "fan": ["    a", "  aabaaa", " aabbbaaa", "aabbbbbaaa", "   abb", "    aa"], "shield": ["aaaaaaaa", "abbbbbba", "abccbcba", "abccbcba", " abbbba", "  abba", "   aa"], "feather": ["     aa", "   aabba", "  abbbba", " abbbaa", "abbaa", " aaa", "aa"], "bubble": [" aaaaaaaa", "abbbbbbbba", "abccbbccba", "abbbbbbbba", " abbaaaba", "   aa"], "envelope": ["aaaaaaaaaa", "abbbaabbba", "abbbccbbba", "abbbbbbbba", "aaaaaaaaaa"], "cone": ["      a", "   aaaba", "aaabbbba", "   aaaba", "      a"], "crown": ["a   a   a", "ab ab ab a", "abbbbbbbba", "abccbbccba", " aaaaaaaa"], "torch": ["   b", "  bcb", " bcccb", "  bbb", "  aaa", "   a", "   a"], "pendant": ["a      a", " a    a", "  a  a", "  abba", " abccba", "  abba", "   aa"], "beetle": [" aa aa", "  aaa", " abbba", "abbabba", "abbb bba", " abbba", " aa aa"], "nunchuk": [" aa      aa", " abaaaaaaab", " ab      ab", " ab      ab", " aa      aa"], "mask": [" aaaa aaaa", "abbbbabbbba", "abccbabccba", "abbbbabbbba", " aaaaaaaa"], "scepter": ["   aaa", "  abcba", "   aaa", "    a", "    a", "   aaa", "    a"], "monocle": [" aaaa", "abbbba", "abccbaaa", "abbbba", " aaaa a", "      a"], "teeth": ["aaaaaaaaaa", "abcbcbcbca", "abcbcbcbca", " aaaaaaaa"], "planet": ["    aaaa", " aabbbbaaa", "abbbbbbbba", " aaaabbbaa", "    aaaa"], "ribbon": ["a       a", "ab     ba", "abba abba", " abbbbba", "  aabaa", " ab  ba", " a    a"], "fish": ["  aa    a", " abba aaba", "abbbbbbbba", "abccbbbbba", " abba aaba", "  aa    a"], "bat": ["a        a", "ab aaaa ba", "abbabbabba", " abbbbbba", "  abbbba", "   aaaa"], "sun": ["  a a a", " aaaaaaa", " aabbbaa", "aabccbbbaa", " aabbbaa", " aaaaaaa", "  a a a"], "column": [" aaaaaa", "abccbcba", "abbbbbba", " aaaaaa", "abbbbbba", "abccbcba", " aaaaaa"], "staff": ["   aaaa", "  abbbba", "  ab a a", "   aaa", "    a", "    a", "    a", "    a"], "lasso": [" aaaaa", "abbbbba", "ab aa ba", "abbbbba", " aaaaaa", "      a", "      a"], "comb": ["a a a a a", "aba aba aba", "abbbbbbbba", " aaaaaaaa"], "spring": ["      aa", "   aaabb", " aaabb", " abbaa", "   abbaa", "    abb", " aaaabb", "aa"], "marble": ["   aaa", " aabbbba", "abccbbbba", "abbbbbcba", "abbbbbbaa", " aabbbba", "   aaa"], "eye": ["   aaaaa", " aabbbbbaa", "abbaccbbba", " aabbbbbaa", "   aaaaa"], "domino": ["aaaaaa", "abccba", "abccba", "abbbba", "aaaaaa", "abccba", "aaaaaa"], "button": [" aaa  aaa", "abcbaabcba", " abc  abc", "  aaaaa", "   aba", "   aaa"], "pin": ["  aa", " abba", " abba", "  aa", " abba", "abbbba", " aaaa"], "star": ["    a", "   aba", "aaabbbaaa", " abbbbba", "  abbba", " abb bba", "aa   aa"], "axe": ["      aaa", " aaaabccca", "abbabcccca", " aaaabccca", "    a aaa", "    a", "    a"], "crescent": ["   aaaa", " aabbaa", " abb", "abb", " abb", " aabbaa", "   aaaa"], "pinwheel": [" aa   a", " abba aa", "  abbaaba", "aaabbbbaaa", " ababba", " aa abba", " a   aa"], "medal": ["aa    aa", " ab  ba", "  abba", " abccba", "  abba", "   aa"], "tie": ["  aaaa", "   ab", "  abba", "  abba", " abbbba", "  abba", "   aa"], "collar": ["aa      aa", " ab    ba", " abbaabba", "  abbbba", "   abba", "    aa"], "mitten": ["   aaa", "  abbba", "aaabbba", "abbbbba", " abbbba", "  aaaa"], "snow": ["a   a   a", " aa a aa", "  aaaaa", "aaaabaaaa", "  aaaaa", " aa a aa", "a   a   a"], "heart": [" aaa aaa", "abbbabbba", "abbbbbbba", " abbbbba", "  abbba", "   aba", "    a"], "cap": [" aaaaaaa", "abbbbbbba", "abbbbbbba", " aaaaaaaaaaa"], "satellite": [" aa      aa", "abbaaaaabba", " abbcccbba", "abbaaaaabba", " aa      aa", "     a", "    aaa"], "cape": ["aaa   aaa", " abaaaba", " abbbbba", "abbbbbbba", "abbbbbbba", "aabbbbbaa", "a  aaa  a"], "bow": ["aaa   aaa", "abbaaabba", "abbacabba", "abbaaabba", "aaa   aaa"], "horn": ["       aa", " aaaaabbb", "abbbbbaaa", " aaaaabbb", "       aa"], "cartridge": [" aaaaaaaa", "abbbbbbbba", "abccccccba", "abccccccba", "abbbbbbbba", " aaaaaaaa", "  a a a"], "claw": ["a  a  a", "ab ab ab", "abbabbab", " abbbba", "  abba", "   aa"], "crest": ["aaaaaa", "abbbba", "abaaaa", "abbba", "abaaa", "ab", "aa"], "glasses": [" aaaa aaaa", "abbbbabbbba", "abccbabccba", " aaaa aaaa", "a         a"], "mic": ["  aaaa", " abccba", " abccba", "  aaaa", "   ab", "   ab", "   aa"], "gear": ["  aa  aa", " aaa aaaa", "aabbbbbbaa", " abccbcba", "aabbbbbbaa", " aaa aaaa", "  aa  aa"], "brain": ["  aaaaaa", " aabcabba", "abccabcba", "abacccabba", " aabccbaa", "   aaaa"], "cup": [" aaaaaaa", "abbbbbbaa", "abbbbba ba", "abbbbbaaa", " abbbba", " aaaaaaaa"], "jester": ["aa  aa  aa", " ab ab ab", " abbbbbba", "  abbbba", "   aaaa"], "fang": ["aaaaaa", "abbbba", " abbbba", "  abbba", "   aba", "    a"]};
+export const SIGNATURE_OBJECTS:Record<number,{icon:string;detail:string;name:string}> = {"0": {"icon": "fist", "detail": "star", "name": "gold knuckle meteor"}, "5": {"icon": "bottle", "detail": "bubble", "name": "bong smoke flask"}, "7": {"icon": "yoyo", "detail": "ribbon", "name": "corded yo-yo"}, "8": {"icon": "grin", "detail": "teeth", "name": "red smile boomerang"}, "13": {"icon": "camera", "detail": "star", "name": "camera flash"}, "21": {"icon": "chain", "detail": "fist", "name": "linked duet gauntlets"}, "22": {"icon": "fist", "detail": "claw", "name": "bare-knuckle fist"}, "25": {"icon": "case", "detail": "tie", "name": "executive briefcase"}, "26": {"icon": "fan", "detail": "collar", "name": "gold robe fan"}, "27": {"icon": "shield", "detail": "eye", "name": "eye-emblem shield"}, "28": {"icon": "feather", "detail": "star", "name": "levitating feather"}, "29": {"icon": "bubble", "detail": "grin", "name": "meme speech bubble"}, "31": {"icon": "envelope", "detail": "crest", "name": "sealed ENS envelope"}, "32": {"icon": "cone", "detail": "eye", "name": "long-nose dart"}, "34": {"icon": "crown", "detail": "heart", "name": "royal crown"}, "35": {"icon": "torch", "detail": "medal", "name": "resolve torch"}, "36": {"icon": "pendant", "detail": "teeth", "name": "toothy pendant"}, "37": {"icon": "beetle", "detail": "eye", "name": "red-eyed beetle"}, "38": {"icon": "nunchuk", "detail": "chain", "name": "red-blue nunchucks"}, "39": {"icon": "mask", "detail": "glasses", "name": "double-face mask"}, "41": {"icon": "scepter", "detail": "crown", "name": "tiny-king scepter"}, "42": {"icon": "mitten", "detail": "fist", "name": "red palm glove"}, "43": {"icon": "monocle", "detail": "eye", "name": "asymmetric monocle"}, "44": {"icon": "teeth", "detail": "ribbon", "name": "gold-tooth comb"}, "45": {"icon": "planet", "detail": "button", "name": "orbital eyes"}, "46": {"icon": "ribbon", "detail": "horn", "name": "red ribbon dart"}, "47": {"icon": "fish", "detail": "grin", "name": "strange-lipped flying fish"}, "48": {"icon": "bat", "detail": "fang", "name": "vampire bat"}, "49": {"icon": "sun", "detail": "cape", "name": "sun-hair flare"}, "50": {"icon": "column", "detail": "mask", "name": "stacked-face totem"}, "51": {"icon": "staff", "detail": "crescent", "name": "spiral staff glyph"}, "52": {"icon": "lasso", "detail": "button", "name": "shoulder-loop lasso"}, "53": {"icon": "comb", "detail": "crown", "name": "yellow crest comb"}, "54": {"icon": "spring", "detail": "fang", "name": "zigzag fang spring"}, "55": {"icon": "fan", "detail": "feather", "name": "orange spike fan"}, "56": {"icon": "marble", "detail": "ribbon", "name": "blue belly marble"}, "57": {"icon": "eye", "detail": "star", "name": "eye-mark disc"}, "58": {"icon": "domino", "detail": "teeth", "name": "twin-tooth domino"}, "59": {"icon": "button", "detail": "marble", "name": "figure-eight buttons"}, "60": {"icon": "pin", "detail": "bow", "name": "duet juggling pin"}, "61": {"icon": "star", "detail": "sun", "name": "yellow-hair shooting star"}, "62": {"icon": "axe", "detail": "fang", "name": "hooked halberd blade"}, "63": {"icon": "crescent", "detail": "mask", "name": "floating crescent mask"}, "64": {"icon": "pinwheel", "detail": "sun", "name": "red-yellow pinwheel"}, "65": {"icon": "medal", "detail": "shield", "name": "vest relay medal"}, "66": {"icon": "tie", "detail": "pendant", "name": "yellow tie pendant"}, "67": {"icon": "collar", "detail": "star", "name": "white collar star"}, "68": {"icon": "mitten", "detail": "sun", "name": "giant yellow mitten"}, "69": {"icon": "snow", "detail": "eye", "name": "mint snow-eye crystal"}, "70": {"icon": "heart", "detail": "cape", "name": "red-blue heart brooch"}, "71": {"icon": "sun", "detail": "grin", "name": "golden grin sun"}, "73": {"icon": "pinwheel", "detail": "teeth", "name": "toothy windmill"}, "74": {"icon": "staff", "detail": "monocle", "name": "sage staff seal"}, "75": {"icon": "staff", "detail": "ribbon", "name": "twisted candy staff"}, "76": {"icon": "cap", "detail": "grin", "name": "yellow-cap spinner"}, "79": {"icon": "satellite", "detail": "mask", "name": "stomach-creature satellite"}, "80": {"icon": "cape", "detail": "shield", "name": "hero mantle crest"}, "81": {"icon": "bow", "detail": "teeth", "name": "red bow-tie blade"}, "82": {"icon": "horn", "detail": "grin", "name": "lip trumpet"}, "83": {"icon": "cartridge", "detail": "eye", "name": "machine game cartridge"}, "84": {"icon": "claw", "detail": "pendant", "name": "claw medallion"}, "85": {"icon": "crest", "detail": "bow", "name": "duet F crest"}, "86": {"icon": "medal", "detail": "heart", "name": "blue-gold robe medallion"}, "87": {"icon": "button", "detail": "collar", "name": "yellow belt buckle"}, "88": {"icon": "glasses", "detail": "claw", "name": "cat spectacles"}, "89": {"icon": "mic", "detail": "ribbon", "name": "stage microphone"}, "91": {"icon": "mask", "detail": "eye", "name": "triclops face shield"}, "92": {"icon": "gear", "detail": "pin", "name": "robot bolt gear"}, "93": {"icon": "column", "detail": "eye", "name": "stacked-eye tower"}, "94": {"icon": "tie", "detail": "case", "name": "formal red necktie"}, "95": {"icon": "fang", "detail": "claw", "name": "cat-fang crescent"}, "96": {"icon": "brain", "detail": "heart", "name": "orange brain pulse"}, "97": {"icon": "heart", "detail": "eye", "name": "cyclops heart sigil"}, "98": {"icon": "cup", "detail": "medal", "name": "sober tea-cup seal"}, "99": {"icon": "jester", "detail": "horn", "name": "clown horn cap"}, "100": {"icon": "grin", "detail": "mask", "name": "double-mouth chatter"}, "101": {"icon": "button", "detail": "eye", "name": "yellow belly-button disc"}};
+function drawSignatureObject(c:CanvasRenderingContext2D,index:number,age:number,color:string){
+ const item=SIGNATURE_OBJECTS[index];if(!item)return;
+ const palette:Record<string,string>={a:'#152036',b:color,c:'#ffe05a'};
+ const draw=(name:string,ox:number,oy:number,scale:number,detail=false)=>{
+  const lines=SIGNATURE_ICONS[name],width=Math.max(...lines.map(r=>r.length));
+  for(let y=0;y<lines.length;y++)for(let x=0;x<lines[y].length;x++){
+   const bit=lines[y][x];if(bit===' ')continue;
+   c.fillStyle=detail&&bit==='b'?'#e34c4b':palette[bit];
+   c.fillRect(Math.round(ox+(x-width/2)*scale),Math.round(oy+(y-lines.length/2)*scale),scale,scale);
+  }
+ };
+ // The secondary object is a meaningful attached ornament, not an ID stamp.
+ draw(item.icon,-3,1,3);draw(item.detail,14,-10,2,true);
 }
