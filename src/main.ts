@@ -6,7 +6,7 @@ import './pixelUI.css';
 import './mysticUI.css';
 import './campaignMap.css';
 import {mountCampaignMap} from './campaignMap';
-import { A, ROSTER, PLAYABLE_FIGHTERS, isFreePlayAddition, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
+import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
 import { playRetainCallout } from './characterVoice';
@@ -59,7 +59,7 @@ function updateStage(stage:StageId) {
 async function launchSelection(setup:SelectionSetup,isStory=false) {
     // Reconcile wins from another tab or a restored page before the final P1 gate.
     storyProgress.sync();
-    if(!storyProgress.isUnlocked(setup.fighter)&&(isStory||!isFreePlayAddition(setup.fighter))){
+    if(!storyProgress.isUnlocked(setup.fighter)){
         $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. Defeat this fighter in story mode, or choose an unlocked P1 fighter.`;
         return false;
     }

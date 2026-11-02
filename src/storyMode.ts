@@ -1,5 +1,5 @@
 import {STAGES,STORY_STAGE_IDS,type StageId} from './stage';
-import {ROSTER,isFreePlayAddition,type PlayableFighterId} from './core';
+import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,FINALE_START,storyProgress,type Encounter,type StoryProgress} from './storyProgress';
 
 type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;selectedFighter?:()=>PlayableFighterId;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
@@ -20,8 +20,8 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         if(!hooks.ready()){$('journey-copy').textContent='Fighter sprites are still loading. Try again in a moment.';return;}
         progress.sync();
         const selectedFighter=hooks.selectedFighter?.();
-        if(selectedFighter&&!progress.isUnlocked(selectedFighter)&&(encounter||!isFreePlayAddition(selectedFighter))){
-            $('journey-copy').textContent=isFreePlayAddition(selectedFighter)?`${ROSTER[selectedFighter].name} is available in free play. Choose High Sproto, Fat Head Dave or a recruited fighter for the campaign.`:`${ROSTER[selectedFighter].name} is a locked P1 preview. Return to the arena menu and choose an unlocked P1 fighter, then start this encounter. Defeat ${ROSTER[selectedFighter].name} in story mode to recruit them.`;
+        if(selectedFighter&&!progress.isUnlocked(selectedFighter)){
+            $('journey-copy').textContent=`${ROSTER[selectedFighter].name} is a locked P1 preview. Return to the arena menu and choose an unlocked P1 fighter, then start this encounter. Defeat ${ROSTER[selectedFighter].name} in story mode to recruit them.`;
             return;
         }
         if(encounter&&!progress.canPlay(encounter.index))return;
