@@ -1,0 +1,20 @@
+{
+  "name": "sproto-arena",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local Canvas 2D fighting-game prototype",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "check": "tsc --noEmit",
+    "smoke": "node scripts/smoke.mjs && node scripts/directional-smoke.mjs && node scripts/throw-smoke.mjs && node scripts/movement-smoke.mjs && node scripts/reaction-smoke.mjs",
+    "story-smoke": "node scripts/story-smoke.mjs",
+    "qa": "npm run smoke && npm run story-smoke && node scripts/game-qa.mjs && node scripts/fighter-qa.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}

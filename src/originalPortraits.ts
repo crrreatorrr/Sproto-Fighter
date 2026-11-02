@@ -1,0 +1,26 @@
+import { type FighterId } from './core';
+/** Original user-supplied fighter references only. No rigging diagram. */
+export const originalPortraits:Record<FighterId,string> = {
+ duo:new URL('../art/new-fighter-22/reference/original.png',import.meta.url).href,
+ rivet:new URL('../art/references/rivet.png',import.meta.url).href,
+ vela:new URL('../art/references/vela.png',import.meta.url).href,
+ bront:new URL('../art/references/bront.png',import.meta.url).href,
+ zephyr:new URL('../art/references/zephyr.png',import.meta.url).href,
+ mox:new URL('../art/references/mox.png',import.meta.url).href,
+ rune:new URL('../art/references/rune.png',import.meta.url).href,
+ guest07:new URL('../art/references/reference-07.png',import.meta.url).href,
+ guest08:new URL('../art/references/reference-08.png',import.meta.url).href,
+ guest09:new URL('../art/references/reference-09.png',import.meta.url).href,
+ guest10:new URL('../art/references/reference-10.png',import.meta.url).href,
+ guest11:new URL('../art/references/reference-11.png',import.meta.url).href,
+ guest12:new URL('../art/references/reference-12.png',import.meta.url).href,
+ guest13:new URL('../art/references/reference-13.png',import.meta.url).href,
+ guest14:new URL('../art/references/reference-14.png',import.meta.url).href,
+ dumpstar:new URL('../art/references/dumpstar.png',import.meta.url).href,
+ crapto:new URL('../art/references/crapto.png',import.meta.url).href,
+ vamp:new URL('../art/references/vamp.png',import.meta.url).href,
+ alpha777:new URL('../art/references/alpha777.png',import.meta.url).href,
+ mandela:new URL('../art/references/bitcoin-mandela.png',import.meta.url).href,
+ bigswole:new URL('../art/references/big-swole.png',import.meta.url).href,
+ nate:new URL('../art/references/little-foot-nate.png',import.meta.url).href,
+};

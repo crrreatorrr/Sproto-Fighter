@@ -1,0 +1,45 @@
+// Focused directional/combo development checks. Run: node scripts/directional-smoke.mjs
+// Uses isolated in-memory transpilation; does not modify the combat core.
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import ts from 'typescript';
+const source = ts.transpileModule(readFileSync(new URL('../src/core.ts', import.meta.url), 'utf8'), { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText;
+const { A, FLOOR, PLAYABLE_FIGHTERS, HORIZONTAL_SPIT_FIGHTERS, createState, getMove, step, cpuInput } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
+let failures=0;
+function check(label, fn) { try { fn(); console.log('PASS:',label); } catch(error) { failures++; console.error('FAIL:',label,'—',error.message); } }
+function fresh(mode='dummy'){const s=createState('rivet',mode);s.fighters[0].x=380;s.fighters[1].x=440;return s;}
+function tick(s,n=1,input=0,opponent=0){for(let i=0;i<n;i++)step(s,[input,opponent]);}
+function until(s,predicate,max=180){for(let i=0;i<max&&!predicate();i++)tick(s);assert.ok(predicate(),'condition not reached within '+max+' frames');}
+function route(s,buttons,max=240){let next=0,maxCombo=0;for(let i=0;i<max;i++){let input=0;if(next<buttons.length && s.fighters[0].combo===next){input=buttons[next++];}tick(s,1,input);maxCombo=Math.max(maxCombo,s.fighters[0].combo);}return {attempted:next,hits:maxCombo,best:s.fighters[0].best,pips:s.fighters[0].pips};}
+check('holding Up jumps once after two neutral chord frames',()=>{const s=fresh();let jumps=0,wasGround=true;for(let i=0;i<150;i++){tick(s,1,A.up);const ground=s.fighters[0].y>=FLOOR;if(wasGround&&!ground)jumps++;wasGround=ground;if(i<2)assert.equal(s.fighters[0].y,FLOOR);}assert.equal(jumps,1);assert.equal(s.fighters[0].y,FLOOR);});
+for(const delay of [0,1,2])check(`Up + light within ${delay}-frame chord window is rising attack without jump`,()=>{const s=fresh();tick(s,delay,A.up);tick(s,1,A.up|A.light);assert.equal(s.fighters[0].move?.id,'launcher');assert.equal(s.fighters[0].move?.aim,'up');assert.equal(s.fighters[0].y,FLOOR);tick(s,25,A.up);assert.equal(s.fighters[0].y,FLOOR);});
+check('Up + forward + medium selects diagonal rising strike without jump',()=>{const s=fresh();tick(s,1,A.up|A.right|A.medium);const f=s.fighters[0];assert.equal(f.move?.id,'medium');assert.equal(f.move?.aim,'upForward');assert.equal(getMove(f,'medium').launch,10);assert.equal(f.y,FLOOR);until(s,()=>s.fighters[1].hp<1000);assert.ok(s.fighters[1].vy<0);});
+check('down + medium is a low attack',()=>{const s=fresh();tick(s,1,A.down|A.medium);assert.equal(s.fighters[0].move?.id,'medium');assert.equal(getMove(s.fighters[0],'medium').low,true);});
+check('air down + heavy dives, hits below, and remains a finisher',()=>{const s=fresh();s.fighters[0].y=FLOOR-125;s.fighters[0].vy=-2;tick(s,1,A.down|A.heavy);assert.equal(s.fighters[0].move?.id,'airHeavy');assert.equal(s.fighters[0].move?.aim,'down');assert.ok(s.fighters[0].vy<8,'dive waits for the active strike');assert.equal(getMove(s.fighters[0],'airHeavy').finisher,true);until(s,()=>s.fighters[1].hp<1000);});
+check('all 21 downward heavies become active from an ordinary jump before landing',()=>{for(const id of PLAYABLE_FIGHTERS){const s=createState(id,'dummy');s.fighters[0].x=380;s.fighters[1].x=440;tick(s,1,A.up);tick(s,8);assert.ok(s.fighters[0].y<FLOOR,id+' jump');tick(s,1,A.down|A.heavy);assert.equal(s.fighters[0].move?.id,'airHeavy');until(s,()=>s.fighters[1].hp<1000,60);assert.ok(s.fighters[0].y<FLOOR,id+' must strike while airborne');}});
+check('organic spit is strictly horizontal: all five fighters, both facings, ground/air and nine direction masks',()=>{
+ for(const id of HORIZONTAL_SPIT_FIGHTERS)for(const facing of [1,-1])for(const air of [false,true])for(const direction of [0,A.up,A.down,A.left,A.right,A.up|A.left,A.up|A.right,A.down|A.left,A.down|A.right]){
+  const s=createState(id,'cpu');const [a,b]=s.fighters;a.x=facing===1?200:1080;b.x=facing===1?1200:80;a.facing=facing;b.facing=-facing;
+  if(air){a.y=FLOOR-150;a.vy=-4;}
+  tick(s,1,direction|A.bolt);until(s,()=>s.projectiles.length>0,50);const p=s.projectiles[0],y=p.y;
+  assert.equal(Math.sign(p.vx),facing,id);assert.equal(p.vy,0,id);assert.equal(p.gravity,0);assert.equal(p.wave,0);assert.equal(p.bounces,0);
+  for(let frame=0;frame<25&&s.projectiles.includes(p);frame++){tick(s);assert.equal(p.y,y,id+' entire trajectory');}
+  if(!air)assert.equal(a.y,FLOOR,id+' direction chord must not jump');
+ }
+});
+check('pumpkin still supports directional trajectories and gravity',()=>{
+ for(const [input,dx,dy] of [[A.bolt,1,-1],[A.up|A.bolt,0,-1],[A.up|A.right|A.bolt,1,-1],[A.down|A.bolt,0,1]]){
+  const s=createState('zephyr','cpu');s.fighters[0].x=100;s.fighters[1].x=1200;tick(s,1,input);until(s,()=>s.projectiles.length>0,50);const p=s.projectiles[0];assert.equal(Math.sign(p.vx),dx);assert.equal(Math.sign(p.vy),dy);assert.ok(p.gravity>0);
+ }
+});
+check('light → light → low → medium → heavy: five hits, one finisher pip',()=>{const s=fresh();const result=route(s,[A.light,A.light,A.down|A.light,A.medium,A.heavy]);assert.equal(result.hits,5,JSON.stringify(result));assert.equal(result.pips,1,JSON.stringify(result));});
+check('light → medium → bolt → heavy converts projectile hit into finisher',()=>{const s=fresh();const result=route(s,[A.light,A.medium,A.bolt,A.heavy]);assert.equal(result.hits,4,JSON.stringify(result));assert.equal(result.pips,1,JSON.stringify(result));});
+check('launcher → jump → air light → air medium → air heavy: four hits, one pip',()=>{const s=fresh();tick(s,1,A.launcher);until(s,()=>s.fighters[0].combo===1);tick(s,1,A.up);until(s,()=>s.fighters[0].y<FLOOR);tick(s,5);const inputs=[A.light,A.medium,A.heavy];let next=0,maxCombo=1;for(let i=0;i<190;i++){let input=0;if(next<inputs.length&&s.fighters[0].combo===next+1)input=inputs[next++];tick(s,1,input);maxCombo=Math.max(maxCombo,s.fighters[0].combo);}assert.equal(maxCombo,4,`hits=${maxCombo}, attempted=${next}`);assert.equal(s.fighters[0].pips,1);});
+check('one dash cancel is available during a live combo',()=>{const s=fresh();tick(s,1,A.light);until(s,()=>s.fighters[0].combo===1&&s.freeze===0);tick(s,1,A.dash);assert.equal(s.fighters[0].dashCanceled,true);assert.ok(s.fighters[0].dash>0);assert.equal(s.fighters[0].move,null);
+// Isolate the second-cancel gate without requiring a spacing-specific dash route.
+const f=s.fighters[0];f.dash=0;f.dashLock=0;f.move={id:'medium',t:8,hit:true,connected:true,wave:-1};s.fighters[1].stun=20;tick(s);tick(s,1,A.dash);assert.equal(f.move?.id,'medium');assert.equal(f.dash,0);});
+check('Up + light captured during hit-stop stays a rising strike, not auto-jump',()=>{const s=fresh();tick(s,1,A.light);until(s,()=>s.fighters[0].combo===1);assert.ok(s.freeze>0);tick(s,1,A.up|A.light);let airborne=false;for(let i=0;i<40;i++){tick(s);airborne ||= s.fighters[0].y<FLOOR;}assert.equal(airborne,false);});
+check('dash cancel input survives hit-stop',()=>{const s=fresh();tick(s,1,A.light);until(s,()=>s.fighters[0].combo===1);assert.ok(s.freeze>0);tick(s,1,A.dash);let dashed=false;for(let i=0;i<12;i++){tick(s);dashed ||= s.fighters[0].dash>0;}assert.equal(dashed,true);});
+check('guarded chain causes no damage or charge',()=>{const s=fresh('guard');const presses=new Map([[0,A.light],[12,A.medium],[27,A.heavy]]);for(let i=0;i<150;i++)step(s,[presses.get(i)||0,cpuInput(s)]);assert.equal(s.fighters[1].hp,1000);assert.equal(s.fighters[0].pips,0);});
+check('single finisher never earns a pip',()=>{const s=fresh();tick(s,1,A.heavy);tick(s,100);assert.equal(s.fighters[0].pips,0);});
+if(failures){console.error(`${failures} focused check(s) failed.`);process.exitCode=1;}else console.log('All focused directional checks passed.');
