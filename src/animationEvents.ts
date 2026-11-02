@@ -1,6 +1,11 @@
 /** Presentation clocks never alter the fixed-step combat state or replay inputs. */
 export const EVENT_CLIP_LENGTHS = { intro:4, special:8, cast:4, recoil:4, defeat:12 } as const;
 export type EventClipName = keyof typeof EVENT_CLIP_LENGTHS;
+/** Optional richer motion for new twin bodies; legacy atlases remain valid. */
+export const ACTION_CLIP_LENGTHS = {dash:6,jump:6,heavy:8,airKick:6,victory:6,signatureCast:8} as const;
+export const ASSIST_CLIP_LENGTHS = {assistEnter:6,assistAttack:16,assistExit:6,assistVictory:4} as const;
+export const IDENTITY_CLIP_LENGTHS = {entrance:8,death:16,ranged:8} as const;
+export type AtlasClipName = EventClipName | keyof typeof ACTION_CLIP_LENGTHS | keyof typeof ASSIST_CLIP_LENGTHS | keyof typeof IDENTITY_CLIP_LENGTHS;
 export const INTRO_FRAMES = 52, OUTRO_FRAMES = 96;
 export interface RoundPresentation {
   phase:'intro'|'fight'|'outro'|'result';
@@ -24,6 +29,10 @@ const timed=(age:number,durations:readonly number[])=>{
   for(let i=0;i<durations.length;i++){if(age<durations[i])return i;age-=durations[i];}
   return durations.length-1;
 };
+export const entranceFrame=(age:number)=>timed(age,[5,6,7,7,7,7,6,7]);
+export const deathFrame=(age:number,fromFloor:boolean)=>fromFloor
+  ?8+timed(age,[8,8,10,12,12,14,14,18])
+  :timed(age,[4,4,5,5,5,5,5,7,6,6,6,6,7,7,8,10]);
 export const introFrame=(age:number)=>timed(age,[12,14,14,12]);
 export const recoilFrame=(age:number)=>timed(age,[3,5,6,8]);
 export const defeatFrame=(age:number,fromFloor:boolean)=>fromFloor
