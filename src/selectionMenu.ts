@@ -1,4 +1,4 @@
-import { ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, createState, getMove, FLOOR, type PlayableFighterId, type Mode } from './core';
+import { ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, bodySpread, createState, getMove, FLOOR, type PlayableFighterId, type Mode } from './core';
 import { originalPortraits } from './originalPortraits';
 import { drawPoseAtlasSample } from './poseAtlas';
 import { STAGES, drawStagePreview, type StageId } from './stage';
@@ -22,21 +22,24 @@ export function createSelectionMenu(hooks:{start:(setup:SelectionSetup)=>void}){
  for(const stage of STAGES){const button=document.createElement('button');button.className='stage-choice';button.dataset.stage=stage.id;button.setAttribute('aria-label',stage.name);button.innerHTML=`<canvas width="256" height="110" aria-hidden="true"></canvas><span><small>${stage.chapter?'WORLD 0'+stage.chapter:'BONUS STAGE'}</small><b>${stage.name}</b></span>`;button.onclick=()=>{setup.stage=stage.id;update();};rail.append(button);}
  function stats(id:PlayableFighterId,side:string){const f=createState(id,'dummy').fighters[0],kit=COMBAT_STYLES[id];return `<div class="summary-top"><span>${side}</span><small>${kit.role}</small></div><h2>${ROSTER[id].name}</h2><p>${kit.specialName}</p><dl><div><dt>HEAVY DAMAGE</dt><dd>${getMove(f,'heavy').damage}<small>HP</small></dd></div><div><dt>LIGHT REACH</dt><dd>${getMove(f,'light').range}<small>PX</small></dd></div><div><dt>WALK SPEED</dt><dd>${ROSTER[id].speed.toFixed(2)}<small>PX/F</small></dd></div><div><dt>POWER STARTUP</dt><dd>${getMove(f,'bolt').startup}<small>FR</small></dd></div></dl>`;}
  function preview(){
+  const fighters=createState(setup.fighter,'dummy',setup.opponent).fighters;
+  const paired=fighters.some(actor=>bodySpread(actor.id)>0);
+  root.classList.toggle('paired-preview',paired);
   const canvas=el<HTMLCanvasElement>('selection-stage');
   const w=Math.round(canvas.clientWidth)||1280,h=Math.round(canvas.clientHeight)||420;
   canvas.width=w;canvas.height=h;
   const c=canvas.getContext('2d')!;drawStagePreview(c,setup.stage,w,h);
   c.fillStyle='#050712a6';c.fillRect(0,0,w,h);
-  const fighters=createState(setup.fighter,'dummy',setup.opponent).fighters;
-  const compact=w<650,feet=compact?h-146:h-20,scale=Math.min((compact?feet:h)*.0054,w*.0032);
+  const compact=w<650||paired,feet=compact?h-146:h-20;
+  const scale=Math.min((compact?feet:h)*.0054,w*(paired?.0018:.0032));
   for(let i=0;i<2;i++){
    const actor=fighters[i],x=w*(i===0?(compact?.25:.32):(compact?.75:.68));
    c.fillStyle=i===0?'#b41e4288':'#1c51de99';c.beginPath();c.ellipse(x,feet+1,w*(compact?.16:.10),5,0,0,Math.PI*2);c.fill();
    c.fillStyle=i===0?'#ff3e5b':'#518aff';c.fillRect(x-w*.06,feet+4,w*.12,1);
    actor.x=0;actor.y=FLOOR;actor.facing=i===0?1:-1;
-   // The two-body silhouette must fit between the stat panel and center VS.
-   const actorScale=scale*(actor.id==='duo'?.60:1);
-   c.save();c.translate(x,feet);c.scale(actorScale,actorScale);c.translate(0,-FLOOR);drawPoseAtlasSample(c,actor,0,0);c.restore();
+   // Every body uses the same menu scale. A paired fighter must not shrink
+   // both characters just because its complete formation is wider.
+   c.save();c.translate(x,feet);c.scale(scale,scale);c.translate(0,-FLOOR);drawPoseAtlasSample(c,actor,0,0);c.restore();
   }
   for(const button of Array.from(rail.querySelectorAll<HTMLButtonElement>('button'))){const thumb=button.querySelector('canvas')!;drawStagePreview(thumb.getContext('2d')!,button.dataset.stage as StageId,thumb.width,thumb.height);}
  }

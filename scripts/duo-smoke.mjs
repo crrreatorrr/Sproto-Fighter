@@ -22,6 +22,53 @@ check('one selectable duo, two complete body atlases and one health/input/meter 
  for(const id of ['duo','duo-blue']){const cfg=manifest.fighters[id];assert.equal(cfg.frames.length,32);assert.equal(cfg.walkFrames.length,4);for(const[name,n]of Object.entries(events.EVENT_CLIP_LENGTHS))assert.equal(cfg.clips[name].length,n);}
  assert.equal(fresh().fighters.length,2);
 });
+check('CPU reaches melee contact against and as the duo in both facings and at either wall',()=>{
+ const pairs=[['duo','duo'],...PLAYABLE_FIGHTERS.filter(id=>id!=='duo').flatMap(id=>[['duo',id],[id,'duo']])];
+ let probes=0;
+ for(const [playerId,cpuId] of pairs)for(const face of [-1,1])for(const wall of [false,true]){
+  const s=createState(playerId,'cpu',cpuId),[p,f]=s.fighters;
+  const gap=55+core.bodySpread(playerId)+core.bodySpread(cpuId);
+  p.x=wall?(face===1?core.WIDTH-core.fighterWall(playerId):core.fighterWall(playerId)):640+face*gap/2;
+  f.x=p.x-face*gap;p.facing=-face;f.facing=face;
+  let contact=false;
+  for(let t=0;t<180;t++){
+   step(s,[0,core.cpuInput(s)]);
+   contact ||= !!(f.move?.connected&&['light','medium','heavy','launcher'].includes(f.move.id))||s.throwState?.attacker===1;
+  }
+  assert.ok(contact&&p.hp<1000,`${playerId}/${cpuId}/face${face}/wall${wall}: CPU must attack through the legal collision gap`);
+  probes++;
+ }
+ assert.equal(probes,172);
+});
+check('CPU special respects root-based reach instead of spending charge beyond its formation',()=>{
+ const s=createState('duo','cpu','duo');s.frame=1;s.fighters[1].pips=3;
+ s.fighters[1].x=300;s.fighters[0].x=860;
+ assert.equal(core.cpuInput(s)&A.special,0);
+ s.fighters[0].x=800;
+ assert.ok(core.cpuInput(s)&A.special);
+});
+check('blue kick recovery returns through its coherent raised-knee pose before planting',()=>{
+ assert.deepEqual(manifest.fighters['duo-blue'].frames[19],manifest.fighters['duo-blue'].frames[16]);
+ const s=fresh(),f=s.fighters[0];f.facing=1;
+ const slots=[];
+ for(const t of [3,5,7,12,14,17,27]){
+  f.move={id:'medium',t,hit:false,connected:false,wave:-1,aim:'level'};
+  slots.push(getDuoPoseDebug(f,s.frame)[1].slot);
+ }
+ assert.deepEqual(slots,[16,17,18,17,19,13,0]);
+});
+check('blue aerial kick uses tucked startup before extension and falling recovery',()=>{
+ assert.deepEqual(manifest.fighters['duo-blue'].frames[22],manifest.fighters['duo-blue'].frames[8]);
+ const s=fresh(),f=s.fighters[0];f.facing=1;f.y=FLOOR-100;
+ for(const id of ['airMedium','airHeavy']){
+  const move=core.getMove(f,id),slots=[];
+  for(const t of [1,move.startup,move.startup+move.active]){
+   f.move={id,t,hit:false,connected:false,wave:-1,aim:'level'};
+   slots.push(getDuoPoseDebug(f,s.frame)[1].slot);
+  }
+  assert.deepEqual(slots,[22,23,9]);
+ }
+});
 check('each body retains stable world-side placement across facing changes without core mutation',()=>{
  const s=fresh(),f=s.fighters[0];for(const face of [1,-1,1]){f.facing=face;const before=JSON.stringify(s),c=ctx();drawPoseAtlas(c,f,s.frame);assert.equal(JSON.stringify(s),before);assert.deepEqual(c.translations.map(v=>v[0]).sort((a,b)=>a-b),[600-DUO_SPREAD,600+DUO_SPREAD]);assert.equal(c.images.length,2);assert.ok(c.images.some(u=>u.includes('/duo-blue/')));assert.ok(c.images.some(u=>u.includes('/duo/')));}
 });

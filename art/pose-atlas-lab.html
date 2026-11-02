@@ -9,7 +9,7 @@
 <div class="bar"><button id="pagePrev">Previous frame page</button><span id="pageLabel"></span><button id="pageNext">Next frame page</button><label>Inspect exact slot<select id="slot"></select></label><button id="slotPreview">Show slot page</button></div><div id="frames"></div>
 <p>Thirty-two poses do not constitute hand-drawn full-action animation. Directional attacks share authored punch/kick poses; victim throws use an impact pose, then the relaxed full-body falling pose with simulation-owned grip contact and whole-body rotation. No separate limb or presentation-only grab offset is applied. Direction-specific paired throw art remains limited. Projectile and power mechanics remain distinct in the game. Judge anatomy, foot anchors, timing, motion continuity and missing states separately.</p>
 <script type="module">
-import {A,FLOOR,WALL,WIDTH,isDown,ROSTER,PLAYABLE_FIGHTERS,createState,step,getMove} from '/src/core.ts';
+import {A,FLOOR,WALL,WIDTH,isDown,ROSTER,PLAYABLE_FIGHTERS,bodySpread,fighterWall,createState,step,getMove} from '/src/core.ts';
 import {loadPoseAtlases,drawPoseAtlas,drawPoseAtlasSample,getPoseAtlasDebug,getPoseAtlasLoadStatus,setPoseAtlasThrowState,POSE_SLOTS} from '/src/poseAtlas.ts';
 const $=id=>document.getElementById(id),names=Object.entries(POSE_SLOTS),keys=new Set();
 for(const id of PLAYABLE_FIGHTERS){const o=new Option(ROSTER[id].name+' · '+id,id);$('fighter').add(o);$('target').add(new Option(ROSTER[id].name,id));} $('fighter').value='vela';$('target').value='rivet';
@@ -30,9 +30,9 @@ window.addEventListener('keydown',e=>{if($('action').value==='keyboard'&&keymap[
 window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>keys.clear());
 function beginScenario(){
  const a=scenario().action;s=createState($('fighter').value,'dummy',$('target').value);const face=Number($('facing').value);s.fighters[0].x=600;s.fighters[1].x=600+face*450;s.fighters[0].pips=3;s.fighters[0].facing=face;s.fighters[1].facing=-face;
- if(['light','medium','heavy','low','sweep','grab','victimThrow','hit','heavyHit','launchHit','block','launcher'].includes(a))s.fighters[1].x=600+face*60;
+ if(['light','medium','heavy','low','sweep','grab','victimThrow','hit','heavyHit','launchHit','block','launcher'].includes(a))s.fighters[1].x=600+face*(60+bodySpread(s.fighters[0].id)+bodySpread(s.fighters[1].id));
  if(a==='bolt'||a==='special')s.fighters[1].x=600+face*350;
- if($('position').value!=='center'){const pos=$('position').value,edge=pos.endsWith('wall')?0:60,delta=(pos.startsWith('left')?WALL+edge:WIDTH-WALL-edge)-600;for(const f of s.fighters)f.x=Math.max(WALL,Math.min(WIDTH-WALL,f.x+delta));}
+ if($('position').value!=='center'){const pos=$('position').value,edge=pos.endsWith('wall')?0:60,[f,target]=s.fighters,gap=target.x-f.x,lo=Math.max(fighterWall(f.id),fighterWall(target.id)-gap),hi=Math.min(WIDTH-fighterWall(f.id),WIDTH-fighterWall(target.id)-gap);f.x=pos.startsWith('left')?Math.min(hi,lo+edge):Math.max(lo,hi-edge);target.x=f.x+gap;}
  age=0;keys.clear();draw();gallery();
 }
 function reset(){reviewIndex=0;cycle=0;reviewComplete=false;accumulator=0;beginScenario();}

@@ -1,12 +1,13 @@
 import {drawPower} from './powerArt';
 import { FLOOR, ROSTER, COMBAT_STYLES, type CombatState, type Fighter } from './core';
 import { drawSprite } from './spriteRoster';
-import { setPoseAtlasAssistTiming } from './poseAtlas';
+import { getDuoLayoutDebug, setPoseAtlasAssistTiming } from './poseAtlas';
 const clamp=(n:number)=>Math.max(0,Math.min(1,n));
 const ease=(n:number)=>{n=clamp(n);return n*n*(3-2*n);};
 // Retain object identity so complete-body playback and event clocks do not reset
 // on every draw. Assists follow the owner's contacts, not their own kit's clock.
 const assists=new WeakMap<Fighter,Fighter>();
+const assistLanes=new WeakMap<Fighter,{attack:Fighter['move'];raised:boolean}>();
 /** Runtime choreography follows each kit's actual contact frames. */
 export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
  for(const f of s.fighters){
@@ -21,7 +22,22 @@ export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
   const offset=-250+(entry*160)+(t>=27?ease((t-27)/12)*65:0)-exit*220;
   let teammate=assists.get(f);
   if(!teammate){teammate={...f};assists.set(f,teammate);}
-  Object.assign(teammate,f,{id:ROSTER[f.id].partner,x:f.x+f.facing*offset,y:FLOOR,hp:1000,flash:0,stun:0,blockstun:0,reaction:null,vx:0,vy:0,move:{...f.move,t}});
+  let assistX=f.x+f.facing*offset,assistY=FLOOR;
+  if(f.id==='duo'){
+   // The single-body entrance swept the cameo through the rear twin. Keep
+   // it behind both complete silhouettes, with an elevated assist at a wall.
+   const bounds=getDuoLayoutDebug(f,s.frame).bounds;
+   const rear=f.facing===1?bounds[0][0]:bounds[1][1];
+   const margin=125+(1-entry)*45+exit*45;
+   assistX=rear-f.facing*margin;
+   let lane=assistLanes.get(f);
+   if(!lane||lane.attack!==f.move){lane={attack:f.move,raised:assistX<105||assistX>1175};assistLanes.set(f,lane);}
+   // Retain the entrance lane through recovery instead of popping vertically
+   // when forward movement crosses the available-space threshold.
+   // The inset sky lane also clears the left combo readout and upper banner.
+   if(lane.raised){assistX=Math.max(385,Math.min(895,f.x));assistY=FLOOR-190;}
+  }
+  Object.assign(teammate,f,{id:ROSTER[f.id].partner,x:assistX,y:assistY,hp:1000,flash:0,stun:0,blockstun:0,reaction:null,vx:0,vy:0,move:{...f.move,t}});
   setPoseAtlasAssistTiming(teammate,COMBAT_STYLES[f.id].specialFrames);
   c.save();c.globalAlpha=clamp(entry*(1-exit))*.93;drawSprite(c,teammate,s.frame,false,s.freeze>0);c.restore();
  }

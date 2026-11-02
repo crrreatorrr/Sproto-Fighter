@@ -1,0 +1,478 @@
+[
+  {
+    "label": "kick-right-contact",
+    "status": "Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 5\nSequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":0,\"direction\":1} hp=940 x=732.00 y=578.00 vx=8.00 vy=0.00"
+  },
+  {
+    "label": "kick-right-rechamber",
+    "status": "Core frame 19 \u00b7 scenario frame 19 \u00b7 frozen 0\nSequence poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=14 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":7,\"direction\":1} hp=940 x=761.61 y=578.00 vx=2.36 vy=0.00"
+  },
+  {
+    "label": "kick-right-plant",
+    "status": "Core frame 27 \u00b7 scenario frame 27 \u00b7 frozen 0\nSequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=22 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":15,\"direction\":1} hp=940 x=770.93 y=578.00 vx=0.59 vy=0.00"
+  },
+  {
+    "label": "kick-left-contact",
+    "status": "Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 5\nSequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":0,\"direction\":-1} hp=940 x=468.00 y=578.00 vx=-8.00 vy=0.00"
+  },
+  {
+    "label": "kick-left-rechamber",
+    "status": "Core frame 19 \u00b7 scenario frame 19 \u00b7 frozen 0\nSequence poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove medium t=14 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":7,\"direction\":-1} hp=940 x=438.39 y=578.00 vx=-2.36 vy=0.00"
+  },
+  {
+    "label": "isolated-walk-right-10",
+    "status": "Core frame 10 \u00b7 scenario frame 10 \u00b7 frozen 0\nSequence walk \u00b7 frame 3/3 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.775 \u00b7 x 648.3 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=648.32 y=578.00 vx=5.06 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "dash-left-active",
+    "status": "Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0\nSequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 548.5 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=548.48 y=578.00 vx=-11.71 vy=0.00 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "dash-left-recovered",
+    "status": "Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.069 \u00b7 x 479.4 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=479.42 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "dash-right-active",
+    "status": "Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0\nSequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.500 \u00b7 x 651.5 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=651.52 y=578.00 vx=11.71 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "dash-right-recovered",
+    "status": "Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.569 \u00b7 x 720.6 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=720.58 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "jump-right-rise",
+    "status": "Core frame 8 \u00b7 scenario frame 8 \u00b7 frozen 0\nSequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.500 \u00b7 x 600.0 y 501.9 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=501.95 vx=0.00 vy=-10.38 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "jump-right-fall",
+    "status": "Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0\nSequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.500 \u00b7 x 600.0 y 451.4 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=451.40 vx=0.00 vy=3.22 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "jump-right-land",
+    "status": "Core frame 50 \u00b7 scenario frame 50 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "jump-left-rise",
+    "status": "Core frame 8 \u00b7 scenario frame 8 \u00b7 frozen 0\nSequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 600.0 y 501.9 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=501.95 vx=0.00 vy=-10.38 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "jump-left-fall",
+    "status": "Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0\nSequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 600.0 y 451.4 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=451.40 vx=0.00 vy=3.22 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "jump-left-land",
+    "status": "Core frame 50 \u00b7 scenario frame 50 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "blue-kick-chamber",
+    "status": "Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0\nSequence poses \u00b7 frame 16/31 \u00b7 pose slot 16: kickChamber \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=3 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=732.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "blue-kick-contact",
+    "status": "Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 5\nSequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":0,\"direction\":1} hp=940 x=732.00 y=578.00 vx=8.00 vy=0.00"
+  },
+  {
+    "label": "blue-kick-rechamber",
+    "status": "Core frame 19 \u00b7 scenario frame 19 \u00b7 frozen 0\nSequence poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=14 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":7,\"direction\":1} hp=940 x=761.61 y=578.00 vx=2.36 vy=0.00"
+  },
+  {
+    "label": "blue-kick-plant",
+    "status": "Core frame 27 \u00b7 scenario frame 27 \u00b7 frozen 0\nSequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=22 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":15,\"direction\":1} hp=940 x=770.93 y=578.00 vx=0.59 vy=0.00"
+  },
+  {
+    "label": "throw-forward-right-hold",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":5,\"direction\":\"forward\",\"facing\":1,\"startAttackerX\":600,\"startVictimX\":804,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":851.5,\"gripVictimY\":555.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=851.50 y=555.50 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "throw-forward-right-release",
+    "status": "Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0\nSequence poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":2,\"direction\":\"forward\",\"facing\":1,\"startAttackerX\":600,\"startVictimX\":804,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":851.5,\"gripVictimY\":555.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"flight\",\"t\":2,\"direction\":1} hp=885 x=878.87 y=542.05 vx=13.58 vy=-6.30"
+  },
+  {
+    "label": "throw-back-right-hold",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":5,\"direction\":\"back\",\"facing\":1,\"startAttackerX\":600,\"startVictimX\":804,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":851.5,\"gripVictimY\":555.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=851.50 y=555.50 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "throw-back-right-release",
+    "status": "Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0\nSequence poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing -1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":2,\"direction\":\"back\",\"facing\":1,\"startAttackerX\":600,\"startVictimX\":804,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":851.5,\"gripVictimY\":555.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"flight\",\"t\":2,\"direction\":-1} hp=885 x=851.50 y=514.05 vx=0.00 vy=-20.30"
+  },
+  {
+    "label": "throw-up-right-hold",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":5,\"direction\":\"up\",\"facing\":1,\"startAttackerX\":600,\"startVictimX\":804,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":851.5,\"gripVictimY\":555.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=851.50 y=555.50 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "throw-up-right-release",
+    "status": "Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0\nSequence poses \u00b7 frame 15/31 \u00b7 pose slot 15: uppercut \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":2,\"direction\":\"up\",\"facing\":1,\"startAttackerX\":600,\"startVictimX\":804,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":851.5,\"gripVictimY\":555.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"flight\",\"t\":2,\"direction\":1} hp=885 x=857.37 y=522.05 vx=2.91 vy=-16.30"
+  },
+  {
+    "label": "throw-down-right-hold",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":5,\"direction\":\"down\",\"facing\":1,\"startAttackerX\":600,\"startVictimX\":804,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":851.5,\"gripVictimY\":555.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=851.50 y=555.50 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "throw-down-right-floor",
+    "status": "Core frame 30 \u00b7 scenario frame 30 \u00b7 frozen 0\nSequence poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.500 \u00b7 x 599.2 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":4,\"direction\":\"down\",\"facing\":1,\"startAttackerX\":600,\"startVictimX\":804,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":851.5,\"gripVictimY\":555.5}\nReactions 0: null hp=1000 x=599.20 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"down\",\"t\":2,\"direction\":1} hp=885 x=866.28 y=578.00 vx=1.03 vy=0.00"
+  },
+  {
+    "label": "throw-forward-left-hold",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":5,\"direction\":\"forward\",\"facing\":-1,\"startAttackerX\":600,\"startVictimX\":396,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":352.25,\"gripVictimY\":565.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=352.25 y=565.50 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "throw-forward-left-release",
+    "status": "Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0\nSequence poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":2,\"direction\":\"forward\",\"facing\":-1,\"startAttackerX\":600,\"startVictimX\":396,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":352.25,\"gripVictimY\":565.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"flight\",\"t\":2,\"direction\":-1} hp=885 x=324.88 y=552.05 vx=-13.58 vy=-6.30"
+  },
+  {
+    "label": "throw-back-left-hold",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":5,\"direction\":\"back\",\"facing\":-1,\"startAttackerX\":600,\"startVictimX\":396,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":352.25,\"gripVictimY\":565.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=352.25 y=565.50 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "throw-back-left-release",
+    "status": "Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0\nSequence poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":2,\"direction\":\"back\",\"facing\":-1,\"startAttackerX\":600,\"startVictimX\":396,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":352.25,\"gripVictimY\":565.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"flight\",\"t\":2,\"direction\":1} hp=885 x=352.25 y=524.05 vx=0.00 vy=-20.30"
+  },
+  {
+    "label": "throw-up-left-hold",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":5,\"direction\":\"up\",\"facing\":-1,\"startAttackerX\":600,\"startVictimX\":396,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":352.25,\"gripVictimY\":565.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=352.25 y=565.50 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "throw-up-left-release",
+    "status": "Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0\nSequence poses \u00b7 frame 15/31 \u00b7 pose slot 15: uppercut \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":2,\"direction\":\"up\",\"facing\":-1,\"startAttackerX\":600,\"startVictimX\":396,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":352.25,\"gripVictimY\":565.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"flight\",\"t\":2,\"direction\":-1} hp=885 x=346.38 y=532.05 vx=-2.91 vy=-16.30"
+  },
+  {
+    "label": "throw-down-left-hold",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":5,\"direction\":\"down\",\"facing\":-1,\"startAttackerX\":600,\"startVictimX\":396,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":352.25,\"gripVictimY\":565.5}\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=352.25 y=565.50 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "throw-down-left-release",
+    "status": "Core frame 30 \u00b7 scenario frame 30 \u00b7 frozen 0\nSequence poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 602.7 y 578.0 facing -1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":4,\"direction\":\"down\",\"facing\":-1,\"startAttackerX\":600,\"startVictimX\":396,\"startVictimY\":578,\"gripAttackerX\":600,\"gripVictimX\":352.25,\"gripVictimY\":565.5}\nReactions 0: null hp=1000 x=602.67 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"down\",\"t\":3,\"direction\":-1} hp=885 x=340.51 y=578.00 vx=-0.88 vy=0.00"
+  },
+  {
+    "label": "throw-left-recovered",
+    "status": "Core frame 120 \u00b7 scenario frame 120 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 602.7 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=602.67 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=336.20 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "victim-left-wall-hold",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.500 \u00b7 x 152.0 y 578.0 facing 1\nMove none t=- \nThrow {\"attacker\":1,\"victim\":0,\"phase\":\"hold\",\"t\":5,\"direction\":\"down\",\"facing\":-1,\"startAttackerX\":284,\"startVictimX\":152,\"startVictimY\":578,\"gripAttackerX\":335.25,\"gripVictimX\":152,\"gripVictimY\":578}\nReactions 0: null hp=1000 x=152.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=335.25 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "victim-left-wall-floor",
+    "status": "Core frame 30 \u00b7 scenario frame 30 \u00b7 frozen 0\nSequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.500 \u00b7 x 152.0 y 578.0 facing 1\nMove none t=- \nThrow {\"attacker\":1,\"victim\":0,\"phase\":\"release\",\"t\":4,\"direction\":\"down\",\"facing\":-1,\"startAttackerX\":284,\"startVictimX\":152,\"startVictimY\":578,\"gripAttackerX\":335.25,\"gripVictimX\":152,\"gripVictimY\":578}\nReactions 0: {\"kind\":\"knockdown\",\"phase\":\"down\",\"t\":3,\"direction\":-1} hp=885 x=152.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=338.77 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "victim-left-wall-recovered",
+    "status": "Core frame 95 \u00b7 scenario frame 95 \u00b7 frozen 0\nSequence poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.500 \u00b7 x 152.0 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=885 x=152.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=339.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "victim-right-wall-floor",
+    "status": "Core frame 30 \u00b7 scenario frame 30 \u00b7 frozen 0\nSequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 1128.0 y 578.0 facing -1\nMove none t=- \nThrow {\"attacker\":1,\"victim\":0,\"phase\":\"release\",\"t\":4,\"direction\":\"down\",\"facing\":1,\"startAttackerX\":996,\"startVictimX\":1128,\"startVictimY\":578,\"gripAttackerX\":943.5,\"gripVictimX\":1128,\"gripVictimY\":578}\nReactions 0: {\"kind\":\"knockdown\",\"phase\":\"down\",\"t\":3,\"direction\":1} hp=885 x=1128.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=941.16 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "victim-right-wall-recovered",
+    "status": "Core frame 95 \u00b7 scenario frame 95 \u00b7 frozen 0\nSequence poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 1128.0 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=885 x=1128.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=941.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "blue-kick-1x-a",
+    "status": "Core frame 15 \u00b7 scenario frame 15 \u00b7 frozen 0\nSequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=10 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":3,\"direction\":1} hp=940 x=749.11 y=578.00 vx=4.74 vy=0.00"
+  },
+  {
+    "label": "blue-kick-1x-b",
+    "status": "Core frame 19 \u00b7 scenario frame 19 \u00b7 frozen 0\nSequence poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=14 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":7,\"direction\":1} hp=940 x=761.61 y=578.00 vx=2.36 vy=0.00"
+  },
+  {
+    "label": "blue-kick-1x-c",
+    "status": "Core frame 25 \u00b7 scenario frame 25 \u00b7 frozen 0\nSequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=20 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":13,\"direction\":1} hp=940 x=769.65 y=578.00 vx=0.83 vy=0.00"
+  },
+  {
+    "label": "blue-kick-1x-d",
+    "status": "Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove medium t=27 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":20,\"direction\":1} hp=940 x=772.72 y=578.00 vx=0.24 vy=0.00"
+  },
+  {
+    "label": "special-right-contact1",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 5\nSequence special \u00b7 frame 2/7 \u00b7 pose slot 30: special \u00b7 gait phase 0.500 \u00b7 x 616.0 y 578.0 facing 1\nMove special t=14 startup/active/recovery 14/35/30\nThrow none\nReactions 0: null hp=1000 x=616.00 y=578.00 vx=2.00 vy=0.00 | 1: {\"kind\":\"launch\",\"phase\":\"flight\",\"t\":0,\"direction\":1} hp=934 x=950.00 y=577.00 vx=3.00 vy=-10.00"
+  },
+  {
+    "label": "special-right-contact2",
+    "status": "Core frame 30 \u00b7 scenario frame 30 \u00b7 frozen 4\nSequence special \u00b7 frame 3/7 \u00b7 pose slot 30: special \u00b7 gait phase 0.500 \u00b7 x 636.0 y 578.0 facing 1\nMove special t=24 startup/active/recovery 14/35/30\nThrow none\nReactions 0: null hp=1000 x=636.00 y=578.00 vx=2.00 vy=0.00 | 1: {\"kind\":\"launch\",\"phase\":\"flight\",\"t\":0,\"direction\":1} hp=873 x=977.63 y=523.75 vx=1.65 vy=-10.00"
+  },
+  {
+    "label": "special-right-contact3",
+    "status": "Core frame 48 \u00b7 scenario frame 48 \u00b7 frozen 3\nSequence special \u00b7 frame 2/7 \u00b7 pose slot 30: special \u00b7 gait phase 0.500 \u00b7 x 660.0 y 578.0 facing 1\nMove special t=36 startup/active/recovery 14/35/30\nThrow none\nReactions 0: null hp=1000 x=660.00 y=578.00 vx=2.00 vy=0.00 | 1: {\"kind\":\"launch\",\"phase\":\"flight\",\"t\":0,\"direction\":1} hp=818 x=995.60 y=470.05 vx=1.65 vy=-10.00"
+  },
+  {
+    "label": "special-right-contact4",
+    "status": "Core frame 66 \u00b7 scenario frame 66 \u00b7 frozen 2\nSequence special \u00b7 frame 3/7 \u00b7 pose slot 31: special \u00b7 gait phase 0.500 \u00b7 x 684.0 y 578.0 facing 1\nMove special t=48 startup/active/recovery 14/35/30\nThrow none\nReactions 0: null hp=1000 x=684.00 y=578.00 vx=2.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"flight\",\"t\":0,\"direction\":1} hp=768 x=1013.58 y=416.35 vx=1.65 vy=-10.00"
+  },
+  {
+    "label": "special-left-contact1",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 5\nSequence special \u00b7 frame 2/7 \u00b7 pose slot 30: special \u00b7 gait phase 0.000 \u00b7 x 584.0 y 578.0 facing -1\nMove special t=14 startup/active/recovery 14/35/30\nThrow none\nReactions 0: null hp=1000 x=584.00 y=578.00 vx=-2.00 vy=0.00 | 1: {\"kind\":\"launch\",\"phase\":\"flight\",\"t\":0,\"direction\":-1} hp=934 x=250.00 y=577.00 vx=-3.00 vy=-10.00"
+  },
+  {
+    "label": "special-left-contact2",
+    "status": "Core frame 30 \u00b7 scenario frame 30 \u00b7 frozen 4\nSequence special \u00b7 frame 3/7 \u00b7 pose slot 30: special \u00b7 gait phase 0.000 \u00b7 x 564.0 y 578.0 facing -1\nMove special t=24 startup/active/recovery 14/35/30\nThrow none\nReactions 0: null hp=1000 x=564.00 y=578.00 vx=-2.00 vy=0.00 | 1: {\"kind\":\"launch\",\"phase\":\"flight\",\"t\":0,\"direction\":-1} hp=873 x=222.37 y=523.75 vx=-1.65 vy=-10.00"
+  },
+  {
+    "label": "special-left-contact4",
+    "status": "Core frame 66 \u00b7 scenario frame 66 \u00b7 frozen 2\nSequence special \u00b7 frame 3/7 \u00b7 pose slot 31: special \u00b7 gait phase 0.000 \u00b7 x 516.0 y 578.0 facing -1\nMove special t=48 startup/active/recovery 14/35/30\nThrow none\nReactions 0: null hp=1000 x=516.00 y=578.00 vx=-2.00 vy=0.00 | 1: {\"kind\":\"knockdown\",\"phase\":\"flight\",\"t\":0,\"direction\":-1} hp=768 x=186.42 y=416.35 vx=-1.65 vy=-10.00"
+  },
+  {
+    "label": "special-left-recovered",
+    "status": "Core frame 136 \u00b7 scenario frame 136 \u00b7 frozen 0\nSequence poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 509.3 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=509.33 y=578.00 vx=0.00 vy=0.00 | 1: null hp=768 x=141.64 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "air-kick-left-chamber",
+    "status": "Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0\nSequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 600.0 y 468.9 facing -1\nMove airMedium t=3 startup/active/recovery 6/6/14\nThrow none\nReactions 0: null hp=1000 x=600.00 y=468.91 vx=0.00 vy=-6.98 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "air-kick-left-extended",
+    "status": "Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0\nSequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 600.0 y 446.7 facing -1\nMove airMedium t=8 startup/active/recovery 6/6/14\nThrow none\nReactions 0: null hp=1000 x=600.00 y=446.74 vx=0.00 vy=-2.73 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "air-kick-left-land",
+    "status": "Core frame 42 \u00b7 scenario frame 42 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 600.0 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "air-kick-right-chamber",
+    "status": "Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0\nSequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.500 \u00b7 x 600.0 y 468.9 facing 1\nMove airMedium t=3 startup/active/recovery 6/6/14\nThrow none\nReactions 0: null hp=1000 x=600.00 y=468.91 vx=0.00 vy=-6.98 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "air-kick-right-extended",
+    "status": "Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0\nSequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.500 \u00b7 x 600.0 y 446.7 facing 1\nMove airMedium t=8 startup/active/recovery 6/6/14\nThrow none\nReactions 0: null hp=1000 x=600.00 y=446.74 vx=0.00 vy=-2.73 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "air-kick-right-land",
+    "status": "Core frame 42 \u00b7 scenario frame 42 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "blue-air-fixed-startup",
+    "status": "Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0\nSequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.500 \u00b7 x 600.0 y 468.9 facing 1\nMove airMedium t=3 startup/active/recovery 6/6/14\nThrow none\nReactions 0: null hp=1000 x=600.00 y=468.91 vx=0.00 vy=-6.98 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "blue-air-fixed-contact",
+    "status": "Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0\nSequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.500 \u00b7 x 600.0 y 446.7 facing 1\nMove airMedium t=8 startup/active/recovery 6/6/14\nThrow none\nReactions 0: null hp=1000 x=600.00 y=446.74 vx=0.00 vy=-2.73 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "blue-air-fixed-recovery",
+    "status": "Core frame 27 \u00b7 scenario frame 27 \u00b7 frozen 0\nSequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.500 \u00b7 x 600.0 y 466.1 facing 1\nMove airMedium t=18 startup/active/recovery 6/6/14\nThrow none\nReactions 0: null hp=1000 x=600.00 y=466.15 vx=0.00 vy=5.77 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "blue-air-fixed-land",
+    "status": "Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.500 \u00b7 x 600.0 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "recoil-right",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence recoil \u00b7 frame 1/3 \u00b7 pose slot 24: recoil \u00b7 gait phase 0.500 \u00b7 x 586.8 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":4,\"direction\":-1} hp=962 x=586.82 y=578.00 vx=-2.49 vy=0.00 | 1: null hp=1000 x=732.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "recoil-left",
+    "status": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence recoil \u00b7 frame 1/3 \u00b7 pose slot 24: recoil \u00b7 gait phase 0.000 \u00b7 x 613.2 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":4,\"direction\":1} hp=962 x=613.18 y=578.00 vx=2.49 vy=0.00 | 1: null hp=1000 x=468.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "launched-left",
+    "status": "Core frame 27 \u00b7 scenario frame 27 \u00b7 frozen 0\nSequence poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 637.6 y 470.3 facing -1\nMove none t=- \nThrow none\nReactions 0: {\"kind\":\"launch\",\"phase\":\"flight\",\"t\":14,\"direction\":1} hp=936 x=637.57 y=470.25 vx=2.43 vy=-2.10 | 1: null hp=1000 x=468.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "launched-left-recovered",
+    "status": "Core frame 102 \u00b7 scenario frame 102 \u00b7 frozen 0\nSequence poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 685.5 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=936 x=685.52 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=468.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "intro-right-start",
+    "status": "Scenario frame 0/64 \u00b7 core frame 0 \u00b7 frozen 0\nRequested intro \u00b7 selected intro 0/3 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=640.0 y=578.0\nPresentation intro frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "intro-right-1x-a",
+    "status": "Scenario frame 14/64 \u00b7 core frame 0 \u00b7 frozen 0\nRequested intro \u00b7 selected intro 1/3 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=640.0 y=578.0\nPresentation intro frame=14 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "intro-right-1x-b",
+    "status": "Scenario frame 17/64 \u00b7 core frame 0 \u00b7 frozen 0\nRequested intro \u00b7 selected intro 1/3 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=640.0 y=578.0\nPresentation intro frame=17 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "intro-right-1x-c",
+    "status": "Scenario frame 22/64 \u00b7 core frame 0 \u00b7 frozen 0\nRequested intro \u00b7 selected intro 1/3 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=640.0 y=578.0\nPresentation intro frame=22 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "defeat-right-1x-a",
+    "status": "Scenario frame 14/110 \u00b7 core frame 0 \u00b7 frozen 0\nRequested defeat \u00b7 selected defeat 2/11 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=640.0 y=578.0\nPresentation outro frame=14 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "defeat-right-1x-b",
+    "status": "Scenario frame 22/110 \u00b7 core frame 0 \u00b7 frozen 0\nRequested defeat \u00b7 selected defeat 3/11 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=640.0 y=578.0\nPresentation outro frame=22 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "defeat-right-1x-c",
+    "status": "Scenario frame 26/110 \u00b7 core frame 0 \u00b7 frozen 0\nRequested defeat \u00b7 selected defeat 3/11 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=640.0 y=578.0\nPresentation outro frame=26 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "defeat-right-1x-d",
+    "status": "Scenario frame 30/110 \u00b7 core frame 0 \u00b7 frozen 0\nRequested defeat \u00b7 selected defeat 4/11 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=640.0 y=578.0\nPresentation outro frame=30 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "defeat-right-terminal",
+    "status": "Scenario frame 110/110 \u00b7 core frame 0 \u00b7 frozen 0\nRequested defeat \u00b7 selected defeat 11/11 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=640.0 y=578.0\nPresentation result frame=96 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "defeat-floor-left-start",
+    "status": "Scenario frame 0/110 \u00b7 core frame 0 \u00b7 frozen 0\nRequested defeat \u00b7 selected defeat 4/11 \u00b7 fallback slot 9\nMove none t=- \u00b7 reaction knockdown t=0 \u00b7 x=640.0 y=578.0\nPresentation outro frame=0 fromFloor=true\nAuthored event clip selected."
+  },
+  {
+    "label": "defeat-floor-left-1x-a",
+    "status": "Scenario frame 14/110 \u00b7 core frame 0 \u00b7 frozen 0\nRequested defeat \u00b7 selected defeat 5/11 \u00b7 fallback slot 9\nMove none t=- \u00b7 reaction knockdown t=0 \u00b7 x=640.0 y=578.0\nPresentation outro frame=14 fromFloor=true\nAuthored event clip selected."
+  },
+  {
+    "label": "defeat-floor-left-1x-b",
+    "status": "Scenario frame 16/110 \u00b7 core frame 0 \u00b7 frozen 0\nRequested defeat \u00b7 selected defeat 5/11 \u00b7 fallback slot 9\nMove none t=- \u00b7 reaction knockdown t=0 \u00b7 x=640.0 y=578.0\nPresentation outro frame=16 fromFloor=true\nAuthored event clip selected."
+  },
+  {
+    "label": "main-cpu-mirror-ko",
+    "status": "MANUAL QA \u00b7 frame 801 \u00b7 QA frozen\nP1 duo: x=152.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=0 combo=0 best=0 pips=0 reaction=knockdown/down:0\nP2 duo: x=411.0 y=578.0 vx=0.00 vy=0.00 heavy t=29 input=0 hp=1000 combo=0 best=2 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"outro\",\"frame\":0,\"winner\":1,\"fromFloor\":true}\nReplay frames: 801\nThrow: null\nProjectiles: \nf41: neutral  hits=0 pips=0 hp=948/1000 x=380 y=578 input=0 throw=-/- reaction2=-/-\nf108: neutral  hits=0 pips=0 hp=888/1000 x=344 y=578 input=0 throw=-/- reaction2=-/-\nf170: neutral  hits=0 pips=0 hp=828/1000 x=302 y=578 input=0 throw=-/- reaction2=-/-\nf230: neutral  hits=0 pips=0 hp=768/1000 x=261 y=578 input=0 throw=-/- reaction2=-/-\nf288: neutral  hits=0 pips=0 hp=708/1000 x=219 y=578 input=0 throw=-/- reaction2=-/-\nf346: neutral  hits=0 pips=0 hp=648/1000 x=177 y=578 input=0 throw=-/- reaction2=-/-\nf398: neutral  hits=0 pips=0 hp=588/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf414: neutral  hits=0 pips=0 hp=508/1000 x=152 y=577 input=0 throw=-/- reaction2=-/-\nf467: neutral  hits=0 pips=0 hp=448/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf516: neutral  hits=0 pips=0 hp=388/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf566: neutral  hits=0 pips=0 hp=328/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf615: neutral  hits=0 pips=0 hp=328/1000 x=216 y=578 input=2 throw=forward/hold reaction2=-/-\nf630: neutral  hits=0 pips=0 hp=213/1000 x=168 y=566 input=0 throw=forward/release reaction2=-/-\nf653: neutral  hits=0 pips=0 hp=213/1000 x=152 y=567 input=0 throw=-/- reaction2=-/-\nf690: neutral  hits=0 pips=0 hp=153/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf706: neutral  hits=0 pips=0 hp=73/1000 x=152 y=577 input=0 throw=-/- reaction2=-/-\nf759: neutral  hits=0 pips=0 hp=13/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf775: neutral  hits=0 pips=0 hp=0/1000 x=152 y=577 input=0 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "main-ko-animation-live",
+    "status": "MANUAL QA \u00b7 frame 801 \u00b7 running\nP1 duo: x=152.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=0 combo=0 best=0 pips=0 reaction=knockdown/down:0\nP2 duo: x=411.0 y=578.0 vx=0.00 vy=0.00 heavy t=29 input=0 hp=1000 combo=0 best=2 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"outro\",\"frame\":14,\"winner\":1,\"fromFloor\":true}\nReplay frames: 801\nThrow: null\nProjectiles: \nf41: neutral  hits=0 pips=0 hp=948/1000 x=380 y=578 input=0 throw=-/- reaction2=-/-\nf108: neutral  hits=0 pips=0 hp=888/1000 x=344 y=578 input=0 throw=-/- reaction2=-/-\nf170: neutral  hits=0 pips=0 hp=828/1000 x=302 y=578 input=0 throw=-/- reaction2=-/-\nf230: neutral  hits=0 pips=0 hp=768/1000 x=261 y=578 input=0 throw=-/- reaction2=-/-\nf288: neutral  hits=0 pips=0 hp=708/1000 x=219 y=578 input=0 throw=-/- reaction2=-/-\nf346: neutral  hits=0 pips=0 hp=648/1000 x=177 y=578 input=0 throw=-/- reaction2=-/-\nf398: neutral  hits=0 pips=0 hp=588/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf414: neutral  hits=0 pips=0 hp=508/1000 x=152 y=577 input=0 throw=-/- reaction2=-/-\nf467: neutral  hits=0 pips=0 hp=448/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf516: neutral  hits=0 pips=0 hp=388/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf566: neutral  hits=0 pips=0 hp=328/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf615: neutral  hits=0 pips=0 hp=328/1000 x=216 y=578 input=2 throw=forward/hold reaction2=-/-\nf630: neutral  hits=0 pips=0 hp=213/1000 x=168 y=566 input=0 throw=forward/release reaction2=-/-\nf653: neutral  hits=0 pips=0 hp=213/1000 x=152 y=567 input=0 throw=-/- reaction2=-/-\nf690: neutral  hits=0 pips=0 hp=153/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf706: neutral  hits=0 pips=0 hp=73/1000 x=152 y=577 input=0 throw=-/- reaction2=-/-\nf759: neutral  hits=0 pips=0 hp=13/1000 x=152 y=578 input=0 throw=-/- reaction2=-/-\nf775: neutral  hits=0 pips=0 hp=0/1000 x=152 y=577 input=0 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "main-keyboard-w-jump",
+    "status": "MANUAL QA \u00b7 frame 547 \u00b7 running\nP1 duo: x=380.0 y=562.4 vx=0.00 vy=-14.63 neutral t=0 input=4 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nP2 duo: x=900.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 547\nThrow: null\nProjectiles: \n"
+  },
+  {
+    "label": "main-keyboard-dash",
+    "status": "MANUAL QA \u00b7 frame 588 \u00b7 running\nP1 duo: x=585.9 y=578.0 vx=12.46 vy=0.00 neutral t=0 input=2048 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nP2 duo: x=900.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 588\nThrow: null\nProjectiles: \n"
+  },
+  {
+    "label": "main-blue-kick",
+    "status": "MANUAL QA \u00b7 frame 1304 \u00b7 running\nP1 duo: x=666.7 y=578.0 vx=0.00 vy=0.00 medium t=7 input=32 hp=1000 combo=1 best=0 pips=0 reaction=-/-:0\nP2 duo: x=900.0 y=578.0 vx=8.00 vy=0.00 neutral t=0 input=0 hp=940 combo=0 best=0 pips=0 reaction=recoil/flight:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 1304\nThrow: null\nProjectiles: \nf1298: medium level hits=0 pips=0 hp=1000/1000 x=667 y=578 input=32 throw=-/- reaction2=-/-\nf1304: medium level hits=1 pips=0 hp=1000/940 x=667 y=578 input=32 throw=-/- reaction2=recoil/flight"
+  },
+  {
+    "label": "main-grab-during-kick-lockout",
+    "status": "MANUAL QA \u00b7 frame 1322 \u00b7 running\nP1 duo: x=666.7 y=578.0 vx=0.00 vy=0.00 medium t=20 input=512 hp=1000 combo=1 best=0 pips=0 reaction=-/-:0\nP2 duo: x=937.6 y=578.0 vx=0.83 vy=0.00 neutral t=0 input=0 hp=940 combo=0 best=0 pips=0 reaction=recoil/flight:13\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 1322\nThrow: null\nProjectiles: \nf1298: medium level hits=0 pips=0 hp=1000/1000 x=667 y=578 input=32 throw=-/- reaction2=-/-\nf1304: medium level hits=1 pips=0 hp=1000/940 x=667 y=578 input=32 throw=-/- reaction2=recoil/flight"
+  },
+  {
+    "label": "main-player-grab-contact",
+    "status": "MANUAL QA \u00b7 frame 2064 \u00b7 running\nP1 duo: x=756.8 y=578.0 vx=0.00 vy=0.00 grab t=6 input=512 hp=1000 combo=0 best=1 pips=0 reaction=-/-:0\nP2 duo: x=1008.3 y=555.5 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 2064\nThrow: {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":4,\"direction\":\"forward\",\"facing\":1,\"startAttackerX\":756.8067300136879,\"startVictimX\":955.8067300136879,\"startVictimY\":578,\"gripAttackerX\":756.8067300136879,\"gripVictimX\":1008.3067300136879,\"gripVictimY\":555.5}\nProjectiles: \nf1298: medium level hits=0 pips=0 hp=1000/1000 x=667 y=578 input=32 throw=-/- reaction2=-/-\nf1304: medium level hits=1 pips=0 hp=1000/940 x=667 y=578 input=32 throw=-/- reaction2=recoil/flight\nf1331: neutral  hits=1 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=recoil/flight\nf1337: neutral  hits=0 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf1350: neutral  hits=0 pips=0 hp=1000/1000 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf2053: grab level hits=0 pips=0 hp=1000/1000 x=753 y=578 input=512 throw=-/- reaction2=-/-\nf2058: grab level hits=0 pips=0 hp=1000/1000 x=757 y=578 input=512 throw=forward/hold reaction2=-/-"
+  },
+  {
+    "label": "main-player-grab-hold-late",
+    "status": "MANUAL QA \u00b7 frame 2068 \u00b7 running\nP1 duo: x=756.8 y=578.0 vx=0.00 vy=0.00 grab t=6 input=0 hp=1000 combo=0 best=1 pips=0 reaction=-/-:0\nP2 duo: x=1008.3 y=555.5 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 2068\nThrow: {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":7,\"direction\":\"forward\",\"facing\":1,\"startAttackerX\":756.8067300136879,\"startVictimX\":955.8067300136879,\"startVictimY\":578,\"gripAttackerX\":756.8067300136879,\"gripVictimX\":1008.3067300136879,\"gripVictimY\":555.5}\nProjectiles: \nf1298: medium level hits=0 pips=0 hp=1000/1000 x=667 y=578 input=32 throw=-/- reaction2=-/-\nf1304: medium level hits=1 pips=0 hp=1000/940 x=667 y=578 input=32 throw=-/- reaction2=recoil/flight\nf1331: neutral  hits=1 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=recoil/flight\nf1337: neutral  hits=0 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf1350: neutral  hits=0 pips=0 hp=1000/1000 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf2053: grab level hits=0 pips=0 hp=1000/1000 x=753 y=578 input=512 throw=-/- reaction2=-/-\nf2058: grab level hits=0 pips=0 hp=1000/1000 x=757 y=578 input=512 throw=forward/hold reaction2=-/-"
+  },
+  {
+    "label": "main-throw-returned-to-control",
+    "status": "MANUAL QA \u00b7 frame 4178 \u00b7 running\nP1 duo: x=756.8 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=1 pips=0 reaction=-/-:0\nP2 duo: x=1128.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 4178\nThrow: null\nProjectiles: \nf1298: medium level hits=0 pips=0 hp=1000/1000 x=667 y=578 input=32 throw=-/- reaction2=-/-\nf1304: medium level hits=1 pips=0 hp=1000/940 x=667 y=578 input=32 throw=-/- reaction2=recoil/flight\nf1331: neutral  hits=1 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=recoil/flight\nf1337: neutral  hits=0 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf1350: neutral  hits=0 pips=0 hp=1000/1000 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf2053: grab level hits=0 pips=0 hp=1000/1000 x=753 y=578 input=512 throw=-/- reaction2=-/-\nf2058: grab level hits=0 pips=0 hp=1000/1000 x=757 y=578 input=512 throw=forward/hold reaction2=-/-\nf2073: grab level hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=forward/release reaction2=knockdown/flight\nf2096: neutral  hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf2099: neutral  hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2113: neutral  hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf2119: neutral  hits=0 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=-/-\nf2160: neutral  hits=0 pips=0 hp=1000/1000 x=757 y=578 input=0 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "main-keyboard-combo",
+    "status": "MANUAL QA \u00b7 frame 4240 \u00b7 running\nP1 duo: x=929.1 y=578.0 vx=0.03 vy=0.00 heavy t=2 input=64 hp=1000 combo=2 best=1 pips=0 reaction=-/-:0\nP2 duo: x=1128.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=907 combo=0 best=0 pips=0 reaction=recoil/flight:2\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 4240\nThrow: null\nProjectiles: \nf1298: medium level hits=0 pips=0 hp=1000/1000 x=667 y=578 input=32 throw=-/- reaction2=-/-\nf1304: medium level hits=1 pips=0 hp=1000/940 x=667 y=578 input=32 throw=-/- reaction2=recoil/flight\nf1331: neutral  hits=1 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=recoil/flight\nf1337: neutral  hits=0 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf1350: neutral  hits=0 pips=0 hp=1000/1000 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf2053: grab level hits=0 pips=0 hp=1000/1000 x=753 y=578 input=512 throw=-/- reaction2=-/-\nf2058: grab level hits=0 pips=0 hp=1000/1000 x=757 y=578 input=512 throw=forward/hold reaction2=-/-\nf2073: grab level hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=forward/release reaction2=knockdown/flight\nf2096: neutral  hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf2099: neutral  hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2113: neutral  hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf2119: neutral  hits=0 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=-/-\nf2160: neutral  hits=0 pips=0 hp=1000/1000 x=757 y=578 input=0 throw=-/- reaction2=-/-\nf4217: light level hits=0 pips=0 hp=1000/1000 x=933 y=578 input=16 throw=-/- reaction2=-/-\nf4221: light level hits=1 pips=0 hp=1000/962 x=930 y=578 input=16 throw=-/- reaction2=recoil/flight\nf4227: medium level hits=1 pips=0 hp=1000/962 x=930 y=578 input=32 throw=-/- reaction2=recoil/flight\nf4233: medium level hits=2 pips=0 hp=1000/907 x=929 y=578 input=64 throw=-/- reaction2=recoil/flight\nf4239: heavy level hits=2 pips=0 hp=1000/907 x=929 y=578 input=64 throw=-/- reaction2=recoil/flight"
+  },
+  {
+    "label": "main-combo-earned-pip1",
+    "status": "MANUAL QA \u00b7 frame 5251 \u00b7 running\nP1 duo: x=869.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=3 pips=1 reaction=-/-:0\nP2 duo: x=1128.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 5251\nThrow: null\nProjectiles: \nf1298: medium level hits=0 pips=0 hp=1000/1000 x=667 y=578 input=32 throw=-/- reaction2=-/-\nf1304: medium level hits=1 pips=0 hp=1000/940 x=667 y=578 input=32 throw=-/- reaction2=recoil/flight\nf1331: neutral  hits=1 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=recoil/flight\nf1337: neutral  hits=0 pips=0 hp=1000/940 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf1350: neutral  hits=0 pips=0 hp=1000/1000 x=667 y=578 input=0 throw=-/- reaction2=-/-\nf2053: grab level hits=0 pips=0 hp=1000/1000 x=753 y=578 input=512 throw=-/- reaction2=-/-\nf2058: grab level hits=0 pips=0 hp=1000/1000 x=757 y=578 input=512 throw=forward/hold reaction2=-/-\nf2073: grab level hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=forward/release reaction2=knockdown/flight\nf2096: neutral  hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf2099: neutral  hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2113: neutral  hits=1 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf2119: neutral  hits=0 pips=0 hp=1000/885 x=757 y=578 input=0 throw=-/- reaction2=-/-\nf2160: neutral  hits=0 pips=0 hp=1000/1000 x=757 y=578 input=0 throw=-/- reaction2=-/-\nf4217: light level hits=0 pips=0 hp=1000/1000 x=933 y=578 input=16 throw=-/- reaction2=-/-\nf4221: light level hits=1 pips=0 hp=1000/962 x=930 y=578 input=16 throw=-/- reaction2=recoil/flight\nf4227: medium level hits=1 pips=0 hp=1000/962 x=930 y=578 input=32 throw=-/- reaction2=recoil/flight\nf4233: medium level hits=2 pips=0 hp=1000/907 x=929 y=578 input=64 throw=-/- reaction2=recoil/flight\nf4239: heavy level hits=2 pips=0 hp=1000/907 x=929 y=578 input=64 throw=-/- reaction2=recoil/flight\nf4249: heavy level hits=3 pips=0 hp=1000/834 x=929 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf4275: heavy level hits=3 pips=0 hp=1000/834 x=871 y=578 input=0 throw=-/- reaction2=knockdown/down\nf4286: neutral  hits=3 pips=0 hp=1000/834 x=869 y=578 input=0 throw=-/- reaction2=knockdown/down\nf4289: neutral  hits=3 pips=0 hp=1000/834 x=869 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf4295: neutral  hits=0 pips=1 hp=1000/834 x=869 y=578 input=0 throw=-/- reaction2=-/-\nf4320: neutral  hits=0 pips=1 hp=1000/1000 x=869 y=578 input=0 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "main-three-earned-pips",
+    "status": "MANUAL QA \u00b7 frame 5345 \u00b7 running\nP1 duo: x=1013.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=3 pips=3 reaction=-/-:0\nP2 vela: x=1200.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 5345\nThrow: null\nProjectiles: \nf80: light level hits=0 pips=0 hp=1000/1000 x=777 y=578 input=16 throw=-/- reaction2=-/-\nf84: light level hits=1 pips=0 hp=1000/962 x=780 y=578 input=16 throw=-/- reaction2=recoil/flight\nf90: medium level hits=1 pips=0 hp=1000/962 x=781 y=578 input=32 throw=-/- reaction2=recoil/flight\nf96: medium level hits=2 pips=0 hp=1000/907 x=782 y=578 input=64 throw=-/- reaction2=recoil/flight\nf102: heavy level hits=2 pips=0 hp=1000/907 x=782 y=578 input=64 throw=-/- reaction2=recoil/flight\nf112: heavy level hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf138: heavy level hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/down\nf149: neutral  hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/down\nf152: neutral  hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf158: neutral  hits=0 pips=1 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=-/-\nf180: neutral  hits=0 pips=1 hp=1000/1000 x=782 y=578 input=0 throw=-/- reaction2=-/-\nf1396: light level hits=0 pips=1 hp=1000/1000 x=994 y=578 input=16 throw=-/- reaction2=-/-\nf1400: light level hits=1 pips=1 hp=1000/962 x=997 y=578 input=16 throw=-/- reaction2=recoil/flight\nf1406: medium level hits=1 pips=1 hp=1000/962 x=998 y=578 input=32 throw=-/- reaction2=recoil/flight\nf1412: medium level hits=2 pips=1 hp=1000/907 x=999 y=578 input=64 throw=-/- reaction2=recoil/flight\nf1418: heavy level hits=2 pips=1 hp=1000/907 x=999 y=578 input=64 throw=-/- reaction2=recoil/flight\nf1428: heavy level hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf1454: heavy level hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/down\nf1465: neutral  hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/down\nf1468: neutral  hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf1474: neutral  hits=0 pips=2 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=-/-\nf1530: neutral  hits=0 pips=2 hp=1000/1000 x=999 y=578 input=0 throw=-/- reaction2=-/-\nf2652: light level hits=0 pips=2 hp=1000/1000 x=1077 y=578 input=16 throw=-/- reaction2=-/-\nf2656: light level hits=1 pips=2 hp=1000/962 x=1074 y=578 input=16 throw=-/- reaction2=recoil/flight\nf2662: medium level hits=1 pips=2 hp=1000/962 x=1074 y=578 input=32 throw=-/- reaction2=recoil/flight\nf2668: medium level hits=2 pips=2 hp=1000/907 x=1073 y=578 input=64 throw=-/- reaction2=recoil/flight\nf2674: heavy level hits=2 pips=2 hp=1000/907 x=1073 y=578 input=64 throw=-/- reaction2=recoil/flight\nf2684: heavy level hits=3 pips=2 hp=1000/834 x=1073 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf2710: heavy level hits=3 pips=2 hp=1000/834 x=1015 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2721: neutral  hits=3 pips=2 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2724: neutral  hits=3 pips=2 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf2730: neutral  hits=0 pips=3 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=-/-\nf2790: neutral  hits=0 pips=3 hp=1000/1000 x=1013 y=578 input=0 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "main-team-special-1x-a",
+    "status": "MANUAL QA \u00b7 frame 5367 \u00b7 running\nP1 duo: x=1029.0 y=578.0 vx=2.00 vy=0.00 special t=14 input=0 hp=1000 combo=1 best=3 pips=0 reaction=-/-:0\nP2 vela: x=1200.0 y=577.0 vx=3.00 vy=-10.00 neutral t=0 input=0 hp=934 combo=0 best=0 pips=0 reaction=launch/flight:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 5367\nThrow: null\nProjectiles: \nf80: light level hits=0 pips=0 hp=1000/1000 x=777 y=578 input=16 throw=-/- reaction2=-/-\nf84: light level hits=1 pips=0 hp=1000/962 x=780 y=578 input=16 throw=-/- reaction2=recoil/flight\nf90: medium level hits=1 pips=0 hp=1000/962 x=781 y=578 input=32 throw=-/- reaction2=recoil/flight\nf96: medium level hits=2 pips=0 hp=1000/907 x=782 y=578 input=64 throw=-/- reaction2=recoil/flight\nf102: heavy level hits=2 pips=0 hp=1000/907 x=782 y=578 input=64 throw=-/- reaction2=recoil/flight\nf112: heavy level hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf138: heavy level hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/down\nf149: neutral  hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/down\nf152: neutral  hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf158: neutral  hits=0 pips=1 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=-/-\nf180: neutral  hits=0 pips=1 hp=1000/1000 x=782 y=578 input=0 throw=-/- reaction2=-/-\nf1396: light level hits=0 pips=1 hp=1000/1000 x=994 y=578 input=16 throw=-/- reaction2=-/-\nf1400: light level hits=1 pips=1 hp=1000/962 x=997 y=578 input=16 throw=-/- reaction2=recoil/flight\nf1406: medium level hits=1 pips=1 hp=1000/962 x=998 y=578 input=32 throw=-/- reaction2=recoil/flight\nf1412: medium level hits=2 pips=1 hp=1000/907 x=999 y=578 input=64 throw=-/- reaction2=recoil/flight\nf1418: heavy level hits=2 pips=1 hp=1000/907 x=999 y=578 input=64 throw=-/- reaction2=recoil/flight\nf1428: heavy level hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf1454: heavy level hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/down\nf1465: neutral  hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/down\nf1468: neutral  hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf1474: neutral  hits=0 pips=2 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=-/-\nf1530: neutral  hits=0 pips=2 hp=1000/1000 x=999 y=578 input=0 throw=-/- reaction2=-/-\nf2652: light level hits=0 pips=2 hp=1000/1000 x=1077 y=578 input=16 throw=-/- reaction2=-/-\nf2656: light level hits=1 pips=2 hp=1000/962 x=1074 y=578 input=16 throw=-/- reaction2=recoil/flight\nf2662: medium level hits=1 pips=2 hp=1000/962 x=1074 y=578 input=32 throw=-/- reaction2=recoil/flight\nf2668: medium level hits=2 pips=2 hp=1000/907 x=1073 y=578 input=64 throw=-/- reaction2=recoil/flight\nf2674: heavy level hits=2 pips=2 hp=1000/907 x=1073 y=578 input=64 throw=-/- reaction2=recoil/flight\nf2684: heavy level hits=3 pips=2 hp=1000/834 x=1073 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf2710: heavy level hits=3 pips=2 hp=1000/834 x=1015 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2721: neutral  hits=3 pips=2 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2724: neutral  hits=3 pips=2 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf2730: neutral  hits=0 pips=3 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=-/-\nf2790: neutral  hits=0 pips=3 hp=1000/1000 x=1013 y=578 input=0 throw=-/- reaction2=-/-\nf5353: special level hits=0 pips=0 hp=1000/1000 x=1013 y=578 input=1024 throw=-/- reaction2=-/-\nf5366: special level hits=1 pips=0 hp=1000/934 x=1029 y=578 input=1024 throw=-/- reaction2=launch/flight"
+  },
+  {
+    "label": "main-team-special-1x-b",
+    "status": "MANUAL QA \u00b7 frame 5370 \u00b7 running\nP1 duo: x=1029.0 y=578.0 vx=2.00 vy=0.00 special t=14 input=0 hp=1000 combo=1 best=3 pips=0 reaction=-/-:0\nP2 vela: x=1200.0 y=577.0 vx=3.00 vy=-10.00 neutral t=0 input=0 hp=934 combo=0 best=0 pips=0 reaction=launch/flight:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 5370\nThrow: null\nProjectiles: \nf80: light level hits=0 pips=0 hp=1000/1000 x=777 y=578 input=16 throw=-/- reaction2=-/-\nf84: light level hits=1 pips=0 hp=1000/962 x=780 y=578 input=16 throw=-/- reaction2=recoil/flight\nf90: medium level hits=1 pips=0 hp=1000/962 x=781 y=578 input=32 throw=-/- reaction2=recoil/flight\nf96: medium level hits=2 pips=0 hp=1000/907 x=782 y=578 input=64 throw=-/- reaction2=recoil/flight\nf102: heavy level hits=2 pips=0 hp=1000/907 x=782 y=578 input=64 throw=-/- reaction2=recoil/flight\nf112: heavy level hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf138: heavy level hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/down\nf149: neutral  hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/down\nf152: neutral  hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf158: neutral  hits=0 pips=1 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=-/-\nf180: neutral  hits=0 pips=1 hp=1000/1000 x=782 y=578 input=0 throw=-/- reaction2=-/-\nf1396: light level hits=0 pips=1 hp=1000/1000 x=994 y=578 input=16 throw=-/- reaction2=-/-\nf1400: light level hits=1 pips=1 hp=1000/962 x=997 y=578 input=16 throw=-/- reaction2=recoil/flight\nf1406: medium level hits=1 pips=1 hp=1000/962 x=998 y=578 input=32 throw=-/- reaction2=recoil/flight\nf1412: medium level hits=2 pips=1 hp=1000/907 x=999 y=578 input=64 throw=-/- reaction2=recoil/flight\nf1418: heavy level hits=2 pips=1 hp=1000/907 x=999 y=578 input=64 throw=-/- reaction2=recoil/flight\nf1428: heavy level hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf1454: heavy level hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/down\nf1465: neutral  hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/down\nf1468: neutral  hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf1474: neutral  hits=0 pips=2 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=-/-\nf1530: neutral  hits=0 pips=2 hp=1000/1000 x=999 y=578 input=0 throw=-/- reaction2=-/-\nf2652: light level hits=0 pips=2 hp=1000/1000 x=1077 y=578 input=16 throw=-/- reaction2=-/-\nf2656: light level hits=1 pips=2 hp=1000/962 x=1074 y=578 input=16 throw=-/- reaction2=recoil/flight\nf2662: medium level hits=1 pips=2 hp=1000/962 x=1074 y=578 input=32 throw=-/- reaction2=recoil/flight\nf2668: medium level hits=2 pips=2 hp=1000/907 x=1073 y=578 input=64 throw=-/- reaction2=recoil/flight\nf2674: heavy level hits=2 pips=2 hp=1000/907 x=1073 y=578 input=64 throw=-/- reaction2=recoil/flight\nf2684: heavy level hits=3 pips=2 hp=1000/834 x=1073 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf2710: heavy level hits=3 pips=2 hp=1000/834 x=1015 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2721: neutral  hits=3 pips=2 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2724: neutral  hits=3 pips=2 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf2730: neutral  hits=0 pips=3 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=-/-\nf2790: neutral  hits=0 pips=3 hp=1000/1000 x=1013 y=578 input=0 throw=-/- reaction2=-/-\nf5353: special level hits=0 pips=0 hp=1000/1000 x=1013 y=578 input=1024 throw=-/- reaction2=-/-\nf5366: special level hits=1 pips=0 hp=1000/934 x=1029 y=578 input=1024 throw=-/- reaction2=launch/flight"
+  },
+  {
+    "label": "main-team-special-1x-c",
+    "status": "MANUAL QA \u00b7 frame 5375 \u00b7 running\nP1 duo: x=1037.0 y=578.0 vx=2.00 vy=0.00 special t=18 input=0 hp=1000 combo=1 best=3 pips=0 reaction=-/-:0\nP2 vela: x=1200.0 y=545.5 vx=0.00 vy=-6.60 neutral t=0 input=0 hp=934 combo=0 best=0 pips=0 reaction=launch/flight:4\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 5375\nThrow: null\nProjectiles: \nf80: light level hits=0 pips=0 hp=1000/1000 x=777 y=578 input=16 throw=-/- reaction2=-/-\nf84: light level hits=1 pips=0 hp=1000/962 x=780 y=578 input=16 throw=-/- reaction2=recoil/flight\nf90: medium level hits=1 pips=0 hp=1000/962 x=781 y=578 input=32 throw=-/- reaction2=recoil/flight\nf96: medium level hits=2 pips=0 hp=1000/907 x=782 y=578 input=64 throw=-/- reaction2=recoil/flight\nf102: heavy level hits=2 pips=0 hp=1000/907 x=782 y=578 input=64 throw=-/- reaction2=recoil/flight\nf112: heavy level hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf138: heavy level hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/down\nf149: neutral  hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/down\nf152: neutral  hits=3 pips=0 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf158: neutral  hits=0 pips=1 hp=1000/834 x=782 y=578 input=0 throw=-/- reaction2=-/-\nf180: neutral  hits=0 pips=1 hp=1000/1000 x=782 y=578 input=0 throw=-/- reaction2=-/-\nf1396: light level hits=0 pips=1 hp=1000/1000 x=994 y=578 input=16 throw=-/- reaction2=-/-\nf1400: light level hits=1 pips=1 hp=1000/962 x=997 y=578 input=16 throw=-/- reaction2=recoil/flight\nf1406: medium level hits=1 pips=1 hp=1000/962 x=998 y=578 input=32 throw=-/- reaction2=recoil/flight\nf1412: medium level hits=2 pips=1 hp=1000/907 x=999 y=578 input=64 throw=-/- reaction2=recoil/flight\nf1418: heavy level hits=2 pips=1 hp=1000/907 x=999 y=578 input=64 throw=-/- reaction2=recoil/flight\nf1428: heavy level hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf1454: heavy level hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/down\nf1465: neutral  hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/down\nf1468: neutral  hits=3 pips=1 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf1474: neutral  hits=0 pips=2 hp=1000/834 x=999 y=578 input=0 throw=-/- reaction2=-/-\nf1530: neutral  hits=0 pips=2 hp=1000/1000 x=999 y=578 input=0 throw=-/- reaction2=-/-\nf2652: light level hits=0 pips=2 hp=1000/1000 x=1077 y=578 input=16 throw=-/- reaction2=-/-\nf2656: light level hits=1 pips=2 hp=1000/962 x=1074 y=578 input=16 throw=-/- reaction2=recoil/flight\nf2662: medium level hits=1 pips=2 hp=1000/962 x=1074 y=578 input=32 throw=-/- reaction2=recoil/flight\nf2668: medium level hits=2 pips=2 hp=1000/907 x=1073 y=578 input=64 throw=-/- reaction2=recoil/flight\nf2674: heavy level hits=2 pips=2 hp=1000/907 x=1073 y=578 input=64 throw=-/- reaction2=recoil/flight\nf2684: heavy level hits=3 pips=2 hp=1000/834 x=1073 y=578 input=0 throw=-/- reaction2=knockdown/flight\nf2710: heavy level hits=3 pips=2 hp=1000/834 x=1015 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2721: neutral  hits=3 pips=2 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=knockdown/down\nf2724: neutral  hits=3 pips=2 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=knockdown/rise\nf2730: neutral  hits=0 pips=3 hp=1000/834 x=1013 y=578 input=0 throw=-/- reaction2=-/-\nf2790: neutral  hits=0 pips=3 hp=1000/1000 x=1013 y=578 input=0 throw=-/- reaction2=-/-\nf5353: special level hits=0 pips=0 hp=1000/1000 x=1013 y=578 input=1024 throw=-/- reaction2=-/-\nf5366: special level hits=1 pips=0 hp=1000/934 x=1029 y=578 input=1024 throw=-/- reaction2=launch/flight"
+  },
+  {
+    "label": "special-cameo-left-wall-contact1",
+    "status": "Scenario frame 14/99 \u00b7 core frame 14 \u00b7 frozen 5\nRequested special \u00b7 selected special 2/7 \u00b7 fallback slot 30\nMove special t=14 \u00b7 reaction none t=- \u00b7 x=168.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-right-wall-contact1",
+    "status": "Scenario frame 14/99 \u00b7 core frame 14 \u00b7 frozen 5\nRequested special \u00b7 selected special 2/7 \u00b7 fallback slot 30\nMove special t=14 \u00b7 reaction none t=- \u00b7 x=1112.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-right-wall-1x-0",
+    "status": "Scenario frame 28/99 \u00b7 core frame 28 \u00b7 frozen 0\nRequested special \u00b7 selected special 3/7 \u00b7 fallback slot 29\nMove special t=23 \u00b7 reaction none t=- \u00b7 x=1094.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-right-wall-1x-1",
+    "status": "Scenario frame 55/99 \u00b7 core frame 55 \u00b7 frozen 0\nRequested special \u00b7 selected special 3/7 \u00b7 fallback slot 29\nMove special t=40 \u00b7 reaction none t=- \u00b7 x=1060.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-right-wall-1x-2",
+    "status": "Scenario frame 62/99 \u00b7 core frame 62 \u00b7 frozen 0\nRequested special \u00b7 selected special 3/7 \u00b7 fallback slot 29\nMove special t=47 \u00b7 reaction none t=- \u00b7 x=1046.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-right-wall-recovered",
+    "status": "Scenario frame 99/99 \u00b7 core frame 99 \u00b7 frozen 0\nRequested special \u00b7 selected poses 0/31 \u00b7 fallback slot 0\nMove none t=- \u00b7 reaction none t=- \u00b7 x=1037.3 y=578.0\nPresentation fight frame=0 fromFloor=false\nEvent not active or not installed; inspect inventory above."
+  },
+  {
+    "label": "special-cameo-center-left-contact2",
+    "status": "Scenario frame 30/99 \u00b7 core frame 30 \u00b7 frozen 4\nRequested special \u00b7 selected special 3/7 \u00b7 fallback slot 30\nMove special t=24 \u00b7 reaction none t=- \u00b7 x=604.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-left-wall-contact1-final",
+    "status": "Scenario frame 14/99 \u00b7 core frame 14 \u00b7 frozen 5\nRequested special \u00b7 selected special 2/7 \u00b7 fallback slot 30\nMove special t=14 \u00b7 reaction none t=- \u00b7 x=168.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-left-wall-1x-0",
+    "status": "Scenario frame 28/99 \u00b7 core frame 28 \u00b7 frozen 0\nRequested special \u00b7 selected special 3/7 \u00b7 fallback slot 29\nMove special t=23 \u00b7 reaction none t=- \u00b7 x=186.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-left-wall-1x-1",
+    "status": "Scenario frame 49/99 \u00b7 core frame 49 \u00b7 frozen 2\nRequested special \u00b7 selected special 2/7 \u00b7 fallback slot 30\nMove special t=36 \u00b7 reaction none t=- \u00b7 x=212.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-left-wall-final-contact2",
+    "status": "Scenario frame 30/99 \u00b7 core frame 30 \u00b7 frozen 4\nRequested special \u00b7 selected special 3/7 \u00b7 fallback slot 30\nMove special t=24 \u00b7 reaction none t=- \u00b7 x=188.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-left-wall-final-1x-0",
+    "status": "Scenario frame 44/99 \u00b7 core frame 44 \u00b7 frozen 0\nRequested special \u00b7 selected special 3/7 \u00b7 fallback slot 29\nMove special t=34 \u00b7 reaction none t=- \u00b7 x=208.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-left-wall-final-1x-1",
+    "status": "Scenario frame 63/99 \u00b7 core frame 63 \u00b7 frozen 5\nRequested special \u00b7 selected special 3/7 \u00b7 fallback slot 31\nMove special t=48 \u00b7 reaction none t=- \u00b7 x=236.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-right-wall-final-contact3",
+    "status": "Scenario frame 48/99 \u00b7 core frame 48 \u00b7 frozen 3\nRequested special \u00b7 selected special 2/7 \u00b7 fallback slot 30\nMove special t=36 \u00b7 reaction none t=- \u00b7 x=1068.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-center-right-final-contact1",
+    "status": "Scenario frame 14/99 \u00b7 core frame 14 \u00b7 frozen 5\nRequested special \u00b7 selected special 2/7 \u00b7 fallback slot 30\nMove special t=14 \u00b7 reaction none t=- \u00b7 x=656.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-center-right-final-1x-0",
+    "status": "Scenario frame 28/99 \u00b7 core frame 28 \u00b7 frozen 0\nRequested special \u00b7 selected special 3/7 \u00b7 fallback slot 29\nMove special t=23 \u00b7 reaction none t=- \u00b7 x=674.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "special-cameo-center-right-final-1x-1",
+    "status": "Scenario frame 49/99 \u00b7 core frame 49 \u00b7 frozen 2\nRequested special \u00b7 selected special 2/7 \u00b7 fallback slot 30\nMove special t=36 \u00b7 reaction none t=- \u00b7 x=700.0 y=578.0\nPresentation fight frame=0 fromFloor=false\nAuthored event clip selected."
+  },
+  {
+    "label": "final-main-W-jump-fight-scale",
+    "status": "MANUAL QA \u00b7 frame 482 \u00b7 QA frozen\nP1 duo: x=380.0 y=523.6 vx=0.00 vy=-12.08 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nP2 vela: x=900.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 482\nThrow: null\nProjectiles: \n"
+  },
+  {
+    "label": "final-main-approach-and-kick",
+    "status": "MANUAL QA \u00b7 frame 541 \u00b7 QA frozen\nP1 duo: x=574.9 y=578.0 vx=0.85 vy=0.00 medium t=5 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nP2 vela: x=900.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 541\nThrow: null\nProjectiles: \nf537: medium level hits=0 pips=0 hp=1000/1000 x=569 y=578 input=32 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "final-main-blue-kick-chamber",
+    "status": "MANUAL QA \u00b7 frame 541 \u00b7 QA frozen\nP1 duo: x=574.9 y=578.0 vx=0.85 vy=0.00 medium t=5 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nP2 vela: x=900.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 541\nThrow: null\nProjectiles: \nf537: medium level hits=0 pips=0 hp=1000/1000 x=569 y=578 input=32 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "final-main-blue-kick-plant",
+    "status": "MANUAL QA \u00b7 frame 556 \u00b7 QA frozen\nP1 duo: x=576.9 y=578.0 vx=0.00 vy=0.00 medium t=20 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nP2 vela: x=900.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 556\nThrow: null\nProjectiles: \nf537: medium level hits=0 pips=0 hp=1000/1000 x=569 y=578 input=32 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "final-main-blue-kick-return",
+    "status": "MANUAL QA \u00b7 frame 572 \u00b7 QA frozen\nP1 duo: x=576.9 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nP2 vela: x=900.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 572\nThrow: null\nProjectiles: \nf537: medium level hits=0 pips=0 hp=1000/1000 x=569 y=578 input=32 throw=-/- reaction2=-/-\nf565: neutral  hits=0 pips=0 hp=1000/1000 x=577 y=578 input=0 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "final-main-blue-kick-extension",
+    "status": "MANUAL QA \u00b7 frame 7 \u00b7 QA frozen\nP1 duo: x=380.0 y=578.0 vx=0.00 vy=0.00 medium t=7 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nP2 vela: x=900.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 7\nThrow: null\nProjectiles: \nf1: medium level hits=0 pips=0 hp=1000/1000 x=380 y=578 input=32 throw=-/- reaction2=-/-"
+  },
+  {
+    "label": "final-main-blue-kick-rechamber-t14",
+    "status": "MANUAL QA \u00b7 frame 14 \u00b7 QA frozen\nP1 duo: x=380.0 y=578.0 vx=0.00 vy=0.00 medium t=14 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nP2 vela: x=900.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0\nPresentation: {\"phase\":\"fight\",\"frame\":0,\"winner\":null,\"fromFloor\":false}\nReplay frames: 14\nThrow: null\nProjectiles: \nf1: medium level hits=0 pips=0 hp=1000/1000 x=380 y=578 input=32 throw=-/- reaction2=-/-"
+  }
+]

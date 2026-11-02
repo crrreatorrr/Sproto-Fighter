@@ -1,0 +1,9 @@
+PASS: all selectable fighters: complete forward/reverse gait, hitstop, and neutral guard after stopping
+PASS: all 21 core grips agree with installed per-fighter hand/torso art metadata
+PASS: all 441 held pairs: draw uses actual core placement without secondary offsets or core mutation
+PASS: all 21 knockdown transforms: both facings, flight/down/rise, floor/camera bounds and nonmutation
+PASS: missing image fails atomically and retains declared-art no-fallback guard
+PASS: invalid opaque bounds fails atomically and retains declared-art no-fallback guard
+PASS: invalid walk count fails atomically and retains declared-art no-fallback guard
+PASS: out-of-bounds contact fails atomically and retains declared-art no-fallback guard
+PASS: 8 pose playback/contract groups. No visual-quality claim from these checks.

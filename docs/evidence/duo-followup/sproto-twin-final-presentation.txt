@@ -1,0 +1,7 @@
+PASS: intro advances presentation only; input skip enters actual combat without losing the input
+PASS: unskipped intro has a bounded duration
+PASS: pause/resume preserves intro and outro; restart resets presentation and replay
+PASS: winner freezes combat and replay for full outro before result overlay, exactly once
+PASS: winner freezes combat and replay for full outro before story handoff, exactly once
+PASS: floor defeat uses the landed knockout reaction
+Presentation integration checks passed. DOM rendering and sprite aesthetics require separate browser review.

@@ -480,7 +480,10 @@ function act(s: CombatState, f: Fighter) {
     }
 }
 export function cpuInput(s: CombatState): number {
-    const f = s.fighters[1], p = s.fighters[0], distance = Math.abs(p.x - f.x), toward = p.x < f.x ? A.left : A.right, away = p.x < f.x ? A.right : A.left;
+    const f = s.fighters[1], p = s.fighters[0], rootDistance = Math.abs(p.x - f.x), toward = p.x < f.x ? A.left : A.right, away = p.x < f.x ? A.right : A.left;
+    // Approach and ordinary attacks use the gap between the two front bodies.
+    // Root distance alone leaves a wide fighter stuck walking into collision.
+    const distance = Math.max(0, rootDistance - bodySpread(f.id) - bodySpread(p.id));
     if (s.mode === 'dummy')
         return 0;
     if (s.mode === 'guard')
@@ -503,7 +506,9 @@ export function cpuInput(s: CombatState): number {
         return input;
     if (p.move && distance < 180 && s.frame % 120 < 65)
         return away | (p.input & A.down);
-    if (f.pips === 3 && distance < 450)
+    // Specials originate at the shared root; unlike ordinary melee their range
+    // does not include the attacker's formation spread.
+    if (f.pips === 3 && rootDistance - bodySpread(p.id) < Math.min(450, getMove(f, 'special').range))
         return A.special;
     if (f.id === 'vela' && distance > 260) {
         input = distance < 390 ? away : 0;
