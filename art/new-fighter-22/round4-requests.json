@@ -1,0 +1,46 @@
+[
+  {
+    "index": 9,
+    "params": {
+      "model": "nano_banana_2_1",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "thinking_level": "high",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "6e705245-be1a-427d-bee5-6d33ca406f6f"
+        },
+        {
+          "role": "image",
+          "value": "088e0956-0bf8-47d3-bdf9-def3eb56e6b6"
+        }
+      ],
+      "prompt": "Create an EIGHT-FRAME pixel-art guarded walking cycle, exactly4columns by2rows, flat puremagenta#ff00ff background. The FIRST attached image is the ACCEPTED COMBAT ATLAS: copy its top-left guard's exact head size, eyes, neck length, low belly, pelvis height, short leg lengths, colors and pixel style. The SECOND image is only a leg-pose schematic. Do not adopt the schematic's body proportions. The guard character's big head must NOT shrink, neck must NOT lengthen, legs must NOT grow longer. Keep both hands raised in the same compact combat guard throughout, not relaxed walking arms. Facing RIGHT in all8cells. Full body each cell, all extremities inside with margins, one connected silhouette, no text/grid/shadow/trails. Strongest requirement: eight true sequential drawings with OPPOSITE leg ownership in the second row, not a repeated first row. Near leg is bright, far leg is dark, each retains its color in all8cells. LOW pelvis at base of belly, only two legs, two feet.\nFrame0(top-left) NEAR BRIGHT leg stretches RIGHT to forward heel contact; FAR DARK leg stretches LEFT behind on toe.\nFrame1 top-second weight down on NEAR BRIGHT leg on RIGHT; FAR DARK foot begins lifting behindLEFT.\nFrame2 top-third NEAR BRIGHT leg supports vertically under pelvis; FAR DARK knee passes forward, its foot lifted beside support shin.\nFrame3 top-fourth NEAR BRIGHT support foot trails LEFT on toe; FAR DARK knee swings forwardRIGHT.\nFrame4 bottom-left FAR DARK leg stretches RIGHT to forward heel contact; NEAR BRIGHT leg stretches LEFT behind on toe. EXACT OPPOSITE leg colors fromframe0. The rightmost forward foot is now DARK; the leftmost rear foot nowBRIGHT.\nFrame5 bottom-second weight down on FAR DARK leg onRIGHT; NEAR BRIGHT foot lifts behindLEFT.\nFrame6 bottom-third FAR DARK leg supports vertically under pelvis; NEAR BRIGHT knee passes forward, its foot lifted beside support shin. EXACT OPPOSITE colors fromframe2.\nFrame7 bottom-fourth FAR DARK support foot trailsLEFT; NEAR BRIGHT knee swings forwardRIGHT, ready to plant asframe0.\nFour-phase contact-down-pass-up cycle repeated with leg identities exchanged. Whole-body head position almostfixed, gentle1–2pixel bob only. Head shape and scale are copied from accepted guard, no resized cartoon design. No decorations. \nRED ACTOR from first image: brightred sweptspikyhead, hugeyelloweyes, blackpupils, roundrednose, smile,longslimredneck/body, EMPTY hands, redlowlegs/feet,no clothing or hat. Yellow only ineyes."
+    }
+  },
+  {
+    "index": 10,
+    "params": {
+      "model": "nano_banana_2_1",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "thinking_level": "high",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "fddd018e-22c7-465e-b558-8ef7d944807f"
+        },
+        {
+          "role": "image",
+          "value": "088e0956-0bf8-47d3-bdf9-def3eb56e6b6"
+        }
+      ],
+      "prompt": "Create an EIGHT-FRAME pixel-art guarded walking cycle, exactly4columns by2rows, flat puremagenta#ff00ff background. The FIRST attached image is the ACCEPTED COMBAT ATLAS: copy its top-left guard's exact head size, eyes, neck length, low belly, pelvis height, short leg lengths, colors and pixel style. The SECOND image is only a leg-pose schematic. Do not adopt the schematic's body proportions. The guard character's big head must NOT shrink, neck must NOT lengthen, legs must NOT grow longer. Keep both hands raised in the same compact combat guard throughout, not relaxed walking arms. Facing RIGHT in all8cells. Full body each cell, all extremities inside with margins, one connected silhouette, no text/grid/shadow/trails. Strongest requirement: eight true sequential drawings with OPPOSITE leg ownership in the second row, not a repeated first row. Near leg is bright, far leg is dark, each retains its color in all8cells. LOW pelvis at base of belly, only two legs, two feet.\nFrame0(top-left) NEAR BRIGHT leg stretches RIGHT to forward heel contact; FAR DARK leg stretches LEFT behind on toe.\nFrame1 top-second weight down on NEAR BRIGHT leg on RIGHT; FAR DARK foot begins lifting behindLEFT.\nFrame2 top-third NEAR BRIGHT leg supports vertically under pelvis; FAR DARK knee passes forward, its foot lifted beside support shin.\nFrame3 top-fourth NEAR BRIGHT support foot trails LEFT on toe; FAR DARK knee swings forwardRIGHT.\nFrame4 bottom-left FAR DARK leg stretches RIGHT to forward heel contact; NEAR BRIGHT leg stretches LEFT behind on toe. EXACT OPPOSITE leg colors fromframe0. The rightmost forward foot is now DARK; the leftmost rear foot nowBRIGHT.\nFrame5 bottom-second weight down on FAR DARK leg onRIGHT; NEAR BRIGHT foot lifts behindLEFT.\nFrame6 bottom-third FAR DARK leg supports vertically under pelvis; NEAR BRIGHT knee passes forward, its foot lifted beside support shin. EXACT OPPOSITE colors fromframe2.\nFrame7 bottom-fourth FAR DARK support foot trailsLEFT; NEAR BRIGHT knee swings forwardRIGHT, ready to plant asframe0.\nFour-phase contact-down-pass-up cycle repeated with leg identities exchanged. Whole-body head position almostfixed, gentle1–2pixel bob only. Head shape and scale are copied from accepted guard, no resized cartoon design. No decorations. \nBLUE ACTOR from first image: blue sweptspikyhead, tinyattachedyellowtophat, hugeyelloweyes, blackpupils,yellowmuzzle, RED BOXINGGLOVES andyellowcuffs, roundedLOWbluebelly, shortbluelegs, redfeet. Bothglovesremainraisedinguard, never danglebyhips."
+    }
+  }
+]

@@ -1,0 +1,109 @@
+{
+  "sproto1011-events": {
+    "discardSmallestComponents": 1,
+    "reason": "Inspected 33 components: 32 complete staff-holding actors plus one detached white/yellow swing arc, area 3671 versus roughly 40000 per actor. Drop only that detached effect; retain every complete actor and attached staff."
+  },
+  "sproto2075-events": {
+    "repeatFinalRest": 4,
+    "reason": "The corrected sheet has 28 complete drawings: 20 action/recoil poses, four collapse poses, and four fully side-lying rest poses. Visually reviewed the final row; hold/reuse those four complete rest drawings for the final settled defeat segment, as the existing duo also holds selected floor drawings. No invented collapse frames."
+  },
+  "sproto1625-core": {
+    "componentIndices": [
+      1,
+      0,
+      4,
+      5,
+      2,
+      3,
+      6,
+      7,
+      8,
+      9,
+      11,
+      10,
+      13,
+      14,
+      16,
+      12,
+      17,
+      20,
+      18,
+      19,
+      24,
+      23,
+      22,
+      21,
+      28,
+      27,
+      26,
+      25,
+      30,
+      29,
+      32,
+      31
+    ],
+    "reason": "Visually inspected all 33 source figures. Map complete silhouettes to the 32 runtime slots, omit one redundant guard, and preserve overhanging uppercut without cutting cells. Walk entries are supplied by the separate gait set."
+  },
+  "sproto2344-motion": {
+    "scaleFromFrame": 5,
+    "targetStandingHeight": 128,
+    "reason": "Inspected motion05 is upright guard. Match core standing height instead of scaling the full sheet from the initial dash crouch."
+  },
+  "sproto2344-companion-motion": {
+    "scaleFromFrame": 5,
+    "targetStandingHeight": 128,
+    "reason": "Inspected motion05 is upright guard. Match core standing height instead of scaling the full sheet from the initial dash crouch."
+  },
+  "sproto3181-motion": {
+    "scaleFromFrame": 5,
+    "targetStandingHeight": 128,
+    "reason": "Match authored upright guard 05 to core standing height; do not enlarge from dash crouch."
+  },
+  "sproto1870-motion": {
+    "scaleFromFrame": 5,
+    "targetStandingHeight": 128,
+    "reason": "Use upright guard05 for scale. Victory bank27 loses the lower face; use the complete adjacent upward swoop28 for that victory beat.",
+    "replaceFrames": {
+      "27": 28
+    }
+  },
+  "vaudream-motion": {
+    "scaleFromFrame": 5,
+    "targetStandingHeight": 128,
+    "reason": "Match authored upright guard 05 to core standing height; do not enlarge from dash crouch."
+  },
+  "sproto1870-core": {
+    "reason": "Reviewed full sheet: ram18 occludes the lower face. Use the complete forward ram12 for heavy contact; both joined facial regions stay readable.",
+    "replaceFrames": {
+      "18": 12
+    }
+  },
+  "sproto3181-core": {
+    "replaceFrames": {
+      "20": 21,
+      "21": 20,
+      "1": 0
+    },
+    "reason": "Reviewed low attack drawings: source21 is the extended monster lunge and source20 is retracted low guard; swap for contact/recovery slots. Idle01 had an unrelated white puff, so use clean guard00."
+  },
+  "sproto3152-assist": {
+    "scaleFromFrame": 5,
+    "targetStandingHeight": 128,
+    "reason": "Upright ready key establishes common scale for assist entry, planted attack and exit."
+  },
+  "vaudream-assist": {
+    "scaleFromFrame": 5,
+    "targetStandingHeight": 128,
+    "reason": "Upright ready key anchors common scale across assist entrance, attacks and retreat."
+  },
+  "sproto3181-assist": {
+    "scaleFromFrame": 5,
+    "targetStandingHeight": 128,
+    "reason": "Upright ready key anchors common scale across assist entrance, attacks and retreat."
+  },
+  "sproto3181-companion-assist": {
+    "scaleFromFrame": 5,
+    "targetStandingHeight": 128,
+    "reason": "Upright ready key anchors common scale across assist entrance, attacks and retreat."
+  }
+}

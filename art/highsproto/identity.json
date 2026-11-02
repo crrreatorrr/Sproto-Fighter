@@ -1,0 +1,21 @@
+{
+  "name": "High Sproto",
+  "id": "highsproto",
+  "reference": "art/highsproto/reference.png",
+  "identity": "High Sproto is the ONE BLUE bearded Sproto in image 1. Preserve the broad light-blue spiky head and long pointed blue beard, huge jagged PALE YELLOW hair crest across the top with blue spikes behind it, sleepy drooping pale-yellow eyelids with RED irises and narrow black vertical pupils, small dark blue nose, thin broad RED closed smiling lips. Keep his relaxed half-lidded expression and long beard; no toothy grin or clean-shaven face. Preserve the red open hoodie/jacket collar. Extend the cropped body conservatively with an opaque red long-sleeved hoodie, dark undershirt, navy trousers, blue bare hands with visible fingers and simple dark shoes. The beard hangs in front of his upper chest; it stays attached to head. No boxing gloves, gun, wand, signs or extra characters. No background black padding.",
+  "powerRule": " His ranged attack shoots cartoon JOINT-shaped projectiles forward. Draw only the firing BODY pose: core powerCharge slot29 brings the front blue hand near the chest; core powerRelease slot30 flicks the front index and middle fingers horizontally RIGHT from the wrist at chest height. No joint or smoke floating in the sheet; engine supplies the projectile and smoke. Keep all hands and fingers attached.",
+  "status": "installed-playable",
+  "referenceSHA256": "7947ec35ba4c159553a7fc48e96f824fd08abfae0a1537bdabceec06d288dd70",
+  "installedFrames": 72,
+  "visualQA": "Core, walk and event sheets reviewed. Main-game finger-flick cast and joint projectile inspected at frame 20; one 58HP hit confirmed at frame 49.",
+  "projectileOrigin": {
+    "point": [
+      189.0,
+      124.0
+    ],
+    "world": {
+      "forward": 96.25,
+      "height": 107.5
+    }
+  }
+}

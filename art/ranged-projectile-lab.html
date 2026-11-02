@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reference projectile review</title>
+<style>body{margin:24px auto;max-width:1280px;padding:0 20px;background:#111923;color:#e7eff8;font:15px system-ui}a{color:#ffdf72}.controls{display:flex;gap:16px;align-items:end;flex-wrap:wrap;background:#223247;padding:16px}label{display:grid;gap:5px}select,button,input{font:inherit;color:inherit;background:#30455d;border:1px solid #879caf;padding:7px}canvas{width:100%;image-rendering:pixelated;border:1px solid #60758d}#reference{height:145px;max-width:220px;object-fit:contain;image-rendering:pixelated}pre{white-space:pre-wrap;color:#bfd0e1}.description{display:flex;gap:24px;align-items:center}p{line-height:1.5}</style></head>
+<body><p><a href="/">Play Sproto Fight</a> · <a href="/art/pose-atlas-lab.html">Pose review</a></p><h1>Reference projectile review</h1>
+<div class="controls"><label>Fighter<select id="fighter"><option value="sproto2531">#2531 · Mini Sproto spit</option><option value="sproto3106">#3106 · Reference B throw</option></select></label><label>Facing<select id="facing"><option value="1">Right</option><option value="-1">Left</option></select></label><label>Simulation frame<input id="frame" type="number" min="0" max="100" value="24"></label><button id="show">Show frame</button><button id="step">Step 1 frame</button><button id="play">Play</button></div>
+<div class="description"><img id="reference" alt="Exact projectile sprite"><p id="description"></p></div><p id="status" role="status">Loading the selected fighter and projectile art…</p><canvas id="combat" width="1280" height="720" aria-label="Real combat renderer with the selected projectile"></canvas><pre id="debug"></pre>
+<script type="module">
+import {A,COMBAT_STYLES,createState,step} from '/src/core.ts';
+import {ensurePoseAtlases} from '/src/poseAtlas.ts';
+import {ensurePowerArt} from '/src/powerArt.ts';
+import {render} from '/src/render.ts';
+const $=id=>document.getElementById(id),query=new URLSearchParams(location.search);
+$('fighter').value=query.get('fighter')==='sproto3106'?'sproto3106':'sproto2531';
+let state,ready=false,playing=false,last=0,acc=0;
+const presentation={phase:'fight',frame:0,winner:null,fromFloor:false};
+function initial(){const face=Number($('facing').value),s=createState($('fighter').value,'cpu','rivet');s.fighters[0].x=face===1?380:900;s.fighters[1].x=face===1?1120:160;s.fighters[0].facing=face;s.fighters[1].facing=-face;return s;}
+function draw(){if(!ready)return;render($('combat').getContext('2d'),state,presentation);$('frame').value=state.frame;const p=state.projectiles[0];$('debug').textContent=`Fighter ${state.fighters[0].id} · facing ${state.fighters[0].facing} · frame ${state.frame}\n${p?'Projectile '+p.shape+' · x='+p.x.toFixed(2)+' y='+p.y.toFixed(2)+' vx='+p.vx.toFixed(2)+' vy='+p.vy.toFixed(2):'Projectile not active at this frame.'}`;}
+function advance(){step(state,[state.frame===0?A.bolt:0,0]);draw();}
+function seek(){if(!ready)return;playing=false;$('play').textContent='Play';const frame=Math.max(0,Math.min(100,Number($('frame').value)||0));state=initial();for(let i=0;i<frame;i++)step(state,[i===0?A.bolt:0,0]);draw();}
+async function load(){ready=false;playing=false;$('show').disabled=$('step').disabled=$('play').disabled=true;const id=$('fighter').value;history.replaceState(null,'','?fighter='+id);try{await Promise.all([ensurePoseAtlases([id,'rivet']),ensurePowerArt()]);ready=true;$('reference').src=id==='sproto3106'?'/fighters/powers/sproto3106-reference-b.png':'/fighters/powers/sproto2531-mini.png';$('description').textContent=id==='sproto3106'?'Exact yellow B extracted from the source, including its red accents and black outline. It stays upright in both travel directions.':'A complete miniature Sproto is spat from the mouth. It faces its direction of travel.';$('status').textContent='Ready · real combat state, simulation-owned spawn point and the game renderer';seek();}catch(e){$('status').textContent='Art unavailable: '+e.message;}finally{$('show').disabled=$('step').disabled=$('play').disabled=!ready;}}
+$('show').onclick=seek;$('fighter').onchange=load;$('facing').onchange=seek;$('step').onclick=()=>{playing=false;$('play').textContent='Play';advance();};$('play').onclick=()=>{if(!ready)return;if(state.frame>=100){$('frame').value=0;seek();}playing=!playing;$('play').textContent=playing?'Pause':'Play';last=0;acc=0;};
+function tick(now){if(playing&&ready){if(last)acc+=Math.min(.1,(now-last)/1000);while(acc>=1/60){if(state.frame>=100){state=initial();}advance();acc-=1/60;}}last=now;requestAnimationFrame(tick);}await load();requestAnimationFrame(tick);
+</script></body></html>

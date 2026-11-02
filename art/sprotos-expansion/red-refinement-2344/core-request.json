@@ -1,0 +1,29 @@
+[
+  {
+    "index": 1349,
+    "entity": "sproto2344",
+    "fighter": "sproto2344",
+    "kind": "core",
+    "revision": "2344-red-slender-face-2",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "1c7c9981-3823-4b58-a80d-2694d38fd356"
+        },
+        {
+          "role": "image",
+          "value": "7868bd98-23f9-4f75-815c-cf7d0566c108"
+        }
+      ],
+      "prompt": "Revise the FIRST reference, an existing 32-pose fighting-game sprite atlas, using the SECOND reference only for the face and slender hourglass silhouette of its BACK LEFT adult woman. Produce EXACTLY 32 complete figures, FOUR columns by EIGHT rows, same row-major poses and pose order as first reference. Face RIGHT in consistent three-quarter view. ONLY the adult female red-bodied figure, with the BLUE face and RED outfit. SLIM and CURVY adult hourglass proportions: slender arms and calves, long slim legs, small waist, naturally full chest and rounded hips. Slimmer hips/thighs than the previous heavy version, while retaining a clear waist-to-hip curve. Opaque fitted plain red one-piece costume. Face must match the original reference: wider gently oval blue head with a broad forehead and subtly tapered lower cheeks/chin, not a round ball; very large almond-shaped YELLOW eyes, asymmetrical slanted half-lidded blue upper eyelids, long outer lash points, black oval pupils; small CLOSED red curved smile, minimal nose, no round red nose, no big open mouth, no teeth. Mature feminine face, expressive and recognizable as the source. Exclude the blue companion, pointed red cap and open-mouthed red-nosed face. In the first atlas reduce arm and leg thickness around 30 percent, reduce hip breadth around 15 percent, keep a slim waist and full but proportionate chest. Head should be a little wider and less tall than its old circular version. Give eyes the reference's exact slanted almond outline and heavier half-closed lids; no round-eyed chibi face. Keep overall standing height and head-to-body scale suitable for the existing game. Preserve exact anticipation, punch/uppercut/kick/grab/cast pose sequence from first reference, all 32 poses. Two arms and two legs only, low pelvis joints, knee chamber and supporting leg in kicks. Complete connected anatomy, all feet and hands inside each cell with empty margins. Crisp pixel-art stepped edges, dark outlines and limited-color shading. Pure MAGENTA #ff00ff background everywhere. No labels, grid lines, shadows, extra subjects or particles. Opaque costume in every pose, neutral fighting animation."
+    }
+  }
+]

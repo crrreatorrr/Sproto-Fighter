@@ -1,5 +1,5 @@
 {
-  "status": "prepared; not playable; no fighter generation submitted",
+  "status": "22nd selectable fighter integrated; independent motion QA and targeted gait correction in progress",
   "reference": {
     "library_file_id": "libfile_93cd6daf56a48191a895f354e1f1bdda",
     "version": 0,
@@ -11,25 +11,22 @@
   },
   "identity": {
     "subject": "Both figures, two separate visual entities acting as one selectable fighter",
-    "displayName": null,
+    "displayName": "Sproto Duo",
     "clarificationRequested": false,
     "observedLeft": "Slim bright-red figure with swept spiked head, large yellow oval eyes, black pupils, rounded nose, smiling mouth, long narrow neck, bent arm and a small yellow curved hand-held shape. Lower feet are cropped.",
     "observedRight": "Blue spiked figure with a small yellow top hat, yellow eyes and muzzle area, smiling mouth, long neck and red circular shapes at the front; lower red feet are cropped.",
-    "anatomyRequirement": "Each body has its own legs attached low on the lower body. Do not merge torsos, necks, hips, limbs or feet."
+    "anatomyRequirement": "Each body has its own legs attached low on the lower body. Do not merge torsos, necks, hips, limbs or feet.",
+    "workingName": true,
+    "nameStatus": "Working name until the user supplies a final name"
   },
   "model": "nano_banana_2_1",
   "baseCredits": 16,
   "optionalCorrection": {
-    "maximumSheets": 2,
-    "resolution": "4k",
-    "aspect_ratio": "9:16",
-    "creditsPerSheet": 3,
-    "totalCredits": 6,
-    "limit": "At most one correction sheet per entity, only if approved and needed."
+    "policy": "Only regenerate confirmed defects; user removed22-credit cap; other19 animation sets STOPPED"
   },
-  "requestedCap": 22,
-  "approvedCredits": 0,
-  "spentCredits": 0,
+  "requestedCap": null,
+  "approvedCredits": "existing available balance only, no purchase or subscription change",
+  "spentCredits": 35.5,
   "quote4k": {
     "cost": {
       "credits": 3,
@@ -45,11 +42,11 @@
   "readiness": {
     "characterChoice": "confirmed duo, separate bodies",
     "name": "pending",
-    "budget": "revised 22-credit cap approval requested; pending",
-    "referenceUpload": "not attempted; prior Higgsfield storage denial unresolved",
-    "generatedAssets": "none",
-    "runtimeIntegration": "pending accepted art and identity",
-    "individualVisualQA": "not run; no new animation assets"
+    "budget": "authorized existing balance",
+    "referenceUpload": "standard upload succeeded; prior19 denied uploads not retried",
+    "generatedAssets": "16 completed jobs including rejected grids and targeted corrections;35.5credits",
+    "runtimeIntegration": "one logical playable fighter with two independent full-body atlases",
+    "individualVisualQA": "in progress; throws/recoil/intro/cast/kicks/special/floor states reviewed, final gait/special fixes pending"
   },
   "accountInspection": {
     "authenticatedReadAccess": true,
@@ -118,6 +115,7 @@
     "visualOffsets": "bounded duo spacing and phase offsets; authored attack leader owns the visible contact",
     "throws": "one attack transaction and one damage release; inspect both bodies and caught opponent together",
     "hitboxPolicy": "One health/meter state and one damage transaction. Inspect a shared collision envelope or union of the two deterministic body regions against actual art; individual visual bodies must not produce double damage. Final geometry remains unmeasured.",
-    "runtimeStatus": "design only; not installed"
-  }
+    "runtimeStatus": "installed and mechanically checked; visual refinements ongoing"
+  },
+  "balanceAfterLatestGeneration": 12
 }

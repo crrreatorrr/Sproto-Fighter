@@ -195,5 +195,14 @@
     "inspected": true,
     "requirement": "Preserve blue face, yellow spikes/hood, yellow eyes, red grin with pale-blue teeth.",
     "status": "playable; original-reference selection portrait; Higgsfield whole-pose atlas + 8 locally authored guarded steps; individual combat profile; visual quality limitations documented in docs/SPRITE-REWORK-QA.md"
+  },
+  {
+    "name": "duo",
+    "display_name": "Sproto Duo",
+    "local_reference": "art/new-fighter-22/reference/original.png",
+    "library_file_id": "libfile_93cd6daf56a48191a895f354e1f1bdda",
+    "inspected": true,
+    "requirement": "Two distinct entities acting as one fighter; legs attach low on each separate body. Working name.",
+    "status": "Playable; two whole-body atlases, four-key gaits, individual event clips; current local follow-up QA recorded in docs/DUO-QA.md."
   }
 ]

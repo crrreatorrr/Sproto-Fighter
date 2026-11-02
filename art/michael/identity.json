@@ -1,0 +1,20 @@
+{
+  "id": "michael",
+  "name": "Michael D. Sproto - Chad Dev",
+  "identity": "The ONE character in reference image 1. Long cobalt BLUE spiky swept head and long neck. Exactly TWO very large pale YELLOW eyes with glossy BLACK pupils and white glints. Upright YELLOW pointed forehead stripe between eyes, RED vertical teardrop nose, YELLOW cheek/muzzle patches underneath eyes, a long thin smiling RED UPPER mouth and separate broad RED double-lobed LOWER lip across lower face. Preserve two distinct lip contours as in reference, NOT a second face or extra eyes. RED shirt with wide YELLOW collar and small blue oval brooch. Bare BLUE arms/hands, red legs and yellow boots. No gloves, cape, wand or coin drawn on body. Exactly one head, two eyes, two arms and two low-rooted legs. Exclude reference background. Match all identity colors consistently.",
+  "appearanceRule": " All clothing, spikes and accessories stay connected. Preserve asymmetry by anatomical side. No text, detached effects, weapons, floating shapes or extra subjects. No white clothing highlights; shading uses the same hue as the colored surface. Ranged cast is a forceful SPIT from the mouth, leaning forward with cheeks puffed then mouth open, arms held back; no palm shot. Do not draw the coin or speech words in the sheet; runtime renders these. Special includes an open-mouth shouting stance.",
+  "role": "RETAIN",
+  "special": "RETAIN RALLY",
+  "color": "#fff5d4",
+  "reference": "art/michael/reference.png",
+  "referenceSHA256": "135a433cec9f02cf0cbab701a0a0499a0f1eda3b9e94fedb50e91e1924b4027c",
+  "status": "installed-playable",
+  "ordinal": 4,
+  "artDirectory": "art/michael",
+  "installedFrames": 72,
+  "visualQA": "All three sheets reviewed. Browser freeze QA sampled supplied coin face at frame18, edge-on rotation at frame25, RETAIN! text, and one 60HP impact at frame49.",
+  "coinReference": "art/michael/coin-reference.png",
+  "coinSprite": "/fighters/powers/chad-retain-coin.png",
+  "voice": "/fighters/voices/retain.wav",
+  "voiceSource": "Local macOS Daniel synthesis, exact text RETAIN!, normalized PCM WAV"
+}

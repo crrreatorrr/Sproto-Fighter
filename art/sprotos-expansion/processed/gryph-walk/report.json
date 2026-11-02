@@ -1,0 +1,177 @@
+{
+  "entity": "gryph",
+  "kind": "walk",
+  "source": "art/sprotos-expansion/raw/gryph-walk.png",
+  "uniformSourceScale": 0.3208020050125313,
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        79,
+        129,
+        319,
+        528
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        34.5,
+        399
+      ],
+      "canonicalBounds": [
+        101,
+        82,
+        178,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        486,
+        129,
+        699,
+        528
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        15.5,
+        399
+      ],
+      "canonicalBounds": [
+        107,
+        82,
+        175,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        899,
+        129,
+        1098,
+        528
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        0.75,
+        399
+      ],
+      "canonicalBounds": [
+        112,
+        82,
+        176,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1253,
+        129,
+        1525,
+        528
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        28.0,
+        399
+      ],
+      "canonicalBounds": [
+        103,
+        82,
+        190,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        73,
+        658,
+        333,
+        1054
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        39.5,
+        396
+      ],
+      "canonicalBounds": [
+        99,
+        83,
+        182,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        477,
+        658,
+        701,
+        1050
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        26.5,
+        392
+      ],
+      "canonicalBounds": [
+        103,
+        84,
+        175,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        899,
+        658,
+        1097,
+        1059
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        -2.0,
+        401
+      ],
+      "canonicalBounds": [
+        113,
+        81,
+        177,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1242,
+        658,
+        1523,
+        1054
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        37.5,
+        396
+      ],
+      "canonicalBounds": [
+        100,
+        83,
+        190,
+        210
+      ]
+    }
+  ]
+}

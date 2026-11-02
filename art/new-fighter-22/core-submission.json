@@ -1,0 +1,30 @@
+{
+  "jobs": [
+    {
+      "index": 0,
+      "job_id": "e0261a27-6826-49f6-a904-15025add82db",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+        }
+      }
+    },
+    {
+      "index": 1,
+      "job_id": "fddd018e-22c7-465e-b558-8ef7d944807f",
+      "status": "pending",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+        }
+      }
+    }
+  ],
+  "submitted_count": 2,
+  "failed_count": 0
+}

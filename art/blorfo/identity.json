@@ -1,0 +1,16 @@
+{
+  "id": "blorfo",
+  "name": "Blorfo",
+  "identity": "The ONE character in reference image 1. Tall elongated BLUE shaggy/jagged head blending into broad long blue torso, large swept angular BLUE side spikes, bright YELLOW almond eyes with BLACK oval pupils and white glints, large RED muzzle with long red nose and closed horizontal red smile, a distinctive RED teardrop patch at anatomical left side/ear. Thin long RED arms with RED bare hands resting on hips in reference. Preserve red arms and blue body with no clothing, collar, gloves or cape. Extend blue lower torso into two low-rooted BLUE legs and simple blue feet. Exactly one head, two eyes, two arms and two low-rooted legs. Exclude reference background. Match all identity colors consistently.",
+  "appearanceRule": " All clothing, spikes and accessories stay connected. Preserve asymmetry by anatomical side. No text, detached effects, weapons, floating shapes or extra subjects. No white clothing highlights; shading uses the same hue as the colored surface.",
+  "role": "LONG REACH",
+  "special": "BLORFO BREAK",
+  "color": "#4658ef",
+  "reference": "art/blorfo/reference.png",
+  "referenceSHA256": "eb7204c67db2141d39b0c109170100ed0380635f50760a078620f919c752945d",
+  "status": "installed-playable",
+  "ordinal": 3,
+  "artDirectory": "art/blorfo",
+  "installedFrames": 72,
+  "visualQA": "All core/walk/event contact sheets reviewed for reference identity, connected anatomy and complete silhouettes; selected in the main game and keyboard walking/punch sampled."
+}

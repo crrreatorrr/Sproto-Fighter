@@ -1,0 +1,60 @@
+[
+  {
+    "index": 0,
+    "job_id": "7a713d3d-b625-42b1-9fd2-c672f10e5722",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "highsproto",
+    "fighter": "highsproto",
+    "kind": "core",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_053045_7a713d3d-b625-42b1-9fd2-c672f10e5722.png"
+  },
+  {
+    "index": 1,
+    "job_id": "29397d1b-2db3-43c1-b76e-31862bc68785",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "highsproto",
+    "fighter": "highsproto",
+    "kind": "walk",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_053220_29397d1b-2db3-43c1-b76e-31862bc68785.png"
+  },
+  {
+    "index": 2,
+    "job_id": "e4e3f2fe-9e90-4316-a480-0fe1fe6a9897",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "highsproto",
+    "fighter": "highsproto",
+    "kind": "events",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_053220_e4e3f2fe-9e90-4316-a480-0fe1fe6a9897.png"
+  }
+]

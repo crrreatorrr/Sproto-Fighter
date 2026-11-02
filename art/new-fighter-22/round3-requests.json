@@ -1,0 +1,82 @@
+[
+  {
+    "index": 5,
+    "params": {
+      "model": "nano_banana_2_1",
+      "thinking_level": "high",
+      "count": 1,
+      "use_unlim": false,
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "medias": [
+        {
+          "role": "image",
+          "value": "7a271219-45aa-44c3-8f9c-05eb213ee40f"
+        }
+      ],
+      "prompt": "Create a production-oriented PIXEL ART full-body fighting-game pose atlas, using the attached drawing as the identity reference. Exactly 32 separate complete figures in a regular 4-column by 8-row grid, read left-to-right then top-to-bottom. Each cell contains exactly ONE actor, facing RIGHT in a consistent three-quarter side view. Orthographic 2D sprite art; crisp stepped pixels, dark outlines, compact limited-color shading, no anti-aliased painterly rendering. Use the SAME face, head size, long body proportions and limb lengths in every cell. The feet and every extended limb must fit wholly inside its own cell with generous empty margins. Flat solid pure magenta #ff00ff background everywhere, no ground lines, labels, numbers, grid lines, shadows, motion trails or floating effects. One connected character silhouette per cell; hands, feet, neck and any worn accessory are visibly attached. Most important anatomy: the TWO LEGS grow from the LOWEST LOWER BODY/PELVIS beneath the elongated torso, close to the base, NEVER from the chest, shoulders, mid-torso or neck. Preserve two arms and two legs only; never leave a duplicate limb baked into the body. During kicks, the low hip rotates, knee chambers and extends, ankle/foot follows, supporting leg carries weight. Never replace a leg with a stretched straight tube. Clear anticipation, contact and retraction. All pose drawings are complete bodies; no separated rig pieces.\n\nUse ONLY the RED character on the LEFT of the reference. EXCLUDE the blue character completely. Preserve the bright red swept spiky head, huge yellow oval eyes with black pupils, rounded red nose, friendly wide smile, long slender red neck/body, thin red arms, low red legs and rounded red feet. No clothing, no blue skin, no hat. The small hand-held yellow item is put away before combat. Draw EMPTY RED HANDS throughout all32cells. No yellow objects anywhere except the two EYES. This simplified combat silhouette must stay consistent through every pose. Its head silhouette and eyes must remain recognizable. Body is slender and elongated; two visible low leg roots stay below the long belly.\n\nRow 1: relaxed combat guard; subtle exhale guard; forward guarded step with near foot leading; weight passes over near planted foot.\nRow 2: forward guarded step with far foot leading; weight passes over far planted foot; forward dash with low lean and both legs anatomically connected; jump anticipation with hips lowered and knees bent.\nRow 3: rising jump with both low-rooted knees gathered; falling jump with legs extending for landing; low crouched landing with both soles grounded; PUNCH WINDUP with front fist pulled BACK NEXT TO THE RIBS, elbow deeply bent, shoulder coiling; absolutely no extended arms here.\nRow 4: fully extended straight punch toward the right; punch retracting to guard; uppercut low-body coil; clear rising uppercut with elbow then fist high, two legs retained.\nRow 5: side kick chamber, near knee lifted from LOW hip, support foot planted; half-extended kick with knee opening; fully extended waist-height side kick, low hip, ankle and toes aligned; kick knee retracts high to chest with supporting foot planted; BOTH feet must NOT touch ground yet.\nRow 6: low sweeping kick with one grounded bent support leg; sweep recovery returning over the low pelvis; airborne kick chamber with both legs originating at lower body; airborne kick full extension with coherent second leg folded.\nRow 7: recoiling from a chest hit, head and torso remain joined; solid two-arm high guard; reaching forward to catch with clearly visible open hand; close grab hold with both arms bent toward an imagined opponent but NO opponent drawn.\nRow 8: forward throw release with planted low legs and torso follow-through, no opponent; ranged power anticipation with hands close to chest; ranged power release with front hand extended, no projectile; broad triumphant Team Special impact stance with both arms and both legs visible."
+    }
+  },
+  {
+    "index": 6,
+    "params": {
+      "model": "nano_banana_2_1",
+      "thinking_level": "high",
+      "count": 1,
+      "use_unlim": false,
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "medias": [
+        {
+          "role": "image",
+          "value": "7a271219-45aa-44c3-8f9c-05eb213ee40f"
+        },
+        {
+          "role": "image",
+          "value": "088e0956-0bf8-47d3-bdf9-def3eb56e6b6"
+        }
+      ],
+      "prompt": "Create an eight-frame PIXEL ART guarded walk cycle,4columns×2rows. Reference1 is the character identity. Reference2 is a POSE GUIDE: follow the exact LEG POSES in its corresponding eight cells, including contact,down,passing andup. Keep the character's own cartoon anatomy/large head/long neck/LOW pelvis, not the stick figure's proportions. Guide dark near leg and lighter far leg show WHICH LEG IS FRONT; alternate their identities in second row. Important cells2and6: ONE STRAIGHT SUPPORT LEG vertically below LOW PELVIS, other knee passes closely beside it, lifted foot near opposite shin. These are narrow passing silhouettes, not wide running strides. Cells0and4 have opposite foot contacts. All bodies face RIGHT. Keep near leg brighter, far leg darker for readable alternation. Same headsize and pelvisposition, slight vertical weight shift, planted soles on same baseline. Each cell one complete connected body with two arms and low-rooted legs. No cropped feet, no detached parts. Flat pure magenta#ff00ff, no grid/labels/shadows. Crisp pixel edges, limited shading.\nUse only BLUE RIGHT actor: blue swept spikes, attached tiny YELLOW TOP HAT, huge yellow eyes, black pupils, curved yellow muzzle patch, smilingmouth, long bluebody, roundedLOWbelly, red boxinggloves/yellowcuffs, blue low legs,redfeet. No clothes, no red actor."
+    }
+  },
+  {
+    "index": 7,
+    "params": {
+      "model": "nano_banana_2_1",
+      "thinking_level": "high",
+      "count": 1,
+      "use_unlim": false,
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "medias": [
+        {
+          "role": "image",
+          "value": "7a271219-45aa-44c3-8f9c-05eb213ee40f"
+        },
+        {
+          "role": "image",
+          "value": "088e0956-0bf8-47d3-bdf9-def3eb56e6b6"
+        }
+      ],
+      "prompt": "Create an eight-frame PIXEL ART guarded walk cycle,4columns×2rows. Reference1 is the character identity. Reference2 is a POSE GUIDE: follow the exact LEG POSES in its corresponding eight cells, including contact,down,passing andup. Keep the character's own cartoon anatomy/large head/long neck/LOW pelvis, not the stick figure's proportions. Guide dark near leg and lighter far leg show WHICH LEG IS FRONT; alternate their identities in second row. Important cells2and6: ONE STRAIGHT SUPPORT LEG vertically below LOW PELVIS, other knee passes closely beside it, lifted foot near opposite shin. These are narrow passing silhouettes, not wide running strides. Cells0and4 have opposite foot contacts. All bodies face RIGHT. Keep near leg brighter, far leg darker for readable alternation. Same headsize and pelvisposition, slight vertical weight shift, planted soles on same baseline. Each cell one complete connected body with two arms and low-rooted legs. No cropped feet, no detached parts. Flat pure magenta#ff00ff, no grid/labels/shadows. Crisp pixel edges, limited shading.\nUse only the RED LEFT actor: brightred swept spiked head, huge yellow eyes, black pupils, round red nose, smile, long slim neck/body, red arms and red low legs/feet. No clothing, blue skin or hat. Put the hand-held item away for combat: EMPTY RED HANDS throughout, only the eyes are yellow."
+    }
+  },
+  {
+    "index": 8,
+    "params": {
+      "model": "nano_banana_2_1",
+      "thinking_level": "high",
+      "count": 1,
+      "use_unlim": false,
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "medias": [
+        {
+          "role": "image",
+          "value": "7a271219-45aa-44c3-8f9c-05eb213ee40f"
+        }
+      ],
+      "prompt": "Use the supplied original reference and the accepted pose atlas to make NEW COMPLETE-BODY PIXEL ART animation drawings of the SAME RED ACTOR ONLY. Exactly one full actor per cell. Face RIGHT in every cell. Use only the RED LEFT actor: brightred swept spiked head, huge yellow eyes, black pupils, round red nose, smile, long slim neck/body, red arms and red low legs/feet. No clothing, blue skin or hat. Put the hand-held item away for combat: EMPTY RED HANDS throughout, only the eyes are yellow. Legs originate from the bottom pelvis, never chest or neck. Both arms/legs, neck  stay connected. No duplicate limbs, no other character. Same head size and body proportions between all frames. Keep enough margins for every extremity. Pure solid magenta #ff00ff background, no words, numbers, grid lines, shadows or detached effects. Draw crisp stepped pixel contours and simple limited-color shading. Each cell is a complete body, NOT rig pieces.\nExactly32drawings in a4-column by8-row grid, read row-major. Keep world scale identical. Row1, intro4frames:0 neutral guard matching core guard;1 playful wave with front hand, other fist at hip;2 confident forward gesture with other hand at waist;3 settle both hands to guard. Rows2and3, eight DOUBLE TAKE special frames:4 deep low-knee energy coil;5 rear-foot push with shoulders winding;6 powerful forward right-facing cross punch;7 retract fist and shift weight back;8 upward punch with low hips extending;9 recoil into low planted guard;10 climactic two-handed forward PALM strike with both low legs strongly braced;11 both hands recover toward guard. Row4, four cast frames12-15:12 hands gather at chest;13 low hips coil, palms cup together;14 forward palm release at chest height;15 hands recoil toward guard. No projectile drawn, game draws it separately. Row5, four recoilframes16-19:16 torso jolts backward but feet planted;17 knees soften and both arms catch balance;18 straighten over low hips;19 return to combat guard. Rows6-8, twelve DEFEAT frames20-31:20 upright stunned;21 knees buckle;22 lowers toward knees;23 hand touches ground to break fall;24 begins side fall with torso angled, knees low;25 hip and hand contact floor;26 torso lowers onto side;27 head and shoulder rest;28 rolls slightly into side rest;29 settles, eyes closed;30 tiny final exhale lying on side;31 stable defeated side-lying rest. Draw entire body  attached/coherent in all lying frames; each must fit within its cell, lower floor at same baseline. Do not shrink lying figures to fit; use sufficiently generous spacing. No standing poses after frame24. The final lower8frames must ALL remain on the floor and settle smoothly.\nOnly the original RED character, not the blue one. Hands are EMPTY in all32drawings, no yellow props. Face right. Defeat24through31are side-lying on the floor, not kneeling; preserve full body size and generous horizontal margin. Smooth coherent full-body poses. Yellow only in eyes."
+    }
+  }
+]

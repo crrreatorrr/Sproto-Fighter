@@ -1,0 +1,54 @@
+[
+  {
+    "index": 1,
+    "entity": "gpm",
+    "fighter": "gpm",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "c437cbe2-1efe-479c-89b0-35c2e31221d0"
+        },
+        {
+          "role": "image",
+          "value": "5df40e33-debe-4510-a11f-0803586dd5b5"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and broad rounded furry torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: GPM is the ONE ROUND BLUE FURRY SPROTO in reference image 1. Preserve the broad rounded periwinkle/cobalt-blue shaggy head and rounded furry body, sharp blue tufts/spikes around top and sides, enormous YELLOW double-oval eye markings/lids joined across the nose bridge, huge BLACK oval pupils with THREE small white shiny highlights in each visible eye, small BLACK oval nose and very large RED-ORANGE smiling muzzle/lips. Mouth stays closed with a curved smile line, NO TEETH and no extra tongue. The yellow area is the original eye-region coloration, NOT new glasses, goggles or jewelry. No red nose, red head spikes, yellow hair, beard, hat, clothing, suit or collar. This is an opaque fully blue-furred cartoon creature. Extend the cropped lower body conservatively as a broad rounded blue furry torso, two blue fur-covered arms with connected fingered hands, low-rooted sturdy blue legs and simple rounded blue feet. Keep the broad friendly chunky silhouette, not a skinny humanoid or long-necked character. Huge glossy black eyes and black nose are primary identity cues. Exclude yellow backdrop and all corner framing. Image 1 is the original portrait. Image 2 is the approved complete-body GPM design: match the EXACT blue fur, broad rounded body, jagged blue tufts, enormous yellow eye markings, glossy BLACK pupils with white glints, BLACK nose, red-orange smiling muzzle, blue fingered hands and blue feet. No clothing, collar, tie, red nose or teeth.\n\nExactly EIGHT separate full-body drawings in a regular 4-column by 2-row grid. A continuous guarded fighting footwork loop, NOT a run. Upper body stays calm, head/torso size constant, hips stay at the same height and same x center. Both fists remain raised. Feet are clearly different on adjacent frames: 0 near foot forward grounded/far foot back grounded; 1 transfer weight to near sole, far heel lifts; 2 far knee passes under low pelvis with far foot lifted; 3 far foot reaches forward while near sole still supports; 4 far foot forward grounded/near foot back grounded; 5 transfer weight to far sole, near heel lifts; 6 near knee passes under low pelvis with near foot lifted; 7 near foot reaches forward ready to plant. No feet crossing through one another, no sliding torso, no detached hips. Each frame has at least one clearly grounded foot. Last frame loops to first. Same complete body and clothing as the combat reference.\n Fur stays solid and opaque, with crisp stepped edges and restrained tuft shading. Keep yellow eye markings and red-orange muzzle identical across poses; never invent extra eyes or additional pupils. Keep all white glints within the two black pupils. Two arms and two low-rooted legs only, attached beneath the round body. No fighting gloves or held weapons. Match broad round proportions and blue fur color in every cell. Strict exact count with generous pure magenta gutters around each complete actor."
+    }
+  },
+  {
+    "index": 2,
+    "entity": "gpm",
+    "fighter": "gpm",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "c437cbe2-1efe-479c-89b0-35c2e31221d0"
+        },
+        {
+          "role": "image",
+          "value": "5df40e33-debe-4510-a11f-0803586dd5b5"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and broad rounded furry torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: GPM is the ONE ROUND BLUE FURRY SPROTO in reference image 1. Preserve the broad rounded periwinkle/cobalt-blue shaggy head and rounded furry body, sharp blue tufts/spikes around top and sides, enormous YELLOW double-oval eye markings/lids joined across the nose bridge, huge BLACK oval pupils with THREE small white shiny highlights in each visible eye, small BLACK oval nose and very large RED-ORANGE smiling muzzle/lips. Mouth stays closed with a curved smile line, NO TEETH and no extra tongue. The yellow area is the original eye-region coloration, NOT new glasses, goggles or jewelry. No red nose, red head spikes, yellow hair, beard, hat, clothing, suit or collar. This is an opaque fully blue-furred cartoon creature. Extend the cropped lower body conservatively as a broad rounded blue furry torso, two blue fur-covered arms with connected fingered hands, low-rooted sturdy blue legs and simple rounded blue feet. Keep the broad friendly chunky silhouette, not a skinny humanoid or long-necked character. Huge glossy black eyes and black nose are primary identity cues. Exclude yellow backdrop and all corner framing. Image 1 is the original portrait. Image 2 is the approved complete-body GPM design: match the EXACT blue fur, broad rounded body, jagged blue tufts, enormous yellow eye markings, glossy BLACK pupils with white glints, BLACK nose, red-orange smiling muzzle, blue fingered hands and blue feet. No clothing, collar, tie, red nose or teeth.\n\nExactly 32 separate complete drawings, regular 4-column by 8-row grid, read left-to-right/top-to-bottom. All 32 are the SAME single actor, including lying floor drawings. No opponents or partner drawn.\nRow 1 INTRO: relaxed idle; determined head turn with fists rising; guarded confident stance; settle combat guard.\nRow 2 SPECIAL A: low coil; shoulder windup; fully extended straight impact punch; punch retract.\nRow 3 SPECIAL B: alternate shoulder strike; retract to cover; two-arm finishing palm thrust to RIGHT; recover combat guard. No floating effects.\nRow 4 CAST: hands coil at chest; forward hand chambers; front palm extends RIGHT at chest height; retract to guard. No projectile, sphere or particles; engine supplies effects.\nRow 5 RECOIL: chest impact arch; head/torso lean back with arms still connected; bend knees to absorb; regain combat guard.\nRow 6 DEFEAT START: staggering upright; knees buckle; dropping toward floor with bent elbows; roll onto side with head and feet fully visible.\nRow 7 DEFEAT FLOOR: entirely lying on side, head to LEFT feet to RIGHT; same lying body settles; small final shoulder drop; side-lying completely still. No kneeling or standing in any of these four.\nRow 8 DEFEAT REST: same side-lying floor silhouette with tiny relaxed hand change; same side-lying rest; same resting body; final completely relaxed side-lying body. Floor poses are lower than standing poses; never stretch them upright. All hats, heads, hands and feet remain connected and fully visible.\n Fur stays solid and opaque, with crisp stepped edges and restrained tuft shading. Keep yellow eye markings and red-orange muzzle identical across poses; never invent extra eyes or additional pupils. Keep all white glints within the two black pupils. Two arms and two low-rooted legs only, attached beneath the round body. No fighting gloves or held weapons. Match broad round proportions and blue fur color in every cell. Strict exact count with generous pure magenta gutters around each complete actor."
+    }
+  }
+]

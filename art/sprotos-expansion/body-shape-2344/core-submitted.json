@@ -1,0 +1,40 @@
+[
+  {
+    "index": 1331,
+    "entity": "sproto2344",
+    "fighter": "sproto2344",
+    "kind": "core",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "job_id": "1c7c9981-3823-4b58-a80d-2694d38fd356",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "model": "gpt_image_2_5",
+    "retry": 10,
+    "estimatedCredits": 4.25
+  },
+  {
+    "index": 1332,
+    "entity": "sproto2344-companion",
+    "fighter": "sproto2344",
+    "kind": "core",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "job_id": "26efe74d-5967-40c4-bb8f-1c6e3b478bf0",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "model": "gpt_image_2_5",
+    "retry": 10,
+    "estimatedCredits": 4.25
+  }
+]

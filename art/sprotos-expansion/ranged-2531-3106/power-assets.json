@@ -1,0 +1,44 @@
+{
+  "referenceB": {
+    "source": "art/sprotos-expansion/references/sproto-gremlin-3106.png",
+    "sourceSha256": "869f39a4ed9d43d8bf8801982109cc7755f1faff7172c6a7559cfe0686e7e49f",
+    "sourceRegion": [
+      610,
+      20,
+      995,
+      440
+    ],
+    "trim": [
+      19,
+      39,
+      358,
+      400
+    ],
+    "size": [
+      339,
+      361
+    ],
+    "opaqueColors": "unchanged source RGB"
+  },
+  "miniSproto": {
+    "source": "art/sprotos-expansion/processed/sproto2531-core/08.png",
+    "sourceSha256": "d80be63d37ff62881c45ba5123aed8e3497c814522a7a5609a0caba433331a31",
+    "size": [
+      37,
+      46
+    ],
+    "sampling": "nearest",
+    "pose": "complete airborne body, slot08"
+  },
+  "frameFiles": 72,
+  "origins": {
+    "sproto2531": {
+      "forward": 31.25,
+      "height": 98.75
+    },
+    "sproto3106": {
+      "forward": 86.25,
+      "height": 106.25
+    }
+  }
+}
