@@ -6,3 +6,7 @@ dist/
 # Local Python authoring caches
 __pycache__/
 *.pyc
+
+# This vendored runtime is an input to the game build, not the game output.
+!vendor/hub-sdk/dist/
+!vendor/hub-sdk/dist/**

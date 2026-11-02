@@ -202,3 +202,9 @@ footer { padding: 8px 0 10px; font-size: 7px; color: #727580; }
 .portrait-choice.fighter-locked{border-color:#454a58}
 .god-mode-control{display:grid;gap:6px;max-width:240px}.god-mode-control small{font-size:11px;line-height:1.4;color:#a3b2c4}.god-mode-control input{width:auto}
 .world-card:disabled{opacity:.45;cursor:not-allowed}
+
+/* Hub status is optional; existing story locks and original portraits remain authoritative. */
+.hub-label.linked{color:#7fe8a8}
+#return-hub{border-color:#ff3d6e}
+#hub-toast{position:fixed;right:18px;bottom:18px;z-index:50;max-width:min(340px,calc(100vw - 36px));padding:12px 16px;background:#13101fef;border:2px solid #ffdb49;box-shadow:3px 3px #000;color:#f6efd2;font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+#hub-toast b{display:block;color:#ffdb49;font-size:13px;letter-spacing:.5px}

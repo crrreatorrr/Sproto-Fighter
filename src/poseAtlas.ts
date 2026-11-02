@@ -1,3 +1,8 @@
+/** Resolve public art under the build's HTML base; Node/diagnostic fixtures use root paths. */
+const asset=(path:string)=>{
+ const base=typeof document==='undefined'?'/':(document.querySelector?.('meta[name="sproto-asset-base"]') as HTMLMetaElement|null)?.content||'/';
+ return base+path.replace(/^\/+/, '');
+};
 import { EVENT_CLIP_LENGTHS, ACTION_CLIP_LENGTHS, ASSIST_CLIP_LENGTHS, IDENTITY_CLIP_LENGTHS, entranceFrame, deathFrame, introFrame, defeatFrame, specialFrame, castFrame, recoilFrame, type AtlasClipName, type RoundPresentation } from './animationEvents';
 import { A, ROSTER, COMBAT_STYLES, CHARACTER_ACTIONS, DUO_SPREAD, FLOOR, WIDTH, getMove, bodyAtlasIds, bodyOffsets, specialPartnerIds, PARTNER_ATTACKS, partnerContactIndex, isPairedFighter, isCrouchingSpit, type Fighter, type ThrowState } from './core';
 
@@ -86,7 +91,7 @@ const names = Object.entries(POSE_SLOTS);
 function localUrl(path: string, revision?: string): string {
   // Atlas assets are local application files. No external source is fetched.
   if (!path || /^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(path) || path.includes('\\')) throw new Error('Atlas frame must use a local URL');
-  const url = path.startsWith('/') ? path : '/fighters/' + path;
+  const url = asset(path.startsWith('/') ? path : '/fighters/' + path);
   return revision ? url + (url.includes('?') ? '&' : '?') + 'v=' + encodeURIComponent(revision) : url;
 }
 async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): Promise<Atlas> {
@@ -144,7 +149,7 @@ export function loadPoseAtlases(): Promise<boolean> {
   if (pending) return pending;
   loadState = 'loading'; loadError = null;
   pending = (async () => {
-    const response = await fetch('/fighters/pose-atlas.json', { cache: 'no-store' });
+    const response = await fetch(asset('/fighters/pose-atlas.json'), { cache: 'no-store' });
     if (response.status === 404 || (response.ok && response.headers.get('content-type')?.includes('text/html'))) {
       // Development SPA servers can return their HTML shell for missing files.
       atlases.clear(); declaredAtlases.clear(); loadState = 'absent'; return false;
@@ -170,7 +175,7 @@ let latestSelectionBodies=new Set<string>();
  * allocate every fighter's decoded animation images before the menu opens. */
 export async function ensurePoseAtlases(ids:readonly Fighter['id'][]):Promise<void>{
   selectionManifest??=(async()=>{
-    const response=await fetch('/fighters/pose-atlas.json',{cache:'no-store'});
+    const response=await fetch(asset('/fighters/pose-atlas.json'),{cache:'no-store'});
     if(!response.ok)throw new Error(`Pose atlas metadata: HTTP ${response.status}`);
     const manifest=await response.json() as PoseAtlasManifest;
     if(manifest.version!==1||!manifest.fighters)throw new Error('Unsupported pose atlas manifest');

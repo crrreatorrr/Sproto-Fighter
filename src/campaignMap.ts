@@ -1,3 +1,8 @@
+/** Resolve public art under the build's HTML base; Node/diagnostic fixtures use root paths. */
+const asset=(path:string)=>{
+ const base=typeof document==='undefined'?'/':(document.querySelector?.('meta[name="sproto-asset-base"]') as HTMLMetaElement|null)?.content||'/';
+ return base+path.replace(/^\/+/, '');
+};
 import {campaignMapMarkerLayout,campaignMapPaths,campaignMapPoints} from './campaignMapLayout';
 import {campaignMapViewport} from './campaignMapViewport';
 import {ROSTER} from './core';
@@ -10,7 +15,7 @@ import {storyLocationForEncounter} from './stageVariants';
 export function mountCampaignMap(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void){
  const save=progress.snapshot(),points=campaignMapPoints(STORY_ENCOUNTERS),root=document.createElement('section');root.className='campaign is-overview';
  const markerLayout=campaignMapMarkerLayout(points);
- root.innerHTML='<div class="campaign-toolbar"><strong>OUT OF THE TRENCHES</strong><button class="quiet campaign-current">Find next fight</button><button class="quiet campaign-fit">Fit map</button><label>Map zoom <input class="campaign-zoom" type="range" min="100" max="800" step="25" value="100"><output class="campaign-zoom-value">Fit</output></label></div><p class="campaign-help">The full map is visible. Select a rival or region to zoom in. Arrow keys move between rivals; Enter selects. Gold is next, green is cleared, grey is locked.</p><div class="campaign-regions" aria-label="Jump to a map region"></div><div class="campaign-window" tabindex="0" aria-label="Scrollable campaign map"><div class="campaign-land"><img class="campaign-art" src="/story/campaign-map-expanded.webp" alt="Expanded pixel world: trench villages, neon city, Bitcoin yacht marina, castle, Sproto Ranch, HPOS10i Club, a separate alien Hatchery island and the final Verse portal." draggable="false"><svg class="campaign-trail" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg><div class="campaign-nodes" role="group"></div></div></div><div class="campaign-rival" aria-live="polite"></div>';
+ root.innerHTML='<div class="campaign-toolbar"><strong>OUT OF THE TRENCHES</strong><button class="quiet campaign-current">Find next fight</button><button class="quiet campaign-fit">Fit map</button><label>Map zoom <input class="campaign-zoom" type="range" min="100" max="800" step="25" value="100"><output class="campaign-zoom-value">Fit</output></label></div><p class="campaign-help">The full map is visible. Select a rival or region to zoom in. Arrow keys move between rivals; Enter selects. Gold is next, green is cleared, grey is locked.</p><div class="campaign-regions" aria-label="Jump to a map region"></div><div class="campaign-window" tabindex="0" aria-label="Scrollable campaign map"><div class="campaign-land"><img class="campaign-art" src="'+asset('/story/campaign-map-expanded.webp')+'" alt="Expanded pixel world: trench villages, neon city, Bitcoin yacht marina, castle, Sproto Ranch, HPOS10i Club, a separate alien Hatchery island and the final Verse portal." draggable="false"><svg class="campaign-trail" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg><div class="campaign-nodes" role="group"></div></div></div><div class="campaign-rival" aria-live="polite"></div>';
  parent.append(root);
  const chapters=parent.querySelector<HTMLElement>('.campaign-chapter-list');if(chapters)chapters.hidden=true;
  const viewport=root.querySelector<HTMLElement>('.campaign-window')!;

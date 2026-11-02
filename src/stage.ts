@@ -1,3 +1,8 @@
+/** Resolve public art under the build's HTML base; Node/diagnostic fixtures use root paths. */
+const asset=(path:string)=>{
+ const base=typeof document==='undefined'?'/':(document.querySelector?.('meta[name="sproto-asset-base"]') as HTMLMetaElement|null)?.content||'/';
+ return base+path.replace(/^\/+/, '');
+};
 /** Fallback ranch pixel art, drawn at 320×180 then nearest-neighbor scaled.
  * Reference motifs: amber dusk, stone farmhouse, grassy fields, muddy lane,
  * dry-stone boundary and distant weathered farm buildings. No reference pixels,
@@ -271,7 +276,7 @@ export function loadStageArt(ids:readonly StageId[]=STAGES.map(stage=>stage.id))
         const pending=stageArtPending.get(id);if(pending)return pending;
         const image=new Image();
         const load=new Promise<void>((resolve,reject)=>{
-            image.onload=()=>resolve();image.onerror=()=>reject(new Error(`Stage image could not load: ${id}`));image.src=stageImageSource(id);
+            image.onload=()=>resolve();image.onerror=()=>reject(new Error(`Stage image could not load: ${id}`));image.src=asset(stageImageSource(id));
         }).then(()=>{stageImages.set(id,image);stageArtErrors.delete(id);})
           .catch(error=>{stageArtErrors.set(id,String(error));})
           .finally(()=>{stageArtPending.delete(id);});

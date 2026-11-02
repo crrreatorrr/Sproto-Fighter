@@ -1,3 +1,8 @@
+/** Resolve public art under the build's HTML base; Node/diagnostic fixtures use root paths. */
+const asset=(path:string)=>{
+ const base=typeof document==='undefined'?'/':(document.querySelector?.('meta[name="sproto-asset-base"]') as HTMLMetaElement|null)?.content||'/';
+ return base+path.replace(/^\/+/, '');
+};
 import type {StageId} from './stage';
 
 export interface StoryLocation {id:string;stage:StageId;title:string;image:string;width:number;height:number}
@@ -532,7 +537,7 @@ const pending=new Map<string,Promise<void>>();
 export function loadStoryLocation(location:StoryLocation):Promise<void>{
  if(images.has(location.id))return Promise.resolve();
  let load=pending.get(location.id);if(load)return load;
- load=new Promise<void>((resolve,reject)=>{const image=new Image();image.onload=()=>{images.set(location.id,image);resolve();};image.onerror=()=>reject(new Error(`Could not load story scenery: ${location.title}`));image.src=location.image;}).finally(()=>pending.delete(location.id));
+ load=new Promise<void>((resolve,reject)=>{const image=new Image();image.onload=()=>{images.set(location.id,image);resolve();};image.onerror=()=>reject(new Error(`Could not load story scenery: ${location.title}`));image.src=asset(location.image);}).finally(()=>pending.delete(location.id));
  pending.set(location.id,load);return load;
 }
 /** All variants have a full-width floor around y=578. Reviewed in the lane lab.
