@@ -10,6 +10,7 @@ import { ensurePowerArt } from './powerArt';
 import { playRetainCallout } from './characterVoice';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
 import { STAGES, setStage, loadStageArt, type StageId } from './stage';
+import {storyProgress} from './storyProgress';
 import { createStoryMode } from './storyMode';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
@@ -35,6 +36,7 @@ let state = createState(), chosen: FighterId = 'rivet', mode: Mode = 'cpu', oppo
     action: Action;
     device: 'key' | 'pad';
 } | null = null;
+let matchGodMode=false, matchEarnedGodMode=false, testingGodMode=false, matchTesting=false;
 let presentation = createRoundPresentation();
 let modalDirection='',modalRepeatAt=0,padNeedsRelease=true;
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousStart = false;
@@ -52,15 +54,21 @@ function updateStage(stage:StageId) {
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
 async function launchSelection(setup:SelectionSetup,isStory=false) {
-    try{await Promise.all([ensurePoseAtlases([setup.fighter,setup.opponent]),[setup.fighter,setup.opponent].some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return;}
+    if(!storyProgress.isUnlocked(setup.fighter))return false;
+    try{await Promise.all([ensurePoseAtlases(isStory&&setup.opponent==='vela'?[setup.fighter,'vela','vaudream']:[setup.fighter,setup.opponent]),[setup.fighter,setup.opponent].some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
+    matchEarnedGodMode=!isStory&&storyProgress.snapshot().completed&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);
     selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
     started=false;restart();start();
     $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
+    if(isStory&&setup.opponent==='vaudream')$('mode-label').textContent+=' / FINAL GAUNTLET / HEALTH REFILLED';
+    updateGodModeLabel();
+    return true;
 }
 function returnToSelection() {
+    story.leaveStory();
     running=false;started=false;held.clear();queued=0;accumulator=0;qaSingleStep=false;
     resumeAfterSettings=false;resumeAfterJourney=false;
     $('fight-view').hidden=true;$('overlay').hidden=true;
@@ -129,24 +137,36 @@ function pause() {
         start();
 }
 function restart() {
+    matchTesting=testingGodMode;matchGodMode=testingGodMode||matchEarnedGodMode;
     state = createState(chosen, mode, opponent);
+    if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
     frames.length = 0;
     qaEvents.length = 0;
     accumulator = 0;
     held.clear();
     queued = 0;
+    updateGodModeLabel();
     if (started)
         start();
 }
+function updateGodModeLabel(){
+    const label=$('mode-label');label.textContent=(label.textContent??'').replace(/ \/ GOD MODE(?: TEST)?$/,'')+(matchTesting?' / GOD MODE TEST':matchGodMode?' / GOD MODE':'');
+}
+function setTestingGodMode(enabled:boolean){
+    testingGodMode=enabled;
+    if(started&&!selection.isOpen){if(!story.retryMatch())restart();}
+}
 let resumeAfterJourney = false, freePlayMode: Mode | null = null;
 const story = createStoryMode({
+    testing:()=>matchTesting,
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
     resume: () => { if (resumeAfterJourney && started && presentation.phase !== 'result') start(); },
-    launch: (stage, isStory) => {
+    launch: (stage, isStory, storyOpponent) => {
         if(isStory)freePlayMode??=selection.getSetup().mode;
         const setup=selection.getSetup();
+        if(storyOpponent)setup.opponent=storyOpponent;
         setup.stage=stage;setup.mode=isStory?'cpu':freePlayMode??setup.mode;
         if(!isStory)freePlayMode=null;
         return launchSelection(setup,isStory);
@@ -154,9 +174,11 @@ const story = createStoryMode({
 });
 $('start').onclick = start;
 $('pause').onclick = pause;
-$('reset').onclick = restart;
+$('reset').onclick = ()=>{if(!story.retryMatch())restart();};
 const dialog = $<HTMLDialogElement>('controls-dialog');
+$('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
 $('settings').onclick = () => {
+    $<HTMLInputElement>('testing-god-mode').checked=testingGodMode;
     resumeAfterSettings = running;
     if (running)
         pause();
@@ -255,7 +277,7 @@ function pollPad(): number {
         }
         modalDirection=direction;
         if(buttons[1]&&!previousPad[1])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
-        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLButtonElement)document.activeElement.click();
+        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLElement&&document.activeElement.matches('button,input[type=checkbox]'))document.activeElement.click();
     }else if(!wasOverlay)modalDirection='';
     if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen){
         const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
@@ -339,6 +361,7 @@ function advanceRoundFrame(input: number) {
     for(const [i,f] of state.fighters.entries())if(f.id==='michael'&&f.move!==previousMoves[i]&&(f.move?.id==='bolt'||f.move?.id==='special'))playRetainCallout();
     qaRecord(qaBefore);
     if (state.winner !== null) {
+        story.finishMatch(state.winner);
         const losers = state.fighters.filter((_, i) => state.winner === 2 || i !== state.winner);
         const fromFloor = losers.every(f => f.reaction?.kind === 'knockdown' && f.reaction.phase === 'down');
         beginRoundOutro(presentation, state.winner as 0 | 1 | 2, fromFloor);
@@ -377,8 +400,9 @@ document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStageArt().then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
-Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, replay: () => ({ version: 1, fighter: chosen, mode, opponent, frames: frames.map(f => [...f]) }), verifyReplay: () => {
+Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, godMode:matchGodMode, frames: frames.map(f => [...f]) }), verifyReplay: () => {
             const replay = createState(chosen, mode, opponent);
+            if(matchGodMode){replay.godMode=true;replay.fighters[0].pips=3;}
             for (const frame of frames)
                 step(replay, frame);
             return JSON.stringify(replay) === JSON.stringify(state);

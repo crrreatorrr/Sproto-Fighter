@@ -616,6 +616,7 @@ export interface CombatState {
     effects: Effect[];
     freeze: number;
     mode: Mode;
+    godMode?: boolean;
     winner: number | null;
     notice: string;
     noticeLife: number;
@@ -735,7 +736,7 @@ function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile
     }
     if(heldAttacker)interruptThrow(s);
     const scaling = Math.max(.45, 1 - a.combo * .08), amount = Math.round(m.damage * scaling);
-    b.hp = Math.max(0, b.hp - amount);
+    b.hp = Math.max(0, b.hp - (s.godMode && index === 1 ? 0 : amount));
     b.stun = m.stun;
     b.blockstun = 0;
     b.move = null;
@@ -930,6 +931,7 @@ export function step(s: CombatState, inputs: [
 ]): void {
     if (s.winner !== null)
         return;
+    if(s.godMode){s.fighters[0].hp=1000;s.fighters[0].pips=3;}
     const endingKO=s.fighters.some(f=>f.hp<=0);
     if(endingKO)inputs=[0,0];
     s.frame++;
@@ -1184,6 +1186,7 @@ export function step(s: CombatState, inputs: [
         s.winner = a.hp === b.hp ? 2 : a.hp > b.hp ? 0 : 1;
         s.throwState=null;
     }
+    if(s.godMode){a.hp=1000;a.pips=3;}
     if (s.mode !== 'cpu' && b.stun === 0 && a.combo === 0 && s.frame % 90 === 0)
         b.hp = 1000;
 }

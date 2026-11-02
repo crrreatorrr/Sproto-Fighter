@@ -196,3 +196,9 @@ footer { padding: 8px 0 10px; font-size: 7px; color: #727580; }
 @media (min-width:650px){
  .preview-stage-label{top:5px;bottom:auto;width:10%;max-width:120px;}
 }
+/* Story recruitment and post-campaign free-play reward. */
+.portrait-choice.fighter-locked img{filter:grayscale(1);opacity:.35}
+.portrait-choice.fighter-locked .portrait-name::before{content:'LOCKED · ';color:#f1c481}
+.portrait-choice.fighter-locked{border-color:#454a58}
+.god-mode-control{display:grid;gap:6px;max-width:240px}.god-mode-control small{font-size:11px;line-height:1.4;color:#a3b2c4}.god-mode-control input{width:auto}
+.world-card:disabled{opacity:.45;cursor:not-allowed}
