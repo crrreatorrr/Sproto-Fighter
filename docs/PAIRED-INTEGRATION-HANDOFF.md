@@ -141,3 +141,9 @@ UI, stage-lane, twin-display, partner-assist and roster deltas. The completed
 100-encounter progression branch is queued, including its later testing-mode
 follow-up. See [INTEGRATION-CHECKPOINT.md](INTEGRATION-CHECKPOINT.md). No merge
 to main, remote push, paid generation or publication was performed here.
+
+## Additional preservation check
+
+The installed Sproto 943 core, walk and event assets were compared with the completed flat-trousers correction: all 72 PNG hashes matched. The three source contact sheets were inspected and no protruding crotch shape was observed. This checks those 72 assets, not later entrance/defeat frames from the separately completed roster update.
+
+An incorrectly named live-capture record was corrected: `integration-live-group1-*` screenshots show group 1 (Duo, 282, 704, 832), not Sproto 3181. They must not be used as evidence of live 3181 sweep review. The separately recorded deterministic 3181 samples remain correctly attributed.
