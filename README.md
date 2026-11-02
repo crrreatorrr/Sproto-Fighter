@@ -1,7 +1,7 @@
 # Sproto Arena
 
 A local TypeScript / Canvas 2D fighting game with **131 installed fighters**,
-CPU/practice opponents, ten base arenas and a campaign that grows with the installed roster.
+CPU/practice opponents, 70 selectable arenas and a campaign that grows with the installed roster.
 No game engine, multiplayer transport or deployment.
 
 **Satoshi Sprototo, Xalt and Poto Cai Cai** are campaign opponents with 104 drawings each, including custom entrance8, mouth-spit8 and death16 sequences. Defeat each in the Verse to recruit them for play. [Animation and combat QA](docs/LATE-NAMED-NOV02-QA.md).
@@ -19,8 +19,9 @@ npm run dev -- --port 5173 --strictPort
 Open **http://127.0.0.1:5173/** on this Mac. Keep the server terminal open.
 The existing background service serves this main checkout for the current
 login session. After logout/reboot use the launcher again. The isolated
-integration preview uses port 5187. Saves belong to their browser
-origin: 5173 and 5187 have separate progression. This is not a hosted website.
+stage-integration preview uses port 5197. Saves belong to their browser
+origin: 5173 and 5197 have separate progression. Use 5173 for normal play.
+This is not a hosted website.
 
 ## Campaign and testing
 
@@ -50,7 +51,7 @@ current encounter. Story wins persist in either mode; free-play wins do not.
 Testing mode turns off on reload. Completing the campaign also grants a durable
 God Mode selection reward. God Mode does not bypass P1 recruitment locks.
 
-This integration candidate has 131 installed entries: 129 distinct rivals across
+This local checkpoint has 131 installed entries: 129 distinct rivals across
 126 encounters, including three two-opponent encounters. Nineteen additional roster
 entries and their assets are still needed for the requested 150. The route grows
 from registered fighters without inventing characters; at 150 entries it has 148
@@ -58,8 +59,18 @@ rivals across 145 encounters. The map also passes a synthetic 150-node fixture.
 The last zone opens with Nick → Juicy, followed by Morelight → VMU. Previous
 Nick/Juicy wins and recruits are retained when their old encounters regroup.
 Scenes remain placeholders pending script approval. No videos or paid generations
-were made by this integration. Final merge to main remains pending completion of
-the remaining roster and clarification of the additional stage variations.
+were made by this integration. Completed work is checkpointed on local main;
+the remaining roster and full live animation review are still open.
+
+The non-story selector groups all **70 installed backgrounds** into eight zones,
+including every approved story panorama. Ranch has its original arena plus the
+lantern-lit barn, green paddock and dusty farmhouse yard. Story scenery advances
+between sequential boss bouts while preserving their order and saves. The current
+route uses 60 of 61 story locations; Pearl Incubation Chamber is available in free
+play, with only four Hatchery bouts currently installed.
+
+See the [stage catalogue checkpoint](docs/STAGE-CATALOGUE-20261102.md) for exact
+counts, file mappings, checks and browser-verification limits.
 
 See [campaign expansion and browser QA](docs/CAMPAIGN-EXPANSION-UPDATE.md) for
 exact coverage, isolated preview commands and pending integration work.
@@ -68,7 +79,7 @@ exact coverage, isolated preview commands and pending integration work.
 
 Every fight opens with both fighters' original profile pictures and names,
 including twins and each bout of the sequential story bosses. The versus preview
-advances automatically, or use Enter, Space, the Continue button or gamepad A/Start.
+waits for Enter, the Continue button or gamepad A. Space and gamepad Start do not dismiss it.
 A **3, 2, 1, FIGHT!** countdown follows. Entrances play during the countdown;
 combat starts on FIGHT. Escape pauses either introduction. Rounds have no time limit.
 

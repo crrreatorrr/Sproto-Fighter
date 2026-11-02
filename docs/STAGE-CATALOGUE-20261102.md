@@ -35,3 +35,10 @@ Evidence is in `docs/evidence/stage-catalog-20261102/`, including the full catal
 ## Limits and separate work
 
 The supported browser-control tool is unavailable. No new in-browser clickthrough, screen layout, gameplay or motion pass is claimed. Physical controller testing remains explicitly skipped. The separate twin size/registration audit remains in `sproto-motion-followup`; its unverified changes are not part of this stage checkpoint. The campaign still has 131 selectable owners, 19 short of the requested 150 unique fighters. No remote push was made.
+
+
+## Completed parallel VS-screen work preserved
+
+`Convert sproto sprites to fighters (2)` finished its latest task before integration. Its four local files were preserved at `aa039c91`, then combined with stage commit `4ee753ef` in isolated merge `f4e35072`. The changes touch different parts of `main.ts` and merged without conflict. The VS screen now waits for fresh Enter, controller A, or Continue; it retains the 3/2/1/FIGHT countdown and uses the existing home artwork for borders and button. README instructions were corrected accordingly.
+
+The originating chat reported a live check of waiting, Space rejection and Enter transition. I independently inspected its saved screenshot (`versus-completed-peer.png`), and reran the eight versus groups / 17,161 ordered portrait mappings, presentation tests, TypeScript build, all stage/selector checks and the full story suite on the combined code. I did not perform that chat's live browser check myself. Combined logs are retained beside the stage evidence. No unfinished twin files were included.
