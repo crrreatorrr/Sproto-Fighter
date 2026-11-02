@@ -74,7 +74,7 @@ nick:{name:'Nick',color:'#3158ee',dark:'#172763',speed:5.5,jump:15.8,partner:'ri
 highsproto:{name:'High Sproto',color:'#79a9e8',dark:'#243458',speed:5.5,jump:15.8,partner:'rivet',special:'SMOKE SIGNAL',role:'SMOKE SHOT',description:'Finger-flick joint shots, relaxed footwork and a four-contact Smoke Signal.'},
 /* HIGHSPROTO ROSTER END */
 /* ERIK ROSTER BEGIN */
-erik:{name:'Erik Stevens Sproto',color:'#f0c94d',dark:'#192944',speed:5.5,jump:15.8,partner:'rivet',special:'EXECUTIVE FINISH',role:'FORMAL',description:'Tailored navy suit, yellow dress shirt and red tie; composed strikes and a four-contact finish.'},
+erik:{name:'Erik Stevens Sproto',color:'#f0c94d',dark:'#192944',speed:5.5,jump:15.8,"partner":"sproto1601",special:'EXECUTIVE FINISH',role:'FORMAL',description:'Tailored navy suit, yellow dress shirt and red tie; composed strikes and a four-contact finish.'},
 /* ERIK ROSTER END */
 /* BIMBA ROSTER BEGIN */
 bimba:{name:'BIMBA',color:'#ffd637',dark:'#2543aa',speed:5.5,jump:15.8,partner:'rivet',special:'GOLDEN ENTRANCE',role:'POISE',description:'Tall blue silhouette, broad yellow collar and composed four-contact choreography.'},
@@ -158,28 +158,28 @@ sproto3215: {"name": "Sproto #3215", "color": "#ffe168", "dark": "#263c64", "spe
 sproto3224: {"name": "Sproto #3224", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "TWIN FUSION 3224", "role": "DUET", "description": "Two separate animated bodies with one health pool and alternating contacts."},
 sproto3235: {"name": "Sproto #3235", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "TWIN FUSION 3235", "role": "DUET", "description": "Two separate animated bodies with one health pool and alternating contacts."},
 vaudream: {"name": "\u142f\u156c\u144c\u15de\u1587\u156e\u15cb\u156c", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "DREAM SURGE", "role": "HOVER", "description": "Legless floating machine: hover glides, chassis rams and screen casts."},
-uncmasterflex: {"name": "UNC Master Flex", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST uncmasterflex", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
+uncmasterflex: {"name": "UNC Master Flex", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner":"sproto215", "special": "SPROTO BURST uncmasterflex", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
 gryph: {"name": "Gryph", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "TWIN FUSION gryph", "role": "DUET", "description": "Two separate animated bodies with one health pool and alternating contacts."},
-vitaliketh: {"name": "vitalik.eth", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST vitaliketh", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
-urmometh: {"name": "urmom.eth", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST urmometh", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
+vitaliketh: {"name": "vitalik.eth", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner":"sproto818", "special": "SPROTO BURST vitaliketh", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
+urmometh: {"name": "urmom.eth", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner":"sproto1414", "special": "SPROTO BURST urmometh", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
 chaton: {"name": "Chaton von Sproto", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST chaton", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
-loadthebags: {"name": "LoadTheBags", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "MIC CHECK", "role": "MC", "description": "Microphone jabs, overhead mic swings and vocal casts."},
+loadthebags: {"name": "LoadTheBags", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner":"sproto313", "special": "MIC CHECK", "role": "MC", "description": "Microphone jabs, overhead mic swings and vocal casts."},
 sisma: {"name": "SISMA", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "RETAIN SCREAM", "role": "SHOUT", "description": "RETAIN scream sends readable words horizontally across the arena."},
 captainhowdy: {"name": "Captain Howdy", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST captainhowdy", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
 sprotosales: {"name": "Sproto Sales", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST sprotosales", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
 sprog: {"name": "Sprog", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST sprog", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
 jasper: {"name": "Jasper", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST jasper", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
-aaron: {"name": "Aaron", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST aaron", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
-brainsprot: {"name": "Brain Sprot", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST brainsprot", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
+aaron: {"name": "Aaron", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner":"sproto834", "special": "SPROTO BURST aaron", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
+brainsprot: {"name": "Brain Sprot", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner":"sproto2075", "special": "SPROTO BURST brainsprot", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
 godmod3d: {"name": "GodMod3D.eth", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "TWIN FUSION godmod3d", "role": "DUET", "description": "Two separate animated bodies with one health pool and alternating contacts."},
-sober: {"name": "Sober", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST sober", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
+sober: {"name": "Sober", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner":"sproto282", "special": "SPROTO BURST sober", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
 nosmileclown: {"name": "\ud835\udd79\ud835\udd94\ud835\udd98\ud835\udd92\ud835\udd8e\ud835\udd91\ud835\udd8a\ud835\udd88\ud835\udd91\ud835\udd94\ud835\udd9c\ud835\udd93", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "TWIN FUSION nosmileclown", "role": "DUET", "description": "Two separate animated bodies with one health pool and alternating contacts."},
-olnoname: {"name": "ol\u2019 no name", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST olnoname", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
+olnoname: {"name": "ol\u2019 no name", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner":"sproto1815", "special": "SPROTO BURST olnoname", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
 greatcharly: {"name": "Great Charly.eth", "color": "#60aaff", "dark": "#263c64", "speed": 5.5, "jump": 15.8, "partner": "rivet", "special": "SPROTO BURST greatcharly", "role": "SKIRMISH", "description": "Reference-based full-body pixel art; shared controls and individual combat profile."},
 /* SPROTOS ROSTER END */
     duo: { name:'Sproto Duo', color:'#ffcf45', dark:'#294e8b', speed:5.5, jump:15.8, partner:'vela', special:'DOUBLE TAKE', role:'DUET', description:'Two distinct Sprotos, one player: the front actor attacks while its companion covers.' },
-    vela: { name: 'Morelight', color: '#6ba9ff', dark: '#244da8', speed: 4.4, jump: 14.8, partner: 'rivet', special: 'PRISM BREAK', role: 'ZONING', description: 'Spit fast eggs to control space, then turn an opening into a full combo.' },
-    bront: { name: 'Fat Head Dave', color: '#ed9471', dark: '#8b493f', speed: 3.7, jump: 13.6, partner: 'rivet', special: 'FAULT LINE', role: 'POWER', description: 'Stand your ground with heavier blows and a longer-reaching command grab.' },
+    vela: { name: 'Morelight', color: '#6ba9ff', dark: '#244da8', speed: 4.4, jump: 14.8, "partner":"sproto2789", special: 'PRISM BREAK', role: 'ZONING', description: 'Spit fast eggs to control space, then turn an opening into a full combo.' },
+    bront: { name: 'Fat Head Dave', color: '#ed9471', dark: '#8b493f', speed: 3.7, jump: 13.6, "partner":"sproto704", special: 'FAULT LINE', role: 'POWER', description: 'Stand your ground with heavier blows and a longer-reaching command grab.' },
     zephyr: { name: 'Halloween 2008', color: '#ffa74f', dark: '#bd5929', speed: 5.1, jump: 15.8, partner: 'vela', special: 'HARVEST MOON', role: 'AERIAL', description: 'Double-jump through the air and turn pumpkin strikes into a Harvest Moon relay.' },
     mox: { name: 'Yannix', color: '#a49eff', dark: '#4d468a', speed: 4.9, jump: 15.2, partner: 'bront', special: 'ECHO DRIVE', role: 'REACH', description: 'Catch an opening with longer-reaching light and medium attacks.' },
     rune: { name: 'Bongraker', color: '#f1b2d6', dark: '#895072', speed: 4.6, jump: 15.1, partner: 'zephyr', special: 'NIGHT BURST', role: 'BALANCED', description: 'Mix steady movement, close-range chains, and stronger, slower bolts.' },
@@ -192,15 +192,44 @@ greatcharly: {"name": "Great Charly.eth", "color": "#60aaff", "dark": "#263c64",
     guest13: { name: 'Jahon', color: '#d6c3ad', dark: '#526070', speed: 5.5, jump: 15.8, partner: 'rivet', special: 'TEAM RELAY', role: 'SHARED KIT', description: 'Individual reference-based sprites and shared combat kit.' },
  guest14:{name:'Virtuagram',color:'#becfce',dark:'#526070',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites and shared combat kit.'},
  vamp:{name:'VAMP',color:'#5b83f4',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
- alpha777:{name:'Alpha 777',color:'#98aa6c',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
+ alpha777:{name:'Alpha 777',color:'#98aa6c',dark:'#263c64',speed:5.5,jump:15.8,"partner":"sproto2884",special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
  mandela:{name:'Bitcoin Mandela',color:'#5288ef',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
  bigswole:{name:'Big Swole',color:'#4395fb',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
  nate:{name:'Little Foot Nate',color:'#97aee7',dark:'#263c64',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprites, shared movement and attacks.'},
  crapto:{name:'Crapto',color:'#d1a86c',dark:'#745137',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Individual reference-based sprite art with shared powers and animation timing.'},
- dumpstar:{name:'Dumpstar',color:'#77a9ff',dark:'#345bb3',speed:5.5,jump:15.8,partner:'rivet',special:'TEAM RELAY',role:'SHARED KIT',description:'Shared Golden Sproto movement and attacks. Face and attire from the supplied reference; shoulder objects omitted.'},
+ dumpstar:{name:'Dumpstar',color:'#77a9ff',dark:'#345bb3',speed:5.5,jump:15.8,"partner":"sproto102",special:'TEAM RELAY',role:'SHARED KIT',description:'Shared Golden Sproto movement and attacks. Face and attire from the supplied reference; shoulder objects omitted.'},
 };
 /** One roster identity per assist. Its complete twin body set is resolved by bodyAtlasIds. */
 export const specialPartnerIds=(id:FighterId):readonly FighterId[]=>[ROSTER[id].partner];
+/** Authored partner choreography and confirmed-contact properties. One identity
+ * still shares the main fighter's meter and contact clock; twins alternate bodies. */
+export interface PartnerAttack {
+ name:string;
+ kind:'prism'|'geyser'|'comet'|'vortex'|'blitz'|'dive'|'halberd'|'eights'|'storm'|'frost'|'crossfire'|'quakeDive'|'boomerang';
+ motion:'hover'|'rise'|'orbit'|'rush'|'dive'|'sweep'|'throw'|'pulse'|'paired';
+ color:string;
+ bodyAttacks?:readonly string[];
+ hits:readonly {push:number;stun:number;launch?:number;low?:boolean}[];
+}
+export const PARTNER_ATTACKS:Partial<Record<FighterId,PartnerAttack>> = {
+ sproto313: {"name": "FOUR-EYE PINBALL", "kind": "prism", "motion": "hover", "color": "#6bf5ff", "hits": [{"push": 5, "stun": 32}]},
+ sproto1414: {"name": "BLUE GEYSER", "kind": "geyser", "motion": "rise", "color": "#378dff", "hits": [{"push": 2, "stun": 34, "launch": 6}]},
+ sproto2884: {"name": "CAP COMET", "kind": "comet", "motion": "orbit", "color": "#ffe55b", "hits": [{"push": 8, "stun": 30}]},
+ sproto215: {"name": "RED-EYE VORTEX", "kind": "vortex", "motion": "hover", "color": "#fa587f", "hits": [{"push": -5, "stun": 36}]},
+ sproto102: {"name": "SHOULDER BLITZ", "kind": "blitz", "motion": "rush", "color": "#ffaf4c", "hits": [{"push": 11, "stun": 29}]},
+ sproto834: {"name": "CRIMSON DIVE", "kind": "dive", "motion": "dive", "color": "#ff416b", "hits": [{"push": 3, "stun": 33, "launch": 4}]},
+ sproto1815: {"name": "HOOKED REAPER", "kind": "halberd", "motion": "sweep", "color": "#ff4747", "hits": [{"push": -3, "stun": 35, "low": true}]},
+ sproto1601: {"name": "LUCKY EIGHT RAIN", "kind": "eights", "motion": "throw", "color": "#ffe45a", "hits": [{"push": 4, "stun": 31}]},
+ sproto2789: {"name": "STORMSTAFF", "kind": "storm", "motion": "rise", "color": "#c791ff", "hits": [{"push": 1, "stun": 39, "launch": 5}]},
+ sproto818: {"name": "FROST ECHO", "kind": "frost", "motion": "pulse", "color": "#9cecff", "hits": [{"push": 0, "stun": 42, "low": true}]},
+ sproto282: {"name": "RED / BLUE CROSSFIRE", "kind": "crossfire", "motion": "paired", "color": "#f77294", "hits": [{"push": 7, "stun": 32}, {"push": -2, "stun": 35}], "bodyAttacks": ["Red fan shot", "Blue ground zigzag"]},
+ sproto2075: {"name": "SKY / QUAKE", "kind": "quakeDive", "motion": "paired", "color": "#ffe368", "hits": [{"push": 2, "stun": 34, "launch": 7}, {"push": 10, "stun": 37, "low": true, "launch": -9}], "bodyAttacks": ["Small Sproto sky dive", "Large Sproto earthquake stomp"]},
+ sproto704: {"name": "BOULDER / BOOMERANG", "kind": "boomerang", "motion": "paired", "color": "#7be7c1", "hits": [{"push": 13, "stun": 30}, {"push": -4, "stun": 38}], "bodyAttacks": ["Large Sproto boulder throw", "Small Sproto returning boomerang"]},
+};
+/** Fixed identities alternate independently of facing, so both twins attack. */
+export function partnerContactIndex(t:number,contacts:readonly number[]):number {
+ let beat=0;for(let i=1;i<contacts.length&&contacts[i]<=t;i++)beat=i;return beat;
+}
 for (const id of PLAYABLE_FIGHTERS) {
     if (id !== 'rivet' && id !== 'vela') {
         ROSTER[id].speed = 5.5;
@@ -746,6 +775,7 @@ function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile
         // an ascending attacker. Finishers still knock downward; route limits remain.
         b.vy = kind === 'airHeavy' ? 10 : m.air && !grounded(a) ? Math.min(-4.5,a.vy) : -4.5;
     }
+    if(kind==='special'&&PARTNER_ATTACKS[ROSTER[a.id].partner]?.kind==='frost')b.slow=90;
     const power=COMBAT_STYLES[a.id].power;
     if(kind==='special'||(projectile&&(a.id==='vamp'||a.id==='crapto'))){
       if(power==='slow')b.slow=90;
@@ -795,6 +825,10 @@ function chooseMove(f: Fighter, buttons: number, directions=f.input): MoveId | n
 export function getMove(f: Fighter, id: MoveId): Move {
  const style=COMBAT_STYLES[f.id];
  let m:Move={...MOVES[id],...(id==='light'?{range:style.lightRange}:id==='heavy'||id==='airHeavy'?style.heavy:id==='bolt'?style.bolt:id==='special'?{...style.special,startup:style.specialFrames[0],active:style.specialFrames.at(-1)!-style.specialFrames[0]+1,recovery:30}:{} )};
+ if(id==='special'){
+  const partner=PARTNER_ATTACKS[ROSTER[f.id].partner];
+  if(partner){const beat=partnerContactIndex(f.move?.id==='special'?f.move.t:0,style.specialFrames);m={...m,launch:0,low:false,...partner.hits[beat%partner.hits.length]};}
+ }
  const aim = f.move?.id === id ? f.move.aim : undefined;
  if(!m.projectile && id !== 'special' && id !== 'grab'){
    if(aim==='upForward')m={...m,range:155,stun:Math.max(m.stun,32),launch:10};

@@ -1,5 +1,7 @@
 # Independent partner assists — November 2, 2026
 
+The follow-up [13-partner expansion](PARTNER-EXPANSION-QA.md) adds ten single Sprotos and three twin pairs with distinct attacks. This report records the original separation fix.
+
 Each main fighter now summons exactly one roster partner. The 34 former three-partner relays are split among Pissing Sproto, Vmudream, and #3181. The existing roster IDs are `sproto3152`, `vaudream`, and `sproto3181`; the display name for `vaudream` is stylized Unicode in the supplied roster. No identities or art were guessed or regenerated.
 
 The one-partner rule is shared by rendering, lazy asset loading, the character selection announcement, and the special banner. A twin remains one partner identity with its complete authored pair. #3181 therefore retains exactly its large blue actor and small yellow actor; its stomach creature remains attached artwork, not a third fighter. Its four contacts alternate yellow strike and blue stomach attack, with the covering body idle on each beat. Combat contacts, charge spending, damage, and the two combat health slots retain their existing behavior.

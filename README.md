@@ -8,6 +8,8 @@ The original Sproto Duo and the new twin/triple selections use separate animated
 
 **November 2 roster update:** reference-based core, guarded movement and event animation sets are installed for the expansion. Twins receive additional dash, jump, heavy, aerial and victory drawings. See [expansion QA](docs/SPROTOS-EXPANSION-QA.md) for exact coverage and corrections. Earlier dated reports below describe prior builds.
 
+**13 additional partner attacks:** Ten randomly selected single Sprotos and three twin pairs now assist different main fighters, with distinct attack paths and hit reactions. Both members of each twin pair attack. [Assignments and verification](docs/PARTNER-EXPANSION-QA.md).
+
 **Independent partners:** Each main fighter summons one assigned partner. The 34 former group relays are split across Pissing Sproto, Vmudream, and #3181; twin identities keep both bodies. [Assignments and QA](docs/INDEPENDENT-PARTNERS-QA.md).
 
 ## Run

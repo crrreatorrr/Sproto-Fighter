@@ -1,5 +1,5 @@
 import { EVENT_CLIP_LENGTHS, ACTION_CLIP_LENGTHS, ASSIST_CLIP_LENGTHS, IDENTITY_CLIP_LENGTHS, entranceFrame, deathFrame, introFrame, defeatFrame, specialFrame, castFrame, recoilFrame, type AtlasClipName, type RoundPresentation } from './animationEvents';
-import { A, ROSTER, COMBAT_STYLES, CHARACTER_ACTIONS, DUO_SPREAD, FLOOR, WIDTH, getMove, bodyAtlasIds, bodyOffsets, specialPartnerIds, isPairedFighter, type Fighter, type ThrowState } from './core';
+import { A, ROSTER, COMBAT_STYLES, CHARACTER_ACTIONS, DUO_SPREAD, FLOOR, WIDTH, getMove, bodyAtlasIds, bodyOffsets, specialPartnerIds, PARTNER_ATTACKS, partnerContactIndex, isPairedFighter, type Fighter, type ThrowState } from './core';
 
 /** Complete-character frames, never articulated cutouts. Thirty-two authored poses
  * cover shared actions only; this does not invent missing per-character animation. */
@@ -206,6 +206,21 @@ let presentationScene:{presentation:RoundPresentation;fighters:readonly Fighter[
 export function setPoseAtlasPresentation(presentation:RoundPresentation|null,fighters:readonly Fighter[]):void {presentationScene=presentation?{presentation,fighters}:null;}
 const assistTiming=new WeakMap<Fighter,readonly number[]>();
 const assistStarts=new WeakMap<Fighter,number>();
+/** Each twin's fixed identity owns alternating contacts in either facing. */
+export function getPartnerAssistBodyPlan(f:Fighter){
+ const owner=sceneActor(f),profile=PARTNER_ATTACKS[owner.id],contacts=assistTiming.get(owner);
+ if(!profile||!contacts||owner.move?.id!=='special')return[];
+ const t=owner.move.t,beat=partnerContactIndex(t,contacts),age=t-contacts[beat],count=bodyAtlasIds(owner.id).length;
+ return bodyAtlasIds(owner.id).map((entity,index)=>{
+  const selected=index===beat%count,active=selected&&age>=0&&age<=8;
+  let y=0;
+  const arc=Math.max(0,...contacts.filter((_,i)=>i%count===index).map(hit=>t<hit?Math.sin(Math.max(0,Math.min(1,(t-hit+10)/10))*Math.PI):0));
+  if(profile.motion==='dive'||profile.kind==='quakeDive'&&index===0)y=-arc*145;
+  else if(selected&&profile.motion==='rise')y=-Math.max(0,1-Math.abs(age)/10)*38;
+  else if(selected&&profile.motion==='pulse')y=-Math.sin(Math.max(0,age)*.4)*4;
+  return {entity,index,beat,age,active,y,action:profile.bodyAttacks?.[index]??profile.name};
+ });
+}
 const floorDefeat=(f:Fighter,p:RoundPresentation)=>p.fromFloor||(f.reaction?.kind==='knockdown'&&f.reaction.phase==='down');
 /** The caller updates the stable assist object's move.t from its owner's clock. */
 export function setPoseAtlasAssistTiming(f:Fighter,contacts:readonly number[],start=4):void {assistTiming.set(f,contacts);assistStarts.set(f,start);}
@@ -227,6 +242,17 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:AtlasClipName
       return choose('assistAttack',active?(yellow?0:12)+phase:0);
     }
     return choose('assistAttack',(beat%4)*4+phase);
+  }
+  if(assistContacts&&f.move?.id==='special'&&PARTNER_ATTACKS[owner.id]){
+    const body=componentOwner.get(f)?.index??0,plan=getPartnerAssistBodyPlan(owner)[body],t=f.move.t;
+    const first=assistContacts[0],last=assistContacts.at(-1)!,start=assistStarts.get(owner)??4;
+    if(t<first)return choose('intro',Math.min(3,Math.floor(Math.max(0,t-start)*4/Math.max(1,first-start))));
+    if(t>last+9)return choose('intro',Math.max(0,3-Math.floor((t-last-10)/3)));
+    if(!plan.active)return choose('special',0);
+    const profile=PARTNER_ATTACKS[owner.id]!,age=plan.age;
+    if(profile.kind==='quakeDive')return body===0?choose('airKick',Math.min(5,2+Math.floor(age/3)))??choose('special',2):choose('heavy',Math.min(7,3+Math.floor(age/2)))??choose('special',4);
+    if(profile.kind==='crossfire'&&body===0)return choose('signatureCast',age<3?4:5)??choose('special',2);
+    return choose('special',specialFrame(t,assistContacts));
   }
   const p=presentationScene?.presentation,index=presentationScene?.fighters.indexOf(owner)??-1;
   if(p&&index>=0){
@@ -436,6 +462,8 @@ function paintData(f:Fighter,slot:PoseSlot,sampled:PoseAtlasDebug|undefined,atla
   // Event drawings already contain their authored body attitude and floor anchor.
   const transform=reactionTransform(f,atlas,source,!!sampled && !event);
   const ram=getHoverMeleeOffset(f);transform.x+=ram.x;transform.y+=ram.y;
+  const assistBody=getPartnerAssistBodyPlan(sceneActor(f))[componentOwner.get(f)?.index??0];
+  if(assistBody)transform.y+=assistBody.y;
   // A knocked-back body already landed head-first in its impact direction.
   // Preserve that whole-body orientation when entering the authored floor rest;
   // otherwise the defeated fighter flips ends at the KO presentation boundary.

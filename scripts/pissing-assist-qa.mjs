@@ -9,8 +9,9 @@ const cu=url(compile('src/core.ts')),eu=url(compile('src/animationEvents.ts')),p
 const core=await import(cu),events=await import(eu);
 const poseCode=compile('src/poseAtlas.ts').replace("from './core'",`from '${cu}'`).replace("from './animationEvents'",`from '${eu}'`);
 const poseUrl=url(poseCode),poses=await import(poseUrl);
+const effectUrl=url(compile('src/partnerEffects.ts').replace("from './powerArt'",`from '${pu}'`));
 const stub=url('export function drawSprite(c,f,frame){globalThis.__assistCapture(f,frame);return true;}');
-const team=await import(url(compile('src/teamSpecial.ts').replace("from './core'",`from '${cu}'`).replace("from './powerArt'",`from '${pu}'`).replace("from './spriteRoster'",`from '${stub}'`).replace("from './poseAtlas'",`from '${poseUrl}'`)));
+const team=await import(url(compile('src/teamSpecial.ts').replace("from './core'",`from '${cu}'`).replace("from './powerArt'",`from '${pu}'`).replace("from './spriteRoster'",`from '${stub}'`).replace("from './poseAtlas'",`from '${poseUrl}'`).replace("from './partnerEffects'",`from '${effectUrl}'`)));
 const manifest=JSON.parse(read('public/fighters/pose-atlas.json'));
 globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>structuredClone(manifest)});
 globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}};

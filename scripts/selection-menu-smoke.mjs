@@ -48,7 +48,9 @@ check('each main selection announces exactly its own assigned partner',()=>{
   for(const id of core.PLAYABLE_FIGHTERS){
   portraits.find(button=>button.dataset.fighter===id).click();
   const hint=$('selection-announcement').textContent;
-  assert.ok(hint.endsWith('Special partner: '+core.ROSTER[core.ROSTER[id].partner].name),id);
+  const partner=core.ROSTER[id].partner;
+  assert.ok(hint.includes('Special partner: '+core.ROSTER[partner].name),id);
+  if(core.PARTNER_ATTACKS[partner])assert.ok(hint.endsWith('Partner attack: '+core.PARTNER_ATTACKS[partner].name),id);
   assert.equal(hint.includes('Special partners:'),false);
   }
  }

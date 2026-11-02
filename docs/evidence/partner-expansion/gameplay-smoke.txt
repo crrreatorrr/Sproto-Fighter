@@ -1,0 +1,75 @@
+
+> sproto-arena@0.1.0 smoke
+> node scripts/smoke.mjs && node scripts/directional-smoke.mjs && node scripts/throw-smoke.mjs && node scripts/movement-smoke.mjs && node scripts/reaction-smoke.mjs
+
+PASS: 102 roster combos; movement/jump; three-combo special; guard/grab; CPU round and replay; fresh round.
+PASS: holding Up jumps once after two neutral chord frames
+PASS: Up + light within 0-frame chord window is rising attack without jump
+PASS: Up + light within 1-frame chord window is rising attack without jump
+PASS: Up + light within 2-frame chord window is rising attack without jump
+PASS: Up + forward + medium selects diagonal rising strike without jump
+PASS: down + medium is a low attack
+PASS: air down + heavy dives, hits below, and remains a finisher
+PASS: all 21 downward heavies become active from an ordinary jump before landing
+PASS: organic spit is strictly horizontal: all five fighters, both facings, ground/air and nine direction masks
+PASS: pumpkin still supports directional trajectories and gravity
+PASS: light → light → low → medium → heavy: five hits, one finisher pip
+PASS: light → medium → bolt → heavy converts projectile hit into finisher
+PASS: launcher → jump → air light → air medium → air heavy: four hits, one pip
+PASS: one dash cancel is available during a live combo
+PASS: Up + light captured during hit-stop stays a rising strike, not auto-jump
+PASS: dash cancel input survives hit-stop
+PASS: guarded chain causes no damage or charge
+PASS: single finisher never earns a pip
+All focused directional checks passed.
+PASS: catch eases to authored grip, damages only at release, then fully recovers
+PASS: forward release, trajectory, knockdown and recovery in both facings
+PASS: back release, trajectory, knockdown and recovery in both facings
+PASS: up release, trajectory, knockdown and recovery in both facings
+PASS: down release, trajectory, knockdown and recovery in both facings
+PASS: all roster pairs × 4 directions × 2 facings × 3 locations: bounded finite catch and recovery
+PASS: guard loses to grab; misses and airborne/stunned targets do not latch
+PASS: projectile interrupts held attacker even while away is held, without teleport/damage to victim
+PASS: held victim is protected from incidental projectiles
+PASS: simultaneous grabs break evenly; opposite directions cancel to forward
+PASS: late recovery input buffers but early presses do not leak after a hold
+PASS: KO throw finishes visible flight and clears latch before result; restart is fresh
+PASS: flush-wall back throws swap sides for all attackers, both player indices and walls
+PASS: KO during hold cancels the latch without teleporting or damaging the victim
+PASS: throw state remains deterministic through JSON snapshot and replay
+15 throw groups passed; 0 failed.
+PASS: all 21 fighters reach full run in 2 frames, reverse in 2, brake in 2
+PASS: jump release preserves takeoff momentum instead of stopping in midair
+PASS: air attack preserves travel and allows restrained steering
+PASS: neutral air steering can reverse travel without instant velocity flip
+PASS: dash has 3 committed frames then consumes a buffered attack
+PASS: dash tap-jump transitions after commitment and retains dash momentum
+PASS: last-frame landing strike becomes a grounded attack without disappearing
+PASS: tap-jump shortly before landing fires on touchdown, held Up never repeats
+PASS: up+attack on touchdown remains a rising attack and suppresses jump
+PASS: stun and attack recovery cannot be bypassed with dash/jump buffers
+PASS: movement input replay remains deterministic through air, dash, landing and attack
+PASS: human-paced launcher route retains vertical alignment through finisher
+PASS: hitstop buffers dash direction at press, not at later execution
+PASS: recovery-buffered dash keeps its world direction across a side change
+PASS: vertical dash chords cannot leak an unintended dash after release
+PASS: attack wins simultaneous dash chord without a delayed second action
+PASS: tap dash keeps commitment, then opposite input brakes and reverses
+PASS: wall collision clears outward dash velocity for immediate departure
+PASS: holding forward in a dash jump preserves the same momentum as neutral
+PASS: airborne facing stays stable across opponent, then resolves on touchdown
+PASS: frozen-frame attack tap survives and executes once after hitstop
+PASS: firm jump arc measures 134px and 35 airborne frames for Golden Sproto
+PASS: all fighters retain controlled 31–35-frame neutral arcs and faster dash impulse
+PASS: firmer gravity preserves the human-paced four-hit aerial route for all21 fighters
+Measured trajectories: [{"id":"rivet","height":134.36200000000002,"airFrames":35,"takeoff":2},{"id":"vela","height":117.51800000000003,"airFrames":33,"takeoff":2}]
+24 focused movement checks passed.
+PASS: light contacts visibly move the target away, with finite recoil and no knockdown
+PASS: all 21 heavy finishers launch/pop, fall, lie down and recover in both facings
+PASS: launcher ascends then falls, remains juggleable, and clears without permanent lock
+PASS: downed bodies keep floor space at either wall instead of hiding under the standing fighter
+PASS: sweep gives low knockdown; downward air-heavy slams into the floor
+PASS: floor/get-up phases reject followup damage and throw loops; recovery input is responsive
+PASS: finisher combo pays exactly one pip after knockdown recovery, never on block
+PASS: all special final contacts give a finite knockdown and spend all meter
+8 reaction groups passed; 0 failed.
