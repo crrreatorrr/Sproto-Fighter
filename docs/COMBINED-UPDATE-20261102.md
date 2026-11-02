@@ -11,11 +11,14 @@ This is a factual review record, not a checklist delegated to Claude. No externa
 - God Mode wins use the same recruitment/progression path. Settings testing mode is invulnerable with special charge, without erasing progression. No physical controller testing was performed, as requested.
 - Every match and sequential boss bout has a dynamic versus card using the selector's original PFPs and exact names. Long names wrap; twin identity is retained. The four originals with unused right halves use the selector's reviewed left-square crop.
 - **3, 2, 1, FIGHT!** follows the versus card. Each numeral lasts60 presentation frames. CPU, combat, damage and replay remain frozen until FIGHT at frame180. The fight itself remains untimed. Pause suspends the introductions; skip keys require release and controller skipping requires neutral before combat.
+- Main-menu stage selection now chooses a zone, then a variation. The preview, actual arena, random selection, and return-to-selection state agree. Keyboard/controller navigation retains the two rows and Back returns to their parent zone.
 - 46 selectable free-play stages and61 story scenery assets are installed, including the completed Bar reference revisions and Blue Terrace Bar. The present126-node route visits58 scenery variants; only two Hatchery nodes exist, so three additional Hatchery variants are not selected by that route. All variants remain preserved.
 
 ## Integration and architecture
 
-Work was isolated in `sproto-combined-readiness` on `codex/combined-readiness-20261102`, with separate preview/QA ports5194/5195. Two immutable captures preserved the live checkout without staging or altering its working files: `41be5642` and then `146ab4ff`. The second capture was taken after all seven inspected roster chats were idle or had completed their last task. It includes Buddhashadow, Vitalik's Ethereum projectile/caption, Michael's KO icon, Reverend Cloud's revised portrait, and the new stage work.
+Work was isolated in `sproto-combined-readiness` on `codex/combined-readiness-20261102`, with separate preview/QA ports5194/5195. Three immutable captures preserved the live checkout without staging or altering its working files: `41be5642`, `146ab4ff`, and `a654cac8`. The second capture was taken after all seven inspected roster chats were idle or had completed their last task. It includes Buddhashadow, Vitalik's Ethereum projectile/caption, Michael's KO icon, Reverend Cloud's revised portrait, and the new stage work.
+
+The third capture preserves the completed zone→variation menu follow-up. Its selection/controller test conflict was reconciled with the all-roster lock checks and earned-God-Mode save handling; both behaviors remain tested. The other chat’s CSS additions coexist with the readable-name and narrow-screen rules.
 
 The campaign branch was integrated at `7fef6c1c`. The subsequent capture merge deliberately combined generic all-bout asset preloading with Vitalik's power-art preload. The minified atlas conflict was resolved structurally: retain every reviewed correction and add the new Buddha body/revision. No global renderer resizing, combat hitbox change, or bulk re-import was used for the scale repairs.
 
@@ -26,6 +29,7 @@ Key files:
 | Route and saves | `src/storyProgress.ts`, `src/storyMode.ts`: roster-derived route, stable IDs, three gauntlets, God Mode, migration and save-safe gating |
 | Map | `src/campaignMap.ts`, `.css`, `campaignMapLayout.ts`, `art/story-map/expanded/`: fitted expanded art, overview/detail navigation and portrait framing |
 | Match introductions | `src/versusScreen.ts`, `.css`, `fightCountdown.ts`, `main.ts`: original portraits, pause/skip/neutral gating, countdown independent of combat ticks |
+| Zone menu | `src/stageGroups.ts`, `selectionMenu.ts`, `mysticUI.css`: eight zones, filtered variations, preserved preview/launch identity and input navigation |
 | Other completed work | `core.ts`, `powerArt.ts`, `render.ts`, `stage.ts`, `stageVariants.ts`, original portraits and retained source/runtime assets |
 | Sprite repair | `public/fighters/pose-atlas.json`,407 new correction PNGs, `art/scale-consistency-20261102/`, `art/buddhashadow/registration.py` |
 | Admission checks | `scripts/sprite-scale-qa.mjs`, `art/sprotos-expansion/process.py`, `docs/SPRITE-SCALE-WORKFLOW.md` |
@@ -59,6 +63,8 @@ Two stale integration fixtures were updated deliberately: the renderer now accep
 Sampled live playback and stepped states in the actual-core renderer lab covered the15 repaired owners plus Buddha, with both-facing views, all affected companion bodies, and extra Fat Head Dave jump/kick/landing, Jessica gait/special, twin entrance/cast/defeat, and Buddha before/after idle→walk/special/recoil transitions. The exact owner/state list is in [root-browser-coverage.csv](evidence/scale-consistency-20261102/root-browser-coverage.csv). This is not a claim that every frame of all131 fighters was manually watched in continuous gameplay.
 
 An additional normal, non-QA practice match used Fat Head Dave against Morelight on Blue Terrace Bar. Actual keyboard W jumped; W then L entered the aerial attack; holding W through landing did not trigger another jump. Captured jump and aerial-chamber images confirm the corrected art at real game scale. The same run checked a locked Buddha preview/message, a playable starter, selected stage/actual background agreement, and return to fighter selection.
+
+The final zone-menu merge passed typecheck/build, 17 selection/controller checks, all seven versus groups, six presentation groups, 26 campaign/controller/main checks, and the map geometry suite. In the combined browser build, choosing Bar exposed its seven variations; Blue Terrace Bar changed the preview and actual match scenery, and returning retained it. Random selected a Hatchery variation and its correct zone. The 320px view kept the document at 320px, wrapped long names/stats and kept both Solana bodies visible; decorative borders slightly overhang their containers without page overflow. The viewport was restored afterward.
 
 ## Known limits
 

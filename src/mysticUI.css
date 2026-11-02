@@ -475,3 +475,8 @@ dialog { overflow-y: auto; }
   .fighter-summary dd { min-width: 0; white-space: normal; }
   .fighter-summary dd small { display: block; margin: 2px 0 0; line-height: 1.2; }
 }
+
+/* Stage selection: zone families first, local variations second. */
+.variation-heading{margin-top:16px;margin-bottom:9px}
+#zone-stage-count{font-size:10px;letter-spacing:1px;color:#c4b187;white-space:nowrap}
+#zone-rail .zone-choice{height:76px}
