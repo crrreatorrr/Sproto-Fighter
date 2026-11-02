@@ -58,6 +58,8 @@ Two stale integration fixtures were updated deliberately: the renderer now accep
 
 Sampled live playback and stepped states in the actual-core renderer lab covered the15 repaired owners plus Buddha, with both-facing views, all affected companion bodies, and extra Fat Head Dave jump/kick/landing, Jessica gait/special, twin entrance/cast/defeat, and Buddha before/after idle→walk/special/recoil transitions. The exact owner/state list is in [root-browser-coverage.csv](evidence/scale-consistency-20261102/root-browser-coverage.csv). This is not a claim that every frame of all131 fighters was manually watched in continuous gameplay.
 
+An additional normal, non-QA practice match used Fat Head Dave against Morelight on Blue Terrace Bar. Actual keyboard W jumped; W then L entered the aerial attack; holding W through landing did not trigger another jump. Captured jump and aerial-chamber images confirm the corrected art at real game scale. The same run checked a locked Buddha preview/message, a playable starter, selected stage/actual background agreement, and return to fighter selection.
+
 ## Known limits
 
 - Nineteen more supplied fighter entries/assets are needed for150 unique owners. Existing sources have been retained; no speculative roster entries were created.
