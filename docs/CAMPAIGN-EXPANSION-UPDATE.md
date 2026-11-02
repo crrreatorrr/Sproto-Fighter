@@ -81,3 +81,28 @@ npm run dev -- --port 5193 --strictPort
 For the current stable preview, the source copy is `story-expansion-20261102`; build output is `/tmp/sproto-expanded-campaign-preview`, served with `npm run preview -- --outDir /tmp/sproto-expanded-campaign-preview --port 5193 --strictPort`. Keep the server process running. Test saves are origin-specific.
 
 When every open chat is finished, inspect their final branch tips and uncommitted files, capture each owner's work, and reconcile the overlapping `core`, `main`, selection, story, stage and renderer changes deliberately. Retain this v3 schema and gauntlet logic, all approved new art and IDs, and each chat's final requirements. Rerun the focused checks against the final roster, production build, browser map/selection, representative fight and sequential boss transitions. Merge local main only then; do not push without fresh authorization.
+
+## Integration-readiness follow-up
+
+After the main report was saved, a second read-only source snapshot combined this
+branch's campaign/UI with the shared checkout's 130-fighter core, portrait, pose
+and power definitions. It is at sibling `integration-readiness-20261102`; its
+`SNAPSHOT.json` records exact source hashes. Main was not edited. TypeScript,
+production build, all 58 focused groups and map tests passed: 130 roster entries,
+128 rivals, 126 nodes. This is source compatibility evidence, not a completed
+merge or new visual certification of the active art changes.
+
+Latest confirmed chat status: Dano Crypto and sprot.eth are complete; the Solana
+Del Ray pair is still checking its revised event drawings. Twenty registered
+roster slots remain to reach 150, and the additional stage-variation scope still
+requires clarification. The final local main merge remains gated on completion
+of all open work. No remote push is authorized.
+
+The eventual merge must preserve the shared checkout's current `core.ts`,
+`originalPortraits.ts`, `poseAtlas.ts`, `powerArt.ts`, fighter assets, renamed
+identities and owner QA scripts. Reconcile their older free-play assertions with
+the new campaign recruitment rules. Use this branch's final v3 story logic,
+responsive map and name typography, retaining the three Verse recruits. Before
+changing main, take a stable snapshot of tracked and untracked local work, then
+recheck hashes and task status to avoid committing a partial concurrent write.
+Run the combined checks and browser review before final integration.
