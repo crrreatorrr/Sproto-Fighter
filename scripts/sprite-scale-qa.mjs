@@ -77,10 +77,11 @@ for (const [id, cfg] of Object.entries(manifest.fighters)) {
   bodies[id] = {scale, authoredFacing:cfg.facing ?? 1, owners:core.PLAYABLE_FIGHTERS.filter(owner => core.bodyAtlasIds(owner).includes(id)), sequences:{}, runtimeTransforms:{}};
   for (const [sequence, frames] of Object.entries(sequences)) for (const [index, entry] of frames.entries()) {
     const frame = typeof entry === 'string' ? {url:entry} : entry;
+    const registration=cfg.clipRegistration?.[sequence],pixelScale=registration?.pixelScale??1,offset=registration?.anchorOffset??[0,0],sourceAnchor=frame.anchor??cfg.anchor;
     const row = {key:`${id}/${sequence}/${index}`, body:id, sequence, index, pose:sequence === 'poses' ? Object.keys(poses.POSE_SLOTS).find(name => poses.POSE_SLOTS[name] === index) : null,
       url:localPath(frame.url), width:frame.width ?? cfg.width, height:frame.height ?? cfg.height,
-      anchor:frame.anchor ?? cfg.anchor, bounds:frame.bounds ?? [0, 0, frame.width ?? cfg.width, frame.height ?? cfg.height],
-      contactHull:frame.contactHull ?? null, scale, authoredFacing:cfg.facing ?? 1};
+      anchor:sourceAnchor.map((v,i)=>v+offset[i]), bounds:frame.bounds ?? [0, 0, frame.width ?? cfg.width, frame.height ?? cfg.height],
+      contactHull:frame.contactHull ?? null, scale:scale*pixelScale, sourceRegistration:registration??null, authoredFacing:cfg.facing ?? 1};
     cells.push(row);
     if (!byUrl.has(row.url)) byUrl.set(row.url, []);
     byUrl.get(row.url).push(row);

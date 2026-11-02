@@ -1,5 +1,7 @@
 # Movement review continuation — 2 November 2026
 
+> Later same-day update: browser access recovered and the individual sampled review continued. See [the current live-review handoff](MOVEMENT-LIVE-REVIEW-20261102.md) for repairs, per-fighter coverage and remaining limitations. The blocked status below describes the earlier checkpoint.
+
 This checkpoint was prepared on `codex/movement-followup-20261102`, based on local main `89ee9f9a`. The user requested integration of completed work now, without waiting for the unfinished live-motion audit. The four reviewed aerial-kick repairs and functional review fixtures are ready for that local checkpoint. No remote push is authorized; full visual completion is not claimed.
 
 ## Confirmed aerial-kick defect and repair

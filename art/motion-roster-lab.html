@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Roster motion wall · real combat review</title><style>
+:root{color-scheme:dark;font:12px system-ui;color:#eaf0f8;background:#101722}*{box-sizing:border-box}body{max-width:1280px;margin:6px auto;padding:0 8px}h1{font-size:17px;margin:4px 0}p{margin:4px 0;color:#b9c9db;font-size:11px}.bar{display:flex;flex-wrap:wrap;gap:5px;align-items:end;padding:6px;background:#1c2b40;border:1px solid #485f7c}label{display:grid;gap:2px;font-size:10px}select,button,input{font:inherit;color:inherit;background:#283b52;border:1px solid #607c9c;border-radius:3px;padding:4px}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}label.check{display:flex;align-items:center;height:30px}#status{font:12px ui-monospace,monospace;min-height:18px;color:#cbdff8}#status.error{color:#ffb6a4}#wall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:8px}.card{display:grid;grid-template-rows:30px minmax(0,1fr) 38px;min-height:0;min-width:0;border:1px solid #52657f;background:#172336;margin:0}.card-head{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:3px 6px;min-height:0;overflow:hidden}.card-head strong{font-size:12px;line-height:1.1;overflow-wrap:anywhere}.card-head label{display:flex;align-items:center}.card-head select{font-size:11px}.card canvas{display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}.debug{font:10px ui-monospace,monospace;white-space:pre-wrap;line-height:1.35;padding:4px 6px;margin:0;min-height:0;overflow:hidden;color:#d0dfef}.muted{font-size:11px;line-height:1.4}#batch{max-width:200px}#scenario{max-width:205px}#target{max-width:120px}@media(max-width:760px){#wall{height:auto!important;grid-template-columns:1fr;grid-template-rows:none}.card{height:340px}.bar{position:static}}
+</style></head><body><h1>Roster motion wall</h1><p>Four independent real-core matches, fixed 0.72× camera scale. Both bodies of a twin use the game’s actual renderer and lead selection.</p>
+<div class="bar"><button id="prevBatch">Previous 4</button><label>Fighter batch<select id="batch"></select></label><button id="nextBatch">Next 4</button><label>Scenario<select id="scenario"></select></label><button id="prevScenario">Previous action</button><button id="nextScenario">Next action</button><label>All start facing<select id="allFacing"><option value="1">Right</option><option value="-1">Left</option></select></label><label>Arena position<select id="position"><option>center</option><option>left corner</option><option>right corner</option><option>left wall</option><option>right wall</option></select></label><label>Opponent<select id="target"></select></label><label>Playback speed<select id="speed"><option value=".25">¼×</option><option value=".5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><label class="check"><input id="sweep" type="checkbox">Run 52-action sweep</label><label class="check"><input id="loop" type="checkbox" checked>Loop</label><button id="play">Play</button><button id="step">Step 1 frame</button><button id="step10">Step 10 frames</button><button id="reset">Restart action</button></div>
+<p id="status" role="status">Loading…</p><div id="wall"></div><p class="muted">Completion means simulation playback only, never visual approval. Each scenario restores positions and a three-pip test meter; no saved game data is changed. Select actual left and right facings to swap twin lead bodies. This view displays movement/combat body animation and throw contact; projectile graphics, partner cameo effects, entrance and defeat presentation require the normal match view. A frozen screenshot is not a real-time review.</p>
+<script type="module">
+import {A,FLOOR,WIDTH,isDown,ROSTER,PLAYABLE_FIGHTERS,bodySpread,fighterWall,createState,step,getMove} from '/src/core.ts';
+import {ensurePoseAtlases,drawPoseAtlas,getPoseAtlasDebug,getDuoPoseDebug,getPoseAtlasLoadStatus,setPoseAtlasThrowState} from '/src/poseAtlas.ts';
+import {drawPelvicAttacks} from '/src/pelvicAttack.ts';
+const $=id=>document.getElementById(id);
+const motionReview=[
+ {action:'idle',label:'Idle / breathing'},
+ {action:'walkForward',label:'Walk forward → stop'},
+ {action:'walkBack',label:'Walk backward → stop'},
+ {action:'walk',label:'Walk reversal → stop'},
+ {action:'dash',label:'Forward dash → recovery'},
+ {action:'dash',direction:'back',label:'Backward dash → recovery'},
+ {action:'jump',label:'Neutral jump → landing'},
+ {action:'jumpForward',label:'Forward jump → landing'},
+ {action:'jumpBack',label:'Backward jump → landing'},
+ {action:'jumpHeld',label:'Held jump → single landing'},
+ {action:'crouch',label:'Crouch → stand'},
+ ...['light','medium','heavy','low','sweep','launcher'].map(action=>({action,label:action,expectedMove:action})),
+ {action:'light',direction:'up',label:'Rising light / launcher',expectedMove:'launcher'},
+ {action:'medium',direction:'upForward',label:'Up-forward medium',expectedMove:'medium'},
+ {action:'heavy',direction:'upForward',label:'Up-forward finisher',expectedMove:'heavy'},
+ ...['forward','up','upForward','down'].map(direction=>({action:'bolt',direction,label:'Ranged power · '+direction,expectedMove:'bolt'})),
+ ...['airLight','airMedium','airHeavy'].flatMap(action=>['forward','up','down'].map(direction=>({action,direction,label:action+' · '+direction,expectedMove:action==='airLight'&&direction==='up'?'launcher':action}))),
+ ...['forward','up','upForward','down'].map(direction=>({action:'airBolt',direction,label:'Air ranged power · '+direction,expectedMove:'bolt'})),
+ ...['hit','heavyHit','launchHit','block','crouchBlock'].map(action=>({action,label:action})),
+ ...['forward','back','up','down'].map(direction=>({action:'grab',direction,label:'Attacker throw · '+direction,expectedMove:'grab'})),
+ ...['forward','back','up','down'].map(direction=>({action:'victimThrow',direction,label:'Victim throw · '+direction})),
+ {action:'special',label:'Team special',expectedMove:'special'},
+ {action:'airSpecial',label:'Air Team special',expectedMove:'special'},
+];
+
+// Scenario/input behavior intentionally matches pose-atlas-lab.html. The
+// roster-wall smoke check compares every fixture against that established lab.
+const pairedActions=new Set(['grab','victimThrow','hit','heavyHit','launchHit','block','crouchBlock']);
+const params=new URLSearchParams(location.search),custom=(params.get('fighters')??'').split(',').filter(id=>PLAYABLE_FIGHTERS.includes(id)).slice(0,4);
+const batches=[];if(custom.length)batches.push(custom);
+for(let n=0;n<PLAYABLE_FIGHTERS.length;n+=4)batches.push(PLAYABLE_FIGHTERS.slice(n,n+4));
+for(const [i,ids]of batches.entries())$('batch').add(new Option((custom.length&&i===0?'Custom':String(i+(custom.length?0:1)))+' · '+ids.map(id=>ROSTER[id].name).join(' / '),String(i)));
+for(const [i,item]of motionReview.entries())$('scenario').add(new Option(String(i+1).padStart(2,'0')+' · '+item.label,String(i)));
+for(const id of PLAYABLE_FIGHTERS)$('target').add(new Option(ROSTER[id].name,id));$('target').value='rivet';
+$('batch').value=String(Math.max(0,Math.min(batches.length-1,Number(params.get('batch'))||0)));
+$('scenario').value=String(Math.max(0,Math.min(motionReview.length-1,Number(params.get('scenario'))||0)));
+if(params.get('facing')==='-1')$('allFacing').value='-1';
+if([...$('position').options].some(o=>o.value===params.get('position')))$('position').value=params.get('position');
+let panels=[],age=0,playing=false,ready=false,last=0,accumulator=0,cycles=0,complete=false,error='',generation=0;
+const scenario=()=>motionReview[Number($('scenario').value)];
+function createFixture(id,face,targetId,position){
+ const a=scenario().action,s=createState(id,'dummy',targetId);s.fighters[0].x=600;s.fighters[1].x=600+face*450;s.fighters[0].pips=3;s.fighters[0].facing=face;s.fighters[1].facing=-face;
+ if(['light','medium','heavy','low','sweep','grab','victimThrow','hit','heavyHit','launchHit','block','crouchBlock','launcher'].includes(a))s.fighters[1].x=600+face*(60+bodySpread(s.fighters[0].id)+bodySpread(s.fighters[1].id));
+ if(a==='block'||a==='crouchBlock')s.fighters[1].x=600+face*(36+bodySpread(s.fighters[0].id)+bodySpread(s.fighters[1].id));
+ if(['bolt','airBolt','special','airSpecial'].includes(a))s.fighters[1].x=600+face*350;
+ if(position!=='center'){const edge=position.endsWith('wall')?0:60,[f,target]=s.fighters,gap=target.x-f.x,lo=Math.max(fighterWall(f.id),fighterWall(target.id)-gap),hi=Math.min(WIDTH-fighterWall(f.id),WIDTH-fighterWall(target.id)-gap);f.x=position.startsWith('left')?Math.min(hi,lo+edge):Math.max(lo,hi-edge);target.x=f.x+gap;}
+ return s;
+}
+function direction(f){const d=scenario().direction??'forward',forward=f.facing===1?A.right:A.left,back=f.facing===1?A.left:A.right;return d==='up'?A.up:d==='down'?A.down:d==='back'?back:d==='upForward'?A.up|forward:0;}
+function input(s){const a=scenario().action,f=s.fighters[0],forward=f.facing===1?A.right:A.left,back=f.facing===1?A.left:A.right;let first=0,second=0;
+ if(a==='walk')first=age<60?forward:age<120?back:0;
+ else if(a==='walkForward')first=age<60?forward:0;
+ else if(a==='walkBack')first=age<60?back:0;
+ else if(a==='crouch')first=age<75?A.down:0;
+ else if(a==='jump')first=age===0?A.up:0;
+ else if(a==='jumpHeld')first=age<110?A.up:0;
+ else if(a==='jumpForward'||a==='jumpBack')first=(age===0?A.up:0)|(age<22?(a==='jumpForward'?forward:back):0);
+ else if(a==='dash')first=age===0?(scenario().direction==='back'?back:forward)|A.dash:0;
+ else if(['hit','heavyHit','launchHit','block','crouchBlock'].includes(a)){second=age===0?(a==='heavyHit'?A.heavy:a==='launchHit'?A.launcher:a==='crouchBlock'?A.down|A.light:A.light):0;if((a==='block'||a==='crouchBlock')&&age<35)first=back|(a==='crouchBlock'?A.down:0);}
+ else if(a==='victimThrow')second=age===0?A.grab|direction(s.fighters[1]):0;
+ else if(a.startsWith('air')){if(age===0)first=A.up;else if(age===9)first=A[a==='airLight'?'light':a==='airMedium'?'medium':a==='airBolt'?'bolt':a==='airSpecial'?'special':'heavy']|direction(f);}
+ else if(age===0)first=(A[a]??(a==='low'?A.light:a==='sweep'?A.heavy:0))|(['low','sweep'].includes(a)?A.down:direction(f));
+ return[first,second];
+}
+function settled(s){return !s.freeze&&!s.throwState&&!s.projectiles.length&&s.fighters.every(f=>!f.move&&!f.stun&&!f.blockstun&&!f.dash&&f.y>=FLOOR&&f.vy===0&&Math.abs(f.vx)<.1);}
+function beginScenario(){age=0;complete=false;accumulator=0;for(const panel of panels)panel.state=createFixture(panel.id,Number(panel.face.value),$('target').value,$('position').value);draw();}
+function pause(){playing=false;$('play').textContent='Play';}
+function reset(){pause();cycles=0;error='';beginScenario();}
+function createPanels(){
+ $('wall').replaceChildren();panels=[];
+ for(const [i,id]of batches[Number($('batch').value)].entries()){
+  const card=document.createElement('figure');card.className='card';const head=document.createElement('div');head.className='card-head';const name=document.createElement('strong');name.textContent=ROSTER[id].name+' · '+id;
+  const label=document.createElement('label');label.textContent='Actual facing ';const face=document.createElement('select');face.id='facing'+i;face.setAttribute('aria-label',ROSTER[id].name+' actual facing');face.add(new Option('Right','1'));face.add(new Option('Left','-1'));face.value=$('allFacing').value;label.append(face);head.append(name,label);
+  const canvas=document.createElement('canvas');canvas.width=600;canvas.height=360;canvas.setAttribute('aria-label',ROSTER[id].name+' live combat animation');const debug=document.createElement('figcaption');debug.className='debug';card.append(head,canvas,debug);$('wall').append(card);const panel={id,face,canvas,debug,state:null};panels.push(panel);face.onchange=reset;
+ }
+ reset();
+}
+async function load(){const token=++generation;ready=false;pause();draw();for(const id of ['play','step','step10'])$(id).disabled=true;
+ try{await ensurePoseAtlases([...panels.map(p=>p.id),$('target').value]);if(token!==generation)return;const loaded=getPoseAtlasLoadStatus();error=loaded.error??'';ready=!error&&panels.every(p=>getPoseAtlasDebug(p.state.fighters[0],0).available&&getDuoPoseDebug(p.state.fighters[0],0).every(body=>body.available));if(!ready&&!error)error='At least one requested atlas is unavailable; playback is disabled.';}
+ catch(e){if(token!==generation)return;error='Atlas load failed: '+e.message;ready=false;}
+ for(const id of ['play','step','step10'])$(id).disabled=!ready;draw();
+}
+function advance(){if(!ready||complete||error)return;for(const panel of panels)step(panel.state,input(panel.state));age++;
+ if(age>=900&&!panels.every(p=>settled(p.state))){error='Stopped: '+scenario().label+' did not settle within 900 ticks; this is not a pass.';pause();draw();return;}
+ if(age>=(scenario().action==='walk'?150:120)&&panels.every(p=>settled(p.state))){
+  if($('sweep').checked){const next=Number($('scenario').value)+1;if(next<motionReview.length){$('scenario').value=String(next);beginScenario();return;}if($('loop').checked){cycles++;$('scenario').value='0';beginScenario();return;}complete=true;pause();}
+  else if($('loop').checked){cycles++;beginScenario();return;}
+  else {complete=true;pause();}
+ }draw();
+}
+function checker(c){for(let y=0;y<360;y+=20)for(let x=0;x<600;x+=20){c.fillStyle=(x/20+y/20)%2?'#303e50':'#253243';c.fillRect(x,y,20,20);}}
+function draw(){
+ $('status').className=error?'error':'';$('status').textContent=error||`${ready?'READY':'Loading body atlases'} · ${scenario().label} · scenario frame ${age} · ${playing?'PLAYING':'PAUSED'} · cycle ${cycles+1}${complete?' · COMPLETE (not visually approved)':''}`;
+ for(const panel of panels){const s=panel.state;if(!s)continue;const c=panel.canvas.getContext('2d'),f=s.fighters[0];checker(c);setPoseAtlasThrowState(s.throwState,s.fighters);c.save();
+  const camera=pairedActions.has(scenario().action)?(s.fighters[0].x+s.fighters[1].x)/2:f.x;c.translate(300,325);c.scale(.72,.72);c.translate(-camera,-FLOOR);c.strokeStyle='#9bb5cc';c.lineWidth=1;c.beginPath();c.moveTo(camera-420,FLOOR);c.lineTo(camera+420,FLOOR);c.stroke();
+  c.strokeStyle='#ffaa66';for(const x of [0,WIDTH]){c.beginPath();c.moveTo(x,FLOOR-450);c.lineTo(x,FLOOR+15);c.stroke();}
+  const d0=isDown(s.fighters[0]),d1=isDown(s.fighters[1]),front=s.throwState?.attacker??(d0!==d1?(d0?1:0):(s.fighters[1].move&&!s.fighters[0].move?1:0));
+  for(const index of [1-front,front])drawPoseAtlas(c,s.fighters[index],s.frame,false,s.freeze>0);drawPelvicAttacks(c,s);c.restore();
+  const d=getPoseAtlasDebug(f,s.frame,s.freeze>0),members=getDuoPoseDebug(f,s.frame,s.freeze>0),move=f.move?getMove(f,f.move.id):null;
+  if(!d.available){c.fillStyle='#ffb6a4';c.font='16px system-ui';c.textAlign='center';c.fillText('Atlas unavailable; no fallback drawn',300,160);c.textAlign='left';}
+  const descriptions=members.length?members.map(m=>`${m.entity}: ${m.sequence} ${m.frameIndex}/${m.sequenceLength-1}`):[`${d.sequence} ${d.frameIndex}/${d.sequenceLength-1}`];
+  panel.debug.textContent=`${descriptions.join(' | ')}
+core ${s.frame} · x ${f.x.toFixed(1)} y ${f.y.toFixed(1)} · facing ${f.facing} · ${f.move?.id??'neutral'} ${f.move?.t??''}${move?' ['+move.startup+'/'+move.active+'/'+move.recovery+']':''} · ${s.throwState?'THROW '+s.throwState.direction:f.reaction?.phase??'no reaction'}`;
+ }
+}
+$('batch').onchange=()=>{createPanels();load();};$('target').onchange=()=>{reset();load();};$('scenario').onchange=reset;$('position').onchange=reset;$('allFacing').onchange=()=>{for(const p of panels)p.face.value=$('allFacing').value;reset();};
+for(const [id,delta]of [['prevBatch',-1],['nextBatch',1]])$(id).onclick=()=>{$('batch').value=String((Number($('batch').value)+delta+batches.length)%batches.length);createPanels();load();};
+for(const [id,delta]of [['prevScenario',-1],['nextScenario',1]])$(id).onclick=()=>{$('scenario').value=String((Number($('scenario').value)+delta+motionReview.length)%motionReview.length);reset();};
+$('play').onclick=()=>{if(!ready)return;if(complete)beginScenario();playing=!playing;$('play').textContent=playing?'Pause':'Play';last=0;accumulator=0;draw();};
+$('reset').onclick=reset;$('step').onclick=()=>{pause();advance();};$('step10').onclick=()=>{pause();for(let i=0;i<10;i++)advance();};
+function loop(now){if(last&&playing&&ready){accumulator+=Math.min(100,now-last)*Number($('speed').value);while(playing&&accumulator>=1000/60){accumulator-=1000/60;advance();}}last=now;requestAnimationFrame(loop);}
+function fitWall(){if(innerWidth>760)$('wall').style.height=Math.max(380,innerHeight-$('wall').getBoundingClientRect().top-12)+'px';}window.addEventListener('resize',fitWall);
+createPanels();fitWall();load();requestAnimationFrame(loop);
+</script></body></html>

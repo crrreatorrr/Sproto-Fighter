@@ -1,0 +1,2234 @@
+{
+  "schema": 1,
+  "status": "Applied; exact first/last contact, recovery and neutral return visually rechecked in both actual facings; phase regression passed",
+  "scope": "Four source-contact timing corrections found in actual browser playback; no source art redrawing or per-frame scaling.",
+  "samplerContract": {
+    "airKick": {
+      "startupSlots": [
+        0,
+        1
+      ],
+      "activeSlots": [
+        2,
+        3
+      ],
+      "recoverySlots": [
+        4,
+        5
+      ]
+    },
+    "heavy": {
+      "startupSlots": [
+        0,
+        1,
+        2
+      ],
+      "activeSlots": [
+        3,
+        4
+      ],
+      "recoverySlots": [
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  "findings": [
+    {
+      "owner": "sproto1499",
+      "body": "sproto1499-companion",
+      "clip": "heavy",
+      "sourceIndices": [
+        0,
+        1,
+        2,
+        3,
+        3,
+        5,
+        6,
+        7
+      ],
+      "before": [
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/12.png",
+          "bounds": [
+            143,
+            149,
+            251,
+            274
+          ],
+          "contactHull": [
+            [
+              143,
+              265
+            ],
+            [
+              166,
+              160
+            ],
+            [
+              174,
+              156
+            ],
+            [
+              182,
+              153
+            ],
+            [
+              224,
+              149
+            ],
+            [
+              229,
+              149
+            ],
+            [
+              236,
+              162
+            ],
+            [
+              239,
+              168
+            ],
+            [
+              241,
+              175
+            ],
+            [
+              250,
+              212
+            ],
+            [
+              250,
+              224
+            ],
+            [
+              245,
+              273
+            ],
+            [
+              143,
+              273
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/13.png",
+          "bounds": [
+            164,
+            140,
+            251,
+            274
+          ],
+          "contactHull": [
+            [
+              164,
+              164
+            ],
+            [
+              167,
+              151
+            ],
+            [
+              173,
+              147
+            ],
+            [
+              182,
+              144
+            ],
+            [
+              223,
+              140
+            ],
+            [
+              227,
+              140
+            ],
+            [
+              237,
+              160
+            ],
+            [
+              239,
+              165
+            ],
+            [
+              250,
+              195
+            ],
+            [
+              250,
+              205
+            ],
+            [
+              243,
+              248
+            ],
+            [
+              241,
+              250
+            ],
+            [
+              214,
+              273
+            ],
+            [
+              187,
+              273
+            ],
+            [
+              164,
+              167
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/14.png",
+          "bounds": [
+            164,
+            138,
+            246,
+            274
+          ],
+          "contactHull": [
+            [
+              164,
+              162
+            ],
+            [
+              167,
+              150
+            ],
+            [
+              169,
+              148
+            ],
+            [
+              173,
+              146
+            ],
+            [
+              182,
+              142
+            ],
+            [
+              222,
+              138
+            ],
+            [
+              227,
+              138
+            ],
+            [
+              239,
+              164
+            ],
+            [
+              245,
+              240
+            ],
+            [
+              245,
+              250
+            ],
+            [
+              212,
+              273
+            ],
+            [
+              186,
+              273
+            ],
+            [
+              167,
+              217
+            ],
+            [
+              164,
+              166
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/15.png",
+          "bounds": [
+            163,
+            142,
+            301,
+            274
+          ],
+          "contactHull": [
+            [
+              163,
+              170
+            ],
+            [
+              166,
+              157
+            ],
+            [
+              172,
+              153
+            ],
+            [
+              181,
+              149
+            ],
+            [
+              221,
+              142
+            ],
+            [
+              227,
+              142
+            ],
+            [
+              300,
+              186
+            ],
+            [
+              300,
+              203
+            ],
+            [
+              298,
+              207
+            ],
+            [
+              294,
+              211
+            ],
+            [
+              225,
+              273
+            ],
+            [
+              197,
+              273
+            ],
+            [
+              167,
+              222
+            ],
+            [
+              163,
+              174
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/16.png",
+          "bounds": [
+            162,
+            143,
+            254,
+            274
+          ],
+          "contactHull": [
+            [
+              162,
+              168
+            ],
+            [
+              166,
+              155
+            ],
+            [
+              168,
+              153
+            ],
+            [
+              181,
+              147
+            ],
+            [
+              224,
+              143
+            ],
+            [
+              228,
+              143
+            ],
+            [
+              241,
+              168
+            ],
+            [
+              253,
+              199
+            ],
+            [
+              253,
+              211
+            ],
+            [
+              249,
+              240
+            ],
+            [
+              223,
+              269
+            ],
+            [
+              220,
+              272
+            ],
+            [
+              218,
+              273
+            ],
+            [
+              210,
+              273
+            ],
+            [
+              204,
+              267
+            ],
+            [
+              172,
+              228
+            ],
+            [
+              171,
+              225
+            ],
+            [
+              162,
+              171
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/17.png",
+          "bounds": [
+            136,
+            147,
+            243,
+            274
+          ],
+          "contactHull": [
+            [
+              136,
+              265
+            ],
+            [
+              142,
+              219
+            ],
+            [
+              167,
+              158
+            ],
+            [
+              174,
+              154
+            ],
+            [
+              183,
+              151
+            ],
+            [
+              224,
+              147
+            ],
+            [
+              229,
+              147
+            ],
+            [
+              240,
+              172
+            ],
+            [
+              242,
+              212
+            ],
+            [
+              242,
+              220
+            ],
+            [
+              229,
+              273
+            ],
+            [
+              136,
+              273
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/18.png",
+          "bounds": [
+            147,
+            149,
+            253,
+            274
+          ],
+          "contactHull": [
+            [
+              147,
+              265
+            ],
+            [
+              164,
+              173
+            ],
+            [
+              167,
+              160
+            ],
+            [
+              173,
+              156
+            ],
+            [
+              182,
+              153
+            ],
+            [
+              224,
+              149
+            ],
+            [
+              228,
+              149
+            ],
+            [
+              237,
+              168
+            ],
+            [
+              252,
+              208
+            ],
+            [
+              252,
+              218
+            ],
+            [
+              248,
+              273
+            ],
+            [
+              147,
+              273
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/19.png",
+          "bounds": [
+            165,
+            147,
+            251,
+            274
+          ],
+          "contactHull": [
+            [
+              165,
+              173
+            ],
+            [
+              168,
+              160
+            ],
+            [
+              174,
+              156
+            ],
+            [
+              182,
+              153
+            ],
+            [
+              224,
+              147
+            ],
+            [
+              228,
+              147
+            ],
+            [
+              240,
+              173
+            ],
+            [
+              250,
+              207
+            ],
+            [
+              250,
+              271
+            ],
+            [
+              192,
+              273
+            ],
+            [
+              165,
+              273
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        }
+      ],
+      "approvedContactUrl": "/fighters/motion/sproto1499-companion/scale-fix/15.png",
+      "approvedContactSha256": "8edb61f0e220d7bd1524824805234e20f46d866396df458d531e7be87d5575a8",
+      "reviewedSourceHashes": {
+        "/fighters/motion/sproto1499-companion/scale-fix/12.png": "0839eb8e135be62281a7a376afc56cdcb0f670a87ac0aafebc1b311ac4a4c83b",
+        "/fighters/motion/sproto1499-companion/scale-fix/13.png": "f0417b94f39fd3b405d12f97c130d7984515927ddb806f38bc992b9447c3667b",
+        "/fighters/motion/sproto1499-companion/scale-fix/14.png": "0b4fb726e6598ff2f2d1483196ff0a37e4e3b16c553e1474cb2b915b441e750f",
+        "/fighters/motion/sproto1499-companion/scale-fix/15.png": "8edb61f0e220d7bd1524824805234e20f46d866396df458d531e7be87d5575a8",
+        "/fighters/motion/sproto1499-companion/scale-fix/16.png": "6b26fd4223a72f4f43ab40c850939ca36bc162f4ff3e93ab45d77230c1df2c00",
+        "/fighters/motion/sproto1499-companion/scale-fix/17.png": "2a35135e59e86693f45ab427abec51a8e4caaa31e3ecee16edb9e0063d31b29a",
+        "/fighters/motion/sproto1499-companion/scale-fix/18.png": "2cf08ce37bdba6bcf19cf974c0999d66748de413b51d9d1b5311e61381a87afe",
+        "/fighters/motion/sproto1499-companion/scale-fix/19.png": "e1e9bbc789e25d4546179769c21a10f4a9b8a24698af0ac6faaf9aca8a3b84f9"
+      },
+      "observation": "Browser scenario19 f15, heavy age15 [11/6/23], slot4 has raised retracted knee; scenario13 f20 age12 slot3 is extended contact.",
+      "rationale": "Keep the individually inspected extended kick visible through both active sampler slots, preserving startup, recovery, original dimensions, anchors, bounds and contact hulls.",
+      "source_pixels_inspected": [
+        "/fighters/motion/sproto1499-companion/scale-fix/15.png",
+        "/fighters/motion/sproto1499-companion/scale-fix/16.png"
+      ]
+    },
+    {
+      "owner": "sproto1499",
+      "body": "sproto1499-companion",
+      "clip": "airKick",
+      "sourceIndices": [
+        0,
+        1,
+        2,
+        2,
+        4,
+        5
+      ],
+      "before": [
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/20.png",
+          "bounds": [
+            143,
+            155,
+            242,
+            274
+          ],
+          "contactHull": [
+            [
+              143,
+              232
+            ],
+            [
+              166,
+              167
+            ],
+            [
+              172,
+              162
+            ],
+            [
+              180,
+              159
+            ],
+            [
+              222,
+              155
+            ],
+            [
+              227,
+              155
+            ],
+            [
+              235,
+              168
+            ],
+            [
+              241,
+              180
+            ],
+            [
+              241,
+              193
+            ],
+            [
+              237,
+              245
+            ],
+            [
+              231,
+              251
+            ],
+            [
+              202,
+              273
+            ],
+            [
+              184,
+              273
+            ],
+            [
+              143,
+              240
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/21.png",
+          "bounds": [
+            163,
+            146,
+            253,
+            274
+          ],
+          "contactHull": [
+            [
+              163,
+              173
+            ],
+            [
+              166,
+              160
+            ],
+            [
+              168,
+              158
+            ],
+            [
+              172,
+              155
+            ],
+            [
+              181,
+              151
+            ],
+            [
+              224,
+              146
+            ],
+            [
+              229,
+              146
+            ],
+            [
+              241,
+              172
+            ],
+            [
+              251,
+              199
+            ],
+            [
+              252,
+              202
+            ],
+            [
+              252,
+              214
+            ],
+            [
+              251,
+              218
+            ],
+            [
+              244,
+              240
+            ],
+            [
+              241,
+              244
+            ],
+            [
+              239,
+              246
+            ],
+            [
+              205,
+              273
+            ],
+            [
+              197,
+              273
+            ],
+            [
+              194,
+              271
+            ],
+            [
+              189,
+              263
+            ],
+            [
+              173,
+              232
+            ],
+            [
+              163,
+              175
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/22.png",
+          "bounds": [
+            164,
+            172,
+            301,
+            274
+          ],
+          "contactHull": [
+            [
+              164,
+              207
+            ],
+            [
+              166,
+              193
+            ],
+            [
+              168,
+              190
+            ],
+            [
+              173,
+              186
+            ],
+            [
+              180,
+              182
+            ],
+            [
+              219,
+              172
+            ],
+            [
+              224,
+              172
+            ],
+            [
+              300,
+              205
+            ],
+            [
+              300,
+              220
+            ],
+            [
+              298,
+              224
+            ],
+            [
+              296,
+              226
+            ],
+            [
+              257,
+              261
+            ],
+            [
+              246,
+              269
+            ],
+            [
+              239,
+              273
+            ],
+            [
+              223,
+              273
+            ],
+            [
+              178,
+              263
+            ],
+            [
+              176,
+              262
+            ],
+            [
+              174,
+              260
+            ],
+            [
+              164,
+              209
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/23.png",
+          "bounds": [
+            165,
+            149,
+            258,
+            274
+          ],
+          "contactHull": [
+            [
+              165,
+              178
+            ],
+            [
+              168,
+              165
+            ],
+            [
+              169,
+              163
+            ],
+            [
+              173,
+              160
+            ],
+            [
+              182,
+              156
+            ],
+            [
+              221,
+              149
+            ],
+            [
+              226,
+              149
+            ],
+            [
+              240,
+              173
+            ],
+            [
+              257,
+              206
+            ],
+            [
+              257,
+              214
+            ],
+            [
+              229,
+              253
+            ],
+            [
+              213,
+              269
+            ],
+            [
+              208,
+              273
+            ],
+            [
+              202,
+              273
+            ],
+            [
+              191,
+              263
+            ],
+            [
+              189,
+              261
+            ],
+            [
+              169,
+              239
+            ],
+            [
+              166,
+              235
+            ],
+            [
+              165,
+              233
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/24.png",
+          "bounds": [
+            141,
+            176,
+            273,
+            274
+          ],
+          "contactHull": [
+            [
+              141,
+              239
+            ],
+            [
+              169,
+              190
+            ],
+            [
+              175,
+              186
+            ],
+            [
+              183,
+              182
+            ],
+            [
+              220,
+              176
+            ],
+            [
+              225,
+              176
+            ],
+            [
+              270,
+              219
+            ],
+            [
+              272,
+              221
+            ],
+            [
+              272,
+              228
+            ],
+            [
+              237,
+              271
+            ],
+            [
+              235,
+              273
+            ],
+            [
+              178,
+              273
+            ],
+            [
+              141,
+              247
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1499-companion/scale-fix/25.png",
+          "bounds": [
+            154,
+            160,
+            247,
+            274
+          ],
+          "contactHull": [
+            [
+              154,
+              265
+            ],
+            [
+              166,
+              182
+            ],
+            [
+              171,
+              171
+            ],
+            [
+              172,
+              169
+            ],
+            [
+              184,
+              164
+            ],
+            [
+              188,
+              163
+            ],
+            [
+              222,
+              160
+            ],
+            [
+              226,
+              160
+            ],
+            [
+              237,
+              182
+            ],
+            [
+              246,
+              213
+            ],
+            [
+              246,
+              223
+            ],
+            [
+              245,
+              271
+            ],
+            [
+              179,
+              273
+            ],
+            [
+              154,
+              273
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        }
+      ],
+      "approvedContactUrl": "/fighters/motion/sproto1499-companion/scale-fix/22.png",
+      "approvedContactSha256": "52df1b2f68ce269580274c6ff9ef0ce695a9e3952fac2816217d55f73e0c719d",
+      "reviewedSourceHashes": {
+        "/fighters/motion/sproto1499-companion/scale-fix/20.png": "5c0e6cde61fd655690a23ec80bd94c11d2bca682d24494b4a0a0adc63065eadd",
+        "/fighters/motion/sproto1499-companion/scale-fix/21.png": "09502a06ce3cc70c6e55c178eae9a7540b332497037a076dcfa54d5dbf7dcb85",
+        "/fighters/motion/sproto1499-companion/scale-fix/22.png": "52df1b2f68ce269580274c6ff9ef0ce695a9e3952fac2816217d55f73e0c719d",
+        "/fighters/motion/sproto1499-companion/scale-fix/23.png": "a7cdea06bf4372533f2309a48259e64bc5c1a9c2848d54ef57c2c03934c25149",
+        "/fighters/motion/sproto1499-companion/scale-fix/24.png": "f2955fb9f89fc663245abe41f061a4989f8b90c5d655457cd2844034668569a6",
+        "/fighters/motion/sproto1499-companion/scale-fix/25.png": "f8f71301568e7d48fe2b13ec2cce80cf89394350001b72387ee07cc76637f66e"
+      },
+      "observation": "Browser scenario28 f20, airMedium age11 [6/6/14], slot3 tucked; scenario27 f17 age8 slot2 extended.",
+      "rationale": "Keep the individually inspected extended kick visible through both active sampler slots, preserving startup, recovery, original dimensions, anchors, bounds and contact hulls.",
+      "source_pixels_inspected": [
+        "/fighters/motion/sproto1499-companion/scale-fix/22.png",
+        "/fighters/motion/sproto1499-companion/scale-fix/23.png"
+      ]
+    },
+    {
+      "owner": "sproto1625",
+      "body": "sproto1625-companion",
+      "clip": "airKick",
+      "sourceIndices": [
+        0,
+        1,
+        2,
+        2,
+        4,
+        5
+      ],
+      "before": [
+        {
+          "url": "/fighters/motion/sproto1625-companion/scale-fix/20.png",
+          "bounds": [
+            161,
+            157,
+            242,
+            274
+          ],
+          "contactHull": [
+            [
+              161,
+              173
+            ],
+            [
+              204,
+              157
+            ],
+            [
+              209,
+              157
+            ],
+            [
+              233,
+              177
+            ],
+            [
+              241,
+              212
+            ],
+            [
+              241,
+              219
+            ],
+            [
+              228,
+              257
+            ],
+            [
+              224,
+              261
+            ],
+            [
+              208,
+              273
+            ],
+            [
+              203,
+              273
+            ],
+            [
+              199,
+              271
+            ],
+            [
+              167,
+              239
+            ],
+            [
+              163,
+              198
+            ],
+            [
+              161,
+              175
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1625-companion/scale-fix/21.png",
+          "bounds": [
+            162,
+            161,
+            241,
+            274
+          ],
+          "contactHull": [
+            [
+              162,
+              177
+            ],
+            [
+              202,
+              161
+            ],
+            [
+              207,
+              161
+            ],
+            [
+              214,
+              165
+            ],
+            [
+              232,
+              178
+            ],
+            [
+              240,
+              211
+            ],
+            [
+              240,
+              218
+            ],
+            [
+              229,
+              255
+            ],
+            [
+              228,
+              257
+            ],
+            [
+              219,
+              270
+            ],
+            [
+              216,
+              273
+            ],
+            [
+              210,
+              273
+            ],
+            [
+              208,
+              272
+            ],
+            [
+              175,
+              240
+            ],
+            [
+              164,
+              201
+            ],
+            [
+              162,
+              179
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1625-companion/scale-fix/22.png",
+          "bounds": [
+            136,
+            166,
+            253,
+            274
+          ],
+          "contactHull": [
+            [
+              136,
+              187
+            ],
+            [
+              173,
+              166
+            ],
+            [
+              178,
+              166
+            ],
+            [
+              249,
+              182
+            ],
+            [
+              251,
+              184
+            ],
+            [
+              252,
+              186
+            ],
+            [
+              252,
+              194
+            ],
+            [
+              251,
+              198
+            ],
+            [
+              209,
+              268
+            ],
+            [
+              207,
+              271
+            ],
+            [
+              205,
+              273
+            ],
+            [
+              200,
+              273
+            ],
+            [
+              147,
+              250
+            ],
+            [
+              144,
+              246
+            ],
+            [
+              136,
+              189
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1625-companion/scale-fix/23.png",
+          "bounds": [
+            162,
+            175,
+            240,
+            274
+          ],
+          "contactHull": [
+            [
+              162,
+              190
+            ],
+            [
+              204,
+              175
+            ],
+            [
+              208,
+              175
+            ],
+            [
+              232,
+              193
+            ],
+            [
+              239,
+              226
+            ],
+            [
+              239,
+              233
+            ],
+            [
+              224,
+              271
+            ],
+            [
+              222,
+              273
+            ],
+            [
+              217,
+              273
+            ],
+            [
+              196,
+              269
+            ],
+            [
+              169,
+              254
+            ],
+            [
+              167,
+              252
+            ],
+            [
+              166,
+              250
+            ],
+            [
+              162,
+              192
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1625-companion/scale-fix/24.png",
+          "bounds": [
+            163,
+            156,
+            242,
+            274
+          ],
+          "contactHull": [
+            [
+              163,
+              167
+            ],
+            [
+              205,
+              156
+            ],
+            [
+              209,
+              156
+            ],
+            [
+              211,
+              157
+            ],
+            [
+              233,
+              174
+            ],
+            [
+              241,
+              209
+            ],
+            [
+              241,
+              218
+            ],
+            [
+              220,
+              257
+            ],
+            [
+              216,
+              261
+            ],
+            [
+              197,
+              272
+            ],
+            [
+              195,
+              273
+            ],
+            [
+              188,
+              273
+            ],
+            [
+              185,
+              271
+            ],
+            [
+              178,
+              264
+            ],
+            [
+              177,
+              261
+            ],
+            [
+              170,
+              228
+            ],
+            [
+              163,
+              191
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto1625-companion/scale-fix/25.png",
+          "bounds": [
+            149,
+            174,
+            246,
+            274
+          ],
+          "contactHull": [
+            [
+              149,
+              253
+            ],
+            [
+              164,
+              187
+            ],
+            [
+              207,
+              174
+            ],
+            [
+              211,
+              174
+            ],
+            [
+              215,
+              177
+            ],
+            [
+              233,
+              192
+            ],
+            [
+              234,
+              193
+            ],
+            [
+              245,
+              250
+            ],
+            [
+              245,
+              257
+            ],
+            [
+              205,
+              273
+            ],
+            [
+              189,
+              273
+            ],
+            [
+              151,
+              261
+            ],
+            [
+              149,
+              259
+            ]
+          ],
+          "width": 416,
+          "height": 336,
+          "anchor": [
+            176,
+            274
+          ]
+        }
+      ],
+      "approvedContactUrl": "/fighters/motion/sproto1625-companion/scale-fix/22.png",
+      "approvedContactSha256": "fd27b3681fdcd83bfd556580a0d4b0da6e27260bf5e77fb9e7464b2194088de3",
+      "reviewedSourceHashes": {
+        "/fighters/motion/sproto1625-companion/scale-fix/20.png": "720c2d223c9e685a8b55159eb29ce67bcddc3cf434b532f502a3ababa9818cfa",
+        "/fighters/motion/sproto1625-companion/scale-fix/21.png": "376c36a7acd2c265d1f0cf849ec9031c3c059f8a2e3ac7bb219ab42020ade71c",
+        "/fighters/motion/sproto1625-companion/scale-fix/22.png": "fd27b3681fdcd83bfd556580a0d4b0da6e27260bf5e77fb9e7464b2194088de3",
+        "/fighters/motion/sproto1625-companion/scale-fix/23.png": "7e9dad13cb5ad50070fe3c5401a5396f896f5bc4cb228eecc5ac0248b3dcd27f",
+        "/fighters/motion/sproto1625-companion/scale-fix/24.png": "41a2c92de3097168614b2d6869183746a96b344d4806f721171fe9b2638c36fe",
+        "/fighters/motion/sproto1625-companion/scale-fix/25.png": "1f3d2d5783aa8925fdc485584ff3949d8e80ce41c4d0e024fd1578a0ac8f1059"
+      },
+      "observation": "Browser scenario28 f20, airMedium age11 [6/6/14], slot3 tucked; scenario27 f17 age8 slot2 extended.",
+      "rationale": "Keep the individually inspected extended kick visible through both active sampler slots, preserving startup, recovery, original dimensions, anchors, bounds and contact hulls.",
+      "source_pixels_inspected": [
+        "/fighters/motion/sproto1625-companion/scale-fix/22.png",
+        "/fighters/motion/sproto1625-companion/scale-fix/23.png"
+      ]
+    },
+    {
+      "owner": "sproto2010",
+      "body": "sproto2010-companion",
+      "clip": "airKick",
+      "sourceIndices": [
+        0,
+        1,
+        2,
+        2,
+        4,
+        5
+      ],
+      "before": [
+        {
+          "url": "/fighters/motion/sproto2010-companion/20.png",
+          "bounds": [
+            93,
+            77,
+            194,
+            210
+          ],
+          "contactHull": [
+            [
+              93,
+              157
+            ],
+            [
+              108,
+              100
+            ],
+            [
+              115,
+              82
+            ],
+            [
+              118,
+              80
+            ],
+            [
+              120,
+              79
+            ],
+            [
+              125,
+              77
+            ],
+            [
+              147,
+              77
+            ],
+            [
+              153,
+              79
+            ],
+            [
+              158,
+              81
+            ],
+            [
+              163,
+              84
+            ],
+            [
+              167,
+              88
+            ],
+            [
+              172,
+              94
+            ],
+            [
+              193,
+              133
+            ],
+            [
+              193,
+              142
+            ],
+            [
+              172,
+              194
+            ],
+            [
+              167,
+              200
+            ],
+            [
+              154,
+              209
+            ],
+            [
+              143,
+              209
+            ],
+            [
+              96,
+              169
+            ],
+            [
+              93,
+              165
+            ]
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto2010-companion/21.png",
+          "bounds": [
+            107,
+            77,
+            194,
+            210
+          ],
+          "contactHull": [
+            [
+              107,
+              102
+            ],
+            [
+              114,
+              84
+            ],
+            [
+              117,
+              81
+            ],
+            [
+              120,
+              79
+            ],
+            [
+              126,
+              77
+            ],
+            [
+              145,
+              77
+            ],
+            [
+              153,
+              79
+            ],
+            [
+              158,
+              81
+            ],
+            [
+              162,
+              84
+            ],
+            [
+              170,
+              92
+            ],
+            [
+              173,
+              96
+            ],
+            [
+              193,
+              128
+            ],
+            [
+              193,
+              136
+            ],
+            [
+              170,
+              204
+            ],
+            [
+              168,
+              207
+            ],
+            [
+              165,
+              209
+            ],
+            [
+              157,
+              209
+            ],
+            [
+              153,
+              206
+            ],
+            [
+              112,
+              174
+            ],
+            [
+              109,
+              170
+            ],
+            [
+              107,
+              103
+            ]
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto2010-companion/22.png",
+          "bounds": [
+            91,
+            83,
+            242,
+            210
+          ],
+          "contactHull": [
+            [
+              91,
+              157
+            ],
+            [
+              115,
+              89
+            ],
+            [
+              118,
+              86
+            ],
+            [
+              123,
+              83
+            ],
+            [
+              145,
+              83
+            ],
+            [
+              157,
+              87
+            ],
+            [
+              238,
+              123
+            ],
+            [
+              241,
+              125
+            ],
+            [
+              241,
+              135
+            ],
+            [
+              238,
+              140
+            ],
+            [
+              235,
+              144
+            ],
+            [
+              169,
+              209
+            ],
+            [
+              163,
+              209
+            ],
+            [
+              137,
+              197
+            ],
+            [
+              134,
+              195
+            ],
+            [
+              97,
+              170
+            ],
+            [
+              91,
+              165
+            ]
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto2010-companion/23.png",
+          "bounds": [
+            100,
+            86,
+            187,
+            210
+          ],
+          "contactHull": [
+            [
+              100,
+              163
+            ],
+            [
+              108,
+              109
+            ],
+            [
+              116,
+              92
+            ],
+            [
+              118,
+              90
+            ],
+            [
+              128,
+              86
+            ],
+            [
+              146,
+              86
+            ],
+            [
+              154,
+              88
+            ],
+            [
+              158,
+              90
+            ],
+            [
+              163,
+              93
+            ],
+            [
+              170,
+              101
+            ],
+            [
+              174,
+              107
+            ],
+            [
+              186,
+              142
+            ],
+            [
+              186,
+              151
+            ],
+            [
+              155,
+              200
+            ],
+            [
+              153,
+              203
+            ],
+            [
+              130,
+              209
+            ],
+            [
+              124,
+              209
+            ],
+            [
+              119,
+              204
+            ],
+            [
+              116,
+              199
+            ],
+            [
+              100,
+              171
+            ]
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto2010-companion/24.png",
+          "bounds": [
+            96,
+            72,
+            188,
+            210
+          ],
+          "contactHull": [
+            [
+              96,
+              153
+            ],
+            [
+              107,
+              97
+            ],
+            [
+              113,
+              81
+            ],
+            [
+              117,
+              77
+            ],
+            [
+              125,
+              72
+            ],
+            [
+              144,
+              72
+            ],
+            [
+              152,
+              75
+            ],
+            [
+              156,
+              77
+            ],
+            [
+              159,
+              79
+            ],
+            [
+              163,
+              82
+            ],
+            [
+              165,
+              84
+            ],
+            [
+              170,
+              90
+            ],
+            [
+              174,
+              96
+            ],
+            [
+              177,
+              102
+            ],
+            [
+              187,
+              152
+            ],
+            [
+              187,
+              161
+            ],
+            [
+              164,
+              206
+            ],
+            [
+              160,
+              209
+            ],
+            [
+              135,
+              209
+            ],
+            [
+              128,
+              202
+            ],
+            [
+              99,
+              166
+            ],
+            [
+              96,
+              162
+            ]
+          ]
+        },
+        {
+          "url": "/fighters/motion/sproto2010-companion/25.png",
+          "bounds": [
+            74,
+            105,
+            178,
+            210
+          ],
+          "contactHull": [
+            [
+              74,
+              200
+            ],
+            [
+              87,
+              164
+            ],
+            [
+              90,
+              158
+            ],
+            [
+              115,
+              112
+            ],
+            [
+              117,
+              110
+            ],
+            [
+              127,
+              105
+            ],
+            [
+              147,
+              105
+            ],
+            [
+              154,
+              108
+            ],
+            [
+              162,
+              112
+            ],
+            [
+              167,
+              117
+            ],
+            [
+              174,
+              127
+            ],
+            [
+              177,
+              133
+            ],
+            [
+              177,
+              207
+            ],
+            [
+              145,
+              209
+            ],
+            [
+              127,
+              209
+            ],
+            [
+              74,
+              207
+            ]
+          ]
+        }
+      ],
+      "approvedContactUrl": "/fighters/motion/sproto2010-companion/22.png",
+      "approvedContactSha256": "8ab48c0ded8a839390e2d7b4f2f3e29ee11eb0f47fc75b9a01a01c9028812eea",
+      "reviewedSourceHashes": {
+        "/fighters/motion/sproto2010-companion/20.png": "7a0ff70ee49de66c0d62f24d7ec3eb3eb83c870e04481bb2f796d5ce10cdf480",
+        "/fighters/motion/sproto2010-companion/21.png": "284bbb6d037f2d80830f7f0bbf0a9007dae03c97bce053f06405aca3087d2fcb",
+        "/fighters/motion/sproto2010-companion/22.png": "8ab48c0ded8a839390e2d7b4f2f3e29ee11eb0f47fc75b9a01a01c9028812eea",
+        "/fighters/motion/sproto2010-companion/23.png": "0ead7a479416eb8daa44061da21ea4e1bbc7bfc6f39241d3e325b1e88f5040b1",
+        "/fighters/motion/sproto2010-companion/24.png": "620078fc600eb9fa279ce2eee97e8b6f6c61e68b6062c6b7159eb3c1feafede6",
+        "/fighters/motion/sproto2010-companion/25.png": "12ef79bd7ab086ee47b58243d41fb4913d131dc0cb2e82b303163c91dd31e3c8"
+      },
+      "observation": "Browser scenario28 f20, airMedium age11 [6/6/14], slot3 tucked; scenario27 f17 age8 slot2 extended.",
+      "rationale": "Keep the individually inspected extended kick visible through both active sampler slots, preserving startup, recovery, original dimensions, anchors, bounds and contact hulls.",
+      "source_pixels_inspected": [
+        "/fighters/motion/sproto2010-companion/22.png",
+        "/fighters/motion/sproto2010-companion/23.png"
+      ]
+    }
+  ],
+  "limitations": [
+    "Holding the authored extended contact replaces premature retraction; no new inbetween art is created.",
+    "Focused automated sampling verifies contact selection, not live-motion quality. Browser retest required after applying."
+  ],
+  "browserRecord": "docs/evidence/movement-followup-20261102/live-pairs-c.json"
+}

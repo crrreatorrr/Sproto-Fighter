@@ -1,0 +1,38 @@
+{
+  "fighter": "guest14",
+  "name": "Virtuagram",
+  "issue": "Aerial contact slot23 shows a near-guard/short-step stance instead of a visible kick. Confirmed in both facings at airMedium/airHeavy core frame20 and native source pixels.",
+  "original": {
+    "url": "/fighters/poses/guest14/23-airKickFull.png",
+    "width": 256,
+    "height": 256,
+    "anchor": [
+      112,
+      210
+    ]
+  },
+  "replacement": {
+    "url": "/fighters/poses/guest14/18-kickFull.png",
+    "width": 256,
+    "height": 256,
+    "anchor": [
+      112,
+      210
+    ]
+  },
+  "sourceHashes": {
+    "/fighters/poses/guest14/23-airKickFull.png": "8233db963dd16a2decab182225cdd86ac85c2927b54b0a9d6bb5bf2f9440c66b",
+    "/fighters/poses/guest14/18-kickFull.png": "d36c5ad8bb0a887a09027a4b1fbf8e933bc84c0814d03d5e683b0e7c9a86e99d"
+  },
+  "evidence": [
+    "g04-s27-R-t2.jpg",
+    "g04-s30-R-t2.jpg",
+    "g04-s30-L-t2.jpg"
+  ],
+  "scope": "Remap only guest14 contact slot23 to already authored ground full-kick pose18. Preserve original PNG and other metadata. No gameplay/core/hitbox change.",
+  "limitations": [
+    "Reuses existing complete-body ground kick art; not a newly authored airborne kick.",
+    "Sparse actual-browser samples confirm this targeted correction; not every frame or normal-match effects."
+  ],
+  "applicationStatus": "Applied by root; browser-rechecked both facings at airMedium/airHeavy contact20, recovery27/28 and return51/53."
+}

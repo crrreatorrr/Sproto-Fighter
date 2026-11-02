@@ -33,6 +33,10 @@ export interface PoseAtlasConfig {
   walkFrames?: (string | PoseFrameConfig)[];
   /** Optional complete-body event sequences; each supplied clip must be complete. */
   clips?: Partial<Record<AtlasClipName, (string | PoseFrameConfig)[]>>;
+  /** Reviewed source-sheet calibration, constant for every cel in a clip.
+   * Corrects a differently drawn pixel density/origin; never auto-fits a pose.
+   * Raw PNGs and their metadata stay in source pixels. */
+  clipRegistration?: Partial<Record<AtlasClipName, { pixelScale:number; anchorOffset:Point }>>;
   width: number;
   height: number;
   anchor: Point;
@@ -94,6 +98,10 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
   for(const [name,entries] of Object.entries(cfg.clips??{})){
     if(!(name in {...EVENT_CLIP_LENGTHS,...ACTION_CLIP_LENGTHS,...ASSIST_CLIP_LENGTHS,...IDENTITY_CLIP_LENGTHS})||!Array.isArray(entries)||entries.length!==({...EVENT_CLIP_LENGTHS,...ACTION_CLIP_LENGTHS,...ASSIST_CLIP_LENGTHS,...IDENTITY_CLIP_LENGTHS})[name as AtlasClipName])throw new Error(`Atlas ${id}: invalid ${name} clip length`);
   }
+  if(cfg.clipRegistration!==undefined && (!cfg.clipRegistration || typeof cfg.clipRegistration!=='object' || Array.isArray(cfg.clipRegistration)))throw new Error(`Atlas ${id}: clipRegistration must be an object`);
+  for(const [name,registration] of Object.entries(cfg.clipRegistration??{})){
+    if(!cfg.clips?.[name as AtlasClipName] || !registration || !positive(registration.pixelScale) || registration.pixelScale<.5 || registration.pixelScale>2 || !point(registration.anchorOffset))throw new Error(`Atlas ${id}: invalid ${name} source registration`);
+  }
   const loadFrames = (entries: (string | PoseFrameConfig)[], label:string) => Promise.all(entries.map(async (entry, slot): Promise<LoadedFrame> => {
     const f = typeof entry === 'string' ? { url: entry } : entry;
     if (!f || typeof f.url !== 'string') throw new Error(`Atlas ${id}, ${label} frame ${slot}: missing frame URL`);
@@ -110,7 +118,14 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
       img.src = localUrl(f.url, revision);
     });
     if (image.naturalWidth !== width || image.naturalHeight !== height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: image dimensions differ from metadata`);
-    return { image, width, height, anchor: [...anchor] as Point, bounds: [...bounds] as LoadedFrame['bounds'], fallLean:f.fallLean??0, contactHull:f.contactHull };
+    const registration=cfg.clipRegistration?.[label as AtlasClipName], density=registration?.pixelScale??1, offset=registration?.anchorOffset??[0,0];
+    // All geometry uses the same calibrated coordinates as the drawn bitmap.
+    // Keeping the foot origin, bounds and hull together also preserves camera
+    // packing and floor/throw placement. Combat never reads this registration.
+    return { image, width:width*density, height:height*density,
+      anchor:[(anchor[0]+offset[0])*density,(anchor[1]+offset[1])*density],
+      bounds:bounds.map(v=>v*density) as LoadedFrame['bounds'], fallLean:f.fallLean??0,
+      contactHull:f.contactHull?.map(([x,y])=>[x*density,y*density]) };
   }));
   const [frames, walkFrames, clipEntries] = await Promise.all([loadFrames(cfg.frames, 'poses'), cfg.walkFrames ? loadFrames(cfg.walkFrames, 'walk') : undefined, Promise.all(Object.entries(cfg.clips??{}).map(async ([name,entries])=>[name,await loadFrames(entries!,name)] as const))]);
   return { frames, walkFrames, clips:Object.fromEntries(clipEntries), scale: cfg.scale ?? cfg.worldHeight! / cfg.height, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact };
@@ -620,7 +635,7 @@ function paint(c: CanvasRenderingContext2D, f: Fighter, slot: PoseSlot, ghost: b
   }
   if (ghost) c.globalAlpha *= .55;
   if (f.flash > 0 && f.flash % 4 < 2) c.filter = 'brightness(1.8)';
-  c.drawImage(source.image, -source.anchor[0]-transform.pivotX, -source.anchor[1]-transform.pivotY); c.restore(); return true;
+  c.drawImage(source.image, -source.anchor[0]-transform.pivotX, -source.anchor[1]-transform.pivotY,source.width,source.height); c.restore(); return true;
 }
 /** False means no installed complete atlas; caller decides the fallback. */
 export function drawPoseAtlas(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false): boolean {
