@@ -1,0 +1,15 @@
+node:internal/modules/run_main:123
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: gryph facing -1 airMedium age 6: active contact must show the inspected extended-leg kick
+    at file:///Users/kenhiraoka/Documents/Codex/2026-10-31/task/sproto-motion-followup/scripts/aerial-kick-art-smoke.mjs:35:14 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v22.22.3

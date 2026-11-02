@@ -14,7 +14,9 @@
     "qa": "npm run smoke && npm run story-smoke && node scripts/game-qa.mjs && node scripts/fighter-qa.mjs && npm run sprite-scale-qa",
     "partners-qa": "node scripts/pissing-assist-qa.mjs && node scripts/partner-expansion-qa.mjs",
     "versus-smoke": "node scripts/versus-smoke.mjs && node scripts/presentation-smoke.mjs",
-    "sprite-scale-qa": "node scripts/sprite-scale-qa.mjs"
+    "sprite-scale-qa": "node scripts/sprite-scale-qa.mjs",
+    "aerial-kick-art-smoke": "node scripts/aerial-kick-art-smoke.mjs",
+    "motion-review-smoke": "node scripts/motion-review-smoke.mjs"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

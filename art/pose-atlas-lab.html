@@ -3,8 +3,8 @@
 :root{font:14px system-ui;color:#e9edf4;background:#101722;color-scheme:dark}body{max-width:1320px;margin:24px auto;padding:0 16px}h1{font-size:25px}p{color:#aebed0;line-height:1.5}.bar{display:flex;gap:12px;flex-wrap:wrap;align-items:end;padding:14px;background:#1d293b;border:1px solid #42556e}label{display:grid;gap:5px;font-size:12px}select,button{font:inherit;padding:8px;background:#283c53;color:white;border:1px solid #60758d;border-radius:4px;cursor:pointer}button:disabled{opacity:.5}#live{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}canvas{width:100%;image-rendering:pixelated;background:#273345;border:1px solid #64758b}#frames{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}figure{margin:14px 0}figcaption{font-size:12px;padding:5px}#status,#debug{white-space:pre-wrap;font:12px ui-monospace,monospace;line-height:1.6}.error{color:#ffad9e}a{color:#a9d8ff}@media(max-width:760px){#live{grid-template-columns:1fr}#frames{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style></head><body>
 <h1>Full-pose atlas review</h1><p>Complete authored frames only. The live panels advance the real combat core with persistent fighter objects. The second panel mirrors the same state for facing inspection. Frame inspection below bypasses action selection. Missing atlases are labelled; no old cutout art is drawn here.</p>
-<div class="bar"><button id="prev">Previous fighter</button><label>Fighter<select id="fighter"></select></label><button id="next">Next fighter</button><label>Action<select id="action"><option value="fullReview">Full motion review</option><option selected>idle</option><option>walk</option><option>dash</option><option>jump</option><option>crouch</option><option>light</option><option>medium</option><option>heavy</option><option>low</option><option>sweep</option><option>launcher</option><option>bolt</option><option>airLight</option><option>airMedium</option><option>airHeavy</option><option>grab</option><option>victimThrow</option><option>hit</option><option>heavyHit</option><option>launchHit</option><option>block</option><option>special</option><option>keyboard</option></select></label><label>Aim / throw direction<select id="direction"><option>forward</option><option>back</option><option>up</option><option>upForward</option><option>down</option></select></label><label>Opponent<select id="target"></select></label><label>Start facing<select id="facing"><option value="1">Right</option><option value="-1">Left</option></select></label><label>Arena position<select id="position"><option>center</option><option>left corner</option><option>right corner</option><option>left wall</option><option>right wall</option></select></label><label>Playback speed<select id="speed"><option value=".25">¼×</option><option value=".5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><label style="display:flex;align-items:center;gap:6px"><input id="loopAction" type="checkbox" checked> Loop action</label><button id="play">Play</button><button id="step">Step 1 frame</button><label>Frames to advance<input id="frameCount" type="number" min="1" max="600" value="10" style="width:65px"></label><button id="advanceFrames">Advance frames</button><button id="reset">Restart action</button><button id="reload">Reload assets</button></div>
-<p id="scenario" role="status" style="font-weight:600;color:#fff"></p><p id="status" role="status">Loading optional atlas manifest…</p><p>Keyboard mode: A/D move · W jump · S crouch · J/K/L attacks · U launcher · I power · O grab · P special · Shift dash. Test special starts with three pips. This review fixture does not alter the game's charging rules. Each scripted scenario resets positions and test meter, then advances persistent core state through recovery. Full review checks both walking directions and all four attacker/victim throw directions.</p>
+<div class="bar"><button id="prev">Previous fighter</button><label>Fighter<select id="fighter"></select></label><button id="next">Next fighter</button><label>Action<select id="action"><option value="fullReview">Full motion review</option><option selected>idle</option><option>walk</option><option>dash</option><option>jump</option><option>crouch</option><option>light</option><option>medium</option><option>heavy</option><option>low</option><option>sweep</option><option>launcher</option><option>bolt</option><option>airLight</option><option>airMedium</option><option>airHeavy</option><option>grab</option><option>victimThrow</option><option>hit</option><option>heavyHit</option><option>launchHit</option><option>block</option><option>special</option><option>keyboard</option></select></label><label>Aim / throw direction<select id="direction"><option>forward</option><option>back</option><option>up</option><option>upForward</option><option>down</option></select></label><label>Opponent<select id="target"></select></label><label>Start facing<select id="facing"><option value="1">Right</option><option value="-1">Left</option></select></label><label>Arena position<select id="position"><option>center</option><option>left corner</option><option>right corner</option><option>left wall</option><option>right wall</option></select></label><label>Playback speed<select id="speed"><option value=".25">¼×</option><option value=".5">½×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label><label style="display:flex;align-items:center;gap:6px"><input id="loopAction" type="checkbox" checked> Loop action</label><button id="play">Play</button><button id="step">Step 1 frame</button><label>Frames to advance<input id="frameCount" type="number" min="1" max="600" value="10" style="width:65px"></label><button id="advanceFrames">Advance frames</button><button id="reset">Restart action</button><button id="reload">Reload page assets</button></div>
+<p id="scenario" role="status" style="font-weight:600;color:#fff"></p><p id="status" role="status">Loading optional atlas manifest…</p><p>Keyboard mode: A/D move · W jump · S crouch · J/K/L attacks · U launcher · I power · O grab · P special · Shift dash. Test special starts with three pips. This review fixture does not alter the game's charging rules. Each scripted scenario resets positions and test meter, then advances persistent core state through recovery. Full review covers reversals, both dash directions, neutral/directional/held jumps, all ground and aerial attacks, directional ranged casts, recoil/launch/block, and all four attacker/victim throw directions. It does not record a visual pass automatically. Entrances, defeat and full partner effects still need the actual match review.</p>
 <div id="live"><figure><canvas id="normal" width="640" height="440"></canvas><figcaption>Actual state · original facing</figcaption></figure><figure><canvas id="mirror" width="640" height="440"></canvas><figcaption>Same state · opposite facing</figcaption></figure></div><pre id="debug"></pre>
 <div class="bar"><button id="pagePrev">Previous frame page</button><span id="pageLabel"></span><button id="pageNext">Next frame page</button><label>Inspect exact slot<select id="slot"></select></label><button id="slotPreview">Show slot page</button></div><div id="frames"></div>
 <p>Thirty-two poses do not constitute hand-drawn full-action animation. Directional attacks share authored punch/kick poses; victim throws use an impact pose, then the relaxed full-body falling pose with simulation-owned grip contact and whole-body rotation. No separate limb or presentation-only grab offset is applied. Direction-specific paired throw art remains limited. Projectile and power mechanics remain distinct in the game. Judge anatomy, foot anchors, timing, motion continuity and missing states separately.</p>
@@ -16,27 +16,49 @@ const $=id=>document.getElementById(id),names=Object.entries(POSE_SLOTS),keys=ne
 for(const id of PLAYABLE_FIGHTERS){const o=new Option(ROSTER[id].name+' · '+id,id);$('fighter').add(o);$('target').add(new Option(ROSTER[id].name,id));} $('fighter').value='vela';$('target').value='rivet';
 for(const [name,n]of names)$('slot').add(new Option(n+' · '+name,String(n)));
 let s,age=0,playing=false,last=0,accumulator=0,page=0,error='',reviewIndex=0,cycle=0,reviewComplete=false;
+// A finite review itinerary, not automatic visual approval. Keep individual
+// actions selectable; each real core path is checked by motion-review-smoke.
 const motionReview=[
  {action:'idle',label:'Idle / breathing'},
- {action:'walkForward',label:'Walk forward'},
- {action:'walkBack',label:'Walk backward'},
- ...['dash','jump','light','medium','sweep','launcher','bolt','airMedium','hit','block'].map(action=>({action,label:action})),
- ...['forward','back','up','down'].map(direction=>({action:'grab',direction,label:'Attacker throw · '+direction})),
+ {action:'walkForward',label:'Walk forward → stop'},
+ {action:'walkBack',label:'Walk backward → stop'},
+ {action:'walk',label:'Walk reversal → stop'},
+ {action:'dash',label:'Forward dash → recovery'},
+ {action:'dash',direction:'back',label:'Backward dash → recovery'},
+ {action:'jump',label:'Neutral jump → landing'},
+ {action:'jumpForward',label:'Forward jump → landing'},
+ {action:'jumpBack',label:'Backward jump → landing'},
+ {action:'jumpHeld',label:'Held jump → single landing'},
+ {action:'crouch',label:'Crouch → stand'},
+ ...['light','medium','heavy','low','sweep','launcher'].map(action=>({action,label:action,expectedMove:action})),
+ {action:'light',direction:'up',label:'Rising light / launcher',expectedMove:'launcher'},
+ {action:'medium',direction:'upForward',label:'Up-forward medium',expectedMove:'medium'},
+ {action:'heavy',direction:'upForward',label:'Up-forward finisher',expectedMove:'heavy'},
+ ...['forward','up','upForward','down'].map(direction=>({action:'bolt',direction,label:'Ranged power · '+direction,expectedMove:'bolt'})),
+ ...['airLight','airMedium','airHeavy'].flatMap(action=>['forward','up','down'].map(direction=>({action,direction,label:action+' · '+direction,expectedMove:action==='airLight'&&direction==='up'?'launcher':action}))),
+ ...['forward','up','upForward','down'].map(direction=>({action:'airBolt',direction,label:'Air ranged power · '+direction,expectedMove:'bolt'})),
+ ...['hit','heavyHit','launchHit','block','crouchBlock'].map(action=>({action,label:action})),
+ ...['forward','back','up','down'].map(direction=>({action:'grab',direction,label:'Attacker throw · '+direction,expectedMove:'grab'})),
  ...['forward','back','up','down'].map(direction=>({action:'victimThrow',direction,label:'Victim throw · '+direction})),
- {action:'special',label:'Team special'},
+ {action:'special',label:'Team special',expectedMove:'special'},
+ {action:'airSpecial',label:'Air Team special',expectedMove:'special'},
 ];
+// Expose every itinerary action in the standalone selector too.
+for(const item of motionReview)if(![...$('action').options].some(option=>option.value===item.action))$('action').add(new Option(item.action,item.action));
+
 function scenario(){return $('action').value==='fullReview'?motionReview[reviewIndex]:{action:$('action').value,direction:$('direction').value,label:$('action').selectedOptions[0].textContent};}
 const keymap={KeyA:A.left,KeyD:A.right,KeyW:A.up,KeyS:A.down,KeyJ:A.light,KeyK:A.medium,KeyL:A.heavy,KeyU:A.launcher,KeyI:A.bolt,KeyO:A.grab,KeyP:A.special,ShiftLeft:A.dash};
 window.addEventListener('keydown',e=>{if($('action').value==='keyboard'&&keymap[e.code]&&!['SELECT','INPUT','BUTTON'].includes(e.target.tagName)){keys.add(e.code);e.preventDefault();}});
 window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>keys.clear());
 function beginScenario(){
  const a=scenario().action;s=createState($('fighter').value,'dummy',$('target').value);const face=Number($('facing').value);s.fighters[0].x=600;s.fighters[1].x=600+face*450;s.fighters[0].pips=3;s.fighters[0].facing=face;s.fighters[1].facing=-face;
- if(['light','medium','heavy','low','sweep','grab','victimThrow','hit','heavyHit','launchHit','block','launcher'].includes(a))s.fighters[1].x=600+face*(60+bodySpread(s.fighters[0].id)+bodySpread(s.fighters[1].id));
- if(a==='bolt'||a==='special')s.fighters[1].x=600+face*350;
+ if(['light','medium','heavy','low','sweep','grab','victimThrow','hit','heavyHit','launchHit','block','crouchBlock','launcher'].includes(a))s.fighters[1].x=600+face*(60+bodySpread(s.fighters[0].id)+bodySpread(s.fighters[1].id));
+ if(a==='block'||a==='crouchBlock')s.fighters[1].x=600+face*(36+bodySpread(s.fighters[0].id)+bodySpread(s.fighters[1].id));
+ if(['bolt','airBolt','special','airSpecial'].includes(a))s.fighters[1].x=600+face*350;
  if($('position').value!=='center'){const pos=$('position').value,edge=pos.endsWith('wall')?0:60,[f,target]=s.fighters,gap=target.x-f.x,lo=Math.max(fighterWall(f.id),fighterWall(target.id)-gap),hi=Math.min(WIDTH-fighterWall(f.id),WIDTH-fighterWall(target.id)-gap);f.x=pos.startsWith('left')?Math.min(hi,lo+edge):Math.max(lo,hi-edge);target.x=f.x+gap;}
  age=0;keys.clear();draw();gallery();
 }
-function reset(){reviewIndex=0;cycle=0;reviewComplete=false;accumulator=0;beginScenario();}
+function reset(){error='';reviewIndex=0;cycle=0;reviewComplete=false;accumulator=0;beginScenario();}
 function direction(f){const d=scenario().direction??'forward',forward=f.facing===1?A.right:A.left,back=f.facing===1?A.left:A.right;return d==='up'?A.up:d==='down'?A.down:d==='back'?back:d==='upForward'?A.up|forward:0;}
 function input(){const a=scenario().action,f=s.fighters[0],forward=f.facing===1?A.right:A.left,back=f.facing===1?A.left:A.right;let first=0,second=0;
  if(a==='keyboard')for(const code of keys)first|=keymap[code]??0;
@@ -45,10 +67,12 @@ function input(){const a=scenario().action,f=s.fighters[0],forward=f.facing===1?
  else if(a==='walkBack')first=age<60?back:0;
  else if(a==='crouch')first=age<75?A.down:0;
  else if(a==='jump')first=age===0?A.up:0;
- else if(a==='dash')first=age===0?forward|A.dash:0;
- else if(['hit','heavyHit','launchHit','block'].includes(a)){second=age===0?(a==='heavyHit'?A.heavy:a==='launchHit'?A.launcher:A.light):0;if(a==='block'&&age<35)first=back;}
+ else if(a==='jumpHeld')first=age<110?A.up:0;
+ else if(a==='jumpForward'||a==='jumpBack')first=(age===0?A.up:0)|(age<22?(a==='jumpForward'?forward:back):0);
+ else if(a==='dash')first=age===0?(scenario().direction==='back'?back:forward)|A.dash:0;
+ else if(['hit','heavyHit','launchHit','block','crouchBlock'].includes(a)){second=age===0?(a==='heavyHit'?A.heavy:a==='launchHit'?A.launcher:a==='crouchBlock'?A.down|A.light:A.light):0;if((a==='block'||a==='crouchBlock')&&age<35)first=back|(a==='crouchBlock'?A.down:0);}
  else if(a==='victimThrow')second=age===0?A.grab|direction(s.fighters[1]):0;
- else if(a.startsWith('air')){if(age===0)first=A.up;else if(age===9)first=A[a==='airLight'?'light':a==='airMedium'?'medium':'heavy']|direction(f);}
+ else if(a.startsWith('air')){if(age===0)first=A.up;else if(age===9)first=A[a==='airLight'?'light':a==='airMedium'?'medium':a==='airBolt'?'bolt':a==='airSpecial'?'special':'heavy']|direction(f);}
  else if(age===0){first=(A[a]??(a==='low'?A.light:a==='sweep'?A.heavy:0))|(['low','sweep'].includes(a)?A.down:direction(f));}
  return[first,second];
 }
@@ -57,6 +81,7 @@ function advance(){
  if(reviewComplete)return;
  step(s,input());age++;
  const a=scenario().action,minFrames=a==='walk'?150:120;
+ if(a!=='keyboard'&&age>=900&&!settled()){error='Review stopped: '+scenario().label+' did not settle within 900 ticks. This is not a pass.';playing=false;$('play').textContent='Play';draw();return;}
  if(a!=='keyboard'&&age>=minFrames&&settled()){
   if($('action').value==='fullReview'){
    if(reviewIndex<motionReview.length-1){reviewIndex++;beginScenario();return;}
@@ -69,7 +94,7 @@ function advance(){
 function checker(c,w,h){for(let y=0;y<h;y+=20)for(let x=0;x<w;x+=20){c.fillStyle=(x/20+y/20)%2?'#303e50':'#253243';c.fillRect(x,y,20,20);}}
 function missing(c,x,y,id){c.fillStyle='#f6b1a5';c.font='14px system-ui';c.textAlign='center';c.fillText('No installed 32-frame atlas: '+id,x,y);c.textAlign='left';}
 function draw(){if(!s)return;const current=scenario();$('scenario').textContent=`${$('action').value==='fullReview'?'Full motion review · '+(reviewIndex+1)+'/'+motionReview.length+' · ':''}${current.label}${current.direction&&$('action').value!=='fullReview'?' · '+current.direction:''} · cycle ${cycle+1}${reviewComplete?' · COMPLETE (not an approval)':''}`;setPoseAtlasThrowState(s.throwState,s.fighters);const f=s.fighters[0];
- for(const [id,flip]of [['normal',1],['mirror',-1]]){const c=$(id).getContext('2d');checker(c,640,440);c.save();const paired=['grab','victimThrow','hit','heavyHit','launchHit','block'].includes(current.action),camera=paired?(s.fighters[0].x+s.fighters[1].x)/2:f.x;c.translate(320,390);c.scale(flip*.82,.82);c.translate(-camera,-FLOOR);c.strokeStyle='#a0b1c4';c.beginPath();c.moveTo(f.x-330,FLOOR);c.lineTo(f.x+330,FLOOR);c.stroke();const d0=isDown(s.fighters[0]),d1=isDown(s.fighters[1]),front=s.throwState?.attacker??(d0!==d1?(d0?1:0):(s.fighters[1].move&&!s.fighters[0].move?1:0));for(const i of [1-front,front])drawPoseAtlas(c,s.fighters[i],s.frame,false,s.freeze>0);drawPelvicAttacks(c,s);c.restore();if(!getPoseAtlasDebug(f,s.frame,s.freeze>0).available)missing(c,320,165,f.id);}
+ for(const [id,flip]of [['normal',1],['mirror',-1]]){const c=$(id).getContext('2d');checker(c,640,440);c.save();const paired=['grab','victimThrow','hit','heavyHit','launchHit','block','crouchBlock'].includes(current.action),camera=paired?(s.fighters[0].x+s.fighters[1].x)/2:f.x;c.translate(320,390);c.scale(flip*.82,.82);c.translate(-camera,-FLOOR);c.strokeStyle='#a0b1c4';c.beginPath();c.moveTo(f.x-330,FLOOR);c.lineTo(f.x+330,FLOOR);c.stroke();const d0=isDown(s.fighters[0]),d1=isDown(s.fighters[1]),front=s.throwState?.attacker??(d0!==d1?(d0?1:0):(s.fighters[1].move&&!s.fighters[0].move?1:0));for(const i of [1-front,front])drawPoseAtlas(c,s.fighters[i],s.frame,false,s.freeze>0);drawPelvicAttacks(c,s);c.restore();if(!getPoseAtlasDebug(f,s.frame,s.freeze>0).available)missing(c,320,165,f.id);}
  const d=getPoseAtlasDebug(f,s.frame,s.freeze>0),m=f.move?getMove(f,f.move.id):null;
  $('debug').textContent=`Core frame ${s.frame} · scenario frame ${age} · frozen ${s.freeze}\nSequence ${d.sequence} · frame ${d.frameIndex}/${d.sequenceLength-1} · pose slot ${d.slot}: ${d.name} · gait phase ${d.walkPhase.toFixed(3)} · x ${f.x.toFixed(1)} y ${f.y.toFixed(1)} facing ${f.facing}\nMove ${f.move?.id??'none'} t=${f.move?.t??'-'} ${m?'startup/active/recovery '+m.startup+'/'+m.active+'/'+m.recovery:''}\nThrow ${s.throwState?JSON.stringify(s.throwState):'none'}\nReactions ${s.fighters.map((f,i)=>i+': '+JSON.stringify(f.reaction)+' hp='+f.hp+' x='+f.x.toFixed(2)+' y='+f.y.toFixed(2)+' vx='+f.vx.toFixed(2)+' vy='+f.vy.toFixed(2)).join(' | ')}`;
  const load=getPoseAtlasLoadStatus();$('status').className=error?'error':'';$('status').textContent=error||`${load.state}: ${load.ids.length} installed body atlases for ${PLAYABLE_FIGHTERS.length} fighters. Selected: ${d.available?'available':'absent — no fallback shown'}.`;
@@ -78,7 +103,7 @@ function gallery(){$('frames').replaceChildren();$('pageLabel').textContent=`Slo
 async function load(){try{error='';await ensurePoseAtlases([$('fighter').value,$('target').value]);}catch(e){error='Atlas load failed (no fallback): '+e.message;}draw();gallery();}
 $('fighter').onchange=()=>{reset();load();};$('target').onchange=()=>{reset();load();};$('facing').onchange=reset;$('position').onchange=reset;$('action').onchange=reset;$('direction').onchange=reset;$('reset').onclick=reset;
 $('prev').onclick=()=>{$('fighter').selectedIndex=($('fighter').selectedIndex+PLAYABLE_FIGHTERS.length-1)%PLAYABLE_FIGHTERS.length;reset();load();};$('next').onclick=()=>{$('fighter').selectedIndex=($('fighter').selectedIndex+1)%PLAYABLE_FIGHTERS.length;reset();load();};
-$('play').onclick=()=>{if(reviewComplete)reset();playing=!playing;$('play').textContent=playing?'Pause':'Play';last=0;accumulator=0;};$('step').onclick=()=>{playing=false;$('play').textContent='Play';advance();};$('reload').onclick=load;$('advanceFrames').onclick=()=>{playing=false;$('play').textContent='Play';const count=Math.max(1,Math.min(600,Number($('frameCount').value)||1));for(let i=0;i<count;i++)advance();};
+$('play').onclick=()=>{if(reviewComplete)reset();playing=!playing;$('play').textContent=playing?'Pause':'Play';last=0;accumulator=0;};$('step').onclick=()=>{playing=false;$('play').textContent='Play';advance();};$('reload').onclick=()=>location.reload();$('advanceFrames').onclick=()=>{playing=false;$('play').textContent='Play';const count=Math.max(1,Math.min(600,Number($('frameCount').value)||1));for(let i=0;i<count;i++)advance();};
 $('pagePrev').onclick=()=>{page=(page+3)%4;gallery();};$('pageNext').onclick=()=>{page=(page+1)%4;gallery();};$('slotPreview').onclick=()=>{page=Math.floor(Number($('slot').value)/8);gallery();};
 function loop(now){if(last&&playing){accumulator+=Math.min(100,now-last)*Number($('speed').value);while(playing&&accumulator>=1000/60){advance();accumulator-=1000/60;}}last=now;requestAnimationFrame(loop);}reset();load();requestAnimationFrame(loop);
 </script></body></html>
