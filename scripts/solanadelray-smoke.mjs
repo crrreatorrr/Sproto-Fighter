@@ -15,7 +15,7 @@ const tick=(s,n,a=0,b=0)=>{for(let i=0;i<n;i++)step(s,[a,b]);};
 let checks=0;
 for(const id of ids){
  const item=plan.find(x=>x.id===id);assert.ok(PLAYABLE_FIGHTERS.includes(id));assert.equal(ROSTER[id].name,item.name);
- assert.ok(core.isFreePlayAddition(id),id+' selectable without changing campaign saves');
+ assert.ok(core.isFreePlayAddition(id),id+' retains its legacy roster-addition marker (P1 recruitment is tested by the campaign/selection suites)');
  for(const body of bodyAtlasIds(id)){
   const cfg=manifest.fighters[body];assert.equal(cfg.frames.length,32);assert.equal(cfg.walkFrames.length,8);assert.equal(cfg.anchor[1],210);
   for(const [name,count]of Object.entries({intro:4,special:8,cast:4,recoil:4,defeat:12}))assert.equal(cfg.clips[name].length,count);

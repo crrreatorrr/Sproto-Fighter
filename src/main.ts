@@ -5,8 +5,11 @@ import './arcadeSelection.css';
 import './pixelUI.css';
 import './mysticUI.css';
 import './campaignMap.css';
+import './versusScreen.css';
+import {createVersusScreen} from './versusScreen';
+import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';
-import { A, ROSTER, PLAYABLE_FIGHTERS, isFreePlayAddition, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
+import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
 import { playRetainCallout } from './characterVoice';
@@ -44,7 +47,16 @@ let presentation = createRoundPresentation();
 let modalDirection='',modalRepeatAt=0,padNeedsRelease=true;
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousStart = false;
 const held = new Set<string>();
+const blockedKeys = new Set<string>();
 let queued = 0;
+const countdown=createFightCountdown(canvas.parentElement!);
+const versus=createVersusScreen($('fight-view'),()=>{
+    // Dismissing a preview must never become an attack, jump or pause in combat.
+    for(const code of held)blockedKeys.add(code);
+    held.clear();queued=0;padNeedsRelease=true;
+    countdown.show();
+    if(running&&!dialog.open&&!story.isOpen)canvas.focus();
+});
 const frames: [
     number,
     number
@@ -59,12 +71,13 @@ function updateStage(stage:StageId) {
 async function launchSelection(setup:SelectionSetup,isStory=false) {
     // Reconcile wins from another tab or a restored page before the final P1 gate.
     storyProgress.sync();
-    if(!storyProgress.isUnlocked(setup.fighter)&&(isStory||!isFreePlayAddition(setup.fighter))){
+    if(!storyProgress.isUnlocked(setup.fighter)){
         $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. Defeat this fighter in story mode, or choose an unlocked P1 fighter.`;
         return false;
     }
-    try{await Promise.all([ensurePoseAtlases(isStory&&setup.opponent==='vela'?[setup.fighter,'vela','vaudream']:[setup.fighter,setup.opponent]),[setup.fighter,setup.opponent].some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
-    const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponent===setup.opponent):undefined;
+    const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
+    const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
+    try{await Promise.all([ensurePoseAtlases(requiredFighters),requiredFighters.some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
@@ -75,11 +88,17 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
     started=false;restart();start();
     $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
-    if(isStory&&setup.opponent==='vaudream')$('mode-label').textContent+=' / FINAL GAUNTLET / HEALTH REFILLED';
+    if(encounter&&encounter.opponents.length>1){
+        const bout=encounter.opponents.indexOf(setup.opponent)+1;
+        const gauntletName=encounter.gauntlet==='art'?'ART DUO':encounter.gauntlet==='nick-juicy'?'NICK → JUICY':'FINAL GAUNTLET';
+        $('mode-label').textContent+=` / ${gauntletName} / BOUT ${bout} OF ${encounter.opponents.length}${bout>1?' / HEALTH REFILLED':''}`;
+    }
     updateGodModeLabel();
     return true;
 }
 function returnToSelection() {
+    versus.hide();
+    countdown.hide();
     story.leaveStory();
     running=false;started=false;held.clear();queued=0;accumulator=0;qaSingleStep=false;
     resumeAfterSettings=false;resumeAfterJourney=false;
@@ -125,13 +144,14 @@ function bind(value: string | number) {
     updateControls();
     $('binding-status').textContent = 'Saved on this browser.';
 }
-function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; held.clear(); queued = 0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; if(!selection.isOpen)$('start').focus(); }
+function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; if(!selection.isOpen)$('start').focus(); }
 function start() {
     if (selection.isOpen || story.isOpen || dialog.open || ($('start') as HTMLButtonElement).disabled) return;
     if (presentation.phase === 'result')
         restart();
     started = true;
     running = true;
+    versus.suspend(false);countdown.suspend(false);
     padNeedsRelease = true;
     accumulator = 0;
     held.clear();
@@ -153,6 +173,8 @@ function restart() {
     state = createState(chosen, mode, opponent);
     if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
+    countdown.hide();
+    versus.show(chosen,state.fighters[1].id);
     frames.length = 0;
     qaEvents.length = 0;
     accumulator = 0;
@@ -243,6 +265,10 @@ window.addEventListener('keydown', e => {
     }
     if (!running)
         return;
+    if(blockedKeys.has(e.code)){e.preventDefault();return;}
+    if(versus.isOpen&&(e.code==='Enter'||e.code==='Space')){
+        e.preventDefault();if(!e.repeat){blockedKeys.add(e.code);versus.skip();}return;
+    }
     if (Object.values(keys).includes(e.code)) {
         e.preventDefault();
         if (!held.has(e.code)) {
@@ -253,8 +279,9 @@ window.addEventListener('keydown', e => {
         held.add(e.code);
     }
 });
-window.addEventListener('keyup', e => held.delete(e.code));
+window.addEventListener('keyup', e => {held.delete(e.code);blockedKeys.delete(e.code);});
 window.addEventListener('blur', () => {
+    blockedKeys.clear();
     held.clear();
     queued = 0;
     if (running)
@@ -309,6 +336,12 @@ function pollPad(): number {
     }
     if(wasSelection||wasModal||wasOverlay||selection.isOpen||story.isOpen||dialog.open){padNeedsRelease=true;previousStart=!!buttons[9];previousPad=buttons;return 0;}
     if(padNeedsRelease){previousStart=!!buttons[9];previousPad=buttons;if(!buttons.some(Boolean)&&pad.axes.every(axis=>Math.abs(axis)<.3))padNeedsRelease=false;return 0;}
+    if(versus.isOpen){
+        const skip=!!buttons[0]&&!previousPad[0]||!!buttons[9]&&!previousPad[9];
+        previousStart=!!buttons[9];previousPad=buttons;
+        if(skip)versus.skip();
+        return 0;
+    }
     const menu = !!buttons[9];
     if (menu && !previousStart && !dialog.open && !story.isOpen) {
         if (!started || presentation.phase === 'result')
@@ -338,7 +371,7 @@ let qaFrozen=false,qaSingleStep=false;
 let qaStopAtOutro=()=>{};
 const qaEvents:string[]=[];
 if(qaPanel){
-    const bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;padding:12px';
+    const bar=document.createElement('div');bar.style.cssText='display:flex;flex-wrap:wrap;gap:8px;padding:12px';
     const freeze=document.createElement('button'),single=document.createElement('button');
     freeze.textContent='Freeze QA frame';single.textContent='Advance QA frame';
     freeze.onclick=()=>{qaFrozen=!qaFrozen;freeze.textContent=qaFrozen?'Resume QA playback':'Freeze QA frame';accumulator=0;};
@@ -355,6 +388,12 @@ function qaRecord(before:string){
 }
 // A presentation frame never enters the deterministic combat/replay stream.
 function advanceRoundFrame(input: number) {
+    if(versus.advance())return;
+    if(countdown.advance()){
+        // Entrances remain visible during the countdown; combat and replay wait.
+        advanceRoundPresentation(presentation);
+        return;
+    }
     if (presentation.phase === 'intro') {
         advanceRoundPresentation(presentation, input !== 0);
         if ((presentation as RoundPresentation).phase !== 'fight') return;

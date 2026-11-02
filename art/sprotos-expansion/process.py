@@ -3,7 +3,7 @@
 Keep one scale across a sheet, hard alpha, complete silhouettes and foot roots.
 Reports expose cell clipping, detached components and missing poses for review.
 """
-import argparse, concurrent.futures, importlib.util, json, subprocess, os
+import argparse, concurrent.futures, importlib.util, json, subprocess, os, math
 from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw
@@ -43,6 +43,24 @@ def hull(mask):
         while len(hi)>1 and cross(hi[-2],hi[-1],p)<=0:hi.pop()
         hi.append(p)
     return [list(p) for p in lo[:-1]+hi[:-1]]
+
+def fit_source_scale(cells,requested_scale,calibrated=False):
+    """Keep a calibrated body's size; canvas fitting is not anatomical review.
+
+    Estimated legacy imports retain their existing common fit behavior. An
+    explicitly chosen source scale may not be silently reduced to fit a weapon
+    or effect. Callers must enlarge/re-register that canvas or revise the
+    inspected calibration instead. This helper performs no I/O.
+    """
+    if isinstance(requested_scale,bool) or not isinstance(requested_scale,(int,float)) or not math.isfinite(requested_scale) or requested_scale<=0:
+        raise ValueError('Source scale must be a finite positive number')
+    if not cells:raise ValueError('Cannot fit a sheet with no cells')
+    fit_limit=min(limit for crop,anchor in cells for limit in
+        [111/max(anchor[0],1),142/max(crop.width-anchor[0],1),209/max(anchor[1],1),44/max(crop.height-anchor[1],1)])
+    applied=min(requested_scale,fit_limit);ratio=applied/requested_scale
+    if calibrated and applied<requested_scale-1e-9:
+        raise ValueError(f'Calibrated source scale {requested_scale:g} would shrink to {applied:g} (fit ratio {ratio:.6f}); enlarge/re-register the canvas or explicitly revise the inspected calibration. No frames were written.')
+    return dict(requestedSourceScale=float(requested_scale),appliedSourceScale=float(applied),sourceFitRatio=float(ratio),canvasFitLimit=float(fit_limit),calibratedSourceScale=bool(calibrated))
 
 def process(job,force=False):
     entity,kind=job['entity'],job['kind'];dest=HERE/'processed'/f'{entity}-{kind}'
@@ -109,10 +127,14 @@ def process(job,force=False):
     # the common scale without enlarging every dash/jump body to crouch height.
     if 'scaleFromFrame' in config:
         scale=config.get('targetStandingHeight',128)/cells[config['scaleFromFrame']][0].height
-    # Fit whole sheet with a common factor, preserving actual crouch/floor size.
-    for crop,anchor in cells:
-        limits=[111/max(anchor[0],1),142/max(crop.width-anchor[0],1),209/max(anchor[1],1),44/max(crop.height-anchor[1],1)]
-        scale=min(scale,*limits)
+    # A named reference frame still estimates scale from its opaque envelope.
+    # A numeric override is an explicit calibration unless scaleFromFrame wins;
+    # authors may also mark a reviewed frame-based calibration explicitly.
+    scale_basis='reference-frame' if 'scaleFromFrame' in config else 'explicit' if 'scale' in config else 'first-opaque-height'
+    calibrated=bool(config.get('calibratedScale',False)) or scale_basis=='explicit'
+    scale_review=fit_source_scale(cells,scale,calibrated)
+    scale_review.update(sourceScaleBasis=scale_basis,scaleReferenceFrame=config.get('scaleFromFrame',0),anatomicalReviewRequired=True)
+    scale=scale_review['appliedSourceScale']
     dest.mkdir(parents=True,exist_ok=True)
     sheet=Image.new('RGBA',(4*256,rows*256),'#202c3e')
     for i,(crop,anchor) in enumerate(cells):
@@ -138,7 +160,7 @@ def process(job,force=False):
         metadata['holdContact']={'hand':hand,'torso':torso}
     (dest/'metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
     source_marker.write_text(job['job_id'])
-    (dest/'report.json').write_text(json.dumps(dict(entity=entity,kind=kind,source=str(src.relative_to(ROOT)),uniformSourceScale=scale,status='normalized; visual review required',frames=report),indent=2)+'\n')
+    (dest/'report.json').write_text(json.dumps(dict(entity=entity,kind=kind,source=str(src.relative_to(ROOT)),uniformSourceScale=scale,scaleReview=scale_review,status='normalized; visual review required',frames=report),indent=2)+'\n')
     sheet.save(dest/'contact.png')
     return dict(entity=entity,kind=kind,status='normalized',issues=sum(bool(f['cellEdge'] or f['detachedComponents']) for f in report))
 

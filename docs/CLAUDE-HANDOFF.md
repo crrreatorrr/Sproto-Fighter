@@ -1,6 +1,12 @@
 # Sproto Arena — factual handoff, 2 November 2026
 
 This records work and checks already performed, not checks delegated to Claude.
+
+The newer [campaign expansion report](CAMPAIGN-EXPANSION-UPDATE.md) supersedes
+the campaign counts, map, save schema and name-font details below. It is prepared
+on a separate local branch; final main integration is intentionally pending
+completion of the other active chats. The earlier integration record remains
+historical evidence, not a claim that current concurrent work is complete.
 No external reviewer was contacted. Earlier export documentation is preserved
 in `archive/CLAUDE-HANDOFF-22-fighter-export.md`.
 

@@ -1,5 +1,5 @@
 import {storyProgress} from './storyProgress';
-import { ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, isFreePlayAddition, specialPartnerIds, PARTNER_ATTACKS, bodyAtlasIds, isPairedFighter, createState, getMove, FLOOR, type PlayableFighterId, type Mode } from './core';
+import { ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, specialPartnerIds, PARTNER_ATTACKS, bodyAtlasIds, isPairedFighter, createState, getMove, FLOOR, type PlayableFighterId, type Mode } from './core';
 import { originalPortraits } from './originalPortraits';
 import { drawSelectionPose } from './poseAtlas';
 import { STAGES, drawStagePreview, type StageId } from './stage';
@@ -7,7 +7,7 @@ export interface SelectionSetup { fighter:PlayableFighterId; opponent:PlayableFi
 /** Local selection state only. The match is created by the explicit start hook. */
 export function createSelectionMenu(hooks:{start:(setup:SelectionSetup)=>void;prepare?:(ids:PlayableFighterId[])=>Promise<void>}){
  const root=document.getElementById('selection-view')!;
- const canSelect=(id:PlayableFighterId)=>storyProgress.isUnlocked(id)||isFreePlayAddition(id);
+ const canSelect=(id:PlayableFighterId)=>storyProgress.isUnlocked(id);
  let setup:SelectionSetup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'cpu',godMode:false},target:'fighter'|'opponent'='fighter',ready=false,open=true;
  let lastButtons:number[]=[],lastDirection='',repeatAt=0,assetRequest=0,artLoading=false,loadFailed=false;
  root.innerHTML=`<div class="arcade-echoes" aria-hidden="true"><img id="player-echo" alt=""><img id="rival-echo" alt=""></div>

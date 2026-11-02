@@ -1,0 +1,29 @@
+.versus-screen{position:fixed;inset:0;z-index:40;box-sizing:border-box;overflow:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:22px 28px;color:#fff7d0;background:radial-gradient(ellipse at 10% 70%,#174f8b 0,transparent 54%),radial-gradient(ellipse at 90% 25%,#a82542 0,transparent 54%),#090e20;border:8px double #f5cf6a}
+.versus-screen[hidden]{display:none}
+.versus-screen.is-suspended,.fight-countdown.is-suspended{visibility:hidden;pointer-events:none}
+.versus-screen h2{margin:0;font:700 clamp(18px,3vw,30px)/1.2 'Pixelify Sans',monospace;letter-spacing:.14em}
+.versus-lineup{display:grid;grid-template-columns:minmax(0,1fr) minmax(40px,.2fr) minmax(0,1fr);align-items:center;gap:clamp(8px,3vw,36px);width:min(100%,1000px)}
+.versus-fighter{min-width:0;margin:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;align-self:stretch;gap:12px;padding:16px;border:3px solid #6db6ff;box-shadow:6px 6px 0 #050b1d;background:#081a31}
+.versus-rival{border-color:#ff6876;background:#2c101f}
+.versus-side{font:700 12px/1.2 'Pixelify Sans',monospace;letter-spacing:.12em;color:#aad4ff}
+.versus-rival .versus-side{color:#ffabb4}
+.versus-fighter img{display:block;width:100%;height:min(42vh,340px);object-fit:contain;object-position:center;min-width:0;background:#0b0e19}
+.versus-fighter img[hidden]{display:none}
+/* Match the selector's framing for originals with an unused black right half. */
+.versus-fighter:is([data-fighter='vaudream'],[data-fighter='nick'],[data-fighter='highsproto'],[data-fighter='captain']) img{width:min(100%,42vh,340px);height:auto;aspect-ratio:1;justify-self:center;object-fit:cover;object-position:left center}
+.versus-fighter.portrait-unavailable{min-height:180px}
+.versus-fighter figcaption{min-width:0;align-self:end}
+.versus-fighter h3{margin:0;font:800 clamp(18px,3.3vw,34px)/1.12 system-ui,-apple-system,'Segoe UI',sans-serif;font-family:system-ui,-apple-system,'Segoe UI',sans-serif!important;text-align:center;text-transform:none;overflow-wrap:anywhere;word-break:normal;letter-spacing:0}
+.versus-mark{font:900 clamp(32px,6vw,76px)/1 'Pixelify Sans',monospace;color:#ffe064;text-align:center;text-shadow:4px 4px 0 #2a0b19}
+.versus-screen .versus-skip{margin:0;min-height:44px;padding:10px 24px;border:2px solid #ffe064;border-radius:0;color:#10162a;background:#ffe064;font:700 16px/1.25 system-ui,sans-serif;cursor:pointer;box-shadow:4px 4px 0 #080a14}
+.versus-screen .versus-skip:focus-visible{outline:3px solid white;outline-offset:4px}
+.versus-hint{margin:0;font:13px/1.4 system-ui,sans-serif;color:#d4d9ed;text-align:center}
+/* Pause remains available while the preview clock is stopped. */
+.canvas-wrap .overlay{z-index:50}
+.fight-countdown{position:absolute;inset:0;z-index:20;display:grid;place-items:center;pointer-events:none;background:#07101b24}
+.fight-countdown[hidden]{display:none}
+.fight-countdown strong{font:900 clamp(48px,12vw,150px)/1 'Pixelify Sans',monospace;color:#ffdf63;text-shadow:4px 4px 0 #142442,-4px -4px 0 #142442,4px -4px 0 #142442,-4px 4px 0 #142442,0 0 32px #030817}
+.fight-countdown.is-fight{background:transparent}
+.fight-countdown.is-fight strong{font-size:clamp(42px,10vw,126px);color:#fff1a3}
+@media(max-width:550px){.versus-screen{border-width:5px;padding:20px 12px;gap:16px}.versus-lineup{gap:8px;grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr)}.versus-fighter{padding:7px;gap:10px;border-width:2px}.versus-fighter img{height:auto;aspect-ratio:1;max-height:35vh}.versus-fighter h3{font-size:clamp(16px,4.6vw,24px)}.versus-side{font-size:10px;letter-spacing:.03em}.versus-mark{font-size:32px}}
+@media(max-height:480px) and (min-width:551px){.versus-screen{padding:10px 20px;gap:6px}.versus-fighter{padding:8px;gap:5px}.versus-fighter img{height:40vh}.versus-fighter h3{font-size:22px}.versus-screen h2{font-size:18px}.versus-hint{font-size:11px}}

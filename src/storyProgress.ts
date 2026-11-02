@@ -7,8 +7,9 @@ export const PREVIOUS_STORY_SAVE_KEY='sproto-arena-story-v2';
 export const STORY_SAVE_KEY='sproto-arena-story-v3';
 export const STORY_TARGET_ROSTER=150;
 export const STARTER_FIGHTERS:readonly PlayableFighterId[]=['highsproto','bront'];
-// These user-supplied rivals are recruited in Verse before Golden and the gauntlets.
-export const CAMPAIGN_RECRUITS:readonly PlayableFighterId[]=['satoshi','xalt','potocaicai'];
+// Optional user-supplied rivals stay late in Verse only when actually registered.
+// String pins keep this module compatible with the original 102-fighter registry.
+export const CAMPAIGN_RECRUITS:readonly string[]=['satoshi','xalt','potocaicai'];
 // Frozen orders are migration schemas, never the source of the live campaign roster.
 export const LEGACY_STORY_OPPONENTS:readonly PlayableFighterId[]=['zephyr', 'mox', 'rune', 'guest07', 'guest08', 'guest09', 'guest10', 'guest11', 'guest12', 'guest13', 'guest14', 'dumpstar', 'crapto', 'vamp', 'alpha777', 'mandela', 'bigswole', 'nate', 'nick', 'captain', 'highsproto', 'erik', 'bimba', 'gpm', 'leviosa', 'lifeisameme', 'thxobama', 'rlarsson', 'blorfo', 'michael', 'freshprince', 'mlk', 'sproto102', 'sproto215', 'sproto313', 'sproto651', 'sproto763', 'sproto818', 'sproto831', 'sproto834', 'sproto837', 'sproto865', 'sproto943', 'sproto999', 'sproto1011', 'sproto1093', 'sproto1187', 'sproto1335', 'sproto1345', 'sproto1414', 'sproto1477', 'sproto1601', 'sproto1668', 'sproto1815', 'sproto1870', 'sproto2101', 'sproto2177', 'sproto2322', 'sproto2381', 'sproto2531', 'sproto2569', 'sproto2616', 'sproto2789', 'sproto2884', 'sproto3106', 'sproto3152', 'sproto3215', 'uncmasterflex', 'vitaliketh', 'urmometh', 'chaton', 'loadthebags', 'sisma', 'captainhowdy', 'sprotosales', 'sprog', 'jasper', 'aaron', 'brainsprot', 'sober', 'olnoname', 'greatcharly', 'sproto282', 'sproto704', 'sproto832', 'sproto1499', 'sproto1625', 'sproto2010', 'sproto2075', 'sproto2210', 'sproto2344', 'sproto3181', 'sproto3224', 'sproto3235', 'gryph', 'godmod3d', 'nosmileclown', 'duo', 'vela', 'vaudream'];
 
@@ -16,7 +17,7 @@ const previousReturning=LEGACY_STORY_OPPONENTS.filter(id=>id!=='highsproto');
 export const PREVIOUS_STORY_OPPONENTS:readonly PlayableFighterId[]=[...previousReturning.slice(0,-2),'rivet',...previousReturning.slice(-2)];
 export interface Encounter {
     id:string;index:number;opponent:PlayableFighterId;opponents:readonly PlayableFighterId[];
-    stage:StageId;chapter:number;gauntlet?:'art'|'final';
+    stage:StageId;chapter:number;gauntlet?:'art'|'nick-juicy'|'final';
 }
 const singleId=(id:string)=>`story-v1-${id}`;
 const groupId=(ids:readonly string[])=>ids.length===1?singleId(ids[0]):`story-v3-gauntlet-${ids.join('+')}`;
@@ -25,7 +26,8 @@ const groupId=(ids:readonly string[])=>ids.length===1?singleId(ids[0]):`story-v3
 export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,registered:readonly PlayableFighterId[]=PLAYABLE_FIGHTERS):Encounter[]{
     if(stages.length<3)throw new Error('Campaign requires at least three story locations.');
     const available=new Set(registered),starters=new Set<PlayableFighterId>(STARTER_FIGHTERS);
-    const tail=new Set<PlayableFighterId>([...CAMPAIGN_RECRUITS,'rivet','sproto865','sproto943','vela','vaudream']);
+    const pinned=CAMPAIGN_RECRUITS.flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
+    const tail=new Set<PlayableFighterId>([...pinned,'rivet','sproto865','sproto943','nick','guest07','vela','vaudream']);
     const ordered=[...new Set([...PREVIOUS_STORY_OPPONENTS,...registered])].filter(id=>available.has(id)&&!starters.has(id));
     const regular=ordered.filter(id=>!tail.has(id)&&!isPairedFighter(id));
     const paired=ordered.filter(id=>!tail.has(id)&&isPairedFighter(id));
@@ -36,9 +38,10 @@ export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,regi
     }
     regular.forEach((id,index)=>append([id],Math.min(stages.length-3,Math.floor(index*(stages.length-2)/Math.max(1,regular.length)))));
     for(const id of paired)append([id],stages.length-2);
-    for(const id of CAMPAIGN_RECRUITS)append([id],stages.length-2);
+    for(const id of pinned)append([id],stages.length-2);
     append(['rivet'],stages.length-2);
     append(['sproto865','sproto943'],stages.length-2,'art');
+    append(['nick','guest07'],stages.length-1,'nick-juicy');
     append(['vela','vaudream'],stages.length-1,'final');
     return route;
 }
@@ -46,6 +49,7 @@ export const STORY_ENCOUNTERS=campaignForStages();
 export const STORY_OPPONENTS:readonly PlayableFighterId[]=STORY_ENCOUNTERS.flatMap(e=>e.opponents);
 export const TWIN_ENCOUNTER_START=STORY_ENCOUNTERS.findIndex(e=>isPairedFighter(e.opponent));
 export const ART_GAUNTLET_INDEX=STORY_ENCOUNTERS.findIndex(e=>e.gauntlet==='art');
+export const NICK_JUICY_GAUNTLET_INDEX=STORY_ENCOUNTERS.findIndex(e=>e.gauntlet==='nick-juicy');
 export const FINALE_START=STORY_ENCOUNTERS.findIndex(e=>e.gauntlet==='final');
 export const STORY_ROSTER_COUNTS={installed:PLAYABLE_FIGHTERS.length,target:STORY_TARGET_ROSTER,missing:Math.max(0,STORY_TARGET_ROSTER-PLAYABLE_FIGHTERS.length),rivals:STORY_OPPONENTS.length,encounters:STORY_ENCOUNTERS.length} as const;
 
@@ -70,6 +74,10 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
         // progress earned by a newer roster. Only registered IDs are exposed by snapshot.
         const cleared=new Set<string>((Array.isArray(data.cleared)?data.cleared:[]).filter(encounterToken));
         const unlocked=new Set<string>([...starterIds,...(Array.isArray(data.unlocked)?data.unlocked:[]).filter(fighterToken)]);
+        // Nick and Juicy used to be separate v3 encounters. Both recorded wins
+        // satisfy their regrouped encounter; an unlock alone never counts as a win.
+        // Keep the original IDs too so older open tabs cannot erase earned progress.
+        for(const encounter of encounters)if(encounter.opponents.length>1&&encounter.opponents.every(id=>cleared.has(singleId(id))))cleared.add(encounter.id);
         for(const encounter of encounters)if(cleared.has(encounter.id))for(const id of encounter.opponents)unlocked.add(id);
         return {version:3,cleared:[...cleared],unlocked:[...unlocked],godModeUnlocked:data.godModeUnlocked===true||routeComplete(cleared)};
     }
@@ -105,7 +113,7 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
     const isCleared=(index:number)=>!!encounters[index]&&save.cleared.includes(encounters[index].id);
     const nextIndex=()=>{const index=encounters.findIndex((_,i)=>!isCleared(i));return index<0?null:index;};
     const canPlay=(index:number)=>Number.isInteger(index)&&index>=0&&index<encounters.length&&(isCleared(index)||index===nextIndex());
-    const currentWave=(index:number)=>run?.id===encounters[index]?.id?run!.wave:0;
+    const currentWave=(index:number)=>run&&run.id===encounters[index]?.id?run.wave:0;
     function abandonRun(){run=null;emit();}
     return {
         snapshot:()=>({version:3 as const,cleared:encounters.filter((_,i)=>isCleared(i)).map(e=>e.id),unlocked:save.unlocked.filter(isAvailable),persistent,completed:routeComplete(new Set(save.cleared)),godModeUnlocked:save.godModeUnlocked,nextIndex:nextIndex(),activeRun:run?{...run}:null,finaleReady:!!run&&run.wave>0&&encounters.find(e=>e.id===run!.id)?.gauntlet==='final'}),

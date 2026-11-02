@@ -176,7 +176,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     if(presentation?.phase==='intro'){
         c.fillStyle='#101725e0';c.fillRect(435,175,410,66);
         text(c,'GET READY',640,204,24,'#f4e8c5','center',900);
-        text(c,'MOVE OR ATTACK TO START',640,227,10,'#b4c3d3','center');
+        text(c,'PREPARE FOR THE OPENING EXCHANGE',640,227,10,'#b4c3d3','center');
     }else if(presentation?.phase==='outro'){
         const draw=presentation.winner===2;
         text(c,draw?'DOUBLE DOWN':'K.O.',640,220,40,'#f4e8c5','center',900);

@@ -44,7 +44,7 @@ export function mountCampaignMap(parent:HTMLElement,progress:StoryProgress,choos
  function preview(){
   const encounter=STORY_ENCOUNTERS[selected],level=STAGES.find(s=>s.id===encounter.stage)!,location=storyLocationForEncounter(encounter,STORY_ENCOUNTERS),available=progress.canPlay(selected),cleared=progress.isCleared(selected);
   const names=encounter.opponents.map(id=>ROSTER[id].name),portraits=document.createElement('div');portraits.className='campaign-rival-portraits';
-  rival.replaceChildren();for(const id of encounter.opponents){const portrait=document.createElement('img');portrait.src=originalPortraits[id];portrait.alt=ROSTER[id].name;portraits.append(portrait);}
+  rival.replaceChildren();for(const id of encounter.opponents){const portrait=document.createElement('img');portrait.src=originalPortraits[id];portrait.alt=ROSTER[id].name;portrait.dataset.fighter=id;portraits.append(portrait);}
   const copy=document.createElement('div'),heading=document.createElement('h3');heading.textContent=`${String(selected+1).padStart(3,'0')} / ${names.join(' → ')}`;
   const info=document.createElement('p');info.textContent=`${level.name}${location?' · '+location.title:''} · ${cleared?'RECRUITED':available?'READY TO CHALLENGE':'LOCKED'}`;
   const note=document.createElement('p');note.textContent=encounter.opponents.length>1?`Gauntlet: defeat ${names.join(', then ')}. Health refills between bouts. Win both without leaving or losing.`:available?'Victory recruits this fighter and opens the next encounter, including in God Mode.':'Clear preceding encounters to unlock this fight.';

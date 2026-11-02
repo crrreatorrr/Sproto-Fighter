@@ -5,6 +5,15 @@ import ts from 'typescript';
 const source = ts.transpileModule(readFileSync(new URL('../src/core.ts', import.meta.url), 'utf8'), { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText;
 const { A, FLOOR, HORIZONTAL_SPIT_FIGHTERS, createState, step, getMove, isCrouchingSpit } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 let checks=0;
+// The supplied shorter fighters have authored mouth origins below the ducking
+// lane. Preserve those reference-aligned origins instead of assuming every
+// standing cast has the original five fighters' high trajectory. In pairs,
+// which body leads makes the lane facing-dependent. These are explicit expected
+// collision outcomes, independent of the runtime overlap calculation.
+const lowStandingFaces=new Set([
+ 'zepump/1','peterpan/1',
+ ...['willuminati','prim','benjamin','maxbiggums','fiatfudder','godether','cyberviber','mrgoldrobe'].flatMap(id=>[`${id}/1`,`${id}/-1`]),
+]);
 const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};
 function fresh(id='rivet',face=1){const s=createState(id,'cpu');s.fighters[0].x=face===1?200:1080;s.fighters[1].x=face===1?1100:180;s.fighters[0].facing=face;return s;}
 function tick(s,n=1,a=0,b=0){for(let i=0;i<n;i++)step(s,[a,b]);}
@@ -36,8 +45,8 @@ for(const id of HORIZONTAL_SPIT_FIGHTERS)for(const face of [1,-1]){
   const s=fresh(id,face),f=s.fighters[0];f.y=FLOOR-1;f.vy=4;f.prev=A.up;f.input=A.up;
   const p=shot(s,A.up|A.bolt);assert.equal(f.y,FLOOR);assert.equal(p.y,shot(fresh(id,face),A.bolt).y);
  });
- check(`${id}/${face}: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground`,()=>{
-  for(const [input,crouch,hit] of [[A.bolt,false,true],[A.bolt,true,false],[A.down|A.bolt,false,true],[A.down|A.bolt,true,true],[A.up|A.bolt,false,false],[A.up|A.bolt,true,false]]){
+ check(`${id}/${face}: stance-height collision matches its authored mouth lane; jumping spit clears ground`,()=>{
+  for(const [input,crouch,hit] of [[A.bolt,false,true],[A.bolt,true,lowStandingFaces.has(`${id}/${face}`)],[A.down|A.bolt,false,true],[A.down|A.bolt,true,true],[A.up|A.bolt,false,false],[A.up|A.bolt,true,false]]){
    const s=fresh(id,face);s.fighters[1].x=s.fighters[0].x+face*300;
    tick(s,1,input,crouch?A.down:0);tick(s,90,0,crouch?A.down:0);
    assert.equal(s.fighters[1].hp<1000,hit,`${id} input=${input} target crouched=${crouch}`);
@@ -61,4 +70,4 @@ check('jump-height spit can actually hit an airborne opponent at its lane',()=>{
  const s=fresh();s.fighters[1].x=420;s.fighters[1].id='rivet';
  tick(s,1,A.up|A.bolt);tick(s,13);tick(s,1,0,A.up);tick(s,65);assert.ok(s.fighters[1].hp<1000);
 });
-console.log(`PASS: ${checks} directional spit groups across all five organic-spit fighters and both facings.`);
+console.log(`PASS: ${checks} directional spit groups across ${HORIZONTAL_SPIT_FIGHTERS.length} stance-aware horizontal-spit fighters and both facings.`);

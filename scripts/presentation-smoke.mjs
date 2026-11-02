@@ -13,7 +13,7 @@ const functions=main.statements.filter(n=>ts.isFunctionDeclaration(n)&&names.inc
 assert.equal(functions.match(/function /g).length,names.length);
 function fixture(storyResult=false){
  const elements=new Map();
- const c={...core,...events,state:core.createState('rivet','dummy'),presentation:events.createRoundPresentation(),chosen:'rivet',mode:'dummy',opponent:undefined,testingGodMode:false,matchTesting:false,matchGodMode:false,matchEarnedGodMode:false,updateGodModeLabel(){},frames:[],qaEvents:[],qaPanel:null,qaRecord(){},qaStopAtOutro(){},held:new Set(),queued:0,selection:{isOpen:false},dialog:{open:false},padNeedsRelease:false,running:true,started:true,accumulator:0,storyCalls:0,overlays:0,canvas:{focus(){}},$:id=>{if(!elements.has(id))elements.set(id,{disabled:false});return elements.get(id);}};
+ const c={...core,...events,countdown:{advance:()=>false,hide(){},suspend(){}},versus:{advance:()=>false,show(){},suspend(){}},state:core.createState('rivet','dummy'),presentation:events.createRoundPresentation(),chosen:'rivet',mode:'dummy',opponent:undefined,testingGodMode:false,matchTesting:false,matchGodMode:false,matchEarnedGodMode:false,updateGodModeLabel(){},frames:[],qaEvents:[],qaPanel:null,qaRecord(){},qaStopAtOutro(){},held:new Set(),queued:0,selection:{isOpen:false},dialog:{open:false},padNeedsRelease:false,running:true,started:true,accumulator:0,storyCalls:0,overlays:0,canvas:{focus(){}},$:id=>{if(!elements.has(id))elements.set(id,{disabled:false});return elements.get(id);}};
  c.story={isOpen:false,finishMatch(){},onRoundEnd(){c.storyCalls++;if(storyResult)c.running=false;return storyResult;}};
  c.showOverlay=()=>{c.overlays++;c.running=false;};
  vm.createContext(c);vm.runInContext(compile(functions),c);return c;

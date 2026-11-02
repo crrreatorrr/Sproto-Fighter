@@ -1,0 +1,182 @@
+[
+  {
+    "id": "duo",
+    "oldWalkUniqueCount": 4,
+    "newWalkUniqueCount": 4,
+    "originalImagesPreserved": true,
+    "ranged": {
+      "timingPhaseCount": 8,
+      "uniqueDrawings": 4,
+      "castFrameIndices": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3
+      ],
+      "reason": "Original identity ranged drawing changes head-to-leg proportions; coherent complete cast frames preserve anatomy and active-release timing."
+    },
+    "walkPreserved": "Original optional four keys retained: taller silhouette comes from straighter stride versus bent guard; head/torso size is stable.",
+    "eyeLandmarkReview": {
+      "method": "Visually isolated connected yellow eye pixel component; findings from roster_a enlarged pixel review",
+      "mainGuardLeft": {
+        "dimensions": [
+          12,
+          13
+        ],
+        "area": 102
+      },
+      "originalWalkLeft": {
+        "dimensions": [
+          12,
+          13
+        ],
+        "area": 109
+      },
+      "oldIdentityRangedReleaseLeft": {
+        "dimensions": [
+          18,
+          19
+        ],
+        "area": 241
+      },
+      "coherentCastReleaseLeft": {
+        "dimensions": [
+          12,
+          13
+        ],
+        "area": 109
+      }
+    },
+    "entrance": {
+      "phaseCount": 8,
+      "uniqueDrawings": 4,
+      "introFrameIndices": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3
+      ]
+    },
+    "death": {
+      "phaseCount": 16,
+      "uniqueDrawings": 6,
+      "defeatFrameIndices": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        11,
+        11
+      ],
+      "floorRestStartsAtPhase": 8
+    },
+    "identityRationale": "Entire identity sheet alters head-to-leg proportions (and bluefacepalette); retain coherent whole-body intro/cast/defeat drawings and original timing phases. OriginalidentityPNGfiles remain unchanged."
+  },
+  {
+    "id": "duo-blue",
+    "oldWalkUniqueCount": 4,
+    "newWalkUniqueCount": 4,
+    "originalImagesPreserved": true,
+    "ranged": {
+      "timingPhaseCount": 8,
+      "uniqueDrawings": 4,
+      "castFrameIndices": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3
+      ],
+      "reason": "Original identity ranged drawing changes head-to-leg proportions; coherent complete cast frames preserve anatomy and active-release timing."
+    },
+    "walkPreserved": "Original optional four keys retained: taller silhouette comes from straighter stride versus bent guard; head/torso size is stable.",
+    "eyeLandmarkReview": {
+      "mainGuardLeft": {
+        "dimensions": [
+          14,
+          12
+        ],
+        "area": 117
+      },
+      "originalWalkLeft": {
+        "dimensions": [
+          14,
+          12
+        ],
+        "area": 121
+      },
+      "conclusion": "No anatomical walk-scale correction justified"
+    },
+    "entrance": {
+      "phaseCount": 8,
+      "uniqueDrawings": 4,
+      "introFrameIndices": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        3
+      ]
+    },
+    "death": {
+      "phaseCount": 16,
+      "uniqueDrawings": 6,
+      "defeatFrameIndices": [
+        0,
+        0,
+        1,
+        1,
+        2,
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        11,
+        11
+      ],
+      "floorRestStartsAtPhase": 8
+    },
+    "identityRationale": "Entire identity sheet alters head-to-leg proportions (and bluefacepalette); retain coherent whole-body intro/cast/defeat drawings and original timing phases. OriginalidentityPNGfiles remain unchanged."
+  },
+  {
+    "id": "sproto2789",
+    "oldWalkUniqueCount": 8,
+    "newWalkUniqueCount": 4,
+    "newWalkMainSlots": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "originalImagesPreserved": true
+  }
+]

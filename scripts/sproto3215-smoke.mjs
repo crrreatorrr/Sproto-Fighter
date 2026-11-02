@@ -39,6 +39,12 @@ for(const face of [-1,1])for(const direction of [0,A.up,A.down,face===1?A.left:A
 const s=createState('sproto3215','cpu','rivet'),f=s.fighters[0];f.pips=3;s.fighters[1].x=480;step(s,[A.special,0]);let combo=0;
 for(let t=0;t<220;t++){combo=Math.max(combo,f.combo);step(s,[0,0]);}
 assert.equal(f.pips,0);assert.equal(combo,COMBAT_STYLES.sproto3215.specialFrames.length);assert.equal(f.move,null);
-console.log('PASS: Sproto #3215 identity and 72-frame asset contract; full gait in both facings, dash/jump/landing, five attacks, eight directional throws and four-contact existing Team Special. Reference likeness and costume checked visually.');
+console.log('PASS: Captain Green identity and 72-frame asset contract; full gait in both facings, dash/jump/landing, five attacks, eight directional throws and four-contact existing Team Special. This is automated coverage; likeness is recorded separately.');
 
-const prior=JSON.parse(readFileSync(new URL('../art/sproto3215-hero/before-gameplay.json',import.meta.url),'utf8'));assert.deepEqual({...ROSTER.sproto3215,name:prior.roster.name},prior.roster);assert.deepEqual(JSON.parse(JSON.stringify(COMBAT_STYLES.sproto3215)),prior.kit);console.log('PASS: art revision preserves the existing fighter name, kit and gameplay values.');
+const prior=JSON.parse(readFileSync(new URL('../art/sproto3215-hero/before-gameplay.json',import.meta.url),'utf8'));
+assert.equal(ROSTER.sproto3215.partner,'sproto3152','preserve the separately approved individual partner assignment');
+assert.deepEqual({...ROSTER.sproto3215,name:prior.roster.name,partner:prior.roster.partner},prior.roster);
+const currentKit=JSON.parse(JSON.stringify(COMBAT_STYLES.sproto3215));
+assert.equal(currentKit.projectile.shape,'signature:80:0','preserve the later fighter-specific projectile art');
+assert.deepEqual({...currentKit,projectile:{...currentKit.projectile,shape:prior.kit.projectile.shape}},prior.kit);
+console.log('PASS: art revision preserves combat values alongside the later Captain Green name and individual partner assignment.');

@@ -1,5 +1,5 @@
 import {STAGES,STORY_STAGE_IDS,type StageId} from './stage';
-import {ROSTER,isFreePlayAddition,type PlayableFighterId} from './core';
+import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,STORY_OPPONENTS,storyProgress,type Encounter,type StoryProgress} from './storyProgress';
 
 type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;selectedFighter?:()=>PlayableFighterId;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
@@ -27,7 +27,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         if(!hooks.ready()){$('journey-copy').textContent='Fighter sprites are still loading. Try again in a moment.';return;}
         progress.sync();
         const selectedFighter=hooks.selectedFighter?.();
-        if(selectedFighter&&!progress.isUnlocked(selectedFighter)&&(encounter||STORY_OPPONENTS.includes(selectedFighter)||!isFreePlayAddition(selectedFighter))){
+        if(selectedFighter&&!progress.isUnlocked(selectedFighter)){
             $('journey-copy').textContent=`${ROSTER[selectedFighter].name} is a locked P1 preview. Return to the arena menu and choose an unlocked P1 fighter. Defeat ${ROSTER[selectedFighter].name} in story mode to recruit them.`;
             return;
         }
@@ -71,7 +71,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         view=story?'worlds':'levels';modal.classList.toggle('story-map-open',story);const save=progress.snapshot();
         $('journey-kicker').textContent=story?`STORY / ${save.cleared.length} OF ${total} ENCOUNTERS CLEARED`:'FREE PLAY / LEVEL SELECT';
         $('journey-title').textContent=story?'The road to the Hatchery.':'Pick a place to fight.';
-        $('journey-copy').textContent=story?`${STORY_OPPONENTS.length} distinct rivals across ${total} encounters. Victory recruits each defeated fighter. The art duo closes Verse Gate; Morelight and VMU guard the finale. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
+        $('journey-copy').textContent=story?`${STORY_OPPONENTS.length} distinct rivals across ${total} encounters. Victory recruits each defeated fighter. The art duo closes Verse Gate. In the Hatchery, defeat Nick then Juicy before the Morelight and VMU finale. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
         const content=$('journey-content');content.replaceChildren();const grid=document.createElement('div');grid.className='world-grid'+(story?' campaign-chapter-list':'');content.append(grid);
         for(const level of story?worlds:STAGES){
             const encounters=STORY_ENCOUNTERS.filter(e=>e.stage===level.id),first=encounters[0],last=encounters.at(-1);

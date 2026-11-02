@@ -422,3 +422,56 @@ dialog { overflow-y: auto; }
   .story-slate { padding: 18px; }
   .story-slate strong { font-size: clamp(23px,7vw,32px); }
 }
+
+/* Names need distinct letter shapes at caption sizes. Keep the pixel type for
+   the arcade chrome, but preserve handles/casing in a locally available face.
+   #app scopes also override pixelUI's blanket font rule without !important. */
+:root { --fighter-name-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+#app .portrait-name,
+#app .side-tab span,
+#app .fighter-summary h2 {
+  font-family: var(--fighter-name-font);
+  font-weight: 700;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  text-shadow: none;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  hyphens: none;
+}
+#app .portrait-name {
+  font-size: 12px;
+  line-height: 1.3;
+  color: #f3ead6;
+}
+#app .side-tab span {
+  font-size: 14px;
+  line-height: 1.3;
+}
+#app .fighter-summary h2 {
+  font-size: clamp(16px, 1.4vw, 20px);
+  line-height: 1.2;
+  margin-block: 8px 6px;
+  color: #fff0c7;
+}
+@media (max-width: 650px) {
+  #app .side-tab span { font-size: 13px; }
+  #app .fighter-summary h2 { font-size: 14px; line-height: 1.2; }
+  /* Names and kit titles can take more lines on narrow phones. The selection
+     renderer already reserves the measured panel height above the fighters. */
+  .fighter-summary,
+  #selection-view[data-paired=true] .fighter-summary {
+    height: auto;
+    min-height: 196px;
+  }
+}
+@media (max-width: 380px) {
+  /* Tall name panels still leave room for full-size fighters and the stage
+     badge. Paired selections retain their separate 704px stacked preview. */
+  #selection-view:not([data-paired=true]) .match-preview { height: 540px; }
+  /* Keep the complete value and unit inside each narrow stat cell. */
+  .fighter-summary dd { min-width: 0; white-space: normal; }
+  .fighter-summary dd small { display: block; margin: 2px 0 0; line-height: 1.2; }
+}

@@ -1,0 +1,685 @@
+{
+  "id": "sproto1815",
+  "name": "Jessica",
+  "correction": "body stature + head landmark review",
+  "walk": {
+    "oldUniqueFrames": 8,
+    "newUniqueFrames": 4,
+    "mainSlots": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "cycleWorldPixels": 112,
+    "oldSourcesPreserved": true,
+    "rationale": "Optional gait changes body proportions; use coherent authored main loop."
+  },
+  "events": {
+    "factor": 1.28,
+    "oldAnchor": [
+      112,
+      210
+    ],
+    "newAnchor": [
+      160,
+      300
+    ],
+    "newCanvas": [
+      384,
+      384
+    ],
+    "interpolation": "nearest",
+    "records": [
+      {
+        "frame": 0,
+        "sourceUrl": "/fighters/events/sproto1815/00.png",
+        "sourceSha256": "39ffa587b8bd023dfcc43debf124bce4c6409a76658e0153f40ae35b3436e586",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/00.png",
+        "correctedSha256": "291ab4be1b46a62b0ffb10f58310f1699c8a36865f3d819f487ea96b3be2e444",
+        "beforeBounds": [
+          83,
+          84,
+          163,
+          210
+        ],
+        "afterBounds": [
+          123,
+          139,
+          225,
+          300
+        ],
+        "opaqueColorsPreserved": 3205
+      },
+      {
+        "frame": 1,
+        "sourceUrl": "/fighters/events/sproto1815/01.png",
+        "sourceSha256": "ca610faf811dbb7c5fcc92ec1b26e25bfaa946fc3e9b277e3e5ae6be51e6009d",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/01.png",
+        "correctedSha256": "3b9bd23401e081a2a176c3c4eb372ffae50b9cf88aed0a93a80919d235d427ae",
+        "beforeBounds": [
+          68,
+          83,
+          146,
+          210
+        ],
+        "afterBounds": [
+          104,
+          137,
+          204,
+          300
+        ],
+        "opaqueColorsPreserved": 3046
+      },
+      {
+        "frame": 2,
+        "sourceUrl": "/fighters/events/sproto1815/02.png",
+        "sourceSha256": "ed364fcdc9f67b31bd9c25a9fe11dc6921c44cc4094f4b1dd9200b422919b49a",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/02.png",
+        "correctedSha256": "77d43ddc91411fd21568b20d4000c47bed6979e09b53677ef8b25836843a0ae8",
+        "beforeBounds": [
+          65,
+          75,
+          147,
+          210
+        ],
+        "afterBounds": [
+          100,
+          127,
+          205,
+          300
+        ],
+        "opaqueColorsPreserved": 3262
+      },
+      {
+        "frame": 3,
+        "sourceUrl": "/fighters/events/sproto1815/03.png",
+        "sourceSha256": "a6055ac05df0e1fc45c67a48ec501675efc2efb23c8ff5529bdbbf6e02cae1f4",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/03.png",
+        "correctedSha256": "fe8e42a8cab7142559551da8fce75f27e562bbf0344467532bd564df2ed1e58e",
+        "beforeBounds": [
+          83,
+          100,
+          166,
+          210
+        ],
+        "afterBounds": [
+          123,
+          159,
+          229,
+          300
+        ],
+        "opaqueColorsPreserved": 2873
+      },
+      {
+        "frame": 4,
+        "sourceUrl": "/fighters/events/sproto1815/04.png",
+        "sourceSha256": "07e300c4b2a27ccf4e179e498b2571db58694adf3c85d0da97de942b96643f44",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/04.png",
+        "correctedSha256": "696b4376703ccbbc81cb36cf7986e390907b984938d29372d29d8e2fc836c183",
+        "beforeBounds": [
+          75,
+          101,
+          189,
+          210
+        ],
+        "afterBounds": [
+          113,
+          160,
+          259,
+          300
+        ],
+        "opaqueColorsPreserved": 2925
+      },
+      {
+        "frame": 5,
+        "sourceUrl": "/fighters/events/sproto1815/05.png",
+        "sourceSha256": "6d3bea242dee7e93650bac2fea59b3a0a1f40e16dbcb9d20eea81ecb7af6502c",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/05.png",
+        "correctedSha256": "584e38d5e75a1b4ec038d4b12013f7790cf128b32ce0e4d035a071fb0c15eeeb",
+        "beforeBounds": [
+          97,
+          95,
+          211,
+          210
+        ],
+        "afterBounds": [
+          141,
+          153,
+          287,
+          300
+        ],
+        "opaqueColorsPreserved": 3122
+      },
+      {
+        "frame": 6,
+        "sourceUrl": "/fighters/events/sproto1815/06.png",
+        "sourceSha256": "81a55fbcb6a660765c8ebfd78392fbd3dba7c3d5574436a3276fc3e82b830bec",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/06.png",
+        "correctedSha256": "4a672d396890bd67d02771ef6489f630ea952b8cd8be08895a0fdc10fbe47fb5",
+        "beforeBounds": [
+          84,
+          121,
+          243,
+          210
+        ],
+        "afterBounds": [
+          124,
+          186,
+          328,
+          300
+        ],
+        "opaqueColorsPreserved": 2897
+      },
+      {
+        "frame": 7,
+        "sourceUrl": "/fighters/events/sproto1815/07.png",
+        "sourceSha256": "4557cbe41526a988f21a9a404968745b6529548e577e9798d9b799c1fa37e34e",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/07.png",
+        "correctedSha256": "7e576d2eb7149f766f1c111feecd56d2e61cf7e2fcc20b7a0fad416e976d95ff",
+        "beforeBounds": [
+          83,
+          106,
+          171,
+          210
+        ],
+        "afterBounds": [
+          123,
+          167,
+          236,
+          300
+        ],
+        "opaqueColorsPreserved": 2946
+      },
+      {
+        "frame": 8,
+        "sourceUrl": "/fighters/events/sproto1815/08.png",
+        "sourceSha256": "a3cd18b6bf609808f18448880f89a45d429785485d6e3002fc46487aef1d1b57",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/08.png",
+        "correctedSha256": "8c6e519a1b8cce1cff153fa1666b1bd9ebda07833f9cd1132eb87a08ed2cc63f",
+        "beforeBounds": [
+          103,
+          77,
+          180,
+          210
+        ],
+        "afterBounds": [
+          148,
+          130,
+          247,
+          300
+        ],
+        "opaqueColorsPreserved": 3195
+      },
+      {
+        "frame": 9,
+        "sourceUrl": "/fighters/events/sproto1815/09.png",
+        "sourceSha256": "f1e9228f379c0c822f832c5f1e2a6a650396266e1ba8c7a064df35e528fc80da",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/09.png",
+        "correctedSha256": "a6892ab52f374ccd792342b2ed996c3e9ee34f17756afc3f8b8912a323ec9523",
+        "beforeBounds": [
+          87,
+          87,
+          177,
+          210
+        ],
+        "afterBounds": [
+          128,
+          143,
+          243,
+          300
+        ],
+        "opaqueColorsPreserved": 3173
+      },
+      {
+        "frame": 10,
+        "sourceUrl": "/fighters/events/sproto1815/10.png",
+        "sourceSha256": "e09f01397646cecbf95c1609f83d79590042aed7afd8903e6e02098423f49471",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/10.png",
+        "correctedSha256": "f3f5de0c958b314ed89e099e425b997906309cde39ffd26b8587603d7bbbe957",
+        "beforeBounds": [
+          82,
+          114,
+          231,
+          210
+        ],
+        "afterBounds": [
+          122,
+          177,
+          312,
+          300
+        ],
+        "opaqueColorsPreserved": 3181
+      },
+      {
+        "frame": 11,
+        "sourceUrl": "/fighters/events/sproto1815/11.png",
+        "sourceSha256": "611c497f4b9cd3bbc6c94a0cdced2b9d0b068d119bfbcb6b31602bf836074d5a",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/11.png",
+        "correctedSha256": "bcf0201a43692dad2b1094535200fe702beb103ec5d370203c90fb64fb820321",
+        "beforeBounds": [
+          83,
+          93,
+          166,
+          210
+        ],
+        "afterBounds": [
+          123,
+          150,
+          229,
+          300
+        ],
+        "opaqueColorsPreserved": 3011
+      },
+      {
+        "frame": 12,
+        "sourceUrl": "/fighters/events/sproto1815/12.png",
+        "sourceSha256": "e008b146d0dcf3fbfd76ffc83ce8e64b1938da91920658118a1b7bc181668338",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/12.png",
+        "correctedSha256": "2c7d3e0de484c89023625d26b0f59e3374453415b34c221f336f9ed6daf600b9",
+        "beforeBounds": [
+          87,
+          86,
+          159,
+          210
+        ],
+        "afterBounds": [
+          128,
+          141,
+          220,
+          300
+        ],
+        "opaqueColorsPreserved": 3081
+      },
+      {
+        "frame": 13,
+        "sourceUrl": "/fighters/events/sproto1815/13.png",
+        "sourceSha256": "4ad9681699426dba4d12fc54691af068386128b62963e282d8637f84e57f2868",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/13.png",
+        "correctedSha256": "91a441b6a73be8365946a767956b1e0ad4eac24c62b03c2dd3e8c772a831e4b9",
+        "beforeBounds": [
+          76,
+          90,
+          176,
+          210
+        ],
+        "afterBounds": [
+          114,
+          146,
+          242,
+          300
+        ],
+        "opaqueColorsPreserved": 2974
+      },
+      {
+        "frame": 14,
+        "sourceUrl": "/fighters/events/sproto1815/14.png",
+        "sourceSha256": "1b2583ca44473df8d3a964e183b18b8bec897d3d3eac6e2355c57501f6805694",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/14.png",
+        "correctedSha256": "1c19a19eb29842b3677444e33384ffa2281ddd96e8c08d48daa75d3a4293706e",
+        "beforeBounds": [
+          62,
+          116,
+          211,
+          210
+        ],
+        "afterBounds": [
+          96,
+          180,
+          287,
+          300
+        ],
+        "opaqueColorsPreserved": 3084
+      },
+      {
+        "frame": 15,
+        "sourceUrl": "/fighters/events/sproto1815/15.png",
+        "sourceSha256": "14aad77c9a6c14a0addd0555c82f717e703f89f07d702825b230e80426cb67c2",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/15.png",
+        "correctedSha256": "b1ab015e336f99d4b741b2e664b0c61af757e8d63558d58ec29aecd64afb19e1",
+        "beforeBounds": [
+          83,
+          92,
+          166,
+          210
+        ],
+        "afterBounds": [
+          123,
+          149,
+          229,
+          300
+        ],
+        "opaqueColorsPreserved": 3021
+      },
+      {
+        "frame": 16,
+        "sourceUrl": "/fighters/events/sproto1815/16.png",
+        "sourceSha256": "641931f8c2cdaf333550267a96dd34240c2abb6dbaee7636adc47496456d8d1f",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/16.png",
+        "correctedSha256": "64c81a3f804d4b34bc5fe76b7abb49c46bd2fd7e78d9664169bbcdca459c1778",
+        "beforeBounds": [
+          85,
+          108,
+          173,
+          210
+        ],
+        "afterBounds": [
+          125,
+          169,
+          238,
+          300
+        ],
+        "opaqueColorsPreserved": 3050
+      },
+      {
+        "frame": 17,
+        "sourceUrl": "/fighters/events/sproto1815/17.png",
+        "sourceSha256": "a50e50d73e090bdaae12c0ccaaa77dd8e1f83c02ece0f978898c955c6997f75a",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/17.png",
+        "correctedSha256": "10739fd019ee3f318ff6270014e7b853eb56d0913152939c161574ec03c26122",
+        "beforeBounds": [
+          104,
+          116,
+          184,
+          210
+        ],
+        "afterBounds": [
+          150,
+          180,
+          252,
+          300
+        ],
+        "opaqueColorsPreserved": 2519
+      },
+      {
+        "frame": 18,
+        "sourceUrl": "/fighters/events/sproto1815/18.png",
+        "sourceSha256": "a3c74555da2d50773849e70f9b2bb241dd3f5b58d94d8c4b73bc459413089a16",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/18.png",
+        "correctedSha256": "c3979cac08c05f8f3f901c342373dfb678ecbffff776208dfee5e34a25518d7f",
+        "beforeBounds": [
+          76,
+          122,
+          170,
+          210
+        ],
+        "afterBounds": [
+          114,
+          187,
+          234,
+          300
+        ],
+        "opaqueColorsPreserved": 3149
+      },
+      {
+        "frame": 19,
+        "sourceUrl": "/fighters/events/sproto1815/19.png",
+        "sourceSha256": "3de1d59b7d83b3b6ff0e9f965f6720c579b35ecb02e431285f6c1e9a9f66ebf9",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/19.png",
+        "correctedSha256": "8df76b1f0b84c0ad28f79d4814044c34fa00b50fd23a958dcffefdcb37c25e33",
+        "beforeBounds": [
+          82,
+          90,
+          165,
+          210
+        ],
+        "afterBounds": [
+          122,
+          146,
+          228,
+          300
+        ],
+        "opaqueColorsPreserved": 3092
+      },
+      {
+        "frame": 20,
+        "sourceUrl": "/fighters/events/sproto1815/20.png",
+        "sourceSha256": "453d7a7c859f0b2c7f514a95a0be11ac8accd9d581d1c772d907420879997465",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/20.png",
+        "correctedSha256": "4ccbb51535b7f71057a090e2a9ff4182763a2e84360ab849d3c4048377b04b00",
+        "beforeBounds": [
+          98,
+          117,
+          190,
+          210
+        ],
+        "afterBounds": [
+          142,
+          181,
+          260,
+          300
+        ],
+        "opaqueColorsPreserved": 2940
+      },
+      {
+        "frame": 21,
+        "sourceUrl": "/fighters/events/sproto1815/21.png",
+        "sourceSha256": "e090781b135c3d479ba70c3af15b59452cf648c7f253c324212bbfbcb5f354b8",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/21.png",
+        "correctedSha256": "bbc2557609ff4ca08dbf6e0f61fdaf9f7f405e3c2316e5889d1f94ece11fd41e",
+        "beforeBounds": [
+          50,
+          97,
+          146,
+          210
+        ],
+        "afterBounds": [
+          81,
+          155,
+          204,
+          300
+        ],
+        "opaqueColorsPreserved": 3110
+      },
+      {
+        "frame": 22,
+        "sourceUrl": "/fighters/events/sproto1815/22.png",
+        "sourceSha256": "3d16419105ea99716159430d4776230a38d727af61e357863c7afc5b356e667a",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/22.png",
+        "correctedSha256": "49d10d232f19b8bc221edb2befcac9bc2b8a5ec1684e403ecbb183c983b2dad1",
+        "beforeBounds": [
+          67,
+          139,
+          200,
+          210
+        ],
+        "afterBounds": [
+          102,
+          209,
+          273,
+          300
+        ],
+        "opaqueColorsPreserved": 3019
+      },
+      {
+        "frame": 23,
+        "sourceUrl": "/fighters/events/sproto1815/23.png",
+        "sourceSha256": "5981bb2b69b148b57c208c682616479b6f64e2f0d1004d7bc8dc9ff2e8835edb",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/23.png",
+        "correctedSha256": "b6967d8b003655da32695cf4f9e55039b5f71e8a9bb9d1539c70213b1c12eaee",
+        "beforeBounds": [
+          48,
+          145,
+          175,
+          210
+        ],
+        "afterBounds": [
+          78,
+          217,
+          241,
+          300
+        ],
+        "opaqueColorsPreserved": 2947
+      },
+      {
+        "frame": 24,
+        "sourceUrl": "/fighters/events/sproto1815/24.png",
+        "sourceSha256": "10d26e713d9301848632c4896d504eb9860a79715a9ddeadd93436c23f6e229b",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/24.png",
+        "correctedSha256": "d45dc298408e5324e4ffd61c742fbdd79577cdcc5db5ee302ed66d2a0bd38499",
+        "beforeBounds": [
+          49,
+          157,
+          174,
+          210
+        ],
+        "afterBounds": [
+          79,
+          232,
+          239,
+          300
+        ],
+        "opaqueColorsPreserved": 2341
+      },
+      {
+        "frame": 25,
+        "sourceUrl": "/fighters/events/sproto1815/25.png",
+        "sourceSha256": "c7a771502b0974df377f23b73f75a7dc1023388eade079cbd67dc2be6fff66b8",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/25.png",
+        "correctedSha256": "95bf611a7c4542b285fab646813b10564de0e91131c08c75d629da38472dc03a",
+        "beforeBounds": [
+          50,
+          157,
+          174,
+          210
+        ],
+        "afterBounds": [
+          81,
+          232,
+          239,
+          300
+        ],
+        "opaqueColorsPreserved": 2324
+      },
+      {
+        "frame": 26,
+        "sourceUrl": "/fighters/events/sproto1815/26.png",
+        "sourceSha256": "a8714e1cb2ad55706eb1114359cd83e79e416d998d55ac157666084b6428635b",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/26.png",
+        "correctedSha256": "c79e696f77435a2be064253a89eef87b873806c46e37cd3e1af3eca609afc98e",
+        "beforeBounds": [
+          47,
+          155,
+          178,
+          210
+        ],
+        "afterBounds": [
+          77,
+          230,
+          244,
+          300
+        ],
+        "opaqueColorsPreserved": 2577
+      },
+      {
+        "frame": 27,
+        "sourceUrl": "/fighters/events/sproto1815/27.png",
+        "sourceSha256": "2812839982c08feadd9a20b5413f6ce8f74aa58131e0546a64fa84552a6b8604",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/27.png",
+        "correctedSha256": "de18c92a2be201f50c7ef4dc6c6cff99ce851dce88d0604d30eda98bf677fe3b",
+        "beforeBounds": [
+          49,
+          157,
+          177,
+          210
+        ],
+        "afterBounds": [
+          79,
+          232,
+          243,
+          300
+        ],
+        "opaqueColorsPreserved": 2452
+      },
+      {
+        "frame": 28,
+        "sourceUrl": "/fighters/events/sproto1815/28.png",
+        "sourceSha256": "0c47459c91d055b39d98f055abeeac8a2f1109e22b0c580d23daa610eb0a2cf0",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/28.png",
+        "correctedSha256": "5c1ae32bf21acd954cb5afdba244196e8fb62d34327ebefc1940f59ef5606639",
+        "beforeBounds": [
+          49,
+          157,
+          174,
+          210
+        ],
+        "afterBounds": [
+          79,
+          232,
+          239,
+          300
+        ],
+        "opaqueColorsPreserved": 2409
+      },
+      {
+        "frame": 29,
+        "sourceUrl": "/fighters/events/sproto1815/29.png",
+        "sourceSha256": "d46d20669d503f9d664d8f5852fd4e0de5c55832add3a5f8f1ed54e5e1c3ebf1",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/29.png",
+        "correctedSha256": "d4af74e453f5ae6465aec0c01f3e0322353be8615995db18f292fcd3e7ad1fcf",
+        "beforeBounds": [
+          51,
+          158,
+          174,
+          210
+        ],
+        "afterBounds": [
+          82,
+          233,
+          239,
+          300
+        ],
+        "opaqueColorsPreserved": 2359
+      },
+      {
+        "frame": 30,
+        "sourceUrl": "/fighters/events/sproto1815/30.png",
+        "sourceSha256": "075e11fcd83d151f3de357218a04573cbb49936c0d8c8de84f4672ce71ba1bec",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/30.png",
+        "correctedSha256": "45e2fdac90e93261fbfd4edd109a192a8afb8aee55a9aefc2aa15aae56fb395c",
+        "beforeBounds": [
+          48,
+          157,
+          177,
+          210
+        ],
+        "afterBounds": [
+          78,
+          232,
+          243,
+          300
+        ],
+        "opaqueColorsPreserved": 2382
+      },
+      {
+        "frame": 31,
+        "sourceUrl": "/fighters/events/sproto1815/31.png",
+        "sourceSha256": "31c2f69d8a9c55042d1d7808bd116a591e7a7197a246814b7d1ff884ca0217fe",
+        "correctedUrl": "/fighters/events/sproto1815/scale-body-128/31.png",
+        "correctedSha256": "a0613ba379c8ae7c139a859f30a81876fe8b98c4759bf38e4c7a7251b2eb3aca",
+        "beforeBounds": [
+          49,
+          158,
+          177,
+          210
+        ],
+        "afterBounds": [
+          79,
+          233,
+          243,
+          300
+        ],
+        "opaqueColorsPreserved": 2361
+      }
+    ],
+    "reference": "Main0 head54px, body crown-to-foot127px; event intro0 head40px, body101px; factor1.28 produces head51px and body129px."
+  },
+  "unchanged": [
+    "atlas.scale",
+    "main poses",
+    "identity clips",
+    "move timing",
+    "core collisions",
+    "original images"
+  ]
+}
