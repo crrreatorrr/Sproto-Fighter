@@ -1,0 +1,310 @@
+/* Higgsfield citadel skin. Additive presentation layer; controls remain native. */
+:root {
+  --mystic-gold: #dec48b;
+  --mystic-bronze: #796444;
+  --mystic-ink: #0b0d19;
+  --mystic-paper: #f0e5ca;
+  --mystic-button: url('/menu/higgsfield/mystic/button-amethyst.png');
+}
+body {
+  background: #070911 url('/menu/higgsfield/mystic/citadel.webp') center top / max(100vw, 1700px) auto fixed no-repeat;
+  color: var(--mystic-paper);
+}
+#app { min-height: 100vh; background: linear-gradient(180deg, #07091108 0, #07091110 600px, #070911a8 1500px); }
+.arena-header {
+  max-width: 1400px; min-height: 70px; padding: 10px 36px;
+  background: #090c17db; border-bottom: 1px solid #9a80524d;
+  box-shadow: 0 2px 0 #0009, inset 0 -3px 0 #211d27;
+}
+.brand { color: #f1e3bb; font-size: 19px; letter-spacing: 2px; gap: 12px; }
+.brand b { color: #c4a5ef; }
+.brand-icon {
+  width: 40px; height: 40px; background: #1a1428; color: #ffe9ac;
+  border: 3px double #ac8b50; box-shadow: inset 0 0 0 3px #080a12, 3px 3px 0 #02030a;
+  clip-path: polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+}
+.offline-label { color: #b9ad9b; font-size: 11px; letter-spacing: 1px; }
+.top-navigation { gap: 10px; }
+main { max-width: 1360px; padding: 14px 42px 0; }
+#selection-view {
+  padding: 0 24px 22px; border: 0;
+  background: linear-gradient(180deg,#090c1700 0 120px,#090c1755 160px,#090c17c4 650px);
+  box-shadow: none; overflow: visible;
+}
+#selection-view::before {
+  display: block; content: ''; position: absolute; inset: 140px 10px 10px;
+  z-index: -1; border: 1px solid #9b7d493b; clip-path: none;
+  box-shadow: 0 0 0 4px #080a1255, 0 0 0 5px #9b7d4920;
+}
+#selection-view::after { display: none; }
+.arcade-echoes { display: block; opacity: .2; }
+.arcade-echoes img { top: 160px; height: 400px; }
+.selection-heading { min-height: 132px; padding: 40px 0 20px; gap: 24px; }
+.selection-heading h1 {
+  font-size: clamp(26px, 3.1vw, 42px); line-height: 1.2; letter-spacing: 5px;
+  color: #fff0c7; text-shadow: 3px 3px 0 #25192d, 0 2px 0 #000;
+}
+.selection-heading h1 em { color: #d0b2f1; }
+.heading-rule, .heading-rule:first-child {
+  height: 12px; max-width: 180px; transform: none; border-block: 1px solid #9c7a4e;
+  background: repeating-linear-gradient(90deg,transparent 0 12px,#caab6b 12px 15px,transparent 15px 27px);
+  clip-path: polygon(0 40%,7% 0,93% 0,100% 40%,100% 60%,93% 100%,7% 100%,0 60%);
+}
+.quiet, .primary, .text-button, .top-navigation .quiet, .side-tab, .start-fight {
+  --mystic-button: url('/menu/higgsfield/mystic/button-amethyst.png');
+  border: 0; border-radius: 0; background: var(--mystic-button) center / 100% 100% no-repeat;
+  color: #f2e6cf; box-shadow: none; text-shadow: 1px 2px #05030c;
+  padding: 13px 34px; min-height: 46px;
+  font-size: 14px; font-weight: 600; letter-spacing: .7px;
+  image-rendering: pixelated; cursor: pointer;
+}
+.quiet:hover, .text-button:hover, .top-navigation .quiet:hover {
+  background: var(--mystic-button) center / 100% 100% no-repeat;
+  color: #fff3c9; filter: brightness(1.25);
+}
+.top-navigation .quiet { min-width: 126px; padding: 12px 28px; font-size: 13px; }
+.primary, #journey-actions .quiet:first-child, .start-fight {
+  --mystic-button: url('/menu/higgsfield/mystic/button-amber.png');
+  background: var(--mystic-button) center / 100% 100% no-repeat;
+  color: #fff0b1; border: 0; box-shadow: none;
+}
+.primary:hover, .start-fight:hover, #journey-actions .quiet:first-child:hover {
+  background: var(--mystic-button) center / 100% 100% no-repeat; filter: brightness(1.2);
+}
+button:disabled { cursor: wait; filter: saturate(.25) brightness(.7); }
+button:focus-visible, select:focus-visible, a:focus-visible, canvas:focus-visible {
+  outline: 2px solid #f7d890; outline-offset: 4px;
+}
+.selection-locations, .selection-launch {
+  background: linear-gradient(90deg,#121220ef,#171728da 50%,#121220ef);
+  border: 1px solid #80704a; box-shadow: inset 0 0 0 3px #080b16, inset 0 0 0 4px #72604444;
+}
+.selection-locations { padding: 12px 16px 10px; margin: 0; border-bottom: 0; }
+.selection-locations .selection-section-heading { margin-bottom: 8px; min-height: 36px; }
+.selection-section-heading h2, .selection-locations h2 { font-size: 13px; letter-spacing: 2px; color: #dcc58f; }
+.text-button { font-size: 12px; padding: 10px 30px; min-height: 34px; }
+.stage-rail { gap: 8px; padding: 3px 3px 8px; scrollbar-color: #ab8b51 #0b0d19; }
+.stage-choice {
+  height: 72px; border: 3px double #9a855e; background: #121523;
+  box-shadow: 3px 3px 0 #03040a, inset 0 0 0 1px #0a0b11;
+}
+.stage-choice canvas { filter: brightness(.8) saturate(.8); }
+.stage-choice > span { background: #090c17dc; padding: 5px; border-top: 1px solid #85704b88; }
+.stage-choice b { font-size: 12px; color: #f1e3c5; text-shadow: 1px 1px #000; }
+.stage-choice[aria-pressed=true] { border: 3px double #f5d78f; outline: 1px solid #9c7046; outline-offset: 1px; }
+.stage-choice[aria-pressed=true]::after { content: '◆'; background: #17101e; color: #ffe5a0; font-size: 12px; width: 18px; line-height: 18px; }
+.stage-choice:hover { border-color: #e0c3f1; }
+.stage-swipe-cue { font-size: 11px; color: #b5a4c7; margin: 6px 0 0; }
+.selection-launch { padding: 12px 16px 16px; gap: 24px; border-top: 1px solid #6d5a3a77; margin: 0; }
+.selection-launch label { color: #bdadcf; font-size: 11px; letter-spacing: 1.5px; min-width: 210px; }
+.selection-launch select {
+  border: 3px double #92744c; background: #0d1020; color: #eadfc4;
+  box-shadow: inset 2px 2px #02050c; padding: 8px 10px; font-size: 13px;
+}
+.menu-instructions span { color: #b5afc2; font-size: 11px; line-height: 1.5; }
+.start-fight { min-width: 250px; min-height: 64px; padding: 16px 40px; font-size: 23px; letter-spacing: 2px; }
+#selection-loading { margin: 12px 0; font-size: 11px; color: #b2acbd; letter-spacing: .8px; }
+.match-preview {
+  height: clamp(290px,27vw,360px); border: 3px double #9a8158;
+  box-shadow: 0 0 0 3px #070a13, 0 0 0 4px #49354f, 5px 5px 0 #03040c;
+}
+.fighter-summary { top: 14px; bottom: 14px; width: 20%; padding: 12px; border: 1px solid #9a815888; background: #100c1be8; }
+.fighter-summary.red { border-right: 2px solid #b95d68; }
+.fighter-summary.blue { border-left: 2px solid #689ab9; background: #090e20eb; }
+.summary-top { font-size: 12px; letter-spacing: 1px; }
+.summary-top small { font-size: 9px; color: #b7a8bc; margin-top: 4px; }
+.fighter-summary h2 { color: #ffebbb; font-size: clamp(17px,1.8vw,24px); margin: 12px 0 6px; }
+.fighter-summary > p { color: #d1b0ed; font-size: 10px; margin-bottom: 14px; }
+.fighter-summary dl { gap: 6px; }
+.fighter-summary dl > div, .fighter-summary.blue dl > div, .fighter-summary dl > div:nth-child(2n) {
+  background: #151323; border: 1px solid #796b52; box-shadow: inset 2px 2px #070910; min-height: 28px; padding: 5px 6px;
+}
+.fighter-summary dt { color: #c4b7a4; font-size: 9px; }
+.fighter-summary dd { color: #ffe8b2; font-size: 16px; }
+.fighter-summary dd small { font-size: 9px; color: #b0a6a1; }
+.versus {
+  top: 34%; height: 66px; width: 72px; border: 3px double #d9bf7f;
+  background: #171023e8; box-shadow: 0 0 0 4px #080a15, 0 0 0 5px #7b6651;
+  color: #ffdfa0; font-size: 37px; text-shadow: 2px 2px #79364e;
+}
+.preview-stage-label { border: 3px double #b39761; background: #0e1020ed; bottom: 14px; width: auto; min-width: 180px; padding: 6px 18px; }
+.preview-stage-label span { color: #bca2d4; font-size: 9px; }
+.preview-stage-label b { color: #f1dbb5; font-size: 13px; }
+.selection-roster { margin-top: 22px; }
+.selection-roster > .selection-section-heading { background: #0d0e1ce8; border-block: 1px solid #8b714b; padding: 9px 8px; margin-bottom: 14px; }
+.side-tab { width: 31%; min-height: 48px; padding: 12px 36px; font-size: 12px; }
+.side-tab.red { --mystic-button: url('/menu/higgsfield/mystic/button-ruby.png'); color: #f2b8b9; }
+.side-tab.blue { --mystic-button: url('/menu/higgsfield/mystic/button-sapphire.png'); color: #b9ddf3; }
+.side-tab span { font-size: 14px; letter-spacing: .3px; }
+.side-tab.red[aria-pressed=true], .side-tab.blue[aria-pressed=true] {
+  background: var(--mystic-button) center / 100% 100% no-repeat; border: 0;
+  color: #ffebbb; box-shadow: none; filter: brightness(1.25);
+}
+.selection-roster #roster-heading { left: 33%; right: 33%; font-size: 11px; letter-spacing: 1px; }
+.selection-grid { grid-template-columns: repeat(12,minmax(0,1fr)); gap: 8px; padding: 0; }
+.portrait-choice {
+  height: 100px; border: 3px double #8a7353; background: linear-gradient(135deg,#242135,#0c101d);
+  box-shadow: inset 0 0 0 2px #080a13, 3px 3px 0 #02030a;
+}
+.portrait-choice img { padding: 2px 2px 26px; }
+.portrait-choice:is([data-fighter='vaudream'],[data-fighter='nick'],[data-fighter='highsproto'],[data-fighter='captain']) img { padding-bottom: 26px; }
+.portrait-name { color: #dbcfb6; font-size: 10px; background: #0b0d19ed; border-top: 1px solid #8a7353; min-height: 25px; padding: 4px 2px; }
+.portrait-choice:hover { background: #30253b; border-color: #d7b787; }
+.portrait-choice[aria-pressed=true] { background: #3a2030; border-color: #f2cc7c; outline: 2px solid #c5a361; outline-offset: 1px; }
+#selection-view[data-side=opponent] .portrait-choice[aria-pressed=true] { background: #132d44; }
+.side-marker { font-size: 9px; border: 1px solid #caa66d; }
+.random-choice { background: #171226; border: 3px double #b49767; }
+.random-choice strong { color: #d4b4f2; font-size: 40px; }
+.random-choice > span { font-size: 9px; color: #dbcfb6; }
+.selection-hint { font-size: 12px; color: #c8bbce; line-height: 1.6; margin-top: 14px; }
+footer { color: #a99aac; font-size: 11px; padding: 20px 0 24px; }
+dialog, .overlay > div {
+  border: 4px double #c4a477; background: linear-gradient(#111322e8,#0b0f1bf5),url('/menu/higgsfield/mystic/citadel.webp') center / cover;
+  box-shadow: inset 0 0 0 4px #080b14, 0 0 0 2px #4c3655, 8px 8px 0 #02030b;
+}
+dialog::backdrop { background: #030512df; }
+.dialog-top h2, dialog h2 { color: #ffe5b0; }
+dialog p, .overlay p { color: #c7bdcd; }
+.world-card { background: #111424ed; border: 3px double #9b8057; border-top: 4px solid var(--stage-accent); box-shadow: 3px 3px #03040a; }
+.world-card:hover { background: #282037; border-color: #dab7e6; }
+.world-card strong { color: #efdfbe; }
+.arena-shell { border: 4px double #a98c5b; box-shadow: 5px 5px #02030a; }
+.arena-bar, .arena-footer { background: #101222ee; color: #cabbca; }
+.arena-bar { border-bottom: 1px solid #8a7353; }
+.fight-notes { background: #090c17e8; padding-inline: 18px; margin-top: 18px; border: 1px solid #75604488; }
+.controls-strip { background: #090c17d9; padding-inline: 18px; }
+kbd { background: #1c1929; border-color: #8f7b5a; color: #f3deb3; }
+@media (max-width: 1000px) {
+  main { padding-inline: 20px; }
+  #selection-view { padding-inline: 12px; }
+  .arena-header { padding-inline: 20px; }
+  .top-navigation .quiet { min-width: 100px; padding-inline: 22px; }
+  .start-fight { min-width: 210px; }
+  .selection-launch { gap: 14px; }
+  .menu-instructions { display: none; }
+  .selection-grid { grid-template-columns: repeat(8,minmax(0,1fr)); }
+  .fighter-summary { width: 23%; padding: 10px; }
+  .fighter-summary dt { font-size: 8px; }
+}
+@media (max-width: 650px) {
+  body { background-size: auto 950px; }
+  .arena-header { min-height: 98px; padding: 10px 12px; gap: 9px; justify-content: center; }
+  .brand { font-size: 17px; }
+  .brand-icon { width: 32px; height: 32px; }
+  .top-navigation { width: 100%; justify-content: center; margin: 0; gap: 5px; }
+  .top-navigation .quiet { min-width: 0; flex: 1; max-width: 150px; min-height: 36px; font-size: 11px; padding: 9px 19px; }
+  main { padding: 0 8px; }
+  #selection-view { padding: 0 4px 14px; }
+  #selection-view::before { inset: 104px 0 0; }
+  .selection-heading { min-height: 102px; padding: 24px 0 18px; gap: 10px; }
+  .selection-heading h1 { font-size: 28px; letter-spacing: 3px; }
+  .heading-rule { max-width: 40px; }
+  .selection-locations { padding: 8px 10px; }
+  .selection-locations h2 { font-size: 11px; letter-spacing: 1px; }
+  .text-button { min-height: 32px; font-size: 10px; padding: 9px 24px; }
+  .stage-rail { grid-auto-columns: 126px; }
+  .stage-choice { height: 70px; }
+  .stage-choice b { font-size: 12px; }
+  .selection-launch { padding: 10px; gap: 10px; flex-wrap: nowrap; align-items: end; }
+  .selection-launch label { width: auto; flex: 1 1 0; min-width: 0; font-size: 9px; letter-spacing: .5px; }
+  .selection-launch select { width: 100%; font-size: 11px; padding: 8px 4px; }
+  .start-fight { min-width: 0; min-height: 50px; flex: .9 1 0; padding: 14px 16px; font-size: 14px; letter-spacing: .5px; }
+  #selection-loading { font-size: 10px; line-height: 1.4; margin: 10px 0; }
+  .match-preview { height: 412px; }
+  .fighter-summary { top: auto; bottom: 0; width: 49.5%; height: 160px; padding: 10px 7px; }
+  .fighter-summary h2 { font-size: 18px; margin: 8px 0 5px; }
+  .fighter-summary > p { font-size: 10px; margin-bottom: 10px; }
+  .summary-top { font-size: 11px; }
+  .summary-top small { font-size: 8px; margin: 0; }
+  .fighter-summary dl { gap: 4px; }
+  .fighter-summary dl > div { min-height: 30px; padding: 4px; }
+  .fighter-summary dt { font-size: 8px; max-width: 44px; }
+  .fighter-summary dd { font-size: 14px; }
+  .fighter-summary dd small { font-size: 8px; }
+  .versus { top: 95px; height: 48px; width: 52px; font-size: 29px; }
+  .preview-stage-label { top: 10px; bottom: auto; min-width: 140px; padding: 5px 12px; }
+  .preview-stage-label b { font-size: 12px; }
+  .selection-roster { margin-top: 18px; }
+  .selection-roster > .selection-section-heading { padding: 7px 4px 24px; }
+  .side-tab { width: 49%; min-height: 48px; padding: 12px 27px; font-size: 10px; }
+  .side-tab span { font-size: 12px; margin-left: 3px; }
+  .selection-roster #roster-heading { left: 0; right: 0; bottom: 5px; font-size: 10px; }
+  .selection-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 7px; }
+  .portrait-choice { height: 100px; }
+  .portrait-name { font-size: 10px; }
+  .selection-hint, footer { font-size: 10px; }
+  dialog { padding: 16px; }
+  dialog .quiet { font-size: 12px; padding-inline: 26px; }
+  .binding-row .quiet { min-height: 34px; padding: 8px 16px; font-size: 11px; }
+  .overlay { position: fixed; z-index: 50; padding: 18px; }
+  .overlay > div { padding: 20px; width: min(440px,100%); }
+  .overlay h2 { font-size: 28px; }
+  .overlay .primary, .overlay .quiet { min-height: 40px; padding: 10px 30px; }
+  .arena-footer .quiet { padding: 10px 20px; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  button:not(:disabled):active { transform: none; }
+}
+
+/* Engraved Higgsfield frame details, overlaid without moving the controls. */
+:root { --mystic-frame: url('/menu/higgsfield/mystic/engraved-frame.png'); }
+.selection-locations, .selection-launch, .selection-roster, .selection-roster > .selection-section-heading,
+.stage-choice, .portrait-choice { position: relative; }
+.selection-locations::after, .selection-launch::after, .match-preview::after,
+.selection-roster > .selection-section-heading::after, .fighter-summary::before,
+.stage-choice::before, .portrait-choice::before {
+  content: ''; position: absolute; inset: -4px; z-index: 4; pointer-events: none;
+  border: 16px solid transparent; border-image: var(--mystic-frame) 18% / 16px / 0 stretch;
+  background: none; height: auto; width: auto;
+}
+.selection-launch::after { inset: -3px -4px -4px; }
+.match-preview::after { border-image-width: 18px; }
+.fighter-summary::before { inset: -3px; border-width: 10px; border-image-width: 10px; }
+.selection-roster > .selection-section-heading::after { border-image-width: 12px; }
+.stage-choice::before, .portrait-choice::before { inset: -2px; border-width: 8px; border-image-width: 8px; }
+.portrait-choice[aria-pressed=true]::before, .stage-choice[aria-pressed=true]::before { filter: brightness(1.5); }
+.side-marker { z-index: 5; }
+.start-fight { min-width: 270px; padding-inline: 54px; font-size: 21px; letter-spacing: 1px; }
+@media (max-width:650px) {
+  .start-fight { min-width: 0; padding-inline: 28px; font-size: 13px; letter-spacing: 0; }
+  .selection-locations::after, .selection-launch::after, .match-preview::after { border-image-width: 12px; }
+  .stage-choice::before, .portrait-choice::before { border-image-width: 7px; }
+}
+
+/* Keep ornament outside the readable area and make portraits true squares. */
+.match-preview { overflow: visible; min-height: 340px; }
+.match-preview::after { inset: -7px; border-image-width: 12px; }
+.fighter-summary { position: absolute; padding: 18px 16px; top: 18px; bottom: 18px; }
+.fighter-summary::before { inset: -7px; border-width: 7px; border-image-width: 7px; z-index: 0; }
+.fighter-summary > * { position: relative; z-index: 1; }
+.fighter-summary h2 { font-size: clamp(16px,1.65vw,22px); margin: 8px 0 6px; }
+.fighter-summary dl { gap: 4px; }
+.portrait-choice { height: auto; aspect-ratio: 1 / 1; overflow: hidden; }
+.portrait-choice img,
+.portrait-choice:is([data-fighter='vaudream'],[data-fighter='nick'],[data-fighter='highsproto'],[data-fighter='captain']) img {
+  display: block; width: 100%; height: 100%; padding: 0; object-fit: cover;
+}
+.portrait-choice::before { inset: 0; border-width: 5px; border-image-width: 5px; }
+.portrait-name { z-index: 5; padding-inline: 7px; }
+@media (max-width:650px) {
+  .match-preview { height: 460px; }
+  .fighter-summary { top: auto; bottom: 10px; height: 196px; width: calc(50% - 18px); padding: 13px 9px; }
+  .fighter-summary.red { left: 10px; right: auto; }
+  .fighter-summary.blue { right: 10px; left: auto; }
+  .fighter-summary h2 { font-size: 16px; }
+  .fighter-summary > p { margin-bottom: 8px; }
+  .fighter-summary dl > div { min-height: 28px; }
+  .portrait-choice { height: auto; }
+}
+
+/* Full square artwork inside a rectangular frame with a name strip below. */
+.portrait-choice { aspect-ratio: auto; height: auto; padding: 5px 5px 23px; }
+.portrait-choice img,
+.portrait-choice:is([data-fighter='vaudream'],[data-fighter='nick'],[data-fighter='highsproto'],[data-fighter='captain']) img {
+  width: 100%; height: auto; aspect-ratio: 1 / 1; padding: 0; object-fit: contain;
+}
+/* These sources have an unused black right half; the full portrait is on the left. */
+.portrait-choice:is([data-fighter='vaudream'],[data-fighter='nick'],[data-fighter='highsproto'],[data-fighter='captain']) img { object-fit: cover; object-position: left center; }
+.portrait-name { left: 5px; right: 5px; bottom: 4px; min-height: 19px; padding: 3px 2px; line-height: 12px; font-size: 10px; }
+.random-choice { min-height: 110px; padding: 8px 5px 23px; }
+@media (max-width:650px) { .portrait-choice { height: auto; } }

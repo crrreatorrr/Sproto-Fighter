@@ -163,8 +163,7 @@
   "accounting": "Opening 62.5 minus latest observed 47.5 = 15 credits total. Fighter pilot 7; earlier stage scope error 6; separately approved menu background 2. The existing 13-credit conservative commitment bucket and 35-credit headroom remain separate from the completed 2-credit menu authorization. No new duo-fighter jobs or successful remaining-roster uploads.",
   "confirmedSpentCredits": 15,
   "latestConfirmedBalance": 47.5,
-  "remainingApprovedCredits": 35,
-  "plannedRemainingBaseCost": 28.5,
+  "remainingApprovedCredits": 0,
   "projectedBaseTotal": 41.5,
   "remainingUploadStatus": "Latest specifically authorized retry executed; all 19 storage PUT requests returned HTTP 403; none confirmed; no new jobs.",
   "activeJobs": 0,
@@ -173,7 +172,9 @@
   "stageArtSpend": 6,
   "fighterAnimationSpentCredits": 7,
   "stageSpendingAuthorized": false,
-  "spendingClarification": "The original 48-credit authorization applies only to existing fighter animation sheets. Six stage credits had been spent before clarification and were disclosed as a scope error. A later separate 2-credit menu authorization was fully used. No additional stage/menu spend is authorized. Retain the conservative 35-credit headroom for the existing roster; the new duo-fighter proposal has no approved budget yet.",
+  "spendingClarification": "The user stopped the other 19 animation sets. No further spending or work on those sets is authorized. Preserve existing installed art. New duo fighter has a separate approved 22-credit cap; the approved 2-credit menu image is complete.",
   "separatelyApprovedMenuCredits": 2,
-  "separatelyApprovedMenuJob": "558ee637-d69a-480a-a5e5-329b41dbd6e1"
+  "separatelyApprovedMenuJob": "558ee637-d69a-480a-a5e5-329b41dbd6e1",
+  "remainingRosterStatus": "Stopped by user on 2026-11-01. Preserve all existing art; do not generate or revise these 19 event sets.",
+  "plannedRemainingBaseCostHistorical": 28.5
 }

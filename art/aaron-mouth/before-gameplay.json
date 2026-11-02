@@ -1,0 +1,43 @@
+{
+  "roster": {
+    "name": "Aaron",
+    "color": "#60aaff",
+    "dark": "#263c64",
+    "speed": 5.0600000000000005,
+    "jump": 15.484,
+    "partner": "rivet",
+    "special": "SPROTO BURST aaron",
+    "role": "SKIRMISH",
+    "description": "Guarded footwork, a heavy kick and four-contact ranged relay."
+  },
+  "kit": {
+    "role": "SKIRMISH",
+    "specialName": "SPROTO BURST aaron",
+    "signature": "Guarded footwork, a heavy kick and four-contact ranged relay.",
+    "lightRange": 82,
+    "heavy": {
+      "range": 144,
+      "damage": 137
+    },
+    "bolt": {
+      "startup": 16,
+      "damage": 53
+    },
+    "projectile": {
+      "speed": 12,
+      "shape": "spark"
+    },
+    "specialFrames": [
+      14,
+      24,
+      36,
+      48
+    ],
+    "special": {
+      "range": 499,
+      "damage": 120,
+      "push": 3
+    },
+    "advance": 2
+  }
+}

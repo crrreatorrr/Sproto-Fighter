@@ -1,15 +1,19 @@
-import { loadPoseAtlases, getPoseAtlasLoadStatus } from './poseAtlas';
-import { loadHiggsfieldRigs } from './higgsfieldRig';
+import { ensurePoseAtlases, getPoseAtlasLoadStatus } from './poseAtlas';
 import { createSelectionMenu, type SelectionSetup } from './selectionMenu';
 import './style.css';
 import './arcadeSelection.css';
+import './pixelUI.css';
+import './mysticUI.css';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
+import { ensurePowerArt } from './powerArt';
+import { playRetainCallout } from './characterVoice';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
 import { STAGES, setStage, loadStageArt, type StageId } from './stage';
 import { createStoryMode } from './storyMode';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
+$('roster-count').textContent=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · UNLIMITED ROUND TIME`;
 const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: 'ShiftLeft' };
 const padDefaults: Partial<Record<Action, number>> = { light: 0, medium: 2, heavy: 1, launcher: 3, bolt: 5, grab: 4, special: 7, dash: 6 };
 const labels: Record<Action, string> = { left: 'Move left', right: 'Move right', up: 'Jump', down: 'Crouch', light: 'Light', medium: 'Medium', heavy: 'Finisher', launcher: 'Launcher', bolt: 'Ranged power', grab: 'Grab', special: 'Team special', dash: 'Dash' };
@@ -40,14 +44,15 @@ const frames: [
     number,
     number
 ][] = [];
-const selection = createSelectionMenu({start:setup=>launchSelection(setup)});
+const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:ensurePoseAtlases});
 function updateStage(stage:StageId) {
     setStage(stage);
     const location=STAGES.find(s=>s.id===stage)!;
     $('stage-title').textContent=location.name.toUpperCase();
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
-function launchSelection(setup:SelectionSetup,isStory=false) {
+async function launchSelection(setup:SelectionSetup,isStory=false) {
+    try{await Promise.all([ensurePoseAtlases([setup.fighter,setup.opponent]),[setup.fighter,setup.opponent].some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return;}
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);
@@ -144,7 +149,7 @@ const story = createStoryMode({
         const setup=selection.getSetup();
         setup.stage=stage;setup.mode=isStory?'cpu':freePlayMode??setup.mode;
         if(!isStory)freePlayMode=null;
-        launchSelection(setup,isStory);
+        return launchSelection(setup,isStory);
     },
 });
 $('start').onclick = start;
@@ -329,7 +334,9 @@ function advanceRoundFrame(input: number) {
     const pair: [number, number] = [input, cpuInput(state)];
     frames.push(pair);
     const qaBefore = qaPanel ? [state.fighters[0].move?.id,state.fighters[0].combo,state.fighters[0].pips,state.fighters[0].hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|') : '';
+    const previousMoves=state.fighters.map(f=>f.move);
     step(state, pair);
+    for(const [i,f] of state.fighters.entries())if(f.id==='michael'&&f.move!==previousMoves[i]&&(f.move?.id==='bolt'||f.move?.id==='special'))playRetainCallout();
     qaRecord(qaBefore);
     if (state.winner !== null) {
         const losers = state.fighters.filter((_, i) => state.winner === 2 || i !== state.winner);
@@ -365,7 +372,8 @@ function tick(now: number) {
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
-loadPoseAtlases().then(()=>{const installed=getPoseAtlasLoadStatus().ids;return PLAYABLE_FIGHTERS.some(id=>!installed.includes(id))?loadHiggsfieldRigs():undefined;}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+ensurePoseAtlases(['rivet','vela']).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStageArt().then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.

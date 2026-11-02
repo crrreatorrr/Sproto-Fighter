@@ -66,9 +66,16 @@ main { max-width: 1360px; padding: 12px 18px 0; }
 .side-tab.blue[aria-pressed=true] { background: linear-gradient(90deg,#0f1a34,#174b8d); color: #ffdb54; border-color: #ffdd65; box-shadow: inset 0 0 0 2px #08090c; }
 .selection-roster #roster-heading { position: absolute; left: 27%; right: 27%; text-align: center; font-size: 9px; letter-spacing: 1.5px; pointer-events: none; }
 .roster-total { display: none; }
-.selection-grid { grid-template-columns: repeat(11,minmax(0,1fr)); gap: 6px; padding: 0 2px; }
+.selection-grid { grid-template-columns: repeat(12,minmax(0,1fr)); gap: 6px; padding: 0 2px; }
 .portrait-choice { height: clamp(76px,7.3vw,97px); border: 3px double #9a9691; border-radius: 0; background: #080a10; box-shadow: 2px 2px #000; }
 .portrait-choice img { padding: 0 1px 15px; }
+/* These four supplied portraits include a black right-hand half. Show the
+   original left-hand picture at its natural aspect ratio in the roster. */
+.portrait-choice:is([data-fighter="vaudream"],[data-fighter="nick"],[data-fighter="highsproto"],[data-fighter="captain"]) img {
+  object-fit: cover;
+  object-position: left center;
+  padding: 0 0 15px;
+}
 .portrait-name { min-height: 17px; padding: 3px 1px 2px; font-size: 7px; background: #04060ce6; border-top: 1px solid #504c44; }
 .portrait-choice:hover { border-color: #f7e6a4; background: #1f2532; }
 .portrait-choice[aria-pressed=true] { outline: 2px solid #ffdb49; outline-offset: 1px; border-color: #ffdc4c; background: #5d2732; }
@@ -171,7 +178,7 @@ footer { padding: 8px 0 10px; font-size: 7px; color: #727580; }
   .random-choice strong { font-size: 30px; }
   .random-choice > span { font-size: 6px; letter-spacing: 0; }
   .selection-hint { font-size: 8px; margin: 6px 2px; }
-  .stage-rail { grid-template-columns: repeat(5,125px); gap: 6px; padding-bottom: 5px; }
+  .stage-rail { grid-template-columns: none; grid-auto-columns: 125px; gap: 6px; padding-bottom: 5px; }
   .stage-choice { height: 60px; }
   .stage-choice b { font-size: 10px; }
   .stage-swipe-cue { margin: 3px 0; font-size: 8px; }

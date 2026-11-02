@@ -1,0 +1,16 @@
+{
+  "id": "freshprince",
+  "name": "FreshPrinceOfBellend",
+  "identity": "The ONE character in reference image 1. Large cobalt BLUE rounded head with sharp swept BLUE rear/top spikes. Huge almond YELLOW eyes with RED oval irises, BLACK centers and WHITE vertical glints, heavy blue eyelids and cheek creases. Large broad curved RED smiling muzzle/lips with curled red corners and closed mouth; no teeth. Bright YELLOW pointed stand-up collar around neck with RED shirt. BLUE bare arms/hands, extend RED trousers and simple yellow boots. No crown, hat, cape, gloves or jewelry. Exactly one head, two eyes, two arms and two low-rooted legs. Exclude reference background. Match all identity colors consistently.",
+  "appearanceRule": " All clothing, spikes and accessories stay connected. Preserve asymmetry by anatomical side. No text, detached effects, weapons, floating shapes or extra subjects. No white clothing highlights; shading uses the same hue as the colored surface.",
+  "role": "REGAL",
+  "special": "ROYAL REBOUND",
+  "color": "#ffe963",
+  "reference": "art/freshprince/reference.png",
+  "referenceSHA256": "12b93423d0d8d75cc0b9a98c5546e25f1f34fa24ee187de86dfcac03ad55ba7c",
+  "status": "installed-playable",
+  "ordinal": 5,
+  "artDirectory": "art/freshprince",
+  "installedFrames": 72,
+  "visualQA": "All core/walk/event contact sheets reviewed for reference identity, connected anatomy and complete silhouettes; selected in the main game and keyboard walking/punch sampled."
+}

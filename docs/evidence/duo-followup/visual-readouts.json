@@ -1,0 +1,62 @@
+[
+  {
+    "label": "kick-right-contact",
+    "status": "Core frame 7 · scenario frame 7 · frozen 5\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.500 · x 600.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":0,\"direction\":1} hp=940 x=732.00 y=578.00 vx=8.00 vy=0.00"
+  },
+  {
+    "label": "kick-right-rechamber",
+    "status": "Core frame 19 · scenario frame 19 · frozen 0\nSequence poses · frame 19/31 · pose slot 19: kickRecover · gait phase 0.500 · x 600.0 y 578.0 facing 1\nMove medium t=14 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":7,\"direction\":1} hp=940 x=761.61 y=578.00 vx=2.36 vy=0.00"
+  },
+  {
+    "label": "kick-right-plant",
+    "status": "Core frame 27 · scenario frame 27 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.500 · x 600.0 y 578.0 facing 1\nMove medium t=22 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":15,\"direction\":1} hp=940 x=770.93 y=578.00 vx=0.59 vy=0.00"
+  },
+  {
+    "label": "kick-left-contact",
+    "status": "Core frame 7 · scenario frame 7 · frozen 5\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 600.0 y 578.0 facing -1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":0,\"direction\":-1} hp=940 x=468.00 y=578.00 vx=-8.00 vy=0.00"
+  },
+  {
+    "label": "kick-left-rechamber",
+    "status": "Core frame 19 · scenario frame 19 · frozen 0\nSequence poses · frame 19/31 · pose slot 19: kickRecover · gait phase 0.000 · x 600.0 y 578.0 facing -1\nMove medium t=14 startup/active/recovery 7/5/17\nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: {\"kind\":\"recoil\",\"phase\":\"flight\",\"t\":7,\"direction\":-1} hp=940 x=438.39 y=578.00 vx=-2.36 vy=0.00"
+  },
+  {
+    "label": "isolated-walk-right-10",
+    "status": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 3/3 · pose slot 5: passFar · gait phase 0.775 · x 648.3 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=648.32 y=578.00 vx=5.06 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "isolated-walk-right-25",
+    "status": "Core frame 15 · scenario frame 15 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 600.0 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "isolated-walk-reversal-65",
+    "status": "Core frame 55 · scenario frame 55 · frozen 0\nSequence poses · frame 1/31 · pose slot 1: breathe · gait phase 0.000 · x 600.0 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "isolated-walk-stop-125",
+    "status": "Core frame 115 · scenario frame 115 · frozen 0\nSequence poses · frame 1/31 · pose slot 1: breathe · gait phase 0.000 · x 600.0 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "isolated-walk-right-25",
+    "status": "Core frame 25 · scenario frame 25 · frozen 0\nSequence walk · frame 0/3 · pose slot 2: walkNear · gait phase 0.206 · x 724.2 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=724.22 y=578.00 vx=5.06 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "isolated-walk-reversal-65",
+    "status": "Core frame 65 · scenario frame 65 · frozen 0\nSequence walk · frame 0/3 · pose slot 2: walkNear · gait phase 0.084 · x 878.8 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=878.81 y=578.00 vx=-5.06 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "isolated-walk-stop-125",
+    "status": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.494 · x 599.0 y 578.0 facing 1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=598.99 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=1050.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "walk-left-1x-a",
+    "status": "Core frame 13 · scenario frame 13 · frozen 0\nSequence walk · frame 1/3 · pose slot 3: passNear · gait phase 0.361 · x 536.5 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=536.50 y=578.00 vx=-5.06 vy=0.00 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "walk-left-1x-b",
+    "status": "Core frame 18 · scenario frame 18 · frozen 0\nSequence walk · frame 2/3 · pose slot 4: walkFar · gait phase 0.505 · x 511.2 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=511.20 y=578.00 vx=-5.06 vy=0.00 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  },
+  {
+    "label": "walk-left-1x-c",
+    "status": "Core frame 28 · scenario frame 28 · frozen 0\nSequence walk · frame 3/3 · pose slot 5: passFar · gait phase 0.792 · x 460.6 y 578.0 facing -1\nMove none t=- \nThrow none\nReactions 0: null hp=1000 x=460.60 y=578.00 vx=-5.06 vy=0.00 | 1: null hp=1000 x=150.00 y=578.00 vx=0.00 vy=0.00"
+  }
+]

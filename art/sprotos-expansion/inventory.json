@@ -1,0 +1,1691 @@
+[
+  {
+    "id": "sproto102",
+    "number": 102,
+    "name": "Sproto #102",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-102.png",
+    "sha256": "bf7ba3ed0a836f7f5ab6eea44b3264427c21e221b6b28ebe0ccb11e8b7becefb",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto102",
+        "description": "Blue swept spikes, huge yellow round eyes with black pupils, red round nose and wide toothy red smile, yellow sleeves/arms and black vest with red pendant. Slim yellow legs and black/yellow shoes."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto215",
+    "number": 215,
+    "name": "Sproto #215",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-215.png",
+    "sha256": "2cdf17eb0b80978dfeb0726ec63df7a28a45da6bc9598dd1e3d2b98fd8db0365",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto215",
+        "description": "Lavender spiky figure, two protruding large red oval eyes with black pupils, red lips and yellow rounded belly with two dark oval markings. Lavender arms and low legs; no extra character on the belly."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto282",
+    "number": 282,
+    "name": "Sproto #282",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-282.png",
+    "sha256": "dd58a8196816245dd17e10fb31c52b96afcb3c9db11ab3b32a9174e3c7f60fa5",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto282",
+        "description": "ONLY the RED figure on the LEFT: dark red spikes, yellow half-lidded eyes, dark red broad muzzle, yellow long sleeves and black vest. Exclude the blue figure."
+      },
+      {
+        "id": "sproto282-companion",
+        "description": "ONLY the BLUE figure on the RIGHT: blue spikes, yellow half-lidded eyes, dark red broad muzzle, blue neck/body, yellow arms. Exclude the red figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sproto313",
+    "number": 313,
+    "name": "Sproto #313",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-313.png",
+    "sha256": "026c0878cd4da927b94086f953104d9ec1243e00d3b0f39a3f85533ef50c76ad",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto313",
+        "description": "ONE connected BLUE spiky Sproto body with TWO side-by-side facial regions on a single wide head. Exactly FOUR yellow eyes, two per face, EACH eye has a clearly visible solid BLACK pupil and tiny white glint. BOTH eyes on the LEFT facial region need full BLACK oval pupils; never omit the far-left pupil or draw blank yellow eyes. Two red broad muzzles/noses, one per facial region. One continuous blue torso, exactly TWO yellow arms/hands and TWO low-rooted blue legs total. Never split into twins, never create two bodies. Keep four readable pupils across all poses."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto651",
+    "number": 651,
+    "name": "Sproto Picasso",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-651.png",
+    "sha256": "7657d76a5738194ee3bb2f5f40f6a74f0bca028128fbe4b0c8368599cbf5c45f",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto651",
+        "description": "Round blue bald head with one oversized white eye and one yellow half-lidded eye, protruding red lips, yellow ear and muzzle accents, blue neck and open red collar/shirt."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto704",
+    "number": 704,
+    "name": "Sproto #704",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-704.png",
+    "sha256": "0714f3766c8caca65b1d6e7aab6a9d0825a0f8e51e4b5740975eb8a86d5075ce",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto704",
+        "description": "ONLY the LARGE BLUE figure on the LEFT: blue pointed ears/head spikes, yellow eyes, wide red smile, black vest and yellow collar/arms. Exclude the smaller figure."
+      },
+      {
+        "id": "sproto704-companion",
+        "description": "ONLY the SMALL figure on the RIGHT: tall blue crown-like spikes, yellow round eyes, red round muzzle, blue torso and black/yellow trim. Exclude the large figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sproto763",
+    "number": 763,
+    "name": "Sproto #763",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-763.png",
+    "sha256": "09c196eb9fbad67c79426eb139756c826b8d4c8e75ef5fb24a5d001d80d6b015",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto763",
+        "description": "Red swept spiky head, white round eyes with black pupils, red broad nose/muzzle, blue neck/torso, yellow arms with red hands. Simple low blue legs and red feet."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto818",
+    "number": 818,
+    "name": "Sproto #818",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-818.png",
+    "sha256": "24f9911b64f5877f8da898c50b47484b6492be60660bc06311f9b807c0a0efe9",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto818",
+        "description": "Blue asymmetrical face, drooping yellow left eye above broad red muzzle and oversized round white right eye with black pupil. Black coat and yellow pointed collar. Retain asymmetry."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto831",
+    "number": 831,
+    "name": "Sproto #831",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-831.png",
+    "sha256": "451dbc8362b927114d73e4a7aec3df0db3581419477dfe30b412e2ea0d8a5bc5",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto831",
+        "description": "Blue swept spikes, yellow side accents, large white eyes with black pupils, huge red open smile with large square yellow teeth, red high collar/scarf. Blue torso/arms and legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto832",
+    "number": 832,
+    "name": "Sproto #832",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-832.png",
+    "sha256": "70d74963c59d1a035ac40860cd9706f666ec597343e611c08930737f49a819c6",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto832",
+        "description": "ONLY the LARGE BLUE figure on the LEFT: blue pointed ears/spikes, huge yellow eyes, red round muzzle, blue round body and thin blue low legs. Exclude crowned figure."
+      },
+      {
+        "id": "sproto832-companion",
+        "description": "ONLY the SMALL CROWNED figure on the RIGHT: yellow pointed crown touching blue head, large red lips and black torso with yellow belly/arms. Exclude large blue figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sproto834",
+    "number": 834,
+    "name": "Sproto #834",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-834.png",
+    "sha256": "69212d5b3483f108187575ff63727d817c7b38f5fafdaf34b03e4b8bcc81f77c",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto834",
+        "description": "Slim blue swept spiky figure, white oval eyes, broad red smile and dark round nose, long bare blue neck/body, thin yellow arms and red hands, red feet. Preserve slim form."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto837",
+    "number": 837,
+    "name": "Bitcoin Robin Williams",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-837.png",
+    "sha256": "aafd9a180f69820ff70dffb382d66ffdea5c3c8f1c7fa7d640d6e5a560a0a955",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto837",
+        "description": "Very WEIRD BLUE CAT-LIKE SPROTO. Preserve bizarre reference geometry: two very TALL triangular ears, horizontally bulging tubular YELLOW eyes with uneven narrow hooked BLACK pupils, long thin BLUE snout with tiny BLACK oval nose, and extremely LONG asymmetric RED lips projecting far forward like a flattened duck bill. Heavy drooping cheek and chin, blue angular side spikes, one attached YELLOW curved hook-like cheek/ear protrusion, yellow curved chest/flame markings. Head is large and lopsided with squashed muzzle, not a generic round handsome fighter. Slender blue body and low blue legs, red shoes. Keep the strange long projecting lips, bulging eyes, tall ears and yellow cheek hook clearly recognizable in every pose."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto865",
+    "number": 865,
+    "name": "Sproto #865",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-865.png",
+    "sha256": "9177e1e5e5df7011d910afc4c44c46300d7ac6de8d35048533daa1f80e7709a4",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto865",
+        "description": "Blue humanoid vampire, sharp dark-blue swept hair, half-lidded yellow eyes with red upper lids, sharp red toothy grin with white fangs, bare blue muscular chest/arms. Slim blue legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto943",
+    "number": 943,
+    "name": "Sproto #943",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-943.png",
+    "sha256": "aa1157b69b38c656531b0ecad5fe5e1f369327cba55adc33bb8c738b3e866137",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto943",
+        "description": "A WOMAN: slender blue female Sproto with huge radiating YELLOW spiky hair, expressive white side-view eye with black pupil and feminine eyelashes, gently curved blue face, clearly defined RED lipstick, RED cape/open jacket. An opaque red fitted training top and blue trousers cover her torso/hips. Feminine adult face and figure, no masculine jaw or bulky chest. Preserve the original woman's identity, hairstyle, red cape, blue skin and red lips."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "gender": "woman",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto999",
+    "number": 999,
+    "name": "Sproto #999",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-999.png",
+    "sha256": "de16c7f12011eafe5dd6432de00713695f37e87164f7f32023bb531730bbd324",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto999",
+        "description": "ONE SINGLE continuous BLUE SPROTO BODY with TWO vertically stacked facial regions, NOT twins. Upper large broad blue spiky head with yellow forehead flourish and dot, TWO huge half-lidded eyes with dark BLUE upper eye regions and YELLOW lower lids, crisp BLACK pupils with white glints, enormous curved RED smiling muzzle. Lower front abdomen has a second smaller BLUE face integrated into SAME TORSO, TWO pale CREAM eyes with BLACK pupils and a red curled smile. Exactly FOUR eyes total, one continuous blue head/torso mass, ONE pelvis, TWO RED-sleeved arms with YELLOW hands and TWO low-rooted red-trousered legs/red shoes total. Never detach lower face or give it its own limbs. A single fighter with two faces like Sprog, not two separate characters."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1011",
+    "number": 1011,
+    "name": "Sproto #1011",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1011.png",
+    "sha256": "b1dbe3db1e59fc679405493809d99c637a4d48d4a5a3658387a5936c44d2e1c5",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1011",
+        "description": "Blue swept spiky head, yellow narrow eyes, dark red broad lips, black torso with yellow collar and red pendant, yellow arms. Red/yellow curled staff held in one hand; attached accessory, never an extra limb. All melee attacks strike with the red/yellow curled staff: two-hand thrusts, overhead swings, low stick sweeps and airborne staff strikes. No punches or kicking attacks."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "weapon": "curled staff",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1093",
+    "number": 1093,
+    "name": "Sproto #1093",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1093.png",
+    "sha256": "905362125aebe3b5168d0d906d487b4bc2238063e6af88526a3fd9326b2d84f3",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1093",
+        "description": "Blue swept spikes and blue round head, large yellow eyes, small red nose and broad red smile, yellow torso with broad yellow looping shoulder/arm shapes and black lower vest with red pendant. Keep loops anatomically attached."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1187",
+    "number": 1187,
+    "name": "Sproto #1187",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1187.png",
+    "sha256": "b3a497942630816ba07e5e67a7de3d606329286f7279532466369f84211fd58b",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1187",
+        "description": "Round bald blue head with three forehead wrinkles, yellow half-lidded eyes and broad red lips, huge yellow spiked crest behind the head, red and yellow high collar. Blue arms and low legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1335",
+    "number": 1335,
+    "name": "Sproto #1335",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1335.png",
+    "sha256": "651fbc2301335a3feeac3b341661874d1cf4ef7f7d7fad9f24cb10cb24aaa9fe",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1335",
+        "description": "BLUE spiky elongated rounded body/head, exactly TWO huge sleepy YELLOW eyes with BLACK pupils, open black mouth with RED lower gums and TWO long WHITE fangs. Yellow small oval belly marks. The TWO YELLOW ARMS are EXTREMELY LONG, THIN and visibly ZIGZAGGED with THREE sharp angular bends each, like accordion lightning-bolt arms in the original image. Each arm is at least the torso length, thin consistent thickness, shoulder connected through all zigzag bends to small yellow hands at wrists. Zigzag silhouette visible even in guard, coiling and extending elastically for strikes. Never replace with short muscular arms, smooth curves or extra detached arms. Blue lower torso and low blue legs, yellow/black shoes."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1345",
+    "number": 1345,
+    "name": "Sproto #1345",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1345.png",
+    "sha256": "fdf5c6b6068d0c538624c6a7c9dec7b8223396e52f9d8bf7eeaf4b8204269d8a",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1345",
+        "description": "Asymmetrical blue head with long sideways ORANGE spike fan on left, huge yellow eyes, red mouth and large white teeth, yellow torso/arms and small red neck pendant. Orange spikes stay on head."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1414",
+    "number": 1414,
+    "name": "Sproto #1414",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1414.png",
+    "sha256": "42afbd00a1b3b690373dfc5c1070d0015cefa939c646bb4c1160227206a19bcf",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1414",
+        "description": "Blue swept spiky head, yellow half-lidded eyes, red eyelids and broad red smile, long thin bare blue neck/torso with plain blue belly; all lower circles colored blue to match surrounding body. Thin blue arms and low legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1477",
+    "number": 1477,
+    "name": "Sproto #1477",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1477.png",
+    "sha256": "52396022ec46c4b76ac292c08f311a9b31a19bf68a0a120ce7120a0656b7a3d8",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1477",
+        "description": "Blue spiky head, large yellow eyes, raised yellow brow, broad red smile with small white triangular teeth, blue bare torso, yellow eye-like chest markings and small yellow object in hand. Two arms, two legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1499",
+    "number": 1499,
+    "name": "Sproto #1499",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1499.png",
+    "sha256": "bb83a9e1e697b0387c2fe7f3eebaa77d079e4f1c3338719ce0ea3409c677e622",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1499",
+        "description": "ONLY the LEFT figure: blue wavy head, yellow outlined rectangular eyes, open red mouth with two white square teeth, yellow torso/arms and blue briefs/low legs. Exclude right figure."
+      },
+      {
+        "id": "sproto1499-companion",
+        "description": "ONLY the RIGHT figure: blue wavy head, yellow eyes, red broad protruding lips, long blue body with red oval chest mark, yellow arms and low blue legs. Exclude left figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sproto1601",
+    "number": 1601,
+    "name": "Sproto #1601",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1601.png",
+    "sha256": "04c2ec616ed93603b8026b9ac6bc354e9dde4be6194cb51ae1549b3c39ce6164",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1601",
+        "description": "Dark blue broad spiky head, yellow narrow eyes and red thin lips, three large yellow round figure-eight markings across blue belly, black waistband and yellow/red accents. Markings are body decoration."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "power": "yellowEight",
+    "projectileOrigin": {
+      "forward": 77.5,
+      "height": 105
+    },
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1625",
+    "number": 1625,
+    "name": "Sproto #1625",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1625.png",
+    "sha256": "6a722b185664b015ff9c595a46764d145458e96d92061b46604b36b393e8599b",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1625",
+        "description": "ONLY the SMALL LEFT figure: yellow spiky head, yellow eyes, broad red lips, blue lower body/garment. Exclude large blue figure."
+      },
+      {
+        "id": "sproto1625-companion",
+        "description": "ONLY the LARGE RIGHT figure: bright blue swept spikes, yellow round eyes and huge red lips, blue torso with red and yellow collar circles, red/yellow sleeve stripes. Exclude yellow figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sproto1668",
+    "number": 1668,
+    "name": "Sproto #1668",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1668.png",
+    "sha256": "17f9c43f638b0cd3447a4b7f0af326e3ef4d574fc7e79340f98fa2f92b887fc6",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1668",
+        "description": "An ADULT WOMAN SPROTO, clearly feminine athletic silhouette. Swept bright YELLOW spiky head/hair, BLUE eye mask/cheeks, two large round YELLOW eyes with BLACK pupils, long feminine BLACK eyelashes, soft curved BLUE cheeks and broad RED lips. Slender YELLOW arms with small hands, narrow waist and gently rounded hips; no bulky male chest, square jaw or large biceps. Fitted BLACK sleeveless athletic tunic with original YELLOW chest symbol, opaque fitted YELLOW full-length trousers and black/yellow shoes. Preserve female shape and eyelashes consistently across every pose while retaining the original unusual yellow spiky head and blue face. Fully clothed, one complete adult cartoon body."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "gender": "woman",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1815",
+    "number": 1815,
+    "name": "Sproto #1815",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1815.png",
+    "sha256": "7c8583bd73bd1f096b676c77a524043c3f6189644e082077d757d1b3e1fe2068",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1815",
+        "description": "SLENDER WOMAN BLUE SPROTO with a tall swept BLUE crest and YELLOW side hair/spikes, very large pale CREAM eyes with BLACK pupils and white glints, thick expressive BLACK brows, eyelashes and broad narrow RED smile with small WHITE teeth. Feminine slender waist, blue hands. Fully clothed in a fitted YELLOW sleeveless top, yellow waist belt and BLACK long trousers with red shoes. Hold a full-length HALBERD with dark wooden shaft and a large RED curved hooked AXE blade inspired by the red curved shape in reference, a sharp WHITE/steel spear point and two white fang-like serrations beneath axe edge. The halberd is body-height or taller. Every attack uses this HALBERD with secure hand grips. No unarmed kicks; preserve feminine face and tall blue/yellow crest."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "weapon": "halberd",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto1870",
+    "number": 1870,
+    "name": "Sproto #1870",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-1870.png",
+    "sha256": "6e13f53810360254947d7a2da3488d3e7142ce61d2164851aab47b652b70868d",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto1870",
+        "description": "ONE SINGLE legless floating Sproto shaped like the ENTIRE original image: large upper blue face with red swept spike fan, yellow forehead/side crescent and enormous yellow angular muzzle; small LOWER BLUE face with two huge round yellow eyes and rounded yellow muzzle. These TWO facial regions are JOINED into ONE CONTINUOUS BLUE head/body silhouette. One complete floating mass, not two detached characters. Preserve both facial regions and all FOUR yellow eyes as in the full reference. No neck, humanoid torso, arms, hands, legs, feet or shoes. Complete the cropped bottom with a rounded blue/yellow contour. VMU-like legless hovering motion, but remain this organic Sproto design, not a machine."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "November 2 correction sheets visually reviewed; sampled live melee/stream and recovery checked in mirrored panels; asset, movement, contact, facing and build checks passed. Shared action poses remain selected key drawings, not full hand-drawn in-betweens.",
+    "locomotion": "hover",
+    "extraMotion": true,
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto2010",
+    "number": 2010,
+    "name": "Sproto #2010",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2010.png",
+    "sha256": "a5a887dda8dcda6ce16d71926ebc54e3a38fdd76ef998217f2a8dea466ee0c69",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2010",
+        "description": "ONLY the RED LEFT figure: red rounded head with huge yellow triangular top spikes, yellow round eyes, wide red mouth with square white teeth, long yellow torso. Exclude blue figure."
+      },
+      {
+        "id": "sproto2010-companion",
+        "description": "ONLY the BLUE RIGHT figure: blue round hood-like head, white oval eyes and red broad lips, blue torso and yellow bow-like chest shapes. Exclude red figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sproto2075",
+    "number": 2075,
+    "name": "Sproto #2075",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2075.png",
+    "sha256": "0bd987e6c7687accf9bcc9c56362beb451b01204e48b4f31fe7963f39e58600c",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2075",
+        "description": "ONLY the SMALL BACK LEFT figure: blue head with yellow spiky crest, red lips and red/yellow collar, black vest. Exclude the large front figure."
+      },
+      {
+        "id": "sproto2075-companion",
+        "description": "ONLY the LARGE FRONT RIGHT figure: round blue head with small upper spikes, huge single oval yellow visible eye, large broad blue muzzle with red smile, blue torso and yellow belly. Exclude back figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sproto2101",
+    "number": 2101,
+    "name": "Sproto #2101",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2101.png",
+    "sha256": "d19beb145cdf87c33e439befdb42361438e00c23c5c59951869a59be7782358a",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2101",
+        "description": "Blue swept spiky head, huge yellow round eyes, broad red toothy smile with square yellow teeth, yellow pointed collar and black vest with red tie/pendant. Yellow arms and low legs. Face/cheeks stay clean BLUE; red is restricted to muzzle/lips, with no red color bleed onto cheeks or forehead. Crisp palette boundaries."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto2177",
+    "number": 2177,
+    "name": "Sproto #2177",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2177.png",
+    "sha256": "e9fa4a1f6172402f3356dba25d5970d050f6191560116f93cfdeda129237909f",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2177",
+        "description": "Blue-violet spiky head, yellow eyes, black round nose, broad yellow smiling muzzle, black torso and large white collar. Blue-violet arms/legs and yellow hands/feet. The ENTIRE collar is WHITE fabric, all around including side/back portions. No yellow collar sections."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto2210",
+    "number": 2210,
+    "name": "Sproto #2210",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2210.png",
+    "sha256": "1a54086e11c55c750a62b3aa625c67fa4fc1398ebd0a27a5f8a62aed1c1a8ed5",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2210",
+        "description": "ONLY the LARGE LEFT figure: blue swept head, huge yellow eyes and red round nose/muzzle, yellow torso and arms. Exclude slim right figure."
+      },
+      {
+        "id": "sproto2210-companion",
+        "description": "ONLY the SLIM RIGHT figure: blue swept head, yellow visible eye and small red nose/lips, long slim blue body and limbs. Exclude large left figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sproto2322",
+    "number": 2322,
+    "name": "Sproto #2322",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2322.png",
+    "sha256": "b877fa3853f1166b2ce5e94659cc4bbb90dbf268448fd53c2f1e4dadb99df3d1",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2322",
+        "description": "Pale mint swept spiky head, huge yellow circular eyes and broad red smile, yellow pointed collar, red sleeves and pale blue torso with paired oval chest markings. Simple mint/blue low legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto2344",
+    "number": 2344,
+    "name": "Sproto #2344",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2344.png",
+    "sha256": "acd31668b8a180d3c0aa4ea6ac36877fdfc95504a0865735a1390302dabfe985",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2344",
+        "description": "ONLY the adult female red-bodied figure, with the BLUE face and RED outfit. SLIM and CURVY adult hourglass proportions: slender arms and calves, long slim legs, small waist, naturally full chest and rounded hips. Slimmer hips/thighs than the previous heavy version, while retaining a clear waist-to-hip curve. Opaque fitted plain red one-piece costume. Face must match the original reference: wider gently oval blue head with a broad forehead and subtly tapered lower cheeks/chin, not a round ball; very large almond-shaped YELLOW eyes, asymmetrical slanted half-lidded blue upper eyelids, long outer lash points, black oval pupils; small CLOSED red curved smile, minimal nose, no round red nose, no big open mouth, no teeth. Mature feminine face, expressive and recognizable as the source. Exclude the blue companion, pointed red cap and open-mouthed red-nosed face."
+      },
+      {
+        "id": "sproto2344-companion",
+        "description": "ONLY the FRONT RIGHT adult cartoon figure: dark blue elongated rounded head with attached red pointed top, yellow half-lidded eyes, large red round nose and open red mouth with white teeth. Chubby blue body: wide round belly, thicker waist, rounded flanks, fuller cheeks, thick short legs and sturdy arms. A soft heavy-set silhouette, not a narrow lean torso or muscles. Exclude the back red figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "bodyShapeRevision": "2344-curvy-red-chubby-blue-1",
+    "redRefinementRevision": "2344-red-slender-face-2"
+  },
+  {
+    "id": "sproto2381",
+    "number": 2381,
+    "name": "Sproto #2381",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2381.png",
+    "sha256": "0d33b6633af79a82dcaedfc1a0728a67658a556cbb384d2e23d4e596e99deafb",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2381",
+        "description": "Blue swept spiky head with tiny pointed ears, very large yellow eyes and black pupils, massive yellow smiling muzzle outlined in red, black vest and red/yellow pointed collar. Yellow arms and low legs. Eyes are crisp YELLOW eye whites with SINGLE BLACK pupil per eye and clean dark pixel outlines. No blurred gray haze or smeared pupils."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto2531",
+    "number": 2531,
+    "name": "Sproto #2531",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2531.png",
+    "sha256": "347b1a52d8a2792aa748fa4a90111f3153b2179f4fe5705b1c4fdec738a062f6",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2531",
+        "description": "Single BLUE boxing Sproto, swept spiky blue head and broad YELLOW stripe/crest down the right side of the head, red round nose and broad red lips. Exactly TWO crisp WHITE almond-shaped eyes with black oval pupils, dark sharp eyelid outlines, no yellow or blue tint inside the white sclera. Pupils clearly separated from lids and visible at small game size. Large RED boxing gloves with white cuffs, entirely WHITE raised collar, black sleeveless outfit, blue low legs and red/white shoes. Preserve the existing complete-body proportions and clothing. Ranged attack is a mouth SPIT: inhale, cheeks inflate, mouth snaps forward/open and exhales, gloves stay in guard."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Sharper white eyes and black pupils; all72 eye/spit frames reviewed. Mouth origin (137,131) measured from cast release. Mini Sproto checked in real renderer both facings; horizontal ground/air aim and single-hit/guard behavior checked.",
+    "power": "miniSproto",
+    "rangedRevision": "2531-sharp-eyes-mini-spit-1",
+    "partner": "sproto3152",
+    "projectileOrigin": {
+      "forward": 31.25,
+      "height": 98.75
+    },
+    "projectileOriginReview": "Cast release14 mouth lip at canonical (137,131), foot root(112,210), scale1.25",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto2569",
+    "number": 2569,
+    "name": "Sproto #2569",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2569.png",
+    "sha256": "bf3b6b7b37876ea51a142bb69662d637306d94ccfa8fe28e6069f11b15f152d2",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2569",
+        "description": "Blue head with backward yellow spiky fan, huge yellow eyes and red round nose, very broad toothy red smile with square yellow teeth, yellow neck/chest with blue shoulders. Low yellow legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto2616",
+    "number": 2616,
+    "name": "Sproto #2616",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2616.png",
+    "sha256": "459f9db2be11c3c2a6214bda77b57f13af46a825f6643784f052a887a3123a6d",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2616",
+        "description": "Blue bald wrinkled round head with large round yellow ears, half-lidded yellow eyes, round red nose, yellow muzzle with red lips, yellow and blue torso with coiled red/yellow chest accessory. Keep accessories attached. Holds a large full-length RED-AND-GOLD curled STAFF about as tall as the actor. All attacks strike with the staff: thrust, overhead swing, low sweep and aerial staff strike, never punches or kicks."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "weapon": "full-length curled staff",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto2789",
+    "number": 2789,
+    "name": "Sproto #2789",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2789.png",
+    "sha256": "087327087601b4b6f5cded2e2f215e70d962ec600c70a61aa8fd9be7763d4bfa",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2789",
+        "description": "Lavender blue swept spiky head, yellow eyes and broad red lips, lavender blue torso with paired red oval chest marks, yellow hand holding red/yellow twisted staff. Slim lavender low legs. Holds a large full-length RED-AND-GOLD curled STAFF about as tall as the actor. All attacks strike with the staff: thrust, overhead swing, low sweep and aerial staff strike, never punches or kicks."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "weapon": "full-length curled staff",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto2884",
+    "number": 2884,
+    "name": "Sproto #2884",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-2884.png",
+    "sha256": "1d5ad9794b3a37fabbce3a8fbac05e5d8920f78df3b10582b4b1c2d79f98c22a",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto2884",
+        "description": "Round fuzzy blue head, yellow half-lidded eyes with red outlines, red round protruding nose, broad yellow smiling muzzle with black line, small yellow cap on head, red high collar. Blue arms and low legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto3106",
+    "number": 3106,
+    "name": "Sproto #3106",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-3106.png",
+    "sha256": "869f39a4ed9d43d8bf8801982109cc7755f1faff7172c6a7559cfe0686e7e49f",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto3106",
+        "description": "Tall red swept head with wrinkled forehead, huge yellow eyes and black pupils, enormous red smile with square white teeth, black vest, yellow star-like pendant and yellow sleeves. Red low legs. Omit the floating background letter."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Exact original B extracted without recoloring opaque pixels. Hand-origin throw and visible held-B windup checked in real renderer both facings; aim/damage/guard behavior checked.",
+    "power": "referenceB",
+    "projectileReference": "Exact yellow/red/black B extracted from upper right of source PNG; preserve letter shape and colors.",
+    "partner": "sproto3152",
+    "projectileOrigin": {
+      "forward": 86.25,
+      "height": 106.25
+    },
+    "projectileOriginReview": "Cast release2 right palm at canonical (181,125), foot root(112,210), scale1.25",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto3152",
+    "number": 3152,
+    "name": "Pissing Sproto",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-3152.png",
+    "sha256": "e3694768c07136c7f62716be26953bfc4b1236de35374790a363f6227950ba6c",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto3152",
+        "description": "Lavender swept spiky head, narrow yellow eyes, broad red lips, dark neck band, lavender torso and yellow hands/feet. Small smoking accessory held near one hand, attached; no floating background splash."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "2026-11-02: 32 dedicated assist drawings reviewed; 2322 real-core/render contacts inspected in both facings; 204 assist/facing/wall scenarios and single-damage schedule passed.",
+    "power": "pelvicStream",
+    "extraAssist": true,
+    "partner": "sproto2322"
+  },
+  {
+    "id": "sproto3181",
+    "number": 3181,
+    "name": "Sproto #3181",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-3181.png",
+    "sha256": "2465c0baa3b9e70417f1ec6b34f7c8ece81c792c04cfa31dc6e79f61342036ff",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto3181",
+        "description": "LARGE BLUE figure on LEFT: blue swept spiky head, tiny pointed ears, narrow red half-lidded eyes and broad dark red lips, long blue torso with yellow sleeves/gloves and simple blue trousers. The small navy/black creature is ATTACHED to the front of his STOMACH: black swept spiky head, two very large WHITE eyes with black pupils, broad black muzzle and tiny RED smile, tiny yellow hands. It is part of the main blue actor silhouette, carried on his stomach in EVERY pose; never a third independent body. Exclude yellow partner from this sheet. No number bubble. Instead of kicking, the attached stomach creature expands on a connected elastic navy neck, lunges with its large black muzzle/maw and retracts. Blue legs only support/tuck; never attacking kicks."
+      },
+      {
+        "id": "sproto3181-companion",
+        "description": "ONLY the YELLOW figure on the RIGHT: yellow narrow side-profile head with tiny pointed ear/spikes, single large visible black oval eye with white glint, black round nose, long slender yellow neck/body, two slim yellow arms with round yellow hands. Extend low yellow legs with simple black shoes. No blue head or red eyelids. Exclude both blue/dark figures and number bubble.",
+        "scale": 0.6
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "2026-11-02: Dedicated assist sheets reviewed; screen laser and yellow-then-big-stomach relay checked with 2322 in both facings; 204 wall/facing scenarios, separated camera-bounded bodies, four shared damage contacts.",
+    "bodySpacing": 112,
+    "meleeStyle": "bellyMonster",
+    "extraAssist": true
+  },
+  {
+    "id": "sproto3215",
+    "number": 3215,
+    "name": "Sproto #3215",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-3215.png",
+    "sha256": "e31a12dec74a5cb9205a7b67105c84d55ff2583453ac9923f52768491bcbbe73",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto3215",
+        "description": "Green swept spiky head, blue heavy eyelids, solid yellow eye ovals without black pupils, broad yellow muzzle/chin and red smiling lips. Reference-based heroic clothing: BLACK high shoulder mantle and flowing black cape with red lining, YELLOW fitted chest and fully covered yellow legs, RED sleeves/gauntlets/boots, black belt and original red chest ornament with a round green/silver brooch. One fully clothed body."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "All 72 cleaned core/walk/event drawings reviewed: crisp flat palette, green head, blue eyelids, yellow suit and red/black hero clothing retained. Game playback pending.",
+    "currentArtRevision": "art/sproto3215-clean-colors",
+    "partner": "sproto3152",
+    "specialPartners": [
+      "sproto3152",
+      "vaudream",
+      "sproto3181"
+    ]
+  },
+  {
+    "id": "sproto3224",
+    "number": 3224,
+    "name": "Sproto #3224",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-3224.png",
+    "sha256": "76afd98273e35d38d67aef8280a4bb6b70bf22a6d8b43ab42bbd9ec868499a96",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto3224",
+        "description": "ONLY the BLUE LEFT figure: blue swept spiky head, yellow narrow eyes and huge red toothy smile with yellow square teeth, blue body and small red bow tie. Exclude yellow/red right figure."
+      },
+      {
+        "id": "sproto3224-companion",
+        "description": "ONLY the RIGHT figure: yellow tall pointed head cap, blue face accents, yellow round eyes and broad red lips, yellow torso and arms. Exclude blue left figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sproto3235",
+    "number": 3235,
+    "name": "Sproto #3235",
+    "reference": "art/sprotos-expansion/references/sproto-gremlin-3235.png",
+    "sha256": "5ba114b82a329116240e9d7d7a5885fb4b910a0e45c0b275f4ae15caebef3a55",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sproto3235",
+        "description": "ONLY the FRONT LEFT figure: blue swept spiky head, huge yellow eyes and broad red protruding lips, yellow neck/body and blue lower accents. Exclude back figure."
+      },
+      {
+        "id": "sproto3235-companion",
+        "description": "ONLY the BACK RIGHT figure: round blue bald head with forehead wrinkles, yellow half-lidded visible eye, small red smile and blue neck/body. Exclude front figure."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "vaudream",
+    "number": "machine",
+    "name": "\u142f\u156c\u144c\u15de\u1587\u156e\u15cb\u156c",
+    "reference": "art/sprotos-expansion/references/vaudream.png",
+    "sha256": "506c4e411df9527eb6da1f01404e7d0bc217c92ab50e66c130d56f01a95ec348",
+    "size": [
+      468,
+      257
+    ],
+    "entities": [
+      {
+        "id": "vaudream",
+        "description": "Floating blue-violet handheld-machine body with asymmetric yellow eyes, yellow toothy grille, tilted rectangular screen with yellow reflection, circular buttons and triangular spikes along top. NO LEGS, feet, arms or humanoid torso. Exclude the small creature behind it."
+      }
+    ],
+    "locomotion": "hover",
+    "status": "installed-playable",
+    "visualQA": "2026-11-02: Dedicated assist sheets reviewed; screen laser and yellow-then-big-stomach relay checked with 2322 in both facings; 204 wall/facing scenarios, separated camera-bounded bodies, four shared damage contacts.",
+    "extraMotion": true,
+    "extraAssist": true
+  },
+  {
+    "id": "uncmasterflex",
+    "number": "uncmasterflex",
+    "name": "UNC Master Flex",
+    "reference": "art/sprotos-expansion/references/unc-master-flex.png",
+    "sha256": "3d698caf2cfd1d224d12704714244139c8685ba9d2c90566b2e5991c853b2242",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "uncmasterflex",
+        "description": "UNC MASTER FLEX: blue swept spiky head with forehead wrinkles, huge YELLOW round eyes with crisp BLACK pupils and white catchlights, RED round nose, broad YELLOW smiling muzzle outlined in black with red lips and small square white teeth. Broad YELLOW collar/neck area, BLUE sleeveless vest over WHITE long sleeves, red curled/claw-shaped pendant centered on chest. Preserve wrinkles and friendly confident smile. Complete his cropped lower body with BLACK long trousers and black shoes; yellow hands. Entirely clothed, coherent two arms and two low-rooted legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "gryph",
+    "number": "gryph",
+    "name": "Gryph",
+    "reference": "art/sprotos-expansion/references/gryph.png",
+    "sha256": "d2b8f33760e0ea0e8f607e4d4807dd67422bcc078672a4ea4d39b885e558bd82",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "gryph",
+        "description": "ONLY the SLENDER LEFT Sproto: long slim BLUE swept spiky head and neck, two large YELLOW eyes with black pupils, long pointed RED nose and smiling RED lips, yellow throat/chest shirt with RED outer sleeves/coat and a small BLUE-and-white F-like pendant. Yellow hands, slender BLUE low legs with simple red/black shoes. Preserve long narrow head/neck. Exclude the round right Sproto; no white head tufts."
+      },
+      {
+        "id": "gryph-companion",
+        "description": "ONLY the ROUND RIGHT Sproto: broad ROUND BLUE head, two WHITE eyes with black pupils and thick RED upper eyelids, broad RED smiling muzzle, small WHITE short rectangular hair tufts touching top of head, thick RED collar and RED torso shirt with a BLUE horizontal band and round blue central button. Blue hands, low blue legs with red/black shoes. Preserve wide round head. Exclude slender left Sproto; no pointed red nose or yellow eyes."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "vitaliketh",
+    "number": "vitaliketh",
+    "name": "vitalik.eth",
+    "reference": "art/sprotos-expansion/references/vitalik-eth.png",
+    "sha256": "c69605ecac739ce1bd4126be4ba2fb6cd1f3c61212ffa3081447031571dc5cc3",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "vitaliketh",
+        "description": "Deep vivid BLUE swept spiky head, huge round YELLOW eyes with crisp BLACK pupils and white catchlights, very broad RED smiling muzzle/lips, long blue neck/chest, RED robe/shirt with broad GOLD/YELLOW collar and a centered BLUE circular medallion with small red/yellow center. Preserve simple friendly face and tiny yellow nose/cheek accent. Long blue arms/hands, red long trousers with simple blue/black shoes. Entirely clothed, coherent two arms and two low-rooted legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "urmometh",
+    "number": "urmometh",
+    "name": "urmom.eth",
+    "reference": "art/sprotos-expansion/references/urmom-eth.png",
+    "sha256": "1b75582cbfe4456fe30c057cda26aabbc622b8077c65c1abe54d01665697de17",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "urmometh",
+        "description": "Round stocky BLUE swept spiky Sproto, broad blue head and long rounded blue torso, half-lidded YELLOW eyes with distinctive crisp BLACK pupils, large round RED nose and very broad RED smiling muzzle/lips. Blue long arms and hands resting near low hips. Bright YELLOW lower garment/waistband; complete with yellow long trousers and blue/black shoes. Blue opaque fitted upper garment matching blue body palette, no exposed torso details. Preserve broad rounded silhouette, heavy eyelids and confident smile. Exactly two arms and two low-rooted legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "chaton",
+    "number": "chaton",
+    "name": "Chaton von Sproto",
+    "reference": "art/sprotos-expansion/references/chaton-von-sproto.png",
+    "sha256": "de514fc8588c5c683d1a54b7a5c766aa78755c49c6b48a07ac1a85c159c6e340",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "chaton",
+        "description": "Chaton von Sproto: broad BLUE cat-like head with pointed blue ears with YELLOW inner ears, swept blue side spikes and curved dark blue eyebrows, BLACK/DARK rectangular-oval GLASSES with visible horizontal temple arms, large YELLOW eyes with black pupils, small BLACK heart-like nose, broad dark RED smiling muzzle with YELLOW cheek/jaw border. Thick YELLOW collar, WHITE shirt with BLACK horizontal stripe/bands across chest and sleeves. Blue hands, BLACK long trousers and black/white shoes. Preserve glasses, half-lidded eyes, yellow collar and striped outfit. One complete clothed Sproto, two arms and two low-rooted legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "loadthebags",
+    "number": "loadthebags",
+    "name": "LoadTheBags",
+    "reference": "art/sprotos-expansion/references/loadthebags.png",
+    "sha256": "fcbb2a176e488fe8943cdadbacb61ede433eec0b19a8618a5c0d1ab6552903ed",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "loadthebags",
+        "description": "ONE single BLUE Sproto with FOUR EYES on one connected head: TWO UPPER WHITE eyes with RED irises/black pupils and drooping blue lids; TWO LOWER YELLOW oval eyes with black pupils immediately above broad RED lips. Yellow rear spike fan with small red tip, BLUE long head/neck. BLACK coat, RED high collar and RED bow tie with WHITE polka dots, black long pants and black shoes; blue hands. Preserve ALL FOUR eyes in every pose. Holds a BLACK handheld MICROPHONE with SILVER rounded mesh grille; microphone is his melee weapon and vocal focus. No staff or long cable."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "weapon": "microphone"
+  },
+  {
+    "id": "sisma",
+    "number": "sisma",
+    "name": "SISMA",
+    "reference": "art/sprotos-expansion/references/sisma.png",
+    "sha256": "1b3b34721a19845314edc23c4d5126d3d40af6c32cee9f0a211b9d8d985ab81a",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "sisma",
+        "description": "ONE single BLUE long-headed Sproto with THREE YELLOW eyes: two eyes across left/center brow, third visible eye on the protruding RIGHT face ridge. Crisp black pupils. Red long rounded nose, broad protruding RED lips, yellow lower jaw and YELLOW chest with large RED circular marking. Blue swept rear spikes, long blue arms and low blue legs; yellow hands/feet. Extend cropped body with an opaque yellow/blue training suit. His signature attack is a forceful RETAIN SCREAM: mouth opens wide with red lips and dark mouth interior, torso inhales then projects a yell to RIGHT. No printed words in the sprite; game engine draws the flying word RETAIN."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "power": "retain"
+  },
+  {
+    "id": "captainhowdy",
+    "number": "captainhowdy",
+    "name": "Captain Howdy",
+    "reference": "art/sprotos-expansion/references/captainhowdy.png",
+    "sha256": "0517535ac698a22f01e1938da5eec6ab69fce8bdf8e8ff777b2657a6a1ea8bb2",
+    "size": [
+      385,
+      385
+    ],
+    "entities": [
+      {
+        "id": "captainhowdy",
+        "description": "ONE single BLUE swept spiky head with THREE clearly separate WHITE round eyes and THREE black pupils arranged horizontally across the brow. Broad long RED smiling lips, short blue neck with YELLOW collar band, RED long-sleeve shirt and small GREEN round chest button/medallion. Blue hands, dark blue long trousers and red/black shoes. Preserve the THREE white eyes, forehead wrinkles and friendly smile in every pose. Do not reduce to two eyes or split into multiple characters."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sprotosales",
+    "number": "sprotosales",
+    "name": "Sproto Sales",
+    "reference": "art/sprotos-expansion/references/sprotosales.png",
+    "sha256": "65fcd8bb4b9974e22437e58813184917160a206284d4d827ced1a6cf3ac2a623",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "sprotosales",
+        "description": "A ROBOT Sproto: head vertically split YELLOW on LEFT and BLUE on RIGHT, huge YELLOW eyes with crisp black pupils, broad RED smiling lips and yellow lower mouth border, swept yellow left spikes. RED torso armor/outfit with WHITE collar and black/red/yellow clasp at chest. Articulated SILVER METAL ROBOT ARMS with round elbow hinges and mechanical fists/claws; low-rooted mechanical legs with SILVER METAL ROBOT FEET and ankle joints. Arms and feet are the attacking weapons: piston punches, metal-fist uppercuts, robot side kicks and mechanical stomps. Exactly two robot arms and two robot legs, no organic limbs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "robot": true
+  },
+  {
+    "id": "sprog",
+    "number": "sprog",
+    "name": "Sprog",
+    "reference": "art/sprotos-expansion/references/sprog.png",
+    "sha256": "193168c208835a33c26a92e6e2b88721163fdc9245efcca56e64d296f7526b8c",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "sprog",
+        "description": "ONE SINGLE BLUE Sproto BODY with TWO STACKED FACES joined vertically in ONE continuous long blue head/torso mass. UPPER face has TWO large YELLOW eyes and red pouting lips; LOWER face has TWO large WHITE eyes with black pupils and red smiling lips. FOUR EYES TOTAL. One continuous blue body, only TWO yellow arms/hands and TWO low blue legs with red/blue shoes; simple red lower garment. NEVER split into twins, duplicate bodies or separate the two facial regions. Preserve yellow upper eyes and white lower eyes in every pose."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "jasper",
+    "number": "jasper",
+    "name": "Jasper",
+    "reference": "art/sprotos-expansion/references/jasper.png",
+    "sha256": "aaec853d5f7e1c21830041f9ff5af8262a469059548f9ac70e828721395f1293",
+    "size": [
+      379,
+      379
+    ],
+    "entities": [
+      {
+        "id": "jasper",
+        "description": "Broad PURPLE-BLUE rounded Sproto head with swept rear spikes, drooping YELLOW eyes with crisp black pupils, very heavy RED lower eyelids/eye bags, large rounded RED nose and broad straight RED lips. BLACK formal SUIT jacket, WHITE shirt collar and RED necktie. Purple-blue hands, BLACK long suit trousers and black dress shoes. Preserve red eye bags, heavy-lidded expression and suit. One fully clothed body with two arms and two low-rooted legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "aaron",
+    "number": "aaron",
+    "name": "Aaron",
+    "reference": "art/sprotos-expansion/references/aaron.png",
+    "sha256": "47cc4c6b021c0ccfd980244de5cfbaa4bd67c7fe1e2bf17e68968413d7928f81",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "aaron",
+        "description": "Blue pointed cat-like ears with yellow inner ears and yellow rear spikes, sleepy yellow eyes with black pupils and black rounded heart-like nose. MASSIVE long broad thick RED smiling muzzle, spanning most of the face width and protruding well beyond the right cheek, with a closed curved black smile crease and no teeth. Thick yellow collar and gloves, black outfit with white chest panel, black long trousers and black/yellow shoes. Exactly one body, two arms and two low-rooted legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Core, eight-frame walk and all event contact sheets reviewed for reference face, colors, costume continuity, complete silhouettes and coherent limbs. Main-game checks pending.",
+    "currentArtRevision": "art/aaron-mouth"
+  },
+  {
+    "id": "brainsprot",
+    "number": "brainsprot",
+    "name": "Brain Sprot",
+    "reference": "art/sprotos-expansion/references/brainsprot.png",
+    "sha256": "42960f92f84cee37a7fcbd242b3b01f2cab8e7c33a43978cdcbd28459d4e82ae",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "brainsprot",
+        "description": "BLUE swept spiky Sproto head, two huge YELLOW eyes with small crisp BLACK pupils and tiny white glints, large ORANGE pear-shaped nose, extremely broad RED smiling mouth and cheeks with dark mouth interior and RED block-like teeth. Thick YELLOW neck/collar/chest, BLACK vest with small red circular pendant. Yellow sleeves/arms and hands, BLACK long trousers and red/yellow shoes. Preserve orange nose, red teeth (not white), wide red mouth and large yellow eyes. Complete clothed single body with two arms and two low-rooted legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "godmod3d",
+    "number": "godmod3d",
+    "name": "GodMod3D.eth",
+    "reference": "art/sprotos-expansion/references/godmod3d-eth.png",
+    "sha256": "185868c73ba42e839f9129609ab22a70f9ce0a69667b370ac55f5bea77004958",
+    "size": [
+      500,
+      500
+    ],
+    "entities": [
+      {
+        "id": "godmod3d",
+        "description": "ONLY the LEFT Sproto: blue-violet spiky head, TWO yellow half-lidded eyes with black pupils, red round nose, broad red smiling lips outlined by a yellow muzzle/cheek border, thick yellow/red collar and RED shirt with small white chest emblem. Large RED heart-like hat/plume touching top of head. Yellow hands, blue low legs with red/black shoes. Exclude right cyclops."
+      },
+      {
+        "id": "godmod3d-companion",
+        "description": "ONLY the RIGHT BLUE-VIOLET CYCLOPS: broad round long blue-violet head with exactly ONE enormous round YELLOW eye and ONE black pupil with white glint, small red round side nose and small RED pouting lips, blue-violet long neck/body and YELLOW hands. Complete with blue trousers and yellow/blue shoes. ONE EYE ONLY; never add a second eye or red hat. Exclude left character."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "sober",
+    "number": "sober",
+    "name": "Sober",
+    "reference": "art/sprotos-expansion/references/sober.png",
+    "sha256": "bf261afdb6213c6e22f2d6359da9dfd8a5f2163d279c0e06a2ed39d400ced33c",
+    "size": [
+      1000,
+      1000
+    ],
+    "entities": [
+      {
+        "id": "sober",
+        "description": "BLUE-VIOLET swept spiky rounded head, heavy sleepy half-lidded YELLOW eyes with crisp BLACK pupils, broad RED smiling muzzle/lips, no large round nose. RED collared coat/shirt and central black round medallion with white oval details and a yellow symbol. Blue-violet hands, BLACK long trousers and black/red shoes. Preserve heavy eyelids, round chin, red collar and medallion. One clothed body with two arms and two low legs."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "nosmileclown",
+    "number": "nosmileclown",
+    "name": "\ud835\udd79\ud835\udd94\ud835\udd98\ud835\udd92\ud835\udd8e\ud835\udd91\ud835\udd8a\ud835\udd88\ud835\udd91\ud835\udd94\ud835\udd9c\ud835\udd93",
+    "reference": "art/sprotos-expansion/references/nosmileclown.png",
+    "sha256": "e981b456abed73636018c6509362c90e7ec5cef947c108916ba054d58313c550",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "nosmileclown",
+        "description": "ONLY the HUGE BLUE SPROTO on RIGHT: broad swept blue spikes, multiple thin YELLOW horn/antenna protrusions attached to top of head, overlapping WHITE eye cluster with THREE black pupils (one left, two in the large right white region), small pointed RED nose and enormous long RED smiling lips. Huge YELLOW lower-jaw/neck ruff, blue torso with RED flame-like chest patches, yellow hands and low blue legs/red feet. Exclude tiny pink clown. Preserve huge head and yellow horns."
+      },
+      {
+        "id": "nosmileclown-companion",
+        "description": "ONLY the TINY PINK CLOWN on LEFT: small PINK oval head with black oval mouth and tiny black eyes, WHITE two-lobed puffy chef-like hat/hair attached above head. Very slim BLACK torso with a vertical row of small YELLOW buttons, RED thin arms/sleeves and RED low legs/trousers, small WHITE gloves and WHITE shoes. A separate full tiny humanoid clown, NOT a blue Sproto. Exclude huge blue figure. Draw complete anatomy clearly at consistent source size; engine scales him MUCH SMALLER than his companion.",
+        "scale": 0.55
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
+    "bodySpacing": 112
+  },
+  {
+    "id": "olnoname",
+    "number": "olnoname",
+    "name": "ol\u2019 no name",
+    "reference": "art/sprotos-expansion/references/olnoname.png",
+    "sha256": "f19a3918caf443fdf9726b0ed2bc2b523e1a6d2d1abfefae08ba4c702ff087be",
+    "size": [
+      1024,
+      1024
+    ],
+    "entities": [
+      {
+        "id": "olnoname",
+        "description": "ONE continuous BLUE spiky head with TWO RED MOUTHS vertically stacked on ONE connected face. Upper face has exactly TWO huge round YELLOW eyes, crisp BLACK pupils with white glints, one big teardrop RED nose and curved smiling RED lips. Lower chin has a SECOND smiling RED mouth with two central YELLOW teeth, but NO second eyes. RED side ear-like protrusions. ONE SINGLE BODY with red collared shirt, black trousers, blue hands and red/black shoes. Preserve both stacked mouths, never separate into twins or two heads."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "greatcharly",
+    "number": "greatcharly",
+    "name": "Great Charly.eth",
+    "reference": "art/sprotos-expansion/references/greatcharly.png",
+    "sha256": "8d40024b4b73810a686986c36ef6b54a0cf9863e195e800a416df3222f05effa",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "greatcharly",
+        "description": "ONE continuous tall BLUE spiky head/body. Upper face has TWO half-lidded YELLOW eyes with BLACK pupils and white glints, one thin dark olive eyebrow, broad RED smiling muzzle. Lower front torso has a large YELLOW oval circular face-like belly patch containing exactly TWO small BLACK dots and NO mouth. RED rectangular side tabs near lower head. Preserve the yellow two-dot belly patch attached to SAME BODY. Blue arms and low blue legs with red shoes. Fully clothed blue matching tunic/shorts extending conservatively from cropped reference. ONE body only, never a twin."
+      }
+    ],
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "mox",
+    "number": "mox",
+    "name": "Yannix",
+    "reference": "art/sprotos-expansion/references/mox-revision.png",
+    "sha256": "30ed0a92400406ee57fa4d804e1f778809f04671f3661795cc8334594bbc1875",
+    "size": [
+      550,
+      546
+    ],
+    "entities": [
+      {
+        "id": "mox",
+        "description": "Indigo BLUE-VIOLET cat-like spiky head, TWO narrow sleepy YELLOW eyes with BLACK pupils, distinct large ROUND BLACK nose, pointed little cat ears and fuzzy blue pointed CHIN BEARD. Mouth is open dark RED with exactly THREE separated triangular WHITE fang teeth and black mouth cavity. Yellow curved collar, black sleeveless fitted vest with TWO WHITE oval buttons down the front, thin long indigo blue arms/hands and blue low-rooted legs/feet. Preserve reference feline snout, black nose, three sharp teeth and chin beard; not a generic round Sproto, no red broad human smile. Slim wiry fighter with clear expressive face and confident low guarded posture."
+      }
+    ],
+    "preserveGameplay": true,
+    "extraMotion": true,
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "guest09",
+    "number": "guest09",
+    "name": "Red Kev",
+    "reference": "art/sprotos-expansion/references/guest09-revision.png",
+    "sha256": "eb1c84f9d380c1b5fd73912730a890dc10b2af74fab5efc08d88cff8474da794",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "guest09",
+        "description": "Bright RED spiky head and red skin with exactly TWO huge round YELLOW eyes and crisp BLACK oval pupils/white glints. Small BLACK down-pointing nose. ESSENTIAL: enormous delighted OPEN U-SHAPED SMILE matching reference, large BLACK mouth cavity, thick RED lips around it, thin YELLOW upper rim and EIGHT clearly separated small rounded WHITE teeth arranged along the deep upward-curving lower smile arc. No clenched rectangular teeth, no fangs, no closed red lip, no blank black mouth. Thick YELLOW collar, BLACK long-sleeved shirt with large YELLOW 2-3-3-like curled shapes on chest and yellow sleeve motifs, black trousers and red/yellow shoes. Smile remains huge, rounded and friendly in every pose."
+      }
+    ],
+    "preserveGameplay": true,
+    "extraMotion": false,
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "guest10",
+    "number": "guest10",
+    "name": "Sprotel Bitcoin",
+    "reference": "art/sprotos-expansion/references/guest10-revision.png",
+    "sha256": "68bb2a0642ccc0fe882860d7be2446e05e6f8c65be821c652423e2d717a0ba20",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "guest10",
+        "description": "BLUE spiky Sproto head, exactly TWO yellow eyes with small BLACK pupils and white glints, very large round RED nose, broad closed RED lips. Red SANTA HAT with fluffy WHITE brim and pompom. FULL SANTA OUTFIT in EVERY pose: RED long-sleeved coat with WHITE fluffy front trim, WHITE sleeve cuffs and WHITE coat hem; BLACK waist belt with GOLD buckle; RED full-length trousers; BLACK Santa boots. Blue hands. Hat is only one part of the complete Santa suit; never shirtless, never blue bare torso or blue legs. Preserve red nose, blue face and yellow eyes."
+      }
+    ],
+    "preserveGameplay": true,
+    "extraMotion": false,
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "vamp",
+    "number": "vamp",
+    "name": "VAMP",
+    "reference": "art/sprotos-expansion/references/vamp-revision.png",
+    "sha256": "47ce7b04178878df1cb36a8f87f0bb9073d53b5bfb285f04532cdee15e26bfe0",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "vamp",
+        "description": "BLUE-VIOLET pointed-ear spiky Sproto head, YELLOW ear insides, TWO very narrow sleepy YELLOW eyes behind thin rectangular dark frames, small BLACK cat nose, broad deep dark-RED lips and BLACK chin stripe. Black goth outfit with broad YELLOW collar/stripe, fitted BLACK jacket and BLACK trousers/boots. ADD clearly visible SILVER CONICAL SPIKES attached to BOTH shoulder pads, outer forearm cuffs and belt sides: three or four sharp small spikes per shoulder and cuff, stay attached and consistently visible across poses. Outfit has repeated metal spikes, not body-colored hair tufts; no floating spikes. Preserve glasses, sleepy face and black/yellow outfit."
+      }
+    ],
+    "preserveGameplay": true,
+    "extraMotion": false,
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "bimba",
+    "number": "bimba",
+    "name": "BIMBA",
+    "reference": "art/sprotos-expansion/references/bimba-revision.png",
+    "sha256": "85a740b954c2b8dea558b816d3541caddb22522c9f960164f07c376efd1254ad",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "bimba",
+        "description": "ONE BLUE SPROTO with tall elongated smooth cobalt-blue head and LONG broad blue neck, red-orange triangular side/back spikes, large pale-YELLOW oval eyes with tiny dark RED pupils and white highlights, fine black eyelid/brow lines, huge wide protruding RED smiling lips with NO teeth. Exceptionally BROAD YELLOW wraparound shawl-like collar over a FULL-LENGTH RED ROBE. The flowing red robe covers the entire torso and BOTH legs down to ANKLES, with long red sleeves, yellow cuff trim and a broad yellow hem. BLUE fingered hands and small dark-red shoes peek out. Never a short tunic, shorts or exposed blue legs. Preserve long blue head/neck, broad yellow collar and complete ankle-length robe in every pose; robe folds and lower hem follow kicks and jumps without clipping."
+      }
+    ],
+    "preserveGameplay": true,
+    "extraMotion": false,
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  },
+  {
+    "id": "mlk",
+    "number": "mlk",
+    "name": "Bitcoin MLK",
+    "reference": "art/mlk/reference.png",
+    "sha256": "1461eb5abbfdb900979361e86b889eaf14c3d49356d6d3982d6a9bad92a98c83",
+    "size": [
+      400,
+      400
+    ],
+    "entities": [
+      {
+        "id": "mlk",
+        "description": "Reference-accurate INDIGO BLUE head, base color near #4737CD RGB71,55,205, a rich BLUE-leaning indigo. NOT reddish violet, magenta-purple or lavender. Blue channel far stronger than red; preserve blue-indigo skin across face, ears, hands. Round spiky head with short dark-blue forehead strokes and angular tufts, small YELLOW triangular temple spikes, TWO droopy YELLOW eyes with BLACK oval pupils and glints, rounded INDIGO BLUE nose and broad dark RED closed lips. Thick YELLOW collar over RED full shirt, small yellow chest brooch, RED trousers and YELLOW boots. No pale purple highlights; skin shading stays deep indigo BLUE. One complete clothed body, preserve sleepy eye shape, nose and red/yellow clothing."
+      }
+    ],
+    "preserveGameplay": true,
+    "status": "installed-playable",
+    "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens."
+  }
+]

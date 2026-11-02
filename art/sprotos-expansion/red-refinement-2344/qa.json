@@ -1,0 +1,110 @@
+{
+  "revision": "2344-red-slender-face-2",
+  "entity": "sproto2344",
+  "newFrameFiles": 104,
+  "model": "gpt_image_2_5",
+  "variant": "sunburst",
+  "quality": "high",
+  "successfulJobs": [
+    {
+      "index": 1350,
+      "entity": "sproto2344",
+      "fighter": "sproto2344",
+      "kind": "core",
+      "revision": "2344-red-slender-face-2",
+      "job_id": "8b7af14f-d9ba-43d2-8db4-15275ea6f54e",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 12,
+      "estimatedCredits": 4.25,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_063139_8b7af14f-d9ba-43d2-8db4-15275ea6f54e.png"
+    },
+    {
+      "index": 1351,
+      "entity": "sproto2344",
+      "fighter": "sproto2344",
+      "kind": "walk",
+      "revision": "2344-red-slender-face-2",
+      "job_id": "af9f0c06-29b6-4997-9a68-c26c12e1aa63",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 12,
+      "estimatedCredits": 2.75,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_063353_af9f0c06-29b6-4997-9a68-c26c12e1aa63.png"
+    },
+    {
+      "index": 1352,
+      "entity": "sproto2344",
+      "fighter": "sproto2344",
+      "kind": "events",
+      "revision": "2344-red-slender-face-2",
+      "job_id": "6c16bb2e-3d11-4dcc-b637-17774caa6cdc",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 12,
+      "estimatedCredits": 4.25,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_063353_6c16bb2e-3d11-4dcc-b637-17774caa6cdc.png"
+    },
+    {
+      "index": 1353,
+      "entity": "sproto2344",
+      "fighter": "sproto2344",
+      "kind": "motion",
+      "revision": "2344-red-slender-face-2",
+      "job_id": "da0fdebb-e8d5-4f0c-86bc-c7a35097e2ba",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 12,
+      "estimatedCredits": 4.25,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_063353_da0fdebb-e8d5-4f0c-86bc-c7a35097e2ba.png"
+    }
+  ],
+  "checksPassed": [
+    "production build",
+    "15 throw lifecycle groups across current roster",
+    "blue companion byte hashes preserved",
+    "8 pose playback/contract groups",
+    "sprite dimensions, alpha, anchors and transparent padding across 9032 installed entries /118 body atlases"
+  ],
+  "visualReview": [
+    "32 core poses",
+    "8-frame walk sheet",
+    "32 event poses",
+    "32 motion poses",
+    "in-game guard, walk12, jump15, left-heavy15 and left-grab14, mirrored views"
+  ],
+  "broaderQaLimitation": "Expansion-wide QA stopped at an unrelated concurrent name mismatch: inventory Sproto Picasso versus current core Sproto #651. No unrelated names changed by this revision.",
+  "scopeLimit": "Sampled runtime views and static sheets; not every possible combat sequence."
+}

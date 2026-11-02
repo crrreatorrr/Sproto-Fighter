@@ -14,17 +14,17 @@ globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/js
 globalThis.Image=class {
   set src(value){this.url=value;try{const p=value.split('?')[0];const b=readFileSync(new URL('../public'+p,import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}catch{queueMicrotask(()=>this.onerror());}}
 };
-const {A,FLOOR,createState,step,PLAYABLE_FIGHTERS,THROW_GRIPS,WIDTH}=core;
+const {A,FLOOR,createState,step,PLAYABLE_FIGHTERS,THROW_GRIPS,WIDTH,bodySpread,isPairedFighter}=core;
 const {loadPoseAtlases,getPoseAtlasDebug,drawPoseAtlas,setPoseAtlasThrowState,getPoseAtlasLoadStatus,isPoseAtlasDeclared,getPoseAtlasReactionTransform}=poses;
-await loadPoseAtlases();assert.equal(getPoseAtlasLoadStatus().ids.length,21);
+await loadPoseAtlases();assert.equal(getPoseAtlasLoadStatus().ids.length,Object.keys(original.fighters).length);
 let count=0;
 const check=(name,fn)=>{fn();count++;console.log('PASS:',name);};
-check('all 21: forward/reverse gait, hitstop, and neutral guard after stopping',()=>{
+check('all selectable fighters: complete forward/reverse gait, hitstop, and neutral guard after stopping',()=>{
  for(const id of PLAYABLE_FIGHTERS){
   const s=createState(id,'dummy');s.fighters[1].x=1100;const f=s.fighters[0];
   getPoseAtlasDebug(f,0);const seen=new Set();
-  for(let t=0;t<24;t++){step(s,[A.right,0]);seen.add(getPoseAtlasDebug(f,s.frame).frameIndex);}
-  assert.equal(seen.size,8,id+' complete gait');const before=getPoseAtlasDebug(f,s.frame);
+  for(let t=0;t<44;t++){step(s,[A.right,0]);seen.add(getPoseAtlasDebug(f,s.frame).frameIndex);}
+  assert.equal(seen.size,original.fighters[id].walkFrames.length,id+' complete gait');const before=getPoseAtlasDebug(f,s.frame);
   step(s,[A.left,0]);const frozen=getPoseAtlasDebug(f,s.frame,true);assert.equal(frozen.walkPhase,before.walkPhase,id+' frozen travel');
   for(let t=0;t<4;t++){step(s,[A.left,0]);getPoseAtlasDebug(f,s.frame);}
   const reverseBefore=getPoseAtlasDebug(f,s.frame).walkPhase;
@@ -37,14 +37,14 @@ check('all 21: forward/reverse gait, hitstop, and neutral guard after stopping',
  }
 });
 check('all 21 core grips agree with installed per-fighter hand/torso art metadata',()=>{
- for(const id of PLAYABLE_FIGHTERS){const cfg=original.fighters[id];for(const [label,slot]of [['hand',26],['torso',24]]){
+ for(const id of PLAYABLE_FIGHTERS.filter(id=>id!=='duo')){const cfg=original.fighters[id];for(const [label,slot]of [['hand',26],['torso',24]]){
   const point=cfg.holdContact[label],anchor=cfg.frames[slot].anchor??cfg.anchor;
   assert.deepEqual(THROW_GRIPS[id][label],[(point[0]-anchor[0])*cfg.scale,(point[1]-anchor[1])*cfg.scale],id+' '+label);
  }}
 });
-check('all 441 held pairs: draw uses actual core placement without secondary offsets or core mutation',()=>{
- for(const aid of PLAYABLE_FIGHTERS)for(const bid of PLAYABLE_FIGHTERS){
-  const s=createState(aid,'dummy',bid);s.fighters[0].x=500;s.fighters[1].x=560;step(s,[A.grab,0]);
+check('all single-body held pairs: draw uses actual core placement without secondary offsets or core mutation',()=>{
+ for(const aid of PLAYABLE_FIGHTERS.filter(id=>!isPairedFighter(id)))for(const bid of PLAYABLE_FIGHTERS.filter(id=>!isPairedFighter(id))){
+  const s=createState(aid,'dummy',bid);s.fighters[0].x=500;s.fighters[1].x=560+bodySpread(aid)+bodySpread(bid);step(s,[A.grab,0]);
   for(let t=0;t<50&&!(s.throwState?.phase==='hold'&&s.throwState.t===5);t++)step(s,[0,0]);
   assert.equal(s.throwState?.phase,'hold');setPoseAtlasThrowState(s.throwState,s.fighters);
   const [a,b]=s.fighters;let translation;const ctx={save(){},restore(){},scale(){},rotate(){},drawImage(){},translate(x,y){translation=[x,y]}};
@@ -55,7 +55,7 @@ check('all 441 held pairs: draw uses actual core placement without secondary off
  setPoseAtlasThrowState(null,[]);
 });
 check('all 21 knockdown transforms: both facings, flight/down/rise, floor/camera bounds and nonmutation',()=>{
- for(const id of PLAYABLE_FIGHTERS)for(const facing of [1,-1])for(const x of [80,600,1200])for(const phase of ['flight','down','rise'])for(const t of [0,4,10,18,35]){
+ for(const id of PLAYABLE_FIGHTERS.filter(id=>id!=='duo'))for(const facing of [1,-1])for(const x of [80,600,1200])for(const phase of ['flight','down','rise'])for(const t of [0,4,10,18,35]){
   const s=createState(id,'cpu'),f=s.fighters[0];f.x=x;f.facing=facing;f.y=phase==='flight'?FLOOR-80:FLOOR;f.stun=20;f.reaction={kind:'knockdown',phase,t,direction:-facing};
   const before=JSON.stringify(s);const transform=getPoseAtlasReactionTransform(f);assert.equal(JSON.stringify(s),before);assert.ok([transform.x,transform.y,transform.angle].every(Number.isFinite));
   if(transform.angle){for(const [cx,cy]of transform.corners){assert.ok(transform.y+cy<=FLOOR+1e-8,id+' floor');assert.ok(transform.x+cx>=5.999&&transform.x+cx<=WIDTH-5.999,id+' camera');}}

@@ -23,8 +23,8 @@ for(const id of PLAYABLE_FIGHTERS){
  total++;
  console.log(`PASS: ${id}: four directional inputs / ${isHorizontalSpit(id)?'horizontal':'aimed'} ${style.projectile.shape} casts, ${contacts.length}-contact ${style.specialName}, spend/recovery/no self charge`);
 }
-assert.equal(new Set(Object.values(COMBAT_STYLES).map(s=>JSON.stringify([s.heavy,s.projectile,s.special,s.specialFrames,s.power,s.advance]))).size,21,'all 21 mechanical profiles differ');
+assert.equal(new Set(Object.values(COMBAT_STYLES).map(s=>JSON.stringify([s.heavy,s.projectile,s.special,s.specialFrames,s.power,s.advance]))).size,PLAYABLE_FIGHTERS.length,'all mechanical profiles differ');
 for(const id of ['zephyr','guest12','guest10','nate']){const s=createState(id,'cpu');s.fighters[0].x=100;s.fighters[1].x=1200;step(s,[A.bolt,0]);let bounced=false;for(let i=0;i<130;i++){step(s,[0,0]);bounced ||= s.projectiles.some(p=>(p.bounces??0)<COMBAT_STYLES[id].projectile.bounces&&p.vy<0);}assert.ok(bounced,id+' actual floor bounce');}
 for(const id of ['guest08','mandela']){const s=createState(id,'cpu');s.fighters[0].x=100;s.fighters[1].x=1200;step(s,[A.bolt,0]);let returned=false;for(let i=0;i<100;i++){step(s,[0,0]);returned ||= s.projectiles.some(p=>p.vx<0);}assert.ok(returned,id+' return reverses');}
 for(const id of ['vamp','crapto']){const s=createState(id,'cpu');s.fighters[0].hp=500;s.fighters[1].x=570;step(s,[A.bolt,0]);let applied=false;for(let i=0;i<80;i++){step(s,[0,0]);applied ||= id==='vamp'?s.fighters[1].slow>0:s.fighters[0].hp>500;}assert.ok(applied,id+' projectile power on hit');}
-console.log(`PASS: ${total} per-fighter cases, 21 unique mechanical profiles, 8 trajectory/power interaction checks.`);
+console.log(`PASS: ${total} per-fighter cases, ${PLAYABLE_FIGHTERS.length} unique mechanical profiles, 8 trajectory/power interaction checks.`);

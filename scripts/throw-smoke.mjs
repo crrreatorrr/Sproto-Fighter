@@ -3,13 +3,17 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 const source=ts.transpileModule(readFileSync(new URL('../src/core.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
-const {A,FLOOR,WALL,WIDTH,PLAYABLE_FIGHTERS,THROW_GRIPS,createState,step,THROW_HOLD_FRAMES,THROW_CATCH_FRAMES,THROW_RECOVERY_FRAMES}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const {A,FLOOR,WALL,WIDTH,PLAYABLE_FIGHTERS,THROW_GRIPS,getThrowGrip,bodySpread,fighterWall,createState,step,THROW_HOLD_FRAMES,THROW_CATCH_FRAMES,THROW_RECOVERY_FRAMES}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 let count=0,failures=0;
 function check(name,fn){try{fn();count++;console.log('PASS:',name);}catch(e){failures++;console.error('FAIL:',name,'—',e.message);}}
 function fresh(a='rivet',b='vela',facing=1,location='center'){
  const s=createState(a,'cpu',b),[p,q]=s.fighters;
- p.x=location==='left'?WALL+60:location==='right'?WIDTH-WALL-60:600;
- q.x=p.x+facing*60;p.facing=facing;q.facing=-facing;return s;
+ const gap=60+bodySpread(a)+bodySpread(b),aw=fighterWall(a),bw=fighterWall(b);
+ const min=Math.max(aw,bw-facing*gap),max=Math.min(WIDTH-aw,WIDTH-bw-facing*gap);
+ p.x=location==='left'?min:location==='right'?max:600;
+ q.x=p.x+facing*gap;p.facing=facing;q.facing=-facing;
+ for(const f of s.fighters)assert.ok(f.x>=fighterWall(f.id)&&f.x<=WIDTH-fighterWall(f.id),'fixture must begin inside its own formation bounds');
+ return s;
 }
 function tick(s,n=1,a=0,b=0){for(let i=0;i<n;i++)step(s,[a,b]);}
 function until(s,predicate,max=200){for(let i=0;i<max&&!predicate();i++)tick(s);assert.ok(predicate(),'phase condition not reached');}
@@ -32,20 +36,20 @@ for(const direction of ['forward','back','up','down'])check(`${direction} releas
   assert.ok(fell&&down&&rise,'flight/down/rise observed');if(direction==='back')assert.ok(crossed,'must cross behind');if(direction==='up')assert.ok(flewUp);assert.equal(b.reaction,null);assert.equal(b.stun,0);assert.equal(s.throwState,null);
  }
 });
-check('all 441 pairs × 4 directions × 2 facings × 3 locations: bounded finite catch and recovery',()=>{
+check('all roster pairs × 4 directions × 2 facings × 3 locations: bounded finite catch and recovery',()=>{
  let probes=0;
  for(const a of PLAYABLE_FIGHTERS)for(const b of PLAYABLE_FIGHTERS)for(const d of ['forward','back','up','down'])for(const f of [1,-1])for(const location of ['center','left','right']){
   const s=fresh(a,b,f,location);catchTarget(s,button(d,f));until(s,()=>s.throwState.t===THROW_CATCH_FRAMES);
-  const [p,q]=s.fighters,gap=THROW_GRIPS[a].hand[0]+THROW_GRIPS[b].torso[0];
+  const [p,q]=s.fighters,gap=getThrowGrip(p,'hand')[0]+getThrowGrip(q,'torso')[0];
   assert.ok(Math.abs((q.x-p.x)*f-gap)<1e-7,`${a}/${b}/${d}/${f}/${location} grip`);
   let crossed=false;
-  for(let t=0;t<150;t++){tick(s);for(const x of s.fighters){assert.ok([x.x,x.y,x.vx,x.vy].every(Number.isFinite));assert.ok(x.x>=WALL&&x.x<=WIDTH-WALL);assert.ok(x.y<=FLOOR);}crossed ||= (q.x-p.x)*f<0;}
+  for(let t=0;t<150;t++){tick(s);for(const x of s.fighters){assert.ok([x.x,x.y,x.vx,x.vy].every(Number.isFinite));assert.ok(x.x>=fighterWall(x.id)&&x.x<=WIDTH-fighterWall(x.id));assert.ok(x.y<=FLOOR);}crossed ||= (q.x-p.x)*f<0;}
   assert.equal(s.throwState,null);assert.equal(q.stun,0);assert.equal(q.reaction,null);assert.equal(q.hp,885);
   // Corner-facing-away back throws hit the wall, so a side swap is impossible.
   if(d==='back' && location==='center')assert.ok(crossed,`${a}/${b} back must cross`);
   probes++;
  }
- assert.equal(probes,10584);
+ assert.equal(probes,PLAYABLE_FIGHTERS.length**2*4*2*3);
 });
 check('guard loses to grab; misses and airborne/stunned targets do not latch',()=>{
  const s=fresh();s.mode='guard';catchTarget(s,A.grab,A.right);until(s,()=>s.throwState.phase==='release');assert.equal(s.fighters[1].hp,885);
@@ -71,7 +75,7 @@ check('KO throw finishes visible flight and clears latch before result; restart 
 });
 check('flush-wall back throws swap sides for all attackers, both player indices and walls',()=>{
  for(const id of PLAYABLE_FIGHTERS)for(const index of [0,1])for(const face of [1,-1]){
-  const s=createState(id,'cpu','bront');if(index===1)s.fighters.reverse();const a=s.fighters[index],b=s.fighters[1-index];a.x=face===1?WALL:WIDTH-WALL;a.facing=face;b.x=a.x+face*60;b.facing=-face;
+  const s=createState(id,'cpu','bront');if(index===1)s.fighters.reverse();const a=s.fighters[index],b=s.fighters[1-index];a.x=face===1?fighterWall(a.id):WIDTH-fighterWall(a.id);a.facing=face;b.x=a.x+face*(60+bodySpread(a.id)+bodySpread(b.id));b.facing=-face;
   const inputs=[0,0];inputs[index]=button('back',face);step(s,inputs);until(s,()=>!!s.throwState);
   for(let t=0;t<150;t++){const before=a.x;tick(s);assert.ok(Math.abs(a.x-before)<=8,`${id}: landing collision must not pop the holder`);}
   assert.ok((b.x-a.x)*face< -50,`${id}/index${index}/face${face}: ${(b.x-a.x)*face}`);assert.equal(s.throwState,null);assert.equal(b.stun,0);

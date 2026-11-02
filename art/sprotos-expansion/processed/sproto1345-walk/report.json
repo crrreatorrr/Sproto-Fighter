@@ -1,0 +1,335 @@
+{
+  "source": "art/sprotos-expansion/processed/sproto1345-core/00.png",
+  "sourceSha256": "1b37e5b33c2608e9d57938a0155e60e95f6b1f15f326f1e30a5af7b8ed10adcb",
+  "authoring": {
+    "center": 112,
+    "cut": 172,
+    "footHeight": 8,
+    "pinPelvis": true,
+    "reachLimit": 6
+  },
+  "joints": [
+    {
+      "index": 0,
+      "bob": 0,
+      "legs": [
+        {
+          "side": "far",
+          "hip": [
+            101.0,
+            173
+          ],
+          "knee": [
+            90.75,
+            188.6
+          ],
+          "ankle": [
+            78.5,
+            203.0
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        },
+        {
+          "side": "near",
+          "hip": [
+            121.5,
+            173
+          ],
+          "knee": [
+            132.0,
+            188.6
+          ],
+          "ankle": [
+            140.5,
+            203
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "bob": 0,
+      "legs": [
+        {
+          "side": "far",
+          "hip": [
+            101.0,
+            173
+          ],
+          "knee": [
+            93.25,
+            187.12921789513197
+          ],
+          "ankle": [
+            81.5,
+            200.17157287525382
+          ],
+          "planted": false,
+          "sourceFootY": 209
+        },
+        {
+          "side": "near",
+          "hip": [
+            121.5,
+            173
+          ],
+          "knee": [
+            130.5,
+            188.6
+          ],
+          "ankle": [
+            137.5,
+            203
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "bob": -1,
+      "legs": [
+        {
+          "side": "far",
+          "hip": [
+            101.0,
+            172
+          ],
+          "knee": [
+            94.75,
+            186.04
+          ],
+          "ankle": [
+            84.5,
+            199.0
+          ],
+          "planted": false,
+          "sourceFootY": 209
+        },
+        {
+          "side": "near",
+          "hip": [
+            121.5,
+            172
+          ],
+          "knee": [
+            129.0,
+            188.12
+          ],
+          "ankle": [
+            134.5,
+            203
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "bob": -1,
+      "legs": [
+        {
+          "side": "far",
+          "hip": [
+            101.0,
+            172
+          ],
+          "knee": [
+            96.25,
+            186.64921789513198
+          ],
+          "ankle": [
+            87.5,
+            200.17157287525382
+          ],
+          "planted": false,
+          "sourceFootY": 209
+        },
+        {
+          "side": "near",
+          "hip": [
+            121.5,
+            172
+          ],
+          "knee": [
+            127.5,
+            188.12
+          ],
+          "ankle": [
+            131.5,
+            203
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "bob": 0,
+      "legs": [
+        {
+          "side": "far",
+          "hip": [
+            101.0,
+            173
+          ],
+          "knee": [
+            96.75,
+            188.6
+          ],
+          "ankle": [
+            90.5,
+            203
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        },
+        {
+          "side": "near",
+          "hip": [
+            121.5,
+            173
+          ],
+          "knee": [
+            126.0,
+            188.6
+          ],
+          "ankle": [
+            128.5,
+            203.0
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "bob": 0,
+      "legs": [
+        {
+          "side": "far",
+          "hip": [
+            101.0,
+            173
+          ],
+          "knee": [
+            95.25,
+            188.6
+          ],
+          "ankle": [
+            87.5,
+            203
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        },
+        {
+          "side": "near",
+          "hip": [
+            121.5,
+            173
+          ],
+          "knee": [
+            128.5,
+            187.12921789513197
+          ],
+          "ankle": [
+            131.5,
+            200.17157287525382
+          ],
+          "planted": false,
+          "sourceFootY": 209
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "bob": -1,
+      "legs": [
+        {
+          "side": "far",
+          "hip": [
+            101.0,
+            172
+          ],
+          "knee": [
+            93.75,
+            188.12
+          ],
+          "ankle": [
+            84.5,
+            203
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        },
+        {
+          "side": "near",
+          "hip": [
+            121.5,
+            172
+          ],
+          "knee": [
+            130.0,
+            186.04
+          ],
+          "ankle": [
+            134.5,
+            199.0
+          ],
+          "planted": false,
+          "sourceFootY": 209
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "bob": -1,
+      "legs": [
+        {
+          "side": "far",
+          "hip": [
+            101.0,
+            172
+          ],
+          "knee": [
+            92.25,
+            188.12
+          ],
+          "ankle": [
+            81.5,
+            203
+          ],
+          "planted": true,
+          "sourceFootY": 209
+        },
+        {
+          "side": "near",
+          "hip": [
+            121.5,
+            172
+          ],
+          "knee": [
+            131.5,
+            186.64921789513198
+          ],
+          "ankle": [
+            137.5,
+            200.17157287525382
+          ],
+          "planted": false,
+          "sourceFootY": 209
+        }
+      ]
+    }
+  ],
+  "provenance": "Eight locally baked guarded steps from Higgsfield guard; same method as existing roster",
+  "status": "visual review required"
+}

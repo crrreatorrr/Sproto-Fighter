@@ -1,0 +1,66 @@
+[
+  {
+    "index": 18,
+    "entity": "mlk",
+    "fighter": "mlk",
+    "kind": "core",
+    "job_id": "c1ef57a3-7acc-4837-bfaf-adc03bca3324",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_060700_c1ef57a3-7acc-4837-bfaf-adc03bca3324.png"
+  },
+  {
+    "index": 19,
+    "entity": "mlk",
+    "fighter": "mlk",
+    "kind": "walk",
+    "job_id": "a35c559f-8444-4ca4-8893-ad7d91c20b89",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_060858_a35c559f-8444-4ca4-8893-ad7d91c20b89.png"
+  },
+  {
+    "index": 20,
+    "entity": "mlk",
+    "fighter": "mlk",
+    "kind": "events",
+    "job_id": "87ec27ab-0fd9-460f-bc27-6c96eb5345b1",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_060858_87ec27ab-0fd9-460f-bc27-6c96eb5345b1.png"
+  }
+]

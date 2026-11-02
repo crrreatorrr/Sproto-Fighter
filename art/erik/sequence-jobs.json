@@ -1,0 +1,42 @@
+[
+  {
+    "index": 1,
+    "job_id": "b0cf97ae-adaa-47e6-9de2-25879a0c186a",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "erik",
+    "fighter": "erik",
+    "kind": "walk"
+  },
+  {
+    "index": 2,
+    "job_id": "5a25675c-7564-44a7-a1ff-11a69a85710e",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "erik",
+    "fighter": "erik",
+    "kind": "events"
+  }
+]

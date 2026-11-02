@@ -1,0 +1,420 @@
+[
+  {
+    "index": 13,
+    "entity": "sproto313",
+    "fighter": "sproto313",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "8393c3ad-b151-47e8-8ad8-5e88ac5840e4"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONE SINGLE Sproto with TWO CONNECTED FACES side-by-side on ONE broad blue spiky head. Each face has TWO yellow eyes with black pupils (FOUR EYES TOTAL) and its own broad RED muzzle/lips; both face halves are joined in one continuous blue head mass. ONE blue torso, TWO yellow arms/hands, TWO low-rooted blue legs and blue feet. Never split into two bodies or draw two separate actors. Preserve the two-face anatomy in every pose, including side view. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly EIGHT separate full-body drawings in a regular 4-column by 2-row grid. A continuous guarded fighting footwork loop, NOT a run. Upper body stays calm, head/torso size constant, hips stay at the same height and same x center. Both fists remain raised. Feet are clearly different on adjacent frames: 0 near foot forward grounded/far foot back grounded; 1 transfer weight to near sole, far heel lifts; 2 far knee passes under low pelvis with far foot lifted; 3 far foot reaches forward while near sole still supports; 4 far foot forward grounded/near foot back grounded; 5 transfer weight to far sole, near heel lifts; 6 near knee passes under low pelvis with near foot lifted; 7 near foot reaches forward ready to plant. No feet crossing through one another, no sliding torso, no detached hips. Each frame has at least one clearly grounded foot. Last frame loops to first. Same complete body and clothing as the combat reference."
+    }
+  },
+  {
+    "index": 1073,
+    "entity": "sproto999-companion",
+    "fighter": "sproto999",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "0e48e3a1-a160-4a7c-947a-bb9d8c808963"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the SMALL LOWER BLUE figure: round blue head with swept top spikes, two large cream/yellow eyes with black pupils, small rounded red nose, broad red lips and blue cheek/ear area. Slim blue body with simple blue trousers and yellow gloves/shoes. Exclude the large upper figure; no yellow forehead brow band from it. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly EIGHT separate full-body drawings in a regular 4-column by 2-row grid. A continuous guarded fighting footwork loop, NOT a run. Upper body stays calm, head/torso size constant, hips stay at the same height and same x center. Both fists remain raised. Feet are clearly different on adjacent frames: 0 near foot forward grounded/far foot back grounded; 1 transfer weight to near sole, far heel lifts; 2 far knee passes under low pelvis with far foot lifted; 3 far foot reaches forward while near sole still supports; 4 far foot forward grounded/near foot back grounded; 5 transfer weight to far sole, near heel lifts; 6 near knee passes under low pelvis with near foot lifted; 7 near foot reaches forward ready to plant. No feet crossing through one another, no sliding torso, no detached hips. Each frame has at least one clearly grounded foot. Last frame loops to first. Same complete body and clothing as the combat reference."
+    }
+  },
+  {
+    "index": 100,
+    "entity": "sproto1870",
+    "fighter": "sproto1870",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "5f2c9e21-96bc-454d-adc5-c8c0ee4584c7"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Isolate only the specified one of the two original figures.\n\nIDENTITY: ONLY the LARGE UPPER figure, as a legless floating Sproto HEAD: blue forehead and pointed blue upper spike, RED swept rear spike fan and yellow side crescent, half-lidded yellow eyes with black pupils, enormous YELLOW angular muzzle/cheek patch and red lower outline. This face IS the whole floating character: no neck, humanoid torso, arms, hands, legs, feet or shoes. Exclude the smaller lower blue figure. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly EIGHT separate complete floating heads in a FOUR-COLUMN by TWO-ROW grid. A smooth repeating HOVER GLIDE cycle: level hover; bank forward slightly; rise a little; return level at top of bob; bank opposite slightly; fall a little; return level at bottom of bob; transition into first pose. Keep head and muzzle size constant. No walking, no footprints, no legs, no feet, no torso. Entire head visible in every cell."
+    }
+  },
+  {
+    "index": 103,
+    "entity": "sproto1870-companion",
+    "fighter": "sproto1870",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "866d96db-99e3-45c8-982b-a0fecfc0c18c"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Isolate only the specified one of the two original figures.\n\nIDENTITY: ONLY the SMALL LOWER RIGHT figure, as a legless floating Sproto HEAD: round blue swept head, enormous yellow round eyes with black pupils and white catchlights, tiny black nose/mouth, rounded YELLOW muzzle below eyes. Blue cheeks and forehead. This face IS the whole floating character: no neck, torso, arms, hands, legs, feet or shoes. No red spike fan or red-and-yellow mask. Exclude the large figure. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly EIGHT separate complete floating heads in a FOUR-COLUMN by TWO-ROW grid. A smooth repeating HOVER GLIDE cycle: level hover; bank forward slightly; rise a little; return level at top of bob; bank opposite slightly; fall a little; return level at bottom of bob; transition into first pose. Keep head and muzzle size constant. No walking, no footprints, no legs, no feet, no torso. Entire head visible in every cell."
+    }
+  },
+  {
+    "index": 1221,
+    "entity": "sproto3181-companion",
+    "fighter": "sproto3181",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "071fb413-bae0-4ed4-9c5f-f03e5296169f"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the YELLOW figure on the RIGHT: yellow narrow side-profile head with tiny pointed ear/spikes, single large visible black oval eye with white glint, black round nose, long slender yellow neck/body, two slim yellow arms with round yellow hands. Extend low yellow legs with simple black shoes. No blue head or red eyelids. Exclude both blue/dark figures and number bubble. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly EIGHT separate full-body drawings in a regular 4-column by 2-row grid. A continuous guarded fighting footwork loop, NOT a run. Upper body stays calm, head/torso size constant, hips stay at the same height and same x center. Both fists remain raised. Feet are clearly different on adjacent frames: 0 near foot forward grounded/far foot back grounded; 1 transfer weight to near sole, far heel lifts; 2 far knee passes under low pelvis with far foot lifted; 3 far foot reaches forward while near sole still supports; 4 far foot forward grounded/near foot back grounded; 5 transfer weight to far sole, near heel lifts; 6 near knee passes under low pelvis with near foot lifted; 7 near foot reaches forward ready to plant. No feet crossing through one another, no sliding torso, no detached hips. Each frame has at least one clearly grounded foot. Last frame loops to first. Same complete body and clothing as the combat reference."
+    }
+  },
+  {
+    "index": 1225,
+    "entity": "sproto3181-companion2",
+    "fighter": "sproto3181",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "a24dff96-1892-4c59-9d89-5ec55f9fd215"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the SMALL DARK figure at the LOWER CENTER: navy/black swept spiky head, two very large WHITE eyes with black pupils, rounded broad BLACK muzzle and tiny RED smiling mouth, dark blue torso, YELLOW arms/hands and small low blue legs with yellow shoes. Exclude the large blue figure, yellow right figure and number bubble. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly EIGHT separate full-body drawings in a regular 4-column by 2-row grid. A continuous guarded fighting footwork loop, NOT a run. Upper body stays calm, head/torso size constant, hips stay at the same height and same x center. Both fists remain raised. Feet are clearly different on adjacent frames: 0 near foot forward grounded/far foot back grounded; 1 transfer weight to near sole, far heel lifts; 2 far knee passes under low pelvis with far foot lifted; 3 far foot reaches forward while near sole still supports; 4 far foot forward grounded/near foot back grounded; 5 transfer weight to far sole, near heel lifts; 6 near knee passes under low pelvis with near foot lifted; 7 near foot reaches forward ready to plant. No feet crossing through one another, no sliding torso, no detached hips. Each frame has at least one clearly grounded foot. Last frame loops to first. Same complete body and clothing as the combat reference."
+    }
+  },
+  {
+    "index": 14,
+    "entity": "sproto313",
+    "fighter": "sproto313",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "8393c3ad-b151-47e8-8ad8-5e88ac5840e4"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONE SINGLE Sproto with TWO CONNECTED FACES side-by-side on ONE broad blue spiky head. Each face has TWO yellow eyes with black pupils (FOUR EYES TOTAL) and its own broad RED muzzle/lips; both face halves are joined in one continuous blue head mass. ONE blue torso, TWO yellow arms/hands, TWO low-rooted blue legs and blue feet. Never split into two bodies or draw two separate actors. Preserve the two-face anatomy in every pose, including side view. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 separate complete drawings, regular 4-column by 8-row grid, read left-to-right/top-to-bottom. All 32 are the SAME single actor, including lying floor drawings. No opponents or partner drawn.\nRow 1 INTRO: relaxed idle; determined head turn with fists rising; guarded confident stance; settle combat guard.\nRow 2 SPECIAL A: low coil; shoulder windup; fully extended straight impact punch; punch retract.\nRow 3 SPECIAL B: alternate shoulder strike; retract to cover; two-arm finishing palm thrust to RIGHT; recover combat guard. No floating effects.\nRow 4 CAST: hands coil at chest; forward hand chambers; front palm extends RIGHT at chest height; retract to guard. No projectile, sphere or particles; engine supplies effects.\nRow 5 RECOIL: chest impact arch; head/torso lean back with arms still connected; bend knees to absorb; regain combat guard.\nRow 6 DEFEAT START: staggering upright; knees buckle; dropping toward floor with bent elbows; roll onto side with head and feet fully visible.\nRow 7 DEFEAT FLOOR: entirely lying on side, head to LEFT feet to RIGHT; same lying body settles; small final shoulder drop; side-lying completely still. No kneeling or standing in any of these four.\nRow 8 DEFEAT REST: same side-lying floor silhouette with tiny relaxed hand change; same side-lying rest; same resting body; final completely relaxed side-lying body. Floor poses are lower than standing poses; never stretch them upright. All hats, heads, hands and feet remain connected and fully visible."
+    }
+  },
+  {
+    "index": 1074,
+    "entity": "sproto999-companion",
+    "fighter": "sproto999",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "0e48e3a1-a160-4a7c-947a-bb9d8c808963"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the SMALL LOWER BLUE figure: round blue head with swept top spikes, two large cream/yellow eyes with black pupils, small rounded red nose, broad red lips and blue cheek/ear area. Slim blue body with simple blue trousers and yellow gloves/shoes. Exclude the large upper figure; no yellow forehead brow band from it. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses. This actor is the ACROBATIC COMPANION: intro includes a quick pivot and jaunty guarded hop; SPECIAL rows 2-3 use dynamic low-hip kick chambers, waist-high kicks, bent-knee airborne strike, planted double-palm finish, then recover guard. Rows 2-3 still follow the exact 8 windup/contact/retract/finish beats. Every striking pose faces RIGHT. Separate complete actor only; its partner will alternate attack contacts in the engine. Do not draw the partner.\n\nExactly 32 separate complete drawings, regular 4-column by 8-row grid, read left-to-right/top-to-bottom. All 32 are the SAME single actor, including lying floor drawings. No opponents or partner drawn.\nRow 1 INTRO: relaxed idle; determined head turn with fists rising; guarded confident stance; settle combat guard.\nRow 2 SPECIAL A: low coil; shoulder windup; fully extended straight impact punch; punch retract.\nRow 3 SPECIAL B: alternate shoulder strike; retract to cover; two-arm finishing palm thrust to RIGHT; recover combat guard. No floating effects.\nRow 4 CAST: hands coil at chest; forward hand chambers; front palm extends RIGHT at chest height; retract to guard. No projectile, sphere or particles; engine supplies effects.\nRow 5 RECOIL: chest impact arch; head/torso lean back with arms still connected; bend knees to absorb; regain combat guard.\nRow 6 DEFEAT START: staggering upright; knees buckle; dropping toward floor with bent elbows; roll onto side with head and feet fully visible.\nRow 7 DEFEAT FLOOR: entirely lying on side, head to LEFT feet to RIGHT; same lying body settles; small final shoulder drop; side-lying completely still. No kneeling or standing in any of these four.\nRow 8 DEFEAT REST: same side-lying floor silhouette with tiny relaxed hand change; same side-lying rest; same resting body; final completely relaxed side-lying body. Floor poses are lower than standing poses; never stretch them upright. All hats, heads, hands and feet remain connected and fully visible."
+    }
+  },
+  {
+    "index": 101,
+    "entity": "sproto1870",
+    "fighter": "sproto1870",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "5f2c9e21-96bc-454d-adc5-c8c0ee4584c7"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Isolate only the specified one of the two original figures.\n\nIDENTITY: ONLY the LARGE UPPER figure, as a legless floating Sproto HEAD: blue forehead and pointed blue upper spike, RED swept rear spike fan and yellow side crescent, half-lidded yellow eyes with black pupils, enormous YELLOW angular muzzle/cheek patch and red lower outline. This face IS the whole floating character: no neck, humanoid torso, arms, hands, legs, feet or shoes. Exclude the smaller lower blue figure. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete floating HEAD drawings, FOUR columns and EIGHT rows. Exactly four per row.\nRow 1 INTRO: neutral hover; look determined; confident slight bank; settle neutral hover.\nRow 2 SPECIAL A: backward bank coil; drive forward; full forward ram impact; ram retract.\nRow 3 SPECIAL B: rotate upward with dynamic expression; retract through low bank; emphatic diagonal forward ram finish; recover level hover.\nRow 4 CAST: eyes focus; head tilts back slightly; forward power exhale, no projectile; return neutral.\nRow 5 RECOIL: face flinches and head tilts back; continuing bank recoil; stabilize lower hover; return neutral.\nRow 6 DEFEAT: drooping hover; loses lift; dropping turned head; settles on side at floor. No body or limbs.\nRow 7 FLOOR REST: whole head resting sideways; settles; eyes soften; entirely still resting head.\nRow 8 FINAL REST: same complete sideways resting head; same head with small eye relaxation; hold resting head; final still resting head. Remain a head-only character."
+    }
+  },
+  {
+    "index": 104,
+    "entity": "sproto1870-companion",
+    "fighter": "sproto1870",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "866d96db-99e3-45c8-982b-a0fecfc0c18c"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Isolate only the specified one of the two original figures.\n\nIDENTITY: ONLY the SMALL LOWER RIGHT figure, as a legless floating Sproto HEAD: round blue swept head, enormous yellow round eyes with black pupils and white catchlights, tiny black nose/mouth, rounded YELLOW muzzle below eyes. Blue cheeks and forehead. This face IS the whole floating character: no neck, torso, arms, hands, legs, feet or shoes. No red spike fan or red-and-yellow mask. Exclude the large figure. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete floating HEAD drawings, FOUR columns and EIGHT rows. Exactly four per row.\nRow 1 INTRO: neutral hover; look determined; confident slight bank; settle neutral hover.\nRow 2 SPECIAL A: backward bank coil; drive forward; full forward ram impact; ram retract.\nRow 3 SPECIAL B: rotate upward with dynamic expression; retract through low bank; emphatic diagonal forward ram finish; recover level hover.\nRow 4 CAST: eyes focus; head tilts back slightly; forward power exhale, no projectile; return neutral.\nRow 5 RECOIL: face flinches and head tilts back; continuing bank recoil; stabilize lower hover; return neutral.\nRow 6 DEFEAT: drooping hover; loses lift; dropping turned head; settles on side at floor. No body or limbs.\nRow 7 FLOOR REST: whole head resting sideways; settles; eyes soften; entirely still resting head.\nRow 8 FINAL REST: same complete sideways resting head; same head with small eye relaxation; hold resting head; final still resting head. Remain a head-only character."
+    }
+  },
+  {
+    "index": 1222,
+    "entity": "sproto3181-companion",
+    "fighter": "sproto3181",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "071fb413-bae0-4ed4-9c5f-f03e5296169f"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the YELLOW figure on the RIGHT: yellow narrow side-profile head with tiny pointed ear/spikes, single large visible black oval eye with white glint, black round nose, long slender yellow neck/body, two slim yellow arms with round yellow hands. Extend low yellow legs with simple black shoes. No blue head or red eyelids. Exclude both blue/dark figures and number bubble. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses. This actor is the ACROBATIC COMPANION: intro includes a quick pivot and jaunty guarded hop; SPECIAL rows 2-3 use dynamic low-hip kick chambers, waist-high kicks, bent-knee airborne strike, planted double-palm finish, then recover guard. Rows 2-3 still follow the exact 8 windup/contact/retract/finish beats. Every striking pose faces RIGHT. Separate complete actor only; its partner will alternate attack contacts in the engine. Do not draw the partner.\n\nExactly 32 separate complete drawings, regular 4-column by 8-row grid, read left-to-right/top-to-bottom. All 32 are the SAME single actor, including lying floor drawings. No opponents or partner drawn.\nRow 1 INTRO: relaxed idle; determined head turn with fists rising; guarded confident stance; settle combat guard.\nRow 2 SPECIAL A: low coil; shoulder windup; fully extended straight impact punch; punch retract.\nRow 3 SPECIAL B: alternate shoulder strike; retract to cover; two-arm finishing palm thrust to RIGHT; recover combat guard. No floating effects.\nRow 4 CAST: hands coil at chest; forward hand chambers; front palm extends RIGHT at chest height; retract to guard. No projectile, sphere or particles; engine supplies effects.\nRow 5 RECOIL: chest impact arch; head/torso lean back with arms still connected; bend knees to absorb; regain combat guard.\nRow 6 DEFEAT START: staggering upright; knees buckle; dropping toward floor with bent elbows; roll onto side with head and feet fully visible.\nRow 7 DEFEAT FLOOR: entirely lying on side, head to LEFT feet to RIGHT; same lying body settles; small final shoulder drop; side-lying completely still. No kneeling or standing in any of these four.\nRow 8 DEFEAT REST: same side-lying floor silhouette with tiny relaxed hand change; same side-lying rest; same resting body; final completely relaxed side-lying body. Floor poses are lower than standing poses; never stretch them upright. All hats, heads, hands and feet remain connected and fully visible."
+    }
+  },
+  {
+    "index": 1226,
+    "entity": "sproto3181-companion2",
+    "fighter": "sproto3181",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "a24dff96-1892-4c59-9d89-5ec55f9fd215"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the SMALL DARK figure at the LOWER CENTER: navy/black swept spiky head, two very large WHITE eyes with black pupils, rounded broad BLACK muzzle and tiny RED smiling mouth, dark blue torso, YELLOW arms/hands and small low blue legs with yellow shoes. Exclude the large blue figure, yellow right figure and number bubble. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses. This actor is the ACROBATIC COMPANION: intro includes a quick pivot and jaunty guarded hop; SPECIAL rows 2-3 use dynamic low-hip kick chambers, waist-high kicks, bent-knee airborne strike, planted double-palm finish, then recover guard. Rows 2-3 still follow the exact 8 windup/contact/retract/finish beats. Every striking pose faces RIGHT. Separate complete actor only; its partner will alternate attack contacts in the engine. Do not draw the partner.\n\nExactly 32 separate complete drawings, regular 4-column by 8-row grid, read left-to-right/top-to-bottom. All 32 are the SAME single actor, including lying floor drawings. No opponents or partner drawn.\nRow 1 INTRO: relaxed idle; determined head turn with fists rising; guarded confident stance; settle combat guard.\nRow 2 SPECIAL A: low coil; shoulder windup; fully extended straight impact punch; punch retract.\nRow 3 SPECIAL B: alternate shoulder strike; retract to cover; two-arm finishing palm thrust to RIGHT; recover combat guard. No floating effects.\nRow 4 CAST: hands coil at chest; forward hand chambers; front palm extends RIGHT at chest height; retract to guard. No projectile, sphere or particles; engine supplies effects.\nRow 5 RECOIL: chest impact arch; head/torso lean back with arms still connected; bend knees to absorb; regain combat guard.\nRow 6 DEFEAT START: staggering upright; knees buckle; dropping toward floor with bent elbows; roll onto side with head and feet fully visible.\nRow 7 DEFEAT FLOOR: entirely lying on side, head to LEFT feet to RIGHT; same lying body settles; small final shoulder drop; side-lying completely still. No kneeling or standing in any of these four.\nRow 8 DEFEAT REST: same side-lying floor silhouette with tiny relaxed hand change; same side-lying rest; same resting body; final completely relaxed side-lying body. Floor poses are lower than standing poses; never stretch them upright. All hats, heads, hands and feet remain connected and fully visible."
+    }
+  },
+  {
+    "index": 1071,
+    "entity": "sproto999",
+    "fighter": "sproto999",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "20473828-ea62-4dbc-a429-40afa65dbda7"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the LARGE UPPER BLUE figure: swept blue head, yellow brow and half-lidded yellow eyes, broad red smiling muzzle, red long-sleeved shirt with yellow cuffs and yellow hands. Simple red torso, blue trousers and yellow shoes. No eyes or face on its shirt/belly; the lower face belongs to the separate companion. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete dynamic pixel-art figures in an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid. Each of the following rows contains EXACTLY FOUR figures; do not create a fifth column. Equal cell width/height; generous empty magenta margins around each body. Same single actor throughout.\nRow 1 DASH: crouch-drive anticipation; rear-leg powerful push; low traveling stride with front knee drive; long low traveling stride with coherent bent knees.\nRow 2 DASH TO JUMP: front foot brakes and torso rises; guard recovery; tucked rising jump with bent low knees; springing airborne rise with front arm high.\nRow 3 JUMP: folded knees at apex; falling with arms balancing; feet reach down; falling landing-ready with both feet below hips. These are airborne silhouettes, no floor.\nRow 4 HEAVY KICK: low hip coil; front knee chambers from low pelvis; knee rises; SIDE KICK fully extended waist-high to RIGHT.\nRow 5 HEAVY RECOVERY: sustain extended side kick one beat; knee folds back; grounded follow-through; guard.\nRow 6 AIR KICK: compact aerial coil; front knee chambers; knee opens; forceful extended diagonal kick to RIGHT, rear knee folded.\nRow 7 AIR TO VICTORY: knee retracts in air; balanced airborne recovery; confident upright victory guard; victory knees coil.\nRow 8 VICTORY: jubilant short hop with fist up; stylish landing crouch; proud standing hero stance; settled triumphant hero pose. No effects, no additional figures. Exactly 4 figures per row, 8 rows."
+    }
+  },
+  {
+    "index": 1075,
+    "entity": "sproto999-companion",
+    "fighter": "sproto999",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "0e48e3a1-a160-4a7c-947a-bb9d8c808963"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the SMALL LOWER BLUE figure: round blue head with swept top spikes, two large cream/yellow eyes with black pupils, small rounded red nose, broad red lips and blue cheek/ear area. Slim blue body with simple blue trousers and yellow gloves/shoes. Exclude the large upper figure; no yellow forehead brow band from it. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete dynamic pixel-art figures in an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid. Each of the following rows contains EXACTLY FOUR figures; do not create a fifth column. Equal cell width/height; generous empty magenta margins around each body. Same single actor throughout.\nRow 1 DASH: crouch-drive anticipation; rear-leg powerful push; low traveling stride with front knee drive; long low traveling stride with coherent bent knees.\nRow 2 DASH TO JUMP: front foot brakes and torso rises; guard recovery; tucked rising jump with bent low knees; springing airborne rise with front arm high.\nRow 3 JUMP: folded knees at apex; falling with arms balancing; feet reach down; falling landing-ready with both feet below hips. These are airborne silhouettes, no floor.\nRow 4 HEAVY KICK: low hip coil; front knee chambers from low pelvis; knee rises; SIDE KICK fully extended waist-high to RIGHT.\nRow 5 HEAVY RECOVERY: sustain extended side kick one beat; knee folds back; grounded follow-through; guard.\nRow 6 AIR KICK: compact aerial coil; front knee chambers; knee opens; forceful extended diagonal kick to RIGHT, rear knee folded.\nRow 7 AIR TO VICTORY: knee retracts in air; balanced airborne recovery; confident upright victory guard; victory knees coil.\nRow 8 VICTORY: jubilant short hop with fist up; stylish landing crouch; proud standing hero stance; settled triumphant hero pose. No effects, no additional figures. Exactly 4 figures per row, 8 rows."
+    }
+  },
+  {
+    "index": 213,
+    "entity": "sproto1870",
+    "fighter": "sproto1870",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "5f2c9e21-96bc-454d-adc5-c8c0ee4584c7"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Isolate only the specified one of the two original figures.\n\nIDENTITY: ONLY the LARGE UPPER figure, as a legless floating Sproto HEAD: blue forehead and pointed blue upper spike, RED swept rear spike fan and yellow side crescent, half-lidded yellow eyes with black pupils, enormous YELLOW angular muzzle/cheek patch and red lower outline. This face IS the whole floating character: no neck, humanoid torso, arms, hands, legs, feet or shoes. Exclude the smaller lower blue figure. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete floating HEAD drawings, FOUR columns and EIGHT rows. Exactly four per row.\nRow 1 DASH: back-bank anticipation; drive forward; fast forward tilt; stretched forward lunge by position, never deform face.\nRow 2 DASH/JUMP: braking bank; level hover recovery; rising glide; rising bank.\nRow 3 JUMP: upper-arc head; level at apex; descending head; descending recovery bank.\nRow 4 HEAVY RAM: low backward coil; windup bank; turn forward; strong forward ram contact.\nRow 5 HEAVY RECOVERY: sustain ram contact; retract bank; stabilize; level hover guard.\nRow 6 AIR RAM: aerial back-bank coil; drive upward; rotate forward; forceful diagonal aerial head ram.\nRow 7 AIR/VICTORY: retract from ram; balanced glide; proud floating guard; victory bank coil.\nRow 8 VICTORY: celebratory upward swoop; tilt proudly; settle confident floating head; final proud level hover. Absolutely no arms, hands, legs or feet."
+    }
+  },
+  {
+    "index": 214,
+    "entity": "sproto1870-companion",
+    "fighter": "sproto1870",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "866d96db-99e3-45c8-982b-a0fecfc0c18c"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Isolate only the specified one of the two original figures.\n\nIDENTITY: ONLY the SMALL LOWER RIGHT figure, as a legless floating Sproto HEAD: round blue swept head, enormous yellow round eyes with black pupils and white catchlights, tiny black nose/mouth, rounded YELLOW muzzle below eyes. Blue cheeks and forehead. This face IS the whole floating character: no neck, torso, arms, hands, legs, feet or shoes. No red spike fan or red-and-yellow mask. Exclude the large figure. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete floating HEAD drawings, FOUR columns and EIGHT rows. Exactly four per row.\nRow 1 DASH: back-bank anticipation; drive forward; fast forward tilt; stretched forward lunge by position, never deform face.\nRow 2 DASH/JUMP: braking bank; level hover recovery; rising glide; rising bank.\nRow 3 JUMP: upper-arc head; level at apex; descending head; descending recovery bank.\nRow 4 HEAVY RAM: low backward coil; windup bank; turn forward; strong forward ram contact.\nRow 5 HEAVY RECOVERY: sustain ram contact; retract bank; stabilize; level hover guard.\nRow 6 AIR RAM: aerial back-bank coil; drive upward; rotate forward; forceful diagonal aerial head ram.\nRow 7 AIR/VICTORY: retract from ram; balanced glide; proud floating guard; victory bank coil.\nRow 8 VICTORY: celebratory upward swoop; tilt proudly; settle confident floating head; final proud level hover. Absolutely no arms, hands, legs or feet."
+    }
+  },
+  {
+    "index": 1219,
+    "entity": "sproto3181",
+    "fighter": "sproto3181",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "161c57cd-1e71-4ee2-9b67-a5305196bcff"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the LARGE BLUE figure on the LEFT: blue swept spiky head with tiny pointed ears, narrow red half-lidded eyes and broad dark red lips, long blue torso and yellow sleeves/gloves, simple blue trousers. No small cartoon face, creature or patch on the shirt/chest. Omit background number bubble. Exclude the yellow right figure and small dark lower figure. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete dynamic pixel-art figures in an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid. Each of the following rows contains EXACTLY FOUR figures; do not create a fifth column. Equal cell width/height; generous empty magenta margins around each body. Same single actor throughout.\nRow 1 DASH: crouch-drive anticipation; rear-leg powerful push; low traveling stride with front knee drive; long low traveling stride with coherent bent knees.\nRow 2 DASH TO JUMP: front foot brakes and torso rises; guard recovery; tucked rising jump with bent low knees; springing airborne rise with front arm high.\nRow 3 JUMP: folded knees at apex; falling with arms balancing; feet reach down; falling landing-ready with both feet below hips. These are airborne silhouettes, no floor.\nRow 4 HEAVY KICK: low hip coil; front knee chambers from low pelvis; knee rises; SIDE KICK fully extended waist-high to RIGHT.\nRow 5 HEAVY RECOVERY: sustain extended side kick one beat; knee folds back; grounded follow-through; guard.\nRow 6 AIR KICK: compact aerial coil; front knee chambers; knee opens; forceful extended diagonal kick to RIGHT, rear knee folded.\nRow 7 AIR TO VICTORY: knee retracts in air; balanced airborne recovery; confident upright victory guard; victory knees coil.\nRow 8 VICTORY: jubilant short hop with fist up; stylish landing crouch; proud standing hero stance; settled triumphant hero pose. No effects, no additional figures. Exactly 4 figures per row, 8 rows."
+    }
+  },
+  {
+    "index": 1223,
+    "entity": "sproto3181-companion",
+    "fighter": "sproto3181",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "071fb413-bae0-4ed4-9c5f-f03e5296169f"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the YELLOW figure on the RIGHT: yellow narrow side-profile head with tiny pointed ear/spikes, single large visible black oval eye with white glint, black round nose, long slender yellow neck/body, two slim yellow arms with round yellow hands. Extend low yellow legs with simple black shoes. No blue head or red eyelids. Exclude both blue/dark figures and number bubble. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete dynamic pixel-art figures in an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid. Each of the following rows contains EXACTLY FOUR figures; do not create a fifth column. Equal cell width/height; generous empty magenta margins around each body. Same single actor throughout.\nRow 1 DASH: crouch-drive anticipation; rear-leg powerful push; low traveling stride with front knee drive; long low traveling stride with coherent bent knees.\nRow 2 DASH TO JUMP: front foot brakes and torso rises; guard recovery; tucked rising jump with bent low knees; springing airborne rise with front arm high.\nRow 3 JUMP: folded knees at apex; falling with arms balancing; feet reach down; falling landing-ready with both feet below hips. These are airborne silhouettes, no floor.\nRow 4 HEAVY KICK: low hip coil; front knee chambers from low pelvis; knee rises; SIDE KICK fully extended waist-high to RIGHT.\nRow 5 HEAVY RECOVERY: sustain extended side kick one beat; knee folds back; grounded follow-through; guard.\nRow 6 AIR KICK: compact aerial coil; front knee chambers; knee opens; forceful extended diagonal kick to RIGHT, rear knee folded.\nRow 7 AIR TO VICTORY: knee retracts in air; balanced airborne recovery; confident upright victory guard; victory knees coil.\nRow 8 VICTORY: jubilant short hop with fist up; stylish landing crouch; proud standing hero stance; settled triumphant hero pose. No effects, no additional figures. Exactly 4 figures per row, 8 rows."
+    }
+  },
+  {
+    "index": 1227,
+    "entity": "sproto3181-companion2",
+    "fighter": "sproto3181",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "a24dff96-1892-4c59-9d89-5ec55f9fd215"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: ONLY the SMALL DARK figure at the LOWER CENTER: navy/black swept spiky head, two very large WHITE eyes with black pupils, rounded broad BLACK muzzle and tiny RED smiling mouth, dark blue torso, YELLOW arms/hands and small low blue legs with yellow shoes. Exclude the large blue figure, yellow right figure and number bubble. This sheet isolates ONLY this selected figure. All companions have separate animation atlases. Never merge bodies, duplicate heads or include a companion. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete dynamic pixel-art figures in an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid. Each of the following rows contains EXACTLY FOUR figures; do not create a fifth column. Equal cell width/height; generous empty magenta margins around each body. Same single actor throughout.\nRow 1 DASH: crouch-drive anticipation; rear-leg powerful push; low traveling stride with front knee drive; long low traveling stride with coherent bent knees.\nRow 2 DASH TO JUMP: front foot brakes and torso rises; guard recovery; tucked rising jump with bent low knees; springing airborne rise with front arm high.\nRow 3 JUMP: folded knees at apex; falling with arms balancing; feet reach down; falling landing-ready with both feet below hips. These are airborne silhouettes, no floor.\nRow 4 HEAVY KICK: low hip coil; front knee chambers from low pelvis; knee rises; SIDE KICK fully extended waist-high to RIGHT.\nRow 5 HEAVY RECOVERY: sustain extended side kick one beat; knee folds back; grounded follow-through; guard.\nRow 6 AIR KICK: compact aerial coil; front knee chambers; knee opens; forceful extended diagonal kick to RIGHT, rear knee folded.\nRow 7 AIR TO VICTORY: knee retracts in air; balanced airborne recovery; confident upright victory guard; victory knees coil.\nRow 8 VICTORY: jubilant short hop with fist up; stylish landing crouch; proud standing hero stance; settled triumphant hero pose. No effects, no additional figures. Exactly 4 figures per row, 8 rows."
+    }
+  }
+]

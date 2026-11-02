@@ -1,0 +1,66 @@
+[
+  {
+    "index": 0,
+    "id": "trenches",
+    "name": "Mudline Trenches",
+    "story": "Chapter 1 \u00b7 The Trenches",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: A muddy maintenance trench at the foot of a huge distant neon city. Side-on fighting lane at the bottom, metal retaining walls, drainage pipes, shallow rain puddles, a broken amber work lamp and an unlettered discarded access pass on a wall hook. The trench opens to a hazy staircase and a narrow distant route up toward glittering city towers. Rainy predawn blue/teal air against amber lamp pools. Humble starting-line mood with visible hope in the city lights. Foreground level packed-earth lane; puddles behind the combat foot line, no water blocking the walkable floor."
+    }
+  },
+  {
+    "index": 1,
+    "id": "circuit",
+    "name": "Circuit Gate",
+    "story": "Chapter 2 \u00b7 The City",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: The gate to an extravagant neon challenge circuit in the city streets. Towering retrofuturistic buildings, a raised security gate, four unlettered circular challenge lamps, a gold yacht-shaped invitation icon in a high glass case, broad building silhouettes and one distant elevated pedestrian route. Electric teal signs made of geometric lights only, amber windows, violet city haze. Defiant climb-through-the-city atmosphere. Empty flat stone/metal street fighting lane, uninterrupted from left wall to right wall, all boards, gates and street furniture behind it."
+    }
+  },
+  {
+    "index": 2,
+    "id": "throne",
+    "name": "Crown Relay Chamber",
+    "story": "Chapter 4 \u00b7 The Castle",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: Inside a vast gothic stone castle, a colossal crown-shaped relay engine over an empty throne dominates the BACK wall. Heavy chains descend from the engine into the floor BEHIND the fighting lane. A cracked lock, warm torchlight and a thin violet glow from a hidden lower doorway imply the next route. Moonlit indigo stone arches, brass and gold circuitry worked into medieval masonry, amber lamps, red cloth far in the background. No human throne occupant. The flat foreground is a broad uninterrupted low-contrast stone combat platform; the throne, chain sockets, stairs and portals are all behind it."
+    }
+  },
+  {
+    "index": 3,
+    "id": "verse",
+    "name": "Verse Gate",
+    "story": "Chapter 6 \u00b7 The Verse",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: The edge of a fractured neon universe: a huge locked circular portal beyond a floating stone-and-metal platform. A branching route of small red, blue, gold and green lights approaches the portal from below, suggesting every recruited crew member. Floating geometric fragments and a star-filled violet horizon, cyan portal rim, small red/blue sentry plinths with NO figures, distant luminous pathways opening into space. Grand hopeful finale, dark restrained center for colorful fighters. A solid perfectly horizontal foreground fighting platform spans the full image including corners, no holes or edge drops in the playable lane."
+    }
+  }
+]

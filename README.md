@@ -1,12 +1,16 @@
 # Sproto Arena — local combat prototype
 
-Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline prototype with **21 selectable fighters**, each with its original supplied image on the selection screen and a fighting animation set. All 21 have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Four story worlds now have static Higgsfield pixel-art stage panoramas; story text and cutscenes remain explicit placeholders. The original pixel-art **Amber Ranch** remains a free-play bonus.
+Original browser-based, side-view 2D fighter in TypeScript + Canvas 2D. No game engine. This is an offline prototype with an expanded selectable roster, each with its original supplied image on the selection screen and a fighting animation set. The fighters have individual attack profiles, powers and contact timing; see [fighter kits](docs/FIGHTER_KITS.md). Ten arenas include story-based and reference-derived Higgsfield pixel-art panoramas, with a seven-chapter route; story text and cutscenes remain explicit placeholders. The original pixel-art **Amber Ranch** remains a free-play bonus.
 
-The selection screen follows the supplied reference's compact arcade composition: centered **MEMBER SELECT**, opposing fighters, side statistics and a dense portrait grid in red, blue and yellow, with an approved Higgsfield pixel-art border. It retains random fighter/stage choices and an explicit **Start fight** button. Selecting a stage changes the preview and the next match's arena. All rounds are untimed and end on knockout. See the [latest layout verification](docs/MENU-REFERENCE-REVISION.md) and [prior menu/gameplay checks](docs/MENU-QA.md).
+The selection screen follows the supplied reference's compact arcade composition: centered **MEMBER SELECT**, opposing fighters, side statistics and a dense portrait grid in red, blue and yellow, with a code-drawn pixel frame, square buttons and a locally bundled Pixelify Sans font across menus, dialogs and the combat HUD. **Stage selection and Start fight sit above the fighter preview and roster**, with keyboard/gamepad routes matching that order. It retains random fighter/stage choices. The font and its SIL Open Font License are bundled under public/fonts; runtime font loading needs no external service. See [pixel menu QA](docs/PIXEL-MENU-NOV02-QA.md). Selecting a stage changes the preview and the next match's arena. All rounds are untimed and end on knockout. See the [latest layout verification](docs/MENU-REFERENCE-REVISION.md) and [prior menu/gameplay checks](docs/MENU-QA.md).
 
-A new two-Sproto fighter has been requested but is **not yet playable**: its exact reference is preserved, while generation budget and upload access remain pending. See [new fighter status](docs/NEW-FIGHTER-22-STATUS.md).
+The original Sproto Duo and the new twin/triple selections use separate animated bodies with shared health and controls. The November 2 expansion adds all 47 folder references and the subsequent named submissions. [Expansion verification and limitations](docs/SPROTOS-EXPANSION-QA.md).
 
-**Latest animation update: 2 of 21 new event sets are installed.** Golden Sproto and Morelight now have new intro, special, cast, recoil and defeat frames, with separate presentation timing and a visible defeat sequence before results. The other 19 retain their existing playable art; their latest authorized reference-upload retry received HTTP 403 from storage, blocking new generation. See [current event QA](docs/ANIMATION-EVENT-QA.md) and [handoff](docs/CLAUDE-HANDOFF.md) for exact coverage, cost and limitations.
+**November 2 roster update:** reference-based core, guarded movement and event animation sets are installed for the expansion. Twins receive additional dash, jump, heavy, aerial and victory drawings. See [expansion QA](docs/SPROTOS-EXPANSION-QA.md) for exact coverage and corrections. Earlier dated reports below describe prior builds.
+
+**Pissing Sproto update:** #3152 now has 32 dedicated assist drawings and partners with 34 Sprotos, including #2322. [Partner animation QA](docs/PISSING-SPROTO-ASSIST-QA.md).
+
+**Partner relay:** 34 Sprotos, including #2322, now coordinate Pissing Sproto, Vmudream screen lasers, the small #3181 yellow strike and the large stomach-creature finisher. [Relay QA](docs/PARTNER-RELAY-QA.md).
 
 ## Run
 
@@ -31,9 +35,9 @@ For the new event pilot, run `node scripts/presentation-smoke.mjs` and `node scr
 
 ## Play
 
-Choose any of the 21 fighters; each selection describes its attack and power style. Use **P1 / Your fighter** and **CPU / Your rival** to choose either side, or use **Random fighter** for the selected side. **Random stage** picks from all five stages. Common controls and combo rules make it easy to switch fighters, while attack profiles, projectile behavior and specials differ. See the fighter-kit guide for the full roster.
+Choose any fighter in the roster; each selection describes its attack and power style. Use **P1 / Your fighter** and **CPU / Your rival** to choose either side, or use **Random fighter** for the selected side. **Random stage** picks from all five stages. Common controls and combo rules make it easy to switch fighters, while attack profiles, projectile behavior and specials differ. See the fighter-kit guide for the full roster.
 
-In selection, use arrows to move focus, Enter to select and Tab to change sections. On a controller, stick/D-pad navigate, A selects, B returns to the player side, X switches side and Start focuses the launch button. Release menu inputs before entering combat. **Fighter select** returns from a match without automatically starting another round. The header also opens the four-world story selector and standalone level selector.
+In selection, use arrows to move focus, Enter to select and Tab to change sections. On a controller, stick/D-pad navigate, A selects, B returns to the player side, X switches side and Start focuses the launch button. Release menu inputs before entering combat. **Fighter select** returns from a match without automatically starting another round. The header also opens the seven-chapter story selector and standalone level selector.
 
 | Action | Keyboard | Standard gamepad |
 | --- | --- | --- |
@@ -92,7 +96,7 @@ CPU and practice rounds have no timer or timeout result. A knockout ends the rou
 - `src/higgsfieldRig.ts`: superseded cutout renderer retained for provenance/undeclared-art fallback; the installed 21-fighter manifest takes priority.
 - `src/originalPortraits.ts`: explicit mapping of the 21 original references used by character selection.
 - `art/pose-atlases/`: source sheets, connected-component importer, targeted identity/footwear corrections and reproducible guarded-step authoring.
-- `src/stage.ts`: original ranch plus four static Higgsfield stage images, shared between previews and combat. Procedural labeled fallbacks remain available if optional stage images fail to load. `src/storyMode.ts` controls world selection and placeholder scene/progression panels.
+- `src/stage.ts`: original ranch plus nine static Higgsfield stage images, shared between previews and combat. Procedural labeled fallbacks remain available if optional stage images fail to load. `src/storyMode.ts` controls world selection and placeholder scene/progression panels.
 - `src/style.css` / `index.html`: combat/menu shell; `src/arcadeSelection.css` supplies the latest reference-led selection composition and mobile overrides.
 
 Development console helpers: `neonRelay.snapshot()` returns a copied state, `neonRelay.replay()` returns initial configuration + input masks, and `neonRelay.verifyReplay()` re-simulates recorded input and compares state. This structure makes later rollback exploration easier; it does **not** establish cross-browser determinism or online readiness. There is no transport, matchmaking, synchronization, rollback, or remote input handling yet.
@@ -109,7 +113,7 @@ Deferred: sound, physical-controller verification, local versus, online 1v1, mul
 
 ## Story and stage selection
 
-**Story worlds** opens four directly selectable locations: Tidebreak Marina (yacht/beach), Last Light Bar, Moonkeep Castle, and Neon Tomorrow (retrofuturistic). Each opens a labeled static placeholder scene. Wins advance to the next scene; losses/draws offer retry. Progress lasts for this session only. No final story or cutscene animations have been authored. **Free-play levels** selects any of these stages or Amber Ranch without story progression. Back/Escape returns through the flow; browsing preserves pause state and leaving story restores prior practice behavior.
+**Story worlds** follows seven chapter arenas of *Out of the Trenches*: Mudline Trenches → Circuit Gate → Tidebreak Marina → Crown Relay Chamber → Last Light Bar → Verse Gate → The Hatchery. All chapters are directly selectable; wins advance to the next scene and losses/draws offer retry. Scene panels remain explicit placeholders, and progress lasts for the session. **Free-play levels** also includes the original Neon Tomorrow, Moonkeep Castle and Amber Ranch, for ten selectable arenas. Back/Escape preserves pause state and leaving story restores the previous practice behavior.
 
 ## Current-update verification
 

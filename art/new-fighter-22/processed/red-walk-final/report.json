@@ -1,0 +1,78 @@
+{
+  "entity": "red",
+  "keys": [
+    {
+      "frame": 0,
+      "source": "red-walk-r2.png",
+      "cell": 0,
+      "sourceBounds": [
+        78,
+        49,
+        552,
+        860
+      ],
+      "scale": 0.17385943279901356,
+      "bounds": [
+        72,
+        69,
+        154,
+        210
+      ]
+    },
+    {
+      "frame": 1,
+      "source": "red-walk-r2.png",
+      "cell": 2,
+      "sourceBounds": [
+        1369,
+        46,
+        1670,
+        866
+      ],
+      "scale": 0.17317073170731706,
+      "bounds": [
+        90,
+        68,
+        142,
+        210
+      ]
+    },
+    {
+      "frame": 2,
+      "source": "red-walk-contact-far.png",
+      "cell": null,
+      "sourceBounds": [
+        216,
+        42,
+        818,
+        997
+      ],
+      "scale": 0.14764397905759163,
+      "bounds": [
+        73,
+        69,
+        162,
+        210
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "red-walk-pass-far-fixed.png",
+      "cell": null,
+      "sourceBounds": [
+        334,
+        37,
+        685,
+        1003
+      ],
+      "scale": 0.14699792960662525,
+      "bounds": [
+        90,
+        68,
+        142,
+        210
+      ]
+    }
+  ],
+  "notes": "Four authored keys; not eight unique in-between frames."
+}

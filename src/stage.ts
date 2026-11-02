@@ -174,12 +174,19 @@ function drawRanch(ctx: CanvasRenderingContext2D, frame: number): void {
     ctx.restore();
 }
 
-export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch';
+export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch' | 'trenches' | 'circuit' | 'throne' | 'verse' | 'hatchery';
+/** Canonical chapter order; encounter assignments and gates derive from this route. */
+export const STORY_STAGE_IDS:readonly StageId[] = ['trenches','circuit','yacht','throne','bar','verse','hatchery'];
 export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:number|null}[] = [
-    {id:'yacht',name:'Tidebreak Marina',theme:'Yacht / beach',accent:'#66d7e8',chapter:1},
-    {id:'bar',name:'Last Light Bar',theme:'Bar',accent:'#efaa65',chapter:2},
-    {id:'castle',name:'Moonkeep Castle',theme:'Castle',accent:'#adabed',chapter:3},
-    {id:'retro',name:'Neon Tomorrow',theme:'Retrofuturistic city',accent:'#df86de',chapter:4},
+    {id:'trenches',name:'Mudline Trenches',theme:'The Trenches / city below',accent:'#d6a05c',chapter:1},
+    {id:'circuit',name:'Circuit Gate',theme:'The City / challenge gate',accent:'#64d7df',chapter:2},
+    {id:'retro',name:'Neon Tomorrow',theme:'Retrofuturistic city',accent:'#df86de',chapter:2},
+    {id:'yacht',name:'Tidebreak Marina',theme:'$Bitcoin Yacht Party',accent:'#66d7e8',chapter:3},
+    {id:'throne',name:'Crown Relay Chamber',theme:'The Castle / relay throne',accent:'#e5b65f',chapter:4},
+    {id:'castle',name:'Moonkeep Castle',theme:'Castle courtyard',accent:'#adabed',chapter:4},
+    {id:'bar',name:'Last Light Bar',theme:'The Bar / hidden doorway',accent:'#efaa65',chapter:5},
+    {id:'verse',name:'Verse Gate',theme:'The Verse / open every gate',accent:'#ad92f4',chapter:6},
+    {id:'hatchery',name:'The Hatchery',theme:'Beyond the portal / alien hive',accent:'#c4d75c',chapter:7},
     {id:'ranch',name:'Amber Ranch',theme:'Bonus / original ranch',accent:'#efbd7a',chapter:null},
 ];
 let currentStage:StageId='ranch';
@@ -187,7 +194,7 @@ const placeholderScenery=new Map<StageId,HTMLCanvasElement>();
 const stageImages=new Map<StageId,HTMLImageElement>();
 const stageArtErrors=new Map<StageId,string>();
 let stageArtPromise:Promise<void>|undefined;
-/** Independent, text-prompted Higgsfield scenery. No fighter references are uploaded. */
+/** Higgsfield scenery from text or environmental references, never fighter atlases. */
 export function loadStageArt():Promise<void>{
     return stageArtPromise??=Promise.all(STAGES.filter(s=>s.id!=='ranch').map(async stage=>{
         const image=new Image();
@@ -238,7 +245,7 @@ function drawBarApron(ctx:CanvasRenderingContext2D):void{
 export function drawStage(ctx:CanvasRenderingContext2D,frame:number):void {
     drawStagePreview(ctx,currentStage,1280,720,frame);
     if(currentStage==='ranch'||stageImages.has(currentStage))return;
-    ctx.save();ctx.fillStyle='#0b101acc';ctx.fillRect(24,630,430,35);ctx.fillStyle='#d7e3ef';ctx.font='12px monospace';ctx.textAlign='left';
+    ctx.save();ctx.fillStyle='#0b101acc';ctx.fillRect(24,630,430,35);ctx.fillStyle='#d7e3ef';ctx.font='12px "Pixelify Sans", monospace';ctx.textAlign='left';
     ctx.fillText('PLACEHOLDER STAGE / '+STAGES.find(s=>s.id===currentStage)!.theme.toUpperCase(),36,652);ctx.restore();
 }
 /** Deliberately static layout studies. These are not final level art or cutscene animation. */
@@ -246,7 +253,16 @@ function buildPlaceholder(id:StageId):HTMLCanvasElement {
     const canvas=document.createElement('canvas');canvas.width=320;canvas.height=180;const c=canvas.getContext('2d')!;
     const r=(x:number,y:number,w:number,h:number,color:string)=>{c.fillStyle=color;c.fillRect(x,y,w,h);};
     const p=(points:number[][],color:string)=>{c.fillStyle=color;c.beginPath();points.forEach(([x,y],i)=>i?c.lineTo(x,y):c.moveTo(x,y));c.closePath();c.fill();};
-    if(id==='yacht'){
+    if(id==='trenches'){
+        r(0,0,320,180,'#142b42');
+        for(let i=0;i<12;i++){const x=i*29,h=16+i*13%35;r(x,64-h,20,h,'#234c63');r(x+5,65-h,2,h-6,'#53a2b4');}
+        r(0,68,320,76,'#34434b');r(115,70,90,74,'#182d3c');
+        for(let y=86;y<144;y+=9){const width=40+(y-86)*.9;r(160-width/2,y,width,5,'#56707a');}
+        for(const x of [8,73,237,301]){r(x,68,5,76,'#1d2f38');r(x+2,80,2,55,'#61717a');}
+        for(const x of [55,260]){r(x,89,3,37,'#867047');r(x-8,87,18,4,'#ecb765');r(x-4,92,10,4,'#d58d39');}
+        r(0,143,320,37,'#685143');r(0,143,320,2,'#a78b65');
+        for(let i=0;i<20;i++)r((i*47)%320,151+i*7%25,14,2,i%2?'#56453e':'#7c6250');
+    }else if(id==='yacht'){
         r(0,0,320,180,'#406978');r(0,42,320,39,'#89b4b9');r(0,81,320,63,'#397b89');r(255,51,22,22,'#eed49c');
         for(let i=0;i<18;i++)r((i*43)%320,89+(i*7)%44,17+i%12,1,'#75a8ab');
         p([[72,103],[211,103],[190,118],[88,118]],'#d7d3bd');r(100,82,75,21,'#ded9c2');r(113,70,42,12,'#cfceb9');r(119,73,30,7,'#416477');r(106,89,60,9,'#355d70');r(156,62,2,20,'#c1c1ab');
@@ -259,12 +275,30 @@ function buildPlaceholder(id:StageId):HTMLCanvasElement {
         r(14,114,292,9,'#bd9366');r(18,123,284,20,'#694939');r(18,138,284,5,'#50372e');
         for(const x of [52,153,255]){r(x,126,19,4,'#b58b69');r(x+7,130,4,14,'#39323a');r(x+3,142,12,2,'#292832');r(x+8,42,2,15,'#7a6d69');p([[x+9,55],[x-1,63],[x+19,63]],'#dda96a');}
         r(0,144,320,36,'#453635');for(let y=150;y<180;y+=8)r(0,y,320,1,'#685044');for(let x=0;x<320;x+=40)r(x,144,1,36,'#352b2e');
-    }else if(id==='castle'){
+    }else if(id==='castle'||id==='throne'){
         r(0,0,320,180,'#272b47');r(0,64,320,80,'#474865');r(236,48,22,22,'#c9c8cf');
         for(const x of [15,130,260]){r(x,78,44,66,'#66677b');for(let j=0;j<4;j++)r(x+j*12,69,8,12,'#77788a');r(x+15,93,14,30,'#2d304b');p([[x+15,93],[x+22,84],[x+29,93]],'#2d304b');}
         r(0,126,320,18,'#777585');for(let x=0;x<320;x+=18)r(x,119,11,10,'#888591');
         r(0,144,320,36,'#62616f');for(let y=145;y<180;y+=9){r(0,y,320,1,'#85828b');for(let x=(y%2)*12;x<320;x+=24)r(x,y,1,9,'#454654');}
         for(const x of [82,224]){r(x,100,3,31,'#7f695c');r(x-2,94,7,10,'#b5825e');r(x,91,3,10,'#d5ae78');}
+    }else if(id==='hatchery'){
+        r(0,0,320,180,'#171d31');r(0,73,320,71,'#202733');
+        for(let x=0;x<320;x+=24){r(x,112,22,20,'#303747');r(x+5,110,2,3,'#50a9b4');}
+        p([[105,136],[94,119],[104,96],[129,86],[187,86],[213,110],[215,136]],'#362633');
+        p([[122,128],[113,96],[128,65],[138,102],[157,76],[175,101],[190,66],[200,98],[186,128]],'#765130');
+        p([[139,128],[128,106],[142,88],[159,94],[174,87],[190,109],[180,128]],'#ac5736');
+        for(const [x,y]of[[126,104],[145,95],[168,99],[181,113]]){r(x,y,7,10,'#c3c535');r(x+2,y+2,3,4,'#e2e84b');}
+        for(const x of [33,66,247,281]){p([[x,135],[x-6,118],[x-1,109],[x+3,123],[x+8,115],[x+11,135]],'#3d6d9c');r(x,119,2,13,'#78b8d2');}
+        r(0,144,320,36,'#262936');r(0,144,320,2,'#4e5365');
+        for(let i=0;i<28;i++)r(i*47%320,150+i*7%27,8,1,i%3?'#35394a':'#46334b');
+    }else if(id==='verse'){
+        r(0,0,320,180,'#17172d');
+        for(let i=0;i<50;i++)r((i*79)%320,25+i*17%100,1,1,i%3?'#827fc1':'#d9d6f1');
+        c.strokeStyle='#69d5ef';c.lineWidth=7;c.beginPath();c.arc(160,76,39,0,Math.PI*2);c.stroke();
+        c.strokeStyle='#7c6bc6';c.lineWidth=4;c.beginPath();c.arc(160,76,49,-2.9,-.2);c.stroke();
+        for(const x of [13,60,230,285]){r(x,113,26,6,'#4f527b');p([[x,119],[x+26,119],[x+13,140]],'#2f3554');}
+        r(0,144,320,36,'#363d5d');r(0,144,320,3,'#9697b2');r(0,172,320,3,'#94794c');
+        for(let x=0;x<320;x+=32)r(x,147,1,26,'#202b46');
     }else{
         r(0,0,320,180,'#272541');r(0,65,320,79,'#443553');r(144,53,31,31,'#c38b9f');
         for(let i=0;i<10;i++){const x=i*35-6,h=26+(i*17)%45;r(x,134-h,25,h,'#292d43');r(x+4,130-h,2,h,'#74738b');for(let j=0;j<5;j++)r(x+8,138-h+j*7,12,2,j%2?'#9c7ca1':'#679b9c');}

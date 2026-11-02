@@ -1,0 +1,270 @@
+{
+  "revision": "2344-curvy-red-chubby-blue-1",
+  "model": "gpt_image_2_5",
+  "variant": "sunburst",
+  "quality": "high",
+  "frameFiles": 208,
+  "jobs": [
+    {
+      "index": 1331,
+      "entity": "sproto2344",
+      "fighter": "sproto2344",
+      "kind": "core",
+      "revision": "2344-curvy-red-chubby-blue-1",
+      "job_id": "1c7c9981-3823-4b58-a80d-2694d38fd356",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 10,
+      "estimatedCredits": 4.25,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_061744_1c7c9981-3823-4b58-a80d-2694d38fd356.png"
+    },
+    {
+      "index": 1332,
+      "entity": "sproto2344-companion",
+      "fighter": "sproto2344",
+      "kind": "core",
+      "revision": "2344-curvy-red-chubby-blue-1",
+      "job_id": "26efe74d-5967-40c4-bb8f-1c6e3b478bf0",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 10,
+      "estimatedCredits": 4.25,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_061744_26efe74d-5967-40c4-bb8f-1c6e3b478bf0.png"
+    },
+    {
+      "index": 1333,
+      "entity": "sproto2344",
+      "fighter": "sproto2344",
+      "kind": "walk",
+      "revision": "2344-curvy-red-chubby-blue-1",
+      "job_id": "9c233254-3a95-4b4a-9f37-d77f5e465d92",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 10,
+      "estimatedCredits": 2.75,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_061922_9c233254-3a95-4b4a-9f37-d77f5e465d92.png"
+    },
+    {
+      "index": 1334,
+      "entity": "sproto2344",
+      "fighter": "sproto2344",
+      "kind": "events",
+      "revision": "2344-curvy-red-chubby-blue-1",
+      "job_id": "e17786b2-78f2-44b6-b254-a359a7ba3f17",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 10,
+      "estimatedCredits": 4.25,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_061924_e17786b2-78f2-44b6-b254-a359a7ba3f17.png"
+    },
+    {
+      "index": 1335,
+      "entity": "sproto2344",
+      "fighter": "sproto2344",
+      "kind": "motion",
+      "revision": "2344-curvy-red-chubby-blue-1",
+      "job_id": "3cafa028-1d16-4a1e-a01e-4bc7a3f55b12",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 10,
+      "estimatedCredits": 4.25,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_061923_3cafa028-1d16-4a1e-a01e-4bc7a3f55b12.png"
+    },
+    {
+      "index": 1336,
+      "entity": "sproto2344-companion",
+      "fighter": "sproto2344",
+      "kind": "walk",
+      "revision": "2344-curvy-red-chubby-blue-1",
+      "job_id": "d4b2b702-d31d-4aed-807d-cdc0179ae11e",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 10,
+      "estimatedCredits": 2.75,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_061922_d4b2b702-d31d-4aed-807d-cdc0179ae11e.png"
+    },
+    {
+      "index": 1337,
+      "entity": "sproto2344-companion",
+      "fighter": "sproto2344",
+      "kind": "events",
+      "revision": "2344-curvy-red-chubby-blue-1",
+      "job_id": "58a0a8be-bd1e-4365-be82-bb33fe2478f9",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 10,
+      "estimatedCredits": 4.25,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_061922_58a0a8be-bd1e-4365-be82-bb33fe2478f9.png"
+    },
+    {
+      "index": 1338,
+      "entity": "sproto2344-companion",
+      "fighter": "sproto2344",
+      "kind": "motion",
+      "revision": "2344-curvy-red-chubby-blue-1",
+      "job_id": "bc3199dc-7dc6-4dbe-aa4d-0f0810bc016d",
+      "status": "completed",
+      "adjustments": {
+        "medias[0].role": {
+          "requested": "image",
+          "used": "image_references",
+          "reason": "GPT Image 2.5 backend expects schema-key media roles"
+        }
+      },
+      "model": "gpt_image_2_5",
+      "retry": 10,
+      "estimatedCredits": 4.25,
+      "type": "image",
+      "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_061923_bc3199dc-7dc6-4dbe-aa4d-0f0810bc016d.png"
+    }
+  ],
+  "passed": [
+    "TypeScript",
+    "production build",
+    "19 expansion contract groups",
+    "8 pose playback groups",
+    "asset format/padding validation across 9112 entries",
+    "15 throw lifecycle groups across all current roster pairs, directions, facings and arena positions"
+  ],
+  "browserSamples": [
+    "walk forward/reverse at normal speed",
+    "jump frame15",
+    "dash frame5",
+    "heavy frame15 facing right and left",
+    "grab frame14 facing right",
+    "special frame40 facing left",
+    "heavy-hit knockdown frame50 facing left"
+  ],
+  "limitation": "Sampled runtime views and reviewed pose sheets; not continuous inspection of every possible combat sequence.",
+  "preservation": "No unrelated PNG changes immediately after targeted install; subsequent external changes detected in 72 other files. This installer writes only #2344 paths.",
+  "concurrentAssetPaths": [
+    "public/fighters/poses/sproto943/14.png",
+    "public/fighters/poses/sproto943/00.png",
+    "public/fighters/poses/sproto943/28.png",
+    "public/fighters/poses/sproto943/29.png",
+    "public/fighters/poses/sproto943/01.png",
+    "public/fighters/poses/sproto943/15.png",
+    "public/fighters/poses/sproto943/03.png",
+    "public/fighters/poses/sproto943/17.png",
+    "public/fighters/poses/sproto943/16.png",
+    "public/fighters/poses/sproto943/02.png",
+    "public/fighters/poses/sproto943/06.png",
+    "public/fighters/poses/sproto943/12.png",
+    "public/fighters/poses/sproto943/13.png",
+    "public/fighters/poses/sproto943/07.png",
+    "public/fighters/poses/sproto943/11.png",
+    "public/fighters/poses/sproto943/05.png",
+    "public/fighters/poses/sproto943/04.png",
+    "public/fighters/poses/sproto943/10.png",
+    "public/fighters/poses/sproto943/21.png",
+    "public/fighters/poses/sproto943/09.png",
+    "public/fighters/poses/sproto943/08.png",
+    "public/fighters/poses/sproto943/20.png",
+    "public/fighters/poses/sproto943/22.png",
+    "public/fighters/poses/sproto943/23.png",
+    "public/fighters/poses/sproto943/27.png",
+    "public/fighters/poses/sproto943/26.png",
+    "public/fighters/poses/sproto943/18.png",
+    "public/fighters/poses/sproto943/30.png",
+    "public/fighters/poses/sproto943/24.png",
+    "public/fighters/poses/sproto943/25.png",
+    "public/fighters/poses/sproto943/31.png",
+    "public/fighters/poses/sproto943/19.png",
+    "public/fighters/walk/sproto943/00.png",
+    "public/fighters/walk/sproto943/01.png",
+    "public/fighters/walk/sproto943/03.png",
+    "public/fighters/walk/sproto943/02.png",
+    "public/fighters/walk/sproto943/06.png",
+    "public/fighters/walk/sproto943/07.png",
+    "public/fighters/walk/sproto943/05.png",
+    "public/fighters/walk/sproto943/04.png",
+    "public/fighters/events/sproto943/14.png",
+    "public/fighters/events/sproto943/00.png",
+    "public/fighters/events/sproto943/28.png",
+    "public/fighters/events/sproto943/29.png",
+    "public/fighters/events/sproto943/01.png",
+    "public/fighters/events/sproto943/15.png",
+    "public/fighters/events/sproto943/03.png",
+    "public/fighters/events/sproto943/17.png",
+    "public/fighters/events/sproto943/16.png",
+    "public/fighters/events/sproto943/02.png",
+    "public/fighters/events/sproto943/06.png",
+    "public/fighters/events/sproto943/12.png",
+    "public/fighters/events/sproto943/13.png",
+    "public/fighters/events/sproto943/07.png",
+    "public/fighters/events/sproto943/11.png",
+    "public/fighters/events/sproto943/05.png",
+    "public/fighters/events/sproto943/04.png",
+    "public/fighters/events/sproto943/10.png",
+    "public/fighters/events/sproto943/21.png",
+    "public/fighters/events/sproto943/09.png",
+    "public/fighters/events/sproto943/08.png",
+    "public/fighters/events/sproto943/20.png",
+    "public/fighters/events/sproto943/22.png",
+    "public/fighters/events/sproto943/23.png",
+    "public/fighters/events/sproto943/27.png",
+    "public/fighters/events/sproto943/26.png",
+    "public/fighters/events/sproto943/18.png",
+    "public/fighters/events/sproto943/30.png",
+    "public/fighters/events/sproto943/24.png",
+    "public/fighters/events/sproto943/25.png",
+    "public/fighters/events/sproto943/31.png",
+    "public/fighters/events/sproto943/19.png"
+  ]
+}

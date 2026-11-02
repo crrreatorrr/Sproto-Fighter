@@ -1,0 +1,48 @@
+[
+  {
+    "index": 1331,
+    "entity": "sproto2344",
+    "fighter": "sproto2344",
+    "kind": "core",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "0b68ce37-91d3-423c-a5dc-cbc680975660"
+        }
+      ],
+      "prompt": "Revise this existing full-body fighting-game pixel-art pose atlas. Preserve the exact 32 combat poses and their exact 4-column by 8-row row-major order, facing RIGHT. Exactly ONE complete actor per cell. Keep the same identity, head size, outline, facial features, colors, anatomy, shoes and total standing height. Change the BODY PROPORTIONS consistently in ALL 32 figures, including crouches, kicks and airborne drawings. ONLY the BACK LEFT adult female cartoon figure: round blue head, large yellow half-lidded eyes with black pupils, broad red lips. Red torso, arms and legs in an opaque fitted red one-piece costume. Preserve a clearly curvy adult silhouette like the source: narrower waist, substantially wider rounded hips, fuller upper torso, fuller thighs. No slender athletic build. Keep her blue face, red body palette and recognizability. Exclude the front pointed figure. The attached sheet contains only this actor, so retain it exclusively. Widen hips and upper torso visibly, hips about 45 percent wider than the attached thin version, with a naturally defined waist; fuller red thighs. The red costume stays fully opaque and featureless, no exposed chest details. Both legs attach at the low pelvis beneath the belly; two arms, two legs only; no duplicate limbs. Complete-body drawings, not cutouts. Preserve readable anticipation, contact and recovery. Every head, foot and extended hand stays fully inside its own cell with generous margins. Crisp stepped pixel edges, dark outlines, limited color shading; no smooth vector artwork. Flat pure magenta #ff00ff background. No grid lines, numbers, labels, shadows, particles or extra subjects."
+    }
+  },
+  {
+    "index": 1332,
+    "entity": "sproto2344-companion",
+    "fighter": "sproto2344",
+    "kind": "core",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "9abb3f64-2f73-426e-bebd-3bb7e13652d2"
+        }
+      ],
+      "prompt": "Revise this existing full-body fighting-game pixel-art pose atlas. Preserve the exact 32 combat poses and their exact 4-column by 8-row row-major order, facing RIGHT. Exactly ONE complete actor per cell. Keep the same identity, head size, outline, facial features, colors, anatomy, shoes and total standing height. Change the BODY PROPORTIONS consistently in ALL 32 figures, including crouches, kicks and airborne drawings. ONLY the FRONT RIGHT adult cartoon figure: dark blue elongated rounded head with attached red pointed top, yellow half-lidded eyes, large red round nose and open red mouth with white teeth. Chubby blue body: wide round belly, thicker waist, rounded flanks, fuller cheeks, thick short legs and sturdy arms. A soft heavy-set silhouette, not a narrow lean torso or muscles. Exclude the back red figure. The attached sheet contains only this actor, so retain it exclusively. Make the blue belly and torso about 55 percent wider than the attached lean version, a prominent rounded abdomen, thicker low thighs and shins. Avoid a muscular superhero chest. Both legs attach at the low pelvis beneath the belly; two arms, two legs only; no duplicate limbs. Complete-body drawings, not cutouts. Preserve readable anticipation, contact and recovery. Every head, foot and extended hand stays fully inside its own cell with generous margins. Crisp stepped pixel edges, dark outlines, limited color shading; no smooth vector artwork. Flat pure magenta #ff00ff background. No grid lines, numbers, labels, shadows, particles or extra subjects."
+    }
+  }
+]

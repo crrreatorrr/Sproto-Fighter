@@ -1,0 +1,24 @@
+[
+  {
+    "index": 0,
+    "entity": "nick",
+    "fighter": "nick",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "630399be-98cc-4bba-9d02-c5ae02f4f07a"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: Nick is the ONE BLUE SPROTO in reference image 1. Preserve the cobalt-blue broad head/body, red triangular side/back spikes, small yellow top spike, large bulging yellow eyes with large RED irises and small black pupils, yellow muzzle/chin frame, enormous expressive red lips and visible cream square teeth. His hands are RED BARE SKIN with separately visible fingers, thumbs, nails and knuckles. These are NOT gloves. NO BOXING GLOVES, NO FIGHTING GLOVES, no mittens, gauntlets, wrist wraps or hand coverings in ANY pose. Open palms and fingered fists retain normal hand proportions, never oversized padded fists. Extend the cropped lower body conservatively: blue torso/arms, simple opaque dark navy shorts, two blue legs rooted low at pelvis and simple rounded blue feet. Keep the large expressive anxious face. Exclude black image padding and background. No extra character.\n\nExactly 32 complete figures in a regular 4-column by 8-row grid. Row 1: relaxed combat guard; subtle exhale guard; forward guarded step with near foot leading; weight passes over near planted foot.\nRow 2: forward guarded step with far foot leading; weight passes over far planted foot; forward dash with low lean and both legs anatomically connected; jump anticipation with hips lowered and knees bent.\nRow 3: rising jump with both low-rooted knees gathered; falling jump with legs extending for landing; low crouched landing with both soles grounded; light punch anticipation with shoulder and elbow coiling.\nRow 4: fully extended straight punch toward the right; punch retracting to guard; uppercut low-body coil; clear rising uppercut with elbow then fist high, two legs retained.\nRow 5: side kick chamber, near knee lifted from LOW hip, support foot planted; half-extended kick with knee opening; fully extended waist-height side kick, low hip, ankle and toes aligned; kick knee retracts before planting.\nRow 6: low sweeping kick with one grounded bent support leg; sweep recovery returning over the low pelvis; airborne kick chamber with both legs originating at lower body; airborne kick full extension with coherent second leg folded.\nRow 7: recoiling from a chest hit, head and torso remain joined; solid two-arm high guard; reaching forward to catch with clearly visible open hand; close grab hold with both arms bent toward an imagined opponent but NO opponent drawn.\nRow 8: forward throw release with planted low legs and torso follow-through, no opponent; ranged power anticipation with hands close to chest; ranged power release with front hand extended, no projectile; broad triumphant Team Special impact stance with both arms and both legs visible. In every drawing hands are uncovered and anatomical, with visible fingers/thumbs and small knuckles. Red hands are skin, never rounded boxing gloves. No wrist cuffs. When fists close, retain clear finger divisions. Every glove-like drawing is a defect."
+    }
+  }
+]
