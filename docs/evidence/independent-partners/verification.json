@@ -1,0 +1,113 @@
+{
+  "branch": "codex/independent-partner-assists",
+  "base": "aa4e4960",
+  "automated": {
+    "singlePartnerScenarios": 612,
+    "twinPartnerScenarios": 32,
+    "fighterProfiles": 102,
+    "fighterCases": 510,
+    "selectionGroups": 9,
+    "expansionGroups": 21
+  },
+  "passedCommands": [
+    "npm run build",
+    "node scripts/pissing-assist-qa.mjs",
+    "node scripts/selection-menu-smoke.mjs",
+    "node scripts/sprotos-expansion-qa.mjs",
+    "npm run smoke",
+    "node scripts/fighter-qa.mjs"
+  ],
+  "assignments": {
+    "sproto102": "sproto3152",
+    "sproto215": "vaudream",
+    "sproto313": "sproto3181",
+    "sproto651": "sproto3152",
+    "sproto763": "vaudream",
+    "sproto818": "sproto3181",
+    "sproto831": "sproto3152",
+    "sproto834": "vaudream",
+    "sproto837": "sproto3181",
+    "sproto865": "sproto3152",
+    "sproto943": "vaudream",
+    "sproto999": "sproto3181",
+    "sproto1011": "sproto3152",
+    "sproto1093": "vaudream",
+    "sproto1187": "sproto3181",
+    "sproto1335": "sproto3152",
+    "sproto1345": "vaudream",
+    "sproto1414": "sproto3181",
+    "sproto1477": "sproto3152",
+    "sproto1601": "vaudream",
+    "sproto1668": "sproto3181",
+    "sproto1815": "sproto3152",
+    "sproto1870": "vaudream",
+    "sproto2101": "sproto3181",
+    "sproto2177": "sproto3152",
+    "sproto2322": "vaudream",
+    "sproto2381": "sproto3181",
+    "sproto2531": "sproto3152",
+    "sproto2569": "vaudream",
+    "sproto2616": "sproto3181",
+    "sproto2789": "sproto3152",
+    "sproto2884": "vaudream",
+    "sproto3106": "sproto3181",
+    "sproto3215": "sproto3152"
+  },
+  "browserSamples": [
+    {
+      "fighter": "sproto102",
+      "partner": "sproto3152",
+      "facing": 1,
+      "specialTime": 15
+    },
+    {
+      "fighter": "sproto215",
+      "partner": "vaudream",
+      "facing": 1,
+      "specialTime": 15
+    },
+    {
+      "fighter": "sproto763",
+      "partner": "vaudream",
+      "facing": 1,
+      "specialTime": 15
+    },
+    {
+      "fighter": "sproto313",
+      "partner": "sproto3181",
+      "bodies": [
+        "sproto3181",
+        "sproto3181-companion"
+      ],
+      "facing": 1,
+      "specialTime": 15
+    },
+    {
+      "fighter": "sproto313",
+      "partner": "sproto3181",
+      "bodies": [
+        "sproto3181",
+        "sproto3181-companion"
+      ],
+      "facing": -1,
+      "specialTime": 50,
+      "attack": "stomachSlam"
+    },
+    {
+      "fighter": "sproto102",
+      "partner": "sproto3152",
+      "facing": -1,
+      "specialTime": 20,
+      "position": "wall",
+      "connected": false
+    },
+    {
+      "fighter": "sproto215",
+      "partner": "vaudream",
+      "facing": -1,
+      "specialTime": 15,
+      "attack": "screen laser"
+    }
+  ],
+  "merged": false
+}

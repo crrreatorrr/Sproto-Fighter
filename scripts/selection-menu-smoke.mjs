@@ -27,7 +27,7 @@ for(const id of ['device','start','overlay-select','story-worlds'])ids.set(id,ne
 document={activeElement:root,getElementById:id=>ids.get(id),querySelector:()=>null,querySelectorAll:()=>[],createElement:tag=>new Element(tag)};
 const stages=['trenches','circuit','retro','yacht','throne','castle','bar','verse','ranch'].map((id,i)=>({id,name:id,chapter:i<4?i+1:null}));
 const unlocked=new Set(['rivet','bront']);let completed=false;const subscribers=[];const progress={snapshot:()=>({unlocked:[...unlocked],completed}),isUnlocked:id=>unlocked.has(id),subscribe:fn=>subscribers.push(fn)};
-const modules={'./storyProgress':{storyProgress:progress},'./core':core,'./originalPortraits':{originalPortraits:Object.fromEntries(core.PLAYABLE_FIGHTERS.map(id=>[id,'/'+id+'.png']))},'./poseAtlas':{drawSelectionPose:()=>true},'./stage':{STAGES:stages,drawStagePreview(){}}};
+const modules={'./storyProgress':{storyProgress:progress},'./core':core,'./originalPortraits':{originalPortraits:Object.fromEntries(core.PLAYABLE_FIGHTERS.map(id=>[id,'/'+id+'.png']))},'./poseAtlas':{drawPoseAtlasSample:()=>true,drawSelectionPose:()=>true},'./stage':{STAGES:stages,drawStagePreview(){}}};
 const context={exports:{},require:id=>modules[id],document,HTMLElement:Element,HTMLButtonElement:Element,HTMLSelectElement:Select,Event:class{constructor(type){this.type=type;}},window:{addEventListener(){}},performance:{now:()=>now},console,Math};vm.createContext(context);vm.runInContext(compile(read('src/selectionMenu.ts')),context);
 let launches=0,lastSetup;const menu=context.exports.createSelectionMenu({start(setup){launches++;lastSetup=setup;menu.hide();context.running=true;context.padNeedsRelease=true;}});menu.setReady(true);
 assert.ok(root.innerHTML.indexOf('class="selection-locations"')<root.innerHTML.indexOf('class="match-preview"'));assert.ok(root.innerHTML.indexOf('id="start-fight"')<root.innerHTML.indexOf('class="selection-roster"'));
@@ -44,6 +44,22 @@ check('upper launch controls lead down to side tabs and roster, and back up',()=
 check('locked P1 cannot be chosen; random P1 only uses unlocked fighters while CPU can use every fighter',()=>{const locked=portraits.find(p=>p.dataset.fighter==='zephyr');locked.click();assert.equal(menu.getSetup().fighter,'rivet');assert.match($('selection-announcement').textContent,/locked/);for(let i=0;i<30;i++){portraits.at(-1).click();assert.ok(unlocked.has(menu.getSetup().fighter));}$('choose-rival').click();locked.click();assert.equal(menu.getSetup().opponent,'zephyr');menu.setSetup({fighter:'rivet',opponent:'vela'});$('choose-player').click();});
 check('recruitment updates selection immediately and God Mode is gated until completion',()=>{unlocked.add('zephyr');subscribers.forEach(fn=>fn());portraits.find(p=>p.dataset.fighter==='zephyr').click();assert.equal(menu.getSetup().fighter,'zephyr');assert.equal($('god-mode').disabled,true);$('god-mode').checked=true;$('god-mode').onchange();assert.equal(menu.getSetup().godMode,false);completed=true;subscribers.forEach(fn=>fn());assert.equal($('god-mode').disabled,false);$('god-mode').checked=true;$('god-mode').onchange();assert.equal(menu.getSetup().godMode,true);menu.setSetup({godMode:false});$('mode').focus();key('Down');assert.equal(document.activeElement,$('god-mode'));menuPress([0]);assert.equal(menu.getSetup().godMode,true);key('Down');assert.equal(document.activeElement,$('start-fight'));key('Up');assert.equal(document.activeElement,$('god-mode'));completed=false;subscribers.forEach(fn=>fn());assert.equal(menu.getSetup().godMode,false);menu.setSetup({fighter:'rivet'});});
 check('gamepad Start focuses CTA; A launches once and held A does not repeat',()=>{menuPress([9]);assert.equal(document.activeElement,$('start-fight'));assert.equal(launches,0);menuPress([0]);assert.equal(launches,1);menu.pollPad(pad([0]));assert.equal(launches,1);assert.equal(lastSetup.fighter,'rivet');assert.equal(lastSetup.opponent,'vela');assert.equal(lastSetup.mode,'dummy');});
+check('each main selection announces exactly its own assigned partner',()=>{
+ const prior=[...unlocked];for(const id of core.PLAYABLE_FIGHTERS)unlocked.add(id);subscribers.forEach(fn=>fn());
+ menu.show();
+ for(const side of ['choose-player','choose-rival']){
+  $(side).click();
+  for(const id of core.PLAYABLE_FIGHTERS){
+  portraits.find(button=>button.dataset.fighter===id).click();
+  const hint=$('selection-announcement').textContent;
+  const partner=core.ROSTER[id].partner;
+  assert.ok(hint.includes('Special partner: '+core.ROSTER[partner].name),id);
+  if(core.PARTNER_ATTACKS[partner])assert.ok(hint.endsWith('Partner attack: '+core.PARTNER_ATTACKS[partner].name),id);
+  assert.equal(hint.includes('Special partners:'),false);
+  }
+ }
+ unlocked.clear();prior.forEach(id=>unlocked.add(id));subscribers.forEach(fn=>fn());
+});
 // Compile main's actual pollPad implementation rather than copying its release gate.
 const source=ts.createSourceFile('main.ts',read('src/main.ts'),ts.ScriptTarget.Latest,true);const poll=source.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='pollPad');assert.ok(poll);
 let currentPad=pad();Object.assign(context,{selection:menu,story:{isOpen:false},dialog:{open:false},running:false,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:false,presentation:{phase:'fight'},navigator:{getGamepads:()=>[currentPad]},$:id=>ids.get(id),A:core.A,padKeys:{light:0,medium:2},bind(){throw Error('unexpected remap');},start(){context.running=true;context.padNeedsRelease=true;},pause(){context.running=false;},returnToSelection(){context.running=false;menu.show();}});vm.runInContext(compile(poll.getText(source)),context);

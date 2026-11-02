@@ -1,0 +1,49 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>13 new partner attacks — QA gallery</title>
+<style>body{margin:18px;background:#101827;color:#e6efff;font:14px system-ui}header{display:flex;gap:16px;align-items:center;flex-wrap:wrap;position:sticky;top:0;background:#101827f5;z-index:2;padding:10px 0}h1{font-size:20px;margin:0}button,select{padding:8px;background:#27384b;color:#fff;border:1px solid #71829b}#gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:1320px}figure{margin:0;background:#1e2b3f;border:1px solid #475770}figcaption{padding:10px;min-height:58px;line-height:1.5}canvas{display:block;width:100%;image-rendering:pixelated}small{color:#9ee6bb}pre{max-width:1320px;white-space:pre-wrap}@media(max-width:800px){#gallery{grid-template-columns:1fr}}</style>
+<header><h1>13 new partner attacks</h1><label>Facing <select id="facing"><option value="1">Right</option><option value="-1">Left</option></select></label><label>Show <select id="group"><option value="all">All partners</option><option value="singles">10 single Sprotos</option><option value="twins">3 twin pairs · both attacks</option></select></label><button id="save" disabled>Save gallery PNG</button></header>
+<p id="status">Loading actual game rendering…</p><section id="gallery" aria-label="New partner attack gallery"></section><pre id="summary"></pre>
+<script type="module">
+import{A,ROSTER,PLAYABLE_FIGHTERS,PARTNER_ATTACKS,COMBAT_STYLES,bodyAtlasIds,createState,step}from'/src/core.ts';
+import{ensurePoseAtlases}from'/src/poseAtlas.ts';
+import{loadStageArt,setStage}from'/src/stage.ts';
+import{ensurePowerArt}from'/src/powerArt.ts';
+import{render}from'/src/render.ts';
+import{getTeamSpecialAssistPlan,getTeamSpecialBodyDebug}from'/src/teamSpecial.ts';
+const $=id=>document.getElementById(id),params=new URLSearchParams(location.search),snapshots=[];
+$('facing').value=params.get('facing')==='-1'?'-1':'1';$('group').value=['singles','twins'].includes(params.get('group'))?params.get('group'):'all';
+let revision=0;
+async function load(){
+ const request=++revision,face=Number($('facing').value),group=$('group').value;
+ $('save').disabled=true;$('gallery').replaceChildren();snapshots.length=0;const results=[];
+ const chosen=Object.entries(PARTNER_ATTACKS).filter(([id])=>group==='all'||(bodyAtlasIds(id).length>1)===(group==='twins'));
+ for(const[partner,attack]of chosen){
+  if(request!==revision)return;const main=PLAYABLE_FIGHTERS.find(id=>ROSTER[id].partner===partner);if(!main)throw Error('Unassigned partner '+partner);
+  $('status').textContent=`Loading ${ROSTER[partner].name} · ${results.length}/${chosen.length} partners checked…`;
+  await ensurePoseAtlases([main,'rivet']);if(request!==revision)return;
+  const bodies=bodyAtlasIds(partner),contacts=COMBAT_STYLES[main].specialFrames;
+  for(let body=0;body<bodies.length;body++){
+   const s=createState(main,'dummy','rivet'),[f,foe]=s.fighters;f.x=face===1?510:770;foe.x=f.x+face*200;f.facing=face;foe.facing=-face;f.pips=3;
+   step(s,[A.special,0]);const time=contacts[body]+1;for(let n=0;n<180&&f.move&&f.move.t<time;n++)step(s,[0,0]);
+   const figure=document.createElement('figure'),caption=document.createElement('figcaption'),canvas=document.createElement('canvas');canvas.width=1280;canvas.height=720;render(canvas.getContext('2d'),s);
+   const plan=getTeamSpecialAssistPlan(f,foe.x),bodyPlan=getTeamSpecialBodyDebug(f),active=bodyPlan.filter(b=>b.active),ok=plan.length===1&&plan[0].id===partner&&active.length===1&&active[0].entity===bodies[body];
+   const role=attack.bodyAttacks?.[body]??attack.name;
+   caption.innerHTML=`<b>${attack.name}</b><br>${ROSTER[main].name} + ${ROSTER[partner].name} · ${role}<br><small>${ok?'PASS':'FAIL'} · facing ${face} · contact ${body+1} · active ${active.map(b=>b.entity).join(', ')}</small>`;
+   figure.dataset.check=ok?'pass':'fail';figure.dataset.partner=partner;figure.dataset.body=bodies[body];figure.append(caption,canvas);$('gallery').append(figure);
+   snapshots.push({canvas,label:attack.name+' / '+role,detail:main+' + '+partner+' | facing '+face+' | active '+active.map(b=>b.entity).join(', ')});
+  }
+  results.push({partner,main,bodies,attack:attack.name});
+ }
+ const failures=$('gallery').querySelectorAll('[data-check="fail"]').length;
+ $('status').textContent=`Ready · ${results.length} partners · ${snapshots.length} attacks · ${failures} failures · actual combat/render · three-pip QA fixture`;
+ $('summary').textContent=JSON.stringify(results,null,2);$('save').disabled=failures>0;
+}
+$('facing').onchange=()=>load().catch(fail);$('group').onchange=()=>load().catch(fail);
+$('save').onclick=()=>{
+ const image=document.createElement('canvas');image.width=1280;image.height=Math.ceil(snapshots.length/2)*420;
+ const c=image.getContext('2d');c.imageSmoothingEnabled=false;c.fillStyle='#101827';c.fillRect(0,0,image.width,image.height);
+ snapshots.forEach((item,i)=>{const x=i%2*640,y=Math.floor(i/2)*420;c.fillStyle='#e6efff';c.font='bold 15px monospace';c.fillText(item.label,x+10,y+20);c.font='11px monospace';c.fillText(item.detail,x+10,y+40);c.drawImage(item.canvas,x,y+60,640,360);});
+ const link=document.createElement('a');link.download=`partner-expansion-${$('group').value}-${$('facing').value}.png`;link.href=image.toDataURL('image/png');link.click();
+};
+function fail(e){$('status').textContent='Failed: '+e.message;console.error(e);}
+setStage('ranch');try{await Promise.all([loadStageArt(),ensurePowerArt()]);await load();}catch(e){fail(e);}
+</script></html>

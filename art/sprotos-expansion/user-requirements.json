@@ -4,34 +4,34 @@
   "budget": "Paid Higgsfield credits approved; extra credits for dynamic twin choreography; no purchases or subscription changes requested",
   "changes": {
     "313": "Left side needs both pupils; ONE connected body with two faces",
-    "1870": "SINGLE legless floating Sproto, preserve full reference as one connected silhouette; VMU-like hovering. Supersedes earlier twin interpretation. Improve melee dynamics with windup, body ram, rising strike, low swoop and aerial dive; retain single floating legless silhouette.",
-    "3181": "Exactly TWO independent characters: large blue main and much smaller yellow partner. Small dark creature is ATTACHED to the blue character stomach in every pose, not a third fighter. Replace blue actor kicks with the stomach monster expanding, lunging/biting and retracting while attached; yellow partner covers during those attacks.",
-    "943": "Woman",
-    "1668": "Woman, reiterated by user",
-    "2531": "Sharper white almond eyes and clearly defined black pupils throughout animations; preserve red boxing gloves and white collar. Ranged attack spits a miniature Sproto from the mouth.",
-    "2177": "Collar entirely white",
-    "1414": "Lower yellow circles colored blue",
-    "1335": "Extremely long thin yellow zigzag arms",
-    "1011": "Staff-based melee: thrusts, swings, sweeps and aerial strikes",
-    "999": "USER CORRECTION: ONE connected body with stacked faces, NOT twin; supersedes earlier inference",
-    "2101": "Clean blue face, no red bleed outside lips/muzzle",
-    "2381": "Sharp yellow eyes, black pupils and clean outlines",
-    "2616": "Add a full-length curled staff; all melee attacks use it",
-    "2789": "Enlarge stick to full staff; attacks use staff",
-    "3215": "Fully clothed as photo, black long pants",
-    "2344": "Red actor: thinner but curvy adult hourglass build, slender arms/legs, slim waist and proportionate full chest/rounded hips; face matches source wide oval, slanted half-lidded yellow almond eyes and closed red lips instead of round head. Keep blue actor chubby.",
     "651": "Rename Sproto Picasso",
     "837": "Rename Bitcoin Robin Williams; stranger reference-faithful long muzzle, bulging eyes, ear shapes",
+    "943": "Woman",
+    "999": "USER CORRECTION: ONE connected body with stacked faces, NOT twin; supersedes earlier inference",
+    "1011": "Staff-based melee: thrusts, swings, sweeps and aerial strikes",
+    "1335": "Extremely long thin yellow zigzag arms",
+    "1414": "Lower yellow circles colored blue",
+    "1668": "Woman, reiterated by user",
     "1815": "Full halberd type weapon from image; all melee uses halberd",
+    "1870": "SINGLE legless floating Sproto, preserve full reference as one connected silhouette; VMU-like hovering. Supersedes earlier twin interpretation. Improve melee dynamics with windup, body ram, rising strike, low swoop and aerial dive; retain single floating legless silhouette.",
+    "2101": "Clean blue face, no red bleed outside lips/muzzle",
+    "2177": "Collar entirely white",
+    "2344": "Red actor: thinner but curvy adult hourglass build, slender arms/legs, slim waist and proportionate full chest/rounded hips; face matches source wide oval, slanted half-lidded yellow almond eyes and closed red lips instead of round head. Keep blue actor chubby.",
+    "2381": "Sharp yellow eyes, black pupils and clean outlines",
+    "2531": "Sharper white almond eyes and clearly defined black pupils throughout animations; preserve red boxing gloves and white collar. Ranged attack spits a miniature Sproto from the mouth.",
+    "2616": "Add a full-length curled staff; all melee attacks use it",
+    "2789": "Enlarge stick to full staff; attacks use staff",
+    "3106": "Ranged attack throws the exact B in the original photo: preserve its tilted serif silhouette, yellow fill, red counter accents and black outline.",
+    "3152": "Rename Pissing Sproto. Add dedicated assist animations; special partner for broad single-body roster including 2322.",
+    "3181": "Exactly TWO independent characters: large blue main and much smaller yellow partner. Small dark creature is ATTACHED to the blue character stomach in every pose, not a third fighter. Replace blue actor kicks with the stomach monster expanding, lunging/biting and retracting while attached; yellow partner covers during those attacks.",
+    "3215": "Fully clothed as photo, black long pants",
     "Yannix": "Improve reference fidelity and dynamic movement animations",
     "Red Kev": "Large curved open toothy smile like source",
     "Sprotel Bitcoin": "Complete Santa outfit, not hat only",
     "VAMP": "Spikes attached to body outfit",
     "BIMBA": "Full ankle-length robe",
     "Bitcoin MLK": "Reduce excess purple toward reference indigo blue hue",
-    "3152": "Rename Pissing Sproto. Add dedicated assist animations; special partner for broad single-body roster including 2322.",
-    "vaudream": "Improve legless floating-machine melee animations: deep banking windup, explosive chassis rams, rising strikes, low swoops and aerial dives.",
-    "3106": "Ranged attack throws the exact B in the original photo: preserve its tilted serif silhouette, yellow fill, red counter accents and black outline."
+    "vaudream": "Improve legless floating-machine melee animations: deep banking windup, explosive chassis rams, rising strikes, low swoops and aerial dives."
   },
   "preserveExternalWork": "Vaudream is being added in another chat; preserve its inventory, art and integration.",
   "expectedSprotoBodyCount": 59,
@@ -51,8 +51,8 @@
     "Brain Sprot": "single, orange nose and broad red mouth",
     "GodMod3D.eth": "interpreted as twin; left two eyes/right one eye",
     "Sober": "single with sleepy eyes/red collar",
-    "\ud835\udd79\ud835\udd94\ud835\udd98\ud835\udd92\ud835\udd8e\ud835\udd91\ud835\udd8a\ud835\udd88\ud835\udd91\ud835\udd94\ud835\udd9c\ud835\udd93": "double, pink clown much smaller (.55 vs 1.25 scale), spacing112",
-    "ol\u2019 no name": "One body, two separated mouths",
+    "𝕹𝖔𝖘𝖒𝖎𝖑𝖊𝖈𝖑𝖔𝖜𝖓": "double, pink clown much smaller (.55 vs 1.25 scale), spacing112",
+    "ol’ no name": "One body, two separated mouths",
     "Great Charly.eth": "One body with yellow two-dot belly patch"
   },
   "pissingSprotoPartners": [
@@ -135,5 +135,271 @@
       "3181 attached stomach creature large finisher"
     ],
     "damage": "existing four scheduled contacts; no extra simulation bodies"
+  },
+  "independentPartners": {
+    "supersedes": "partnerRelay and pissingAssist broad shared lineup",
+    "rule": "Every main fighter has exactly one partner identity; twin partners include their complete pair. Pissing Sproto, Vmudream (vaudream), and #3181 are assigned separately to different mains.",
+    "assignments": {
+      "sproto102": "sproto3152",
+      "sproto215": "vaudream",
+      "sproto313": "sproto3181",
+      "sproto651": "sproto3152",
+      "sproto763": "vaudream",
+      "sproto818": "sproto3181",
+      "sproto831": "sproto3152",
+      "sproto834": "vaudream",
+      "sproto837": "sproto3181",
+      "sproto865": "sproto3152",
+      "sproto943": "vaudream",
+      "sproto999": "sproto3181",
+      "sproto1011": "sproto3152",
+      "sproto1093": "vaudream",
+      "sproto1187": "sproto3181",
+      "sproto1335": "sproto3152",
+      "sproto1345": "vaudream",
+      "sproto1414": "sproto3181",
+      "sproto1477": "sproto3152",
+      "sproto1601": "vaudream",
+      "sproto1668": "sproto3181",
+      "sproto1815": "sproto3152",
+      "sproto1870": "vaudream",
+      "sproto2101": "sproto3181",
+      "sproto2177": "sproto3152",
+      "sproto2322": "vaudream",
+      "sproto2381": "sproto3181",
+      "sproto2531": "sproto3152",
+      "sproto2569": "vaudream",
+      "sproto2616": "sproto3181",
+      "sproto2789": "sproto3152",
+      "sproto2884": "vaudream",
+      "sproto3106": "sproto3181",
+      "sproto3215": "sproto3152"
+    }
+  },
+  "partnerExpansion": {
+    "singleIds": [
+      "sproto313",
+      "sproto1414",
+      "sproto2884",
+      "sproto215",
+      "sproto102",
+      "sproto834",
+      "sproto1815",
+      "sproto1601",
+      "sproto2789",
+      "sproto818"
+    ],
+    "twinIds": [
+      "sproto282",
+      "sproto2075",
+      "sproto704"
+    ],
+    "assignments": {
+      "loadthebags": "sproto313",
+      "urmometh": "sproto1414",
+      "alpha777": "sproto2884",
+      "uncmasterflex": "sproto215",
+      "dumpstar": "sproto102",
+      "aaron": "sproto834",
+      "olnoname": "sproto1815",
+      "erik": "sproto1601",
+      "vela": "sproto2789",
+      "vitaliketh": "sproto818",
+      "sober": "sproto282",
+      "brainsprot": "sproto2075",
+      "bront": "sproto704"
+    },
+    "attacks": {
+      "sproto313": {
+        "name": "FOUR-EYE PINBALL",
+        "kind": "prism",
+        "motion": "hover",
+        "color": "#6bf5ff",
+        "hits": [
+          {
+            "push": 5,
+            "stun": 32
+          }
+        ]
+      },
+      "sproto1414": {
+        "name": "BLUE GEYSER",
+        "kind": "geyser",
+        "motion": "rise",
+        "color": "#378dff",
+        "hits": [
+          {
+            "push": 2,
+            "stun": 34,
+            "launch": 6
+          }
+        ]
+      },
+      "sproto2884": {
+        "name": "CAP COMET",
+        "kind": "comet",
+        "motion": "orbit",
+        "color": "#ffe55b",
+        "hits": [
+          {
+            "push": 8,
+            "stun": 30
+          }
+        ]
+      },
+      "sproto215": {
+        "name": "RED-EYE VORTEX",
+        "kind": "vortex",
+        "motion": "hover",
+        "color": "#fa587f",
+        "hits": [
+          {
+            "push": -5,
+            "stun": 36
+          }
+        ]
+      },
+      "sproto102": {
+        "name": "SHOULDER BLITZ",
+        "kind": "blitz",
+        "motion": "rush",
+        "color": "#ffaf4c",
+        "hits": [
+          {
+            "push": 11,
+            "stun": 29
+          }
+        ]
+      },
+      "sproto834": {
+        "name": "CRIMSON DIVE",
+        "kind": "dive",
+        "motion": "dive",
+        "color": "#ff416b",
+        "hits": [
+          {
+            "push": 3,
+            "stun": 33,
+            "launch": 4
+          }
+        ]
+      },
+      "sproto1815": {
+        "name": "HOOKED REAPER",
+        "kind": "halberd",
+        "motion": "sweep",
+        "color": "#ff4747",
+        "hits": [
+          {
+            "push": -3,
+            "stun": 35,
+            "low": true
+          }
+        ]
+      },
+      "sproto1601": {
+        "name": "LUCKY EIGHT RAIN",
+        "kind": "eights",
+        "motion": "throw",
+        "color": "#ffe45a",
+        "hits": [
+          {
+            "push": 4,
+            "stun": 31
+          }
+        ]
+      },
+      "sproto2789": {
+        "name": "STORMSTAFF",
+        "kind": "storm",
+        "motion": "rise",
+        "color": "#c791ff",
+        "hits": [
+          {
+            "push": 1,
+            "stun": 39,
+            "launch": 5
+          }
+        ]
+      },
+      "sproto818": {
+        "name": "FROST ECHO",
+        "kind": "frost",
+        "motion": "pulse",
+        "color": "#9cecff",
+        "hits": [
+          {
+            "push": 0,
+            "stun": 42,
+            "low": true
+          }
+        ]
+      },
+      "sproto282": {
+        "name": "RED / BLUE CROSSFIRE",
+        "kind": "crossfire",
+        "motion": "paired",
+        "color": "#f77294",
+        "hits": [
+          {
+            "push": 7,
+            "stun": 32
+          },
+          {
+            "push": -2,
+            "stun": 35
+          }
+        ],
+        "bodyAttacks": [
+          "Red fan shot",
+          "Blue ground zigzag"
+        ]
+      },
+      "sproto2075": {
+        "name": "SKY / QUAKE",
+        "kind": "quakeDive",
+        "motion": "paired",
+        "color": "#ffe368",
+        "hits": [
+          {
+            "push": 2,
+            "stun": 34,
+            "launch": 7
+          },
+          {
+            "push": 10,
+            "stun": 37,
+            "low": true,
+            "launch": -9
+          }
+        ],
+        "bodyAttacks": [
+          "Small Sproto sky dive",
+          "Large Sproto earthquake stomp"
+        ]
+      },
+      "sproto704": {
+        "name": "BOULDER / BOOMERANG",
+        "kind": "boomerang",
+        "motion": "paired",
+        "color": "#7be7c1",
+        "hits": [
+          {
+            "push": 13,
+            "stun": 30
+          },
+          {
+            "push": -4,
+            "stun": 38
+          }
+        ],
+        "bodyAttacks": [
+          "Large Sproto boulder throw",
+          "Small Sproto returning boomerang"
+        ]
+      }
+    },
+    "selection": "Random sample from the existing single-body and paired Sproto inventories, excluding already-used partners. Assignments are fixed after sampling.",
+    "rule": "One partner identity per special. Both members of each twin partner perform their own attack on alternating main-fighter contacts."
   }
 }

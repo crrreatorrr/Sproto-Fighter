@@ -74,7 +74,6 @@ def install():
         elif len(ref['entities'])==3:name=f'TRIPLE SURGE {n}'
         elif ref.get('locomotion')=='hover':name=f'FLOATING SURGE {n}'
         data=dict(name=ref['name'],color=color,dark='#263c64',speed=5.5,jump=15.8,partner=ref.get('partner','rivet'),special=name,role='DUET' if twin else 'SKIRMISH',description='Two separate animated bodies with one health pool and alternating contacts.' if twin else 'Reference-based full-body pixel art; shared controls and individual combat profile.')
-        if ref.get('specialPartners'):data['specialPartners']=ref['specialPartners']
         if ident=='vaudream':data.update(role='HOVER',description='Legless floating machine: hover glides, chassis rams and screen casts.')
         elif ref.get('locomotion')=='hover':data.update(role='HOVER',description='One legless floating Sproto with hovering glides and head rams.')
         elif ref.get('weapon')=='microphone':data.update(role='MC',description='Microphone jabs, overhead mic swings and vocal casts.')
