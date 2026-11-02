@@ -1,0 +1,16 @@
+PASS: catch eases to authored grip, damages only at release, then fully recovers
+PASS: forward release, trajectory, knockdown and recovery in both facings
+PASS: back release, trajectory, knockdown and recovery in both facings
+PASS: up release, trajectory, knockdown and recovery in both facings
+PASS: down release, trajectory, knockdown and recovery in both facings
+PASS: all roster pairs × 4 directions × 2 facings × 3 locations: bounded finite catch and recovery
+PASS: guard loses to grab; misses and airborne/stunned targets do not latch
+PASS: projectile interrupts held attacker even while away is held, without teleport/damage to victim
+PASS: held victim is protected from incidental projectiles
+PASS: simultaneous grabs break evenly; opposite directions cancel to forward
+PASS: late recovery input buffers but early presses do not leak after a hold
+PASS: KO throw finishes visible flight and clears latch before result; restart is fresh
+PASS: flush-wall back throws swap sides for all attackers, both player indices and walls
+PASS: KO during hold cancels the latch without teleporting or damaging the victim
+PASS: throw state remains deterministic through JSON snapshot and replay
+15 throw groups passed; 0 failed.

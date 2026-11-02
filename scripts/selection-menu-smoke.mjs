@@ -26,7 +26,7 @@ const root=new Element('section','selection-view');ids.set(root.id,root);
 for(const id of ['device','start','overlay-select','story-worlds'])ids.set(id,new Element('button',id));
 document={activeElement:root,getElementById:id=>ids.get(id),querySelector:()=>null,querySelectorAll:()=>[],createElement:tag=>new Element(tag)};
 const stages=['trenches','circuit','retro','yacht','throne','castle','bar','verse','ranch'].map((id,i)=>({id,name:id,chapter:i<4?i+1:null}));
-const modules={'./core':core,'./originalPortraits':{originalPortraits:Object.fromEntries(core.PLAYABLE_FIGHTERS.map(id=>[id,'/'+id+'.png']))},'./poseAtlas':{drawPoseAtlasSample:()=>true},'./stage':{STAGES:stages,drawStagePreview(){}}};
+const modules={'./core':core,'./originalPortraits':{originalPortraits:Object.fromEntries(core.PLAYABLE_FIGHTERS.map(id=>[id,'/'+id+'.png']))},'./poseAtlas':{drawSelectionPose:()=>true},'./stage':{STAGES:stages,drawStagePreview(){}}};
 const context={exports:{},require:id=>modules[id],document,HTMLElement:Element,HTMLButtonElement:Element,HTMLSelectElement:Select,Event:class{constructor(type){this.type=type;}},window:{addEventListener(){}},performance:{now:()=>now},console,Math};vm.createContext(context);vm.runInContext(compile(read('src/selectionMenu.ts')),context);
 let launches=0,lastSetup;const menu=context.exports.createSelectionMenu({start(setup){launches++;lastSetup=setup;menu.hide();context.running=true;context.padNeedsRelease=true;}});menu.setReady(true);
 assert.ok(root.innerHTML.indexOf('class="selection-locations"')<root.innerHTML.indexOf('class="match-preview"'));assert.ok(root.innerHTML.indexOf('id="start-fight"')<root.innerHTML.indexOf('class="selection-roster"'));

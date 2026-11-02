@@ -169,3 +169,21 @@ dialog p { font-size: 16px; line-height: 1.5; }
   .world-card { padding: 16px; }
   .world-card strong { font-size: 22px; }
 }
+
+/* Give paired selections a complete preview area rather than shrinking bodies
+   between the side readouts. Combat canvases do not use these rules. */
+#selection-view[data-paired=true] .match-preview { height: calc(clamp(242px,24vw,305px) + 154px); }
+#selection-view[data-paired=true] .fighter-summary { top: auto; bottom: 0; height: 150px; width: 49%; max-width: none; padding: 8px 12px; }
+#selection-view[data-paired=true] .fighter-summary dl { grid-template-columns: repeat(4,minmax(0,1fr)); gap: 6px; }
+#selection-view[data-paired=true] .fighter-summary dl > div { display: block; }
+#selection-view[data-paired=true] .fighter-summary h2 { margin: 5px 0; }
+#selection-view[data-paired=true] .fighter-summary > p { margin-bottom: 6px; }
+#selection-view[data-paired=true] .versus { top: 30%; }
+#selection-view[data-paired=true] .preview-stage-label { top: 4px; bottom: auto; }
+@media(max-width:650px) {
+  #selection-view[data-paired=true] .match-preview { height: 654px; }
+  #selection-view[data-paired=true] .fighter-summary { padding: 8px 6px; }
+  #selection-view[data-paired=true] .fighter-summary dl { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px; }
+  #selection-view[data-paired=true] .fighter-summary dl > div { display: flex; }
+  #selection-view[data-paired=true] .versus { top: 232px; width: 38px; height: 32px; font-size: 19px; }
+}

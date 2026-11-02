@@ -1,4 +1,4 @@
-import { ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, specialPartnerIds, bodyAtlasIds, isPairedFighter, createState, getMove, FLOOR, type PlayableFighterId, type Mode } from './core';
+import { ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, specialPartnerIds, isPairedFighter, createState, getMove, FLOOR, type PlayableFighterId, type Mode } from './core';
 import { originalPortraits } from './originalPortraits';
 import { drawSelectionPose } from './poseAtlas';
 import { STAGES, drawStagePreview, type StageId } from './stage';
@@ -29,19 +29,24 @@ export function createSelectionMenu(hooks:{start:(setup:SelectionSetup)=>void;pr
   const c=canvas.getContext('2d')!;drawStagePreview(c,setup.stage,w,h);
   c.fillStyle='#050712a6';c.fillRect(0,0,w,h);
   const fighters=createState(setup.fighter,'dummy',setup.opponent).fighters;
-  const compact=w<650,feet=compact?h-146:h-20,scale=Math.min((compact?feet:h)*.0054,w*.0032);
+  const compact=window.innerWidth<=650,paired=isPairedFighter(setup.fighter)||isPairedFighter(setup.opponent);
+  const area=paired?h-154:h,feet=compact?(paired?area/2-14:h-154):area-20;
+  const height=compact?176:Math.min(244,area-46);
+  const scale=height/160;
   for(let i=0;i<2;i++){
-   const actor=fighters[i],x=w*(i===0?(compact?.25:.35):(compact?.75:.65));
-   c.fillStyle=i===0?'#b41e4288':'#1c51de99';c.beginPath();c.ellipse(x,feet+1,w*(compact?.16:.10),5,0,0,Math.PI*2);c.fill();
-   c.fillStyle=i===0?'#ff3e5b':'#518aff';c.fillRect(x-w*.06,feet+4,w*.12,1);
+   const stacked=paired&&compact;
+   const actor=fighters[i],x=w*(stacked?.5:i===0?(compact?.25:paired?.25:.35):(compact?.75:paired?.75:.65));
+   const floor=feet+(stacked?i*area/2:0);
+   c.fillStyle=i===0?'#b41e4288':'#1c51de99';c.beginPath();c.ellipse(x,floor+1,w*(compact?.16:.10),5,0,0,Math.PI*2);c.fill();
+   c.fillStyle=i===0?'#ff3e5b':'#518aff';c.fillRect(x-w*.06,floor+4,w*.12,1);
    actor.x=0;actor.y=FLOOR;actor.facing=i===0?1:-1;
    // Pack menu bodies by their visible bounds; never shrink a team by body count.
-   c.save();c.translate(x,feet);drawSelectionPose(c,actor,scale,w*(compact?.43:.28));c.restore();
+   c.save();c.translate(x,floor);drawSelectionPose(c,actor,scale,w*(paired?(compact?.90:.46):compact?.43:.28));c.restore();
   }
   for(const button of Array.from(rail.querySelectorAll<HTMLButtonElement>('button'))){const thumb=button.querySelector('canvas')!;drawStagePreview(thumb.getContext('2d')!,button.dataset.stage as StageId,thumb.width,thumb.height);}
  }
 
- function update(){root.dataset.side=target;el('choose-player').setAttribute('aria-pressed',String(target==='fighter'));el('choose-rival').setAttribute('aria-pressed',String(target==='opponent'));el('player-selection-name').textContent=ROSTER[setup.fighter].name;el('rival-selection-name').textContent=ROSTER[setup.opponent].name;el<HTMLImageElement>('player-echo').src=originalPortraits[setup.fighter];el<HTMLImageElement>('rival-echo').src=originalPortraits[setup.opponent];el('roster-heading').textContent=target==='fighter'?'SELECT YOUR FIGHTER':'SELECT YOUR CPU RIVAL';for(const button of portraits){const id=button.dataset.fighter;button.classList.toggle('picked-player',id===setup.fighter);button.classList.toggle('picked-rival',id===setup.opponent);button.setAttribute('aria-pressed',String(id===setup[target]));button.tabIndex=id===setup[target]?0:-1;}for(const button of Array.from(rail.querySelectorAll<HTMLButtonElement>('button')))button.setAttribute('aria-pressed',String(button.dataset.stage===setup.stage));el('player-summary').innerHTML=stats(setup.fighter,'P1 / YOU');el('rival-summary').innerHTML=stats(setup.opponent,'CPU / RIVAL');el('selected-stage-name').textContent=STAGES.find(s=>s.id===setup.stage)!.name;el<HTMLSelectElement>('mode').value=setup.mode;el('selection-announcement').textContent=`Editing ${target==='fighter'?'P1':'CPU rival'} · ${ROSTER[setup[target]].name} · ${COMBAT_STYLES[setup[target]].signature} · Special partners: ${specialPartnerIds(setup[target]).map(id=>ROSTER[id].name).join(" + ")}`;preview();}
+ function update(){root.dataset.paired=String(isPairedFighter(setup.fighter)||isPairedFighter(setup.opponent));root.dataset.side=target;el('choose-player').setAttribute('aria-pressed',String(target==='fighter'));el('choose-rival').setAttribute('aria-pressed',String(target==='opponent'));el('player-selection-name').textContent=ROSTER[setup.fighter].name;el('rival-selection-name').textContent=ROSTER[setup.opponent].name;el<HTMLImageElement>('player-echo').src=originalPortraits[setup.fighter];el<HTMLImageElement>('rival-echo').src=originalPortraits[setup.opponent];el('roster-heading').textContent=target==='fighter'?'SELECT YOUR FIGHTER':'SELECT YOUR CPU RIVAL';for(const button of portraits){const id=button.dataset.fighter;button.classList.toggle('picked-player',id===setup.fighter);button.classList.toggle('picked-rival',id===setup.opponent);button.setAttribute('aria-pressed',String(id===setup[target]));button.tabIndex=id===setup[target]?0:-1;}for(const button of Array.from(rail.querySelectorAll<HTMLButtonElement>('button')))button.setAttribute('aria-pressed',String(button.dataset.stage===setup.stage));el('player-summary').innerHTML=stats(setup.fighter,'P1 / YOU');el('rival-summary').innerHTML=stats(setup.opponent,'CPU / RIVAL');el('selected-stage-name').textContent=STAGES.find(s=>s.id===setup.stage)!.name;el<HTMLSelectElement>('mode').value=setup.mode;el('selection-announcement').textContent=`Editing ${target==='fighter'?'P1':'CPU rival'} · ${ROSTER[setup[target]].name} · ${COMBAT_STYLES[setup[target]].signature} · Special partners: ${specialPartnerIds(setup[target]).map(id=>ROSTER[id].name).join(" + ")}`;preview();}
  function focusSelected(){portraits.find(b=>b.dataset.fighter===setup[target])?.focus();}
  function launchState(){el<HTMLButtonElement>('start-fight').disabled=!ready||artLoading;el('start-fight').textContent=artLoading?'LOADING FIGHTERS…':ready?'START FIGHT  ↗':'FIGHTERS UNAVAILABLE';}
  async function prepareSelection(){
