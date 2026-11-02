@@ -174,9 +174,9 @@ function drawRanch(ctx: CanvasRenderingContext2D, frame: number): void {
     ctx.restore();
 }
 
-export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch' | 'trenches' | 'circuit' | 'throne' | 'verse';
-/** Primary arenas for the six chapters of Out of the Trenches. */
-export const STORY_STAGE_IDS:readonly StageId[] = ['trenches','circuit','yacht','throne','bar','verse'];
+export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch' | 'trenches' | 'circuit' | 'throne' | 'verse' | 'hatchery';
+/** Canonical chapter order; encounter assignments and gates derive from this route. */
+export const STORY_STAGE_IDS:readonly StageId[] = ['trenches','circuit','yacht','throne','bar','verse','hatchery'];
 export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:number|null}[] = [
     {id:'trenches',name:'Mudline Trenches',theme:'The Trenches / city below',accent:'#d6a05c',chapter:1},
     {id:'circuit',name:'Circuit Gate',theme:'The City / challenge gate',accent:'#64d7df',chapter:2},
@@ -186,6 +186,7 @@ export const STAGES: {id:StageId;name:string;theme:string;accent:string;chapter:
     {id:'castle',name:'Moonkeep Castle',theme:'Castle courtyard',accent:'#adabed',chapter:4},
     {id:'bar',name:'Last Light Bar',theme:'The Bar / hidden doorway',accent:'#efaa65',chapter:5},
     {id:'verse',name:'Verse Gate',theme:'The Verse / open every gate',accent:'#ad92f4',chapter:6},
+    {id:'hatchery',name:'The Hatchery',theme:'Beyond the portal / alien hive',accent:'#c4d75c',chapter:7},
     {id:'ranch',name:'Amber Ranch',theme:'Bonus / original ranch',accent:'#efbd7a',chapter:null},
 ];
 let currentStage:StageId='ranch';
@@ -193,7 +194,7 @@ const placeholderScenery=new Map<StageId,HTMLCanvasElement>();
 const stageImages=new Map<StageId,HTMLImageElement>();
 const stageArtErrors=new Map<StageId,string>();
 let stageArtPromise:Promise<void>|undefined;
-/** Independent, text-prompted Higgsfield scenery. No fighter references are uploaded. */
+/** Higgsfield scenery from text or environmental references, never fighter atlases. */
 export function loadStageArt():Promise<void>{
     return stageArtPromise??=Promise.all(STAGES.filter(s=>s.id!=='ranch').map(async stage=>{
         const image=new Image();
@@ -244,7 +245,7 @@ function drawBarApron(ctx:CanvasRenderingContext2D):void{
 export function drawStage(ctx:CanvasRenderingContext2D,frame:number):void {
     drawStagePreview(ctx,currentStage,1280,720,frame);
     if(currentStage==='ranch'||stageImages.has(currentStage))return;
-    ctx.save();ctx.fillStyle='#0b101acc';ctx.fillRect(24,630,430,35);ctx.fillStyle='#d7e3ef';ctx.font='12px monospace';ctx.textAlign='left';
+    ctx.save();ctx.fillStyle='#0b101acc';ctx.fillRect(24,630,430,35);ctx.fillStyle='#d7e3ef';ctx.font='12px "Pixelify Sans", monospace';ctx.textAlign='left';
     ctx.fillText('PLACEHOLDER STAGE / '+STAGES.find(s=>s.id===currentStage)!.theme.toUpperCase(),36,652);ctx.restore();
 }
 /** Deliberately static layout studies. These are not final level art or cutscene animation. */
@@ -280,6 +281,16 @@ function buildPlaceholder(id:StageId):HTMLCanvasElement {
         r(0,126,320,18,'#777585');for(let x=0;x<320;x+=18)r(x,119,11,10,'#888591');
         r(0,144,320,36,'#62616f');for(let y=145;y<180;y+=9){r(0,y,320,1,'#85828b');for(let x=(y%2)*12;x<320;x+=24)r(x,y,1,9,'#454654');}
         for(const x of [82,224]){r(x,100,3,31,'#7f695c');r(x-2,94,7,10,'#b5825e');r(x,91,3,10,'#d5ae78');}
+    }else if(id==='hatchery'){
+        r(0,0,320,180,'#171d31');r(0,73,320,71,'#202733');
+        for(let x=0;x<320;x+=24){r(x,112,22,20,'#303747');r(x+5,110,2,3,'#50a9b4');}
+        p([[105,136],[94,119],[104,96],[129,86],[187,86],[213,110],[215,136]],'#362633');
+        p([[122,128],[113,96],[128,65],[138,102],[157,76],[175,101],[190,66],[200,98],[186,128]],'#765130');
+        p([[139,128],[128,106],[142,88],[159,94],[174,87],[190,109],[180,128]],'#ac5736');
+        for(const [x,y]of[[126,104],[145,95],[168,99],[181,113]]){r(x,y,7,10,'#c3c535');r(x+2,y+2,3,4,'#e2e84b');}
+        for(const x of [33,66,247,281]){p([[x,135],[x-6,118],[x-1,109],[x+3,123],[x+8,115],[x+11,135]],'#3d6d9c');r(x,119,2,13,'#78b8d2');}
+        r(0,144,320,36,'#262936');r(0,144,320,2,'#4e5365');
+        for(let i=0;i<28;i++)r(i*47%320,150+i*7%27,8,1,i%3?'#35394a':'#46334b');
     }else if(id==='verse'){
         r(0,0,320,180,'#17172d');
         for(let i=0;i<50;i++)r((i*79)%320,25+i*17%100,1,1,i%3?'#827fc1':'#d9d6f1');
