@@ -223,7 +223,7 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:AtlasClipName
     const age=t-assistContacts[beat],phase=age<3?1:age<6?2:age<9?3:0;
     const component=componentOwner.get(f);
     if(owner.id==='sproto3181'&&component){
-      const yellow=component.index===1,active=yellow?beat===0:beat===assistContacts.length-1;
+      const yellow=component.index===1,active=yellow?beat%2===0:beat%2===1;
       return choose('assistAttack',active?(yellow?0:12)+phase:0);
     }
     return choose('assistAttack',(beat%4)*4+phase);

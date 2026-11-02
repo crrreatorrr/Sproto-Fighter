@@ -1,5 +1,5 @@
 import {drawPower,drawPelvicStream} from './powerArt';
-import { FLOOR, WIDTH, ROSTER, COMBAT_STYLES, specialPartnerIds, bodyOffsets, isPairedFighter, bodySpread, type FighterId, type CombatState, type Fighter } from './core';
+import { FLOOR, WIDTH, ROSTER, COMBAT_STYLES, specialPartnerIds, isPairedFighter, bodySpread, type FighterId, type CombatState, type Fighter } from './core';
 import { drawSprite } from './spriteRoster';
 import { getDuoLayoutDebug, setPoseAtlasAssistTiming } from './poseAtlas';
 const clamp=(n:number)=>Math.max(0,Math.min(1,n));
@@ -9,16 +9,11 @@ const entries=new WeakMap<Fighter,{move:Fighter['move'];side:number}>();
 function actorFor(owner:Fighter,id:FighterId){let group=assists.get(owner);if(!group){group=new Map();assists.set(owner,group);}let actor=group.get(id);if(!actor){actor={...owner};group.set(id,actor);}return actor;}
 interface AssistBeat{id:FighterId;contacts:readonly number[];start:number;rank:number}
 function schedule(f:Fighter):AssistBeat[]{
- const ids=specialPartnerIds(f.id),hits=COMBAT_STYLES[f.id].specialFrames;
- if(ids.includes('sproto3152')&&ids.includes('vaudream')&&ids.includes('sproto3181')&&hits.length>=4)return[
-  {id:'sproto3152',contacts:[hits[0]],start:4,rank:0},
-  {id:'vaudream',contacts:[hits[1]],start:Math.max(4,hits[1]-12),rank:1},
-  {id:'sproto3181',contacts:[hits[2],hits[3]],start:Math.max(4,hits[2]-12),rank:2},
- ];
- if(['sproto3152','vaudream','sproto3181'].includes(ids[0]))return[{id:ids[0],contacts:hits,start:4,rank:0}];
+ const id=ROSTER[f.id].partner,hits=COMBAT_STYLES[f.id].specialFrames;
+ if(['sproto3152','vaudream','sproto3181'].includes(id))return[{id,contacts:hits,start:4,rank:0}];
  return[];
 }
-/** A wall-side decision persists through the entire relay, avoiding teleports. */
+/** A wall-side decision persists through the entire special, avoiding teleports. */
 export function getTeamSpecialAssistPlan(f:Fighter){
  if(f.move?.id!=='special')return[];
  let entry=entries.get(f);
@@ -32,7 +27,8 @@ export function getTeamSpecialAssistPlan(f:Fighter){
   const offset=entry.side*(-(spread+140)+into*140-out*220),margin=beat.id==='sproto3181'?160:90;
   const x=Math.max(margin,Math.min(WIDTH-margin,f.x+f.facing*offset)),y=FLOOR-(beat.id==='vaudream'?85:0);
   const source=beat.id==='vaudream'?{x:x+f.facing*35,y:y-125}:{x:x+f.facing*30,y:y-50};
-  const attack=beat.id==='sproto3181'?(t>=last&&t<=last+9?'stomachSlam':t>=first&&t<=first+9?'yellowStrike':null):null;
+  let contact=-1;for(let i=0;i<beat.contacts.length;i++)if(t>=beat.contacts[i]&&t<=beat.contacts[i]+9)contact=i;
+  const attack=beat.id==='sproto3181'&&contact>=0?(contact%2===0?'yellowStrike':'stomachSlam'):null;
   return[{...beat,x,y,facing:f.facing,t,opacity:clamp(into*(1-out))*.93,source,attack,impactScale:attack==='stomachSlam'?2.6:.7,
    reach:Math.max(40,(COMBAT_STYLES[f.id].special.range??480)+(f.x-x)*f.facing-30)}];
  });
@@ -62,7 +58,7 @@ export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
       for(const[width,stroke]of [[16,'#185a96'],[8,'#38dcff'],[3,'#f3ffff']]as const){c.lineWidth=width;c.strokeStyle=stroke;c.beginPath();c.moveTo(a.source.x,a.source.y);c.lineTo(foe.x,foe.y-65);c.stroke();}
       c.fillStyle='#f3ffff';c.fillRect(Math.round(a.source.x)-5,Math.round(a.source.y)-5,10,10);
      }else if(a.id==='sproto3181'){
-      const big=i===a.contacts.length-1,r=(22+age*4)*(big?2.6:.7),cx=foe.x,cy=foe.y-65;
+      const big=i%2===1,r=(22+age*4)*(big?2.6:.7),cx=foe.x,cy=foe.y-65;
       c.strokeStyle=big?'#111a34':'#ffe26a';c.lineWidth=big?15:4;c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.stroke();
       if(big){c.strokeStyle='#ffe26a';c.lineWidth=4;c.beginPath();c.arc(cx,cy,r+7,0,Math.PI*2);c.stroke();for(let k=0;k<8;k++){const angle=k*Math.PI/4;c.fillStyle='#ffe26a';c.fillRect(Math.round(cx+Math.cos(angle)*r),Math.round(cy+Math.sin(angle)*r),8,8);}}
      }

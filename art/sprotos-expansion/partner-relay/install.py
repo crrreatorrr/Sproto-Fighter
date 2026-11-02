@@ -1,4 +1,4 @@
-"""Install only relay assist clips and explicit roster partner lists."""
+"""Install only relay assist clips and individual roster partner assignments."""
 import hashlib,json,re,shutil
 from pathlib import Path
 HERE=Path(__file__).resolve().parent;EXPANSION=HERE.parent;ROOT=EXPANSION.parents[1]
@@ -15,7 +15,8 @@ manifest_path.write_text(json.dumps(manifest,indent=2)+'\n')
 def update(match):
     indent,ident,raw=match.groups();ref=refs.get(ident);data=json.loads(raw)
     if not ref or 'color' not in data or 'name' not in data:return match.group(0)
-    if ref.get('specialPartners'):data['specialPartners']=ref['specialPartners']
+    data.pop('specialPartners',None)
+    data['partner']=ref.get('partner','rivet')
     return indent+ident+': '+json.dumps(data)+','
 core_path=ROOT/'src/core.ts';core_path.write_text(re.sub(r'^([ \t]*)(sproto\d+):[ \t]*(\{[^\n]*\}),$',update,core_path.read_text(),flags=re.M))
-print('Installed 96 new assist drawings; coordinated relay for 34 fighters, including 2322.')
+print('Installed 96 new assist drawings; independent partners for 34 fighters, including 2322.')

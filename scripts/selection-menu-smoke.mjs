@@ -26,7 +26,7 @@ const root=new Element('section','selection-view');ids.set(root.id,root);
 for(const id of ['device','start','overlay-select','story-worlds'])ids.set(id,new Element('button',id));
 document={activeElement:root,getElementById:id=>ids.get(id),querySelector:()=>null,querySelectorAll:()=>[],createElement:tag=>new Element(tag)};
 const stages=['trenches','circuit','retro','yacht','throne','castle','bar','verse','ranch'].map((id,i)=>({id,name:id,chapter:i<4?i+1:null}));
-const modules={'./core':core,'./originalPortraits':{originalPortraits:Object.fromEntries(core.PLAYABLE_FIGHTERS.map(id=>[id,'/'+id+'.png']))},'./poseAtlas':{drawPoseAtlasSample:()=>true},'./stage':{STAGES:stages,drawStagePreview(){}}};
+const modules={'./core':core,'./originalPortraits':{originalPortraits:Object.fromEntries(core.PLAYABLE_FIGHTERS.map(id=>[id,'/'+id+'.png']))},'./poseAtlas':{drawPoseAtlasSample:()=>true,drawSelectionPose:()=>true},'./stage':{STAGES:stages,drawStagePreview(){}}};
 const context={exports:{},require:id=>modules[id],document,HTMLElement:Element,HTMLButtonElement:Element,HTMLSelectElement:Select,Event:class{constructor(type){this.type=type;}},window:{addEventListener(){}},performance:{now:()=>now},console,Math};vm.createContext(context);vm.runInContext(compile(read('src/selectionMenu.ts')),context);
 let launches=0,lastSetup;const menu=context.exports.createSelectionMenu({start(setup){launches++;lastSetup=setup;menu.hide();context.running=true;context.padNeedsRelease=true;}});menu.setReady(true);
 assert.ok(root.innerHTML.indexOf('class="selection-locations"')<root.innerHTML.indexOf('class="match-preview"'));assert.ok(root.innerHTML.indexOf('id="start-fight"')<root.innerHTML.indexOf('class="selection-roster"'));
@@ -41,6 +41,18 @@ check('stage down reaches mode then CTA; mode changes only the future setup',()=
 check('gamepad D-pad uses the same grid exits and Random Stage route',()=>{portraits.at(-1).focus();menuPress([13]);assert.equal(document.activeElement,stageButtons.at(-1));menuPress([15]);assert.equal(document.activeElement,$('random-stage'));menuPress([12]);assert.equal(document.activeElement,$('story-worlds'));});
 check('upper launch controls lead down to side tabs and roster, and back up',()=>{$('start-fight').focus();key('Down');assert.equal(document.activeElement,$('choose-player'));key('Down');assert.equal(document.activeElement,portraits[0]);key('Up');assert.equal(document.activeElement,$('choose-player'));key('Up');assert.equal(document.activeElement,$('start-fight'));});
 check('gamepad Start focuses CTA; A launches once and held A does not repeat',()=>{menuPress([9]);assert.equal(document.activeElement,$('start-fight'));assert.equal(launches,0);menuPress([0]);assert.equal(launches,1);menu.pollPad(pad([0]));assert.equal(launches,1);assert.equal(lastSetup.fighter,'rivet');assert.equal(lastSetup.opponent,'vela');assert.equal(lastSetup.mode,'dummy');});
+check('each main selection announces exactly its own assigned partner',()=>{
+ menu.show();
+ for(const side of ['choose-player','choose-rival']){
+  $(side).click();
+  for(const id of core.PLAYABLE_FIGHTERS){
+  portraits.find(button=>button.dataset.fighter===id).click();
+  const hint=$('selection-announcement').textContent;
+  assert.ok(hint.endsWith('Special partner: '+core.ROSTER[core.ROSTER[id].partner].name),id);
+  assert.equal(hint.includes('Special partners:'),false);
+  }
+ }
+});
 // Compile main's actual pollPad implementation rather than copying its release gate.
 const source=ts.createSourceFile('main.ts',read('src/main.ts'),ts.ScriptTarget.Latest,true);const poll=source.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='pollPad');assert.ok(poll);
 let currentPad=pad();Object.assign(context,{selection:menu,story:{isOpen:false},dialog:{open:false},running:false,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:false,presentation:{phase:'fight'},navigator:{getGamepads:()=>[currentPad]},$:id=>ids.get(id),A:core.A,padKeys:{light:0,medium:2},bind(){throw Error('unexpected remap');},start(){context.running=true;context.padNeedsRelease=true;},pause(){context.running=false;},returnToSelection(){context.running=false;menu.show();}});vm.runInContext(compile(poll.getText(source)),context);
