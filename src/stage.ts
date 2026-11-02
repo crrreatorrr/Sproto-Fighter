@@ -215,7 +215,7 @@ export function drawStagePreview(ctx:CanvasRenderingContext2D,id:StageId,width:n
     ctx.translate((width-1280*scale)/2,(height-720*scale)*.6);ctx.scale(scale,scale);ctx.imageSmoothingEnabled=false;
     const art=stageImages.get(id);
     if(art){
-        ctx.drawImage(art,0,0,1280,720);
+        drawArenaScenery(ctx,id,art);
         if(id==='bar')drawBarApron(ctx);
     }
     else if(id==='ranch'){drawRanch(ctx,frame);}
@@ -225,6 +225,31 @@ export function drawStagePreview(ctx:CanvasRenderingContext2D,id:StageId,width:n
         ctx.drawImage(scene,0,0,1280,720);
     }
     ctx.restore();
+}
+/** Reframe depth bands around the unchanged y=578 gameplay floor.
+ * Verse's deck surrounds the fighters rather than ending at their heels;
+ * the castle's courtyard begins before their feet instead of after the curb.
+ * Source coordinates use the same 1280×720 space as the unmodified panorama.
+ */
+function drawArenaScenery(ctx:CanvasRenderingContext2D,id:StageId,art:HTMLImageElement):void{
+    const sourceWidth=art.naturalWidth,sourceHeight=art.naturalHeight;
+    const bands=id==='verse'?[[0,0],[480,480],[570,676],[720,720]]:
+        id==='castle'?[[0,0],[596,520],[692,704],[720,720]]:null;
+    if(bands){
+        for(let i=1;i<bands.length;i++){
+            const [sourceTop,targetTop]=bands[i-1],[sourceBottom,targetBottom]=bands[i];
+            ctx.drawImage(art,0,sourceTop/720*sourceHeight,sourceWidth,(sourceBottom-sourceTop)/720*sourceHeight,
+                0,targetTop,1280,targetBottom-targetTop);
+        }
+    }else ctx.drawImage(art,0,0,1280,720);
+    if(id==='yacht'){
+        // The source pier turns into water on the right. Continue its own timber
+        // across the foreground so the entire walkable arena stays on the dock.
+        ctx.drawImage(art,0,532/720*sourceHeight,650/1280*sourceWidth,188/720*sourceHeight,
+            0,532,1280,188);
+        ctx.fillStyle='#594531';ctx.fillRect(0,532,1280,3);
+        ctx.fillStyle='#d5b87c';ctx.fillRect(0,535,1280,2);
+    }
 }
 /** A clear fighting floor in front of the bar's side booths, including both corners. */
 function drawBarApron(ctx:CanvasRenderingContext2D):void{
