@@ -106,3 +106,26 @@ responsive map and name typography, retaining the three Verse recruits. Before
 changing main, take a stable snapshot of tracked and untracked local work, then
 recheck hashes and task status to avoid committing a partial concurrent write.
 Run the combined checks and browser review before final integration.
+
+### Legacy animation checks reconciled
+
+The current legacy event suite initially failed because its release expectation
+covered only mini-Sproto projectiles, not the existing mind-beam, yellow-eight
+and sun release holds. It also applied generic partner timing to fighters with
+dedicated relay entrance/contact sequences. The test now respects those distinct
+contracts; no runtime animation was changed to satisfy the assertions. Twelve
+event groups pass against both the 102-entry checkpoint and 130-entry source
+snapshot. Diagnostic failures now identify the fighter and phase.
+
+The dedicated relay suites also pass: 780 single-partner scenarios, 38 twin-partner
+cases and 78 expanded-partner facing/wall cases. The newer presentation suite
+passes for 107 installed owners with entrance8/death16, covering 214 facing loops
+and 1,712 defeat cases. Its optional all-authored flag fails 107/130 because 23
+other owners retain the supported intro4/defeat12 format; this is not a claim
+that every fighter has the same frame format. The corrected legacy suite covers
+that fallback separately. No additional visual-animation certification is made.
+
+Solana Del Ray's owning chat has now completed its final review and reports 208
+drawings, separate red/blue bodies and passed movement/build checks. The other
+visible local character-chat turns are also completed. Final main integration
+still awaits the remaining roster target and stage clarification.
