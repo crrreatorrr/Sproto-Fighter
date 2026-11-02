@@ -227,3 +227,7 @@ export function drawStoryLocation(ctx:CanvasRenderingContext2D,location:StoryLoc
  const image=images.get(location.id);if(!image)return false;
  ctx.save();ctx.imageSmoothingEnabled=false;ctx.drawImage(image,0,0,1280,720);ctx.restore();return true;
 }
+
+let activeStoryLocation:StoryLocation|null=null;
+export function setActiveStoryLocation(location:StoryLocation|null){activeStoryLocation=location;}
+export function drawActiveStoryLocation(ctx:CanvasRenderingContext2D){return activeStoryLocation?drawStoryLocation(ctx,activeStoryLocation):false;}

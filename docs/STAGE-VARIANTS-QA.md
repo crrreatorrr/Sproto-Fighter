@@ -1,14 +1,14 @@
-# Approved stage variations — integration preparation
+# Approved stage variations — story integration
 
 The 24 supplied v2 PNGs are installed unchanged under `public/stages/variations-v2`. SHA-256 hashes and original dimensions are recorded in its manifest. The source pack and all existing backgrounds remain intact. No images or videos were generated, and no credits were used in this integration pass.
 
-`src/stageVariants.ts` maps scenery in contiguous regional blocks without altering opponent order or saved encounter IDs: Trenches → ranch outskirts; city gate → city interiors; yacht pier → deck → salon; castle halls → crown relay; cosmic Verse locations. Bar and Hatchery retain their existing backgrounds. This mapping is prepared for the persistent 100-encounter route; at this checkpoint it has not yet been connected to actual story launch.
+`src/stageVariants.ts` maps scenery in contiguous regional blocks without altering opponent order or saved encounter IDs: Trenches → ranch outskirts; city gate → city interiors; yacht pier → deck → salon; castle halls → crown relay; cosmic Verse locations. Bar and Hatchery retain their existing backgrounds. The canonical 100-encounter route now selects these locations at actual story launch. Free play clears that override and retains its selected original arena.
 
 ## Observed checks
 
 All 24 locations were rendered in the actual browser review page with the installed Duo and Morelight sprites at the unchanged y=578 combat floor, at the center and both arena edges. All eight full-page screenshots were individually inspected; fighters have visible solid ground beneath their feet and remain readable. No stage-specific floor remap was needed. These are placement checks, not a full fight on every background. One sampled city/yacht walking playback was also captured; no claim is made of continuous video review. Evidence: `docs/evidence/stage-variants/`.
 
-`node scripts/stage-variants-smoke.mjs` passed asset/hash/dimension checks, deterministic mapping of all 24 locations across a 100-encounter fixture, unchanged save/opponent IDs, Bar/Hatchery fallback, and deduplicated loading. `npm run check` passed. Actual canonical route and launch/navigation checks remain for the combined build.
+`node scripts/stage-variants-smoke.mjs` passed asset/hash/dimension checks, deterministic mapping of all 24 locations across a 100-encounter fixture, unchanged save/opponent IDs, Bar/Hatchery fallback, and deduplicated loading. `npm run check` passed. The canonical-route test verifies all 24 locations are used, and the actual main launch-hook test verifies story assignment and free-play clearing. In-browser, the first Halloween 2008 encounter loaded Drainage floodgate; keyboard movement, jump, air light, medium, ranged and Team Special were observed there with health/recoil diagnostics. Other backgrounds have placement review, not a full browser fight on each.
 
 ## Loading
 

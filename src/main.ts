@@ -4,13 +4,16 @@ import './style.css';
 import './arcadeSelection.css';
 import './pixelUI.css';
 import './mysticUI.css';
+import './campaignMap.css';
+import {mountCampaignMap} from './campaignMap';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
 import { playRetainCallout } from './characterVoice';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
 import { STAGES, setStage, loadStageArt, type StageId } from './stage';
-import {storyProgress} from './storyProgress';
+import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
+import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
 import { createStoryMode } from './storyMode';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
@@ -48,7 +51,7 @@ const frames: [
 ][] = [];
 const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:ensurePoseAtlases});
 function updateStage(stage:StageId) {
-    setStage(stage);
+    setStage(stage);setActiveStoryLocation(null);
     const location=STAGES.find(s=>s.id===stage)!;
     $('stage-title').textContent=location.name.toUpperCase();
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
@@ -56,10 +59,14 @@ function updateStage(stage:StageId) {
 async function launchSelection(setup:SelectionSetup,isStory=false) {
     if(!storyProgress.isUnlocked(setup.fighter))return false;
     try{await Promise.all([ensurePoseAtlases(isStory&&setup.opponent==='vela'?[setup.fighter,'vela','vaudream']:[setup.fighter,setup.opponent]),[setup.fighter,setup.opponent].some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
+    const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponent===setup.opponent):undefined;
+    let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS):null;
+    if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
     matchEarnedGodMode=!isStory&&storyProgress.snapshot().completed&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
-    updateStage(setup.stage);
+    updateStage(setup.stage);setActiveStoryLocation(scenery);
+    if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
     selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
     started=false;restart();start();
     $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
@@ -159,6 +166,7 @@ function setTestingGodMode(enabled:boolean){
 }
 let resumeAfterJourney = false, freePlayMode: Mode | null = null;
 const story = createStoryMode({
+    map:mountCampaignMap,
     testing:()=>matchTesting,
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },

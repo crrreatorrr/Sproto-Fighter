@@ -2,7 +2,7 @@ import {STAGES,STORY_STAGE_IDS,type StageId} from './stage';
 import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,FINALE_START,storyProgress,type Encounter,type StoryProgress} from './storyProgress';
 
-type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean};
+type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
 /** Story scenes are placeholders until the separate cutscene script is approved. */
 export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
@@ -48,11 +48,11 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         buttons([{label:'Start encounter →',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);back=()=>selector(true);open();
     }
     function selector(story:boolean){
-        view=story?'worlds':'levels';const save=progress.snapshot();
+        view=story?'worlds':'levels';modal.classList.toggle('story-map-open',story);const save=progress.snapshot();
         $('journey-kicker').textContent=story?`STORY / ${save.cleared.length} OF 100 CLEARED`:'FREE PLAY / LEVEL SELECT';
         $('journey-title').textContent=story?'The road to the Hatchery.':'Pick a place to fight.';
         $('journey-copy').textContent=story?`Defeat 100 different rivals. Each victory permanently recruits that fighter; clear each location to open the next. Finish the route to unlock God Mode for free play. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
-        const content=$('journey-content');content.replaceChildren();const grid=document.createElement('div');grid.className='world-grid';content.append(grid);
+        const content=$('journey-content');content.replaceChildren();const grid=document.createElement('div');grid.className='world-grid'+(story?' campaign-chapter-list':'');content.append(grid);
         for(const level of story?worlds:STAGES){
             const encounters=STORY_ENCOUNTERS.filter(e=>e.stage===level.id),first=encounters[0],last=encounters.at(-1),locked=story&&!progress.canPlay(first.index),done=story&&save.cleared.length>last!.index;
             const button=document.createElement('button');button.className='world-card';button.style.setProperty('--stage-accent',level.accent);button.dataset.stage=level.id;button.disabled=locked;
@@ -60,6 +60,10 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
             button.innerHTML=`<span>${story?`STAGE ${first.chapter} / ENCOUNTERS ${first.index+1}–${last!.index+1}`:'FREE PLAY ARENA'}${done?' / CLEARED':locked?' / LOCKED':''}</span><strong>${level.name}</strong><small>${level.theme}</small><em>${story?(locked?'CLEAR THE PREVIOUS LOCATION':`${Math.max(0,Math.min(encounters.length,save.cleared.length-first.index))} / ${encounters.length} CLEARED`):'FREE PLAY ARENA'}</em>`;
             button.onclick=()=>{if(locked)return;if(!story){void launch(level.id);return;}const next=encounters.find(e=>e.index>=progress.snapshot().cleared.length)??first;if(next===first)scene(next);else encounterPreview(next);};grid.append(button);
         }
+        if(story)hooks.map?.(content,progress,encounter=>{
+            const first=encounter.index===0||STORY_ENCOUNTERS[encounter.index-1].stage!==encounter.stage;
+            if(first)scene(encounter);else encounterPreview(encounter);
+        });
         buttons(story?[
             {label:save.completed?'Replay from the beginning':'Continue story →',run:()=>{const next=STORY_ENCOUNTERS[Math.min(save.cleared.length,99)];if(save.completed)scene(STORY_ENCOUNTERS[0]);else if(next.index===0||STORY_ENCOUNTERS[next.index-1].stage!==next.stage)scene(next,true);else encounterPreview(next);}},
             {label:'Free-play levels',run:()=>selector(false)},{label:'Back to arena',run:close},

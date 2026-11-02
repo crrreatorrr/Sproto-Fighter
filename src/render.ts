@@ -1,3 +1,4 @@
+import {drawActiveStoryLocation} from './stageVariants';
 import { setPoseAtlasThrowState, setPoseAtlasPresentation } from './poseAtlas';
 import type { RoundPresentation } from './animationEvents';
 import { drawPower } from './powerArt';
@@ -47,7 +48,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     setHiggsfieldThrowState(s.throwState,s.fighters);
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
-    drawStage(c, s.frame);
+    if(!drawActiveStoryLocation(c))drawStage(c, s.frame);
     // Keep the HUD legible over the bright sky and moon without covering fighters.
     c.fillStyle='#071224b8';c.fillRect(0,0,1280,162);
     c.fillStyle='#07122455';c.fillRect(0,162,1280,10);
