@@ -162,7 +162,9 @@ function updateGodModeLabel(){
 }
 function setTestingGodMode(enabled:boolean){
     testingGodMode=enabled;
-    if(started&&!selection.isOpen){if(!story.retryMatch())restart();}
+    // Restart is deliberately blocked while Settings is open. Resume the new
+    // round on close even if the previous one was already on its result screen.
+    if(started&&!selection.isOpen){resumeAfterSettings=true;if(!story.retryMatch())restart();}
 }
 let resumeAfterJourney = false, freePlayMode: Mode | null = null;
 const story = createStoryMode({

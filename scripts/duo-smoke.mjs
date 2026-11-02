@@ -77,8 +77,15 @@ check('back throw keeps the catching body through release even when attacker fac
 });
 check('intro and floor defeat reach both entity clips only for the actual scene actor',()=>{
  const s=fresh(),f=s.fighters[0],p=events.createRoundPresentation();setPoseAtlasPresentation(p,s.fighters);
- for(let age=0;age<52;age++){assert.ok(getDuoPoseDebug(f,0).every(d=>d.sequence==='intro'));assert.notEqual(getPoseAtlasDebug({...f},0).sequence,'intro');events.advanceRoundPresentation(p);}
- events.beginRoundOutro(p,1,true);f.hp=0;for(let age=0;age<100;age++){const d=getDuoPoseDebug(f,age);assert.ok(d.every(v=>v.sequence==='defeat'&&v.frameIndex>=4));const c=ctx();drawPoseAtlas(c,f,age);assert.ok(c.images.every(u=>!/(?:28|29|30|31)\.png/.test(u)));events.advanceRoundPresentation(p);}
+ for(let age=0;age<52;age++){
+  for(const d of getDuoPoseDebug(f,age)){const identity=!!manifest.fighters[d.entity].clips.entrance;assert.equal(d.sequence,identity?'entrance':'intro');assert.equal(d.frameIndex,identity?events.entranceFrame(p.frame):events.introFrame(p.frame));}
+  assert.ok(!['intro','entrance'].includes(getPoseAtlasDebug({...f},age).sequence));events.advanceRoundPresentation(p);
+ }
+ events.beginRoundOutro(p,1,true);f.hp=0;for(let age=0;age<100;age++){
+  for(const d of getDuoPoseDebug(f,age)){const identity=!!manifest.fighters[d.entity].clips.death;assert.equal(d.sequence,identity?'death':'defeat');assert.equal(d.frameIndex,identity?events.deathFrame(p.frame,true):events.defeatFrame(p.frame,true));}
+  const expected=getDuoPoseDebug(f,age).map(d=>{const entry=manifest.fighters[d.entity].clips[d.sequence][d.frameIndex];return typeof entry==='string'?entry:entry.url;});
+  const c=ctx();drawPoseAtlas(c,f,age);assert.equal(c.images.length,2);assert.ok(c.images.every(u=>expected.some(path=>u.split('?')[0].endsWith(path))));events.advanceRoundPresentation(p);
+ }
 });
 check('duo special has its own complete clips, consumes three pips and never doubles contact damage',()=>{
  for(const face of [1,-1]){const s=fresh(face),f=s.fighters[0];f.pips=3;let maxCombo=0,seen=new Set();step(s,[A.special,0]);

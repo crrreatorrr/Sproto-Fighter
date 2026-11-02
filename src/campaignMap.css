@@ -32,4 +32,12 @@
 #journey-dialog .campaign-rival>img{width:62px;height:62px}
 #journey-dialog .campaign-rival h3{font-size:20px;margin:0 0 4px}
 #journey-dialog .campaign-rival p{font-size:12px;margin:3px 0}
-@media(max-width:650px){#journey-dialog[open]:has(.campaign){padding:10px;overflow:auto}#journey-dialog .campaign{min-height:540px}#journey-dialog:has(.campaign) #journey-content{flex:none}.campaign-toolbar input{width:85px}}
+@media(max-width:650px){
+  #journey-dialog[open]:has(.campaign){padding:10px;overflow:auto}
+  #journey-dialog .campaign{min-height:0;flex:none;grid-template-rows:auto auto auto 260px auto}
+  #journey-dialog:has(.campaign) #journey-content{flex:none}
+  #journey-dialog .campaign-window{height:260px;min-height:0}
+  #journey-dialog .campaign-regions{flex-wrap:nowrap;overflow-x:auto}
+  #journey-dialog .campaign-regions button{flex-shrink:0;white-space:nowrap}
+  .campaign-toolbar input{width:85px}
+}

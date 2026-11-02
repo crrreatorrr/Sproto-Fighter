@@ -1,3 +1,5 @@
+> Final combined status and later fixes: [CLAUDE-HANDOFF.md](CLAUDE-HANDOFF.md). The dated checkpoint below is retained as history; its pending-integration section is superseded. The coverage CSV includes the final combined recheck.
+
 # Paired fighters and integration checkpoint — 2 November 2026
 
 This is a factual local handoff after the checks recorded below. It is not a
