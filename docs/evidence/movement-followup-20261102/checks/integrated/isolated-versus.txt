@@ -1,0 +1,20 @@
+
+> sproto-arena@0.1.0 versus-smoke
+> node scripts/versus-smoke.mjs && node scripts/presentation-smoke.mjs
+
+PASS: all installed portraits exist and all ordered matchups preserve exact selector names, original images and pair identity
+PASS: preview waits indefinitely; explicit confirmation is idempotent across matchups and missing images
+PASS: pause suspends previews and countdowns without losing their phase or hiding pause controls
+PASS: actual keyboard accepts a fresh Enter only, rejecting Space, combat keys and repeat
+PASS: actual main freezes combat, CPU, replay and entrance clock during versus, then retains the full entrance
+PASS: actual main shows 3/2/1 for one second each, plays entrances without damage, and starts combat on FIGHT
+PASS: actual gamepad preview consumes only fresh A, requires neutral after skipping, and never leaks an attack
+PASS: actual restart refreshes both fighter identities and return to selection removes the preview
+8 versus groups passed; 17161 ordered matchup mappings, actual main clock/restart/pad boundaries. No physical controller claim.
+PASS: intro advances presentation only; input skip enters actual combat without losing the input
+PASS: unskipped intro has a bounded duration
+PASS: pause/resume preserves intro and outro; restart resets presentation and replay
+PASS: winner freezes combat and replay for full outro before result overlay, exactly once
+PASS: winner freezes combat and replay for full outro before story handoff, exactly once
+PASS: floor defeat uses the landed knockout reaction
+Presentation integration checks passed. DOM rendering and sprite aesthetics require separate browser review.

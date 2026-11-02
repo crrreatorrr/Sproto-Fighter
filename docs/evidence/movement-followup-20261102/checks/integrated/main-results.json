@@ -1,0 +1,38 @@
+[
+  {
+    "name": "build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0
+  },
+  {
+    "name": "motion-repairs",
+    "command": [
+      "npm",
+      "run",
+      "motion-fix-smoke"
+    ],
+    "exitCode": 0
+  },
+  {
+    "name": "versus",
+    "command": [
+      "npm",
+      "run",
+      "versus-smoke"
+    ],
+    "exitCode": 0
+  },
+  {
+    "name": "stage-catalog",
+    "command": [
+      "npm",
+      "run",
+      "stage-catalog-smoke"
+    ],
+    "exitCode": 0
+  }
+]

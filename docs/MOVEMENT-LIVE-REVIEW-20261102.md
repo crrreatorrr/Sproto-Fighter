@@ -87,4 +87,14 @@ npm run sprite-scale-qa -- --out /tmp/sproto-scale-review
 npm run motion-visual-coverage
 ```
 
-The browser review used an isolated no-HMR server on 5199 to avoid concurrent file writes resetting scenarios. Main's separate in-progress map/stage and versus-font changes are outside this motion commit and must be preserved. Final local integration/browser checkpoint details are recorded after verification; there is no remote push.
+The browser review used an isolated no-HMR server on 5199 to avoid concurrent file writes resetting scenarios. Main's separate in-progress map/stage and versus-font changes are outside this motion commit and were preserved. There is no remote push.
+
+## Final local integration
+
+Motion source/review commit: `5becdd96`. Combined code commit on local main: `aa6ba21c`. The sole merge conflict was the package test-command list; both stage and motion commands were retained. All **42 concurrent local files were verified byte-for-byte unchanged** during the main fast-forward.
+
+The actual main working tree passed production build, all targeted motion-repair checks, versus checks and stage-catalogue checks. The live menu showed 131 fighters and 73 stages, including the other chat's still-uncommitted stage work. Those local map/stage/font changes were not silently included in the motion commit.
+
+Browser verification on `http://127.0.0.1:5173/` confirmed Dave versus hly3 selection, correct original-PFP versus screen, visible countdown 3, W jump, grounded approach, close heavy hit (1000→880 HP with both twin bodies airborne), a successful grab and subsequent grounded release, restart-to-versus and return to selection. High Sproto versus Morelight/CPU/Sproto Ranch was restored and START FIGHT remained enabled. No console errors were recorded. [Exact observations and limits](evidence/movement-followup-20261102/main-browser-verification.json) distinguish unobserved frames from confirmed results; [integration checks](evidence/movement-followup-20261102/checks/integrated/main-results.json) record actual exit codes.
+
+Git's background housekeeping reported a malformed extra ref named `refs/heads/codex/persistent-story-unlocks 2`; the valid story branch still resolves normally. Local commits and integration succeeded. No ref deletion or unrelated repository cleanup was performed.

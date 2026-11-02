@@ -1,0 +1,15 @@
+
+> sproto-arena@0.1.0 motion-fix-smoke
+> node scripts/motion-fix-smoke.mjs
+
+PASS: 408 paired attack phase frames, both lead facings; calibrated draw geometry and nonmutation; eight invalid-registration cases and recovery. Visual quality assessed separately.
+PASS: 382 actual renderer samples, all 32 motion timing slots, 19 inspected active contacts, 6 recoveries, both facings and both entities drawn. Source pixels/world scale unchanged; static proportion residuals remain documented. No live-motion approval.
+PASS: 240 render frames, both facings, five optional clips; contact mapping, fixed origin, source hashes and combat-state nonmutation. Browser review remains separate.
+PASS: 248 rendered phase frames, 52 active contacts, 8 recoveries; four body identities, both facings. Pixel semantics were reviewed separately; no live-motion approval.
+PASS: 576 rendered phase frames ({"startup":134,"active":116,"recovery":326}), 58 reviewed active contacts, 288 rear-cover frames, 18 recoveries; five body clips and actual owner facings. No live-motion approval.
+PASS: 452 rendered phase frames ({"startup":106,"active":90,"recovery":256}), 45 reviewed active contacts, 226 rear-cover frames, 14 recoveries; four reviewed clips across three companion bodies and actual owner facings. No live-motion approval.
+PASS: 612 rendered phase frames ({"startup":150,"active":114,"recovery":348}), 57 reviewed active contacts, 306 rear-cover frames, 18 recoveries; six reviewed clips across three main bodies and actual owner facings. No live-motion approval.
+PASS: 656 rendered phase frames ({"startup":156,"active":128,"recovery":372}), 64 reviewed active contacts, 328 rear-cover frames, 20 recoveries; six reviewed clips across five paired bodies and actual owner facings. No live-motion approval.
+PASS: 452 rendered phase frames ({"startup":106,"active":90,"recovery":256}), 45 reviewed active contacts, 226 rear-cover frames, 14 recoveries; four reviewed clips across three paired bodies and actual owner facings. No live-motion approval.
+PASS: 26 production-render contact frames use reviewed extended kick; all states nonmutating. Visual QA still required.
+PASS: 10 targeted motion repair checks. Browser observations are recorded separately.

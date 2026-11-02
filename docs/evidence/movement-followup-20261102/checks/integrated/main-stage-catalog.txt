@@ -1,0 +1,7 @@
+
+> sproto-arena@0.1.0 stage-catalog-smoke
+> node scripts/stage-catalog-smoke.mjs
+
+PASS: 73 unique installed arenas; all 64 story locations and 24 approved panoramas are selectable in eight zones; Ranch has seven choices.
+PASS: all 73 preview/fight backgrounds match; all 64 story images load; scoped loading deduplicates and retries failed art.
+PASS: 129 bouts use 60 of 64 story locations, including all three new Ranch maps. Mapping preserves opponent and save IDs.
