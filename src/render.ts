@@ -1,7 +1,7 @@
 import {drawActiveStoryLocation} from './stageVariants';
 import { setPoseAtlasThrowState, setPoseAtlasPresentation } from './poseAtlas';
 import type { RoundPresentation } from './animationEvents';
-import { drawPower } from './powerArt';
+import { drawPower, drawRetainDefeat, drawVitalikDefeatCaption } from './powerArt';
 import { drawMindBeams } from './mindBeamArt';
 import { drawPelvicAttacks } from './pelvicAttack';
 import { setHiggsfieldThrowState } from './higgsfieldRig';
@@ -12,7 +12,8 @@ import { FLOOR, ROSTER, COMBAT_STYLES, DUO_SPREAD, bodyOffsets, isPairedFighter,
 function text(c: CanvasRenderingContext2D, str: string, x: number, y: number, size = 14, color = '#93a5bd', align: CanvasTextAlign = 'left', weight = 600) { c.fillStyle = color; c.font = `${weight} ${size}px "Pixelify Sans", monospace`; c.textAlign = align; c.fillText(str, x, y); }
 function line(c: CanvasRenderingContext2D, x: number, y: number, x2: number, y2: number, color: string, width = 1) { c.beginPath(); c.moveTo(x, y); c.lineTo(x2, y2); c.strokeStyle = color; c.lineWidth = width; c.stroke(); }
 function poly(c: CanvasRenderingContext2D, points: number[][], color: string) { c.beginPath(); points.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath(); c.fillStyle = color; c.fill(); }
-function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false) {
+function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false, visualFrame = frame) {
+    if(drawRetainDefeat(c,f.id,f.hp,f.x,FLOOR,visualFrame))return;
     drawSprite(c,f,frame,ghost,frozen);
     if (f.blockstun > 0) {
         c.save();
@@ -44,7 +45,7 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     }
     text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
-export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation) {
+export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0)) {
     setHiggsfieldThrowState(s.throwState,s.fighters);
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
@@ -66,8 +67,8 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     const down0=isDown(s.fighters[0]),down1=isDown(s.fighters[1]);
     const foreground = s.throwState?.attacker ?? (down0!==down1?(down0?1:0):
         (s.fighters[0].move && !s.fighters[0].stun && !s.fighters[1].move ? 0 : 1));
-    fighter(c, s.fighters[1 - foreground], s.frame, false, s.freeze > 0);
-    fighter(c, s.fighters[foreground], s.frame, false, s.freeze > 0);
+    fighter(c, s.fighters[1 - foreground], s.frame, false, s.freeze > 0, visualFrame);
+    fighter(c, s.fighters[foreground], s.frame, false, s.freeze > 0, visualFrame);
     if(presentation&&(presentation.phase==='outro'||presentation.phase==='result'))for(const[i,f]of s.fighters.entries()){
       if(f.id!=='sproto651'||presentation.winner===i)continue;
       const age=presentation.frame,colors=['#f34545','#e9cb30','#367ee6','#b548cf','#39b9a5'];
@@ -93,13 +94,21 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
             c.save();c.translate(Math.round(f.x+f.facing*x),Math.round(f.y-y));drawPower(c,'yellowEight',0,ROSTER[f.id].color);c.restore();
         }
     }
+    for(const f of s.fighters)if(f.id==='vitaliketh'&&f.move?.id==='bolt'&&!f.stun&&!f.blockstun){
+        const startup=getMove(f,'bolt').startup;
+        if(f.move.t<startup){
+            const phase=f.move.t/startup;
+            const [x,y]=phase<.25?[17.5,72.5]:phase<.5?[26.25,76.25]:phase<.75?[51.25,87.5]:[82.5,100];
+            c.save();c.translate(Math.round(f.x+f.facing*x),Math.round(f.y-y));drawPower(c,'ethereum',0,ROSTER[f.id].color);c.restore();
+        }
+    }
     for(const f of s.fighters)if(f.slow>0)text(c,'MELANCHOLY · SLOWED',f.x,f.y-170,9,'#c7a5eb','center',800);
     for (const p of s.projectiles) {
         if(p.shape==='pelvicStream'||p.beamLength)continue;
         c.save();
         c.translate(p.shape==='retain'?Math.round(p.x):p.x,p.shape==='retain'?Math.round(p.y):p.y);
         if(p.shape==='miniSproto')c.scale(p.vx<0?-1:1,1);
-        else if(p.shape!=='retain'&&p.shape!=='referenceB'&&p.shape!=='yellowEight')c.rotate(Math.atan2(p.vy,p.vx));
+        else if(p.shape!=='retain'&&p.shape!=='referenceB'&&p.shape!=='yellowEight'&&p.shape!=='ethereum')c.rotate(Math.atan2(p.vy,p.vx));
         drawPower(c,p.shape??'spark',p.age??0,ROSTER[s.fighters[p.owner].id].color);
         c.restore();
     }
@@ -173,6 +182,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     c.fillStyle = '#18202cba';
     c.fillRect(425, 678, 430, 25);
     text(c, 'HOLD AWAY: BLOCK  /  DOWN: CROUCH', 640, 694, 9, '#b4c3d3', 'center', 500);
+    drawVitalikDefeatCaption(c,s.fighters);
     if(presentation?.phase==='intro'){
         c.fillStyle='#101725e0';c.fillRect(435,175,410,66);
         text(c,'GET READY',640,204,24,'#f4e8c5','center',900);

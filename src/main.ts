@@ -46,6 +46,7 @@ let matchGodMode=false, matchEarnedGodMode=false, testingGodMode=false, matchTes
 let presentation = createRoundPresentation();
 let modalDirection='',modalRepeatAt=0,padNeedsRelease=true;
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousStart = false;
+let visualFrame = 0;
 const held = new Set<string>();
 const blockedKeys = new Set<string>();
 let queued = 0;
@@ -77,7 +78,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
-    try{await Promise.all([ensurePoseAtlases(requiredFighters),requiredFighters.some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
+    try{await Promise.all([ensurePoseAtlases(requiredFighters),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
@@ -427,6 +428,8 @@ function advanceRoundFrame(input: number) {
 function tick(now: number) {
     const elapsed = Math.min((now - lastTime) / 1000, .1);
     lastTime = now;
+    // Keep KO icon rotation alive on the result screen without advancing combat.
+    visualFrame += qaFrozen ? (qaSingleStep ? 1 : 0) : elapsed * 60;
     const pad = pollPad();
     if (running && !selection.isOpen && !dialog.open && !story.isOpen && (!qaFrozen||qaSingleStep)) {
         accumulator = qaSingleStep?1/60:accumulator+elapsed;
@@ -442,7 +445,7 @@ function tick(now: number) {
             if (!running || presentation.phase === 'result') break;
         }
     }
-    if(!selection.isOpen) render(ctx, state, presentation);
+    if(!selection.isOpen) render(ctx, state, presentation, visualFrame);
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);

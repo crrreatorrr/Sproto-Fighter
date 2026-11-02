@@ -2,6 +2,7 @@
 let retainCoin: HTMLImageElement | undefined;
 let referenceB: HTMLImageElement | undefined;
 let miniSproto: HTMLImageElement | undefined;
+let ethereum: HTMLImageElement | undefined;
 let coinReady: Promise<void> | undefined;
 export function ensurePowerArt(): Promise<void> {
  const load=(url:string)=>new Promise<HTMLImageElement>((resolve,reject)=>{
@@ -12,7 +13,8 @@ export function ensurePowerArt(): Promise<void> {
   load('/fighters/powers/chad-retain-coin.png'),
   load('/fighters/powers/sproto3106-reference-b.png'),
   load('/fighters/powers/sproto2531-mini.png'),
- ]).then(([coin,b,mini])=>{retainCoin=coin;referenceB=b;miniSproto=mini;}).catch(error=>{coinReady=undefined;throw error;});
+  load('/fighters/powers/vitalik-ethereum.png'),
+ ]).then(([coin,b,mini,eth])=>{retainCoin=coin;referenceB=b;miniSproto=mini;ethereum=eth;}).catch(error=>{coinReady=undefined;throw error;});
 }
 /** A pixel stream starts exactly at the caller's covered pelvic anchor. */
 export function drawPelvicStream(c:CanvasRenderingContext2D,reach:number,age:number){
@@ -25,6 +27,26 @@ export function drawPelvicStream(c:CanvasRenderingContext2D,reach:number,age:num
  }
  c.fillStyle='#ffe65b';for(let i=0;i<4;i++){const x=reach+3+i*5,y=Math.round(Math.sin(age*.8+i)*5+i*2);c.fillRect(Math.round(x),y,3,3);}
  c.restore();
+}
+/** Face-on rotation keeps the supplied circle fully visible at every angle. */
+export function drawRetainIcon(c:CanvasRenderingContext2D,age:number,size=48){
+ c.save();c.imageSmoothingEnabled=false;c.rotate(age*.09);
+ if(retainCoin?.complete&&retainCoin.naturalWidth)c.drawImage(retainCoin,-size/2,-size/2,size,size);
+ c.restore();
+}
+/** A KO changes Michael into the icon; living fighters keep their body art. */
+export function drawRetainDefeat(c:CanvasRenderingContext2D,id:string,hp:number,x:number,floor:number,age:number):boolean{
+ if(id!=='michael'||hp>0)return false;
+ c.save();c.translate(Math.round(x),floor-68);drawRetainIcon(c,age,112);c.restore();return true;
+}
+export const VITALIK_DEFEAT_LINE='HarryPotterObamaSonic10Inu is not a scam';
+/** A KO caption follows health, so it works for either side and clears on restart. */
+export function drawVitalikDefeatCaption(c:CanvasRenderingContext2D,fighters:readonly {id:string;hp:number}[]):boolean{
+ if(!fighters.some(f=>f.id==='vitaliketh'&&f.hp<=0))return false;
+ c.save();c.fillStyle='#101725ed';c.fillRect(170,600,940,46);
+ c.strokeStyle='#8e89a8';c.lineWidth=1;c.strokeRect(170.5,600.5,939,45);
+ c.font='800 22px "Pixelify Sans", monospace';c.textAlign='center';c.fillStyle='#fff2cd';
+ c.fillText(VITALIK_DEFEAT_LINE,640,630);c.restore();return true;
 }
 export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,color:string){
  c.save();c.imageSmoothingEnabled=false;c.fillStyle=color;c.strokeStyle=color;c.lineWidth=3;
@@ -43,11 +65,23 @@ export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,col
    c.drawImage(image,-w/2,-h/2,w,h);
   }else if(!coinReady)void ensurePowerArt().catch(error=>console.error(error));
  }
+ else if(shape==='ethereum'){
+  if(ethereum?.complete&&ethereum.naturalWidth){
+   const h=48,w=ethereum.naturalWidth*h/ethereum.naturalHeight;
+   c.rotate(age*.11);c.drawImage(ethereum,-w/2,-h/2,w,h);
+  }else if(!coinReady)void ensurePowerArt().catch(error=>console.error(error));
+ }
  else if(shape==='pelvicStream'){box(-8,-2,16,4,'#ffe65b');box(-4,-2,9,1,'#fff6ab');box(10,3,3,3,'#ffe65b');}
  else if(shape==='chadCoin'){
-  // A half turn reveals the reverse; the in-plane turn also rotates the supplied face.
-  const turn=Math.cos(age*.22);c.rotate(age*.09);c.scale(Math.sign(turn)*Math.max(.16,Math.abs(turn)),1);
-  if(retainCoin?.complete&&retainCoin.naturalWidth)c.drawImage(retainCoin,-24,-24,48,48);
+  drawRetainIcon(c,age);
+ }
+ else if(shape==='darkRing'){
+  c.rotate(age*.045);
+  for(let y=-9;y<=9;y++)for(let x=-9;x<=9;x++){
+   const r=Math.hypot(x,y);if(r<5||r>9)continue;
+   const ink=r>8?'#686174':r<5.8?'#393242':x<0&&y<0?'#302a3a':'#0d0b13';
+   box(x*2-1,y*2-1,2,2,ink);
+  }
  }
  else if(shape==='sun'){
   c.rotate(age*.055);

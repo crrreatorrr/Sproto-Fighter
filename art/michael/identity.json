@@ -16,5 +16,13 @@
   "coinReference": "art/michael/coin-reference.png",
   "coinSprite": "/fighters/powers/chad-retain-coin.png",
   "voice": "/fighters/voices/retain.wav",
-  "voiceSource": "Local macOS Daniel synthesis, exact text RETAIN!, normalized PCM WAV"
+  "voiceSource": "Local macOS Daniel synthesis, exact text RETAIN!, normalized PCM WAV",
+  "coinRotation": "In-plane rotation only; full face-on circle at all times. No foreshortening, flipping or animated scale.",
+  "defeatPresentation": {
+    "asset": "/fighters/powers/chad-retain-coin.png",
+    "reference": "art/michael/ko-circle-reference.png",
+    "trigger": "Michael hp <= 0",
+    "size": 112,
+    "motion": "Continuous in-plane rotation; body replaced by circle. Presentation clock continues through results and freezes with QA controls."
+  }
 }

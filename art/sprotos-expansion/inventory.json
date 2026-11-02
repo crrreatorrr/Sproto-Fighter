@@ -1099,7 +1099,12 @@
     ],
     "status": "installed-playable",
     "visualQA": "Reference and sampled core/walk/event contact sheets reviewed. Automated full-clip asset and simulation checks plus targeted browser animation QA; not a claim of hand-drawn in-betweens.",
-    "partner": "sproto818"
+    "partner": "sproto818",
+    "power": "ethereum",
+    "projectileOrigin": {
+      "forward": 100,
+      "height": 100
+    }
   },
   {
     "id": "urmometh",

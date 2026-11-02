@@ -2,6 +2,8 @@
 
 This records work and checks already performed, not checks delegated to Claude.
 
+**Latest:** [Combined campaign, versus/countdown, roster and scale update](COMBINED-UPDATE-20261102.md) supersedes all older roster counts and integration status below. Read it first.
+
 The newer [campaign expansion report](CAMPAIGN-EXPANSION-UPDATE.md) supersedes
 the campaign counts, map, save schema and name-font details below. It is prepared
 on a separate local branch; final main integration is intentionally pending

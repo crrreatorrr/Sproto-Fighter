@@ -1,0 +1,338 @@
+[
+  {
+    "index": 0,
+    "id": "rustcanal",
+    "zone": "trenches",
+    "name": "Rustwater Canal",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: An abandoned industrial canal service road beneath huge rusted water pipes and brick culverts, low canal water far behind the lane, foggy moss-green late morning with yellow sodium lamps; empty flat asphalt foreground. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 1,
+    "id": "ashstation",
+    "zone": "trenches",
+    "name": "Ashfall Pump Station",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: A soot-covered pumping station beneath the neon city, huge pressure tanks and brick smokestacks behind a broad dry maintenance yard, pale ash falling in distant air, muted sepia afternoon and ember-orange furnace windows. No ash obscuring play area. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 2,
+    "id": "culvertgarden",
+    "zone": "trenches",
+    "name": "Culvert Wildgarden",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: A reclaimed drainage trench where ferns and flowering weeds climb abandoned retaining walls, shafts of warm afternoon sunlight from the city above, soft olive green and weathered turquoise metal. Clear flat old concrete service lane; plants only behind lane or at far edges. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 3,
+    "id": "datavault",
+    "zone": "circuit",
+    "name": "Municipal Data Vault",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: A cavernous futuristic city data exchange with enormous server stacks and luminous cables behind glass, cold white and ice-blue working lights, restrained amber warning bars; empty broad dark matte metal floor. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 4,
+    "id": "ionplaza",
+    "zone": "circuit",
+    "name": "Ion Fountain Plaza",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: An extravagant city civic plaza with a huge geometric holographic fountain behind the combat area and elevated roads weaving through towers, bright clean overcast daylight, mint cyan and cool grey with orange accents. Dry uninterrupted foreground stone pavement. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 5,
+    "id": "stormarcade",
+    "zone": "circuit",
+    "name": "Stormlit Arcade",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: A covered retrofuturistic city shopping arcade with closed glass storefronts and tall vaulted steel roof, electric purple thunderstorm visible through windows, blue-violet reflections and isolated warm shop lamps. No readable signage. Flat clear central concourse. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 6,
+    "id": "coralsalon",
+    "zone": "yacht",
+    "name": "Coral Glass Salon",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: Interior of a luxury yacht with panoramic underwater observation windows, distant coral reefs and tiny abstract marine shapes without animals, cream marble, brass rails and turquoise daylight filtered through ocean. Wide uninterrupted dry marble foreground. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 7,
+    "id": "helipad",
+    "zone": "yacht",
+    "name": "Oceanwind Helipad",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: Topmost deck of a luxury yacht with a broad unlettered helipad surface, navigation radar towers behind the lane, distant sea cliffs and pink morning clouds; teal water and pale coral dawn. No helicopter, no painted letters. Full-width solid deck. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 8,
+    "id": "regatta",
+    "zone": "yacht",
+    "name": "Regatta Anchorage",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: A quiet luxury marina viewed from a broad stone quay, ornate unoccupied sailboats moored far behind and a distant grand yacht, festive abstract pennants, lavender blue-hour twilight and warm golden lanterns. Empty level stone foreground across both corners. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 9,
+    "id": "lunarchapel",
+    "zone": "throne",
+    "name": "Lunar Relay Chapel",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: A gothic castle chapel built around a moon-powered brass relay, tall silver stained-glass windows, enormous unoccupied organ pipes and a small empty altar deep behind, midnight silver and indigo with cool blue candles. Broad uninterrupted stone foreground. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 10,
+    "id": "royallibrary",
+    "zone": "throne",
+    "name": "Clockwork Royal Library",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: Castle royal library with towering bookcases, gold gear-driven moving shelves and an astronomical clock in the background, warm walnut and copper with emerald reading lamps. No readable book titles or clock digits. Flat dark wooden fighting floor. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 11,
+    "id": "frostbastion",
+    "zone": "throne",
+    "name": "Frostglass Bastion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: High castle battlement enclosed by frosted glass and ancient stone arches, snowy mountains and frozen blue relay towers beyond, crisp cyan winter morning with orange braziers entirely behind lane. Clear dry full-width slate foreground, no slippery ice gameplay. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 12,
+    "id": "backstage",
+    "zone": "bar",
+    "name": "Backstage Blue Room",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: Back room of the hidden city bar, empty jazz rehearsal space with upright piano and drum kit behind a low rail, velvet curtains and exposed brick, smoky cobalt blue with dim honey spotlights. No musicians, no smoke obscuring foreground. Empty flat wood floor. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 13,
+    "id": "lanterncourt",
+    "zone": "bar",
+    "name": "Lantern Courtyard",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: Secret courtyard behind the bar, old brick walls covered in ivy, glowing paper lanterns and empty cafe booths set back, a narrow unoccupied hidden doorway, warm rust and golden evening light. Flat unobstructed paving-stone foreground. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 14,
+    "id": "aquariumbar",
+    "zone": "bar",
+    "name": "Midnight Aquarium Bar",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: An underground cocktail bar with a huge blue aquarium wall filled with rocks, coral and swaying abstract plants but NO animals, curved brass shelves and empty stools deep behind, cyan glow with dark cherry wood and magenta accent lamps. Broad empty dark parquet floor. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 15,
+    "id": "gravityarchive",
+    "zone": "verse",
+    "name": "Gravity Archive",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: A cosmic archive of gigantic floating geometric memory slabs arranged beyond a solid celestial causeway, distant white dwarf star and spiraling pale blue nebula, ivory-gold stone with deep ultramarine sky. All floating objects behind arena; solid full-width level foreground. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 16,
+    "id": "auroragate",
+    "zone": "verse",
+    "name": "Aurora Gate Terrace",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: A solid broad terrace at a distant interdimensional portal, towering auroral ribbons and nested diamond-shaped gates above the horizon, jade green and soft lilac against dark space. Flat dark crystalline floor extends all the way to bottom and corners; no drop at fighter foot line. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 17,
+    "id": "sundial",
+    "zone": "verse",
+    "name": "Shattered Sun Dial",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: Ancient cosmic sundial machinery orbiting a fragmented orange sun far in the background, immense bronze rings and deep starfield, orange-gold light with blue-black silhouettes. No text or numbers. Wide uninterrupted dark stone arena platform; front edge below bottom of image. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 18,
+    "id": "pearlchamber",
+    "zone": "hatchery",
+    "name": "Pearl Incubation Chamber",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: Alien hive incubation hall of huge pearlescent eggs behind translucent membranes, organic arches and branching veins, cool opal pink and violet with blue bioluminescent floor seams. No creatures emerging. Clear broad matte chitin foreground. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 19,
+    "id": "rootreservoir",
+    "zone": "hatchery",
+    "name": "Root Reservoir",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: Deep alien hive underground reservoir, colossal intertwined roots and glowing green nutrient channels behind a raised organic retaining wall, dense red-black ribs with emerald and pale mint lights. Dry solid full-width dark stone foreground; liquid entirely behind arena. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  },
+  {
+    "index": 20,
+    "id": "moltinghall",
+    "zone": "hatchery",
+    "name": "Molting Hall",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Production environment background for an existing colorful side-view 2D pixel-art fighting game. WIDE 16:9 panoramic composition, sharp hand-authored stepped pixel clusters, restrained 32/64-color palette, broad readable shapes, dark outlines and simple cel-shaded surfaces. Match clean 1990s arcade scenery, no photorealism, no 3D render, no blur, no excessive microtexture. Camera is side-on at fighter height, fixed horizon, no fisheye or tilted camera. Environment ONLY: no characters, silhouettes of people, enemies, animals, fighters, foreground props, lettering, text, logos, UI, borders or watermark. Compose for a 1280x720 arena: a clear flat horizontal fighting ground has its foot/contact line at y=578 (80.3 percent image height), with empty low-contrast foreground extending to bottom; keep the central play area from x=80 to1200, y=330 to600 free of clutter that would occlude fighters. Strong landmarks belong in the middle/far background above the fighting lane. Keep upper 22 percent fairly dark/simple for HUD legibility. Frame the left and right corners as equally walkable. No giant objects or pillars in the foreground. Rich layered scenic depth with controlled contrast so fighters remain the focus. One seamless single complete background image.\n\nSCENE: An alien hive ceremonial molting chamber with empty translucent shell husks mounted deep in honeycomb alcoves and towering rib vaults, burnt sienna and luminous turquoise, dusty amber rays from high openings. No living monsters. Empty flat chitin stone floor spans foreground. Preserve this zone theme while offering a clearly different scenic setting. Floor is one uninterrupted level surface at y578, front platform edge must be BELOW the image bottom, generous clear floor in front of fighters. No people, creatures, text, HUD or gameplay hazards."
+    }
+  }
+]

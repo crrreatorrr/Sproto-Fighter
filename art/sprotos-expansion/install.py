@@ -99,6 +99,7 @@ def install():
         elif ref.get('power')=='referenceB':signature='Hand windup releases the original yellow B, retaining its tilted serif shape, red accents and black outline.'
         elif ref.get('power')=='yellowEight':signature='Hand windup throws a bright yellow 8, with a heavy kick and four-contact relay.'
         elif ref.get('power')=='sun':signature='Full-length staff strikes and a radiant sun cast from its curled tip.'
+        elif ref.get('power')=='ethereum':signature='Hand-thrown Ethereum symbols, a heavy kick and four-contact ranged relay.'
         elif ref.get('weapon')=='halberd':signature='Full-length hooked halberd thrusts, overhead swings, low sweeps and airborne strikes.'
         elif ref.get('weapon'):signature='Full-length staff thrusts, overhead swings, low sweeps and airborne staff strikes.'
         elif len(ref['entities'])==3:signature='Three separate Sprotos coordinate alternating contacts with one shared health bar.'
@@ -111,6 +112,7 @@ def install():
         if ref.get('power')=='referenceB':shot.update(shape='referenceB',origin=ref.get('projectileOrigin',{'forward':86.25,'height':106.25}))
         if ref.get('power')=='yellowEight':shot.update(shape='yellowEight',origin=ref.get('projectileOrigin',{'forward':77.5,'height':105}))
         if ref.get('power')=='sun':shot.update(shape='sun',origin=ref.get('projectileOrigin',{'forward':157.5,'height':80}))
+        if ref.get('power')=='ethereum':shot.update(shape='ethereum',origin=ref.get('projectileOrigin',{'forward':100,'height':100}))
         kits.append(f" {ident}:kit({data['role']!r},{name!r},{signature!r},82,{{range:{125+i%20},damage:{78+i}}},{{startup:{13+i%7},damage:{46+i%13}}},{json.dumps(shot)},[14,24,36,48],{{range:{440+i},damage:{61+i},push:3}},2),")
         cfg=configs[ident]
         def grip(config,part):

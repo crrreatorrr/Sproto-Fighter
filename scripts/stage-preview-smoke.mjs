@@ -8,10 +8,10 @@ globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>ctx()})
 globalThis.Image=class {set src(url){this.url=url;queueMicrotask(()=>this.onload());}};
 const stage=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
 await stage.loadStageArt();
-assert.deepEqual(stage.getStageArtStatus().loaded,['yacht','bar','castle','retro']);
+assert.deepEqual(stage.getStageArtStatus().loaded,stage.STAGES.map(s=>s.id));
 assert.deepEqual(stage.getStageArtStatus().errors,{});
 stage.setStage('ranch');
-for(const id of ['yacht','bar','castle','retro']){
+for(const id of stage.STAGES.map(s=>s.id)){
  const preview=ctx();stage.drawStagePreview(preview,id,320,180);
  assert.equal(stage.getStage(),'ranch','preview must not switch the fight stage');
  assert.deepEqual(preview.calls.find(x=>x[0]==='scale'),['scale',.25,.25]);
@@ -27,13 +27,13 @@ assert.equal(stage.getStage(),'ranch');
 const wide=ctx();stage.drawStagePreview(wide,'yacht',1280,420);
 assert.deepEqual(wide.calls.find(x=>x[0]==='scale'),['scale',1,1],'wide preview preserves scenery proportions');
 assert.ok(wide.calls.some(x=>x[0]==='clip'),'cover crop is clipped to its preview panel');
-console.log('PASS: all five previews render; four generated images match actual arena selections; preview never mutates selected stage.');
+console.log('PASS: all installed previews render; generated images match actual arena selections; preview never mutates selected stage.');
 
 // A missing optional scenery image leaves the procedural stage usable.
 globalThis.Image=class {set src(url){this.url=url;queueMicrotask(()=>this.onerror());}};
 const fallback=await import('data:text/javascript;base64,'+Buffer.from(code+'\n// isolated missing-image fixture').toString('base64'));
 await fallback.loadStageArt();
-assert.equal(Object.keys(fallback.getStageArtStatus().errors).length,4);
+assert.equal(Object.keys(fallback.getStageArtStatus().errors).length,stage.STAGES.length);
 fallback.setStage('castle');const scene=ctx();fallback.drawStage(scene,0);
 assert.ok(scene.calls.some(x=>x[0]==='drawImage'));
 assert.ok(scene.calls.some(x=>x[0]==='fillText'&&x[1].includes('PLACEHOLDER')));

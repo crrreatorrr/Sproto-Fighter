@@ -39,8 +39,11 @@ try{
   assert.equal(campaignMapViewport(width,height,0).zoom,100,'fit is the minimum zoom');
   assert.equal(campaignMapViewport(width,height,fit.maxZoom+100).zoom,fit.maxZoom);
  }
- const locations=STORY_ENCOUNTERS.map(e=>storyLocationForEncounter(e,STORY_ENCOUNTERS));assert.equal(new Set(locations.filter(Boolean).map(l=>l.id)).size,24);for(const [i,e]of STORY_ENCOUNTERS.entries())if(e.stage==='bar'||e.stage==='hatchery')assert.equal(locations[i],null);
+ const locations=STORY_ENCOUNTERS.map(e=>storyLocationForEncounter(e,STORY_ENCOUNTERS));
+ const regions={trenches:['trenches','ranch'],circuit:['circuit','retro'],yacht:['yacht'],throne:['castle','throne'],verse:['verse'],bar:['bar'],hatchery:['hatchery']};
+ for(const [i,e]of STORY_ENCOUNTERS.entries())assert.ok(locations[i]&&regions[e.stage].includes(locations[i].stage),'each actual encounter has scenery in its own region');
+ assert.equal(new Set(locations.map(l=>l.id)).size,58,'actual route uses58 of61 installed scenes; two Hatchery nodes cannot visit all five Hatchery variants');
  assert.ok(readFileSync('public/story/campaign-map.webp').length>0);
  assert.ok(readFileSync('public/story/campaign-map-expanded.webp').length>0);
- console.log(`PASS: whole-map initial fit at 5 desktop/mobile sizes; aspect/zoom bounds and readable detail; ${points.length} actual unique/bounded/separated map nodes; synthetic 150-node geometry (minimum gap ${expandedGap.toFixed(2)}px); stable encounter IDs; 24 approved scenes mapped; original map retained.`);
+ console.log(`PASS: whole-map initial fit at 5 desktop/mobile sizes; aspect/zoom bounds and readable detail; ${points.length} actual unique/bounded/separated map nodes; synthetic 150-node geometry (minimum gap ${expandedGap.toFixed(2)}px); stable encounter IDs; 58 scenes mapped across all seven regions; original map retained.`);
 }finally{rmSync(temp,{recursive:true,force:true});}

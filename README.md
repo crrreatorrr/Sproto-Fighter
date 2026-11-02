@@ -1,6 +1,6 @@
 # Sproto Arena
 
-A local TypeScript / Canvas 2D fighting game with **130 installed fighters**,
+A local TypeScript / Canvas 2D fighting game with **131 installed fighters**,
 CPU/practice opponents, ten base arenas and a campaign that grows with the installed roster.
 No game engine, multiplayer transport or deployment.
 
@@ -50,8 +50,8 @@ current encounter. Story wins persist in either mode; free-play wins do not.
 Testing mode turns off on reload. Completing the campaign also grants a durable
 God Mode selection reward. God Mode does not bypass P1 recruitment locks.
 
-This integration candidate has 130 installed entries: 128 distinct rivals across
-125 encounters, including three two-opponent encounters. Twenty additional roster
+This integration candidate has 131 installed entries: 129 distinct rivals across
+126 encounters, including three two-opponent encounters. Nineteen additional roster
 entries and their assets are still needed for the requested 150. The route grows
 from registered fighters without inventing characters; at 150 entries it has 148
 rivals across 145 encounters. The map also passes a synthetic 150-node fixture.

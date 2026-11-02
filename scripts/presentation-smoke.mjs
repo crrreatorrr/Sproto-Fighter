@@ -39,6 +39,6 @@ for(const storyResult of [false,true])check(`winner freezes combat and replay fo
  c.advanceRoundFrame(0);assert.equal(c.storyCalls,1);assert.equal(JSON.stringify(c.state),state);assert.equal(c.frames.length,count);
 });
 check('floor defeat uses the landed knockout reaction',()=>{const c=fixture();c.presentation.phase='fight';c.state.fighters[0].hp=0;c.state.fighters[0].reaction={kind:'knockdown',phase:'down',t:0,direction:1};c.advanceRoundFrame(0);assert.equal(c.presentation.fromFloor,true);});
-assert.match(read('main.ts'),/render\(ctx, state, presentation\)/);
+assert.match(read('main.ts'),/render\(ctx, state, presentation, visualFrame\)/);
 assert.match(read('main.ts'),/presentationSnapshot: \(\) => structuredClone\(presentation\)/);
 console.log('Presentation integration checks passed. DOM rendering and sprite aesthetics require separate browser review.');

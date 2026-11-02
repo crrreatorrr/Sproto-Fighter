@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8"><title>New zone arenas</title><style>body{background:#111827;color:#eee;font:16px system-ui;margin:24px}main{display:grid;grid-template-columns:repeat(2,640px);gap:24px}canvas{width:640px;height:360px}h2{font-size:18px}</style><h1>21 new Higgsfield arenas · seven zones</h1><p id="status">Loading game scenery…</p><main></main><script type="module">
+import {loadStageArt,drawStagePreview,getStageArtStatus} from '/src/stage.ts';
+const rows=await (await fetch('./requests.json')).json();await loadStageArt();
+const sprite=new Image();sprite.src='/fighters/poses/danocrypto/00.png';await sprite.decode();
+for(const row of rows){const box=document.createElement('section'),heading=document.createElement('h2'),canvas=document.createElement('canvas');heading.textContent=row.zone+' · '+row.name;canvas.width=1280;canvas.height=720;box.append(heading,canvas);document.querySelector('main').append(box);const c=canvas.getContext('2d');drawStagePreview(c,row.id,1280,720);c.imageSmoothingEnabled=false;for(const [x,face]of [[350,1],[930,-1]]){c.save();c.translate(x,578);c.scale(face*1.25,1.25);c.drawImage(sprite,-112,-210);c.restore();}}
+const status=getStageArtStatus();document.querySelector('#status').textContent=`${rows.filter(r=>status.loaded.includes(r.id)).length}/21 new arenas loaded · fighters at game floor y=578 · ${Object.keys(status.errors).length} errors`;
+</script>

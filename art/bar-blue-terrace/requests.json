@@ -1,0 +1,24 @@
+[
+  {
+    "index": 0,
+    "id": "bluebar",
+    "zone": "bar",
+    "name": "Blue Terrace Bar",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "cc9d25bd-55b2-4e81-ab69-574becc879b3"
+        }
+      ],
+      "prompt": "Production side-view 2D PIXEL ART fighting-game background, WIDE16:9, crisp stepped arcade pixels, dark architectural outlines, limited-color shading. EXPAND the attached venue photo into a full panoramic arena. Preserve the modest weathered BLUE building: dark navy masonry base, faded blue wooden terrace railings, cream/light-grey upper storey with blue trim, grey-blue cylindrical columns, large leafy flowering tree growing behind/through raised terrace, blue staircase far RIGHT behind combat lane. Wide blue painted facade sign with white 7 SIPS BAR & GRILL-style lettering, blue/yellow/red spiky cartoon mascot beside orange Bitcoin coin, gold bottles, matching reference. Painted mascot is attached sign decoration only. Tropical daylight, pale blue sky, dappled green canopy, subtle pink blossoms. Expand into coherent neighborhood frontage with distant low tropical buildings. Camera side-on at fighter height. Clear uninterrupted broad sidewalk fighting floor at y578 of1280x720, generous flat sidewalk below feet down to bottom and across both corners. All building columns, railings, stairs, sign and tree trunks BEHIND fighting lane. No people, animals, cars, live mascots or crowds; no furniture, rubble, poles, curbs or obstacles in foreground. REMOVE map attribution, date, browser overlays and photo navigation. Venue signage allowed, no HUD or watermark. Top22% subdued for game HUD. Match current Bar pixel-art style, not photo or3D."
+    }
+  }
+]

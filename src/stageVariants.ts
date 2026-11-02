@@ -194,19 +194,317 @@ export const STORY_LOCATIONS:readonly StoryLocation[]=[
     "image": "/stages/variations-v2/ranch/23-ranch-dusty-farmhouse-yard.png",
     "width": 2688,
     "height": 1520
+  },
+  {
+    "id": "zone-variety-rainworks",
+    "stage": "trenches",
+    "title": "Rainworks Spillway",
+    "image": "/stages/higgsfield/rainworks.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-scrapyard",
+    "stage": "trenches",
+    "title": "Copperbone Scrapyard",
+    "image": "/stages/higgsfield/scrapyard.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-skyrail",
+    "stage": "circuit",
+    "title": "Skyrail Junction",
+    "image": "/stages/higgsfield/skyrail.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-nightmarket",
+    "stage": "circuit",
+    "title": "Neon Night Market",
+    "image": "/stages/higgsfield/nightmarket.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-sundeck",
+    "stage": "yacht",
+    "title": "Gilded Sun Deck",
+    "image": "/stages/higgsfield/sundeck.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-drydock",
+    "stage": "yacht",
+    "title": "Moonlit Dry Dock",
+    "image": "/stages/higgsfield/drydock.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-glassgarden",
+    "stage": "throne",
+    "title": "Royal Glass Garden",
+    "image": "/stages/higgsfield/glassgarden.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-chainforge",
+    "stage": "throne",
+    "title": "Crown Chainforge",
+    "image": "/stages/higgsfield/chainforge.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-cellar",
+    "stage": "bar",
+    "title": "Bottle Vault Cellar",
+    "image": "/stages/higgsfield/cellar.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-rooftop",
+    "stage": "bar",
+    "title": "Oakshade Patio",
+    "image": "/stages/higgsfield/rooftop.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-starbridge",
+    "stage": "verse",
+    "title": "Prismatic Starbridge",
+    "image": "/stages/higgsfield/starbridge.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-observatory",
+    "stage": "verse",
+    "title": "Event Horizon Observatory",
+    "image": "/stages/higgsfield/observatory.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-sporegrove",
+    "stage": "hatchery",
+    "title": "Bioluminescent Spore Grove",
+    "image": "/stages/higgsfield/sporegrove.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-ambernursery",
+    "stage": "hatchery",
+    "title": "Amber Egg Cathedral",
+    "image": "/stages/higgsfield/ambernursery.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-rustcanal",
+    "stage": "trenches",
+    "title": "Rustwater Canal",
+    "image": "/stages/higgsfield/rustcanal.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-ashstation",
+    "stage": "trenches",
+    "title": "Ashfall Pump Station",
+    "image": "/stages/higgsfield/ashstation.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-culvertgarden",
+    "stage": "trenches",
+    "title": "Culvert Wildgarden",
+    "image": "/stages/higgsfield/culvertgarden.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-datavault",
+    "stage": "circuit",
+    "title": "Municipal Data Vault",
+    "image": "/stages/higgsfield/datavault.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-ionplaza",
+    "stage": "circuit",
+    "title": "Ion Fountain Plaza",
+    "image": "/stages/higgsfield/ionplaza.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-stormarcade",
+    "stage": "circuit",
+    "title": "Stormlit Arcade",
+    "image": "/stages/higgsfield/stormarcade.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-coralsalon",
+    "stage": "yacht",
+    "title": "Coral Glass Salon",
+    "image": "/stages/higgsfield/coralsalon.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-helipad",
+    "stage": "yacht",
+    "title": "Oceanwind Helipad",
+    "image": "/stages/higgsfield/helipad.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-regatta",
+    "stage": "yacht",
+    "title": "Regatta Anchorage",
+    "image": "/stages/higgsfield/regatta.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-lunarchapel",
+    "stage": "throne",
+    "title": "Lunar Relay Chapel",
+    "image": "/stages/higgsfield/lunarchapel.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-royallibrary",
+    "stage": "throne",
+    "title": "Clockwork Royal Library",
+    "image": "/stages/higgsfield/royallibrary.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-frostbastion",
+    "stage": "throne",
+    "title": "Frostglass Bastion",
+    "image": "/stages/higgsfield/frostbastion.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-backstage",
+    "stage": "bar",
+    "title": "Mural Games Room",
+    "image": "/stages/higgsfield/backstage.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-lanterncourt",
+    "stage": "bar",
+    "title": "Treehouse Club Exterior",
+    "image": "/stages/higgsfield/lanterncourt.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-aquariumbar",
+    "stage": "bar",
+    "title": "Neon Mural Lounge",
+    "image": "/stages/higgsfield/aquariumbar.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-gravityarchive",
+    "stage": "verse",
+    "title": "Gravity Archive",
+    "image": "/stages/higgsfield/gravityarchive.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-auroragate",
+    "stage": "verse",
+    "title": "Aurora Gate Terrace",
+    "image": "/stages/higgsfield/auroragate.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-sundial",
+    "stage": "verse",
+    "title": "Shattered Sun Dial",
+    "image": "/stages/higgsfield/sundial.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-pearlchamber",
+    "stage": "hatchery",
+    "title": "Pearl Incubation Chamber",
+    "image": "/stages/higgsfield/pearlchamber.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-rootreservoir",
+    "stage": "hatchery",
+    "title": "Root Reservoir",
+    "image": "/stages/higgsfield/rootreservoir.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-moltinghall",
+    "stage": "hatchery",
+    "title": "Molting Hall",
+    "image": "/stages/higgsfield/moltinghall.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "reference-main-bar",
+    "stage": "bar",
+    "title": "Last Light Bar",
+    "image": "/stages/higgsfield/bar.png",
+    "width": 1280,
+    "height": 720
+  },
+  {
+    "id": "zone-variety-bluebar",
+    "stage": "bar",
+    "title": "Blue Terrace Bar",
+    "image": "/stages/higgsfield/bluebar.png",
+    "width": 1280,
+    "height": 720
   }
 ];
 
 const regionOrder:Partial<Record<StageId,readonly number[]>>={
- trenches:[0,1,2,21,22,23],
- circuit:[3,5,4,8,6,7],
- yacht:[9,10,11],
- throne:[15,16,17,12,13,14],
- verse:[18,19,20],
+ trenches:[0,1,2,21,22,23,24,25,38,39,40],
+ circuit:[3,5,4,8,6,7,26,27,41,42,43],
+ yacht:[9,10,11,28,29,44,45,46],
+ throne:[15,16,17,12,13,14,30,31,47,48,49],
+ verse:[18,19,20,34,35,53,54,55],
+ bar:[59,32,33,50,51,52,60],
+ hatchery:[36,37,56,57,58],
 };
 /** Scenery selection never reorders opponents or changes a saved encounter ID.
  * Contiguous location blocks make travel legible instead of randomizing backdrops.
- * Regions without variations (Bar and Hatchery) retain their original scenery. */
+ * Every story zone has themed locations, including Bar and Hatchery. */
 export function storyLocationForEncounter(encounter:{stage:StageId;index:number},route:readonly {stage:StageId;index:number}[]):StoryLocation|null {
  const pool=regionOrder[encounter.stage];if(!pool?.length)return null;
  const local=route.filter(e=>e.stage===encounter.stage),position=local.findIndex(e=>e.index===encounter.index);
