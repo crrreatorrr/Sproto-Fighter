@@ -1,3 +1,5 @@
+Latest isolated paired-fighter and integration checkpoint: [PAIRED-INTEGRATION-HANDOFF.md](PAIRED-INTEGRATION-HANDOFF.md). Read its coverage and pending-integration limits before the earlier history below.
+
 # Current-build handoff — November 2, 2026
 
 The user requested publishing this current snapshot immediately, before the remaining QA and fixes. **This is not a fully accepted or fully verified release.** No hosting deployment is included.

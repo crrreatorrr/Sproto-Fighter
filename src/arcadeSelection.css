@@ -194,5 +194,5 @@ footer { padding: 8px 0 10px; font-size: 7px; color: #727580; }
 
 /* Keep enlarged full-height paired previews clear of the stage caption. */
 @media (min-width:650px){
- .preview-stage-label{top:5px;bottom:auto;width:18%;max-width:170px;}
+ .preview-stage-label{top:5px;bottom:auto;width:10%;max-width:120px;}
 }

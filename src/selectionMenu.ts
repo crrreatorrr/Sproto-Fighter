@@ -31,12 +31,12 @@ export function createSelectionMenu(hooks:{start:(setup:SelectionSetup)=>void;pr
   const fighters=createState(setup.fighter,'dummy',setup.opponent).fighters;
   const compact=w<650,feet=compact?h-146:h-20,scale=Math.min((compact?feet:h)*.0054,w*.0032);
   for(let i=0;i<2;i++){
-   const actor=fighters[i],x=w*(i===0?(compact?.25:.35):(compact?.75:.65));
+   const actor=fighters[i],x=w*(i===0?(compact?.25:.32):(compact?.75:.68));
    c.fillStyle=i===0?'#b41e4288':'#1c51de99';c.beginPath();c.ellipse(x,feet+1,w*(compact?.16:.10),5,0,0,Math.PI*2);c.fill();
    c.fillStyle=i===0?'#ff3e5b':'#518aff';c.fillRect(x-w*.06,feet+4,w*.12,1);
    actor.x=0;actor.y=FLOOR;actor.facing=i===0?1:-1;
    // Pack menu bodies by their visible bounds; never shrink a team by body count.
-   c.save();c.translate(x,feet);drawSelectionPose(c,actor,scale,w*(compact?.43:.28));c.restore();
+   c.save();c.translate(x,feet);drawSelectionPose(c,actor,scale,w*(compact?.43:.24));c.restore();
   }
   for(const button of Array.from(rail.querySelectorAll<HTMLButtonElement>('button'))){const thumb=button.querySelector('canvas')!;drawStagePreview(thumb.getContext('2d')!,button.dataset.stage as StageId,thumb.width,thumb.height);}
  }

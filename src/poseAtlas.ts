@@ -1,5 +1,5 @@
 import { EVENT_CLIP_LENGTHS, ACTION_CLIP_LENGTHS, ASSIST_CLIP_LENGTHS, IDENTITY_CLIP_LENGTHS, entranceFrame, deathFrame, introFrame, defeatFrame, specialFrame, castFrame, recoilFrame, type AtlasClipName, type RoundPresentation } from './animationEvents';
-import { A, ROSTER, COMBAT_STYLES, CHARACTER_ACTIONS, DUO_SPREAD, FLOOR, WIDTH, getMove, bodyAtlasIds, bodyOffsets, specialPartnerIds, isPairedFighter, type Fighter, type ThrowState } from './core';
+import { A, ROSTER, COMBAT_STYLES, CHARACTER_ACTIONS, DUO_SPREAD, FLOOR, WIDTH, getMove, bodyAtlasIds, bodyOffsets, specialPartnerIds, isPairedFighter, isCrouchingSpit, type Fighter, type ThrowState } from './core';
 
 /** Complete-character frames, never articulated cutouts. Thirty-two authored poses
  * cover shared actions only; this does not invent missing per-character animation. */
@@ -256,6 +256,7 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:AtlasClipName
     }
     return choose('special',key);
   }
+  if(isCrouchingSpit(f))return null;
   if(f.move?.id==='bolt'){
     const move=getMove(f,'bolt');
     if(atlas.clips.ranged){const age=f.move.t,start=move.startup,end=start+move.active+move.recovery;return choose('ranged',age<start?Math.min(3,Math.floor(age/start*4)):age<start+5?4:age<end-8?5:age<end-4?6:7);}
@@ -321,6 +322,7 @@ function selectSlot(f:Fighter,phase:number,frame:number,landedAt:number,idleSinc
       if(contacts.some(hit=>t>=hit&&t<hit+3))return S.powerRelease;
       return t>last+2?S.punchRecover:S.powerCharge;
     }
+    if(isCrouchingSpit(f))return S.crouchLanding;
     if(attack.id==='bolt')return startup?S.powerCharge:active?S.powerRelease:S.punchRecover;
     if(attack.id==='launcher')return startup?S.upperWindup:active?S.uppercut:S.punchRecover;
     if(attack.id==='grab')return startup||active?S.grabReach:S.punchRecover;

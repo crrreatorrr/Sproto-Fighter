@@ -1,0 +1,1878 @@
+[
+  {
+    "name": "g1-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "g1-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · center · PAUSED"
+  },
+  {
+    "name": "g1-jump",
+    "status": "16 paired fighters · jump · frame 22 · Right · center · PAUSED"
+  },
+  {
+    "name": "g1-kick",
+    "status": "16 paired fighters · medium · frame 14 · Right · center · PAUSED"
+  },
+  {
+    "name": "g1-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Right · center · PAUSED"
+  },
+  {
+    "name": "g1-grab-back-hold",
+    "status": "16 paired fighters · grab back · frame 22 · Right · center · PAUSED"
+  },
+  {
+    "name": "g1-special",
+    "status": "16 paired fighters · special · frame 26 · Right · center · PAUSED"
+  },
+  {
+    "name": "g2-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "g2-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · center · PAUSED"
+  },
+  {
+    "name": "g2-jump",
+    "status": "16 paired fighters · jump · frame 22 · Right · center · PAUSED"
+  },
+  {
+    "name": "g2-kick",
+    "status": "16 paired fighters · medium · frame 14 · Right · center · PAUSED"
+  },
+  {
+    "name": "g2-special",
+    "status": "16 paired fighters · special · frame 26 · Right · center · PAUSED"
+  },
+  {
+    "name": "g2-grab-up-contact",
+    "status": "16 paired fighters · grab up · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "g3-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "g3-kick",
+    "status": "16 paired fighters · medium · frame 14 · Right · center · PAUSED"
+  },
+  {
+    "name": "g3-grab-down-contact",
+    "status": "16 paired fighters · grab down · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "g3-special",
+    "status": "16 paired fighters · special · frame 26 · Right · center · PAUSED"
+  },
+  {
+    "name": "g4-walk-final",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "g4-kick",
+    "status": "16 paired fighters · medium · frame 14 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Right · center · PAUSED"
+  },
+  {
+    "name": "g1-left-air-active",
+    "status": "16 paired fighters · airMedium · frame 17 · Left · center · PAUSED"
+  },
+  {
+    "name": "g1-left-air-heavy-active",
+    "status": "16 paired fighters · airHeavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-idle",
+    "status": "16 paired fighters · idle · frame 1 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-jump",
+    "status": "16 paired fighters · jump · frame 22 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-light",
+    "status": "16 paired fighters · light · frame 9 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-medium",
+    "status": "16 paired fighters · medium · frame 14 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-heavy",
+    "status": "16 paired fighters · heavy · frame 20 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-low",
+    "status": "16 paired fighters · low · frame 9 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-sweep",
+    "status": "16 paired fighters · sweep · frame 18 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-launcher",
+    "status": "16 paired fighters · launcher · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-bolt",
+    "status": "16 paired fighters · bolt · frame 24 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-airLight",
+    "status": "16 paired fighters · airLight · frame 18 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 21 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 25 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-grab-forward",
+    "status": "16 paired fighters · grab forward · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-grab-back",
+    "status": "16 paired fighters · grab back · frame 28 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-grab-up",
+    "status": "16 paired fighters · grab up · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-grab-down",
+    "status": "16 paired fighters · grab down · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-victim-forward",
+    "status": "16 paired fighters · victim forward · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-victim-back",
+    "status": "16 paired fighters · victim back · frame 28 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-victim-up",
+    "status": "16 paired fighters · victim up · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-hit",
+    "status": "16 paired fighters · hit · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-heavyHit",
+    "status": "16 paired fighters · heavyHit · frame 30 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-launchHit",
+    "status": "16 paired fighters · launchHit · frame 32 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-block",
+    "status": "16 paired fighters · block · frame 12 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-special",
+    "status": "16 paired fighters · special · frame 26 · Right · center · PAUSED"
+  },
+  {
+    "name": "g1-special-left-wall",
+    "status": "16 paired fighters · special · frame 26 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "g1-victim-down-left-wall",
+    "status": "16 paired fighters · victim down · frame 40 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "live-g1-1-walk-0",
+    "status": "16 paired fighters · walk · frame 14 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-1",
+    "status": "16 paired fighters · walk · frame 19 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-2",
+    "status": "16 paired fighters · walk · frame 21 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-3",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-4",
+    "status": "16 paired fighters · walk · frame 26 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-5",
+    "status": "16 paired fighters · walk · frame 28 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-6",
+    "status": "16 paired fighters · walk · frame 31 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-7",
+    "status": "16 paired fighters · walk · frame 38 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-8",
+    "status": "16 paired fighters · walk · frame 40 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-9",
+    "status": "16 paired fighters · walk · frame 43 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-10",
+    "status": "16 paired fighters · walk · frame 50 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-walk-11",
+    "status": "16 paired fighters · walk · frame 56 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-0",
+    "status": "16 paired fighters · medium · frame 13 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-1",
+    "status": "16 paired fighters · medium · frame 19 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-2",
+    "status": "16 paired fighters · medium · frame 19 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-3",
+    "status": "16 paired fighters · medium · frame 25 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-4",
+    "status": "16 paired fighters · medium · frame 32 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-5",
+    "status": "16 paired fighters · medium · frame 39 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-6",
+    "status": "16 paired fighters · medium · frame 41 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-7",
+    "status": "16 paired fighters · medium · frame 44 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-8",
+    "status": "16 paired fighters · medium · frame 51 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-9",
+    "status": "16 paired fighters · medium · frame 55 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-10",
+    "status": "16 paired fighters · medium · frame 63 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1--1-medium-11",
+    "status": "16 paired fighters · medium · frame 68 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-0",
+    "status": "16 paired fighters · walk · frame 13 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-1",
+    "status": "16 paired fighters · walk · frame 14 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-2",
+    "status": "16 paired fighters · walk · frame 15 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-3",
+    "status": "16 paired fighters · walk · frame 16 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-4",
+    "status": "16 paired fighters · walk · frame 17 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-5",
+    "status": "16 paired fighters · walk · frame 19 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-6",
+    "status": "16 paired fighters · walk · frame 20 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-7",
+    "status": "16 paired fighters · walk · frame 21 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-8",
+    "status": "16 paired fighters · walk · frame 22 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-9",
+    "status": "16 paired fighters · walk · frame 23 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-10",
+    "status": "16 paired fighters · walk · frame 24 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2-1-walk-11",
+    "status": "16 paired fighters · walk · frame 26 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-0",
+    "status": "16 paired fighters · medium · frame 13 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-1",
+    "status": "16 paired fighters · medium · frame 20 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-2",
+    "status": "16 paired fighters · medium · frame 22 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-3",
+    "status": "16 paired fighters · medium · frame 23 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-4",
+    "status": "16 paired fighters · medium · frame 26 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-5",
+    "status": "16 paired fighters · medium · frame 30 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-6",
+    "status": "16 paired fighters · medium · frame 31 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-7",
+    "status": "16 paired fighters · medium · frame 37 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-8",
+    "status": "16 paired fighters · medium · frame 38 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-9",
+    "status": "16 paired fighters · medium · frame 44 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-10",
+    "status": "16 paired fighters · medium · frame 48 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-medium-11",
+    "status": "16 paired fighters · medium · frame 50 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-0",
+    "status": "16 paired fighters · walk · frame 14 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-1",
+    "status": "16 paired fighters · walk · frame 15 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-2",
+    "status": "16 paired fighters · walk · frame 16 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-3",
+    "status": "16 paired fighters · walk · frame 18 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-4",
+    "status": "16 paired fighters · walk · frame 20 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-5",
+    "status": "16 paired fighters · walk · frame 25 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-6",
+    "status": "16 paired fighters · walk · frame 26 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-7",
+    "status": "16 paired fighters · walk · frame 28 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-8",
+    "status": "16 paired fighters · walk · frame 31 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-9",
+    "status": "16 paired fighters · walk · frame 35 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-10",
+    "status": "16 paired fighters · walk · frame 37 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3-1-walk-11",
+    "status": "16 paired fighters · walk · frame 40 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-0",
+    "status": "16 paired fighters · medium · frame 14 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-1",
+    "status": "16 paired fighters · medium · frame 17 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-2",
+    "status": "16 paired fighters · medium · frame 19 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-3",
+    "status": "16 paired fighters · medium · frame 20 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-4",
+    "status": "16 paired fighters · medium · frame 21 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-5",
+    "status": "16 paired fighters · medium · frame 23 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-6",
+    "status": "16 paired fighters · medium · frame 29 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-7",
+    "status": "16 paired fighters · medium · frame 32 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-8",
+    "status": "16 paired fighters · medium · frame 34 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-9",
+    "status": "16 paired fighters · medium · frame 35 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-10",
+    "status": "16 paired fighters · medium · frame 41 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g3--1-medium-11",
+    "status": "16 paired fighters · medium · frame 42 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-0",
+    "status": "16 paired fighters · walk · frame 14 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-1",
+    "status": "16 paired fighters · walk · frame 16 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-2",
+    "status": "16 paired fighters · walk · frame 20 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-3",
+    "status": "16 paired fighters · walk · frame 21 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-4",
+    "status": "16 paired fighters · walk · frame 23 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-5",
+    "status": "16 paired fighters · walk · frame 26 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-6",
+    "status": "16 paired fighters · walk · frame 28 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-7",
+    "status": "16 paired fighters · walk · frame 31 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-8",
+    "status": "16 paired fighters · walk · frame 38 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-9",
+    "status": "16 paired fighters · walk · frame 39 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-10",
+    "status": "16 paired fighters · walk · frame 41 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4-1-walk-11",
+    "status": "16 paired fighters · walk · frame 44 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-0",
+    "status": "16 paired fighters · medium · frame 14 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-1",
+    "status": "16 paired fighters · medium · frame 17 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-2",
+    "status": "16 paired fighters · medium · frame 23 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-3",
+    "status": "16 paired fighters · medium · frame 27 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-4",
+    "status": "16 paired fighters · medium · frame 28 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-5",
+    "status": "16 paired fighters · medium · frame 29 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-6",
+    "status": "16 paired fighters · medium · frame 36 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-7",
+    "status": "16 paired fighters · medium · frame 41 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-8",
+    "status": "16 paired fighters · medium · frame 42 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-9",
+    "status": "16 paired fighters · medium · frame 43 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-10",
+    "status": "16 paired fighters · medium · frame 46 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g4--1-medium-11",
+    "status": "16 paired fighters · medium · frame 48 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-0",
+    "status": "16 paired fighters · special · frame 13 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-1",
+    "status": "16 paired fighters · special · frame 18 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-2",
+    "status": "16 paired fighters · special · frame 19 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-3",
+    "status": "16 paired fighters · special · frame 20 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-4",
+    "status": "16 paired fighters · special · frame 22 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-5",
+    "status": "16 paired fighters · special · frame 24 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-6",
+    "status": "16 paired fighters · special · frame 30 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-7",
+    "status": "16 paired fighters · special · frame 33 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-8",
+    "status": "16 paired fighters · special · frame 37 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-9",
+    "status": "16 paired fighters · special · frame 42 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-10",
+    "status": "16 paired fighters · special · frame 48 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g1-1-special-11",
+    "status": "16 paired fighters · special · frame 52 · Right · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-0",
+    "status": "16 paired fighters · grab back · frame 14 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-1",
+    "status": "16 paired fighters · grab back · frame 14 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-2",
+    "status": "16 paired fighters · grab back · frame 16 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-3",
+    "status": "16 paired fighters · grab back · frame 21 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-4",
+    "status": "16 paired fighters · grab back · frame 24 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-5",
+    "status": "16 paired fighters · grab back · frame 26 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-6",
+    "status": "16 paired fighters · grab back · frame 28 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-7",
+    "status": "16 paired fighters · grab back · frame 29 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-8",
+    "status": "16 paired fighters · grab back · frame 32 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-9",
+    "status": "16 paired fighters · grab back · frame 34 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-10",
+    "status": "16 paired fighters · grab back · frame 40 · Left · center · PLAYING"
+  },
+  {
+    "name": "live-g2--1-grab-back-11",
+    "status": "16 paired fighters · grab back · frame 42 · Left · center · PLAYING"
+  },
+  {
+    "name": "group1--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 17 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 17 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 20 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 17 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 17 · Right · center · PAUSED"
+  },
+  {
+    "name": "group2-1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 20 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 17 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 17 · Right · center · PAUSED"
+  },
+  {
+    "name": "group3-1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 20 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 17 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4--1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 20 · Left · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-airMedium",
+    "status": "16 paired fighters · airMedium · frame 17 · Right · center · PAUSED"
+  },
+  {
+    "name": "group4-1-center-airHeavy",
+    "status": "16 paired fighters · airHeavy · frame 20 · Right · center · PAUSED"
+  },
+  {
+    "name": "group1-1-left-wall-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group1-1-left-wall-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group1-1-left-wall-medium",
+    "status": "16 paired fighters · medium · frame 14 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group1-1-left-wall-special",
+    "status": "16 paired fighters · special · frame 26 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group1-1-left-wall-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group1--1-right-wall-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group1--1-right-wall-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group1--1-right-wall-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group1--1-right-wall-special",
+    "status": "16 paired fighters · special · frame 26 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group1--1-right-wall-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group2-1-left-wall-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group2-1-left-wall-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group2-1-left-wall-medium",
+    "status": "16 paired fighters · medium · frame 14 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group2-1-left-wall-special",
+    "status": "16 paired fighters · special · frame 26 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group2-1-left-wall-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group2--1-right-wall-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group2--1-right-wall-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group2--1-right-wall-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group2--1-right-wall-special",
+    "status": "16 paired fighters · special · frame 26 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group2--1-right-wall-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group3-1-left-wall-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group3-1-left-wall-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group3-1-left-wall-medium",
+    "status": "16 paired fighters · medium · frame 14 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group3-1-left-wall-special",
+    "status": "16 paired fighters · special · frame 26 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group3-1-left-wall-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group3--1-right-wall-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group3--1-right-wall-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group3--1-right-wall-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group3--1-right-wall-special",
+    "status": "16 paired fighters · special · frame 26 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group3--1-right-wall-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group4-1-left-wall-walk",
+    "status": "16 paired fighters · walk · frame 25 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group4-1-left-wall-dash",
+    "status": "16 paired fighters · dash · frame 7 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group4-1-left-wall-medium",
+    "status": "16 paired fighters · medium · frame 14 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group4-1-left-wall-special",
+    "status": "16 paired fighters · special · frame 26 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group4-1-left-wall-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Right · left wall · PAUSED"
+  },
+  {
+    "name": "group4--1-right-wall-walk",
+    "status": "16 paired fighters · walk · frame 25 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group4--1-right-wall-dash",
+    "status": "16 paired fighters · dash · frame 7 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group4--1-right-wall-medium",
+    "status": "16 paired fighters · medium · frame 14 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group4--1-right-wall-special",
+    "status": "16 paired fighters · special · frame 26 · Left · right wall · PAUSED"
+  },
+  {
+    "name": "group4--1-right-wall-victim-down",
+    "status": "16 paired fighters · victim down · frame 40 · Left · right wall · PAUSED"
+  }
+]

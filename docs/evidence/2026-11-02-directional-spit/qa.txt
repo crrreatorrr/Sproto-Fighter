@@ -1,0 +1,178 @@
+
+> sproto-arena@0.1.0 qa
+> npm run smoke && npm run story-smoke && node scripts/game-qa.mjs && node scripts/fighter-qa.mjs
+
+
+> sproto-arena@0.1.0 smoke
+> node scripts/smoke.mjs && node scripts/directional-smoke.mjs && node scripts/spit-smoke.mjs && node scripts/throw-smoke.mjs && node scripts/movement-smoke.mjs && node scripts/reaction-smoke.mjs
+
+PASS: 21 roster combos; movement/jump; three-combo special; guard/grab; CPU round and replay; fresh round.
+PASS: holding Up jumps once after two neutral chord frames
+PASS: Up + light within 0-frame chord window is rising attack without jump
+PASS: Up + light within 1-frame chord window is rising attack without jump
+PASS: Up + light within 2-frame chord window is rising attack without jump
+PASS: Up + forward + medium selects diagonal rising strike without jump
+PASS: down + medium is a low attack
+PASS: air down + heavy dives, hits below, and remains a finisher
+PASS: all 21 downward heavies become active from an ordinary jump before landing
+PASS: organic spit is strictly horizontal: all five fighters, both facings, ground/air and nine direction masks
+PASS: pumpkin still supports directional trajectories and gravity
+PASS: light → light → low → medium → heavy: five hits, one finisher pip
+PASS: light → medium → bolt → heavy converts projectile hit into finisher
+PASS: launcher → jump → air light → air medium → air heavy: four hits, one pip
+PASS: one dash cancel is available during a live combo
+PASS: Up + light captured during hit-stop stays a rising strike, not auto-jump
+PASS: dash cancel input survives hit-stop
+PASS: guarded chain causes no damage or charge
+PASS: single finisher never earns a pip
+All focused directional checks passed.
+PASS: rivet/1: crouched mouth is lower; every directional shot stays horizontal
+PASS: rivet/1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: rivet/1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: rivet/1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: rivet/-1: crouched mouth is lower; every directional shot stays horizontal
+PASS: rivet/-1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: rivet/-1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: rivet/-1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: vela/1: crouched mouth is lower; every directional shot stays horizontal
+PASS: vela/1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: vela/1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: vela/1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: vela/-1: crouched mouth is lower; every directional shot stays horizontal
+PASS: vela/-1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: vela/-1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: vela/-1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: guest07/1: crouched mouth is lower; every directional shot stays horizontal
+PASS: guest07/1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: guest07/1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: guest07/1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: guest07/-1: crouched mouth is lower; every directional shot stays horizontal
+PASS: guest07/-1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: guest07/-1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: guest07/-1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: guest13/1: crouched mouth is lower; every directional shot stays horizontal
+PASS: guest13/1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: guest13/1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: guest13/1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: guest13/-1: crouched mouth is lower; every directional shot stays horizontal
+PASS: guest13/-1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: guest13/-1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: guest13/-1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: crapto/1: crouched mouth is lower; every directional shot stays horizontal
+PASS: crapto/1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: crapto/1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: crapto/1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: crapto/-1: crouched mouth is lower; every directional shot stays horizontal
+PASS: crapto/-1: Up + spit across the chord window jumps; no grounded high aim or repeat jump
+PASS: crapto/-1: Down in flight uses normal mouth; a landing cast cannot keep an airborne high offset
+PASS: crapto/-1: low spit hits standing/crouching opponents, neutral is ducked, jumping spit clears ground
+PASS: crouched intent survives releasing Down, attack buffering, and hit-stop
+PASS: jump-and-spit input survives hit-stop; opposing vertical inputs retain Up priority
+PASS: jump-height spit can actually hit an airborne opponent at its lane
+PASS: 43 directional spit groups across all five organic-spit fighters and both facings.
+PASS: catch eases to authored grip, damages only at release, then fully recovers
+PASS: forward release, trajectory, knockdown and recovery in both facings
+PASS: back release, trajectory, knockdown and recovery in both facings
+PASS: up release, trajectory, knockdown and recovery in both facings
+PASS: down release, trajectory, knockdown and recovery in both facings
+PASS: all 441 pairs × 4 directions × 2 facings × 3 locations: bounded finite catch and recovery
+PASS: guard loses to grab; misses and airborne/stunned targets do not latch
+PASS: projectile interrupts held attacker even while away is held, without teleport/damage to victim
+PASS: held victim is protected from incidental projectiles
+PASS: simultaneous grabs break evenly; opposite directions cancel to forward
+PASS: late recovery input buffers but early presses do not leak after a hold
+PASS: KO throw finishes visible flight and clears latch before result; restart is fresh
+PASS: flush-wall back throws swap sides for all attackers, both player indices and walls
+PASS: KO during hold cancels the latch without teleporting or damaging the victim
+PASS: throw state remains deterministic through JSON snapshot and replay
+15 throw groups passed; 0 failed.
+PASS: all 21 fighters reach full run in 2 frames, reverse in 2, brake in 2
+PASS: jump release preserves takeoff momentum instead of stopping in midair
+PASS: air attack preserves travel and allows restrained steering
+PASS: neutral air steering can reverse travel without instant velocity flip
+PASS: dash has 3 committed frames then consumes a buffered attack
+PASS: dash tap-jump transitions after commitment and retains dash momentum
+PASS: last-frame landing strike becomes a grounded attack without disappearing
+PASS: tap-jump shortly before landing fires on touchdown, held Up never repeats
+PASS: up+attack on touchdown remains a rising attack and suppresses jump
+PASS: stun and attack recovery cannot be bypassed with dash/jump buffers
+PASS: movement input replay remains deterministic through air, dash, landing and attack
+PASS: human-paced launcher route retains vertical alignment through finisher
+PASS: hitstop buffers dash direction at press, not at later execution
+PASS: recovery-buffered dash keeps its world direction across a side change
+PASS: vertical dash chords cannot leak an unintended dash after release
+PASS: attack wins simultaneous dash chord without a delayed second action
+PASS: tap dash keeps commitment, then opposite input brakes and reverses
+PASS: wall collision clears outward dash velocity for immediate departure
+PASS: holding forward in a dash jump preserves the same momentum as neutral
+PASS: airborne facing stays stable across opponent, then resolves on touchdown
+PASS: frozen-frame attack tap survives and executes once after hitstop
+PASS: firm jump arc measures 134px and 35 airborne frames for Golden Sproto
+PASS: all fighters retain controlled 31–35-frame neutral arcs and faster dash impulse
+PASS: firmer gravity preserves the human-paced four-hit aerial route for all21 fighters
+Measured trajectories: [{"id":"rivet","height":134.36200000000002,"airFrames":35,"takeoff":2},{"id":"vela","height":117.51800000000003,"airFrames":33,"takeoff":2}]
+24 focused movement checks passed.
+PASS: light contacts visibly move the target away, with finite recoil and no knockdown
+PASS: all 21 heavy finishers launch/pop, fall, lie down and recover in both facings
+PASS: launcher ascends then falls, remains juggleable, and clears without permanent lock
+PASS: downed bodies keep floor space at either wall instead of hiding under the standing fighter
+PASS: sweep gives low knockdown; downward air-heavy slams into the floor
+PASS: floor/get-up phases reject followup damage and throw loops; recovery input is responsive
+PASS: finisher combo pays exactly one pip after knockdown recovery, never on block
+PASS: all special final contacts give a finite knockdown and spend all meter
+8 reaction groups passed; 0 failed.
+
+> sproto-arena@0.1.0 story-smoke
+> node scripts/story-smoke.mjs
+
+PASS: four story worlds and five free-play stages have distinct stable IDs
+PASS: each story world can be selected directly, showing a placeholder before launch
+PASS: wins advance through three transitions to ending without autostart
+PASS: defeat and draw retry the same world without clearing it, for every world
+PASS: starting at final world does not mark earlier worlds cleared
+PASS: cleared world badges survive revisiting and repeated victories are idempotent
+PASS: restart from ending or world selector clears progress and returns to World 1 scene
+PASS: all five free-play choices launch without scenes or story result interception
+PASS: story to free-play leaves progression inactive while retaining earned session badges
+PASS: Back and Escape return scene/result to worlds then close to arena
+PASS: selector cross-links and Back-to-arena buttons work without launching a match
+PASS: navigation pauses only once per modal visit, preserving pre-navigation running state
+PASS: readiness gate blocks every story and free-play launch and allows later retry
+PASS: explicit leaveStory stops story results; snapshots do not expose mutable progress
+PASS: actual main hooks preserve paused/running status after nested destination browsing
+PASS: actual main hooks never resume a completed round from menu Back
+PASS: actual main hooks resume an unfinished outro without restarting presentation
+PASS: actual main hooks preserve intro progress while browsing and reset it on a new stage
+PASS: actual main hooks force CPU for story and restore each prior free-play behavior
+PASS: selection-first story browsing and Back never start combat
+PASS: explicit selection applies both fighters, behavior and stage; return stops without restarting
+21 story/navigation checks passed (controller + actual main hooks; DOM stub, no browser claim).
+PASS: KO resolves either side and simultaneous zero health draws; completed rounds are immutable
+PASS: every mode continues beyond the old 99-second boundary regardless of health advantage
+PASS: held attack triggers once, released/repressed attack repeats
+PASS: special without three charges is rejected; whiffs grant no charge
+PASS: horizontal spit hits standing target and passes over grounded crouch
+PASS: all 441 player/opponent combinations across CPU/dummy/guard retain finite bounded state and replay identically
+PASS: 6 broad QA groups; 476,280 scripted interaction frames plus focused outcomes. Physical input and visual quality require browser checks.
+PASS: rivet: four directional inputs / horizontal spark casts, 4-contact CROSSCURRENT, spend/recovery/no self charge
+PASS: vela: four directional inputs / horizontal prism casts, 3-contact PRISM BREAK, spend/recovery/no self charge
+PASS: bront: four directional inputs / aimed boulder casts, 2-contact FAULT LINE, spend/recovery/no self charge
+PASS: zephyr: four directional inputs / aimed pumpkin casts, 3-contact HARVEST MOON, spend/recovery/no self charge
+PASS: mox: four directional inputs / aimed needle casts, 5-contact ECHO DRIVE, spend/recovery/no self charge
+PASS: rune: four directional inputs / aimed orb casts, 3-contact NIGHT BURST, spend/recovery/no self charge
+PASS: guest07: four directional inputs / horizontal drop casts, 3-contact CITRUS RUSH, spend/recovery/no self charge
+PASS: guest08: four directional inputs / aimed ring casts, 3-contact ROUND TRIP, spend/recovery/no self charge
+PASS: guest09: four directional inputs / aimed arrow casts, 3-contact REDLINE, spend/recovery/no self charge
+PASS: guest10: four directional inputs / aimed gift casts, 4-contact GIFT STORM, spend/recovery/no self charge
+PASS: guest11: four directional inputs / aimed heart casts, 2-contact HEARTBREAK, spend/recovery/no self charge
+PASS: guest12: four directional inputs / aimed coin casts, 3-contact COIN ADDRESS, spend/recovery/no self charge
+PASS: guest13: four directional inputs / horizontal serpent casts, 3-contact SERPENT COIL, spend/recovery/no self charge
+PASS: guest14: four directional inputs / aimed pixel casts, 3-contact PHASE SHIFT, spend/recovery/no self charge
+PASS: dumpstar: four directional inputs / aimed scrap casts, 3-contact CLEANUP CREW, spend/recovery/no self charge
+PASS: crapto: four directional inputs / horizontal acid casts, 3-contact ACID TEST, spend/recovery/no self charge
+PASS: vamp: four directional inputs / aimed brokenHeart casts, 3-contact BLACK PARADE, spend/recovery/no self charge
+PASS: alpha777: four directional inputs / aimed seven casts, 6-contact LUCKY SEVENS, spend/recovery/no self charge
+PASS: mandela: four directional inputs / aimed chain casts, 3-contact FREEDOM CHAIN, spend/recovery/no self charge
+PASS: bigswole: four directional inputs / aimed rock casts, 2-contact ATLAS CRASH, spend/recovery/no self charge
+PASS: nate: four directional inputs / aimed paw casts, 3-contact SMALL STEPS, spend/recovery/no self charge
+PASS: 105 per-fighter cases, 21 unique mechanical profiles, 8 trajectory/power interaction checks.

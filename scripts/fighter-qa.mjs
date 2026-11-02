@@ -10,7 +10,7 @@ for(const id of PLAYABLE_FIGHTERS){
  for(const direction of [0,A.up,A.up|A.right,A.down]){
   const s=createState(id,'cpu');s.fighters[0].x=100;s.fighters[1].x=1150;step(s,[direction|A.bolt,0]);let shot;
   for(let i=0;i<60&&!shot;i++){step(s,[0,0]);shot=s.projectiles[0];}
-  assert.ok(shot,id+' projectile spawns');assert.equal(shot.shape,style.projectile.shape);assert.ok(Number.isFinite(shot.vx)&&Number.isFinite(shot.vy));assert.equal(s.fighters[0].y,FLOOR,id+' cast chord must not jump');if(isHorizontalSpit(id)){assert.equal(shot.vy,0);assert.equal(shot.gravity,0);assert.equal(shot.wave,0);}
+  assert.ok(shot,id+' projectile spawns');assert.equal(shot.shape,style.projectile.shape);assert.ok(Number.isFinite(shot.vx)&&Number.isFinite(shot.vy));if(!isHorizontalSpit(id)||!(direction&A.up))assert.equal(s.fighters[0].y,FLOOR,id+' aimed cast chord must not jump');if(isHorizontalSpit(id)){assert.equal(shot.vy,0);assert.equal(shot.gravity,0);assert.equal(shot.wave,0);}
   total++;
  }
  const s=createState(id,'cpu');s.fighters[0].x=380;s.fighters[1].x=460;s.fighters[0].hp=600;s.fighters[0].pips=3;
