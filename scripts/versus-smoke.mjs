@@ -11,7 +11,8 @@ const cu=url(compile(read('core.ts'))),core=await import(cu),events=await import
 const originalBase=new URL('../src/originalPortraits.ts',import.meta.url).href;
 const pu=url(compile(read('originalPortraits.ts')).replaceAll('import.meta.url',JSON.stringify(originalBase)));
 const {originalPortraits}=await import(pu);
-const {createVersusScreen,VERSUS_FRAMES}=await import(url(compile(read('versusScreen.ts')).replace("from './core'",`from '${cu}'`).replace("from './originalPortraits'",`from '${pu}'`)));
+const {createVersusScreen}=await import(url(compile(read('versusScreen.ts')).replace("from './core'",`from '${cu}'`).replace("from './originalPortraits'",`from '${pu}'`)));
+const VERSUS_FRAMES=600; // Simulate ten seconds: confirmation must never time out.
 const {createFightCountdown,COUNTDOWN_FRAMES,FIGHT_CUE_FRAMES}=await import(url(compile(read('fightCountdown.ts'))));
 class Element{
  constructor(tag){this.tagName=tag;this.children=[];this.attributes={};this.hidden=false;this.classes=new Set();this.classList={add:x=>this.classes.add(x),remove:x=>this.classes.delete(x),toggle:(x,on)=>on?this.classes.add(x):this.classes.delete(x)};}
@@ -27,10 +28,10 @@ check('all installed portraits exist and all ordered matchups preserve exact sel
   [a,b].forEach((id,index)=>{const card=t.cards[index];assert.equal(card.attributes['data-fighter'],id);assert.equal(card.children[1].src,originalPortraits[id]);assert.equal(card.children[2].children[0].textContent,core.ROSTER[id].name);assert.equal(card.classes.has('is-paired'),core.isPairedFighter(id));});
  }
 });
-check('bounded automatic advance, explicit skip, replacement matchup and missing image cannot stall the game',()=>{
+check('preview waits indefinitely; explicit confirmation is idempotent across matchups and missing images',()=>{
  let finishes=0;const t=ui(()=>finishes++);t.screen.show('guest08','guest09');
  for(let n=0;n<VERSUS_FRAMES-1;n++)assert.ok(t.screen.advance());assert.equal(finishes,0);
- assert.ok(t.screen.advance());assert.equal(finishes,1);assert.equal(t.screen.advance(),false);
+ assert.ok(t.screen.advance());assert.equal(finishes,0);assert.ok(t.screen.isOpen);t.screen.skip();assert.equal(finishes,1);assert.equal(t.screen.advance(),false);
  t.screen.show('solanadelray','realityarchitect');t.cards[0].children[1].onerror();assert.ok(t.cards[0].classes.has('portrait-unavailable'));assert.ok(t.screen.isOpen);
  t.button.onclick();assert.equal(finishes,2);t.screen.skip();assert.equal(finishes,2);
  t.screen.show('guest08','guest09');assert.equal(t.cards[0].children[1].hidden,false);t.screen.hide();assert.equal(finishes,2);
@@ -46,6 +47,12 @@ check('pause suspends previews and countdowns without losing their phase or hidi
 });
 const main=ts.createSourceFile('main.ts',read('main.ts'),ts.ScriptTarget.Latest,true);
 const fn=name=>main.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text===name).getText(main);
+check('actual keyboard accepts a fresh Enter only, rejecting Space, combat keys and repeat',()=>{
+ let handler;const {screen}=ui();const c={window:{addEventListener(type,fn){handler=fn;}},story:{isOpen:false},dialog:{open:false},selection:{isOpen:false},running:true,blockedKeys:new Set(),versus:screen};
+ vm.createContext(c);const registration=main.statements.find(n=>ts.isExpressionStatement(n)&&n.getText(main).startsWith("window.addEventListener('keydown'"));vm.runInContext(compile(registration.getText(main)),c);
+ screen.show('guest08','guest09');for(const [code,repeat] of [['Space',false],['KeyA',false],['Enter',true]]){let prevented=false;handler({code,repeat,preventDefault(){prevented=true;}});assert.ok(prevented);assert.ok(screen.isOpen);}
+ handler({code:'Enter',repeat:false,preventDefault(){}});assert.equal(screen.isOpen,false);assert.ok(c.blockedKeys.has('Enter'));
+});
 function combatFixture(){
  const c={...core,...events,countdown:{advance:()=>false},state:core.createState('highsproto','dummy','vela'),presentation:events.createRoundPresentation(),frames:[],held:new Set(),queued:0,padNeedsRelease:false,qaPanel:null,qaRecord(){},playRetainCallout(){},qaStopAtOutro(){},story:{finishMatch(){},onRoundEnd:()=>false},showOverlay(){}};
  const t=ui(()=>{c.held.clear();c.queued=0;c.padNeedsRelease=true;});c.versus=t.screen;vm.createContext(c);vm.runInContext(compile(fn('advanceRoundFrame')),c);return {c,...t};
@@ -53,7 +60,7 @@ function combatFixture(){
 check('actual main freezes combat, CPU, replay and entrance clock during versus, then retains the full entrance',()=>{
  const {c,screen}=combatFixture();screen.show('highsproto','vela');const before=JSON.stringify(c.state);
  for(let n=0;n<VERSUS_FRAMES;n++)c.advanceRoundFrame(core.A.light|core.A.right);
- assert.equal(JSON.stringify(c.state),before);assert.equal(c.frames.length,0);assert.equal(c.presentation.frame,0);assert.equal(c.padNeedsRelease,true);
+ assert.equal(JSON.stringify(c.state),before);assert.equal(c.frames.length,0);assert.equal(c.presentation.frame,0);assert.equal(c.padNeedsRelease,false);assert.ok(screen.isOpen);screen.skip();assert.equal(c.padNeedsRelease,true);
  c.advanceRoundFrame(0);assert.equal(c.presentation.frame,1);assert.equal(c.state.frame,0);
  c.advanceRoundFrame(core.A.light);assert.equal(c.state.fighters[0].move.id,'light');assert.equal(c.frames.length,1);
 });
@@ -70,11 +77,13 @@ check('actual main shows 3/2/1 for one second each, plays entrances without dama
  for(let n=0;n<FIGHT_CUE_FRAMES;n++)c.advanceRoundFrame(0);assert.equal(c.countdown.isOpen,false);
  c.countdown.show();assert.equal(word.textContent,'3');c.countdown.hide();assert.equal(c.countdown.isOpen,false);
 });
-check('actual gamepad preview consumes fresh A/Start, requires neutral after skipping, and never leaks an attack',()=>{
+check('actual gamepad preview consumes only fresh A, requires neutral after skipping, and never leaks an attack',()=>{
  let current={connected:true,axes:[0,0],buttons:Array.from({length:16},()=>({pressed:false}))};
  const c={...core,selection:{isOpen:false,pollPad(){}},story:{isOpen:false},dialog:{open:false},running:true,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:true,presentation:{phase:'intro'},navigator:{getGamepads:()=>[current]},$:()=>({}),padKeys:{light:0},performance:{now:()=>0},start(){throw Error('preview Start leaked');},pause(){throw Error('preview Start paused');}};
  const {screen}=ui(()=>{c.padNeedsRelease=true;});c.versus=screen;vm.createContext(c);vm.runInContext(compile(fn('pollPad')),c);
- for(const button of [0,9]){
+ screen.show('guest08','guest09');current.buttons[9].pressed=true;assert.equal(c.pollPad(),0);assert.ok(screen.isOpen,'Start must not confirm');current.buttons[9].pressed=false;c.pollPad();
+ screen.show('guest08','guest09');c.padNeedsRelease=true;current.buttons[0].pressed=true;assert.equal(c.pollPad(),0);assert.ok(screen.isOpen,'held A cannot skip a new preview');current.buttons[0].pressed=false;c.pollPad();
+ for(const button of [0]){
   screen.show('guest08','guest09');c.padNeedsRelease=false;c.previousPad=[];current.buttons[button].pressed=true;
   assert.equal(c.pollPad(),0);assert.equal(screen.isOpen,false);assert.equal(c.pollPad(),0);
   current.buttons[button].pressed=false;assert.equal(c.pollPad(),0);assert.equal(c.padNeedsRelease,false);
