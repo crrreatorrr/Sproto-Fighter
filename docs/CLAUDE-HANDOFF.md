@@ -134,3 +134,28 @@ long sessions, every matchup/transition, a full manual 100-win campaign,
 subjective player acceptance and systematic cross-browser performance remain
 unverified. There is no online/rollback-readiness claim. The retained authoring
 archive is large; review contents before any future public push.
+
+## Final local main verification
+
+Main advanced safely to combined checkpoint e4f45b44; its former tip and every
+feature branch remain preserved. Final follow-up removes an accidentally tracked
+node_modules link and ignores dependency links/directories correctly. The main
+link had pointed to itself and prevented launch. An offline reinstall lacked
+Rollup in cache; npm ci against the standard registry restored the exact locked
+packages. The production build, 30 story groups and 12 menu/controller groups
+then passed from the actual main checkout. The earlier failed main launch/build
+is recorded here and is not counted as a pass.
+
+Native Chrome at http://127.0.0.1:5173/ loaded selection, launched Golden Sproto
+against Duo on Last Light Bar in testing God Mode, and activated the special
+banner. It then returned to selection; testing was turned off; Story worlds
+showed all 100 nodes and encounter 1 at the correct location. Node numerals now
+use a clear monospace face while surrounding pixel-art UI remains unchanged.
+Screenshots main-5173-play.png and main-5173-map.png were inspected. The sampled
+console had browser-extension warnings but no application warning/error entries.
+Temporary browser viewport overrides are reset.
+
+The existing com.sprotoarena.local launchd job serves main independently of this
+assistant shell for the current login session. No new startup installation was
+created. After logout/reboot, use the launcher in README. Port 5187 is only the
+isolated review checkout; use 5173 for the final game and persistent saves.

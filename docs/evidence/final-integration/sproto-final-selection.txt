@@ -1,0 +1,13 @@
+PASS: keyboard grid exits reach side controls and stage rail, with reverse routes
+PASS: Random Stage is reachable at both rail ends; up/down and horizontal return routes work
+PASS: stage down reaches mode then CTA; mode changes only the future setup
+PASS: gamepad D-pad uses the same grid exits and Random Stage route
+PASS: upper launch controls lead down to side tabs and roster, and back up
+PASS: locked P1 cannot be chosen; random P1 only uses unlocked fighters while CPU can use every fighter
+PASS: recruitment updates selection immediately and God Mode is gated until completion
+PASS: gamepad Start focuses CTA; A launches once and held A does not repeat
+PASS: each main selection announces exactly its own assigned partner
+PASS: actual main pollPad blocks menu-confirm and held controls until a neutral release
+PASS: actual main overlay pad navigation can return to selection without leaking attacks
+PASS: actual main settings confirm toggles the testing checkbox once per controller press
+12 selection/controller integration checks passed. Stub DOM/gamepad only; no browser or physical-controller claim.

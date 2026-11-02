@@ -15,7 +15,9 @@ npm run dev -- --port 5173 --strictPort
 ```
 
 Open **http://127.0.0.1:5173/** on this Mac. Keep the server terminal open.
-The isolated integration preview uses port 5187. Saves belong to their browser
+The existing background service serves this main checkout for the current
+login session. After logout/reboot use the launcher again. The isolated
+integration preview uses port 5187. Saves belong to their browser
 origin: 5173 and 5187 have separate progression. This is not a hosted website.
 
 ## Campaign and testing
