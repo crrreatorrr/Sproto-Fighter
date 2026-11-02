@@ -2,13 +2,13 @@ import {STAGES,STORY_STAGE_IDS,type StageId} from './stage';
 import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,FINALE_START,storyProgress,type Encounter,type StoryProgress} from './storyProgress';
 
-type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean};
+type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean};
 /** Story scenes are placeholders until the separate cutscene script is approved. */
 export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
     const modal=$<HTMLDialogElement>('journey-dialog');
     const worlds=STORY_STAGE_IDS.map(id=>STAGES.find(s=>s.id===id)!);
-    let active:Encounter|null=null,settled:number|null=null,launching=false;
+    let active:Encounter|null=null,settled:number|null=null,settledTesting=false,launching=false;
     let view:'worlds'|'levels'|'scene'|'result'='worlds';
     let back:()=>void=()=>{};
     const storageNote=()=>progress.snapshot().persistent?'Progress saves on this browser.':'Browser saving is unavailable. Progress lasts only while this page stays open.';
@@ -69,13 +69,17 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     // Called at KO, before the presentation outro: reloading during the outro keeps a win.
     function finishMatch(winner:number){
         if(!active||launching||settled!==null||![0,1,2].includes(winner))return false;
-        settled=winner;if(winner===0)progress.win(active.index);else if(active.index>=FINALE_START)progress.abandonFinale();status();return true;
+        settled=winner;settledTesting=hooks.testing?.()??false;if(settledTesting)progress.abandonFinale();else if(winner===0)progress.win(active.index);else if(active.index>=FINALE_START)progress.abandonFinale();status();return true;
     }
     function onRoundEnd(winner:number):boolean{
         if(!active||launching)return false;
-        finishMatch(winner);const encounter=active,result=settled;active=null;settled=null;
+        finishMatch(winner);const encounter=active,result=settled,wasTesting=settledTesting;active=null;settled=null;settledTesting=false;
         view='result';$('journey-content').replaceChildren();$('journey-kicker').textContent=`STORY / ENCOUNTER ${encounter.index+1} OF 100`;
-        if(result===0){
+        if(wasTesting){
+            $('journey-title').textContent='God Mode test complete.';
+            $('journey-copy').textContent='Story progress and fighter unlocks are unchanged. Turn off God Mode for testing in Settings to earn recruits and advance the route.';
+            buttons([{label:'Test again →',run:()=>{const retry=encounter.index>=FINALE_START?STORY_ENCOUNTERS[FINALE_START]:encounter;void launch(retry.stage,retry);}},{label:'Story route',run:()=>selector(true)}]);
+        }else if(result===0){
             const next=STORY_ENCOUNTERS[encounter.index+1];
             if(encounter.index===FINALE_START){void launch(next.stage,next);return true;}
             if(next&&next.stage!==encounter.stage){scene(next,true);return true;}

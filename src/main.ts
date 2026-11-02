@@ -35,7 +35,7 @@ let state = createState(), chosen: FighterId = 'rivet', mode: Mode = 'cpu', oppo
     action: Action;
     device: 'key' | 'pad';
 } | null = null;
-let matchGodMode=false;
+let matchGodMode=false, matchEarnedGodMode=false, testingGodMode=false, matchTesting=false;
 let presentation = createRoundPresentation();
 let modalDirection='',modalRepeatAt=0,padNeedsRelease=true;
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousStart = false;
@@ -55,7 +55,7 @@ function updateStage(stage:StageId) {
 async function launchSelection(setup:SelectionSetup,isStory=false) {
     if(!storyProgress.isUnlocked(setup.fighter))return false;
     try{await Promise.all([ensurePoseAtlases(isStory&&setup.opponent==='vela'?[setup.fighter,'vela','vaudream']:[setup.fighter,setup.opponent]),[setup.fighter,setup.opponent].some(id=>['michael','sproto2531','sproto3106'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
-    matchGodMode=!isStory&&storyProgress.snapshot().completed&&!!setup.godMode;
+    matchEarnedGodMode=!isStory&&storyProgress.snapshot().completed&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);
@@ -63,7 +63,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     started=false;restart();start();
     $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
     if(isStory&&setup.opponent==='vaudream')$('mode-label').textContent+=' / FINAL GAUNTLET / HEALTH REFILLED';
-    if(matchGodMode)$('mode-label').textContent+=' / GOD MODE';
+    updateGodModeLabel();
     return true;
 }
 function returnToSelection() {
@@ -136,6 +136,7 @@ function pause() {
         start();
 }
 function restart() {
+    matchTesting=testingGodMode;matchGodMode=testingGodMode||matchEarnedGodMode;
     state = createState(chosen, mode, opponent);
     if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
@@ -144,11 +145,20 @@ function restart() {
     accumulator = 0;
     held.clear();
     queued = 0;
+    updateGodModeLabel();
     if (started)
         start();
 }
+function updateGodModeLabel(){
+    const label=$('mode-label');label.textContent=(label.textContent??'').replace(/ \/ GOD MODE(?: TEST)?$/,'')+(matchTesting?' / GOD MODE TEST':matchGodMode?' / GOD MODE':'');
+}
+function setTestingGodMode(enabled:boolean){
+    testingGodMode=enabled;
+    if(started&&!selection.isOpen){if(!story.retryMatch())restart();}
+}
 let resumeAfterJourney = false, freePlayMode: Mode | null = null;
 const story = createStoryMode({
+    testing:()=>matchTesting,
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
     resume: () => { if (resumeAfterJourney && started && presentation.phase !== 'result') start(); },
@@ -165,7 +175,9 @@ $('start').onclick = start;
 $('pause').onclick = pause;
 $('reset').onclick = ()=>{if(!story.retryMatch())restart();};
 const dialog = $<HTMLDialogElement>('controls-dialog');
+$('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
 $('settings').onclick = () => {
+    $<HTMLInputElement>('testing-god-mode').checked=testingGodMode;
     resumeAfterSettings = running;
     if (running)
         pause();
@@ -264,7 +276,7 @@ function pollPad(): number {
         }
         modalDirection=direction;
         if(buttons[1]&&!previousPad[1])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
-        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLButtonElement)document.activeElement.click();
+        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLElement&&document.activeElement.matches('button,input[type=checkbox]'))document.activeElement.click();
     }else if(!wasOverlay)modalDirection='';
     if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen){
         const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
