@@ -505,12 +505,24 @@ const regionOrder:Partial<Record<StageId,readonly number[]>>={
 /** Scenery selection never reorders opponents or changes a saved encounter ID.
  * Contiguous location blocks make travel legible instead of randomizing backdrops.
  * Every story zone has themed locations, including Bar and Hatchery. */
-export function storyLocationForEncounter(encounter:{stage:StageId;index:number},route:readonly {stage:StageId;index:number}[]):StoryLocation|null {
+export function storyLocationForEncounter(
+ encounter:{stage:StageId;index:number;opponents?:readonly string[]},
+ route:readonly {stage:StageId;index:number;opponents?:readonly string[]}[],
+ bout=0,
+):StoryLocation|null {
  const pool=regionOrder[encounter.stage];if(!pool?.length)return null;
  const local=route.filter(e=>e.stage===encounter.stage),position=local.findIndex(e=>e.index===encounter.index);
- if(position<0)return null;
- return STORY_LOCATIONS[pool[Math.min(pool.length-1,Math.floor(position*pool.length/local.length))]];
+ if(position<0||!Number.isInteger(bout)||bout<0||bout>=(local[position].opponents?.length??1))return null;
+ // Each sequential boss bout advances through the same region. This changes
+ // scenery only: encounter IDs, boss order and saved progression are untouched.
+ const count=(e:typeof local[number])=>e.opponents?.length??1;
+ const total=local.reduce((sum,e)=>sum+count(e),0);
+ const offset=local.slice(0,position).reduce((sum,e)=>sum+count(e),0)+bout;
+ const slot=total>=pool.length?Math.floor(offset*pool.length/total):
+     total===1?0:Math.round(offset*(pool.length-1)/(total-1));
+ return STORY_LOCATIONS[pool[Math.min(pool.length-1,slot)]];
 }
+
 const images=new Map<string,HTMLImageElement>();
 const pending=new Map<string,Promise<void>>();
 export function loadStoryLocation(location:StoryLocation):Promise<void>{

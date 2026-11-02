@@ -31,7 +31,7 @@ const variantsUrl=asModule(read('src/stageVariants.ts')),stageUrl=asModule(read(
 const groups=await import(asModule(read('src/stageGroups.ts').replace("from './stage'",`from '${stageUrl}'`).replace("from './stageVariants'",`from '${variantsUrl}'`)));
 const stages=actualStage.STAGES;
 const unlocked=new Set(['highsproto','bront']),pendingUnlocks=new Set();let completed=false,earnedReward=false;const subscribers=[];const progress={snapshot:()=>({unlocked:[...unlocked],completed,godModeUnlocked:completed||earnedReward}),isUnlocked:id=>unlocked.has(id),subscribe:fn=>subscribers.push(fn),sync(){for(const id of pendingUnlocks)unlocked.add(id);pendingUnlocks.clear();subscribers.forEach(fn=>fn());}};
-const modules={'./stageGroups':groups,'./storyProgress':{storyProgress:progress},'./core':core,'./originalPortraits':{originalPortraits:Object.fromEntries(core.PLAYABLE_FIGHTERS.map(id=>[id,'/'+id+'.png']))},'./poseAtlas':{drawPoseAtlasSample:()=>true,drawSelectionPose:()=>true},'./stage':{STAGES:stages,drawStagePreview(){}}};
+const modules={'./stageGroups':groups,'./storyProgress':{storyProgress:progress},'./core':core,'./originalPortraits':{originalPortraits:Object.fromEntries(core.PLAYABLE_FIGHTERS.map(id=>[id,'/'+id+'.png']))},'./poseAtlas':{drawPoseAtlasSample:()=>true,drawSelectionPose:()=>true},'./stage':{STAGES:stages,drawStagePreview(){},loadStageArt:async()=>{}}};
 const context={exports:{},require:id=>modules[id],document,HTMLElement:Element,HTMLButtonElement:Element,HTMLSelectElement:Select,Event:class{constructor(type){this.type=type;}},window:{addEventListener(){}},performance:{now:()=>now},console,Math};vm.createContext(context);vm.runInContext(compile(read('src/selectionMenu.ts')),context);
 let launches=0,lastSetup;const menu=context.exports.createSelectionMenu({start(setup){launches++;lastSetup=setup;menu.hide();context.running=true;context.padNeedsRelease=true;}});menu.setReady(true);
 assert.ok(root.innerHTML.indexOf('class="selection-locations"')<root.innerHTML.indexOf('class="match-preview"'));assert.ok(root.innerHTML.indexOf('id="start-fight"')<root.innerHTML.indexOf('class="selection-roster"'));
@@ -48,6 +48,21 @@ check('zone selection filters variations and preserves launch identity',()=>{
  assert.equal(seen.size,stages.length);
  zoneButtons().find(b=>b.dataset.zone==='bar').click();const blue=visibleStages().find(b=>b.dataset.stage==='bluebar');assert.ok(blue);blue.click();assert.equal(menu.getSetup().stage,'bluebar');assert.equal(currentZone().dataset.zone,'bar');blue.focus();menuPress([1]);assert.equal(document.activeElement,currentZone());
  menu.setSetup({stage:'starbridge'});assert.equal(currentZone().dataset.zone,'verse');assert.ok(visibleStages().some(b=>b.dataset.stage==='starbridge'));menu.setSetup({stage:'ranch'});
+});
+
+check('all 24 approved story panoramas are selectable, including Ranch’s three variations',()=>{
+ const approved=JSON.parse(read('public/stages/variations-v2/manifest.json'));
+ assert.equal(stages.length,70);
+ for(const item of approved){
+  const zone=groups.stageZone(item.id);zoneButtons().find(button=>button.dataset.zone===zone).click();
+  const button=visibleStages().find(button=>button.dataset.stage===item.id);assert.ok(button,item.id);
+  button.click();assert.equal(menu.getSetup().stage,item.id);assert.equal($('selected-stage-name').textContent,stages.find(s=>s.id===item.id).name);
+  assert.equal(currentZone().dataset.zone,zone);assert.equal(button.getAttribute('aria-pressed'),'true');
+ }
+ zoneButtons().find(button=>button.dataset.zone==='ranch').click();
+ assert.equal(visibleStages().length,4);assert.equal($('zone-stage-count').textContent,'4 STAGES');
+ for(const button of visibleStages()){button.focus();menuPress([0]);assert.equal(menu.getSetup().stage,button.dataset.stage);menuPress([1]);assert.equal(document.activeElement,currentZone());}
+ menu.setSetup({stage:'ranch'});
 });
 check('High starts fresh; locked Golden can be previewed but cannot launch',()=>{assert.equal(menu.getSetup().fighter,'highsproto');const golden=portraits.find(p=>p.dataset.fighter==='rivet');golden.click();assert.equal(menu.getSetup().fighter,'rivet');assert.match($('player-summary').innerHTML,/Golden Sproto/);assert.match(golden.getAttribute('aria-description'),/Select to preview/);assert.equal(golden.getAttribute('aria-disabled'),null);assert.match($('selection-loading').textContent,/locked for P1/);assert.equal($('start-fight').disabled,true);$('start-fight').onclick();assert.equal(launches,0);menu.setSetup({fighter:'highsproto'});assert.equal($('start-fight').disabled,false);});
 check('keyboard grid exits reach variation then its zone',()=>{portraits[0].focus();key('Up');assert.equal(document.activeElement,$('choose-player'));key('Down');assert.equal(document.activeElement,starter);portraits.at(-1).focus();key('Down');assert.equal(document.activeElement,currentStage());key('Up');assert.equal(document.activeElement,currentZone());key('Down');assert.equal(document.activeElement,currentStage());});

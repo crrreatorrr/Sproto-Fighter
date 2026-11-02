@@ -227,6 +227,8 @@ try {
       const versus={show:(...ids)=>versusCalls.push(ids),hide(){}};
       const ensurePoseAtlases=async(ids)=>{assetRequests.push([...ids]);if(assetFailure)throw Error('asset failure');},ensurePowerArt=async()=>{};
       const setStage=id=>selectedStage=id,setActiveStoryLocation=value=>selectedLocation=value,loadStoryLocation=async()=>{};
+      const stageRequests=[],stageErrors={};
+      const loadStageArt=async(ids)=>{stageRequests.push([...ids]);},getStageArtStatus=()=>({errors:stageErrors});
       const selection={isOpen:true,getSetup:()=>({...setup}),setSetup:next=>setup={...setup,...next},hide(){this.isOpen=false;},show(){this.isOpen=true;},setReady(){}};
       const mountCampaignMap=(_parent,_progress,choose)=>mapChoose=choose;
       const dialog=$('controls-dialog'),updateControls=()=>{};
@@ -235,11 +237,12 @@ try {
       ${code}
       return {story,launchSelection,returnToSelection,restart,setTestingGodMode,closeSettings,
         setSelectedFighter(id){setup.fighter=id;},setSelectedGodMode(value){setup.godMode=value;},
+        failStage(id,value=true){if(value)stageErrors[id]='load failure';else delete stageErrors[id];},
         setReady(value){$('start').disabled=!value;},failAssets(value=true){assetFailure=value;},
         openSettings(){resumeAfterSettings=running;running=false;dialog.open=true;},
         openResultSettings(){running=false;presentation.phase='result';dialog.open=true;resumeAfterSettings=false;$('overlay').hidden=false;},
         mapPick(index){if(!mapChoose)throw Error('Map not mounted');mapChoose(STORY_ENCOUNTERS[index]);},
-        inspect:()=>({setup,mode,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
+        inspect:()=>({setup,mode,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
     `)({createStoryMode:hooks=>createStoryMode(hooks,progress),storyProgress:progress,STAGES,ROSTER,$:d.$,createRoundPresentation,createState,
       STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition});
     return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await d.action(0);await d.action(0);await flush();}};
@@ -277,7 +280,7 @@ try {
     assert.match(t.$('journey-copy').textContent,/locked P1 preview/);assert.ok(t.$('journey-copy').textContent.includes(ROSTER[locked].name));
     t.setSelectedFighter(STARTER_FIGHTERS[0]);await t.action(0);await flush();assert.equal(t.story.isActive,true);assert.equal(t.inspect().state.fighters[0].id,'highsproto');assert.equal(t.inspect().state.godMode,true);
   });
-  await check('actual main refills health and preserves hero and scenery between all three gauntlets’ opponents',async()=>{
+  await check('actual main refills health, preserves hero and selects the correct regional scenery for each boss bout',async()=>{
     for(const encounter of [ART,NICK_JUICY,FINAL]){
       const t=integration({disk:before(encounter.index)});await t.begin();assert.equal(t.inspect().mode,'cpu');
       assert.equal(t.inspect().state.fighters[1].id,encounter.opponents[0]);
@@ -288,7 +291,7 @@ try {
       assert.equal(t.inspect().state.fighters[1].id,encounter.opponents[1]);assert.equal(t.inspect().state.fighters[0].id,hero);
       assert.deepEqual(t.inspect().versusCalls.at(-1),[hero,encounter.opponents[1]],'second bout gets its own correct versus portraits');
       assert.equal(t.inspect().state.fighters[0].hp,1000);assert.equal(t.inspect().state.fighters[0].pips,0);assert.equal(t.inspect().state.winner,null);
-      assert.equal(t.inspect().selectedStage,encounter.stage);assert.equal(t.inspect().selectedLocation?.id??null,location,'both waves keep the encounter scenery');
+      assert.equal(t.inspect().selectedStage,encounter.stage);assert.equal(t.inspect().selectedLocation?.id??null,storyLocationForEncounter(encounter,STORY_ENCOUNTERS,1)?.id??null,'second wave uses its own regional scenery');
       assert.equal(t.progress.isCleared(encounter.index),false);assert.match(t.$('mode-label').textContent,/HEALTH REFILLED/);
       assert.ok(t.inspect().assetRequests[0].includes(encounter.opponents[0]));assert.ok(t.inspect().assetRequests[0].includes(encounter.opponents[1]),'preload both opponents');
       await finishWave(t);assert.ok(createStoryProgress(t.disk).isCleared(encounter.index));
@@ -326,6 +329,21 @@ try {
     assert.equal(t.inspect().matchGodMode,false);const prior=t.inspect().state;t.failAssets();
     const error=console.error;console.error=()=>{};try{assert.equal(await t.launchSelection({fighter:'bront',opponent:'vela',stage:'bar',mode:'guard'}),false);}finally{console.error=error;}
     assert.equal(t.inspect().state,prior);t.returnToSelection();assert.equal(t.story.isActive,false);
+  });
+  await check('all free-play catalogue entries launch their exact arena and clear story overrides',async()=>{
+    const t=integration();await t.begin();const saved=progressView(t.progress);
+    for(const entry of STAGES){
+      assert.equal(await t.launchSelection({fighter:'highsproto',opponent:'vela',stage:entry.id,mode:'dummy'}),true,entry.id);
+      assert.equal(t.inspect().selectedStage,entry.id);assert.equal(t.inspect().selectedLocation,null);
+      assert.deepEqual(t.inspect().stageRequests.at(-1),[entry.id]);
+      assert.equal(t.$('stage-title').textContent,entry.name.toUpperCase());
+    }
+    assert.deepEqual(progressView(t.progress),saved);
+    const id='21-ranch-lantern-lit-barn',prior=t.inspect().state;
+    t.failStage(id);assert.equal(await t.launchSelection({fighter:'highsproto',opponent:'vela',stage:id,mode:'cpu'}),false);
+    assert.equal(t.inspect().state,prior);assert.match(t.$('selection-loading').textContent,/stage art could not load/);
+    t.failStage(id,false);assert.equal(await t.launchSelection({fighter:'highsproto',opponent:'vela',stage:id,mode:'cpu'}),true);
+    assert.equal(t.inspect().selectedStage,id);
   });
   await check('Settings testing toggle is immediate, restores a fresh round and resumes after result overlay',async()=>{
     const t=integration();t.setTestingGodMode(true);await t.begin();assert.equal(t.inspect().state.godMode,true);assert.equal(t.inspect().state.fighters[0].pips,3);assert.match(t.$('mode-label').textContent,/GOD MODE TEST/);

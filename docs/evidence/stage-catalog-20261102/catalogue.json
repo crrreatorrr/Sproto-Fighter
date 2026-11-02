@@ -1,0 +1,1343 @@
+{
+  "counts": {
+    "trenches": 9,
+    "circuit": 13,
+    "yacht": 9,
+    "throne": 13,
+    "bar": 7,
+    "verse": 9,
+    "hatchery": 6,
+    "ranch": 4
+  },
+  "stages": [
+    {
+      "id": "trenches",
+      "name": "Mudline Trenches",
+      "zone": "trenches",
+      "image": "/stages/higgsfield/trenches.png"
+    },
+    {
+      "id": "circuit",
+      "name": "Circuit Gate",
+      "zone": "circuit",
+      "image": "/stages/higgsfield/circuit.png"
+    },
+    {
+      "id": "retro",
+      "name": "Neon Tomorrow",
+      "zone": "circuit",
+      "image": "/stages/higgsfield/retro.png"
+    },
+    {
+      "id": "yacht",
+      "name": "Tidebreak Marina",
+      "zone": "yacht",
+      "image": "/stages/higgsfield/yacht.png"
+    },
+    {
+      "id": "throne",
+      "name": "Crown Relay Chamber",
+      "zone": "throne",
+      "image": "/stages/higgsfield/throne.png"
+    },
+    {
+      "id": "castle",
+      "name": "Moonkeep Castle",
+      "zone": "throne",
+      "image": "/stages/higgsfield/castle.png"
+    },
+    {
+      "id": "bar",
+      "name": "Last Light Bar",
+      "zone": "bar",
+      "image": "/stages/higgsfield/bar.png"
+    },
+    {
+      "id": "verse",
+      "name": "Verse Gate",
+      "zone": "verse",
+      "image": "/stages/higgsfield/verse.png"
+    },
+    {
+      "id": "hatchery",
+      "name": "The Hatchery",
+      "zone": "hatchery",
+      "image": "/stages/higgsfield/hatchery.png"
+    },
+    {
+      "id": "ranch",
+      "name": "Sproto Ranch",
+      "zone": "ranch",
+      "image": "/stages/higgsfield/ranch.png"
+    },
+    {
+      "id": "rainworks",
+      "name": "Rainworks Spillway",
+      "zone": "trenches",
+      "image": "/stages/higgsfield/rainworks.png"
+    },
+    {
+      "id": "scrapyard",
+      "name": "Copperbone Scrapyard",
+      "zone": "trenches",
+      "image": "/stages/higgsfield/scrapyard.png"
+    },
+    {
+      "id": "skyrail",
+      "name": "Skyrail Junction",
+      "zone": "circuit",
+      "image": "/stages/higgsfield/skyrail.png"
+    },
+    {
+      "id": "nightmarket",
+      "name": "Neon Night Market",
+      "zone": "circuit",
+      "image": "/stages/higgsfield/nightmarket.png"
+    },
+    {
+      "id": "sundeck",
+      "name": "Gilded Sun Deck",
+      "zone": "yacht",
+      "image": "/stages/higgsfield/sundeck.png"
+    },
+    {
+      "id": "drydock",
+      "name": "Moonlit Dry Dock",
+      "zone": "yacht",
+      "image": "/stages/higgsfield/drydock.png"
+    },
+    {
+      "id": "glassgarden",
+      "name": "Royal Glass Garden",
+      "zone": "throne",
+      "image": "/stages/higgsfield/glassgarden.png"
+    },
+    {
+      "id": "chainforge",
+      "name": "Crown Chainforge",
+      "zone": "throne",
+      "image": "/stages/higgsfield/chainforge.png"
+    },
+    {
+      "id": "cellar",
+      "name": "Bottle Vault Cellar",
+      "zone": "bar",
+      "image": "/stages/higgsfield/cellar.png"
+    },
+    {
+      "id": "rooftop",
+      "name": "Oakshade Patio",
+      "zone": "bar",
+      "image": "/stages/higgsfield/rooftop.png"
+    },
+    {
+      "id": "starbridge",
+      "name": "Prismatic Starbridge",
+      "zone": "verse",
+      "image": "/stages/higgsfield/starbridge.png"
+    },
+    {
+      "id": "observatory",
+      "name": "Event Horizon Observatory",
+      "zone": "verse",
+      "image": "/stages/higgsfield/observatory.png"
+    },
+    {
+      "id": "sporegrove",
+      "name": "Bioluminescent Spore Grove",
+      "zone": "hatchery",
+      "image": "/stages/higgsfield/sporegrove.png"
+    },
+    {
+      "id": "ambernursery",
+      "name": "Amber Egg Cathedral",
+      "zone": "hatchery",
+      "image": "/stages/higgsfield/ambernursery.png"
+    },
+    {
+      "id": "rustcanal",
+      "name": "Rustwater Canal",
+      "zone": "trenches",
+      "image": "/stages/higgsfield/rustcanal.png"
+    },
+    {
+      "id": "ashstation",
+      "name": "Ashfall Pump Station",
+      "zone": "trenches",
+      "image": "/stages/higgsfield/ashstation.png"
+    },
+    {
+      "id": "culvertgarden",
+      "name": "Culvert Wildgarden",
+      "zone": "trenches",
+      "image": "/stages/higgsfield/culvertgarden.png"
+    },
+    {
+      "id": "datavault",
+      "name": "Municipal Data Vault",
+      "zone": "circuit",
+      "image": "/stages/higgsfield/datavault.png"
+    },
+    {
+      "id": "ionplaza",
+      "name": "Ion Fountain Plaza",
+      "zone": "circuit",
+      "image": "/stages/higgsfield/ionplaza.png"
+    },
+    {
+      "id": "stormarcade",
+      "name": "Stormlit Arcade",
+      "zone": "circuit",
+      "image": "/stages/higgsfield/stormarcade.png"
+    },
+    {
+      "id": "coralsalon",
+      "name": "Coral Glass Salon",
+      "zone": "yacht",
+      "image": "/stages/higgsfield/coralsalon.png"
+    },
+    {
+      "id": "helipad",
+      "name": "Oceanwind Helipad",
+      "zone": "yacht",
+      "image": "/stages/higgsfield/helipad.png"
+    },
+    {
+      "id": "regatta",
+      "name": "Regatta Anchorage",
+      "zone": "yacht",
+      "image": "/stages/higgsfield/regatta.png"
+    },
+    {
+      "id": "lunarchapel",
+      "name": "Lunar Relay Chapel",
+      "zone": "throne",
+      "image": "/stages/higgsfield/lunarchapel.png"
+    },
+    {
+      "id": "royallibrary",
+      "name": "Clockwork Royal Library",
+      "zone": "throne",
+      "image": "/stages/higgsfield/royallibrary.png"
+    },
+    {
+      "id": "frostbastion",
+      "name": "Frostglass Bastion",
+      "zone": "throne",
+      "image": "/stages/higgsfield/frostbastion.png"
+    },
+    {
+      "id": "backstage",
+      "name": "Mural Games Room",
+      "zone": "bar",
+      "image": "/stages/higgsfield/backstage.png"
+    },
+    {
+      "id": "lanterncourt",
+      "name": "Treehouse Club Exterior",
+      "zone": "bar",
+      "image": "/stages/higgsfield/lanterncourt.png"
+    },
+    {
+      "id": "aquariumbar",
+      "name": "Neon Mural Lounge",
+      "zone": "bar",
+      "image": "/stages/higgsfield/aquariumbar.png"
+    },
+    {
+      "id": "gravityarchive",
+      "name": "Gravity Archive",
+      "zone": "verse",
+      "image": "/stages/higgsfield/gravityarchive.png"
+    },
+    {
+      "id": "auroragate",
+      "name": "Aurora Gate Terrace",
+      "zone": "verse",
+      "image": "/stages/higgsfield/auroragate.png"
+    },
+    {
+      "id": "sundial",
+      "name": "Shattered Sun Dial",
+      "zone": "verse",
+      "image": "/stages/higgsfield/sundial.png"
+    },
+    {
+      "id": "pearlchamber",
+      "name": "Pearl Incubation Chamber",
+      "zone": "hatchery",
+      "image": "/stages/higgsfield/pearlchamber.png"
+    },
+    {
+      "id": "rootreservoir",
+      "name": "Root Reservoir",
+      "zone": "hatchery",
+      "image": "/stages/higgsfield/rootreservoir.png"
+    },
+    {
+      "id": "moltinghall",
+      "name": "Molting Hall",
+      "zone": "hatchery",
+      "image": "/stages/higgsfield/moltinghall.png"
+    },
+    {
+      "id": "bluebar",
+      "name": "Blue Terrace Bar",
+      "zone": "bar",
+      "image": "/stages/higgsfield/bluebar.png"
+    },
+    {
+      "id": "00-trenches-drainage-floodgate",
+      "name": "Drainage floodgate",
+      "zone": "trenches",
+      "image": "/stages/variations-v2/trenches/00-trenches-drainage-floodgate.png"
+    },
+    {
+      "id": "01-trenches-sun-baked-scrapworks",
+      "name": "Sun-baked scrapworks",
+      "zone": "trenches",
+      "image": "/stages/variations-v2/trenches/01-trenches-sun-baked-scrapworks.png"
+    },
+    {
+      "id": "02-trenches-canal-underpass",
+      "name": "Canal underpass",
+      "zone": "trenches",
+      "image": "/stages/variations-v2/trenches/02-trenches-canal-underpass.png"
+    },
+    {
+      "id": "03-circuit-checkpoint-lockdown",
+      "name": "Checkpoint lockdown",
+      "zone": "circuit",
+      "image": "/stages/variations-v2/circuit/03-circuit-checkpoint-lockdown.png"
+    },
+    {
+      "id": "04-circuit-daylight-maglev-terminal",
+      "name": "Daylight maglev terminal",
+      "zone": "circuit",
+      "image": "/stages/variations-v2/circuit/04-circuit-daylight-maglev-terminal.png"
+    },
+    {
+      "id": "05-circuit-underground-control-bunker",
+      "name": "Underground control bunker",
+      "zone": "circuit",
+      "image": "/stages/variations-v2/circuit/05-circuit-underground-control-bunker.png"
+    },
+    {
+      "id": "06-midnight-market-alley",
+      "name": "Midnight market alley",
+      "zone": "circuit",
+      "image": "/stages/variations-v2/retro/06-midnight-market-alley.png"
+    },
+    {
+      "id": "07-antenna-rooftop-at-dawn",
+      "name": "Antenna rooftop at dawn",
+      "zone": "circuit",
+      "image": "/stages/variations-v2/retro/07-antenna-rooftop-at-dawn.png"
+    },
+    {
+      "id": "08-night-transit-tunnel",
+      "name": "Night transit tunnel",
+      "zone": "circuit",
+      "image": "/stages/variations-v2/retro/08-night-transit-tunnel.png"
+    },
+    {
+      "id": "09-sunlit-cargo-pier",
+      "name": "Sunlit cargo pier",
+      "zone": "yacht",
+      "image": "/stages/variations-v2/yacht/09-sunlit-cargo-pier.png"
+    },
+    {
+      "id": "10-upper-deck-in-a-storm",
+      "name": "Upper deck in a storm",
+      "zone": "yacht",
+      "image": "/stages/variations-v2/yacht/10-upper-deck-in-a-storm.png"
+    },
+    {
+      "id": "11-grand-salon-after-dark",
+      "name": "Grand salon after dark",
+      "zone": "yacht",
+      "image": "/stages/variations-v2/yacht/11-grand-salon-after-dark.png"
+    },
+    {
+      "id": "12-throne-furnace-relay-vault",
+      "name": "Furnace relay vault",
+      "zone": "throne",
+      "image": "/stages/variations-v2/throne/12-throne-furnace-relay-vault.png"
+    },
+    {
+      "id": "13-throne-power-conduit-gallery",
+      "name": "Power conduit gallery",
+      "zone": "throne",
+      "image": "/stages/variations-v2/throne/13-throne-power-conduit-gallery.png"
+    },
+    {
+      "id": "14-throne-broken-crown-sanctuary",
+      "name": "Broken crown sanctuary",
+      "zone": "throne",
+      "image": "/stages/variations-v2/throne/14-throne-broken-crown-sanctuary.png"
+    },
+    {
+      "id": "15-castle-stained-glass-great-hall",
+      "name": "Stained-glass great hall",
+      "zone": "throne",
+      "image": "/stages/variations-v2/castle/15-castle-stained-glass-great-hall.png"
+    },
+    {
+      "id": "16-castle-smoky-armory-forge",
+      "name": "Smoky armory forge",
+      "zone": "throne",
+      "image": "/stages/variations-v2/castle/16-castle-smoky-armory-forge.png"
+    },
+    {
+      "id": "17-castle-snow-swept-battlements",
+      "name": "Snow-swept battlements",
+      "zone": "throne",
+      "image": "/stages/variations-v2/castle/17-castle-snow-swept-battlements.png"
+    },
+    {
+      "id": "18-verse-red-sun-asteroid-causeway",
+      "name": "Red-sun asteroid causeway",
+      "zone": "verse",
+      "image": "/stages/variations-v2/verse/18-verse-red-sun-asteroid-causeway.png"
+    },
+    {
+      "id": "19-verse-cosmic-crystal-cavern",
+      "name": "Cosmic crystal cavern",
+      "zone": "verse",
+      "image": "/stages/variations-v2/verse/19-verse-cosmic-crystal-cavern.png"
+    },
+    {
+      "id": "20-verse-beyond-the-dimensional-sea",
+      "name": "Beyond the dimensional sea",
+      "zone": "verse",
+      "image": "/stages/variations-v2/verse/20-verse-beyond-the-dimensional-sea.png"
+    },
+    {
+      "id": "21-ranch-lantern-lit-barn",
+      "name": "Lantern-lit barn",
+      "zone": "ranch",
+      "image": "/stages/variations-v2/ranch/21-ranch-lantern-lit-barn.png"
+    },
+    {
+      "id": "22-ranch-green-paddock-at-midday",
+      "name": "Green paddock at midday",
+      "zone": "ranch",
+      "image": "/stages/variations-v2/ranch/22-ranch-green-paddock-at-midday.png"
+    },
+    {
+      "id": "23-ranch-dusty-farmhouse-yard",
+      "name": "Dusty farmhouse yard",
+      "zone": "ranch",
+      "image": "/stages/variations-v2/ranch/23-ranch-dusty-farmhouse-yard.png"
+    }
+  ],
+  "storyBouts": [
+    {
+      "encounter": "story-v1-zephyr",
+      "bout": 0,
+      "opponent": "zephyr",
+      "location": "00-trenches-drainage-floodgate",
+      "image": "/stages/variations-v2/trenches/00-trenches-drainage-floodgate.png"
+    },
+    {
+      "encounter": "story-v1-mox",
+      "bout": 0,
+      "opponent": "mox",
+      "location": "00-trenches-drainage-floodgate",
+      "image": "/stages/variations-v2/trenches/00-trenches-drainage-floodgate.png"
+    },
+    {
+      "encounter": "story-v1-rune",
+      "bout": 0,
+      "opponent": "rune",
+      "location": "01-trenches-sun-baked-scrapworks",
+      "image": "/stages/variations-v2/trenches/01-trenches-sun-baked-scrapworks.png"
+    },
+    {
+      "encounter": "story-v1-guest08",
+      "bout": 0,
+      "opponent": "guest08",
+      "location": "01-trenches-sun-baked-scrapworks",
+      "image": "/stages/variations-v2/trenches/01-trenches-sun-baked-scrapworks.png"
+    },
+    {
+      "encounter": "story-v1-guest09",
+      "bout": 0,
+      "opponent": "guest09",
+      "location": "02-trenches-canal-underpass",
+      "image": "/stages/variations-v2/trenches/02-trenches-canal-underpass.png"
+    },
+    {
+      "encounter": "story-v1-guest10",
+      "bout": 0,
+      "opponent": "guest10",
+      "location": "02-trenches-canal-underpass",
+      "image": "/stages/variations-v2/trenches/02-trenches-canal-underpass.png"
+    },
+    {
+      "encounter": "story-v1-guest11",
+      "bout": 0,
+      "opponent": "guest11",
+      "location": "21-ranch-lantern-lit-barn",
+      "image": "/stages/variations-v2/ranch/21-ranch-lantern-lit-barn.png"
+    },
+    {
+      "encounter": "story-v1-guest12",
+      "bout": 0,
+      "opponent": "guest12",
+      "location": "21-ranch-lantern-lit-barn",
+      "image": "/stages/variations-v2/ranch/21-ranch-lantern-lit-barn.png"
+    },
+    {
+      "encounter": "story-v1-guest13",
+      "bout": 0,
+      "opponent": "guest13",
+      "location": "22-ranch-green-paddock-at-midday",
+      "image": "/stages/variations-v2/ranch/22-ranch-green-paddock-at-midday.png"
+    },
+    {
+      "encounter": "story-v1-guest14",
+      "bout": 0,
+      "opponent": "guest14",
+      "location": "22-ranch-green-paddock-at-midday",
+      "image": "/stages/variations-v2/ranch/22-ranch-green-paddock-at-midday.png"
+    },
+    {
+      "encounter": "story-v1-dumpstar",
+      "bout": 0,
+      "opponent": "dumpstar",
+      "location": "23-ranch-dusty-farmhouse-yard",
+      "image": "/stages/variations-v2/ranch/23-ranch-dusty-farmhouse-yard.png"
+    },
+    {
+      "encounter": "story-v1-crapto",
+      "bout": 0,
+      "opponent": "crapto",
+      "location": "zone-variety-rainworks",
+      "image": "/stages/higgsfield/rainworks.png"
+    },
+    {
+      "encounter": "story-v1-vamp",
+      "bout": 0,
+      "opponent": "vamp",
+      "location": "zone-variety-rainworks",
+      "image": "/stages/higgsfield/rainworks.png"
+    },
+    {
+      "encounter": "story-v1-alpha777",
+      "bout": 0,
+      "opponent": "alpha777",
+      "location": "zone-variety-scrapyard",
+      "image": "/stages/higgsfield/scrapyard.png"
+    },
+    {
+      "encounter": "story-v1-mandela",
+      "bout": 0,
+      "opponent": "mandela",
+      "location": "zone-variety-scrapyard",
+      "image": "/stages/higgsfield/scrapyard.png"
+    },
+    {
+      "encounter": "story-v1-bigswole",
+      "bout": 0,
+      "opponent": "bigswole",
+      "location": "zone-variety-rustcanal",
+      "image": "/stages/higgsfield/rustcanal.png"
+    },
+    {
+      "encounter": "story-v1-nate",
+      "bout": 0,
+      "opponent": "nate",
+      "location": "zone-variety-rustcanal",
+      "image": "/stages/higgsfield/rustcanal.png"
+    },
+    {
+      "encounter": "story-v1-captain",
+      "bout": 0,
+      "opponent": "captain",
+      "location": "zone-variety-ashstation",
+      "image": "/stages/higgsfield/ashstation.png"
+    },
+    {
+      "encounter": "story-v1-erik",
+      "bout": 0,
+      "opponent": "erik",
+      "location": "zone-variety-ashstation",
+      "image": "/stages/higgsfield/ashstation.png"
+    },
+    {
+      "encounter": "story-v1-bimba",
+      "bout": 0,
+      "opponent": "bimba",
+      "location": "zone-variety-culvertgarden",
+      "image": "/stages/higgsfield/culvertgarden.png"
+    },
+    {
+      "encounter": "story-v1-gpm",
+      "bout": 0,
+      "opponent": "gpm",
+      "location": "03-circuit-checkpoint-lockdown",
+      "image": "/stages/variations-v2/circuit/03-circuit-checkpoint-lockdown.png"
+    },
+    {
+      "encounter": "story-v1-leviosa",
+      "bout": 0,
+      "opponent": "leviosa",
+      "location": "03-circuit-checkpoint-lockdown",
+      "image": "/stages/variations-v2/circuit/03-circuit-checkpoint-lockdown.png"
+    },
+    {
+      "encounter": "story-v1-lifeisameme",
+      "bout": 0,
+      "opponent": "lifeisameme",
+      "location": "05-circuit-underground-control-bunker",
+      "image": "/stages/variations-v2/circuit/05-circuit-underground-control-bunker.png"
+    },
+    {
+      "encounter": "story-v1-thxobama",
+      "bout": 0,
+      "opponent": "thxobama",
+      "location": "05-circuit-underground-control-bunker",
+      "image": "/stages/variations-v2/circuit/05-circuit-underground-control-bunker.png"
+    },
+    {
+      "encounter": "story-v1-rlarsson",
+      "bout": 0,
+      "opponent": "rlarsson",
+      "location": "04-circuit-daylight-maglev-terminal",
+      "image": "/stages/variations-v2/circuit/04-circuit-daylight-maglev-terminal.png"
+    },
+    {
+      "encounter": "story-v1-blorfo",
+      "bout": 0,
+      "opponent": "blorfo",
+      "location": "04-circuit-daylight-maglev-terminal",
+      "image": "/stages/variations-v2/circuit/04-circuit-daylight-maglev-terminal.png"
+    },
+    {
+      "encounter": "story-v1-michael",
+      "bout": 0,
+      "opponent": "michael",
+      "location": "08-night-transit-tunnel",
+      "image": "/stages/variations-v2/retro/08-night-transit-tunnel.png"
+    },
+    {
+      "encounter": "story-v1-freshprince",
+      "bout": 0,
+      "opponent": "freshprince",
+      "location": "08-night-transit-tunnel",
+      "image": "/stages/variations-v2/retro/08-night-transit-tunnel.png"
+    },
+    {
+      "encounter": "story-v1-mlk",
+      "bout": 0,
+      "opponent": "mlk",
+      "location": "06-midnight-market-alley",
+      "image": "/stages/variations-v2/retro/06-midnight-market-alley.png"
+    },
+    {
+      "encounter": "story-v1-sproto102",
+      "bout": 0,
+      "opponent": "sproto102",
+      "location": "06-midnight-market-alley",
+      "image": "/stages/variations-v2/retro/06-midnight-market-alley.png"
+    },
+    {
+      "encounter": "story-v1-sproto215",
+      "bout": 0,
+      "opponent": "sproto215",
+      "location": "07-antenna-rooftop-at-dawn",
+      "image": "/stages/variations-v2/retro/07-antenna-rooftop-at-dawn.png"
+    },
+    {
+      "encounter": "story-v1-sproto313",
+      "bout": 0,
+      "opponent": "sproto313",
+      "location": "zone-variety-skyrail",
+      "image": "/stages/higgsfield/skyrail.png"
+    },
+    {
+      "encounter": "story-v1-sproto651",
+      "bout": 0,
+      "opponent": "sproto651",
+      "location": "zone-variety-skyrail",
+      "image": "/stages/higgsfield/skyrail.png"
+    },
+    {
+      "encounter": "story-v1-sproto763",
+      "bout": 0,
+      "opponent": "sproto763",
+      "location": "zone-variety-nightmarket",
+      "image": "/stages/higgsfield/nightmarket.png"
+    },
+    {
+      "encounter": "story-v1-sproto818",
+      "bout": 0,
+      "opponent": "sproto818",
+      "location": "zone-variety-nightmarket",
+      "image": "/stages/higgsfield/nightmarket.png"
+    },
+    {
+      "encounter": "story-v1-sproto831",
+      "bout": 0,
+      "opponent": "sproto831",
+      "location": "zone-variety-datavault",
+      "image": "/stages/higgsfield/datavault.png"
+    },
+    {
+      "encounter": "story-v1-sproto834",
+      "bout": 0,
+      "opponent": "sproto834",
+      "location": "zone-variety-datavault",
+      "image": "/stages/higgsfield/datavault.png"
+    },
+    {
+      "encounter": "story-v1-sproto837",
+      "bout": 0,
+      "opponent": "sproto837",
+      "location": "zone-variety-ionplaza",
+      "image": "/stages/higgsfield/ionplaza.png"
+    },
+    {
+      "encounter": "story-v1-sproto999",
+      "bout": 0,
+      "opponent": "sproto999",
+      "location": "zone-variety-ionplaza",
+      "image": "/stages/higgsfield/ionplaza.png"
+    },
+    {
+      "encounter": "story-v1-sproto1011",
+      "bout": 0,
+      "opponent": "sproto1011",
+      "location": "zone-variety-stormarcade",
+      "image": "/stages/higgsfield/stormarcade.png"
+    },
+    {
+      "encounter": "story-v1-sproto1093",
+      "bout": 0,
+      "opponent": "sproto1093",
+      "location": "09-sunlit-cargo-pier",
+      "image": "/stages/variations-v2/yacht/09-sunlit-cargo-pier.png"
+    },
+    {
+      "encounter": "story-v1-sproto1187",
+      "bout": 0,
+      "opponent": "sproto1187",
+      "location": "09-sunlit-cargo-pier",
+      "image": "/stages/variations-v2/yacht/09-sunlit-cargo-pier.png"
+    },
+    {
+      "encounter": "story-v1-sproto1335",
+      "bout": 0,
+      "opponent": "sproto1335",
+      "location": "09-sunlit-cargo-pier",
+      "image": "/stages/variations-v2/yacht/09-sunlit-cargo-pier.png"
+    },
+    {
+      "encounter": "story-v1-sproto1345",
+      "bout": 0,
+      "opponent": "sproto1345",
+      "location": "10-upper-deck-in-a-storm",
+      "image": "/stages/variations-v2/yacht/10-upper-deck-in-a-storm.png"
+    },
+    {
+      "encounter": "story-v1-sproto1414",
+      "bout": 0,
+      "opponent": "sproto1414",
+      "location": "10-upper-deck-in-a-storm",
+      "image": "/stages/variations-v2/yacht/10-upper-deck-in-a-storm.png"
+    },
+    {
+      "encounter": "story-v1-sproto1477",
+      "bout": 0,
+      "opponent": "sproto1477",
+      "location": "11-grand-salon-after-dark",
+      "image": "/stages/variations-v2/yacht/11-grand-salon-after-dark.png"
+    },
+    {
+      "encounter": "story-v1-sproto1601",
+      "bout": 0,
+      "opponent": "sproto1601",
+      "location": "11-grand-salon-after-dark",
+      "image": "/stages/variations-v2/yacht/11-grand-salon-after-dark.png"
+    },
+    {
+      "encounter": "story-v1-sproto1668",
+      "bout": 0,
+      "opponent": "sproto1668",
+      "location": "11-grand-salon-after-dark",
+      "image": "/stages/variations-v2/yacht/11-grand-salon-after-dark.png"
+    },
+    {
+      "encounter": "story-v1-sproto1815",
+      "bout": 0,
+      "opponent": "sproto1815",
+      "location": "zone-variety-sundeck",
+      "image": "/stages/higgsfield/sundeck.png"
+    },
+    {
+      "encounter": "story-v1-sproto1870",
+      "bout": 0,
+      "opponent": "sproto1870",
+      "location": "zone-variety-sundeck",
+      "image": "/stages/higgsfield/sundeck.png"
+    },
+    {
+      "encounter": "story-v1-sproto2101",
+      "bout": 0,
+      "opponent": "sproto2101",
+      "location": "zone-variety-drydock",
+      "image": "/stages/higgsfield/drydock.png"
+    },
+    {
+      "encounter": "story-v1-sproto2177",
+      "bout": 0,
+      "opponent": "sproto2177",
+      "location": "zone-variety-drydock",
+      "image": "/stages/higgsfield/drydock.png"
+    },
+    {
+      "encounter": "story-v1-sproto2322",
+      "bout": 0,
+      "opponent": "sproto2322",
+      "location": "zone-variety-drydock",
+      "image": "/stages/higgsfield/drydock.png"
+    },
+    {
+      "encounter": "story-v1-sproto2381",
+      "bout": 0,
+      "opponent": "sproto2381",
+      "location": "zone-variety-coralsalon",
+      "image": "/stages/higgsfield/coralsalon.png"
+    },
+    {
+      "encounter": "story-v1-sproto2531",
+      "bout": 0,
+      "opponent": "sproto2531",
+      "location": "zone-variety-coralsalon",
+      "image": "/stages/higgsfield/coralsalon.png"
+    },
+    {
+      "encounter": "story-v1-sproto2569",
+      "bout": 0,
+      "opponent": "sproto2569",
+      "location": "zone-variety-helipad",
+      "image": "/stages/higgsfield/helipad.png"
+    },
+    {
+      "encounter": "story-v1-sproto2616",
+      "bout": 0,
+      "opponent": "sproto2616",
+      "location": "zone-variety-helipad",
+      "image": "/stages/higgsfield/helipad.png"
+    },
+    {
+      "encounter": "story-v1-sproto2789",
+      "bout": 0,
+      "opponent": "sproto2789",
+      "location": "zone-variety-helipad",
+      "image": "/stages/higgsfield/helipad.png"
+    },
+    {
+      "encounter": "story-v1-sproto2884",
+      "bout": 0,
+      "opponent": "sproto2884",
+      "location": "zone-variety-regatta",
+      "image": "/stages/higgsfield/regatta.png"
+    },
+    {
+      "encounter": "story-v1-sproto3106",
+      "bout": 0,
+      "opponent": "sproto3106",
+      "location": "zone-variety-regatta",
+      "image": "/stages/higgsfield/regatta.png"
+    },
+    {
+      "encounter": "story-v1-sproto3152",
+      "bout": 0,
+      "opponent": "sproto3152",
+      "location": "15-castle-stained-glass-great-hall",
+      "image": "/stages/variations-v2/castle/15-castle-stained-glass-great-hall.png"
+    },
+    {
+      "encounter": "story-v1-sproto3215",
+      "bout": 0,
+      "opponent": "sproto3215",
+      "location": "15-castle-stained-glass-great-hall",
+      "image": "/stages/variations-v2/castle/15-castle-stained-glass-great-hall.png"
+    },
+    {
+      "encounter": "story-v1-uncmasterflex",
+      "bout": 0,
+      "opponent": "uncmasterflex",
+      "location": "16-castle-smoky-armory-forge",
+      "image": "/stages/variations-v2/castle/16-castle-smoky-armory-forge.png"
+    },
+    {
+      "encounter": "story-v1-vitaliketh",
+      "bout": 0,
+      "opponent": "vitaliketh",
+      "location": "16-castle-smoky-armory-forge",
+      "image": "/stages/variations-v2/castle/16-castle-smoky-armory-forge.png"
+    },
+    {
+      "encounter": "story-v1-urmometh",
+      "bout": 0,
+      "opponent": "urmometh",
+      "location": "17-castle-snow-swept-battlements",
+      "image": "/stages/variations-v2/castle/17-castle-snow-swept-battlements.png"
+    },
+    {
+      "encounter": "story-v1-chaton",
+      "bout": 0,
+      "opponent": "chaton",
+      "location": "17-castle-snow-swept-battlements",
+      "image": "/stages/variations-v2/castle/17-castle-snow-swept-battlements.png"
+    },
+    {
+      "encounter": "story-v1-loadthebags",
+      "bout": 0,
+      "opponent": "loadthebags",
+      "location": "12-throne-furnace-relay-vault",
+      "image": "/stages/variations-v2/throne/12-throne-furnace-relay-vault.png"
+    },
+    {
+      "encounter": "story-v1-sisma",
+      "bout": 0,
+      "opponent": "sisma",
+      "location": "12-throne-furnace-relay-vault",
+      "image": "/stages/variations-v2/throne/12-throne-furnace-relay-vault.png"
+    },
+    {
+      "encounter": "story-v1-captainhowdy",
+      "bout": 0,
+      "opponent": "captainhowdy",
+      "location": "13-throne-power-conduit-gallery",
+      "image": "/stages/variations-v2/throne/13-throne-power-conduit-gallery.png"
+    },
+    {
+      "encounter": "story-v1-sprotosales",
+      "bout": 0,
+      "opponent": "sprotosales",
+      "location": "13-throne-power-conduit-gallery",
+      "image": "/stages/variations-v2/throne/13-throne-power-conduit-gallery.png"
+    },
+    {
+      "encounter": "story-v1-sprog",
+      "bout": 0,
+      "opponent": "sprog",
+      "location": "14-throne-broken-crown-sanctuary",
+      "image": "/stages/variations-v2/throne/14-throne-broken-crown-sanctuary.png"
+    },
+    {
+      "encounter": "story-v1-jasper",
+      "bout": 0,
+      "opponent": "jasper",
+      "location": "zone-variety-glassgarden",
+      "image": "/stages/higgsfield/glassgarden.png"
+    },
+    {
+      "encounter": "story-v1-aaron",
+      "bout": 0,
+      "opponent": "aaron",
+      "location": "zone-variety-glassgarden",
+      "image": "/stages/higgsfield/glassgarden.png"
+    },
+    {
+      "encounter": "story-v1-brainsprot",
+      "bout": 0,
+      "opponent": "brainsprot",
+      "location": "zone-variety-chainforge",
+      "image": "/stages/higgsfield/chainforge.png"
+    },
+    {
+      "encounter": "story-v1-sober",
+      "bout": 0,
+      "opponent": "sober",
+      "location": "zone-variety-chainforge",
+      "image": "/stages/higgsfield/chainforge.png"
+    },
+    {
+      "encounter": "story-v1-olnoname",
+      "bout": 0,
+      "opponent": "olnoname",
+      "location": "zone-variety-lunarchapel",
+      "image": "/stages/higgsfield/lunarchapel.png"
+    },
+    {
+      "encounter": "story-v1-greatcharly",
+      "bout": 0,
+      "opponent": "greatcharly",
+      "location": "zone-variety-lunarchapel",
+      "image": "/stages/higgsfield/lunarchapel.png"
+    },
+    {
+      "encounter": "story-v1-reverend",
+      "bout": 0,
+      "opponent": "reverend",
+      "location": "zone-variety-royallibrary",
+      "image": "/stages/higgsfield/royallibrary.png"
+    },
+    {
+      "encounter": "story-v1-sprotopotamus",
+      "bout": 0,
+      "opponent": "sprotopotamus",
+      "location": "zone-variety-royallibrary",
+      "image": "/stages/higgsfield/royallibrary.png"
+    },
+    {
+      "encounter": "story-v1-willuminati",
+      "bout": 0,
+      "opponent": "willuminati",
+      "location": "zone-variety-frostbastion",
+      "image": "/stages/higgsfield/frostbastion.png"
+    },
+    {
+      "encounter": "story-v1-pirate",
+      "bout": 0,
+      "opponent": "pirate",
+      "location": "reference-main-bar",
+      "image": "/stages/higgsfield/bar.png"
+    },
+    {
+      "encounter": "story-v1-prim",
+      "bout": 0,
+      "opponent": "prim",
+      "location": "reference-main-bar",
+      "image": "/stages/higgsfield/bar.png"
+    },
+    {
+      "encounter": "story-v1-benjamin",
+      "bout": 0,
+      "opponent": "benjamin",
+      "location": "reference-main-bar",
+      "image": "/stages/higgsfield/bar.png"
+    },
+    {
+      "encounter": "story-v1-maxbiggums",
+      "bout": 0,
+      "opponent": "maxbiggums",
+      "location": "zone-variety-cellar",
+      "image": "/stages/higgsfield/cellar.png"
+    },
+    {
+      "encounter": "story-v1-xav",
+      "bout": 0,
+      "opponent": "xav",
+      "location": "zone-variety-cellar",
+      "image": "/stages/higgsfield/cellar.png"
+    },
+    {
+      "encounter": "story-v1-emix",
+      "bout": 0,
+      "opponent": "emix",
+      "location": "zone-variety-cellar",
+      "image": "/stages/higgsfield/cellar.png"
+    },
+    {
+      "encounter": "story-v1-anni",
+      "bout": 0,
+      "opponent": "anni",
+      "location": "zone-variety-rooftop",
+      "image": "/stages/higgsfield/rooftop.png"
+    },
+    {
+      "encounter": "story-v1-pinewaffle",
+      "bout": 0,
+      "opponent": "pinewaffle",
+      "location": "zone-variety-rooftop",
+      "image": "/stages/higgsfield/rooftop.png"
+    },
+    {
+      "encounter": "story-v1-rainman",
+      "bout": 0,
+      "opponent": "rainman",
+      "location": "zone-variety-rooftop",
+      "image": "/stages/higgsfield/rooftop.png"
+    },
+    {
+      "encounter": "story-v1-wifebeater",
+      "bout": 0,
+      "opponent": "wifebeater",
+      "location": "zone-variety-backstage",
+      "image": "/stages/higgsfield/backstage.png"
+    },
+    {
+      "encounter": "story-v1-fiatfudder",
+      "bout": 0,
+      "opponent": "fiatfudder",
+      "location": "zone-variety-backstage",
+      "image": "/stages/higgsfield/backstage.png"
+    },
+    {
+      "encounter": "story-v1-moonshiller",
+      "bout": 0,
+      "opponent": "moonshiller",
+      "location": "zone-variety-backstage",
+      "image": "/stages/higgsfield/backstage.png"
+    },
+    {
+      "encounter": "story-v1-godether",
+      "bout": 0,
+      "opponent": "godether",
+      "location": "zone-variety-lanterncourt",
+      "image": "/stages/higgsfield/lanterncourt.png"
+    },
+    {
+      "encounter": "story-v1-aleksander",
+      "bout": 0,
+      "opponent": "aleksander",
+      "location": "zone-variety-lanterncourt",
+      "image": "/stages/higgsfield/lanterncourt.png"
+    },
+    {
+      "encounter": "story-v1-cyberviber",
+      "bout": 0,
+      "opponent": "cyberviber",
+      "location": "zone-variety-lanterncourt",
+      "image": "/stages/higgsfield/lanterncourt.png"
+    },
+    {
+      "encounter": "story-v1-realityarchitect",
+      "bout": 0,
+      "opponent": "realityarchitect",
+      "location": "zone-variety-aquariumbar",
+      "image": "/stages/higgsfield/aquariumbar.png"
+    },
+    {
+      "encounter": "story-v1-mrgoldrobe",
+      "bout": 0,
+      "opponent": "mrgoldrobe",
+      "location": "zone-variety-aquariumbar",
+      "image": "/stages/higgsfield/aquariumbar.png"
+    },
+    {
+      "encounter": "story-v1-sproteth",
+      "bout": 0,
+      "opponent": "sproteth",
+      "location": "zone-variety-aquariumbar",
+      "image": "/stages/higgsfield/aquariumbar.png"
+    },
+    {
+      "encounter": "story-v1-danocrypto",
+      "bout": 0,
+      "opponent": "danocrypto",
+      "location": "zone-variety-bluebar",
+      "image": "/stages/higgsfield/bluebar.png"
+    },
+    {
+      "encounter": "story-v1-buddhashadow",
+      "bout": 0,
+      "opponent": "buddhashadow",
+      "location": "zone-variety-bluebar",
+      "image": "/stages/higgsfield/bluebar.png"
+    },
+    {
+      "encounter": "story-v1-sproto282",
+      "bout": 0,
+      "opponent": "sproto282",
+      "location": "18-verse-red-sun-asteroid-causeway",
+      "image": "/stages/variations-v2/verse/18-verse-red-sun-asteroid-causeway.png"
+    },
+    {
+      "encounter": "story-v1-sproto704",
+      "bout": 0,
+      "opponent": "sproto704",
+      "location": "18-verse-red-sun-asteroid-causeway",
+      "image": "/stages/variations-v2/verse/18-verse-red-sun-asteroid-causeway.png"
+    },
+    {
+      "encounter": "story-v1-sproto832",
+      "bout": 0,
+      "opponent": "sproto832",
+      "location": "18-verse-red-sun-asteroid-causeway",
+      "image": "/stages/variations-v2/verse/18-verse-red-sun-asteroid-causeway.png"
+    },
+    {
+      "encounter": "story-v1-sproto1499",
+      "bout": 0,
+      "opponent": "sproto1499",
+      "location": "18-verse-red-sun-asteroid-causeway",
+      "image": "/stages/variations-v2/verse/18-verse-red-sun-asteroid-causeway.png"
+    },
+    {
+      "encounter": "story-v1-sproto1625",
+      "bout": 0,
+      "opponent": "sproto1625",
+      "location": "19-verse-cosmic-crystal-cavern",
+      "image": "/stages/variations-v2/verse/19-verse-cosmic-crystal-cavern.png"
+    },
+    {
+      "encounter": "story-v1-sproto2010",
+      "bout": 0,
+      "opponent": "sproto2010",
+      "location": "19-verse-cosmic-crystal-cavern",
+      "image": "/stages/variations-v2/verse/19-verse-cosmic-crystal-cavern.png"
+    },
+    {
+      "encounter": "story-v1-sproto2075",
+      "bout": 0,
+      "opponent": "sproto2075",
+      "location": "19-verse-cosmic-crystal-cavern",
+      "image": "/stages/variations-v2/verse/19-verse-cosmic-crystal-cavern.png"
+    },
+    {
+      "encounter": "story-v1-sproto2210",
+      "bout": 0,
+      "opponent": "sproto2210",
+      "location": "20-verse-beyond-the-dimensional-sea",
+      "image": "/stages/variations-v2/verse/20-verse-beyond-the-dimensional-sea.png"
+    },
+    {
+      "encounter": "story-v1-sproto2344",
+      "bout": 0,
+      "opponent": "sproto2344",
+      "location": "20-verse-beyond-the-dimensional-sea",
+      "image": "/stages/variations-v2/verse/20-verse-beyond-the-dimensional-sea.png"
+    },
+    {
+      "encounter": "story-v1-sproto3181",
+      "bout": 0,
+      "opponent": "sproto3181",
+      "location": "20-verse-beyond-the-dimensional-sea",
+      "image": "/stages/variations-v2/verse/20-verse-beyond-the-dimensional-sea.png"
+    },
+    {
+      "encounter": "story-v1-sproto3224",
+      "bout": 0,
+      "opponent": "sproto3224",
+      "location": "zone-variety-starbridge",
+      "image": "/stages/higgsfield/starbridge.png"
+    },
+    {
+      "encounter": "story-v1-sproto3235",
+      "bout": 0,
+      "opponent": "sproto3235",
+      "location": "zone-variety-starbridge",
+      "image": "/stages/higgsfield/starbridge.png"
+    },
+    {
+      "encounter": "story-v1-gryph",
+      "bout": 0,
+      "opponent": "gryph",
+      "location": "zone-variety-starbridge",
+      "image": "/stages/higgsfield/starbridge.png"
+    },
+    {
+      "encounter": "story-v1-godmod3d",
+      "bout": 0,
+      "opponent": "godmod3d",
+      "location": "zone-variety-observatory",
+      "image": "/stages/higgsfield/observatory.png"
+    },
+    {
+      "encounter": "story-v1-nosmileclown",
+      "bout": 0,
+      "opponent": "nosmileclown",
+      "location": "zone-variety-observatory",
+      "image": "/stages/higgsfield/observatory.png"
+    },
+    {
+      "encounter": "story-v1-duo",
+      "bout": 0,
+      "opponent": "duo",
+      "location": "zone-variety-observatory",
+      "image": "/stages/higgsfield/observatory.png"
+    },
+    {
+      "encounter": "story-v1-zepump",
+      "bout": 0,
+      "opponent": "zepump",
+      "location": "zone-variety-gravityarchive",
+      "image": "/stages/higgsfield/gravityarchive.png"
+    },
+    {
+      "encounter": "story-v1-peterpan",
+      "bout": 0,
+      "opponent": "peterpan",
+      "location": "zone-variety-gravityarchive",
+      "image": "/stages/higgsfield/gravityarchive.png"
+    },
+    {
+      "encounter": "story-v1-solanadelray",
+      "bout": 0,
+      "opponent": "solanadelray",
+      "location": "zone-variety-gravityarchive",
+      "image": "/stages/higgsfield/gravityarchive.png"
+    },
+    {
+      "encounter": "story-v1-satoshi",
+      "bout": 0,
+      "opponent": "satoshi",
+      "location": "zone-variety-auroragate",
+      "image": "/stages/higgsfield/auroragate.png"
+    },
+    {
+      "encounter": "story-v1-xalt",
+      "bout": 0,
+      "opponent": "xalt",
+      "location": "zone-variety-auroragate",
+      "image": "/stages/higgsfield/auroragate.png"
+    },
+    {
+      "encounter": "story-v1-potocaicai",
+      "bout": 0,
+      "opponent": "potocaicai",
+      "location": "zone-variety-auroragate",
+      "image": "/stages/higgsfield/auroragate.png"
+    },
+    {
+      "encounter": "story-v1-rivet",
+      "bout": 0,
+      "opponent": "rivet",
+      "location": "zone-variety-sundial",
+      "image": "/stages/higgsfield/sundial.png"
+    },
+    {
+      "encounter": "story-v3-gauntlet-sproto865+sproto943",
+      "bout": 0,
+      "opponent": "sproto865",
+      "location": "zone-variety-sundial",
+      "image": "/stages/higgsfield/sundial.png"
+    },
+    {
+      "encounter": "story-v3-gauntlet-sproto865+sproto943",
+      "bout": 1,
+      "opponent": "sproto943",
+      "location": "zone-variety-sundial",
+      "image": "/stages/higgsfield/sundial.png"
+    },
+    {
+      "encounter": "story-v3-gauntlet-nick+guest07",
+      "bout": 0,
+      "opponent": "nick",
+      "location": "zone-variety-sporegrove",
+      "image": "/stages/higgsfield/sporegrove.png"
+    },
+    {
+      "encounter": "story-v3-gauntlet-nick+guest07",
+      "bout": 1,
+      "opponent": "guest07",
+      "location": "zone-variety-ambernursery",
+      "image": "/stages/higgsfield/ambernursery.png"
+    },
+    {
+      "encounter": "story-v3-gauntlet-vela+vaudream",
+      "bout": 0,
+      "opponent": "vela",
+      "location": "zone-variety-rootreservoir",
+      "image": "/stages/higgsfield/rootreservoir.png"
+    },
+    {
+      "encounter": "story-v3-gauntlet-vela+vaudream",
+      "bout": 1,
+      "opponent": "vaudream",
+      "location": "zone-variety-moltinghall",
+      "image": "/stages/higgsfield/moltinghall.png"
+    }
+  ],
+  "unusedStoryLocations": [
+    "zone-variety-pearlchamber"
+  ],
+  "browserVerified": false
+}
