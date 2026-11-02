@@ -422,3 +422,8 @@ dialog { overflow-y: auto; }
   .story-slate { padding: 18px; }
   .story-slate strong { font-size: clamp(23px,7vw,32px); }
 }
+
+/* Stage selection: zone families first, local variations second. */
+.variation-heading{margin-top:16px;margin-bottom:9px}
+#zone-stage-count{font-size:10px;letter-spacing:1px;color:#c4b187;white-space:nowrap}
+#zone-rail .zone-choice{height:76px}
