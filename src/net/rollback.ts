@@ -49,6 +49,8 @@ export class RollbackSession<E = never> {
   lastRollback = 0;
   totalRollbackFrames = 0;
   desync: Desync | null = null;
+  /** Both players' inputs for every confirmed frame, in slot order: the match log. */
+  readonly confirmedInputs: [number, number][] = [];
 
   private readonly localInputs = new Map<number, number>();
   private readonly remoteInputs = new Map<number, number>();
@@ -58,6 +60,7 @@ export class RollbackSession<E = never> {
   private readonly localChecksums = new Map<number, number>();
   private readonly remoteChecksums = new Map<number, number>();
   private nextLocalFrame: number;
+  private serverStreamed = 0;
   private rollbackFrom: number | null = null;
 
   constructor(readonly state: CombatState, options: RollbackOptions, private readonly observer?: FrameObserver<E>,
@@ -76,6 +79,13 @@ export class RollbackSession<E = never> {
     const f = this.nextLocalFrame++;
     this.localInputs.set(f, mask);
     return f;
+  }
+
+  /** Local inputs not yet streamed to the hub (each frame once, oldest first, at most 120). */
+  takeInputsForServer(): { start: number; masks: number[] } {
+    const start = this.serverStreamed, masks: number[] = [];
+    while (this.serverStreamed < this.nextLocalFrame && masks.length < 120) masks.push(this.localInputs.get(this.serverStreamed++) ?? 0);
+    return { start, masks };
   }
 
   /** Local inputs the remote side has not acknowledged yet, oldest first. */
@@ -198,6 +208,8 @@ export class RollbackSession<E = never> {
     const limit = Math.min(this.remoteFrame, this.frame - 1);
     while (this.confirmedFrame < limit && this.localInputs.has(this.confirmedFrame + 1)) {
       const f = ++this.confirmedFrame;
+      const local = this.localInputs.get(f) ?? 0, remote = this.remoteInputs.get(f) ?? 0;
+      this.confirmedInputs.push(this.options.localSlot === 0 ? [local, remote] : [remote, local]);
       const events = this.pendingEvents.get(f) ?? [];
       this.pendingEvents.delete(f);
       this.onConfirmed?.(f, events);
@@ -210,7 +222,7 @@ export class RollbackSession<E = never> {
     }
     // Keep only what a rollback could still need.
     for (const f of this.snapshots.keys()) if (f < this.confirmedFrame) this.snapshots.delete(f);
-    for (const f of this.localInputs.keys()) if (f < this.confirmedFrame - 64) this.localInputs.delete(f);
+    for (const f of this.localInputs.keys()) if (f < Math.min(this.confirmedFrame - 64, this.serverStreamed)) this.localInputs.delete(f);
     for (const f of this.remoteInputs.keys()) if (f < this.confirmedFrame - 64) this.remoteInputs.delete(f);
     for (const f of this.localChecksums.keys()) if (f < this.confirmedFrame - 600) { this.localChecksums.delete(f); this.sentChecksums.delete(f); }
   }
