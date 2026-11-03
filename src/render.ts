@@ -103,11 +103,13 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     for(const f of s.fighters)if(f.slow>0)text(c,'MELANCHOLY · SLOWED',f.x,f.y-170,9,'#c7a5eb','center',800);
     for (const p of s.projectiles) {
         if(p.shape==='pelvicStream'||p.beamLength)continue;
+        const owner=s.fighters[p.owner];
+        const chestLaser=p.shape==='eyeLaser'&&owner.id==='theo';
         c.save();
         c.translate(p.shape==='retain'?Math.round(p.x):p.x,p.shape==='retain'?Math.round(p.y):p.y);
-        if(p.shape==='miniSproto')c.scale(p.vx<0?-1:1,1);
+        if(p.shape==='miniSproto'||chestLaser)c.scale(p.vx<0?-1:1,1);
         else if(p.shape!=='retain'&&p.shape!=='referenceB'&&p.shape!=='yellowEight'&&p.shape!=='ethereum')c.rotate(Math.atan2(p.vy,p.vx));
-        drawPower(c,p.shape??'spark',p.age??0,ROSTER[s.fighters[p.owner].id].color);
+        drawPower(c,chestLaser?'chestLaser':p.shape??'spark',p.age??0,ROSTER[owner.id].color);
         c.restore();
     }
     drawPelvicAttacks(c,s);
@@ -155,7 +157,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
         if(f.move && f.move.t>0){
-            const aim=f.move.aim,powerShape=COMBAT_STYLES[f.id].projectile.shape;
+            const aim=f.move.aim,powerShape=f.id==='theo'?'chestLaser':COMBAT_STYLES[f.id].projectile.shape;
             const label=f.move.id==='grab'?(f.move.throwDirection??'forward').toUpperCase()+' THROW':f.move.id==='bolt'?(powerShape==='yellowEight'?'YELLOW 8':powerShape.startsWith('signature:')?'RANGED ATTACK':powerShape==='painting'?'PAINTING THROW':powerShape.replace(/([A-Z])/g,' $1').toUpperCase()):aim==='upForward'?'DIAGONAL STRIKE':aim==='up'?'RISING STRIKE':aim==='down'?(f.y<FLOOR?'DIVE STRIKE':'LOW STRIKE'):'';
             if(label&&!(f.id==='michael'&&f.move.id==='bolt'&&f.move.t<38))text(c,label,f.x,f.y-200,10,'#e8e4cc','center',750);
             if(f.move.connected&&f.move.id!=='special'&&f.move.id!=='grab')text(c,f.dashCanceled?'CHAIN READY':'CHAIN / DASH CANCEL',f.x,f.y+35,9,'#b4f8c8','center',750);

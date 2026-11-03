@@ -127,8 +127,10 @@ export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,col
    box((x-8)*2,(y-10)*2,2,2,shell);
   }
  }
- else if(shape==='eyeLaser'){
-  for(const [x,y] of [[-22,-4],[-36,3]]){box(x,y-2,66,4,'#f13d35');box(x+3,y-1,64,2,'#fffbe2');}
+ else if(shape==='eyeLaser'||shape==='chestLaser'){
+  // Theo's two emitters are 20 world units apart and staggered by 5 vertically.
+  const tracks=shape==='chestLaser'?[[-22,0],[-42,5]]:[[-22,-4],[-36,3]];
+  for(const [x,y] of tracks){box(x,y-2,66,4,'#f13d35');box(x+3,y-1,64,2,'#fffbe2');}
  }
  else if(shape==='retain'){
   const font:Record<string,string[]>={R:['11110','10001','10001','11110','10100','10010','10001'],E:['11111','10000','10000','11110','10000','10000','11111'],T:['11111','00100','00100','00100','00100','00100','00100'],A:['01110','10001','10001','11111','10001','10001','10001'],I:['11111','00100','00100','00100','00100','00100','11111'],N:['10001','11001','11001','10101','10011','10011','10001']};

@@ -31,7 +31,7 @@ export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,regi
     if(stages.length<3)throw new Error('Campaign requires at least three story locations.');
     const available=new Set(registered),starters=new Set<PlayableFighterId>(STARTER_FIGHTERS);
     const pinned=CAMPAIGN_RECRUITS.flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
-    const hatchery=['michael','buddhashadow'].flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
+    const hatchery=['michael','buddhashadow','theo'].flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
     const tail=new Set<PlayableFighterId>([...hatchery,...pinned,'rivet','sproto865','sproto943','nick','guest07','vela','vaudream']);
     const relicOnly=new Set<string>(RELIC_ONLY_RECRUITS);
     const ordered=[...new Set([...PREVIOUS_STORY_OPPONENTS,...registered])].filter(id=>available.has(id)&&!starters.has(id)&&!relicOnly.has(id));

@@ -1,9 +1,9 @@
 {
   "date": "2026-11-02",
-  "owners": 131,
-  "singleBodyOwners": 112,
+  "owners": 132,
+  "singleBodyOwners": 113,
   "pairedOwners": 19,
-  "bodyAtlases": 150,
+  "bodyAtlases": 151,
   "everyFrameVisuallyApproved": 0,
   "limits": [
     "Counts use different explicit units; do not add them as comparable frames.",
@@ -6996,6 +6996,32 @@
         "Supplement: active dash/recovery and jump landing frames 40/50 inspected in both facings; no new scale/registration pop in these samples."
       ],
       "record": "docs/evidence/movement-followup-20261102/live-roster-c.json"
+    },
+    {
+      "id": "theo",
+      "name": "Theo",
+      "bodies": [
+        "theo"
+      ],
+      "reviewer": "live-theo",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Chest laser release",
+        "Grounded recoil"
+      ],
+      "observationCount": 3,
+      "countUnit": "inspected browser snapshots",
+      "gaps": [
+        "Browser samples cover laser release in both actual facings and grounded recoil with a mirrored comparison. The rest of the movement and reaction coverage comes from the sprite review and automated runtime checks."
+      ],
+      "findings": [
+        "Both horizontal laser tracks start at the chest marks on release in both actual facings. The sampled recoil frame keeps the supporting boot at floor height."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-theo.json"
     }
   ]
 }

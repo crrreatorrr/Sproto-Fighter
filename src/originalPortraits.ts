@@ -155,6 +155,7 @@ export const originalPortraits:Record<FighterId,string> = {
 /* DANOCRYPTO PORTRAIT END */
 /* BUDDHASHADOW PORTRAIT BEGIN */
  buddhashadow:new URL('../art/buddhashadow/reference.png',import.meta.url).href,
+ theo:new URL('../art/theo/reference.png',import.meta.url).href,
 /* BUDDHASHADOW PORTRAIT END */
  duo:new URL('../art/new-fighter-22/reference/original.png',import.meta.url).href,
  rivet:new URL('../art/references/rivet.png',import.meta.url).href,
