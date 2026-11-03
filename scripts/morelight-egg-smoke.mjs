@@ -1,9 +1,10 @@
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const compile=p=>ts.transpileModule(readFileSync(new URL(p,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const core=await import(url(compile('../src/core.ts'))),art=await import(url(compile('../src/powerArt.ts')));
+const core=await import(url(bundledCore())),art=await import(url(compile('../src/powerArt.ts')));
 const {A,FLOOR,ROSTER,COMBAT_STYLES,isHorizontalSpit,createState,step,getMove}=core;
 assert.equal(ROSTER.vela.name,'Morelight');assert.ok(isHorizontalSpit('vela'));const egg=COMBAT_STYLES.vela.projectile;
 assert.equal(egg.shape,'egg');assert.equal(egg.speed,12);assert.equal(egg.horizontal,true);assert.deepEqual(egg.origin,{forward:59,height:103});

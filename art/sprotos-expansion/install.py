@@ -37,7 +37,7 @@ def install():
     manifest['fighters'].update(configs);manifest['fighters'].pop('sproto313-companion',None);manifest['fighters'].pop('sproto1870-companion',None);manifest['fighters'].pop('sproto999-companion',None);manifest['revision']='sprotos-'+hashlib.sha256(''.join(hashlib.sha256((ROOT/'public'/entry['url'].lstrip('/')).read_bytes()).hexdigest() for cfg in configs.values() for entry in cfg['frames']+cfg['walkFrames']+[f for clip in cfg['clips'].values() for f in clip]).encode()).hexdigest()[:12]
     manifest['fighters'].pop('sproto3181-companion2',None)
     manifest_path.write_text(json.dumps(manifest,indent=2)+'\n')
-    core_path=ROOT/'src/core.ts';core=core_path.read_text()
+    core_path=ROOT/'src/sim/roster.ts';core=core_path.read_text()
     # Existing roster art revisions retain their kits, order and portrait entries.
     for ref in inventory:
         if not ref.get('preserveGameplay'):continue

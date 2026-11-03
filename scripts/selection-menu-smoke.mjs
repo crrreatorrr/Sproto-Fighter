@@ -1,5 +1,6 @@
 // Executes the actual selection controller and main pollPad against a small DOM.
 // No browser, canvas aesthetics or physical-controller claim.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
@@ -7,7 +8,7 @@ import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const asModule=s=>'data:text/javascript;base64,'+Buffer.from(ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText).toString('base64');
-const core=await import(asModule(read('src/core.ts')));
+const core=await import(asModule(bundledCore()));
 const ids=new Map();let document,now=1000;
 class Element{
  constructor(tag='div',id=''){this.tagName=tag.toUpperCase();this.id=id;this.children=[];this.dataset={};this.attributes={};this.events={};this.hidden=false;this.disabled=false;this.offsetParent={};this.classList={toggle(){}};this.clientWidth=1280;this.clientHeight=420;}
@@ -31,7 +32,7 @@ const variantsUrl=asModule(read('src/stageVariants.ts')),stageUrl=asModule(read(
 const groups=await import(asModule(read('src/stageGroups.ts').replace("from './stage'",`from '${stageUrl}'`).replace("from './stageVariants'",`from '${variantsUrl}'`)));
 const stages=actualStage.STAGES;
 const unlocked=new Set(['highsproto','bront']),pendingUnlocks=new Set();let completed=false,earnedReward=false;const subscribers=[];const progress={snapshot:()=>({unlocked:[...unlocked],completed,godModeUnlocked:completed||earnedReward}),isUnlocked:id=>unlocked.has(id),subscribe:fn=>subscribers.push(fn),sync(){for(const id of pendingUnlocks)unlocked.add(id);pendingUnlocks.clear();subscribers.forEach(fn=>fn());}};
-const modules={'./stageGroups':groups,'./storyProgress':{storyProgress:progress},'./core':core,'./originalPortraits':{originalPortraits:Object.fromEntries(core.PLAYABLE_FIGHTERS.map(id=>[id,'/'+id+'.png']))},'./poseAtlas':{drawPoseAtlasSample:()=>true,drawSelectionPose:()=>true},'./stage':{STAGES:stages,drawStagePreview(){},loadStageArt:async()=>{}}};
+const modules={'./stageGroups':groups,'./storyProgress':{storyProgress:progress},'./core':core,'./portraits':{portraitThumb:id=>'/portraits/thumb/'+id+'.webp',portraitLarge:id=>'/portraits/large/'+id+'.webp'},'./poseAtlas':{drawPoseAtlasSample:()=>true,drawSelectionPose:()=>true},'./stage':{STAGES:stages,drawStagePreview(){},loadStagePreviews:async()=>{}}};
 const context={exports:{},require:id=>modules[id],document,HTMLElement:Element,HTMLButtonElement:Element,HTMLSelectElement:Select,Event:class{constructor(type){this.type=type;}},window:{addEventListener(){}},performance:{now:()=>now},console,Math};vm.createContext(context);vm.runInContext(compile(read('src/selectionMenu.ts')),context);
 let launches=0,lastSetup;const menu=context.exports.createSelectionMenu({start(setup){launches++;lastSetup=setup;menu.hide();context.running=true;context.padNeedsRelease=true;}});menu.setReady(true);
 assert.ok(root.innerHTML.indexOf('class="selection-locations"')<root.innerHTML.indexOf('class="match-preview"'));assert.ok(root.innerHTML.indexOf('id="start-fight"')<root.innerHTML.indexOf('class="selection-roster"'));
@@ -101,7 +102,8 @@ check('each main selection announces exactly its own assigned partner',()=>{
 });
 // Compile main's actual pollPad implementation rather than copying its release gate.
 const source=ts.createSourceFile('main.ts',read('src/main.ts'),ts.ScriptTarget.Latest,true);const poll=source.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='pollPad');assert.ok(poll);
-let currentPad=pad();Object.assign(context,{versus:{isOpen:false,skip(){}},selection:menu,story:{isOpen:false},dialog:{open:false},running:false,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:false,presentation:{phase:'fight'},navigator:{getGamepads:()=>[currentPad]},$:id=>ids.get(id),A:core.A,padKeys:{light:0,medium:2},bind(){throw Error('unexpected remap');},start(){context.running=true;context.padNeedsRelease=true;},pause(){context.running=false;},returnToSelection(){context.running=false;menu.show();}});vm.runInContext(compile(poll.getText(source)),context);
+const {versusPads}=await import(asModule(read('src/localInput.ts').replace("from './core'",`from '${asModule(bundledCore())}'`)));
+let currentPad=pad();Object.assign(context,{online:null,versusPads,previousPad2:[],versus:{isOpen:false,skip(){}},selection:menu,story:{isOpen:false},dialog:{open:false},running:false,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:false,presentation:{phase:'fight'},navigator:{getGamepads:()=>[currentPad]},$:id=>ids.get(id),A:core.A,padKeys:{light:0,medium:2},bind(){throw Error('unexpected remap');},start(){context.running=true;context.padNeedsRelease=true;},pause(){context.running=false;},returnToSelection(){context.running=false;menu.show();}});vm.runInContext(compile(poll.getText(source)),context);
 check('actual main pollPad blocks menu-confirm and held controls until a neutral release',()=>{
  menu.show();menu.pollPad(pad());currentPad=pad([9]);assert.equal(context.pollPad(),0);currentPad=pad();assert.equal(context.pollPad(),0);currentPad=pad([0]);assert.equal(context.pollPad(),0);assert.equal(menu.isOpen,false);assert.equal(context.running,true);assert.equal(context.pollPad(),0,'held confirm must not become light');currentPad=pad([],[-1,0]);assert.equal(context.pollPad(),0,'held stick also requires neutral');currentPad=pad();assert.equal(context.pollPad(),0,'neutral frame is consumed');currentPad=pad([0]);assert.equal(context.pollPad()&core.A.light,core.A.light,'fresh press reaches combat after release');
 });

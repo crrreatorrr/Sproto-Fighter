@@ -1,7 +1,8 @@
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
-const source=ts.transpileModule(readFileSync(new URL('../src/core.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
+const source=bundledCore();
 const {A,FLOOR,WALL,WIDTH,createState,step,PLAYABLE_FIGHTERS,KNOCKDOWN_FRAMES,GETUP_FRAMES}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 let count=0,failures=0;
 function check(name,fn){try{fn();count++;console.log('PASS:',name);}catch(e){failures++;console.error('FAIL:',name,'—',e.message);}}

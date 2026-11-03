@@ -12,7 +12,7 @@ def install():
     path=ROOT/'public/fighters/pose-atlas.json';manifest=json.loads(path.read_text());manifest['fighters']['freshprince']=cfg
     if not manifest.get('revision','').endswith('-freshprince'):manifest['revision']=manifest.get('revision','expansion')+'-freshprince'
     path.write_text(json.dumps(manifest,indent=2)+'\n')
-    path=ROOT/'src/core.ts';s=path.read_text()
+    path=ROOT/'src/sim/roster.ts';s=path.read_text()
     for tag in ['ROSTER','KIT','GRIP']:
         s=re.sub(r'/\* FRESHPRINCE '+tag+r' BEGIN \*/.*?/\* FRESHPRINCE '+tag+r' END \*/\n','',s,flags=re.S)
     line=re.search(r'export type FighterId = (.*?);',s)

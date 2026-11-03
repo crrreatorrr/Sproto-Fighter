@@ -1,8 +1,9 @@
 // Stance-height, jump-input and real collision checks against the combat step.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
-const source = ts.transpileModule(readFileSync(new URL('../src/core.ts', import.meta.url), 'utf8'), { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText;
+const source = bundledCore();
 const { A, FLOOR, HORIZONTAL_SPIT_FIGHTERS, createState, step, getMove, isCrouchingSpit } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 let checks=0;
 // The supplied shorter fighters have authored mouth origins below the ducking

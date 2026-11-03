@@ -1,8 +1,9 @@
 // Focused responsiveness regressions. Uses the actual combat core, no DOM.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
-const source=ts.transpileModule(readFileSync(new URL('../src/core.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
+const source=bundledCore();
 const {A,FLOOR,WALL,GRAVITY,ROSTER,fighterWall,createState,step}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 let checks=0;
 const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};

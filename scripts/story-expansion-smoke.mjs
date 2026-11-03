@@ -10,7 +10,7 @@ import {createRequire} from 'node:module';
 const temp=mkdtempSync(join(tmpdir(),'sproto-expanded-story-'));
 let groups=0;
 try{
- assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/storyProgress.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck'],{stdio:'inherit'}).status,0);
+ assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/storyProgress.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0);
  const req=createRequire(import.meta.url),story=req(join(temp,'storyProgress.js'));
  const {PLAYABLE_FIGHTERS,isPairedFighter,createState,step,A}=req(join(temp,'core.js'));
  const {STORY_STAGE_IDS}=req(join(temp,'stage.js'));
@@ -68,7 +68,7 @@ try{
   writeFileSync(join(fixture,'core.ts'),`export const PLAYABLE_FIGHTERS=${JSON.stringify(baseline)} as const;export type PlayableFighterId=typeof PLAYABLE_FIGHTERS[number];export const isPairedFighter=(id:PlayableFighterId)=>new Set<string>(${JSON.stringify(baseline.filter(isPairedFighter))}).has(id);`);
   writeFileSync(join(fixture,'stage.ts'),`export const STORY_STAGE_IDS=${JSON.stringify(STORY_STAGE_IDS)} as const;export type StageId=typeof STORY_STAGE_IDS[number];`);
   writeFileSync(join(fixture,'storyProgress.ts'),readFileSync(resolve('src/storyProgress.ts'),'utf8'));
-  assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),join(fixture,'storyProgress.ts'),'--noEmit','--module','commonjs','--target','ES2022','--skipLibCheck'],{stdio:'inherit'}).status,0);
+  assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),join(fixture,'storyProgress.ts'),'--noEmit','--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0);
  });
  check('isolated150-entry registry yields148 rivals/145 nodes without adding fake runtime fighters',()=>{
   assert.equal(fixture150.length,150);const route=campaignForStages(STORY_STAGE_IDS,fixture150);verifyRoute(fixture150,route);

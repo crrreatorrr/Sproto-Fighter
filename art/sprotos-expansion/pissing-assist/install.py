@@ -15,7 +15,7 @@ manifest=json.loads(manifest_path.read_text())
 manifest['fighters']['sproto3152']['clips'].update(config['clips'])
 manifest['revision']='pissing-assist-'+hashlib.sha256(''.join(hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(dest.glob('*.png'))).encode()).hexdigest()[:12]
 manifest_path.write_text(json.dumps(manifest,indent=2)+'\n')
-core_path=ROOT/'src/core.ts'
+core_path=ROOT/'src/sim/roster.ts'
 def update(match):
     indent,ident,raw=match.groups();ref=refs.get(ident)
     if not ref or 'partner' not in ref:return match.group(0)

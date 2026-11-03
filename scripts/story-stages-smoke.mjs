@@ -21,7 +21,7 @@ console.log('PASS: Ranch image failure uses the original 320×180 procedural bac
 
 // Contact and shadow must have margin on the actual floor band, including both corners.
 // Also verify source sampling remains correct for the marina/castle's non-1280 native images.
-const floor=Number(readFileSync(new URL('../src/core.ts',import.meta.url),'utf8').match(/FLOOR = (\d+)/)[1]);
+const floor=Number(readFileSync(new URL('../src/sim/constants.ts',import.meta.url),'utf8').match(/FLOOR = (\d+)/)[1]);
 for(const id of ['verse','castle','yacht']){
     calls.length=0;stage.drawStagePreview(ctx,id,1280,720);
     const floorDraw=calls.findLast(({rest:r})=>r.length===8&&r[4]===0&&r[6]===1280&&r[5]<floor&&r[5]+r[7]>floor);

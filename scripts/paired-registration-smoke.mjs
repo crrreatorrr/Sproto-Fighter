@@ -1,11 +1,12 @@
 // Source-density/origin regression; fake image loading is not visual approval.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url));
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
 const compile=p=>ts.transpileModule(read(p).toString(),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
-const coreUrl=url(compile('src/core.ts')),eventsUrl=url(compile('src/animationEvents.ts'));
+const coreUrl=url(bundledCore()),eventsUrl=url(compile('src/animationEvents.ts'));
 const core=await import(coreUrl);
 const poses=await import(url(compile('src/poseAtlas.ts').replace("from './core'",`from '${coreUrl}'`).replace("from './animationEvents'",`from '${eventsUrl}'`)));
 const source=JSON.parse(read('public/fighters/pose-atlas.json'));

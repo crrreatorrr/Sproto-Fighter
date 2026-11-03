@@ -1,4 +1,5 @@
 // Tests real core contacts and renderer selection, not visual approval.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -6,7 +7,7 @@ import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url));
 const compile=p=>ts.transpileModule(read(p).toString(),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const cu=url(compile('src/core.ts')),eu=url(compile('src/animationEvents.ts')),core=await import(cu);
+const cu=url(bundledCore()),eu=url(compile('src/animationEvents.ts')),core=await import(cu);
 const poses=await import(url(compile('src/poseAtlas.ts').replace("from './core'",`from '${cu}'`).replace("from './animationEvents'",`from '${eu}'`)));
 const fixture=await import(url(compile('art/reaction-review-fixture.ts').replace("from '../src/core'",`from '${cu}'`)));
 const original=JSON.parse(read('public/fighters/pose-atlas.json')),review=JSON.parse(read('art/reaction-size-qa-20261102/calibrations.json'));

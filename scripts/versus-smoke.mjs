@@ -1,5 +1,6 @@
 // Real versus component and main boundaries with a minimal DOM; browser layout
 // and motion are verified separately. No save, controller hardware or art claim.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import vm from 'node:vm';
@@ -7,11 +8,11 @@ import ts from 'typescript';
 const read=name=>readFileSync(new URL('../src/'+name,import.meta.url),'utf8');
 const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const cu=url(compile(read('core.ts'))),core=await import(cu),events=await import(url(compile(read('animationEvents.ts'))));
-const originalBase=new URL('../src/originalPortraits.ts',import.meta.url).href;
-const pu=url(compile(read('originalPortraits.ts')).replaceAll('import.meta.url',JSON.stringify(originalBase)));
-const {originalPortraits}=await import(pu);
-const {createVersusScreen}=await import(url(compile(read('versusScreen.ts')).replace("from './core'",`from '${cu}'`).replace("from './originalPortraits'",`from '${pu}'`)));
+const cu=url(bundledCore()),core=await import(cu),events=await import(url(compile(read('animationEvents.ts'))));
+const pu=url(compile(read('portraits.ts')));
+const {portraitLarge}=await import(pu);
+const {versusPads}=await import(url(compile(read('localInput.ts')).replace("from './core'",`from '${cu}'`)));
+const {createVersusScreen}=await import(url(compile(read('versusScreen.ts')).replace("from './core'",`from '${cu}'`).replace("from './portraits'",`from '${pu}'`)));
 const VERSUS_FRAMES=600; // Simulate ten seconds: confirmation must never time out.
 const {createFightCountdown,COUNTDOWN_FRAMES,FIGHT_CUE_FRAMES}=await import(url(compile(read('fightCountdown.ts'))));
 class Element{
@@ -22,10 +23,10 @@ globalThis.document={createElement:tag=>new Element(tag)};
 let checks=0;const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};
 function ui(done=()=>{}){const host=new Element('div'),screen=createVersusScreen(host,done),root=host.children[0],lineup=root.children[1];return {screen,root,cards:[lineup.children[0],lineup.children[2]],button:root.children[2]};}
 check('all installed portraits exist and all ordered matchups preserve exact selector names, original images and pair identity',()=>{
- const t=ui();for(const id of core.PLAYABLE_FIGHTERS)assert.ok(existsSync(new URL(originalPortraits[id])),id+' original picture exists');
+ const t=ui();for(const id of core.PLAYABLE_FIGHTERS)assert.ok(existsSync(new URL('../public'+portraitLarge(id),import.meta.url)),id+' versus portrait exists');
  for(const a of core.PLAYABLE_FIGHTERS)for(const b of core.PLAYABLE_FIGHTERS){
   t.screen.show(a,b);assert.ok(t.screen.isOpen);
-  [a,b].forEach((id,index)=>{const card=t.cards[index];assert.equal(card.attributes['data-fighter'],id);assert.equal(card.children[1].src,originalPortraits[id]);assert.equal(card.children[2].children[0].textContent,core.ROSTER[id].name);assert.equal(card.classes.has('is-paired'),core.isPairedFighter(id));});
+  [a,b].forEach((id,index)=>{const card=t.cards[index];assert.equal(card.attributes['data-fighter'],id);assert.equal(card.children[1].src,portraitLarge(id));assert.equal(card.children[2].children[0].textContent,core.ROSTER[id].name);assert.equal(card.classes.has('is-paired'),core.isPairedFighter(id));});
  }
 });
 check('preview waits indefinitely; explicit confirmation is idempotent across matchups and missing images',()=>{
@@ -48,13 +49,13 @@ check('pause suspends previews and countdowns without losing their phase or hidi
 const main=ts.createSourceFile('main.ts',read('main.ts'),ts.ScriptTarget.Latest,true);
 const fn=name=>main.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text===name).getText(main);
 check('actual keyboard accepts a fresh Enter only, rejecting Space, combat keys and repeat',()=>{
- let handler;const {screen}=ui();const c={window:{addEventListener(type,fn){handler=fn;}},story:{isOpen:false},dialog:{open:false},selection:{isOpen:false},running:true,blockedKeys:new Set(),versus:screen};
+ let handler;const {screen}=ui();const c={online:null,window:{addEventListener(type,fn){handler=fn;}},story:{isOpen:false},dialog:{open:false},selection:{isOpen:false},running:true,blockedKeys:new Set(),versus:screen};
  vm.createContext(c);const registration=main.statements.find(n=>ts.isExpressionStatement(n)&&n.getText(main).startsWith("window.addEventListener('keydown'"));vm.runInContext(compile(registration.getText(main)),c);
  screen.show('guest08','guest09');for(const [code,repeat] of [['Space',false],['KeyA',false],['Enter',true]]){let prevented=false;handler({code,repeat,preventDefault(){prevented=true;}});assert.ok(prevented);assert.ok(screen.isOpen);}
  handler({code:'Enter',repeat:false,preventDefault(){}});assert.equal(screen.isOpen,false);assert.ok(c.blockedKeys.has('Enter'));
 });
 function combatFixture(){
- const c={...core,...events,countdown:{advance:()=>false},state:core.createState('highsproto','dummy','vela'),presentation:events.createRoundPresentation(),frames:[],held:new Set(),queued:0,padNeedsRelease:false,qaPanel:null,qaRecord(){},playRetainCallout(){},qaStopAtOutro(){},story:{finishMatch(){},onRoundEnd:()=>false},showOverlay(){}};
+ const c={online:null,...core,...events,countdown:{advance:()=>false},state:core.createState('highsproto','dummy','vela'),presentation:events.createRoundPresentation(),frames:[],held:new Set(),queued:0,padNeedsRelease:false,qaPanel:null,qaRecord(){},playRetainCallout(){},qaStopAtOutro(){},story:{finishMatch(){},onRoundEnd:()=>false},showOverlay(){}};
  const t=ui(()=>{c.held.clear();c.queued=0;c.padNeedsRelease=true;});c.versus=t.screen;vm.createContext(c);vm.runInContext(compile(fn('advanceRoundFrame')),c);return {c,...t};
 }
 check('actual main freezes combat, CPU, replay and entrance clock during versus, then retains the full entrance',()=>{
@@ -79,7 +80,7 @@ check('actual main shows 3/2/1 for one second each, plays entrances without dama
 });
 check('actual gamepad preview consumes only fresh A, requires neutral after skipping, and never leaks an attack',()=>{
  let current={connected:true,axes:[0,0],buttons:Array.from({length:16},()=>({pressed:false}))};
- const c={...core,selection:{isOpen:false,pollPad(){}},story:{isOpen:false},dialog:{open:false},running:true,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:true,presentation:{phase:'intro'},navigator:{getGamepads:()=>[current]},$:()=>({}),padKeys:{light:0},performance:{now:()=>0},start(){throw Error('preview Start leaked');},pause(){throw Error('preview Start paused');}};
+ const c={online:null,...core,versusPads,previousPad2:[],selection:{isOpen:false,pollPad(){}},story:{isOpen:false},dialog:{open:false},running:true,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:true,presentation:{phase:'intro'},navigator:{getGamepads:()=>[current]},$:()=>({}),padKeys:{light:0},performance:{now:()=>0},start(){throw Error('preview Start leaked');},pause(){throw Error('preview Start paused');}};
  const {screen}=ui(()=>{c.padNeedsRelease=true;});c.versus=screen;vm.createContext(c);vm.runInContext(compile(fn('pollPad')),c);
  screen.show('guest08','guest09');current.buttons[9].pressed=true;assert.equal(c.pollPad(),0);assert.ok(screen.isOpen,'Start must not confirm');current.buttons[9].pressed=false;c.pollPad();
  screen.show('guest08','guest09');c.padNeedsRelease=true;current.buttons[0].pressed=true;assert.equal(c.pollPad(),0);assert.ok(screen.isOpen,'held A cannot skip a new preview');current.buttons[0].pressed=false;c.pollPad();
@@ -92,10 +93,10 @@ check('actual gamepad preview consumes only fresh A, requires neutral after skip
 });
 check('actual restart refreshes both fighter identities and return to selection removes the preview',()=>{
  const {screen,cards}=ui(),elements=new Map();
- const c={...core,...events,countdown:{hide(){}},versus:screen,chosen:'guest08',opponent:'guest09',mode:'dummy',testingGodMode:false,matchEarnedGodMode:false,matchTesting:false,matchGodMode:false,state:core.createState(),presentation:events.createRoundPresentation(),frames:[],qaEvents:[],accumulator:0,held:new Set(),queued:0,started:false,running:false,qaSingleStep:false,resumeAfterSettings:false,resumeAfterJourney:false,story:{leaveStory(){}},selection:{show(){}},updateGodModeLabel(){},start(){},$:id=>{if(!elements.has(id))elements.set(id,{});return elements.get(id);}};
+ const c={online:null,...core,...events,countdown:{hide(){}},versus:screen,chosen:'guest08',opponent:'guest09',mode:'dummy',testingGodMode:false,matchEarnedGodMode:false,matchTesting:false,matchGodMode:false,state:core.createState(),presentation:events.createRoundPresentation(),frames:[],qaEvents:[],accumulator:0,held:new Set(),queued:0,started:false,running:false,qaSingleStep:false,resumeAfterSettings:false,resumeAfterJourney:false,story:{leaveStory(){}},selection:{show(){}},updateGodModeLabel(){},start(){},$:id=>{if(!elements.has(id))elements.set(id,{});return elements.get(id);}};
  vm.createContext(c);vm.runInContext(compile(fn('restart')+'\n'+fn('returnToSelection')),c);c.restart();
  assert.equal(cards[0].children[2].children[0].textContent,'Yoyo');assert.equal(cards[1].children[2].children[0].textContent,'Red Kev');assert.ok(screen.isOpen);
- c.opponent='vaudream';c.restart();assert.equal(cards[1].children[1].src,originalPortraits.vaudream);
+ c.opponent='vaudream';c.restart();assert.equal(cards[1].children[1].src,portraitLarge('vaudream'));
  c.returnToSelection();assert.equal(screen.isOpen,false);
 });
 console.log(`${checks} versus groups passed; ${core.PLAYABLE_FIGHTERS.length**2} ordered matchup mappings, actual main clock/restart/pad boundaries. No physical controller claim.`);

@@ -6,7 +6,7 @@ import {spawnSync} from 'node:child_process';
 import {createRequire} from 'node:module';
 const temp=mkdtempSync(join(tmpdir(),'sproto-map-'));
 try{
- assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/campaignMapLayout.ts','src/campaignMapViewport.ts','src/storyProgress.ts','src/stageVariants.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck'],{stdio:'inherit'}).status,0);
+ assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/campaignMapLayout.ts','src/campaignMapViewport.ts','src/storyProgress.ts','src/stageVariants.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0);
  const req=createRequire(import.meta.url),{campaignMapMarkerLayout,campaignMapPoints,campaignMapPaths}=req(join(temp,'campaignMapLayout.js')),{STORY_ENCOUNTERS}=req(join(temp,'storyProgress.js')),{storyLocationForEncounter}=req(join(temp,'stageVariants.js'));
  const originalRoute=JSON.parse(readFileSync('art/world-map-zones-nov02/encounters-before.json','utf8'));
  const moved=new Set(['story-v1-michael','story-v1-buddhashadow']);

@@ -9,7 +9,7 @@ import {createHash} from 'node:crypto';
 
 const root=resolve('.'),temp=mkdtempSync(join(tmpdir(),'sproto-stage-catalog-'));
 try {
- assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/stage.ts','src/stageGroups.ts','src/stageVariants.ts','src/storyProgress.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck'],{stdio:'inherit'}).status,0);
+ assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/stage.ts','src/stageGroups.ts','src/stageVariants.ts','src/storyProgress.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0);
  const require=createRequire(import.meta.url),stage=require(join(temp,'stage.js'));
  const {STORY_LOCATIONS,storyLocationForEncounter,loadStoryLocation,drawStoryLocation}=require(join(temp,'stageVariants.js'));
  const {STAGE_ZONES,stageZone,stagesInZone}=require(join(temp,'stageGroups.js'));

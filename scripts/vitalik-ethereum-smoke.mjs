@@ -1,3 +1,4 @@
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
@@ -5,7 +6,7 @@ import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const load=async p=>import('data:text/javascript;base64,'+Buffer.from(compile(read(p))).toString('base64'));
-const core=await load('src/core.ts');
+const core=await import('data:text/javascript;base64,'+Buffer.from(bundledCore()).toString('base64'));
 const {A,FLOOR,COMBAT_STYLES,createState,step,getMove}=core;
 assert.equal(COMBAT_STYLES.vitaliketh.projectile.shape,'ethereum');
 assert.equal(COMBAT_STYLES.vitaliketh.projectile.speed,11);assert.equal(COMBAT_STYLES.vitaliketh.bolt.damage,57);assert.equal(COMBAT_STYLES.vitaliketh.bolt.startup,14);

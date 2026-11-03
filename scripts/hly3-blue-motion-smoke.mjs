@@ -1,4 +1,5 @@
 // Source registration and real renderer sampling checks; no visual approval.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -8,7 +9,7 @@ const read=p=>readFileSync(new URL('../'+p,import.meta.url));
 const hash=b=>createHash('sha256').update(b).digest('hex');
 const dataUrl=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
 const compile=p=>ts.transpileModule(read(p).toString(),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
-const coreUrl=dataUrl(compile('src/core.ts')),eventsUrl=dataUrl(compile('src/animationEvents.ts'));
+const coreUrl=dataUrl(bundledCore()),eventsUrl=dataUrl(compile('src/animationEvents.ts'));
 const core=await import(coreUrl);
 const poses=await import(dataUrl(compile('src/poseAtlas.ts').replace("from './core'",`from '${coreUrl}'`).replace("from './animationEvents'",`from '${eventsUrl}'`)));
 const manifest=JSON.parse(read('public/fighters/pose-atlas.json'));

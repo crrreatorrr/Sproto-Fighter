@@ -50,7 +50,7 @@ def install():
         assert cfg.get(key) == before[IDENT].get(key)
     path.write_text(json.dumps(manifest, indent=2) + '\n')
 
-    path = ROOT / 'src/core.ts'
+    path = ROOT / 'src/sim/roster.ts'
     core = path.read_text()
     core, count = re.subn(r'^sproto1625:\s*\{"hand"[^\n]+\},$', IDENT + ':' + json.dumps({part: grip(cfg, part) for part in ['hand', 'torso']}) + ',', core, flags=re.M)
     assert count == 1

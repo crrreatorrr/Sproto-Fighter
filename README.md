@@ -100,7 +100,18 @@ combat starts on FIGHT. Escape pauses either introduction. Rounds have no time l
 | Team Special | P | Right trigger |
 | Dash / pause | Left Shift / Escape | Left trigger / Start |
 
-Settings supports remapping. W jumps once per press. W+J gives a rising strike;
+**Local versus:** choose *Local versus · Second player* as the rival behavior,
+then pick player 2's fighter on the rival tab. Player 2 uses the arrow keys,
+`,` `.` `/` (light, medium, finisher), `;` (launcher), `'` (ranged), `[`
+(grab), `]` (Team Special) and Right Shift (dash), or a second controller (the
+first controller stays player 1 and drives the menus). Local versus never
+earns hub rewards and has no God Mode.
+
+**Settings → Controls** has a tab for each player, with separate keyboard and
+controller mappings. A key can belong to only one action across both players:
+binding a key the other player uses swaps it. Player 2's controller buttons
+are remapped from the second connected controller. Mappings save in the
+browser. The online multiplayer plan is in [docs/MULTIPLAYER-PLAN.md](docs/MULTIPLAYER-PLAN.md). W jumps once per press. W+J gives a rising strike;
 W+forward+K gives a diagonal strike. S+J/K gives low attacks, S+L sweeps, and
 S+K/L in the air dives. O plus forward/back/W/S selects a directional throw.
 Three damaging hits ending in a finisher earn one pip when the combo ends;
@@ -114,8 +125,14 @@ own trajectories. All rounds are untimed.
 
 ## Architecture and verification
 
-- `src/core.ts`: fixed-step 60 Hz combat, frame-indexed inputs, attacks, CPU,
-  throws/reactions, God Mode, fighter profiles and assigned partner mechanics.
+- `src/core.ts`: the public entry to the combat simulation. Import from here.
+  The simulation itself is in `src/sim/` and has no DOM, clock or randomness:
+  `constants.ts` (arena, physics, input bits), `roster.ts` (fighters, kits,
+  grips, pair spacing; art installers edit marked blocks here), `data/*.json`
+  (generated per-fighter action timing), `types.ts`, `combat.ts` (state,
+  throws, damage, move selection), `cpu.ts` and `step.ts` (the fixed 60 Hz
+  step, deterministic math and `hashState`). It produces identical results in
+  every browser engine; `scripts/determinism-smoke.mjs` checks this.
 - `src/poseAtlas.ts`: complete-body frame playback, paired identities, stable
   formations, camera clearance and event presentation. Paired menu
   normalization does not change fight scale. `pose-atlas.json` is the single
@@ -128,6 +145,11 @@ own trajectories. All rounds are untimed.
   full-height twin previews, random choices and stage selection.
 - `src/teamSpecial.ts`: partner appearances and attack choreography.
 - `public/`: local runtime art/fonts; no generation service is needed to play.
+  The menu uses small generated WebP copies (`public/portraits/`,
+  `public/stages/previews/`) instead of the 1000 px portrait PNGs and full
+  stage backgrounds; a fight loads only its own background. After adding or
+  changing a portrait or stage, run `python3 scripts/build-images.py`
+  (needs Pillow); `portraits-smoke` and `stage-previews-smoke` catch stale copies.
 
 ### Checks
 
@@ -156,9 +178,41 @@ Older dated reports and authoring sources are preserved as history.
 
 No physical-controller test, per user instruction. A full manual 100-match
 campaign, every frame/matchup, long sessions and systematic cross-browser
-performance remain unverified. There is no online-readiness claim. This
+performance remain unverified. Online play is tested against a local hub only; it has
+not run against a deployed hub or through a TURN server. This
 integration adds no purchases, generation calls, remote push or hosting.
 
+
+## Online play
+
+Pick **Online · Find an opponent** or **Online · Wager 10 Tickets** in the
+fighter select. Online play needs the hub session, so open the game from the
+hub's arcade cabinet. Matches use rollback netcode over a direct WebRTC
+connection, falling back to the hub relay. The hub runs the same simulation
+from both players' inputs and decides the result, so wagers are paid only on
+a result the server verified. Tickets have no real-money value.
+
+- Settings → Online sets the input delay (2 frames by default; raise it on
+  unstable connections).
+- The status line shows the link (DIRECT or RELAY), ping and rollback frames.
+- After a match, **Rematch →** pairs you with the same opponent if they choose
+  it too.
+
+Configuration: `VITE_NAKAMA_URL` and `VITE_NAKAMA_SERVER_KEY` as below, and
+optionally `VITE_ICE_SERVERS` (a JSON array of `RTCIceServer`, e.g. with a
+TURN server; the default is a public STUN server). The server side is the
+`sproto_duel` match on the metaverse-hub branch `claude/sproto-online-duels`;
+after changing anything under `src/sim`, run `node scripts/build-sim-bundle.mjs
+--out <hub>/server/modules/vendor/sproto-sim.js` so the hub and clients share
+one simulation fingerprint. Design and status:
+[the multiplayer plan](docs/MULTIPLAYER-PLAN.md).
+
+With a local hub running, these play real online matches:
+
+```sh
+NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/hub-duel-smoke.mjs
+NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/online-browser-smoke.mjs
+```
 
 ## Metaverse Hub integration
 

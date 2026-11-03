@@ -13,7 +13,7 @@ for info in plan:
   for image in source.glob('[0-9][0-9].png'):shutil.copy2(image,dest/image.name)
  manifestPath=ROOT/'public/fighters/pose-atlas.json';manifest=json.loads(manifestPath.read_text());manifest['fighters'][id]=cfg
  manifest['revision']='late-'+hashlib.sha256(json.dumps(cfg).encode()).hexdigest()[:16];manifestPath.write_text(json.dumps(manifest,separators=(',',':'))+'\n')
- path=ROOT/'src/core.ts';s=path.read_text()
+ path=ROOT/'src/sim/roster.ts';s=path.read_text()
  for section in ['ROSTER','KIT','GRIP']:
   s=re.sub(r'/\* '+tag+' '+section+r' BEGIN \*/.*?/\* '+tag+' '+section+r' END \*/\n','',s,flags=re.S)
  line=re.search(r'export type FighterId = (.*?);',s)

@@ -1,5 +1,5 @@
 import {ROSTER,isPairedFighter,type PlayableFighterId} from './core';
-import {originalPortraits} from './originalPortraits';
+import {portraitLarge} from './portraits';
 
 /** Explicit confirmation only; never enters the deterministic combat/replay stream. */
 export function createVersusScreen(host:HTMLElement,onFinish:()=>void){
@@ -33,7 +33,7 @@ export function createVersusScreen(host:HTMLElement,onFinish:()=>void){
     const side=sides[index];side.name.textContent=ROSTER[id].name;side.card.setAttribute('data-fighter',id);
     side.image.alt=`${ROSTER[id].name} — original profile picture`;
     side.image.hidden=false;side.card.classList.remove('portrait-unavailable');
-    side.image.src=originalPortraits[id];side.card.classList.toggle('is-paired',isPairedFighter(id));
+    side.image.src=portraitLarge(id);side.card.classList.toggle('is-paired',isPairedFighter(id));
    });
    suspend(false);root.hidden=false;skip.focus({preventScroll:true});
   },

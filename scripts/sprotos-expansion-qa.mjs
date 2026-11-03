@@ -1,5 +1,6 @@
 // Expansion-specific mechanics, two-body playback and bounded loading checks.
 // Visual anatomy and normal-speed motion are reviewed separately in the lab.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -7,7 +8,7 @@ import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const compile=p=>ts.transpileModule(read(p),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const cu=url(compile('src/core.ts')),eu=url(compile('src/animationEvents.ts'));
+const cu=url(bundledCore()),eu=url(compile('src/animationEvents.ts'));
 const core=await import(cu),events=await import(eu);
 const poseCode=compile('src/poseAtlas.ts').replace("from './core'",`from '${cu}'`).replace("from './animationEvents'",`from '${eu}'`);
 const poses=await import(url(poseCode));

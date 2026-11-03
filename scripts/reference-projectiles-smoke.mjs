@@ -1,10 +1,11 @@
 // Behavior checks for the requested reference B throw and mouth-spat Sproto.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const compile=p=>ts.transpileModule(readFileSync(new URL('../'+p,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const {A,FLOOR,COMBAT_STYLES,createState,step,getMove}=await import(url(compile('src/core.ts')));
+const {A,FLOOR,COMBAT_STYLES,createState,step,getMove}=await import(url(bundledCore()));
 const tick=(s,n,a=0,b=0)=>{for(let i=0;i<n;i++)step(s,[a,b]);};
 let cases=0;
 for(const [id,shape]of [['sproto2531','miniSproto'],['sproto3106','referenceB']]){
