@@ -33,6 +33,8 @@ export interface PoseFrameConfig {
   contactHull?: Point[];
 }
 export interface PoseAtlasConfig {
+  /** Added by scripts/build-sheets.py in built games: one image holding every frame, with each frame's top-left cell. */
+  sheet?: { url: string; cells: Record<string, [number, number]> };
   frames: (string | PoseFrameConfig)[];
   /** Optional complete-body walk cycle, 2–64 frames, sharing atlas scale. */
   walkFrames?: (string | PoseFrameConfig)[];
@@ -62,7 +64,10 @@ export interface PoseAtlasManifest {
   revision?: string;
   fighters: Record<string, PoseAtlasConfig>;
 }
-interface LoadedFrame { image: HTMLImageElement; anchor: Point; width: number; height: number; bounds: [number,number,number,number]; fallLean:number; contactHull?:Point[] }
+/** A decoded frame: its own image, or a slice of the body's sprite sheet. */
+type FrameImage = HTMLImageElement | ImageBitmap;
+const imageSize = (image: FrameImage) => 'naturalWidth' in image ? [image.naturalWidth, image.naturalHeight] : [image.width, image.height];
+interface LoadedFrame { image: FrameImage; anchor: Point; width: number; height: number; bounds: [number,number,number,number]; fallLean:number; contactHull?:Point[] }
 interface Atlas { clips: Partial<Record<AtlasClipName, LoadedFrame[]>>; frames: LoadedFrame[]; walkFrames?: LoadedFrame[]; scale: number; facing: number; cycle: number; holdContact?: { hand:Point; torso:Point } }
 export interface PoseAtlasDebug {
   available: boolean;
@@ -114,6 +119,15 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
   for(const [name,registration] of Object.entries(cfg.poseRegistration??{})){
     if(!Object.hasOwn(POSE_SLOTS,name) || !registration || !positive(registration.pixelScale) || registration.pixelScale<.5 || registration.pixelScale>2 || !point(registration.anchorOffset))throw new Error(`Atlas ${id}: invalid ${name} pose registration`);
   }
+  // One request for the whole body when the build packed a sprite sheet; individual frames otherwise or if it fails.
+  const sheetImage: Promise<HTMLImageElement | null> | null = cfg.sheet && typeof createImageBitmap === 'function'
+    ? new Promise<HTMLImageElement | null>(resolve => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => { console.warn(`Atlas ${id}: sprite sheet failed to load; using individual frames`); resolve(null); };
+      img.src = asset(cfg.sheet!.url);
+    })
+    : null;
   const loadFrames = (entries: (string | PoseFrameConfig)[], label:string) => Promise.all(entries.map(async (entry, slot): Promise<LoadedFrame> => {
     const f = typeof entry === 'string' ? { url: entry } : entry;
     if (!f || typeof f.url !== 'string') throw new Error(`Atlas ${id}, ${label} frame ${slot}: missing frame URL`);
@@ -123,13 +137,18 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
     if (!Array.isArray(bounds) || bounds.length !== 4 || !bounds.every(Number.isFinite) || bounds[0] < 0 || bounds[1] < 0 || bounds[2] > width || bounds[3] > height || bounds[0] >= bounds[2] || bounds[1] >= bounds[3]) throw new Error(`Atlas ${id}, ${label} frame ${slot}: invalid opaque bounds`);
     if(f.fallLean!==undefined&&(!Number.isFinite(f.fallLean)||Math.abs(f.fallLean)>Math.PI/3))throw new Error(`Atlas ${id}: invalid fall lean`);
     if(f.contactHull&&(!Array.isArray(f.contactHull)||f.contactHull.length<3||f.contactHull.length>128||f.contactHull.some(p=>!point(p)||p[0]<0||p[1]<0||p[0]>width||p[1]>height)))throw new Error(`Atlas ${id}: invalid contact hull`);
-    const image = await new Promise<HTMLImageElement>((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject(new Error(`Atlas ${id}, ${label} frame ${slot}: failed to load ${f.url}`));
-      img.src = localUrl(f.url, revision);
-    });
-    if (image.naturalWidth !== width || image.naturalHeight !== height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: image dimensions differ from metadata`);
+    const cell = cfg.sheet?.cells[f.url];
+    const sheet = cell && sheetImage ? await sheetImage : null;
+    const image: FrameImage = sheet && cell
+      ? await createImageBitmap(sheet, cell[0], cell[1], width, height)
+      : await new Promise<HTMLImageElement>((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = () => reject(new Error(`Atlas ${id}, ${label} frame ${slot}: failed to load ${f.url}`));
+        img.src = localUrl(f.url, revision);
+      });
+    const [naturalWidth, naturalHeight] = imageSize(image);
+    if (naturalWidth !== width || naturalHeight !== height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: image dimensions differ from metadata`);
     const registration=label==='poses'?cfg.poseRegistration?.[names[slot][0] as keyof typeof POSE_SLOTS]:cfg.clipRegistration?.[label as AtlasClipName], density=registration?.pixelScale??1, offset=registration?.anchorOffset??[0,0];
     // All geometry uses the same calibrated coordinates as the drawn bitmap.
     // Keeping the foot origin, bounds and hull together also preserves camera
@@ -702,7 +721,7 @@ export function drawPoseAtlasSample(c: CanvasRenderingContext2D, f: Fighter, fra
 const menuBounds=new WeakMap<LoadedFrame,readonly number[]>();
 function selectionBounds(source:LoadedFrame):readonly number[] {
   let bounds=menuBounds.get(source);if(bounds)return bounds;
-  const canvas=document.createElement('canvas');canvas.width=source.image.naturalWidth;canvas.height=source.image.naturalHeight;
+  const canvas=document.createElement('canvas');[canvas.width,canvas.height]=imageSize(source.image);
   const context=canvas.getContext('2d',{willReadFrequently:true})!;context.drawImage(source.image,0,0);
   const {data}=context.getImageData(0,0,canvas.width,canvas.height);
   let l=canvas.width,t=canvas.height,r=0,b=0;

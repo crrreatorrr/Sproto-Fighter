@@ -39,6 +39,8 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
+      # One sprite sheet per body instead of 100-140 frame requests; verified pixel-identical.
+      - run: python3 scripts/build-sheets.py dist --verify
       - name: Gameplay, art and story checks
         run: node scripts/run-all.mjs
       - uses: actions/upload-artifact@v4

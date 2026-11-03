@@ -24,7 +24,8 @@
     "test": "vitest run",
     "build:hub-sdk": "tsc -p vendor/hub-sdk/tsconfig.build.json",
     "test:all": "vitest run && node scripts/run-all.mjs",
-    "test:fast": "vitest run && node scripts/run-all.mjs --fast"
+    "test:fast": "vitest run && node scripts/run-all.mjs --fast",
+    "build:release": "npm run build && python3 scripts/build-sheets.py dist --verify"
   },
   "devDependencies": {
     "esbuild": "0.28.2",
