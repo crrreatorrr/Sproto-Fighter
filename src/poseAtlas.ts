@@ -170,26 +170,49 @@ export function loadPoseAtlases(): Promise<boolean> {
 }
 let selectionManifest:Promise<PoseAtlasManifest>|null=null;
 const bodyLoads=new Map<string,Promise<Atlas>>();
+const bodyConfigs=new Map<string,Promise<PoseAtlasConfig>>();
 let latestSelectionBodies=new Set<string>();
+/**
+ * The full manifest is about 20 MB. Builds and the dev server also publish it
+ * split (see poseAtlasSplit in vite.config.ts): a small index listing every
+ * body, and one file per body under /fighters/pose-atlas/. Index entries are
+ * empty; a body's config is fetched only when a match needs it, from a URL
+ * keyed by the revision so the browser can cache it. Without the split files
+ * (another static server) this falls back to the full manifest.
+ */
+async function loadSelectionManifest():Promise<PoseAtlasManifest>{
+  let response=await fetch(asset('/fighters/pose-atlas/index.json'),{cache:'no-cache'});
+  if(response.status===404||(response.ok&&response.headers.get('content-type')?.includes('text/html')))
+    response=await fetch(asset('/fighters/pose-atlas.json'),{cache:'no-store'});
+  if(!response.ok)throw new Error(`Pose atlas metadata: HTTP ${response.status}`);
+  const manifest=await response.json() as PoseAtlasManifest;
+  if(manifest.version!==1||!manifest.fighters)throw new Error('Unsupported pose atlas manifest');
+  for(const id of Object.keys(manifest.fighters))declaredAtlases.add(id);
+  return manifest;
+}
+function bodyConfig(manifest:PoseAtlasManifest,id:string):Promise<PoseAtlasConfig>{
+  const listed=manifest.fighters[id];if(!listed)throw new Error(`Missing complete body atlas: ${id}`);
+  if(listed.frames)return Promise.resolve(listed);
+  if(!bodyConfigs.has(id))bodyConfigs.set(id,(async()=>{
+    const response=await fetch(asset(`/fighters/pose-atlas/${encodeURIComponent(id)}.json`)+`?v=${encodeURIComponent(manifest.revision??'')}`);
+    if(!response.ok)throw new Error(`Pose atlas ${id}: HTTP ${response.status}`);
+    const cfg=(await response.json() as PoseAtlasManifest).fighters?.[id];
+    if(!cfg?.frames)throw new Error(`Pose atlas ${id}: missing body config`);
+    return cfg;
+  })().catch(error=>{bodyConfigs.delete(id);throw error;}));
+  return bodyConfigs.get(id)!;
+}
 /** Load the selected match and assists on demand. The large expansion must not
  * allocate every fighter's decoded animation images before the menu opens. */
 export async function ensurePoseAtlases(ids:readonly Fighter['id'][]):Promise<void>{
-  selectionManifest??=(async()=>{
-    const response=await fetch(asset('/fighters/pose-atlas.json'),{cache:'no-store'});
-    if(!response.ok)throw new Error(`Pose atlas metadata: HTTP ${response.status}`);
-    const manifest=await response.json() as PoseAtlasManifest;
-    if(manifest.version!==1||!manifest.fighters)throw new Error('Unsupported pose atlas manifest');
-    for(const id of Object.keys(manifest.fighters))declaredAtlases.add(id);
-    return manifest;
-  })().catch(error=>{selectionManifest=null;throw error;});
+  selectionManifest??=loadSelectionManifest().catch(error=>{selectionManifest=null;throw error;});
   try{
     const manifest=await selectionManifest;
     const needed=new Set(ids.flatMap(id=>[...bodyAtlasIds(id),...specialPartnerIds(id).flatMap(bodyAtlasIds)]));
     latestSelectionBodies=needed;
     const loaded=await Promise.all([...needed].map(async id=>{
       if(atlases.has(id))return [id,atlases.get(id)!] as const;
-      const cfg=manifest.fighters[id];if(!cfg)throw new Error(`Missing complete body atlas: ${id}`);
-      if(!bodyLoads.has(id))bodyLoads.set(id,loadAtlas(id,cfg,manifest.revision).finally(()=>bodyLoads.delete(id)));
+      if(!bodyLoads.has(id))bodyLoads.set(id,bodyConfig(manifest,id).then(cfg=>loadAtlas(id,cfg,manifest.revision)).finally(()=>bodyLoads.delete(id)));
       return [id,await bodyLoads.get(id)!] as const;
     }));
     for(const[id,atlas]of loaded){atlases.delete(id);atlases.set(id,atlas);}
