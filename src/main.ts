@@ -9,7 +9,7 @@ import './versusScreen.css';
 import {createVersusScreen} from './versusScreen';
 import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';
-import { P2_KEYS, keyboardMask, pressedMask, padMask, versusPads } from './localInput';
+import { P2_KEYS, UNBOUND, keyboardMask, pressedMask, padMask, versusPads, rebindKey, rebindPad, resolveKeyConflicts } from './localInput';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
@@ -27,7 +27,9 @@ $('roster-count').textContent=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.
 const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: 'ShiftLeft' };
 const padDefaults: Partial<Record<Action, number>> = { light: 0, medium: 2, heavy: 1, launcher: 3, bolt: 5, grab: 4, special: 7, dash: 6 };
 const labels: Record<Action, string> = { left: 'Move left', right: 'Move right', up: 'Jump', down: 'Crouch', light: 'Light', medium: 'Medium', heavy: 'Finisher', launcher: 'Launcher', bolt: 'Ranged power', grab: 'Grab', special: 'Team special', dash: 'Dash' };
+// Player 1 and player 2 (local versus) each have their own keyboard and gamepad mappings.
 let keys = { ...defaults }, padKeys = { ...padDefaults };
+let keys2: Record<Action, string> = { ...P2_KEYS }, padKeys2 = { ...padDefaults };
 // Saved under the project's old working name until this release; read it once
 // so remapped controls survive, then save under the new key.
 const CONTROLS_KEY = 'sproto-arena-controls', LEGACY_CONTROLS_KEY = 'neon-relay-controls';
@@ -41,17 +43,27 @@ try {
             if (Number.isInteger(saved.padKeys?.[a]))
                 padKeys[a] = saved.padKeys[a];
         if ((saved.controlsVersion??0)<3 && ['Space','ArrowUp'].includes(keys.up) && !Object.entries(keys).some(([a,k]) => a !== 'up' && k === 'KeyW')) keys.up = 'KeyW';
+        for (const a of Object.keys(defaults) as Action[])
+            if (typeof saved.keys2?.[a] === 'string')
+                keys2[a] = saved.keys2[a];
+        for (const a of Object.keys(padDefaults) as Action[])
+            if (Number.isInteger(saved.padKeys2?.[a]))
+                padKeys2[a] = saved.padKeys2[a];
     }
 }
 catch { /* Storage may be disabled. Defaults still work. */ }
+resolveKeyConflicts(keys, keys2);
 let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
     action: Action;
     device: 'key' | 'pad';
+    player: 1 | 2;
 } | null = null;
+/** Which player's mappings the Controls panel is showing. */
+let controlsPlayer: 1 | 2 = 1;
 let matchGodMode=false, matchEarnedGodMode=false, testingGodMode=false, matchTesting=false;
 let presentation = createRoundPresentation();
 let modalDirection='',modalRepeatAt=0,padNeedsRelease=true;
-let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousStart = false;
+let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousPad2: number[] = [], previousStart = false;
 let visualFrame = 0;
 const held = new Set<string>();
 const blockedKeys = new Set<string>();
@@ -148,10 +160,11 @@ function returnToSelection() {
     selection.show();
 }
 $('back-select').onclick=returnToSelection;$('overlay-select').onclick=returnToSelection;
-function keyName(code: string) { return code.replace('Key', '').replace('Digit', '').replace('Arrow', '').replace('Left', '').replace('Right', ''); }
+const KEY_SYMBOLS: Record<string, string> = { ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓', BracketLeft: '[', BracketRight: ']', Comma: ',', Period: '.', Slash: '/', Backslash: '\\', Semicolon: ';', Quote: "'", Backquote: '`', Minus: '-', Equal: '=', ShiftLeft: 'L-Shift', ShiftRight: 'R-Shift', ControlLeft: 'L-Ctrl', ControlRight: 'R-Ctrl', AltLeft: 'L-Alt', AltRight: 'R-Alt', Space: 'Space', Enter: 'Enter' };
+function keyName(code: string) { return KEY_SYMBOLS[code] ?? code.replace('Key', '').replace('Digit', '').replace('Numpad', 'Num '); }
 function save() {
     try {
-        localStorage.setItem(CONTROLS_KEY, JSON.stringify({ controlsVersion: 3, keys, padKeys }));
+        localStorage.setItem(CONTROLS_KEY, JSON.stringify({ controlsVersion: 4, keys, padKeys, keys2, padKeys2 }));
         localStorage.removeItem(LEGACY_CONTROLS_KEY);
     }
     catch { /* Nonpersistent mode. */ }
@@ -161,25 +174,23 @@ function updateControls() {
 
     $('controls-strip').innerHTML = `<span class="control"><kbd>${keyName(keys.left)} ${keyName(keys.right)}</kbd> Move / block</span>` + (['up', 'down', 'light', 'medium', 'heavy', 'launcher', 'bolt', 'grab', 'special', 'dash'] as Action[]).map(a => `<span class="control"><kbd>${keyName(keys[a])}</kbd>${labels[a]}</span>`).join('');
     document.querySelectorAll<HTMLElement>('[data-key]').forEach(el => el.textContent = keyName(keys[el.dataset.key as Action]));
-    $('bindings').innerHTML = Object.entries(labels).map(([a, label]) => `<div class="binding-row ${remapping?.action === a ? 'pending' : ''}"><span>${label}</span><button class="quiet" data-map="${a}" data-device="key">${remapping?.action === a && remapping.device === 'key' ? 'Press a key…' : keyName(keys[a as Action])}</button>${a in padDefaults ? `<button class="quiet" data-map="${a}" data-device="pad">${remapping?.action === a && remapping.device === 'pad' ? 'Press a button…' : 'Pad ' + padKeys[a as Action]}</button>` : '<span class="micro">D-pad / left stick</span>'}</div>`).join('');
-    document.querySelectorAll<HTMLButtonElement>('[data-map]').forEach(b => b.onclick = () => { remapping = { action: b.dataset.map as Action, device: b.dataset.device as 'key' | 'pad' }; $('binding-status').textContent = 'Escape cancels. Existing bindings are swapped.'; updateControls(); });
+    const playerKeys = controlsPlayer === 1 ? keys : keys2, playerPad = controlsPlayer === 1 ? padKeys : padKeys2;
+    for (const p of [1, 2] as const) { const tab = $(`controls-p${p}`); tab.setAttribute('aria-selected', String(controlsPlayer === p)); tab.tabIndex = controlsPlayer === p ? 0 : -1; }
+    $('controls-panel').dataset.player = String(controlsPlayer);
+    $('controls-player-note').textContent = controlsPlayer === 1 ? 'Player 1 plays every mode and drives the menus with the first controller.' : 'Player 2 plays in Local versus with these keys or the second controller connected.';
+    $('defaults').textContent = `Restore player ${controlsPlayer} defaults`;
+    const pending = (a: string, device: 'key' | 'pad') => remapping?.player === controlsPlayer && remapping.action === a && remapping.device === device;
+    $('bindings').innerHTML = Object.entries(labels).map(([a, label]) => `<div class="binding-row ${remapping?.player === controlsPlayer && remapping.action === a ? 'pending' : ''}"><span>${label}</span><button class="quiet" data-map="${a}" data-device="key">${pending(a, 'key') ? 'Press a key…' : playerKeys[a as Action] === UNBOUND ? '—' : keyName(playerKeys[a as Action])}</button>${a in padDefaults ? `<button class="quiet" data-map="${a}" data-device="pad">${pending(a, 'pad') ? 'Press a button…' : 'Pad ' + playerPad[a as Action]}</button>` : '<span class="micro">D-pad / left stick</span>'}</div>`).join('');
+    document.querySelectorAll<HTMLButtonElement>('[data-map]').forEach(b => b.onclick = () => { remapping = { action: b.dataset.map as Action, device: b.dataset.device as 'key' | 'pad', player: controlsPlayer }; $('binding-status').textContent = 'Escape cancels. A key another action or player uses is swapped.'; updateControls(); });
 }
 function bind(value: string | number) {
     if (!remapping)
         return;
-    const { action, device } = remapping;
-    if (device === 'key') {
-        const old = keys[action], other = (Object.keys(keys) as Action[]).find(a => keys[a] === value);
-        if (other)
-            keys[other] = old;
-        keys[action] = String(value);
-    }
-    else {
-        const old = padKeys[action], other = (Object.keys(padKeys) as Action[]).find(a => padKeys[a] === value);
-        if (other)
-            padKeys[other] = old;
-        padKeys[action] = Number(value);
-    }
+    const { action, device, player } = remapping;
+    if (device === 'key')
+        rebindKey([keys, keys2], player - 1, action, String(value));
+    else
+        rebindPad(player === 1 ? padKeys : padKeys2, action, Number(value));
     remapping = null;
     held.clear();
     queued = 0;queued2=0;
@@ -285,7 +296,13 @@ dialog.addEventListener('cancel', e => {
     else
         closeSettings();
 });
-$('defaults').onclick = () => { keys = { ...defaults }; padKeys = { ...padDefaults }; remapping = null; save(); updateControls(); };
+$('defaults').onclick = () => {
+    if (controlsPlayer === 1) { keys = { ...defaults }; padKeys = { ...padDefaults }; }
+    else { keys2 = { ...P2_KEYS }; padKeys2 = { ...padDefaults }; }
+    resolveKeyConflicts(keys, keys2); remapping = null; save(); updateControls();
+};
+for (const p of [1, 2] as const) $(`controls-p${p}`).onclick = () => { controlsPlayer = p; remapping = null; updateControls(); };
+$('controls-tabs').onkeydown = e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); controlsPlayer = controlsPlayer === 1 ? 2 : 1; remapping = null; updateControls(); $(`controls-p${controlsPlayer}`).focus(); } };
 window.addEventListener('keydown', e => {
     if (story.isOpen) return;
     if (dialog.open) {
@@ -322,9 +339,9 @@ window.addEventListener('keydown', e => {
         }
         held.add(e.code);
     }
-    else if (mode === 'versus' && Object.values(P2_KEYS).includes(e.code)) {
+    else if (mode === 'versus' && e.code !== UNBOUND && Object.values(keys2).includes(e.code)) {
         e.preventDefault();
-        if (!held.has(e.code)) queued2 |= pressedMask(e.code, P2_KEYS);
+        if (!held.has(e.code)) queued2 |= pressedMask(e.code, keys2);
         held.add(e.code);
     }
 });
@@ -354,10 +371,17 @@ function pollPad(): number {
     $('device').textContent = 'CONTROLLER CONNECTED';
     const buttons = pad.buttons.map(b => b.pressed ? 1 : 0);
     let boundPadThisFrame=false;
+    // Remapping listens to the remapped player's own controller: player 2's is
+    // the second one connected (falling back to the first if there is only one).
+    const second = versusPads(Array.from(pads))[1];
+    const secondButtons = second ? second.buttons.map(b => b.pressed ? 1 : 0) : [];
     if (remapping?.device === 'pad') {
-        const index = buttons.findIndex((b, i) => b && !previousPad[i]);
+        const fromSecond = remapping.player === 2 && !!second;
+        const source = fromSecond ? secondButtons : buttons, before = fromSecond ? previousPad2 : previousPad;
+        const index = source.findIndex((b, i) => b && !before[i]);
         if (index >= 0 && index !== 9){bind(index);boundPadThisFrame=true;}
     }
+    previousPad2 = secondButtons;
     if(wasModal&&(story.isOpen||dialog.open)&&!remapping&&!boundPadThisFrame){
         const activeDialog=document.querySelector<HTMLDialogElement>('dialog[open]')!;
         const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
@@ -495,7 +519,7 @@ function tick(now: number) {
         qaSingleStep=false;
         while (accumulator >= 1 / 60) {
             let input = pad | queued;
-            const p2 = mode === 'versus' ? padMask(versusPads(Array.from(navigator.getGamepads?.() ?? []))[1], padKeys) | queued2 | keyboardMask(held, withoutP1Keys(P2_KEYS)) : undefined;
+            const p2 = mode === 'versus' ? padMask(versusPads(Array.from(navigator.getGamepads?.() ?? []))[1], padKeys2) | queued2 | keyboardMask(held, withoutP1Keys(keys2)) : undefined;
             queued = 0;queued2=0;
             for (const a of Object.keys(A) as Action[])
                 if (held.has(keys[a]))
@@ -507,7 +531,7 @@ function tick(now: number) {
     }
     if(!selection.isOpen) render(ctx, state, presentation, visualFrame);
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
-    $('coach').textContent = mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: arrows move, , . / attack, ; ' [ ] Right Shift. A second controller plays P2.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
+    $('coach').textContent = mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);
 }
 updateControls();

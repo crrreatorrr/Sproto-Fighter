@@ -11,6 +11,7 @@ const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
 const cu=url(bundledCore()),core=await import(cu),events=await import(url(compile(read('animationEvents.ts'))));
 const pu=url(compile(read('portraits.ts')));
 const {portraitLarge}=await import(pu);
+const {versusPads}=await import(url(compile(read('localInput.ts')).replace("from './core'",`from '${cu}'`)));
 const {createVersusScreen}=await import(url(compile(read('versusScreen.ts')).replace("from './core'",`from '${cu}'`).replace("from './portraits'",`from '${pu}'`)));
 const VERSUS_FRAMES=600; // Simulate ten seconds: confirmation must never time out.
 const {createFightCountdown,COUNTDOWN_FRAMES,FIGHT_CUE_FRAMES}=await import(url(compile(read('fightCountdown.ts'))));
@@ -79,7 +80,7 @@ check('actual main shows 3/2/1 for one second each, plays entrances without dama
 });
 check('actual gamepad preview consumes only fresh A, requires neutral after skipping, and never leaks an attack',()=>{
  let current={connected:true,axes:[0,0],buttons:Array.from({length:16},()=>({pressed:false}))};
- const c={...core,selection:{isOpen:false,pollPad(){}},story:{isOpen:false},dialog:{open:false},running:true,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:true,presentation:{phase:'intro'},navigator:{getGamepads:()=>[current]},$:()=>({}),padKeys:{light:0},performance:{now:()=>0},start(){throw Error('preview Start leaked');},pause(){throw Error('preview Start paused');}};
+ const c={...core,versusPads,previousPad2:[],selection:{isOpen:false,pollPad(){}},story:{isOpen:false},dialog:{open:false},running:true,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:true,presentation:{phase:'intro'},navigator:{getGamepads:()=>[current]},$:()=>({}),padKeys:{light:0},performance:{now:()=>0},start(){throw Error('preview Start leaked');},pause(){throw Error('preview Start paused');}};
  const {screen}=ui(()=>{c.padNeedsRelease=true;});c.versus=screen;vm.createContext(c);vm.runInContext(compile(fn('pollPad')),c);
  screen.show('guest08','guest09');current.buttons[9].pressed=true;assert.equal(c.pollPad(),0);assert.ok(screen.isOpen,'Start must not confirm');current.buttons[9].pressed=false;c.pollPad();
  screen.show('guest08','guest09');c.padNeedsRelease=true;current.buttons[0].pressed=true;assert.equal(c.pollPad(),0);assert.ok(screen.isOpen,'held A cannot skip a new preview');current.buttons[0].pressed=false;c.pollPad();

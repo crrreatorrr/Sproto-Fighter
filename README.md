@@ -107,7 +107,11 @@ then pick player 2's fighter on the rival tab. Player 2 uses the arrow keys,
 first controller stays player 1 and drives the menus). Local versus never
 earns hub rewards and has no God Mode.
 
-Settings supports remapping (player 1). W jumps once per press. W+J gives a rising strike;
+**Settings → Controls** has a tab for each player, with separate keyboard and
+controller mappings. A key can belong to only one action across both players:
+binding a key the other player uses swaps it. Player 2's controller buttons
+are remapped from the second connected controller. Mappings save in the
+browser. The online multiplayer plan is in [docs/MULTIPLAYER-PLAN.md](docs/MULTIPLAYER-PLAN.md). W jumps once per press. W+J gives a rising strike;
 W+forward+K gives a diagonal strike. S+J/K gives low attacks, S+L sweeps, and
 S+K/L in the air dives. O plus forward/back/W/S selects a directional throw.
 Three damaging hits ending in a finisher earn one pip when the combo ends;

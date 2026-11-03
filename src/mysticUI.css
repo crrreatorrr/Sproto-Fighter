@@ -480,3 +480,29 @@ dialog { overflow-y: auto; }
 .variation-heading{margin-top:16px;margin-bottom:9px}
 #zone-stage-count{font-size:10px;letter-spacing:1px;color:#c4b187;white-space:nowrap}
 #zone-rail .zone-choice{height:76px}
+
+/* Per-player Controls panel. Crests and device icons: art/controls-menu-nov03. */
+.player-tabs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin: 10px 0 0; }
+.player-tab { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 10px 14px; color: #efdfbe; font: inherit; text-align: left; cursor: pointer; background: #111424ed; border: 3px double #6f5c43; border-bottom: 0; box-shadow: 3px 0 #03040a; }
+.player-tab b { display: block; font-size: 15px; color: #f3e3c2; }
+.player-tab small { display: block; font-size: 10px; color: #a99aac; letter-spacing: 1px; }
+.player-crest { flex: none; width: 40px; height: 48px; background: url('/menu/higgsfield/mystic/crest-ruby.webp') center / contain no-repeat; filter: saturate(.35) brightness(.75); transition: filter .15s; }
+.player-tab.p2 .player-crest { background-image: url('/menu/higgsfield/mystic/crest-sapphire.webp'); }
+.player-tab:hover .player-crest, .player-tab[aria-selected="true"] .player-crest { filter: none; }
+.player-tab.p1[aria-selected="true"] { border-color: #d0596b; background: linear-gradient(#3a1520e8,#141223f0); }
+.player-tab.p2[aria-selected="true"] { border-color: #5f8ee6; background: linear-gradient(#142446e8,#111526f0); }
+.player-tab:focus-visible { outline: 2px solid #ffe5b0; outline-offset: 2px; }
+.controls-panel { padding: 12px 14px 4px; border: 3px double #d0596b; background: #0c0f1ccc; }
+.controls-panel[data-player="2"] { border-color: #5f8ee6; }
+.controls-panel > .micro { margin: 0 0 8px; color: #c7bdcd; font-size: 11px; }
+.binding-head { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: center; gap: 8px; padding: 4px 0 8px; border-bottom: 2px solid #2c4260; color: #cbb68d; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+.device-head { display: flex; align-items: center; justify-content: center; gap: 8px; }
+.device-head::before { content: ''; width: 34px; height: 27px; background: url('/menu/higgsfield/mystic/icon-keyboard.webp') center / contain no-repeat; }
+.device-head.gamepad::before { background-image: url('/menu/higgsfield/mystic/icon-gamepad.webp'); }
+@media (max-width: 650px) {
+  .player-tabs { gap: 6px; }
+  .player-tab { padding: 8px; gap: 8px; }
+  .player-crest { width: 30px; height: 36px; }
+  .player-tab b { font-size: 13px; }
+  .device-head::before { width: 26px; height: 21px; }
+}
