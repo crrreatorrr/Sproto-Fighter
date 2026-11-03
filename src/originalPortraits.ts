@@ -1,6 +1,16 @@
 import { type FighterId } from './core';
 /** Original user-supplied fighter references only. No rigging diagram. */
 export const originalPortraits:Record<FighterId,string> = {
+/* NOV03 NINE PORTRAITS BEGIN */
+    nomis: new URL('../art/roster-intake-nine-nov03/nomis/reference.png', import.meta.url).href,
+    clobrwn: new URL('../art/roster-intake-nine-nov03/clobrwn/reference.png', import.meta.url).href,
+    thesprotowholivedeth: new URL('../art/roster-intake-nine-nov03/thesprotowholivedeth/reference.png', import.meta.url).href,
+    sirbitcoin: new URL('../art/roster-intake-nine-nov03/sirbitcoin/reference.png', import.meta.url).href,
+    saburdo: new URL('../art/roster-intake-nine-nov03/saburdo/reference.png', import.meta.url).href,
+    hermionemichelleamyrose: new URL('../art/roster-intake-nine-nov03/hermionemichelleamyrose/reference.png', import.meta.url).href,
+    pongohpos10i: new URL('../art/roster-intake-nine-nov03/pongohpos10i/reference.png', import.meta.url).href,
+    julian: new URL('../art/roster-intake-nine-nov03/julian/reference.png', import.meta.url).href,
+/* NOV03 NINE PORTRAITS END */
 /* SOLANA PORTRAITS BEGIN */
  solanadelray:new URL('../art/solanadelray/reference.png',import.meta.url).href,
 /* SOLANA PORTRAITS END */
