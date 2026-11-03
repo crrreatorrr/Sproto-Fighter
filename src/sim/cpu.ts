@@ -23,8 +23,9 @@ export const CPU = {
     dashGap: 220, dashCycle: 120,
     inputFrames: 4,
 } as const;
-export function cpuInput(s: CombatState): number {
-    const f = s.fighters[1], p = s.fighters[0], rootDistance = Math.abs(p.x - f.x), toward = p.x < f.x ? A.left : A.right, away = p.x < f.x ? A.right : A.left;
+/** Input the built-in CPU would press this frame for the fighter in `slot` (default: slot 1). */
+export function cpuInput(s: CombatState, slot: 0 | 1 = 1): number {
+    const f = s.fighters[slot], p = s.fighters[1 - slot], rootDistance = Math.abs(p.x - f.x), toward = p.x < f.x ? A.left : A.right, away = p.x < f.x ? A.right : A.left;
     // Approach and ordinary attacks use the gap between the two front bodies.
     // Root distance alone leaves a wide fighter stuck walking into collision.
     const distance = Math.max(0, rootDistance - bodySpread(f.id) - bodySpread(p.id));

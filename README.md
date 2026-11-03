@@ -100,7 +100,14 @@ combat starts on FIGHT. Escape pauses either introduction. Rounds have no time l
 | Team Special | P | Right trigger |
 | Dash / pause | Left Shift / Escape | Left trigger / Start |
 
-Settings supports remapping. W jumps once per press. W+J gives a rising strike;
+**Local versus:** choose *Local versus · Second player* as the rival behavior,
+then pick player 2's fighter on the rival tab. Player 2 uses the arrow keys,
+`,` `.` `/` (light, medium, finisher), `;` (launcher), `'` (ranged), `[`
+(grab), `]` (Team Special) and Right Shift (dash), or a second controller (the
+first controller stays player 1 and drives the menus). Local versus never
+earns hub rewards and has no God Mode.
+
+Settings supports remapping (player 1). W jumps once per press. W+J gives a rising strike;
 W+forward+K gives a diagonal strike. S+J/K gives low attacks, S+L sweeps, and
 S+K/L in the air dives. O plus forward/back/W/S selects a directional throw.
 Three damaging hits ending in a finisher earn one pip when the combo ends;

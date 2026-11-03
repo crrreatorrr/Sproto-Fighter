@@ -28,7 +28,7 @@ function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost =
 function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string) {
     const x = right ? 765 : 55, width = 460, color = ROSTER[f.id].color;
     text(c, ROSTER[f.id].name, right ? 1225 : 55, 55, 24, '#eaf0f7', right ? 'right' : 'left', 850);
-    text(c, (right ? (mode === 'cpu' ? 'CPU / ' : 'DUMMY / ') : 'YOU / ') + ROSTER[f.id].role, right ? 1225 : 55, 74, 10, color, right ? 'right' : 'left');
+    text(c, (mode === 'versus' ? (right ? 'P2 / ' : 'P1 / ') : right ? (mode === 'cpu' ? 'CPU / ' : 'DUMMY / ') : 'YOU / ') + ROSTER[f.id].role, right ? 1225 : 55, 74, 10, color, right ? 'right' : 'left');
     c.fillStyle = '#2b3547';
     c.fillRect(x, 88, width, 19);
     c.fillStyle = color;

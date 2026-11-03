@@ -12,7 +12,10 @@ export const PLAYABLE_FIGHTERS = ['rivet', 'vela', 'bront', 'zephyr', 'mox', 'ru
 export type PlayableFighterId = typeof PLAYABLE_FIGHTERS[number];
 /** New reference additions are available in free play outside the fixed campaign. */
 export const isFreePlayAddition = (id:FighterId) => (['reverend','zepump','sprotopotamus','willuminati','pirate','prim','benjamin','maxbiggums','xav','emix','peterpan','anni','pinewaffle','rainman','wifebeater','fiatfudder','moonshiller','godether','aleksander','cyberviber','realityarchitect','mrgoldrobe','solanadelray','sproteth','danocrypto', 'buddhashadow'] as readonly FighterId[]).includes(id);
-export type Mode = 'cpu' | 'dummy' | 'guard';
+/** 'cpu', 'dummy' and 'guard' put the built-in CPU in slot 1; 'versus' is two human players. */
+export type Mode = 'cpu' | 'dummy' | 'guard' | 'versus';
+/** Practice modes: slot 1 is a training dummy whose health refills. */
+export const isPracticeMode = (mode: Mode) => mode === 'dummy' || mode === 'guard';
 export type MoveId = 'light' | 'medium' | 'heavy' | 'low' | 'sweep' | 'airLight' | 'airMedium' | 'airHeavy' | 'launcher' | 'bolt' | 'grab' | 'special';
 export interface Move {
     startup: number;

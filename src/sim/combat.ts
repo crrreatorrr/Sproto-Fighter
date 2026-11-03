@@ -15,8 +15,10 @@ export function finishCombo(s: CombatState, attacker: Fighter) {
     if (attacker.combo >= 3 && attacker.lastFinisher && attacker.chargeEligible) {
         attacker.pips = Math.min(3, attacker.pips + 1);
         effect(s, attacker.x, attacker.y - 130, 'charge', ROSTER[attacker.id].color);
-        if (attacker === s.fighters[0]) {
-            s.notice = attacker.pips === 3 ? 'RELAY READY — TEAM SPECIAL' : 'CLEAN FINISH  /  +1 RELAY CHARGE';
+        // Against the CPU only the human (slot 0) gets coaching notices; in local versus both do.
+        const slot = s.fighters.indexOf(attacker);
+        if (slot === 0 || s.mode === 'versus') {
+            s.notice = (s.mode === 'versus' ? `P${slot + 1} ` : '') + (attacker.pips === 3 ? 'RELAY READY — TEAM SPECIAL' : 'CLEAN FINISH  /  +1 RELAY CHARGE');
             s.noticeLife = 150;
         }
     }

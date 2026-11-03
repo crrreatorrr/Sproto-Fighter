@@ -1,7 +1,7 @@
 // Deterministic math, state checksum and the per-frame step.
 import { act, beginThrow, clamp, damage, effect, finishCombo, getMove, grounded, isDown, updateThrow } from './combat';
 import { A, FLOOR, GRAVITY, WIDTH } from './constants';
-import { BACK_THROW_LIFT_FRAMES, COMBAT_STYLES, CROUCH_SPIT_ORIGINS, GETUP_FRAMES, KNOCKDOWN_FRAMES, MOVES, Move, MoveId, ROSTER, THROW_RECOVERY_FRAMES, bodySpread, fighterWall, isCrouchingSpit, isHorizontalSpit, isPairedFighter } from './roster';
+import { BACK_THROW_LIFT_FRAMES, COMBAT_STYLES, CROUCH_SPIT_ORIGINS, GETUP_FRAMES, KNOCKDOWN_FRAMES, MOVES, Move, MoveId, ROSTER, THROW_RECOVERY_FRAMES, bodySpread, fighterWall, isCrouchingSpit, isHorizontalSpit, isPairedFighter, isPracticeMode } from './roster';
 import { CombatState, Fighter } from './types';
 /**
  * Deterministic math for the simulation. Online play needs every browser to
@@ -295,6 +295,6 @@ export function step(s: CombatState, inputs: [
         s.throwState=null;
     }
     if(s.godMode){a.hp=1000;a.pips=3;}
-    if (s.mode !== 'cpu' && b.stun === 0 && a.combo === 0 && s.frame % 90 === 0)
+    if (isPracticeMode(s.mode) && b.stun === 0 && a.combo === 0 && s.frame % 90 === 0)
         b.hp = 1000;
 }

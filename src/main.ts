@@ -9,6 +9,7 @@ import './versusScreen.css';
 import {createVersusScreen} from './versusScreen';
 import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';
+import { P2_KEYS, keyboardMask, pressedMask, padMask, versusPads } from './localInput';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
@@ -54,12 +55,12 @@ let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: num
 let visualFrame = 0;
 const held = new Set<string>();
 const blockedKeys = new Set<string>();
-let queued = 0;
+let queued = 0, queued2 = 0; // presses since the last frame, per playerqueued2=0;
 const countdown=createFightCountdown(canvas.parentElement!);
 const versus=createVersusScreen($('fight-view'),()=>{
     // Dismissing a preview must never become an attack, jump or pause in combat.
     for(const code of held)blockedKeys.add(code);
-    held.clear();queued=0;padNeedsRelease=true;
+    held.clear();queued=0;queued2=0;padNeedsRelease=true;
     countdown.show();
     if(running&&!dialog.open&&!story.isOpen)canvas.focus();
 });
@@ -128,7 +129,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
     selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
     started=false;restart();start();
-    $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
+    $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
     if(encounter&&encounter.opponents.length>1){
         const bout=encounter.opponents.indexOf(setup.opponent)+1;
         const gauntletName=encounter.gauntlet==='art'?'ART DUO':encounter.gauntlet==='nick-juicy'?'NICK → JUICY':'FINAL GAUNTLET';
@@ -141,7 +142,7 @@ function returnToSelection() {
     versus.hide();
     countdown.hide();
     story.leaveStory();
-    running=false;started=false;held.clear();queued=0;accumulator=0;qaSingleStep=false;
+    running=false;started=false;held.clear();queued=0;queued2=0;accumulator=0;qaSingleStep=false;
     resumeAfterSettings=false;resumeAfterJourney=false;
     $('fight-view').hidden=true;$('overlay').hidden=true;
     selection.show();
@@ -181,12 +182,12 @@ function bind(value: string | number) {
     }
     remapping = null;
     held.clear();
-    queued = 0;
+    queued = 0;queued2=0;
     save();
     updateControls();
     $('binding-status').textContent = 'Saved on this browser.';
 }
-function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; if(!selection.isOpen)$('start').focus(); }
+function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; if(!selection.isOpen)$('start').focus(); }
 function start() {
     if (selection.isOpen || story.isOpen || dialog.open || ($('start') as HTMLButtonElement).disabled) return;
     if (presentation.phase === 'result')
@@ -197,7 +198,7 @@ function start() {
     padNeedsRelease = true;
     accumulator = 0;
     held.clear();
-    queued = 0;
+    queued = 0;queued2=0;
     $('overlay').hidden = true;
     $('pause').innerHTML = 'Pause <kbd>Esc</kbd>';
     canvas.focus();
@@ -211,7 +212,7 @@ function pause() {
         start();
 }
 function restart() {
-    matchTesting=testingGodMode;matchGodMode=testingGodMode||matchEarnedGodMode;
+    matchTesting=testingGodMode&&mode!=='versus';matchGodMode=(testingGodMode||matchEarnedGodMode)&&mode!=='versus';
     state = createState(chosen, mode, opponent);
     if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
@@ -221,7 +222,7 @@ function restart() {
     qaEvents.length = 0;
     accumulator = 0;
     held.clear();
-    queued = 0;
+    queued = 0;queued2=0;
     updateGodModeLabel();
     if (started)
         start();
@@ -264,7 +265,7 @@ $('settings').onclick = () => {
     if (running)
         pause();
     held.clear();
-    queued = 0;
+    queued = 0;queued2=0;
     dialog.showModal();
 };
 function closeSettings() {
@@ -321,12 +322,17 @@ window.addEventListener('keydown', e => {
         }
         held.add(e.code);
     }
+    else if (mode === 'versus' && Object.values(P2_KEYS).includes(e.code)) {
+        e.preventDefault();
+        if (!held.has(e.code)) queued2 |= pressedMask(e.code, P2_KEYS);
+        held.add(e.code);
+    }
 });
 window.addEventListener('keyup', e => {held.delete(e.code);blockedKeys.delete(e.code);});
 window.addEventListener('blur', () => {
     blockedKeys.clear();
     held.clear();
-    queued = 0;
+    queued = 0;queued2=0;
     if (running)
         pause();
 });
@@ -430,7 +436,13 @@ function qaRecord(before:string){
     if(before!==after){qaEvents.push(`f${state.frame}: ${f.move?.id??'neutral'} ${f.move?.aim??''} hits=${f.combo} pips=${f.pips} hp=${f.hp}/${state.fighters[1].hp} x=${Math.round(f.x)} y=${Math.round(f.y)} input=${f.input} throw=${state.throwState?.direction??'-'}/${state.throwState?.phase??'-'} reaction2=${state.fighters[1].reaction?.kind??'-'}/${state.fighters[1].reaction?.phase??'-'}`);if(qaEvents.length>48)qaEvents.shift();}
 }
 // A presentation frame never enters the deterministic combat/replay stream.
-function advanceRoundFrame(input: number) {
+/** Player 2's bindings minus any key player 1 has remapped onto (player 1 wins). */
+function withoutP1Keys(bindings: Readonly<Record<Action, string>>): Record<Action, string> {
+    const p1 = new Set(Object.values(keys));
+    return Object.fromEntries(Object.entries(bindings).map(([a, code]) => [a, p1.has(code) ? '' : code])) as Record<Action, string>;
+}
+/** Advance one frame. `p2Input` is player 2's input in local versus; otherwise the CPU plays slot 2. */
+function advanceRoundFrame(input: number, p2Input?: number) {
     if(versus.advance())return;
     if(countdown.advance()){
         // Entrances remain visible during the countdown; combat and replay wait.
@@ -447,12 +459,16 @@ function advanceRoundFrame(input: number) {
         if ((presentation as RoundPresentation).phase !== 'result') return;
         reportRound();
         if (story.onRoundEnd(state.winner!)) return;
+        if (mode === 'versus') {
+            showOverlay(state.winner === 2 ? 'Double knockout.' : `Player ${state.winner! + 1} wins.`, `Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch →', 'LOCAL VERSUS');
+            return;
+        }
         const won = state.winner === 0;
         showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again →', 'ROUND COMPLETE');
         return;
     }
     if (presentation.phase !== 'fight') return;
-    const pair: [number, number] = [input, cpuInput(state)];
+    const pair: [number, number] = [input, p2Input ?? cpuInput(state)];
     frames.push(pair);
     const qaBefore = qaPanel ? [state.fighters[0].move?.id,state.fighters[0].combo,state.fighters[0].pips,state.fighters[0].hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|') : '';
     const previousMoves=state.fighters.map(f=>f.move);
@@ -465,7 +481,7 @@ function advanceRoundFrame(input: number) {
         const fromFloor = losers.every(f => f.reaction?.kind === 'knockdown' && f.reaction.phase === 'down');
         beginRoundOutro(presentation, state.winner as 0 | 1 | 2, fromFloor);
         qaStopAtOutro();
-        held.clear(); queued = 0;
+        held.clear(); queued = 0;queued2=0;
     }
 }
 function tick(now: number) {
@@ -479,18 +495,19 @@ function tick(now: number) {
         qaSingleStep=false;
         while (accumulator >= 1 / 60) {
             let input = pad | queued;
-            queued = 0;
+            const p2 = mode === 'versus' ? padMask(versusPads(Array.from(navigator.getGamepads?.() ?? []))[1], padKeys) | queued2 | keyboardMask(held, withoutP1Keys(P2_KEYS)) : undefined;
+            queued = 0;queued2=0;
             for (const a of Object.keys(A) as Action[])
                 if (held.has(keys[a]))
                     input |= A[a];
             accumulator -= 1 / 60;
-            advanceRoundFrame(input);
+            advanceRoundFrame(input, p2);
             if (!running || presentation.phase === 'result') break;
         }
     }
     if(!selection.isOpen) render(ctx, state, presentation, visualFrame);
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
-    $('coach').textContent = state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
+    $('coach').textContent = mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: arrows move, , . / attack, ; ' [ ] Right Shift. A second controller plays P2.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);
 }
 updateControls();
