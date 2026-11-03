@@ -23,4 +23,6 @@ Fetch initially failed because two existing duplicate ref files had invalid name
 
 See `INTEGRATION-20261103.md` for build, automated and actual browser coverage. The main browser URL is `http://127.0.0.1:5200/`. Physical controllers and authenticated live hub rewards remain unverified; no server migration or backend deployment was performed.
 
-Publication result and verified remote commit are recorded after upload completes.
+All eight asset-transfer commits completed and their remote SHAs were checked. The final transfer tip is `3eb88efa9b051e4a03168887bdc5f89def10ada9`; its tree `24f759b83537022aa9d5a9acfa9343f89984757f` exactly matches the verified local source checkpoint `26eafe51`. The slow seventh transfer was stopped before its ref advanced and successfully retried through the same GitHub endpoint using HTTP/1.1. The six prior batches were preserved.
+
+The final main checkpoint joins this transfer history with the complete local development history. No tracked source art, runtime assets or QA evidence are excluded. The final remote-main SHA and GitHub Actions result are provided in the task delivery; use `git rev-parse main` for the checked-out publication commit. Detailed scan metadata is in `PUBLIC-HISTORY-SCAN-20261103.json`.

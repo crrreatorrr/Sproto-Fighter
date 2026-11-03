@@ -1,0 +1,43 @@
+{
+  "commits": 66,
+  "blobs": 29152,
+  "textBlobsScanned": 5179,
+  "historyBlobBytes": 7211962016,
+  "largestHistory": [
+    [
+      21365270,
+      "public/fighters/pose-atlas.json"
+    ],
+    [
+      21363222,
+      "public/fighters/pose-atlas.json"
+    ],
+    [
+      21361778,
+      "public/fighters/pose-atlas.json"
+    ],
+    [
+      21361164,
+      "public/fighters/pose-atlas.json"
+    ],
+    [
+      21197423,
+      "public/fighters/pose-atlas.json"
+    ],
+    [
+      21152339,
+      "public/fighters/pose-atlas.json"
+    ],
+    [
+      21005555,
+      "art/sprotos-expansion/raw/rejected/sproto1345-walk.png"
+    ],
+    [
+      20467124,
+      "art/sprotos-expansion/raw/pilot-nano.png"
+    ]
+  ],
+  "findings": [],
+  "scope": "Local history through 54551852, before preserved already-public remote evidence and documentation-only publication records.",
+  "limitations": "Pattern-based credential scan; no guarantee against arbitrary private content. Binary image pixel content was not analyzed by this scan."
+}
