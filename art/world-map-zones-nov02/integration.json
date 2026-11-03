@@ -1,0 +1,26 @@
+{
+  "source": "art/world-map-zones-nov02/raw/world-map.png",
+  "runtime": "public/story/campaign-map-expanded.webp",
+  "size": [
+    3840,
+    2160
+  ],
+  "sourceSHA256": "5456f88a27c643cc0fd6b761c89838a010c49989b4012690f6ec7fb72d1ee30e",
+  "runtimeSHA256": "232c6a7e9407a77c65762afdbfdf4737659e73a8252e6dd87a1eb31e29a97c89",
+  "conversion": "Lossless WebP, exact decoded RGB pixel match, no crop or resize",
+  "zoneOrder": [
+    "trenches",
+    "circuit",
+    "yacht",
+    "ranch",
+    "throne",
+    "bar",
+    "hatchery",
+    "verse"
+  ],
+  "routes": "art/world-map-zones-nov02/routes.json",
+  "originalsRetained": [
+    "public/story/campaign-map.webp",
+    "art/story-map/expanded/Sproto-Arena-Expanded-Campaign-Map-150.png"
+  ]
+}

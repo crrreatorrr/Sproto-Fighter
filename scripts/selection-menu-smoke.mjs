@@ -14,7 +14,7 @@ class Element{
  set innerHTML(s){this.html=s;this.children=[];for(const m of s.matchAll(/<([\w-]+)[^>]*\bid="([^"]+)"/g)){const e=m[1]==='select'?new Select():new Element(m[1]);e.id=m[2];ids.set(e.id,e);}if(s.includes('class="selection-grid"'))this.grid=new Element();if(s.includes('class="stage-rail"'))this.rail=new Element();if(s.includes('<canvas'))this.canvas=new Element('canvas');}
  get innerHTML(){return this.html??'';}setAttribute(k,v){this.attributes[k]=String(v);}getAttribute(k){return this.attributes[k]??null;}
  contains(e){return this===e||this.children.some(c=>c.contains(e));}
- append(e){this.children.push(e);}focus(){document.activeElement=this;this.onfocus?.();}click(){if(!this.disabled){if(this.tagName==='INPUT'){this.checked=!this.checked;this.onchange?.();}this.onclick?.();}}
+ append(e){const index=this.children.indexOf(e);if(index>=0)this.children.splice(index,1);this.children.push(e);}focus(){document.activeElement=this;this.onfocus?.();}click(){if(!this.disabled){if(this.tagName==='INPUT'){this.checked=!this.checked;this.onchange?.();}this.onclick?.();}}
  addEventListener(k,f){this.events[k]=f;}dispatchEvent(e){this.events[e.type]?.(e);if(e.type==='change')this.onchange?.();return true;}
  querySelector(s){if(s==='.selection-grid')return this.grid;if(s.startsWith('.stage-rail'))return this.rail;if(s==='.roster-total')return this.rosterTotal??=new Element();if(s==='canvas')return this.canvas;return null;}
  querySelectorAll(s){return s==='button'?this.children.filter(c=>c.tagName==='BUTTON'):[];}
@@ -42,6 +42,14 @@ const key=direction=>{let prevented=false;root.events.keydown({key:'Arrow'+direc
 const pad=(pressed=[],axes=[0,0])=>({connected:true,axes,buttons:Array.from({length:16},(_,i)=>({pressed:pressed.includes(i)}))});
 function menuPress(buttons){now+=1000;menu.pollPad(pad());menu.pollPad(pad(buttons));}
 let count=0;const check=(name,fn)=>{fn();count++;console.log('PASS:',name);};
+check('unlocked fighters sort alphabetically before locked fighters on both sides and after recruitment',()=>{
+ const expected=()=>[...core.PLAYABLE_FIGHTERS].sort((a,b)=>Number(unlocked.has(b))-Number(unlocked.has(a))||core.ROSTER[a].name.localeCompare(core.ROSTER[b].name,'en',{sensitivity:'base',numeric:true})||a.localeCompare(b));
+ const verify=()=>{assert.deepEqual(portraits.filter(p=>p.dataset.fighter).map(p=>p.dataset.fighter),expected());assert.equal(portraits.at(-1).dataset.fighter,undefined,'random stays last');};
+ verify();$('choose-rival').click();verify();$('choose-player').click();
+ const aaron=portraits.find(p=>p.dataset.fighter==='aaron');aaron.focus();unlocked.add('aaron');subscribers.forEach(fn=>fn());verify();assert.equal(document.activeElement,aaron,'reordering retains focus');assert.equal(portraits[0],aaron);
+ key('Right');assert.equal(document.activeElement,portraits[1],'keyboard follows sorted order');aaron.focus();menuPress([15]);assert.equal(document.activeElement,portraits[1],'controller follows sorted order');
+ unlocked.delete('aaron');subscribers.forEach(fn=>fn());verify();menu.setSetup({fighter:'highsproto'});
+});
 check('zone selection filters variations and preserves launch identity',()=>{
  assert.equal(zoneButtons().length,8);
  const seen=new Set();for(const zone of groups.STAGE_ZONES){zoneButtons().find(b=>b.dataset.zone===zone.id).click();assert.equal(menu.getSetup().stage,zone.id);assert.deepEqual(visibleStages().map(b=>b.dataset.stage),groups.stagesInZone(zone.id).map(s=>s.id));for(const button of visibleStages())seen.add(button.dataset.stage);}
@@ -50,9 +58,9 @@ check('zone selection filters variations and preserves launch identity',()=>{
  menu.setSetup({stage:'starbridge'});assert.equal(currentZone().dataset.zone,'verse');assert.ok(visibleStages().some(b=>b.dataset.stage==='starbridge'));menu.setSetup({stage:'ranch'});
 });
 
-check('all 24 approved story panoramas are selectable, including Ranch’s three variations',()=>{
+check('all 24 approved story panoramas are selectable, including the three new Ranch maps',()=>{
  const approved=JSON.parse(read('public/stages/variations-v2/manifest.json'));
- assert.equal(stages.length,70);
+ assert.equal(stages.length,73);
  for(const item of approved){
   const zone=groups.stageZone(item.id);zoneButtons().find(button=>button.dataset.zone===zone).click();
   const button=visibleStages().find(button=>button.dataset.stage===item.id);assert.ok(button,item.id);
@@ -60,7 +68,7 @@ check('all 24 approved story panoramas are selectable, including Ranch’s three
   assert.equal(currentZone().dataset.zone,zone);assert.equal(button.getAttribute('aria-pressed'),'true');
  }
  zoneButtons().find(button=>button.dataset.zone==='ranch').click();
- assert.equal(visibleStages().length,4);assert.equal($('zone-stage-count').textContent,'4 STAGES');
+ assert.equal(visibleStages().length,7);assert.equal($('zone-stage-count').textContent,'7 STAGES');
  for(const button of visibleStages()){button.focus();menuPress([0]);assert.equal(menu.getSetup().stage,button.dataset.stage);menuPress([1]);assert.equal(document.activeElement,currentZone());}
  menu.setSetup({stage:'ranch'});
 });

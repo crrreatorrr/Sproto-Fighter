@@ -13,7 +13,7 @@ try{
  const ids=['satoshi','xalt','potocaicai'],indices=ids.map(id=>STORY_ENCOUNTERS.findIndex(e=>e.opponents.includes(id)));
  assert.deepEqual(CAMPAIGN_RECRUITS,ids);assert.deepEqual(indices,[indices[0],indices[0]+1,indices[0]+2]);
  for(const [i,id]of ids.entries()){
-  assert.equal(STORY_OPPONENTS.filter(x=>x===id).length,1);assert.deepEqual(STORY_ENCOUNTERS[indices[i]].opponents,[id]);assert.equal(STORY_ENCOUNTERS[indices[i]].stage,'verse');assert.equal(isFreePlayAddition(id),false);
+  assert.equal(STORY_OPPONENTS.filter(x=>x===id).length,1);assert.deepEqual(STORY_ENCOUNTERS[indices[i]].opponents,[id]);assert.equal(STORY_ENCOUNTERS[indices[i]].stage,'hatchery');assert.equal(isFreePlayAddition(id),false);
  }
  assert.equal(STORY_ENCOUNTERS[indices[2]+1].opponent,'rivet');
  const storage=(data={})=>{const entries=new Map(Object.entries(data));return {getItem:k=>entries.get(k)??null,setItem:(k,v)=>entries.set(k,v)};};
@@ -29,7 +29,7 @@ try{
   for(const later of ids.slice(i+1))assert.equal(p.isUnlocked(later),false);
   const count=p.snapshot().cleared.length;clear(p,index);assert.equal(p.snapshot().cleared.length,count,'replays cannot award the next recruit');
  }
- console.log('PASS: three distinct consecutive Verse challenges; each recruit locks P1 until its own victory and stays unlocked after reload.');
+ console.log('PASS: three distinct consecutive Hatchery challenges; each recruit locks P1 until its own victory and stays unlocked after reload.');
  for(const [version,key,order]of [[1,LEGACY_STORY_SAVE_KEY,LEGACY_STORY_OPPONENTS],[2,PREVIOUS_STORY_SAVE_KEY,PREVIOUS_STORY_OPPONENTS]]){
   for(let count=0;count<=order.length;count++){
    const raw=JSON.stringify({version,cleared:order.slice(0,count).map(id=>'story-v1-'+id),unlocked:[...new Set(['bront',...(version===1?['rivet']:['highsproto']),...order.slice(0,count)])]});

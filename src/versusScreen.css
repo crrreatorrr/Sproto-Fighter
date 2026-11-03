@@ -13,7 +13,7 @@
 .versus-fighter:is([data-fighter='vaudream'],[data-fighter='nick'],[data-fighter='highsproto'],[data-fighter='captain']) img{width:min(100%,42vh,340px);height:auto;aspect-ratio:1;justify-self:center;object-fit:cover;object-position:left center}
 .versus-fighter.portrait-unavailable{min-height:180px}
 .versus-fighter figcaption{min-width:0;align-self:end}
-.versus-fighter h3{margin:0;font:800 clamp(18px,3.3vw,34px)/1.12 system-ui,-apple-system,'Segoe UI',sans-serif;font-family:system-ui,-apple-system,'Segoe UI',sans-serif!important;text-align:center;text-transform:none;overflow-wrap:anywhere;word-break:normal;letter-spacing:0}
+.versus-fighter h3{margin:0;font:700 clamp(18px,3.3vw,34px)/1.2 'Pixelify Sans',monospace;font-family:'Pixelify Sans',monospace!important;text-align:center;text-transform:none;overflow-wrap:anywhere;word-break:normal;letter-spacing:0}
 .versus-mark{font:900 clamp(32px,6vw,76px)/1 'Pixelify Sans',monospace;color:#ffe064;text-align:center;text-shadow:4px 4px 0 #2a0b19}
 .versus-screen .versus-skip{margin:0;min-height:44px;padding:10px 24px;border:2px solid #ffe064;border-radius:0;color:#10162a;background:#ffe064;font:700 16px/1.25 system-ui,sans-serif;cursor:pointer;box-shadow:4px 4px 0 #080a14}
 .versus-screen .versus-skip:focus-visible{outline:3px solid white;outline-offset:4px}

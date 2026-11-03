@@ -60,7 +60,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     function encounterPreview(encounter:Encounter){
         view='result';$('journey-kicker').textContent=`STORY / ENCOUNTER ${encounter.index+1} OF ${total}`;
         $('journey-title').textContent=`Challenge ${names(encounter)}.`;
-        $('journey-copy').textContent=`${gauntletNote(encounter)}Win to recruit each defeated fighter and advance toward the Hatchery. ${storageNote()}`;
+        $('journey-copy').textContent=`${gauntletNote(encounter)}Win to recruit each defeated fighter and advance toward Verse Gate. ${storageNote()}`;
         $('journey-content').replaceChildren();
         buttons([{label:'Start encounter →',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);back=()=>selector(true);open();
     }
@@ -70,8 +70,8 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         progress.sync();
         view=story?'worlds':'levels';modal.classList.toggle('story-map-open',story);const save=progress.snapshot();
         $('journey-kicker').textContent=story?`STORY / ${save.cleared.length} OF ${total} ENCOUNTERS CLEARED`:'FREE PLAY / LEVEL SELECT';
-        $('journey-title').textContent=story?'The road to the Hatchery.':'Pick a place to fight.';
-        $('journey-copy').textContent=story?`${STORY_OPPONENTS.length} distinct rivals across ${total} encounters. Victory recruits each defeated fighter. The art duo closes Verse Gate. In the Hatchery, defeat Nick then Juicy before the Morelight and VMU finale. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
+        $('journey-title').textContent=story?'The road to Verse Gate.':'Pick a place to fight.';
+        $('journey-copy').textContent=story?`${STORY_OPPONENTS.length} distinct rivals across ${total} encounters. Victory recruits each defeated fighter. Sproto Ranch is the middle chapter. The final three zones are HPOS10i Club (Bar), The Hatchery, then Verse Gate. The art duo closes the Hatchery; Nick then Juicy lead into the Morelight and VMU finale at Verse Gate. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
         const content=$('journey-content');content.replaceChildren();const grid=document.createElement('div');grid.className='world-grid'+(story?' campaign-chapter-list':'');content.append(grid);
         for(const level of story?worlds:STAGES){
             const encounters=STORY_ENCOUNTERS.filter(e=>e.stage===level.id),first=encounters[0],last=encounters.at(-1);

@@ -1,0 +1,120 @@
+{
+  "stages": [
+    {
+      "id": "ranch-orchard",
+      "name": "Dawn Orchard",
+      "scene": "DAWN ORCHARD: rows of gnarled apple trees with red fruit and soft sage leaves behind low dry-stone walls. Old pale-stone cider press house offset to the left with reddish roof, stacked empty wooden apple crates far behind lane, distant farmhouse and rolling misty pasture. Pale peach dawn through stepped rose/cream clouds, cool lavender shadows, dew on restrained grass. Broad level ochre farm track in foreground. The orchard, cider house and pale dawn should dominate."
+    },
+    {
+      "id": "ranch-windmill",
+      "name": "Stormwind Mill",
+      "scene": "STORMWIND MILL: towering weathered timber windmill on a pale stone base offset right, with big four-blade silhouette, old grain barn left, golden wheat fields, broken stone tower far distance. Dramatic indigo storm clouds with a thin copper break of sunlight, cool slate/teal shadows and warm gold grain. Fence line and wheat remain BEHIND the lane. Broad level firm gravel mill yard across foreground, no puddles or raised objects in lane. No animated rain overlay; one richly crafted still."
+    },
+    {
+      "id": "ranch-creek",
+      "name": "Moonlit Creek Crossing",
+      "scene": "MOONLIT CREEK CROSSING: small arched stone bridge and calm silver-blue creek in middle background, willow trees and reeds only behind the lane, lantern-lit pale stone watermill cottage left, turning waterwheel attached beside creek in background, distant red-roof farmhouse and ruined chimney on ridge. Crescent moon and crisp stepped midnight blue clouds, localized amber lantern light, blue/sage/silver palette. A broad continuous flat dry compacted earth towpath across foreground in FRONT of all creek water; no water crosses the fighting lane. No bridge arch under fighters."
+    }
+  ],
+  "requests": [
+    {
+      "index": 0,
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "sunburst",
+        "quality": "high",
+        "resolution": "4k",
+        "aspect_ratio": "16:9",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "0f17148a-66ab-481f-9ed2-db00019d1801"
+          }
+        ],
+        "prompt": "Create one complete 16:9 side-view 2D fighting-game background for Sproto Ranch. Use the supplied ranch panorama only as an art-style, world identity and camera reference; create a NEW location with its own architecture and composition, not a recolor. Rich detailed arcade PIXEL ART with sharp stepped clusters, controlled dithering and crafted material textures, approximately 640x360 working grid. Weathered pale stone rural buildings, red tiled roofs, lush British-style countryside, farm lanes and distant ruined masonry belong to this world. Fixed horizontal camera at fighter height, NO overhead or isometric view. Full-width flat walkable lane across bottom third, with foot contact at y=578 of720, earth/wood ground continuing to bottom. No gaps, steps, water or raised objects in that lane; all scenery and water BEHIND the fighters. Keep x=80..1200,y=350..600 relatively subdued and unobstructed; top22 percent quiet for HUD. No fighters, people, animals, text, UI, borders, logos, blur, photography or 3D rendering. A full scene only, not a montage.\n\nDAWN ORCHARD: rows of gnarled apple trees with red fruit and soft sage leaves behind low dry-stone walls. Old pale-stone cider press house offset to the left with reddish roof, stacked empty wooden apple crates far behind lane, distant farmhouse and rolling misty pasture. Pale peach dawn through stepped rose/cream clouds, cool lavender shadows, dew on restrained grass. Broad level ochre farm track in foreground. The orchard, cider house and pale dawn should dominate."
+      }
+    },
+    {
+      "index": 1,
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "sunburst",
+        "quality": "high",
+        "resolution": "4k",
+        "aspect_ratio": "16:9",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "0f17148a-66ab-481f-9ed2-db00019d1801"
+          }
+        ],
+        "prompt": "Create one complete 16:9 side-view 2D fighting-game background for Sproto Ranch. Use the supplied ranch panorama only as an art-style, world identity and camera reference; create a NEW location with its own architecture and composition, not a recolor. Rich detailed arcade PIXEL ART with sharp stepped clusters, controlled dithering and crafted material textures, approximately 640x360 working grid. Weathered pale stone rural buildings, red tiled roofs, lush British-style countryside, farm lanes and distant ruined masonry belong to this world. Fixed horizontal camera at fighter height, NO overhead or isometric view. Full-width flat walkable lane across bottom third, with foot contact at y=578 of720, earth/wood ground continuing to bottom. No gaps, steps, water or raised objects in that lane; all scenery and water BEHIND the fighters. Keep x=80..1200,y=350..600 relatively subdued and unobstructed; top22 percent quiet for HUD. No fighters, people, animals, text, UI, borders, logos, blur, photography or 3D rendering. A full scene only, not a montage.\n\nSTORMWIND MILL: towering weathered timber windmill on a pale stone base offset right, with big four-blade silhouette, old grain barn left, golden wheat fields, broken stone tower far distance. Dramatic indigo storm clouds with a thin copper break of sunlight, cool slate/teal shadows and warm gold grain. Fence line and wheat remain BEHIND the lane. Broad level firm gravel mill yard across foreground, no puddles or raised objects in lane. No animated rain overlay; one richly crafted still."
+      }
+    },
+    {
+      "index": 2,
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "sunburst",
+        "quality": "high",
+        "resolution": "4k",
+        "aspect_ratio": "16:9",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "0f17148a-66ab-481f-9ed2-db00019d1801"
+          }
+        ],
+        "prompt": "Create one complete 16:9 side-view 2D fighting-game background for Sproto Ranch. Use the supplied ranch panorama only as an art-style, world identity and camera reference; create a NEW location with its own architecture and composition, not a recolor. Rich detailed arcade PIXEL ART with sharp stepped clusters, controlled dithering and crafted material textures, approximately 640x360 working grid. Weathered pale stone rural buildings, red tiled roofs, lush British-style countryside, farm lanes and distant ruined masonry belong to this world. Fixed horizontal camera at fighter height, NO overhead or isometric view. Full-width flat walkable lane across bottom third, with foot contact at y=578 of720, earth/wood ground continuing to bottom. No gaps, steps, water or raised objects in that lane; all scenery and water BEHIND the fighters. Keep x=80..1200,y=350..600 relatively subdued and unobstructed; top22 percent quiet for HUD. No fighters, people, animals, text, UI, borders, logos, blur, photography or 3D rendering. A full scene only, not a montage.\n\nMOONLIT CREEK CROSSING: small arched stone bridge and calm silver-blue creek in middle background, willow trees and reeds only behind the lane, lantern-lit pale stone watermill cottage left, turning waterwheel attached beside creek in background, distant red-roof farmhouse and ruined chimney on ridge. Crescent moon and crisp stepped midnight blue clouds, localized amber lantern light, blue/sage/silver palette. A broad continuous flat dry compacted earth towpath across foreground in FRONT of all creek water; no water crosses the fighting lane. No bridge arch under fighters."
+      }
+    }
+  ],
+  "submission": {
+    "jobs": [
+      {
+        "index": 0,
+        "job_id": "fbe251cf-c0d5-4470-a638-d81596020734",
+        "status": "pending",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.5 backend expects schema-key media roles"
+          }
+        }
+      },
+      {
+        "index": 1,
+        "job_id": "0d6e1605-96ae-4fcb-8fff-5853d9a5a737",
+        "status": "pending",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.5 backend expects schema-key media roles"
+          }
+        }
+      },
+      {
+        "index": 2,
+        "job_id": "0b48adef-47bf-41e3-9d8c-b49effea6260",
+        "status": "pending",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "GPT Image 2.5 backend expects schema-key media roles"
+          }
+        }
+      }
+    ],
+    "submitted_count": 3,
+    "failed_count": 0
+  }
+}

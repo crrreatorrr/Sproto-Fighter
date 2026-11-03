@@ -1,0 +1,18 @@
+{
+  "stages": [
+    "ranch-orchard",
+    "ranch-windmill",
+    "ranch-creek"
+  ],
+  "storyRegion": "ranch",
+  "storyProgressSHA256": "3118247a71a9d41a640e0956331f4c8b67ddf3b2428393fe024baef67b9c1f47",
+  "note": "Three new locations in the dedicated Ranch chapter. All six Ranch variations occur in contiguous countryside blocks. This asset change does not modify opponent IDs or save rules; a concurrent campaign revision added the dedicated chapter.",
+  "mapNote": "Ranch road follows the upper-left farm district. The expanded pre-Verse Hatchery road follows the lower-right cave approach so paired recruits remain spaced.",
+  "storyChapter": 4,
+  "storySampleOpponents": {
+    "ranch-orchard": "sproto3106",
+    "ranch-windmill": "uncmasterflex",
+    "ranch-creek": "chaton"
+  },
+  "browserVerified": true
+}

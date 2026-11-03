@@ -6,6 +6,8 @@ No game engine, multiplayer transport or deployment.
 
 **Satoshi Sprototo, Xalt and Poto Cai Cai** are campaign opponents with 104 drawings each, including custom entrance8, mouth-spit8 and death16 sequences. Defeat each in the Verse to recruit them for play. [Animation and combat QA](docs/LATE-NAMED-NOV02-QA.md).
 
+**Three new Ranch maps:** Dawn Orchard, Stormwind Mill and Moonlit Creek Crossing are selectable under The Ranch and appear in its story chapter. The Ranch now has seven stage choices. Artwork and prompts: `art/ranch-nov02/`.
+
 ## Play locally
 
 Double-click **Play Sproto Arena.command**, or run:

@@ -7,7 +7,7 @@ export const PREVIOUS_STORY_SAVE_KEY='sproto-arena-story-v2';
 export const STORY_SAVE_KEY='sproto-arena-story-v3';
 export const STORY_TARGET_ROSTER=150;
 export const STARTER_FIGHTERS:readonly PlayableFighterId[]=['highsproto','bront'];
-// Optional user-supplied rivals stay late in Verse only when actually registered.
+// Optional user-supplied rivals stay late in the Hatchery only when actually registered.
 // String pins keep this module compatible with the original 102-fighter registry.
 export const CAMPAIGN_RECRUITS:readonly string[]=['satoshi','xalt','potocaicai'];
 // Frozen orders are migration schemas, never the source of the live campaign roster.
@@ -27,7 +27,8 @@ export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,regi
     if(stages.length<3)throw new Error('Campaign requires at least three story locations.');
     const available=new Set(registered),starters=new Set<PlayableFighterId>(STARTER_FIGHTERS);
     const pinned=CAMPAIGN_RECRUITS.flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
-    const tail=new Set<PlayableFighterId>([...pinned,'rivet','sproto865','sproto943','nick','guest07','vela','vaudream']);
+    const hatchery=['michael','buddhashadow'].flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
+    const tail=new Set<PlayableFighterId>([...hatchery,...pinned,'rivet','sproto865','sproto943','nick','guest07','vela','vaudream']);
     const ordered=[...new Set([...PREVIOUS_STORY_OPPONENTS,...registered])].filter(id=>available.has(id)&&!starters.has(id));
     const regular=ordered.filter(id=>!tail.has(id)&&!isPairedFighter(id));
     const paired=ordered.filter(id=>!tail.has(id)&&isPairedFighter(id));
@@ -37,6 +38,7 @@ export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,regi
         route.push({id:groupId(present),index:route.length,opponent:present[0],opponents:present,stage:stages[chapter],chapter:chapter+1,...(present.length>1&&gauntlet?{gauntlet}:{})});
     }
     regular.forEach((id,index)=>append([id],Math.min(stages.length-3,Math.floor(index*(stages.length-2)/Math.max(1,regular.length)))));
+    for(const id of hatchery)append([id],stages.length-2);
     for(const id of paired)append([id],stages.length-2);
     for(const id of pinned)append([id],stages.length-2);
     append(['rivet'],stages.length-2);
