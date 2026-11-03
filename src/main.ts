@@ -1,5 +1,5 @@
 import { ensurePoseAtlases, getPoseAtlasLoadStatus } from './poseAtlas';
-import { createSelectionMenu, type SelectionSetup } from './selectionMenu';
+import { createSelectionMenu, type MenuMode, type SelectionSetup } from './selectionMenu';
 import './style.css';
 import './arcadeSelection.css';
 import './pixelUI.css';
@@ -20,6 +20,8 @@ import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
 import { createStoryMode } from './storyMode';
 import { connectHub, hubConfigured, type HubLink } from './hub/link';
+import { OnlineMatch } from './net/onlineMatch';
+import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
@@ -83,6 +85,10 @@ const frames: [
 const storage = (() => { try { return window.localStorage; } catch { return null; } })();
 let hubRelics: string[] = readRelicCache(storage);
 let hub: HubLink | null = null;
+/** The current online duel, from queue to result; null in every local mode. */
+let online: OnlineMatch | null = null;
+/** Keeps an online match ticking while the tab is hidden (browsers pause requestAnimationFrame). */
+let hiddenClock: Worker | null = null;
 const canPlayFighter=(id:FighterId)=>isFighterAvailable(id,storyProgress.isUnlocked(id),hubRelics);
 const lockedFighter=(id:FighterId)=>fighterLockReason(id,storyProgress.isUnlocked(id),hubRelics);
 const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:ensurePoseAtlases,canPlay:canPlayFighter,locked:lockedFighter});
@@ -118,6 +124,7 @@ function updateStage(stage:StageId) {
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
 async function launchSelection(setup:SelectionSetup,isStory=false) {
+    if(!isStory&&(setup.mode==='online'||setup.mode==='online-wager')){void queueOnline(setup);return true;}
     // Reconcile wins from another tab or a restored page before the final P1 gate.
     storyProgress.sync();
     if(!canPlayFighter(setup.fighter)){
@@ -135,7 +142,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
-    chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
+    chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode as Mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);setActiveStoryLocation(scenery);
     if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
@@ -151,6 +158,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     return true;
 }
 function returnToSelection() {
+    if(online){if(online.phase==='playing'&&!window.confirm('Leave this online match? Leaving forfeits it.'))return;void online.leave();online=null;stopHiddenClock();}
     versus.hide();
     countdown.hide();
     story.leaveStory();
@@ -215,7 +223,7 @@ function start() {
     canvas.focus();
 }
 function pause() {
-    if (!started || presentation.phase === 'result')
+    if (!started || presentation.phase === 'result' || online)
         return;
     if (running)
         showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume →');
@@ -247,7 +255,7 @@ function setTestingGodMode(enabled:boolean){
     // round on close even if the previous one was already on its result screen.
     if(started&&!selection.isOpen){resumeAfterSettings=true;if(!story.retryMatch())restart();}
 }
-let resumeAfterJourney = false, freePlayMode: Mode | null = null;
+let resumeAfterJourney = false, freePlayMode: MenuMode | null = null;
 const story = createStoryMode({
     map:mountCampaignMap,
     selectedFighter:()=>selection.getSetup().fighter,
@@ -265,7 +273,7 @@ const story = createStoryMode({
         return launchSelection(setup,isStory);
     },
 });
-$('start').onclick = start;
+$('start').onclick = () => overlayAction ? overlayAction() : start();
 $('pause').onclick = pause;
 $('reset').onclick = ()=>{if(!story.retryMatch())restart();};
 const dialog = $<HTMLDialogElement>('controls-dialog');
@@ -356,6 +364,7 @@ window.addEventListener('blur', () => {
 document.addEventListener('visibilitychange', () => {
     if (document.hidden && running)
         pause();
+    if (online) document.hidden ? startHiddenClock() : stopHiddenClock();
 });
 canvas.addEventListener('pointerdown', () => canvas.focus());
 function pollPad(): number {
@@ -364,11 +373,11 @@ function pollPad(): number {
     const wasSelection=selection.isOpen,wasModal=story.isOpen||dialog.open,wasOverlay=!running&&!selection.isOpen;
     selection.pollPad(pad??null);
     if (!pad) {
-        $('device').textContent = 'KEYBOARD READY';
+        if (!online) $('device').textContent = 'KEYBOARD READY';
         previousPad = [];
         return 0;
     }
-    $('device').textContent = 'CONTROLLER CONNECTED';
+    if (!online) $('device').textContent = 'CONTROLLER CONNECTED';
     const buttons = pad.buttons.map(b => b.pressed ? 1 : 0);
     let boundPadThisFrame=false;
     // Remapping listens to the remapped player's own controller: player 2's is
@@ -460,6 +469,131 @@ function qaRecord(before:string){
     if(before!==after){qaEvents.push(`f${state.frame}: ${f.move?.id??'neutral'} ${f.move?.aim??''} hits=${f.combo} pips=${f.pips} hp=${f.hp}/${state.fighters[1].hp} x=${Math.round(f.x)} y=${Math.round(f.y)} input=${f.input} throw=${state.throwState?.direction??'-'}/${state.throwState?.phase??'-'} reaction2=${state.fighters[1].reaction?.kind??'-'}/${state.fighters[1].reaction?.phase??'-'}`);if(qaEvents.length>48)qaEvents.shift();}
 }
 // A presentation frame never enters the deterministic combat/replay stream.
+// ---- Online duels (src/net/onlineMatch.ts; hub match sproto_duel) ----
+/** Overlay button action while an online overlay is up (queue, failure, result). */
+let overlayAction: (() => void) | null = null;
+const ONLINE_DELAY_KEY = 'sproto-arena-online-delay';
+function onlineInputDelay(): number {
+    try { const v = Number(localStorage.getItem(ONLINE_DELAY_KEY)); return v >= 1 && v <= 4 ? v : 2; } catch { return 2; }
+}
+async function queueOnline(setup: SelectionSetup) {
+    if (online) { await online.leave(); online = null; }
+    const wager = setup.mode === 'online-wager';
+    const match = new OnlineMatch({
+        onPhase: (phase, detail) => {
+            if (match !== online) return;
+            if (phase === 'queued') showOnlineOverlay('Finding an opponent…', wager ? 'Both players stake 10 Tickets; the winner takes 20. The hub verifies the result before paying.' : 'Looking for another player. Pick “Fighter select” to stop searching.', 'Searching…', 'ONLINE', null);
+            if (phase === 'failed' && presentation.phase !== 'result') showOnlineOverlay('Online match unavailable', onlineFailureText(detail), 'Back to fighter select →', 'ONLINE', returnToSelection);
+        },
+        onStart: start => { if (match === online) void beginOnline(match, start.fighters as [FighterId, FighterId], start.stage, !!start.wager); },
+        onEvent: event => {
+            if (match !== online || event.kind !== 'move') return;
+            const f = state.fighters[event.slot];
+            if (f?.id === 'michael' && (event.move === 'bolt' || event.move === 'special')) playRetainCallout();
+        },
+        onOutcome: outcome => {
+            if (match !== online) return;
+            // The opponent forfeited (left or stopped sending) before any KO: end the round now.
+            if (presentation.phase !== 'result' && outcome.status === 'settled' && outcome.reason === 'forfeit') { showOnlineResult(); return; }
+            if (presentation.phase === 'result') showOnlineResult();
+        },
+    }, onlineInputDelay());
+    online = match;
+    selection.hide(); $('fight-view').hidden = false;
+    showOnlineOverlay('Connecting to the hub…', '', 'Connecting…', 'ONLINE', null);
+    await match.queue({ wager, fighter: setup.fighter, stage: setup.stage });
+}
+function onlineFailureText(reason?: string) {
+    const known: Record<string, string> = {
+        insufficient_tickets: 'One player has fewer than 10 Tickets. Win CPU matches to earn more.',
+        not_eligible: 'Wagers open after 3 CPU wins. Win a few CPU matches first.',
+        pair_limit: 'You two have played 5 wagered matches today. Try another opponent or play unwagered.',
+        daily_wager_cap: 'Daily wager winnings limit reached. Unwagered online play is still open.',
+        sim_mismatch: 'The other player is on a different game version. Reload to update.',
+        join_timeout: 'The other player didn’t join in time.',
+    };
+    return known[reason ?? ''] ?? reason ?? 'Could not reach the hub.';
+}
+function showOnlineOverlay(title: string, copy: string, button: string, kicker: string, action: (() => void) | null) {
+    showOverlay(title, copy, button, kicker);
+    overlayAction = action;
+    ($('start') as HTMLButtonElement).disabled = !action;
+}
+async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId], stageId: string, wager: boolean) {
+    const stage = (STAGES.some(s => s.id === stageId) ? stageId : 'ranch') as StageId;
+    showOnlineOverlay('Opponent found!', 'Loading fighters…', 'Loading…', 'ONLINE', null);
+    await Promise.all([loadStageArt([stage]), ensurePoseAtlases(fighters).catch(() => undefined)]);
+    if (match !== online || !match.session) return;
+    chosen = fighters[0]; opponent = fighters[1]; mode = 'versus';
+    matchTesting = false; matchGodMode = false;
+    updateStage(stage);
+    state = match.session.state;
+    presentation = createRoundPresentation();
+    countdown.hide();
+    versus.show(chosen, opponent);
+    frames.length = 0; qaEvents.length = 0; accumulator = 0; held.clear(); queued = 0; queued2 = 0;
+    overlayAction = null; ($('start') as HTMLButtonElement).disabled = false;
+    $('mode-label').textContent = wager ? 'ONLINE / 10-TICKET WAGER' : 'ONLINE VERSUS';
+    started = true; running = true;
+    versus.suspend(false); countdown.suspend(false);
+    $('overlay').hidden = true;
+    canvas.focus();
+    // Both players start together: skip the versus card after a moment instead of waiting for Enter.
+    setTimeout(() => { if (match === online && versus.isOpen) versus.skip(); }, 2500);
+    if (document.hidden) startHiddenClock();
+}
+/** One online fight frame: the rollback session owns the state; the outro waits for a KO both inputs confirm. */
+/** QA: `?autoplay` lets the built-in CPU play the local side of an online match (soak and end-to-end tests). */
+const qaAutoplay = new URLSearchParams(location.search).has('autoplay');
+function advanceOnlineFrame(input: number) {
+    if (!online) return;
+    if (qaAutoplay && online.start) input = cpuInput(state, online.start.seat);
+    online.play();
+    online.tick(input);
+    if (online.confirmedKo && state.winner !== null && presentation.phase === 'fight') {
+        const losers = state.fighters.filter((_, i) => state.winner === 2 || i !== state.winner);
+        const fromFloor = losers.every(f => f.reaction?.kind === 'knockdown' && f.reaction.phase === 'down');
+        beginRoundOutro(presentation, state.winner as 0 | 1 | 2, fromFloor);
+        held.clear(); queued = 0; queued2 = 0;
+    }
+}
+function onlineOutcomeText(outcome: DuelOutcome, seat: number) {
+    if (outcome.status === 'cancelled') return onlineFailureText(outcome.reason);
+    const won = outcome.winnerSeat === seat;
+    if (outcome.status === 'refunded') return outcome.wager ? `Stakes refunded (${outcome.reason.replace(/_/g, ' ')}).` : 'No winner recorded.';
+    const tickets = outcome.wager ? (won ? ' +10 Tickets (20-Ticket pot).' : ' −10 Tickets.') : '';
+    return (outcome.reason === 'forfeit' ? (won ? 'Your opponent forfeited.' : 'You forfeited.') : 'The hub verified the result.') + tickets;
+}
+function showOnlineResult() {
+    const match = online;
+    if (!match?.start) return;
+    const seat = match.start.seat, outcome = match.outcome;
+    const winnerSeat = outcome?.status === 'settled' ? outcome.winnerSeat : state.winner;
+    running = false; started = false;
+    const title = winnerSeat === 2 ? 'Double knockout.' : winnerSeat === seat ? 'You win.' : winnerSeat === null || winnerSeat === undefined ? 'Match over.' : 'You lose.';
+    showOnlineOverlay(title, outcome ? onlineOutcomeText(outcome, seat) : 'Waiting for the hub to confirm the result…', 'Find another opponent →', match.start.wager ? 'ONLINE / 10-TICKET WAGER' : 'ONLINE VERSUS', () => {
+        void match.leave(); online = null; stopHiddenClock();
+        void queueOnline({ ...selection.getSetup(), mode: match.start?.wager ? 'online-wager' : 'online' });
+    });
+}
+let onlineStatusAt = 0;
+function updateOnlineStatus() {
+    const now = performance.now();
+    if (!online || now - onlineStatusAt < 500) return;
+    onlineStatusAt = now;
+    const s = online.status();
+    $('device').textContent = online.phase === 'playing'
+        ? `${s.link === 'direct' ? 'DIRECT' : 'RELAYED'} · ${s.pingMs === null ? '…' : Math.round(s.pingMs) + ' MS'} · ROLLBACK ${s.rollback}${s.stalled ? ' · WAITING' : ''}`
+        : 'ONLINE';
+}
+function startHiddenClock() {
+    if (hiddenClock || typeof Worker === 'undefined') return;
+    const source = URL.createObjectURL(new Blob(['setInterval(() => postMessage(0), 16);'], { type: 'text/javascript' }));
+    hiddenClock = new Worker(source);
+    hiddenClock.onmessage = () => { if (document.hidden && online) stepTo(performance.now()); };
+}
+function stopHiddenClock() { hiddenClock?.terminate(); hiddenClock = null; }
+
 /** Player 2's bindings minus any key player 1 has remapped onto (player 1 wins). */
 function withoutP1Keys(bindings: Readonly<Record<Action, string>>): Record<Action, string> {
     const p1 = new Set(Object.values(keys));
@@ -478,9 +612,11 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         if ((presentation as RoundPresentation).phase !== 'fight') return;
         // A skip preserves this exact input for the first combat step.
     }
+    if (online && presentation.phase !== 'fight') online.linger();
     if (presentation.phase === 'outro') {
         advanceRoundPresentation(presentation);
         if ((presentation as RoundPresentation).phase !== 'result') return;
+        if (online) { showOnlineResult(); return; }
         reportRound();
         if (story.onRoundEnd(state.winner!)) return;
         if (mode === 'versus') {
@@ -492,6 +628,7 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         return;
     }
     if (presentation.phase !== 'fight') return;
+    if (online) { advanceOnlineFrame(input); return; }
     const pair: [number, number] = [input, p2Input ?? cpuInput(state)];
     frames.push(pair);
     const qaBefore = qaPanel ? [state.fighters[0].move?.id,state.fighters[0].combo,state.fighters[0].pips,state.fighters[0].hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|') : '';
@@ -508,13 +645,14 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         held.clear(); queued = 0;queued2=0;
     }
 }
-function tick(now: number) {
+/** Advance the simulation by the real time since the last call. Shared by the frame loop and the hidden-tab clock. */
+function stepTo(now: number) {
     const elapsed = Math.min((now - lastTime) / 1000, .1);
     lastTime = now;
     // Keep KO icon rotation alive on the result screen without advancing combat.
     visualFrame += qaFrozen ? (qaSingleStep ? 1 : 0) : elapsed * 60;
     const pad = pollPad();
-    if (running && !selection.isOpen && !dialog.open && !story.isOpen && (!qaFrozen||qaSingleStep)) {
+    if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen)) && (!qaFrozen||qaSingleStep)) {
         accumulator = qaSingleStep?1/60:accumulator+elapsed;
         qaSingleStep=false;
         while (accumulator >= 1 / 60) {
@@ -529,7 +667,11 @@ function tick(now: number) {
             if (!running || presentation.phase === 'result') break;
         }
     }
+}
+function tick(now: number) {
+    stepTo(now);
     if(!selection.isOpen) render(ctx, state, presentation, visualFrame);
+    if (online) updateOnlineStatus();
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);

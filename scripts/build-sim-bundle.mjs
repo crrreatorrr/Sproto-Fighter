@@ -19,6 +19,8 @@ const args = process.argv.slice(2);
 const result = await esbuild.build({
   entryPoints: [root + 'src/net/serverEntry.ts'], bundle: true, write: false, format: 'iife', globalName: 'SprotoSim',
   target: 'es2015', platform: 'neutral', logLevel: 'silent', legalComments: 'none',
+  // Path comments in the output are relative to this; fix it so the fingerprint doesn't depend on the caller's directory.
+  absWorkingDir: root,
 });
 const code = result.outputFiles[0].text;
 const version = createHash('sha256').update(code).digest('hex').slice(0, 16);
