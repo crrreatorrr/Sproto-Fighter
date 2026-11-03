@@ -2,6 +2,17 @@
 
 This records work and checks already performed, not checks delegated to Claude.
 
+**3 November 2026 maintenance pass** (branch `claude/pensive-gates-jlo2k9`). Five
+standalone checks were failing on main: four were stale after deliberate
+changes (#1601 renamed "888", Aaron's new partner, Yannix's mind beam,
+crouched spit height) and two found real regressions: Peterpan's walk frames
+were registered ~30 world px ahead of its standing poses, and the
+identity-actions batch had replaced #1601's hand-authored yellow 8. Both are
+fixed. CI now runs every check (`scripts/run-all.mjs`) from a partial checkout;
+duplicated per-fighter checks were merged; the unused limb-rig renderer and its
+assets were removed; the game loads atlas data per body instead of the 20 MB
+manifest. See [the docs index](README.md) for where things are.
+
 **Latest:** [Combined campaign, versus/countdown, roster and scale update](COMBINED-UPDATE-20261102.md) supersedes all older roster counts and integration status below. Read it first.
 
 The newer [campaign expansion report](CAMPAIGN-EXPANSION-UPDATE.md) supersedes

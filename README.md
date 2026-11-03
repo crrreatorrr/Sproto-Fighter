@@ -10,20 +10,22 @@ No game engine, multiplayer transport or deployment.
 
 ## Play locally
 
-Double-click **Play Sproto Arena.command**, or run:
+Requires Node.js 22+. On macOS you can double-click **Play Sproto Arena.command**;
+otherwise, from the repository folder:
 
 ```sh
-cd /Users/kenhiraoka/Documents/Codex/2026-10-31/task/neon-relay
-npm ci # only if dependencies are missing or after a fresh clone
+npm ci # first time, or after dependencies change
 npm run dev -- --port 5173 --strictPort
 ```
 
-Open **http://127.0.0.1:5173/** on this Mac. Keep the server terminal open.
-The existing background service serves this main checkout for the current
-login session. After logout/reboot use the launcher again. The isolated
-stage-integration preview uses port 5197. Saves belong to their browser
-origin: 5173 and 5197 have separate progression. Use 5173 for normal play.
-This is not a hosted website.
+Open **http://127.0.0.1:5173/** and keep the server terminal open. If the
+Metaverse Hub dev server already uses 5173 on your machine, pick another port
+(for example `--port 5200`). Saves belong to the browser origin, so each port
+keeps its own progression. This is not a hosted website.
+
+The full repository is several GB, mostly authoring art and QA history under
+`art/` and `docs/evidence/`. To play or run the checks you only need a partial
+clone; see `.github/ci-checkout-paths.txt` for the three commands.
 
 ## Campaign and testing
 
@@ -115,8 +117,10 @@ own trajectories. All rounds are untimed.
 - `src/core.ts`: fixed-step 60 Hz combat, frame-indexed inputs, attacks, CPU,
   throws/reactions, God Mode, fighter profiles and assigned partner mechanics.
 - `src/poseAtlas.ts`: complete-body frame playback, paired identities, stable
-  formations, camera clearance and event presentation. Installed art bypasses
-  runtime limb cutouts. Paired menu normalization does not change fight scale.
+  formations, camera clearance and event presentation. Paired menu
+  normalization does not change fight scale. `pose-atlas.json` is the single
+  source of frame data; the dev server and builds also publish it split per
+  body under `/fighters/pose-atlas/` so a match loads only its own bodies.
 - `src/storyProgress.ts`, `storyMode.ts`, `campaignMap.ts`: saves, progression,
   placeholder scenes and a real 100-node map. `stageVariants.ts` maps approved
   scenes without changing opponent/save identities.
@@ -125,17 +129,26 @@ own trajectories. All rounds are untimed.
 - `src/teamSpecial.ts`: partner appearances and attack choreography.
 - `public/`: local runtime art/fonts; no generation service is needed to play.
 
-Run `npm run build`, `npm run qa`, `npm run partners-qa` and
-`node scripts/selection-menu-smoke.mjs`. Focused formation checks are
-`paired-spacing-probe.mjs`, `paired-wall-motion-smoke.mjs`, `duo-smoke.mjs`;
-map/stage checks are `campaign-map-smoke.mjs` and `stage-variants-smoke.mjs`
-(all under `scripts/`). Add `?qa` to the game URL for visible diagnostics.
+### Checks
+
+```sh
+npm run check      # TypeScript
+npm run test:all   # vitest, then every check under scripts/ in parallel
+npm run test:fast  # the same without the three slow roster-wide audits
+node scripts/run-all.mjs throw duo   # only checks whose name matches
+```
+
+GitHub Actions runs the typecheck, vitest, the build and every check on each
+push to main and each pull request. The older grouped commands (`npm run qa`,
+`npm run partners-qa`, `npm run versus-smoke`, ...) still work. Add `?qa` to
+the game URL for visible diagnostics.
 
 The dev server excludes the large static `art/`, `docs/` and `public/` archives
 from watching. Reload after installing static assets. Application source still
 reloads normally; dependency scanning starts at `index.html`.
 
-See [the factual handoff](docs/CLAUDE-HANDOFF.md) for integrated branches,
+Start with [the docs index](docs/README.md), which separates current
+references from dated reports. See [the factual handoff](docs/CLAUDE-HANDOFF.md) for integrated branches,
 checks and limitations, and [per-pair coverage](docs/PAIRED-QA-COVERAGE.csv).
 The latest progression, preview-lock and responsive-map changes are recorded in
 [the story/UI update](docs/STORY-UI-UPDATE.md).
@@ -152,6 +165,13 @@ integration adds no purchases, generation calls, remote push or hosting.
 The optional hub adapter comes from the published `claude/sweet-newton-l4tjnh` work. A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
 
 Story recruits remain playable. Hub Relics provide an additional route to Halloween 2008 (HPOS10I Core), $Bitcoin Obama (Genesis Block Shard), Big Swole (Cone’s Tip), Bongraker (Tinubu’s Crown), and Sproto Duo (all four). Fighters without a corresponding Relic retain their existing story rules. Locked fighters remain previewable and usable as CPU opponents. A lost/revoked Relic does not revoke a fighter recruited in the story.
+
+Rewards are reported by the game client (`src/hub/link.ts`); the server only
+caps Tickets per call and per day. A linked player with browser developer
+tools could make the same calls without winning a match. Whether that matters
+depends on what Tickets and Relics are worth in the hub. If it does, the server
+should verify wins, for example by replaying the match's frame-indexed inputs
+through `src/core.ts`, which is deterministic.
 
 Configure `VITE_HUB_URL`, `VITE_NAKAMA_URL` and `VITE_NAKAMA_SERVER_KEY` for a hub deployment. The client server key is public configuration; never put backend secrets in Vite variables. Standalone play needs no backend. The relative build base supports the root and `/play/sproto-fighter/`; the integration does not start, migrate or deploy the hub server. Run `npm test` for hub adapter checks.
 
