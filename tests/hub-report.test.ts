@@ -13,6 +13,7 @@ describe('planFighterWin', () => {
     expect(planFighterWin({ ...base, winner: 2 })).toEqual([]);
     expect(planFighterWin({ ...base, mode: 'dummy' })).toEqual([]);
     expect(planFighterWin({ ...base, mode: 'guard', storyWorld: 1 })).toEqual([]);
+    expect(planFighterWin({ ...base, assisted: true, storyWorld: 1 })).toEqual([]);
   });
 
   it('reports the Relic event for a Story World 1 win', () => {

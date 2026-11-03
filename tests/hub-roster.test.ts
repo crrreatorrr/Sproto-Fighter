@@ -9,6 +9,8 @@ import {
   readRelicCache,
   requiredRelics,
   writeRelicCache,
+  isFighterAvailable,
+  fighterLockReason,
   type KeyValueStore,
 } from '../src/hub/roster';
 
@@ -21,7 +23,7 @@ describe('Relic-locked fighters', () => {
   it('locks exactly the four Relic fighters and Sproto Duo', () => {
     const locked = PLAYABLE_FIGHTERS.filter((id) => !isUnlocked(id, []));
     expect(locked.sort()).toEqual(['bigswole', 'duo', 'guest12', 'rune', 'zephyr']);
-    expect(PLAYABLE_FIGHTERS.length - locked.length).toBe(17);
+    expect(PLAYABLE_FIGHTERS.length - locked.length).toBe(PLAYABLE_FIGHTERS.length - 5);
   });
 
   it('maps each other-game Relic to one fighter', () => {
@@ -70,5 +72,24 @@ describe('Relic-locked fighters', () => {
     const throwing: KeyValueStore = { getItem: () => { throw new Error('denied'); }, setItem: () => { throw new Error('denied'); } };
     expect(readRelicCache(throwing)).toEqual([]);
     expect(() => writeRelicCache(throwing, ['cones_tip'])).not.toThrow();
+  });
+
+  it('preserves every story recruit and leaves every other recruit locked without a matching Relic', () => {
+    for(const id of PLAYABLE_FIGHTERS){
+      expect(isFighterAvailable(id,true,[])).toBe(true);
+      expect(fighterLockReason(id,true,[])).toBeNull();
+      expect(isFighterAvailable(id,false,[])).toBe(false);
+      expect(fighterLockReason(id,false,[])).toContain('story mode');
+    }
+  });
+
+  it('adds only the intended Relic recruits and does not grant unrelated fighters', () => {
+    expect(PLAYABLE_FIGHTERS.filter(id=>isFighterAvailable(id,false,DUO_RELICS)).sort())
+      .toEqual(['bigswole','duo','guest12','rune','zephyr']);
+    expect(isFighterAvailable('duo',false,DUO_RELICS.slice(0,3))).toBe(false);
+    expect(isFighterAvailable('duo',true,DUO_RELICS.slice(0,3))).toBe(true);
+    expect(isFighterAvailable('bigswole',false,['cones_tip'])).toBe(true);
+    expect(isFighterAvailable('bigswole',true,[])).toBe(true);
+    expect(fighterLockReason('bigswole',false,[])).toContain("Cone's Tip");
   });
 });

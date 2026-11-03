@@ -218,6 +218,7 @@ try {
     const code=compile(functions.map(node=>node.getText(parsed)).join('\n')+'\n'+main.slice(start,end));
     const fixture=new Function('dependencies',`
       const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition}=dependencies;
+      const canPlayFighter=id=>storyProgress.isUnlocked(id),lockedFighter=()=> 'Defeat this fighter in story mode to recruit them.';
       let setup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'guard',godMode:false};
       let mode='guard',running=false,started=false,chosen='highsproto',opponent='vela',matchGodMode=false,matchEarnedGodMode=false,testingGodMode=false,matchTesting=false;
       let state=createState(),presentation=createRoundPresentation(),accumulator=0,queued=0,qaSingleStep=false,resumeAfterSettings=false,remapping=null;
