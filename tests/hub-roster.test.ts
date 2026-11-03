@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { PLAYABLE_FIGHTERS } from '../src/core';
+import { RELIC_ONLY_RECRUITS, STORY_OPPONENTS } from '../src/storyProgress';
 import {
-  DUO_RELICS,
+  ALL_FOUR_RELICS,
+  ALL_RELICS_FIGHTER,
   RELIC_CACHE_KEY,
+  RELIC_ONLY_FIGHTERS,
   RELIC_FIGHTERS,
   isUnlocked,
   lockReason,
@@ -19,23 +22,37 @@ function memory(): KeyValueStore & { data: Map<string, string> } {
   return { data, getItem: (k) => data.get(k) ?? null, setItem: (k, v) => void data.set(k, v) };
 }
 
+const RELIC_FIVE = ['captain', 'sproto1870', 'sproto2616', 'sproto3152', 'sproto3215'];
+
 describe('Relic-locked fighters', () => {
-  it('locks exactly the four Relic fighters and Sproto Duo', () => {
+  it('the five Relic fighters are the registered Captain Sproto, Sun God, Pissing Sproto, Captain Green and Error 333', () => {
+    for (const id of RELIC_FIVE) expect(PLAYABLE_FIGHTERS).toContain(id);
+    expect([...RELIC_ONLY_FIGHTERS].sort()).toEqual(RELIC_FIVE);
     const locked = PLAYABLE_FIGHTERS.filter((id) => !isUnlocked(id, []));
-    expect(locked.sort()).toEqual(['bigswole', 'duo', 'guest12', 'rune', 'zephyr']);
-    expect(PLAYABLE_FIGHTERS.length - locked.length).toBe(PLAYABLE_FIGHTERS.length - 5);
+    expect(locked.sort()).toEqual(RELIC_FIVE);
   });
 
-  it('maps each other-game Relic to one fighter', () => {
+  it('maps each other-game Relic to one fighter, and all four to Error 333', () => {
     expect(RELIC_FIGHTERS).toEqual({
-      hpos10i_core: 'zephyr',
-      genesis_shard: 'guest12',
-      cones_tip: 'bigswole',
-      tinubu_crown: 'rune',
+      hpos10i_core: 'sproto2616',
+      genesis_shard: 'sproto3215',
+      cones_tip: 'sproto3152',
+      tinubu_crown: 'captain',
     });
+    expect(ALL_RELICS_FIGHTER).toBe('sproto1870');
     for (const [relic, fighter] of Object.entries(RELIC_FIGHTERS)) {
       expect(isUnlocked(fighter, [relic])).toBe(true);
       expect(lockReason(fighter, [relic])).toBeNull();
+    }
+  });
+
+  it('keeps the Relic fighters out of story mode (story list matches the hub list)', () => {
+    expect([...RELIC_ONLY_RECRUITS].sort()).toEqual([...RELIC_ONLY_FIGHTERS].sort());
+    for (const id of RELIC_FIVE) expect(STORY_OPPONENTS).not.toContain(id);
+    // The earlier Relic picks are story recruits now.
+    for (const id of ['zephyr', 'guest12', 'bigswole', 'rune', 'duo']) {
+      expect(STORY_OPPONENTS).toContain(id);
+      expect(requiredRelics(id as never)).toEqual([]);
     }
   });
 
@@ -46,14 +63,15 @@ describe('Relic-locked fighters', () => {
     expect(PLAYABLE_FIGHTERS.filter((id) => !isUnlocked(id, ['tidebreaker_belt'])).length).toBe(5);
   });
 
-  it('needs all four Four Lights Relics for Sproto Duo', () => {
-    expect(isUnlocked('duo', DUO_RELICS.slice(0, 3))).toBe(false);
-    expect(lockReason('duo', DUO_RELICS.slice(0, 3))).toContain('1 still missing');
-    expect(isUnlocked('duo', [...DUO_RELICS])).toBe(true);
+  it('needs all four Four Lights Relics for Error 333', () => {
+    expect(isUnlocked('sproto1870', ALL_FOUR_RELICS.slice(0, 3))).toBe(false);
+    expect(lockReason('sproto1870', ALL_FOUR_RELICS.slice(0, 3))).toContain('1 still missing');
+    expect(isUnlocked('sproto1870', [...ALL_FOUR_RELICS])).toBe(true);
   });
 
   it('names the Relic and game a locked fighter needs', () => {
-    expect(lockReason('bigswole', [])).toBe("Earn Cone's Tip in NOBU: Saviour Dog");
+    expect(lockReason('sproto3152', [])).toBe("Earn Cone's Tip in NOBU: Saviour Dog");
+    expect(lockReason('captain', [])).toBe("Earn Tinubu's Crown in Sproto Duel");
     expect(lockReason('rivet', [])).toBeNull();
   });
 
@@ -74,22 +92,21 @@ describe('Relic-locked fighters', () => {
     expect(() => writeRelicCache(throwing, ['cones_tip'])).not.toThrow();
   });
 
-  it('preserves every story recruit and leaves every other recruit locked without a matching Relic', () => {
+  it('preserves every story recruit; story fighters say story mode, Relic fighters name their Relic', () => {
     for(const id of PLAYABLE_FIGHTERS){
       expect(isFighterAvailable(id,true,[])).toBe(true);
       expect(fighterLockReason(id,true,[])).toBeNull();
       expect(isFighterAvailable(id,false,[])).toBe(false);
-      expect(fighterLockReason(id,false,[])).toContain('story mode');
+      expect(fighterLockReason(id,false,[])).toContain(RELIC_FIVE.includes(id) ? 'hub Relic only' : 'story mode');
     }
   });
 
   it('adds only the intended Relic recruits and does not grant unrelated fighters', () => {
-    expect(PLAYABLE_FIGHTERS.filter(id=>isFighterAvailable(id,false,DUO_RELICS)).sort())
-      .toEqual(['bigswole','duo','guest12','rune','zephyr']);
-    expect(isFighterAvailable('duo',false,DUO_RELICS.slice(0,3))).toBe(false);
-    expect(isFighterAvailable('duo',true,DUO_RELICS.slice(0,3))).toBe(true);
-    expect(isFighterAvailable('bigswole',false,['cones_tip'])).toBe(true);
-    expect(isFighterAvailable('bigswole',true,[])).toBe(true);
-    expect(fighterLockReason('bigswole',false,[])).toContain("Cone's Tip");
+    expect(PLAYABLE_FIGHTERS.filter(id=>isFighterAvailable(id,false,ALL_FOUR_RELICS)).sort()).toEqual(RELIC_FIVE);
+    expect(isFighterAvailable('sproto1870',false,ALL_FOUR_RELICS.slice(0,3))).toBe(false);
+    expect(isFighterAvailable('sproto1870',true,ALL_FOUR_RELICS.slice(0,3))).toBe(true);
+    expect(isFighterAvailable('sproto3152',false,['cones_tip'])).toBe(true);
+    expect(isFighterAvailable('bigswole',false,['cones_tip'])).toBe(false);
+    expect(fighterLockReason('sproto3152',false,[])).toContain("Cone's Tip");
   });
 });

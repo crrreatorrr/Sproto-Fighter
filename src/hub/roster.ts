@@ -4,8 +4,12 @@ import type { PlayableFighterId } from '../core';
  * Which Sproto Fighter characters other games' Relics unlock.
  *
  * Same rule as the hub's item matrix: a Relic unlocks things in the other games, never in its
- * own. The Tidebreaker Belt is earned here, so it unlocks nothing here. The existing story recruitment rules also remain valid. Other fighters are
- * recruited through the campaign. The CPU may use any fighter, locked or not, so you meet them before you own them.
+ * own. The Tidebreaker Belt is earned here, so it unlocks nothing here.
+ *
+ * The five Relic fighters are Relic-only: they are left out of the story campaign
+ * (storyProgress.campaignForStages), so the hub is the only way to recruit them. Every other
+ * fighter, including the earlier Relic picks (Halloween 2008, $Bitcoin Obama, Big Swole,
+ * Bongraker, Sproto Duo), is recruited through the campaign. The CPU may still use any fighter.
  */
 export interface RelicUnlock {
   relic: string;
@@ -14,11 +18,17 @@ export interface RelicUnlock {
 }
 
 export const RELIC_FIGHTERS: Readonly<Record<string, PlayableFighterId>> = {
-  hpos10i_core: 'zephyr',
-  genesis_shard: 'guest12',
-  cones_tip: 'bigswole',
-  tinubu_crown: 'rune',
+  hpos10i_core: 'sproto2616', // Sun God
+  genesis_shard: 'sproto3215', // Captain Green
+  cones_tip: 'sproto3152', // Pissing Sproto
+  tinubu_crown: 'captain', // Captain Sproto
 };
+
+/** Error 333 needs all four Four Lights Relics. */
+export const ALL_RELICS_FIGHTER: PlayableFighterId = 'sproto1870';
+
+/** Fighters only the hub can unlock. The story campaign skips them. */
+export const RELIC_ONLY_FIGHTERS: readonly PlayableFighterId[] = [...Object.values(RELIC_FIGHTERS), ALL_RELICS_FIGHTER];
 
 const RELIC_SOURCES: Readonly<Record<string, Omit<RelicUnlock, 'relic'>>> = {
   hpos10i_core: { relicName: 'HPOS10I Core', game: 'HPOS10I' },
@@ -27,12 +37,12 @@ const RELIC_SOURCES: Readonly<Record<string, Omit<RelicUnlock, 'relic'>>> = {
   tinubu_crown: { relicName: "Tinubu's Crown", game: 'Sproto Duel' },
 };
 
-/** Sproto Duo needs all four of these. */
-export const DUO_RELICS = ['hpos10i_core', 'genesis_shard', 'cones_tip', 'tinubu_crown'] as const;
+/** Error 333 needs all four of these. */
+export const ALL_FOUR_RELICS = ['hpos10i_core', 'genesis_shard', 'cones_tip', 'tinubu_crown'] as const;
 
 /** The Relics a locked fighter needs, or an empty list when the fighter is always playable. */
 export function requiredRelics(id: PlayableFighterId): RelicUnlock[] {
-  if (id === 'duo') return DUO_RELICS.map((relic) => ({ relic, ...RELIC_SOURCES[relic] }));
+  if (id === ALL_RELICS_FIGHTER) return ALL_FOUR_RELICS.map((relic) => ({ relic, ...RELIC_SOURCES[relic] }));
   const relic = Object.keys(RELIC_FIGHTERS).find((key) => RELIC_FIGHTERS[key] === id);
   return relic ? [{ relic, ...RELIC_SOURCES[relic] }] : [];
 }
@@ -47,7 +57,7 @@ export function lockReason(id: PlayableFighterId, relics: readonly string[]): st
   const owned = new Set(relics);
   const missing = requiredRelics(id).filter((need) => !owned.has(need.relic));
   if (missing.length === 0) return null;
-  if (id === 'duo') return `Own all four Four Lights Relics in the hub (${missing.length} still missing)`;
+  if (id === ALL_RELICS_FIGHTER) return `Own all four Four Lights Relics in the hub (${missing.length} still missing)`;
   return `Earn ${missing[0].relicName} in ${missing[0].game}`;
 }
 
@@ -78,12 +88,16 @@ export function writeRelicCache(store: KeyValueStore | null, relics: readonly st
   }
 }
 
-/** Relics are an additional recruitment route; never revoke an earned story recruit. */
+/**
+ * Relic fighters come from the hub; everyone else from the story. A save that already recruited a
+ * Relic fighter in an older campaign keeps it (an earned recruit is never revoked).
+ */
 export function isFighterAvailable(id:PlayableFighterId, storyUnlocked:boolean, relics:readonly string[]):boolean {
   return storyUnlocked || (requiredRelics(id).length > 0 && isUnlocked(id,relics));
 }
 export function fighterLockReason(id:PlayableFighterId, storyUnlocked:boolean, relics:readonly string[]):string|null {
   if(isFighterAvailable(id,storyUnlocked,relics))return null;
   const relic=lockReason(id,relics);
-  return 'Defeat this fighter in story mode to recruit them'+(relic?' — or '+relic+'.':'.');
+  if(relic)return relic+' (hub Relic only, not in story mode).';
+  return 'Defeat this fighter in story mode to recruit them.';
 }

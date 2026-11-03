@@ -10,6 +10,10 @@ export const STARTER_FIGHTERS:readonly PlayableFighterId[]=['highsproto','bront'
 // Optional user-supplied rivals stay late in the Hatchery only when actually registered.
 // String pins keep this module compatible with the original 102-fighter registry.
 export const CAMPAIGN_RECRUITS:readonly string[]=['satoshi','xalt','potocaicai'];
+// Hub Relic fighters (src/hub/roster.ts RELIC_ONLY_FIGHTERS, kept equal by tests/hub-roster.test.ts) are
+// recruited only through hub Relics, never as story rivals: Captain Sproto, Sun God, Pissing Sproto,
+// Captain Green and Error 333. String pins, like CAMPAIGN_RECRUITS.
+export const RELIC_ONLY_RECRUITS:readonly string[]=['captain','sproto2616','sproto3152','sproto3215','sproto1870'];
 // Frozen orders are migration schemas, never the source of the live campaign roster.
 export const LEGACY_STORY_OPPONENTS:readonly PlayableFighterId[]=['zephyr', 'mox', 'rune', 'guest07', 'guest08', 'guest09', 'guest10', 'guest11', 'guest12', 'guest13', 'guest14', 'dumpstar', 'crapto', 'vamp', 'alpha777', 'mandela', 'bigswole', 'nate', 'nick', 'captain', 'highsproto', 'erik', 'bimba', 'gpm', 'leviosa', 'lifeisameme', 'thxobama', 'rlarsson', 'blorfo', 'michael', 'freshprince', 'mlk', 'sproto102', 'sproto215', 'sproto313', 'sproto651', 'sproto763', 'sproto818', 'sproto831', 'sproto834', 'sproto837', 'sproto865', 'sproto943', 'sproto999', 'sproto1011', 'sproto1093', 'sproto1187', 'sproto1335', 'sproto1345', 'sproto1414', 'sproto1477', 'sproto1601', 'sproto1668', 'sproto1815', 'sproto1870', 'sproto2101', 'sproto2177', 'sproto2322', 'sproto2381', 'sproto2531', 'sproto2569', 'sproto2616', 'sproto2789', 'sproto2884', 'sproto3106', 'sproto3152', 'sproto3215', 'uncmasterflex', 'vitaliketh', 'urmometh', 'chaton', 'loadthebags', 'sisma', 'captainhowdy', 'sprotosales', 'sprog', 'jasper', 'aaron', 'brainsprot', 'sober', 'olnoname', 'greatcharly', 'sproto282', 'sproto704', 'sproto832', 'sproto1499', 'sproto1625', 'sproto2010', 'sproto2075', 'sproto2210', 'sproto2344', 'sproto3181', 'sproto3224', 'sproto3235', 'gryph', 'godmod3d', 'nosmileclown', 'duo', 'vela', 'vaudream'];
 
@@ -29,12 +33,13 @@ export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,regi
     const pinned=CAMPAIGN_RECRUITS.flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
     const hatchery=['michael','buddhashadow'].flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
     const tail=new Set<PlayableFighterId>([...hatchery,...pinned,'rivet','sproto865','sproto943','nick','guest07','vela','vaudream']);
-    const ordered=[...new Set([...PREVIOUS_STORY_OPPONENTS,...registered])].filter(id=>available.has(id)&&!starters.has(id));
+    const relicOnly=new Set<string>(RELIC_ONLY_RECRUITS);
+    const ordered=[...new Set([...PREVIOUS_STORY_OPPONENTS,...registered])].filter(id=>available.has(id)&&!starters.has(id)&&!relicOnly.has(id));
     const regular=ordered.filter(id=>!tail.has(id)&&!isPairedFighter(id));
     const paired=ordered.filter(id=>!tail.has(id)&&isPairedFighter(id));
     const route:Encounter[]=[];
     function append(opponents:readonly PlayableFighterId[],chapter:number,gauntlet?:Encounter['gauntlet']){
-        const present=opponents.filter(id=>available.has(id)&&!starters.has(id));if(!present.length)return;
+        const present=opponents.filter(id=>available.has(id)&&!starters.has(id)&&!relicOnly.has(id));if(!present.length)return;
         route.push({id:groupId(present),index:route.length,opponent:present[0],opponents:present,stage:stages[chapter],chapter:chapter+1,...(present.length>1&&gauntlet?{gauntlet}:{})});
     }
     regular.forEach((id,index)=>append([id],Math.min(stages.length-3,Math.floor(index*(stages.length-2)/Math.max(1,regular.length)))));

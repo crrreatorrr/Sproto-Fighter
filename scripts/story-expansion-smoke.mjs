@@ -14,6 +14,10 @@ try{
  const req=createRequire(import.meta.url),story=req(join(temp,'storyProgress.js'));
  const {PLAYABLE_FIGHTERS,isPairedFighter,createState,step,A}=req(join(temp,'core.js'));
  const {STORY_STAGE_IDS}=req(join(temp,'stage.js'));
+ // Hub Relic fighters are recruited only through hub Relics, never as story rivals.
+ const RELIC_ONLY_FIGHTERS=story.RELIC_ONLY_RECRUITS;
+ const inCampaign=f=>!STARTER_FIGHTERS.includes(f)&&!RELIC_ONLY_FIGHTERS.includes(f);
+ const relicCount=registry=>registry.filter(f=>RELIC_ONLY_FIGHTERS.includes(f)).length;
  const {campaignForStages,createStoryProgress,STORY_ENCOUNTERS,STORY_OPPONENTS,STARTER_FIGHTERS,STORY_ROSTER_COUNTS,CAMPAIGN_RECRUITS,STORY_SAVE_KEY,PREVIOUS_STORY_SAVE_KEY,LEGACY_STORY_SAVE_KEY,PREVIOUS_STORY_OPPONENTS,LEGACY_STORY_OPPONENTS}=story;
  const disk=(initial={})=>{const values=new Map(Object.entries(initial));return {getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)};};
  const check=(name,run)=>{run();groups++;console.log('PASS:',name);};
@@ -21,9 +25,9 @@ try{
  const fixture150=[...PLAYABLE_FIGHTERS,...Array.from({length:Math.max(0,150-PLAYABLE_FIGHTERS.length)},(_,i)=>`qa_registered_fixture_${i+1}`)];
  const id=fighter=>`story-v1-${fighter}`;
  function verifyRoute(registry,route){
-  const opponents=route.flatMap(e=>e.opponents),expected=registry.filter(f=>!STARTER_FIGHTERS.includes(f));
+  const opponents=route.flatMap(e=>e.opponents),expected=registry.filter(inCampaign);
   assert.equal(new Set(opponents).size,opponents.length);assert.deepEqual(new Set(opponents),new Set(expected));
-  assert.equal(route.length,registry.length-5);assert.equal(new Set(route.map(e=>e.id)).size,route.length);
+  assert.equal(route.length,registry.length-5-relicCount(registry));assert.equal(new Set(route.map(e=>e.id)).size,route.length);
   for(const [index,e] of route.entries()){assert.equal(e.index,index);assert.equal(e.opponent,e.opponents[0]);assert.ok(e.opponents.length===1||e.opponents.length===2);}
   assert.deepEqual(route.at(-4).opponents,['rivet']);assert.deepEqual(route.at(-3).opponents,['sproto865','sproto943']);assert.deepEqual(route.at(-2).opponents,['nick','guest07']);assert.deepEqual(route.at(-1).opponents,['vela','vaudream']);
   assert.equal(route.at(-3).gauntlet,'art');assert.equal(route.at(-3).stage,'hatchery');assert.equal(route.at(-2).gauntlet,'nick-juicy');assert.equal(route.at(-2).stage,'verse');assert.equal(route.at(-1).gauntlet,'final');assert.equal(route.at(-1).stage,'verse');
@@ -42,7 +46,7 @@ try{
 
  check('registered baseline102 and current roster each produce exact distinct opponents and grouped boss nodes',()=>{
   assert.equal(baseline.length,102);verifyRoute(baseline,campaignForStages(STORY_STAGE_IDS,baseline));verifyRoute(PLAYABLE_FIGHTERS,STORY_ENCOUNTERS);
-  assert.equal(STORY_ROSTER_COUNTS.installed,PLAYABLE_FIGHTERS.length);assert.equal(STORY_ROSTER_COUNTS.rivals,PLAYABLE_FIGHTERS.length-2);assert.equal(STORY_ROSTER_COUNTS.encounters,PLAYABLE_FIGHTERS.length-5);assert.equal(STORY_ROSTER_COUNTS.missing,Math.max(0,150-PLAYABLE_FIGHTERS.length));assert.deepEqual(STORY_OPPONENTS,STORY_ENCOUNTERS.flatMap(e=>e.opponents));
+  assert.equal(STORY_ROSTER_COUNTS.installed,PLAYABLE_FIGHTERS.length);assert.equal(STORY_ROSTER_COUNTS.rivals,PLAYABLE_FIGHTERS.length-2-relicCount(PLAYABLE_FIGHTERS));assert.equal(STORY_ROSTER_COUNTS.encounters,PLAYABLE_FIGHTERS.length-5-relicCount(PLAYABLE_FIGHTERS));assert.equal(STORY_ROSTER_COUNTS.missing,Math.max(0,150-PLAYABLE_FIGHTERS.length));assert.deepEqual(STORY_OPPONENTS,STORY_ENCOUNTERS.flatMap(e=>e.opponents));
  });
  check('optional Satoshi/Xalt/Potocaicai pins appear in the Hatchery immediately before Golden only when registered',()=>{
   for(const registry of [baseline,PLAYABLE_FIGHTERS,fixture150]){
@@ -68,12 +72,12 @@ try{
  });
  check('isolated150-entry registry yields148 rivals/145 nodes without adding fake runtime fighters',()=>{
   assert.equal(fixture150.length,150);const route=campaignForStages(STORY_STAGE_IDS,fixture150);verifyRoute(fixture150,route);
-  assert.equal(route.flatMap(e=>e.opponents).length,148);assert.equal(route.length,145);assert.ok(PLAYABLE_FIGHTERS.every(f=>!f.startsWith('qa_registered_fixture_')));
-  const p=createStoryProgress(disk(),route,fixture150);finish(p,route);assert.equal(p.snapshot().completed,true);assert.equal(p.snapshot().unlocked.length,150);
+  assert.equal(route.flatMap(e=>e.opponents).length,148-relicCount(fixture150));assert.equal(route.length,145-relicCount(fixture150));assert.ok(PLAYABLE_FIGHTERS.every(f=>!f.startsWith('qa_registered_fixture_')));
+  const p=createStoryProgress(disk(),route,fixture150);finish(p,route);assert.equal(p.snapshot().completed,true);assert.equal(p.snapshot().unlocked.length,150-relicCount(fixture150));
  });
  check('absent references never become opponents and duplicate registry inputs are harmless',()=>{
   const partial=baseline.filter(f=>!['rivet','sproto943','vaudream'].includes(f)),route=campaignForStages(STORY_STAGE_IDS,[...partial,...partial]);
-  const actual=route.flatMap(e=>e.opponents);assert.deepEqual(new Set(actual),new Set(partial.filter(f=>!STARTER_FIGHTERS.includes(f))));assert.equal(actual.length,new Set(actual).size);assert.ok(actual.every(f=>partial.includes(f)));
+  const actual=route.flatMap(e=>e.opponents);assert.deepEqual(new Set(actual),new Set(partial.filter(inCampaign)));assert.equal(actual.length,new Set(actual).size);assert.ok(actual.every(f=>partial.includes(f)));
  });
  check('fresh saves expose only starters and the first node; invalid wave/index requests do not mutate progress',()=>{
   const p=createStoryProgress(disk());assert.deepEqual(p.snapshot().unlocked,STARTER_FIGHTERS);assert.equal(p.snapshot().nextIndex,0);assert.equal(p.snapshot().godModeUnlocked,false);
@@ -82,9 +86,9 @@ try{
  });
  check('all current recruits can be earned, reloaded and replayed without dropping completion',()=>{
   const store=disk(),p=createStoryProgress(store);finish(p,STORY_ENCOUNTERS);const restored=createStoryProgress(store);
-  assert.equal(restored.snapshot().completed,true);assert.equal(restored.snapshot().nextIndex,null);assert.equal(restored.snapshot().godModeUnlocked,true);assert.equal(restored.snapshot().unlocked.length,PLAYABLE_FIGHTERS.length);
+  assert.equal(restored.snapshot().completed,true);assert.equal(restored.snapshot().nextIndex,null);assert.equal(restored.snapshot().godModeUnlocked,true);assert.equal(restored.snapshot().unlocked.length,PLAYABLE_FIGHTERS.length-relicCount(PLAYABLE_FIGHTERS));
   const count=restored.snapshot().cleared.length;assert.ok(restored.win(0));assert.equal(restored.snapshot().cleared.length,count);
-  const copy=restored.snapshot();copy.cleared.length=0;copy.unlocked.length=0;assert.equal(restored.snapshot().cleared.length,count);assert.equal(restored.snapshot().unlocked.length,PLAYABLE_FIGHTERS.length);
+  const copy=restored.snapshot();copy.cleared.length=0;copy.unlocked.length=0;assert.equal(restored.snapshot().cleared.length,count);assert.equal(restored.snapshot().unlocked.length,PLAYABLE_FIGHTERS.length-relicCount(PLAYABLE_FIGHTERS));
  });
  for(const version of [1,2])check(`v${version} migration preserves all101 historical prefix positions and old keys`,()=>{
   const order=version===1?LEGACY_STORY_OPPONENTS:PREVIOUS_STORY_OPPONENTS,key=version===1?LEGACY_STORY_SAVE_KEY:PREVIOUS_STORY_SAVE_KEY;
@@ -115,7 +119,7 @@ try{
   const futureRoute=campaignForStages(STORY_STAGE_IDS,fixture150),future=createStoryProgress(store,futureRoute,fixture150);finish(future,futureRoute);
   const allFuture=JSON.parse(store.getItem(STORY_SAVE_KEY));older.win(0);const retained=JSON.parse(store.getItem(STORY_SAVE_KEY));
   for(const value of allFuture.cleared)assert.ok(retained.cleared.includes(value));for(const value of allFuture.unlocked)assert.ok(retained.unlocked.includes(value));
-  const reload=createStoryProgress(store,futureRoute,fixture150);assert.equal(reload.snapshot().completed,true);assert.equal(reload.snapshot().unlocked.length,150);assert.ok(older.snapshot().unlocked.every(f=>baseline.includes(f)));
+  const reload=createStoryProgress(store,futureRoute,fixture150);assert.equal(reload.snapshot().completed,true);assert.equal(reload.snapshot().unlocked.length,150-relicCount(fixture150));assert.ok(older.snapshot().unlocked.every(f=>baseline.includes(f)));
   const legacy=JSON.stringify(legacyRecord(1,50));store.setItem(LEGACY_STORY_SAVE_KEY,legacy);current.sync();assert.ok(current.isUnlocked('rivet'));current.win(0);assert.equal(store.getItem(LEGACY_STORY_SAVE_KEY),legacy);
  });
  for(const type of ['art','nick-juicy','final'])check(`${type} gauntlet recruits wave1 but only atomically clears after both sequential wins`,()=>{
