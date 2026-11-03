@@ -9,10 +9,9 @@ const read=name=>readFileSync(new URL('../src/'+name,import.meta.url),'utf8');
 const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
 const cu=url(bundledCore()),core=await import(cu),events=await import(url(compile(read('animationEvents.ts'))));
-const originalBase=new URL('../src/originalPortraits.ts',import.meta.url).href;
-const pu=url(compile(read('originalPortraits.ts')).replaceAll('import.meta.url',JSON.stringify(originalBase)));
-const {originalPortraits}=await import(pu);
-const {createVersusScreen}=await import(url(compile(read('versusScreen.ts')).replace("from './core'",`from '${cu}'`).replace("from './originalPortraits'",`from '${pu}'`)));
+const pu=url(compile(read('portraits.ts')));
+const {portraitLarge}=await import(pu);
+const {createVersusScreen}=await import(url(compile(read('versusScreen.ts')).replace("from './core'",`from '${cu}'`).replace("from './portraits'",`from '${pu}'`)));
 const VERSUS_FRAMES=600; // Simulate ten seconds: confirmation must never time out.
 const {createFightCountdown,COUNTDOWN_FRAMES,FIGHT_CUE_FRAMES}=await import(url(compile(read('fightCountdown.ts'))));
 class Element{
@@ -23,10 +22,10 @@ globalThis.document={createElement:tag=>new Element(tag)};
 let checks=0;const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};
 function ui(done=()=>{}){const host=new Element('div'),screen=createVersusScreen(host,done),root=host.children[0],lineup=root.children[1];return {screen,root,cards:[lineup.children[0],lineup.children[2]],button:root.children[2]};}
 check('all installed portraits exist and all ordered matchups preserve exact selector names, original images and pair identity',()=>{
- const t=ui();for(const id of core.PLAYABLE_FIGHTERS)assert.ok(existsSync(new URL(originalPortraits[id])),id+' original picture exists');
+ const t=ui();for(const id of core.PLAYABLE_FIGHTERS)assert.ok(existsSync(new URL('../public'+portraitLarge(id),import.meta.url)),id+' versus portrait exists');
  for(const a of core.PLAYABLE_FIGHTERS)for(const b of core.PLAYABLE_FIGHTERS){
   t.screen.show(a,b);assert.ok(t.screen.isOpen);
-  [a,b].forEach((id,index)=>{const card=t.cards[index];assert.equal(card.attributes['data-fighter'],id);assert.equal(card.children[1].src,originalPortraits[id]);assert.equal(card.children[2].children[0].textContent,core.ROSTER[id].name);assert.equal(card.classes.has('is-paired'),core.isPairedFighter(id));});
+  [a,b].forEach((id,index)=>{const card=t.cards[index];assert.equal(card.attributes['data-fighter'],id);assert.equal(card.children[1].src,portraitLarge(id));assert.equal(card.children[2].children[0].textContent,core.ROSTER[id].name);assert.equal(card.classes.has('is-paired'),core.isPairedFighter(id));});
  }
 });
 check('preview waits indefinitely; explicit confirmation is idempotent across matchups and missing images',()=>{
@@ -96,7 +95,7 @@ check('actual restart refreshes both fighter identities and return to selection 
  const c={...core,...events,countdown:{hide(){}},versus:screen,chosen:'guest08',opponent:'guest09',mode:'dummy',testingGodMode:false,matchEarnedGodMode:false,matchTesting:false,matchGodMode:false,state:core.createState(),presentation:events.createRoundPresentation(),frames:[],qaEvents:[],accumulator:0,held:new Set(),queued:0,started:false,running:false,qaSingleStep:false,resumeAfterSettings:false,resumeAfterJourney:false,story:{leaveStory(){}},selection:{show(){}},updateGodModeLabel(){},start(){},$:id=>{if(!elements.has(id))elements.set(id,{});return elements.get(id);}};
  vm.createContext(c);vm.runInContext(compile(fn('restart')+'\n'+fn('returnToSelection')),c);c.restart();
  assert.equal(cards[0].children[2].children[0].textContent,'Yoyo');assert.equal(cards[1].children[2].children[0].textContent,'Red Kev');assert.ok(screen.isOpen);
- c.opponent='vaudream';c.restart();assert.equal(cards[1].children[1].src,originalPortraits.vaudream);
+ c.opponent='vaudream';c.restart();assert.equal(cards[1].children[1].src,portraitLarge('vaudream'));
  c.returnToSelection();assert.equal(screen.isOpen,false);
 });
 console.log(`${checks} versus groups passed; ${core.PLAYABLE_FIGHTERS.length**2} ordered matchup mappings, actual main clock/restart/pad boundaries. No physical controller claim.`);

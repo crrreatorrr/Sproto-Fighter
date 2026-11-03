@@ -134,6 +134,11 @@ own trajectories. All rounds are untimed.
   full-height twin previews, random choices and stage selection.
 - `src/teamSpecial.ts`: partner appearances and attack choreography.
 - `public/`: local runtime art/fonts; no generation service is needed to play.
+  The menu uses small generated WebP copies (`public/portraits/`,
+  `public/stages/previews/`) instead of the 1000 px portrait PNGs and full
+  stage backgrounds; a fight loads only its own background. After adding or
+  changing a portrait or stage, run `python3 scripts/build-images.py`
+  (needs Pillow); `portraits-smoke` and `stage-previews-smoke` catch stale copies.
 
 ### Checks
 
