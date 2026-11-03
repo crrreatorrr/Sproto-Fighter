@@ -11,7 +11,7 @@ by relative path. Use this page to find the current material first.
 | [../README.md](../README.md) | How to run, play and check the game; architecture; hub notes |
 | [INTEGRATION-20261103.md](INTEGRATION-20261103.md) | Latest integration: 131 fighters, 73 stages, hub adapter, checks run |
 | [GITHUB-INTEGRATION-20261103.md](GITHUB-INTEGRATION-20261103.md) | How the full history reached GitHub; repository size |
-| [MULTIPLAYER-PLAN.md](MULTIPLAYER-PLAN.md) | Plan for online play: rollback, transport, loading, trusted results |
+| [MULTIPLAYER-PLAN.md](MULTIPLAYER-PLAN.md) | Plan for online play: rollback, transport, loading, trusted results, 10-Ticket wagers |
 | [CLAUDE-HANDOFF.md](CLAUDE-HANDOFF.md) | Running handoff log (older counts; read its newest notes first) |
 | [STORY-UI-UPDATE.md](STORY-UI-UPDATE.md), [CAMPAIGN-EXPANSION-UPDATE.md](CAMPAIGN-EXPANSION-UPDATE.md) | Campaign, saves, map and story UI |
 | [STAGE-CATALOGUE-20261102.md](STAGE-CATALOGUE-20261102.md) | Stage counts and file mapping |

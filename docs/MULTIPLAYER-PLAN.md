@@ -51,6 +51,7 @@ during rollback, network jitter, background tabs and asset loading.
                 └──────────────► Nakama (existing hub) ◄─────┘
                                  TURN relay for strict NATs
                                  result check: replay inputs through src/sim
+                                 wager escrow: hold 10 each, settle 20 to winner
 ```
 
 ## Phase A — Make presentation rollback-safe
@@ -150,7 +151,80 @@ starts. Online, the slower player's download delays both.
   TypeScript runtime or a small Node worker can run it.
 - Input logs also give replays and spectating almost for free.
 
-## Phase F — Feel and polish
+## Phase F — Ticket wagers (10 Tickets per match)
+
+Every online match is played for Tickets: each player stakes **10 Tickets**,
+the winner takes the 20-Ticket pot (net +10), the loser loses their 10. The
+stake is fixed; there is no wager-size choice.
+
+**Scope.** Online matches between two hub-linked players only. CPU matches
+keep today's reward (+20 for a win against the CPU, no stake). Local versus
+has no wager: both players share one hub account. Practice and God Mode never
+touch Tickets.
+
+**The server holds the money; the client never moves Tickets.** The current
+SDK can only earn (capped at 200 per session and 1,000 per day), spend or
+sell in shops, and exchange. A wager needs new server RPCs in the hub
+(the metaverse-hub repository, not this one), all idempotent by match ID:
+
+| RPC | When | What it does |
+| --- | --- | --- |
+| `wager.hold` | Match formed, before the versus screen | Moves 10 Tickets from each player into an escrow record `{matchId, players, stake: 10, status: 'held'}`. If either player can't cover it, the match is cancelled and the other player's hold is returned. |
+| `wager.settle` | After the server verifies the result (Phase E) | Pays the 20-Ticket pot to the replayed winner and closes the record. A transfer out of escrow, not new Tickets, so it doesn't count against the earn caps. |
+| `wager.refund` | Draw, desync, unverifiable result, match never started, server-side expiry | Returns 10 to each player and closes the record. |
+
+**Outcomes:**
+
+| What happened | Tickets |
+| --- | --- |
+| A wins, both logs replay to A | A +20 from the pot (net +10), B net −10 |
+| Double KO | Refund both |
+| Desync detected (Phase B checksums) | Refund both |
+| Logs disagree or don't replay to a result | Refund both, flag the pair for review |
+| Disconnect before the first fight frame | Refund both |
+| Disconnect mid-fight, no reconnect within 10 s | Disconnected player forfeits; the other player wins the pot |
+| Record still `held` after 15 minutes | Server job refunds both |
+
+**Matchmaking.** Players queue explicitly for a wagered match, so nobody stakes
+Tickets by accident. Queueing needs a balance of at least 10, checked again
+by `wager.hold`. Rematches carry the wager only after both players confirm
+again.
+
+**Client UI (this repo):**
+- Queue button "Fight for 10 Tickets" showing the current balance.
+- Versus screen: both crests with "10" under each and "20 at stake".
+- Result screen: "+20 Tickets" or "−10 Tickets", and "Pending verification"
+  until `wager.settle` confirms. The client shows the server's result only.
+- Wager history in Settings, from the server's records.
+- SDK: new `queueWagerMatch` and `wagerStatus(matchId)`, retried through the
+  SDK's existing outbox like other economy calls.
+
+**Abuse limits.** A wager moves Tickets but never creates them, so the risk is
+funnelling: alt accounts losing on purpose to a main account.
+- At most 5 wagered matches per pair of players per day.
+- A daily cap on net Tickets won from wagers.
+- New accounts can't wager until they've played a number of CPU matches.
+- Flag pairs with one-sided records or very short matches.
+
+**Policy check before launch.** If Tickets can be bought with money, or
+exchanged for anything with cash value (the hub's `exchange` and shop
+`sellItem` paths need checking), wagering them may be regulated gambling in
+many places. Confirm that Tickets have no real-money value, or get a legal
+review and add age and region gating, before turning wagers on.
+
+**Tests.**
+- Server: hold, settle and refund are idempotent, and a match can't be
+  settled twice.
+- Server: a crash between hold and settle ends in a refund by the expiry job.
+- Server: an insufficient balance on one side refunds the other.
+- Client: against a fake hub, the result screen shows only the
+  server-confirmed amount.
+
+**Depends on:** Phase C (matchmaking and match IDs) and Phase E (server-
+verified results). **Wagers must not pay out without Phase E**: otherwise a
+client could report a false win and take the pot.
+
+## Phase G — Feel and polish
 
 - Network quality indicator (ping, rollback frames) on the HUD; an optional
   input-delay override in Settings.
@@ -166,10 +240,11 @@ starts. Online, the slower player's download delays both.
 | C WebRTC, Nakama signaling, TURN, match flow | Large (includes server work) | B |
 | D Preloading, sprite sheets | Medium | can run in parallel with A–C |
 | E Server-verified results | Medium | C |
-| F Polish | Ongoing | C |
+| F Ticket wagers (hub RPCs, escrow, UI) | Medium (mostly hub server work) | C, E |
+| G Polish | Ongoing | C |
 
 The first playable online match needs A + B + C. D determines whether it feels
-good on ordinary connections.
+good on ordinary connections. Wagers (F) need E first, plus the policy check.
 
 ## Risks
 
