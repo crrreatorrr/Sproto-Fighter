@@ -1111,6 +1111,26 @@ function act(s: CombatState, f: Fighter) {
         effect(s, f.x, f.y - 50, 'dash', ROSTER[f.id].color);
     }
 }
+/**
+ * CPU tuning. Distances are the gap between the two nearest bodies (root
+ * distance minus both fighters' body spread), so paired fighters behave like
+ * single ones. Cycles are frame periods; "Frames" is how much of a cycle the
+ * CPU spends on that choice.
+ */
+const CPU = {
+    approachGap: 105,   // walk in while farther than this
+    closeGap: 90,       // light attacks / grabs inside this
+    mediumGap: 125,     // medium attack inside this
+    guardGap: 180,      // block an incoming attack inside this
+    guardCycle: 120, guardFrames: 65,
+    grabCycle: 150, grabFrames: 22,
+    specialMaxGap: 450, // never fire the Team Special from farther than this
+    zoneGap: 260,       // ranged power beyond this
+    zoneRetreatGap: 390, zoneBoltCycle: 45, // Morelight keeps this distance
+    boltCycle: 90,
+    dashGap: 220, dashCycle: 120,
+    inputFrames: 4,
+} as const;
 export function cpuInput(s: CombatState): number {
     const f = s.fighters[1], p = s.fighters[0], rootDistance = Math.abs(p.x - f.x), toward = p.x < f.x ? A.left : A.right, away = p.x < f.x ? A.right : A.left;
     // Approach and ordinary attacks use the gap between the two front bodies.
@@ -1124,7 +1144,7 @@ export function cpuInput(s: CombatState): number {
         return 0;
     if (f.move?.id === 'launcher' && f.move.connected && grounded(f))
         return A.up | toward;
-    let input = distance > 105 ? toward : 0;
+    let input = distance > CPU.approachGap ? toward : 0;
     if (s.frame % 2 === 0)
         return input;
     if (f.move?.connected) {
@@ -1136,24 +1156,24 @@ export function cpuInput(s: CombatState): number {
     }
     if (f.move)
         return input;
-    if (p.move && distance < 180 && s.frame % 120 < 65)
+    if (p.move && distance < CPU.guardGap && s.frame % CPU.guardCycle < CPU.guardFrames)
         return away | (p.input & A.down);
     // Specials originate at the shared root; unlike ordinary melee their range
     // does not include the attacker's formation spread.
-    if (f.pips === 3 && rootDistance - bodySpread(p.id) < Math.min(450, getMove(f, 'special').range))
+    if (f.pips === 3 && rootDistance - bodySpread(p.id) < Math.min(CPU.specialMaxGap, getMove(f, 'special').range))
         return A.special;
-    if (f.id === 'vela' && distance > 260) {
-        input = distance < 390 ? away : 0;
-        if (s.frame % 45 < 4)
+    if (f.id === 'vela' && distance > CPU.zoneGap) {
+        input = distance < CPU.zoneRetreatGap ? away : 0;
+        if (s.frame % CPU.zoneBoltCycle < CPU.inputFrames)
             return input | A.bolt;
     }
-    if (distance < 90)
-        return input | (s.frame % 150 < 22 ? A.grab : A.light);
-    if (distance < 125)
+    if (distance < CPU.closeGap)
+        return input | (s.frame % CPU.grabCycle < CPU.grabFrames ? A.grab : A.light);
+    if (distance < CPU.mediumGap)
         return input | A.medium;
-    if (distance > 260 && s.frame % 90 < 3)
+    if (distance > CPU.zoneGap && s.frame % CPU.boltCycle < 3)
         return input | A.bolt;
-    if (distance > 220 && s.frame % 120 < 4)
+    if (distance > CPU.dashGap && s.frame % CPU.dashCycle < CPU.inputFrames)
         return input | A.dash;
     return input;
 }
