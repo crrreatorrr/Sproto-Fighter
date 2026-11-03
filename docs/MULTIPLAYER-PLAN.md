@@ -206,11 +206,11 @@ funnelling: alt accounts losing on purpose to a main account.
 - New accounts can't wager until they've played a number of CPU matches.
 - Flag pairs with one-sided records or very short matches.
 
-**Policy check before launch.** If Tickets can be bought with money, or
-exchanged for anything with cash value (the hub's `exchange` and shop
-`sellItem` paths need checking), wagering them may be regulated gambling in
-many places. Confirm that Tickets have no real-money value, or get a legal
-review and add age and region gating, before turning wagers on.
+**Ticket value (decided).** The owner confirmed on 3 November 2026 that
+Tickets have no real-money value: they can't be bought with money or cashed
+out. Wagering them is play-currency only, so no gambling gating is planned.
+If Tickets ever become purchasable, or exchangeable for anything with cash
+value, revisit this before wagers stay on.
 
 **Tests.**
 - Server: hold, settle and refund are idempotent, and a match can't be
@@ -244,7 +244,7 @@ client could report a false win and take the pot.
 | G Polish | Ongoing | C |
 
 The first playable online match needs A + B + C. D determines whether it feels
-good on ordinary connections. Wagers (F) need E first, plus the policy check.
+good on ordinary connections. Wagers (F) need E first.
 
 ## Risks
 
