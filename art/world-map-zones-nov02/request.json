@@ -1,0 +1,36 @@
+{
+  "model": "gpt_image_2_5",
+  "variant": "sunburst",
+  "quality": "xhigh",
+  "resolution": "4k",
+  "aspect_ratio": "16:9",
+  "count": 1,
+  "use_unlim": false,
+  "medias": [
+    {
+      "role": "image",
+      "value": "65e3281d-4120-4ddc-8511-6683cd7eaae8"
+    },
+    {
+      "role": "image",
+      "value": "5c730890-a6b8-4af6-8d14-547d4a70a92b"
+    },
+    {
+      "role": "image",
+      "value": "c7201dc8-3b68-49e2-90d5-3bf9e09a72b7"
+    },
+    {
+      "role": "image",
+      "value": "bfca6752-5b73-4735-8d31-21faef3e5062"
+    },
+    {
+      "role": "image",
+      "value": "2a2d41a0-b121-4568-8bf4-f398d38aafb5"
+    },
+    {
+      "role": "image",
+      "value": "aa811701-bc47-4d64-99a0-8b65f01278c3"
+    }
+  ],
+  "prompt": "Use case: precise-object-edit / game-world illustration.\nAsset: finished 3840x2160 landscape pixel-art WORLD MAP for the existing Sproto fighting game.\nEDIT TARGET image1 is the existing world map. Keep its cohesive elevated isometric overview, detailed crisp 1990s pixel clusters, rich turquoise sea, mountainous islands, waterfalls, warm traversable paths, forested cliffs and night sky. Preserve the recognizable lower-left trench villages, left-middle cyan/purple futuristic city, central Bitcoin marina with white yacht and gold Bitcoin landmark, and upper-middle violet castle. Improve clarity and visual separation of the later regions. This is a world map, NEVER a side-view combat stage or a collage of reference panels.\n\nThere must be EIGHT distinct explorable zones. Travel order is Trenches, Circuit city, Marina, SPROTO RANCH, Castle, HPOS10i CLUB (BAR), THE HATCHERY, VERSE GATE. Ranch is the middle campaign zone, and the final THREE are Club then Hatchery then Verse Gate. Provide a spacious readable winding road within each region for interactive encounter dots added later by the engine. No dots/numbers generated.\n\nGeography/composition with image-relative coordinates from top-left:\n1-3 Preserve trenches mainly x0-35% y55-98%, neon city x15-46% y36-75%, marina x40-64% y30-66%.\n4 SPROTO RANCH: expand the lower-right pastoral island into a distinct generous farmstead zone, x65-90% y62-90%. Match image6's weathered stone farmhouse with terracotta/slate roof, wood barn, stone fences, field gates and paddocks, hay stacks, warm sunset windows and soft grassy rolling hills. Make its sandy dirt lane wind around farmhouse and fields with room for encounters. Do not make it another futuristic city. A scenic stone bridge connects it to the central marina/castle network. A stone windmill and small red-roof cottages may remain from the existing map.\n5 Keep the violet castle upper-middle, x52-70% y4-30%, with its wide existing elevated courtyard paths.\n6 HPOS10i CLUB (BAR): replace the generic medieval tavern district in image1's right-middle island, x69-88% y33-49%, with the recognizable club in images2 and3. Render it as a welcoming isometric open-front/cutaway timber-and-brick club building within a tiny nightlife district: vivid amber-orange LED strips, dark walnut bar counter, multiple rows of colorful bottles, brass-footed stools, warm reflective wood, and the blue/yellow/red flat neon Sproto/Bitcoin wall emblem recognizable in the reference. This emblem is wall signage, NOT a living character. A blue-lit small terrace and red/orange neon door can complement it. Its architecture must visibly read as this specific neon cocktail/sports club, not a medieval inn. Keep the club small enough to belong to the map but detailed and easy to identify. Put a broad winding cobbled street outside/around it.\n7 THE HATCHERY: create an entirely separate dark alien island/plateau, x74-88% y5-28%, between the club and final portal, clearly separated from both. Images4/5 define its visual identity. Large unmistakable rust-brown ribbed chitin organic hatchery landmark with two curled horn/blade fins, orange-red core and vivid yellow/lime armor sacs. Midnight-navy cracked ground, indigo-purple organic creep, gothic low segmented perimeter walls and tiny cyan lamps, icy-blue jagged crystals, ochre egg-like growths. Surround it with an ample winding dark stone path or serpentine causeway, not a tiny single point. It is a biological alien hive, not a cathedral/castle, not a second blue portal. Ignore ALL interface text, labels, coins, player icons and characters in image5.\n8 VERSE GATE: keep a distinct final floating cosmic zone at the extreme upper-right, x90-99% y2-25%, with its brilliant circular cyan/blue vortex portal framed by dark stone arches, purple nebula, floating islands and red/blue crystals. A clear elevated causeway connects the Hatchery EXIT to this final gate. Hatchery and Verse are two separate islands/biomes with a visible gap, two different landmarks. The final gateway is NOT inside the Hatchery. No additional world exists after Verse Gate.\n\nThe map should feel like one coherent beautifully finished playable pixel-art world with eight clearly different regions and carefully drawn bridges/roads rather than disconnected thumbnails. Retain adequate water and breathing room. Distinct large recognizable club, hatchery and ranch landmarks; small architecture relative to the full map. No people, fighters, living mascots, UI, numbered markers, labels, borders, watermark or explanatory captions. Only the small reference neon emblem is permitted as attached club wall decoration. NO TEXT needs to be rendered: the game adds all region names. Keep full 16:9 landscape framing without cropping."
+}

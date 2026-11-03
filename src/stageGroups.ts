@@ -1,7 +1,7 @@
 import {STAGES, type StageId} from './stage';
 import {STORY_LOCATIONS} from './stageVariants';
 
-/** Menu families follow the story regions; Ranch remains a bonus zone. */
+/** Menu families follow the story regions; Ranch countryside also appears in the opening campaign. */
 export const STAGE_ZONES = [
  {id:'trenches',name:'The Trenches'}, {id:'circuit',name:'The City'},
  {id:'yacht',name:'The Yacht'}, {id:'throne',name:'The Castle'},

@@ -26,8 +26,11 @@ try{
   assert.equal(route.length,registry.length-5);assert.equal(new Set(route.map(e=>e.id)).size,route.length);
   for(const [index,e] of route.entries()){assert.equal(e.index,index);assert.equal(e.opponent,e.opponents[0]);assert.ok(e.opponents.length===1||e.opponents.length===2);}
   assert.deepEqual(route.at(-4).opponents,['rivet']);assert.deepEqual(route.at(-3).opponents,['sproto865','sproto943']);assert.deepEqual(route.at(-2).opponents,['nick','guest07']);assert.deepEqual(route.at(-1).opponents,['vela','vaudream']);
-  assert.equal(route.at(-3).gauntlet,'art');assert.equal(route.at(-3).stage,'verse');assert.equal(route.at(-2).gauntlet,'nick-juicy');assert.equal(route.at(-2).stage,'hatchery');assert.equal(route.at(-1).gauntlet,'final');assert.equal(route.at(-1).stage,'hatchery');
-  for(const e of route)if(isPairedFighter(e.opponent)){assert.ok(e.index<route.length-2);assert.equal(e.stage,'verse');}
+  assert.equal(route.at(-3).gauntlet,'art');assert.equal(route.at(-3).stage,'hatchery');assert.equal(route.at(-2).gauntlet,'nick-juicy');assert.equal(route.at(-2).stage,'verse');assert.equal(route.at(-1).gauntlet,'final');assert.equal(route.at(-1).stage,'verse');
+  for(const e of route)if(isPairedFighter(e.opponent)){assert.ok(e.index<route.length-2);assert.equal(e.stage,'hatchery');}
+  for(const fighter of ['michael','buddhashadow'])if(registry.includes(fighter)){
+   const encounters=route.filter(e=>e.opponents.includes(fighter));assert.equal(encounters.length,1);assert.deepEqual(encounters[0].opponents,[fighter]);assert.equal(encounters[0].stage,'hatchery');assert.equal(encounters[0].id,id(fighter));
+  }
   assert.deepEqual([...new Set(route.map(e=>e.stage))],STORY_STAGE_IDS);
  }
  const finish=(progress,route)=>{for(let index=0;index<route.length;index++){if(progress.isCleared(index))continue;assert.ok(progress.begin(index));for(let wave=0;wave<route[index].opponents.length;wave++)assert.ok(progress.win(index,wave));}};
@@ -41,12 +44,19 @@ try{
   assert.equal(baseline.length,102);verifyRoute(baseline,campaignForStages(STORY_STAGE_IDS,baseline));verifyRoute(PLAYABLE_FIGHTERS,STORY_ENCOUNTERS);
   assert.equal(STORY_ROSTER_COUNTS.installed,PLAYABLE_FIGHTERS.length);assert.equal(STORY_ROSTER_COUNTS.rivals,PLAYABLE_FIGHTERS.length-2);assert.equal(STORY_ROSTER_COUNTS.encounters,PLAYABLE_FIGHTERS.length-5);assert.equal(STORY_ROSTER_COUNTS.missing,Math.max(0,150-PLAYABLE_FIGHTERS.length));assert.deepEqual(STORY_OPPONENTS,STORY_ENCOUNTERS.flatMap(e=>e.opponents));
  });
- check('optional Satoshi/Xalt/Potocaicai pins appear in Verse immediately before Golden only when registered',()=>{
+ check('optional Satoshi/Xalt/Potocaicai pins appear in the Hatchery immediately before Golden only when registered',()=>{
   for(const registry of [baseline,PLAYABLE_FIGHTERS,fixture150]){
    const route=campaignForStages(STORY_STAGE_IDS,registry),expected=CAMPAIGN_RECRUITS.filter(id=>registry.includes(id)),golden=route.findIndex(e=>e.opponent==='rivet');
    assert.deepEqual(route.slice(golden-expected.length,golden).map(e=>e.opponent),expected);
-   for(const id of expected){const e=route.find(e=>e.opponent===id);assert.equal(e.stage,'verse');assert.ok(route.filter(e=>isPairedFighter(e.opponent)).every(p=>p.index<e.index));}
+   for(const id of expected){const e=route.find(e=>e.opponent===id);assert.equal(e.stage,'hatchery');assert.ok(route.filter(e=>isPairedFighter(e.opponent)).every(p=>p.index<e.index));}
    for(const id of CAMPAIGN_RECRUITS.filter(id=>!registry.includes(id)))assert.equal(route.some(e=>e.opponents.includes(id)),false);
+  }
+ });
+ check('moving Michael and Buddha to the Hatchery retains saved v3 wins and recruits by encounter identity',()=>{
+  const moved=['michael','buddhashadow'];
+  const store=disk({[STORY_SAVE_KEY]:JSON.stringify({version:3,cleared:moved.map(id),unlocked:STARTER_FIGHTERS,godModeUnlocked:false})});
+  for(const progress of [createStoryProgress(store),createStoryProgress(store)])for(const fighter of moved){
+   const encounter=STORY_ENCOUNTERS.find(e=>e.opponent===fighter);assert.equal(encounter.stage,'hatchery');assert.ok(progress.isCleared(encounter.index));assert.ok(progress.isUnlocked(fighter));
   }
  });
  check('new progression source typechecks against a102-entry registered fixture with no optional pin IDs',()=>{

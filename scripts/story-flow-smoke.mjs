@@ -85,9 +85,9 @@ try {
 
   await check('installed campaign exposes three genuine sequential gauntlets and dynamic counts',()=>{
     assert.ok(TOTAL>0);assert.ok(ART);assert.ok(NICK_JUICY);assert.ok(FINAL);
-    assert.deepEqual(NICK_JUICY.opponents,['nick','guest07']);assert.equal(NICK_JUICY.stage,'hatchery');assert.equal(NICK_JUICY.index,FINAL.index-1);
+    assert.deepEqual(NICK_JUICY.opponents,['nick','guest07']);assert.equal(NICK_JUICY.stage,'verse');assert.equal(NICK_JUICY.index,FINAL.index-1);
     assert.deepEqual(ART.opponents,['sproto865','sproto943']);assert.deepEqual(FINAL.opponents,['vela','vaudream']);
-    assert.equal(ART.stage,'verse');assert.equal(FINAL.stage,'hatchery');
+    assert.equal(ART.stage,'hatchery');assert.equal(FINAL.stage,'verse');
     for(const encounter of STORY_ENCOUNTERS){assert.ok(encounter.opponents.length);assert.equal(encounter.opponent,encounter.opponents[0]);for(const id of encounter.opponents)assert.ok(PLAYABLE_FIGHTERS.includes(id),id);}
     assert.equal(new Set(STORY_ENCOUNTERS.map(e=>e.id)).size,TOTAL);
   });

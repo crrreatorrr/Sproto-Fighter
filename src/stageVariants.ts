@@ -1,7 +1,7 @@
 import type {StageId} from './stage';
 
 export interface StoryLocation {id:string;stage:StageId;title:string;image:string;width:number;height:number}
-/** Approved Higgsfield still panoramas. The original stage assets remain intact. */
+/** Higgsfield still panoramas, including the new Ranch countryside stretch. The original stage assets remain intact. */
 export const STORY_LOCATIONS:readonly StoryLocation[]=[
   {
     "id": "00-trenches-drainage-floodgate",
@@ -478,7 +478,7 @@ export const STORY_LOCATIONS:readonly StoryLocation[]=[
   {
     "id": "reference-main-bar",
     "stage": "bar",
-    "title": "Last Light Bar",
+    "title": "HPOS10i Club (Bar)",
     "image": "/stages/higgsfield/bar.png",
     "width": 1280,
     "height": 720
@@ -490,11 +490,15 @@ export const STORY_LOCATIONS:readonly StoryLocation[]=[
     "image": "/stages/higgsfield/bluebar.png",
     "width": 1280,
     "height": 720
-  }
+  },
+  {"id":"ranch-orchard","stage":"ranch","title":"Dawn Orchard","image":"/stages/higgsfield/ranch-orchard.png","width":1280,"height":720},
+  {"id":"ranch-windmill","stage":"ranch","title":"Stormwind Mill","image":"/stages/higgsfield/ranch-windmill.png","width":1280,"height":720},
+  {"id":"ranch-creek","stage":"ranch","title":"Moonlit Creek Crossing","image":"/stages/higgsfield/ranch-creek.png","width":1280,"height":720},
 ];
 
 const regionOrder:Partial<Record<StageId,readonly number[]>>={
- trenches:[0,1,2,21,22,23,24,25,38,39,40],
+ trenches:[0,1,2,24,25,38,39,40],
+ ranch:[21,22,23,61,62,63],
  circuit:[3,5,4,8,6,7,26,27,41,42,43],
  yacht:[9,10,11,28,29,44,45,46],
  throne:[15,16,17,12,13,14,30,31,47,48,49],

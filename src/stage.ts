@@ -174,21 +174,21 @@ function drawRanch(ctx: CanvasRenderingContext2D, frame: number): void {
     ctx.restore();
 }
 
-export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch' | 'trenches' | 'circuit' | 'throne' | 'verse' | 'hatchery' | 'rainworks' | 'scrapyard' | 'skyrail' | 'nightmarket' | 'sundeck' | 'drydock' | 'glassgarden' | 'chainforge' | 'cellar' | 'rooftop' | 'starbridge' | 'observatory' | 'sporegrove' | 'ambernursery' | 'rustcanal' | 'ashstation' | 'culvertgarden' | 'datavault' | 'ionplaza' | 'stormarcade' | 'coralsalon' | 'helipad' | 'regatta' | 'lunarchapel' | 'royallibrary' | 'frostbastion' | 'backstage' | 'lanterncourt' | 'aquariumbar' | 'gravityarchive' | 'auroragate' | 'sundial' | 'pearlchamber' | 'rootreservoir' | 'moltinghall' | 'bluebar' | '00-trenches-drainage-floodgate' | '01-trenches-sun-baked-scrapworks' | '02-trenches-canal-underpass' | '03-circuit-checkpoint-lockdown' | '04-circuit-daylight-maglev-terminal' | '05-circuit-underground-control-bunker' | '06-midnight-market-alley' | '07-antenna-rooftop-at-dawn' | '08-night-transit-tunnel' | '09-sunlit-cargo-pier' | '10-upper-deck-in-a-storm' | '11-grand-salon-after-dark' | '12-throne-furnace-relay-vault' | '13-throne-power-conduit-gallery' | '14-throne-broken-crown-sanctuary' | '15-castle-stained-glass-great-hall' | '16-castle-smoky-armory-forge' | '17-castle-snow-swept-battlements' | '18-verse-red-sun-asteroid-causeway' | '19-verse-cosmic-crystal-cavern' | '20-verse-beyond-the-dimensional-sea' | '21-ranch-lantern-lit-barn' | '22-ranch-green-paddock-at-midday' | '23-ranch-dusty-farmhouse-yard';
+export type StageId = 'yacht' | 'bar' | 'castle' | 'retro' | 'ranch' | 'trenches' | 'circuit' | 'throne' | 'verse' | 'hatchery' | 'rainworks' | 'scrapyard' | 'skyrail' | 'nightmarket' | 'sundeck' | 'drydock' | 'glassgarden' | 'chainforge' | 'cellar' | 'rooftop' | 'starbridge' | 'observatory' | 'sporegrove' | 'ambernursery' | 'rustcanal' | 'ashstation' | 'culvertgarden' | 'datavault' | 'ionplaza' | 'stormarcade' | 'coralsalon' | 'helipad' | 'regatta' | 'lunarchapel' | 'royallibrary' | 'frostbastion' | 'backstage' | 'lanterncourt' | 'aquariumbar' | 'gravityarchive' | 'auroragate' | 'sundial' | 'pearlchamber' | 'rootreservoir' | 'moltinghall' | 'bluebar' | '00-trenches-drainage-floodgate' | '01-trenches-sun-baked-scrapworks' | '02-trenches-canal-underpass' | '03-circuit-checkpoint-lockdown' | '04-circuit-daylight-maglev-terminal' | '05-circuit-underground-control-bunker' | '06-midnight-market-alley' | '07-antenna-rooftop-at-dawn' | '08-night-transit-tunnel' | '09-sunlit-cargo-pier' | '10-upper-deck-in-a-storm' | '11-grand-salon-after-dark' | '12-throne-furnace-relay-vault' | '13-throne-power-conduit-gallery' | '14-throne-broken-crown-sanctuary' | '15-castle-stained-glass-great-hall' | '16-castle-smoky-armory-forge' | '17-castle-snow-swept-battlements' | '18-verse-red-sun-asteroid-causeway' | '19-verse-cosmic-crystal-cavern' | '20-verse-beyond-the-dimensional-sea' | '21-ranch-lantern-lit-barn' | '22-ranch-green-paddock-at-midday' | '23-ranch-dusty-farmhouse-yard' | 'ranch-orchard' | 'ranch-windmill' | 'ranch-creek';
 /** Canonical chapter order; encounter assignments and gates derive from this route. */
-export const STORY_STAGE_IDS:readonly StageId[] = ['trenches','circuit','yacht','throne','bar','verse','hatchery'];
+export const STORY_STAGE_IDS:readonly StageId[] = ['trenches','circuit','yacht','ranch','throne','bar','hatchery','verse'];
 export interface StageDefinition {id:StageId;name:string;theme:string;accent:string;chapter:number|null;image?:string;parent?:StageId}
 export const STAGES: StageDefinition[] = [
     {id:'trenches',name:'Mudline Trenches',theme:'The Trenches / city below',accent:'#d6a05c',chapter:1},
     {id:'circuit',name:'Circuit Gate',theme:'The City / challenge gate',accent:'#64d7df',chapter:2},
     {id:'retro',name:'Neon Tomorrow',theme:'Retrofuturistic city',accent:'#df86de',chapter:2},
     {id:'yacht',name:'Tidebreak Marina',theme:'$Bitcoin Yacht Party',accent:'#66d7e8',chapter:3},
-    {id:'throne',name:'Crown Relay Chamber',theme:'The Castle / relay throne',accent:'#e5b65f',chapter:4},
-    {id:'castle',name:'Moonkeep Castle',theme:'Castle courtyard',accent:'#adabed',chapter:4},
-    {id:'bar',name:'Last Light Bar',theme:'The Bar / hidden doorway',accent:'#efaa65',chapter:5},
-    {id:'verse',name:'Verse Gate',theme:'The Verse / open every gate',accent:'#ad92f4',chapter:6},
-    {id:'hatchery',name:'The Hatchery',theme:'Beyond the portal / alien hive',accent:'#c4d75c',chapter:7},
-    {id:'ranch',name:'Sproto Ranch',theme:'Bonus / sunset farmstead',accent:'#efbd7a',chapter:null},
+    {id:'throne',name:'Crown Relay Chamber',theme:'The Castle / relay throne',accent:'#e5b65f',chapter:5},
+    {id:'castle',name:'Moonkeep Castle',theme:'Castle courtyard',accent:'#adabed',chapter:5},
+    {id:'bar',name:'HPOS10i Club (Bar)',theme:'HPOS10i Club / neon nightlife',accent:'#efaa65',chapter:6},
+    {id:'verse',name:'Verse Gate',theme:'The Verse / final gateway',accent:'#ad92f4',chapter:8},
+    {id:'hatchery',name:'The Hatchery',theme:'The Hatchery / alien hive before the Verse',accent:'#c4d75c',chapter:7},
+    {id:'ranch',name:'Sproto Ranch',theme:'Sproto Ranch / sunset farmstead',accent:'#efbd7a',chapter:4},
     {"id": "rainworks", "name": "Rainworks Spillway", "theme": "Trenches / Rainworks Spillway", "accent": "#d6a05c", "chapter": null},
     {"id": "scrapyard", "name": "Copperbone Scrapyard", "theme": "Trenches / Copperbone Scrapyard", "accent": "#d6a05c", "chapter": null},
     {"id": "skyrail", "name": "Skyrail Junction", "theme": "Circuit / Skyrail Junction", "accent": "#64d7df", "chapter": null},
@@ -250,6 +250,9 @@ export const STAGES: StageDefinition[] = [
     {"id":"21-ranch-lantern-lit-barn","name":"Lantern-lit barn","theme":"Ranch / Lantern-lit barn","accent":"#efbd7a","chapter":null,"image":"/stages/variations-v2/ranch/21-ranch-lantern-lit-barn.png","parent":"ranch"},
     {"id":"22-ranch-green-paddock-at-midday","name":"Green paddock at midday","theme":"Ranch / Green paddock at midday","accent":"#efbd7a","chapter":null,"image":"/stages/variations-v2/ranch/22-ranch-green-paddock-at-midday.png","parent":"ranch"},
     {"id":"23-ranch-dusty-farmhouse-yard","name":"Dusty farmhouse yard","theme":"Ranch / Dusty farmhouse yard","accent":"#efbd7a","chapter":null,"image":"/stages/variations-v2/ranch/23-ranch-dusty-farmhouse-yard.png","parent":"ranch"},
+    {"id":"ranch-orchard","name":"Dawn Orchard","theme":"Ranch / Dawn Orchard","accent":"#efbd7a","chapter":null,"image":"/stages/higgsfield/ranch-orchard.png","parent":"ranch"},
+    {"id":"ranch-windmill","name":"Stormwind Mill","theme":"Ranch / Stormwind Mill","accent":"#efbd7a","chapter":null,"image":"/stages/higgsfield/ranch-windmill.png","parent":"ranch"},
+    {"id":"ranch-creek","name":"Moonlit Creek Crossing","theme":"Ranch / Moonlit Creek Crossing","accent":"#efbd7a","chapter":null,"image":"/stages/higgsfield/ranch-creek.png","parent":"ranch"},
 ];
 export function stageImageSource(id:StageId):string {
     const stage=STAGES.find(stage=>stage.id===id);
