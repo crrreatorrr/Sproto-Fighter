@@ -27,7 +27,11 @@ export const waveSin=(age:number)=>Number.isInteger(age)&&age>=0&&age<WAVE_SIN.l
  * JSON number formatting is fully specified, so the text is identical everywhere.
  */
 export function hashState(s:CombatState):number{
-    const text=JSON.stringify(s);let h=0x811c9dc5;
+    return hashText(JSON.stringify(s));
+}
+/** FNV-1a of a state's JSON text; hashText(saveState(s).text) === hashState(s). */
+export function hashText(text:string):number{
+    let h=0x811c9dc5;
     for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}
     return h>>>0;
 }
