@@ -1,0 +1,55 @@
+MANUAL QA · frame 8607 · running
+P1 duo: x=1037.1 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=4 pips=0 reaction=-/-:0
+P2 vela: x=1200.0 y=578.0 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0
+Presentation: {"phase":"fight","frame":0,"winner":null,"fromFloor":false}
+Replay frames: 8607
+Throw: null
+Projectiles: 
+f1226: medium level hits=2 pips=0 hp=1000/907 x=788 y=578 input=0 throw=-/- reaction2=recoil/flight
+f1232: heavy level hits=2 pips=0 hp=1000/907 x=788 y=578 input=0 throw=-/- reaction2=recoil/flight
+f1242: heavy level hits=3 pips=0 hp=1000/834 x=789 y=578 input=0 throw=-/- reaction2=knockdown/flight
+f1268: heavy level hits=3 pips=0 hp=1000/834 x=789 y=578 input=0 throw=-/- reaction2=knockdown/down
+f1279: neutral  hits=3 pips=0 hp=1000/834 x=789 y=578 input=0 throw=-/- reaction2=knockdown/down
+f1282: neutral  hits=3 pips=0 hp=1000/834 x=789 y=578 input=0 throw=-/- reaction2=knockdown/rise
+f1288: neutral  hits=0 pips=1 hp=1000/834 x=789 y=578 input=0 throw=-/- reaction2=-/-
+f1350: neutral  hits=0 pips=1 hp=1000/1000 x=789 y=578 input=0 throw=-/- reaction2=-/-
+f2473: light level hits=0 pips=1 hp=1000/1000 x=861 y=578 input=16 throw=-/- reaction2=-/-
+f2494: neutral  hits=0 pips=1 hp=1000/1000 x=869 y=578 input=0 throw=-/- reaction2=-/-
+f2495: heavy level hits=0 pips=1 hp=1000/1000 x=869 y=578 input=0 throw=-/- reaction2=-/-
+f2505: heavy level hits=1 pips=1 hp=1000/913 x=869 y=578 input=0 throw=-/- reaction2=knockdown/flight
+f2531: heavy level hits=1 pips=1 hp=1000/913 x=869 y=578 input=0 throw=-/- reaction2=knockdown/down
+f2542: neutral  hits=1 pips=1 hp=1000/913 x=869 y=578 input=0 throw=-/- reaction2=knockdown/down
+f2545: neutral  hits=1 pips=1 hp=1000/913 x=869 y=578 input=0 throw=-/- reaction2=knockdown/rise
+f2551: neutral  hits=0 pips=1 hp=1000/913 x=869 y=578 input=0 throw=-/- reaction2=-/-
+f2610: neutral  hits=0 pips=1 hp=1000/1000 x=869 y=578 input=0 throw=-/- reaction2=-/-
+f3217: light level hits=0 pips=1 hp=1000/1000 x=1037 y=578 input=16 throw=-/- reaction2=-/-
+f3221: light level hits=1 pips=1 hp=1000/962 x=1040 y=578 input=16 throw=-/- reaction2=recoil/flight
+f3227: medium level hits=1 pips=1 hp=1000/962 x=1041 y=578 input=32 throw=-/- reaction2=recoil/flight
+f3233: medium level hits=2 pips=1 hp=1000/907 x=1042 y=578 input=64 throw=-/- reaction2=recoil/flight
+f3239: heavy level hits=2 pips=1 hp=1000/907 x=1042 y=578 input=0 throw=-/- reaction2=recoil/flight
+f3249: heavy level hits=3 pips=1 hp=1000/834 x=1042 y=578 input=0 throw=-/- reaction2=knockdown/flight
+f3275: heavy level hits=3 pips=1 hp=1000/834 x=1037 y=578 input=0 throw=-/- reaction2=knockdown/down
+f3286: neutral  hits=3 pips=1 hp=1000/834 x=1037 y=578 input=0 throw=-/- reaction2=knockdown/down
+f3289: neutral  hits=3 pips=1 hp=1000/834 x=1037 y=578 input=0 throw=-/- reaction2=knockdown/rise
+f3295: neutral  hits=0 pips=2 hp=1000/834 x=1037 y=578 input=0 throw=-/- reaction2=-/-
+f3330: neutral  hits=0 pips=2 hp=1000/1000 x=1037 y=578 input=0 throw=-/- reaction2=-/-
+f7032: light level hits=0 pips=2 hp=1000/1000 x=1099 y=578 input=16 throw=-/- reaction2=-/-
+f7036: light level hits=1 pips=2 hp=1000/962 x=1097 y=578 input=16 throw=-/- reaction2=recoil/flight
+f7042: medium level hits=1 pips=2 hp=1000/962 x=1097 y=578 input=32 throw=-/- reaction2=recoil/flight
+f7048: medium level hits=2 pips=2 hp=1000/907 x=1097 y=578 input=64 throw=-/- reaction2=recoil/flight
+f7054: heavy level hits=2 pips=2 hp=1000/907 x=1097 y=578 input=0 throw=-/- reaction2=recoil/flight
+f7064: heavy level hits=3 pips=2 hp=1000/834 x=1097 y=578 input=0 throw=-/- reaction2=knockdown/flight
+f7090: heavy level hits=3 pips=2 hp=1000/834 x=1039 y=578 input=0 throw=-/- reaction2=knockdown/down
+f7101: neutral  hits=3 pips=2 hp=1000/834 x=1037 y=578 input=0 throw=-/- reaction2=knockdown/down
+f7104: neutral  hits=3 pips=2 hp=1000/834 x=1037 y=578 input=0 throw=-/- reaction2=knockdown/rise
+f7110: neutral  hits=0 pips=3 hp=1000/1000 x=1037 y=578 input=0 throw=-/- reaction2=-/-
+f7820: special level hits=0 pips=0 hp=1000/1000 x=1037 y=578 input=1024 throw=-/- reaction2=-/-
+f7833: special level hits=1 pips=0 hp=1000/934 x=1053 y=578 input=0 throw=-/- reaction2=launch/flight
+f7848: special level hits=2 pips=0 hp=1000/873 x=1073 y=578 input=0 throw=-/- reaction2=launch/flight
+f7865: special level hits=3 pips=0 hp=1000/818 x=1097 y=578 input=0 throw=-/- reaction2=launch/flight
+f7882: special level hits=4 pips=0 hp=1000/768 x=1121 y=578 input=0 throw=-/- reaction2=knockdown/flight
+f7918: neutral  hits=4 pips=0 hp=1000/768 x=1120 y=578 input=0 throw=-/- reaction2=knockdown/flight
+f7921: neutral  hits=4 pips=0 hp=1000/768 x=1096 y=578 input=0 throw=-/- reaction2=knockdown/down
+f7935: neutral  hits=4 pips=0 hp=1000/768 x=1037 y=578 input=0 throw=-/- reaction2=knockdown/rise
+f7941: neutral  hits=0 pips=0 hp=1000/768 x=1037 y=578 input=0 throw=-/- reaction2=-/-
+f8010: neutral  hits=0 pips=0 hp=1000/1000 x=1037 y=578 input=0 throw=-/- reaction2=-/-

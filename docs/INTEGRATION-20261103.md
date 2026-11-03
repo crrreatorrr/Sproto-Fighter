@@ -1,6 +1,6 @@
 # Local integration — 3 November 2026
 
-This checkpoint combines completed local game work with the published Sproto Fighter hub adapter. It does not deploy or push anything. The game still has **131 selectable fighters, 150 rendered bodies including pairs, 126 story encounters / 129 distinct rivals, and 73 selectable stages**. The requested 150 distinct-fighter target is not complete.
+This checkpoint combines completed local game work with the published Sproto Fighter hub adapter. The initial local checkpoint did not deploy or push anything; the user subsequently requested GitHub main integration too. The game still has **131 selectable fighters, 150 rendered bodies including pairs, 126 story encounters / 129 distinct rivals, and 73 selectable stages**. The requested 150 distinct-fighter target is not complete.
 
 ## Sources and preservation
 
@@ -55,13 +55,17 @@ The actual production bundle was opened at `http://127.0.0.1:5201/play/sproto-fi
 - Keyboard movement, a kick, W jump and an actual heavy contact were exercised. The hit reduced Morelight to 880 HP and showed the hit effect/reaction. Restart returned to versus preview.
 - Screenshots are in `docs/evidence/integration-20261103/`. Still images document the observed states; they are not a claim of a fresh continuous-motion review of every fighter.
 
+### Final local-main check
+
+Local main merge `54551852` retained the same tracked tree as the verified isolated integration. Two repeated conflicts (the map image URL and selection unlock text) were resolved to those already-tested combined versions. A clean dependency installation, all 24 adapter tests and the production build passed again on main. The detached server on port 5200 was restarted from this checkout. In the actual main browser, High Sproto versus Twinners launched on Dawn Orchard, both twin bodies rendered, the CPU completed a round, and practice subsequently launched successfully. No browser console errors were captured. The final menu/fight images are `main-twin-menu.jpg` and `main-twin-fight.jpg`.
+
 ## Limits and follow-up
 
 - No authenticated live hub session, actual Ticket credit, Relic grant, return portal or backend deployment was exercised. Those require the configured running hub/server. Adapter behavior was tested with stubs and standalone browser play.
 - Physical controller testing was intentionally skipped per the user's instruction. Existing simulated controller checks passed.
 - Prior roster-wide art/reaction evidence remains in the project. This integration pass did not repeat every fighter's full live animation review or assert that all outstanding aesthetic issues are solved.
 - The distinct-fighter goal remains 150; only 131 selectable entries currently exist. No invented characters or unapproved cutscene videos were added.
-- No remote push was performed. Other worktrees and the separate hub process on port 5173 were preserved.
+- No remote push was performed for the initial local checkpoint. The later authorized publication is recorded separately. Other worktrees and the separate hub process on port 5173 were preserved.
 
 ## Run locally
 

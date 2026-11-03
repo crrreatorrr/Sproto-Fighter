@@ -1,0 +1,13 @@
+PASS: installed optional clips have exact current counts and inventory; absent roster entries remain absent
+PASS: intro clocks cover four frames without core mutation; identity excludes same-ID assist
+PASS: actual special inputs select contact poses on every own-kit contact and hold through real hitstop
+PASS: cast release lasts at least four simulation ages; rendering preserves projectile spawn and mouth origins
+PASS: real grounded light recoil samples correctly; block, throw, airborne and knockdown suppress recoil
+PASS: defeat floor starts at4+, never rotates authored art, rests at source floor baseline, final result holds
+PASS: mixed-state double-KO presentation detect prone losers individually and retain opposite impact orientation
+PASS: explicit floor presentation without reaction safely uses current facing
+PASS: all defeat frames stay inside six-pixel horizontal margins at both walls without core-position mutation
+PASS: stable assist identity follows owner contacts rather than its own kit; same-ID object unaffected
+PASS: length rejects atomically without old-art fallback
+PASS: missing rejects atomically without old-art fallback
+12 event-clip groups passed for installed IDs: rivet, vela (both facings). Mechanical/metadata coverage only; no visual claim.

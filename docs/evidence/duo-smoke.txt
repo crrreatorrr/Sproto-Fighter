@@ -1,0 +1,10 @@
+PASS: one selectable duo, two complete body atlases and one health/input/meter state
+PASS: each body retains stable world-side placement across facing changes without core mutation
+PASS: independent half-cycle gait covers both full sequences, freezes and reverses
+PASS: contact geometry matches each facing-specific front body, including formation offset
+PASS: back throw keeps the catching body through release even when attacker facing flips
+PASS: intro and floor defeat reach both entity clips only for the actual scene actor
+PASS: duo special has its own complete clips, consumes three pips and never doubles contact damage
+PASS: a projectile overlapping the shared duo envelope damages its one health pool once
+PASS: both complete falling bodies stay separated and inside the camera at both walls
+9 duo contract groups passed. Browser visual review is recorded separately.

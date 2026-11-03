@@ -1,0 +1,21 @@
+{
+  "scope": "Current public source snapshot, known credential and private metadata patterns; excludes ignored dependencies/build cache. Not a proof against every possible secret.",
+  "filesScanned": 1514,
+  "textFilesScanned": 70,
+  "bytesScanned": 40050998,
+  "findings": [],
+  "imageMetadataToReview": [],
+  "filesOver95MiB": [],
+  "symlinks": [],
+  "sourceRuntimeTestMismatches": [],
+  "originalHistory": "2032 text blobs scanned earlier with zero known credential-pattern findings; original history is not published.",
+  "innocuousImageMetadata": "JFIF version/density in browser captures; no EXIF or private text.",
+  "providerMetadataRemoved": [
+    "public/stages/higgsfield/castle.png",
+    "public/stages/higgsfield/retro.png",
+    "public/stages/higgsfield/yacht.png",
+    "public/stages/higgsfield/bar.png",
+    "public/menu/higgsfield/arcade-frame.png"
+  ],
+  "runtimeAssetPixelEquivalence": "All5 sanitized PNG files verified pixel-identical to original; only provider job metadata removed."
+}
