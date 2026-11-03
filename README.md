@@ -145,3 +145,12 @@ No physical-controller test, per user instruction. A full manual 100-match
 campaign, every frame/matchup, long sessions and systematic cross-browser
 performance remain unverified. There is no online-readiness claim. This
 integration adds no purchases, generation calls, remote push or hosting.
+
+
+## Metaverse Hub integration
+
+The optional hub adapter comes from the published `claude/sweet-newton-l4tjnh` work. A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
+
+Story recruits remain playable. Hub Relics provide an additional route to Halloween 2008 (HPOS10I Core), $Bitcoin Obama (Genesis Block Shard), Big Swole (Cone’s Tip), Bongraker (Tinubu’s Crown), and Sproto Duo (all four). Fighters without a corresponding Relic retain their existing story rules. Locked fighters remain previewable and usable as CPU opponents. A lost/revoked Relic does not revoke a fighter recruited in the story.
+
+Configure `VITE_HUB_URL`, `VITE_NAKAMA_URL` and `VITE_NAKAMA_SERVER_KEY` for a hub deployment. The client server key is public configuration; never put backend secrets in Vite variables. Standalone play needs no backend. The relative build base supports the root and `/play/sproto-fighter/`; the integration does not start, migrate or deploy the hub server. Run `npm test` for hub adapter checks.

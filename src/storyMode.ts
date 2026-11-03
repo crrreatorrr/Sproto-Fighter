@@ -2,7 +2,7 @@ import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
 import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,STORY_OPPONENTS,storyProgress,type Encounter,type StoryProgress} from './storyProgress';
 
-type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;selectedFighter?:()=>PlayableFighterId;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
+type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
 /** Real progression; chapter scenes remain placeholders pending script approval. */
 export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
@@ -27,7 +27,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         if(!hooks.ready()){$('journey-copy').textContent='Fighter sprites are still loading. Try again in a moment.';return;}
         progress.sync();
         const selectedFighter=hooks.selectedFighter?.();
-        if(selectedFighter&&!progress.isUnlocked(selectedFighter)){
+        if(selectedFighter&&!(hooks.canPlayFighter?.(selectedFighter)??progress.isUnlocked(selectedFighter))){
             $('journey-copy').textContent=`${ROSTER[selectedFighter].name} is a locked P1 preview. Return to the arena menu and choose an unlocked P1 fighter. Defeat ${ROSTER[selectedFighter].name} in story mode to recruit them.`;
             return;
         }

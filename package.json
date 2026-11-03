@@ -20,10 +20,16 @@
     "motion-fix-smoke": "node scripts/motion-fix-smoke.mjs",
     "motion-visual-coverage": "node scripts/movement-visual-coverage.mjs",
     "stage-catalog-smoke": "node scripts/stage-catalog-smoke.mjs",
-    "reaction-size-smoke": "node scripts/reaction-size-smoke.mjs"
+    "reaction-size-smoke": "node scripts/reaction-size-smoke.mjs",
+    "test": "vitest run",
+    "build:hub-sdk": "tsc -p vendor/hub-sdk/tsconfig.build.json"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vitest": "^3.2.4"
+  },
+  "dependencies": {
+    "@metaverse/hub-sdk": "file:vendor/hub-sdk"
   }
 }

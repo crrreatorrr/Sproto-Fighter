@@ -18,6 +18,8 @@ import { STAGES, setStage, loadStageArt, getStageArtStatus, type StageId } from 
 import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
 import { createStoryMode } from './storyMode';
+import { connectHub, hubConfigured, type HubLink } from './hub/link';
+import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
 $('roster-count').textContent=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · UNLIMITED ROUND TIME`;
@@ -62,7 +64,37 @@ const frames: [
     number,
     number
 ][] = [];
-const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:ensurePoseAtlases});
+const storage = (() => { try { return window.localStorage; } catch { return null; } })();
+let hubRelics: string[] = readRelicCache(storage);
+let hub: HubLink | null = null;
+const canPlayFighter=(id:FighterId)=>isFighterAvailable(id,storyProgress.isUnlocked(id),hubRelics);
+const lockedFighter=(id:FighterId)=>fighterLockReason(id,storyProgress.isUnlocked(id),hubRelics);
+const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:ensurePoseAtlases,canPlay:canPlayFighter,locked:lockedFighter});
+let toastTimer=0;
+function hubToast(title:string,sub:string){
+ const toast=$('hub-toast');toast.replaceChildren();
+ const heading=document.createElement('b');heading.textContent=title;
+ toast.append(heading,document.createTextNode(sub));toast.hidden=false;
+ clearTimeout(toastTimer);toastTimer=window.setTimeout(()=>{toast.hidden=true;},6000);
+}
+$('return-hub').onclick=()=>{if(hub)hub.exitHub();};
+if(hubConfigured())$('return-hub').hidden=false;
+void connectHub().then(link=>{
+ hub=link;
+ if(link.connected){
+  hubRelics=link.relics;writeRelicCache(storage,hubRelics);selection.refreshLocks();
+  $('return-hub').hidden=false;$('hub-label').textContent='● HUB LINKED / BAR ARCADE';$('hub-label').classList.add('linked');
+ }else if(link.error){$('hub-label').textContent='● HUB OFFLINE / 1V1';console.warn('Hub connection unavailable:',link.error);}
+});
+/** Called exactly once at result; story saves are already settled at KO. */
+function reportRound(){
+ if(!hub?.connected||state.winner===null)return;
+ const current=story.snapshot(),encounter=current.encounter;
+ const chapterComplete=!!encounter&&current.wave===encounter.opponents.length-1&&
+  STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter).every(e=>storyProgress.isCleared(e.index));
+ void hub.onRoundEnd({winner:state.winner,mode,storyWorld:chapterComplete?encounter!.chapter:null,
+  stage:current.active??selection.getSetup().stage,fighter:chosen,assisted:matchGodMode},hubToast);
+}
 function updateStage(stage:StageId) {
     setStage(stage);setActiveStoryLocation(null);
     const location=STAGES.find(s=>s.id===stage)!;
@@ -72,8 +104,8 @@ function updateStage(stage:StageId) {
 async function launchSelection(setup:SelectionSetup,isStory=false) {
     // Reconcile wins from another tab or a restored page before the final P1 gate.
     storyProgress.sync();
-    if(!storyProgress.isUnlocked(setup.fighter)){
-        $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. Defeat this fighter in story mode, or choose an unlocked P1 fighter.`;
+    if(!canPlayFighter(setup.fighter)){
+        $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. ${lockedFighter(setup.fighter)} Or choose an unlocked P1 fighter.`;
         return false;
     }
     await loadStageArt([setup.stage]);
@@ -203,6 +235,7 @@ let resumeAfterJourney = false, freePlayMode: Mode | null = null;
 const story = createStoryMode({
     map:mountCampaignMap,
     selectedFighter:()=>selection.getSetup().fighter,
+    canPlayFighter,
     testing:()=>matchTesting,
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
@@ -408,6 +441,7 @@ function advanceRoundFrame(input: number) {
     if (presentation.phase === 'outro') {
         advanceRoundPresentation(presentation);
         if ((presentation as RoundPresentation).phase !== 'result') return;
+        reportRound();
         if (story.onRoundEnd(state.winner!)) return;
         const won = state.winner === 0;
         showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again →', 'ROUND COMPLETE');

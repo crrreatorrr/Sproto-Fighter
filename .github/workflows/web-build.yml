@@ -1,0 +1,32 @@
+# Builds the web game and uploads it as the `web-build` artifact. The hub's
+# `npm run fetch:sproto-fighter` downloads the latest successful run of this
+# workflow (by name) into its dev server at /play/sproto-fighter/.
+name: Web build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: dist
+          if-no-files-found: error

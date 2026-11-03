@@ -1,6 +1,8 @@
-import {defineConfig} from 'vite';
+import {defineConfig} from 'vitest/config';
 
 export default defineConfig({
+  base: './',
+  test: {include: ['tests/**/*.test.ts'], environment: 'node'},
   optimizeDeps: {entries: ['index.html']},
   server: {
     // The retained art sources, QA evidence and runtime frame library contain

@@ -1,3 +1,8 @@
+/** Resolve public art under the build's HTML base; Node/diagnostic fixtures use root paths. */
+const asset=(path:string)=>{
+ const base=typeof document==='undefined'?'/':(document.querySelector?.('meta[name="sproto-asset-base"]') as HTMLMetaElement|null)?.content||'/';
+ return base+path.replace(/^\/+/, '');
+};
 /** Pixel motifs and reference-derived projectile sprites. */
 let retainCoin: HTMLImageElement | undefined;
 let referenceB: HTMLImageElement | undefined;
@@ -7,7 +12,7 @@ let coinReady: Promise<void> | undefined;
 export function ensurePowerArt(): Promise<void> {
  const load=(url:string)=>new Promise<HTMLImageElement>((resolve,reject)=>{
   const image=new Image();image.onload=()=>resolve(image);
-  image.onerror=()=>reject(new Error('Projectile sprite could not load: '+url));image.src=url;
+  image.onerror=()=>reject(new Error('Projectile sprite could not load: '+url));image.src=asset(url);
  });
  return coinReady ??= Promise.all([
   load('/fighters/powers/chad-retain-coin.png'),
