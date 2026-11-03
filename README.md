@@ -72,7 +72,7 @@ Sproto Fighter is the fifth game in [Metaverse Hub](https://github.com/crrreator
 
 The Tidebreaker Belt unlocks nothing here (a Relic never unlocks things in the game that awards it). Played without the hub, the game uses the Relic list from this browser's last hub visit, so fighters locked on a fresh browser stay locked until a hub visit confirms the Relics. The mapping is `src/hub/roster.ts`.
 
-Build settings: `VITE_HUB_URL` (hub page, default `/hub/`) and `VITE_NAKAMA_URL` (default `http://127.0.0.1:7350`). The build uses a relative base, so it runs at the site root, at the hub's dev path `/play/sproto-fighter/`, or at `https://play.<domain>/sproto-fighter/`. The `Web build` workflow uploads `dist` as the `web-build` artifact that the hub's `npm run fetch:sproto-fighter` downloads.
+Build settings: `VITE_HUB_URL` (hub page, default `/hub/`), `VITE_NAKAMA_URL` (default `http://127.0.0.1:7350`) and `VITE_NAKAMA_SERVER_KEY` (Nakama's client server key; dev uses `defaultkey`, like the hub). The build uses a relative base, so it runs at the site root, at the hub's dev path `/play/sproto-fighter/`, or at `https://play.<domain>/sproto-fighter/`. The `Web build` workflow uploads `dist` as the `web-build` artifact that the hub's `npm run fetch:sproto-fighter` downloads.
 
 ## Worlds and presentation
 
