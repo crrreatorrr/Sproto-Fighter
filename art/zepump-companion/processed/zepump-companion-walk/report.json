@@ -1,0 +1,177 @@
+{
+  "entity": "zepump-companion",
+  "kind": "walk",
+  "source": "art/zepump-companion/raw/zepump-companion-walk.png",
+  "uniformSourceScale": 0.267223382045929,
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        71,
+        62,
+        340,
+        541
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        111.61861861861861,
+        479
+      ],
+      "canonicalBounds": [
+        82,
+        82,
+        154,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        503,
+        59,
+        701,
+        544
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        64.11861861861861,
+        485
+      ],
+      "canonicalBounds": [
+        95,
+        80,
+        148,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        899,
+        59,
+        1084,
+        539
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        62.11861861861861,
+        480
+      ],
+      "canonicalBounds": [
+        95,
+        82,
+        144,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1236,
+        59,
+        1536,
+        536
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        116.61861861861861,
+        477
+      ],
+      "canonicalBounds": [
+        81,
+        83,
+        161,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        64,
+        631,
+        341,
+        1109
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        131.8686186186186,
+        478
+      ],
+      "canonicalBounds": [
+        77,
+        82,
+        151,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        476,
+        630,
+        706,
+        1109
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        107.11861861861861,
+        479
+      ],
+      "canonicalBounds": [
+        83,
+        82,
+        144,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        919,
+        630,
+        1086,
+        1106
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        51.61861861861861,
+        476
+      ],
+      "canonicalBounds": [
+        98,
+        83,
+        143,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1245,
+        630,
+        1536,
+        1108
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        122.11861861861861,
+        478
+      ],
+      "canonicalBounds": [
+        79,
+        82,
+        157,
+        210
+      ]
+    }
+  ]
+}

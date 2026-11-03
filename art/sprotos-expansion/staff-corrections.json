@@ -1,0 +1,46 @@
+[
+  {
+    "index": 57,
+    "entity": "sproto1011",
+    "fighter": "sproto1011",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "802f7f1a-34ed-4e6a-9258-bcaf97cf3e6f"
+        }
+      ],
+      "prompt": "Create a corrected PIXEL-ART combat animation sheet from the attached existing character sheet. Preserve EXACT character identity: blue swept spiky head, narrow yellow eyes, broad dark red lips, black clothes, yellow collar and yellow gloves. His RED/YELLOW CURLING STICK/STAFF is the weapon. EVERY offensive pose strikes with this staff, not bare fists or feet. Use coherent two-handed grips, visible anticipation, forceful staff contact and retraction. Stick is always securely attached to one or both hands; no detached props. Legs provide support only. Exactly 32 complete figures in a regular FOUR-COLUMN by EIGHT-ROW grid, exactly FOUR figures per row. Complete bodies and entire sticks fit with generous magenta padding. Solid #ff00ff background; crisp stepped pixels, dark outlines, no floating effects, labels or grid lines. Row 1: guarded staff held with both hands; subtle staff guard breathing; near guarded step; passing step. Row 2: far guarded step; far passing step; low staff-guarded dash; jump anticipation. Row 3: rising jump with staff close; falling jump with staff close; crouched landing; draw staff back for thrust. Row 4: straight STAFF THRUST to RIGHT; retract staff; coil staff low for rising swing; UPWARD STAFF SWING. Row 5: chamber OVERHEAD STAFF SWING; staff halfway through overhead swing; full STAFF IMPACT toward RIGHT with both feet planted; retract staff after swing. Row 6: LOW STAFF SWEEP at knee height to RIGHT, no kicking leg; recover staff sweep; airborne STAFF STRIKE chamber, knees bent; airborne STAFF STRIKE extended to RIGHT, no kick. Row 7: hit recoil with staff retained; high staff guard; hook staff forward to catch; staff-assisted close hold, no opponent. Row 8: staff lever throw follow-through, no opponent; staff power charge; staff channel release to RIGHT, no projectile; powerful two-handed STAFF SPECIAL impact."
+    }
+  },
+  {
+    "index": 59,
+    "entity": "sproto1011",
+    "fighter": "sproto1011",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "f2b13dde-ec19-4cfc-999e-6740b29a3244"
+        }
+      ],
+      "prompt": "Create a corrected PIXEL-ART combat animation sheet from the attached existing character sheet. Preserve EXACT character identity: blue swept spiky head, narrow yellow eyes, broad dark red lips, black clothes, yellow collar and yellow gloves. His RED/YELLOW CURLING STICK/STAFF is the weapon. EVERY offensive pose strikes with this staff, not bare fists or feet. Use coherent two-handed grips, visible anticipation, forceful staff contact and retraction. Stick is always securely attached to one or both hands; no detached props. Legs provide support only. Exactly 32 complete figures in a regular FOUR-COLUMN by EIGHT-ROW grid, exactly FOUR figures per row. Complete bodies and entire sticks fit with generous magenta padding. Solid #ff00ff background; crisp stepped pixels, dark outlines, no floating effects, labels or grid lines. Row 1 INTRO: guarded staff; small staff twirl held securely; confident staff salute; settle staff guard. Row 2 SPECIAL A: staff backward coil; strong two-handed windup; straight staff thrust to RIGHT; retract staff. Row 3 SPECIAL B: overhead staff strike; staff retract cover; emphatic two-handed finishing STAFF SWING to RIGHT; staff guard recover. Row 4 CAST: staff held close to chest; staff tip raised to aim; staff points forward to release energy, no projectile; staff returns to guard. Row 5 RECOIL: chest hit recoil keeping staff attached to hand; head/torso lean; knees absorb; regain staff guard. Row 6 DEFEAT: stagger; knees buckle; drop toward floor with staff in hand; roll onto side, entire staff visible and touching hand. Row 7 FLOOR REST: side-lying, head LEFT feet RIGHT, staff safely beside body touching hand; settle side-lying; small shoulder relaxation; completely still side-lying. Row 8 FINAL REST: same complete lying body and staff; same relaxed lying body; hold full floor rest; final still side-lying body and staff. Never stand or kneel in the last eight frames."
+    }
+  }
+]

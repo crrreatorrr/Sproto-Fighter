@@ -1,0 +1,28 @@
+{
+  "id": "xalt",
+  "name": "Xalt",
+  "media": "31d51ccd-e020-47ca-a64a-75070971393c",
+  "role": "BRIGHT EYES",
+  "special": "SCARLET SURGE",
+  "color": "#ff655b",
+  "identity": "Long rounded cobalt BLUE head and neck, enormous touching circular YELLOW eye surrounds, glossy round BLACK pupils with dark RED iris rings and white glints. Small flat blue nose; broad projecting RED beak-like closed lips with curved smile seam. Several RED triangular spines along the rear head. Thick rolled YELLOW collar with a small red/black oval brooch in yellow rim, RED shirt. BLUE bare arms/hands; extend RED trousers and yellow boots. No crown, hair, cape or boxing gloves. Preserve the round wide-eyed expression and red rear spines.",
+  "intro": "INTRO: stand alert with enormous round eyes looking right; excited small bounce with two low knees bent and palms up; tap the oval collar brooch with one blue fingertip while the other hand rises; settle to a bright-eyed confident guard. Brooch remains fixed to collar, no effects.",
+  "cast": "CAST: eyes widen and red lips purse while knees compress; head draws back, cheeks puff and both hands brace at waist; powerful open-beaked mouth SPIT to RIGHT as neck shoots forward and rear spines tilt with head, elbows held back; mouth closes and head recoils smoothly into guard. No palm shot, projectile or effects drawn.",
+  "defeat": "DEFEAT START: big eyes blink in disbelief as red rear spines tilt; wobble on both knees with arms windmilling but connected; seated collapse with both feet forward; roll onto side with head LEFT and feet RIGHT. DEFEAT FLOOR: fully side-lying body with yellow eyes still open; one hand reaches weakly forward along floor; hand drops and red mouth slackens; settle side-lying with spine silhouette intact. DEFEAT REST: eyelids grow heavy; eyes close to thin yellow slits; fingers relax; completely still side-lying rest. Brooch and red costume retained.",
+  "ordinal": 1,
+  "artDirectory": "art/xalt",
+  "reference": "art/xalt/reference.png",
+  "referenceSHA256": "1f8f1e4f2de630c87349fb4856af8c21caf7b32cd86612e26913842c85d6b32b",
+  "status": "installed-playable",
+  "appearanceRule": " Preserve the same costume and face across every frame. Same-hue limited palette shading; no white clothing patches, text, floating effects, detached accessories or additional actors.",
+  "mouthPoint": [
+    151,
+    126
+  ],
+  "mouthOrigin": {
+    "forward": 48.75,
+    "height": 105.0
+  },
+  "installedFrames": 104,
+  "unlockRule": "Defeat this fighter in its campaign encounter to recruit for P1 play."
+}

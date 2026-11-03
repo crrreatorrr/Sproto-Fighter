@@ -1,0 +1,91 @@
+[
+  {
+    "index": 16,
+    "entity": "willuminati",
+    "fighter": "willuminati",
+    "kind": "core",
+    "job_id": "930fdac5-9e22-42db-8f9b-cf773bb24098",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162251_930fdac5-9e22-42db-8f9b-cf773bb24098.png"
+  },
+  {
+    "index": 17,
+    "entity": "willuminati",
+    "fighter": "willuminati",
+    "kind": "walk",
+    "job_id": "b223f106-43eb-4135-af18-ac5096690f8b",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162645_b223f106-43eb-4135-af18-ac5096690f8b.png"
+  },
+  {
+    "index": 18,
+    "entity": "willuminati",
+    "fighter": "willuminati",
+    "kind": "events",
+    "job_id": "fca45a5e-a6f5-4640-aa90-2950dfa7c795",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162655_fca45a5e-a6f5-4640-aa90-2950dfa7c795.png",
+    "superseded": true
+  },
+  {
+    "index": 18,
+    "entity": "willuminati",
+    "fighter": "willuminati",
+    "kind": "events",
+    "job_id": "3ef70769-304a-4a52-a25a-c61b56e19b9e",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163559_3ef70769-304a-4a52-a25a-c61b56e19b9e.png"
+  }
+]

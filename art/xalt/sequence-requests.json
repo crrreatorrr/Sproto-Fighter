@@ -1,0 +1,83 @@
+[
+  {
+    "index": 4,
+    "entity": "xalt",
+    "fighter": "xalt",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "31d51ccd-e020-47ca-a64a-75070971393c"
+        },
+        {
+          "role": "image",
+          "value": "c6c022bd-04b5-4d13-8990-353de320bd32"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, asymmetric facial markings, colors, clothing, accessories and long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: Long rounded cobalt BLUE head and neck, enormous touching circular YELLOW eye surrounds, glossy round BLACK pupils with dark RED iris rings and white glints. Small flat blue nose; broad projecting RED beak-like closed lips with curved smile seam. Several RED triangular spines along the rear head. Thick rolled YELLOW collar with a small red/black oval brooch in yellow rim, RED shirt. BLUE bare arms/hands; extend RED trousers and yellow boots. No crown, hair, cape or boxing gloves. Preserve the round wide-eyed expression and red rear spines. Reference image 2 is the reviewed combat sheet; match its proportions and style.\n\nExactly EIGHT separate full-body drawings in a regular 4-column by 2-row grid. A continuous guarded fighting footwork loop, NOT a run. Upper body stays calm, head/torso size constant, hips stay at the same height and same x center. Both fists remain raised. Feet are clearly different on adjacent frames: 0 near foot forward grounded/far foot back grounded; 1 transfer weight to near sole, far heel lifts; 2 far knee passes under low pelvis with far foot lifted; 3 far foot reaches forward while near sole still supports; 4 far foot forward grounded/near foot back grounded; 5 transfer weight to far sole, near heel lifts; 6 near knee passes under low pelvis with near foot lifted; 7 near foot reaches forward ready to plant. No feet crossing through one another, no sliding torso, no detached hips. Each frame has at least one clearly grounded foot. Last frame loops to first. Same complete body and clothing as the combat reference. Preserve the same costume and face across every frame. Same-hue limited palette shading; no white clothing patches, text, floating effects, detached accessories or additional actors."
+    }
+  },
+  {
+    "index": 5,
+    "entity": "xalt",
+    "fighter": "xalt",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "31d51ccd-e020-47ca-a64a-75070971393c"
+        },
+        {
+          "role": "image",
+          "value": "c6c022bd-04b5-4d13-8990-353de320bd32"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, asymmetric facial markings, colors, clothing, accessories and long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: Long rounded cobalt BLUE head and neck, enormous touching circular YELLOW eye surrounds, glossy round BLACK pupils with dark RED iris rings and white glints. Small flat blue nose; broad projecting RED beak-like closed lips with curved smile seam. Several RED triangular spines along the rear head. Thick rolled YELLOW collar with a small red/black oval brooch in yellow rim, RED shirt. BLUE bare arms/hands; extend RED trousers and yellow boots. No crown, hair, cape or boxing gloves. Preserve the round wide-eyed expression and red rear spines. Reference image 2 is the reviewed combat sheet; match its proportions and style.\n\nExactly 32 separate complete drawings, regular 4-column by 8-row grid, read left-to-right/top-to-bottom. All 32 are the SAME single actor, including lying floor drawings. No opponents or partner drawn.\nRow 1 INTRO:stand alert with enormous round eyes looking right; excited small bounce with two low knees bent and palms up; tap the oval collar brooch with one blue fingertip while the other hand rises; settle to a bright-eyed confident guard. Brooch remains fixed to collar, no effects.\nRow 2 SPECIAL A: low coil; shoulder windup; fully extended straight impact punch; punch retract.\nRow 3 SPECIAL B: alternate shoulder strike; retract to cover; two-arm finishing palm thrust to RIGHT; recover combat guard. No floating effects.\nRow 4 CAST:eyes widen and red lips purse while knees compress; head draws back, cheeks puff and both hands brace at waist; powerful open-beaked mouth SPIT to RIGHT as neck shoots forward and rear spines tilt with head, elbows held back; mouth closes and head recoils smoothly into guard. No palm shot, projectile or effects drawn.\nRow 5 RECOIL: chest impact arch; head/torso lean back with arms still connected; bend knees to absorb; regain combat guard.\nRow 6 to 8: DEFEAT START: big eyes blink in disbelief as red rear spines tilt; wobble on both knees with arms windmilling but connected; seated collapse with both feet forward; roll onto side with head LEFT and feet RIGHT. DEFEAT FLOOR: fully side-lying body with yellow eyes still open; one hand reaches weakly forward along floor; hand drops and red mouth slackens; settle side-lying with spine silhouette intact. DEFEAT REST: eyelids grow heavy; eyes close to thin yellow slits; fingers relax; completely still side-lying rest. Brooch and red costume retained. Exactly four figures per row, twelve defeat drawings total. Preserve the same costume and face across every frame. Same-hue limited palette shading; no white clothing patches, text, floating effects, detached accessories or additional actors."
+    }
+  },
+  {
+    "index": 10,
+    "entity": "xalt",
+    "fighter": "xalt",
+    "kind": "identity",
+    "ranged": true,
+    "deathStart": 16,
+    "frameCount": 32,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "31d51ccd-e020-47ca-a64a-75070971393c"
+        },
+        {
+          "role": "image",
+          "value": "c6c022bd-04b5-4d13-8990-353de320bd32"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, asymmetric facial markings, colors, clothing, accessories and long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: Long rounded cobalt BLUE head and neck, enormous touching circular YELLOW eye surrounds, glossy round BLACK pupils with dark RED iris rings and white glints. Small flat blue nose; broad projecting RED beak-like closed lips with curved smile seam. Several RED triangular spines along the rear head. Thick rolled YELLOW collar with a small red/black oval brooch in yellow rim, RED shirt. BLUE bare arms/hands; extend RED trousers and yellow boots. No crown, hair, cape or boxing gloves. Preserve the round wide-eyed expression and red rear spines. Reference image2 is the reviewed combat sheet; match its pixel style, face, costume and proportions precisely.\n\nExactly 32 complete separate drawings in a strict FOUR-column EIGHT-row grid. Rows1-2 are eight ENTRANCE frames, rows3-4 are eight MOUTH-SPIT frames, rows5-8 are sixteen DEATH frames. Read left to right then top to bottom. Same single actor throughout. No projectile, text, opponent, floor shadow or effects. Death frames24-31 must be wholly side-lying with head to LEFT and feet to RIGHT, never upright or kneeling. Crown, collar, spines and ornaments stay attached.\nRow 1: alert wide round eyes, relaxed arms; compress two knees for a tiny excited bounce; rise on toes with both palms up; land lightly with both red-spined head and neck level.\nRow 2: near blue fingertip reaches fixed oval collar brooch; tap the brooch, far hand rises into guard; release brooch and set near fist forward; settled wide-eyed two-fist guard.\nRow 3: round eyes widen and red lips purse; head draws back with cheeks beginning to puff; compress low knees and brace hands at waist; fully puffed cheeks, neck coiled back, rear red spines follow head.\nRow 4: powerful open-beaked mouth SPIT RIGHT, neck shoots forward, hands remain BACK; hold release with wide eyes and forward neck; mouth closes, head recoils toward center; settled bright-eyed guard, red spines unchanged.\nRow 5: big eyes blink in disbelief; head and red rear spines tip back; connected arms swing outward for balance; knees wobble and fold.\nRow 6: hips drop and arms reach down; seated collapse with both feet forward; roll onto left side, head LEFT feet RIGHT; entirely side-lying body, yellow eyes still open.\nRow 7: near hand weakly reaches along floor; hand pauses with elbow low; hand drops and red mouth slackens; shoulder settles to floor.\nRow 8: eyelids grow heavy; eyes close to thin yellow slits; blue fingers relax beside body; final completely still side-lying rest, brooch attached. Preserve the same costume and face across every frame. Same-hue limited palette shading; no white clothing patches, text, floating effects, detached accessories or additional actors."
+    }
+  }
+]

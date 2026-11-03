@@ -1,0 +1,26 @@
+{
+  "addedArenas": 21,
+  "perStoryZone": {
+    "trenches": 3,
+    "circuit": 3,
+    "yacht": 3,
+    "throne": 3,
+    "bar": 3,
+    "verse": 3,
+    "hatchery": 3
+  },
+  "selectableStages": 45,
+  "storyLocations": 59,
+  "model": "Higgsfield GPT Image 2.5 Sunburst high / 4k",
+  "checks": {
+    "productionBuild": "passed",
+    "stageHashesDimensionsAndLoading": "passed: all59 locations",
+    "regionMapping": "passed: contiguous deterministic blocks across210 encounters",
+    "stagePreviewsAndFallbacks": "passed",
+    "storyProgressionAndMigration": "passed",
+    "browserAssets": "21/21 loaded, zero errors"
+  },
+  "visualReview": "All21 panoramas reviewed for theme and clear full-width floor. Runtime sampled at game floor y578 with fighters in trench, castle, bar and hatchery settings.",
+  "gallery": "/Users/kenhiraoka/Documents/Codex/2026-11-01/u/outputs/new-zone-stages-2.png",
+  "runtimeScreenshot": "/Users/kenhiraoka/Documents/Codex/2026-11-01/u/outputs/zone-stage-runtime-2.png"
+}
