@@ -1,7 +1,8 @@
 // Online duel in real browsers against a running hub: two Chromium pages, each
 // logged in as a different hub player, queue for a 10-Ticket wager, connect
 // over WebRTC, play (the CPU drives each side via ?autoplay), and show the
-// hub's verdict. Checks the direct link, the result screens and the balances.
+// hub's verdict, then both press Rematch and play again. Checks the direct link,
+// the result screens and the balances.
 //   NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/online-browser-smoke.mjs
 // Skipped without NAKAMA_URL, HUB_DATABASE_URL or a Playwright Chromium.
 import assert from 'node:assert/strict';
@@ -68,8 +69,27 @@ try {
   } else {
     assert.deepEqual(balances, [50, 50], 'double KO refunds');
   }
+  // Both press Rematch: the matchmaker pairs only these two again (tagged with the last match id).
+  assert.ok((await Promise.all(pages.map(p => p.$eval('#start', e => e.textContent)))).every(x => x.startsWith('Rematch')), 'result screens offer a rematch');
+  await Promise.all(pages.map(p => p.click('#start')));
+  const rematchDeadline = Date.now() + 150000;
+  let rematched = false;
+  while (Date.now() < rematchDeadline) {
+    const t = await titles();
+    if (t.every(x => x === '' || /^(You win|You lose|Double)/.test(x)) && t.some(x => x === '')) rematched = true;
+    if (rematched && t.every(x => /You win|You lose|Double/.test(x))) {
+      const c = await Promise.all(pages.map(p => p.$eval('#overlay-copy', e => e.textContent)));
+      if (c.every(x => !x.startsWith('Waiting'))) break;
+    }
+    await new Promise(r => setTimeout(r, 500));
+  }
+  const second = await titles();
+  console.log('  rematch:', second.join(' | '));
+  assert.ok(rematched && second.every(x => /You win|You lose|Double/.test(x)), 'the same two players were paired again and finished the rematch');
+  const after = players.map(p => balance(p.id));
+  assert.equal(after[0] + after[1], 100, 'Tickets are conserved across both wagers');
   for (const p of pages) assert.deepEqual(p.errors, [], 'no page errors');
-  console.log('PASS: two browsers matched, played a wagered online duel over WebRTC, and showed the hub-verified result.');
+  console.log('PASS: two browsers matched, played a wagered online duel over WebRTC, showed the hub-verified result, and played a rematch.');
 } finally {
   await browser?.close();
   server.kill();

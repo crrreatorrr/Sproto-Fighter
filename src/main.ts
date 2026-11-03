@@ -473,16 +473,26 @@ function qaRecord(before:string){
 /** Overlay button action while an online overlay is up (queue, failure, result). */
 let overlayAction: (() => void) | null = null;
 const ONLINE_DELAY_KEY = 'sproto-arena-online-delay';
+$<HTMLSelectElement>('online-delay').value = String(onlineInputDelay());
+$<HTMLSelectElement>('online-delay').onchange = e => { try { localStorage.setItem(ONLINE_DELAY_KEY, (e.target as HTMLSelectElement).value); } catch { /* not saved */ } };
 function onlineInputDelay(): number {
     try { const v = Number(localStorage.getItem(ONLINE_DELAY_KEY)); return v >= 1 && v <= 4 ? v : 2; } catch { return 2; }
 }
-async function queueOnline(setup: SelectionSetup) {
+async function queueOnline(setup: SelectionSetup, rematchOf?: string) {
     if (online) { await online.leave(); online = null; }
     const wager = setup.mode === 'online-wager';
     const match = new OnlineMatch({
         onPhase: (phase, detail) => {
             if (match !== online) return;
-            if (phase === 'queued') showOnlineOverlay('Finding an opponent…', wager ? 'Both players stake 10 Tickets; the winner takes 20. The hub verifies the result before paying.' : 'Looking for another player. Pick “Fighter select” to stop searching.', 'Searching…', 'ONLINE', null);
+            if (phase === 'queued' && rematchOf) {
+                showOnlineOverlay('Rematch requested', 'Waiting for your opponent to choose Rematch too…', 'Waiting…', 'ONLINE', null);
+                setTimeout(() => {
+                    if (match !== online || match.phase !== 'queued') return;
+                    void match.leave(); online = null;
+                    showOnlineOverlay('No rematch', 'Your opponent didn’t choose Rematch.', 'Find another opponent →', 'ONLINE', () => void queueOnline(setup));
+                }, 30000);
+            }
+            else if (phase === 'queued') showOnlineOverlay('Finding an opponent…', wager ? 'Both players stake 10 Tickets; the winner takes 20. The hub verifies the result before paying.' : 'Looking for another player. Pick “Fighter select” to stop searching.', 'Searching…', 'ONLINE', null);
             if (phase === 'failed' && presentation.phase !== 'result') showOnlineOverlay('Online match unavailable', onlineFailureText(detail), 'Back to fighter select →', 'ONLINE', returnToSelection);
         },
         onStart: start => { if (match === online) void beginOnline(match, start.fighters as [FighterId, FighterId], start.stage, !!start.wager); },
@@ -501,7 +511,7 @@ async function queueOnline(setup: SelectionSetup) {
     online = match;
     selection.hide(); $('fight-view').hidden = false;
     showOnlineOverlay('Connecting to the hub…', '', 'Connecting…', 'ONLINE', null);
-    await match.queue({ wager, fighter: setup.fighter, stage: setup.stage });
+    await match.queue({ wager, fighter: setup.fighter, stage: setup.stage, rematchOf });
 }
 function onlineFailureText(reason?: string) {
     const known: Record<string, string> = {
@@ -571,9 +581,9 @@ function showOnlineResult() {
     const winnerSeat = outcome?.status === 'settled' ? outcome.winnerSeat : state.winner;
     running = false; started = false;
     const title = winnerSeat === 2 ? 'Double knockout.' : winnerSeat === seat ? 'You win.' : winnerSeat === null || winnerSeat === undefined ? 'Match over.' : 'You lose.';
-    showOnlineOverlay(title, outcome ? onlineOutcomeText(outcome, seat) : 'Waiting for the hub to confirm the result…', 'Find another opponent →', match.start.wager ? 'ONLINE / 10-TICKET WAGER' : 'ONLINE VERSUS', () => {
+    showOnlineOverlay(title, outcome ? onlineOutcomeText(outcome, seat) : 'Waiting for the hub to confirm the result…', 'Rematch →', match.start.wager ? 'ONLINE / 10-TICKET WAGER' : 'ONLINE VERSUS', () => {
         void match.leave(); online = null; stopHiddenClock();
-        void queueOnline({ ...selection.getSetup(), mode: match.start?.wager ? 'online-wager' : 'online' });
+        void queueOnline({ ...selection.getSetup(), mode: match.start?.wager ? 'online-wager' : 'online' }, match.matchId ?? undefined);
     });
 }
 let onlineStatusAt = 0;

@@ -1,9 +1,41 @@
 # Online multiplayer plan
 
-Status: plan only (3 November 2026). Nothing here is implemented yet except
-where marked **done**. Goal: online 1v1 that feels as good as playing on one
-machine. That means rollback netcode, no visible stutter, fast matchmaking,
-and results the server can trust.
+Status: implemented (3 November 2026). Phases A–G are built and tested
+end to end against a local hub. The hub side lives on the metaverse-hub branch
+`claude/sproto-online-duels` and is **not merged or deployed**. Goal: online
+1v1 that feels as good as playing on one machine. That means rollback netcode,
+no visible stutter, fast matchmaking, and results the server can trust.
+
+## Implementation status
+
+| Phase | Where | Verified by |
+| --- | --- | --- |
+| A Rollback-safe state | `src/sim/snapshot.ts` (in-place save/load), effects and notices kept in state | `rollback-smoke`, determinism job |
+| B Rollback session | `src/net/rollback.ts`, `src/net/protocol.ts` | `rollback-smoke` (loss, jitter, delay, desync checks) |
+| C Transport and match flow | `src/net/peer.ts` (WebRTC, relay fallback), `src/net/hubDuel.ts`, `src/net/onlineMatch.ts`, `src/main.ts` | `hub-duel-smoke`, `online-browser-smoke` |
+| D Loading | `scripts/build-sheets.py` (one lossless WebP sheet per body, built after `vite build`) | `build-sheets.py --verify` in CI |
+| E Server-verified results | hub `sproto_duel` match handler simulates the bundled sim (`scripts/build-sim-bundle.mjs`) | `hub-replay-smoke`, `hub-duel-smoke` |
+| F 10-Ticket wagers | hub migration `0010_sproto_fighter_wagers` (escrow, payout, refund, expiry) | `hub-duel-smoke`, `online-browser-smoke` |
+| G Polish | link/ping/rollback HUD, input-delay setting, rematch | `online-browser-smoke` (plays a rematch) |
+
+Deviations from the plan below:
+
+- **The server simulates both input streams instead of checking uploaded logs.**
+  With logs, a losing player could keep the stake by never uploading. Each
+  client streams its own inputs to the hub match every 6 frames; the server
+  runs the same simulation and decides the winner itself. A player who stops
+  streaming for 10 s forfeits.
+- **Match state is stored as a JSON string on the server.** Nakama's match
+  state round-trip does not keep property order, which changed the simulation.
+- **Sprite sheets are built at build time**, not at load time, from the
+  existing frame PNGs; the PNGs stay as the fallback.
+- **Rematch** requeues both players with a matchmaker tag for the finished
+  match, so they pair only with each other. If the other player doesn't choose
+  Rematch within 30 s, the game offers a new search.
+
+Not yet exercised: a real TURN server (players behind strict NATs use the
+hub relay), a production hub deployment, region-based matchmaking, and ranked
+play. CI does not run the three hub smokes, since they need a running hub.
 
 ## Where we start
 
@@ -226,9 +258,9 @@ client could report a false win and take the pot.
 
 ## Phase G — Feel and polish
 
-- Network quality indicator (ping, rollback frames) on the HUD; an optional
-  input-delay override in Settings.
-- Rematch and quick-search; region-based matchmaking.
+- **Done:** network quality indicator (link, ping, rollback frames) on the HUD;
+  an input-delay setting (1–4 frames) in Settings.
+- **Done:** rematch. Still open: quick-search and region-based matchmaking.
 - Ranked play only after Phase E is in place.
 
 ## Ordering and estimates

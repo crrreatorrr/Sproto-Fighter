@@ -53,6 +53,8 @@ export class HubDuel {
   private matchId: string | null = null;
   private ticket: string | null = null;
   private decoder = new TextDecoder();
+  /** The current (or just-finished) match id, for a rematch tag. */
+  get currentMatchId(): string | null { return this.matchId; }
 
   constructor(private readonly client: Client, private readonly session: Session, private readonly handlers: DuelHandlers) {
     this.userId = session.user_id ?? '';
@@ -69,12 +71,14 @@ export class HubDuel {
   }
 
   /** Ask the matchmaker for an opponent; `wager` matches only players who also chose to wager. */
-  async queue(options: { wager: boolean; fighter: string; stage: string }): Promise<void> {
+  async queue(options: { wager: boolean; fighter: string; stage: string; rematchOf?: string }): Promise<void> {
     if (!this.socket) throw new Error('not connected');
     this.hello = { fighter: options.fighter, stage: options.stage, sim: SIM_VERSION };
     const wager = options.wager ? '1' : '0';
-    const query = `+properties.game:${GAME_ID} +properties.wager:${wager} +properties.sim:${SIM_VERSION}`;
-    const ticket = await this.socket.addMatchmaker(query, 2, 2, { game: GAME_ID, wager, sim: SIM_VERSION });
+    // A rematch tag (the previous match id, letters and digits only) pairs only the two players who just fought.
+    const rematch = options.rematchOf ? options.rematchOf.split('.')[0].replace(/[^a-zA-Z0-9]/g, '') : 'none';
+    const query = `+properties.game:${GAME_ID} +properties.wager:${wager} +properties.sim:${SIM_VERSION} +properties.rematch:${rematch}`;
+    const ticket = await this.socket.addMatchmaker(query, 2, 2, { game: GAME_ID, wager, sim: SIM_VERSION, rematch });
     this.ticket = ticket.ticket;
   }
   private hello: { fighter: string; stage: string; sim: string } | null = null;

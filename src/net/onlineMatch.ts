@@ -31,6 +31,8 @@ export class OnlineMatch {
   phase: OnlinePhase = 'connecting';
   session: RollbackSession<OnlineEvent> | null = null;
   start: DuelStart | null = null;
+  /** The hub match id once started (for a rematch with the same opponent). */
+  matchId: string | null = null;
   outcome: DuelOutcome | null = null;
   /** The KO as confirmed by both players' inputs (a predicted KO can still be rolled back). */
   confirmedKo = false;
@@ -60,7 +62,8 @@ export class OnlineMatch {
   }
 
   /** Connect to the hub and queue for an opponent. */
-  async queue(options: { wager: boolean; fighter: PlayableFighterId; stage: string }): Promise<void> {
+  /** `rematchOf` pairs only with the opponent from that match (who must also choose Rematch). */
+  async queue(options: { wager: boolean; fighter: PlayableFighterId; stage: string; rematchOf?: string }): Promise<void> {
     const connection = OnlineMatch.connection();
     if (!connection) { this.setPhase('failed', 'Online play needs the hub: open Sproto Fighter from the arcade cabinet.'); return; }
     this.duel = new HubDuel(connection.client, connection.session, {
@@ -81,6 +84,7 @@ export class OnlineMatch {
 
   private begin(start: DuelStart): void {
     this.start = start;
+    this.matchId = this.duel?.currentMatchId ?? null;
     const state = createState(start.fighters[0] as PlayableFighterId, 'versus', start.fighters[1] as PlayableFighterId);
     const observer = {
       before: (s: CombatState) => ({ winner: s.winner, moves: s.fighters.map(f => f.move?.id ?? null) }),

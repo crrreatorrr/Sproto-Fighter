@@ -178,9 +178,41 @@ Older dated reports and authoring sources are preserved as history.
 
 No physical-controller test, per user instruction. A full manual 100-match
 campaign, every frame/matchup, long sessions and systematic cross-browser
-performance remain unverified. There is no online-readiness claim. This
+performance remain unverified. Online play is tested against a local hub only; it has
+not run against a deployed hub or through a TURN server. This
 integration adds no purchases, generation calls, remote push or hosting.
 
+
+## Online play
+
+Pick **Online · Find an opponent** or **Online · Wager 10 Tickets** in the
+fighter select. Online play needs the hub session, so open the game from the
+hub's arcade cabinet. Matches use rollback netcode over a direct WebRTC
+connection, falling back to the hub relay. The hub runs the same simulation
+from both players' inputs and decides the result, so wagers are paid only on
+a result the server verified. Tickets have no real-money value.
+
+- Settings → Online sets the input delay (2 frames by default; raise it on
+  unstable connections).
+- The status line shows the link (DIRECT or RELAY), ping and rollback frames.
+- After a match, **Rematch →** pairs you with the same opponent if they choose
+  it too.
+
+Configuration: `VITE_NAKAMA_URL` and `VITE_NAKAMA_SERVER_KEY` as below, and
+optionally `VITE_ICE_SERVERS` (a JSON array of `RTCIceServer`, e.g. with a
+TURN server; the default is a public STUN server). The server side is the
+`sproto_duel` match on the metaverse-hub branch `claude/sproto-online-duels`;
+after changing anything under `src/sim`, run `node scripts/build-sim-bundle.mjs
+--out <hub>/server/modules/vendor/sproto-sim.js` so the hub and clients share
+one simulation fingerprint. Design and status:
+[the multiplayer plan](docs/MULTIPLAYER-PLAN.md).
+
+With a local hub running, these play real online matches:
+
+```sh
+NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/hub-duel-smoke.mjs
+NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/online-browser-smoke.mjs
+```
 
 ## Metaverse Hub integration
 
