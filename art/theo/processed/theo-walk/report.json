@@ -1,0 +1,187 @@
+{
+  "entity": "theo",
+  "kind": "walk",
+  "source": "art/theo/raw/theo-walk.png",
+  "uniformSourceScale": 0.30117647058823527,
+  "scaleReview": {
+    "requestedSourceScale": 0.30117647058823527,
+    "appliedSourceScale": 0.30117647058823527,
+    "sourceFitRatio": 1.0,
+    "canvasFitLimit": 0.4894613583138173,
+    "calibratedSourceScale": false,
+    "sourceScaleBasis": "first-opaque-height",
+    "scaleReferenceFrame": 0,
+    "anatomicalReviewRequired": true
+  },
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        44,
+        116,
+        347,
+        541
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        130.4804992199688,
+        425
+      ],
+      "canonicalBounds": [
+        73,
+        82,
+        164,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        460,
+        114,
+        746,
+        541
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        116.4804992199688,
+        427
+      ],
+      "canonicalBounds": [
+        77,
+        81,
+        163,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        879,
+        114,
+        1138,
+        541
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        89.9804992199688,
+        427
+      ],
+      "canonicalBounds": [
+        85,
+        81,
+        163,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1245,
+        116,
+        1564,
+        541
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        112.4804992199688,
+        425
+      ],
+      "canonicalBounds": [
+        78,
+        82,
+        174,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        44,
+        706,
+        357,
+        1129
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        129.4804992199688,
+        423
+      ],
+      "canonicalBounds": [
+        73,
+        83,
+        167,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        458,
+        706,
+        742,
+        1130
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        114.9804992199688,
+        424
+      ],
+      "canonicalBounds": [
+        77,
+        82,
+        163,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        884,
+        706,
+        1142,
+        1129
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        87.9804992199688,
+        423
+      ],
+      "canonicalBounds": [
+        86,
+        83,
+        164,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1247,
+        706,
+        1564,
+        1130
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        124.4804992199688,
+        424
+      ],
+      "canonicalBounds": [
+        75,
+        82,
+        170,
+        210
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "date": "2026-11-03",
+  "facings": [-1, 1],
+  "states": ["Chest laser release", "Grounded recoil"],
+  "observationCount": 3,
+  "countUnit": "inspected browser snapshots",
+  "gaps": ["Browser samples cover laser release in both actual facings and grounded recoil with a mirrored comparison. The rest of the movement and reaction coverage comes from the sprite review and automated runtime checks."],
+  "findings": ["Both horizontal laser tracks start at the chest marks on release in both actual facings. The sampled recoil frame keeps the supporting boot at floor height."]
+}

@@ -39,6 +39,8 @@ for(const f of pc.fighters){
   const seen=f.actual_facing_visually_sampled;
   add(f.id,'live-pairs-c',Object.keys(seen).filter(k=>seen[k].length).map(Number),Object.values(seen).flat().map(i=>itinerary[i].label),Object.values(seen).reduce((n,s)=>n+s.length,0),'scenario/facing combinations with visual samples',[...pc.limitations,...(pc.captured_only_or_unobserved??[])],[...f.observations,...(f.unresolved_contact_findings??[]),...(pc.residuals??[])]);
 }
+const theo=load('live-theo');
+add('theo','live-theo',theo.facings,theo.states,theo.observationCount,theo.countUnit,theo.gaps,theo.findings);
 assert.equal(rows.size,core.PLAYABLE_FIGHTERS.length,'Every available owner needs an explicit individual review record');
 const ordered=core.PLAYABLE_FIGHTERS.map(id=>rows.get(id));
 for(const row of ordered)assert.deepEqual(row.facings,[-1,1],`${row.name}: both actual facings must be explicitly observed`);
