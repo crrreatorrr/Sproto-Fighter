@@ -1,0 +1,989 @@
+[
+  {
+    "capture": "rivet-airHeavy-20",
+    "coreFrame": 20,
+    "pose": "23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "move": "Move airHeavy t=11 startup/active/recovery 8/7/21",
+    "screenshot": "rivet-airHeavy-20.png"
+  },
+  {
+    "capture": "rivet-airHeavy-24",
+    "coreFrame": 24,
+    "pose": "9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 451.4 facing 1",
+    "move": "Move airHeavy t=15 startup/active/recovery 8/7/21",
+    "screenshot": "rivet-airHeavy-24.png"
+  },
+  {
+    "capture": "rivet-grab-12",
+    "coreFrame": 12,
+    "pose": "27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=6 startup/active/recovery 6/3/30",
+    "screenshot": "rivet-grab-12.png"
+  },
+  {
+    "capture": "rivet-grab-32",
+    "coreFrame": 32,
+    "pose": "28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=9 startup/active/recovery 6/3/30",
+    "screenshot": "rivet-grab-32.png"
+  },
+  {
+    "capture": "rivet-live1x-a",
+    "coreFrame": 10,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rivet-live1x-a.png"
+  },
+  {
+    "capture": "rivet-live1x-b",
+    "coreFrame": 15,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rivet-live1x-b.png"
+  },
+  {
+    "capture": "rivet-quarterSpecial-a",
+    "coreFrame": 2,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=2 startup/active/recovery 12/31/30",
+    "screenshot": "rivet-quarterSpecial-a.png"
+  },
+  {
+    "capture": "rivet-quarterSpecial-b",
+    "coreFrame": 3,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=3 startup/active/recovery 12/31/30",
+    "screenshot": "rivet-quarterSpecial-b.png"
+  },
+  {
+    "capture": "rivet-special-12",
+    "coreFrame": 12,
+    "pose": "30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 518.0 y 578.0 facing 1",
+    "move": "Move special t=12 startup/active/recovery 12/31/30",
+    "screenshot": "rivet-special-12.png"
+  },
+  {
+    "capture": "rivet-special-32",
+    "coreFrame": 32,
+    "pose": "30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 548.0 y 578.0 facing 1",
+    "move": "Move special t=22 startup/active/recovery 12/31/30",
+    "screenshot": "rivet-special-32.png"
+  },
+  {
+    "capture": "rivet-victimThrow-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rivet-victimThrow-12.png"
+  },
+  {
+    "capture": "rivet-victimThrow-32",
+    "coreFrame": 32,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 452.3 y 521.9 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rivet-victimThrow-32.png"
+  },
+  {
+    "capture": "rivet-walk1x-a",
+    "coreFrame": 10,
+    "pose": "4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rivet-walk1x-a.png"
+  },
+  {
+    "capture": "rivet-walk1x-b",
+    "coreFrame": 14,
+    "pose": "5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rivet-walk1x-b.png"
+  },
+  {
+    "capture": "vela-airHeavy-12",
+    "coreFrame": 12,
+    "pose": "22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 478.7 facing 1",
+    "move": "Move airHeavy t=3 startup/active/recovery 8/7/21",
+    "screenshot": "vela-airHeavy-12.png"
+  },
+  {
+    "capture": "vela-airHeavy-20",
+    "coreFrame": 20,
+    "pose": "23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 461.3 facing 1",
+    "move": "Move airHeavy t=11 startup/active/recovery 8/7/21",
+    "screenshot": "vela-airHeavy-20.png"
+  },
+  {
+    "capture": "vela-airHeavy-24",
+    "coreFrame": 24,
+    "pose": "9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 473.0 facing 1",
+    "move": "Move airHeavy t=15 startup/active/recovery 8/7/21",
+    "screenshot": "vela-airHeavy-24.png"
+  },
+  {
+    "capture": "vela-block-12",
+    "coreFrame": 12,
+    "pose": "25: block \u00b7 gait phase 0.816 \u00b7 x 478.8 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "vela-block-12.png"
+  },
+  {
+    "capture": "vela-grab-12",
+    "coreFrame": 12,
+    "pose": "27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=6 startup/active/recovery 6/3/30",
+    "screenshot": "vela-grab-12.png"
+  },
+  {
+    "capture": "vela-grab-32",
+    "coreFrame": 32,
+    "pose": "28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=9 startup/active/recovery 6/3/30",
+    "screenshot": "vela-grab-32.png"
+  },
+  {
+    "capture": "vela-hit-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 492.3 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "vela-hit-12.png"
+  },
+  {
+    "capture": "vela-launcher-12",
+    "coreFrame": 12,
+    "pose": "15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move launcher t=8 startup/active/recovery 8/6/23",
+    "screenshot": "vela-launcher-12.png"
+  },
+  {
+    "capture": "vela-light-12",
+    "coreFrame": 12,
+    "pose": "12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move light t=7 startup/active/recovery 5/4/13",
+    "screenshot": "vela-light-12.png"
+  },
+  {
+    "capture": "vela-live1x-a",
+    "coreFrame": 9,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "vela-live1x-a.png"
+  },
+  {
+    "capture": "vela-live1x-b",
+    "coreFrame": 13,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "vela-live1x-b.png"
+  },
+  {
+    "capture": "vela-medium-12",
+    "coreFrame": 12,
+    "pose": "18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move medium t=7 startup/active/recovery 7/5/17",
+    "screenshot": "vela-medium-12.png"
+  },
+  {
+    "capture": "vela-quarterSpecial-a",
+    "coreFrame": 2,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=2 startup/active/recovery 16/33/30",
+    "screenshot": "vela-quarterSpecial-a.png"
+  },
+  {
+    "capture": "vela-quarterSpecial-b",
+    "coreFrame": 3,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=3 startup/active/recovery 16/33/30",
+    "screenshot": "vela-quarterSpecial-b.png"
+  },
+  {
+    "capture": "vela-special-12",
+    "coreFrame": 12,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=12 startup/active/recovery 16/33/30",
+    "screenshot": "vela-special-12.png"
+  },
+  {
+    "capture": "vela-special-32",
+    "coreFrame": 32,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=27 startup/active/recovery 16/33/30",
+    "screenshot": "vela-special-32.png"
+  },
+  {
+    "capture": "vela-victimThrow-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "vela-victimThrow-12.png"
+  },
+  {
+    "capture": "vela-victimThrow-32",
+    "coreFrame": 32,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 452.3 y 521.9 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "vela-victimThrow-32.png"
+  },
+  {
+    "capture": "vela-walk1x-a",
+    "coreFrame": 9,
+    "pose": "3: passNear \u00b7 gait phase 0.459 \u00b7 x 529.4 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "vela-walk1x-a.png"
+  },
+  {
+    "capture": "vela-walk1x-b",
+    "coreFrame": 14,
+    "pose": "4: walkFar \u00b7 gait phase 0.734 \u00b7 x 547.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "vela-walk1x-b.png"
+  },
+  {
+    "capture": "bront-airHeavy-12",
+    "coreFrame": 12,
+    "pose": "22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+    "move": "Move airHeavy t=3 startup/active/recovery 14/7/21",
+    "screenshot": "bront-airHeavy-12.png"
+  },
+  {
+    "capture": "bront-airHeavy-20",
+    "coreFrame": 20,
+    "pose": "22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "move": "Move airHeavy t=11 startup/active/recovery 14/7/21",
+    "screenshot": "bront-airHeavy-20.png"
+  },
+  {
+    "capture": "bront-airHeavy-24",
+    "coreFrame": 24,
+    "pose": "23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 451.4 facing 1",
+    "move": "Move airHeavy t=15 startup/active/recovery 14/7/21",
+    "screenshot": "bront-airHeavy-24.png"
+  },
+  {
+    "capture": "bront-block-12",
+    "coreFrame": 12,
+    "pose": "25: block \u00b7 gait phase 0.770 \u00b7 x 474.9 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "bront-block-12.png"
+  },
+  {
+    "capture": "bront-grab-12",
+    "coreFrame": 12,
+    "pose": "27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=6 startup/active/recovery 6/3/30",
+    "screenshot": "bront-grab-12.png"
+  },
+  {
+    "capture": "bront-grab-32",
+    "coreFrame": 32,
+    "pose": "28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=9 startup/active/recovery 6/3/30",
+    "screenshot": "bront-grab-32.png"
+  },
+  {
+    "capture": "bront-hit-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 492.3 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "bront-hit-12.png"
+  },
+  {
+    "capture": "bront-launcher-12",
+    "coreFrame": 12,
+    "pose": "15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move launcher t=8 startup/active/recovery 8/6/23",
+    "screenshot": "bront-launcher-12.png"
+  },
+  {
+    "capture": "bront-light-12",
+    "coreFrame": 12,
+    "pose": "12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move light t=7 startup/active/recovery 5/4/13",
+    "screenshot": "bront-light-12.png"
+  },
+  {
+    "capture": "bront-live1x-a",
+    "coreFrame": 10,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "bront-live1x-a.png"
+  },
+  {
+    "capture": "bront-live1x-b",
+    "coreFrame": 14,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "bront-live1x-b.png"
+  },
+  {
+    "capture": "bront-medium-12",
+    "coreFrame": 12,
+    "pose": "18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move medium t=7 startup/active/recovery 7/5/17",
+    "screenshot": "bront-medium-12.png"
+  },
+  {
+    "capture": "bront-quarterSpecial-a",
+    "coreFrame": 2,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=2 startup/active/recovery 18/23/30",
+    "screenshot": "bront-quarterSpecial-a.png"
+  },
+  {
+    "capture": "bront-quarterSpecial-b",
+    "coreFrame": 3,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=3 startup/active/recovery 18/23/30",
+    "screenshot": "bront-quarterSpecial-b.png"
+  },
+  {
+    "capture": "bront-special-12",
+    "coreFrame": 12,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=12 startup/active/recovery 18/23/30",
+    "screenshot": "bront-special-12.png"
+  },
+  {
+    "capture": "bront-special-32",
+    "coreFrame": 32,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=32 startup/active/recovery 18/23/30",
+    "screenshot": "bront-special-32.png"
+  },
+  {
+    "capture": "bront-victimThrow-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "bront-victimThrow-12.png"
+  },
+  {
+    "capture": "bront-victimThrow-32",
+    "coreFrame": 32,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 452.3 y 521.9 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "bront-victimThrow-32.png"
+  },
+  {
+    "capture": "bront-walk1x-a",
+    "coreFrame": 9,
+    "pose": "4: walkFar \u00b7 gait phase 0.574 \u00b7 x 536.7 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "bront-walk1x-a.png"
+  },
+  {
+    "capture": "bront-walk1x-b",
+    "coreFrame": 14,
+    "pose": "5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "bront-walk1x-b.png"
+  },
+  {
+    "capture": "zephyr-airHeavy-12",
+    "coreFrame": 12,
+    "pose": "22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+    "move": "Move airHeavy t=3 startup/active/recovery 8/7/21",
+    "screenshot": "zephyr-airHeavy-12.png"
+  },
+  {
+    "capture": "zephyr-airHeavy-20",
+    "coreFrame": 20,
+    "pose": "23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "move": "Move airHeavy t=11 startup/active/recovery 8/7/21",
+    "screenshot": "zephyr-airHeavy-20.png"
+  },
+  {
+    "capture": "zephyr-airHeavy-24",
+    "coreFrame": 24,
+    "pose": "9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 451.4 facing 1",
+    "move": "Move airHeavy t=15 startup/active/recovery 8/7/21",
+    "screenshot": "zephyr-airHeavy-24.png"
+  },
+  {
+    "capture": "zephyr-block-12",
+    "coreFrame": 12,
+    "pose": "25: block \u00b7 gait phase 0.770 \u00b7 x 474.9 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "zephyr-block-12.png"
+  },
+  {
+    "capture": "zephyr-grab-12",
+    "coreFrame": 12,
+    "pose": "27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=6 startup/active/recovery 6/3/30",
+    "screenshot": "zephyr-grab-12.png"
+  },
+  {
+    "capture": "zephyr-grab-32",
+    "coreFrame": 32,
+    "pose": "28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=9 startup/active/recovery 6/3/30",
+    "screenshot": "zephyr-grab-32.png"
+  },
+  {
+    "capture": "zephyr-hit-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 492.3 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "zephyr-hit-12.png"
+  },
+  {
+    "capture": "zephyr-launcher-12",
+    "coreFrame": 12,
+    "pose": "15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move launcher t=8 startup/active/recovery 8/6/23",
+    "screenshot": "zephyr-launcher-12.png"
+  },
+  {
+    "capture": "zephyr-light-12",
+    "coreFrame": 12,
+    "pose": "12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move light t=7 startup/active/recovery 5/4/13",
+    "screenshot": "zephyr-light-12.png"
+  },
+  {
+    "capture": "zephyr-live1x-a",
+    "coreFrame": 9,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "zephyr-live1x-a.png"
+  },
+  {
+    "capture": "zephyr-live1x-b",
+    "coreFrame": 14,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "zephyr-live1x-b.png"
+  },
+  {
+    "capture": "zephyr-medium-12",
+    "coreFrame": 12,
+    "pose": "18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move medium t=7 startup/active/recovery 7/5/17",
+    "screenshot": "zephyr-medium-12.png"
+  },
+  {
+    "capture": "zephyr-quarterSpecial-a",
+    "coreFrame": 2,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=2 startup/active/recovery 14/29/30",
+    "screenshot": "zephyr-quarterSpecial-a.png"
+  },
+  {
+    "capture": "zephyr-quarterSpecial-b",
+    "coreFrame": 3,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=3 startup/active/recovery 14/29/30",
+    "screenshot": "zephyr-quarterSpecial-b.png"
+  },
+  {
+    "capture": "zephyr-special-12",
+    "coreFrame": 12,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=12 startup/active/recovery 14/29/30",
+    "screenshot": "zephyr-special-12.png"
+  },
+  {
+    "capture": "zephyr-special-32",
+    "coreFrame": 32,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=27 startup/active/recovery 14/29/30",
+    "screenshot": "zephyr-special-32.png"
+  },
+  {
+    "capture": "zephyr-victimThrow-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "zephyr-victimThrow-12.png"
+  },
+  {
+    "capture": "zephyr-victimThrow-32",
+    "coreFrame": 32,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 452.3 y 521.9 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "zephyr-victimThrow-32.png"
+  },
+  {
+    "capture": "zephyr-walk1x-a",
+    "coreFrame": 10,
+    "pose": "4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "zephyr-walk1x-a.png"
+  },
+  {
+    "capture": "zephyr-walk1x-b",
+    "coreFrame": 14,
+    "pose": "5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "zephyr-walk1x-b.png"
+  },
+  {
+    "capture": "mox-airHeavy-12",
+    "coreFrame": 12,
+    "pose": "22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+    "move": "Move airHeavy t=3 startup/active/recovery 8/7/21",
+    "screenshot": "mox-airHeavy-12.png"
+  },
+  {
+    "capture": "mox-airHeavy-20",
+    "coreFrame": 20,
+    "pose": "23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "move": "Move airHeavy t=11 startup/active/recovery 8/7/21",
+    "screenshot": "mox-airHeavy-20.png"
+  },
+  {
+    "capture": "mox-airHeavy-24",
+    "coreFrame": 24,
+    "pose": "9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 451.4 facing 1",
+    "move": "Move airHeavy t=15 startup/active/recovery 8/7/21",
+    "screenshot": "mox-airHeavy-24.png"
+  },
+  {
+    "capture": "mox-block-12",
+    "coreFrame": 12,
+    "pose": "25: block \u00b7 gait phase 0.770 \u00b7 x 474.9 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "mox-block-12.png"
+  },
+  {
+    "capture": "mox-grab-12",
+    "coreFrame": 12,
+    "pose": "27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=6 startup/active/recovery 6/3/30",
+    "screenshot": "mox-grab-12.png"
+  },
+  {
+    "capture": "mox-grab-32",
+    "coreFrame": 32,
+    "pose": "28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=9 startup/active/recovery 6/3/30",
+    "screenshot": "mox-grab-32.png"
+  },
+  {
+    "capture": "mox-hit-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 492.3 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "mox-hit-12.png"
+  },
+  {
+    "capture": "mox-launcher-12",
+    "coreFrame": 12,
+    "pose": "15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move launcher t=8 startup/active/recovery 8/6/23",
+    "screenshot": "mox-launcher-12.png"
+  },
+  {
+    "capture": "mox-light-12",
+    "coreFrame": 12,
+    "pose": "12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move light t=7 startup/active/recovery 5/4/13",
+    "screenshot": "mox-light-12.png"
+  },
+  {
+    "capture": "mox-live1x-a",
+    "coreFrame": 10,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "mox-live1x-a.png"
+  },
+  {
+    "capture": "mox-live1x-b",
+    "coreFrame": 14,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "mox-live1x-b.png"
+  },
+  {
+    "capture": "mox-medium-12",
+    "coreFrame": 12,
+    "pose": "18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move medium t=7 startup/active/recovery 7/5/17",
+    "screenshot": "mox-medium-12.png"
+  },
+  {
+    "capture": "mox-quarterSpecial-a",
+    "coreFrame": 2,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=2 startup/active/recovery 12/33/30",
+    "screenshot": "mox-quarterSpecial-a.png"
+  },
+  {
+    "capture": "mox-quarterSpecial-b",
+    "coreFrame": 3,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=3 startup/active/recovery 12/33/30",
+    "screenshot": "mox-quarterSpecial-b.png"
+  },
+  {
+    "capture": "mox-special-12",
+    "coreFrame": 12,
+    "pose": "30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 506.0 y 578.0 facing 1",
+    "move": "Move special t=12 startup/active/recovery 12/33/30",
+    "screenshot": "mox-special-12.png"
+  },
+  {
+    "capture": "mox-special-32",
+    "coreFrame": 32,
+    "pose": "30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 516.0 y 578.0 facing 1",
+    "move": "Move special t=22 startup/active/recovery 12/33/30",
+    "screenshot": "mox-special-32.png"
+  },
+  {
+    "capture": "mox-victimThrow-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "mox-victimThrow-12.png"
+  },
+  {
+    "capture": "mox-victimThrow-32",
+    "coreFrame": 32,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 452.3 y 521.9 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "mox-victimThrow-32.png"
+  },
+  {
+    "capture": "mox-walk1x-a",
+    "coreFrame": 9,
+    "pose": "4: walkFar \u00b7 gait phase 0.574 \u00b7 x 536.7 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "mox-walk1x-a.png"
+  },
+  {
+    "capture": "mox-walk1x-b",
+    "coreFrame": 15,
+    "pose": "5: passFar \u00b7 gait phase 0.987 \u00b7 x 563.1 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "mox-walk1x-b.png"
+  },
+  {
+    "capture": "rune-airHeavy-12",
+    "coreFrame": 12,
+    "pose": "22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+    "move": "Move airHeavy t=3 startup/active/recovery 8/7/21",
+    "screenshot": "rune-airHeavy-12.png"
+  },
+  {
+    "capture": "rune-airHeavy-20",
+    "coreFrame": 20,
+    "pose": "23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "move": "Move airHeavy t=11 startup/active/recovery 8/7/21",
+    "screenshot": "rune-airHeavy-20.png"
+  },
+  {
+    "capture": "rune-airHeavy-24",
+    "coreFrame": 24,
+    "pose": "9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 451.4 facing 1",
+    "move": "Move airHeavy t=15 startup/active/recovery 8/7/21",
+    "screenshot": "rune-airHeavy-24.png"
+  },
+  {
+    "capture": "rune-block-12",
+    "coreFrame": 12,
+    "pose": "25: block \u00b7 gait phase 0.770 \u00b7 x 474.9 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rune-block-12.png"
+  },
+  {
+    "capture": "rune-grab-12",
+    "coreFrame": 12,
+    "pose": "27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=6 startup/active/recovery 6/3/30",
+    "screenshot": "rune-grab-12.png"
+  },
+  {
+    "capture": "rune-grab-32",
+    "coreFrame": 32,
+    "pose": "28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=9 startup/active/recovery 6/3/30",
+    "screenshot": "rune-grab-32.png"
+  },
+  {
+    "capture": "rune-hit-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 492.3 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rune-hit-12.png"
+  },
+  {
+    "capture": "rune-launcher-12",
+    "coreFrame": 12,
+    "pose": "15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move launcher t=8 startup/active/recovery 8/6/23",
+    "screenshot": "rune-launcher-12.png"
+  },
+  {
+    "capture": "rune-light-12",
+    "coreFrame": 12,
+    "pose": "12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move light t=7 startup/active/recovery 5/4/13",
+    "screenshot": "rune-light-12.png"
+  },
+  {
+    "capture": "rune-live1x-a",
+    "coreFrame": 9,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rune-live1x-a.png"
+  },
+  {
+    "capture": "rune-live1x-b",
+    "coreFrame": 15,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rune-live1x-b.png"
+  },
+  {
+    "capture": "rune-medium-12",
+    "coreFrame": 12,
+    "pose": "18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move medium t=7 startup/active/recovery 7/5/17",
+    "screenshot": "rune-medium-12.png"
+  },
+  {
+    "capture": "rune-quarterSpecial-a",
+    "coreFrame": 2,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=2 startup/active/recovery 18/31/30",
+    "screenshot": "rune-quarterSpecial-a.png"
+  },
+  {
+    "capture": "rune-quarterSpecial-b",
+    "coreFrame": 3,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=3 startup/active/recovery 18/31/30",
+    "screenshot": "rune-quarterSpecial-b.png"
+  },
+  {
+    "capture": "rune-special-12",
+    "coreFrame": 12,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=12 startup/active/recovery 18/31/30",
+    "screenshot": "rune-special-12.png"
+  },
+  {
+    "capture": "rune-special-32",
+    "coreFrame": 32,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=27 startup/active/recovery 18/31/30",
+    "screenshot": "rune-special-32.png"
+  },
+  {
+    "capture": "rune-victimThrow-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rune-victimThrow-12.png"
+  },
+  {
+    "capture": "rune-victimThrow-32",
+    "coreFrame": 32,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 452.3 y 521.9 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rune-victimThrow-32.png"
+  },
+  {
+    "capture": "rune-walk1x-a",
+    "coreFrame": 11,
+    "pose": "4: walkFar \u00b7 gait phase 0.712 \u00b7 x 545.5 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rune-walk1x-a.png"
+  },
+  {
+    "capture": "rune-walk1x-b",
+    "coreFrame": 14,
+    "pose": "5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "rune-walk1x-b.png"
+  },
+  {
+    "capture": "guest07-airHeavy-12",
+    "coreFrame": 12,
+    "pose": "22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+    "move": "Move airHeavy t=3 startup/active/recovery 8/7/21",
+    "screenshot": "guest07-airHeavy-12.png"
+  },
+  {
+    "capture": "guest07-airHeavy-20",
+    "coreFrame": 20,
+    "pose": "23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "move": "Move airHeavy t=11 startup/active/recovery 8/7/21",
+    "screenshot": "guest07-airHeavy-20.png"
+  },
+  {
+    "capture": "guest07-airHeavy-24",
+    "coreFrame": 24,
+    "pose": "9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 451.4 facing 1",
+    "move": "Move airHeavy t=15 startup/active/recovery 8/7/21",
+    "screenshot": "guest07-airHeavy-24.png"
+  },
+  {
+    "capture": "guest07-block-12",
+    "coreFrame": 12,
+    "pose": "25: block \u00b7 gait phase 0.770 \u00b7 x 474.9 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "guest07-block-12.png"
+  },
+  {
+    "capture": "guest07-grab-12",
+    "coreFrame": 12,
+    "pose": "27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=6 startup/active/recovery 6/3/30",
+    "screenshot": "guest07-grab-12.png"
+  },
+  {
+    "capture": "guest07-grab-32",
+    "coreFrame": 32,
+    "pose": "28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move grab t=9 startup/active/recovery 6/3/30",
+    "screenshot": "guest07-grab-32.png"
+  },
+  {
+    "capture": "guest07-hit-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 492.3 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "guest07-hit-12.png"
+  },
+  {
+    "capture": "guest07-launcher-12",
+    "coreFrame": 12,
+    "pose": "15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move launcher t=8 startup/active/recovery 8/6/23",
+    "screenshot": "guest07-launcher-12.png"
+  },
+  {
+    "capture": "guest07-light-12",
+    "coreFrame": 12,
+    "pose": "12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move light t=7 startup/active/recovery 5/4/13",
+    "screenshot": "guest07-light-12.png"
+  },
+  {
+    "capture": "guest07-live1x-a",
+    "coreFrame": 9,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "guest07-live1x-a.png"
+  },
+  {
+    "capture": "guest07-live1x-b",
+    "coreFrame": 14,
+    "pose": "0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "guest07-live1x-b.png"
+  },
+  {
+    "capture": "guest07-medium-12",
+    "coreFrame": 12,
+    "pose": "18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move medium t=7 startup/active/recovery 7/5/17",
+    "screenshot": "guest07-medium-12.png"
+  },
+  {
+    "capture": "guest07-quarterSpecial-a",
+    "coreFrame": 2,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=2 startup/active/recovery 12/31/30",
+    "screenshot": "guest07-quarterSpecial-a.png"
+  },
+  {
+    "capture": "guest07-quarterSpecial-b",
+    "coreFrame": 3,
+    "pose": "29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move special t=3 startup/active/recovery 12/31/30",
+    "screenshot": "guest07-quarterSpecial-b.png"
+  },
+  {
+    "capture": "guest07-special-12",
+    "coreFrame": 12,
+    "pose": "30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 524.0 y 578.0 facing 1",
+    "move": "Move special t=12 startup/active/recovery 12/31/30",
+    "screenshot": "guest07-special-12.png"
+  },
+  {
+    "capture": "guest07-special-32",
+    "coreFrame": 32,
+    "pose": "30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 580.0 y 578.0 facing 1",
+    "move": "Move special t=26 startup/active/recovery 12/31/30",
+    "screenshot": "guest07-special-32.png"
+  },
+  {
+    "capture": "guest07-victimThrow-12",
+    "coreFrame": 12,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "guest07-victimThrow-12.png"
+  },
+  {
+    "capture": "guest07-victimThrow-32",
+    "coreFrame": 32,
+    "pose": "24: hit \u00b7 gait phase 0.000 \u00b7 x 452.3 y 521.9 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "guest07-victimThrow-32.png"
+  },
+  {
+    "capture": "guest07-walk1x-a",
+    "coreFrame": 10,
+    "pose": "4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "guest07-walk1x-a.png"
+  },
+  {
+    "capture": "guest07-walk1x-b",
+    "coreFrame": 15,
+    "pose": "5: passFar \u00b7 gait phase 0.987 \u00b7 x 563.1 y 578.0 facing 1",
+    "move": "Move none t=- ",
+    "screenshot": "guest07-walk1x-b.png"
+  },
+  {
+    "capture": "mox-air-head-fixed-15",
+    "coreFrame": 15,
+    "pose": "22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 453.1 facing 1",
+    "move": "Move airHeavy t=6 startup/active/recovery 8/7/21",
+    "screenshot": "mox-air-head-fixed-15.png"
+  },
+  {
+    "capture": "mox-air-head-fixed-20",
+    "coreFrame": 20,
+    "pose": "23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "move": "Move airHeavy t=11 startup/active/recovery 8/7/21",
+    "screenshot": "mox-air-head-fixed-20.png"
+  },
+  {
+    "capture": "mox-air-head-fixed-24",
+    "coreFrame": 24,
+    "pose": "9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 451.4 facing 1",
+    "move": "Move airHeavy t=15 startup/active/recovery 8/7/21",
+    "screenshot": "mox-air-head-fixed-24.png"
+  },
+  {
+    "capture": "rivet-air-head-fixed-15",
+    "coreFrame": 15,
+    "pose": "22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 453.1 facing 1",
+    "move": "Move airHeavy t=6 startup/active/recovery 8/7/21",
+    "screenshot": "rivet-air-head-fixed-15.png"
+  },
+  {
+    "capture": "rivet-air-head-fixed-20",
+    "coreFrame": 20,
+    "pose": "23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "move": "Move airHeavy t=11 startup/active/recovery 8/7/21",
+    "screenshot": "rivet-air-head-fixed-20.png"
+  },
+  {
+    "capture": "rivet-air-head-fixed-24",
+    "coreFrame": 24,
+    "pose": "9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 451.4 facing 1",
+    "move": "Move airHeavy t=15 startup/active/recovery 8/7/21",
+    "screenshot": "rivet-air-head-fixed-24.png"
+  },
+  {
+    "capture": "vela-medium-recovery-fixed-22",
+    "coreFrame": 22,
+    "pose": "13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "move": "Move medium t=17 startup/active/recovery 7/5/17",
+    "screenshot": "vela-medium-recovery-fixed-22.png"
+  }
+]

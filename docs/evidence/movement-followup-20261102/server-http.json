@@ -1,0 +1,27 @@
+{
+  "scope": "HTTP availability and served artifact identity only, not browser playback",
+  "beforePromotion": [
+    {
+      "port": 5173,
+      "indexHTTP": 200,
+      "gameTitle": true,
+      "atlasHTTP": 200,
+      "revision": "late-0c4068a62c0a9b94",
+      "sha256": "293a4aa1abf69cadd25b5dc055f7ca8fb954848d3fa60feb467f5271792a46bf",
+      "bodies": 150,
+      "labHTTP": 200,
+      "labHasMotionControls": true
+    },
+    {
+      "port": 5196,
+      "indexHTTP": 200,
+      "gameTitle": true,
+      "atlasHTTP": 200,
+      "revision": "late-0c4068a62c0a9b94-reviewed-airkick-20261102",
+      "sha256": "b2fa20d1ff993819cc9e73acb688736fb2f13ec178918805c08ca88afcdf1fca",
+      "bodies": 150,
+      "labHTTP": 200,
+      "labHasMotionControls": true
+    }
+  ]
+}

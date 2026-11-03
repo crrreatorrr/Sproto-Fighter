@@ -1,0 +1,28 @@
+PASS: installed campaign exposes three genuine sequential gauntlets and dynamic counts
+PASS: initial region gates block jumps while free-play arenas stay available
+PASS: normal and God Mode controller wins persist identical recruitment and continuation
+PASS: defeat, draw and duplicate result notifications do not advance ordinary encounters
+PASS: restart of a settled ordinary round accepts a new outcome once
+PASS: all three gauntlets recruit wave one but save no halfway checkpoint; wave two auto-launches
+PASS: loss and draw in either wave retry each gauntlet from its first opponent
+PASS: reload, leaving, restart and route re-entry restart all three gauntlets from wave one
+PASS: readiness and launch failures keep progress unchanged and allow a clean retry
+PASS: failed second-wave loading resets each gauntlet rather than granting its next fight
+PASS: double-clicked encounter launch submits once while assets load
+PASS: free play, Back and Escape do not award story progress
+PASS: preserved gaps drive Continue, map inspection and regional entry by first uncleared node
+PASS: full installed route in normal and God Mode follows every wave and ends with a durable reward
+PASS: actual main rejects every unrecruited campaign P1 including former free-play additions
+PASS: actual normal and God Mode wins recruit playable P1 fighters immediately and after reload
+PASS: actual main refreshes stale saves before P1 launch without granting the next locked fighter
+PASS: actual story hook keeps locked previews open with useful recruitment feedback
+PASS: actual main refills health, preserves hero and selects the correct regional scenery for each boss bout
+PASS: Settings God Mode during any second wave restarts that encounter and both wins still count
+PASS: earned God Mode survives campaign gaps and works in story and free play
+PASS: actual main story scenery follows the node and standalone arenas clear the variant
+PASS: actual main asset failure preserves the current state and premature God Mode remains gated
+PASS: all free-play catalogue entries launch their exact arena and clear story overrides
+PASS: Settings testing toggle is immediate, restores a fresh round and resumes after result overlay
+PASS: God Mode prevents melee, spit and throw damage while normal combat remains vulnerable
+PASS: God Mode permits enemy KO and deterministic frame-indexed replay
+27 campaign/controller/main integration checks passed for 126 nodes / 129 opponents. Stub DOM and in-memory saves only.

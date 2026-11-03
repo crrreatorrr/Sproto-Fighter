@@ -1,0 +1,2536 @@
+{
+  "rivet": [
+    {
+      "evidence": "rivet-dash3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 537.2 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-down-air-12.txt",
+      "state": [
+        "155 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+        "Move airHeavy t=3 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-down-air-20.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 475.8 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-down-air-24.txt",
+      "state": [
+        "155 text Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 526.5 facing 1",
+        "Move airHeavy t=15 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-down-air-28.txt",
+      "state": [
+        "155 text Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-down-air-36.txt",
+      "state": [
+        "155 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-down-air-44.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-down-air-live-0-f17.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 475.8 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-down-air-live-1-f25.txt",
+      "state": [
+        "155 text Core frame 27 \u00b7 scenario frame 27 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 573.5 facing 1",
+        "Move airHeavy t=18 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-down-air-live-2-f42.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-final-dash3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-final-live-dash-0-f14.txt",
+      "state": [
+        "143 text Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-final-live-dash-1-f19.txt",
+      "state": [
+        "155 text Core frame 19 \u00b7 scenario frame 19 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-final-live-jump-0-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 446.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-final-live-jump-1-f32.txt",
+      "state": [
+        "155 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-final-live-jump-2-f40.txt",
+      "state": [
+        "155 text Core frame 40 \u00b7 scenario frame 40 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-final-live-walk-0-f18.txt",
+      "state": [
+        "155 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.388 \u00b7 x 588.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-final-live-walk-1-f71.txt",
+      "state": [
+        "155 text Core frame 71 \u00b7 scenario frame 71 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.882 \u00b7 x 748.4 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-final-live-walk-2-f126.txt",
+      "state": [
+        "155 text Core frame 126 \u00b7 scenario frame 126 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-grab9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move grab t=6 startup/active/recovery 6/3/30",
+        "Throw {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+      ]
+    },
+    {
+      "evidence": "rivet-jump20.txt",
+      "state": [
+        "154 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-jump3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 562.4 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-jump32.txt",
+      "state": [
+        "154 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-jump36.txt",
+      "state": [
+        "154 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 556.3 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-jump45.txt",
+      "state": [
+        "154 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-launcher25.txt",
+      "state": [
+        "154 text Core frame 25 \u00b7 scenario frame 25 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=20 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-launcher9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 15/31 \u00b7 pose slot 15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=8 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-light18.txt",
+      "state": [
+        "154 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=13 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-light6.txt",
+      "state": [
+        "142 text Core frame 6 \u00b7 scenario frame 6 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 12/31 \u00b7 pose slot 12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=5 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-medium12.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=7 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-medium22.txt",
+      "state": [
+        "154 text Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=17 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-medium4.txt",
+      "state": [
+        "142 text Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 17/31 \u00b7 pose slot 17: kickHalf \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=4 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-walk0.txt",
+      "state": [
+        "142 text Core frame 1 \u00b7 scenario frame 1 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-walk1.txt",
+      "state": [
+        "154 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-walk2.txt",
+      "state": [
+        "154 text Core frame 5 \u00b7 scenario frame 5 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-walk3.txt",
+      "state": [
+        "154 text Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-walk4.txt",
+      "state": [
+        "154 text Core frame 8 \u00b7 scenario frame 8 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-walk5.txt",
+      "state": [
+        "154 text Core frame 10 \u00b7 scenario frame 10 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-walk6.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rivet-walk7.txt",
+      "state": [
+        "154 text Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    }
+  ],
+  "vela": [
+    {
+      "evidence": "vela-dash3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 534.5 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-down-air-12.txt",
+      "state": [
+        "155 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 478.7 facing 1",
+        "Move airHeavy t=3 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-down-air-20.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 490.5 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-down-air-24.txt",
+      "state": [
+        "155 text Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 541.2 facing 1",
+        "Move airHeavy t=15 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-down-air-28.txt",
+      "state": [
+        "155 text Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-down-air-36.txt",
+      "state": [
+        "155 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-down-air-44.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-down-air-live-0-f26.txt",
+      "state": [
+        "155 text Core frame 31 \u00b7 scenario frame 31 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-down-air-live-1-f34.txt",
+      "state": [
+        "155 text Core frame 37 \u00b7 scenario frame 37 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-down-air-live-2-f42.txt",
+      "state": [
+        "155 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-final-dash3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 534.5 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-final-live-dash-0-f13.txt",
+      "state": [
+        "143 text Core frame 13 \u00b7 scenario frame 13 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.176 \u00b7 x 605.2 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-final-live-dash-1-f18.txt",
+      "state": [
+        "155 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.176 \u00b7 x 605.2 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-final-live-jump-0-f16.txt",
+      "state": [
+        "155 text Core frame 16 \u00b7 scenario frame 16 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 463.2 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-final-live-jump-1-f32.txt",
+      "state": [
+        "155 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 537.1 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-final-live-jump-2-f41.txt",
+      "state": [
+        "155 text Core frame 41 \u00b7 scenario frame 41 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-final-live-walk-0-f18.txt",
+      "state": [
+        "155 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.110 \u00b7 x 571.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-final-live-walk-1-f70.txt",
+      "state": [
+        "155 text Core frame 70 \u00b7 scenario frame 70 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.169 \u00b7 x 702.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-final-live-walk-2-f126.txt",
+      "state": [
+        "155 text Core frame 126 \u00b7 scenario frame 126 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.987 \u00b7 x 499.2 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-grab9.txt",
+      "state": [
+        "143 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move grab t=6 startup/active/recovery 6/3/30",
+        "Throw {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+      ]
+    },
+    {
+      "evidence": "vela-jump20.txt",
+      "state": [
+        "154 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 461.3 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-jump3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 563.3 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-jump32.txt",
+      "state": [
+        "154 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 537.1 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-jump36.txt",
+      "state": [
+        "154 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-jump45.txt",
+      "state": [
+        "154 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-launcher25.txt",
+      "state": [
+        "154 text Core frame 25 \u00b7 scenario frame 25 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=20 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-launcher9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 15/31 \u00b7 pose slot 15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=8 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-light18.txt",
+      "state": [
+        "154 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=13 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-light6.txt",
+      "state": [
+        "142 text Core frame 6 \u00b7 scenario frame 6 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 12/31 \u00b7 pose slot 12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=5 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-medium12.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=7 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-medium22.txt",
+      "state": [
+        "154 text Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=17 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-medium4.txt",
+      "state": [
+        "142 text Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 17/31 \u00b7 pose slot 17: kickHalf \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=4 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-walk0.txt",
+      "state": [
+        "143 text Core frame 1 \u00b7 scenario frame 1 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.035 \u00b7 x 502.2 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-walk1.txt",
+      "state": [
+        "155 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.161 \u00b7 x 510.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-walk2.txt",
+      "state": [
+        "155 text Core frame 5 \u00b7 scenario frame 5 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.288 \u00b7 x 518.4 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-walk3.txt",
+      "state": [
+        "155 text Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.414 \u00b7 x 526.5 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-walk4.txt",
+      "state": [
+        "155 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.541 \u00b7 x 534.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-walk5.txt",
+      "state": [
+        "155 text Core frame 11 \u00b7 scenario frame 11 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.667 \u00b7 x 542.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-walk6.txt",
+      "state": [
+        "155 text Core frame 13 \u00b7 scenario frame 13 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.794 \u00b7 x 550.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "vela-walk7.txt",
+      "state": [
+        "155 text Core frame 15 \u00b7 scenario frame 15 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.920 \u00b7 x 558.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    }
+  ],
+  "bront": [
+    {
+      "evidence": "bront-dash3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-down-air-12.txt",
+      "state": [
+        "155 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+        "Move airHeavy t=3 startup/active/recovery 14/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-down-air-20.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 14/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-down-air-24.txt",
+      "state": [
+        "155 text Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 457.0 facing 1",
+        "Move airHeavy t=15 startup/active/recovery 14/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-down-air-28.txt",
+      "state": [
+        "155 text Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 500.9 facing 1",
+        "Move airHeavy t=19 startup/active/recovery 14/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-down-air-36.txt",
+      "state": [
+        "155 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-down-air-44.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-down-air-live-0-f17.txt",
+      "state": [
+        "155 text Core frame 19 \u00b7 scenario frame 19 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.8 facing 1",
+        "Move airHeavy t=10 startup/active/recovery 14/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-down-air-live-1-f27.txt",
+      "state": [
+        "155 text Core frame 29 \u00b7 scenario frame 29 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 514.0 facing 1",
+        "Move airHeavy t=20 startup/active/recovery 14/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-down-air-live-2-f42.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-final-dash3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-final-live-dash-0-f14.txt",
+      "state": [
+        "143 text Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-final-live-dash-1-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-final-live-jump-0-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 446.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-final-live-jump-1-f32.txt",
+      "state": [
+        "155 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-final-live-jump-2-f41.txt",
+      "state": [
+        "155 text Core frame 41 \u00b7 scenario frame 41 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-final-live-walk-0-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.308 \u00b7 x 583.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-final-live-walk-1-f70.txt",
+      "state": [
+        "155 text Core frame 70 \u00b7 scenario frame 70 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.961 \u00b7 x 753.5 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-final-live-walk-2-f126.txt",
+      "state": [
+        "155 text Core frame 126 \u00b7 scenario frame 126 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-grab9.txt",
+      "state": [
+        "143 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move grab t=6 startup/active/recovery 6/3/30",
+        "Throw {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+      ]
+    },
+    {
+      "evidence": "bront-jump20.txt",
+      "state": [
+        "154 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-jump3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 562.4 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-jump32.txt",
+      "state": [
+        "154 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-jump36.txt",
+      "state": [
+        "154 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 556.3 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-jump45.txt",
+      "state": [
+        "154 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-launcher25.txt",
+      "state": [
+        "154 text Core frame 25 \u00b7 scenario frame 25 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=20 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-launcher9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 15/31 \u00b7 pose slot 15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=8 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-light18.txt",
+      "state": [
+        "154 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=13 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-light6.txt",
+      "state": [
+        "142 text Core frame 6 \u00b7 scenario frame 6 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 12/31 \u00b7 pose slot 12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=5 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-medium12.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=7 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-medium22.txt",
+      "state": [
+        "154 text Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=17 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-medium4.txt",
+      "state": [
+        "142 text Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 17/31 \u00b7 pose slot 17: kickHalf \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=4 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-walk0.txt",
+      "state": [
+        "143 text Core frame 1 \u00b7 scenario frame 1 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.043 \u00b7 x 502.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-walk1.txt",
+      "state": [
+        "155 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.202 \u00b7 x 512.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-walk2.txt",
+      "state": [
+        "155 text Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.281 \u00b7 x 518.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-walk3.txt",
+      "state": [
+        "155 text Core frame 6 \u00b7 scenario frame 6 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.439 \u00b7 x 528.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-walk4.txt",
+      "state": [
+        "155 text Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.518 \u00b7 x 533.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-walk5.txt",
+      "state": [
+        "155 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.676 \u00b7 x 543.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-walk6.txt",
+      "state": [
+        "155 text Core frame 10 \u00b7 scenario frame 10 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.755 \u00b7 x 548.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "bront-walk7.txt",
+      "state": [
+        "155 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.913 \u00b7 x 558.4 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    }
+  ],
+  "zephyr": [
+    {
+      "evidence": "zephyr-dash3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 537.2 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-down-air-12.txt",
+      "state": [
+        "155 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+        "Move airHeavy t=3 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-down-air-20.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 475.8 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-down-air-24.txt",
+      "state": [
+        "155 text Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 526.5 facing 1",
+        "Move airHeavy t=15 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-down-air-28.txt",
+      "state": [
+        "155 text Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-down-air-36.txt",
+      "state": [
+        "155 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-down-air-44.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-down-air-live-0-f17.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 475.8 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-down-air-live-1-f26.txt",
+      "state": [
+        "155 text Core frame 27 \u00b7 scenario frame 27 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 573.5 facing 1",
+        "Move airHeavy t=18 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-down-air-live-2-f42.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-final-dash3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-final-live-dash-0-f14.txt",
+      "state": [
+        "143 text Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-final-live-dash-1-f18.txt",
+      "state": [
+        "155 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-final-live-jump-0-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 446.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-final-live-jump-1-f32.txt",
+      "state": [
+        "155 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-final-live-jump-2-f41.txt",
+      "state": [
+        "155 text Core frame 41 \u00b7 scenario frame 41 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-final-live-walk-0-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.308 \u00b7 x 583.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-final-live-walk-1-f70.txt",
+      "state": [
+        "155 text Core frame 70 \u00b7 scenario frame 70 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.961 \u00b7 x 753.5 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-final-live-walk-2-f126.txt",
+      "state": [
+        "155 text Core frame 126 \u00b7 scenario frame 126 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-grab9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move grab t=6 startup/active/recovery 6/3/30",
+        "Throw {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+      ]
+    },
+    {
+      "evidence": "zephyr-jump20.txt",
+      "state": [
+        "154 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-jump3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 562.4 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-jump32.txt",
+      "state": [
+        "154 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-jump36.txt",
+      "state": [
+        "154 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 556.3 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-jump45.txt",
+      "state": [
+        "154 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-launcher25.txt",
+      "state": [
+        "154 text Core frame 25 \u00b7 scenario frame 25 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=20 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-launcher9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 15/31 \u00b7 pose slot 15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=8 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-light18.txt",
+      "state": [
+        "154 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=13 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-light6.txt",
+      "state": [
+        "142 text Core frame 6 \u00b7 scenario frame 6 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 12/31 \u00b7 pose slot 12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=5 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-medium12.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=7 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-medium22.txt",
+      "state": [
+        "154 text Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=17 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-medium4.txt",
+      "state": [
+        "142 text Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 17/31 \u00b7 pose slot 17: kickHalf \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=4 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-walk0.txt",
+      "state": [
+        "142 text Core frame 1 \u00b7 scenario frame 1 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-walk1.txt",
+      "state": [
+        "154 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-walk2.txt",
+      "state": [
+        "154 text Core frame 5 \u00b7 scenario frame 5 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-walk3.txt",
+      "state": [
+        "154 text Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-walk4.txt",
+      "state": [
+        "154 text Core frame 8 \u00b7 scenario frame 8 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-walk5.txt",
+      "state": [
+        "154 text Core frame 10 \u00b7 scenario frame 10 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-walk6.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "zephyr-walk7.txt",
+      "state": [
+        "154 text Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    }
+  ],
+  "mox": [
+    {
+      "evidence": "mox-dash3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 537.2 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-down-air-12.txt",
+      "state": [
+        "155 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+        "Move airHeavy t=3 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-down-air-20.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 475.8 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-down-air-24.txt",
+      "state": [
+        "155 text Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 526.5 facing 1",
+        "Move airHeavy t=15 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-down-air-28.txt",
+      "state": [
+        "155 text Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-down-air-36.txt",
+      "state": [
+        "155 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-down-air-44.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-down-air-live-0-f18.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 475.8 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-down-air-live-1-f26.txt",
+      "state": [
+        "155 text Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-down-air-live-2-f42.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-final-dash3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-final-live-dash-0-f13.txt",
+      "state": [
+        "143 text Core frame 13 \u00b7 scenario frame 13 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-final-live-dash-1-f18.txt",
+      "state": [
+        "155 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-final-live-jump-0-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 446.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-final-live-jump-1-f32.txt",
+      "state": [
+        "155 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-final-live-jump-2-f40.txt",
+      "state": [
+        "155 text Core frame 40 \u00b7 scenario frame 40 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-final-live-walk-0-f15.txt",
+      "state": [
+        "155 text Core frame 15 \u00b7 scenario frame 15 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.150 \u00b7 x 573.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-final-live-walk-1-f71.txt",
+      "state": [
+        "155 text Core frame 71 \u00b7 scenario frame 71 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.882 \u00b7 x 748.4 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-final-live-walk-2-f126.txt",
+      "state": [
+        "155 text Core frame 126 \u00b7 scenario frame 126 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-grab9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move grab t=6 startup/active/recovery 6/3/30",
+        "Throw {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+      ]
+    },
+    {
+      "evidence": "mox-jump20.txt",
+      "state": [
+        "154 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-jump3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 562.4 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-jump32.txt",
+      "state": [
+        "154 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-jump36.txt",
+      "state": [
+        "154 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 556.3 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-jump45.txt",
+      "state": [
+        "154 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-launcher25.txt",
+      "state": [
+        "154 text Core frame 25 \u00b7 scenario frame 25 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=20 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-launcher9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 15/31 \u00b7 pose slot 15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=8 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-light18.txt",
+      "state": [
+        "154 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=13 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-light6.txt",
+      "state": [
+        "142 text Core frame 6 \u00b7 scenario frame 6 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 12/31 \u00b7 pose slot 12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=5 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-medium12.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=7 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-medium22.txt",
+      "state": [
+        "154 text Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=17 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-medium4.txt",
+      "state": [
+        "142 text Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 17/31 \u00b7 pose slot 17: kickHalf \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=4 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-walk0.txt",
+      "state": [
+        "142 text Core frame 1 \u00b7 scenario frame 1 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-walk1.txt",
+      "state": [
+        "154 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-walk2.txt",
+      "state": [
+        "154 text Core frame 5 \u00b7 scenario frame 5 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-walk3.txt",
+      "state": [
+        "154 text Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-walk4.txt",
+      "state": [
+        "154 text Core frame 8 \u00b7 scenario frame 8 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-walk5.txt",
+      "state": [
+        "154 text Core frame 10 \u00b7 scenario frame 10 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-walk6.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "mox-walk7.txt",
+      "state": [
+        "154 text Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    }
+  ],
+  "rune": [
+    {
+      "evidence": "rune-dash3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 537.2 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-down-air-12.txt",
+      "state": [
+        "155 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+        "Move airHeavy t=3 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-down-air-20.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 475.8 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-down-air-24.txt",
+      "state": [
+        "155 text Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 526.5 facing 1",
+        "Move airHeavy t=15 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-down-air-28.txt",
+      "state": [
+        "155 text Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-down-air-36.txt",
+      "state": [
+        "155 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-down-air-44.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-down-air-live-0-f17.txt",
+      "state": [
+        "155 text Core frame 19 \u00b7 scenario frame 19 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 465.3 facing 1",
+        "Move airHeavy t=10 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-down-air-live-1-f25.txt",
+      "state": [
+        "155 text Core frame 27 \u00b7 scenario frame 27 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 573.5 facing 1",
+        "Move airHeavy t=18 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-down-air-live-2-f43.txt",
+      "state": [
+        "155 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-final-dash3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-final-live-dash-0-f14.txt",
+      "state": [
+        "143 text Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-final-live-dash-1-f18.txt",
+      "state": [
+        "155 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-final-live-jump-0-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 446.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-final-live-jump-1-f32.txt",
+      "state": [
+        "155 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-final-live-jump-2-f40.txt",
+      "state": [
+        "155 text Core frame 40 \u00b7 scenario frame 40 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-final-live-walk-0-f16.txt",
+      "state": [
+        "155 text Core frame 16 \u00b7 scenario frame 16 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.229 \u00b7 x 578.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-final-live-walk-1-f70.txt",
+      "state": [
+        "155 text Core frame 70 \u00b7 scenario frame 70 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.961 \u00b7 x 753.5 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-final-live-walk-2-f127.txt",
+      "state": [
+        "155 text Core frame 127 \u00b7 scenario frame 127 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-grab9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move grab t=6 startup/active/recovery 6/3/30",
+        "Throw {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+      ]
+    },
+    {
+      "evidence": "rune-jump20.txt",
+      "state": [
+        "154 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-jump3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 562.4 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-jump32.txt",
+      "state": [
+        "154 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-jump36.txt",
+      "state": [
+        "154 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 556.3 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-jump45.txt",
+      "state": [
+        "154 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-launcher25.txt",
+      "state": [
+        "154 text Core frame 25 \u00b7 scenario frame 25 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=20 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-launcher9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 15/31 \u00b7 pose slot 15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=8 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-light18.txt",
+      "state": [
+        "154 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=13 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-light6.txt",
+      "state": [
+        "142 text Core frame 6 \u00b7 scenario frame 6 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 12/31 \u00b7 pose slot 12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=5 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-medium12.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=7 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-medium22.txt",
+      "state": [
+        "154 text Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=17 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-medium4.txt",
+      "state": [
+        "142 text Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 17/31 \u00b7 pose slot 17: kickHalf \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=4 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-walk0.txt",
+      "state": [
+        "142 text Core frame 1 \u00b7 scenario frame 1 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-walk1.txt",
+      "state": [
+        "154 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-walk2.txt",
+      "state": [
+        "154 text Core frame 5 \u00b7 scenario frame 5 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-walk3.txt",
+      "state": [
+        "154 text Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-walk4.txt",
+      "state": [
+        "154 text Core frame 8 \u00b7 scenario frame 8 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-walk5.txt",
+      "state": [
+        "154 text Core frame 10 \u00b7 scenario frame 10 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-walk6.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "rune-walk7.txt",
+      "state": [
+        "154 text Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    }
+  ],
+  "guest07": [
+    {
+      "evidence": "guest07-dash3.txt",
+      "state": [
+        "142 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 537.2 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-down-air-12.txt",
+      "state": [
+        "155 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 22/31 \u00b7 pose slot 22: airKickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 468.9 facing 1",
+        "Move airHeavy t=3 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-down-air-20.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 475.8 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-down-air-24.txt",
+      "state": [
+        "155 text Core frame 24 \u00b7 scenario frame 24 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 526.5 facing 1",
+        "Move airHeavy t=15 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-down-air-28.txt",
+      "state": [
+        "155 text Core frame 28 \u00b7 scenario frame 28 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-down-air-36.txt",
+      "state": [
+        "155 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-down-air-44.txt",
+      "state": [
+        "155 text Core frame 44 \u00b7 scenario frame 44 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-down-air-live-0-f18.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 475.8 facing 1",
+        "Move airHeavy t=11 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-down-air-live-1-f25.txt",
+      "state": [
+        "155 text Core frame 27 \u00b7 scenario frame 27 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 573.5 facing 1",
+        "Move airHeavy t=18 startup/active/recovery 8/7/21",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-down-air-live-2-f43.txt",
+      "state": [
+        "155 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-final-dash3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-final-live-dash-0-f13.txt",
+      "state": [
+        "143 text Core frame 13 \u00b7 scenario frame 13 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-final-live-dash-1-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-final-live-jump-0-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 446.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-final-live-jump-1-f33.txt",
+      "state": [
+        "155 text Core frame 33 \u00b7 scenario frame 33 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 518.6 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-final-live-jump-2-f40.txt",
+      "state": [
+        "155 text Core frame 40 \u00b7 scenario frame 40 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 10/31 \u00b7 pose slot 10: crouchLanding \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-final-live-walk-0-f17.txt",
+      "state": [
+        "155 text Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.308 \u00b7 x 583.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-final-live-walk-1-f70.txt",
+      "state": [
+        "155 text Core frame 70 \u00b7 scenario frame 70 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.961 \u00b7 x 753.5 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-final-live-walk-2-f126.txt",
+      "state": [
+        "155 text Core frame 126 \u00b7 scenario frame 126 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-grab9.txt",
+      "state": [
+        "142 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move grab t=6 startup/active/recovery 6/3/30",
+        "Throw {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+      ]
+    },
+    {
+      "evidence": "guest07-jump20.txt",
+      "state": [
+        "155 text Core frame 20 \u00b7 scenario frame 20 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-jump3.txt",
+      "state": [
+        "143 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 562.4 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-jump32.txt",
+      "state": [
+        "155 text Core frame 32 \u00b7 scenario frame 32 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 507.7 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-jump36.txt",
+      "state": [
+        "155 text Core frame 36 \u00b7 scenario frame 36 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 556.3 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-jump45.txt",
+      "state": [
+        "155 text Core frame 45 \u00b7 scenario frame 45 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-launcher25.txt",
+      "state": [
+        "155 text Core frame 25 \u00b7 scenario frame 25 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=20 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-launcher9.txt",
+      "state": [
+        "143 text Core frame 9 \u00b7 scenario frame 9 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 15/31 \u00b7 pose slot 15: uppercut \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move launcher t=8 startup/active/recovery 8/6/23",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-light18.txt",
+      "state": [
+        "155 text Core frame 18 \u00b7 scenario frame 18 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=13 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-light6.txt",
+      "state": [
+        "143 text Core frame 6 \u00b7 scenario frame 6 \u00b7 frozen 4",
+        "Sequence poses \u00b7 frame 12/31 \u00b7 pose slot 12: punchExtended \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move light t=5 startup/active/recovery 5/4/13",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-medium12.txt",
+      "state": [
+        "155 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 18/31 \u00b7 pose slot 18: kickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=7 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-medium22.txt",
+      "state": [
+        "155 text Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=17 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-medium4.txt",
+      "state": [
+        "143 text Core frame 4 \u00b7 scenario frame 4 \u00b7 frozen 0",
+        "Sequence poses \u00b7 frame 17/31 \u00b7 pose slot 17: kickHalf \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+        "Move medium t=4 startup/active/recovery 7/5/17",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-walk0.txt",
+      "state": [
+        "142 text Core frame 1 \u00b7 scenario frame 1 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-walk1.txt",
+      "state": [
+        "154 text Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-walk2.txt",
+      "state": [
+        "154 text Core frame 5 \u00b7 scenario frame 5 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-walk3.txt",
+      "state": [
+        "154 text Core frame 7 \u00b7 scenario frame 7 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-walk4.txt",
+      "state": [
+        "154 text Core frame 8 \u00b7 scenario frame 8 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-walk5.txt",
+      "state": [
+        "154 text Core frame 10 \u00b7 scenario frame 10 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-walk6.txt",
+      "state": [
+        "154 text Core frame 12 \u00b7 scenario frame 12 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    },
+    {
+      "evidence": "guest07-walk7.txt",
+      "state": [
+        "154 text Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0",
+        "Sequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+        "Move none t=-",
+        "Throw none"
+      ]
+    }
+  ]
+}

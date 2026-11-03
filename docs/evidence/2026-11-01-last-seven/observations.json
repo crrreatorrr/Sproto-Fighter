@@ -1,0 +1,1427 @@
+[
+  {
+    "id": "bigswole",
+    "label": "before-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "before-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "before-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "before-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "before-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "before-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "before-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "before-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "medium-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=3 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "medium-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "medium-recovery",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=17 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "light-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=3 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "light-contact",
+    "debug": "Core frame 6 · scenario frame 6 · frozen 4\nSequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=5 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "light-recovery",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=9 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "airMedium-contact",
+    "debug": "Core frame 16 · scenario frame 16 · frozen 0\nSequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1\nMove airMedium t=7 startup/active/recovery 6/6/14\nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-reversal",
+    "debug": "Core frame 66 · scenario frame 66 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "walk-stop",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "medium-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=3 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "medium-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "medium-recovery",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=18 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "light-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=3 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "light-contact",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 3\nSequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=5 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "light-recovery",
+    "debug": "Core frame 15 · scenario frame 15 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=10 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "airMedium-contact",
+    "debug": "Core frame 16 · scenario frame 16 · frozen 0\nSequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1\nMove airMedium t=7 startup/active/recovery 6/6/14\nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-reversal",
+    "debug": "Core frame 66 · scenario frame 66 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "walk-stop",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "medium-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=3 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "medium-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "medium-recovery",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=17 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "light-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=3 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "light-contact",
+    "debug": "Core frame 6 · scenario frame 6 · frozen 4\nSequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=5 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "light-recovery",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=9 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "airMedium-contact",
+    "debug": "Core frame 16 · scenario frame 16 · frozen 0\nSequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1\nMove airMedium t=7 startup/active/recovery 6/6/14\nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-reversal",
+    "debug": "Core frame 66 · scenario frame 66 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "walk-stop",
+    "debug": "Core frame 126 · scenario frame 126 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "medium-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=3 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "medium-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "medium-recovery",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=18 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "light-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=3 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "light-contact",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 3\nSequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=5 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "light-recovery",
+    "debug": "Core frame 15 · scenario frame 15 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=10 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "airMedium-contact",
+    "debug": "Core frame 16 · scenario frame 16 · frozen 0\nSequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1\nMove airMedium t=7 startup/active/recovery 6/6/14\nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-reversal",
+    "debug": "Core frame 66 · scenario frame 66 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "walk-stop",
+    "debug": "Core frame 124 · scenario frame 124 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "medium-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=3 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "medium-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "medium-recovery",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=18 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "light-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=3 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "light-contact",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 3\nSequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=5 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "light-recovery",
+    "debug": "Core frame 15 · scenario frame 15 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=10 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "airMedium-contact",
+    "debug": "Core frame 17 · scenario frame 17 · frozen 0\nSequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 446.7 facing 1\nMove airMedium t=8 startup/active/recovery 6/6/14\nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-reversal",
+    "debug": "Core frame 66 · scenario frame 66 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "walk-stop",
+    "debug": "Core frame 126 · scenario frame 126 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "medium-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=3 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "medium-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "medium-recovery",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=18 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "light-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=3 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "light-contact",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 3\nSequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=5 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "light-recovery",
+    "debug": "Core frame 15 · scenario frame 15 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=10 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "airMedium-contact",
+    "debug": "Core frame 16 · scenario frame 16 · frozen 0\nSequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1\nMove airMedium t=7 startup/active/recovery 6/6/14\nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-reversal",
+    "debug": "Core frame 66 · scenario frame 66 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "walk-stop",
+    "debug": "Core frame 126 · scenario frame 126 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "medium-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 16/31 · pose slot 16: kickChamber · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=3 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "medium-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "medium-recovery",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=18 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "light-startup",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence poses · frame 11/31 · pose slot 11: punchWindup · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=3 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "light-contact",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 3\nSequence poses · frame 12/31 · pose slot 12: punchExtended · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=5 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "light-recovery",
+    "debug": "Core frame 15 · scenario frame 15 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove light t=10 startup/active/recovery 5/4/13\nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "airMedium-contact",
+    "debug": "Core frame 16 · scenario frame 16 · frozen 0\nSequence poses · frame 23/31 · pose slot 23: airKickFull · gait phase 0.000 · x 500.0 y 449.5 facing 1\nMove airMedium t=7 startup/active/recovery 6/6/14\nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-reversal",
+    "debug": "Core frame 67 · scenario frame 67 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.682 · x 736.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "walk-stop",
+    "debug": "Core frame 127 · scenario frame 127 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-0",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.031 · x 502.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-1",
+    "debug": "Core frame 3 · scenario frame 3 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.162 · x 510.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-2",
+    "debug": "Core frame 5 · scenario frame 5 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.299 · x 519.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-3",
+    "debug": "Core frame 7 · scenario frame 7 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.437 · x 527.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-4",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.505 · x 532.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-5",
+    "debug": "Core frame 10 · scenario frame 10 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.643 · x 541.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-6",
+    "debug": "Core frame 12 · scenario frame 12 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.780 · x 549.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-7",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-0",
+    "debug": "Core frame 13 · scenario frame 13 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.849 · x 554.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-1",
+    "debug": "Core frame 17 · scenario frame 17 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.124 · x 571.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-2",
+    "debug": "Core frame 19 · scenario frame 19 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.262 · x 580.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-3",
+    "debug": "Core frame 21 · scenario frame 21 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.399 · x 589.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-4",
+    "debug": "Core frame 24 · scenario frame 24 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.605 · x 602.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-5",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.743 · x 611.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-6",
+    "debug": "Core frame 27 · scenario frame 27 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.812 · x 615.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-7",
+    "debug": "Core frame 29 · scenario frame 29 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.949 · x 624.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-8",
+    "debug": "Core frame 30 · scenario frame 30 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.018 · x 629.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-9",
+    "debug": "Core frame 32 · scenario frame 32 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.155 · x 637.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-10",
+    "debug": "Core frame 35 · scenario frame 35 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.362 · x 651.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-11",
+    "debug": "Core frame 37 · scenario frame 37 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.499 · x 659.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-12",
+    "debug": "Core frame 40 · scenario frame 40 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.705 · x 673.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-13",
+    "debug": "Core frame 43 · scenario frame 43 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.912 · x 686.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-14",
+    "debug": "Core frame 45 · scenario frame 45 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.049 · x 695.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-15",
+    "debug": "Core frame 48 · scenario frame 48 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.255 · x 708.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-16",
+    "debug": "Core frame 51 · scenario frame 51 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.462 · x 721.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-17",
+    "debug": "Core frame 53 · scenario frame 53 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.599 · x 730.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-18",
+    "debug": "Core frame 56 · scenario frame 56 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.805 · x 743.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-19",
+    "debug": "Core frame 58 · scenario frame 58 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.943 · x 752.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-20",
+    "debug": "Core frame 61 · scenario frame 61 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.080 · x 761.6 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-21",
+    "debug": "Core frame 62 · scenario frame 62 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.025 · x 758.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-22",
+    "debug": "Core frame 65 · scenario frame 65 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.819 · x 744.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-23",
+    "debug": "Core frame 67 · scenario frame 67 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.682 · x 736.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-24",
+    "debug": "Core frame 69 · scenario frame 69 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.544 · x 727.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-25",
+    "debug": "Core frame 72 · scenario frame 72 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.338 · x 714.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-26",
+    "debug": "Core frame 73 · scenario frame 73 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.269 · x 709.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-27",
+    "debug": "Core frame 76 · scenario frame 76 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.063 · x 696.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-28",
+    "debug": "Core frame 78 · scenario frame 78 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.925 · x 687.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-29",
+    "debug": "Core frame 81 · scenario frame 81 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.719 · x 674.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-30",
+    "debug": "Core frame 83 · scenario frame 83 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.582 · x 665.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-31",
+    "debug": "Core frame 85 · scenario frame 85 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.444 · x 656.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-32",
+    "debug": "Core frame 86 · scenario frame 86 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.375 · x 652.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-33",
+    "debug": "Core frame 88 · scenario frame 88 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.238 · x 643.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "fixed-live-34",
+    "debug": "Core frame 90 · scenario frame 90 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.100 · x 634.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-0",
+    "debug": "Core frame 14 · scenario frame 14 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.918 · x 558.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-1",
+    "debug": "Core frame 17 · scenario frame 17 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.124 · x 571.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-2",
+    "debug": "Core frame 19 · scenario frame 19 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.262 · x 580.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-3",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.468 · x 593.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-4",
+    "debug": "Core frame 24 · scenario frame 24 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.605 · x 602.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-5",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.743 · x 611.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-6",
+    "debug": "Core frame 28 · scenario frame 28 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.880 · x 620.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-7",
+    "debug": "Core frame 30 · scenario frame 30 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.018 · x 629.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-8",
+    "debug": "Core frame 31 · scenario frame 31 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.087 · x 633.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-9",
+    "debug": "Core frame 38 · scenario frame 38 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.568 · x 664.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-10",
+    "debug": "Core frame 41 · scenario frame 41 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.774 · x 677.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-11",
+    "debug": "Core frame 44 · scenario frame 44 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.980 · x 690.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-12",
+    "debug": "Core frame 47 · scenario frame 47 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.187 · x 703.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-13",
+    "debug": "Core frame 49 · scenario frame 49 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.324 · x 712.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-14",
+    "debug": "Core frame 53 · scenario frame 53 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.599 · x 730.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-15",
+    "debug": "Core frame 55 · scenario frame 55 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.737 · x 739.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-16",
+    "debug": "Core frame 57 · scenario frame 57 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.874 · x 747.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-17",
+    "debug": "Core frame 59 · scenario frame 59 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.012 · x 756.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-18",
+    "debug": "Core frame 61 · scenario frame 61 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.080 · x 761.6 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-19",
+    "debug": "Core frame 64 · scenario frame 64 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.888 · x 749.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-20",
+    "debug": "Core frame 66 · scenario frame 66 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.750 · x 740.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-21",
+    "debug": "Core frame 71 · scenario frame 71 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.407 · x 718.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-22",
+    "debug": "Core frame 73 · scenario frame 73 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.269 · x 709.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-23",
+    "debug": "Core frame 76 · scenario frame 76 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.063 · x 696.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-24",
+    "debug": "Core frame 78 · scenario frame 78 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.925 · x 687.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-25",
+    "debug": "Core frame 80 · scenario frame 80 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.788 · x 678.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-26",
+    "debug": "Core frame 82 · scenario frame 82 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.650 · x 670.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-27",
+    "debug": "Core frame 84 · scenario frame 84 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.513 · x 661.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-28",
+    "debug": "Core frame 86 · scenario frame 86 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.375 · x 652.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-29",
+    "debug": "Core frame 88 · scenario frame 88 · frozen 0\nSequence walk · frame 1/7 · pose slot 2: walkNear · gait phase 0.238 · x 643.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-30",
+    "debug": "Core frame 91 · scenario frame 91 · frozen 0\nSequence walk · frame 0/7 · pose slot 2: walkNear · gait phase 0.032 · x 630.5 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-31",
+    "debug": "Core frame 93 · scenario frame 93 · frozen 0\nSequence walk · frame 7/7 · pose slot 5: passFar · gait phase 0.894 · x 621.7 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-32",
+    "debug": "Core frame 95 · scenario frame 95 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.757 · x 612.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-33",
+    "debug": "Core frame 97 · scenario frame 97 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.619 · x 604.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "fixed-live-34",
+    "debug": "Core frame 99 · scenario frame 99 · frozen 0\nSequence walk · frame 3/7 · pose slot 3: passNear · gait phase 0.482 · x 595.3 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-forward",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.783 · x 614.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-reverse",
+    "debug": "Core frame 65 · scenario frame 65 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.356 · x 778.8 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-stop",
+    "debug": "Core frame 124 · scenario frame 124 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-jump-rise",
+    "debug": "Core frame 4 · scenario frame 4 · frozen 0\nSequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-jump-fall",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-jump-land",
+    "debug": "Core frame 48 · scenario frame 48 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-dash-start",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-dash-end",
+    "debug": "Core frame 17 · scenario frame 17 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-kick-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "dumpstar",
+    "label": "tuned-kick-recovery",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=18 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-forward",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-reverse",
+    "debug": "Core frame 62 · scenario frame 62 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.594 · x 794.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-stop",
+    "debug": "Core frame 123 · scenario frame 123 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-jump-rise",
+    "debug": "Core frame 4 · scenario frame 4 · frozen 0\nSequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-jump-fall",
+    "debug": "Core frame 25 · scenario frame 25 · frozen 0\nSequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 455.5 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-jump-land",
+    "debug": "Core frame 47 · scenario frame 47 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-dash-start",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-dash-end",
+    "debug": "Core frame 18 · scenario frame 18 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-kick-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "crapto",
+    "label": "tuned-kick-recovery",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=18 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-forward",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence walk · frame 6/7 · pose slot 5: passFar · gait phase 0.783 · x 614.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-reverse",
+    "debug": "Core frame 65 · scenario frame 65 · frozen 0\nSequence walk · frame 2/7 · pose slot 3: passNear · gait phase 0.356 · x 778.8 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-stop",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-jump-rise",
+    "debug": "Core frame 4 · scenario frame 4 · frozen 0\nSequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-jump-fall",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-jump-land",
+    "debug": "Core frame 48 · scenario frame 48 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-dash-start",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-dash-end",
+    "debug": "Core frame 17 · scenario frame 17 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-kick-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "vamp",
+    "label": "tuned-kick-recovery",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=17 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-forward",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-reverse",
+    "debug": "Core frame 62 · scenario frame 62 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.594 · x 794.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-stop",
+    "debug": "Core frame 122 · scenario frame 122 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-jump-rise",
+    "debug": "Core frame 4 · scenario frame 4 · frozen 0\nSequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-jump-fall",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-jump-land",
+    "debug": "Core frame 48 · scenario frame 48 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-dash-start",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-dash-end",
+    "debug": "Core frame 17 · scenario frame 17 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-kick-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "alpha777",
+    "label": "tuned-kick-recovery",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=17 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-forward",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-reverse",
+    "debug": "Core frame 63 · scenario frame 63 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.514 · x 788.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-stop",
+    "debug": "Core frame 122 · scenario frame 122 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-jump-rise",
+    "debug": "Core frame 4 · scenario frame 4 · frozen 0\nSequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-jump-fall",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-jump-land",
+    "debug": "Core frame 47 · scenario frame 47 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-dash-start",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-dash-end",
+    "debug": "Core frame 17 · scenario frame 17 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-kick-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "mandela",
+    "label": "tuned-kick-recovery",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=18 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-forward",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-reverse",
+    "debug": "Core frame 294 · scenario frame 294 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-forward",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-reverse",
+    "debug": "Core frame 63 · scenario frame 63 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.514 · x 788.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-stop",
+    "debug": "Core frame 122 · scenario frame 122 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-jump-rise",
+    "debug": "Core frame 4 · scenario frame 4 · frozen 0\nSequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-jump-fall",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-jump-land",
+    "debug": "Core frame 48 · scenario frame 48 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-dash-start",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-dash-end",
+    "debug": "Core frame 17 · scenario frame 17 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-kick-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "bigswole",
+    "label": "tuned-kick-recovery",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=17 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-forward",
+    "debug": "Core frame 22 · scenario frame 22 · frozen 0\nSequence walk · frame 5/7 · pose slot 4: walkFar · gait phase 0.704 · x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-reverse",
+    "debug": "Core frame 63 · scenario frame 63 · frozen 0\nSequence walk · frame 4/7 · pose slot 4: walkFar · gait phase 0.514 · x 788.9 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-stop",
+    "debug": "Core frame 123 · scenario frame 123 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.984 · x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-jump-rise",
+    "debug": "Core frame 4 · scenario frame 4 · frozen 0\nSequence poses · frame 8/31 · pose slot 8: airRise · gait phase 0.000 · x 500.0 y 548.6 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-jump-fall",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 500.0 y 460.4 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-jump-land",
+    "debug": "Core frame 48 · scenario frame 48 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-dash-start",
+    "debug": "Core frame 1 · scenario frame 1 · frozen 0\nSequence poses · frame 6/31 · pose slot 6: dash · gait phase 0.000 · x 514.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-dash-end",
+    "debug": "Core frame 16 · scenario frame 16 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.190 · x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-kick-contact",
+    "debug": "Core frame 8 · scenario frame 8 · frozen 4\nSequence poses · frame 18/31 · pose slot 18: kickFull · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=7 startup/active/recovery 7/5/17\nThrow none"
+  },
+  {
+    "id": "nate",
+    "label": "tuned-kick-recovery",
+    "debug": "Core frame 23 · scenario frame 23 · frozen 0\nSequence poses · frame 13/31 · pose slot 13: punchRecover · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove medium t=18 startup/active/recovery 7/5/17\nThrow none"
+  }
+]

@@ -1,0 +1,3664 @@
+{
+  "reviewer": "motion_wall",
+  "date": "2026-11-02",
+  "scope": {
+    "ownerCount": 10,
+    "bodyCount": 20,
+    "ids": [
+      "sproto2344",
+      "sproto3181",
+      "sproto3224",
+      "sproto3235",
+      "gryph",
+      "godmod3d",
+      "nosmileclown",
+      "zepump",
+      "peterpan",
+      "solanadelray"
+    ]
+  },
+  "status": "Bounded visual review complete; confirmed defects corrected and targeted browser retest completed. Coverage gaps remain explicit.",
+  "method": {
+    "browser": "Chrome through CUA",
+    "urls": [
+      "http://127.0.0.1:5196/art/motion-roster-lab.html",
+      "http://127.0.0.1:5199/art/motion-roster-lab.html"
+    ],
+    "camera": "Fixed 0.72 scale; existing 1512-pixel-wide viewport; four panels visible; no per-pose fit or viewport override.",
+    "description": "Real combat step/drawPoseAtlas. Successive screenshots sampled during normal-speed playback plus deliberate frame stepping. No claim of continuous human video watching or exhaustive per-frame inspection."
+  },
+  "coverage": {
+    "inspectedScreenshots": 140,
+    "capturedOnlyScreenshots": 1,
+    "normalSpeedSamples": 18,
+    "independentDetail": [
+      "peterpan-before-heavy-detail.jpg"
+    ],
+    "notes": [
+      "Truncated outputs036\u2013041 were reopened individually and visually inspected before inclusion.",
+      "Timeout/reset actions produce no visual pass.",
+      "Status/debug or screenshot is authoritative over filename wording: launcher063 is active; victim-down055 already neutral; knockdown066 is floor down."
+    ],
+    "capturedOnlyNote": "One duplicate recovery screenshot140 is excluded from inspection count.",
+    "activeSourceSlotReview": {
+      "bodies": 20,
+      "activeSlots": 80,
+      "idleReferences": 20,
+      "artifact": "live-pairs-b/active-contact-audit.json"
+    }
+  },
+  "fixes": [
+    {
+      "body": "peterpan-companion",
+      "change": "heavy[3]=deepcopy heavy[4]; pixelScale1 anchorOffset[33,0] constant across dash,jump,heavy,airKick,victory",
+      "artifact": "art/movement-followup-20261102/peterpan-yellow/review.json",
+      "applyScript": "art/movement-followup-20261102/peterpan-yellow/apply_registration.py",
+      "check": "node scripts/peterpan-registration-smoke.mjs",
+      "checkResult": "PASS:240 rendered frames, both facings, five clips, unchanged source hashes and no combat-state mutation.",
+      "browserRetest": [
+        "042-g3-after-both-heavy-contact.jpg",
+        "043-g3-after-both-heavy-recovery.jpg",
+        "044-g3-after-both-heavy-return.jpg",
+        "045-g3-after-both-dash-recover.jpg",
+        "046-g3-after-both-jump-apex.jpg"
+      ],
+      "remaining": "Minor optional-source proportion redraw remains; no anatomy warp."
+    },
+    {
+      "bodies": [
+        "sproto3224",
+        "sproto3235",
+        "sproto3235-companion"
+      ],
+      "change": "Four second-active-slot retractions replaced by each body\u2019s existing extended contact cel. Parent serialized the manifest change.",
+      "artifact": "art/movement-followup-20261102/paired-contact-b2",
+      "browserRetest": [
+        "134-b2-retest-heavy3-both.jpg",
+        "135-b2-retest-heavy4-both.jpg",
+        "136-b2-retest-heavy-recovery-both.jpg",
+        "137-b2-retest-airkick2-both.jpg",
+        "138-b2-retest-airkick3-both.jpg",
+        "139-b2-retest-airkick-recovery-both.jpg"
+      ],
+      "observedResult": "Both actual facings: heavy slots3/4 and airKick slots2/3 retain extended forward contact; sampled recovery frames retract only after the active window. No source image or body scale changes.",
+      "preciseFrames": {
+        "heavy": [
+          "scenario20 / move age12 / clip3",
+          "scenario22 / move age14 / clip4",
+          "scenario32 / move age24 / clip5 recovery"
+        ],
+        "airHeavy": [
+          "scenario20 / move age11 / clip2",
+          "scenario23 / move age14 / clip3",
+          "scenario33 / move age24 / clip4 recovery"
+        ]
+      }
+    }
+  ],
+  "findings": [
+    {
+      "severity": "presentation limitation",
+      "ids": [
+        "sproto3181",
+        "nosmileclown"
+      ],
+      "finding": "Tiny-body lower-leg grab contact, deliberately preserved scale."
+    },
+    {
+      "severity": "confirmed contact defect, resolved",
+      "ids": [
+        "sproto3224",
+        "sproto3235",
+        "sproto3235-companion"
+      ],
+      "finding": "Four active attack slots displayed retracted/guard poses. Parent applied guarded contact remaps; screenshots134\u2013139 visually confirm corrected contacts and recovery.",
+      "sourceAudit": "live-pairs-b/active-contact-audit.json"
+    }
+  ],
+  "owners": [
+    {
+      "id": "sproto2344",
+      "bodies": [
+        "sproto2344",
+        "sproto2344-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "No confirmed duplicated/detached limb or unexpected whole-body scaling in inspected samples. This does not certify all 52 scenarios or every in-between frame."
+      ],
+      "captures": [
+        "000-group1-idle-right.jpg",
+        "001-g1-right-live-walk-0.jpg",
+        "002-g1-right-live-walk-1.jpg",
+        "003-g1-right-live-walk-2.jpg",
+        "004-g1-right-live-heavy-start.jpg",
+        "005-g1-left-stepped-dash.jpg",
+        "006-g1-left-stepped-jump-apex.jpg",
+        "007-g1-left-stepped-heavy-contact.jpg",
+        "008-g1-left-stepped-airkick-contact.jpg",
+        "009-g1-right-stepped-dash.jpg",
+        "010-g1-right-stepped-jump-apex.jpg",
+        "011-g1-right-stepped-airkick-contact.jpg",
+        "012-g1-right-live-airkick-recovery.jpg",
+        "093-g1-right-light-contact.jpg",
+        "094-g1-right-medium-contact.jpg",
+        "095-g1-right-sweep.jpg",
+        "096-g1-right-launcher-contact.jpg",
+        "097-g1-right-ranged-release.jpg",
+        "098-g1-right-recoil.jpg",
+        "099-g1-right-floor-knockdown.jpg",
+        "100-g1-right-grab-hold.jpg",
+        "101-g1-right-backthrow-release.jpg",
+        "102-g1-right-upthrow-release.jpg",
+        "103-g1-right-downthrow-release.jpg",
+        "104-g1-right-victim-flight.jpg",
+        "105-g1-right-special-contact.jpg",
+        "106-g1-left-light-contact.jpg",
+        "107-g1-left-medium-contact.jpg",
+        "108-g1-left-sweep.jpg",
+        "109-g1-left-launcher-contact.jpg",
+        "110-g1-left-ranged-release.jpg",
+        "111-g1-left-recoil.jpg",
+        "112-g1-left-floor-knockdown.jpg",
+        "113-g1-left-grab-hold.jpg",
+        "114-g1-left-backthrow-release.jpg",
+        "115-g1-left-upthrow-release.jpg",
+        "116-g1-left-downthrow-release.jpg",
+        "117-g1-left-victim-flight.jpg",
+        "118-g1-left-special-contact.jpg",
+        "119-g1-left-rightwall-special.jpg",
+        "120-g1-right-leftwall-knockdown.jpg",
+        "121-g1-left-live-reversal-a.jpg",
+        "122-g1-left-live-reversal-b.jpg",
+        "123-g1-right-live-jump-rise.jpg",
+        "124-g1-right-live-jump-apex.jpg",
+        "125-g1-left-live-jump-fall.jpg",
+        "126-g1-left-live-jump-landing.jpg",
+        "131-10inu-stomach-and2344-heavy4.jpg",
+        "132-10inu-stomach-and2344-airkick2.jpg",
+        "133-10inu-stomach-and2344-airkick3.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "sproto2344",
+          "sproto2344-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    },
+    {
+      "id": "sproto3181",
+      "bodies": [
+        "sproto3181",
+        "sproto3181-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "No confirmed duplicated/detached limb or unexpected whole-body scaling in inspected samples. This does not certify all 52 scenarios or every in-between frame.",
+        "Tiny companion catches near opponent lower leg/ankle rather than torso; coherent visible contact in sampled hold/release, but readability/semantics differ from full-size lead. Intentional small body scale preserved.",
+        "Targeted screenshots131\u2013133 confirm actual stomach-monster contacts in both facings; tiny companion remains cover pose10, so its chambered unused airKick2 clip was intentionally left unchanged."
+      ],
+      "captures": [
+        "000-group1-idle-right.jpg",
+        "001-g1-right-live-walk-0.jpg",
+        "002-g1-right-live-walk-1.jpg",
+        "003-g1-right-live-walk-2.jpg",
+        "004-g1-right-live-heavy-start.jpg",
+        "005-g1-left-stepped-dash.jpg",
+        "006-g1-left-stepped-jump-apex.jpg",
+        "007-g1-left-stepped-heavy-contact.jpg",
+        "008-g1-left-stepped-airkick-contact.jpg",
+        "009-g1-right-stepped-dash.jpg",
+        "010-g1-right-stepped-jump-apex.jpg",
+        "011-g1-right-stepped-airkick-contact.jpg",
+        "012-g1-right-live-airkick-recovery.jpg",
+        "093-g1-right-light-contact.jpg",
+        "094-g1-right-medium-contact.jpg",
+        "095-g1-right-sweep.jpg",
+        "096-g1-right-launcher-contact.jpg",
+        "097-g1-right-ranged-release.jpg",
+        "098-g1-right-recoil.jpg",
+        "099-g1-right-floor-knockdown.jpg",
+        "100-g1-right-grab-hold.jpg",
+        "101-g1-right-backthrow-release.jpg",
+        "102-g1-right-upthrow-release.jpg",
+        "103-g1-right-downthrow-release.jpg",
+        "104-g1-right-victim-flight.jpg",
+        "105-g1-right-special-contact.jpg",
+        "106-g1-left-light-contact.jpg",
+        "107-g1-left-medium-contact.jpg",
+        "108-g1-left-sweep.jpg",
+        "109-g1-left-launcher-contact.jpg",
+        "110-g1-left-ranged-release.jpg",
+        "111-g1-left-recoil.jpg",
+        "112-g1-left-floor-knockdown.jpg",
+        "113-g1-left-grab-hold.jpg",
+        "114-g1-left-backthrow-release.jpg",
+        "115-g1-left-upthrow-release.jpg",
+        "116-g1-left-downthrow-release.jpg",
+        "117-g1-left-victim-flight.jpg",
+        "118-g1-left-special-contact.jpg",
+        "119-g1-left-rightwall-special.jpg",
+        "120-g1-right-leftwall-knockdown.jpg",
+        "121-g1-left-live-reversal-a.jpg",
+        "122-g1-left-live-reversal-b.jpg",
+        "123-g1-right-live-jump-rise.jpg",
+        "124-g1-right-live-jump-apex.jpg",
+        "125-g1-left-live-jump-fall.jpg",
+        "126-g1-left-live-jump-landing.jpg",
+        "131-10inu-stomach-and2344-heavy4.jpg",
+        "132-10inu-stomach-and2344-airkick2.jpg",
+        "133-10inu-stomach-and2344-airkick3.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "sproto3181",
+          "sproto3181-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    },
+    {
+      "id": "sproto3224",
+      "bodies": [
+        "sproto3224",
+        "sproto3224-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "No confirmed duplicated/detached limb or unexpected whole-body scaling in inspected samples. This does not certify all 52 scenarios or every in-between frame.",
+        "Four exact second-active-slot defects in this pair group were corrected by root; first and last contacts plus recovery were visually retested in both actual facings at screenshots134\u2013139."
+      ],
+      "captures": [
+        "000-group1-idle-right.jpg",
+        "001-g1-right-live-walk-0.jpg",
+        "002-g1-right-live-walk-1.jpg",
+        "003-g1-right-live-walk-2.jpg",
+        "004-g1-right-live-heavy-start.jpg",
+        "005-g1-left-stepped-dash.jpg",
+        "006-g1-left-stepped-jump-apex.jpg",
+        "007-g1-left-stepped-heavy-contact.jpg",
+        "008-g1-left-stepped-airkick-contact.jpg",
+        "009-g1-right-stepped-dash.jpg",
+        "010-g1-right-stepped-jump-apex.jpg",
+        "011-g1-right-stepped-airkick-contact.jpg",
+        "012-g1-right-live-airkick-recovery.jpg",
+        "093-g1-right-light-contact.jpg",
+        "094-g1-right-medium-contact.jpg",
+        "095-g1-right-sweep.jpg",
+        "096-g1-right-launcher-contact.jpg",
+        "097-g1-right-ranged-release.jpg",
+        "098-g1-right-recoil.jpg",
+        "099-g1-right-floor-knockdown.jpg",
+        "100-g1-right-grab-hold.jpg",
+        "101-g1-right-backthrow-release.jpg",
+        "102-g1-right-upthrow-release.jpg",
+        "103-g1-right-downthrow-release.jpg",
+        "104-g1-right-victim-flight.jpg",
+        "105-g1-right-special-contact.jpg",
+        "106-g1-left-light-contact.jpg",
+        "107-g1-left-medium-contact.jpg",
+        "108-g1-left-sweep.jpg",
+        "109-g1-left-launcher-contact.jpg",
+        "110-g1-left-ranged-release.jpg",
+        "111-g1-left-recoil.jpg",
+        "112-g1-left-floor-knockdown.jpg",
+        "113-g1-left-grab-hold.jpg",
+        "114-g1-left-backthrow-release.jpg",
+        "115-g1-left-upthrow-release.jpg",
+        "116-g1-left-downthrow-release.jpg",
+        "117-g1-left-victim-flight.jpg",
+        "118-g1-left-special-contact.jpg",
+        "119-g1-left-rightwall-special.jpg",
+        "120-g1-right-leftwall-knockdown.jpg",
+        "121-g1-left-live-reversal-a.jpg",
+        "122-g1-left-live-reversal-b.jpg",
+        "123-g1-right-live-jump-rise.jpg",
+        "124-g1-right-live-jump-apex.jpg",
+        "125-g1-left-live-jump-fall.jpg",
+        "126-g1-left-live-jump-landing.jpg",
+        "127-active-slot-heavy3-before-b.jpg",
+        "128-active-slot-heavy4-before-b.jpg",
+        "129-active-slot-airkick2-before-b.jpg",
+        "130-active-slot-airkick3-before-b.jpg",
+        "134-b2-retest-heavy3-both.jpg",
+        "135-b2-retest-heavy4-both.jpg",
+        "136-b2-retest-heavy-recovery-both.jpg",
+        "137-b2-retest-airkick2-both.jpg",
+        "138-b2-retest-airkick3-both.jpg",
+        "139-b2-retest-airkick-recovery-both.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "sproto3224",
+          "sproto3224-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    },
+    {
+      "id": "sproto3235",
+      "bodies": [
+        "sproto3235",
+        "sproto3235-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "No confirmed duplicated/detached limb or unexpected whole-body scaling in inspected samples. This does not certify all 52 scenarios or every in-between frame.",
+        "Four exact second-active-slot defects in this pair group were corrected by root; first and last contacts plus recovery were visually retested in both actual facings at screenshots134\u2013139."
+      ],
+      "captures": [
+        "000-group1-idle-right.jpg",
+        "001-g1-right-live-walk-0.jpg",
+        "002-g1-right-live-walk-1.jpg",
+        "003-g1-right-live-walk-2.jpg",
+        "004-g1-right-live-heavy-start.jpg",
+        "005-g1-left-stepped-dash.jpg",
+        "006-g1-left-stepped-jump-apex.jpg",
+        "007-g1-left-stepped-heavy-contact.jpg",
+        "008-g1-left-stepped-airkick-contact.jpg",
+        "009-g1-right-stepped-dash.jpg",
+        "010-g1-right-stepped-jump-apex.jpg",
+        "011-g1-right-stepped-airkick-contact.jpg",
+        "012-g1-right-live-airkick-recovery.jpg",
+        "093-g1-right-light-contact.jpg",
+        "094-g1-right-medium-contact.jpg",
+        "095-g1-right-sweep.jpg",
+        "096-g1-right-launcher-contact.jpg",
+        "097-g1-right-ranged-release.jpg",
+        "098-g1-right-recoil.jpg",
+        "099-g1-right-floor-knockdown.jpg",
+        "100-g1-right-grab-hold.jpg",
+        "101-g1-right-backthrow-release.jpg",
+        "102-g1-right-upthrow-release.jpg",
+        "103-g1-right-downthrow-release.jpg",
+        "104-g1-right-victim-flight.jpg",
+        "105-g1-right-special-contact.jpg",
+        "106-g1-left-light-contact.jpg",
+        "107-g1-left-medium-contact.jpg",
+        "108-g1-left-sweep.jpg",
+        "109-g1-left-launcher-contact.jpg",
+        "110-g1-left-ranged-release.jpg",
+        "111-g1-left-recoil.jpg",
+        "112-g1-left-floor-knockdown.jpg",
+        "113-g1-left-grab-hold.jpg",
+        "114-g1-left-backthrow-release.jpg",
+        "115-g1-left-upthrow-release.jpg",
+        "116-g1-left-downthrow-release.jpg",
+        "117-g1-left-victim-flight.jpg",
+        "118-g1-left-special-contact.jpg",
+        "119-g1-left-rightwall-special.jpg",
+        "120-g1-right-leftwall-knockdown.jpg",
+        "121-g1-left-live-reversal-a.jpg",
+        "122-g1-left-live-reversal-b.jpg",
+        "123-g1-right-live-jump-rise.jpg",
+        "124-g1-right-live-jump-apex.jpg",
+        "125-g1-left-live-jump-fall.jpg",
+        "126-g1-left-live-jump-landing.jpg",
+        "127-active-slot-heavy3-before-b.jpg",
+        "128-active-slot-heavy4-before-b.jpg",
+        "129-active-slot-airkick2-before-b.jpg",
+        "130-active-slot-airkick3-before-b.jpg",
+        "134-b2-retest-heavy3-both.jpg",
+        "135-b2-retest-heavy4-both.jpg",
+        "136-b2-retest-heavy-recovery-both.jpg",
+        "137-b2-retest-airkick2-both.jpg",
+        "138-b2-retest-airkick3-both.jpg",
+        "139-b2-retest-airkick-recovery-both.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "sproto3235",
+          "sproto3235-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    },
+    {
+      "id": "gryph",
+      "bodies": [
+        "gryph",
+        "gryph-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "No confirmed duplicated/detached limb or unexpected whole-body scaling in inspected samples. This does not certify all 52 scenarios or every in-between frame."
+      ],
+      "captures": [
+        "013-g2-idle-right.jpg",
+        "014-g2-right-stepped-walk.jpg",
+        "015-g2-right-stepped-jump-apex.jpg",
+        "016-g2-right-stepped-heavy-contact.jpg",
+        "017-g2-right-stepped-airkick-contact.jpg",
+        "018-g2-left-stepped-walk.jpg",
+        "019-g2-left-stepped-jump-apex.jpg",
+        "020-g2-left-stepped-heavy-contact.jpg",
+        "021-g2-left-stepped-airkick-contact.jpg",
+        "022-g2-left-live-airkick-recovery.jpg",
+        "059-g2-right-dash-recovery.jpg",
+        "060-g2-right-light-contact.jpg",
+        "061-g2-right-medium-contact.jpg",
+        "062-g2-right-sweep.jpg",
+        "063-g2-right-launcher-startup.jpg",
+        "064-g2-right-ranged-release.jpg",
+        "065-g2-right-recoil.jpg",
+        "066-g2-right-knockdown-flight.jpg",
+        "067-g2-right-grab-hold.jpg",
+        "068-g2-right-upthrow-release.jpg",
+        "069-g2-right-backthrow-release.jpg",
+        "070-g2-right-downthrow-release.jpg",
+        "071-g2-right-victim-flight.jpg",
+        "072-g2-right-special-contact.jpg",
+        "073-g2-left-dash-recovery.jpg",
+        "074-g2-left-light-contact.jpg",
+        "075-g2-left-medium-contact.jpg",
+        "076-g2-left-sweep.jpg",
+        "077-g2-left-launcher-contact.jpg",
+        "078-g2-left-ranged-release.jpg",
+        "079-g2-left-recoil.jpg",
+        "080-g2-left-floor-knockdown.jpg",
+        "081-g2-left-grab-hold.jpg",
+        "082-g2-left-backthrow-release.jpg",
+        "083-g2-left-upthrow-release.jpg",
+        "084-g2-left-downthrow-release.jpg",
+        "085-g2-left-victim-flight.jpg",
+        "086-g2-left-special-contact.jpg",
+        "087-g2-left-live-reversal-a.jpg",
+        "088-g2-left-live-reversal-b.jpg",
+        "089-g2-left-live-after-reversal-a.jpg",
+        "090-g2-left-live-after-reversal-b.jpg",
+        "091-g2-left-rightwall-special.jpg",
+        "092-g2-right-leftwall-knockdown.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "gryph",
+          "gryph-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    },
+    {
+      "id": "godmod3d",
+      "bodies": [
+        "godmod3d",
+        "godmod3d-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "No confirmed duplicated/detached limb or unexpected whole-body scaling in inspected samples. This does not certify all 52 scenarios or every in-between frame."
+      ],
+      "captures": [
+        "013-g2-idle-right.jpg",
+        "014-g2-right-stepped-walk.jpg",
+        "015-g2-right-stepped-jump-apex.jpg",
+        "016-g2-right-stepped-heavy-contact.jpg",
+        "017-g2-right-stepped-airkick-contact.jpg",
+        "018-g2-left-stepped-walk.jpg",
+        "019-g2-left-stepped-jump-apex.jpg",
+        "020-g2-left-stepped-heavy-contact.jpg",
+        "021-g2-left-stepped-airkick-contact.jpg",
+        "022-g2-left-live-airkick-recovery.jpg",
+        "059-g2-right-dash-recovery.jpg",
+        "060-g2-right-light-contact.jpg",
+        "061-g2-right-medium-contact.jpg",
+        "062-g2-right-sweep.jpg",
+        "063-g2-right-launcher-startup.jpg",
+        "064-g2-right-ranged-release.jpg",
+        "065-g2-right-recoil.jpg",
+        "066-g2-right-knockdown-flight.jpg",
+        "067-g2-right-grab-hold.jpg",
+        "068-g2-right-upthrow-release.jpg",
+        "069-g2-right-backthrow-release.jpg",
+        "070-g2-right-downthrow-release.jpg",
+        "071-g2-right-victim-flight.jpg",
+        "072-g2-right-special-contact.jpg",
+        "073-g2-left-dash-recovery.jpg",
+        "074-g2-left-light-contact.jpg",
+        "075-g2-left-medium-contact.jpg",
+        "076-g2-left-sweep.jpg",
+        "077-g2-left-launcher-contact.jpg",
+        "078-g2-left-ranged-release.jpg",
+        "079-g2-left-recoil.jpg",
+        "080-g2-left-floor-knockdown.jpg",
+        "081-g2-left-grab-hold.jpg",
+        "082-g2-left-backthrow-release.jpg",
+        "083-g2-left-upthrow-release.jpg",
+        "084-g2-left-downthrow-release.jpg",
+        "085-g2-left-victim-flight.jpg",
+        "086-g2-left-special-contact.jpg",
+        "087-g2-left-live-reversal-a.jpg",
+        "088-g2-left-live-reversal-b.jpg",
+        "089-g2-left-live-after-reversal-a.jpg",
+        "090-g2-left-live-after-reversal-b.jpg",
+        "091-g2-left-rightwall-special.jpg",
+        "092-g2-right-leftwall-knockdown.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "godmod3d",
+          "godmod3d-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    },
+    {
+      "id": "nosmileclown",
+      "bodies": [
+        "nosmileclown",
+        "nosmileclown-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "No confirmed duplicated/detached limb or unexpected whole-body scaling in inspected samples. This does not certify all 52 scenarios or every in-between frame.",
+        "Tiny companion catches near opponent lower leg/ankle rather than torso; coherent visible contact in sampled hold/release, but readability/semantics differ from full-size lead. Intentional small body scale preserved."
+      ],
+      "captures": [
+        "013-g2-idle-right.jpg",
+        "014-g2-right-stepped-walk.jpg",
+        "015-g2-right-stepped-jump-apex.jpg",
+        "016-g2-right-stepped-heavy-contact.jpg",
+        "017-g2-right-stepped-airkick-contact.jpg",
+        "018-g2-left-stepped-walk.jpg",
+        "019-g2-left-stepped-jump-apex.jpg",
+        "020-g2-left-stepped-heavy-contact.jpg",
+        "021-g2-left-stepped-airkick-contact.jpg",
+        "022-g2-left-live-airkick-recovery.jpg",
+        "059-g2-right-dash-recovery.jpg",
+        "060-g2-right-light-contact.jpg",
+        "061-g2-right-medium-contact.jpg",
+        "062-g2-right-sweep.jpg",
+        "063-g2-right-launcher-startup.jpg",
+        "064-g2-right-ranged-release.jpg",
+        "065-g2-right-recoil.jpg",
+        "066-g2-right-knockdown-flight.jpg",
+        "067-g2-right-grab-hold.jpg",
+        "068-g2-right-upthrow-release.jpg",
+        "069-g2-right-backthrow-release.jpg",
+        "070-g2-right-downthrow-release.jpg",
+        "071-g2-right-victim-flight.jpg",
+        "072-g2-right-special-contact.jpg",
+        "073-g2-left-dash-recovery.jpg",
+        "074-g2-left-light-contact.jpg",
+        "075-g2-left-medium-contact.jpg",
+        "076-g2-left-sweep.jpg",
+        "077-g2-left-launcher-contact.jpg",
+        "078-g2-left-ranged-release.jpg",
+        "079-g2-left-recoil.jpg",
+        "080-g2-left-floor-knockdown.jpg",
+        "081-g2-left-grab-hold.jpg",
+        "082-g2-left-backthrow-release.jpg",
+        "083-g2-left-upthrow-release.jpg",
+        "084-g2-left-downthrow-release.jpg",
+        "085-g2-left-victim-flight.jpg",
+        "086-g2-left-special-contact.jpg",
+        "087-g2-left-live-reversal-a.jpg",
+        "088-g2-left-live-reversal-b.jpg",
+        "089-g2-left-live-after-reversal-a.jpg",
+        "090-g2-left-live-after-reversal-b.jpg",
+        "091-g2-left-rightwall-special.jpg",
+        "092-g2-right-leftwall-knockdown.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "nosmileclown",
+          "nosmileclown-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    },
+    {
+      "id": "zepump",
+      "bodies": [
+        "zepump",
+        "zepump-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "No confirmed duplicated/detached limb or unexpected whole-body scaling in inspected samples. This does not certify all 52 scenarios or every in-between frame."
+      ],
+      "captures": [
+        "013-g2-idle-right.jpg",
+        "014-g2-right-stepped-walk.jpg",
+        "015-g2-right-stepped-jump-apex.jpg",
+        "016-g2-right-stepped-heavy-contact.jpg",
+        "017-g2-right-stepped-airkick-contact.jpg",
+        "018-g2-left-stepped-walk.jpg",
+        "019-g2-left-stepped-jump-apex.jpg",
+        "020-g2-left-stepped-heavy-contact.jpg",
+        "021-g2-left-stepped-airkick-contact.jpg",
+        "022-g2-left-live-airkick-recovery.jpg",
+        "059-g2-right-dash-recovery.jpg",
+        "060-g2-right-light-contact.jpg",
+        "061-g2-right-medium-contact.jpg",
+        "062-g2-right-sweep.jpg",
+        "063-g2-right-launcher-startup.jpg",
+        "064-g2-right-ranged-release.jpg",
+        "065-g2-right-recoil.jpg",
+        "066-g2-right-knockdown-flight.jpg",
+        "067-g2-right-grab-hold.jpg",
+        "068-g2-right-upthrow-release.jpg",
+        "069-g2-right-backthrow-release.jpg",
+        "070-g2-right-downthrow-release.jpg",
+        "071-g2-right-victim-flight.jpg",
+        "072-g2-right-special-contact.jpg",
+        "073-g2-left-dash-recovery.jpg",
+        "074-g2-left-light-contact.jpg",
+        "075-g2-left-medium-contact.jpg",
+        "076-g2-left-sweep.jpg",
+        "077-g2-left-launcher-contact.jpg",
+        "078-g2-left-ranged-release.jpg",
+        "079-g2-left-recoil.jpg",
+        "080-g2-left-floor-knockdown.jpg",
+        "081-g2-left-grab-hold.jpg",
+        "082-g2-left-backthrow-release.jpg",
+        "083-g2-left-upthrow-release.jpg",
+        "084-g2-left-downthrow-release.jpg",
+        "085-g2-left-victim-flight.jpg",
+        "086-g2-left-special-contact.jpg",
+        "087-g2-left-live-reversal-a.jpg",
+        "088-g2-left-live-reversal-b.jpg",
+        "089-g2-left-live-after-reversal-a.jpg",
+        "090-g2-left-live-after-reversal-b.jpg",
+        "091-g2-left-rightwall-special.jpg",
+        "092-g2-right-leftwall-knockdown.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "zepump",
+          "zepump-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    },
+    {
+      "id": "peterpan",
+      "bodies": [
+        "peterpan",
+        "peterpan-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "Backward yellow heavy contact corrected and browser retested.",
+        "Yellow optional sheet still has mildly fuller head/thigh proportions than slim core/walk art; density unchanged and originals preserved."
+      ],
+      "captures": [
+        "023-g3-both-idle.jpg",
+        "024-g3-both-stepped-walk.jpg",
+        "025-g3-both-stepped-jump-apex.jpg",
+        "026-g3-both-stepped-heavy-contact.jpg",
+        "027-g3-both-stepped-airkick-contact.jpg",
+        "028-g3-both-stepped-light.jpg",
+        "029-g3-both-stepped-medium.jpg",
+        "030-g3-both-stepped-sweep.jpg",
+        "031-g3-both-stepped-launcher.jpg",
+        "032-g3-both-stepped-ranged.jpg",
+        "033-g3-both-stepped-air-ranged.jpg",
+        "034-g3-both-stepped-special-charge.jpg",
+        "035-g3-both-stepped-air-special.jpg",
+        "036-g3-both-stepped-hit-recoil.jpg",
+        "037-g3-both-stepped-knockdown-flight.jpg",
+        "038-g3-both-stepped-launch-flight.jpg",
+        "039-g3-both-stepped-guard.jpg",
+        "040-g3-both-stepped-grab-hold.jpg",
+        "041-g3-both-stepped-backthrow-release.jpg",
+        "042-g3-after-both-heavy-contact.jpg",
+        "043-g3-after-both-heavy-recovery.jpg",
+        "044-g3-after-both-heavy-return.jpg",
+        "045-g3-after-both-dash-recover.jpg",
+        "046-g3-after-both-jump-apex.jpg",
+        "047-g3-after-realtime-walk-reversal-a.jpg",
+        "048-g3-after-realtime-walk-reversal-b.jpg",
+        "049-g3-both-upthrow-release.jpg",
+        "050-g3-both-downthrow-release.jpg",
+        "051-g3-both-victim-hold.jpg",
+        "052-g3-both-victim-forward-flight.jpg",
+        "053-g3-both-victim-back-flight.jpg",
+        "054-g3-both-victim-up-flight.jpg",
+        "055-g3-both-victim-down-rest.jpg",
+        "056-g3-both-rightwall-dash.jpg",
+        "057-g3-both-rightwall-special.jpg",
+        "058-g3-both-leftwall-knockdown.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "peterpan",
+          "peterpan-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    },
+    {
+      "id": "solanadelray",
+      "bodies": [
+        "solanadelray",
+        "solanadelray-companion"
+      ],
+      "actualLeadFacingsInspected": [
+        -1,
+        1
+      ],
+      "status": "sampled_visual_review_with_limits",
+      "inspectedStateFamilies": [
+        "idle",
+        "walking",
+        "neutral jump",
+        "forward dash recovery",
+        "light",
+        "medium",
+        "heavy contact",
+        "sweep",
+        "launcher sample",
+        "air-heavy contact",
+        "forward ranged release",
+        "hit recoil",
+        "knockdown",
+        "forward grab hold",
+        "back/up/down throw release",
+        "forward victim throw flight",
+        "Team Special body pose",
+        "right-wall special formation",
+        "left-wall floor knockdown"
+      ],
+      "notes": [
+        "No confirmed duplicated/detached limb or unexpected whole-body scaling in inspected samples. This does not certify all 52 scenarios or every in-between frame."
+      ],
+      "captures": [
+        "023-g3-both-idle.jpg",
+        "024-g3-both-stepped-walk.jpg",
+        "025-g3-both-stepped-jump-apex.jpg",
+        "026-g3-both-stepped-heavy-contact.jpg",
+        "027-g3-both-stepped-airkick-contact.jpg",
+        "028-g3-both-stepped-light.jpg",
+        "029-g3-both-stepped-medium.jpg",
+        "030-g3-both-stepped-sweep.jpg",
+        "031-g3-both-stepped-launcher.jpg",
+        "032-g3-both-stepped-ranged.jpg",
+        "033-g3-both-stepped-air-ranged.jpg",
+        "034-g3-both-stepped-special-charge.jpg",
+        "035-g3-both-stepped-air-special.jpg",
+        "036-g3-both-stepped-hit-recoil.jpg",
+        "037-g3-both-stepped-knockdown-flight.jpg",
+        "038-g3-both-stepped-launch-flight.jpg",
+        "039-g3-both-stepped-guard.jpg",
+        "040-g3-both-stepped-grab-hold.jpg",
+        "041-g3-both-stepped-backthrow-release.jpg",
+        "042-g3-after-both-heavy-contact.jpg",
+        "043-g3-after-both-heavy-recovery.jpg",
+        "044-g3-after-both-heavy-return.jpg",
+        "045-g3-after-both-dash-recover.jpg",
+        "046-g3-after-both-jump-apex.jpg",
+        "047-g3-after-realtime-walk-reversal-a.jpg",
+        "048-g3-after-realtime-walk-reversal-b.jpg",
+        "049-g3-both-upthrow-release.jpg",
+        "050-g3-both-downthrow-release.jpg",
+        "051-g3-both-victim-hold.jpg",
+        "052-g3-both-victim-forward-flight.jpg",
+        "053-g3-both-victim-back-flight.jpg",
+        "054-g3-both-victim-up-flight.jpg",
+        "055-g3-both-victim-down-rest.jpg",
+        "056-g3-both-rightwall-dash.jpg",
+        "057-g3-both-rightwall-special.jpg",
+        "058-g3-both-leftwall-knockdown.jpg"
+      ],
+      "remaining": [
+        "Not every intermediate cel in real time",
+        "Not all directional air attack/projectile variants",
+        "Not all jump directions/backward dash/held-jump cases",
+        "Intro/defeat and normal-game projectile/partner effects",
+        "All opponent sizes and arena-edge permutations"
+      ],
+      "activeSlotSourceInspection": {
+        "bodies": [
+          "solanadelray",
+          "solanadelray-companion"
+        ],
+        "slots": [
+          "heavy3",
+          "heavy4",
+          "airKick2",
+          "airKick3"
+        ],
+        "artifact": "live-pairs-b/active-contact-audit.json"
+      }
+    }
+  ],
+  "inspections": [
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "group1-idle-right",
+      "status": "READY \u00b7 Idle / breathing \u00b7 scenario frame 0 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: poses 0/31 | sproto2344-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3181: poses 0/31 | sproto3181-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3224: poses 0/31 | sproto3224-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3235: poses 0/31 | sproto3235-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "000-group1-idle-right.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-right-live-walk-0",
+      "status": "READY \u00b7 Walk reversal \u2192 stop \u00b7 scenario frame 14 \u00b7 PLAYING \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: walk 4/7 | sproto2344-companion: walk 0/7\ncore 14 \u00b7 x 668.6 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3181: walk 4/7 | sproto3181-companion: walk 0/7\ncore 14 \u00b7 x 668.6 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3224: walk 4/7 | sproto3224-companion: walk 0/7\ncore 14 \u00b7 x 668.6 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3235: walk 4/7 | sproto3235-companion: walk 0/7\ncore 14 \u00b7 x 668.6 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "001-g1-right-live-walk-0.jpg",
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-right-live-walk-1",
+      "status": "READY \u00b7 Walk reversal \u2192 stop \u00b7 scenario frame 15 \u00b7 PLAYING \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: walk 5/7 | sproto2344-companion: walk 1/7\ncore 16 \u00b7 x 678.7 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3181: walk 5/7 | sproto3181-companion: walk 1/7\ncore 16 \u00b7 x 678.7 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3224: walk 5/7 | sproto3224-companion: walk 1/7\ncore 16 \u00b7 x 678.7 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3235: walk 5/7 | sproto3235-companion: walk 1/7\ncore 16 \u00b7 x 678.7 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "002-g1-right-live-walk-1.jpg",
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-right-live-walk-2",
+      "status": "READY \u00b7 Walk reversal \u2192 stop \u00b7 scenario frame 17 \u00b7 PLAYING \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: walk 5/7 | sproto2344-companion: walk 1/7\ncore 17 \u00b7 x 683.7 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3181: walk 5/7 | sproto3181-companion: walk 1/7\ncore 17 \u00b7 x 683.7 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3224: walk 5/7 | sproto3224-companion: walk 1/7\ncore 17 \u00b7 x 683.7 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3235: walk 5/7 | sproto3235-companion: walk 1/7\ncore 17 \u00b7 x 683.7 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "003-g1-right-live-walk-2.jpg",
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-right-live-heavy-start",
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 17 \u00b7 PLAYING \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: poses 0/31 | sproto2344-companion: heavy 3/7\ncore 17 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 11 [11/6/23] \u00b7 no reaction",
+        "sproto3181: heavy 3/7 | sproto3181-companion: poses 10/31\ncore 17 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 11 [11/6/23] \u00b7 no reaction",
+        "sproto3224: poses 0/31 | sproto3224-companion: heavy 3/7\ncore 17 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 11 [11/6/23] \u00b7 no reaction",
+        "sproto3235: poses 0/31 | sproto3235-companion: heavy 3/7\ncore 17 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 11 [11/6/23] \u00b7 no reaction"
+      ],
+      "file": "004-g1-right-live-heavy-start.jpg",
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-left-stepped-dash",
+      "status": "READY \u00b7 Forward dash \u2192 recovery \u00b7 scenario frame 10 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: dash 5/5 | sproto2344-companion: dash 5/5\ncore 10 \u00b7 x 491.6 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3181: dash 5/5 | sproto3181-companion: dash 5/5\ncore 10 \u00b7 x 491.6 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3224: dash 5/5 | sproto3224-companion: dash 5/5\ncore 10 \u00b7 x 491.6 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3235: dash 5/5 | sproto3235-companion: dash 5/5\ncore 10 \u00b7 x 491.6 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "005-g1-left-stepped-dash.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-left-stepped-jump-apex",
+      "status": "READY \u00b7 Neutral jump \u2192 landing \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: jump 2/5 | sproto2344-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3181: jump 2/5 | sproto3181-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3224: jump 2/5 | sproto3224-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3235: jump 2/5 | sproto3235-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "006-g1-left-stepped-jump-apex.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-left-stepped-heavy-contact",
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: heavy 3/7 | sproto2344-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "sproto3181: heavy 3/7 | sproto3181-companion: poses 10/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "sproto3224: heavy 3/7 | sproto3224-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "sproto3235: heavy 3/7 | sproto3235-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction"
+      ],
+      "file": "007-g1-left-stepped-heavy-contact.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-left-stepped-airkick-contact",
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: airKick 2/5 | sproto2344-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3181: airKick 2/5 | sproto3181-companion: poses 10/31\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3224: airKick 2/5 | sproto3224-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3235: airKick 2/5 | sproto3235-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction"
+      ],
+      "file": "008-g1-left-stepped-airkick-contact.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-right-stepped-dash",
+      "status": "READY \u00b7 Forward dash \u2192 recovery \u00b7 scenario frame 10 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: dash 5/5 | sproto2344-companion: dash 5/5\ncore 10 \u00b7 x 708.4 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3181: dash 5/5 | sproto3181-companion: dash 5/5\ncore 10 \u00b7 x 708.4 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3224: dash 5/5 | sproto3224-companion: dash 5/5\ncore 10 \u00b7 x 708.4 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3235: dash 5/5 | sproto3235-companion: dash 5/5\ncore 10 \u00b7 x 708.4 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "009-g1-right-stepped-dash.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-right-stepped-jump-apex",
+      "status": "READY \u00b7 Neutral jump \u2192 landing \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: jump 2/5 | sproto2344-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3181: jump 2/5 | sproto3181-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3224: jump 2/5 | sproto3224-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3235: jump 2/5 | sproto3235-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "010-g1-right-stepped-jump-apex.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-right-stepped-airkick-contact",
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: jump 2/5 | sproto2344-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3181: airKick 2/5 | sproto3181-companion: poses 10/31\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3224: jump 2/5 | sproto3224-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3235: jump 2/5 | sproto3235-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction"
+      ],
+      "file": "011-g1-right-stepped-airkick-contact.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "label": "g1-right-live-airkick-recovery",
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 37 \u00b7 PLAYING \u00b7 cycle 1",
+      "debug": [
+        "sproto2344: poses 10/31 | sproto2344-companion: poses 10/31\ncore 38 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3181: poses 10/31 | sproto3181-companion: poses 10/31\ncore 38 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3224: poses 10/31 | sproto3224-companion: poses 10/31\ncore 38 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "sproto3235: poses 10/31 | sproto3235-companion: poses 10/31\ncore 38 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "012-g1-right-live-airkick-recovery.jpg",
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-idle-right",
+      "status": "READY \u00b7 Idle / breathing \u00b7 scenario frame 0 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "gryph: poses 0/31 | gryph-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "godmod3d: poses 0/31 | godmod3d-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "nosmileclown: poses 0/31 | nosmileclown-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "zepump: poses 0/31 | zepump-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "013-g2-idle-right.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-right-stepped-walk",
+      "status": "READY \u00b7 Walk reversal \u2192 stop \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "gryph: walk 7/7 | gryph-companion: walk 3/7\ncore 20 \u00b7 x 698.9 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "godmod3d: walk 7/7 | godmod3d-companion: walk 3/7\ncore 20 \u00b7 x 698.9 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "nosmileclown: walk 7/7 | nosmileclown-companion: walk 3/7\ncore 20 \u00b7 x 698.9 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "zepump: walk 7/7 | zepump-companion: walk 3/7\ncore 20 \u00b7 x 698.9 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "014-g2-right-stepped-walk.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-right-stepped-jump-apex",
+      "status": "READY \u00b7 Neutral jump \u2192 landing \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "gryph: jump 2/5 | gryph-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "godmod3d: jump 2/5 | godmod3d-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "nosmileclown: jump 2/5 | nosmileclown-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "zepump: jump 2/5 | zepump-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "015-g2-right-stepped-jump-apex.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-right-stepped-heavy-contact",
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "gryph: poses 0/31 | gryph-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "godmod3d: poses 0/31 | godmod3d-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "nosmileclown: poses 0/31 | nosmileclown-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "zepump: poses 0/31 | zepump-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction"
+      ],
+      "file": "016-g2-right-stepped-heavy-contact.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-right-stepped-airkick-contact",
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "gryph: jump 2/5 | gryph-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "godmod3d: jump 2/5 | godmod3d-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "nosmileclown: jump 2/5 | nosmileclown-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "zepump: jump 2/5 | zepump-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction"
+      ],
+      "file": "017-g2-right-stepped-airkick-contact.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-left-stepped-walk",
+      "status": "READY \u00b7 Walk reversal \u2192 stop \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "gryph: walk 7/7 | gryph-companion: walk 3/7\ncore 20 \u00b7 x 501.1 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "godmod3d: walk 7/7 | godmod3d-companion: walk 3/7\ncore 20 \u00b7 x 501.1 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "nosmileclown: walk 7/7 | nosmileclown-companion: walk 3/7\ncore 20 \u00b7 x 501.1 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "zepump: walk 7/7 | zepump-companion: walk 3/7\ncore 20 \u00b7 x 501.1 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "018-g2-left-stepped-walk.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-left-stepped-jump-apex",
+      "status": "READY \u00b7 Neutral jump \u2192 landing \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "gryph: jump 2/5 | gryph-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "godmod3d: jump 2/5 | godmod3d-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "nosmileclown: jump 2/5 | nosmileclown-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "zepump: jump 2/5 | zepump-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "019-g2-left-stepped-jump-apex.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-left-stepped-heavy-contact",
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "gryph: heavy 3/7 | gryph-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "godmod3d: heavy 3/7 | godmod3d-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "nosmileclown: heavy 3/7 | nosmileclown-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "zepump: heavy 3/7 | zepump-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction"
+      ],
+      "file": "020-g2-left-stepped-heavy-contact.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-left-stepped-airkick-contact",
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "gryph: airKick 2/5 | gryph-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "godmod3d: airKick 2/5 | godmod3d-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "nosmileclown: airKick 2/5 | nosmileclown-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "zepump: airKick 2/5 | zepump-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction"
+      ],
+      "file": "021-g2-left-stepped-airkick-contact.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "label": "g2-left-live-airkick-recovery",
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 37 \u00b7 PLAYING \u00b7 cycle 1",
+      "debug": [
+        "gryph: airKick 5/5 | gryph-companion: jump 5/5\ncore 37 \u00b7 x 600.0 y 570.6 \u00b7 facing -1 \u00b7 airHeavy 28 [8/7/21] \u00b7 no reaction",
+        "godmod3d: airKick 5/5 | godmod3d-companion: jump 5/5\ncore 37 \u00b7 x 600.0 y 570.6 \u00b7 facing -1 \u00b7 airHeavy 28 [8/7/21] \u00b7 no reaction",
+        "nosmileclown: airKick 5/5 | nosmileclown-companion: jump 5/5\ncore 37 \u00b7 x 600.0 y 570.6 \u00b7 facing -1 \u00b7 airHeavy 28 [8/7/21] \u00b7 no reaction",
+        "zepump: airKick 5/5 | zepump-companion: jump 5/5\ncore 37 \u00b7 x 600.0 y 570.6 \u00b7 facing -1 \u00b7 airHeavy 28 [8/7/21] \u00b7 no reaction"
+      ],
+      "file": "022-g2-left-live-airkick-recovery.jpg",
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-idle",
+      "status": "READY \u00b7 Idle / breathing \u00b7 scenario frame 0 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 0/31 | peterpan-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "solanadelray: poses 0/31 | solanadelray-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "peterpan: poses 0/31 | peterpan-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "solanadelray: poses 0/31 | solanadelray-companion: poses 0/31\ncore 0 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "023-g3-both-idle.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-walk",
+      "status": "READY \u00b7 Walk reversal \u2192 stop \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: walk 7/7 | peterpan-companion: walk 3/7\ncore 20 \u00b7 x 698.9 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "solanadelray: walk 7/7 | solanadelray-companion: walk 3/7\ncore 20 \u00b7 x 698.9 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "peterpan: walk 7/7 | peterpan-companion: walk 3/7\ncore 20 \u00b7 x 501.1 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "solanadelray: walk 7/7 | solanadelray-companion: walk 3/7\ncore 20 \u00b7 x 501.1 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "024-g3-both-stepped-walk.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-jump-apex",
+      "status": "READY \u00b7 Neutral jump \u2192 landing \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: jump 2/5 | peterpan-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "solanadelray: jump 2/5 | solanadelray-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "peterpan: jump 2/5 | peterpan-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "solanadelray: jump 2/5 | solanadelray-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "025-g3-both-stepped-jump-apex.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-heavy-contact",
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 0/31 | peterpan-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "solanadelray: poses 0/31 | solanadelray-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "peterpan: heavy 3/7 | peterpan-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "solanadelray: heavy 3/7 | solanadelray-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction"
+      ],
+      "file": "026-g3-both-stepped-heavy-contact.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-airkick-contact",
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: jump 2/5 | peterpan-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "solanadelray: jump 2/5 | solanadelray-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "peterpan: airKick 2/5 | peterpan-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "solanadelray: airKick 2/5 | solanadelray-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction"
+      ],
+      "file": "027-g3-both-stepped-airkick-contact.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-light",
+      "status": "READY \u00b7 light \u00b7 scenario frame 10 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 0/31 | peterpan-companion: poses 12/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 light 5 [5/4/13] \u00b7 no reaction",
+        "solanadelray: poses 0/31 | solanadelray-companion: poses 12/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 light 5 [5/4/13] \u00b7 no reaction",
+        "peterpan: poses 12/31 | peterpan-companion: poses 0/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 light 5 [5/4/13] \u00b7 no reaction",
+        "solanadelray: poses 12/31 | solanadelray-companion: poses 0/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 light 5 [5/4/13] \u00b7 no reaction"
+      ],
+      "file": "028-g3-both-stepped-light.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-medium",
+      "status": "READY \u00b7 medium \u00b7 scenario frame 10 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 0/31 | peterpan-companion: poses 18/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 medium 7 [7/5/17] \u00b7 no reaction",
+        "solanadelray: poses 0/31 | solanadelray-companion: poses 18/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 medium 7 [7/5/17] \u00b7 no reaction",
+        "peterpan: poses 18/31 | peterpan-companion: poses 0/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 medium 7 [7/5/17] \u00b7 no reaction",
+        "solanadelray: poses 18/31 | solanadelray-companion: poses 0/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 medium 7 [7/5/17] \u00b7 no reaction"
+      ],
+      "file": "029-g3-both-stepped-medium.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-sweep",
+      "status": "READY \u00b7 sweep \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 0/31 | peterpan-companion: poses 20/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 sweep 15 [10/6/24] \u00b7 no reaction",
+        "solanadelray: poses 0/31 | solanadelray-companion: poses 20/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 sweep 15 [10/6/24] \u00b7 no reaction",
+        "peterpan: poses 20/31 | peterpan-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 sweep 15 [10/6/24] \u00b7 no reaction",
+        "solanadelray: poses 20/31 | solanadelray-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 sweep 15 [10/6/24] \u00b7 no reaction"
+      ],
+      "file": "030-g3-both-stepped-sweep.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-launcher",
+      "status": "READY \u00b7 launcher \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 0/31 | peterpan-companion: poses 13/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 launcher 15 [8/6/23] \u00b7 no reaction",
+        "solanadelray: poses 0/31 | solanadelray-companion: poses 13/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 launcher 15 [8/6/23] \u00b7 no reaction",
+        "peterpan: poses 13/31 | peterpan-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 launcher 15 [8/6/23] \u00b7 no reaction",
+        "solanadelray: poses 13/31 | solanadelray-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 launcher 15 [8/6/23] \u00b7 no reaction"
+      ],
+      "file": "031-g3-both-stepped-launcher.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-ranged",
+      "status": "READY \u00b7 Ranged power \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: cast 2/3 | peterpan-companion: cast 2/3\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 bolt 20 [18/1/25] \u00b7 no reaction",
+        "solanadelray: cast 2/3 | solanadelray-companion: cast 2/3\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 bolt 20 [18/1/25] \u00b7 no reaction",
+        "peterpan: cast 2/3 | peterpan-companion: cast 2/3\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 bolt 20 [18/1/25] \u00b7 no reaction",
+        "solanadelray: cast 2/3 | solanadelray-companion: cast 2/3\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 bolt 20 [18/1/25] \u00b7 no reaction"
+      ],
+      "file": "032-g3-both-stepped-ranged.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-air-ranged",
+      "status": "READY \u00b7 Air ranged power \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: cast 1/3 | peterpan-companion: cast 1/3\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 bolt 11 [18/1/25] \u00b7 no reaction",
+        "solanadelray: cast 1/3 | solanadelray-companion: cast 1/3\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 bolt 11 [18/1/25] \u00b7 no reaction",
+        "peterpan: cast 1/3 | peterpan-companion: cast 1/3\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 bolt 11 [18/1/25] \u00b7 no reaction",
+        "solanadelray: cast 1/3 | solanadelray-companion: cast 1/3\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 bolt 11 [18/1/25] \u00b7 no reaction"
+      ],
+      "file": "033-g3-both-stepped-air-ranged.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-special-charge",
+      "status": "READY \u00b7 Team special \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: special 5/7 | peterpan-companion: special 2/7\ncore 20 \u00b7 x 609.0 y 578.0 \u00b7 facing 1 \u00b7 special 15 [14/37/30] \u00b7 no reaction",
+        "solanadelray: special 5/7 | solanadelray-companion: special 2/7\ncore 20 \u00b7 x 609.0 y 578.0 \u00b7 facing 1 \u00b7 special 15 [13/41/30] \u00b7 no reaction",
+        "peterpan: special 2/7 | peterpan-companion: special 5/7\ncore 20 \u00b7 x 591.0 y 578.0 \u00b7 facing -1 \u00b7 special 15 [14/37/30] \u00b7 no reaction",
+        "solanadelray: special 2/7 | solanadelray-companion: special 5/7\ncore 20 \u00b7 x 591.0 y 578.0 \u00b7 facing -1 \u00b7 special 15 [13/41/30] \u00b7 no reaction"
+      ],
+      "file": "034-g3-both-stepped-special-charge.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-air-special",
+      "status": "READY \u00b7 Air Team special \u00b7 scenario frame 30 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: special 5/7 | peterpan-companion: special 2/7\ncore 30 \u00b7 x 600.0 y 455.5 \u00b7 facing 1 \u00b7 special 16 [14/37/30] \u00b7 no reaction",
+        "solanadelray: special 5/7 | solanadelray-companion: special 3/7\ncore 30 \u00b7 x 600.0 y 455.5 \u00b7 facing 1 \u00b7 special 16 [13/41/30] \u00b7 no reaction",
+        "peterpan: special 2/7 | peterpan-companion: special 5/7\ncore 30 \u00b7 x 600.0 y 455.5 \u00b7 facing -1 \u00b7 special 16 [14/37/30] \u00b7 no reaction",
+        "solanadelray: special 3/7 | solanadelray-companion: special 5/7\ncore 30 \u00b7 x 600.0 y 455.5 \u00b7 facing -1 \u00b7 special 16 [13/41/30] \u00b7 no reaction"
+      ],
+      "file": "035-g3-both-stepped-air-special.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-hit-recoil",
+      "status": "READY \u00b7 hit \u00b7 scenario frame 10 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: recoil 0/3 | peterpan-companion: recoil 0/3\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 flight",
+        "solanadelray: recoil 0/3 | solanadelray-companion: recoil 0/3\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 flight",
+        "peterpan: recoil 0/3 | peterpan-companion: recoil 0/3\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 flight",
+        "solanadelray: recoil 0/3 | solanadelray-companion: recoil 0/3\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 flight"
+      ],
+      "file": "036-g3-both-stepped-hit-recoil.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-knockdown-flight",
+      "status": "READY \u00b7 heavyHit \u00b7 scenario frame 30 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 9/31 | peterpan-companion: poses 9/31\ncore 30 \u00b7 x 429.0 y 545.1 \u00b7 facing 1 \u00b7 neutral  \u00b7 flight",
+        "solanadelray: poses 9/31 | solanadelray-companion: poses 9/31\ncore 30 \u00b7 x 429.0 y 545.1 \u00b7 facing 1 \u00b7 neutral  \u00b7 flight",
+        "peterpan: poses 9/31 | peterpan-companion: poses 9/31\ncore 30 \u00b7 x 771.0 y 545.1 \u00b7 facing -1 \u00b7 neutral  \u00b7 flight",
+        "solanadelray: poses 9/31 | solanadelray-companion: poses 9/31\ncore 30 \u00b7 x 771.0 y 545.1 \u00b7 facing -1 \u00b7 neutral  \u00b7 flight"
+      ],
+      "file": "037-g3-both-stepped-knockdown-flight.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-launch-flight",
+      "status": "READY \u00b7 launchHit \u00b7 scenario frame 30 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 24/31 | peterpan-companion: poses 24/31\ncore 30 \u00b7 x 555.4 y 469.1 \u00b7 facing 1 \u00b7 neutral  \u00b7 flight",
+        "solanadelray: poses 24/31 | solanadelray-companion: poses 24/31\ncore 30 \u00b7 x 555.4 y 469.1 \u00b7 facing 1 \u00b7 neutral  \u00b7 flight",
+        "peterpan: poses 24/31 | peterpan-companion: poses 24/31\ncore 30 \u00b7 x 644.6 y 469.1 \u00b7 facing -1 \u00b7 neutral  \u00b7 flight",
+        "solanadelray: poses 24/31 | solanadelray-companion: poses 24/31\ncore 30 \u00b7 x 644.6 y 469.1 \u00b7 facing -1 \u00b7 neutral  \u00b7 flight"
+      ],
+      "file": "038-g3-both-stepped-launch-flight.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-guard",
+      "status": "READY \u00b7 block \u00b7 scenario frame 10 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 25/31 | peterpan-companion: poses 25/31\ncore 10 \u00b7 x 565.4 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "solanadelray: poses 25/31 | solanadelray-companion: poses 25/31\ncore 10 \u00b7 x 565.4 y 578.0 \u00b7 facing 1 \u00b7 neutral  \u00b7 no reaction",
+        "peterpan: poses 25/31 | peterpan-companion: poses 25/31\ncore 10 \u00b7 x 634.6 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction",
+        "solanadelray: poses 25/31 | solanadelray-companion: poses 25/31\ncore 10 \u00b7 x 634.6 y 578.0 \u00b7 facing -1 \u00b7 neutral  \u00b7 no reaction"
+      ],
+      "file": "039-g3-both-stepped-guard.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-grab-hold",
+      "status": "READY \u00b7 Attacker throw \u00b7 forward \u00b7 scenario frame 10 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 25/31 | peterpan-companion: poses 26/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 grab 6 [6/3/30] \u00b7 THROW forward",
+        "solanadelray: poses 25/31 | solanadelray-companion: poses 26/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 grab 6 [6/3/30] \u00b7 THROW forward",
+        "peterpan: poses 26/31 | peterpan-companion: poses 25/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 grab 6 [6/3/30] \u00b7 THROW forward",
+        "solanadelray: poses 26/31 | solanadelray-companion: poses 25/31\ncore 10 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 grab 6 [6/3/30] \u00b7 THROW forward"
+      ],
+      "file": "040-g3-both-stepped-grab-hold.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "label": "g3-both-stepped-backthrow-release",
+      "status": "READY \u00b7 Attacker throw \u00b7 back \u00b7 scenario frame 30 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "peterpan: poses 25/31 | peterpan-companion: poses 28/31\ncore 30 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 grab 9 [6/3/30] \u00b7 THROW back",
+        "solanadelray: poses 25/31 | solanadelray-companion: poses 28/31\ncore 30 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 grab 9 [6/3/30] \u00b7 THROW back",
+        "peterpan: poses 28/31 | peterpan-companion: poses 25/31\ncore 30 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 grab 9 [6/3/30] \u00b7 THROW back",
+        "solanadelray: poses 28/31 | solanadelray-companion: poses 25/31\ncore 30 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 grab 9 [6/3/30] \u00b7 THROW back"
+      ],
+      "file": "041-g3-both-stepped-backthrow-release.jpg",
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "042-g3-after-both-heavy-contact.jpg",
+      "label": "g3-after-both-heavy-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "043-g3-after-both-heavy-recovery.jpg",
+      "label": "g3-after-both-heavy-recovery",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "044-g3-after-both-heavy-return.jpg",
+      "label": "g3-after-both-heavy-return",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "045-g3-after-both-dash-recover.jpg",
+      "label": "g3-after-both-dash-recover",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "046-g3-after-both-jump-apex.jpg",
+      "label": "g3-after-both-jump-apex",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "047-g3-after-realtime-walk-reversal-a.jpg",
+      "label": "g3-after-realtime-walk-reversal-a",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "048-g3-after-realtime-walk-reversal-b.jpg",
+      "label": "g3-after-realtime-walk-reversal-b",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "049-g3-both-upthrow-release.jpg",
+      "label": "g3-both-upthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "050-g3-both-downthrow-release.jpg",
+      "label": "g3-both-downthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "051-g3-both-victim-hold.jpg",
+      "label": "g3-both-victim-hold",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "052-g3-both-victim-forward-flight.jpg",
+      "label": "g3-both-victim-forward-flight",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "053-g3-both-victim-back-flight.jpg",
+      "label": "g3-both-victim-back-flight",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "054-g3-both-victim-up-flight.jpg",
+      "label": "g3-both-victim-up-flight",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "055-g3-both-victim-down-rest.jpg",
+      "label": "g3-both-victim-down-rest",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "056-g3-both-rightwall-dash.jpg",
+      "label": "g3-both-rightwall-dash",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "057-g3-both-rightwall-special.jpg",
+      "label": "g3-both-rightwall-special",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "058-g3-both-leftwall-knockdown.jpg",
+      "label": "g3-both-leftwall-knockdown",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "peterpan",
+        "solanadelray"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1,
+        1
+      ]
+    },
+    {
+      "file": "059-g2-right-dash-recovery.jpg",
+      "label": "g2-right-dash-recovery",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "060-g2-right-light-contact.jpg",
+      "label": "g2-right-light-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "061-g2-right-medium-contact.jpg",
+      "label": "g2-right-medium-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "062-g2-right-sweep.jpg",
+      "label": "g2-right-sweep",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "063-g2-right-launcher-startup.jpg",
+      "label": "g2-right-launcher-startup",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "064-g2-right-ranged-release.jpg",
+      "label": "g2-right-ranged-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "065-g2-right-recoil.jpg",
+      "label": "g2-right-recoil",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "066-g2-right-knockdown-flight.jpg",
+      "label": "g2-right-knockdown-flight",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "067-g2-right-grab-hold.jpg",
+      "label": "g2-right-grab-hold",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "068-g2-right-upthrow-release.jpg",
+      "label": "g2-right-upthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "069-g2-right-backthrow-release.jpg",
+      "label": "g2-right-backthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "070-g2-right-downthrow-release.jpg",
+      "label": "g2-right-downthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "071-g2-right-victim-flight.jpg",
+      "label": "g2-right-victim-flight",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "072-g2-right-special-contact.jpg",
+      "label": "g2-right-special-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "073-g2-left-dash-recovery.jpg",
+      "label": "g2-left-dash-recovery",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "074-g2-left-light-contact.jpg",
+      "label": "g2-left-light-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "075-g2-left-medium-contact.jpg",
+      "label": "g2-left-medium-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "076-g2-left-sweep.jpg",
+      "label": "g2-left-sweep",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "077-g2-left-launcher-contact.jpg",
+      "label": "g2-left-launcher-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "078-g2-left-ranged-release.jpg",
+      "label": "g2-left-ranged-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "079-g2-left-recoil.jpg",
+      "label": "g2-left-recoil",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "080-g2-left-floor-knockdown.jpg",
+      "label": "g2-left-floor-knockdown",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "081-g2-left-grab-hold.jpg",
+      "label": "g2-left-grab-hold",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "082-g2-left-backthrow-release.jpg",
+      "label": "g2-left-backthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "083-g2-left-upthrow-release.jpg",
+      "label": "g2-left-upthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "084-g2-left-downthrow-release.jpg",
+      "label": "g2-left-downthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "085-g2-left-victim-flight.jpg",
+      "label": "g2-left-victim-flight",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "086-g2-left-special-contact.jpg",
+      "label": "g2-left-special-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "087-g2-left-live-reversal-a.jpg",
+      "label": "g2-left-live-reversal-a",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "088-g2-left-live-reversal-b.jpg",
+      "label": "g2-left-live-reversal-b",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "089-g2-left-live-after-reversal-a.jpg",
+      "label": "g2-left-live-after-reversal-a",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "090-g2-left-live-after-reversal-b.jpg",
+      "label": "g2-left-live-after-reversal-b",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "091-g2-left-rightwall-special.jpg",
+      "label": "g2-left-rightwall-special",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "092-g2-right-leftwall-knockdown.jpg",
+      "label": "g2-right-leftwall-knockdown",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "gryph",
+        "godmod3d",
+        "nosmileclown",
+        "zepump"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "093-g1-right-light-contact.jpg",
+      "label": "g1-right-light-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "094-g1-right-medium-contact.jpg",
+      "label": "g1-right-medium-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "095-g1-right-sweep.jpg",
+      "label": "g1-right-sweep",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "096-g1-right-launcher-contact.jpg",
+      "label": "g1-right-launcher-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "097-g1-right-ranged-release.jpg",
+      "label": "g1-right-ranged-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "098-g1-right-recoil.jpg",
+      "label": "g1-right-recoil",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "099-g1-right-floor-knockdown.jpg",
+      "label": "g1-right-floor-knockdown",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "100-g1-right-grab-hold.jpg",
+      "label": "g1-right-grab-hold",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "101-g1-right-backthrow-release.jpg",
+      "label": "g1-right-backthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "102-g1-right-upthrow-release.jpg",
+      "label": "g1-right-upthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "103-g1-right-downthrow-release.jpg",
+      "label": "g1-right-downthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "104-g1-right-victim-flight.jpg",
+      "label": "g1-right-victim-flight",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "105-g1-right-special-contact.jpg",
+      "label": "g1-right-special-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "106-g1-left-light-contact.jpg",
+      "label": "g1-left-light-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "107-g1-left-medium-contact.jpg",
+      "label": "g1-left-medium-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "108-g1-left-sweep.jpg",
+      "label": "g1-left-sweep",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "109-g1-left-launcher-contact.jpg",
+      "label": "g1-left-launcher-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "110-g1-left-ranged-release.jpg",
+      "label": "g1-left-ranged-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "111-g1-left-recoil.jpg",
+      "label": "g1-left-recoil",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "112-g1-left-floor-knockdown.jpg",
+      "label": "g1-left-floor-knockdown",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "113-g1-left-grab-hold.jpg",
+      "label": "g1-left-grab-hold",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "114-g1-left-backthrow-release.jpg",
+      "label": "g1-left-backthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "115-g1-left-upthrow-release.jpg",
+      "label": "g1-left-upthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "116-g1-left-downthrow-release.jpg",
+      "label": "g1-left-downthrow-release",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "117-g1-left-victim-flight.jpg",
+      "label": "g1-left-victim-flight",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "118-g1-left-special-contact.jpg",
+      "label": "g1-left-special-contact",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "119-g1-left-rightwall-special.jpg",
+      "label": "g1-left-rightwall-special",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "120-g1-right-leftwall-knockdown.jpg",
+      "label": "g1-right-leftwall-knockdown",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "121-g1-left-live-reversal-a.jpg",
+      "label": "g1-left-live-reversal-a",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "122-g1-left-live-reversal-b.jpg",
+      "label": "g1-left-live-reversal-b",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "123-g1-right-live-jump-rise.jpg",
+      "label": "g1-right-live-jump-rise",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "124-g1-right-live-jump-apex.jpg",
+      "label": "g1-right-live-jump-apex",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        1
+      ]
+    },
+    {
+      "file": "125-g1-left-live-jump-fall.jpg",
+      "label": "g1-left-live-jump-fall",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "126-g1-left-live-jump-landing.jpg",
+      "label": "g1-left-live-jump-landing",
+      "metadataNote": "Exact state/frame visible in saved screenshot. CUA runtime reset before final metadata flush; this screenshot was emitted and visually inspected.",
+      "owners": [
+        "sproto2344",
+        "sproto3181",
+        "sproto3224",
+        "sproto3235"
+      ],
+      "visualInspection": "inspected",
+      "mode": "sampled normal-speed browser playback",
+      "startingFacings": [
+        -1
+      ]
+    },
+    {
+      "file": "127-active-slot-heavy3-before-b.jpg",
+      "label": "active-slot-heavy3-before-b",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: heavy 3/7 | sproto3224-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "sproto3224: poses 0/31 | sproto3224-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "sproto3235: poses 0/31 | sproto3235-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "sproto3235: heavy 3/7 | sproto3235-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "128-active-slot-heavy4-before-b.jpg",
+      "label": "active-slot-heavy4-before-b",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 22 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: heavy 4/7 | sproto3224-companion: poses 0/31\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction",
+        "sproto3224: poses 0/31 | sproto3224-companion: heavy 4/7\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction",
+        "sproto3235: poses 0/31 | sproto3235-companion: heavy 4/7\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction",
+        "sproto3235: heavy 4/7 | sproto3235-companion: poses 0/31\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "129-active-slot-airkick2-before-b.jpg",
+      "label": "active-slot-airkick2-before-b",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: airKick 2/5 | sproto3224-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3224: jump 2/5 | sproto3224-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3235: jump 2/5 | sproto3235-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3235: airKick 2/5 | sproto3235-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "130-active-slot-airkick3-before-b.jpg",
+      "label": "active-slot-airkick3-before-b",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 23 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: airKick 3/5 | sproto3224-companion: jump 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing -1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction",
+        "sproto3224: jump 3/5 | sproto3224-companion: airKick 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing 1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction",
+        "sproto3235: jump 3/5 | sproto3235-companion: airKick 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing 1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction",
+        "sproto3235: airKick 3/5 | sproto3235-companion: jump 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing -1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "131-10inu-stomach-and2344-heavy4.jpg",
+      "label": "10inu-stomach-and2344-heavy4",
+      "owners": [
+        "sproto3181",
+        "sproto2344"
+      ],
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 22 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3181: heavy 4/7 | sproto3181-companion: poses 10/31\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction",
+        "sproto3181: heavy 4/7 | sproto3181-companion: poses 10/31\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction",
+        "sproto2344: poses 0/31 | sproto2344-companion: heavy 4/7\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction",
+        "sproto2344: heavy 4/7 | sproto2344-companion: poses 0/31\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "132-10inu-stomach-and2344-airkick2.jpg",
+      "label": "10inu-stomach-and2344-airkick2",
+      "owners": [
+        "sproto3181",
+        "sproto2344"
+      ],
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3181: airKick 2/5 | sproto3181-companion: poses 10/31\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3181: airKick 2/5 | sproto3181-companion: poses 10/31\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto2344: jump 2/5 | sproto2344-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto2344: airKick 2/5 | sproto2344-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "133-10inu-stomach-and2344-airkick3.jpg",
+      "label": "10inu-stomach-and2344-airkick3",
+      "owners": [
+        "sproto3181",
+        "sproto2344"
+      ],
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 23 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3181: airKick 3/5 | sproto3181-companion: poses 10/31\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing -1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction",
+        "sproto3181: airKick 3/5 | sproto3181-companion: poses 10/31\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing 1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction",
+        "sproto2344: jump 3/5 | sproto2344-companion: airKick 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing 1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction",
+        "sproto2344: airKick 3/5 | sproto2344-companion: jump 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing -1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "134-b2-retest-heavy3-both.jpg",
+      "label": "b2-retest-heavy3-both",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: heavy 3/7 | sproto3224-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "sproto3224: poses 0/31 | sproto3224-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "sproto3235: poses 0/31 | sproto3235-companion: heavy 3/7\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction",
+        "sproto3235: heavy 3/7 | sproto3235-companion: poses 0/31\ncore 20 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 12 [11/6/23] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "135-b2-retest-heavy4-both.jpg",
+      "label": "b2-retest-heavy4-both",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 22 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: heavy 4/7 | sproto3224-companion: poses 0/31\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction",
+        "sproto3224: poses 0/31 | sproto3224-companion: heavy 4/7\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction",
+        "sproto3235: poses 0/31 | sproto3235-companion: heavy 4/7\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction",
+        "sproto3235: heavy 4/7 | sproto3235-companion: poses 0/31\ncore 22 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 14 [11/6/23] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "136-b2-retest-heavy-recovery-both.jpg",
+      "label": "b2-retest-heavy-recovery-both",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 heavy \u00b7 scenario frame 32 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: heavy 5/7 | sproto3224-companion: poses 0/31\ncore 32 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 24 [11/6/23] \u00b7 no reaction",
+        "sproto3224: poses 0/31 | sproto3224-companion: heavy 5/7\ncore 32 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 24 [11/6/23] \u00b7 no reaction",
+        "sproto3235: poses 0/31 | sproto3235-companion: heavy 5/7\ncore 32 \u00b7 x 600.0 y 578.0 \u00b7 facing 1 \u00b7 heavy 24 [11/6/23] \u00b7 no reaction",
+        "sproto3235: heavy 5/7 | sproto3235-companion: poses 0/31\ncore 32 \u00b7 x 600.0 y 578.0 \u00b7 facing -1 \u00b7 heavy 24 [11/6/23] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "137-b2-retest-airkick2-both.jpg",
+      "label": "b2-retest-airkick2-both",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 20 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: airKick 2/5 | sproto3224-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3224: jump 2/5 | sproto3224-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3235: jump 2/5 | sproto3235-companion: airKick 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing 1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction",
+        "sproto3235: airKick 2/5 | sproto3235-companion: jump 2/5\ncore 20 \u00b7 x 600.0 y 443.6 \u00b7 facing -1 \u00b7 airHeavy 11 [8/7/21] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "138-b2-retest-airkick3-both.jpg",
+      "label": "b2-retest-airkick3-both",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 23 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: airKick 3/5 | sproto3224-companion: jump 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing -1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction",
+        "sproto3224: jump 3/5 | sproto3224-companion: airKick 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing 1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction",
+        "sproto3235: jump 3/5 | sproto3235-companion: airKick 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing 1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction",
+        "sproto3235: airKick 3/5 | sproto3235-companion: jump 3/5\ncore 23 \u00b7 x 600.0 y 448.2 \u00b7 facing -1 \u00b7 airHeavy 14 [8/7/21] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "139-b2-retest-airkick-recovery-both.jpg",
+      "label": "b2-retest-airkick-recovery-both",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 33 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: airKick 4/5 | sproto3224-companion: jump 5/5\ncore 33 \u00b7 x 600.0 y 518.6 \u00b7 facing -1 \u00b7 airHeavy 24 [8/7/21] \u00b7 no reaction",
+        "sproto3224: jump 5/5 | sproto3224-companion: airKick 4/5\ncore 33 \u00b7 x 600.0 y 518.6 \u00b7 facing 1 \u00b7 airHeavy 24 [8/7/21] \u00b7 no reaction",
+        "sproto3235: jump 5/5 | sproto3235-companion: airKick 4/5\ncore 33 \u00b7 x 600.0 y 518.6 \u00b7 facing 1 \u00b7 airHeavy 24 [8/7/21] \u00b7 no reaction",
+        "sproto3235: airKick 4/5 | sproto3235-companion: jump 5/5\ncore 33 \u00b7 x 600.0 y 518.6 \u00b7 facing -1 \u00b7 airHeavy 24 [8/7/21] \u00b7 no reaction"
+      ],
+      "visualInspection": "inspected",
+      "mode": "browser frame-stepped pose inspection"
+    },
+    {
+      "file": "140-b2-final-recovery-both.jpg",
+      "label": "b2-final-recovery-both",
+      "owners": [
+        "sproto3224",
+        "sproto3235"
+      ],
+      "status": "READY \u00b7 airHeavy \u00b7 forward \u00b7 scenario frame 33 \u00b7 PAUSED \u00b7 cycle 1",
+      "debug": [
+        "sproto3224: airKick 4/5 | sproto3224-companion: jump 5/5\ncore 33 \u00b7 x 600.0 y 518.6 \u00b7 facing -1 \u00b7 airHeavy 24 [8/7/21] \u00b7 no reaction",
+        "sproto3224: jump 5/5 | sproto3224-companion: airKick 4/5\ncore 33 \u00b7 x 600.0 y 518.6 \u00b7 facing 1 \u00b7 airHeavy 24 [8/7/21] \u00b7 no reaction",
+        "sproto3235: jump 5/5 | sproto3235-companion: airKick 4/5\ncore 33 \u00b7 x 600.0 y 518.6 \u00b7 facing 1 \u00b7 airHeavy 24 [8/7/21] \u00b7 no reaction",
+        "sproto3235: airKick 4/5 | sproto3235-companion: jump 5/5\ncore 33 \u00b7 x 600.0 y 518.6 \u00b7 facing -1 \u00b7 airHeavy 24 [8/7/21] \u00b7 no reaction"
+      ],
+      "visualInspection": "captured_duplicate_excluded",
+      "mode": "browser frame-stepped pose inspection",
+      "note": "Duplicate frame33 recovery capture retained for bookkeeping only; not counted as an additional visual inspection."
+    }
+  ],
+  "limitations": [
+    "Tiny Nosmileclown companion is approximately40 pixels high in the wall; fine facial and hand detail needs a larger view.",
+    "Wall omits projectile graphics and partner cameo effects; special coverage concerns body poses.",
+    "Victory registration has an automated check only; no browser event playback.",
+    "Server5199 was temporarily unavailable twice; the restarted detached server worked for final exact-slot checks.",
+    "Earlier CUA resets interrupted metadata persistence; saved screenshots and visible debug labels are authoritative. Final capture metadata was reconciled to actual group IDs and all referenced files checked."
+  ]
+}

@@ -1,30 +1,43 @@
-import { ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, createState, getMove, FLOOR, type PlayableFighterId, type Mode } from './core';
+import {STAGE_ZONES,stageZone,stagesInZone} from './stageGroups';
+import {storyProgress} from './storyProgress';
+import { ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, specialPartnerIds, PARTNER_ATTACKS, bodyAtlasIds, isPairedFighter, createState, getMove, FLOOR, type PlayableFighterId, type Mode } from './core';
 import { originalPortraits } from './originalPortraits';
-import { drawPoseAtlasSample } from './poseAtlas';
-import { STAGES, drawStagePreview, type StageId } from './stage';
-export interface SelectionSetup { fighter:PlayableFighterId; opponent:PlayableFighterId; stage:StageId; mode:Mode }
-/**
- * Local selection state only. The match is created by the explicit start hook.
- * `locked` returns why a fighter cannot be played yet (hub Relic unlocks, see hub/roster.ts),
- * or null. Locked fighters can still be picked as the CPU rival.
- */
-export function createSelectionMenu(hooks:{start:(setup:SelectionSetup)=>void;locked?:(id:PlayableFighterId)=>string|null}){
- const lockedWhy=(id:PlayableFighterId)=>hooks.locked?.(id)??null;
+import { drawSelectionPose } from './poseAtlas';
+import { STAGES, drawStagePreview, loadStageArt, type StageId } from './stage';
+export interface SelectionSetup { fighter:PlayableFighterId; opponent:PlayableFighterId; stage:StageId; mode:Mode; godMode?:boolean }
+/** Local selection state only. The match is created by the explicit start hook. */
+export function createSelectionMenu(hooks:{start:(setup:SelectionSetup)=>void;prepare?:(ids:PlayableFighterId[])=>Promise<void>;canPlay?:(id:PlayableFighterId)=>boolean;locked?:(id:PlayableFighterId)=>string|null}){
  const root=document.getElementById('selection-view')!;
- let setup:SelectionSetup={fighter:'rivet',opponent:'vela',stage:'ranch',mode:'cpu'},target:'fighter'|'opponent'='fighter',ready=false,open=true;
- let lastButtons:number[]=[],lastDirection='',repeatAt=0;
+ const canSelect=(id:PlayableFighterId)=>hooks.canPlay?.(id)??storyProgress.isUnlocked(id);
+ const lockedWhy=(id:PlayableFighterId)=>hooks.locked?.(id)??'Defeat this fighter in story mode to recruit them.';
+ let setup:SelectionSetup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'cpu',godMode:false},target:'fighter'|'opponent'='fighter',ready=false,open=true;
+ let previewRequest=0;
+ let lastButtons:number[]=[],lastDirection='',repeatAt=0,assetRequest=0,artLoading=false,loadFailed=false;
  root.innerHTML=`<div class="arcade-echoes" aria-hidden="true"><img id="player-echo" alt=""><img id="rival-echo" alt=""></div>
  <div class="selection-heading"><span class="heading-rule"></span><h1>MEMBER <em>SELECT</em></h1><span class="heading-rule"></span></div>
+ <section class="selection-locations" aria-labelledby="locations-heading"><div class="selection-section-heading"><h2 id="locations-heading">1 · CHOOSE A ZONE</h2><button id="random-stage" class="text-button">↻ RANDOM STAGE</button></div><div id="zone-rail" class="stage-rail" role="group" aria-label="Main zones"></div><div class="selection-section-heading variation-heading"><h2 id="variations-heading">2 · CHOOSE A VARIATION</h2><span id="zone-stage-count"></span></div><div class="stage-rail" role="group" aria-labelledby="variations-heading"></div><p class="stage-swipe-cue">Choose a zone above, then swipe through its stages →</p></section>
+ <div class="selection-launch"><label for="mode">RIVAL BEHAVIOR<select id="mode"><option value="cpu">CPU · Fights back</option><option value="dummy">Practice · Standing dummy</option><option value="guard">Practice · Guard dummy</option></select></label><label class="god-mode-control"><span><input id="god-mode" type="checkbox" disabled> GOD MODE</span><small id="god-mode-help">Clear the campaign for this reward. Testing is available in Settings.</small></label><div class="menu-instructions"><span>Arrows: move · Enter: select · Tab: section<br>Pad: D-pad / stick · A: select · B: back · X: change side</span></div><button id="start-fight" class="start-fight" disabled>LOADING FIGHTERS…</button></div><p id="selection-loading" role="status" class="selection-hint">Loading installed fighter sprites…</p>
  <div class="match-preview"><canvas id="selection-stage" width="1280" height="420" aria-label="Selected stage with both fighters facing one another"></canvas><div class="preview-shade"></div><div class="versus" aria-hidden="true"><b>VS</b></div><div class="preview-stage-label"><span>BATTLEGROUND</span><b id="selected-stage-name"></b></div><div class="fighter-summary red" id="player-summary"></div><div class="fighter-summary blue" id="rival-summary"></div></div>
  <section class="selection-roster" aria-labelledby="roster-heading"><div class="selection-section-heading"><div class="side-switch" aria-label="Choose which side to edit"><button id="choose-player" class="side-tab red" aria-pressed="true">P1 <span id="player-selection-name">YOUR FIGHTER</span></button><button id="choose-rival" class="side-tab blue" aria-pressed="false">CPU <span id="rival-selection-name">YOUR RIVAL</span></button></div><h2 id="roster-heading">SELECT YOUR FIGHTER</h2><span class="roster-total">${PLAYABLE_FIGHTERS.length} / SELECTABLE</span></div><div class="selection-grid" role="group" aria-label="Fighter portraits"></div><p id="selection-announcement" class="selection-hint" aria-live="polite"></p></section>
- <section class="selection-locations" aria-labelledby="locations-heading"><div class="selection-section-heading"><h2 id="locations-heading">SELECT THE STAGE</h2><button id="random-stage" class="text-button">↻ RANDOM STAGE</button></div><div class="stage-rail"></div><p class="stage-swipe-cue">← Swipe to explore all 5 stages →</p></section>
- <div class="selection-launch"><label for="mode">RIVAL BEHAVIOR<select id="mode"><option value="cpu">CPU · Fights back</option><option value="dummy">Practice · Standing dummy</option><option value="guard">Practice · Guard dummy</option></select></label><div class="menu-instructions"><span>Arrows: move · Enter: select · Tab: section<br>Pad: D-pad / stick · A: select · B: back · X: change side</span></div><button id="start-fight" class="start-fight" disabled>LOADING FIGHTERS…</button></div><p id="selection-loading" role="status" class="selection-hint">Loading installed fighter sprites…</p>`;
+`;
  const el=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
- const grid=root.querySelector('.selection-grid')!,rail=root.querySelector('.stage-rail')!;
+ const grid=root.querySelector('.selection-grid')!,rail=root.querySelector('.stage-rail[aria-labelledby="variations-heading"]')!,zoneRail=el('zone-rail');
  const portraits:HTMLButtonElement[]=[];
- for(const id of PLAYABLE_FIGHTERS){const button=document.createElement('button');button.className='portrait-choice';button.dataset.fighter=id;button.setAttribute('aria-label',ROSTER[id].name);button.innerHTML=`<img src="${originalPortraits[id]}" alt="" loading="eager"><span class="portrait-name">${ROSTER[id].name}</span><span class="side-marker p1">P1</span><span class="side-marker cpu">CPU</span><span class="lock-badge" aria-hidden="true">LOCKED</span>`;button.onclick=()=>choose(id);button.onfocus=()=>{portraits.forEach(b=>b.tabIndex=b===button?0:-1);};grid.append(button);portraits.push(button);}
- const random=document.createElement('button');random.className='portrait-choice random-choice';random.innerHTML='<strong>?</strong><span>RANDOM FIGHTER</span>';random.setAttribute('aria-label','Random fighter for selected side');random.onclick=()=>{const pool=target==='fighter'?PLAYABLE_FIGHTERS.filter(id=>!lockedWhy(id)):PLAYABLE_FIGHTERS;choose(pool[Math.floor(Math.random()*pool.length)]);};grid.append(random);portraits.push(random);
- for(const stage of STAGES){const button=document.createElement('button');button.className='stage-choice';button.dataset.stage=stage.id;button.setAttribute('aria-label',stage.name);button.innerHTML=`<canvas width="256" height="110" aria-hidden="true"></canvas><span><small>${stage.chapter?'WORLD 0'+stage.chapter:'BONUS STAGE'}</small><b>${stage.name}</b></span>`;button.onclick=()=>{setup.stage=stage.id;update();};rail.append(button);}
+ for(const id of PLAYABLE_FIGHTERS){const button=document.createElement('button');button.className='portrait-choice';button.dataset.fighter=id;button.setAttribute('aria-label',ROSTER[id].name);button.innerHTML=`<img src="${originalPortraits[id]}" alt="" loading="lazy" decoding="async" fetchpriority="low"><span class="portrait-name">${ROSTER[id].name}</span><span class="side-marker p1">P1</span><span class="side-marker cpu">CPU</span>`;button.onclick=()=>choose(id);button.onfocus=()=>{portraits.forEach(b=>b.tabIndex=b===button?0:-1);};grid.append(button);portraits.push(button);}
+ const random=document.createElement('button');random.className='portrait-choice random-choice';random.innerHTML='<strong>?</strong><span>RANDOM FIGHTER</span>';random.setAttribute('aria-label','Random fighter for selected side');random.onclick=()=>{storyProgress.sync();const ids=PLAYABLE_FIGHTERS.filter(id=>target==='opponent'||canSelect(id));choose(ids[Math.floor(Math.random()*ids.length)]);};grid.append(random);portraits.push(random);
+ function sortPortraits(){
+  const ordered=[...portraits].sort((a,b)=>{
+   const left=a.dataset.fighter as PlayableFighterId|undefined,right=b.dataset.fighter as PlayableFighterId|undefined;
+   if(!left)return right?1:0;if(!right)return -1;
+   return Number(canSelect(right))-Number(canSelect(left))||ROSTER[left].name.localeCompare(ROSTER[right].name,'en',{sensitivity:'base',numeric:true})||left.localeCompare(right);
+  });
+  if(ordered.every((button,index)=>button===portraits[index]))return;
+  const focused=portraits.find(button=>button===document.activeElement);
+  portraits.splice(0,portraits.length,...ordered);for(const button of portraits)grid.append(button);
+  focused?.focus({preventScroll:true});
+ }
+ for(const zone of STAGE_ZONES){const button=document.createElement('button');button.className='stage-choice zone-choice';button.dataset.zone=zone.id;button.dataset.stage=zone.id;button.setAttribute('aria-label',zone.name);button.innerHTML=`<canvas width="256" height="110" aria-hidden="true"></canvas><span><small>${stagesInZone(zone.id).length} ${stagesInZone(zone.id).length===1?'STAGE':'STAGES'}</small><b>${zone.name}</b></span>`;button.onclick=()=>{setup.stage=zone.id;update();};zoneRail.append(button);}
+ for(const stage of STAGES){const button=document.createElement('button');button.className='stage-choice';button.dataset.stage=stage.id;button.setAttribute('aria-label',stage.name);button.innerHTML=`<canvas width="256" height="110" aria-hidden="true"></canvas><span><small>${stage.id===stageZone(stage.id)?'MAIN STAGE':'VARIATION'}</small><b>${stage.name}</b></span>`;button.onclick=()=>{setup.stage=stage.id;update();};rail.append(button);}
  function stats(id:PlayableFighterId,side:string){const f=createState(id,'dummy').fighters[0],kit=COMBAT_STYLES[id];return `<div class="summary-top"><span>${side}</span><small>${kit.role}</small></div><h2>${ROSTER[id].name}</h2><p>${kit.specialName}</p><dl><div><dt>HEAVY DAMAGE</dt><dd>${getMove(f,'heavy').damage}<small>HP</small></dd></div><div><dt>LIGHT REACH</dt><dd>${getMove(f,'light').range}<small>PX</small></dd></div><div><dt>WALK SPEED</dt><dd>${ROSTER[id].speed.toFixed(2)}<small>PX/F</small></dd></div><div><dt>POWER STARTUP</dt><dd>${getMove(f,'bolt').startup}<small>FR</small></dd></div></dl>`;}
  function preview(){
   const canvas=el<HTMLCanvasElement>('selection-stage');
@@ -33,43 +46,68 @@ export function createSelectionMenu(hooks:{start:(setup:SelectionSetup)=>void;lo
   const c=canvas.getContext('2d')!;drawStagePreview(c,setup.stage,w,h);
   c.fillStyle='#050712a6';c.fillRect(0,0,w,h);
   const fighters=createState(setup.fighter,'dummy',setup.opponent).fighters;
-  const compact=w<650,feet=compact?h-146:h-20,scale=Math.min((compact?feet:h)*.0054,w*.0032);
+  const compact=window.innerWidth<=650,paired=isPairedFighter(setup.fighter)||isPairedFighter(setup.opponent);
+  // Mobile stat panels need their own space; long labels must never cover feet.
+  const summaryHeight=Math.max(el('player-summary').offsetHeight||0,el('rival-summary').offsetHeight||0);
+  const summaryReserve=compact?Math.max(204,summaryHeight+18):154;
+  const area=paired?h-summaryReserve:h,feet=compact?(paired?area/2-14:h-summaryReserve):area-20;
+  const height=compact?176:Math.min(244,area-46);
+  const scale=height/160;
   for(let i=0;i<2;i++){
-   const actor=fighters[i],x=w*(i===0?(compact?.25:.32):(compact?.75:.68));
-   c.fillStyle=i===0?'#b41e4288':'#1c51de99';c.beginPath();c.ellipse(x,feet+1,w*(compact?.16:.10),5,0,0,Math.PI*2);c.fill();
-   c.fillStyle=i===0?'#ff3e5b':'#518aff';c.fillRect(x-w*.06,feet+4,w*.12,1);
+   const stacked=paired&&compact;
+   const actor=fighters[i],x=w*(stacked?.5:i===0?(compact?.25:paired?.25:.35):(compact?.75:paired?.75:.65));
+   const floor=feet+(stacked?i*area/2:0);
+   c.fillStyle=i===0?'#b41e4288':'#1c51de99';c.beginPath();c.ellipse(x,floor+1,w*(compact?.16:.10),5,0,0,Math.PI*2);c.fill();
+   c.fillStyle=i===0?'#ff3e5b':'#518aff';c.fillRect(x-w*.06,floor+4,w*.12,1);
    actor.x=0;actor.y=FLOOR;actor.facing=i===0?1:-1;
-   // The two-body silhouette must fit between the stat panel and center VS.
-   const actorScale=scale*(actor.id==='duo'?.60:1);
-   c.save();c.translate(x,feet);c.scale(actorScale,actorScale);c.translate(0,-FLOOR);drawPoseAtlasSample(c,actor,0,0);c.restore();
+   // Pack menu bodies by their visible bounds; never shrink a team by body count.
+   c.save();c.translate(x,floor);drawSelectionPose(c,actor,scale,w*(paired?(compact?.90:.46):compact?.43:.28));c.restore();
   }
-  for(const button of Array.from(rail.querySelectorAll<HTMLButtonElement>('button'))){const thumb=button.querySelector('canvas')!;drawStagePreview(thumb.getContext('2d')!,button.dataset.stage as StageId,thumb.width,thumb.height);}
+  for(const button of [...Array.from(zoneRail.querySelectorAll<HTMLButtonElement>('button')),...Array.from(rail.querySelectorAll<HTMLButtonElement>('button')).filter(b=>!b.hidden)]){const thumb=button.querySelector('canvas')!;drawStagePreview(thumb.getContext('2d')!,button.dataset.stage as StageId,thumb.width,thumb.height);}
  }
 
- function update(){root.dataset.side=target;el('choose-player').setAttribute('aria-pressed',String(target==='fighter'));el('choose-rival').setAttribute('aria-pressed',String(target==='opponent'));el('player-selection-name').textContent=ROSTER[setup.fighter].name;el('rival-selection-name').textContent=ROSTER[setup.opponent].name;el<HTMLImageElement>('player-echo').src=originalPortraits[setup.fighter];el<HTMLImageElement>('rival-echo').src=originalPortraits[setup.opponent];el('roster-heading').textContent=target==='fighter'?'SELECT YOUR FIGHTER':'SELECT YOUR CPU RIVAL';for(const button of portraits){const id=button.dataset.fighter;button.classList.toggle('picked-player',id===setup.fighter);button.classList.toggle('picked-rival',id===setup.opponent);button.setAttribute('aria-pressed',String(id===setup[target]));button.tabIndex=id===setup[target]?0:-1;const why=id?lockedWhy(id as PlayableFighterId):null;button.classList.toggle('locked',!!why);button.title=why?`Locked for P1 · ${why}`:'';if(id)button.setAttribute('aria-label',why?`${ROSTER[id as PlayableFighterId].name}, locked: ${why}`:ROSTER[id as PlayableFighterId].name);}for(const button of Array.from(rail.querySelectorAll<HTMLButtonElement>('button')))button.setAttribute('aria-pressed',String(button.dataset.stage===setup.stage));el('player-summary').innerHTML=stats(setup.fighter,'P1 / YOU');el('rival-summary').innerHTML=stats(setup.opponent,'CPU / RIVAL');el('selected-stage-name').textContent=STAGES.find(s=>s.id===setup.stage)!.name;el<HTMLSelectElement>('mode').value=setup.mode;el('selection-announcement').textContent=notice||`Editing ${target==='fighter'?'P1':'CPU rival'} · ${ROSTER[setup[target]].name} · ${COMBAT_STYLES[setup[target]].signature}`;notice='';preview();}
- let notice='';
- /** Drop a P1 pick that is no longer playable (for example after the hub's Relic list arrives). */
- function enforceLocks(){if(lockedWhy(setup.fighter))setup.fighter=PLAYABLE_FIGHTERS.find(id=>!lockedWhy(id))??'rivet';}
+ function loadZonePreview(){
+  const request=++previewRequest;
+  void loadStageArt(stagesInZone(stageZone(setup.stage)).map(stage=>stage.id)).then(()=>{if(request===previewRequest&&open)preview();});
+ }
+ function update(){sortPortraits();const zone=stageZone(setup.stage);for(const button of Array.from(zoneRail.querySelectorAll<HTMLButtonElement>('button')))button.setAttribute('aria-pressed',String(button.dataset.zone===zone));for(const button of Array.from(rail.querySelectorAll<HTMLButtonElement>('button')))button.hidden=stageZone(button.dataset.stage as StageId)!==zone;el('variations-heading').textContent='2 · '+STAGE_ZONES.find(item=>item.id===zone)!.name.toUpperCase()+' · CHOOSE A VARIATION';el('zone-stage-count').textContent=stagesInZone(zone).length+(stagesInZone(zone).length===1?' STAGE':' STAGES');root.dataset.paired=String(isPairedFighter(setup.fighter)||isPairedFighter(setup.opponent));const save=storyProgress.snapshot();if(!save.godModeUnlocked)setup.godMode=false;el<HTMLInputElement>('god-mode').disabled=!save.godModeUnlocked;el<HTMLInputElement>('god-mode').checked=!!setup.godMode;el('god-mode-help').textContent=save.godModeUnlocked?'Campaign reward: invulnerability + unlimited Team Special charge. Settings also offers testing in any mode.':'Clear the campaign for this reward. Testing is available in Settings.';root.querySelector('.roster-total')!.textContent=`${PLAYABLE_FIGHTERS.filter(canSelect).length} / ${PLAYABLE_FIGHTERS.length} AVAILABLE`;root.dataset.side=target;el('choose-player').setAttribute('aria-pressed',String(target==='fighter'));el('choose-rival').setAttribute('aria-pressed',String(target==='opponent'));el('player-selection-name').textContent=ROSTER[setup.fighter].name;el('rival-selection-name').textContent=ROSTER[setup.opponent].name;el<HTMLImageElement>('player-echo').src=originalPortraits[setup.fighter];el<HTMLImageElement>('rival-echo').src=originalPortraits[setup.opponent];el('roster-heading').textContent=target==='fighter'?'SELECT YOUR FIGHTER':'SELECT YOUR CPU RIVAL';for(const button of portraits){const id=button.dataset.fighter as PlayableFighterId|undefined;const locked=!!id&&target==='fighter'&&!canSelect(id);button.classList.toggle('fighter-locked',locked);button.setAttribute('aria-description',locked?'Locked for play. Select to preview. '+lockedWhy(id!):'');button.title=locked?'Preview only. '+lockedWhy(id!):'';button.classList.toggle('picked-player',id===setup.fighter);button.classList.toggle('picked-rival',id===setup.opponent);button.setAttribute('aria-pressed',String(id===setup[target]));button.tabIndex=id===setup[target]?0:-1;}for(const button of Array.from(rail.querySelectorAll<HTMLButtonElement>('button')))button.setAttribute('aria-pressed',String(button.dataset.stage===setup.stage));el('player-summary').innerHTML=stats(setup.fighter,'P1 / YOU');el('rival-summary').innerHTML=stats(setup.opponent,'CPU / RIVAL');el('selected-stage-name').textContent=STAGES.find(s=>s.id===setup.stage)!.name;el<HTMLSelectElement>('mode').value=setup.mode;el('selection-announcement').textContent=`${target==='fighter'&&!canSelect(setup.fighter)?'Previewing locked P1':target==='fighter'?'Editing P1':'Editing CPU rival (opponent only)'} · ${ROSTER[setup[target]].name} · ${COMBAT_STYLES[setup[target]].signature} · Special partner: ${specialPartnerIds(setup[target]).map(id=>ROSTER[id].name).join(" + ")}${PARTNER_ATTACKS[ROSTER[setup[target]].partner]?" · Partner attack: "+PARTNER_ATTACKS[ROSTER[setup[target]].partner]!.name:""}`;launchState();preview();loadZonePreview();}
  function focusSelected(){portraits.find(b=>b.dataset.fighter===setup[target])?.focus();}
- function choose(id:PlayableFighterId){const why=target==='fighter'?lockedWhy(id):null;if(why){notice=`${ROSTER[id].name} is locked · ${why}. You can still pick them as your CPU rival.`;update();return;}setup[target]=id;update();}
- function selectSide(side:typeof target){target=side;update();focusSelected();}
+ function launchState(){
+  const locked=!canSelect(setup.fighter);
+  el<HTMLButtonElement>('start-fight').disabled=!ready||artLoading||locked;
+  el('start-fight').textContent=locked?'UNLOCK IN STORY':artLoading||(!ready&&!loadFailed)?'LOADING FIGHTERS…':ready?'START FIGHT':'FIGHTERS UNAVAILABLE';
+  el('selection-loading').textContent=locked?`${ROSTER[setup.fighter].name} is locked for P1. Preview only — ${lockedWhy(setup.fighter)} Or choose an unlocked fighter.`:artLoading?'Loading selected fighters…':ready?'Ready · Offline 1v1 · No round timer':'Loading installed fighter sprites…';
+ }
+ async function prepareSelection(){
+  if(!hooks.prepare)return;
+  const request=++assetRequest;artLoading=true;loadFailed=false;launchState();
+  try{await hooks.prepare([setup.fighter,setup.opponent]);if(request!==assetRequest)return;ready=true;artLoading=false;launchState();preview();}
+  catch(error){if(request!==assetRequest)return;ready=false;artLoading=false;loadFailed=true;launchState();el('selection-loading').textContent='Selected fighter art could not load. Choose again to retry.';console.error(error);}
+ }
+ function choose(id:PlayableFighterId){storyProgress.sync();setup[target]=id;update();void prepareSelection();}
+ function selectSide(side:typeof target){storyProgress.sync();target=side;update();focusSelected();}
+ el<HTMLInputElement>('god-mode').onchange=()=>{setup.godMode=storyProgress.snapshot().godModeUnlocked&&el<HTMLInputElement>('god-mode').checked;update();};
+ storyProgress.subscribe(update);
  el('choose-player').onclick=()=>selectSide('fighter');el('choose-rival').onclick=()=>selectSide('opponent');
  el('random-stage').onclick=()=>{setup.stage=STAGES[Math.floor(Math.random()*STAGES.length)].id;update();};el<HTMLSelectElement>('mode').onchange=()=>{setup.mode=el<HTMLSelectElement>('mode').value as Mode;};
- el('start-fight').onclick=()=>{enforceLocks();if(ready&&open)hooks.start({...setup});};
+ el('start-fight').onclick=()=>{storyProgress.sync();if(ready&&!artLoading&&open&&canSelect(setup.fighter))hooks.start({...setup});};
+ function back(){if(rail.contains(document.activeElement)){Array.from(zoneRail.querySelectorAll<HTMLButtonElement>('button')).find(b=>b.dataset.zone===stageZone(setup.stage))?.focus();return;}selectSide('fighter');}
  function columns(){const first=portraits[0].getBoundingClientRect().top;return Math.max(1,portraits.filter(b=>Math.abs(b.getBoundingClientRect().top-first)<5).length);}
- function navigate(direction:string){const active=document.activeElement as HTMLElement,index=portraits.indexOf(active as HTMLButtonElement),stageButtons=Array.from(rail.querySelectorAll<HTMLButtonElement>('button')),selectedStage=()=>stageButtons.find(b=>b.dataset.stage===setup.stage)?.focus();
+ function navigate(direction:string){const active=document.activeElement as HTMLElement,index=portraits.indexOf(active as HTMLButtonElement),stageButtons=Array.from(rail.querySelectorAll<HTMLButtonElement>('button')).filter(b=>!b.hidden),zoneButtons=Array.from(zoneRail.querySelectorAll<HTMLButtonElement>('button')),selectedStage=()=>stageButtons.find(b=>b.dataset.stage===setup.stage)?.focus();
  if(index>=0){const cols=columns();if(direction==='up'&&index<cols){el(target==='fighter'?'choose-player':'choose-rival').focus();return;}if(direction==='down'&&index+cols>=portraits.length){selectedStage();return;}const offset=direction==='left'?-1:direction==='right'?1:direction==='up'?-cols:cols;portraits[(index+offset+portraits.length)%portraits.length].focus();return;}
- const si=stageButtons.indexOf(active as HTMLButtonElement);if(si>=0){if(direction==='up'){focusSelected();return;}if(direction==='down'){el('mode').focus();return;}if((direction==='left'&&si===0)||(direction==='right'&&si===stageButtons.length-1)){el('random-stage').focus();return;}stageButtons[si+(direction==='left'?-1:1)].focus();return;}
- if(active===el('random-stage')){if(direction==='up'){focusSelected();return;}if(direction==='down'){selectedStage();return;}stageButtons[direction==='left'?stageButtons.length-1:0].focus();return;}
- if(active===el('mode')){if(direction==='up'){selectedStage();return;}if(direction==='down'){el('start-fight').focus();return;}const select=active as HTMLSelectElement;select.selectedIndex=(select.selectedIndex+(direction==='left'?-1:1)+select.options.length)%select.options.length;select.dispatchEvent(new Event('change'));return;}
- if(active===el('start-fight')&&(direction==='up'||direction==='left')){el('mode').focus();return;}
- if((active===el('choose-player')||active===el('choose-rival'))&&direction==='down'){focusSelected();return;}
- const controls=Array.from(document.querySelectorAll<HTMLElement>('#selection-view button, #selection-view select, .top-navigation button')).filter(b=>!b.hidden&&!(b as HTMLButtonElement).disabled&&b.offsetParent!==null);const i=controls.indexOf(active);controls[(i+(direction==='left'||direction==='up'?-1:1)+controls.length)%controls.length]?.focus();}
+ const zi=zoneButtons.indexOf(active as HTMLButtonElement);if(zi>=0){if(direction==='down'){selectedStage();return;}if(direction==='up'){el('random-stage').focus();return;}zoneButtons[(zi+(direction==='left'?-1:1)+zoneButtons.length)%zoneButtons.length].focus();return;}
+ const si=stageButtons.indexOf(active as HTMLButtonElement);if(si>=0){if(direction==='up'){zoneButtons.find(b=>b.dataset.zone===stageZone(setup.stage))?.focus();return;}if(direction==='down'){el('mode').focus();return;}if((direction==='left'&&si===0)||(direction==='right'&&si===stageButtons.length-1)){el('random-stage').focus();return;}stageButtons[si+(direction==='left'?-1:1)].focus();return;}
+ if(active===el('random-stage')){if(direction==='up'){el('story-worlds')?.focus();return;}if(direction==='down'){zoneButtons.find(b=>b.dataset.zone===stageZone(setup.stage))?.focus();return;}zoneButtons[direction==='left'?zoneButtons.length-1:0].focus();return;}
+ if(active===el('mode')){if(direction==='up'){selectedStage();return;}if(direction==='down'){el(el<HTMLInputElement>('god-mode').disabled?'start-fight':'god-mode').focus();return;}const select=active as HTMLSelectElement;select.selectedIndex=(select.selectedIndex+(direction==='left'?-1:1)+select.options.length)%select.options.length;select.dispatchEvent(new Event('change'));return;}
+ if(active===el('god-mode')){if(direction==='up'){el('mode').focus();return;}if(direction==='down'){el('start-fight').focus();return;}}
+ if(active===el('start-fight')){if(direction==='up'||direction==='left'){el(el<HTMLInputElement>('god-mode').disabled?'mode':'god-mode').focus();return;}if(direction==='down'){el(target==='fighter'?'choose-player':'choose-rival').focus();return;}}
+ if(active===el('choose-player')||active===el('choose-rival')){if(direction==='down'){focusSelected();return;}if(direction==='up'){el('start-fight').focus();return;}}
+ const controls=Array.from(document.querySelectorAll<HTMLElement>('#selection-view button, #selection-view select, #selection-view input, .top-navigation button')).filter(b=>!b.hidden&&!(b as HTMLButtonElement).disabled&&b.offsetParent!==null);const i=controls.indexOf(active);controls[(i+(direction==='left'||direction==='up'?-1:1)+controls.length)%controls.length]?.focus();}
 
- root.addEventListener('keydown',e=>{if(!open)return;if(e.key.startsWith('Arrow')){e.preventDefault();navigate(e.key.slice(5).toLowerCase());}else if(e.key==='Escape'){e.preventDefault();selectSide('fighter');}});
+ root.addEventListener('keydown',e=>{if(!open)return;if(e.key.startsWith('Arrow')){e.preventDefault();navigate(e.key.slice(5).toLowerCase());}else if(e.key==='Escape'){e.preventDefault();back();}});
  window.addEventListener('resize',()=>{if(open)preview();});
  update();
- return {get isOpen(){return open;},getSetup:()=>({...setup}),setSetup(next:Partial<SelectionSetup>){setup={...setup,...next};enforceLocks();update();},refreshLocks(){enforceLocks();update();},setReady(value:boolean,message?:string){ready=value;el<HTMLButtonElement>('start-fight').disabled=!value;el('start-fight').textContent=value?'START FIGHT  ↗':'FIGHTERS UNAVAILABLE';el('selection-loading').textContent=message??(value?'Ready · Offline 1v1 · No round timer':'Loading installed fighter sprites…');preview();},show(){open=true;root.hidden=false;update();focusSelected();},hide(){open=false;root.hidden=true;},refresh:preview,
- pollPad(pad:Gamepad|null){const buttons=pad?.buttons.map(b=>b.pressed?1:0)??[];const blocked=!!document.querySelector('dialog[open]');if(!open||blocked){lastButtons=buttons;lastDirection='';return;}const direction=pad&&(buttons[14]||pad.axes[0]<-.55)?'left':pad&&(buttons[15]||pad.axes[0]>.55)?'right':pad&&(buttons[12]||pad.axes[1]<-.55)?'up':pad&&(buttons[13]||pad.axes[1]>.55)?'down':'';const now=performance.now();if(direction&&(direction!==lastDirection||now>=repeatAt)){navigate(direction);repeatAt=now+(direction===lastDirection?150:360);}lastDirection=direction;if(buttons[0]&&!lastButtons[0]){const active=document.activeElement;if(active instanceof HTMLElement&&active.matches('button'))active.click();else focusSelected();}if(buttons[1]&&!lastButtons[1])selectSide('fighter');if(buttons[2]&&!lastButtons[2])selectSide(target==='fighter'?'opponent':'fighter');if(buttons[9]&&!lastButtons[9])el('start-fight').focus();lastButtons=buttons;}
+ return {get isOpen(){return open;},getSetup:()=>({...setup}),setSetup(next:Partial<SelectionSetup>){setup={...setup,...next};update();void prepareSelection();},setReady(value:boolean,message?:string){ready=value;loadFailed=!value&&!!message;launchState();if(message&&canSelect(setup.fighter))el('selection-loading').textContent=message;preview();},show(){storyProgress.sync();open=true;root.hidden=false;update();void prepareSelection();focusSelected();},hide(){open=false;root.hidden=true;},refreshLocks:update,refresh:preview,
+ pollPad(pad:Gamepad|null){const buttons=pad?.buttons.map(b=>b.pressed?1:0)??[];const blocked=!!document.querySelector('dialog[open]');if(!open||blocked){lastButtons=buttons;lastDirection='';return;}const direction=pad&&(buttons[14]||pad.axes[0]<-.55)?'left':pad&&(buttons[15]||pad.axes[0]>.55)?'right':pad&&(buttons[12]||pad.axes[1]<-.55)?'up':pad&&(buttons[13]||pad.axes[1]>.55)?'down':'';const now=performance.now();if(direction&&(direction!==lastDirection||now>=repeatAt)){navigate(direction);repeatAt=now+(direction===lastDirection?150:360);}lastDirection=direction;if(buttons[0]&&!lastButtons[0]){const active=document.activeElement;if(active instanceof HTMLElement&&active.matches('button,input[type=checkbox]'))active.click();else focusSelected();}if(buttons[1]&&!lastButtons[1])back();if(buttons[2]&&!lastButtons[2])selectSide(target==='fighter'?'opponent':'fighter');if(buttons[9]&&!lastButtons[9])el('start-fight').focus();lastButtons=buttons;}
  };
 }

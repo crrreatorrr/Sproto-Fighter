@@ -1,0 +1,541 @@
+[
+  {
+    "slot": 8,
+    "source": "/fighters/poses/guest12/08-airRise.png",
+    "replacement": "/fighters/poses/guest12/scale-fix/08-airRise.png",
+    "factor": 1.28,
+    "before": {
+      "red": [
+        {
+          "area": 755,
+          "bounds": [
+            88,
+            123,
+            141,
+            154
+          ]
+        },
+        {
+          "area": 112,
+          "bounds": [
+            124,
+            102,
+            143,
+            113
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 42,
+          "bounds": [
+            106,
+            105,
+            115,
+            113
+          ]
+        },
+        {
+          "area": 40,
+          "bounds": [
+            126,
+            93,
+            134,
+            103
+          ]
+        },
+        {
+          "area": 16,
+          "bounds": [
+            136,
+            93,
+            141,
+            101
+          ]
+        },
+        {
+          "area": 15,
+          "bounds": [
+            110,
+            96,
+            114,
+            101
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 1230,
+          "bounds": [
+            145,
+            163,
+            213,
+            202
+          ]
+        },
+        {
+          "area": 178,
+          "bounds": [
+            191,
+            136,
+            216,
+            150
+          ]
+        },
+        {
+          "area": 8,
+          "bounds": [
+            191,
+            168,
+            194,
+            173
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 72,
+          "bounds": [
+            168,
+            140,
+            180,
+            150
+          ]
+        },
+        {
+          "area": 68,
+          "bounds": [
+            194,
+            124,
+            204,
+            137
+          ]
+        },
+        {
+          "area": 23,
+          "bounds": [
+            207,
+            124,
+            213,
+            134
+          ]
+        },
+        {
+          "area": 22,
+          "bounds": [
+            173,
+            128,
+            179,
+            134
+          ]
+        }
+      ]
+    },
+    "floorDeltaPx": -1,
+    "minimumPaddingPx": 63
+  },
+  {
+    "slot": 9,
+    "source": "/fighters/poses/guest12/09-airFall.png",
+    "replacement": "/fighters/poses/guest12/scale-fix/09-airFall.png",
+    "factor": 1.17,
+    "before": {
+      "red": [
+        {
+          "area": 768,
+          "bounds": [
+            89,
+            128,
+            136,
+            159
+          ]
+        },
+        {
+          "area": 145,
+          "bounds": [
+            123,
+            105,
+            145,
+            117
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 59,
+          "bounds": [
+            102,
+            109,
+            114,
+            119
+          ]
+        },
+        {
+          "area": 54,
+          "bounds": [
+            125,
+            95,
+            136,
+            105
+          ]
+        },
+        {
+          "area": 24,
+          "bounds": [
+            107,
+            99,
+            112,
+            105
+          ]
+        },
+        {
+          "area": 20,
+          "bounds": [
+            137,
+            95,
+            142,
+            104
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 1036,
+          "bounds": [
+            149,
+            178,
+            204,
+            214
+          ]
+        },
+        {
+          "area": 206,
+          "bounds": [
+            189,
+            151,
+            215,
+            165
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 80,
+          "bounds": [
+            164,
+            156,
+            178,
+            168
+          ]
+        },
+        {
+          "area": 73,
+          "bounds": [
+            191,
+            139,
+            204,
+            151
+          ]
+        },
+        {
+          "area": 36,
+          "bounds": [
+            170,
+            144,
+            176,
+            151
+          ]
+        },
+        {
+          "area": 33,
+          "bounds": [
+            205,
+            139,
+            211,
+            150
+          ]
+        }
+      ]
+    },
+    "floorDeltaPx": 0,
+    "minimumPaddingPx": 62
+  },
+  {
+    "slot": 22,
+    "source": "/fighters/poses/guest12/22-airKickChamber.png",
+    "replacement": "/fighters/poses/guest12/scale-fix/22-airKickChamber.png",
+    "factor": 1.33,
+    "before": {
+      "red": [
+        {
+          "area": 402,
+          "bounds": [
+            109,
+            135,
+            137,
+            160
+          ]
+        },
+        {
+          "area": 97,
+          "bounds": [
+            124,
+            113,
+            141,
+            122
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 37,
+          "bounds": [
+            108,
+            116,
+            116,
+            123
+          ]
+        },
+        {
+          "area": 21,
+          "bounds": [
+            126,
+            107,
+            132,
+            114
+          ]
+        },
+        {
+          "area": 15,
+          "bounds": [
+            134,
+            106,
+            138,
+            113
+          ]
+        },
+        {
+          "area": 15,
+          "bounds": [
+            111,
+            110,
+            115,
+            114
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 713,
+          "bounds": [
+            172,
+            174,
+            209,
+            207
+          ]
+        },
+        {
+          "area": 175,
+          "bounds": [
+            192,
+            145,
+            215,
+            157
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 63,
+          "bounds": [
+            171,
+            149,
+            181,
+            158
+          ]
+        },
+        {
+          "area": 33,
+          "bounds": [
+            195,
+            137,
+            203,
+            146
+          ]
+        },
+        {
+          "area": 26,
+          "bounds": [
+            205,
+            136,
+            211,
+            145
+          ]
+        },
+        {
+          "area": 24,
+          "bounds": [
+            175,
+            141,
+            180,
+            146
+          ]
+        }
+      ]
+    },
+    "floorDeltaPx": -16,
+    "minimumPaddingPx": 78
+  },
+  {
+    "slot": 23,
+    "source": "/fighters/poses/guest12/23-airKickFull.png",
+    "replacement": "/fighters/poses/guest12/scale-fix/23-airKickFull.png",
+    "factor": 1.33,
+    "before": {
+      "red": [
+        {
+          "area": 245,
+          "bounds": [
+            110,
+            126,
+            134,
+            151
+          ]
+        },
+        {
+          "area": 99,
+          "bounds": [
+            100,
+            123,
+            115,
+            135
+          ]
+        },
+        {
+          "area": 87,
+          "bounds": [
+            124,
+            105,
+            140,
+            114
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 36,
+          "bounds": [
+            108,
+            106,
+            115,
+            115
+          ]
+        },
+        {
+          "area": 33,
+          "bounds": [
+            125,
+            98,
+            132,
+            106
+          ]
+        },
+        {
+          "area": 22,
+          "bounds": [
+            132,
+            98,
+            139,
+            105
+          ]
+        },
+        {
+          "area": 17,
+          "bounds": [
+            111,
+            100,
+            115,
+            105
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 432,
+          "bounds": [
+            173,
+            162,
+            205,
+            196
+          ]
+        },
+        {
+          "area": 177,
+          "bounds": [
+            160,
+            158,
+            180,
+            174
+          ]
+        },
+        {
+          "area": 152,
+          "bounds": [
+            192,
+            134,
+            213,
+            146
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 66,
+          "bounds": [
+            171,
+            136,
+            180,
+            148
+          ]
+        },
+        {
+          "area": 62,
+          "bounds": [
+            193,
+            125,
+            203,
+            136
+          ]
+        },
+        {
+          "area": 37,
+          "bounds": [
+            203,
+            125,
+            212,
+            134
+          ]
+        },
+        {
+          "area": 27,
+          "bounds": [
+            175,
+            128,
+            180,
+            134
+          ]
+        }
+      ]
+    },
+    "floorDeltaPx": -16,
+    "minimumPaddingPx": 78
+  }
+]

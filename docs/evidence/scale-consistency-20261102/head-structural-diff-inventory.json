@@ -1,0 +1,253 @@
+{
+  "manifestSha256": "c69138664410cb24409c0bf10944e29230ef677b1fe4715a89d5bde1e0f3d249",
+  "topLevelChanges": [],
+  "addedBodies": [],
+  "removedBodies": [],
+  "changedBodyCount": 19,
+  "newRuntimePngCount": 407,
+  "changedBodies": [
+    {
+      "id": "bront",
+      "fields": [
+        "frames"
+      ]
+    },
+    {
+      "id": "guest12",
+      "fields": [
+        "frames"
+      ]
+    },
+    {
+      "id": "duo",
+      "fields": [
+        "clips.death",
+        "clips.entrance",
+        "clips.ranged"
+      ]
+    },
+    {
+      "id": "duo-blue",
+      "fields": [
+        "clips.death",
+        "clips.entrance",
+        "clips.ranged"
+      ]
+    },
+    {
+      "id": "sproto102",
+      "fields": [
+        "clips.ranged"
+      ]
+    },
+    {
+      "id": "sproto832",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "sproto832-companion",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "sproto1499-companion",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "sproto1625-companion",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "sproto2616",
+      "fields": [
+        "walkFrames"
+      ]
+    },
+    {
+      "id": "sproto2789",
+      "fields": [
+        "walkFrames"
+      ]
+    },
+    {
+      "id": "sproto3235",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "sproto3235-companion",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "sproto1815",
+      "fields": [
+        "clips.cast",
+        "clips.defeat",
+        "clips.intro",
+        "clips.recoil",
+        "clips.special",
+        "walkFrames"
+      ]
+    },
+    {
+      "id": "sproto3224",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "sproto3224-companion",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "gryph-companion",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "godmod3d",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    },
+    {
+      "id": "nosmileclown",
+      "fields": [
+        "clips.airKick",
+        "clips.dash",
+        "clips.heavy",
+        "clips.jump",
+        "clips.victory"
+      ]
+    }
+  ],
+  "motionDistinctDrawings": [
+    {
+      "id": "sproto832",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "sproto832-companion",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "sproto3235",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "sproto3235-companion",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "sproto3224",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "sproto3224-companion",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "sproto1499-companion",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "sproto1625-companion",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "gryph-companion",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "godmod3d",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    },
+    {
+      "id": "nosmileclown",
+      "totalSlots": 32,
+      "distinctPixelDrawings": 32
+    }
+  ],
+  "allOtherBodyFieldsUnchanged": true,
+  "allAtlasScalesAnchorsAndHoldContactsUnchanged": true,
+  "allMainThrowContactFrames24And26Unchanged": true,
+  "postFreezeMetadataCorrection": {
+    "previousManifestSha256": "05b9d297e3808dce293f84ffd4ce5549e6bb50f56a883d1ab4f3c14a062376d1",
+    "changedFieldCount": 8,
+    "fields": [
+      "sproto102.clips.ranged[0].contactHull",
+      "sproto102.clips.ranged[1].contactHull",
+      "sproto102.clips.ranged[2].contactHull",
+      "sproto102.clips.ranged[3].contactHull",
+      "sproto102.clips.ranged[4].contactHull",
+      "sproto102.clips.ranged[5].contactHull",
+      "sproto102.clips.ranged[6].contactHull",
+      "sproto102.clips.ranged[7].contactHull"
+    ],
+    "all407PngHashesUnchanged": true,
+    "actualAlphaHullVerified": true
+  }
+}

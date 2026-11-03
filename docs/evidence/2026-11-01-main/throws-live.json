@@ -1,0 +1,14 @@
+[
+  {
+    "name": "back",
+    "readout": "MANUAL QA · frame 170 · running\nP1 vela: x=860.7 y=578.0 vx=0.00 vy=0.00 grab t=6 input=0 hp=1000 combo=0 best=0 pips=0\nP2 rivet: x=819.1 y=524.5 vx=0.00 vy=0.00 neutral t=0 input=0 hp=1000 combo=0 best=0 pips=0\nf152: grab level hits=0 pips=0 hp=1000/1000 x=858 y=578 input=513"
+  },
+  {
+    "name": "up",
+    "readout": "MANUAL QA · frame 172 · running\nP1 vela: x=860.7 y=578.0 vx=0.00 vy=0.00 grab t=9 input=0 hp=1000 combo=1 best=0 pips=0\nP2 rivet: x=920.7 y=517.0 vx=2.00 vy=-18.00 neutral t=0 input=0 hp=885 combo=0 best=0 pips=0\nf152: grab up hits=0 pips=0 hp=1000/1000 x=858 y=578 input=516\nf172: grab up hits=1 pips=0 hp=1000/885 x=861 y=578 input=0"
+  },
+  {
+    "name": "down",
+    "readout": "MANUAL QA · frame 177 · running\nP1 vela: x=858.6 y=578.0 vx=0.00 vy=0.00 grab t=9 input=0 hp=1000 combo=1 best=0 pips=0\nP2 rivet: x=922.8 y=567.9 vx=4.20 vy=15.85 neutral t=0 input=0 hp=885 combo=0 best=0 pips=0\nf151: grab down hits=0 pips=0 hp=1000/1000 x=856 y=578 input=520\nf171: grab down hits=1 pips=0 hp=1000/885 x=859 y=578 input=0"
+  }
+]

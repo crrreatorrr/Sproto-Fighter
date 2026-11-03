@@ -1,0 +1,3 @@
+Read-only check: http://127.0.0.1:5173/hub/ -> /src/main.ts -> /src/selectionMenu.ts
+const actorScale = scale * (1 / (1 + (bodyAtlasIds(actor.id).length - 1) * 0.67));
+c.scale(actorScale, actorScale);

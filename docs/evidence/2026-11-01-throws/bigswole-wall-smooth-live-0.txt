@@ -1,0 +1,21 @@
+Browser tab: 4, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 199-201
+~		8 pop up button (collapsed, settable) Fighter, Value: Big Swole · bigswole, ID: fighter, Secondary Actions: Expand
+~				11 Morelight · vela
+~				29 (selected) Big Swole · bigswole
+~		96 pop up button (collapsed, settable) Start facing, Value: Left, ID: facing, Secondary Actions: Expand
+~				98 Right
+~				99 (selected) Left
+~		102 pop up button (collapsed, settable) Arena position, Value: right wall, ID: position, Secondary Actions: Expand
+~				107 left wall
+~				108 (selected) right wall
+~	118 button Pause, ID: play
++	187 text grab · back · cycle 1
++	188 text ready: 21/21 installed atlases. Selected: available.
++	189 text Core frame 84 · scenario frame 84 · frozen 0
+Sequence poses · frame 1/31 · pose slot 1: breathe · gait phase 0.000 · x 1108.5 y 578.0 facing 1
+Move none t=- 
+Throw none
+Reactions 0: null hp=1000 x=1108.50 y=578.00 vx=0.00 vy=0.00 | 1: {"kind":"knockdown","phase":"down","t":5,"direction":1} hp=885 x=1200.00 y=578.00 vx=0.00 vy=0.00
+The focused UI element is 118 button Pause, ID: play

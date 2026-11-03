@@ -14,7 +14,7 @@ globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/js
 globalThis.Image=class {
   set src(value){this.url=value;try{const p=value.split('?')[0];const b=readFileSync(new URL('../public'+p,import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}catch{queueMicrotask(()=>this.onerror());}}
 };
-const {A,FLOOR,createState,step,PLAYABLE_FIGHTERS,THROW_GRIPS,WIDTH}=core;
+const {A,FLOOR,createState,step,PLAYABLE_FIGHTERS,THROW_GRIPS,WIDTH,bodySpread,isPairedFighter}=core;
 const {loadPoseAtlases,getPoseAtlasDebug,drawPoseAtlas,setPoseAtlasThrowState,getPoseAtlasLoadStatus,isPoseAtlasDeclared,getPoseAtlasReactionTransform}=poses;
 await loadPoseAtlases();assert.equal(getPoseAtlasLoadStatus().ids.length,Object.keys(original.fighters).length);
 let count=0;
@@ -36,15 +36,30 @@ check('all selectable fighters: complete forward/reverse gait, hitstop, and neut
   assert.equal(f.vx,0);assert.equal(getPoseAtlasDebug(f,s.frame).slot,0,id+' stop must enter guard, not global-clock breath');
  }
 });
-check('all 21 core grips agree with installed per-fighter hand/torso art metadata',()=>{
+check('organic crouched casts retain the complete crouch pose instead of the standing cast clip',()=>{
+ for(const id of core.HORIZONTAL_SPIT_FIGHTERS)for(const face of [1,-1]){
+  const s=createState(id,'cpu'),f=s.fighters[0];f.x=face===1?200:1080;s.fighters[1].x=face===1?1100:180;f.facing=face;
+  step(s,[A.down|A.bolt,0]);let sawRelease=false;
+  while(f.move){
+   const before=JSON.stringify(s),d=getPoseAtlasDebug(f,s.frame);
+   assert.equal(d.sequence,'poses');assert.equal(d.slot,10,id+' crouched cast');
+   drawPoseAtlas({save(){},restore(){},translate(){},rotate(){},scale(){},drawImage(){}},f,s.frame);
+   assert.equal(JSON.stringify(s),before,'rendering cannot change collision geometry');
+   sawRelease ||= s.projectiles.length>0;step(s,[0,0]);
+  }
+  assert.ok(sawRelease,id+' actual crouched projectile');
+ }
+});
+check('all roster core grips agree with installed per-fighter hand/torso art metadata',()=>{
  for(const id of PLAYABLE_FIGHTERS.filter(id=>id!=='duo')){const cfg=original.fighters[id];for(const [label,slot]of [['hand',26],['torso',24]]){
-  const point=cfg.holdContact[label],anchor=cfg.frames[slot].anchor??cfg.anchor;
-  assert.deepEqual(THROW_GRIPS[id][label],[(point[0]-anchor[0])*cfg.scale,(point[1]-anchor[1])*cfg.scale],id+' '+label);
+  const point=cfg.holdContact[label],anchor=cfg.frames[slot].anchor??cfg.anchor,reg=cfg.poseRegistration?.[label==='hand'?'grabReach':'hit'],density=reg?.pixelScale??1,offset=reg?.anchorOffset??[0,0];
+  const expected=point.map((v,i)=>(v-anchor[i]-offset[i])*cfg.scale*density);
+  assert.ok(THROW_GRIPS[id][label].every((v,i)=>Math.abs(v-expected[i])<1e-8),id+' '+label);
  }}
 });
-check('all 441 held pairs: draw uses actual core placement without secondary offsets or core mutation',()=>{
- for(const aid of PLAYABLE_FIGHTERS.filter(id=>id!=='duo'))for(const bid of PLAYABLE_FIGHTERS.filter(id=>id!=='duo')){
-  const s=createState(aid,'dummy',bid);s.fighters[0].x=500;s.fighters[1].x=560;step(s,[A.grab,0]);
+check('all single-body held pairs: draw uses actual core placement without secondary offsets or core mutation',()=>{
+ for(const aid of PLAYABLE_FIGHTERS.filter(id=>!isPairedFighter(id)))for(const bid of PLAYABLE_FIGHTERS.filter(id=>!isPairedFighter(id))){
+  const s=createState(aid,'dummy',bid);s.fighters[0].x=500;s.fighters[1].x=560+bodySpread(aid)+bodySpread(bid);step(s,[A.grab,0]);
   for(let t=0;t<50&&!(s.throwState?.phase==='hold'&&s.throwState.t===5);t++)step(s,[0,0]);
   assert.equal(s.throwState?.phase,'hold');setPoseAtlasThrowState(s.throwState,s.fighters);
   const [a,b]=s.fighters;let translation;const ctx={save(){},restore(){},scale(){},rotate(){},drawImage(){},translate(x,y){translation=[x,y]}};

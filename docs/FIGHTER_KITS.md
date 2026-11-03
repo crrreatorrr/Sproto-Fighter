@@ -25,10 +25,9 @@ All use the same keyboard/controller action layout and combo-earned three-pip Te
 | Bitcoin Mandela | Long reaching hands, returning links and a pull-then-release relay. | FREEDOM CHAIN | 18, 34, 50 |
 | Big Swole | Slow crushing fist, heavy rock and two massive upward/downward impacts. | ATLAS CRASH | 20, 44 |
 | Little Foot Nate | Quick low kick, low hopping shots and three short pounce bursts. | SMALL STEPS | 10, 24, 38 |
-| Sproto Duo | Two separate visual bodies share one fighter; lead/support melee, red/blue ribbon power and alternating relay contacts. | DOUBLE TAKE | 14, 24, 36, 48 |
 
 VAMP slow lasts up to 90 simulation frames and reduces movement speed to 65%; blocked hits do not apply it. Drain restores 20% of confirmed damage, capped at full health. Returning projectiles can hit once; bounce counts and burst schedules are deterministic.
 
 Golden Sproto, Morelight, Juicy, Jahon and Crapto always spit horizontally, on the ground or in the air. Other powers retain directional inputs and their characteristic trajectories.
 
-The original21 fighters use their own Higgsfield complete-body pose sheets, not the superseded runtime limb-cutout rig. Each has32 main slots and eight locally derived guarded-step frames; four main walk slots duplicate selected step images. Sproto Duo adds two body atlases with four authored walking keys each, but one selectable fighter and health pool. The action vocabulary is shared and in-between drawings remain sparse. Distinct mechanical profiles and individual art do not mean22 bespoke frame-by-frame animation systems. See the [current handoff](CLAUDE-HANDOFF.md) and [duo coverage](DUO-QA.md).
+All 21 fighters use their own Higgsfield complete-body pose sheets, not the superseded runtime limb-cutout rig. Each has 32 main slots and eight locally derived guarded-step frames; four main walk slots duplicate selected step images. The action vocabulary is shared and in-between drawings remain sparse. Distinct mechanical profiles and individual art do not mean 21 bespoke frame-by-frame animation systems. See [current sprite audit](SPRITE-REWORK-QA.md) and [throw/reaction follow-up](THROW-REACTION-QA.md).

@@ -1,0 +1,18 @@
+Browser tab: 4, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 197-199
+~		8 pop up button (collapsed, settable) Fighter, Value: Golden Sproto · rivet, ID: fighter, Secondary Actions: Expand
+~				10 (selected) Golden Sproto · rivet
+~				11 Morelight · vela
+~		71 pop up button (collapsed, settable) Opponent, Value: Morelight, ID: target, Secondary Actions: Expand
+~				73 Golden Sproto
+~				74 (selected) Morelight
+~	116 button Pause, ID: play
++	185 text victimThrow · back · cycle 1
++	186 text ready: 21/21 installed atlases. Selected: available.
++	187 text Core frame 16 · scenario frame 16 · frozen 0
+Sequence poses · frame 24/31 · pose slot 24: hit · gait phase 0.000 · x 548.8 y 556.8 facing 1
+Move none t=- 
+Throw {"attacker":1,"victim":0,"phase":"hold","t":7,"direction":"back","facing":-1,"startAttackerX":660,"startVictimX":600,"startVictimY":578,"gripAttackerX":660,"gripVictimX":548.75,"gripVictimY":556.75}
+Reactions 0: null hp=1000 x=548.75 y=556.75 vx=0.00 vy=0.00 | 1: null hp=1000 x=660.00 y=578.00 vx=0.00 vy=0.00
+The focused UI element is 116 button Pause, ID: play

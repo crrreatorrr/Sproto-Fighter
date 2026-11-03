@@ -1,17 +1,28 @@
-import { loadPoseAtlases, getPoseAtlasLoadStatus } from './poseAtlas';
-import { loadHiggsfieldRigs } from './higgsfieldRig';
+import { ensurePoseAtlases, getPoseAtlasLoadStatus } from './poseAtlas';
 import { createSelectionMenu, type SelectionSetup } from './selectionMenu';
 import './style.css';
 import './arcadeSelection.css';
+import './pixelUI.css';
+import './mysticUI.css';
+import './campaignMap.css';
+import './versusScreen.css';
+import {createVersusScreen} from './versusScreen';
+import {createFightCountdown} from './fightCountdown';
+import {mountCampaignMap} from './campaignMap';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
+import { ensurePowerArt } from './powerArt';
+import { playRetainCallout } from './characterVoice';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
-import { STAGES, setStage, loadStageArt, type StageId } from './stage';
+import { STAGES, setStage, loadStageArt, getStageArtStatus, type StageId } from './stage';
+import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
+import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
 import { createStoryMode } from './storyMode';
 import { connectHub, hubConfigured, type HubLink } from './hub/link';
-import { lockReason, readRelicCache, writeRelicCache } from './hub/roster';
+import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
+$('roster-count').textContent=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · UNLIMITED ROUND TIME`;
 const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: 'ShiftLeft' };
 const padDefaults: Partial<Record<Action, number>> = { light: 0, medium: 2, heavy: 1, launcher: 3, bolt: 5, grab: 4, special: 7, dash: 6 };
 const labels: Record<Action, string> = { left: 'Move left', right: 'Move right', up: 'Jump', down: 'Crouch', light: 'Light', medium: 'Medium', heavy: 'Finisher', launcher: 'Launcher', bolt: 'Ranged power', grab: 'Grab', special: 'Team special', dash: 'Dash' };
@@ -29,74 +40,104 @@ try {
     }
 }
 catch { /* Storage may be disabled. Defaults still work. */ }
-let state = createState(), chosen: FighterId = 'rivet', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
+let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
     action: Action;
     device: 'key' | 'pad';
 } | null = null;
+let matchGodMode=false, matchEarnedGodMode=false, testingGodMode=false, matchTesting=false;
 let presentation = createRoundPresentation();
 let modalDirection='',modalRepeatAt=0,padNeedsRelease=true;
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousStart = false;
+let visualFrame = 0;
 const held = new Set<string>();
+const blockedKeys = new Set<string>();
 let queued = 0;
+const countdown=createFightCountdown(canvas.parentElement!);
+const versus=createVersusScreen($('fight-view'),()=>{
+    // Dismissing a preview must never become an attack, jump or pause in combat.
+    for(const code of held)blockedKeys.add(code);
+    held.clear();queued=0;padNeedsRelease=true;
+    countdown.show();
+    if(running&&!dialog.open&&!story.isOpen)canvas.focus();
+});
 const frames: [
     number,
     number
 ][] = [];
-// Relics from the hub unlock some fighters (hub/roster.ts). Until the hub answers, the last
-// confirmed list from this browser applies; a standalone launch keeps using it.
 const storage = (() => { try { return window.localStorage; } catch { return null; } })();
 let hubRelics: string[] = readRelicCache(storage);
 let hub: HubLink | null = null;
-const selection = createSelectionMenu({start:setup=>launchSelection(setup),locked:id=>lockReason(id,hubRelics)});
-let toastTimer = 0;
-function hubToast(title: string, sub: string) {
-    const toast = $('hub-toast');
-    toast.replaceChildren();
-    const head = document.createElement('b');
-    head.textContent = title;
-    toast.append(head, document.createTextNode(sub));
-    toast.hidden = false;
-    clearTimeout(toastTimer);
-    toastTimer = window.setTimeout(() => { toast.hidden = true; }, 6000);
+const canPlayFighter=(id:FighterId)=>isFighterAvailable(id,storyProgress.isUnlocked(id),hubRelics);
+const lockedFighter=(id:FighterId)=>fighterLockReason(id,storyProgress.isUnlocked(id),hubRelics);
+const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:ensurePoseAtlases,canPlay:canPlayFighter,locked:lockedFighter});
+let toastTimer=0;
+function hubToast(title:string,sub:string){
+ const toast=$('hub-toast');toast.replaceChildren();
+ const heading=document.createElement('b');heading.textContent=title;
+ toast.append(heading,document.createTextNode(sub));toast.hidden=false;
+ clearTimeout(toastTimer);toastTimer=window.setTimeout(()=>{toast.hidden=true;},6000);
 }
-$('return-hub').onclick = () => { if (hub) hub.exitHub(); };
-if (hubConfigured()) $('return-hub').hidden = false;
-void connectHub().then(link => {
-    hub = link;
-    if (link.connected) {
-        hubRelics = link.relics;
-        writeRelicCache(storage, hubRelics);
-        selection.refreshLocks();
-        $('return-hub').hidden = false;
-        $('hub-label').textContent = '● HUB LINKED / BAR ARCADE';
-        $('hub-label').classList.add('linked');
-    } else if (link.error) {
-        $('hub-label').textContent = '● HUB OFFLINE / 1V1';
-        console.warn('Hub ticket was not redeemed:', link.error);
-    }
+$('return-hub').onclick=()=>{if(hub)hub.exitHub();};
+if(hubConfigured())$('return-hub').hidden=false;
+void connectHub().then(link=>{
+ hub=link;
+ if(link.connected){
+  hubRelics=link.relics;writeRelicCache(storage,hubRelics);selection.refreshLocks();
+  $('return-hub').hidden=false;$('hub-label').textContent='● HUB LINKED / BAR ARCADE';$('hub-label').classList.add('linked');
+ }else if(link.error){$('hub-label').textContent='● HUB OFFLINE / 1V1';console.warn('Hub connection unavailable:',link.error);}
 });
-/** Tickets for CPU wins and the Tidebreaker Belt for Story World 1. Standalone play reports nothing. */
-function reportRound() {
-    if (!hub?.connected || state.winner === null) return;
-    const active = story.snapshot().active;
-    const storyWorld = active ? STAGES.find(s => s.id === active)?.chapter ?? null : null;
-    void hub.onRoundEnd({ winner: state.winner, mode, storyWorld, stage: active ?? selection.getSetup().stage, fighter: chosen }, hubToast);
+/** Called exactly once at result; story saves are already settled at KO. */
+function reportRound(){
+ if(!hub?.connected||state.winner===null)return;
+ const current=story.snapshot(),encounter=current.encounter;
+ const chapterComplete=!!encounter&&current.wave===encounter.opponents.length-1&&
+  STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter).every(e=>storyProgress.isCleared(e.index));
+ void hub.onRoundEnd({winner:state.winner,mode,storyWorld:chapterComplete?encounter!.chapter:null,
+  stage:current.active??selection.getSetup().stage,fighter:chosen,assisted:matchGodMode},hubToast);
 }
 function updateStage(stage:StageId) {
-    setStage(stage);
+    setStage(stage);setActiveStoryLocation(null);
     const location=STAGES.find(s=>s.id===stage)!;
     $('stage-title').textContent=location.name.toUpperCase();
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
-function launchSelection(setup:SelectionSetup,isStory=false) {
+async function launchSelection(setup:SelectionSetup,isStory=false) {
+    // Reconcile wins from another tab or a restored page before the final P1 gate.
+    storyProgress.sync();
+    if(!canPlayFighter(setup.fighter)){
+        $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. ${lockedFighter(setup.fighter)} Or choose an unlocked P1 fighter.`;
+        return false;
+    }
+    await loadStageArt([setup.stage]);
+    if(getStageArtStatus().errors[setup.stage]){
+        $('selection-loading').textContent='Selected stage art could not load. Choose another stage or press Start Fight to retry.';
+        return false;
+    }
+    const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
+    const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
+    try{await Promise.all([ensurePoseAtlases(requiredFighters),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
+    let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
+    if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
+    matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
-    updateStage(setup.stage);
+    updateStage(setup.stage);setActiveStoryLocation(scenery);
+    if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
     selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
     started=false;restart();start();
     $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
+    if(encounter&&encounter.opponents.length>1){
+        const bout=encounter.opponents.indexOf(setup.opponent)+1;
+        const gauntletName=encounter.gauntlet==='art'?'ART DUO':encounter.gauntlet==='nick-juicy'?'NICK → JUICY':'FINAL GAUNTLET';
+        $('mode-label').textContent+=` / ${gauntletName} / BOUT ${bout} OF ${encounter.opponents.length}${bout>1?' / HEALTH REFILLED':''}`;
+    }
+    updateGodModeLabel();
+    return true;
 }
 function returnToSelection() {
+    versus.hide();
+    countdown.hide();
+    story.leaveStory();
     running=false;started=false;held.clear();queued=0;accumulator=0;qaSingleStep=false;
     resumeAfterSettings=false;resumeAfterJourney=false;
     $('fight-view').hidden=true;$('overlay').hidden=true;
@@ -111,7 +152,7 @@ function save() {
     catch { /* Nonpersistent mode. */ }
 }
 function updateControls() {
-    $('directional-help').textContent = `${keyName(keys.up)} + ${keyName(keys.light)}: Rising strike · ${keyName(keys.up)} + forward + ${keyName(keys.medium)}: Diagonal · ${keyName(keys.down)} + ${keyName(keys.medium)}/${keyName(keys.heavy)}: Low / dive · ${keyName(keys.bolt)}: Horizontal spit / aim other powers · ${keyName(keys.dash)} after hit: Dash cancel`;
+    $('directional-help').textContent = `${keyName(keys.up)} + ${keyName(keys.light)}: Rising strike · ${keyName(keys.up)} + forward + ${keyName(keys.medium)}: Diagonal · ${keyName(keys.down)} + ${keyName(keys.medium)}/${keyName(keys.heavy)}: Low / dive · ${keyName(keys.bolt)}: Horizontal spit (${keyName(keys.down)}: crouch low / ${keyName(keys.up)}: jump high) / aim other powers · ${keyName(keys.dash)} after hit: Dash cancel`;
 
     $('controls-strip').innerHTML = `<span class="control"><kbd>${keyName(keys.left)} ${keyName(keys.right)}</kbd> Move / block</span>` + (['up', 'down', 'light', 'medium', 'heavy', 'launcher', 'bolt', 'grab', 'special', 'dash'] as Action[]).map(a => `<span class="control"><kbd>${keyName(keys[a])}</kbd>${labels[a]}</span>`).join('');
     document.querySelectorAll<HTMLElement>('[data-key]').forEach(el => el.textContent = keyName(keys[el.dataset.key as Action]));
@@ -141,13 +182,14 @@ function bind(value: string | number) {
     updateControls();
     $('binding-status').textContent = 'Saved on this browser.';
 }
-function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; held.clear(); queued = 0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; if(!selection.isOpen)$('start').focus(); }
+function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; if(!selection.isOpen)$('start').focus(); }
 function start() {
     if (selection.isOpen || story.isOpen || dialog.open || ($('start') as HTMLButtonElement).disabled) return;
     if (presentation.phase === 'result')
         restart();
     started = true;
     running = true;
+    versus.suspend(false);countdown.suspend(false);
     padNeedsRelease = true;
     accumulator = 0;
     held.clear();
@@ -165,34 +207,55 @@ function pause() {
         start();
 }
 function restart() {
+    matchTesting=testingGodMode;matchGodMode=testingGodMode||matchEarnedGodMode;
     state = createState(chosen, mode, opponent);
+    if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
+    countdown.hide();
+    versus.show(chosen,state.fighters[1].id);
     frames.length = 0;
     qaEvents.length = 0;
     accumulator = 0;
     held.clear();
     queued = 0;
+    updateGodModeLabel();
     if (started)
         start();
 }
+function updateGodModeLabel(){
+    const label=$('mode-label');label.textContent=(label.textContent??'').replace(/ \/ GOD MODE(?: TEST)?$/,'')+(matchTesting?' / GOD MODE TEST':matchGodMode?' / GOD MODE':'');
+}
+function setTestingGodMode(enabled:boolean){
+    testingGodMode=enabled;
+    // Restart is deliberately blocked while Settings is open. Resume the new
+    // round on close even if the previous one was already on its result screen.
+    if(started&&!selection.isOpen){resumeAfterSettings=true;if(!story.retryMatch())restart();}
+}
 let resumeAfterJourney = false, freePlayMode: Mode | null = null;
 const story = createStoryMode({
+    map:mountCampaignMap,
+    selectedFighter:()=>selection.getSetup().fighter,
+    canPlayFighter,
+    testing:()=>matchTesting,
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
     resume: () => { if (resumeAfterJourney && started && presentation.phase !== 'result') start(); },
-    launch: (stage, isStory) => {
+    launch: (stage, isStory, storyOpponent) => {
         if(isStory)freePlayMode??=selection.getSetup().mode;
         const setup=selection.getSetup();
+        if(storyOpponent)setup.opponent=storyOpponent;
         setup.stage=stage;setup.mode=isStory?'cpu':freePlayMode??setup.mode;
         if(!isStory)freePlayMode=null;
-        launchSelection(setup,isStory);
+        return launchSelection(setup,isStory);
     },
 });
 $('start').onclick = start;
 $('pause').onclick = pause;
-$('reset').onclick = restart;
+$('reset').onclick = ()=>{if(!story.retryMatch())restart();};
 const dialog = $<HTMLDialogElement>('controls-dialog');
+$('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
 $('settings').onclick = () => {
+    $<HTMLInputElement>('testing-god-mode').checked=testingGodMode;
     resumeAfterSettings = running;
     if (running)
         pause();
@@ -241,6 +304,10 @@ window.addEventListener('keydown', e => {
     }
     if (!running)
         return;
+    if(blockedKeys.has(e.code)){e.preventDefault();return;}
+    if(versus.isOpen){
+        e.preventDefault();if(e.code==='Enter'&&!e.repeat){blockedKeys.add(e.code);versus.skip();}return;
+    }
     if (Object.values(keys).includes(e.code)) {
         e.preventDefault();
         if (!held.has(e.code)) {
@@ -251,8 +318,9 @@ window.addEventListener('keydown', e => {
         held.add(e.code);
     }
 });
-window.addEventListener('keyup', e => held.delete(e.code));
+window.addEventListener('keyup', e => {held.delete(e.code);blockedKeys.delete(e.code);});
 window.addEventListener('blur', () => {
+    blockedKeys.clear();
     held.clear();
     queued = 0;
     if (running)
@@ -291,7 +359,7 @@ function pollPad(): number {
         }
         modalDirection=direction;
         if(buttons[1]&&!previousPad[1])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
-        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLButtonElement)document.activeElement.click();
+        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLElement&&document.activeElement.matches('button,input[type=checkbox]'))document.activeElement.click();
     }else if(!wasOverlay)modalDirection='';
     if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen){
         const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
@@ -307,6 +375,12 @@ function pollPad(): number {
     }
     if(wasSelection||wasModal||wasOverlay||selection.isOpen||story.isOpen||dialog.open){padNeedsRelease=true;previousStart=!!buttons[9];previousPad=buttons;return 0;}
     if(padNeedsRelease){previousStart=!!buttons[9];previousPad=buttons;if(!buttons.some(Boolean)&&pad.axes.every(axis=>Math.abs(axis)<.3))padNeedsRelease=false;return 0;}
+    if(versus.isOpen){
+        const skip=!!buttons[0]&&!previousPad[0];
+        previousStart=!!buttons[9];previousPad=buttons;
+        if(skip)versus.skip();
+        return 0;
+    }
     const menu = !!buttons[9];
     if (menu && !previousStart && !dialog.open && !story.isOpen) {
         if (!started || presentation.phase === 'result')
@@ -336,7 +410,7 @@ let qaFrozen=false,qaSingleStep=false;
 let qaStopAtOutro=()=>{};
 const qaEvents:string[]=[];
 if(qaPanel){
-    const bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;padding:12px';
+    const bar=document.createElement('div');bar.style.cssText='display:flex;flex-wrap:wrap;gap:8px;padding:12px';
     const freeze=document.createElement('button'),single=document.createElement('button');
     freeze.textContent='Freeze QA frame';single.textContent='Advance QA frame';
     freeze.onclick=()=>{qaFrozen=!qaFrozen;freeze.textContent=qaFrozen?'Resume QA playback':'Freeze QA frame';accumulator=0;};
@@ -353,6 +427,12 @@ function qaRecord(before:string){
 }
 // A presentation frame never enters the deterministic combat/replay stream.
 function advanceRoundFrame(input: number) {
+    if(versus.advance())return;
+    if(countdown.advance()){
+        // Entrances remain visible during the countdown; combat and replay wait.
+        advanceRoundPresentation(presentation);
+        return;
+    }
     if (presentation.phase === 'intro') {
         advanceRoundPresentation(presentation, input !== 0);
         if ((presentation as RoundPresentation).phase !== 'fight') return;
@@ -371,9 +451,12 @@ function advanceRoundFrame(input: number) {
     const pair: [number, number] = [input, cpuInput(state)];
     frames.push(pair);
     const qaBefore = qaPanel ? [state.fighters[0].move?.id,state.fighters[0].combo,state.fighters[0].pips,state.fighters[0].hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|') : '';
+    const previousMoves=state.fighters.map(f=>f.move);
     step(state, pair);
+    for(const [i,f] of state.fighters.entries())if(f.id==='michael'&&f.move!==previousMoves[i]&&(f.move?.id==='bolt'||f.move?.id==='special'))playRetainCallout();
     qaRecord(qaBefore);
     if (state.winner !== null) {
+        story.finishMatch(state.winner);
         const losers = state.fighters.filter((_, i) => state.winner === 2 || i !== state.winner);
         const fromFloor = losers.every(f => f.reaction?.kind === 'knockdown' && f.reaction.phase === 'down');
         beginRoundOutro(presentation, state.winner as 0 | 1 | 2, fromFloor);
@@ -384,6 +467,8 @@ function advanceRoundFrame(input: number) {
 function tick(now: number) {
     const elapsed = Math.min((now - lastTime) / 1000, .1);
     lastTime = now;
+    // Keep KO icon rotation alive on the result screen without advancing combat.
+    visualFrame += qaFrozen ? (qaSingleStep ? 1 : 0) : elapsed * 60;
     const pad = pollPad();
     if (running && !selection.isOpen && !dialog.open && !story.isOpen && (!qaFrozen||qaSingleStep)) {
         accumulator = qaSingleStep?1/60:accumulator+elapsed;
@@ -399,7 +484,7 @@ function tick(now: number) {
             if (!running || presentation.phase === 'result') break;
         }
     }
-    if(!selection.isOpen) render(ctx, state, presentation);
+    if(!selection.isOpen) render(ctx, state, presentation, visualFrame);
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);
@@ -407,12 +492,14 @@ function tick(now: number) {
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
-loadPoseAtlases().then(()=>{const installed=getPoseAtlasLoadStatus().ids;return PLAYABLE_FIGHTERS.some(id=>!installed.includes(id))?loadHiggsfieldRigs():undefined;}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
-loadStageArt().then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
+ensurePoseAtlases(['highsproto','vela']).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
+loadStageArt(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
-Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, replay: () => ({ version: 1, fighter: chosen, mode, opponent, frames: frames.map(f => [...f]) }), verifyReplay: () => {
+Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, godMode:matchGodMode, frames: frames.map(f => [...f]) }), verifyReplay: () => {
             const replay = createState(chosen, mode, opponent);
+            if(matchGodMode){replay.godMode=true;replay.fighters[0].pips=3;}
             for (const frame of frames)
                 step(replay, frame);
             return JSON.stringify(replay) === JSON.stringify(state);

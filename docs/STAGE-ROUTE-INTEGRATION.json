@@ -1,0 +1,135 @@
+{
+  "source": "src/stage.ts",
+  "status": "installed-and-qa-passed",
+  "route": [
+    "trenches",
+    "circuit",
+    "yacht",
+    "throne",
+    "bar",
+    "verse",
+    "hatchery"
+  ],
+  "chapters": [
+    {
+      "id": "trenches",
+      "name": "Mudline Trenches",
+      "theme": "The Trenches / city below",
+      "accent": "#d6a05c",
+      "chapter": 1
+    },
+    {
+      "id": "circuit",
+      "name": "Circuit Gate",
+      "theme": "The City / challenge gate",
+      "accent": "#64d7df",
+      "chapter": 2
+    },
+    {
+      "id": "yacht",
+      "name": "Tidebreak Marina",
+      "theme": "$Bitcoin Yacht Party",
+      "accent": "#66d7e8",
+      "chapter": 3
+    },
+    {
+      "id": "throne",
+      "name": "Crown Relay Chamber",
+      "theme": "The Castle / relay throne",
+      "accent": "#e5b65f",
+      "chapter": 4
+    },
+    {
+      "id": "bar",
+      "name": "Last Light Bar",
+      "theme": "The Bar / hidden doorway",
+      "accent": "#efaa65",
+      "chapter": 5
+    },
+    {
+      "id": "verse",
+      "name": "Verse Gate",
+      "theme": "The Verse / open every gate",
+      "accent": "#ad92f4",
+      "chapter": 6
+    },
+    {
+      "id": "hatchery",
+      "name": "The Hatchery",
+      "theme": "Beyond the portal / alien hive",
+      "accent": "#c4d75c",
+      "chapter": 7
+    }
+  ],
+  "alternateStages": [
+    {
+      "id": "retro",
+      "name": "Neon Tomorrow",
+      "theme": "Retrofuturistic city",
+      "accent": "#df86de",
+      "chapter": 2
+    },
+    {
+      "id": "castle",
+      "name": "Moonkeep Castle",
+      "theme": "Castle courtyard",
+      "accent": "#adabed",
+      "chapter": 4
+    },
+    {
+      "id": "ranch",
+      "name": "Amber Ranch",
+      "theme": "Bonus / original ranch",
+      "accent": "#efbd7a",
+      "chapter": null
+    }
+  ],
+  "assets": [
+    {
+      "id": "trenches",
+      "path": "public/stages/higgsfield/trenches.png",
+      "sha256": "16bfb68251c26cf15cbf0f13a2100ee4dd130787cda63f35958ac76289639f5a"
+    },
+    {
+      "id": "circuit",
+      "path": "public/stages/higgsfield/circuit.png",
+      "sha256": "4f62828b1b6f9b021a9a8ed33937bbe7e8d91474d3ed0e834c9ed4567efdb713"
+    },
+    {
+      "id": "retro",
+      "path": "public/stages/higgsfield/retro.png",
+      "sha256": "7448914cb447f64d0465ea11ae8d667796a7463c36246814f2008587aa25e1c9"
+    },
+    {
+      "id": "yacht",
+      "path": "public/stages/higgsfield/yacht.png",
+      "sha256": "98e774dda60b9cc999dc27eab58e9418a5095311f25590aa0bd3789aad4bc0cd"
+    },
+    {
+      "id": "throne",
+      "path": "public/stages/higgsfield/throne.png",
+      "sha256": "ed1478a792d8ae479e1d603e91c701912401879a81b6aa3374501a99b0b5485d"
+    },
+    {
+      "id": "castle",
+      "path": "public/stages/higgsfield/castle.png",
+      "sha256": "3ae95bffa16b2868e76f98eb023abad719b34e2e3484dd1818e40cc58b27c977"
+    },
+    {
+      "id": "bar",
+      "path": "public/stages/higgsfield/bar.png",
+      "sha256": "7c34fbc58ab1b40632f00ca7c10d30cfa4f260a03048ee2d31926339be56bbd2"
+    },
+    {
+      "id": "verse",
+      "path": "public/stages/higgsfield/verse.png",
+      "sha256": "2ee1328c890b06c429f210a320af88561d3e1d58fde1a4156adf1748a053beab"
+    },
+    {
+      "id": "hatchery",
+      "path": "public/stages/higgsfield/hatchery.png",
+      "sha256": "8881bfab60d5df7ee90698ae261628bb24fd9c76e510e0da35bffb890d5e3ad5"
+    }
+  ],
+  "integrationNotes": "Persistent campaign owns encounter locks and finale bosses; import canonical ordered route rather than hardcoding IDs. Verse Gate precedes final Hatchery zone."
+}

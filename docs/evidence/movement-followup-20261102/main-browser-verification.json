@@ -1,0 +1,39 @@
+{
+  "url": "http://127.0.0.1:5173/",
+  "codeIntegrationCommit": "aa6ba21cf9e05f287b8c8df26a1e3f7bd08f80b3",
+  "atlasSha256": "6801decd39a60b03a4b12088cba3db2d0bc8e65acc8733a439c79f1a63fbf17c",
+  "visibleRoster": 131,
+  "visibleStageCount": 73,
+  "scopeNote": "The live main working tree also includes42 preserved concurrent map/stage/font files. These were not authored or committed by this motion task.",
+  "observed": [
+    "Selection finished loading with START FIGHT enabled; Fat Head Dave is already unlocked. Chose Dave versus hly3 in standing-dummy practice.",
+    "Versus screen showed both correct original profiles/names and waited for Continue. Countdown3 was visibly observed before normal play; this capture did not inspect every countdown numeral.",
+    "W produced visible airborne Dave at stable head/body registration, followed by grounded movement.",
+    "Initial heavy inputs at insufficient distance whiffed. After closing distance, heavy reduced target HP from1000 to880 and visibly launched both hly3 bodies near the right edge.",
+    "Close grab visibly caught red twin; subsequent screenshot showed both complete twin bodies released to a farther grounded position. Exact release instant was not captured in this main run.",
+    "Restart returned to the versus confirmation. Return to selection succeeded using native visible Fighter select control after a DOM locator click did not navigate.",
+    "Restored initial High Sproto versus Morelight, CPU fights back, Sproto Ranch. START FIGHT enabled. No progression reset or unlock manipulation.",
+    "No browser console errors recorded during this final tab check."
+  ],
+  "proof": [
+    "main-dave-jump.jpg",
+    "main-dave-grab.jpg",
+    "main-dave-throw-after.jpg",
+    "main-heavy-hit.jpg",
+    "main-ready-menu.jpg"
+  ],
+  "limitations": [
+    "Real-time screenshots are sparse samples, not continuous video or a quantified latency/feel verdict.",
+    "Physical controller testing remains skipped.",
+    "No roster-wide normal-match entrance/defeat/projectile/partner-effect approval."
+  ],
+  "pushPerformed": false,
+  "gitHousekeepingWarning": "Background git gc reported bad object refs/heads/codex/persistent-story-unlocks 2. The real codex/persistent-story-unlocks resolves to37777c208ea81081414f591bc22d35cba50838dd. Commits/merge succeeded; no ref deletion or cleanup attempted.",
+  "server": {
+    "pid": 87695,
+    "parentPid": 1,
+    "host": "127.0.0.1",
+    "port": 5173,
+    "persistence": "Existing detached Vite process; survives this task, but is not installed as a login/startup service."
+  }
+}

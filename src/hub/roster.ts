@@ -4,8 +4,8 @@ import type { PlayableFighterId } from '../core';
  * Which Sproto Fighter characters other games' Relics unlock.
  *
  * Same rule as the hub's item matrix: a Relic unlocks things in the other games, never in its
- * own. The Tidebreaker Belt is earned here, so it unlocks nothing here. Every other fighter is
- * always playable. The CPU may use any fighter, locked or not, so you meet them before you own them.
+ * own. The Tidebreaker Belt is earned here, so it unlocks nothing here. The existing story recruitment rules also remain valid. Other fighters are
+ * recruited through the campaign. The CPU may use any fighter, locked or not, so you meet them before you own them.
  */
 export interface RelicUnlock {
   relic: string;
@@ -76,4 +76,14 @@ export function writeRelicCache(store: KeyValueStore | null, relics: readonly st
   } catch {
     /* Storage may be disabled. The hub list still applies for this visit. */
   }
+}
+
+/** Relics are an additional recruitment route; never revoke an earned story recruit. */
+export function isFighterAvailable(id:PlayableFighterId, storyUnlocked:boolean, relics:readonly string[]):boolean {
+  return storyUnlocked || (requiredRelics(id).length > 0 && isUnlocked(id,relics));
+}
+export function fighterLockReason(id:PlayableFighterId, storyUnlocked:boolean, relics:readonly string[]):string|null {
+  if(isFighterAvailable(id,storyUnlocked,relics))return null;
+  const relic=lockReason(id,relics);
+  return 'Defeat this fighter in story mode to recruit them'+(relic?' — or '+relic+'.':'.');
 }

@@ -1,0 +1,2839 @@
+{
+  "manifestSha256": "c69138664410cb24409c0bf10944e29230ef677b1fe4715a89d5bde1e0f3d249",
+  "correctedBodyCount": 19,
+  "newRuntimeAssetPaths": [
+    "/fighters/events/sproto1815/scale-body-128/00.png",
+    "/fighters/events/sproto1815/scale-body-128/01.png",
+    "/fighters/events/sproto1815/scale-body-128/02.png",
+    "/fighters/events/sproto1815/scale-body-128/03.png",
+    "/fighters/events/sproto1815/scale-body-128/04.png",
+    "/fighters/events/sproto1815/scale-body-128/05.png",
+    "/fighters/events/sproto1815/scale-body-128/06.png",
+    "/fighters/events/sproto1815/scale-body-128/07.png",
+    "/fighters/events/sproto1815/scale-body-128/08.png",
+    "/fighters/events/sproto1815/scale-body-128/09.png",
+    "/fighters/events/sproto1815/scale-body-128/10.png",
+    "/fighters/events/sproto1815/scale-body-128/11.png",
+    "/fighters/events/sproto1815/scale-body-128/12.png",
+    "/fighters/events/sproto1815/scale-body-128/13.png",
+    "/fighters/events/sproto1815/scale-body-128/14.png",
+    "/fighters/events/sproto1815/scale-body-128/15.png",
+    "/fighters/events/sproto1815/scale-body-128/16.png",
+    "/fighters/events/sproto1815/scale-body-128/17.png",
+    "/fighters/events/sproto1815/scale-body-128/18.png",
+    "/fighters/events/sproto1815/scale-body-128/19.png",
+    "/fighters/events/sproto1815/scale-body-128/20.png",
+    "/fighters/events/sproto1815/scale-body-128/21.png",
+    "/fighters/events/sproto1815/scale-body-128/22.png",
+    "/fighters/events/sproto1815/scale-body-128/23.png",
+    "/fighters/events/sproto1815/scale-body-128/24.png",
+    "/fighters/events/sproto1815/scale-body-128/25.png",
+    "/fighters/events/sproto1815/scale-body-128/26.png",
+    "/fighters/events/sproto1815/scale-body-128/27.png",
+    "/fighters/events/sproto1815/scale-body-128/28.png",
+    "/fighters/events/sproto1815/scale-body-128/29.png",
+    "/fighters/events/sproto1815/scale-body-128/30.png",
+    "/fighters/events/sproto1815/scale-body-128/31.png",
+    "/fighters/identity/sproto102/scale-fix/08.png",
+    "/fighters/identity/sproto102/scale-fix/09.png",
+    "/fighters/identity/sproto102/scale-fix/10.png",
+    "/fighters/identity/sproto102/scale-fix/11.png",
+    "/fighters/identity/sproto102/scale-fix/12.png",
+    "/fighters/identity/sproto102/scale-fix/13.png",
+    "/fighters/identity/sproto102/scale-fix/14.png",
+    "/fighters/identity/sproto102/scale-fix/15.png",
+    "/fighters/motion/godmod3d/scale-fix/00.png",
+    "/fighters/motion/godmod3d/scale-fix/01.png",
+    "/fighters/motion/godmod3d/scale-fix/02.png",
+    "/fighters/motion/godmod3d/scale-fix/03.png",
+    "/fighters/motion/godmod3d/scale-fix/04.png",
+    "/fighters/motion/godmod3d/scale-fix/05.png",
+    "/fighters/motion/godmod3d/scale-fix/06.png",
+    "/fighters/motion/godmod3d/scale-fix/07.png",
+    "/fighters/motion/godmod3d/scale-fix/08.png",
+    "/fighters/motion/godmod3d/scale-fix/09.png",
+    "/fighters/motion/godmod3d/scale-fix/10.png",
+    "/fighters/motion/godmod3d/scale-fix/11.png",
+    "/fighters/motion/godmod3d/scale-fix/12.png",
+    "/fighters/motion/godmod3d/scale-fix/13.png",
+    "/fighters/motion/godmod3d/scale-fix/14.png",
+    "/fighters/motion/godmod3d/scale-fix/15.png",
+    "/fighters/motion/godmod3d/scale-fix/16.png",
+    "/fighters/motion/godmod3d/scale-fix/17.png",
+    "/fighters/motion/godmod3d/scale-fix/18.png",
+    "/fighters/motion/godmod3d/scale-fix/19.png",
+    "/fighters/motion/godmod3d/scale-fix/20.png",
+    "/fighters/motion/godmod3d/scale-fix/21.png",
+    "/fighters/motion/godmod3d/scale-fix/22.png",
+    "/fighters/motion/godmod3d/scale-fix/23.png",
+    "/fighters/motion/godmod3d/scale-fix/24.png",
+    "/fighters/motion/godmod3d/scale-fix/25.png",
+    "/fighters/motion/godmod3d/scale-fix/26.png",
+    "/fighters/motion/godmod3d/scale-fix/27.png",
+    "/fighters/motion/godmod3d/scale-fix/28.png",
+    "/fighters/motion/godmod3d/scale-fix/29.png",
+    "/fighters/motion/godmod3d/scale-fix/30.png",
+    "/fighters/motion/godmod3d/scale-fix/31.png",
+    "/fighters/motion/gryph-companion/scale-fix/00.png",
+    "/fighters/motion/gryph-companion/scale-fix/01.png",
+    "/fighters/motion/gryph-companion/scale-fix/02.png",
+    "/fighters/motion/gryph-companion/scale-fix/03.png",
+    "/fighters/motion/gryph-companion/scale-fix/04.png",
+    "/fighters/motion/gryph-companion/scale-fix/05.png",
+    "/fighters/motion/gryph-companion/scale-fix/06.png",
+    "/fighters/motion/gryph-companion/scale-fix/07.png",
+    "/fighters/motion/gryph-companion/scale-fix/08.png",
+    "/fighters/motion/gryph-companion/scale-fix/09.png",
+    "/fighters/motion/gryph-companion/scale-fix/10.png",
+    "/fighters/motion/gryph-companion/scale-fix/11.png",
+    "/fighters/motion/gryph-companion/scale-fix/12.png",
+    "/fighters/motion/gryph-companion/scale-fix/13.png",
+    "/fighters/motion/gryph-companion/scale-fix/14.png",
+    "/fighters/motion/gryph-companion/scale-fix/15.png",
+    "/fighters/motion/gryph-companion/scale-fix/16.png",
+    "/fighters/motion/gryph-companion/scale-fix/17.png",
+    "/fighters/motion/gryph-companion/scale-fix/18.png",
+    "/fighters/motion/gryph-companion/scale-fix/19.png",
+    "/fighters/motion/gryph-companion/scale-fix/20.png",
+    "/fighters/motion/gryph-companion/scale-fix/21.png",
+    "/fighters/motion/gryph-companion/scale-fix/22.png",
+    "/fighters/motion/gryph-companion/scale-fix/23.png",
+    "/fighters/motion/gryph-companion/scale-fix/24.png",
+    "/fighters/motion/gryph-companion/scale-fix/25.png",
+    "/fighters/motion/gryph-companion/scale-fix/26.png",
+    "/fighters/motion/gryph-companion/scale-fix/27.png",
+    "/fighters/motion/gryph-companion/scale-fix/28.png",
+    "/fighters/motion/gryph-companion/scale-fix/29.png",
+    "/fighters/motion/gryph-companion/scale-fix/30.png",
+    "/fighters/motion/gryph-companion/scale-fix/31.png",
+    "/fighters/motion/nosmileclown/scale-fix/00.png",
+    "/fighters/motion/nosmileclown/scale-fix/01.png",
+    "/fighters/motion/nosmileclown/scale-fix/02.png",
+    "/fighters/motion/nosmileclown/scale-fix/03.png",
+    "/fighters/motion/nosmileclown/scale-fix/04.png",
+    "/fighters/motion/nosmileclown/scale-fix/05.png",
+    "/fighters/motion/nosmileclown/scale-fix/06.png",
+    "/fighters/motion/nosmileclown/scale-fix/07.png",
+    "/fighters/motion/nosmileclown/scale-fix/08.png",
+    "/fighters/motion/nosmileclown/scale-fix/09.png",
+    "/fighters/motion/nosmileclown/scale-fix/10.png",
+    "/fighters/motion/nosmileclown/scale-fix/11.png",
+    "/fighters/motion/nosmileclown/scale-fix/12.png",
+    "/fighters/motion/nosmileclown/scale-fix/13.png",
+    "/fighters/motion/nosmileclown/scale-fix/14.png",
+    "/fighters/motion/nosmileclown/scale-fix/15.png",
+    "/fighters/motion/nosmileclown/scale-fix/16.png",
+    "/fighters/motion/nosmileclown/scale-fix/17.png",
+    "/fighters/motion/nosmileclown/scale-fix/18.png",
+    "/fighters/motion/nosmileclown/scale-fix/19.png",
+    "/fighters/motion/nosmileclown/scale-fix/20.png",
+    "/fighters/motion/nosmileclown/scale-fix/21.png",
+    "/fighters/motion/nosmileclown/scale-fix/22.png",
+    "/fighters/motion/nosmileclown/scale-fix/23.png",
+    "/fighters/motion/nosmileclown/scale-fix/24.png",
+    "/fighters/motion/nosmileclown/scale-fix/25.png",
+    "/fighters/motion/nosmileclown/scale-fix/26.png",
+    "/fighters/motion/nosmileclown/scale-fix/27.png",
+    "/fighters/motion/nosmileclown/scale-fix/28.png",
+    "/fighters/motion/nosmileclown/scale-fix/29.png",
+    "/fighters/motion/nosmileclown/scale-fix/30.png",
+    "/fighters/motion/nosmileclown/scale-fix/31.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/00.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/01.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/02.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/03.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/04.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/05.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/06.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/07.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/08.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/09.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/10.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/11.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/12.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/13.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/14.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/15.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/16.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/17.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/18.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/19.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/20.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/21.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/22.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/23.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/24.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/25.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/26.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/27.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/28.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/29.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/30.png",
+    "/fighters/motion/sproto1499-companion/scale-fix/31.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/00.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/01.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/02.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/03.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/04.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/05.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/06.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/07.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/08.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/09.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/10.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/11.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/12.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/13.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/14.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/15.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/16.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/17.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/18.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/19.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/20.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/21.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/22.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/23.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/24.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/25.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/26.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/27.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/28.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/29.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/30.png",
+    "/fighters/motion/sproto1625-companion/scale-fix/31.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/00.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/01.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/02.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/03.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/04.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/05.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/06.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/07.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/08.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/09.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/10.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/11.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/12.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/13.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/14.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/15.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/16.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/17.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/18.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/19.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/20.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/21.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/22.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/23.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/24.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/25.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/26.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/27.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/28.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/29.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/30.png",
+    "/fighters/motion/sproto3224-companion/scale-fix/31.png",
+    "/fighters/motion/sproto3224/scale-fix/00.png",
+    "/fighters/motion/sproto3224/scale-fix/01.png",
+    "/fighters/motion/sproto3224/scale-fix/02.png",
+    "/fighters/motion/sproto3224/scale-fix/03.png",
+    "/fighters/motion/sproto3224/scale-fix/04.png",
+    "/fighters/motion/sproto3224/scale-fix/05.png",
+    "/fighters/motion/sproto3224/scale-fix/06.png",
+    "/fighters/motion/sproto3224/scale-fix/07.png",
+    "/fighters/motion/sproto3224/scale-fix/08.png",
+    "/fighters/motion/sproto3224/scale-fix/09.png",
+    "/fighters/motion/sproto3224/scale-fix/10.png",
+    "/fighters/motion/sproto3224/scale-fix/11.png",
+    "/fighters/motion/sproto3224/scale-fix/12.png",
+    "/fighters/motion/sproto3224/scale-fix/13.png",
+    "/fighters/motion/sproto3224/scale-fix/14.png",
+    "/fighters/motion/sproto3224/scale-fix/15.png",
+    "/fighters/motion/sproto3224/scale-fix/16.png",
+    "/fighters/motion/sproto3224/scale-fix/17.png",
+    "/fighters/motion/sproto3224/scale-fix/18.png",
+    "/fighters/motion/sproto3224/scale-fix/19.png",
+    "/fighters/motion/sproto3224/scale-fix/20.png",
+    "/fighters/motion/sproto3224/scale-fix/21.png",
+    "/fighters/motion/sproto3224/scale-fix/22.png",
+    "/fighters/motion/sproto3224/scale-fix/23.png",
+    "/fighters/motion/sproto3224/scale-fix/24.png",
+    "/fighters/motion/sproto3224/scale-fix/25.png",
+    "/fighters/motion/sproto3224/scale-fix/26.png",
+    "/fighters/motion/sproto3224/scale-fix/27.png",
+    "/fighters/motion/sproto3224/scale-fix/28.png",
+    "/fighters/motion/sproto3224/scale-fix/29.png",
+    "/fighters/motion/sproto3224/scale-fix/30.png",
+    "/fighters/motion/sproto3224/scale-fix/31.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/00.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/01.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/02.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/03.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/04.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/05.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/06.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/07.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/08.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/09.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/10.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/11.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/12.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/13.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/14.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/15.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/16.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/17.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/18.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/19.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/20.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/21.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/22.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/23.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/24.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/25.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/26.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/27.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/28.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/29.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/30.png",
+    "/fighters/motion/sproto3235-companion/scale-fix/31.png",
+    "/fighters/motion/sproto3235/scale-fix/00.png",
+    "/fighters/motion/sproto3235/scale-fix/01.png",
+    "/fighters/motion/sproto3235/scale-fix/02.png",
+    "/fighters/motion/sproto3235/scale-fix/03.png",
+    "/fighters/motion/sproto3235/scale-fix/04.png",
+    "/fighters/motion/sproto3235/scale-fix/05.png",
+    "/fighters/motion/sproto3235/scale-fix/06.png",
+    "/fighters/motion/sproto3235/scale-fix/07.png",
+    "/fighters/motion/sproto3235/scale-fix/08.png",
+    "/fighters/motion/sproto3235/scale-fix/09.png",
+    "/fighters/motion/sproto3235/scale-fix/10.png",
+    "/fighters/motion/sproto3235/scale-fix/11.png",
+    "/fighters/motion/sproto3235/scale-fix/12.png",
+    "/fighters/motion/sproto3235/scale-fix/13.png",
+    "/fighters/motion/sproto3235/scale-fix/14.png",
+    "/fighters/motion/sproto3235/scale-fix/15.png",
+    "/fighters/motion/sproto3235/scale-fix/16.png",
+    "/fighters/motion/sproto3235/scale-fix/17.png",
+    "/fighters/motion/sproto3235/scale-fix/18.png",
+    "/fighters/motion/sproto3235/scale-fix/19.png",
+    "/fighters/motion/sproto3235/scale-fix/20.png",
+    "/fighters/motion/sproto3235/scale-fix/21.png",
+    "/fighters/motion/sproto3235/scale-fix/22.png",
+    "/fighters/motion/sproto3235/scale-fix/23.png",
+    "/fighters/motion/sproto3235/scale-fix/24.png",
+    "/fighters/motion/sproto3235/scale-fix/25.png",
+    "/fighters/motion/sproto3235/scale-fix/26.png",
+    "/fighters/motion/sproto3235/scale-fix/27.png",
+    "/fighters/motion/sproto3235/scale-fix/28.png",
+    "/fighters/motion/sproto3235/scale-fix/29.png",
+    "/fighters/motion/sproto3235/scale-fix/30.png",
+    "/fighters/motion/sproto3235/scale-fix/31.png",
+    "/fighters/motion/sproto832-companion/scale-fix/00.png",
+    "/fighters/motion/sproto832-companion/scale-fix/01.png",
+    "/fighters/motion/sproto832-companion/scale-fix/02.png",
+    "/fighters/motion/sproto832-companion/scale-fix/03.png",
+    "/fighters/motion/sproto832-companion/scale-fix/04.png",
+    "/fighters/motion/sproto832-companion/scale-fix/05.png",
+    "/fighters/motion/sproto832-companion/scale-fix/06.png",
+    "/fighters/motion/sproto832-companion/scale-fix/07.png",
+    "/fighters/motion/sproto832-companion/scale-fix/08.png",
+    "/fighters/motion/sproto832-companion/scale-fix/09.png",
+    "/fighters/motion/sproto832-companion/scale-fix/10.png",
+    "/fighters/motion/sproto832-companion/scale-fix/11.png",
+    "/fighters/motion/sproto832-companion/scale-fix/12.png",
+    "/fighters/motion/sproto832-companion/scale-fix/13.png",
+    "/fighters/motion/sproto832-companion/scale-fix/14.png",
+    "/fighters/motion/sproto832-companion/scale-fix/15.png",
+    "/fighters/motion/sproto832-companion/scale-fix/16.png",
+    "/fighters/motion/sproto832-companion/scale-fix/17.png",
+    "/fighters/motion/sproto832-companion/scale-fix/18.png",
+    "/fighters/motion/sproto832-companion/scale-fix/19.png",
+    "/fighters/motion/sproto832-companion/scale-fix/20.png",
+    "/fighters/motion/sproto832-companion/scale-fix/21.png",
+    "/fighters/motion/sproto832-companion/scale-fix/22.png",
+    "/fighters/motion/sproto832-companion/scale-fix/23.png",
+    "/fighters/motion/sproto832-companion/scale-fix/24.png",
+    "/fighters/motion/sproto832-companion/scale-fix/25.png",
+    "/fighters/motion/sproto832-companion/scale-fix/26.png",
+    "/fighters/motion/sproto832-companion/scale-fix/27.png",
+    "/fighters/motion/sproto832-companion/scale-fix/28.png",
+    "/fighters/motion/sproto832-companion/scale-fix/29.png",
+    "/fighters/motion/sproto832-companion/scale-fix/30.png",
+    "/fighters/motion/sproto832-companion/scale-fix/31.png",
+    "/fighters/motion/sproto832/scale-fix/00.png",
+    "/fighters/motion/sproto832/scale-fix/01.png",
+    "/fighters/motion/sproto832/scale-fix/02.png",
+    "/fighters/motion/sproto832/scale-fix/03.png",
+    "/fighters/motion/sproto832/scale-fix/04.png",
+    "/fighters/motion/sproto832/scale-fix/05.png",
+    "/fighters/motion/sproto832/scale-fix/06.png",
+    "/fighters/motion/sproto832/scale-fix/07.png",
+    "/fighters/motion/sproto832/scale-fix/08.png",
+    "/fighters/motion/sproto832/scale-fix/09.png",
+    "/fighters/motion/sproto832/scale-fix/10.png",
+    "/fighters/motion/sproto832/scale-fix/11.png",
+    "/fighters/motion/sproto832/scale-fix/12.png",
+    "/fighters/motion/sproto832/scale-fix/13.png",
+    "/fighters/motion/sproto832/scale-fix/14.png",
+    "/fighters/motion/sproto832/scale-fix/15.png",
+    "/fighters/motion/sproto832/scale-fix/16.png",
+    "/fighters/motion/sproto832/scale-fix/17.png",
+    "/fighters/motion/sproto832/scale-fix/18.png",
+    "/fighters/motion/sproto832/scale-fix/19.png",
+    "/fighters/motion/sproto832/scale-fix/20.png",
+    "/fighters/motion/sproto832/scale-fix/21.png",
+    "/fighters/motion/sproto832/scale-fix/22.png",
+    "/fighters/motion/sproto832/scale-fix/23.png",
+    "/fighters/motion/sproto832/scale-fix/24.png",
+    "/fighters/motion/sproto832/scale-fix/25.png",
+    "/fighters/motion/sproto832/scale-fix/26.png",
+    "/fighters/motion/sproto832/scale-fix/27.png",
+    "/fighters/motion/sproto832/scale-fix/28.png",
+    "/fighters/motion/sproto832/scale-fix/29.png",
+    "/fighters/motion/sproto832/scale-fix/30.png",
+    "/fighters/motion/sproto832/scale-fix/31.png",
+    "/fighters/poses/bront/scale-fix/08-airRise.png",
+    "/fighters/poses/bront/scale-fix/09-airFall.png",
+    "/fighters/poses/bront/scale-fix/16-kickChamber.png",
+    "/fighters/poses/bront/scale-fix/17-kickHalf.png",
+    "/fighters/poses/bront/scale-fix/18-kickFull.png",
+    "/fighters/poses/bront/scale-fix/19-kickRecover.png",
+    "/fighters/poses/bront/scale-fix/22-airKickChamber.png",
+    "/fighters/poses/bront/scale-fix/23-airKickFull.png",
+    "/fighters/poses/bront/scale-fix/29-powerCharge.png",
+    "/fighters/poses/bront/scale-fix/30-powerRelease.png",
+    "/fighters/poses/bront/scale-fix/31-special.png",
+    "/fighters/poses/guest12/scale-fix/08-airRise.png",
+    "/fighters/poses/guest12/scale-fix/09-airFall.png",
+    "/fighters/poses/guest12/scale-fix/22-airKickChamber.png",
+    "/fighters/poses/guest12/scale-fix/23-airKickFull.png"
+  ],
+  "bodies": [
+    {
+      "id": "sproto1815",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 4,
+        "uniqueUrls": 4,
+        "uniquePixelDrawings": 4
+      },
+      "changes": {
+        "walkFrames": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 4,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "replacementPaths": [
+            "/fighters/poses/sproto1815/02.png",
+            "/fighters/poses/sproto1815/03.png",
+            "/fighters/poses/sproto1815/04.png",
+            "/fighters/poses/sproto1815/05.png"
+          ]
+        },
+        "clips.intro": {
+          "before": {
+            "slots": 4,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "after": {
+            "slots": 4,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "replacementPaths": [
+            "/fighters/events/sproto1815/scale-body-128/00.png",
+            "/fighters/events/sproto1815/scale-body-128/01.png",
+            "/fighters/events/sproto1815/scale-body-128/02.png",
+            "/fighters/events/sproto1815/scale-body-128/03.png"
+          ]
+        },
+        "clips.special": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/events/sproto1815/scale-body-128/04.png",
+            "/fighters/events/sproto1815/scale-body-128/05.png",
+            "/fighters/events/sproto1815/scale-body-128/06.png",
+            "/fighters/events/sproto1815/scale-body-128/07.png",
+            "/fighters/events/sproto1815/scale-body-128/08.png",
+            "/fighters/events/sproto1815/scale-body-128/09.png",
+            "/fighters/events/sproto1815/scale-body-128/10.png",
+            "/fighters/events/sproto1815/scale-body-128/11.png"
+          ]
+        },
+        "clips.cast": {
+          "before": {
+            "slots": 4,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "after": {
+            "slots": 4,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "replacementPaths": [
+            "/fighters/events/sproto1815/scale-body-128/12.png",
+            "/fighters/events/sproto1815/scale-body-128/13.png",
+            "/fighters/events/sproto1815/scale-body-128/14.png",
+            "/fighters/events/sproto1815/scale-body-128/15.png"
+          ]
+        },
+        "clips.recoil": {
+          "before": {
+            "slots": 4,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "after": {
+            "slots": 4,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "replacementPaths": [
+            "/fighters/events/sproto1815/scale-body-128/16.png",
+            "/fighters/events/sproto1815/scale-body-128/17.png",
+            "/fighters/events/sproto1815/scale-body-128/18.png",
+            "/fighters/events/sproto1815/scale-body-128/19.png"
+          ]
+        },
+        "clips.defeat": {
+          "before": {
+            "slots": 12,
+            "uniqueUrls": 12,
+            "uniquePixelDrawings": 12
+          },
+          "after": {
+            "slots": 12,
+            "uniqueUrls": 12,
+            "uniquePixelDrawings": 12
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "replacementPaths": [
+            "/fighters/events/sproto1815/scale-body-128/20.png",
+            "/fighters/events/sproto1815/scale-body-128/21.png",
+            "/fighters/events/sproto1815/scale-body-128/22.png",
+            "/fighters/events/sproto1815/scale-body-128/23.png",
+            "/fighters/events/sproto1815/scale-body-128/24.png",
+            "/fighters/events/sproto1815/scale-body-128/25.png",
+            "/fighters/events/sproto1815/scale-body-128/26.png",
+            "/fighters/events/sproto1815/scale-body-128/27.png",
+            "/fighters/events/sproto1815/scale-body-128/28.png",
+            "/fighters/events/sproto1815/scale-body-128/29.png",
+            "/fighters/events/sproto1815/scale-body-128/30.png",
+            "/fighters/events/sproto1815/scale-body-128/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 104,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto2616",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 4,
+        "uniqueUrls": 4,
+        "uniquePixelDrawings": 4
+      },
+      "changes": {
+        "walkFrames": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 4,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "replacementPaths": [
+            "/fighters/poses/sproto2616/02.png",
+            "/fighters/poses/sproto2616/03.png",
+            "/fighters/poses/sproto2616/04.png",
+            "/fighters/poses/sproto2616/05.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 96,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto2789",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 4,
+        "uniqueUrls": 4,
+        "uniquePixelDrawings": 4
+      },
+      "changes": {
+        "walkFrames": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 4,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "replacementPaths": [
+            "/fighters/poses/sproto2789/02.png",
+            "/fighters/poses/sproto2789/03.png",
+            "/fighters/poses/sproto2789/04.png",
+            "/fighters/poses/sproto2789/05.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 104,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "duo",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 4,
+        "uniqueUrls": 4,
+        "uniquePixelDrawings": 4
+      },
+      "changes": {
+        "clips.entrance": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/events/duo/00.png",
+            "/fighters/events/duo/01.png",
+            "/fighters/events/duo/02.png",
+            "/fighters/events/duo/03.png"
+          ]
+        },
+        "clips.death": {
+          "before": {
+            "slots": 16,
+            "uniqueUrls": 16,
+            "uniquePixelDrawings": 16
+          },
+          "after": {
+            "slots": 16,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "replacementPaths": [
+            "/fighters/events/duo/20.png",
+            "/fighters/events/duo/21.png",
+            "/fighters/events/duo/23.png",
+            "/fighters/events/duo/25.png",
+            "/fighters/events/duo/26.png",
+            "/fighters/events/duo/27.png"
+          ]
+        },
+        "clips.ranged": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/events/duo/12.png",
+            "/fighters/events/duo/13.png",
+            "/fighters/events/duo/14.png",
+            "/fighters/events/duo/15.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 94,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "duo-blue",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 31,
+        "uniquePixelDrawings": 31
+      },
+      "walkSequence": {
+        "slots": 4,
+        "uniqueUrls": 4,
+        "uniquePixelDrawings": 4
+      },
+      "changes": {
+        "clips.entrance": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/events/duo-blue/00.png",
+            "/fighters/events/duo-blue/01.png",
+            "/fighters/events/duo-blue/02.png",
+            "/fighters/events/duo-blue/03.png"
+          ]
+        },
+        "clips.death": {
+          "before": {
+            "slots": 16,
+            "uniqueUrls": 16,
+            "uniquePixelDrawings": 16
+          },
+          "after": {
+            "slots": 16,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "replacementPaths": [
+            "/fighters/events/duo-blue/20.png",
+            "/fighters/events/duo-blue/21.png",
+            "/fighters/events/duo-blue/23.png",
+            "/fighters/events/duo-blue/25.png",
+            "/fighters/events/duo-blue/26.png",
+            "/fighters/events/duo-blue/27.png"
+          ]
+        },
+        "clips.ranged": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 4,
+            "uniquePixelDrawings": 4
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/events/duo-blue/12.png",
+            "/fighters/events/duo-blue/13.png",
+            "/fighters/events/duo-blue/14.png",
+            "/fighters/events/duo-blue/15.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 92,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "nosmileclown",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/nosmileclown/scale-fix/00.png",
+            "/fighters/motion/nosmileclown/scale-fix/01.png",
+            "/fighters/motion/nosmileclown/scale-fix/02.png",
+            "/fighters/motion/nosmileclown/scale-fix/03.png",
+            "/fighters/motion/nosmileclown/scale-fix/04.png",
+            "/fighters/motion/nosmileclown/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/nosmileclown/scale-fix/06.png",
+            "/fighters/motion/nosmileclown/scale-fix/07.png",
+            "/fighters/motion/nosmileclown/scale-fix/08.png",
+            "/fighters/motion/nosmileclown/scale-fix/09.png",
+            "/fighters/motion/nosmileclown/scale-fix/10.png",
+            "/fighters/motion/nosmileclown/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/nosmileclown/scale-fix/12.png",
+            "/fighters/motion/nosmileclown/scale-fix/13.png",
+            "/fighters/motion/nosmileclown/scale-fix/14.png",
+            "/fighters/motion/nosmileclown/scale-fix/15.png",
+            "/fighters/motion/nosmileclown/scale-fix/16.png",
+            "/fighters/motion/nosmileclown/scale-fix/17.png",
+            "/fighters/motion/nosmileclown/scale-fix/18.png",
+            "/fighters/motion/nosmileclown/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/nosmileclown/scale-fix/20.png",
+            "/fighters/motion/nosmileclown/scale-fix/21.png",
+            "/fighters/motion/nosmileclown/scale-fix/22.png",
+            "/fighters/motion/nosmileclown/scale-fix/23.png",
+            "/fighters/motion/nosmileclown/scale-fix/24.png",
+            "/fighters/motion/nosmileclown/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/nosmileclown/scale-fix/26.png",
+            "/fighters/motion/nosmileclown/scale-fix/27.png",
+            "/fighters/motion/nosmileclown/scale-fix/28.png",
+            "/fighters/motion/nosmileclown/scale-fix/29.png",
+            "/fighters/motion/nosmileclown/scale-fix/30.png",
+            "/fighters/motion/nosmileclown/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "bront",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "frames": {
+          "before": {
+            "slots": 32,
+            "uniqueUrls": 32,
+            "uniquePixelDrawings": 32
+          },
+          "after": {
+            "slots": 32,
+            "uniqueUrls": 32,
+            "uniquePixelDrawings": 32
+          },
+          "changedSlots": [
+            8,
+            9,
+            16,
+            17,
+            18,
+            19,
+            22,
+            23,
+            29,
+            30,
+            31
+          ],
+          "replacementPaths": [
+            "/fighters/poses/bront/scale-fix/08-airRise.png",
+            "/fighters/poses/bront/scale-fix/09-airFall.png",
+            "/fighters/poses/bront/scale-fix/16-kickChamber.png",
+            "/fighters/poses/bront/scale-fix/17-kickHalf.png",
+            "/fighters/poses/bront/scale-fix/18-kickFull.png",
+            "/fighters/poses/bront/scale-fix/19-kickRecover.png",
+            "/fighters/poses/bront/scale-fix/22-airKickChamber.png",
+            "/fighters/poses/bront/scale-fix/23-airKickFull.png",
+            "/fighters/poses/bront/scale-fix/29-powerCharge.png",
+            "/fighters/poses/bront/scale-fix/30-powerRelease.png",
+            "/fighters/poses/bront/scale-fix/31-special.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 64,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "godmod3d",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/godmod3d/scale-fix/00.png",
+            "/fighters/motion/godmod3d/scale-fix/01.png",
+            "/fighters/motion/godmod3d/scale-fix/02.png",
+            "/fighters/motion/godmod3d/scale-fix/03.png",
+            "/fighters/motion/godmod3d/scale-fix/04.png",
+            "/fighters/motion/godmod3d/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/godmod3d/scale-fix/06.png",
+            "/fighters/motion/godmod3d/scale-fix/07.png",
+            "/fighters/motion/godmod3d/scale-fix/08.png",
+            "/fighters/motion/godmod3d/scale-fix/09.png",
+            "/fighters/motion/godmod3d/scale-fix/10.png",
+            "/fighters/motion/godmod3d/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/godmod3d/scale-fix/12.png",
+            "/fighters/motion/godmod3d/scale-fix/13.png",
+            "/fighters/motion/godmod3d/scale-fix/14.png",
+            "/fighters/motion/godmod3d/scale-fix/15.png",
+            "/fighters/motion/godmod3d/scale-fix/16.png",
+            "/fighters/motion/godmod3d/scale-fix/17.png",
+            "/fighters/motion/godmod3d/scale-fix/18.png",
+            "/fighters/motion/godmod3d/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/godmod3d/scale-fix/20.png",
+            "/fighters/motion/godmod3d/scale-fix/21.png",
+            "/fighters/motion/godmod3d/scale-fix/22.png",
+            "/fighters/motion/godmod3d/scale-fix/23.png",
+            "/fighters/motion/godmod3d/scale-fix/24.png",
+            "/fighters/motion/godmod3d/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/godmod3d/scale-fix/26.png",
+            "/fighters/motion/godmod3d/scale-fix/27.png",
+            "/fighters/motion/godmod3d/scale-fix/28.png",
+            "/fighters/motion/godmod3d/scale-fix/29.png",
+            "/fighters/motion/godmod3d/scale-fix/30.png",
+            "/fighters/motion/godmod3d/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "gryph-companion",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/gryph-companion/scale-fix/00.png",
+            "/fighters/motion/gryph-companion/scale-fix/01.png",
+            "/fighters/motion/gryph-companion/scale-fix/02.png",
+            "/fighters/motion/gryph-companion/scale-fix/03.png",
+            "/fighters/motion/gryph-companion/scale-fix/04.png",
+            "/fighters/motion/gryph-companion/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/gryph-companion/scale-fix/06.png",
+            "/fighters/motion/gryph-companion/scale-fix/07.png",
+            "/fighters/motion/gryph-companion/scale-fix/08.png",
+            "/fighters/motion/gryph-companion/scale-fix/09.png",
+            "/fighters/motion/gryph-companion/scale-fix/10.png",
+            "/fighters/motion/gryph-companion/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/gryph-companion/scale-fix/12.png",
+            "/fighters/motion/gryph-companion/scale-fix/13.png",
+            "/fighters/motion/gryph-companion/scale-fix/14.png",
+            "/fighters/motion/gryph-companion/scale-fix/15.png",
+            "/fighters/motion/gryph-companion/scale-fix/16.png",
+            "/fighters/motion/gryph-companion/scale-fix/17.png",
+            "/fighters/motion/gryph-companion/scale-fix/18.png",
+            "/fighters/motion/gryph-companion/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/gryph-companion/scale-fix/20.png",
+            "/fighters/motion/gryph-companion/scale-fix/21.png",
+            "/fighters/motion/gryph-companion/scale-fix/22.png",
+            "/fighters/motion/gryph-companion/scale-fix/23.png",
+            "/fighters/motion/gryph-companion/scale-fix/24.png",
+            "/fighters/motion/gryph-companion/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/gryph-companion/scale-fix/26.png",
+            "/fighters/motion/gryph-companion/scale-fix/27.png",
+            "/fighters/motion/gryph-companion/scale-fix/28.png",
+            "/fighters/motion/gryph-companion/scale-fix/29.png",
+            "/fighters/motion/gryph-companion/scale-fix/30.png",
+            "/fighters/motion/gryph-companion/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto1625-companion",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1625-companion/scale-fix/00.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/01.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/02.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/03.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/04.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1625-companion/scale-fix/06.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/07.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/08.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/09.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/10.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1625-companion/scale-fix/12.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/13.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/14.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/15.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/16.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/17.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/18.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1625-companion/scale-fix/20.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/21.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/22.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/23.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/24.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1625-companion/scale-fix/26.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/27.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/28.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/29.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/30.png",
+            "/fighters/motion/sproto1625-companion/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto3224-companion",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224-companion/scale-fix/00.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/01.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/02.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/03.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/04.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224-companion/scale-fix/06.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/07.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/08.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/09.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/10.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224-companion/scale-fix/12.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/13.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/14.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/15.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/16.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/17.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/18.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224-companion/scale-fix/20.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/21.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/22.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/23.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/24.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224-companion/scale-fix/26.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/27.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/28.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/29.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/30.png",
+            "/fighters/motion/sproto3224-companion/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto1499-companion",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1499-companion/scale-fix/00.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/01.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/02.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/03.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/04.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1499-companion/scale-fix/06.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/07.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/08.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/09.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/10.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1499-companion/scale-fix/12.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/13.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/14.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/15.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/16.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/17.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/18.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1499-companion/scale-fix/20.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/21.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/22.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/23.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/24.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto1499-companion/scale-fix/26.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/27.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/28.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/29.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/30.png",
+            "/fighters/motion/sproto1499-companion/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto832-companion",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832-companion/scale-fix/00.png",
+            "/fighters/motion/sproto832-companion/scale-fix/01.png",
+            "/fighters/motion/sproto832-companion/scale-fix/02.png",
+            "/fighters/motion/sproto832-companion/scale-fix/03.png",
+            "/fighters/motion/sproto832-companion/scale-fix/04.png",
+            "/fighters/motion/sproto832-companion/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832-companion/scale-fix/06.png",
+            "/fighters/motion/sproto832-companion/scale-fix/07.png",
+            "/fighters/motion/sproto832-companion/scale-fix/08.png",
+            "/fighters/motion/sproto832-companion/scale-fix/09.png",
+            "/fighters/motion/sproto832-companion/scale-fix/10.png",
+            "/fighters/motion/sproto832-companion/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832-companion/scale-fix/12.png",
+            "/fighters/motion/sproto832-companion/scale-fix/13.png",
+            "/fighters/motion/sproto832-companion/scale-fix/14.png",
+            "/fighters/motion/sproto832-companion/scale-fix/15.png",
+            "/fighters/motion/sproto832-companion/scale-fix/16.png",
+            "/fighters/motion/sproto832-companion/scale-fix/17.png",
+            "/fighters/motion/sproto832-companion/scale-fix/18.png",
+            "/fighters/motion/sproto832-companion/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832-companion/scale-fix/20.png",
+            "/fighters/motion/sproto832-companion/scale-fix/21.png",
+            "/fighters/motion/sproto832-companion/scale-fix/22.png",
+            "/fighters/motion/sproto832-companion/scale-fix/23.png",
+            "/fighters/motion/sproto832-companion/scale-fix/24.png",
+            "/fighters/motion/sproto832-companion/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832-companion/scale-fix/26.png",
+            "/fighters/motion/sproto832-companion/scale-fix/27.png",
+            "/fighters/motion/sproto832-companion/scale-fix/28.png",
+            "/fighters/motion/sproto832-companion/scale-fix/29.png",
+            "/fighters/motion/sproto832-companion/scale-fix/30.png",
+            "/fighters/motion/sproto832-companion/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto3224",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224/scale-fix/00.png",
+            "/fighters/motion/sproto3224/scale-fix/01.png",
+            "/fighters/motion/sproto3224/scale-fix/02.png",
+            "/fighters/motion/sproto3224/scale-fix/03.png",
+            "/fighters/motion/sproto3224/scale-fix/04.png",
+            "/fighters/motion/sproto3224/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224/scale-fix/06.png",
+            "/fighters/motion/sproto3224/scale-fix/07.png",
+            "/fighters/motion/sproto3224/scale-fix/08.png",
+            "/fighters/motion/sproto3224/scale-fix/09.png",
+            "/fighters/motion/sproto3224/scale-fix/10.png",
+            "/fighters/motion/sproto3224/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224/scale-fix/12.png",
+            "/fighters/motion/sproto3224/scale-fix/13.png",
+            "/fighters/motion/sproto3224/scale-fix/14.png",
+            "/fighters/motion/sproto3224/scale-fix/15.png",
+            "/fighters/motion/sproto3224/scale-fix/16.png",
+            "/fighters/motion/sproto3224/scale-fix/17.png",
+            "/fighters/motion/sproto3224/scale-fix/18.png",
+            "/fighters/motion/sproto3224/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224/scale-fix/20.png",
+            "/fighters/motion/sproto3224/scale-fix/21.png",
+            "/fighters/motion/sproto3224/scale-fix/22.png",
+            "/fighters/motion/sproto3224/scale-fix/23.png",
+            "/fighters/motion/sproto3224/scale-fix/24.png",
+            "/fighters/motion/sproto3224/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3224/scale-fix/26.png",
+            "/fighters/motion/sproto3224/scale-fix/27.png",
+            "/fighters/motion/sproto3224/scale-fix/28.png",
+            "/fighters/motion/sproto3224/scale-fix/29.png",
+            "/fighters/motion/sproto3224/scale-fix/30.png",
+            "/fighters/motion/sproto3224/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "guest12",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "frames": {
+          "before": {
+            "slots": 32,
+            "uniqueUrls": 32,
+            "uniquePixelDrawings": 32
+          },
+          "after": {
+            "slots": 32,
+            "uniqueUrls": 32,
+            "uniquePixelDrawings": 32
+          },
+          "changedSlots": [
+            8,
+            9,
+            22,
+            23
+          ],
+          "replacementPaths": [
+            "/fighters/poses/guest12/scale-fix/08-airRise.png",
+            "/fighters/poses/guest12/scale-fix/09-airFall.png",
+            "/fighters/poses/guest12/scale-fix/22-airKickChamber.png",
+            "/fighters/poses/guest12/scale-fix/23-airKickFull.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 64,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto832",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832/scale-fix/00.png",
+            "/fighters/motion/sproto832/scale-fix/01.png",
+            "/fighters/motion/sproto832/scale-fix/02.png",
+            "/fighters/motion/sproto832/scale-fix/03.png",
+            "/fighters/motion/sproto832/scale-fix/04.png",
+            "/fighters/motion/sproto832/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832/scale-fix/06.png",
+            "/fighters/motion/sproto832/scale-fix/07.png",
+            "/fighters/motion/sproto832/scale-fix/08.png",
+            "/fighters/motion/sproto832/scale-fix/09.png",
+            "/fighters/motion/sproto832/scale-fix/10.png",
+            "/fighters/motion/sproto832/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832/scale-fix/12.png",
+            "/fighters/motion/sproto832/scale-fix/13.png",
+            "/fighters/motion/sproto832/scale-fix/14.png",
+            "/fighters/motion/sproto832/scale-fix/15.png",
+            "/fighters/motion/sproto832/scale-fix/16.png",
+            "/fighters/motion/sproto832/scale-fix/17.png",
+            "/fighters/motion/sproto832/scale-fix/18.png",
+            "/fighters/motion/sproto832/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832/scale-fix/20.png",
+            "/fighters/motion/sproto832/scale-fix/21.png",
+            "/fighters/motion/sproto832/scale-fix/22.png",
+            "/fighters/motion/sproto832/scale-fix/23.png",
+            "/fighters/motion/sproto832/scale-fix/24.png",
+            "/fighters/motion/sproto832/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto832/scale-fix/26.png",
+            "/fighters/motion/sproto832/scale-fix/27.png",
+            "/fighters/motion/sproto832/scale-fix/28.png",
+            "/fighters/motion/sproto832/scale-fix/29.png",
+            "/fighters/motion/sproto832/scale-fix/30.png",
+            "/fighters/motion/sproto832/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto102",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.ranged": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/identity/sproto102/scale-fix/08.png",
+            "/fighters/identity/sproto102/scale-fix/09.png",
+            "/fighters/identity/sproto102/scale-fix/10.png",
+            "/fighters/identity/sproto102/scale-fix/11.png",
+            "/fighters/identity/sproto102/scale-fix/12.png",
+            "/fighters/identity/sproto102/scale-fix/13.png",
+            "/fighters/identity/sproto102/scale-fix/14.png",
+            "/fighters/identity/sproto102/scale-fix/15.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 104,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto3235-companion",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235-companion/scale-fix/00.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/01.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/02.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/03.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/04.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235-companion/scale-fix/06.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/07.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/08.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/09.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/10.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235-companion/scale-fix/12.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/13.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/14.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/15.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/16.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/17.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/18.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235-companion/scale-fix/20.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/21.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/22.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/23.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/24.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235-companion/scale-fix/26.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/27.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/28.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/29.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/30.png",
+            "/fighters/motion/sproto3235-companion/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    },
+    {
+      "id": "sproto3235",
+      "mainSequence": {
+        "slots": 32,
+        "uniqueUrls": 32,
+        "uniquePixelDrawings": 32
+      },
+      "walkSequence": {
+        "slots": 8,
+        "uniqueUrls": 8,
+        "uniquePixelDrawings": 8
+      },
+      "changes": {
+        "clips.dash": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235/scale-fix/00.png",
+            "/fighters/motion/sproto3235/scale-fix/01.png",
+            "/fighters/motion/sproto3235/scale-fix/02.png",
+            "/fighters/motion/sproto3235/scale-fix/03.png",
+            "/fighters/motion/sproto3235/scale-fix/04.png",
+            "/fighters/motion/sproto3235/scale-fix/05.png"
+          ]
+        },
+        "clips.jump": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235/scale-fix/06.png",
+            "/fighters/motion/sproto3235/scale-fix/07.png",
+            "/fighters/motion/sproto3235/scale-fix/08.png",
+            "/fighters/motion/sproto3235/scale-fix/09.png",
+            "/fighters/motion/sproto3235/scale-fix/10.png",
+            "/fighters/motion/sproto3235/scale-fix/11.png"
+          ]
+        },
+        "clips.heavy": {
+          "before": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "after": {
+            "slots": 8,
+            "uniqueUrls": 8,
+            "uniquePixelDrawings": 8
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235/scale-fix/12.png",
+            "/fighters/motion/sproto3235/scale-fix/13.png",
+            "/fighters/motion/sproto3235/scale-fix/14.png",
+            "/fighters/motion/sproto3235/scale-fix/15.png",
+            "/fighters/motion/sproto3235/scale-fix/16.png",
+            "/fighters/motion/sproto3235/scale-fix/17.png",
+            "/fighters/motion/sproto3235/scale-fix/18.png",
+            "/fighters/motion/sproto3235/scale-fix/19.png"
+          ]
+        },
+        "clips.airKick": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235/scale-fix/20.png",
+            "/fighters/motion/sproto3235/scale-fix/21.png",
+            "/fighters/motion/sproto3235/scale-fix/22.png",
+            "/fighters/motion/sproto3235/scale-fix/23.png",
+            "/fighters/motion/sproto3235/scale-fix/24.png",
+            "/fighters/motion/sproto3235/scale-fix/25.png"
+          ]
+        },
+        "clips.victory": {
+          "before": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "after": {
+            "slots": 6,
+            "uniqueUrls": 6,
+            "uniquePixelDrawings": 6
+          },
+          "changedSlots": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "replacementPaths": [
+            "/fighters/motion/sproto3235/scale-fix/26.png",
+            "/fighters/motion/sproto3235/scale-fix/27.png",
+            "/fighters/motion/sproto3235/scale-fix/28.png",
+            "/fighters/motion/sproto3235/scale-fix/29.png",
+            "/fighters/motion/sproto3235/scale-fix/30.png",
+            "/fighters/motion/sproto3235/scale-fix/31.png"
+          ]
+        }
+      },
+      "originalPathsPreserved": 136,
+      "atlasScalePreserved": true,
+      "throwContactFramesPreserved": true
+    }
+  ]
+}

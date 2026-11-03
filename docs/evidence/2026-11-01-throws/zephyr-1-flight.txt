@@ -1,0 +1,17 @@
+Browser tab: 4, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 197-199
+~		8 pop up button (collapsed, settable) Fighter, Value: Halloween 2008 · zephyr, ID: fighter, Secondary Actions: Expand
+~				12 Fat Head Dave · bront
+~				13 (selected) Halloween 2008 · zephyr
+~		96 pop up button (collapsed, settable) Start facing, Value: Right, ID: facing, Secondary Actions: Expand
+~				98 (selected) Right
+~				99 Left
++	185 text victimThrow · back · cycle 1
++	186 text ready: 21/21 installed atlases. Selected: available.
++	187 text Core frame 42 · scenario frame 42 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 680.9 y 332.9 facing 1
+Move none t=- 
+Throw {"attacker":1,"victim":0,"phase":"release","t":16,"direction":"back","facing":-1,"startAttackerX":660,"startVictimX":600,"startVictimY":578,"gripAttackerX":660,"gripVictimX":550,"gripVictimY":569.25}
+Reactions 0: {"kind":"knockdown","phase":"flight","t":16,"direction":1} hp=885 x=680.92 y=332.85 vx=12.22 vy=-8.40 | 1: null hp=1000 x=660.00 y=578.00 vx=0.00 vy=0.00
+The focused UI element is 121 button Advance frames, ID: advanceFrames

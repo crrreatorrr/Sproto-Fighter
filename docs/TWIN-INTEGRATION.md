@@ -1,0 +1,15 @@
+# Twin fixes — isolated local work
+
+Worktree: `sproto-twin-fixes`; branch: `codex/twin-fixes`; base: `f1c43baca8a9199283aeeadbc7f8fc9cfae28d0c`. No push or merge is authorized.
+
+The other active authoring checkout is `neon-relay`, branch `main` at `ba09fa6`, with substantial uncommitted prior duo work plus a separate untracked `art/sprotos-expansion/` archive. That expansion is not ours to edit. The public export's `main` remains at the already published snapshot.
+
+This branch owns the twin CPU distance fix, blue ground/air kick mappings, menu preview sizing/framing, special partner clearance, focused tests and review-lab geometry, plus its own QA evidence/docs. The throw fixture geometry correction was already present at resume and is retained with stronger assertions; its authorship is not claimed.
+
+Potential integration overlap: `src/core.ts` (CPU/roster logic), `public/fighters/pose-atlas.json` (shared manifest), `src/selectionMenu.ts`, `src/arcadeSelection.css`, `src/teamSpecial.ts`, `scripts/duo-smoke.mjs`, `scripts/throw-smoke.mjs`, the two review labs, and `art/new-fighter-22/install_duo.py`. The same initial twin fix hunks were saved to the shared checkout before the concurrency warning; no rollback was attempted.
+
+Integration plan: retain the shared tree as-is; have one integrator compare the final twin commit against their current tree. Keep expansion roster entries, apply only missing CPU/mapping/test hunks, and retain blue slot19→16 and slot22→8 mappings when regenerating the manifest. Retain the expansion-aware `bodySpread` implementation: the menu's paired layout uses it rather than a hardcoded ID. The cameo fix currently applies only to the original `duo`; do not assume newly added pairs have the same bounds or partner. Do not replace the complete shared manifest or blindly merge the two different histories. Run combined roster/build/throw checks and browser QA after integration. This branch uses its own localhost port to avoid Vite reloads caused by other-chat edits.
+
+Two separate concurrent efforts are reported by the user: more Sprotos, and story/God Mode. The story map must support **100 Sproto encounters**. The story checkout/branch has not been independently identified; the untracked `art/sprotos-expansion/` directory in the original authoring checkout is observable. Do not infer ownership of other modified files from their names. Story changes may also overlap `src/core.ts` for God Mode damage/AI, so apply only the two CPU-spacing hunks from this branch. Preserve the story owner's progression and unlock rules. This branch makes no story, map, God Mode or new-roster implementation changes, and generates no story assets.
+
+Diff review found the roster work's six-line `SPROTOS PAIRS` helper block had been copied with `src/core.ts` during initial isolation. It is excluded from this twin branch; the original checkout is untouched. These helpers were unused in the isolated baseline. All other copied code/manifest hunks were reviewed against `f1c43ba` and are twin-specific. Use port 5184; port 5174 belongs to an unrelated application and is not our server.

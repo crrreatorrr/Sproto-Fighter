@@ -36,9 +36,9 @@ export function drawPlaceholder(c: CanvasRenderingContext2D, f: Fighter, frame: 
     limb(17, -h + 42, reach, y, 14, skin);
     rect(reach - 7, y - 7, 18, 16, skin);
     c.fillStyle = '#101a28';
-    c.font = 'bold 14px monospace';
+    c.font = 'bold 14px "Pixelify Sans", monospace';
     c.textAlign = 'center';
     c.save();c.scale(f.facing,1);c.fillText(f.id.slice(-2), 0, -h + 62);c.restore();
     c.restore();
 }
-export function drawPlaceholderPortrait(c: CanvasRenderingContext2D, w: number, h: number, index: string, color: string) { c.clearRect(0, 0, w, h); c.fillStyle = '#25364b'; c.fillRect(8, 8, w - 16, h - 16); c.fillStyle = color; c.fillRect(w * .2, h * .15, w * .6, h * .42); c.fillRect(w * .15, h * .61, w * .7, h * .32); c.fillStyle = '#122030'; c.fillRect(w * .3, h * .29, 10, 9); c.fillRect(w * .6, h * .29, 10, 9); c.font = 'bold 22px monospace'; c.textAlign = 'center'; c.fillText(index, w / 2, h * .84); }
+export function drawPlaceholderPortrait(c: CanvasRenderingContext2D, w: number, h: number, index: string, color: string) { c.clearRect(0, 0, w, h); c.fillStyle = '#25364b'; c.fillRect(8, 8, w - 16, h - 16); c.fillStyle = color; c.fillRect(w * .2, h * .15, w * .6, h * .42); c.fillRect(w * .15, h * .61, w * .7, h * .32); c.fillStyle = '#122030'; c.fillRect(w * .3, h * .29, 10, 9); c.fillRect(w * .6, h * .29, 10, 9); c.font = 'bold 22px "Pixelify Sans", monospace'; c.textAlign = 'center'; c.fillText(index, w / 2, h * .84); }

@@ -1,0 +1,1883 @@
+[
+  {
+    "slot": 8,
+    "source": "/fighters/poses/bront/08-airRise.png",
+    "replacement": "/fighters/poses/bront/scale-fix/08-airRise.png",
+    "uniformFactor": 1.1,
+    "sourceSHA256": "f4d53b884de206317489f6304b405f8018552a2bd3b19976157a9170de33f044",
+    "before": {
+      "red": [
+        {
+          "area": 693,
+          "bounds": [
+            126,
+            81,
+            171,
+            117
+          ]
+        },
+        {
+          "area": 64,
+          "bounds": [
+            162,
+            123,
+            170,
+            135
+          ]
+        },
+        {
+          "area": 19,
+          "bounds": [
+            149,
+            121,
+            160,
+            123
+          ]
+        },
+        {
+          "area": 7,
+          "bounds": [
+            144,
+            118,
+            149,
+            121
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 199,
+          "bounds": [
+            114,
+            107,
+            132,
+            123
+          ]
+        },
+        {
+          "area": 79,
+          "bounds": [
+            144,
+            96,
+            159,
+            106
+          ]
+        },
+        {
+          "area": 36,
+          "bounds": [
+            162,
+            99,
+            171,
+            106
+          ]
+        },
+        {
+          "area": 31,
+          "bounds": [
+            164,
+            116,
+            171,
+            122
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 831,
+          "bounds": [
+            191,
+            132,
+            241,
+            172
+          ]
+        },
+        {
+          "area": 82,
+          "bounds": [
+            231,
+            178,
+            240,
+            192
+          ]
+        },
+        {
+          "area": 21,
+          "bounds": [
+            217,
+            176,
+            229,
+            178
+          ]
+        },
+        {
+          "area": 8,
+          "bounds": [
+            211,
+            173,
+            217,
+            176
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 241,
+          "bounds": [
+            178,
+            161,
+            198,
+            178
+          ]
+        },
+        {
+          "area": 104,
+          "bounds": [
+            211,
+            149,
+            228,
+            160
+          ]
+        },
+        {
+          "area": 46,
+          "bounds": [
+            231,
+            152,
+            241,
+            160
+          ]
+        },
+        {
+          "area": 36,
+          "bounds": [
+            233,
+            171,
+            241,
+            177
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      157,
+      132,
+      270,
+      274
+    ],
+    "floorDeltaPx": 0,
+    "paddingClear": 62
+  },
+  {
+    "slot": 9,
+    "source": "/fighters/poses/bront/09-airFall.png",
+    "replacement": "/fighters/poses/bront/scale-fix/09-airFall.png",
+    "uniformFactor": 1.12,
+    "sourceSHA256": "c791622dae72f4045f979ed23d192896fdbce09acb5c5c227ac6a40aaf218d9c",
+    "before": {
+      "red": [
+        {
+          "area": 644,
+          "bounds": [
+            130,
+            88,
+            174,
+            122
+          ]
+        },
+        {
+          "area": 41,
+          "bounds": [
+            165,
+            128,
+            173,
+            135
+          ]
+        },
+        {
+          "area": 34,
+          "bounds": [
+            165,
+            136,
+            171,
+            144
+          ]
+        },
+        {
+          "area": 29,
+          "bounds": [
+            144,
+            120,
+            162,
+            128
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 202,
+          "bounds": [
+            117,
+            112,
+            136,
+            127
+          ]
+        },
+        {
+          "area": 83,
+          "bounds": [
+            148,
+            100,
+            162,
+            111
+          ]
+        },
+        {
+          "area": 36,
+          "bounds": [
+            166,
+            120,
+            174,
+            128
+          ]
+        },
+        {
+          "area": 31,
+          "bounds": [
+            166,
+            104,
+            175,
+            111
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 798,
+          "bounds": [
+            196,
+            137,
+            245,
+            175
+          ]
+        },
+        {
+          "area": 55,
+          "bounds": [
+            235,
+            182,
+            244,
+            190
+          ]
+        },
+        {
+          "area": 46,
+          "bounds": [
+            235,
+            191,
+            242,
+            200
+          ]
+        },
+        {
+          "area": 35,
+          "bounds": [
+            212,
+            173,
+            232,
+            182
+          ]
+        },
+        {
+          "area": 10,
+          "bounds": [
+            244,
+            172,
+            248,
+            177
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 260,
+          "bounds": [
+            182,
+            164,
+            203,
+            181
+          ]
+        },
+        {
+          "area": 102,
+          "bounds": [
+            216,
+            151,
+            232,
+            163
+          ]
+        },
+        {
+          "area": 42,
+          "bounds": [
+            236,
+            173,
+            245,
+            182
+          ]
+        },
+        {
+          "area": 38,
+          "bounds": [
+            236,
+            155,
+            247,
+            163
+          ]
+        },
+        {
+          "area": 9,
+          "bounds": [
+            244,
+            180,
+            247,
+            184
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      159,
+      136,
+      268,
+      273
+    ],
+    "floorDeltaPx": -1,
+    "paddingClear": 63
+  },
+  {
+    "slot": 16,
+    "source": "/fighters/poses/bront/16-kickChamber.png",
+    "replacement": "/fighters/poses/bront/scale-fix/16-kickChamber.png",
+    "uniformFactor": 1.12,
+    "sourceSHA256": "404d657e06461bbc245bce26a02960a477a84013653765193ea27344e8d84d6c",
+    "before": {
+      "red": [
+        {
+          "area": 634,
+          "bounds": [
+            124,
+            90,
+            168,
+            124
+          ]
+        },
+        {
+          "area": 36,
+          "bounds": [
+            161,
+            130,
+            167,
+            138
+          ]
+        },
+        {
+          "area": 24,
+          "bounds": [
+            142,
+            124,
+            159,
+            129
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 199,
+          "bounds": [
+            114,
+            116,
+            132,
+            132
+          ]
+        },
+        {
+          "area": 77,
+          "bounds": [
+            142,
+            103,
+            157,
+            113
+          ]
+        },
+        {
+          "area": 33,
+          "bounds": [
+            160,
+            107,
+            169,
+            114
+          ]
+        },
+        {
+          "area": 32,
+          "bounds": [
+            162,
+            123,
+            169,
+            129
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 807,
+          "bounds": [
+            189,
+            140,
+            239,
+            178
+          ]
+        },
+        {
+          "area": 44,
+          "bounds": [
+            231,
+            184,
+            238,
+            193
+          ]
+        },
+        {
+          "area": 27,
+          "bounds": [
+            210,
+            178,
+            229,
+            183
+          ]
+        },
+        {
+          "area": 8,
+          "bounds": [
+            207,
+            175,
+            210,
+            178
+          ]
+        },
+        {
+          "area": 7,
+          "bounds": [
+            239,
+            174,
+            241,
+            178
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 250,
+          "bounds": [
+            178,
+            169,
+            198,
+            187
+          ]
+        },
+        {
+          "area": 88,
+          "bounds": [
+            210,
+            154,
+            226,
+            165
+          ]
+        },
+        {
+          "area": 39,
+          "bounds": [
+            230,
+            159,
+            240,
+            166
+          ]
+        },
+        {
+          "area": 38,
+          "bounds": [
+            232,
+            177,
+            240,
+            183
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      174,
+      138,
+      258,
+      274
+    ],
+    "floorDeltaPx": 0,
+    "paddingClear": 62
+  },
+  {
+    "slot": 17,
+    "source": "/fighters/poses/bront/17-kickHalf.png",
+    "replacement": "/fighters/poses/bront/scale-fix/17-kickHalf.png",
+    "uniformFactor": 1.12,
+    "sourceSHA256": "ef1e22d77830ae7ee0635a47487172c0eda95b6ce917ca324a67ddbbb84d240c",
+    "before": {
+      "red": [
+        {
+          "area": 630,
+          "bounds": [
+            123,
+            91,
+            168,
+            123
+          ]
+        },
+        {
+          "area": 46,
+          "bounds": [
+            163,
+            129,
+            171,
+            137
+          ]
+        },
+        {
+          "area": 11,
+          "bounds": [
+            164,
+            137,
+            169,
+            140
+          ]
+        },
+        {
+          "area": 7,
+          "bounds": [
+            149,
+            125,
+            153,
+            128
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 232,
+          "bounds": [
+            116,
+            118,
+            135,
+            135
+          ]
+        },
+        {
+          "area": 89,
+          "bounds": [
+            142,
+            102,
+            157,
+            113
+          ]
+        },
+        {
+          "area": 37,
+          "bounds": [
+            160,
+            105,
+            169,
+            113
+          ]
+        },
+        {
+          "area": 35,
+          "bounds": [
+            163,
+            121,
+            170,
+            128
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 803,
+          "bounds": [
+            188,
+            141,
+            239,
+            177
+          ]
+        },
+        {
+          "area": 61,
+          "bounds": [
+            233,
+            183,
+            242,
+            192
+          ]
+        },
+        {
+          "area": 18,
+          "bounds": [
+            234,
+            192,
+            240,
+            196
+          ]
+        },
+        {
+          "area": 9,
+          "bounds": [
+            217,
+            179,
+            222,
+            182
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 299,
+          "bounds": [
+            180,
+            171,
+            202,
+            190
+          ]
+        },
+        {
+          "area": 102,
+          "bounds": [
+            210,
+            153,
+            226,
+            165
+          ]
+        },
+        {
+          "area": 48,
+          "bounds": [
+            230,
+            156,
+            240,
+            165
+          ]
+        },
+        {
+          "area": 46,
+          "bounds": [
+            233,
+            174,
+            241,
+            182
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      173,
+      140,
+      285,
+      273
+    ],
+    "floorDeltaPx": -1,
+    "paddingClear": 63
+  },
+  {
+    "slot": 18,
+    "source": "/fighters/poses/bront/18-kickFull.png",
+    "replacement": "/fighters/poses/bront/scale-fix/18-kickFull.png",
+    "uniformFactor": 1.12,
+    "sourceSHA256": "de2f88c5b7cb89e1b3f84c27a3c5344e036637de0d6db499e0381ca1de14ed96",
+    "before": {
+      "red": [
+        {
+          "area": 666,
+          "bounds": [
+            120,
+            94,
+            166,
+            127
+          ]
+        },
+        {
+          "area": 41,
+          "bounds": [
+            162,
+            132,
+            169,
+            139
+          ]
+        },
+        {
+          "area": 20,
+          "bounds": [
+            141,
+            128,
+            156,
+            132
+          ]
+        },
+        {
+          "area": 16,
+          "bounds": [
+            162,
+            140,
+            168,
+            144
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 213,
+          "bounds": [
+            113,
+            125,
+            132,
+            141
+          ]
+        },
+        {
+          "area": 76,
+          "bounds": [
+            139,
+            107,
+            153,
+            117
+          ]
+        },
+        {
+          "area": 38,
+          "bounds": [
+            161,
+            124,
+            169,
+            131
+          ]
+        },
+        {
+          "area": 33,
+          "bounds": [
+            157,
+            108,
+            166,
+            116
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 825,
+          "bounds": [
+            185,
+            144,
+            236,
+            181
+          ]
+        },
+        {
+          "area": 48,
+          "bounds": [
+            232,
+            187,
+            240,
+            194
+          ]
+        },
+        {
+          "area": 26,
+          "bounds": [
+            208,
+            182,
+            225,
+            187
+          ]
+        },
+        {
+          "area": 19,
+          "bounds": [
+            232,
+            196,
+            239,
+            200
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 266,
+          "bounds": [
+            177,
+            179,
+            198,
+            197
+          ]
+        },
+        {
+          "area": 97,
+          "bounds": [
+            206,
+            159,
+            222,
+            170
+          ]
+        },
+        {
+          "area": 49,
+          "bounds": [
+            231,
+            178,
+            240,
+            186
+          ]
+        },
+        {
+          "area": 40,
+          "bounds": [
+            226,
+            160,
+            236,
+            169
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      172,
+      143,
+      333,
+      274
+    ],
+    "floorDeltaPx": 0,
+    "paddingClear": 62
+  },
+  {
+    "slot": 19,
+    "source": "/fighters/poses/bront/19-kickRecover.png",
+    "replacement": "/fighters/poses/bront/scale-fix/19-kickRecover.png",
+    "uniformFactor": 1.08,
+    "sourceSHA256": "614b39a06f9dba1aaa0e60f3132ebd33a32db169d9d3c173beccaba9526c733f",
+    "before": {
+      "red": [
+        {
+          "area": 717,
+          "bounds": [
+            122,
+            100,
+            169,
+            134
+          ]
+        },
+        {
+          "area": 50,
+          "bounds": [
+            161,
+            140,
+            167,
+            154
+          ]
+        },
+        {
+          "area": 10,
+          "bounds": [
+            142,
+            136,
+            150,
+            139
+          ]
+        },
+        {
+          "area": 7,
+          "bounds": [
+            150,
+            139,
+            157,
+            140
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 198,
+          "bounds": [
+            112,
+            129,
+            131,
+            144
+          ]
+        },
+        {
+          "area": 94,
+          "bounds": [
+            141,
+            113,
+            156,
+            124
+          ]
+        },
+        {
+          "area": 36,
+          "bounds": [
+            160,
+            116,
+            169,
+            124
+          ]
+        },
+        {
+          "area": 23,
+          "bounds": [
+            162,
+            133,
+            169,
+            139
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 839,
+          "bounds": [
+            187,
+            155,
+            238,
+            192
+          ]
+        },
+        {
+          "area": 55,
+          "bounds": [
+            229,
+            198,
+            235,
+            214
+          ]
+        },
+        {
+          "area": 11,
+          "bounds": [
+            208,
+            194,
+            217,
+            197
+          ]
+        },
+        {
+          "area": 8,
+          "bounds": [
+            217,
+            197,
+            225,
+            198
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 231,
+          "bounds": [
+            176,
+            187,
+            197,
+            203
+          ]
+        },
+        {
+          "area": 114,
+          "bounds": [
+            207,
+            169,
+            224,
+            181
+          ]
+        },
+        {
+          "area": 43,
+          "bounds": [
+            228,
+            172,
+            238,
+            181
+          ]
+        },
+        {
+          "area": 24,
+          "bounds": [
+            230,
+            191,
+            238,
+            197
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      171,
+      154,
+      253,
+      274
+    ],
+    "floorDeltaPx": 0,
+    "paddingClear": 62
+  },
+  {
+    "slot": 22,
+    "source": "/fighters/poses/bront/22-airKickChamber.png",
+    "replacement": "/fighters/poses/bront/scale-fix/22-airKickChamber.png",
+    "uniformFactor": 1.42,
+    "sourceSHA256": "ed122ab1f27c94e76b9acb37ccea309ea53f6939870e7fafc6ef3a14730a75bb",
+    "before": {
+      "red": [
+        {
+          "area": 464,
+          "bounds": [
+            126,
+            100,
+            162,
+            127
+          ]
+        },
+        {
+          "area": 23,
+          "bounds": [
+            157,
+            132,
+            162,
+            137
+          ]
+        },
+        {
+          "area": 23,
+          "bounds": [
+            157,
+            138,
+            162,
+            143
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 101,
+          "bounds": [
+            122,
+            124,
+            135,
+            134
+          ]
+        },
+        {
+          "area": 49,
+          "bounds": [
+            143,
+            112,
+            154,
+            120
+          ]
+        },
+        {
+          "area": 25,
+          "bounds": [
+            157,
+            126,
+            162,
+            132
+          ]
+        },
+        {
+          "area": 13,
+          "bounds": [
+            157,
+            115,
+            162,
+            120
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 930,
+          "bounds": [
+            196,
+            118,
+            247,
+            156
+          ]
+        },
+        {
+          "area": 47,
+          "bounds": [
+            240,
+            163,
+            247,
+            170
+          ]
+        },
+        {
+          "area": 45,
+          "bounds": [
+            240,
+            172,
+            247,
+            179
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 205,
+          "bounds": [
+            190,
+            152,
+            209,
+            166
+          ]
+        },
+        {
+          "area": 100,
+          "bounds": [
+            220,
+            135,
+            236,
+            146
+          ]
+        },
+        {
+          "area": 50,
+          "bounds": [
+            240,
+            155,
+            247,
+            163
+          ]
+        },
+        {
+          "area": 25,
+          "bounds": [
+            240,
+            139,
+            247,
+            146
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      182,
+      116,
+      281,
+      257
+    ],
+    "floorDeltaPx": -17,
+    "paddingClear": 79
+  },
+  {
+    "slot": 23,
+    "source": "/fighters/poses/bront/23-airKickFull.png",
+    "replacement": "/fighters/poses/bront/scale-fix/23-airKickFull.png",
+    "uniformFactor": 1.42,
+    "sourceSHA256": "1a965164b0a4e3833db88ffc9fa33c0822c9e4f5f185f3c4e2f7b1e5257f9ead",
+    "before": {
+      "red": [
+        {
+          "area": 431,
+          "bounds": [
+            124,
+            91,
+            160,
+            117
+          ]
+        },
+        {
+          "area": 26,
+          "bounds": [
+            154,
+            128,
+            160,
+            133
+          ]
+        },
+        {
+          "area": 21,
+          "bounds": [
+            154,
+            122,
+            160,
+            127
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 108,
+          "bounds": [
+            119,
+            114,
+            132,
+            126
+          ]
+        },
+        {
+          "area": 49,
+          "bounds": [
+            141,
+            102,
+            152,
+            110
+          ]
+        },
+        {
+          "area": 26,
+          "bounds": [
+            154,
+            117,
+            160,
+            122
+          ]
+        },
+        {
+          "area": 19,
+          "bounds": [
+            154,
+            105,
+            161,
+            110
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 889,
+          "bounds": [
+            193,
+            105,
+            244,
+            142
+          ]
+        },
+        {
+          "area": 50,
+          "bounds": [
+            236,
+            158,
+            244,
+            165
+          ]
+        },
+        {
+          "area": 44,
+          "bounds": [
+            236,
+            149,
+            244,
+            156
+          ]
+        },
+        {
+          "area": 8,
+          "bounds": [
+            237,
+            166,
+            240,
+            169
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 216,
+          "bounds": [
+            186,
+            138,
+            204,
+            155
+          ]
+        },
+        {
+          "area": 94,
+          "bounds": [
+            217,
+            121,
+            233,
+            132
+          ]
+        },
+        {
+          "area": 52,
+          "bounds": [
+            236,
+            142,
+            244,
+            149
+          ]
+        },
+        {
+          "area": 34,
+          "bounds": [
+            236,
+            125,
+            246,
+            132
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      180,
+      102,
+      338,
+      257
+    ],
+    "floorDeltaPx": -17,
+    "paddingClear": 78
+  },
+  {
+    "slot": 29,
+    "source": "/fighters/poses/bront/29-powerCharge.png",
+    "replacement": "/fighters/poses/bront/scale-fix/29-powerCharge.png",
+    "uniformFactor": 1.12,
+    "sourceSHA256": "572da85ef631edfce0b87c3ccd5eb16da227537b92138ed593803a92d8138d6f",
+    "before": {
+      "red": [
+        {
+          "area": 630,
+          "bounds": [
+            125,
+            123,
+            168,
+            158
+          ]
+        },
+        {
+          "area": 31,
+          "bounds": [
+            159,
+            162,
+            165,
+            169
+          ]
+        },
+        {
+          "area": 13,
+          "bounds": [
+            138,
+            156,
+            146,
+            162
+          ]
+        },
+        {
+          "area": 8,
+          "bounds": [
+            147,
+            162,
+            155,
+            163
+          ]
+        },
+        {
+          "area": 7,
+          "bounds": [
+            127,
+            144,
+            131,
+            147
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 241,
+          "bounds": [
+            112,
+            138,
+            130,
+            156
+          ]
+        },
+        {
+          "area": 180,
+          "bounds": [
+            168,
+            139,
+            182,
+            157
+          ]
+        },
+        {
+          "area": 74,
+          "bounds": [
+            141,
+            138,
+            155,
+            148
+          ]
+        },
+        {
+          "area": 34,
+          "bounds": [
+            159,
+            140,
+            168,
+            147
+          ]
+        },
+        {
+          "area": 31,
+          "bounds": [
+            161,
+            156,
+            168,
+            162
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 797,
+          "bounds": [
+            191,
+            177,
+            239,
+            216
+          ]
+        },
+        {
+          "area": 37,
+          "bounds": [
+            229,
+            220,
+            235,
+            228
+          ]
+        },
+        {
+          "area": 14,
+          "bounds": [
+            205,
+            214,
+            214,
+            220
+          ]
+        },
+        {
+          "area": 10,
+          "bounds": [
+            236,
+            210,
+            239,
+            214
+          ]
+        },
+        {
+          "area": 9,
+          "bounds": [
+            215,
+            220,
+            224,
+            221
+          ]
+        },
+        {
+          "area": 7,
+          "bounds": [
+            193,
+            200,
+            197,
+            203
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 308,
+          "bounds": [
+            176,
+            193,
+            196,
+            214
+          ]
+        },
+        {
+          "area": 220,
+          "bounds": [
+            239,
+            194,
+            254,
+            215
+          ]
+        },
+        {
+          "area": 94,
+          "bounds": [
+            208,
+            193,
+            224,
+            205
+          ]
+        },
+        {
+          "area": 38,
+          "bounds": [
+            229,
+            196,
+            239,
+            203
+          ]
+        },
+        {
+          "area": 36,
+          "bounds": [
+            231,
+            214,
+            239,
+            220
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      158,
+      175,
+      272,
+      274
+    ],
+    "floorDeltaPx": 0,
+    "paddingClear": 62
+  },
+  {
+    "slot": 30,
+    "source": "/fighters/poses/bront/30-powerRelease.png",
+    "replacement": "/fighters/poses/bront/scale-fix/30-powerRelease.png",
+    "uniformFactor": 1.22,
+    "sourceSHA256": "7af8923b5c53665ebdc1a1feb220353adba2cd318812661662dfe08e4b44db5f",
+    "before": {
+      "red": [
+        {
+          "area": 365,
+          "bounds": [
+            113,
+            118,
+            149,
+            140
+          ]
+        },
+        {
+          "area": 23,
+          "bounds": [
+            144,
+            156,
+            150,
+            166
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 202,
+          "bounds": [
+            110,
+            141,
+            127,
+            158
+          ]
+        },
+        {
+          "area": 59,
+          "bounds": [
+            131,
+            127,
+            144,
+            135
+          ]
+        },
+        {
+          "area": 23,
+          "bounds": [
+            147,
+            127,
+            154,
+            133
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 535,
+          "bounds": [
+            177,
+            162,
+            221,
+            189
+          ]
+        },
+        {
+          "area": 34,
+          "bounds": [
+            215,
+            208,
+            222,
+            220
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 298,
+          "bounds": [
+            174,
+            190,
+            194,
+            211
+          ]
+        },
+        {
+          "area": 83,
+          "bounds": [
+            199,
+            173,
+            215,
+            182
+          ]
+        },
+        {
+          "area": 31,
+          "bounds": [
+            219,
+            173,
+            227,
+            180
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      128,
+      159,
+      270,
+      274
+    ],
+    "floorDeltaPx": 0,
+    "paddingClear": 62
+  },
+  {
+    "slot": 31,
+    "source": "/fighters/poses/bront/31-special.png",
+    "replacement": "/fighters/poses/bront/scale-fix/31-special.png",
+    "uniformFactor": 1.22,
+    "sourceSHA256": "2578700cb9a2551f392e1e5a363d6372a7cbe99c2fc34ee2cb1b4e5b6c5faddb",
+    "before": {
+      "red": [
+        {
+          "area": 389,
+          "bounds": [
+            135,
+            135,
+            166,
+            164
+          ]
+        },
+        {
+          "area": 30,
+          "bounds": [
+            160,
+            168,
+            166,
+            174
+          ]
+        },
+        {
+          "area": 10,
+          "bounds": [
+            160,
+            174,
+            164,
+            178
+          ]
+        },
+        {
+          "area": 9,
+          "bounds": [
+            148,
+            167,
+            157,
+            168
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 94,
+          "bounds": [
+            120,
+            147,
+            135,
+            159
+          ]
+        },
+        {
+          "area": 61,
+          "bounds": [
+            143,
+            146,
+            156,
+            155
+          ]
+        },
+        {
+          "area": 31,
+          "bounds": [
+            159,
+            148,
+            167,
+            154
+          ]
+        },
+        {
+          "area": 30,
+          "bounds": [
+            162,
+            161,
+            169,
+            168
+          ]
+        }
+      ]
+    },
+    "after": {
+      "red": [
+        {
+          "area": 586,
+          "bounds": [
+            204,
+            182,
+            242,
+            218
+          ]
+        },
+        {
+          "area": 42,
+          "bounds": [
+            235,
+            223,
+            242,
+            230
+          ]
+        },
+        {
+          "area": 14,
+          "bounds": [
+            235,
+            230,
+            239,
+            235
+          ]
+        },
+        {
+          "area": 11,
+          "bounds": [
+            210,
+            215,
+            215,
+            219
+          ]
+        },
+        {
+          "area": 11,
+          "bounds": [
+            220,
+            222,
+            231,
+            223
+          ]
+        },
+        {
+          "area": 10,
+          "bounds": [
+            215,
+            219,
+            220,
+            222
+          ]
+        }
+      ],
+      "yellow": [
+        {
+          "area": 138,
+          "bounds": [
+            186,
+            197,
+            204,
+            212
+          ]
+        },
+        {
+          "area": 92,
+          "bounds": [
+            214,
+            196,
+            230,
+            207
+          ]
+        },
+        {
+          "area": 49,
+          "bounds": [
+            237,
+            214,
+            246,
+            223
+          ]
+        },
+        {
+          "area": 48,
+          "bounds": [
+            233,
+            198,
+            243,
+            206
+          ]
+        }
+      ]
+    },
+    "bounds": [
+      154,
+      147,
+      267,
+      274
+    ],
+    "floorDeltaPx": 0,
+    "paddingClear": 62
+  }
+]

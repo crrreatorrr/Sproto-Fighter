@@ -1,14 +1,14 @@
-import { defineConfig } from 'vitest/config';
+import {defineConfig} from 'vitest/config';
 
-/**
- * Relative base so one build runs at the site root, at the hub's dev path
- * `/play/sproto-fighter/`, and at `https://play.<domain>/sproto-fighter/`.
- * Runtime asset URLs go through a local `asset()` helper (stage.ts, poseAtlas.ts, higgsfieldRig.ts) for the same reason.
- */
 export default defineConfig({
   base: './',
-  test: {
-    include: ['tests/**/*.test.ts'],
-    environment: 'node',
+  test: {include: ['tests/**/*.test.ts'], environment: 'node'},
+  optimizeDeps: {entries: ['index.html']},
+  server: {
+    // The retained art sources, QA evidence and runtime frame library contain
+    // tens of thousands of files. Watch application code, not this static
+    // archive. Restart Vite after adding public files so its public-file index
+    // includes them; reload the page after changing existing sprite assets.
+    watch: {ignored: ['**/art/**', '**/docs/**', '**/public/**']},
   },
 });

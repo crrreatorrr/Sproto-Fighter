@@ -1,0 +1,11 @@
+Browser tab: 4, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 185-187
++	197 text victimThrow · back · cycle 1
++	198 text ready: 21/21 installed atlases. Selected: available.
++	199 text Core frame 21 · scenario frame 21 · frozen 5
+Sequence poses · frame 24/31 · pose slot 24: hit · gait phase 0.000 · x 567.5 y 577.0 facing 1
+Move none t=- 
+Throw {"attacker":1,"victim":0,"phase":"release","t":0,"direction":"back","facing":-1,"startAttackerX":660,"startVictimX":600,"startVictimY":578,"gripAttackerX":660,"gripVictimX":567.5,"gripVictimY":578}
+Reactions 0: {"kind":"knockdown","phase":"flight","t":0,"direction":1} hp=885 x=567.50 y=577.00 vx=0.00 vy=-22.00 | 1: null hp=1000 x=660.00 y=578.00 vx=0.00 vy=0.00
+The focused UI element is 116 button Pause, ID: play

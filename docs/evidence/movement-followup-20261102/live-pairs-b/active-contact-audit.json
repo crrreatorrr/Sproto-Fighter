@@ -1,0 +1,379 @@
+{
+  "date": "2026-11-02",
+  "reviewer": "motion_wall",
+  "bodyCount": 20,
+  "sourceActiveSlotsInspected": 80,
+  "referenceIdleSourcesInspected": 20,
+  "method": "Full source images inspected, fitted to independent cells. Source canvas dimensions differ; contact rows compare poses, not on-screen scale. Targeted real-core browser snapshots at heavy age12/14 and airHeavy age11/14 confirm the four wrong slots. No manifest edits performed by this audit.",
+  "rows": [
+    {
+      "body": "sproto2344",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-sproto2344.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "sproto2344-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-sproto2344-companion.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "sproto3181",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-sproto3181.png",
+      "finding": "Intentional stomach-monster reach, not kick anatomy; all four contacts extend forward."
+    },
+    {
+      "body": "sproto3181-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-sproto3181-companion.png",
+      "finding": "heavy3/4 and airKick3 extended; airKick2 chambered, but owner stomach-monster override handles actual heavy/airHeavy contact, so this is unused for those moves. No remap recommended."
+    },
+    {
+      "body": "sproto3224",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-sproto3224.png",
+      "finding": "Confirmed retracting active slots listed in proposals; other contact slots remain extended."
+    },
+    {
+      "body": "sproto3224-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-sproto3224-companion.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "sproto3235",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-sproto3235.png",
+      "finding": "Confirmed retracting active slots listed in proposals; other contact slots remain extended."
+    },
+    {
+      "body": "sproto3235-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-sproto3235-companion.png",
+      "finding": "Confirmed retracting active slots listed in proposals; other contact slots remain extended."
+    },
+    {
+      "body": "gryph",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-gryph.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "gryph-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-gryph-companion.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "godmod3d",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-godmod3d.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "godmod3d-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-godmod3d-companion.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "nosmileclown",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-nosmileclown.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "nosmileclown-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-nosmileclown-companion.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "zepump",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-zepump.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "zepump-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-zepump-companion.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "peterpan",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-peterpan.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "peterpan-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-peterpan-companion.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "solanadelray",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-solanadelray.png",
+      "finding": "All four active-source slots show forward extended contact."
+    },
+    {
+      "body": "solanadelray-companion",
+      "slotsVisuallyInspected": [
+        "heavy3",
+        "heavy4",
+        "airKick2",
+        "airKick3"
+      ],
+      "evidence": "contact-solanadelray-companion.png",
+      "finding": "All four active-source slots show forward extended contact."
+    }
+  ],
+  "proposedRemaps": [
+    {
+      "body": "sproto3224",
+      "sequence": "heavy",
+      "targetSlot": 4,
+      "copyFromSlot": 3,
+      "reason": "Second grounded active slot retracts to chamber/guard.",
+      "before": {
+        "body": "sproto3224",
+        "slot": "heavy4",
+        "url": "/fighters/motion/sproto3224/scale-fix/16.png",
+        "sha256": "53ec2e57989e3237457eb4fde4c1a52e3503992dbe64edac1c5cd56aa3152156",
+        "bounds": [
+          145,
+          145,
+          239,
+          274
+        ],
+        "registration": null
+      },
+      "replacement": {
+        "body": "sproto3224",
+        "slot": "heavy3",
+        "url": "/fighters/motion/sproto3224/scale-fix/15.png",
+        "sha256": "6a01d9baecca6f156c7b044267d7df0206189b8fac2f38355d8b50a7a2e4bb30",
+        "bounds": [
+          146,
+          146,
+          283,
+          274
+        ],
+        "registration": null
+      },
+      "actualBrowserConfirmation": true,
+      "status": "proposed; parent applies serialized change"
+    },
+    {
+      "body": "sproto3224",
+      "sequence": "airKick",
+      "targetSlot": 3,
+      "copyFromSlot": 2,
+      "reason": "Second aerial active slot hangs with kick leg down.",
+      "before": {
+        "body": "sproto3224",
+        "slot": "airKick3",
+        "url": "/fighters/motion/sproto3224/scale-fix/23.png",
+        "sha256": "3bfb937d0276cbce2a7153fee326d59b2225b42b39074d9102a848aba84d3314",
+        "bounds": [
+          146,
+          145,
+          230,
+          274
+        ],
+        "registration": null
+      },
+      "replacement": {
+        "body": "sproto3224",
+        "slot": "airKick2",
+        "url": "/fighters/motion/sproto3224/scale-fix/22.png",
+        "sha256": "89a7807eeeee14f436eef45b8af325a544153ce99fddc0fd9b9ccc4577df4a44",
+        "bounds": [
+          142,
+          158,
+          273,
+          274
+        ],
+        "registration": null
+      },
+      "actualBrowserConfirmation": true,
+      "status": "proposed; parent applies serialized change"
+    },
+    {
+      "body": "sproto3235",
+      "sequence": "airKick",
+      "targetSlot": 3,
+      "copyFromSlot": 2,
+      "reason": "Second aerial active slot retracts into tucked chamber.",
+      "before": {
+        "body": "sproto3235",
+        "slot": "airKick3",
+        "url": "/fighters/motion/sproto3235/scale-fix/23.png",
+        "sha256": "85ca4f6260b034795908d750c22c3e053cd67ec3da9e8c82e247e6734e93ad59",
+        "bounds": [
+          151,
+          175,
+          234,
+          274
+        ],
+        "registration": null
+      },
+      "replacement": {
+        "body": "sproto3235",
+        "slot": "airKick2",
+        "url": "/fighters/motion/sproto3235/scale-fix/22.png",
+        "sha256": "f6e802fea4148e0e0429424c3d1f8516ffc15e4a7a7753144a4622d1059fb423",
+        "bounds": [
+          129,
+          170,
+          253,
+          274
+        ],
+        "registration": null
+      },
+      "actualBrowserConfirmation": true,
+      "status": "proposed; parent applies serialized change"
+    },
+    {
+      "body": "sproto3235-companion",
+      "sequence": "airKick",
+      "targetSlot": 3,
+      "copyFromSlot": 2,
+      "reason": "Second aerial active slot retracts into tucked chamber.",
+      "before": {
+        "body": "sproto3235-companion",
+        "slot": "airKick3",
+        "url": "/fighters/motion/sproto3235-companion/scale-fix/23.png",
+        "sha256": "16da63ddcf88e7bd198f580d2a1bf62f906ebd358ed65ea9cd6ab5a08cd1d0f4",
+        "bounds": [
+          156,
+          168,
+          242,
+          274
+        ],
+        "registration": null
+      },
+      "replacement": {
+        "body": "sproto3235-companion",
+        "slot": "airKick2",
+        "url": "/fighters/motion/sproto3235-companion/scale-fix/22.png",
+        "sha256": "479daec927cfe077b514a99554357278c74b2c9b97240e2ec8913c27cfc9fcda",
+        "bounds": [
+          120,
+          181,
+          253,
+          274
+        ],
+        "registration": null
+      },
+      "actualBrowserConfirmation": true,
+      "status": "proposed; parent applies serialized change"
+    }
+  ],
+  "browserEvidence": [
+    "127-active-slot-heavy3-before-b.jpg",
+    "128-active-slot-heavy4-before-b.jpg",
+    "129-active-slot-airkick2-before-b.jpg",
+    "130-active-slot-airkick3-before-b.jpg"
+  ],
+  "discardedVisualization": "active-slots-N and row crops overflowed for 416x336 source assets; replaced by contact-BODY.png complete-image rows. Do not use overflowed contact sheet for crop/scale judgments."
+}

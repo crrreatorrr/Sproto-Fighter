@@ -69,6 +69,13 @@ main { max-width: 1360px; padding: 12px 18px 0; }
 .selection-grid { grid-template-columns: repeat(12,minmax(0,1fr)); gap: 6px; padding: 0 2px; }
 .portrait-choice { height: clamp(76px,7.3vw,97px); border: 3px double #9a9691; border-radius: 0; background: #080a10; box-shadow: 2px 2px #000; }
 .portrait-choice img { padding: 0 1px 15px; }
+/* These four supplied portraits include a black right-hand half. Show the
+   original left-hand picture at its natural aspect ratio in the roster. */
+.portrait-choice:is([data-fighter="vaudream"],[data-fighter="nick"],[data-fighter="highsproto"],[data-fighter="captain"]) img {
+  object-fit: cover;
+  object-position: left center;
+  padding: 0 0 15px;
+}
 .portrait-name { min-height: 17px; padding: 3px 1px 2px; font-size: 7px; background: #04060ce6; border-top: 1px solid #504c44; }
 .portrait-choice:hover { border-color: #f7e6a4; background: #1f2532; }
 .portrait-choice[aria-pressed=true] { outline: 2px solid #ffdb49; outline-offset: 1px; border-color: #ffdc4c; background: #5d2732; }
@@ -171,7 +178,7 @@ footer { padding: 8px 0 10px; font-size: 7px; color: #727580; }
   .random-choice strong { font-size: 30px; }
   .random-choice > span { font-size: 6px; letter-spacing: 0; }
   .selection-hint { font-size: 8px; margin: 6px 2px; }
-  .stage-rail { grid-template-columns: repeat(5,125px); gap: 6px; padding-bottom: 5px; }
+  .stage-rail { grid-template-columns: none; grid-auto-columns: 125px; gap: 6px; padding-bottom: 5px; }
   .stage-choice { height: 60px; }
   .stage-choice b { font-size: 10px; }
   .stage-swipe-cue { margin: 3px 0; font-size: 8px; }
@@ -185,12 +192,19 @@ footer { padding: 8px 0 10px; font-size: 7px; color: #727580; }
   footer { font-size: 6px; }
 }
 
-/* Hub Relic unlocks: locked fighters stay visible, greyed, and are still pickable as the CPU rival. */
-.lock-badge { display: none; position: absolute; left: 50%; top: 38%; transform: translate(-50%, -50%) rotate(-8deg); padding: 3px 5px; background: #0b0d14e6; border: 1px solid #ffdb49; color: #ffdb49; font-size: 7px; font-weight: 900; letter-spacing: 1px; pointer-events: none; }
-.portrait-choice.locked img { filter: grayscale(1) brightness(.45); }
-.portrait-choice.locked .lock-badge { display: block; }
-#selection-view[data-side=opponent] .portrait-choice.locked img { filter: grayscale(.6) brightness(.7); }
-.hub-label.linked { color: #7fe8a8; }
-#return-hub { border-color: #ff3d6e; }
-#hub-toast { position: fixed; right: 18px; bottom: 18px; z-index: 50; max-width: 340px; padding: 12px 16px; background: #13101fef; border: 2px solid #ffdb49; box-shadow: 3px 3px #000; color: #f6efd2; font-size: 12px; line-height: 1.45; }
-#hub-toast b { display: block; color: #ffdb49; font-size: 13px; letter-spacing: .5px; }
+/* Keep enlarged full-height paired previews clear of the stage caption. */
+@media (min-width:650px){
+ .preview-stage-label{top:5px;bottom:auto;width:10%;max-width:120px;}
+}
+/* Story recruitment and post-campaign free-play reward. */
+.portrait-choice.fighter-locked img{filter:grayscale(1);opacity:.35}
+.portrait-choice.fighter-locked .portrait-name::before{content:'LOCKED · ';color:#f1c481}
+.portrait-choice.fighter-locked{border-color:#454a58}
+.god-mode-control{display:grid;gap:6px;max-width:240px}.god-mode-control small{font-size:11px;line-height:1.4;color:#a3b2c4}.god-mode-control input{width:auto}
+.world-card:disabled{opacity:.45;cursor:not-allowed}
+
+/* Hub status is optional; existing story locks and original portraits remain authoritative. */
+.hub-label.linked{color:#7fe8a8}
+#return-hub{border-color:#ff3d6e}
+#hub-toast{position:fixed;right:18px;bottom:18px;z-index:50;max-width:min(340px,calc(100vw - 36px));padding:12px 16px;background:#13101fef;border:2px solid #ffdb49;box-shadow:3px 3px #000;color:#f6efd2;font-size:12px;line-height:1.45;overflow-wrap:anywhere}
+#hub-toast b{display:block;color:#ffdb49;font-size:13px;letter-spacing:.5px}

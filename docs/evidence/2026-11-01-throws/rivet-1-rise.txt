@@ -1,0 +1,9 @@
+Browser tab: 4, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~		120 stepper (settable, integer) Frames to advance, Value: 1, ID: frameCount
+~	199 text Core frame 92 · scenario frame 92 · frozen 0
+Sequence poses · frame 10/31 · pose slot 10: crouchLanding · gait phase 0.000 · x 1024.9 y 578.0 facing 1
+Move none t=- 
+Throw none
+Reactions 0: {"kind":"knockdown","phase":"rise","t":0,"direction":1} hp=885 x=1024.88 y=578.00 vx=0.15 vy=0.00 | 1: null hp=1000 x=660.00 y=578.00 vx=0.00 vy=0.00
+The focused UI element is 121 button Advance frames, ID: advanceFrames

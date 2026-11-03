@@ -1,0 +1,33 @@
+Browser tab: 4, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 185-196
+~		8 pop up button (collapsed, settable) Fighter, Value: Morelight · vela, ID: fighter, Secondary Actions: Expand
+~				11 (selected) Morelight · vela
+~				30 Little Foot Nate · nate
+~		34 pop up button (collapsed, settable) Action, Value: victimThrow, ID: action, Secondary Actions: Expand
+~				52 grab
+~				53 (selected) victimThrow
+~		62 pop up button (collapsed, settable) Aim / throw direction, Value: back, ID: direction, Secondary Actions: Expand
+~				65 (selected) back
+~				66 up
+~		96 pop up button (collapsed, settable) Start facing, Value: Right, ID: facing, Secondary Actions: Expand
+~				98 (selected) Right
+~				99 Left
+~		120 stepper (settable, integer) Frames to advance, Value: 84, ID: frameCount
++	124 text victimThrow · back · cycle 1
++	125 text ready: 21/21 installed atlases. Selected: available.
++	134 text Core frame 84 · scenario frame 84 · frozen 0
+Sequence poses · frame 9/31 · pose slot 9: airFall · gait phase 0.000 · x 1024.9 y 578.0 facing 1
+Move none t=- 
+Throw none
+Reactions 0: {"kind":"knockdown","phase":"down","t":6,"direction":1} hp=885 x=1024.92 y=578.00 vx=0.62 vy=0.00 | 1: null hp=1000 x=660.00 y=578.00 vx=0.00 vy=0.00
++	136 text Slots 0–7 / 31
++		176 text 0 · guard
++		177 text 1 · breathe
++		178 text 2 · walkNear
++		179 text 3 · passNear
++		180 text 4 · walkFar
++		181 text 5 · passFar
++		182 text 6 · dash
++		183 text 7 · jumpAnticipation
+The focused UI element is 121 button Advance frames, ID: advanceFrames

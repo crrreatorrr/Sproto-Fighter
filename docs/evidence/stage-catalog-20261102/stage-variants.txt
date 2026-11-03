@@ -1,0 +1,3 @@
+PASS: 61 stage PNGs resolve uniquely, preserve native dimensions and match recorded SHA-256 hashes.
+PASS: all 61 locations occur in contiguous regional blocks across 210 encounters; opponent/save IDs remain unchanged; Bar and Hatchery now have variations.
+PASS: loading deduplicates requests; unavailable art signals fallback; drawing uses unchanged arena coordinates. Visual floor alignment requires browser inspection.

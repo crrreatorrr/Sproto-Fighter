@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const source=ts.transpileModule(readFileSync(new URL('../src/core.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
-const {A,FLOOR,WALL,GRAVITY,ROSTER,createState,step}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const {A,FLOOR,WALL,GRAVITY,ROSTER,fighterWall,createState,step}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 let checks=0;
 const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};
-function fresh(id='rivet'){const s=createState(id,'dummy');s.fighters[0].x=180;s.fighters[1].x=850;return s;}
+function fresh(id='rivet'){const s=createState(id,'dummy');s.fighters[0].x=Math.max(180,fighterWall(id)+20);s.fighters[1].x=850;return s;}
 function tick(s,n=1,input=0){for(let i=0;i<n;i++)step(s,[input,0]);}
 check('all 21 fighters reach full run in 2 frames, reverse in 2, brake in 2',()=>{
  for(const id of Object.keys(ROSTER)){const s=fresh(id),f=s.fighters[0],speed=ROSTER[id].speed;

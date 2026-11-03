@@ -1,0 +1,250 @@
+{
+  "branch": "codex/independent-partner-assists",
+  "base": "2e67fa4d",
+  "singlePartners": [
+    "sproto313",
+    "sproto1414",
+    "sproto2884",
+    "sproto215",
+    "sproto102",
+    "sproto834",
+    "sproto1815",
+    "sproto1601",
+    "sproto2789",
+    "sproto818"
+  ],
+  "twinPartners": [
+    "sproto282",
+    "sproto2075",
+    "sproto704"
+  ],
+  "assignments": {
+    "loadthebags": "sproto313",
+    "urmometh": "sproto1414",
+    "alpha777": "sproto2884",
+    "uncmasterflex": "sproto215",
+    "dumpstar": "sproto102",
+    "aaron": "sproto834",
+    "olnoname": "sproto1815",
+    "erik": "sproto1601",
+    "vela": "sproto2789",
+    "vitaliketh": "sproto818",
+    "sober": "sproto282",
+    "brainsprot": "sproto2075",
+    "bront": "sproto704"
+  },
+  "attacks": {
+    "sproto313": {
+      "name": "FOUR-EYE PINBALL",
+      "kind": "prism",
+      "motion": "hover",
+      "color": "#6bf5ff",
+      "hits": [
+        {
+          "push": 5,
+          "stun": 32
+        }
+      ]
+    },
+    "sproto1414": {
+      "name": "BLUE GEYSER",
+      "kind": "geyser",
+      "motion": "rise",
+      "color": "#378dff",
+      "hits": [
+        {
+          "push": 2,
+          "stun": 34,
+          "launch": 6
+        }
+      ]
+    },
+    "sproto2884": {
+      "name": "CAP COMET",
+      "kind": "comet",
+      "motion": "orbit",
+      "color": "#ffe55b",
+      "hits": [
+        {
+          "push": 8,
+          "stun": 30
+        }
+      ]
+    },
+    "sproto215": {
+      "name": "RED-EYE VORTEX",
+      "kind": "vortex",
+      "motion": "hover",
+      "color": "#fa587f",
+      "hits": [
+        {
+          "push": -5,
+          "stun": 36
+        }
+      ]
+    },
+    "sproto102": {
+      "name": "SHOULDER BLITZ",
+      "kind": "blitz",
+      "motion": "rush",
+      "color": "#ffaf4c",
+      "hits": [
+        {
+          "push": 11,
+          "stun": 29
+        }
+      ]
+    },
+    "sproto834": {
+      "name": "CRIMSON DIVE",
+      "kind": "dive",
+      "motion": "dive",
+      "color": "#ff416b",
+      "hits": [
+        {
+          "push": 3,
+          "stun": 33,
+          "launch": 4
+        }
+      ]
+    },
+    "sproto1815": {
+      "name": "HOOKED REAPER",
+      "kind": "halberd",
+      "motion": "sweep",
+      "color": "#ff4747",
+      "hits": [
+        {
+          "push": -3,
+          "stun": 35,
+          "low": true
+        }
+      ]
+    },
+    "sproto1601": {
+      "name": "LUCKY EIGHT RAIN",
+      "kind": "eights",
+      "motion": "throw",
+      "color": "#ffe45a",
+      "hits": [
+        {
+          "push": 4,
+          "stun": 31
+        }
+      ]
+    },
+    "sproto2789": {
+      "name": "STORMSTAFF",
+      "kind": "storm",
+      "motion": "rise",
+      "color": "#c791ff",
+      "hits": [
+        {
+          "push": 1,
+          "stun": 39,
+          "launch": 5
+        }
+      ]
+    },
+    "sproto818": {
+      "name": "FROST ECHO",
+      "kind": "frost",
+      "motion": "pulse",
+      "color": "#9cecff",
+      "hits": [
+        {
+          "push": 0,
+          "stun": 42,
+          "low": true
+        }
+      ]
+    },
+    "sproto282": {
+      "name": "RED / BLUE CROSSFIRE",
+      "kind": "crossfire",
+      "motion": "paired",
+      "color": "#f77294",
+      "hits": [
+        {
+          "push": 7,
+          "stun": 32
+        },
+        {
+          "push": -2,
+          "stun": 35
+        }
+      ],
+      "bodyAttacks": [
+        "Red fan shot",
+        "Blue ground zigzag"
+      ]
+    },
+    "sproto2075": {
+      "name": "SKY / QUAKE",
+      "kind": "quakeDive",
+      "motion": "paired",
+      "color": "#ffe368",
+      "hits": [
+        {
+          "push": 2,
+          "stun": 34,
+          "launch": 7
+        },
+        {
+          "push": 10,
+          "stun": 37,
+          "low": true,
+          "launch": -9
+        }
+      ],
+      "bodyAttacks": [
+        "Small Sproto sky dive",
+        "Large Sproto earthquake stomp"
+      ]
+    },
+    "sproto704": {
+      "name": "BOULDER / BOOMERANG",
+      "kind": "boomerang",
+      "motion": "paired",
+      "color": "#7be7c1",
+      "hits": [
+        {
+          "push": 13,
+          "stun": 30
+        },
+        {
+          "push": -4,
+          "stun": 38
+        }
+      ],
+      "bodyAttacks": [
+        "Large Sproto boulder throw",
+        "Small Sproto returning boomerang"
+      ]
+    }
+  },
+  "automated": {
+    "rosterScenarios": 612,
+    "existingTwinScenarios": 32,
+    "newAttackScenarios": 78,
+    "newTwinAttackFrames": 840,
+    "fighterCases": 510,
+    "selectionGroups": 9
+  },
+  "browser": [
+    {
+      "facing": 1,
+      "partners": 13,
+      "attacks": 16,
+      "failures": 0
+    },
+    {
+      "facing": -1,
+      "partners": 3,
+      "attacks": 6,
+      "failures": 0,
+      "filter": "twins"
+    }
+  ],
+  "merged": false
+}

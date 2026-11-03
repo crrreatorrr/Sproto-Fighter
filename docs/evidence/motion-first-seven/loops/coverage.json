@@ -1,0 +1,4234 @@
+[
+  {
+    "file": "bront-1-early-f9",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 9,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-1-early-f9.png"
+  },
+  {
+    "file": "bront-1-late-f46",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-1-late-f46.png"
+  },
+  {
+    "file": "bront-1-mid-f22",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-1-mid-f22.png"
+  },
+  {
+    "file": "bront-10-early-f1",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-10-early-f1.png"
+  },
+  {
+    "file": "bront-10-late-f46",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-10-late-f46.png"
+  },
+  {
+    "file": "bront-10-mid-f20",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-10-mid-f20.png"
+  },
+  {
+    "file": "bront-11-early-f1",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 7/31 \u00b7 pose slot 7: jumpAnticipation \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-11-early-f1.png"
+  },
+  {
+    "file": "bront-11-late-f47",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-11-late-f47.png"
+  },
+  {
+    "file": "bront-11-mid-f21",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1",
+    "screenshot": "bront-11-mid-f21.png"
+  },
+  {
+    "file": "bront-12-early-f0",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-12-early-f0.png"
+  },
+  {
+    "file": "bront-12-late-f46",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 474.3 y 578.0 facing 1",
+    "screenshot": "bront-12-late-f46.png"
+  },
+  {
+    "file": "bront-12-mid-f20",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 478.3 y 578.0 facing 1",
+    "screenshot": "bront-12-mid-f20.png"
+  },
+  {
+    "file": "bront-13-early-f1",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.969 \u00b7 x 498.0 y 578.0 facing 1",
+    "screenshot": "bront-13-early-f1.png"
+  },
+  {
+    "file": "bront-13-late-f46",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.887 \u00b7 x 413.6 y 578.0 facing 1",
+    "screenshot": "bront-13-late-f46.png"
+  },
+  {
+    "file": "bront-13-mid-f21",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 25/31 \u00b7 pose slot 25: block \u00b7 gait phase 0.770 \u00b7 x 470.3 y 578.0 facing 1",
+    "screenshot": "bront-13-mid-f21.png"
+  },
+  {
+    "file": "bront-14-early-f1",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-14-early-f1.png"
+  },
+  {
+    "file": "bront-14-late-f46",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-14-late-f46.png"
+  },
+  {
+    "file": "bront-14-mid-f20",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 27/31 \u00b7 pose slot 27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-14-mid-f20.png"
+  },
+  {
+    "file": "bront-15-early-f1",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-15-early-f1.png"
+  },
+  {
+    "file": "bront-15-late-f47",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing -1",
+    "screenshot": "bront-15-late-f47.png"
+  },
+  {
+    "file": "bront-15-mid-f22",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-15-mid-f22.png"
+  },
+  {
+    "file": "bront-16-early-f0",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-16-early-f0.png"
+  },
+  {
+    "file": "bront-16-late-f46",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-16-late-f46.png"
+  },
+  {
+    "file": "bront-16-mid-f20",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 27/31 \u00b7 pose slot 27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-16-mid-f20.png"
+  },
+  {
+    "file": "bront-17-early-f1",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-17-early-f1.png"
+  },
+  {
+    "file": "bront-17-late-f45",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-17-late-f45.png"
+  },
+  {
+    "file": "bront-17-mid-f22",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-17-mid-f22.png"
+  },
+  {
+    "file": "bront-18-early-f0",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-18-early-f0.png"
+  },
+  {
+    "file": "bront-18-late-f46",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 428.7 y 570.5 facing 1",
+    "screenshot": "bront-18-late-f46.png"
+  },
+  {
+    "file": "bront-18-mid-f21",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "bront-18-mid-f21.png"
+  },
+  {
+    "file": "bront-19-early-f1",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-19-early-f1.png"
+  },
+  {
+    "file": "bront-19-late-f45",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 690.8 y 561.5 facing 1",
+    "screenshot": "bront-19-late-f45.png"
+  },
+  {
+    "file": "bront-19-mid-f22",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 620.0 y 552.0 facing 1",
+    "screenshot": "bront-19-mid-f22.png"
+  },
+  {
+    "file": "bront-2-early-f0",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-2-early-f0.png"
+  },
+  {
+    "file": "bront-2-late-f45",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.049 \u00b7 x 695.1 y 578.0 facing 1",
+    "screenshot": "bront-2-late-f45.png"
+  },
+  {
+    "file": "bront-2-mid-f22",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.468 \u00b7 x 593.9 y 578.0 facing 1",
+    "screenshot": "bront-2-mid-f22.png"
+  },
+  {
+    "file": "bront-20-early-f0",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-20-early-f0.png"
+  },
+  {
+    "file": "bront-20-late-f46",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 489.8 y 335.5 facing 1",
+    "screenshot": "bront-20-late-f46.png"
+  },
+  {
+    "file": "bront-20-mid-f20",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 519.9 facing 1",
+    "screenshot": "bront-20-mid-f20.png"
+  },
+  {
+    "file": "bront-21-early-f1",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-21-early-f1.png"
+  },
+  {
+    "file": "bront-21-late-f47",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 474.4 y 578.0 facing 1",
+    "screenshot": "bront-21-late-f47.png"
+  },
+  {
+    "file": "bront-21-mid-f21",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "bront-21-mid-f21.png"
+  },
+  {
+    "file": "bront-22-early-f1",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-22-early-f1.png"
+  },
+  {
+    "file": "bront-22-late-f46",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-22-late-f46.png"
+  },
+  {
+    "file": "bront-22-mid-f20",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 30/31 \u00b7 pose slot 30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-22-mid-f20.png"
+  },
+  {
+    "file": "bront-3-early-f1",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.969 \u00b7 x 498.0 y 578.0 facing 1",
+    "screenshot": "bront-3-early-f1.png"
+  },
+  {
+    "file": "bront-3-late-f45",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.951 \u00b7 x 304.9 y 578.0 facing 1",
+    "screenshot": "bront-3-late-f45.png"
+  },
+  {
+    "file": "bront-3-mid-f21",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.601 \u00b7 x 410.5 y 578.0 facing 1",
+    "screenshot": "bront-3-mid-f21.png"
+  },
+  {
+    "file": "bront-4-early-f1",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 513.2 y 578.0 facing 1",
+    "screenshot": "bront-4-early-f1.png"
+  },
+  {
+    "file": "bront-4-late-f45",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "bront-4-late-f45.png"
+  },
+  {
+    "file": "bront-4-mid-f20",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "bront-4-mid-f20.png"
+  },
+  {
+    "file": "bront-5-early-f1",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 7/31 \u00b7 pose slot 7: jumpAnticipation \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-5-early-f1.png"
+  },
+  {
+    "file": "bront-5-late-f45",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-5-late-f45.png"
+  },
+  {
+    "file": "bront-5-mid-f21",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1",
+    "screenshot": "bront-5-mid-f21.png"
+  },
+  {
+    "file": "bront-6-early-f1",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 11/31 \u00b7 pose slot 11: punchWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-6-early-f1.png"
+  },
+  {
+    "file": "bront-6-late-f46",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-6-late-f46.png"
+  },
+  {
+    "file": "bront-6-mid-f20",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-6-mid-f20.png"
+  },
+  {
+    "file": "bront-7-early-f2",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 16/31 \u00b7 pose slot 16: kickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-7-early-f2.png"
+  },
+  {
+    "file": "bront-7-late-f47",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-7-late-f47.png"
+  },
+  {
+    "file": "bront-7-mid-f21",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-7-mid-f21.png"
+  },
+  {
+    "file": "bront-8-early-f0",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-8-early-f0.png"
+  },
+  {
+    "file": "bront-8-late-f45",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-8-late-f45.png"
+  },
+  {
+    "file": "bront-8-mid-f21",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 21/31 \u00b7 pose slot 21: sweepRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-8-mid-f21.png"
+  },
+  {
+    "file": "bront-9-early-f1",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 14/31 \u00b7 pose slot 14: upperWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-9-early-f1.png"
+  },
+  {
+    "file": "bront-9-late-f48",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-9-late-f48.png"
+  },
+  {
+    "file": "bront-9-mid-f22",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-9-mid-f22.png"
+  },
+  {
+    "file": "bront-hold-contact2-9",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 9,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "bront-hold-contact2-9.png"
+  },
+  {
+    "file": "bront-walk-slot0",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+    "screenshot": "bront-walk-slot0.png"
+  },
+  {
+    "file": "bront-walk-slot1",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 3,
+    "sequence": "walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+    "screenshot": "bront-walk-slot1.png"
+  },
+  {
+    "file": "bront-walk-slot2",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 5,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+    "screenshot": "bront-walk-slot2.png"
+  },
+  {
+    "file": "bront-walk-slot3",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 7,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+    "screenshot": "bront-walk-slot3.png"
+  },
+  {
+    "file": "bront-walk-slot4",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 8,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+    "screenshot": "bront-walk-slot4.png"
+  },
+  {
+    "file": "bront-walk-slot5",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 10,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "screenshot": "bront-walk-slot5.png"
+  },
+  {
+    "file": "bront-walk-slot6",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 12,
+    "sequence": "walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+    "screenshot": "bront-walk-slot6.png"
+  },
+  {
+    "file": "bront-walk-slot7",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 14,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "screenshot": "bront-walk-slot7.png"
+  },
+  {
+    "file": "guest07-1-early-f10",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 10,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-1-early-f10.png"
+  },
+  {
+    "file": "guest07-1-late-f50",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 50,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-1-late-f50.png"
+  },
+  {
+    "file": "guest07-1-mid-f22",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-1-mid-f22.png"
+  },
+  {
+    "file": "guest07-10-early-f0",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-10-early-f0.png"
+  },
+  {
+    "file": "guest07-10-late-f47",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-10-late-f47.png"
+  },
+  {
+    "file": "guest07-10-mid-f23",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 23,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-10-mid-f23.png"
+  },
+  {
+    "file": "guest07-11-early-f2",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-11-early-f2.png"
+  },
+  {
+    "file": "guest07-11-late-f45",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-11-late-f45.png"
+  },
+  {
+    "file": "guest07-11-mid-f25",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 25,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 455.5 facing 1",
+    "screenshot": "guest07-11-mid-f25.png"
+  },
+  {
+    "file": "guest07-12-early-f5",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 5,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-12-early-f5.png"
+  },
+  {
+    "file": "guest07-12-late-f45",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 474.3 y 578.0 facing 1",
+    "screenshot": "guest07-12-late-f45.png"
+  },
+  {
+    "file": "guest07-12-mid-f21",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 477.6 y 578.0 facing 1",
+    "screenshot": "guest07-12-mid-f21.png"
+  },
+  {
+    "file": "guest07-13-early-f5",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 5,
+    "sequence": "poses \u00b7 frame 25/31 \u00b7 pose slot 25: block \u00b7 gait phase 0.770 \u00b7 x 480.9 y 578.0 facing 1",
+    "screenshot": "guest07-13-early-f5.png"
+  },
+  {
+    "file": "guest07-13-late-f45",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.887 \u00b7 x 413.6 y 578.0 facing 1",
+    "screenshot": "guest07-13-late-f45.png"
+  },
+  {
+    "file": "guest07-13-mid-f23",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 23,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.736 \u00b7 x 467.9 y 578.0 facing 1",
+    "screenshot": "guest07-13-mid-f23.png"
+  },
+  {
+    "file": "guest07-14-early-f2",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-14-early-f2.png"
+  },
+  {
+    "file": "guest07-14-late-f45",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-14-late-f45.png"
+  },
+  {
+    "file": "guest07-14-mid-f23",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 23,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-14-mid-f23.png"
+  },
+  {
+    "file": "guest07-15-early-f2",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-15-early-f2.png"
+  },
+  {
+    "file": "guest07-15-late-f50",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 50,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing -1",
+    "screenshot": "guest07-15-late-f50.png"
+  },
+  {
+    "file": "guest07-15-mid-f23",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 23,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-15-mid-f23.png"
+  },
+  {
+    "file": "guest07-16-early-f3",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-16-early-f3.png"
+  },
+  {
+    "file": "guest07-16-late-f47",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-16-late-f47.png"
+  },
+  {
+    "file": "guest07-16-mid-f20",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-16-mid-f20.png"
+  },
+  {
+    "file": "guest07-17-early-f0",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-17-early-f0.png"
+  },
+  {
+    "file": "guest07-17-late-f48",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-17-late-f48.png"
+  },
+  {
+    "file": "guest07-17-mid-f22",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-17-mid-f22.png"
+  },
+  {
+    "file": "guest07-18-early-f0",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-18-early-f0.png"
+  },
+  {
+    "file": "guest07-18-late-f51",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 51,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 427.4 y 578.0 facing 1",
+    "screenshot": "guest07-18-late-f51.png"
+  },
+  {
+    "file": "guest07-18-mid-f22",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "guest07-18-mid-f22.png"
+  },
+  {
+    "file": "guest07-19-early-f4",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 4,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-19-early-f4.png"
+  },
+  {
+    "file": "guest07-19-late-f45",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 690.8 y 561.5 facing 1",
+    "screenshot": "guest07-19-late-f45.png"
+  },
+  {
+    "file": "guest07-19-mid-f24",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 24,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 620.0 y 552.0 facing 1",
+    "screenshot": "guest07-19-mid-f24.png"
+  },
+  {
+    "file": "guest07-2-early-f0",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-2-early-f0.png"
+  },
+  {
+    "file": "guest07-2-late-f50",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 50,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.393 \u00b7 x 717.1 y 578.0 facing 1",
+    "screenshot": "guest07-2-late-f50.png"
+  },
+  {
+    "file": "guest07-2-mid-f23",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 23,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.537 \u00b7 x 598.3 y 578.0 facing 1",
+    "screenshot": "guest07-2-mid-f23.png"
+  },
+  {
+    "file": "guest07-20-early-f2",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-20-early-f2.png"
+  },
+  {
+    "file": "guest07-20-late-f48",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 489.7 y 336.1 facing 1",
+    "screenshot": "guest07-20-late-f48.png"
+  },
+  {
+    "file": "guest07-20-mid-f24",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 24,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 517.0 facing 1",
+    "screenshot": "guest07-20-mid-f24.png"
+  },
+  {
+    "file": "guest07-21-early-f0",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-21-early-f0.png"
+  },
+  {
+    "file": "guest07-21-late-f50",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 50,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 474.1 y 578.0 facing 1",
+    "screenshot": "guest07-21-late-f50.png"
+  },
+  {
+    "file": "guest07-21-mid-f23",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 23,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "guest07-21-mid-f23.png"
+  },
+  {
+    "file": "guest07-22-early-f3",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-22-early-f3.png"
+  },
+  {
+    "file": "guest07-22-late-f48",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 628.0 y 578.0 facing 1",
+    "screenshot": "guest07-22-late-f48.png"
+  },
+  {
+    "file": "guest07-22-mid-f20",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 536.0 y 578.0 facing 1",
+    "screenshot": "guest07-22-mid-f20.png"
+  },
+  {
+    "file": "guest07-3-early-f2",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.907 \u00b7 x 494.1 y 578.0 facing 1",
+    "screenshot": "guest07-3-early-f2.png"
+  },
+  {
+    "file": "guest07-3-late-f48",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.745 \u00b7 x 291.7 y 578.0 facing 1",
+    "screenshot": "guest07-3-late-f48.png"
+  },
+  {
+    "file": "guest07-3-mid-f25",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 25,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.326 \u00b7 x 392.9 y 578.0 facing 1",
+    "screenshot": "guest07-3-mid-f25.png"
+  },
+  {
+    "file": "guest07-4-early-f4",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 4,
+    "sequence": "poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 548.1 y 578.0 facing 1",
+    "screenshot": "guest07-4-early-f4.png"
+  },
+  {
+    "file": "guest07-4-late-f46",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "guest07-4-late-f46.png"
+  },
+  {
+    "file": "guest07-4-mid-f20",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "guest07-4-mid-f20.png"
+  },
+  {
+    "file": "guest07-5-early-f1",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 7/31 \u00b7 pose slot 7: jumpAnticipation \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-5-early-f1.png"
+  },
+  {
+    "file": "guest07-5-late-f49",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 49,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-5-late-f49.png"
+  },
+  {
+    "file": "guest07-5-mid-f21",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1",
+    "screenshot": "guest07-5-mid-f21.png"
+  },
+  {
+    "file": "guest07-6-early-f1",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 11/31 \u00b7 pose slot 11: punchWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-6-early-f1.png"
+  },
+  {
+    "file": "guest07-6-late-f49",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 49,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-6-late-f49.png"
+  },
+  {
+    "file": "guest07-6-mid-f22",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-6-mid-f22.png"
+  },
+  {
+    "file": "guest07-7-early-f5",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 5,
+    "sequence": "poses \u00b7 frame 17/31 \u00b7 pose slot 17: kickHalf \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-7-early-f5.png"
+  },
+  {
+    "file": "guest07-7-late-f47",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-7-late-f47.png"
+  },
+  {
+    "file": "guest07-7-mid-f22",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-7-mid-f22.png"
+  },
+  {
+    "file": "guest07-8-early-f0",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-8-early-f0.png"
+  },
+  {
+    "file": "guest07-8-late-f47",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-8-late-f47.png"
+  },
+  {
+    "file": "guest07-8-mid-f23",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 23,
+    "sequence": "poses \u00b7 frame 21/31 \u00b7 pose slot 21: sweepRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-8-mid-f23.png"
+  },
+  {
+    "file": "guest07-9-early-f4",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 4,
+    "sequence": "poses \u00b7 frame 14/31 \u00b7 pose slot 14: upperWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-9-early-f4.png"
+  },
+  {
+    "file": "guest07-9-late-f48",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-9-late-f48.png"
+  },
+  {
+    "file": "guest07-9-mid-f20",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-9-mid-f20.png"
+  },
+  {
+    "file": "guest07-hold-contact2-9",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 9,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "guest07-hold-contact2-9.png"
+  },
+  {
+    "file": "guest07-walk-slot0",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+    "screenshot": "guest07-walk-slot0.png"
+  },
+  {
+    "file": "guest07-walk-slot1",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 3,
+    "sequence": "walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+    "screenshot": "guest07-walk-slot1.png"
+  },
+  {
+    "file": "guest07-walk-slot2",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 5,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+    "screenshot": "guest07-walk-slot2.png"
+  },
+  {
+    "file": "guest07-walk-slot3",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 7,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+    "screenshot": "guest07-walk-slot3.png"
+  },
+  {
+    "file": "guest07-walk-slot4",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 8,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+    "screenshot": "guest07-walk-slot4.png"
+  },
+  {
+    "file": "guest07-walk-slot5",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 10,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "screenshot": "guest07-walk-slot5.png"
+  },
+  {
+    "file": "guest07-walk-slot6",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 12,
+    "sequence": "walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+    "screenshot": "guest07-walk-slot6.png"
+  },
+  {
+    "file": "guest07-walk-slot7",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 14,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "screenshot": "guest07-walk-slot7.png"
+  },
+  {
+    "file": "mox-1-early-f10",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 10,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-1-early-f10.png"
+  },
+  {
+    "file": "mox-1-late-f46",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-1-late-f46.png"
+  },
+  {
+    "file": "mox-1-mid-f22",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-1-mid-f22.png"
+  },
+  {
+    "file": "mox-10-early-f3",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-10-early-f3.png"
+  },
+  {
+    "file": "mox-10-late-f47",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-10-late-f47.png"
+  },
+  {
+    "file": "mox-10-mid-f20",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-10-mid-f20.png"
+  },
+  {
+    "file": "mox-11-early-f2",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-11-early-f2.png"
+  },
+  {
+    "file": "mox-11-late-f45",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-11-late-f45.png"
+  },
+  {
+    "file": "mox-11-mid-f20",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "screenshot": "mox-11-mid-f20.png"
+  },
+  {
+    "file": "mox-12-early-f3",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-12-early-f3.png"
+  },
+  {
+    "file": "mox-12-late-f48",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 474.3 y 578.0 facing 1",
+    "screenshot": "mox-12-late-f48.png"
+  },
+  {
+    "file": "mox-12-mid-f20",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 478.3 y 578.0 facing 1",
+    "screenshot": "mox-12-mid-f20.png"
+  },
+  {
+    "file": "mox-13-early-f0",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-13-early-f0.png"
+  },
+  {
+    "file": "mox-13-late-f45",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.887 \u00b7 x 413.6 y 578.0 facing 1",
+    "screenshot": "mox-13-late-f45.png"
+  },
+  {
+    "file": "mox-13-mid-f21",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 25/31 \u00b7 pose slot 25: block \u00b7 gait phase 0.770 \u00b7 x 470.3 y 578.0 facing 1",
+    "screenshot": "mox-13-mid-f21.png"
+  },
+  {
+    "file": "mox-14-early-f2",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-14-early-f2.png"
+  },
+  {
+    "file": "mox-14-late-f46",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-14-late-f46.png"
+  },
+  {
+    "file": "mox-14-mid-f20",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 27/31 \u00b7 pose slot 27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-14-mid-f20.png"
+  },
+  {
+    "file": "mox-15-early-f1",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-15-early-f1.png"
+  },
+  {
+    "file": "mox-15-late-f46",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing -1",
+    "screenshot": "mox-15-late-f46.png"
+  },
+  {
+    "file": "mox-15-mid-f21",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-15-mid-f21.png"
+  },
+  {
+    "file": "mox-16-early-f0",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-16-early-f0.png"
+  },
+  {
+    "file": "mox-16-late-f47",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-16-late-f47.png"
+  },
+  {
+    "file": "mox-16-mid-f20",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 27/31 \u00b7 pose slot 27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-16-mid-f20.png"
+  },
+  {
+    "file": "mox-17-early-f1",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-17-early-f1.png"
+  },
+  {
+    "file": "mox-17-late-f46",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-17-late-f46.png"
+  },
+  {
+    "file": "mox-17-mid-f20",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 27/31 \u00b7 pose slot 27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-17-mid-f20.png"
+  },
+  {
+    "file": "mox-18-early-f0",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-18-early-f0.png"
+  },
+  {
+    "file": "mox-18-late-f45",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 429.2 y 561.5 facing 1",
+    "screenshot": "mox-18-late-f45.png"
+  },
+  {
+    "file": "mox-18-mid-f20",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "screenshot": "mox-18-mid-f20.png"
+  },
+  {
+    "file": "mox-19-early-f0",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-19-early-f0.png"
+  },
+  {
+    "file": "mox-19-late-f45",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 690.8 y 561.5 facing 1",
+    "screenshot": "mox-19-late-f45.png"
+  },
+  {
+    "file": "mox-19-mid-f20",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 606.4 y 537.8 facing 1",
+    "screenshot": "mox-19-mid-f20.png"
+  },
+  {
+    "file": "mox-2-early-f0",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-2-early-f0.png"
+  },
+  {
+    "file": "mox-2-late-f46",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.118 \u00b7 x 699.5 y 578.0 facing 1",
+    "screenshot": "mox-2-late-f46.png"
+  },
+  {
+    "file": "mox-2-mid-f21",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.399 \u00b7 x 589.5 y 578.0 facing 1",
+    "screenshot": "mox-2-mid-f21.png"
+  },
+  {
+    "file": "mox-20-early-f2",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-20-early-f2.png"
+  },
+  {
+    "file": "mox-20-late-f46",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 489.8 y 335.5 facing 1",
+    "screenshot": "mox-20-late-f46.png"
+  },
+  {
+    "file": "mox-20-mid-f20",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 519.9 facing 1",
+    "screenshot": "mox-20-mid-f20.png"
+  },
+  {
+    "file": "mox-21-early-f0",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-21-early-f0.png"
+  },
+  {
+    "file": "mox-21-late-f46",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 474.6 y 578.0 facing 1",
+    "screenshot": "mox-21-late-f46.png"
+  },
+  {
+    "file": "mox-21-mid-f21",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "mox-21-mid-f21.png"
+  },
+  {
+    "file": "mox-22-early-f2",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-22-early-f2.png"
+  },
+  {
+    "file": "mox-22-late-f45",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 30/31 \u00b7 pose slot 30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 524.0 y 578.0 facing 1",
+    "screenshot": "mox-22-late-f45.png"
+  },
+  {
+    "file": "mox-22-mid-f21",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 510.0 y 578.0 facing 1",
+    "screenshot": "mox-22-mid-f21.png"
+  },
+  {
+    "file": "mox-3-early-f1",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.969 \u00b7 x 498.0 y 578.0 facing 1",
+    "screenshot": "mox-3-early-f1.png"
+  },
+  {
+    "file": "mox-3-late-f45",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.951 \u00b7 x 304.9 y 578.0 facing 1",
+    "screenshot": "mox-3-late-f45.png"
+  },
+  {
+    "file": "mox-3-mid-f20",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.670 \u00b7 x 414.9 y 578.0 facing 1",
+    "screenshot": "mox-3-mid-f20.png"
+  },
+  {
+    "file": "mox-4-early-f1",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 513.2 y 578.0 facing 1",
+    "screenshot": "mox-4-early-f1.png"
+  },
+  {
+    "file": "mox-4-late-f48",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "mox-4-late-f48.png"
+  },
+  {
+    "file": "mox-4-mid-f20",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "mox-4-mid-f20.png"
+  },
+  {
+    "file": "mox-5-early-f2",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-5-early-f2.png"
+  },
+  {
+    "file": "mox-5-late-f47",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-5-late-f47.png"
+  },
+  {
+    "file": "mox-5-mid-f21",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1",
+    "screenshot": "mox-5-mid-f21.png"
+  },
+  {
+    "file": "mox-6-early-f2",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 11/31 \u00b7 pose slot 11: punchWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-6-early-f2.png"
+  },
+  {
+    "file": "mox-6-late-f47",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-6-late-f47.png"
+  },
+  {
+    "file": "mox-6-mid-f21",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-6-mid-f21.png"
+  },
+  {
+    "file": "mox-7-early-f0",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-7-early-f0.png"
+  },
+  {
+    "file": "mox-7-late-f45",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-7-late-f45.png"
+  },
+  {
+    "file": "mox-7-mid-f20",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-7-mid-f20.png"
+  },
+  {
+    "file": "mox-8-early-f1",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 16/31 \u00b7 pose slot 16: kickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-8-early-f1.png"
+  },
+  {
+    "file": "mox-8-late-f47",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-8-late-f47.png"
+  },
+  {
+    "file": "mox-8-mid-f21",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 21/31 \u00b7 pose slot 21: sweepRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-8-mid-f21.png"
+  },
+  {
+    "file": "mox-9-early-f3",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 14/31 \u00b7 pose slot 14: upperWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-9-early-f3.png"
+  },
+  {
+    "file": "mox-9-late-f45",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-9-late-f45.png"
+  },
+  {
+    "file": "mox-9-mid-f22",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-9-mid-f22.png"
+  },
+  {
+    "file": "mox-hold-contact2-9",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 9,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "mox-hold-contact2-9.png"
+  },
+  {
+    "file": "mox-walk-slot0",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+    "screenshot": "mox-walk-slot0.png"
+  },
+  {
+    "file": "mox-walk-slot1",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 3,
+    "sequence": "walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+    "screenshot": "mox-walk-slot1.png"
+  },
+  {
+    "file": "mox-walk-slot2",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 5,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+    "screenshot": "mox-walk-slot2.png"
+  },
+  {
+    "file": "mox-walk-slot3",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 7,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+    "screenshot": "mox-walk-slot3.png"
+  },
+  {
+    "file": "mox-walk-slot4",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 8,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+    "screenshot": "mox-walk-slot4.png"
+  },
+  {
+    "file": "mox-walk-slot5",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 10,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "screenshot": "mox-walk-slot5.png"
+  },
+  {
+    "file": "mox-walk-slot6",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 12,
+    "sequence": "walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+    "screenshot": "mox-walk-slot6.png"
+  },
+  {
+    "file": "mox-walk-slot7",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 14,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "screenshot": "mox-walk-slot7.png"
+  },
+  {
+    "file": "rivet-1-early-f13",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 13,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-1-early-f13.png"
+  },
+  {
+    "file": "rivet-1-late-f46",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-1-late-f46.png"
+  },
+  {
+    "file": "rivet-1-mid-f20",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-1-mid-f20.png"
+  },
+  {
+    "file": "rivet-10-early-f1",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-10-early-f1.png"
+  },
+  {
+    "file": "rivet-10-late-f45",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-10-late-f45.png"
+  },
+  {
+    "file": "rivet-10-mid-f20",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-10-mid-f20.png"
+  },
+  {
+    "file": "rivet-11-early-f1",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 7/31 \u00b7 pose slot 7: jumpAnticipation \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-11-early-f1.png"
+  },
+  {
+    "file": "rivet-11-late-f45",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-11-late-f45.png"
+  },
+  {
+    "file": "rivet-11-mid-f21",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1",
+    "screenshot": "rivet-11-mid-f21.png"
+  },
+  {
+    "file": "rivet-12-early-f0",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-12-early-f0.png"
+  },
+  {
+    "file": "rivet-12-late-f46",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 474.3 y 578.0 facing 1",
+    "screenshot": "rivet-12-late-f46.png"
+  },
+  {
+    "file": "rivet-12-mid-f21",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 477.6 y 578.0 facing 1",
+    "screenshot": "rivet-12-mid-f21.png"
+  },
+  {
+    "file": "rivet-13-early-f1",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.969 \u00b7 x 498.0 y 578.0 facing 1",
+    "screenshot": "rivet-13-early-f1.png"
+  },
+  {
+    "file": "rivet-13-late-f45",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.887 \u00b7 x 413.6 y 578.0 facing 1",
+    "screenshot": "rivet-13-late-f45.png"
+  },
+  {
+    "file": "rivet-13-mid-f20",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 25/31 \u00b7 pose slot 25: block \u00b7 gait phase 0.770 \u00b7 x 470.5 y 578.0 facing 1",
+    "screenshot": "rivet-13-mid-f20.png"
+  },
+  {
+    "file": "rivet-14-early-f1",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-14-early-f1.png"
+  },
+  {
+    "file": "rivet-14-late-f46",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-14-late-f46.png"
+  },
+  {
+    "file": "rivet-14-mid-f21",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-14-mid-f21.png"
+  },
+  {
+    "file": "rivet-15-early-f1",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-15-early-f1.png"
+  },
+  {
+    "file": "rivet-15-late-f45",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing -1",
+    "screenshot": "rivet-15-late-f45.png"
+  },
+  {
+    "file": "rivet-15-mid-f20",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 27/31 \u00b7 pose slot 27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-15-mid-f20.png"
+  },
+  {
+    "file": "rivet-16-early-f0",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-16-early-f0.png"
+  },
+  {
+    "file": "rivet-16-late-f46",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-16-late-f46.png"
+  },
+  {
+    "file": "rivet-16-mid-f21",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-16-mid-f21.png"
+  },
+  {
+    "file": "rivet-17-early-f1",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-17-early-f1.png"
+  },
+  {
+    "file": "rivet-17-late-f45",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-17-late-f45.png"
+  },
+  {
+    "file": "rivet-17-mid-f20",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 27/31 \u00b7 pose slot 27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-17-mid-f20.png"
+  },
+  {
+    "file": "rivet-18-early-f0",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-18-early-f0.png"
+  },
+  {
+    "file": "rivet-18-late-f45",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 429.2 y 561.5 facing 1",
+    "screenshot": "rivet-18-late-f45.png"
+  },
+  {
+    "file": "rivet-18-mid-f20",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "screenshot": "rivet-18-mid-f20.png"
+  },
+  {
+    "file": "rivet-19-early-f1",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-19-early-f1.png"
+  },
+  {
+    "file": "rivet-19-late-f45",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 690.8 y 561.5 facing 1",
+    "screenshot": "rivet-19-late-f45.png"
+  },
+  {
+    "file": "rivet-19-mid-f20",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 606.4 y 537.8 facing 1",
+    "screenshot": "rivet-19-mid-f20.png"
+  },
+  {
+    "file": "rivet-2-early-f1",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+    "screenshot": "rivet-2-early-f1.png"
+  },
+  {
+    "file": "rivet-2-late-f45",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.049 \u00b7 x 695.1 y 578.0 facing 1",
+    "screenshot": "rivet-2-late-f45.png"
+  },
+  {
+    "file": "rivet-2-mid-f21",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.399 \u00b7 x 589.5 y 578.0 facing 1",
+    "screenshot": "rivet-2-mid-f21.png"
+  },
+  {
+    "file": "rivet-20-early-f0",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-20-early-f0.png"
+  },
+  {
+    "file": "rivet-20-late-f45",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 489.9 y 336.5 facing 1",
+    "screenshot": "rivet-20-late-f45.png"
+  },
+  {
+    "file": "rivet-20-mid-f20",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 519.9 facing 1",
+    "screenshot": "rivet-20-mid-f20.png"
+  },
+  {
+    "file": "rivet-21-early-f0",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-21-early-f0.png"
+  },
+  {
+    "file": "rivet-21-late-f46",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 474.6 y 578.0 facing 1",
+    "screenshot": "rivet-21-late-f46.png"
+  },
+  {
+    "file": "rivet-21-mid-f21",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "rivet-21-mid-f21.png"
+  },
+  {
+    "file": "rivet-22-early-f1",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-22-early-f1.png"
+  },
+  {
+    "file": "rivet-22-late-f45",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 30/31 \u00b7 pose slot 30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 578.0 y 578.0 facing 1",
+    "screenshot": "rivet-22-late-f45.png"
+  },
+  {
+    "file": "rivet-22-mid-f21",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 530.0 y 578.0 facing 1",
+    "screenshot": "rivet-22-mid-f21.png"
+  },
+  {
+    "file": "rivet-3-early-f5",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 5,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.701 \u00b7 x 480.9 y 578.0 facing 1",
+    "screenshot": "rivet-3-early-f5.png"
+  },
+  {
+    "file": "rivet-3-late-f48",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.745 \u00b7 x 291.7 y 578.0 facing 1",
+    "screenshot": "rivet-3-late-f48.png"
+  },
+  {
+    "file": "rivet-3-mid-f22",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.532 \u00b7 x 406.1 y 578.0 facing 1",
+    "screenshot": "rivet-3-mid-f22.png"
+  },
+  {
+    "file": "rivet-4-early-f3",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 537.2 y 578.0 facing 1",
+    "screenshot": "rivet-4-early-f3.png"
+  },
+  {
+    "file": "rivet-4-late-f96",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 96,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "rivet-4-late-f96.png"
+  },
+  {
+    "file": "rivet-4-mid-f21",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "rivet-4-mid-f21.png"
+  },
+  {
+    "file": "rivet-5-early-f1",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 7/31 \u00b7 pose slot 7: jumpAnticipation \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-5-early-f1.png"
+  },
+  {
+    "file": "rivet-5-late-f45",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-5-late-f45.png"
+  },
+  {
+    "file": "rivet-5-mid-f21",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1",
+    "screenshot": "rivet-5-mid-f21.png"
+  },
+  {
+    "file": "rivet-6-early-f1",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 11/31 \u00b7 pose slot 11: punchWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-6-early-f1.png"
+  },
+  {
+    "file": "rivet-6-late-f46",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-6-late-f46.png"
+  },
+  {
+    "file": "rivet-6-mid-f20",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-6-mid-f20.png"
+  },
+  {
+    "file": "rivet-7-early-f1",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 16/31 \u00b7 pose slot 16: kickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-7-early-f1.png"
+  },
+  {
+    "file": "rivet-7-late-f47",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-7-late-f47.png"
+  },
+  {
+    "file": "rivet-7-mid-f20",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-7-mid-f20.png"
+  },
+  {
+    "file": "rivet-8-early-f1",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 16/31 \u00b7 pose slot 16: kickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-8-early-f1.png"
+  },
+  {
+    "file": "rivet-8-late-f45",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-8-late-f45.png"
+  },
+  {
+    "file": "rivet-8-mid-f20",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 20/31 \u00b7 pose slot 20: sweep \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-8-mid-f20.png"
+  },
+  {
+    "file": "rivet-9-early-f0",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-9-early-f0.png"
+  },
+  {
+    "file": "rivet-9-late-f46",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-9-late-f46.png"
+  },
+  {
+    "file": "rivet-9-mid-f21",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-9-mid-f21.png"
+  },
+  {
+    "file": "rivet-backwalk-fill-20",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 20,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.330 \u00b7 x 585.1 y 578.0 facing 1",
+    "screenshot": "rivet-backwalk-fill-20.png"
+  },
+  {
+    "file": "rivet-backwalk-live-a",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 10,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "screenshot": "rivet-backwalk-live-a.png"
+  },
+  {
+    "file": "rivet-backwalk-live-b",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 19,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.262 \u00b7 x 580.7 y 578.0 facing 1",
+    "screenshot": "rivet-backwalk-live-b.png"
+  },
+  {
+    "file": "rivet-dash-fill-5",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 5,
+    "sequence": "poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 558.4 y 578.0 facing 1",
+    "screenshot": "rivet-dash-fill-5.png"
+  },
+  {
+    "file": "rivet-hold-contact2-9",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 9,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rivet-hold-contact2-9.png"
+  },
+  {
+    "file": "rivet-walk-slot0",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+    "screenshot": "rivet-walk-slot0.png"
+  },
+  {
+    "file": "rivet-walk-slot1",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 3,
+    "sequence": "walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+    "screenshot": "rivet-walk-slot1.png"
+  },
+  {
+    "file": "rivet-walk-slot2",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 5,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+    "screenshot": "rivet-walk-slot2.png"
+  },
+  {
+    "file": "rivet-walk-slot3",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 7,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+    "screenshot": "rivet-walk-slot3.png"
+  },
+  {
+    "file": "rivet-walk-slot4",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 8,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+    "screenshot": "rivet-walk-slot4.png"
+  },
+  {
+    "file": "rivet-walk-slot5",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 10,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "screenshot": "rivet-walk-slot5.png"
+  },
+  {
+    "file": "rivet-walk-slot6",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 12,
+    "sequence": "walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+    "screenshot": "rivet-walk-slot6.png"
+  },
+  {
+    "file": "rivet-walk-slot7",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 14,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "screenshot": "rivet-walk-slot7.png"
+  },
+  {
+    "file": "rune-1-early-f10",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 10,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-1-early-f10.png"
+  },
+  {
+    "file": "rune-1-late-f45",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-1-late-f45.png"
+  },
+  {
+    "file": "rune-1-mid-f22",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-1-mid-f22.png"
+  },
+  {
+    "file": "rune-10-early-f3",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-10-early-f3.png"
+  },
+  {
+    "file": "rune-10-late-f46",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-10-late-f46.png"
+  },
+  {
+    "file": "rune-10-mid-f21",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-10-mid-f21.png"
+  },
+  {
+    "file": "rune-11-early-f3",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 562.4 facing 1",
+    "screenshot": "rune-11-early-f3.png"
+  },
+  {
+    "file": "rune-11-late-f46",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-11-late-f46.png"
+  },
+  {
+    "file": "rune-11-mid-f20",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 23/31 \u00b7 pose slot 23: airKickFull \u00b7 gait phase 0.000 \u00b7 x 500.0 y 443.6 facing 1",
+    "screenshot": "rune-11-mid-f20.png"
+  },
+  {
+    "file": "rune-12-early-f0",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-12-early-f0.png"
+  },
+  {
+    "file": "rune-12-late-f47",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 474.3 y 578.0 facing 1",
+    "screenshot": "rune-12-late-f47.png"
+  },
+  {
+    "file": "rune-12-mid-f21",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 477.6 y 578.0 facing 1",
+    "screenshot": "rune-12-mid-f21.png"
+  },
+  {
+    "file": "rune-13-early-f2",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.907 \u00b7 x 494.1 y 578.0 facing 1",
+    "screenshot": "rune-13-early-f2.png"
+  },
+  {
+    "file": "rune-13-late-f45",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.887 \u00b7 x 413.6 y 578.0 facing 1",
+    "screenshot": "rune-13-late-f45.png"
+  },
+  {
+    "file": "rune-13-mid-f23",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 23,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.736 \u00b7 x 467.9 y 578.0 facing 1",
+    "screenshot": "rune-13-mid-f23.png"
+  },
+  {
+    "file": "rune-14-early-f2",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-14-early-f2.png"
+  },
+  {
+    "file": "rune-14-late-f45",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-14-late-f45.png"
+  },
+  {
+    "file": "rune-14-mid-f21",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-14-mid-f21.png"
+  },
+  {
+    "file": "rune-15-early-f1",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-15-early-f1.png"
+  },
+  {
+    "file": "rune-15-late-f48",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing -1",
+    "screenshot": "rune-15-late-f48.png"
+  },
+  {
+    "file": "rune-15-mid-f22",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-15-mid-f22.png"
+  },
+  {
+    "file": "rune-16-early-f2",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-16-early-f2.png"
+  },
+  {
+    "file": "rune-16-late-f47",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-16-late-f47.png"
+  },
+  {
+    "file": "rune-16-mid-f23",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 23,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-16-mid-f23.png"
+  },
+  {
+    "file": "rune-17-early-f3",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-17-early-f3.png"
+  },
+  {
+    "file": "rune-17-late-f46",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-17-late-f46.png"
+  },
+  {
+    "file": "rune-17-mid-f21",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-17-mid-f21.png"
+  },
+  {
+    "file": "rune-18-early-f3",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-18-early-f3.png"
+  },
+  {
+    "file": "rune-18-late-f48",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 428.1 y 578.0 facing 1",
+    "screenshot": "rune-18-late-f48.png"
+  },
+  {
+    "file": "rune-18-mid-f21",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "rune-18-mid-f21.png"
+  },
+  {
+    "file": "rune-19-early-f5",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 5,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-19-early-f5.png"
+  },
+  {
+    "file": "rune-19-late-f46",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 691.3 y 570.5 facing 1",
+    "screenshot": "rune-19-late-f46.png"
+  },
+  {
+    "file": "rune-19-mid-f25",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 25,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 620.0 y 552.0 facing 1",
+    "screenshot": "rune-19-mid-f25.png"
+  },
+  {
+    "file": "rune-2-early-f2",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.093 \u00b7 x 505.9 y 578.0 facing 1",
+    "screenshot": "rune-2-early-f2.png"
+  },
+  {
+    "file": "rune-2-late-f46",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.118 \u00b7 x 699.5 y 578.0 facing 1",
+    "screenshot": "rune-2-late-f46.png"
+  },
+  {
+    "file": "rune-2-mid-f20",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.330 \u00b7 x 585.1 y 578.0 facing 1",
+    "screenshot": "rune-2-mid-f20.png"
+  },
+  {
+    "file": "rune-20-early-f2",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-20-early-f2.png"
+  },
+  {
+    "file": "rune-20-late-f47",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 489.8 y 335.4 facing 1",
+    "screenshot": "rune-20-late-f47.png"
+  },
+  {
+    "file": "rune-20-mid-f25",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 25,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 517.0 facing 1",
+    "screenshot": "rune-20-mid-f25.png"
+  },
+  {
+    "file": "rune-21-early-f5",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 5,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-21-early-f5.png"
+  },
+  {
+    "file": "rune-21-late-f49",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 49,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 474.2 y 578.0 facing 1",
+    "screenshot": "rune-21-late-f49.png"
+  },
+  {
+    "file": "rune-21-mid-f20",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 537.8 facing 1",
+    "screenshot": "rune-21-mid-f20.png"
+  },
+  {
+    "file": "rune-22-early-f5",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 5,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-22-early-f5.png"
+  },
+  {
+    "file": "rune-22-late-f47",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 30/31 \u00b7 pose slot 30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-22-late-f47.png"
+  },
+  {
+    "file": "rune-22-mid-f21",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 30/31 \u00b7 pose slot 30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-22-mid-f21.png"
+  },
+  {
+    "file": "rune-3-early-f2",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.907 \u00b7 x 494.1 y 578.0 facing 1",
+    "screenshot": "rune-3-early-f2.png"
+  },
+  {
+    "file": "rune-3-late-f47",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.813 \u00b7 x 296.1 y 578.0 facing 1",
+    "screenshot": "rune-3-late-f47.png"
+  },
+  {
+    "file": "rune-3-mid-f20",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.670 \u00b7 x 414.9 y 578.0 facing 1",
+    "screenshot": "rune-3-mid-f20.png"
+  },
+  {
+    "file": "rune-4-early-f4",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 4,
+    "sequence": "poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 548.1 y 578.0 facing 1",
+    "screenshot": "rune-4-early-f4.png"
+  },
+  {
+    "file": "rune-4-late-f45",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "rune-4-late-f45.png"
+  },
+  {
+    "file": "rune-4-mid-f21",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "rune-4-mid-f21.png"
+  },
+  {
+    "file": "rune-5-early-f0",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-5-early-f0.png"
+  },
+  {
+    "file": "rune-5-late-f47",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-5-late-f47.png"
+  },
+  {
+    "file": "rune-5-mid-f21",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1",
+    "screenshot": "rune-5-mid-f21.png"
+  },
+  {
+    "file": "rune-6-early-f3",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 11/31 \u00b7 pose slot 11: punchWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-6-early-f3.png"
+  },
+  {
+    "file": "rune-6-late-f48",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 48,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-6-late-f48.png"
+  },
+  {
+    "file": "rune-6-mid-f20",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-6-mid-f20.png"
+  },
+  {
+    "file": "rune-7-early-f1",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 16/31 \u00b7 pose slot 16: kickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-7-early-f1.png"
+  },
+  {
+    "file": "rune-7-late-f47",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-7-late-f47.png"
+  },
+  {
+    "file": "rune-7-mid-f20",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-7-mid-f20.png"
+  },
+  {
+    "file": "rune-8-early-f3",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 16/31 \u00b7 pose slot 16: kickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-8-early-f3.png"
+  },
+  {
+    "file": "rune-8-late-f45",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-8-late-f45.png"
+  },
+  {
+    "file": "rune-8-mid-f21",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 21/31 \u00b7 pose slot 21: sweepRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-8-mid-f21.png"
+  },
+  {
+    "file": "rune-9-early-f0",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-9-early-f0.png"
+  },
+  {
+    "file": "rune-9-late-f47",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-9-late-f47.png"
+  },
+  {
+    "file": "rune-9-mid-f21",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-9-mid-f21.png"
+  },
+  {
+    "file": "rune-hold-contact2-9",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 9,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "rune-hold-contact2-9.png"
+  },
+  {
+    "file": "rune-walk-slot0",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+    "screenshot": "rune-walk-slot0.png"
+  },
+  {
+    "file": "rune-walk-slot1",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 3,
+    "sequence": "walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+    "screenshot": "rune-walk-slot1.png"
+  },
+  {
+    "file": "rune-walk-slot2",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 5,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+    "screenshot": "rune-walk-slot2.png"
+  },
+  {
+    "file": "rune-walk-slot3",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 7,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+    "screenshot": "rune-walk-slot3.png"
+  },
+  {
+    "file": "rune-walk-slot4",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 8,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+    "screenshot": "rune-walk-slot4.png"
+  },
+  {
+    "file": "rune-walk-slot5",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 10,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "screenshot": "rune-walk-slot5.png"
+  },
+  {
+    "file": "rune-walk-slot6",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 12,
+    "sequence": "walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+    "screenshot": "rune-walk-slot6.png"
+  },
+  {
+    "file": "rune-walk-slot7",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 14,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "screenshot": "rune-walk-slot7.png"
+  },
+  {
+    "file": "vela-1-early-f0",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-1-early-f0.png"
+  },
+  {
+    "file": "vela-1-late-f45",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-1-late-f45.png"
+  },
+  {
+    "file": "vela-1-mid-f20",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-1-mid-f20.png"
+  },
+  {
+    "file": "vela-10-early-f1",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-10-early-f1.png"
+  },
+  {
+    "file": "vela-10-late-f46",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-10-late-f46.png"
+  },
+  {
+    "file": "vela-10-mid-f21",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-10-mid-f21.png"
+  },
+  {
+    "file": "vela-11-early-f0",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-11-early-f0.png"
+  },
+  {
+    "file": "vela-11-late-f46",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-11-late-f46.png"
+  },
+  {
+    "file": "vela-11-mid-f21",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 462.9 facing 1",
+    "screenshot": "vela-11-mid-f21.png"
+  },
+  {
+    "file": "vela-12-early-f1",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-12-early-f1.png"
+  },
+  {
+    "file": "vela-12-late-f46",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 474.3 y 578.0 facing 1",
+    "screenshot": "vela-12-late-f46.png"
+  },
+  {
+    "file": "vela-12-mid-f20",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 478.3 y 578.0 facing 1",
+    "screenshot": "vela-12-mid-f20.png"
+  },
+  {
+    "file": "vela-13-early-f1",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.975 \u00b7 x 498.4 y 578.0 facing 1",
+    "screenshot": "vela-13-early-f1.png"
+  },
+  {
+    "file": "vela-13-late-f46",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.108 \u00b7 x 428.6 y 578.0 facing 1",
+    "screenshot": "vela-13-late-f46.png"
+  },
+  {
+    "file": "vela-13-mid-f21",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 25/31 \u00b7 pose slot 25: block \u00b7 gait phase 0.816 \u00b7 x 474.1 y 578.0 facing 1",
+    "screenshot": "vela-13-mid-f21.png"
+  },
+  {
+    "file": "vela-14-early-f0",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-14-early-f0.png"
+  },
+  {
+    "file": "vela-14-late-f46",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-14-late-f46.png"
+  },
+  {
+    "file": "vela-14-mid-f21",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-14-mid-f21.png"
+  },
+  {
+    "file": "vela-15-early-f1",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-15-early-f1.png"
+  },
+  {
+    "file": "vela-15-late-f46",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing -1",
+    "screenshot": "vela-15-late-f46.png"
+  },
+  {
+    "file": "vela-15-mid-f21",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-15-mid-f21.png"
+  },
+  {
+    "file": "vela-16-early-f1",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-16-early-f1.png"
+  },
+  {
+    "file": "vela-16-late-f45",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-16-late-f45.png"
+  },
+  {
+    "file": "vela-16-mid-f21",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-16-mid-f21.png"
+  },
+  {
+    "file": "vela-17-early-f1",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-17-early-f1.png"
+  },
+  {
+    "file": "vela-17-late-f45",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-17-late-f45.png"
+  },
+  {
+    "file": "vela-17-mid-f21",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-17-mid-f21.png"
+  },
+  {
+    "file": "vela-18-early-f1",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-18-early-f1.png"
+  },
+  {
+    "file": "vela-18-late-f45",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 429.2 y 561.5 facing 1",
+    "screenshot": "vela-18-late-f45.png"
+  },
+  {
+    "file": "vela-18-mid-f21",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "vela-18-mid-f21.png"
+  },
+  {
+    "file": "vela-19-early-f1",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-19-early-f1.png"
+  },
+  {
+    "file": "vela-19-late-f46",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 691.3 y 570.5 facing 1",
+    "screenshot": "vela-19-late-f46.png"
+  },
+  {
+    "file": "vela-19-mid-f21",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 620.0 y 552.0 facing 1",
+    "screenshot": "vela-19-mid-f21.png"
+  },
+  {
+    "file": "vela-2-early-f1",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.025 \u00b7 x 501.6 y 578.0 facing 1",
+    "screenshot": "vela-2-early-f1.png"
+  },
+  {
+    "file": "vela-2-late-f45",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.439 \u00b7 x 656.1 y 578.0 facing 1",
+    "screenshot": "vela-2-late-f45.png"
+  },
+  {
+    "file": "vela-2-mid-f20",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.064 \u00b7 x 568.1 y 578.0 facing 1",
+    "screenshot": "vela-2-mid-f20.png"
+  },
+  {
+    "file": "vela-20-early-f0",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-20-early-f0.png"
+  },
+  {
+    "file": "vela-20-late-f45",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 489.9 y 336.5 facing 1",
+    "screenshot": "vela-20-late-f45.png"
+  },
+  {
+    "file": "vela-20-mid-f20",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 519.9 facing 1",
+    "screenshot": "vela-20-mid-f20.png"
+  },
+  {
+    "file": "vela-21-early-f0",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-21-early-f0.png"
+  },
+  {
+    "file": "vela-21-late-f46",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 474.6 y 578.0 facing 1",
+    "screenshot": "vela-21-late-f46.png"
+  },
+  {
+    "file": "vela-21-mid-f21",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "vela-21-mid-f21.png"
+  },
+  {
+    "file": "vela-22-early-f1",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-22-early-f1.png"
+  },
+  {
+    "file": "vela-22-late-f45",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-22-late-f45.png"
+  },
+  {
+    "file": "vela-22-mid-f21",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 30/31 \u00b7 pose slot 30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-22-mid-f21.png"
+  },
+  {
+    "file": "vela-3-early-f1",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.975 \u00b7 x 498.4 y 578.0 facing 1",
+    "screenshot": "vela-3-early-f1.png"
+  },
+  {
+    "file": "vela-3-late-f45",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.561 \u00b7 x 343.9 y 578.0 facing 1",
+    "screenshot": "vela-3-late-f45.png"
+  },
+  {
+    "file": "vela-3-mid-f20",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.936 \u00b7 x 431.9 y 578.0 facing 1",
+    "screenshot": "vela-3-mid-f20.png"
+  },
+  {
+    "file": "vela-4-early-f0",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-4-early-f0.png"
+  },
+  {
+    "file": "vela-4-late-f45",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.186 \u00b7 x 598.6 y 578.0 facing 1",
+    "screenshot": "vela-4-late-f45.png"
+  },
+  {
+    "file": "vela-4-mid-f20",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.186 \u00b7 x 598.6 y 578.0 facing 1",
+    "screenshot": "vela-4-mid-f20.png"
+  },
+  {
+    "file": "vela-5-early-f1",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 7/31 \u00b7 pose slot 7: jumpAnticipation \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-5-early-f1.png"
+  },
+  {
+    "file": "vela-5-late-f46",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-5-late-f46.png"
+  },
+  {
+    "file": "vela-5-mid-f20",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 461.3 facing 1",
+    "screenshot": "vela-5-mid-f20.png"
+  },
+  {
+    "file": "vela-6-early-f1",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 11/31 \u00b7 pose slot 11: punchWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-6-early-f1.png"
+  },
+  {
+    "file": "vela-6-late-f46",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-6-late-f46.png"
+  },
+  {
+    "file": "vela-6-mid-f21",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-6-mid-f21.png"
+  },
+  {
+    "file": "vela-7-early-f1",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 16/31 \u00b7 pose slot 16: kickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-7-early-f1.png"
+  },
+  {
+    "file": "vela-7-late-f46",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-7-late-f46.png"
+  },
+  {
+    "file": "vela-7-mid-f20",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-7-mid-f20.png"
+  },
+  {
+    "file": "vela-8-early-f2",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 16/31 \u00b7 pose slot 16: kickChamber \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-8-early-f2.png"
+  },
+  {
+    "file": "vela-8-late-f46",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-8-late-f46.png"
+  },
+  {
+    "file": "vela-8-mid-f21",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 21/31 \u00b7 pose slot 21: sweepRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-8-mid-f21.png"
+  },
+  {
+    "file": "vela-9-early-f0",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-9-early-f0.png"
+  },
+  {
+    "file": "vela-9-late-f46",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-9-late-f46.png"
+  },
+  {
+    "file": "vela-9-mid-f21",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-9-mid-f21.png"
+  },
+  {
+    "file": "vela-hold-contact2-9",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 9,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "vela-hold-contact2-9.png"
+  },
+  {
+    "file": "vela-walk-slot0",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.025 \u00b7 x 501.6 y 578.0 facing 1",
+    "screenshot": "vela-walk-slot0.png"
+  },
+  {
+    "file": "vela-walk-slot1",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 3,
+    "sequence": "walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.129 \u00b7 x 508.3 y 578.0 facing 1",
+    "screenshot": "vela-walk-slot1.png"
+  },
+  {
+    "file": "vela-walk-slot2",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 6,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.294 \u00b7 x 518.8 y 578.0 facing 1",
+    "screenshot": "vela-walk-slot2.png"
+  },
+  {
+    "file": "vela-walk-slot3",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 8,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.404 \u00b7 x 525.9 y 578.0 facing 1",
+    "screenshot": "vela-walk-slot3.png"
+  },
+  {
+    "file": "vela-walk-slot4",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 10,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.514 \u00b7 x 532.9 y 578.0 facing 1",
+    "screenshot": "vela-walk-slot4.png"
+  },
+  {
+    "file": "vela-walk-slot5",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 13,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.679 \u00b7 x 543.5 y 578.0 facing 1",
+    "screenshot": "vela-walk-slot5.png"
+  },
+  {
+    "file": "vela-walk-slot6",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 15,
+    "sequence": "walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.789 \u00b7 x 550.5 y 578.0 facing 1",
+    "screenshot": "vela-walk-slot6.png"
+  },
+  {
+    "file": "vela-walk-slot7",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 17,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.899 \u00b7 x 557.6 y 578.0 facing 1",
+    "screenshot": "vela-walk-slot7.png"
+  },
+  {
+    "file": "zephyr-1-early-f10",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 10,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-1-early-f10.png"
+  },
+  {
+    "file": "zephyr-1-late-f46",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-1-late-f46.png"
+  },
+  {
+    "file": "zephyr-1-mid-f21",
+    "scenario": 1,
+    "label": "Idle / breathing \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-1-mid-f21.png"
+  },
+  {
+    "file": "zephyr-10-early-f0",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-10-early-f0.png"
+  },
+  {
+    "file": "zephyr-10-late-f46",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-10-late-f46.png"
+  },
+  {
+    "file": "zephyr-10-mid-f21",
+    "scenario": 10,
+    "label": "bolt \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-10-mid-f21.png"
+  },
+  {
+    "file": "zephyr-11-early-f1",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 7/31 \u00b7 pose slot 7: jumpAnticipation \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-11-early-f1.png"
+  },
+  {
+    "file": "zephyr-11-late-f45",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-11-late-f45.png"
+  },
+  {
+    "file": "zephyr-11-mid-f21",
+    "scenario": 11,
+    "label": "airMedium \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1",
+    "screenshot": "zephyr-11-mid-f21.png"
+  },
+  {
+    "file": "zephyr-12-early-f1",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-12-early-f1.png"
+  },
+  {
+    "file": "zephyr-12-late-f46",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 474.3 y 578.0 facing 1",
+    "screenshot": "zephyr-12-late-f46.png"
+  },
+  {
+    "file": "zephyr-12-mid-f22",
+    "scenario": 12,
+    "label": "hit \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 477.0 y 578.0 facing 1",
+    "screenshot": "zephyr-12-mid-f22.png"
+  },
+  {
+    "file": "zephyr-13-early-f0",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-13-early-f0.png"
+  },
+  {
+    "file": "zephyr-13-late-f45",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.887 \u00b7 x 413.6 y 578.0 facing 1",
+    "screenshot": "zephyr-13-late-f45.png"
+  },
+  {
+    "file": "zephyr-13-mid-f20",
+    "scenario": 13,
+    "label": "block \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 25/31 \u00b7 pose slot 25: block \u00b7 gait phase 0.770 \u00b7 x 470.5 y 578.0 facing 1",
+    "screenshot": "zephyr-13-mid-f20.png"
+  },
+  {
+    "file": "zephyr-14-early-f0",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-14-early-f0.png"
+  },
+  {
+    "file": "zephyr-14-late-f46",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-14-late-f46.png"
+  },
+  {
+    "file": "zephyr-14-mid-f21",
+    "scenario": 14,
+    "label": "Attacker throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-14-mid-f21.png"
+  },
+  {
+    "file": "zephyr-15-early-f0",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-15-early-f0.png"
+  },
+  {
+    "file": "zephyr-15-late-f46",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing -1",
+    "screenshot": "zephyr-15-late-f46.png"
+  },
+  {
+    "file": "zephyr-15-mid-f20",
+    "scenario": 15,
+    "label": "Attacker throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 27/31 \u00b7 pose slot 27: grabHold \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-15-mid-f20.png"
+  },
+  {
+    "file": "zephyr-16-early-f0",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-16-early-f0.png"
+  },
+  {
+    "file": "zephyr-16-late-f46",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-16-late-f46.png"
+  },
+  {
+    "file": "zephyr-16-mid-f21",
+    "scenario": 16,
+    "label": "Attacker throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-16-mid-f21.png"
+  },
+  {
+    "file": "zephyr-17-early-f1",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-17-early-f1.png"
+  },
+  {
+    "file": "zephyr-17-late-f46",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-17-late-f46.png"
+  },
+  {
+    "file": "zephyr-17-mid-f21",
+    "scenario": 17,
+    "label": "Attacker throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 28/31 \u00b7 pose slot 28: throwRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-17-mid-f21.png"
+  },
+  {
+    "file": "zephyr-18-early-f0",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-18-early-f0.png"
+  },
+  {
+    "file": "zephyr-18-late-f45",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 429.2 y 561.5 facing 1",
+    "screenshot": "zephyr-18-late-f45.png"
+  },
+  {
+    "file": "zephyr-18-mid-f20",
+    "scenario": 18,
+    "label": "Victim throw \u00b7 forward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 512.0 y 552.0 facing 1",
+    "screenshot": "zephyr-18-mid-f20.png"
+  },
+  {
+    "file": "zephyr-19-early-f0",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-19-early-f0.png"
+  },
+  {
+    "file": "zephyr-19-late-f45",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 690.8 y 561.5 facing 1",
+    "screenshot": "zephyr-19-late-f45.png"
+  },
+  {
+    "file": "zephyr-19-mid-f20",
+    "scenario": 19,
+    "label": "Victim throw \u00b7 back \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 606.4 y 537.8 facing 1",
+    "screenshot": "zephyr-19-mid-f20.png"
+  },
+  {
+    "file": "zephyr-2-early-f1",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+    "screenshot": "zephyr-2-early-f1.png"
+  },
+  {
+    "file": "zephyr-2-late-f45",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.049 \u00b7 x 695.1 y 578.0 facing 1",
+    "screenshot": "zephyr-2-late-f45.png"
+  },
+  {
+    "file": "zephyr-2-mid-f21",
+    "scenario": 2,
+    "label": "Walk forward \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.399 \u00b7 x 589.5 y 578.0 facing 1",
+    "screenshot": "zephyr-2-mid-f21.png"
+  },
+  {
+    "file": "zephyr-20-early-f1",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-20-early-f1.png"
+  },
+  {
+    "file": "zephyr-20-late-f45",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 489.9 y 336.5 facing 1",
+    "screenshot": "zephyr-20-late-f45.png"
+  },
+  {
+    "file": "zephyr-20-mid-f22",
+    "scenario": 20,
+    "label": "Victim throw \u00b7 up \u00b7 cycle 1",
+    "coreFrame": 22,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 517.0 facing 1",
+    "screenshot": "zephyr-20-mid-f22.png"
+  },
+  {
+    "file": "zephyr-21-early-f1",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-21-early-f1.png"
+  },
+  {
+    "file": "zephyr-21-late-f46",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 474.6 y 578.0 facing 1",
+    "screenshot": "zephyr-21-late-f46.png"
+  },
+  {
+    "file": "zephyr-21-mid-f21",
+    "scenario": 21,
+    "label": "Victim throw \u00b7 down \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 24/31 \u00b7 pose slot 24: hit \u00b7 gait phase 0.000 \u00b7 x 500.0 y 552.0 facing 1",
+    "screenshot": "zephyr-21-mid-f21.png"
+  },
+  {
+    "file": "zephyr-22-early-f3",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 3,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-22-early-f3.png"
+  },
+  {
+    "file": "zephyr-22-late-f45",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 29/31 \u00b7 pose slot 29: powerCharge \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-22-late-f45.png"
+  },
+  {
+    "file": "zephyr-22-mid-f20",
+    "scenario": 22,
+    "label": "Team special \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 30/31 \u00b7 pose slot 30: powerRelease \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-22-mid-f20.png"
+  },
+  {
+    "file": "zephyr-3-early-f1",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.969 \u00b7 x 498.0 y 578.0 facing 1",
+    "screenshot": "zephyr-3-early-f1.png"
+  },
+  {
+    "file": "zephyr-3-late-f47",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.813 \u00b7 x 296.1 y 578.0 facing 1",
+    "screenshot": "zephyr-3-late-f47.png"
+  },
+  {
+    "file": "zephyr-3-mid-f20",
+    "scenario": 3,
+    "label": "Walk backward \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.670 \u00b7 x 414.9 y 578.0 facing 1",
+    "screenshot": "zephyr-3-mid-f20.png"
+  },
+  {
+    "file": "zephyr-4-early-f0",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-4-early-f0.png"
+  },
+  {
+    "file": "zephyr-4-late-f46",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "zephyr-4-late-f46.png"
+  },
+  {
+    "file": "zephyr-4-mid-f20",
+    "scenario": 4,
+    "label": "dash \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.209 \u00b7 x 614.5 y 578.0 facing 1",
+    "screenshot": "zephyr-4-mid-f20.png"
+  },
+  {
+    "file": "zephyr-5-early-f2",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 2,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-5-early-f2.png"
+  },
+  {
+    "file": "zephyr-5-late-f46",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-5-late-f46.png"
+  },
+  {
+    "file": "zephyr-5-mid-f21",
+    "scenario": 5,
+    "label": "jump \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1",
+    "screenshot": "zephyr-5-mid-f21.png"
+  },
+  {
+    "file": "zephyr-6-early-f1",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 1,
+    "sequence": "poses \u00b7 frame 11/31 \u00b7 pose slot 11: punchWindup \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-6-early-f1.png"
+  },
+  {
+    "file": "zephyr-6-late-f46",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 46,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-6-late-f46.png"
+  },
+  {
+    "file": "zephyr-6-mid-f21",
+    "scenario": 6,
+    "label": "light \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-6-mid-f21.png"
+  },
+  {
+    "file": "zephyr-7-early-f0",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-7-early-f0.png"
+  },
+  {
+    "file": "zephyr-7-late-f45",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-7-late-f45.png"
+  },
+  {
+    "file": "zephyr-7-mid-f21",
+    "scenario": 7,
+    "label": "medium \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 19/31 \u00b7 pose slot 19: kickRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-7-mid-f21.png"
+  },
+  {
+    "file": "zephyr-8-early-f0",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-8-early-f0.png"
+  },
+  {
+    "file": "zephyr-8-late-f47",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 47,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-8-late-f47.png"
+  },
+  {
+    "file": "zephyr-8-mid-f21",
+    "scenario": 8,
+    "label": "sweep \u00b7 cycle 1",
+    "coreFrame": 21,
+    "sequence": "poses \u00b7 frame 21/31 \u00b7 pose slot 21: sweepRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-8-mid-f21.png"
+  },
+  {
+    "file": "zephyr-9-early-f0",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 0,
+    "sequence": "poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-9-early-f0.png"
+  },
+  {
+    "file": "zephyr-9-late-f45",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 45,
+    "sequence": "poses \u00b7 frame 1/31 \u00b7 pose slot 1: breathe \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-9-late-f45.png"
+  },
+  {
+    "file": "zephyr-9-mid-f20",
+    "scenario": 9,
+    "label": "launcher \u00b7 cycle 1",
+    "coreFrame": 20,
+    "sequence": "poses \u00b7 frame 13/31 \u00b7 pose slot 13: punchRecover \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-9-mid-f20.png"
+  },
+  {
+    "file": "zephyr-hold-contact2-9",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 9,
+    "sequence": "poses \u00b7 frame 26/31 \u00b7 pose slot 26: grabReach \u00b7 gait phase 0.000 \u00b7 x 500.0 y 578.0 facing 1",
+    "screenshot": "zephyr-hold-contact2-9.png"
+  },
+  {
+    "file": "zephyr-walk-slot0",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 1,
+    "sequence": "walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.031 \u00b7 x 502.0 y 578.0 facing 1",
+    "screenshot": "zephyr-walk-slot0.png"
+  },
+  {
+    "file": "zephyr-walk-slot1",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 3,
+    "sequence": "walk \u00b7 frame 1/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.162 \u00b7 x 510.3 y 578.0 facing 1",
+    "screenshot": "zephyr-walk-slot1.png"
+  },
+  {
+    "file": "zephyr-walk-slot2",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 5,
+    "sequence": "walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.299 \u00b7 x 519.1 y 578.0 facing 1",
+    "screenshot": "zephyr-walk-slot2.png"
+  },
+  {
+    "file": "zephyr-walk-slot3",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 7,
+    "sequence": "walk \u00b7 frame 3/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.437 \u00b7 x 527.9 y 578.0 facing 1",
+    "screenshot": "zephyr-walk-slot3.png"
+  },
+  {
+    "file": "zephyr-walk-slot4",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 8,
+    "sequence": "walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.505 \u00b7 x 532.3 y 578.0 facing 1",
+    "screenshot": "zephyr-walk-slot4.png"
+  },
+  {
+    "file": "zephyr-walk-slot5",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 10,
+    "sequence": "walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.643 \u00b7 x 541.1 y 578.0 facing 1",
+    "screenshot": "zephyr-walk-slot5.png"
+  },
+  {
+    "file": "zephyr-walk-slot6",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 12,
+    "sequence": "walk \u00b7 frame 6/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.780 \u00b7 x 549.9 y 578.0 facing 1",
+    "screenshot": "zephyr-walk-slot6.png"
+  },
+  {
+    "file": "zephyr-walk-slot7",
+    "scenario": null,
+    "label": null,
+    "coreFrame": 14,
+    "sequence": "walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.918 \u00b7 x 558.7 y 578.0 facing 1",
+    "screenshot": "zephyr-walk-slot7.png"
+  }
+]

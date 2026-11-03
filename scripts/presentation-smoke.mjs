@@ -13,8 +13,8 @@ const functions=main.statements.filter(n=>ts.isFunctionDeclaration(n)&&names.inc
 assert.equal(functions.match(/function /g).length,names.length);
 function fixture(storyResult=false){
  const elements=new Map();
- const c={...core,...events,state:core.createState('rivet','dummy'),presentation:events.createRoundPresentation(),chosen:'rivet',mode:'dummy',opponent:undefined,frames:[],qaEvents:[],qaPanel:null,qaRecord(){},qaStopAtOutro(){},reports:0,reportRound(){c.reports++;},held:new Set(),queued:0,selection:{isOpen:false},dialog:{open:false},padNeedsRelease:false,running:true,started:true,accumulator:0,storyCalls:0,overlays:0,canvas:{focus(){}},$:id=>{if(!elements.has(id))elements.set(id,{disabled:false});return elements.get(id);}};
- c.story={isOpen:false,onRoundEnd(){c.storyCalls++;if(storyResult)c.running=false;return storyResult;}};
+ const c={...core,...events,countdown:{advance:()=>false,hide(){},suspend(){}},versus:{advance:()=>false,show(){},suspend(){}},state:core.createState('rivet','dummy'),presentation:events.createRoundPresentation(),chosen:'rivet',mode:'dummy',opponent:undefined,testingGodMode:false,matchTesting:false,matchGodMode:false,matchEarnedGodMode:false,updateGodModeLabel(){},reports:0,reportRound(){c.reports++;},frames:[],qaEvents:[],qaPanel:null,qaRecord(){},qaStopAtOutro(){},held:new Set(),queued:0,selection:{isOpen:false},dialog:{open:false},padNeedsRelease:false,running:true,started:true,accumulator:0,storyCalls:0,overlays:0,canvas:{focus(){}},$:id=>{if(!elements.has(id))elements.set(id,{disabled:false});return elements.get(id);}};
+ c.story={isOpen:false,finishMatch(){},onRoundEnd(){c.storyCalls++;if(storyResult)c.running=false;return storyResult;}};
  c.showOverlay=()=>{c.overlays++;c.running=false;};
  vm.createContext(c);vm.runInContext(compile(functions),c);return c;
 }
@@ -35,10 +35,10 @@ for(const storyResult of [false,true])check(`winner freezes combat and replay fo
  const c=fixture(storyResult);c.presentation.phase='fight';c.state.fighters.forEach(f=>f.hp=0);c.advanceRoundFrame(0);assert.equal(c.presentation.phase,'outro');assert.equal(c.state.winner,2);
  const state=JSON.stringify(c.state),count=c.frames.length;for(let i=0;i<events.OUTRO_FRAMES-1;i++)c.advanceRoundFrame(core.A.light|core.A.right);
  assert.equal(c.storyCalls,0);assert.equal(c.overlays,0);assert.equal(JSON.stringify(c.state),state);assert.equal(c.frames.length,count);
- c.advanceRoundFrame(0);assert.equal(c.presentation.phase,'result');assert.equal(c.storyCalls,1);assert.equal(c.overlays,storyResult?0:1);assert.equal(c.reports,1,'hub report runs once, at the result');
+ c.advanceRoundFrame(0);assert.equal(c.presentation.phase,'result');assert.equal(c.storyCalls,1);assert.equal(c.overlays,storyResult?0:1);assert.equal(c.reports,1,'hub result reported once');
  c.advanceRoundFrame(0);assert.equal(c.storyCalls,1);assert.equal(c.reports,1);assert.equal(JSON.stringify(c.state),state);assert.equal(c.frames.length,count);
 });
 check('floor defeat uses the landed knockout reaction',()=>{const c=fixture();c.presentation.phase='fight';c.state.fighters[0].hp=0;c.state.fighters[0].reaction={kind:'knockdown',phase:'down',t:0,direction:1};c.advanceRoundFrame(0);assert.equal(c.presentation.fromFloor,true);});
-assert.match(read('main.ts'),/render\(ctx, state, presentation\)/);
+assert.match(read('main.ts'),/render\(ctx, state, presentation, visualFrame\)/);
 assert.match(read('main.ts'),/presentationSnapshot: \(\) => structuredClone\(presentation\)/);
 console.log('Presentation integration checks passed. DOM rendering and sprite aesthetics require separate browser review.');

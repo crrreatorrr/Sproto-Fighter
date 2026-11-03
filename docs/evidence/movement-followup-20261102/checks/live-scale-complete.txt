@@ -1,0 +1,10 @@
+Decoded 15308 PNGs / 15444 cel entries across 150 installed bodies.
+Checked 30888 installed cel/facing transforms and authored anchors.
+Runtime state traversal: 25/131 playable fighters.
+Runtime state traversal: 50/131 playable fighters.
+Runtime state traversal: 75/131 playable fighters.
+Runtime state traversal: 100/131 playable fighters.
+Runtime state traversal: 125/131 playable fighters.
+PASS: {"playableFighters":131,"installedBodies":150,"installedFrameEntries":15444,"uniqueImages":15308,"facings":[-1,1],"installedCellFacingDraws":30888,"hullRegistrationChecks":14726,"throwGripChecks":524,"runtimeSamples":1080948,"assistRuntimeSamples":89230,"imageDraws":2449546,"replayTicks":360250,"replayScenarios":2882,"damageScenarios":2096,"guardScenarios":262,"throwScenarios":524,"hardFailures":0,"advisoryFlags":950,"baselineChanges":0}
+Jessica advisory: blue-head walk area / guard area 0.9992–1.0074. Equal full-silhouette height is not evidence of equal body scale.
+Reports: /Users/kenhiraoka/Documents/Codex/2026-10-31/task/movement-followup-20261102/live-scale-complete

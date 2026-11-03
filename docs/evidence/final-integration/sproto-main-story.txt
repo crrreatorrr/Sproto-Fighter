@@ -1,0 +1,35 @@
+
+> sproto-arena@0.1.0 story-smoke
+> node scripts/story-smoke.mjs
+
+PASS: 100 stable distinct encounter IDs cover every non-starter exactly once
+PASS: canonical stage route is consecutive, nonempty and follows stage metadata
+PASS: new saves have two starters, one available encounter and no God Mode
+PASS: win persists recruitment and continuation across fresh instances and snapshots are copies
+PASS: replayed victories are idempotent and stale tabs merge progress without dropping recruits
+PASS: malformed, unknown-version and noncontiguous saves recover safely
+PASS: blocked writes preserve session progress and surface nonpersistent status
+PASS: initial stage gate prevents direct jumps while all free-play arenas remain available
+PASS: defeat and draw retry the same opponent without unlocks or progression
+PASS: KO saves before outro and duplicate results cannot award the next encounter
+PASS: restarting an already settled match accepts the new outcome without extra awards
+PASS: full 100-match route uses each opponent and stage, emits scenes only at major boundaries and unlocks God Mode after last win
+PASS: reload resumes at the right rival and completed locations replay without erasing unlocks
+PASS: readiness failures and failed async launches neither advance nor leave a phantom story match
+PASS: double clicks while assets load launch only once
+PASS: free play and abandoned story rounds do not grant rewards; Back/Escape preserve progress
+PASS: all paired Sprotos guard the portal before the final zone; final two rivals are Morelight and Vaudream
+PASS: Morelight recruits persistently but reload never checkpoints between the two bosses
+PASS: death or draw against either boss retries from Morelight and cannot complete the route
+PASS: leaving or restarting Vaudream cancels the gauntlet and requires Morelight again
+PASS: testing story victories never save recruits or advance encounters, including Morelight
+PASS: actual main hooks force CPU, use campaign rival, disable God Mode in story and restore free-play behavior
+PASS: actual story launch applies regional scenery and free play clears it
+PASS: actual main finale automatically restores full health against Vaudream and keeps the same hero
+PASS: actual main rejects locked P1 fighters and premature God Mode; asset failure preserves the round
+PASS: testing setting is immediately available before campaign completion and applies to story
+PASS: God Mode toggle from a completed round resumes a fresh fight when Settings closes
+PASS: enabling testing during Vaudream restarts the entire final pair without completing it
+PASS: God Mode prevents melee, projectile and throw damage, refills specials and leaves normal combat vulnerable
+PASS: God Mode still allows enemy knockouts and deterministic replay with its initial option
+30 story/persistence/God Mode checks passed.

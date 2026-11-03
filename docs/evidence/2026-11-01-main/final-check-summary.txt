@@ -1,0 +1,9 @@
+2026-11-01 final validation
+PASS npm run qa: 20 directional,11 throw,24 movement,17 story groups;441 pairings*3 modes*360frames;105 per-fighter power cases+8 interactions.
+PASS npm run build: TypeScript and Vite,32 modules.
+PASS node scripts/pose-atlas-smoke.mjs:5 groups (all21 gait/playback,441 contact bounds,loading failures).
+PASS python3 art/pose-atlases/verify_pose_assets.py:840 frame entries.
+PASS processed/public bytes identical840entries.
+PASS handoff/audit/README relative links.
+Visual coverage remains separately recorded in per-fighter reports; these checks do not establish animation quality.
+PASS checkpoint whitespace check with raw evidence attributes: verbatim AX trailing blanks and CSV CRLF retained intentionally; code/docs use ordinary checks.

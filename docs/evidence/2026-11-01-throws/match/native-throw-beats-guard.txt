@@ -1,0 +1,9 @@
+MANUAL QA · frame 230 · QA frozen
+P1 rivet: x=1031.8 y=578.0 vx=0.00 vy=0.00 grab t=6 input=0 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0
+P2 vela: x=1140.6 y=570.5 vx=0.00 vy=0.00 neutral t=0 input=2 hp=1000 combo=0 best=0 pips=0 reaction=-/-:0
+Throw: {"attacker":0,"victim":1,"phase":"hold","t":4,"direction":"forward","facing":1,"startAttackerX":1031.8177502792632,"startVictimX":1086.8177502792632,"startVictimY":578,"gripAttackerX":1031.8177502792632,"gripVictimX":1140.5677502792632,"gripVictimY":570.5}
+Projectiles: 
+f136: heavy level hits=0 pips=0 hp=1000/1000 x=914 y=578 input=64 throw=-/- reaction2=-/-
+f178: neutral  hits=0 pips=0 hp=1000/1000 x=918 y=578 input=0 throw=-/- reaction2=-/-
+f220: grab level hits=0 pips=0 hp=1000/1000 x=1028 y=578 input=512 throw=-/- reaction2=-/-
+f225: grab level hits=0 pips=0 hp=1000/1000 x=1032 y=578 input=512 throw=forward/hold reaction2=-/-

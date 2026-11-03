@@ -1,0 +1,34 @@
+
+> sproto-arena@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 32 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              7.14 kB │ gzip:  3.02 kB
+dist/assets/vamp-BaeOEztd.png              139.00 kB
+dist/assets/crapto-FNpOZbve.png            154.40 kB
+dist/assets/bront-DteFAF3E.png             162.49 kB
+dist/assets/reference-10-B5-oEtaA.png      163.31 kB
+dist/assets/reference-12-6wV5RYig.png      163.76 kB
+dist/assets/vela-CGtUalaX.png              165.20 kB
+dist/assets/reference-13-Dz2ae4Do.png      168.91 kB
+dist/assets/rune-jVDtMYdV.png              172.32 kB
+dist/assets/dumpstar-CmD4GGls.png          179.71 kB
+dist/assets/zephyr-Tba9MykT.png            179.90 kB
+dist/assets/reference-09-BCSaVj0w.png      207.04 kB
+dist/assets/bitcoin-mandela-DO_aCktm.png   207.63 kB
+dist/assets/alpha777-BCx0W5uA.png          209.34 kB
+dist/assets/big-swole-C2xwIUcj.png         311.83 kB
+dist/assets/reference-07-CoVicEY8.png      360.87 kB
+dist/assets/mox-qwB03yJ5.png               375.62 kB
+dist/assets/reference-14-CR1iOM4m.png      415.41 kB
+dist/assets/reference-11-CXMKeMAk.png      517.09 kB
+dist/assets/rivet-BJlkhZRu.png             530.12 kB
+dist/assets/little-foot-nate-D4Dy1rV3.png  550.88 kB
+dist/assets/reference-08-DKccusL_.png      852.34 kB
+dist/assets/index-95Gg4574.css               8.09 kB │ gzip:  2.46 kB
+dist/assets/index-CDCSzB4W.js              219.66 kB │ gzip: 59.27 kB
+✓ built in 6.58s

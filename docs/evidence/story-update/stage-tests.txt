@@ -1,0 +1,3 @@
+PASS: 24 original PNGs resolve uniquely, preserve native dimensions and match recorded SHA-256 hashes.
+PASS: all 24 locations occur in contiguous regional blocks across 100 encounters; opponent/save IDs and Bar/Hatchery backgrounds remain unchanged.
+PASS: loading deduplicates requests; unavailable art signals fallback; drawing uses unchanged arena coordinates. Visual floor alignment requires browser inspection.

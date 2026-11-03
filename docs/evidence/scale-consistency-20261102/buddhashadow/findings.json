@@ -1,0 +1,154 @@
+{
+  "fighter": "buddhashadow",
+  "reviewedAt": "2026-11-02T19:16:05.999339+00:00",
+  "snapshotManifestSha256": "6898f072c81f1eb2a51d9698ecc6bef92f29500426dbd7d5708a0ed552034395",
+  "uniqueInstalledCelsReviewed": 104,
+  "bothFacingViewsExcludingReferences": 208,
+  "allProcessedSourceCopiesMatch": true,
+  "bodySizeResult": "No confirmed uniform body/head scale discontinuity across all installed cels; intended pose and expression changes retained.",
+  "originalDefects": [
+    {
+      "kind": "horizontal registration",
+      "severity": "medium",
+      "sequence": "walk",
+      "indices": [
+        0,
+        7
+      ],
+      "sourceXTranslation": 30,
+      "proposedAnchor": [
+        142,
+        210
+      ],
+      "status": "corrected; installed anchor verified"
+    },
+    {
+      "kind": "horizontal registration",
+      "severity": "medium",
+      "sequence": "events source",
+      "indices": [
+        0,
+        22
+      ],
+      "sourceXTranslation": 16,
+      "proposedAnchor": [
+        128,
+        210
+      ],
+      "preserveEventSources23to31Anchor": [
+        112,
+        210
+      ],
+      "registrationBranchEvidence": "art/sprotos-expansion/process.py:120\u2013121",
+      "status": "corrected; installed anchors verified"
+    }
+  ],
+  "proposedAnchorReview": {
+    "status": "accepted on static registration grounds",
+    "changedCels": 31,
+    "viewsOfChangedCels": 62,
+    "allEventAndWalkCelsViewed": 40,
+    "bothFacingViews": 80,
+    "repositoryModifiedByReviewer": false
+  },
+  "referenceSources": [
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/sproto-combined-readiness/art/buddhashadow/reference.png",
+      "sha256": "e0acc0868dbd1dee6c0fe529fc41d31532f73802467336e8cd5487299bfc698f",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/sproto-combined-readiness/art/buddhashadow/raw/buddhashadow-core.png",
+      "sha256": "d88454307b766a4c57e779e12ce8397b1e2f3254474696faccc1ae048bcf1266",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/sproto-combined-readiness/art/buddhashadow/raw/buddhashadow-events.png",
+      "sha256": "c1d5945cc43d5246ff64f2d4727608ce4f364637b6d915090d4d17f12a8a92bf",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/sproto-combined-readiness/art/buddhashadow/raw/buddhashadow-identity.png",
+      "sha256": "5d5e83aba4c1549c19926c297fde491aa071c92a46c499df0af12d804eb63b82",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/sproto-combined-readiness/art/buddhashadow/raw/buddhashadow-walk.png",
+      "sha256": "c5eae844f99994400798afa42f01ec35b6fb29067b1bd872c66294817103f896",
+      "actuallyViewed": true
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/core-01.png",
+      "sha256": "587a43b5edbc0e99bef04db23c657ebeffaf5579a7a73d1b52fb820e9a12e228",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/core-02.png",
+      "sha256": "f4aea23a08c21451a487eed6e36d04edd4a73a55b1d0abf8a21d04040380bcbe",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/events-01.png",
+      "sha256": "3f45cdf24488f01b2c3b1a8ba328f1f2a899c076140f7830cf88763bbab2942e",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/events-02.png",
+      "sha256": "568089214cb334804fcc37d4f3b8626172c1347f9d178ae0f55eb68a67624df5",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/identity-01.png",
+      "sha256": "9a7bc0a2d3203a7ab495654ced5973cd23f65dd2ac1ec3a1afd0420e692772dc",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/identity-02.png",
+      "sha256": "cfc4fe355f1797c53dde98cf4784085f2f694a4182c238a8066ac4fed85e81bf",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/proposed-events-01.png",
+      "sha256": "a6f9f05ebac44d599832810545fb1ff52ca386bca9384f8cab4a2fd25205c16f",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/proposed-events-02.png",
+      "sha256": "b31f220ae324cf65856f375967194b3542a9003409d1831291b6c4d9d21ce324",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/proposed-walk-01.png",
+      "sha256": "c42a80c376d2f74a075cbf6b00d7c03059900d5e1b53fe7b808d39e162568344",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/registration-comparison.png",
+      "sha256": "173fb454041a57746060487fc373ce6c9a2b7f4b977f029f59123827622d59a8",
+      "actuallyViewed": true
+    },
+    {
+      "path": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/story-ui-followup/scale-audit/buddhashadow/walk-01.png",
+      "sha256": "ebd08e7c9ba5c21a3e4f05ce966409816484cd2afba551d91d63c91e81145037",
+      "actuallyViewed": true
+    }
+  ],
+  "limitations": [
+    "Static cel/source inspection; no browser playback or timing acceptance.",
+    "No runtime transforms, camera or projectile alignment acceptance.",
+    "Root owns manifest integration and runtime verification."
+  ],
+  "installedVerification": {
+    "verifiedAt": "2026-11-02T19:16:32.606369+00:00",
+    "manifestSha256": "293a4aa1abf69cadd25b5dc055f7ca8fb954848d3fa60feb467f5271792a46bf",
+    "status": "Installed manifest exactly matches independently viewed registration proposal. All 104 PNG bytes, URLs and atlas scale unchanged.",
+    "walkAnchorsChanged": 8,
+    "eventAnchorsChanged": 23,
+    "eventFloorAnchorsUnchanged": 9,
+    "all104Verified": true,
+    "runtimeStatus": "Root live verification pending; not claimed by this static reviewer.",
+    "details": "installed-verification.json"
+  }
+}

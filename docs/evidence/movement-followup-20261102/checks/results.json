@@ -1,0 +1,100 @@
+[
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "log": "00.txt"
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "smoke"
+    ],
+    "exitCode": 0,
+    "log": "01.txt"
+  },
+  {
+    "command": [
+      "node",
+      "scripts/paired-registration-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "02.txt"
+  },
+  {
+    "command": [
+      "node",
+      "scripts/hly3-blue-motion-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "03.txt"
+  },
+  {
+    "command": [
+      "node",
+      "scripts/peterpan-registration-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "04.txt"
+  },
+  {
+    "command": [
+      "node",
+      "scripts/aerial-kick-art-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "05.txt"
+  },
+  {
+    "command": [
+      "node",
+      "scripts/paired-contact-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "06.txt"
+  },
+  {
+    "command": [
+      "node",
+      "scripts/paired-contact-c-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "07.txt"
+  },
+  {
+    "command": [
+      "node",
+      "scripts/paired-contact-c2-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "08.txt"
+  },
+  {
+    "command": [
+      "node",
+      "scripts/paired-contact-root-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "09.txt"
+  },
+  {
+    "command": [
+      "node",
+      "scripts/paired-contact-b2-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "10.txt"
+  },
+  {
+    "command": [
+      "node",
+      "docs/evidence/movement-followup-20261102/live-roster-a/virtuagram-air-kick-smoke.mjs"
+    ],
+    "exitCode": 0,
+    "log": "11.txt"
+  }
+]

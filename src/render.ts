@@ -1,15 +1,19 @@
+import {drawActiveStoryLocation} from './stageVariants';
 import { setPoseAtlasThrowState, setPoseAtlasPresentation } from './poseAtlas';
 import type { RoundPresentation } from './animationEvents';
-import { drawPower } from './powerArt';
+import { drawPower, drawRetainDefeat, drawVitalikDefeatCaption } from './powerArt';
+import { drawMindBeams } from './mindBeamArt';
+import { drawPelvicAttacks } from './pelvicAttack';
 import { setHiggsfieldThrowState } from './higgsfieldRig';
 import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
 import { drawSprite } from './spriteRoster';
 import { drawStage } from './stage';
-import { FLOOR, ROSTER, COMBAT_STYLES, DUO_SPREAD, isDown, type CombatState, type Fighter } from './core';
-function text(c: CanvasRenderingContext2D, str: string, x: number, y: number, size = 14, color = '#93a5bd', align: CanvasTextAlign = 'left', weight = 600) { c.fillStyle = color; c.font = `${weight} ${size}px system-ui, sans-serif`; c.textAlign = align; c.fillText(str, x, y); }
+import { FLOOR, ROSTER, COMBAT_STYLES, DUO_SPREAD, bodyOffsets, isPairedFighter, isDown, getMove, type CombatState, type Fighter } from './core';
+function text(c: CanvasRenderingContext2D, str: string, x: number, y: number, size = 14, color = '#93a5bd', align: CanvasTextAlign = 'left', weight = 600) { c.fillStyle = color; c.font = `${weight} ${size}px "Pixelify Sans", monospace`; c.textAlign = align; c.fillText(str, x, y); }
 function line(c: CanvasRenderingContext2D, x: number, y: number, x2: number, y2: number, color: string, width = 1) { c.beginPath(); c.moveTo(x, y); c.lineTo(x2, y2); c.strokeStyle = color; c.lineWidth = width; c.stroke(); }
 function poly(c: CanvasRenderingContext2D, points: number[][], color: string) { c.beginPath(); points.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath(); c.fillStyle = color; c.fill(); }
-function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false) {
+function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false, visualFrame = frame) {
+    if(drawRetainDefeat(c,f.id,f.hp,f.x,FLOOR,visualFrame))return;
     drawSprite(c,f,frame,ghost,frozen);
     if (f.blockstun > 0) {
         c.save();
@@ -41,17 +45,17 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     }
     text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
-export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation) {
+export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0)) {
     setHiggsfieldThrowState(s.throwState,s.fighters);
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
-    drawStage(c, s.frame);
+    if(!drawActiveStoryLocation(c))drawStage(c, s.frame);
     // Keep the HUD legible over the bright sky and moon without covering fighters.
     c.fillStyle='#071224b8';c.fillRect(0,0,1280,162);
     c.fillStyle='#07122455';c.fillRect(0,162,1280,10);
     for (const f of s.fighters) {
         c.fillStyle = '#040b1366';
-        for(const offset of f.id==='duo'?[-DUO_SPREAD,DUO_SPREAD]:[0]){
+        for(const offset of bodyOffsets(f.id)){
             c.beginPath();
             c.ellipse(f.x+offset, FLOOR + 5, 53 - Math.min(25, (FLOOR - f.y) / 10), 10, 0, 0, Math.PI * 2);
             c.fill();
@@ -63,16 +67,61 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     const down0=isDown(s.fighters[0]),down1=isDown(s.fighters[1]);
     const foreground = s.throwState?.attacker ?? (down0!==down1?(down0?1:0):
         (s.fighters[0].move && !s.fighters[0].stun && !s.fighters[1].move ? 0 : 1));
-    fighter(c, s.fighters[1 - foreground], s.frame, false, s.freeze > 0);
-    fighter(c, s.fighters[foreground], s.frame, false, s.freeze > 0);
+    fighter(c, s.fighters[1 - foreground], s.frame, false, s.freeze > 0, visualFrame);
+    fighter(c, s.fighters[foreground], s.frame, false, s.freeze > 0, visualFrame);
+    if(presentation&&(presentation.phase==='outro'||presentation.phase==='result'))for(const[i,f]of s.fighters.entries()){
+      if(f.id!=='sproto651'||presentation.winner===i)continue;
+      const age=presentation.frame,colors=['#f34545','#e9cb30','#367ee6','#b548cf','#39b9a5'];
+      for(let n=0;n<28;n++){
+        const t=Math.max(0,Math.min(1,(age-10-n%8)/35)),angle=n*2.399;
+        const x=f.x+Math.cos(angle)*(20+n*3)*t,y=Math.min(FLOOR+3,f.y-25-Math.sin(t*Math.PI)*(15+n%7*5)+Math.sin(angle)*n*t);
+        c.fillStyle=colors[n%colors.length];c.fillRect(Math.round(x),Math.round(y),4+n%5,3+n%4);
+      }
+    }
     drawTeamSpecialFront(c,s);
+    // The reference B is visibly held before the hand releases its projectile.
+    for(const f of s.fighters)if(f.id==='sproto3106'&&f.move?.id==='bolt'&&!f.stun&&!f.blockstun){
+        const startup=getMove(f,'bolt').startup;
+        if(f.move.t<startup){
+            const [x,y]=f.move.t<startup*.55?[2.5,70]:[41.25,81.25];
+            c.save();c.translate(Math.round(f.x+f.facing*x),Math.round(f.y-y));drawPower(c,'referenceB',0,ROSTER[f.id].color);c.restore();
+        }
+    }
+    for(const f of s.fighters)if(f.id==='sproto1601'&&f.move?.id==='bolt'&&!f.stun&&!f.blockstun){
+        const startup=getMove(f,'bolt').startup;
+        if(f.move.t<startup){
+            const [x,y]=f.move.t<startup*.55?[0,73.75]:[67.5,85];
+            c.save();c.translate(Math.round(f.x+f.facing*x),Math.round(f.y-y));drawPower(c,'yellowEight',0,ROSTER[f.id].color);c.restore();
+        }
+    }
+    for(const f of s.fighters)if(f.id==='vitaliketh'&&f.move?.id==='bolt'&&!f.stun&&!f.blockstun){
+        const startup=getMove(f,'bolt').startup;
+        if(f.move.t<startup){
+            const phase=f.move.t/startup;
+            const [x,y]=phase<.25?[17.5,72.5]:phase<.5?[26.25,76.25]:phase<.75?[51.25,87.5]:[82.5,100];
+            c.save();c.translate(Math.round(f.x+f.facing*x),Math.round(f.y-y));drawPower(c,'ethereum',0,ROSTER[f.id].color);c.restore();
+        }
+    }
     for(const f of s.fighters)if(f.slow>0)text(c,'MELANCHOLY · SLOWED',f.x,f.y-170,9,'#c7a5eb','center',800);
     for (const p of s.projectiles) {
+        if(p.shape==='pelvicStream'||p.beamLength)continue;
         c.save();
-        c.translate(p.x, p.y);
-        c.rotate(Math.atan2(p.vy,p.vx));
+        c.translate(p.shape==='retain'?Math.round(p.x):p.x,p.shape==='retain'?Math.round(p.y):p.y);
+        if(p.shape==='miniSproto')c.scale(p.vx<0?-1:1,1);
+        else if(p.shape!=='retain'&&p.shape!=='referenceB'&&p.shape!=='yellowEight'&&p.shape!=='ethereum')c.rotate(Math.atan2(p.vy,p.vx));
         drawPower(c,p.shape??'spark',p.age??0,ROSTER[s.fighters[p.owner].id].color);
         c.restore();
+    }
+    drawPelvicAttacks(c,s);
+    drawMindBeams(c,s);
+    for(const f of s.fighters)if(f.id==='michael'&&(f.move?.id==='bolt'||f.move?.id==='special')&&f.move.t<38){
+        c.fillStyle='#11182deb';c.fillRect(Math.round(f.x-62),Math.round(f.y-210),124,30);
+        text(c,'RETAIN!',Math.round(f.x),Math.round(f.y-188),20,'#fff5d4','center',900);
+    }
+    // RETAIN visual bursts follow the special's existing damage schedule.
+    // They are presentation only; actual ranged shots use core projectiles.
+    for(const f of s.fighters)if(f.move?.id==='special'&&COMBAT_STYLES[f.id].projectile.shape==='retain'){
+        for(const contact of COMBAT_STYLES[f.id].specialFrames){const age=f.move.t-contact;if(age>=0&&age<18){c.save();c.translate(Math.round(f.x+f.facing*(110+age*24)),Math.round(f.y-105));c.globalAlpha=Math.min(1,(18-age)/5);drawPower(c,'retain',age,ROSTER[f.id].color);c.restore();}}
     }
     for (const e of s.effects) {
         const life = e.life / e.max;
@@ -108,8 +157,9 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
         if(f.move && f.move.t>0){
-            const aim=f.move.aim, label=f.move.id==='grab'?(f.move.throwDirection??'forward').toUpperCase()+' THROW':f.move.id==='bolt'?COMBAT_STYLES[f.id].projectile.shape.replace(/([A-Z])/g,' $1').toUpperCase():aim==='upForward'?'DIAGONAL STRIKE':aim==='up'?'RISING STRIKE':aim==='down'?(f.y<FLOOR?'DIVE STRIKE':'LOW STRIKE'):'';
-            if(label)text(c,label,f.x,f.y-200,10,'#e8e4cc','center',750);
+            const aim=f.move.aim,powerShape=COMBAT_STYLES[f.id].projectile.shape;
+            const label=f.move.id==='grab'?(f.move.throwDirection??'forward').toUpperCase()+' THROW':f.move.id==='bolt'?(powerShape==='yellowEight'?'YELLOW 8':powerShape.startsWith('signature:')?'RANGED ATTACK':powerShape==='painting'?'PAINTING THROW':powerShape.replace(/([A-Z])/g,' $1').toUpperCase()):aim==='upForward'?'DIAGONAL STRIKE':aim==='up'?'RISING STRIKE':aim==='down'?(f.y<FLOOR?'DIVE STRIKE':'LOW STRIKE'):'';
+            if(label&&!(f.id==='michael'&&f.move.id==='bolt'&&f.move.t<38))text(c,label,f.x,f.y-200,10,'#e8e4cc','center',750);
             if(f.move.connected&&f.move.id!=='special'&&f.move.id!=='grab')text(c,f.dashCanceled?'CHAIN READY':'CHAIN / DASH CANCEL',f.x,f.y+35,9,'#b4f8c8','center',750);
         }
         if (f.combo > 1) {
@@ -132,10 +182,11 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     c.fillStyle = '#18202cba';
     c.fillRect(425, 678, 430, 25);
     text(c, 'HOLD AWAY: BLOCK  /  DOWN: CROUCH', 640, 694, 9, '#b4c3d3', 'center', 500);
+    drawVitalikDefeatCaption(c,s.fighters);
     if(presentation?.phase==='intro'){
         c.fillStyle='#101725e0';c.fillRect(435,175,410,66);
         text(c,'GET READY',640,204,24,'#f4e8c5','center',900);
-        text(c,'MOVE OR ATTACK TO START',640,227,10,'#b4c3d3','center');
+        text(c,'PREPARE FOR THE OPENING EXCHANGE',640,227,10,'#b4c3d3','center');
     }else if(presentation?.phase==='outro'){
         const draw=presentation.winner===2;
         text(c,draw?'DOUBLE DOWN':'K.O.',640,220,40,'#f4e8c5','center',900);

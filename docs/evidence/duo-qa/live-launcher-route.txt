@@ -1,0 +1,13 @@
+MANUAL QA · frame 856 · QA frozen
+P1 duo: x=840.3 y=446.1 vx=2.84 vy=-7.65 airHeavy t=3 input=0 hp=1000 combo=2 best=0 pips=0 reaction=-/-:0
+P2 vela: x=946.6 y=458.3 vx=2.63 vy=-7.65 neutral t=0 input=0 hp=883 combo=0 best=0 pips=0 reaction=launch/flight:3
+Presentation: {"phase":"fight","frame":0,"winner":null,"fromFloor":false}
+Replay frames: 856
+Throw: null
+Projectiles: 
+f826: launcher up hits=0 pips=0 hp=1000/1000 x=804 y=578 input=128 throw=-/- reaction2=-/-
+f833: launcher up hits=1 pips=0 hp=1000/936 x=808 y=578 input=128 throw=-/- reaction2=launch/flight
+f841: neutral  hits=1 pips=0 hp=1000/936 x=811 y=561 input=4 throw=-/- reaction2=launch/flight
+f843: airMedium level hits=1 pips=0 hp=1000/936 x=817 y=531 input=32 throw=-/- reaction2=launch/flight
+f848: airMedium level hits=2 pips=0 hp=1000/883 x=832 y=472 input=32 throw=-/- reaction2=launch/flight
+f854: airHeavy level hits=2 pips=0 hp=1000/883 x=835 y=462 input=64 throw=-/- reaction2=launch/flight

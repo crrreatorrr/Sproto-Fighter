@@ -1,7 +1,10 @@
+/** Resolve public art under the build's HTML base; Node/diagnostic fixtures use root paths. */
+const asset=(path:string)=>{
+ const base=typeof document==='undefined'?'/':(document.querySelector?.('meta[name="sproto-asset-base"]') as HTMLMetaElement|null)?.content||'/';
+ return base+path.replace(/^\/+/, '');
+};
 import { HIGGSFIELD_REVISION } from './higgsfieldRevision';
 import { A, FLOOR, getMove, COMBAT_STYLES, type Fighter } from './core';
-/** Public-folder URL under the build base, so the game also runs below /play/sproto-fighter/. Node smoke scripts have no import.meta.env and keep the root path. */
-const asset=(path:string)=>(typeof import.meta.env==='undefined'?'/':import.meta.env.BASE_URL)+path.replace(/^\/+/,'');
 
 /** Source-derived cutout rigs. The head is kept intact; every limb has its own
  * upper/lower/terminal image and parented pivots. Rendering never mutates combat. */
@@ -27,13 +30,13 @@ const mod=(n:number,m:number)=>(n%m+m)%m;
 export function loadHiggsfieldRigs():Promise<void>{
   if(loading)return loading;
   loading=(async()=>{
-    const response=await fetch(asset('fighters/rig-data.json?v=')+HIGGSFIELD_REVISION,{cache:'no-store'});
+    const response=await fetch(asset('/fighters/rig-data.json?v=')+HIGGSFIELD_REVISION,{cache:'no-store'});
     if(!response.ok)throw new Error(`Rig metadata: HTTP ${response.status}`);
     const data:RigFile=await response.json();
     await Promise.all(Object.entries(data.fighters).map(async([id,rig])=>{
       await Promise.all(Object.values(rig.parts).map(part=>new Promise<void>((resolve,reject)=>{
         const image=new Image();image.onload=()=>{part.image=image;resolve();};
-        image.onerror=()=>reject(new Error(`Rig asset failed: ${part.url}`));image.src=part.url+'?v='+HIGGSFIELD_REVISION;
+        image.onerror=()=>reject(new Error(`Rig asset failed: ${part.url}`));image.src=asset(part.url)+'?v='+HIGGSFIELD_REVISION;
       })));
       rigs.set(id,rig);
     }));

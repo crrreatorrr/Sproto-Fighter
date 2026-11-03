@@ -1,0 +1,380 @@
+[
+  {
+    "id": "guest08",
+    "label": "walk-forward",
+    "debug": "Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0\nSequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.704 \u00b7 x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest08-pelvis4-walk-forward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest08",
+    "label": "walk-backward",
+    "debug": "Core frame 83 \u00b7 scenario frame 83 \u00b7 frozen 0\nSequence walk \u00b7 frame 7/7 \u00b7 pose slot 5: passFar \u00b7 gait phase 0.933 \u00b7 x 687.7 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest08-pelvis4-walk-backward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest08",
+    "label": "walk-stop",
+    "debug": "Core frame 149 \u00b7 scenario frame 149 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest08-pelvis4-walk-stop.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest08",
+    "label": "pelvis4-jump",
+    "debug": "Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0\nSequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 445.8 facing 1\nMove none t=- \nThrow none",
+    "scenario": "jump \u00b7 forward \u00b7 cycle 1",
+    "file": "guest08-pelvis4-pelvis4-jump.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest08",
+    "label": "pelvis4-dash",
+    "debug": "Core frame 16 \u00b7 scenario frame 16 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest08-pelvis4-pelvis4-dash.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest09",
+    "label": "walk-forward",
+    "debug": "Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0\nSequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.704 \u00b7 x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest09-pelvis4-walk-forward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest09",
+    "label": "walk-backward",
+    "debug": "Core frame 82 \u00b7 scenario frame 82 \u00b7 frozen 0\nSequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.012 \u00b7 x 692.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest09-pelvis4-walk-backward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest09",
+    "label": "walk-stop",
+    "debug": "Core frame 148 \u00b7 scenario frame 148 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest09-pelvis4-walk-stop.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest09",
+    "label": "pelvis4-jump",
+    "debug": "Core frame 16 \u00b7 scenario frame 16 \u00b7 frozen 0\nSequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 449.5 facing 1\nMove none t=- \nThrow none",
+    "scenario": "jump \u00b7 forward \u00b7 cycle 1",
+    "file": "guest09-pelvis4-pelvis4-jump.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest09",
+    "label": "pelvis4-dash",
+    "debug": "Core frame 16 \u00b7 scenario frame 16 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest09-pelvis4-pelvis4-dash.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest10",
+    "label": "walk-forward",
+    "debug": "Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0\nSequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.704 \u00b7 x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest10-pelvis4-walk-forward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest10",
+    "label": "walk-backward",
+    "debug": "Core frame 78 \u00b7 scenario frame 78 \u00b7 frozen 0\nSequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.329 \u00b7 x 713.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest10-pelvis4-walk-backward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest10",
+    "label": "walk-stop",
+    "debug": "Core frame 151 \u00b7 scenario frame 151 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest10-pelvis4-walk-stop.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest10",
+    "label": "pelvis4-jump",
+    "debug": "Core frame 15 \u00b7 scenario frame 15 \u00b7 frozen 0\nSequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 453.1 facing 1\nMove none t=- \nThrow none",
+    "scenario": "jump \u00b7 forward \u00b7 cycle 1",
+    "file": "guest10-pelvis4-pelvis4-jump.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest10",
+    "label": "pelvis4-dash",
+    "debug": "Core frame 15 \u00b7 scenario frame 15 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest10-pelvis4-pelvis4-dash.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest11",
+    "label": "walk-forward",
+    "debug": "Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0\nSequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.704 \u00b7 x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest11-pelvis4-walk-forward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest11",
+    "label": "walk-backward",
+    "debug": "Core frame 81 \u00b7 scenario frame 81 \u00b7 frozen 0\nSequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.091 \u00b7 x 697.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest11-pelvis4-walk-backward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest11",
+    "label": "walk-stop",
+    "debug": "Core frame 150 \u00b7 scenario frame 150 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest11-pelvis4-walk-stop.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest11",
+    "label": "pelvis4-jump",
+    "debug": "Core frame 16 \u00b7 scenario frame 16 \u00b7 frozen 0\nSequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 449.5 facing 1\nMove none t=- \nThrow none",
+    "scenario": "jump \u00b7 forward \u00b7 cycle 1",
+    "file": "guest11-pelvis4-pelvis4-jump.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest12",
+    "label": "walk-forward",
+    "debug": "Core frame 21 \u00b7 scenario frame 21 \u00b7 frozen 0\nSequence walk \u00b7 frame 4/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.625 \u00b7 x 604.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest12-pelvis4-walk-forward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest12",
+    "label": "walk-backward",
+    "debug": "Core frame 82 \u00b7 scenario frame 82 \u00b7 frozen 0\nSequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.012 \u00b7 x 692.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest12-pelvis4-walk-backward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest12",
+    "label": "walk-stop",
+    "debug": "Core frame 147 \u00b7 scenario frame 147 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest12-pelvis4-walk-stop.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest12",
+    "label": "pelvis4-jump",
+    "debug": "Core frame 21 \u00b7 scenario frame 21 \u00b7 frozen 0\nSequence poses \u00b7 frame 9/31 \u00b7 pose slot 9: airFall \u00b7 gait phase 0.000 \u00b7 x 500.0 y 444.3 facing 1\nMove none t=- \nThrow none",
+    "scenario": "jump \u00b7 forward \u00b7 cycle 1",
+    "file": "guest12-pelvis4-pelvis4-jump.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest12",
+    "label": "pelvis4-dash",
+    "debug": "Core frame 16 \u00b7 scenario frame 16 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest12-pelvis4-pelvis4-dash.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest12",
+    "label": "pelvis4-dash-exact3",
+    "debug": "Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0\nSequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest12-pelvis4-pelvis4-dash-exact3.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest13",
+    "label": "walk-forward",
+    "debug": "Core frame 29 \u00b7 scenario frame 29 \u00b7 frozen 0\nSequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.257 \u00b7 x 644.5 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest13-pelvis4-walk-forward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest13",
+    "label": "walk-backward",
+    "debug": "Core frame 82 \u00b7 scenario frame 82 \u00b7 frozen 0\nSequence walk \u00b7 frame 0/7 \u00b7 pose slot 2: walkNear \u00b7 gait phase 0.012 \u00b7 x 692.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest13-pelvis4-walk-backward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest13",
+    "label": "walk-stop",
+    "debug": "Core frame 148 \u00b7 scenario frame 148 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest13-pelvis4-walk-stop.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest13",
+    "label": "pelvis4-jump",
+    "debug": "Core frame 16 \u00b7 scenario frame 16 \u00b7 frozen 0\nSequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 449.5 facing 1\nMove none t=- \nThrow none",
+    "scenario": "jump \u00b7 forward \u00b7 cycle 1",
+    "file": "guest13-pelvis4-pelvis4-jump.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest13",
+    "label": "pelvis4-dash",
+    "debug": "Core frame 16 \u00b7 scenario frame 16 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest13-pelvis4-pelvis4-dash.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest13",
+    "label": "pelvis4-dash-exact3",
+    "debug": "Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0\nSequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest13-pelvis4-pelvis4-dash-exact3.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest14",
+    "label": "walk-forward",
+    "debug": "Core frame 22 \u00b7 scenario frame 22 \u00b7 frozen 0\nSequence walk \u00b7 frame 5/7 \u00b7 pose slot 4: walkFar \u00b7 gait phase 0.704 \u00b7 x 609.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest14-pelvis4-walk-forward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest14",
+    "label": "walk-backward",
+    "debug": "Core frame 78 \u00b7 scenario frame 78 \u00b7 frozen 0\nSequence walk \u00b7 frame 2/7 \u00b7 pose slot 3: passNear \u00b7 gait phase 0.329 \u00b7 x 713.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest14-pelvis4-walk-backward.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest14",
+    "label": "walk-stop",
+    "debug": "Core frame 149 \u00b7 scenario frame 149 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.984 \u00b7 x 499.0 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "walk \u00b7 forward \u00b7 cycle 1",
+    "file": "guest14-pelvis4-walk-stop.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest14",
+    "label": "pelvis4-jump",
+    "debug": "Core frame 15 \u00b7 scenario frame 15 \u00b7 frozen 0\nSequence poses \u00b7 frame 8/31 \u00b7 pose slot 8: airRise \u00b7 gait phase 0.000 \u00b7 x 500.0 y 453.1 facing 1\nMove none t=- \nThrow none",
+    "scenario": "jump \u00b7 forward \u00b7 cycle 1",
+    "file": "guest14-pelvis4-pelvis4-jump.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest14",
+    "label": "pelvis4-dash",
+    "debug": "Core frame 14 \u00b7 scenario frame 14 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest14-pelvis4-pelvis4-dash.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest14",
+    "label": "pelvis4-dash-exact3",
+    "debug": "Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0\nSequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest14-pelvis4-pelvis4-dash-exact3.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest08",
+    "label": "pelvis4-dash-exact3",
+    "debug": "Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0\nSequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest08-pelvis4-pelvis4-dash-exact3.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest09",
+    "label": "pelvis4-dash-exact3",
+    "debug": "Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0\nSequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest09-pelvis4-pelvis4-dash-exact3.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest10",
+    "label": "pelvis4-dash-exact3",
+    "debug": "Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0\nSequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest10-pelvis4-pelvis4-dash-exact3.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest11",
+    "label": "pelvis4-dash",
+    "debug": "Core frame 17 \u00b7 scenario frame 17 \u00b7 frozen 0\nSequence poses \u00b7 frame 0/31 \u00b7 pose slot 0: guard \u00b7 gait phase 0.190 \u00b7 x 620.6 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest11-pelvis4-pelvis4-dash.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  },
+  {
+    "id": "guest11",
+    "label": "pelvis4-dash-exact3",
+    "debug": "Core frame 3 \u00b7 scenario frame 3 \u00b7 frozen 0\nSequence poses \u00b7 frame 6/31 \u00b7 pose slot 6: dash \u00b7 gait phase 0.000 \u00b7 x 539.8 y 578.0 facing 1\nMove none t=- \nThrow none",
+    "scenario": "dash \u00b7 forward \u00b7 cycle 1",
+    "file": "guest11-pelvis4-pelvis4-dash-exact3.jpg",
+    "date": "2026-11-01",
+    "revision": "whole-pose-pelvis-4"
+  }
+]

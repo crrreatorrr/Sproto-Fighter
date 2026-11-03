@@ -1,0 +1,16 @@
+Browser tab: 4, Title: "Full-pose atlas review", URL: "http://127.0.0.1:5173/art/pose-atlas-lab.html".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~		8 pop up button (collapsed, settable) Fighter, Value: Alpha 777 · alpha777, ID: fighter, Secondary Actions: Expand
+~				26 VAMP · vamp
+~				27 (selected) Alpha 777 · alpha777
+~		62 pop up button (collapsed, settable) Aim / throw direction, Value: back, ID: direction, Secondary Actions: Expand
+~				65 (selected) back
+~				66 up
+~		120 stepper (settable, integer) Frames to advance, Value: 14, ID: frameCount
+~	185 text grab · back · cycle 1
+~	187 text Core frame 14 · scenario frame 14 · frozen 0
+Sequence poses · frame 26/31 · pose slot 26: grabReach · gait phase 0.000 · x 600.0 y 578.0 facing -1
+Move grab t=6 startup/active/recovery 6/3/30
+Throw {"attacker":0,"victim":1,"phase":"hold","t":5,"direction":"back","facing":-1,"startAttackerX":600,"startVictimX":540,"startVictimY":578,"gripAttackerX":600,"gripVictimX":521.25,"gripVictimY":569.25}
+Reactions 0: null hp=1000 x=600.00 y=578.00 vx=0.00 vy=0.00 | 1: null hp=1000 x=521.25 y=569.25 vx=0.00 vy=0.00
+The focused UI element is 121 button Advance frames, ID: advanceFrames

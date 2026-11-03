@@ -3,6 +3,8 @@ import { BELT_WORLD, STORY_EVENT, TICKETS_PER_WIN, WIN_REASON } from './config';
 export interface FighterWin {
   /** Round winner from the combat state: 0 player, 1 CPU, 2 draw. */
   winner: number;
+  /** God Mode keeps local progress, but assisted rounds earn no hub currency or Relic. */
+  assisted?: boolean;
   /** `cpu` fights back. `dummy` and `guard` are practice and report nothing. */
   mode: string;
   /** Story world number for a story match, or null for free play. */
@@ -36,7 +38,7 @@ export type HubCall = EarnCall | EventCall;
  * Other story worlds only earn Tickets.
  */
 export function planFighterWin(win: FighterWin): HubCall[] {
-  if (win.winner !== 0 || win.mode !== 'cpu') return [];
+  if (win.winner !== 0 || win.mode !== 'cpu' || win.assisted) return [];
   const calls: HubCall[] = [
     { kind: 'earn', amount: TICKETS_PER_WIN, reason: WIN_REASON, key: `fighter:win:${win.matchId}` },
   ];

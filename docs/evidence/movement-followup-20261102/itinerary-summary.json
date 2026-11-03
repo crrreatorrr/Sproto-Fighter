@@ -1,0 +1,18 @@
+{
+  "owners": 131,
+  "scenarios": 52,
+  "facings": [
+    -1,
+    1
+  ],
+  "failures": [],
+  "limits": [
+    "Core/input scenario checks only. No browser playback or aesthetic approval.",
+    "Center scenarios cover all owners; five-position corner fixtures are not all visually inspected.",
+    "Entrance/defeat/partner effects remain separate real-match review."
+  ],
+  "casesPassed": 13624,
+  "totalTicks": 2043600,
+  "manifestSha256": "b2fa20d1ff993819cc9e73acb688736fb2f13ec178918805c08ca88afcdf1fca",
+  "atlasChanges": "Four first-active airKick entries and revision only. All source PNGs and gameplay code unchanged."
+}

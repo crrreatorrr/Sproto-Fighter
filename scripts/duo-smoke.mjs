@@ -18,12 +18,47 @@ const check=(name,fn)=>{fn();count++;console.log('PASS:',name);};
 const ctx=()=>({images:[],translations:[],save(){},restore(){},scale(){},rotate(){},drawImage(img){this.images.push(img.url);},translate(x,y){this.translations.push([x,y]);}});
 const fresh=(face=1)=>{setPoseAtlasPresentation(null,[]);setPoseAtlasThrowState(null,[]);const s=createState('duo','cpu','vela');s.fighters[0].x=600;s.fighters[1].x=600+face*110;s.fighters[0].facing=face;s.fighters[1].facing=-face;return s;};
 check('one selectable duo, two complete body atlases and one health/input/meter state',()=>{
- assert.equal(PLAYABLE_FIGHTERS.length,22);assert.ok(PLAYABLE_FIGHTERS.includes('duo'));assert.ok(!PLAYABLE_FIGHTERS.includes('duo-blue'));
+ assert.ok(PLAYABLE_FIGHTERS.length>=22);assert.ok(PLAYABLE_FIGHTERS.includes('duo'));assert.ok(!PLAYABLE_FIGHTERS.includes('duo-blue'));
  for(const id of ['duo','duo-blue']){const cfg=manifest.fighters[id];assert.equal(cfg.frames.length,32);assert.equal(cfg.walkFrames.length,4);for(const[name,n]of Object.entries(events.EVENT_CLIP_LENGTHS))assert.equal(cfg.clips[name].length,n);}
  assert.equal(fresh().fighters.length,2);
 });
-check('each body retains stable world-side placement across facing changes without core mutation',()=>{
- const s=fresh(),f=s.fighters[0];for(const face of [1,-1,1]){f.facing=face;const before=JSON.stringify(s),c=ctx();drawPoseAtlas(c,f,s.frame);assert.equal(JSON.stringify(s),before);assert.deepEqual(c.translations.map(v=>v[0]).sort((a,b)=>a-b),[600-DUO_SPREAD,600+DUO_SPREAD]);assert.equal(c.images.length,2);assert.ok(c.images.some(u=>u.includes('/duo-blue/')));assert.ok(c.images.some(u=>u.includes('/duo/')));}
+check('CPU reaches melee contact against and as the duo in both facings and at either wall',()=>{
+ const pairs=[['duo','duo'],...PLAYABLE_FIGHTERS.filter(id=>id!=='duo').flatMap(id=>[['duo',id],[id,'duo']])];
+ let probes=0;
+ for(const [playerId,cpuId] of pairs)for(const face of [-1,1])for(const wall of [false,true]){
+  const s=createState(playerId,'cpu',cpuId),[p,f]=s.fighters;
+  const gap=55+core.bodySpread(playerId)+core.bodySpread(cpuId);
+  p.x=wall?(face===1?core.WIDTH-core.fighterWall(playerId):core.fighterWall(playerId)):640+face*gap/2;
+  f.x=p.x-face*gap;p.facing=-face;f.facing=face;
+  let contact=false;
+  for(let t=0;t<180;t++){
+   step(s,[0,core.cpuInput(s)]);
+   contact ||= !!(f.move?.connected&&['light','medium','heavy','launcher'].includes(f.move.id))||s.throwState?.attacker===1;
+  }
+  assert.ok(contact&&p.hp<1000,`${playerId}/${cpuId}/face${face}/wall${wall}: CPU must attack through the legal collision gap`);
+  probes++;
+ }
+ assert.equal(probes,pairs.length*4);
+});
+check('CPU special respects root-based reach instead of spending charge beyond its formation',()=>{
+ const s=createState('duo','cpu','duo');s.frame=1;s.fighters[1].pips=3;
+ s.fighters[1].x=300;s.fighters[0].x=860;
+ assert.equal(core.cpuInput(s)&A.special,0);
+ s.fighters[0].x=800;
+ assert.ok(core.cpuInput(s)&A.special);
+});
+check('blue kick recovery returns through its coherent raised-knee pose before planting',()=>{
+ assert.deepEqual(manifest.fighters['duo-blue'].frames[19],manifest.fighters['duo-blue'].frames[16]);
+ const s=fresh(),f=s.fighters[0];f.facing=1;
+ const slots=[];
+ for(const t of [3,5,7,12,14,17,27]){
+  f.move={id:'medium',t,hit:false,connected:false,wave:-1,aim:'level'};
+  slots.push(getDuoPoseDebug(f,s.frame)[1].slot);
+ }
+ assert.deepEqual(slots,[16,17,18,17,19,13,0]);
+});
+check('lead stays at combat anchor and supporting body moves inward without crossing or core mutation',()=>{
+ const s=fresh(),f=s.fighters[0];for(const face of [1,-1,1]){f.facing=face;const before=JSON.stringify(s),c=ctx();drawPoseAtlas(c,f,s.frame);assert.equal(JSON.stringify(s),before);const [left,right]=c.translations.map(v=>v[0]).sort((a,b)=>a-b);assert.ok(left>=600-DUO_SPREAD && left<600 && right>600 && right<=600+DUO_SPREAD);assert.equal(face===1?right:left,600+face*DUO_SPREAD);assert.ok(right-left<2*DUO_SPREAD);assert.equal(c.images.length,2);assert.ok(c.images.some(u=>u.includes('/duo-blue/')));assert.ok(c.images.some(u=>u.includes('/duo/')));}
 });
 check('independent half-cycle gait covers both full sequences, freezes and reverses',()=>{
  const s=fresh(),f=s.fighters[0];s.fighters[1].x=1200;const seen=[new Set(),new Set()];getDuoPoseDebug(f,0);
@@ -42,8 +77,15 @@ check('back throw keeps the catching body through release even when attacker fac
 });
 check('intro and floor defeat reach both entity clips only for the actual scene actor',()=>{
  const s=fresh(),f=s.fighters[0],p=events.createRoundPresentation();setPoseAtlasPresentation(p,s.fighters);
- for(let age=0;age<52;age++){assert.ok(getDuoPoseDebug(f,0).every(d=>d.sequence==='intro'));assert.notEqual(getPoseAtlasDebug({...f},0).sequence,'intro');events.advanceRoundPresentation(p);}
- events.beginRoundOutro(p,1,true);f.hp=0;for(let age=0;age<100;age++){const d=getDuoPoseDebug(f,age);assert.ok(d.every(v=>v.sequence==='defeat'&&v.frameIndex>=4));const c=ctx();drawPoseAtlas(c,f,age);assert.ok(c.images.every(u=>!/(?:28|29|30|31)\.png/.test(u)));events.advanceRoundPresentation(p);}
+ for(let age=0;age<52;age++){
+  for(const d of getDuoPoseDebug(f,age)){const identity=!!manifest.fighters[d.entity].clips.entrance;assert.equal(d.sequence,identity?'entrance':'intro');assert.equal(d.frameIndex,identity?events.entranceFrame(p.frame):events.introFrame(p.frame));}
+  assert.ok(!['intro','entrance'].includes(getPoseAtlasDebug({...f},age).sequence));events.advanceRoundPresentation(p);
+ }
+ events.beginRoundOutro(p,1,true);f.hp=0;for(let age=0;age<100;age++){
+  for(const d of getDuoPoseDebug(f,age)){const identity=!!manifest.fighters[d.entity].clips.death;assert.equal(d.sequence,identity?'death':'defeat');assert.equal(d.frameIndex,identity?events.deathFrame(p.frame,true):events.defeatFrame(p.frame,true));}
+  const expected=getDuoPoseDebug(f,age).map(d=>{const entry=manifest.fighters[d.entity].clips[d.sequence][d.frameIndex];return typeof entry==='string'?entry:entry.url;});
+  const c=ctx();drawPoseAtlas(c,f,age);assert.equal(c.images.length,2);assert.ok(c.images.every(u=>expected.some(path=>u.split('?')[0].endsWith(path))));events.advanceRoundPresentation(p);
+ }
 });
 check('duo special has its own complete clips, consumes three pips and never doubles contact damage',()=>{
  for(const face of [1,-1]){const s=fresh(face),f=s.fighters[0];f.pips=3;let maxCombo=0,seen=new Set();step(s,[A.special,0]);
@@ -65,12 +107,21 @@ check('both complete falling bodies stay separated and inside the camera at both
   for(const phase of ['flight','down'])for(const t of [0,6,12,18,30]){
    f.reaction={kind:'knockdown',phase,t,direction};f.stun=30;f.y=phase==='down'?FLOOR:FLOOR-100;
    const before=JSON.stringify(f),layout=getDuoLayoutDebug(f,t);
-   assert.equal(JSON.stringify(f),before);assert.ok(layout.bounds[1][0]-layout.bounds[0][1]>=11.99);
+   assert.equal(JSON.stringify(f),before);assert.ok(layout.bounds[1][0]-layout.bounds[0][1]>=5.99);
    assert.ok(layout.bounds[0][0]>=5.99);assert.ok(layout.bounds[1][1]<=core.WIDTH-5.99);
   }
   f.y=FLOOR;const p=events.createRoundPresentation();events.beginRoundOutro(p,1,true);setPoseAtlasPresentation(p,s.fighters);
-  for(let age=0;age<=96;age++){p.frame=age;const b=getDuoLayoutDebug(f,age).bounds;assert.ok(b[1][0]-b[0][1]>=11.99);assert.ok(b[0][0]>=5.99&&b[1][1]<=core.WIDTH-5.99);}
+  for(let age=0;age<=96;age++){p.frame=age;const b=getDuoLayoutDebug(f,age).bounds;assert.ok(b[1][0]-b[0][1]>=5.99);assert.ok(b[0][0]>=5.99&&b[1][1]<=core.WIDTH-5.99);}
   setPoseAtlasPresentation(null,[]);
+ }
+});
+check('every paired roster entry: idle formation is finite and does not mutate combat state',()=>{
+ for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing of [-1,1]){
+  const s=createState(id,'cpu','vela'),f=s.fighters[0];f.x=600;f.facing=facing;
+  const before=JSON.stringify(s),layout=getDuoLayoutDebug(f,0);
+  assert.equal(JSON.stringify(s),before,id+' state changed');
+  assert.equal(layout.bounds.length,core.bodyAtlasIds(id).length,id+' body count');
+  assert.ok(layout.bounds.flat().every(Number.isFinite),id+' nonfinite bounds');
  }
 });
 console.log(`${count} duo contract groups passed. Browser visual review is recorded separately.`);

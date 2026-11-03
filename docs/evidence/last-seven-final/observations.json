@@ -1,0 +1,212 @@
+[
+  {
+    "fighter": "dumpstar",
+    "action": "hold9",
+    "debug": "Core frame 9 · scenario frame 9 · frozen 0\nSequence poses · frame 26/31 · pose slot 26: grabReach · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "dumpstar",
+    "action": "release21",
+    "debug": "Core frame 21 · scenario frame 21 · frozen 5\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "dumpstar",
+    "action": "release26",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "dumpstar",
+    "action": "release32",
+    "debug": "Core frame 32 · scenario frame 32 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":6,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "dumpstar",
+    "action": "stop125",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "dumpstar",
+    "action": "stop128",
+    "debug": "Core frame 128 · scenario frame 128 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "crapto",
+    "action": "hold9",
+    "debug": "Core frame 9 · scenario frame 9 · frozen 0\nSequence poses · frame 26/31 · pose slot 26: grabReach · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "crapto",
+    "action": "release21",
+    "debug": "Core frame 21 · scenario frame 21 · frozen 5\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "crapto",
+    "action": "release26",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "crapto",
+    "action": "release32",
+    "debug": "Core frame 32 · scenario frame 32 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":6,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "crapto",
+    "action": "stop125",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "crapto",
+    "action": "stop128",
+    "debug": "Core frame 128 · scenario frame 128 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "vamp",
+    "action": "hold9",
+    "debug": "Core frame 9 · scenario frame 9 · frozen 0\nSequence poses · frame 26/31 · pose slot 26: grabReach · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "vamp",
+    "action": "release21",
+    "debug": "Core frame 21 · scenario frame 21 · frozen 5\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "vamp",
+    "action": "release26",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "vamp",
+    "action": "release32",
+    "debug": "Core frame 32 · scenario frame 32 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":6,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "vamp",
+    "action": "stop125",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "vamp",
+    "action": "stop128",
+    "debug": "Core frame 128 · scenario frame 128 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "alpha777",
+    "action": "hold9",
+    "debug": "Core frame 9 · scenario frame 9 · frozen 0\nSequence poses · frame 26/31 · pose slot 26: grabReach · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "alpha777",
+    "action": "release21",
+    "debug": "Core frame 21 · scenario frame 21 · frozen 5\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "alpha777",
+    "action": "release26",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "alpha777",
+    "action": "release32",
+    "debug": "Core frame 32 · scenario frame 32 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":6,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "alpha777",
+    "action": "stop125",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "alpha777",
+    "action": "stop128",
+    "debug": "Core frame 128 · scenario frame 128 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "mandela",
+    "action": "hold9",
+    "debug": "Core frame 9 · scenario frame 9 · frozen 0\nSequence poses · frame 26/31 · pose slot 26: grabReach · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "mandela",
+    "action": "release21",
+    "debug": "Core frame 21 · scenario frame 21 · frozen 5\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "mandela",
+    "action": "release26",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "mandela",
+    "action": "release32",
+    "debug": "Core frame 32 · scenario frame 32 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":6,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "mandela",
+    "action": "stop125",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "mandela",
+    "action": "stop128",
+    "debug": "Core frame 128 · scenario frame 128 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "bigswole",
+    "action": "hold9",
+    "debug": "Core frame 9 · scenario frame 9 · frozen 0\nSequence poses · frame 26/31 · pose slot 26: grabReach · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "bigswole",
+    "action": "release21",
+    "debug": "Core frame 21 · scenario frame 21 · frozen 5\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "bigswole",
+    "action": "release26",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "bigswole",
+    "action": "release32",
+    "debug": "Core frame 32 · scenario frame 32 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":6,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "bigswole",
+    "action": "stop125",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "bigswole",
+    "action": "stop128",
+    "debug": "Core frame 128 · scenario frame 128 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "nate",
+    "action": "hold9",
+    "debug": "Core frame 9 · scenario frame 9 · frozen 0\nSequence poses · frame 26/31 · pose slot 26: grabReach · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=6 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"hold\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "nate",
+    "action": "release21",
+    "debug": "Core frame 21 · scenario frame 21 · frozen 5\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "nate",
+    "action": "release26",
+    "debug": "Core frame 26 · scenario frame 26 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":0,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "nate",
+    "action": "release32",
+    "debug": "Core frame 32 · scenario frame 32 · frozen 0\nSequence poses · frame 28/31 · pose slot 28: throwRelease · gait phase 0.000 · x 500.0 y 578.0 facing 1\nMove grab t=9 startup/active/recovery 6/3/30\nThrow {\"attacker\":0,\"victim\":1,\"phase\":\"release\",\"t\":6,\"direction\":\"forward\",\"facing\":1}"
+  },
+  {
+    "fighter": "nate",
+    "action": "stop125",
+    "debug": "Core frame 125 · scenario frame 125 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  },
+  {
+    "fighter": "nate",
+    "action": "stop128",
+    "debug": "Core frame 128 · scenario frame 128 · frozen 0\nSequence poses · frame 0/31 · pose slot 0: guard · gait phase 0.010 · x 501.1 y 578.0 facing 1\nMove none t=- \nThrow none"
+  }
+]
