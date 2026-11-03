@@ -10,10 +10,6 @@ const checks=[
   'scripts/peterpan-registration-smoke.mjs',
   'scripts/aerial-kick-art-smoke.mjs',
   'scripts/paired-contact-smoke.mjs',
-  'scripts/paired-contact-c-smoke.mjs',
-  'scripts/paired-contact-c2-smoke.mjs',
-  'scripts/paired-contact-root-smoke.mjs',
-  'scripts/paired-contact-b2-smoke.mjs',
   'docs/evidence/movement-followup-20261102/live-roster-a/virtuagram-air-kick-smoke.mjs',
 ];
 for(const check of checks){

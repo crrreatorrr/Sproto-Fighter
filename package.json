@@ -22,7 +22,9 @@
     "stage-catalog-smoke": "node scripts/stage-catalog-smoke.mjs",
     "reaction-size-smoke": "node scripts/reaction-size-smoke.mjs",
     "test": "vitest run",
-    "build:hub-sdk": "tsc -p vendor/hub-sdk/tsconfig.build.json"
+    "build:hub-sdk": "tsc -p vendor/hub-sdk/tsconfig.build.json",
+    "test:all": "vitest run && node scripts/run-all.mjs",
+    "test:fast": "vitest run && node scripts/run-all.mjs --fast"
   },
   "devDependencies": {
     "typescript": "^5.9.3",
