@@ -27,6 +27,8 @@
     "test:fast": "vitest run && node scripts/run-all.mjs --fast"
   },
   "devDependencies": {
+    "esbuild": "0.28.2",
+    "playwright": "1.63.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vitest": "^3.2.4"

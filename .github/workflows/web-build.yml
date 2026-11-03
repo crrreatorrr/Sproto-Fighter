@@ -46,3 +46,27 @@ jobs:
           name: web-build
           path: dist
           if-no-files-found: error
+
+  determinism:
+    # Online play needs every browser engine to compute the same game. Replay
+    # scripted matches in Node, Chromium, Firefox and WebKit and compare state
+    # checksums (scripts/determinism-smoke.mjs).
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            src
+            scripts
+            vendor
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: node scripts/determinism-smoke.mjs
+        env:
+          DETERMINISM_BROWSERS: chromium,firefox,webkit

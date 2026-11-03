@@ -46,3 +46,18 @@ export async function loadPoses() {
   };
   return { core, poses, manifest };
 }
+
+/**
+ * Bundle a TypeScript entry and everything it imports into one ES module
+ * string (esbuild). Unlike compile(), the result has no relative imports, so
+ * it works from a data: URL or inside a browser page.
+ */
+export async function bundle(path, options = {}) {
+  const { build } = await import('esbuild');
+  const result = await build({
+    entryPoints: [new URL(path, root).pathname],
+    bundle: true, write: false, format: 'esm', platform: 'neutral', target: 'es2022',
+    logLevel: 'silent', ...options,
+  });
+  return result.outputFiles[0].text;
+}
