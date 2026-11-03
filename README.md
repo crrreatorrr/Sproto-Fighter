@@ -154,3 +154,12 @@ The optional hub adapter comes from the published `claude/sweet-newton-l4tjnh` w
 Story recruits remain playable. Hub Relics provide an additional route to Halloween 2008 (HPOS10I Core), $Bitcoin Obama (Genesis Block Shard), Big Swole (Cone’s Tip), Bongraker (Tinubu’s Crown), and Sproto Duo (all four). Fighters without a corresponding Relic retain their existing story rules. Locked fighters remain previewable and usable as CPU opponents. A lost/revoked Relic does not revoke a fighter recruited in the story.
 
 Configure `VITE_HUB_URL`, `VITE_NAKAMA_URL` and `VITE_NAKAMA_SERVER_KEY` for a hub deployment. The client server key is public configuration; never put backend secrets in Vite variables. Standalone play needs no backend. The relative build base supports the root and `/play/sproto-fighter/`; the integration does not start, migrate or deploy the hub server. Run `npm test` for hub adapter checks.
+
+## Sproto Arcade
+
+Run `npm run dev` and open `/arcade/index.html` to choose between three games.
+For offline play, open `public/arcade/index.html` in a browser.
+
+- **Box Barrage** is the four-boss rush ending with Bot Sales. Horizontal fire is automatic. Press C for a tracking missile (2-second cooldown) and V for a tracking bomb (3-second cooldown). Colored boxes mark projectiles and rising floor hazards.
+- **The Long Way Home** is the original 99-backdrop run-and-gun campaign.
+- **Tidebreak Marina** is the looping pier test with a checkpoint each lap.
