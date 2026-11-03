@@ -27,8 +27,11 @@ const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'Key
 const padDefaults: Partial<Record<Action, number>> = { light: 0, medium: 2, heavy: 1, launcher: 3, bolt: 5, grab: 4, special: 7, dash: 6 };
 const labels: Record<Action, string> = { left: 'Move left', right: 'Move right', up: 'Jump', down: 'Crouch', light: 'Light', medium: 'Medium', heavy: 'Finisher', launcher: 'Launcher', bolt: 'Ranged power', grab: 'Grab', special: 'Team special', dash: 'Dash' };
 let keys = { ...defaults }, padKeys = { ...padDefaults };
+// Saved under the project's old working name until this release; read it once
+// so remapped controls survive, then save under the new key.
+const CONTROLS_KEY = 'sproto-arena-controls', LEGACY_CONTROLS_KEY = 'neon-relay-controls';
 try {
-    const saved = JSON.parse(localStorage.getItem('neon-relay-controls') || 'null');
+    const saved = JSON.parse(localStorage.getItem(CONTROLS_KEY) ?? localStorage.getItem(LEGACY_CONTROLS_KEY) ?? 'null');
     if (saved) {
         for (const a of Object.keys(defaults) as Action[])
             if (typeof saved.keys?.[a] === 'string')
@@ -147,7 +150,8 @@ $('back-select').onclick=returnToSelection;$('overlay-select').onclick=returnToS
 function keyName(code: string) { return code.replace('Key', '').replace('Digit', '').replace('Arrow', '').replace('Left', '').replace('Right', ''); }
 function save() {
     try {
-        localStorage.setItem('neon-relay-controls', JSON.stringify({ controlsVersion: 3, keys, padKeys }));
+        localStorage.setItem(CONTROLS_KEY, JSON.stringify({ controlsVersion: 3, keys, padKeys }));
+        localStorage.removeItem(LEGACY_CONTROLS_KEY);
     }
     catch { /* Nonpersistent mode. */ }
 }
