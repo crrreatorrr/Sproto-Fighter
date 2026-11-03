@@ -26,7 +26,7 @@ def install():
   report.append({'id':id,'frames':item['installedFrames'],'clips':list(cfg['clips'])})
  path=ROOT/'public/fighters/pose-atlas.json';manifest=json.loads(path.read_text());manifest['fighters'].update(configs);manifest['revision']=manifest.get('revision','atlas').split('-midday')[0]+'-midday'+hashlib.sha256(json.dumps(configs,sort_keys=True).encode()).hexdigest()[:10];temp=path.with_suffix('.midday-tmp');temp.write_text(json.dumps(manifest,indent=2)+'\n');temp.replace(path)
  playable=[x for x in plan if not x['id'].endswith('-companion')];ids=[x['id'] for x in playable]
- path=ROOT/'src/core.ts';s=path.read_text()
+ path=ROOT/'src/sim/roster.ts';s=path.read_text()
  for tag in ['ROSTER','KITS','GRIPS','PAIRS']:
   s=re.sub(r'/\* MIDDAY '+tag+r' BEGIN \*/.*?/\* MIDDAY '+tag+r' END \*/\n','',s,flags=re.S)
  type_decl=re.search(r'export type FighterId = (.*?);',s)

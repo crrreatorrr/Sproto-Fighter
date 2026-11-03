@@ -12,7 +12,7 @@ def install():
     path=ROOT/'public/fighters/pose-atlas.json';manifest=json.loads(path.read_text());manifest['fighters']['rlarsson']=cfg
     if not manifest.get('revision','').endswith('-rlarsson'):manifest['revision']=manifest.get('revision','expansion')+'-rlarsson'
     path.write_text(json.dumps(manifest,indent=2)+'\n')
-    path=ROOT/'src/core.ts';s=path.read_text()
+    path=ROOT/'src/sim/roster.ts';s=path.read_text()
     for tag in ['ROSTER','KIT','GRIP']:
         s=re.sub(r'/\* RLARSSON '+tag+r' BEGIN \*/.*?/\* RLARSSON '+tag+r' END \*/\n','',s,flags=re.S)
     line=re.search(r'export type FighterId = (.*?);',s)

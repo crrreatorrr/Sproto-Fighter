@@ -1,10 +1,11 @@
 // Playback/asset-contract checks. Fake image loading is NOT visual/browser QA.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const compile=(path)=>ts.transpileModule(readFileSync(new URL(path,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const coreUrl=url(compile('../src/core.ts'));
+const coreUrl=url(bundledCore());
 const eventsUrl=url(compile('../src/animationEvents.ts'));
 const core=await import(coreUrl);
 const poses=await import(url(compile('../src/poseAtlas.ts').replace("from './core'",`from '${coreUrl}'`).replace("from './animationEvents'",`from '${eventsUrl}'`)));

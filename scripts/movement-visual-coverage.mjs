@@ -1,4 +1,5 @@
 // Summarize explicit reviewer records, never infer a visual pass from a test.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync} from 'node:fs';
 import ts from 'typescript';
@@ -6,7 +7,7 @@ import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const evidence='docs/evidence/movement-followup-20261102/';
 const load=name=>JSON.parse(read(evidence+name+'.json'));
-const code=ts.transpileModule(read('src/core.ts'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
+const code=bundledCore();
 const core=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
 const lab=read('art/pose-atlas-lab.html');
 const itinerary=new Function(lab.slice(lab.indexOf('const motionReview=['),lab.indexOf('// Expose every itinerary action'))+';return motionReview;')();

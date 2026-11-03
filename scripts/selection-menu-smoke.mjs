@@ -1,5 +1,6 @@
 // Executes the actual selection controller and main pollPad against a small DOM.
 // No browser, canvas aesthetics or physical-controller claim.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
@@ -7,7 +8,7 @@ import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
 const asModule=s=>'data:text/javascript;base64,'+Buffer.from(ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText).toString('base64');
-const core=await import(asModule(read('src/core.ts')));
+const core=await import(asModule(bundledCore()));
 const ids=new Map();let document,now=1000;
 class Element{
  constructor(tag='div',id=''){this.tagName=tag.toUpperCase();this.id=id;this.children=[];this.dataset={};this.attributes={};this.events={};this.hidden=false;this.disabled=false;this.offsetParent={};this.classList={toggle(){}};this.clientWidth=1280;this.clientHeight=420;}

@@ -65,7 +65,7 @@ def install():
 
     inventory = json.loads((EXPANSION / 'inventory.json').read_text())
     refs = {r['id']: r for r in inventory}
-    path = ROOT / 'src/core.ts'
+    path = ROOT / 'src/sim/roster.ts'
     core = path.read_text()
     definitions = {
         'sproto2531': ({'speed': 9, 'shape': 'miniSproto', 'horizontal': True,

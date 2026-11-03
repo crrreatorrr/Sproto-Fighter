@@ -17,7 +17,7 @@ def install():
     release=Image.open(HERE/'processed/highsproto-events/14.png');mask=np.array(release.getchannel('A'))>0;yy,xx=np.where(mask);edge=xx>=max(xx)-5
     point=[float(np.median(xx[edge])),float(np.median(yy[edge]))];emitter={'forward':round((point[0]-112)*cfg['scale'],3),'height':round((210-point[1])*cfg['scale'],3)}
     (HERE/'joint-origin.json').write_text(json.dumps(dict(point=point,world=emitter),indent=2)+'\n')
-    path=ROOT/'src/core.ts';s=path.read_text()
+    path=ROOT/'src/sim/roster.ts';s=path.read_text()
     for tag in ['ROSTER','KIT','GRIP']:
         s=re.sub(r'/\* HIGHSPROTO '+tag+r' BEGIN \*/.*?/\* HIGHSPROTO '+tag+r' END \*/\n','',s,flags=re.S)
     line=re.search(r'export type FighterId = (.*?);',s)

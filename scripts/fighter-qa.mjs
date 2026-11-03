@@ -1,7 +1,8 @@
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
-const source=ts.transpileModule(readFileSync(new URL('../src/core.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
+const source=bundledCore();
 const {A,FLOOR,PLAYABLE_FIGHTERS,isHorizontalSpit,COMBAT_STYLES,createState,step,getMove}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 const tick=(s,n,a=0,b=0)=>{for(let i=0;i<n;i++)step(s,[a,b]);};
 let total=0;

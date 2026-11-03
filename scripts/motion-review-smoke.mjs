@@ -1,11 +1,12 @@
 // Exercise the actual lab itinerary/input code through the real combat core.
 // This verifies that a review really reaches its advertised states; it does
 // not mark the resulting animation as visually inspected.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
-const source=ts.transpileModule(read('src/core.ts'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
+const source=bundledCore();
 const core=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 const html=read('art/pose-atlas-lab.html');
 const itineraryCode=html.slice(html.indexOf('const motionReview=['),html.indexOf('// Expose every itinerary action'));

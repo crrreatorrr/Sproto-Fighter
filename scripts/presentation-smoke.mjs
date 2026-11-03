@@ -1,4 +1,5 @@
 // Exercises the actual main-loop presentation boundary with the real combat core.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
@@ -6,7 +7,7 @@ import ts from 'typescript';
 const read = name => readFileSync(new URL('../src/'+name, import.meta.url), 'utf8');
 const compile = source => ts.transpileModule(source, {compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const load = async name => import('data:text/javascript;base64,'+Buffer.from(compile(read(name))).toString('base64'));
-const core=await load('core.ts'), events=await load('animationEvents.ts');
+const core=await import('data:text/javascript;base64,'+Buffer.from(bundledCore()).toString('base64')), events=await load('animationEvents.ts');
 const main=ts.createSourceFile('main.ts',read('main.ts'),ts.ScriptTarget.Latest,true);
 const names=['advanceRoundFrame','start','pause','restart'];
 const functions=main.statements.filter(n=>ts.isFunctionDeclaration(n)&&names.includes(n.name?.text)).map(n=>n.getText(main)).join('\n');

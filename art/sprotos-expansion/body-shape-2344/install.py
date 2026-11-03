@@ -68,7 +68,7 @@ def install(targets=None, revision='2344-curvy-red-chubby-blue-1'):
         point = cfg['holdContact'][part]
         return [(point[i] - anchor[i]) * cfg['scale'] for i in range(2)]
 
-    path = ROOT / 'src/core.ts'
+    path = ROOT / 'src/sim/roster.ts'
     core = path.read_text()
     grips = {part: grip(configs[IDS[0]], part) for part in ['hand', 'torso']}
     core, n = re.subn(r'^sproto2344:\{.*?\},$', 'sproto2344:' + json.dumps(grips) + ',', core, flags=re.M)

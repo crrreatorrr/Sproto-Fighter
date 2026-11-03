@@ -1,10 +1,11 @@
 // Mechanical/metadata checks only. Stub Image reads PNG headers; no visual approval.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const compile=p=>ts.transpileModule(readFileSync(new URL(p,import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const cu=url(compile('../src/core.ts')),eu=url(compile('../src/animationEvents.ts'));
+const cu=url(bundledCore()),eu=url(compile('../src/animationEvents.ts'));
 const core=await import(cu),events=await import(eu);
 const poses=await import(url(compile('../src/poseAtlas.ts').replace("from './core'",`from '${cu}'`).replace("from './animationEvents'",`from '${eu}'`)));
 const original=JSON.parse(readFileSync(new URL('../public/fighters/pose-atlas.json',import.meta.url),'utf8'));

@@ -4,13 +4,14 @@
 //   node scripts/paired-contact-smoke.mjs               all reviews
 //   node scripts/paired-contact-smoke.mjs c2 root       only the named reviews
 // Replaces paired-contact-{b2,c,c2,root}-smoke.mjs.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {read as readText,compile,dataUrl} from './lib/load.mjs';
 
 const read=p=>readText(p,null);
 const hash=b=>createHash('sha256').update(b).digest('hex');
-const coreUrl=dataUrl(compile('src/core.ts')),eventsUrl=dataUrl(compile('src/animationEvents.ts'));
+const coreUrl=dataUrl(bundledCore()),eventsUrl=dataUrl(compile('src/animationEvents.ts'));
 const core=await import(coreUrl);
 const poses=await import(dataUrl(compile('src/poseAtlas.ts').replace("from './core'",`from '${coreUrl}'`).replace("from './animationEvents'",`from '${eventsUrl}'`)));
 const manifest=JSON.parse(read('public/fighters/pose-atlas.json'));

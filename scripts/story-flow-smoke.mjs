@@ -13,7 +13,7 @@ const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2
 const temp=mkdtempSync(join(tmpdir(),'sproto-story-flow-'));
 let checks=0;
 try {
-  assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/storyProgress.ts','src/storyMode.ts','src/animationEvents.ts','src/stageVariants.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck'],{stdio:'inherit'}).status,0,'compile actual campaign modules');
+  assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/storyProgress.ts','src/storyMode.ts','src/animationEvents.ts','src/stageVariants.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0,'compile actual campaign modules');
   const req=createRequire(import.meta.url);
   const progressModule=req(join(temp,'storyProgress.js'));
   const {createStoryProgress,STORY_ENCOUNTERS,STARTER_FIGHTERS,LEGACY_STORY_SAVE_KEY,LEGACY_STORY_OPPONENTS}=progressModule;

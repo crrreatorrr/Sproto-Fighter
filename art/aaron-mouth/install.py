@@ -30,7 +30,7 @@ def install():
  points={}
  for part,slot in [('hand',26),('torso',24)]:
   anchor=cfg['frames'][slot].get('anchor',cfg['anchor']);p=cfg['holdContact'][part];points[part]=[(p[i]-anchor[i])*cfg['scale'] for i in [0,1]]
- path=ROOT/'src/core.ts';s=path.read_text();pattern=r'(?m)^'+re.escape(ident)+r':\s*\{\s*"hand":\s*\[[^\]]+\],\s*"torso":\s*\[[^\]]+\]\s*\},$';s,n=re.subn(pattern,ident+':'+json.dumps(points)+',',s);assert n==1,(ident,n);path.write_text(s)
+ path=ROOT/'src/sim/roster.ts';s=path.read_text();pattern=r'(?m)^'+re.escape(ident)+r':\s*\{\s*"hand":\s*\[[^\]]+\],\s*"torso":\s*\[[^\]]+\]\s*\},$';s,n=re.subn(pattern,ident+':'+json.dumps(points)+',',s);assert n==1,(ident,n);path.write_text(s)
  # Append complete replacement records to the current ledger; retain all prior jobs.
  path=EXPANSION/'jobs.json';ledger=json.loads(path.read_text());known={j.get('job_id') for j in ledger}
  canonical_indices={j['kind']:j['index'] for j in ledger if j.get('entity')==ident}

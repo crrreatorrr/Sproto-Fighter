@@ -1,7 +1,8 @@
 // All installed body cels + real pose/assist playback. No browser or art writes.
 // Transform invariants are assertions. Silhouette/anatomy measurements are advisory.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
-import {readFileSync, writeFileSync, mkdirSync} from 'node:fs';
+import {readFileSync, readdirSync, writeFileSync, mkdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
@@ -20,12 +21,12 @@ assert.ok(args.every((v, i) => ['--out', '--baseline'].includes(v) || ['--out', 
 const read = p => readFileSync(join(root, p), 'utf8');
 const hash = value => createHash('sha256').update(value).digest('hex');
 const manifestText = read('public/fighters/pose-atlas.json'), manifest = JSON.parse(manifestText);
-const sourcePaths = ['src/core.ts','src/poseAtlas.ts','src/spriteRoster.ts','src/teamSpecial.ts','src/animationEvents.ts','art/sprotos-expansion/process.py'];
+const sourcePaths = ['src/core.ts',...readdirSync(join(root,'src/sim')).filter(f=>f.endsWith('.ts')).sort().map(f=>'src/sim/'+f),'src/poseAtlas.ts','src/spriteRoster.ts','src/teamSpecial.ts','src/animationEvents.ts','art/sprotos-expansion/process.py'];
 const sourceTexts = Object.fromEntries(sourcePaths.map(path=>[path,read(path)]));
 const auditScriptSha256 = hash(readFileSync(fileURLToPath(import.meta.url)));
 const compile = p => ts.transpileModule(sourceTexts[p] ?? read(p), {compilerOptions:{module:ts.ModuleKind.ES2022, target:ts.ScriptTarget.ES2022}}).outputText;
 const moduleUrl = text => 'data:text/javascript;base64,' + Buffer.from(text).toString('base64');
-const coreUrl = moduleUrl(compile('src/core.ts')), eventsUrl = moduleUrl(compile('src/animationEvents.ts'));
+const coreUrl = moduleUrl(bundledCore()), eventsUrl = moduleUrl(compile('src/animationEvents.ts'));
 const core = await import(coreUrl), events = await import(eventsUrl);
 // Expose the *real* private paint function in this process only, so superseded
 // installed clips are checked too. The runtime source file is never modified.

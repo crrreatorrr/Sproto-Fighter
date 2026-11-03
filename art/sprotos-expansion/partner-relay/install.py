@@ -18,5 +18,5 @@ def update(match):
     data.pop('specialPartners',None)
     data['partner']=ref.get('partner','rivet')
     return indent+ident+': '+json.dumps(data)+','
-core_path=ROOT/'src/core.ts';core_path.write_text(re.sub(r'^([ \t]*)(sproto\d+):[ \t]*(\{[^\n]*\}),$',update,core_path.read_text(),flags=re.M))
+core_path=ROOT/'src/sim/roster.ts';core_path.write_text(re.sub(r'^([ \t]*)(sproto\d+):[ \t]*(\{[^\n]*\}),$',update,core_path.read_text(),flags=re.M))
 print('Installed 96 new assist drawings; independent partners for 34 fighters, including 2322.')

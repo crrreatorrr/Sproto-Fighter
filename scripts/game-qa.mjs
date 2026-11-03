@@ -1,8 +1,9 @@
 // Current-update QA: deterministic interaction matrix, not a proof of every input sequence.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
-const source=ts.transpileModule(readFileSync(new URL('../src/core.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
+const source=bundledCore();
 const {A,FLOOR,WALL,WIDTH,PLAYABLE_FIGHTERS,createState,step}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 let checks=0,frames=0;
 const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};

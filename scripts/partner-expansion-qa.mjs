@@ -1,11 +1,12 @@
 // New single partners, distinct confirmed-hit behaviors, and both attacking twins.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const compile=p=>ts.transpileModule(read(p),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const cu=url(compile('src/core.ts')),eu=url(compile('src/animationEvents.ts')),pu=url(compile('src/powerArt.ts'));
+const cu=url(bundledCore()),eu=url(compile('src/animationEvents.ts')),pu=url(compile('src/powerArt.ts'));
 const core=await import(cu),rules=JSON.parse(read('art/sprotos-expansion/user-requirements.json')).partnerExpansion;
 const {A,ROSTER,PARTNER_ATTACKS,COMBAT_STYLES,WIDTH,FLOOR,bodyAtlasIds,createState,step,getMove}=core;
 const poseCode=compile('src/poseAtlas.ts').replace("from './core'",`from '${cu}'`).replace("from './animationEvents'",`from '${eu}'`),poseUrl=url(poseCode),poses=await import(poseUrl);

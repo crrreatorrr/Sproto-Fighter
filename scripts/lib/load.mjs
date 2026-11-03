@@ -3,6 +3,7 @@
 // transpiles the modules it needs and imports them from data: URLs.
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
+import * as esbuild from 'esbuild';
 
 const root = new URL('../../', import.meta.url);
 
@@ -16,10 +17,26 @@ export const compile = path => ts.transpileModule(read(path), {
 
 export const dataUrl = source => 'data:text/javascript;base64,' + Buffer.from(source).toString('base64');
 
+let coreBundle;
+/**
+ * src/core.ts and everything under src/sim/ bundled into one ES module string
+ * with no imports, so it can be loaded from a data: URL. Cached per process.
+ */
+export function bundledCore() {
+  if (coreBundle === undefined) {
+    const result = esbuild.buildSync({
+      entryPoints: [new URL('src/core.ts', root).pathname],
+      bundle: true, write: false, format: 'esm', platform: 'neutral', target: 'es2022', logLevel: 'silent',
+    });
+    coreBundle = result.outputFiles[0].text;
+  }
+  return coreBundle;
+}
+
 let coreUrl, eventsUrl;
 /** src/core.ts as a module. Repeated calls in one process share the same instance. */
 export async function loadCore() {
-  coreUrl ??= dataUrl(compile('src/core.ts'));
+  coreUrl ??= dataUrl(bundledCore());
   return import(coreUrl);
 }
 

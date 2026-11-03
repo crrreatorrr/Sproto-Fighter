@@ -12,7 +12,7 @@ def install():
     path=ROOT/'public/fighters/pose-atlas.json';manifest=json.loads(path.read_text());manifest['fighters']['lifeisameme']=cfg
     if not manifest.get('revision','').endswith('-lifeisameme'):manifest['revision']=manifest.get('revision','expansion')+'-lifeisameme'
     path.write_text(json.dumps(manifest,indent=2)+'\n')
-    path=ROOT/'src/core.ts';s=path.read_text()
+    path=ROOT/'src/sim/roster.ts';s=path.read_text()
     for tag in ['ROSTER','KIT','GRIP']:
         s=re.sub(r'/\* LIFEISAMEME '+tag+r' BEGIN \*/.*?/\* LIFEISAMEME '+tag+r' END \*/\n','',s,flags=re.S)
     line=re.search(r'export type FighterId = (.*?);',s)

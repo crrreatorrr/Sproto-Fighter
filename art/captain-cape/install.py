@@ -18,7 +18,7 @@ def install():
     # Reviewed near-eye point in cast release cel14; the second beam begins 25 world pixels behind it.
     point=[147.0,123.0];emitter={'forward':round((point[0]-112)*cfg['scale'],3),'height':round((210-point[1])*cfg['scale'],3)}
     (HERE/'laser-origin.json').write_text(json.dumps(dict(point=point,world=emitter),indent=2)+'\n')
-    path=ROOT/'src/core.ts';s=path.read_text()
+    path=ROOT/'src/sim/roster.ts';s=path.read_text()
     for tag in ['ROSTER','KIT','GRIP']:
         s=re.sub(r'/\* CAPTAIN '+tag+r' BEGIN \*/.*?/\* CAPTAIN '+tag+r' END \*/\n','',s,flags=re.S)
     line=re.search(r'export type FighterId = (.*?);',s)

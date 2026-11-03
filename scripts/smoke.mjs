@@ -7,7 +7,7 @@ import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 const out = mkdtempSync(join(tmpdir(), 'sproto-smoke-'));
 try {
-  const build = spawnSync(process.execPath, [resolve('node_modules/typescript/bin/tsc'), 'src/core.ts', '--outDir', out, '--module', 'commonjs', '--target', 'ES2022', '--skipLibCheck'], { stdio: 'inherit' });
+  const build = spawnSync(process.execPath, [resolve('node_modules/typescript/bin/tsc'), 'src/core.ts', '--outDir', out, '--module', 'commonjs', '--target', 'ES2022', '--skipLibCheck','--resolveJsonModule','--esModuleInterop'], { stdio: 'inherit' });
   assert.equal(build.status, 0, 'combat compilation');
   const { createState, step, A, FLOOR, PLAYABLE_FIGHTERS, cpuInput } = createRequire(import.meta.url)(join(out, 'core.js'));
   const tick = (s, n, input = 0, opponent = 0) => { for (let i = 0; i < n; i++) step(s, [input, opponent]); };

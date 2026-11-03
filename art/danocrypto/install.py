@@ -28,7 +28,7 @@ def install():
     manifest['revision'] = IDENT + '-' + hashlib.sha256(json.dumps(cfg, sort_keys=True).encode()).hexdigest()[:16]
     path.write_text(json.dumps(manifest, indent=2) + '\n')
 
-    path = ROOT / 'src/core.ts'
+    path = ROOT / 'src/sim/roster.ts'
     core = path.read_text()
     for section in ['ROSTER', 'KIT', 'GRIP']:
         core = re.sub(r'/\* ' + TAG + ' ' + section + r' BEGIN \*/.*?/\* ' + TAG + ' ' + section + r' END \*/\n', '', core, flags=re.S)

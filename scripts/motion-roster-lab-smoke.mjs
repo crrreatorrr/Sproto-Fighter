@@ -1,10 +1,11 @@
 // Verify the additive four-panel review uses the established lab's real-core
 // fixtures and inputs. This is not visual approval of any rendered animation.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
-const coreSource=ts.transpileModule(read('src/core.ts'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
+const coreSource=bundledCore();
 const core=await import('data:text/javascript;base64,'+Buffer.from(coreSource).toString('base64'));
 const old=read('art/pose-atlas-lab.html'),wall=read('art/motion-roster-lab.html');
 const itinerary=html=>new Function(html.slice(html.indexOf('const motionReview=['),html.indexOf('];',html.indexOf('const motionReview=['))+2)+';return motionReview;')();

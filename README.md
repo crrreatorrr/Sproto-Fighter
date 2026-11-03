@@ -114,8 +114,14 @@ own trajectories. All rounds are untimed.
 
 ## Architecture and verification
 
-- `src/core.ts`: fixed-step 60 Hz combat, frame-indexed inputs, attacks, CPU,
-  throws/reactions, God Mode, fighter profiles and assigned partner mechanics.
+- `src/core.ts`: the public entry to the combat simulation. Import from here.
+  The simulation itself is in `src/sim/` and has no DOM, clock or randomness:
+  `constants.ts` (arena, physics, input bits), `roster.ts` (fighters, kits,
+  grips, pair spacing; art installers edit marked blocks here), `data/*.json`
+  (generated per-fighter action timing), `types.ts`, `combat.ts` (state,
+  throws, damage, move selection), `cpu.ts` and `step.ts` (the fixed 60 Hz
+  step, deterministic math and `hashState`). It produces identical results in
+  every browser engine; `scripts/determinism-smoke.mjs` checks this.
 - `src/poseAtlas.ts`: complete-body frame playback, paired identities, stable
   formations, camera clearance and event presentation. Paired menu
   normalization does not change fight scale. `pose-atlas.json` is the single

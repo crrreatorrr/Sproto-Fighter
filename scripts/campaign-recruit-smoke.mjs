@@ -7,7 +7,7 @@ import {spawnSync} from 'node:child_process';
 import {createRequire} from 'node:module';
 const temp=mkdtempSync(join(tmpdir(),'sproto-recruits-'));
 try{
- assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/storyProgress.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck'],{stdio:'inherit'}).status,0);
+ assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/storyProgress.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0);
  const req=createRequire(import.meta.url),{createStoryProgress,STORY_ENCOUNTERS,STORY_OPPONENTS,STORY_SAVE_KEY,PREVIOUS_STORY_SAVE_KEY,LEGACY_STORY_SAVE_KEY,PREVIOUS_STORY_OPPONENTS,LEGACY_STORY_OPPONENTS,CAMPAIGN_RECRUITS}=req(join(temp,'storyProgress.js'));
  const {isFreePlayAddition}=req(join(temp,'core.js'));
  const ids=['satoshi','xalt','potocaicai'],indices=ids.map(id=>STORY_ENCOUNTERS.findIndex(e=>e.opponents.includes(id)));

@@ -1,5 +1,6 @@
 // Real versus component and main boundaries with a minimal DOM; browser layout
 // and motion are verified separately. No save, controller hardware or art claim.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import vm from 'node:vm';
@@ -7,7 +8,7 @@ import ts from 'typescript';
 const read=name=>readFileSync(new URL('../src/'+name,import.meta.url),'utf8');
 const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const url=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const cu=url(compile(read('core.ts'))),core=await import(cu),events=await import(url(compile(read('animationEvents.ts'))));
+const cu=url(bundledCore()),core=await import(cu),events=await import(url(compile(read('animationEvents.ts'))));
 const originalBase=new URL('../src/originalPortraits.ts',import.meta.url).href;
 const pu=url(compile(read('originalPortraits.ts')).replaceAll('import.meta.url',JSON.stringify(originalBase)));
 const {originalPortraits}=await import(pu);

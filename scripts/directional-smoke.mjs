@@ -1,9 +1,10 @@
 // Focused directional/combo development checks. Run: node scripts/directional-smoke.mjs
 // Uses isolated in-memory transpilation; does not modify the combat core.
+import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import ts from 'typescript';
-const source = ts.transpileModule(readFileSync(new URL('../src/core.ts', import.meta.url), 'utf8'), { compilerOptions: { module: ts.ModuleKind.ES2022, target: ts.ScriptTarget.ES2022 } }).outputText;
+const source = bundledCore();
 const { A, FLOOR, PLAYABLE_FIGHTERS, HORIZONTAL_SPIT_FIGHTERS, createState, getMove, step, cpuInput } = await import('data:text/javascript;base64,' + Buffer.from(source).toString('base64'));
 let failures=0;
 function check(label, fn) { try { fn(); console.log('PASS:',label); } catch(error) { failures++; console.error('FAIL:',label,'—',error.message); } }
