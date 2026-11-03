@@ -4,7 +4,6 @@ import type { RoundPresentation } from './animationEvents';
 import { drawPower, drawRetainDefeat, drawVitalikDefeatCaption } from './powerArt';
 import { drawMindBeams } from './mindBeamArt';
 import { drawPelvicAttacks } from './pelvicAttack';
-import { setHiggsfieldThrowState } from './higgsfieldRig';
 import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
 import { drawSprite } from './spriteRoster';
 import { drawStage } from './stage';
@@ -46,7 +45,6 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
 export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0)) {
-    setHiggsfieldThrowState(s.throwState,s.fighters);
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
     if(!drawActiveStoryLocation(c))drawStage(c, s.frame);
