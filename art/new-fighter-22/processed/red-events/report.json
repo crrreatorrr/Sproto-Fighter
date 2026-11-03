@@ -1,0 +1,684 @@
+{
+  "entity": "red",
+  "kind": "events",
+  "uniformScale": 0.18181818181818182,
+  "sourceSize": [
+    3072,
+    5504
+  ],
+  "frames": [
+    {
+      "cell": 0,
+      "sourceBounds": [
+        192,
+        55,
+        572,
+        759
+      ],
+      "sourceRoot": [
+        346.21234567901234,
+        759
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        84,
+        82,
+        153,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 1,
+      "sourceBounds": [
+        959,
+        54,
+        1373,
+        759
+      ],
+      "sourceRoot": [
+        1083.2123456790123,
+        759
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        89,
+        82,
+        164,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 2,
+      "sourceBounds": [
+        1726,
+        54,
+        2187,
+        759
+      ],
+      "sourceRoot": [
+        1885.2123456790123,
+        759
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        83,
+        82,
+        167,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 3,
+      "sourceBounds": [
+        2513,
+        54,
+        2895,
+        759
+      ],
+      "sourceRoot": [
+        2666.7123456790123,
+        759
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        84,
+        82,
+        153,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 4,
+      "sourceBounds": [
+        188,
+        887,
+        562,
+        1471
+      ],
+      "sourceRoot": [
+        397.71234567901234,
+        1471
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        74,
+        104,
+        142,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 5,
+      "sourceBounds": [
+        908,
+        854,
+        1377,
+        1478
+      ],
+      "sourceRoot": [
+        1218.2123456790123,
+        1478
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        56,
+        97,
+        141,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 6,
+      "sourceBounds": [
+        1614,
+        822,
+        2237,
+        1479
+      ],
+      "sourceRoot": [
+        1914.7123456790123,
+        1479
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        57,
+        91,
+        170,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 7,
+      "sourceBounds": [
+        2512,
+        820,
+        2883,
+        1475
+      ],
+      "sourceRoot": [
+        2685.9623456790123,
+        1475
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        80,
+        91,
+        147,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 8,
+      "sourceBounds": [
+        163,
+        1511,
+        647,
+        2191
+      ],
+      "sourceRoot": [
+        395.21234567901234,
+        2191
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        70,
+        86,
+        158,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 9,
+      "sourceBounds": [
+        929,
+        1569,
+        1371,
+        2189
+      ],
+      "sourceRoot": [
+        1160.2123456790123,
+        2189
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        70,
+        97,
+        150,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 10,
+      "sourceBounds": [
+        1640,
+        1543,
+        2196,
+        2194
+      ],
+      "sourceRoot": [
+        1906.2123456790123,
+        2194
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        64,
+        92,
+        165,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 11,
+      "sourceBounds": [
+        2513,
+        1531,
+        2903,
+        2191
+      ],
+      "sourceRoot": [
+        2672.7123456790123,
+        2191
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        83,
+        90,
+        154,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 12,
+      "sourceBounds": [
+        199,
+        2247,
+        550,
+        2905
+      ],
+      "sourceRoot": [
+        350.21234567901234,
+        2905
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        85,
+        90,
+        149,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 13,
+      "sourceBounds": [
+        970,
+        2247,
+        1317,
+        2905
+      ],
+      "sourceRoot": [
+        1131.2123456790123,
+        2905
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        83,
+        90,
+        146,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 14,
+      "sourceBounds": [
+        1698,
+        2247,
+        2168,
+        2905
+      ],
+      "sourceRoot": [
+        1878.2123456790123,
+        2905
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        79,
+        90,
+        164,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 15,
+      "sourceBounds": [
+        2517,
+        2247,
+        2903,
+        2905
+      ],
+      "sourceRoot": [
+        2672.2123456790123,
+        2905
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        84,
+        90,
+        154,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 16,
+      "sourceBounds": [
+        132,
+        2957,
+        602,
+        3579
+      ],
+      "sourceRoot": [
+        264.71234567901234,
+        3579
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        88,
+        97,
+        173,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 17,
+      "sourceBounds": [
+        856,
+        2956,
+        1429,
+        3579
+      ],
+      "sourceRoot": [
+        1031.2123456790123,
+        3579
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        80,
+        97,
+        184,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 18,
+      "sourceBounds": [
+        1745,
+        2927,
+        2092,
+        3580
+      ],
+      "sourceRoot": [
+        1891.7123456790123,
+        3580
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        85,
+        91,
+        148,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 19,
+      "sourceBounds": [
+        2520,
+        2927,
+        2901,
+        3580
+      ],
+      "sourceRoot": [
+        2671.2123456790123,
+        3580
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        85,
+        91,
+        154,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 20,
+      "sourceBounds": [
+        191,
+        3603,
+        551,
+        4258
+      ],
+      "sourceRoot": [
+        323.46234567901234,
+        4258
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        88,
+        91,
+        153,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 21,
+      "sourceBounds": [
+        998,
+        3615,
+        1331,
+        4255
+      ],
+      "sourceRoot": [
+        1127.2123456790123,
+        4255
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        89,
+        94,
+        150,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 22,
+      "sourceBounds": [
+        1727,
+        3672,
+        2143,
+        4254
+      ],
+      "sourceRoot": [
+        1984.2123456790123,
+        4254
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        65,
+        104,
+        141,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 23,
+      "sourceBounds": [
+        2424,
+        3701,
+        2965,
+        4254
+      ],
+      "sourceRoot": [
+        2797.9623456790123,
+        4254
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        44,
+        109,
+        142,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 24,
+      "sourceBounds": [
+        93,
+        4338,
+        677,
+        4859
+      ],
+      "sourceRoot": [
+        385.0,
+        4859
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        59,
+        115,
+        165,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 25,
+      "sourceBounds": [
+        828,
+        4381,
+        1463,
+        4871
+      ],
+      "sourceRoot": [
+        1145.5,
+        4871
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        54,
+        121,
+        169,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 26,
+      "sourceBounds": [
+        1586,
+        4501,
+        2284,
+        4854
+      ],
+      "sourceRoot": [
+        1935.0,
+        4854
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        49,
+        146,
+        176,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 27,
+      "sourceBounds": [
+        2348,
+        4547,
+        3057,
+        4851
+      ],
+      "sourceRoot": [
+        2702.5,
+        4851
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        48,
+        155,
+        177,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 28,
+      "sourceBounds": [
+        21,
+        5164,
+        731,
+        5469
+      ],
+      "sourceRoot": [
+        376.0,
+        5469
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        47,
+        155,
+        176,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 29,
+      "sourceBounds": [
+        797,
+        5165,
+        1507,
+        5469
+      ],
+      "sourceRoot": [
+        1152.0,
+        5469
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        47,
+        155,
+        176,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 30,
+      "sourceBounds": [
+        1576,
+        5164,
+        2287,
+        5469
+      ],
+      "sourceRoot": [
+        1931.5,
+        5469
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        47,
+        155,
+        176,
+        210
+      ],
+      "touchesSourceEdge": false
+    },
+    {
+      "cell": 31,
+      "sourceBounds": [
+        2348,
+        5164,
+        3060,
+        5469
+      ],
+      "sourceRoot": [
+        2704.0,
+        5469
+      ],
+      "rootAuthored": false,
+      "bounds": [
+        47,
+        155,
+        176,
+        210
+      ],
+      "touchesSourceEdge": false
+    }
+  ],
+  "status": "requires individual visual review"
+}

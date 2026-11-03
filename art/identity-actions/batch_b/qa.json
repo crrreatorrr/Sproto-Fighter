@@ -1,0 +1,642 @@
+{
+  "status": "pass",
+  "bodies": 63,
+  "frames": 1984,
+  "issues": [],
+  "visualReview": "All body representative pose boards reviewed, complete Sales and 1414 contacts reviewed",
+  "notes": [
+    "1815 entrance03 holds complete entrance02 to avoid source-edge halberd tip clipping.",
+    "Sales disconnected top-edge row bleed removed; real detached mechanical parts retained.",
+    "1414 uses approved fully blue-covered revision after two moderation failures.",
+    "Protected ranged clips excluded: 2531,3106,3152,SISMA.",
+    "Sales complete standing silhouettes00\u201317 recovered from whole raw connected components, restoring boots across row boundaries and removing frame13 line. Shared scale retained; mechanical disassembly18\u201331 unchanged."
+  ],
+  "assets": [
+    {
+      "entity": "sproto1011",
+      "job_id": "ebe777da-a713-4703-95d6-e3db0e4814dc",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1093",
+      "job_id": "f00a67bb-6416-4884-b0b8-1fed328315d1",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1187",
+      "job_id": "48153c03-5c41-4b6d-8689-313ccd082818",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1335",
+      "job_id": "c4c2cd56-2b50-49a8-b2f8-26291618a91d",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1345",
+      "job_id": "0d204ef8-e290-4c3d-ba10-2833ce211971",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1414",
+      "job_id": "ed6849f3-7965-45b7-a2f0-94220e1cf2fc",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1477",
+      "job_id": "db362754-050b-41d3-b99b-38451a3fdd32",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1499",
+      "job_id": "6d03f13e-6d8f-460d-9c41-f5e23ee93fe3",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1499-companion",
+      "job_id": "59d2af5c-4f37-4eae-8787-0ed7fa1f40b0",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1601",
+      "job_id": "1f86e68a-b592-4d49-932d-4fb8c184e41a",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1625",
+      "job_id": "4832c0ff-d1fe-43bb-af7a-c03f6e1be843",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1625-companion",
+      "job_id": "fa554e84-73e1-450c-b217-57e9dc1631ec",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1668",
+      "job_id": "8efb4032-8459-4627-a40a-0f6cd243b3d3",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1815",
+      "job_id": "81328cc0-e88f-4f19-a00e-5bc95bcfd076",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto1870",
+      "job_id": "c52f3302-c221-462c-9fbb-087248984baa",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2010",
+      "job_id": "91762e9e-af42-46b3-b994-0ddc683766c9",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2010-companion",
+      "job_id": "0949b42c-7035-4fd4-ae09-3663580eb738",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2075",
+      "job_id": "2c037b01-696e-4aa9-8d1b-830ef4804def",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2075-companion",
+      "job_id": "c5dcc6f5-fe51-4c7f-a299-33f194429fec",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2101",
+      "job_id": "57405815-fab3-4156-b056-d602de880483",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2177",
+      "job_id": "e211df1e-218a-42c3-a624-d03da715b9c1",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2210",
+      "job_id": "3f35dfd5-feb2-4391-8d5a-2d95cdaef2c7",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2210-companion",
+      "job_id": "02b9c220-681a-4113-8b3c-e3b71d20221d",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2322",
+      "job_id": "b5d9568a-32be-4e74-8cb8-ce4722e402a1",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2344",
+      "job_id": "dde39ece-43f3-4d99-b42b-b12f34658b34",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2344-companion",
+      "job_id": "7931453b-c55b-43ba-9ecc-4eace0a94be8",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2381",
+      "job_id": "5bd616b8-e439-4205-950b-8aedfd76a6dd",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2531",
+      "job_id": "cf35d524-802f-4751-8f79-dc7655cc231c",
+      "frameCount": 24,
+      "clips": {
+        "entrance": 8,
+        "death": 16
+      }
+    },
+    {
+      "entity": "sproto2569",
+      "job_id": "5762d161-6b56-4feb-8042-562de2c8ff5b",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2616",
+      "job_id": "b56191d4-352b-4a69-8e1e-8956e2c9f73c",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2789",
+      "job_id": "2bbc1113-6708-4fe2-ba5b-9d5e6df89988",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto2884",
+      "job_id": "8ae0ddd7-f6d8-40f3-b8cd-5a7844de7a5c",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto3106",
+      "job_id": "1c64870a-7008-488f-9791-923a3c405c65",
+      "frameCount": 24,
+      "clips": {
+        "entrance": 8,
+        "death": 16
+      }
+    },
+    {
+      "entity": "sproto3152",
+      "job_id": "18447cc9-edd9-477f-8b6e-2195e7f92c1a",
+      "frameCount": 24,
+      "clips": {
+        "entrance": 8,
+        "death": 16
+      }
+    },
+    {
+      "entity": "sproto3181",
+      "job_id": "d3a620ad-9692-4a1c-9e87-3d73f1b5aff4",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto3181-companion",
+      "job_id": "d07180cd-7c9e-411f-950a-ceec83554822",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto3215",
+      "job_id": "d2837d13-0c3c-4133-8233-68dfba477ec8",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto3224",
+      "job_id": "540c16ca-eaf3-4e81-a078-a05c75d8d9cc",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto3224-companion",
+      "job_id": "b310e7aa-3585-447c-9a2b-a4aa96ab2d53",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto3235",
+      "job_id": "4c0ffa76-7d62-40f2-b9cb-8523f2ef8388",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sproto3235-companion",
+      "job_id": "b444e8b9-15cd-4048-b198-e36a1d0e41f3",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "vaudream",
+      "job_id": "2dfc8e99-32e1-4ce3-8af2-aa1a5145f615",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "gryph-companion",
+      "job_id": "efc5dc5c-6671-4619-bf44-2f3f3903021d",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "urmometh",
+      "job_id": "6efaf7eb-f996-4548-bf5c-250e97d8c17b",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "chaton",
+      "job_id": "c746a0a5-ab2c-4840-acd6-4d39b4b95418",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "uncmasterflex",
+      "job_id": "82795d5b-221e-4cab-836f-857586778251",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "gryph",
+      "job_id": "fdcc8215-1595-4b56-bcca-a87852c4bb95",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "vitaliketh",
+      "job_id": "12e1f746-f6d7-4b16-be70-71efeca8a6b0",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "loadthebags",
+      "job_id": "e7d3601e-1f5c-4cd4-9cbc-d9f0f8a97c76",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sisma",
+      "job_id": "5d5454c5-0557-4d7a-a5b7-cbe14dad5fb3",
+      "frameCount": 24,
+      "clips": {
+        "entrance": 8,
+        "death": 16
+      }
+    },
+    {
+      "entity": "captainhowdy",
+      "job_id": "6ee6e2b4-4a4d-446f-9a18-bc059f7343c1",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sprotosales",
+      "job_id": "f67180e5-1046-47d6-8985-ae931a24a17e",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sprog",
+      "job_id": "b6346f76-63bc-4458-8356-b0114c2e1af2",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "jasper",
+      "job_id": "2fc450fa-41f9-45ae-848b-056af4593ce1",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "aaron",
+      "job_id": "fedf0ba4-7eda-4090-b66f-c00072b38c0a",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "brainsprot",
+      "job_id": "d9d6cde8-60eb-4ecc-8520-023c98f23823",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "godmod3d",
+      "job_id": "82771b79-89ef-4910-b184-30b527882fc6",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "godmod3d-companion",
+      "job_id": "6ca1c4f6-ac45-4826-8222-9e93a0d10e21",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "sober",
+      "job_id": "b04f0dd5-7d5d-4c39-be82-651efb5ef6b8",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "nosmileclown",
+      "job_id": "d01eda7d-0626-498d-b149-8534780e6908",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "nosmileclown-companion",
+      "job_id": "d1495002-f4c1-4278-badc-e15fab44aada",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "olnoname",
+      "job_id": "dcbdb0e3-75b1-4593-8f2a-e31c05a7ea83",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    },
+    {
+      "entity": "greatcharly",
+      "job_id": "cad14541-e67b-4d5e-9cbd-60a8eea21a27",
+      "frameCount": 32,
+      "clips": {
+        "entrance": 8,
+        "death": 16,
+        "ranged": 8
+      }
+    }
+  ]
+}

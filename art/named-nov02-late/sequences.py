@@ -1,0 +1,36 @@
+import json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[2];HERE=Path(__file__).resolve().parent
+sys.path.insert(0,str(ROOT/'art/sprotos-expansion'));import make_requests as m
+jobs=json.loads((HERE/'jobs.json').read_text());out=[]
+entrances={
+ 'satoshi':['relaxed sly huge smile, arms low','head tilts down, yellow eyes narrow','near elbow rises, hand moves toward face','one attached blue index finger rises beside enormous red mouth in a hush gesture','hold knowing hush with a sideways glance','lower index finger and open both blue palms confidently','close hands and set rear foot into guard','settled two-fist guard with huge red grin'],
+ 'xalt':['alert wide round eyes, relaxed arms','compress two knees for a tiny excited bounce','rise on toes with both palms up','land lightly with both red-spined head and neck level','near blue fingertip reaches fixed oval collar brooch','tap the brooch, far hand rises into guard','release brooch and set near fist forward','settled wide-eyed two-fist guard'],
+ 'potocaicai':['hands on hips, sly asymmetric face','lean crowned head slightly forward','near blue hand rises toward attached gold crown','two fingertips tip the attached crown forward','straighten crown with attached fingers','release crown and proudly lift chin','take near hand off hip and raise guard','settled cocky guard, crown and monocle attached']}
+casts={
+ 'satoshi':['huge red smile begins to purse','head tilts back, cheeks puff','knees compress and shoulders roll back','cheeks fully inflated, elbows tucked BACK by ribs','forceful open-mouth SPIT RIGHT with forward neck and torso snap, hands at ribs','hold open-mouth release briefly with cheeks deflating','neck recoils and chin lowers, mouth closing','huge sly smile and guarded balance restored'],
+ 'xalt':['round eyes widen and red lips purse','head draws back with cheeks beginning to puff','compress low knees and brace hands at waist','fully puffed cheeks, neck coiled back, rear red spines follow head','powerful open-beaked mouth SPIT RIGHT, neck shoots forward, hands remain BACK','hold release with wide eyes and forward neck','mouth closes, head recoils toward center','settled bright-eyed guard, red spines unchanged'],
+ 'potocaicai':['broad red lips purse under coin monocle','crowned head tilts back and cheeks inflate','low knees coil while blue hands tuck behind ribs','cheeks fully puffed, crown and monocle remain attached','explosive open-mouth SPIT RIGHT with crowned head thrust forward, both hands BACK','hold release with broad red mouth open and cheeks relaxing','close red lips, straighten crowned head','recover sly asymmetrical smile and guard']}
+deaths={
+ 'satoshi':['startled yellow eyes widen, huge red smile sags','head jerks back slightly, elbows open','near palm rises to huge mouth','knees buckle while hand touches mouth','hips sink, far arm balances','seated collapse with both feet forward','roll toward left side with huge head LEFT feet RIGHT','fully side-lying body, one elbow briefly props head','elbow bends and heavy head lowers','near hand rests beside enormous mouth','shoulder lowers toward floor','huge red lips relax, eyes half closed','fingers loosen beside mouth','tiny final shoulder drop','eyes close and body lies still','final completely still side-lying rest'],
+ 'xalt':['big eyes blink in disbelief','head and red rear spines tip back','connected arms swing outward for balance','knees wobble and fold','hips drop and arms reach down','seated collapse with both feet forward','roll onto left side, head LEFT feet RIGHT','entirely side-lying body, yellow eyes still open','near hand weakly reaches along floor','hand pauses with elbow low','hand drops and red mouth slackens','shoulder settles to floor','eyelids grow heavy','eyes close to thin yellow slits','blue fingers relax beside body','final completely still side-lying rest, brooch attached'],
+ 'potocaicai':['sleepy uncovered eye opens in shock','near hand reaches attached crown','stagger back while hand steadies crown','knees fold, crown tilts but remains attached','hips lower, far hand protects fixed monocle','seated collapse with both hands near ornaments','roll onto left side, head LEFT feet RIGHT','entirely side-lying body with near hand touching crown','elbow sinks closer to floor','head lowers, crown remains clearly attached','hand slides beside face, monocle fixed','shoulder settles to floor','broad red lips slacken','near blue hand opens','tiny last shoulder drop','final still side-lying rest with crown and monocle attached']}
+for info in json.loads((HERE/'plan.json').read_text()):
+ id=info['id'];p=ROOT/info['artDirectory'];base=json.loads((p/'core-request.json').read_text())[0]['params'];core=next(j for j in jobs if j['entity']==id and j['kind']=='core');own=[]
+ style=m.STYLE.replace('exact eye count','asymmetric facial markings').replace('and slender long torso','and long torso')
+ # Existing 72-frame combat contract, with character-specific core events too.
+ events=m.EVENTS
+ events=events.replace(events.split('Row 1 INTRO:')[1].split('\nRow 2')[0],info['intro'].removeprefix('INTRO: '))
+ events=events.replace(events.split('Row 4 CAST:')[1].split('\nRow 5')[0],info['cast'].removeprefix('CAST: '))
+ events=events.split('Row 6 DEFEAT START:')[0]+'Row 6 to 8: '+info['defeat']+' Exactly four figures per row, twelve defeat drawings total.'
+ for offset,kind,poses in [(1,'walk',m.WALK),(2,'events',events)]:
+  params={**base,'resolution':'2k' if kind=='walk' else '4k','aspect_ratio':'4:3' if kind=='walk' else '9:16','medias':base['medias']+[dict(role='image',value=core['job_id'])],'prompt':style+'\n\nIDENTITY: '+info['identity']+' Reference image 2 is the reviewed combat sheet; match its proportions and style.\n\n'+poses+info['appearanceRule']}
+  req=dict(index=info['ordinal']*3+offset,entity=id,fighter=id,kind=kind,params=params);out.append(req);own.append(req)
+ # Richer authored entrance / mouth cast / death, same contract as current fighters.
+ rows=[];actions=entrances[id]+casts[id]+deaths[id]
+ for row in range(8):rows.append('Row '+str(row+1)+': '+'; '.join(actions[row*4:row*4+4])+'.')
+ identity='Exactly 32 complete separate drawings in a strict FOUR-column EIGHT-row grid. Rows1-2 are eight ENTRANCE frames, rows3-4 are eight MOUTH-SPIT frames, rows5-8 are sixteen DEATH frames. Read left to right then top to bottom. Same single actor throughout. No projectile, text, opponent, floor shadow or effects. Death frames24-31 must be wholly side-lying with head to LEFT and feet to RIGHT, never upright or kneeling. Crown, collar, spines and ornaments stay attached.\n'+'\n'.join(rows)
+ params={**base,'medias':base['medias']+[dict(role='image',value=core['job_id'])],'prompt':style+'\n\nIDENTITY: '+info['identity']+' Reference image2 is the reviewed combat sheet; match its pixel style, face, costume and proportions precisely.\n\n'+identity+info['appearanceRule']}
+ req=dict(index=9+info['ordinal'],entity=id,fighter=id,kind='identity',ranged=True,deathStart=16,frameCount=32,params=params);out.append(req);own.append(req)
+ (p/'sequence-requests.json').write_text(json.dumps(own,indent=2)+'\n')
+(HERE/'sequence-requests.json').write_text(json.dumps(out,indent=2)+'\n')

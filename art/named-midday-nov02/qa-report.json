@@ -1,0 +1,16 @@
+{
+  "status": "installed-playable",
+  "fighters": 22,
+  "bodies": 24,
+  "frames": 1856,
+  "qa": {
+    "focusedCases": 550,
+    "allFighterCases": 635,
+    "profiles": 127,
+    "pairedWallCases": 7200,
+    "selectionGroups": 15,
+    "storyGroups": 40,
+    "build": "pass"
+  },
+  "report": "docs/MIDDAY-ROSTER-QA.md"
+}

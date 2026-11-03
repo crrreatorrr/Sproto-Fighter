@@ -1,0 +1,78 @@
+{
+  "entity": "blue",
+  "keys": [
+    {
+      "frame": 0,
+      "source": "blue-walk-contact-near.png",
+      "cell": null,
+      "sourceBounds": [
+        144,
+        21,
+        849,
+        1003
+      ],
+      "scale": 0.14969450101832993,
+      "bounds": [
+        57,
+        63,
+        163,
+        210
+      ]
+    },
+    {
+      "frame": 1,
+      "source": "blue-walk-r3.png",
+      "cell": 2,
+      "sourceBounds": [
+        1322,
+        67,
+        1718,
+        849
+      ],
+      "scale": 0.18925831202046037,
+      "bounds": [
+        78,
+        62,
+        153,
+        210
+      ]
+    },
+    {
+      "frame": 2,
+      "source": "blue-walk-r3.png",
+      "cell": 0,
+      "sourceBounds": [
+        81,
+        67,
+        573,
+        846
+      ],
+      "scale": 0.18870346598202825,
+      "bounds": [
+        65,
+        63,
+        158,
+        210
+      ]
+    },
+    {
+      "frame": 3,
+      "source": "blue-walk-pass-far.png",
+      "cell": null,
+      "sourceBounds": [
+        293,
+        57,
+        757,
+        972
+      ],
+      "scale": 0.16174863387978142,
+      "bounds": [
+        76,
+        62,
+        151,
+        210
+      ]
+    }
+  ],
+  "notes": "Four authored keys; not eight unique in-between frames."
+}

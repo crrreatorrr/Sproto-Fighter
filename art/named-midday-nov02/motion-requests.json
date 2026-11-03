@@ -1,0 +1,106 @@
+[
+  {
+    "index": 7,
+    "entity": "zepump",
+    "fighter": "zepump",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "a2dadab3-db1f-46b3-bbf2-96379788e383"
+        },
+        {
+          "role": "image",
+          "value": "13599d9b-ceb4-4f6b-a4a3-e35bc211e010"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and the specific body shape described below. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: Isolate ONLY the LARGE BLUE character on the RIGHT of the original. Large long round blue-violet bald-topped head and long thick blue torso, huge YELLOW almond eyes with small black pupils, blue eyelids and broad projecting BLUE nose with small dark nostril, asymmetric RED flat upper lip and separate small RED lower lip. Swept blue rear side spikes. Unclothed cartoon blue body, blue arms and fingered hands, sturdy blue legs and blue feet; no explicit anatomy detail. Exclude the yellow partner, red background and all other subjects. Draw ONLY this selected actor, never its partner. They have separate atlases. Dynamic coordinated action with strong anticipation and follow-through. Lead striker: powerful shoulder-driven straights, uppercuts and planted finishing palm. Match original face and clothing, no boxing gloves. Keep fully connected fingers, hands, feet and head. Each cell ONE complete body. Reference 2 when present locks full-body design and proportions.\n\nExactly 32 complete dynamic pixel-art figures in an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid. Each of the following rows contains EXACTLY FOUR figures; do not create a fifth column. Equal cell width/height; generous empty magenta margins around each body. Same single actor throughout.\nRow 1 DASH: crouch-drive anticipation; rear-leg powerful push; low traveling stride with front knee drive; long low traveling stride with coherent bent knees.\nRow 2 DASH TO JUMP: front foot brakes and torso rises; guard recovery; tucked rising jump with bent low knees; springing airborne rise with front arm high.\nRow 3 JUMP: folded knees at apex; falling with arms balancing; feet reach down; falling landing-ready with both feet below hips. These are airborne silhouettes, no floor.\nRow 4 HEAVY KICK: low hip coil; front knee chambers from low pelvis; knee rises; SIDE KICK fully extended waist-high to RIGHT.\nRow 5 HEAVY RECOVERY: sustain extended side kick one beat; knee folds back; grounded follow-through; guard.\nRow 6 AIR KICK: compact aerial coil; front knee chambers; knee opens; forceful extended diagonal kick to RIGHT, rear knee folded.\nRow 7 AIR TO VICTORY: knee retracts in air; balanced airborne recovery; confident upright victory guard; victory knees coil.\nRow 8 VICTORY: jubilant short hop with fist up; stylish landing crouch; proud standing hero stance; settled triumphant hero pose. No effects, no additional figures. Exactly 4 figures per row, 8 rows."
+    }
+  },
+  {
+    "index": 11,
+    "entity": "zepump-companion",
+    "fighter": "zepump",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "a2dadab3-db1f-46b3-bbf2-96379788e383"
+        },
+        {
+          "role": "image",
+          "value": "0569c4fd-85ad-4198-a4a1-04999c012cd9"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and the specific body shape described below. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: Isolate ONLY the SMALLER YELLOW character on the LEFT of the original. Narrow tall YELLOW torso and very long YELLOW neck, BLUE angular pointed spiky head with two tall blue ear/crest points, large pale yellow eyes with glossy BLACK pupils and white glints, enormous bright YELLOW paired cheek/muzzle lobes and RED pursed lips below. YELLOW slim arms, yellow fingered hands, small RED chest/lower torso markings, yellow legs and red feet. Bare stylized cartoon body with no explicit anatomy details. Exclude the large blue partner, red background and all other subjects. The red curled object in raised hand is a closed RED fist, not a separate character. Draw ONLY this selected actor, never its partner. They have separate atlases. Dynamic coordinated action with strong anticipation and follow-through. Acrobatic companion: elastic low-hip kick chambers, airborne bent-knee strikes, quick pivots, exuberant hops and a planted palm finish. Never detach the long neck. Match original face and clothing, no boxing gloves. Keep fully connected fingers, hands, feet and head. Each cell ONE complete body. Reference 2 when present locks full-body design and proportions.\n\nExactly 32 complete dynamic pixel-art figures in an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid. Each of the following rows contains EXACTLY FOUR figures; do not create a fifth column. Equal cell width/height; generous empty magenta margins around each body. Same single actor throughout.\nRow 1 DASH: crouch-drive anticipation; rear-leg powerful push; low traveling stride with front knee drive; long low traveling stride with coherent bent knees.\nRow 2 DASH TO JUMP: front foot brakes and torso rises; guard recovery; tucked rising jump with bent low knees; springing airborne rise with front arm high.\nRow 3 JUMP: folded knees at apex; falling with arms balancing; feet reach down; falling landing-ready with both feet below hips. These are airborne silhouettes, no floor.\nRow 4 HEAVY KICK: low hip coil; front knee chambers from low pelvis; knee rises; SIDE KICK fully extended waist-high to RIGHT.\nRow 5 HEAVY RECOVERY: sustain extended side kick one beat; knee folds back; grounded follow-through; guard.\nRow 6 AIR KICK: compact aerial coil; front knee chambers; knee opens; forceful extended diagonal kick to RIGHT, rear knee folded.\nRow 7 AIR TO VICTORY: knee retracts in air; balanced airborne recovery; confident upright victory guard; victory knees coil.\nRow 8 VICTORY: jubilant short hop with fist up; stylish landing crouch; proud standing hero stance; settled triumphant hero pose. No effects, no additional figures. Exactly 4 figures per row, 8 rows."
+    }
+  },
+  {
+    "index": 47,
+    "entity": "peterpan",
+    "fighter": "peterpan",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "18c7d58c-d214-4744-84b0-f4e743733ab1"
+        },
+        {
+          "role": "image",
+          "value": "445d303e-f531-4ff6-92d9-a913f6b947b1"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and the specific body shape described below. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: Isolate ONLY BLUE actor on LEFT: light medium BLUE long spiky head with large swept rear crest, large YELLOW eyes with BLACK pupils, broad RED smiling ducklike muzzle. Long curving blue torso and slim waist, bare RED arms and blue fingered hands, BLUE legs and red feet. No clothes or explicit anatomy detail; smooth cartoon body. Exclude yellow character and black background. Draw ONLY this selected actor, never its partner. They have separate atlases. Dynamic coordinated action with strong anticipation and follow-through. Lead striker: powerful shoulder-driven straights, uppercuts and planted finishing palm. Match original face and clothing, no boxing gloves. Keep fully connected fingers, hands, feet and head. Each cell ONE complete body. Reference 2 when present locks full-body design and proportions.\n\nExactly 32 complete dynamic pixel-art figures in an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid. Each of the following rows contains EXACTLY FOUR figures; do not create a fifth column. Equal cell width/height; generous empty magenta margins around each body. Same single actor throughout.\nRow 1 DASH: crouch-drive anticipation; rear-leg powerful push; low traveling stride with front knee drive; long low traveling stride with coherent bent knees.\nRow 2 DASH TO JUMP: front foot brakes and torso rises; guard recovery; tucked rising jump with bent low knees; springing airborne rise with front arm high.\nRow 3 JUMP: folded knees at apex; falling with arms balancing; feet reach down; falling landing-ready with both feet below hips. These are airborne silhouettes, no floor.\nRow 4 HEAVY KICK: low hip coil; front knee chambers from low pelvis; knee rises; SIDE KICK fully extended waist-high to RIGHT.\nRow 5 HEAVY RECOVERY: sustain extended side kick one beat; knee folds back; grounded follow-through; guard.\nRow 6 AIR KICK: compact aerial coil; front knee chambers; knee opens; forceful extended diagonal kick to RIGHT, rear knee folded.\nRow 7 AIR TO VICTORY: knee retracts in air; balanced airborne recovery; confident upright victory guard; victory knees coil.\nRow 8 VICTORY: jubilant short hop with fist up; stylish landing crouch; proud standing hero stance; settled triumphant hero pose. No effects, no additional figures. Exactly 4 figures per row, 8 rows."
+    }
+  },
+  {
+    "index": 51,
+    "entity": "peterpan-companion",
+    "fighter": "peterpan",
+    "kind": "motion",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "18c7d58c-d214-4744-84b0-f4e743733ab1"
+        },
+        {
+          "role": "image",
+          "value": "682750c0-f914-416d-94aa-28a85caf2050"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and the specific body shape described below. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: Isolate ONLY YELLOW character on RIGHT: slim bright YELLOW adult feminine cartoon Sproto with long yellow neck and swept flame-like YELLOW hair, pointed yellow ears and a single small GOLD earring with dark circular detail. Half-lidded pale blue eyes with BLACK pupils, RED triangular nose, open smiling mouth with WHITE teeth and small red tongue. Slim curvy yellow torso/waist, long thin yellow arms and yellow fingered hands; extend as opaque simple YELLOW fitted leotard and yellow leggings with red shoes, no explicit anatomy details. No extra clothes or accessories beyond that opaque body-matching suit. Exclude BLUE partner and black background. Draw ONLY this selected actor, never its partner. They have separate atlases. Dynamic coordinated action with strong anticipation and follow-through. Acrobatic companion: elastic low-hip kick chambers, airborne bent-knee strikes, quick pivots, exuberant hops and a planted palm finish. Never detach the long neck. Match original face and clothing, no boxing gloves. Keep fully connected fingers, hands, feet and head. Each cell ONE complete body. Reference 2 when present locks full-body design and proportions.\n\nExactly 32 complete dynamic pixel-art figures in an EXACTLY FOUR-COLUMN by EIGHT-ROW regular grid. Each of the following rows contains EXACTLY FOUR figures; do not create a fifth column. Equal cell width/height; generous empty magenta margins around each body. Same single actor throughout.\nRow 1 DASH: crouch-drive anticipation; rear-leg powerful push; low traveling stride with front knee drive; long low traveling stride with coherent bent knees.\nRow 2 DASH TO JUMP: front foot brakes and torso rises; guard recovery; tucked rising jump with bent low knees; springing airborne rise with front arm high.\nRow 3 JUMP: folded knees at apex; falling with arms balancing; feet reach down; falling landing-ready with both feet below hips. These are airborne silhouettes, no floor.\nRow 4 HEAVY KICK: low hip coil; front knee chambers from low pelvis; knee rises; SIDE KICK fully extended waist-high to RIGHT.\nRow 5 HEAVY RECOVERY: sustain extended side kick one beat; knee folds back; grounded follow-through; guard.\nRow 6 AIR KICK: compact aerial coil; front knee chambers; knee opens; forceful extended diagonal kick to RIGHT, rear knee folded.\nRow 7 AIR TO VICTORY: knee retracts in air; balanced airborne recovery; confident upright victory guard; victory knees coil.\nRow 8 VICTORY: jubilant short hop with fist up; stylish landing crouch; proud standing hero stance; settled triumphant hero pose. No effects, no additional figures. Exactly 4 figures per row, 8 rows."
+    }
+  }
+]

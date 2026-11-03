@@ -1,0 +1,345 @@
+{
+  "baseCommit": "4ff40d77",
+  "baseAtlasSha256": "b2fa20d1ff993819cc9e73acb688736fb2f13ec178918805c08ca88afcdf1fca",
+  "method": "Two confirmed source-sheet density/origin mismatches. Uniform calibration per entire 32-cel motion sheet, derived from head/torso comparison and grounded recovery foot midpoint; never silhouette-height fitting. Source PNGs unchanged. Pending browser playback.",
+  "bodies": {
+    "sproto704": {
+      "pixelScale": 0.9,
+      "anchorOffset": [
+        31,
+        0
+      ],
+      "sequences": [
+        "dash",
+        "jump",
+        "heavy",
+        "airKick",
+        "victory"
+      ],
+      "sourceFrames": {
+        "dash": [
+          {
+            "url": "/fighters/motion/sproto704/00.png",
+            "sha256": "78f4808c2d540b3b3b91ef31ab3cc82f8d97d48b36c2de2fed643aa928029882"
+          },
+          {
+            "url": "/fighters/motion/sproto704/01.png",
+            "sha256": "7e84a4b06cef4df853d0ce4d5ffe3529a68df0eed2562d2d5d9f450392bbb318"
+          },
+          {
+            "url": "/fighters/motion/sproto704/02.png",
+            "sha256": "ff948693414eb56bc687e5bc5823fbf873e76fe60de05a976d84703db15ba353"
+          },
+          {
+            "url": "/fighters/motion/sproto704/03.png",
+            "sha256": "94ce34a864f3e36b33c30bc10e7bdb81b67e95ed6198572fdcf367cdec657260"
+          },
+          {
+            "url": "/fighters/motion/sproto704/04.png",
+            "sha256": "c934d135df6475f500eb63cf4cdbb062536049a8c3dd718d7ab11177f87126d2"
+          },
+          {
+            "url": "/fighters/motion/sproto704/05.png",
+            "sha256": "ba16177e810c6be84ffc2a5d804ccc0ee13eb76ce7b8dbb278b685a0e93faa91"
+          }
+        ],
+        "jump": [
+          {
+            "url": "/fighters/motion/sproto704/06.png",
+            "sha256": "b74cd480a2d1629391fe69312ba3d582ff3ba99a7b9d7718e7f556b1af8482d5"
+          },
+          {
+            "url": "/fighters/motion/sproto704/07.png",
+            "sha256": "93d13148faa54baacb3c9cdf6a7c7611cde9bb89c1b0bd8c5cc8f7bb854c7b7b"
+          },
+          {
+            "url": "/fighters/motion/sproto704/08.png",
+            "sha256": "b8274191385f285ffca93c703ce48c51378bb4f0a83c258a0abd51670beda62b"
+          },
+          {
+            "url": "/fighters/motion/sproto704/09.png",
+            "sha256": "7ad5727b89367fa37708297c8a197a9e633211bd5560d6e381c11b095796c952"
+          },
+          {
+            "url": "/fighters/motion/sproto704/10.png",
+            "sha256": "13a70a9e8e333dbd57e74c9ec22e35c5168d36b8afb78bef8b049d8349a9a3be"
+          },
+          {
+            "url": "/fighters/motion/sproto704/11.png",
+            "sha256": "87c64e8fe76fbea1ec1a64a72d21764d4550b6f39e2b3903622fd35dec88c692"
+          }
+        ],
+        "heavy": [
+          {
+            "url": "/fighters/motion/sproto704/12.png",
+            "sha256": "cec4836e25885ef53e8f9a0c81c7e4d4b2e033fdaa44500f366462a06f6dfa93"
+          },
+          {
+            "url": "/fighters/motion/sproto704/13.png",
+            "sha256": "3d11272c7b1384b8bcf3fd702342bb111161d86b322753743e0d02cdf7fbec9a"
+          },
+          {
+            "url": "/fighters/motion/sproto704/14.png",
+            "sha256": "33094b9946a8bed5b15d4a8abd3a9ebed1232804fa47aa9cf9dafa292a358372"
+          },
+          {
+            "url": "/fighters/motion/sproto704/15.png",
+            "sha256": "a9febb6120f838d6af9a903854bd4bcd35ffebec6ada92b980c78d515f223c0d"
+          },
+          {
+            "url": "/fighters/motion/sproto704/16.png",
+            "sha256": "c1d02c6caec9f236a83275118d8947aa47dfd30583c9215fdf03fb1471663cf3"
+          },
+          {
+            "url": "/fighters/motion/sproto704/17.png",
+            "sha256": "4d4ce08fd1b1cfcd4b01e4272b16410996336edea15dcefd9fb374303e4ff5cb"
+          },
+          {
+            "url": "/fighters/motion/sproto704/18.png",
+            "sha256": "0ac85fef274e98dedb3c9a60c3cbc323c574f2f0daa20fff50a954c4450a0a79"
+          },
+          {
+            "url": "/fighters/motion/sproto704/19.png",
+            "sha256": "f47eab948eb917da7a9c656ff87e4a0d262b190ceb20850c1e0913d97c81cc2d"
+          }
+        ],
+        "airKick": [
+          {
+            "url": "/fighters/motion/sproto704/20.png",
+            "sha256": "1a2f786aa91b764c5d3a609549defd8fcd1adb583b97c04bc160262afd6c0da7"
+          },
+          {
+            "url": "/fighters/motion/sproto704/21.png",
+            "sha256": "e4b8b80859d4b64a968c81e3434a56b6ec8c1be72c501d3024fe7024f654dd56"
+          },
+          {
+            "url": "/fighters/motion/sproto704/22.png",
+            "sha256": "df62f249e599cbb07c25c027e3541951558768f3bd612e909ee570a44f20c7d9"
+          },
+          {
+            "url": "/fighters/motion/sproto704/23.png",
+            "sha256": "69ca9ba7247c45f83ee7c9dc57a601cc14a5578a24b52106a1eda0290e6fd603"
+          },
+          {
+            "url": "/fighters/motion/sproto704/24.png",
+            "sha256": "ba06769753ed4aee24b76a8bbad44750808c38eb542d1857a1187d2da41a2872"
+          },
+          {
+            "url": "/fighters/motion/sproto704/25.png",
+            "sha256": "0e29741b229b55510623e7eb6a184f3cfea7f5ddf4c03772f5c1fe89b7f35fac"
+          }
+        ],
+        "victory": [
+          {
+            "url": "/fighters/motion/sproto704/26.png",
+            "sha256": "609b055c7780aa043f958d60e6ea04fa3fd65df0d8ac0755c745b0f7fb95e5b5"
+          },
+          {
+            "url": "/fighters/motion/sproto704/27.png",
+            "sha256": "3a8abe17410ee73af77fa0ee7d592cd9dc4475b055802934dec55b86048e1d80"
+          },
+          {
+            "url": "/fighters/motion/sproto704/28.png",
+            "sha256": "e63d38113b166f1ee47a8d9fbd8b502e24e3b08847e03dbdf4d19d9f49af76e2"
+          },
+          {
+            "url": "/fighters/motion/sproto704/29.png",
+            "sha256": "32bb53c585d943801f12d0318ed1675803cdce2c5b4da05c5f8bb131a4ebb060"
+          },
+          {
+            "url": "/fighters/motion/sproto704/30.png",
+            "sha256": "faccedc502b9964aafbec1c84fe32b222866d62174b43f15eeb3cb55ad8db615"
+          },
+          {
+            "url": "/fighters/motion/sproto704/31.png",
+            "sha256": "60c7a499788b494d4753ebe5650cf55e7eb2d634226c044dcaeabb1b8d110dd6"
+          }
+        ]
+      }
+    },
+    "sproto2210": {
+      "pixelScale": 0.9,
+      "anchorOffset": [
+        31,
+        0
+      ],
+      "sequences": [
+        "dash",
+        "jump",
+        "heavy",
+        "airKick",
+        "victory"
+      ],
+      "sourceFrames": {
+        "dash": [
+          {
+            "url": "/fighters/motion/sproto2210/00.png",
+            "sha256": "fddbd90405a60e2ad4cda9de3e7fe56fa397b4faa1b05f39d4e325dda4046990"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/01.png",
+            "sha256": "0b9b4891551b69e954cfe421229544be57a486988c0251864201eababf9a873b"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/02.png",
+            "sha256": "9711670d685d02e88e7e49ab9724bae822c165e5a175ad244309950fb0b2a1ac"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/03.png",
+            "sha256": "9893b9eb72031f726bcc12d5f2d5a65761ceb385e5796fd0277fcb7761015107"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/04.png",
+            "sha256": "8cdc0710405ded9fd9958ab7eb0bc48bbaa32875ed94504d973edf7f709354f9"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/05.png",
+            "sha256": "2e9812606ec9fea8ebf88a3cb0bd71aa9640d9232e885ed31e0be452080ff43b"
+          }
+        ],
+        "jump": [
+          {
+            "url": "/fighters/motion/sproto2210/06.png",
+            "sha256": "294b75c786e88dce70e25bd5079751e4b12587958621613524a99782c3381220"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/07.png",
+            "sha256": "3a1dc6e17c64ea5241e56d5232ea4440240d7a23a2a8be66fe377cb1f8a6cbf7"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/08.png",
+            "sha256": "4949757c3c7cd8b4cd82c9c6105c0c36dbb88e2e3eceb29a37b56c189d7a39e5"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/09.png",
+            "sha256": "451db9a5e67ce87edd4d6ed56519fb39d73d7eae13e91ca23a72fb68ac8ab7b0"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/10.png",
+            "sha256": "127deb0db19e24ec16e41e284c3a55c4ce9106845b12dfc6c82ff2e440541ea9"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/11.png",
+            "sha256": "0a245fb38fea27b08c7c717417521bfcafa9dbbae83b8f78f0f1b14409361ffc"
+          }
+        ],
+        "heavy": [
+          {
+            "url": "/fighters/motion/sproto2210/12.png",
+            "sha256": "9d045fb5044152e22c7acb81f7f9bb97393567b8fde550b88412f6c73d40ab37"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/13.png",
+            "sha256": "aee4cca5b163c1c5126d30c2ac9456181e5db7927828674ed9086dcde9f7a1f3"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/14.png",
+            "sha256": "2ac734b017a74206c7d2cdaa7b848df1329ca3a9a336d873e39d1ec9a49ee1bb"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/15.png",
+            "sha256": "4e383308089963e60709b797d30d1cfade57b642bd36eb2c7aef4ddc49403ef1"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/16.png",
+            "sha256": "7f69cb3f03d9206487b5283aefaa09a819210d015a6631ef2cb24a68bb4e6760"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/17.png",
+            "sha256": "ac26482002f3e39bb48ecbd3fcc31fdcb6ec2e68931095339da05a55660e6f3c"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/18.png",
+            "sha256": "fa978e91212408d29d3c2f848220ee57aad56bebda31a8c99f594594754ecfdd"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/19.png",
+            "sha256": "5588b8a7ad6869670f428b2070d3d3ca70cee4341b5b80306425083506e9838f"
+          }
+        ],
+        "airKick": [
+          {
+            "url": "/fighters/motion/sproto2210/20.png",
+            "sha256": "f357f3a8623b8dc90568aefd31f98f98d3dc1f8a012d8cb03c54612c38300569"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/21.png",
+            "sha256": "37fe7d5ecbe44c049970d4891736a2b9e688e9f9ba6d5bb7cf252148a553f42d"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/22.png",
+            "sha256": "810af5c482dc3bcf85caa5866559983a926fc0701f1dcd87f39ecd40f6714b94"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/23.png",
+            "sha256": "6b03054b6ba1781437bb1dd134241325666ff9c2b25745d01e9129840d08a7b2"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/24.png",
+            "sha256": "6ca8624baf5e6095885602258936ef7e89c70d2a45a04334b9d482917ab88036"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/25.png",
+            "sha256": "89603630bb0ee2df3da64be6fbcfa1fa844433ce708e1136b46da284eb575ad8"
+          }
+        ],
+        "victory": [
+          {
+            "url": "/fighters/motion/sproto2210/26.png",
+            "sha256": "c0a6eda59ad18ab7184bbb8f151df2fb19321598a0cd4479cc01a108fd9a6c54"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/27.png",
+            "sha256": "ca27c4a264fcb4d87689a2a8d5820129613a9762c8eedbcd16aa2ed6dea61d8a"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/28.png",
+            "sha256": "afb7ffa9205cd8805685a06e671a279362627ba430b17c3ed1de6c480b7db8a5"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/29.png",
+            "sha256": "cf9e17f8a132ef2f5857c36ba3b5aa045cab688567c559b4415e0b5742605026"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/30.png",
+            "sha256": "75738c78553493c2832c6e5635d40050c2ba85cecf3ed5a7fe5004421cf5c6d7"
+          },
+          {
+            "url": "/fighters/motion/sproto2210/31.png",
+            "sha256": "3ae4983294502000fac297dd80601ea906d0db05008bbf0e3bcf39547e63df81"
+          }
+        ]
+      }
+    }
+  },
+  "reviewCheckpoint": {
+    "status": "experimental; not promoted to main",
+    "sourceSheetsViewed": 38,
+    "membersViewed": 38,
+    "ownersViewed": 19,
+    "samplesPerMember": 32,
+    "sourceFacingOnly": true,
+    "afterSheetsViewed": [
+      "sproto704-ground.png",
+      "sproto704-air-special.png",
+      "sproto2210-ground.png",
+      "sproto2210-air-special.png"
+    ],
+    "afterFinding": "The four calibrated static sample sheets show more consistent head scale and neutral foot registration. Full motion sequences, both facings, composed pair drawing and regression checks remain pending. These are not browser or live-motion approvals.",
+    "pausedFor": "Ranch and full story-stage selector repair, isolated in sproto-stage-catalog",
+    "browserBlocker": "No supported browser-control tool is present in this turn.",
+    "fullSequenceSheetsViewed": [
+      "sproto704-right.png",
+      "sproto704-left.png",
+      "sproto2210-right.png",
+      "sproto2210-left.png"
+    ],
+    "fullSequenceCoverage": "Both source-facing and mirrored views of all32 motion cels for each of two bodies: dash6, jump6, heavy8, airKick6, victory6. Static transformed source image review only; no composed pair or live play.",
+    "mechanicalAudit": "150 bodies,15444 cel entries,30888 facing transforms,2449546 composed draws,2882 replay scenarios,360250 replayticks;0 hard failures,950 heuristic flags. Output: ../movement-followup-20261102/calibrated-scale.log.",
+    "additionalFinding": "sproto704 airKick3 is a chamber/retraction drawing while airKick2 is extended. Check against the actual action sampler before remapping; not yet fixed."
+  },
+  "liveFollowup": {
+    "record": "docs/evidence/movement-followup-20261102/live-pairs-root.json",
+    "status": "Browser samples inspected in both actual facings; exact listed coverage and residual source-art limitations remain in record. No every-frame approval."
+  }
+}

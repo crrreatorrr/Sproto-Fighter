@@ -1,0 +1,59 @@
+[
+  {
+    "index": 200,
+    "stage": "yacht",
+    "name": "Tidebreak Marina",
+    "params": {
+      "model": "nano_banana_2_1",
+      "resolution": "1k",
+      "thinking_level": "high",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Original 16-bit pixel-art background for a side-view 2D fighting game, 16:9 panoramic composition. Crisp square pixel clusters, restrained 32-color arcade palette, clean stepped outlines, rich but readable atmosphere. Cobalt blue, scarlet red and golden yellow accents. NO characters, people, lettering, numbers, logos, watermarks, UI, HUD or borders. Camera level and fixed, not isometric. All objects are scenery behind the fighting line. The bottom 30 percent is a continuous EMPTY horizontal walkable foreground spanning the full width, with no props or obstacles in front of the fighters. Strong layers: distant sky/interior, midground landmark, calm foreground. Highest contrast near scenery edges, a clear quiet middle for large fighters. Do not paint a floor grid over the characters' space. This is a stage landscape, not a sprite sheet. Golden-hour yacht marina and beach. A sleek white luxury yacht moored across the middle distance, turquoise and cobalt water, red nautical flags, distant coastline, palms at the extreme sides. Golden sky reflected in water. Warm golden sand and a wide weathered wooden promenade make the empty lower fighting lane. Welcoming vivid summer atmosphere."
+    }
+  },
+  {
+    "index": 201,
+    "stage": "bar",
+    "name": "Last Light Bar",
+    "params": {
+      "model": "nano_banana_2_1",
+      "resolution": "1k",
+      "thinking_level": "high",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Original 16-bit pixel-art background for a side-view 2D fighting game, 16:9 panoramic composition. Crisp square pixel clusters, restrained 32-color arcade palette, clean stepped outlines, rich but readable atmosphere. Cobalt blue, scarlet red and golden yellow accents. NO characters, people, lettering, numbers, logos, watermarks, UI, HUD or borders. Camera level and fixed, not isometric. All objects are scenery behind the fighting line. The bottom 30 percent is a continuous EMPTY horizontal walkable foreground spanning the full width, with no props or obstacles in front of the fighters. Strong layers: distant sky/interior, midground landmark, calm foreground. Highest contrast near scenery edges, a clear quiet middle for large fighters. Do not paint a floor grid over the characters' space. This is a stage landscape, not a sprite sheet. Interior of an atmospheric retro arcade bar at night. Long cobalt-lit bottle shelves and an ornate wooden bar counter in the background, crimson velvet booths at the edges, golden pendant lamps, blue windows with rainy city lights. A wide clear warm wooden floor spans the lower fighting lane. No stools, tables or bottles in the foreground. Deep warm shadows, gold highlights, electric blue accents."
+    }
+  },
+  {
+    "index": 202,
+    "stage": "castle",
+    "name": "Moonkeep Castle",
+    "params": {
+      "model": "nano_banana_2_1",
+      "resolution": "1k",
+      "thinking_level": "high",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Original 16-bit pixel-art background for a side-view 2D fighting game, 16:9 panoramic composition. Crisp square pixel clusters, restrained 32-color arcade palette, clean stepped outlines, rich but readable atmosphere. Cobalt blue, scarlet red and golden yellow accents. NO characters, people, lettering, numbers, logos, watermarks, UI, HUD or borders. Camera level and fixed, not isometric. All objects are scenery behind the fighting line. The bottom 30 percent is a continuous EMPTY horizontal walkable foreground spanning the full width, with no props or obstacles in front of the fighters. Strong layers: distant sky/interior, midground landmark, calm foreground. Highest contrast near scenery edges, a clear quiet middle for large fighters. Do not paint a floor grid over the characters' space. This is a stage landscape, not a sprite sheet. Moonlit castle courtyard, deep cobalt sky, large gold-tinted moon behind distant stone towers, red fabric banners, golden torchlight on carved stone arches. Symmetric but natural fortress architecture with weathered blocks, crenellations and a broad gate in the background. Empty wide stone terrace forms the lower fighting lane, calm horizontal paving. No columns in the foreground."
+    }
+  },
+  {
+    "index": 203,
+    "stage": "retro",
+    "name": "Neon Tomorrow",
+    "params": {
+      "model": "nano_banana_2_1",
+      "resolution": "1k",
+      "thinking_level": "high",
+      "aspect_ratio": "16:9",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Original 16-bit pixel-art background for a side-view 2D fighting game, 16:9 panoramic composition. Crisp square pixel clusters, restrained 32-color arcade palette, clean stepped outlines, rich but readable atmosphere. Cobalt blue, scarlet red and golden yellow accents. NO characters, people, lettering, numbers, logos, watermarks, UI, HUD or borders. Camera level and fixed, not isometric. All objects are scenery behind the fighting line. The bottom 30 percent is a continuous EMPTY horizontal walkable foreground spanning the full width, with no props or obstacles in front of the fighters. Strong layers: distant sky/interior, midground landmark, calm foreground. Highest contrast near scenery edges, a clear quiet middle for large fighters. Do not paint a floor grid over the characters' space. This is a stage landscape, not a sprite sheet. Retro-futuristic city rooftop at twilight. Layered cobalt skyscrapers, scarlet neon tubes without lettering, golden antenna rings and retro satellite dishes, distant elevated trains and a large golden sun. Wide empty dark-blue metal rooftop fighting lane with subtle yellow edge lights at the bottom. Strong clean silhouette, 1980s future optimism, no vehicles or objects blocking the foreground."
+    }
+  }
+]
+

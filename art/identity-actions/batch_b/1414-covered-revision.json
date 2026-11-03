@@ -1,0 +1,28 @@
+{
+  "index": 50005,
+  "entity": "sproto1414",
+  "fighter": "sproto1414",
+  "kind": "identity",
+  "frameCount": 32,
+  "ranged": true,
+  "deathStart": 16,
+  "standingHeight": 128,
+  "allowDetachedParts": false,
+  "params": {
+    "model": "gpt_image_2_5",
+    "variant": "sunburst",
+    "quality": "high",
+    "resolution": "4k",
+    "aspect_ratio": "9:16",
+    "count": 1,
+    "use_unlim": false,
+    "medias": [
+      {
+        "role": "image",
+        "value": "0f4228bb-7226-4969-b3c8-b27cb8dbb3a5"
+      }
+    ],
+    "prompt": "A fully clothed ADULT cartoon fighting-game actor in an opaque monochrome BLUE coverall. Preserve the nonsexual blue cartoon silhouette. All torso, lower body and legs covered by plain blue fabric. Production fighting-game PIXEL ART matching the attached existing combat sprite: stepped crisp pixels, black outlines, limited compact shading, no vector smoothness. Each cell contains exactly ONE complete actor facing RIGHT in the same three-quarter view. Preserve exact head shape, eye count, colors, clothing, held weapons, accessories, body proportions and connected anatomy from reference. Do NOT redesign or simplify face. Draw full body, hands, feet and all attached accessories inside each cell with generous empty margins. Same scale and head size throughout. Solid pure MAGENTA #ff00ff background, no labels, text, grid lines, shadows, floor stripe, floating effects or opponents. Never draw a companion. The attached sheet contains the ONE selected body only; copy its current design. No graphic injury or gore.\n\nSTRICT LAYOUT: EXACTLY 32 complete actors, regular FOUR COLUMNS and EIGHT ROWS. Read left-to-right then top-to-bottom. Four actors per row, one drawing per cell.\n\nIDENTITY: Blue swept spiky head, yellow half-lidded eyes, red eyelids and broad red smile, ADULT cartoon in a completely opaque plain BLUE fitted coverall over the whole long thin torso, arms and legs, with all lower markings BLUE to match the outfit. Thin opaque blue-sleeved arms and blue-trousered low legs. Preserve the attached CURRENT COMBAT DESIGN exactly, including actual clothing and face. \n\nENTRANCE frames 0-7 in ROWS 1-2: frame0 relaxed pre-entry stance; frame1 first anticipation; frame2 begin signature gesture; frame3 gesture halfway; frame4 full signature gesture; frame5 recover gesture; frame6 fists/hands/held prop return toward combat position; frame7 stable upright combat guard matching attached neutral. This character signature is: uncoil the long thin blue neck upward, tilt head at a curious angle, trace one hand down the plain BLUE belly, then settle with both elbows tucked close. Each consecutive frame advances a coherent movement, not eight identical guards.\n\nRANGED frames8-15 in ROWS3-4: frame8 identity-specific coil; frame9 draw back; frame10 full windup; frame11 aim; frame12 strongest release toward RIGHT; frame13 short release hold; frame14 recoil/retract; frame15 combat guard. Choreography: draw one long thin blue forearm back below the long neck, stretch the other forward in a delicate two-finger flick to RIGHT, then tuck elbow. NO projectile or particles drawn; engine supplies projectile art. Weapons remain attached to hands.\n\nDEFEAT frames16-31 in ROWS5-8: first EIGHT frames: frame16 surprised recoil; frame17 lose composure; frame18 signature failure starts; frame19 knees/hover lose support; frame20 lowering toward floor; frame21 sideways fall begins; frame22 nearly on floor; frame23 first full floor contact. Character-specific defeat: long neck bends slowly like a wilting stalk, hands slide down the plain blue belly, knees fold, and the body curls into a small side-lying silhouette with neck folded gently.\nLast EIGHT frames 24-31: ALL are entirely LYING ON FLOOR, head to LEFT feet to RIGHT, or the whole legless floating shape lying sideways if no legs. Frame24 full side-lying silhouette; frame25 settle torso/chassis; frame26 shoulder/head relaxes; frame27 small final limb/accessory settlement; frame28 nearly still; frame29 quiet floor rest; frame30 same floor rest; frame31 final still full body. NO standing, kneeling, seated or airborne body in final eight cells. Hats, hair, faces, weapons and clothing stay connected except the robot mechanical disassembly specifically requested. Floor bodies stay visibly lower than standing drawings. Never enlarge floor bodies to standing height."
+  },
+  "retry": 2
+}
