@@ -1,0 +1,166 @@
+[
+  {
+    "index": 0,
+    "entity": "sproteth",
+    "fighter": "sproteth",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "c5e15ac0-2a7a-4817-bb91-f07f1704aeb0"
+        }
+      ],
+      "prompt": "Exactly 32 separate full-body drawings, FOUR columns and EIGHT rows. No extra cells.\nProduction PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\nIDENTITY: Royal cobalt BLUE oversized rounded head with long angular swept BLUE spikes at the rear and a small blue top forelock. TWO enormous touching circular YELLOW eye regions, BLACK round pupils and tiny white glints, blue curved eyelids and brows. Very broad thick projecting RED smiling lips with a curved closed seam. Smooth YELLOW crescent below the mouth along the lower jaw, not white teeth. BLUE neck. BLACK shirt with a very thick rolled YELLOW GOLD collar exactly like reference. Tiny paired yellow decorative strokes on chest, no lettering. Conservatively extend the cropped lower body as BLACK long trousers and simple BLACK shoes with subtle yellow soles. BLUE bare arms and hands, no gloves. One actor with exactly two attached arms and two attached legs. No crown, red spikes, cape, weapon, white teeth or additional accessories.\nRow 1: relaxed combat guard; subtle exhale guard; forward guarded step with near foot leading; weight passes over near planted foot.\nRow 2: forward guarded step with far foot leading; weight passes over far planted foot; forward dash with low lean and both legs anatomically connected; jump anticipation with hips lowered and knees bent.\nRow 3: rising jump with both low-rooted knees gathered; falling jump with legs extending for landing; low crouched landing with both soles grounded; light punch anticipation with shoulder and elbow coiling.\nRow 4: fully extended straight punch toward the right; punch retracting to guard; uppercut low-body coil; clear rising uppercut with elbow then fist high, two legs retained.\nRow 5: side kick chamber, near knee lifted from LOW hip, support foot planted; half-extended kick with knee opening; fully extended waist-height side kick, low hip, ankle and toes aligned; kick knee retracts before planting.\nRow 6: low sweeping kick with one grounded bent support leg; sweep recovery returning over the low pelvis; airborne kick chamber with both legs originating at lower body; airborne kick full extension with coherent second leg folded.\nRow 7: recoiling from a chest hit, head and torso remain joined; solid two-arm high guard; reaching forward to catch with clearly visible open hand; close grab hold with both arms bent toward an imagined opponent but NO opponent drawn.\nRow 8: planted forward throw follow-through without opponent; ranged SPIT anticipation with cheeks inflated and lips pursed, elbows tucked back; open-mouth SPIT release to RIGHT with forward head snap, arms remain at ribs; broad triumphant Team Special finishing stance, complete body. Never fire from a hand. Engine draws projectile; do not draw one. Preserve huge circular yellow eyes, cobalt swept head, broad red smile, yellow jaw crescent and thick gold collar in every frame. BLACK clothing throughout, no white patches. Crisp flat limited same-hue shading, no soft gradients. Do not draw pink reference background, text, effects or projectiles."
+    },
+    "job_id": "e539c87a-9383-400f-8f89-78c01ff469b8",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_172849_e539c87a-9383-400f-8f89-78c01ff469b8.png"
+  },
+  {
+    "index": 1,
+    "entity": "sproteth",
+    "fighter": "sproteth",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "c5e15ac0-2a7a-4817-bb91-f07f1704aeb0"
+        },
+        {
+          "role": "image",
+          "value": "e539c87a-9383-400f-8f89-78c01ff469b8"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\nIDENTITY: Royal cobalt BLUE oversized rounded head with long angular swept BLUE spikes at the rear and a small blue top forelock. TWO enormous touching circular YELLOW eye regions, BLACK round pupils and tiny white glints, blue curved eyelids and brows. Very broad thick projecting RED smiling lips with a curved closed seam. Smooth YELLOW crescent below the mouth along the lower jaw, not white teeth. BLUE neck. BLACK shirt with a very thick rolled YELLOW GOLD collar exactly like reference. Tiny paired yellow decorative strokes on chest, no lettering. Conservatively extend the cropped lower body as BLACK long trousers and simple BLACK shoes with subtle yellow soles. BLUE bare arms and hands, no gloves. One actor with exactly two attached arms and two attached legs. No crown, red spikes, cape, weapon, white teeth or additional accessories. Reference image2 is the reviewed combat sheet; match its face, costume, proportions and crisp pixel style precisely.\nExactly EIGHT separate full-body drawings in a regular 4-column by 2-row grid. A continuous guarded fighting footwork loop, NOT a run. Upper body stays calm, head/torso size constant, hips stay at the same height and same x center. Both fists remain raised. Feet are clearly different on adjacent frames: 0 near foot forward grounded/far foot back grounded; 1 transfer weight to near sole, far heel lifts; 2 far knee passes under low pelvis with far foot lifted; 3 far foot reaches forward while near sole still supports; 4 far foot forward grounded/near foot back grounded; 5 transfer weight to far sole, near heel lifts; 6 near knee passes under low pelvis with near foot lifted; 7 near foot reaches forward ready to plant. No feet crossing through one another, no sliding torso, no detached hips. Each frame has at least one clearly grounded foot. Last frame loops to first. Same complete body and clothing as the combat reference. Preserve huge circular yellow eyes, cobalt swept head, broad red smile, yellow jaw crescent and thick gold collar in every frame. BLACK clothing throughout, no white patches. Crisp flat limited same-hue shading, no soft gradients. Do not draw pink reference background, text, effects or projectiles."
+    },
+    "job_id": "50572d89-d3fd-4807-b828-899660904118",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173005_50572d89-d3fd-4807-b828-899660904118.png"
+  },
+  {
+    "index": 2,
+    "entity": "sproteth",
+    "fighter": "sproteth",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "c5e15ac0-2a7a-4817-bb91-f07f1704aeb0"
+        },
+        {
+          "role": "image",
+          "value": "e539c87a-9383-400f-8f89-78c01ff469b8"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\nIDENTITY: Royal cobalt BLUE oversized rounded head with long angular swept BLUE spikes at the rear and a small blue top forelock. TWO enormous touching circular YELLOW eye regions, BLACK round pupils and tiny white glints, blue curved eyelids and brows. Very broad thick projecting RED smiling lips with a curved closed seam. Smooth YELLOW crescent below the mouth along the lower jaw, not white teeth. BLUE neck. BLACK shirt with a very thick rolled YELLOW GOLD collar exactly like reference. Tiny paired yellow decorative strokes on chest, no lettering. Conservatively extend the cropped lower body as BLACK long trousers and simple BLACK shoes with subtle yellow soles. BLUE bare arms and hands, no gloves. One actor with exactly two attached arms and two attached legs. No crown, red spikes, cape, weapon, white teeth or additional accessories. Reference image2 is the reviewed combat sheet; match its face, costume, proportions and crisp pixel style precisely.\nExactly 32 separate complete drawings, regular 4-column by 8-row grid, read left-to-right/top-to-bottom. All 32 are the SAME single actor, including lying floor drawings. No opponents or partner drawn.\nRow 1 INTRO:relaxed wide-eyed smile with arms low; tilt swept head in friendly nod and adjust thick gold collar with near fingertips; open near palm in greeting with far hand on hip; settle into two-fist guard. No effects or text.\nRow 2 SPECIAL A: low coil; shoulder windup; fully extended straight impact punch; punch retract.\nRow 3 SPECIAL B: alternate shoulder strike; retract to cover; two-arm finishing palm thrust to RIGHT; recover combat guard. No floating effects.\nRow 4 CAST:lean head back and inflate cheeks, red lips pursed; coil knees and tuck both hands BACK at ribs; forceful open-mouth SPIT RIGHT with sharp forward head snap, hands still back; mouth closes and smile returns as knees straighten. Never a palm shot. No projectile.\nRow 5 RECOIL: chest impact arch; head/torso lean back with arms still connected; bend knees to absorb; regain combat guard.\nRow 6 to 8: DEFEAT START: huge eyes widen as smile sags; near hand reaches collar while knees buckle; seated collapse with arms balancing; roll onto left side, head LEFT feet RIGHT. DEFEAT FLOOR: entirely side-lying with elbow briefly propping heavy head; elbow bends; head lowers; shoulder settles. DEFEAT REST: red lips relax; eyes close; fingers loosen by collar; completely still side-lying rest. Exactly four figures per row, twelve defeat drawings total. Preserve huge circular yellow eyes, cobalt swept head, broad red smile, yellow jaw crescent and thick gold collar in every frame. BLACK clothing throughout, no white patches. Crisp flat limited same-hue shading, no soft gradients. Do not draw pink reference background, text, effects or projectiles."
+    },
+    "job_id": "c681b95b-f7c5-447e-ac48-71f163042140",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173008_c681b95b-f7c5-447e-ac48-71f163042140.png"
+  },
+  {
+    "index": 3,
+    "entity": "sproteth",
+    "fighter": "sproteth",
+    "kind": "identity",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "c5e15ac0-2a7a-4817-bb91-f07f1704aeb0"
+        },
+        {
+          "role": "image",
+          "value": "e539c87a-9383-400f-8f89-78c01ff469b8"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\nIDENTITY: Royal cobalt BLUE oversized rounded head with long angular swept BLUE spikes at the rear and a small blue top forelock. TWO enormous touching circular YELLOW eye regions, BLACK round pupils and tiny white glints, blue curved eyelids and brows. Very broad thick projecting RED smiling lips with a curved closed seam. Smooth YELLOW crescent below the mouth along the lower jaw, not white teeth. BLUE neck. BLACK shirt with a very thick rolled YELLOW GOLD collar exactly like reference. Tiny paired yellow decorative strokes on chest, no lettering. Conservatively extend the cropped lower body as BLACK long trousers and simple BLACK shoes with subtle yellow soles. BLUE bare arms and hands, no gloves. One actor with exactly two attached arms and two attached legs. No crown, red spikes, cape, weapon, white teeth or additional accessories. Reference image2 is the reviewed combat sheet; match its face, costume, proportions and crisp pixel style precisely.\nExactly 32 complete drawings in a strict FOUR-column EIGHT-row grid. Rows1-2 eight ENTRANCE frames, rows3-4 eight MOUTH-SPIT frames, rows5-8 sixteen DEATH frames. Read left to right then top to bottom. Same single actor. No projectile, text, opponent, floor shadow or effects. Death frames24-31 entirely side-lying head LEFT feet RIGHT, never upright/kneeling.\nRow 1: relaxed friendly wide-eyed smile, arms low; tilt swept head in a friendly nod; near blue hand reaches thick gold collar; adjust the collar with attached blue fingertips, far palm at hip.\nRow 2: release collar and lift near open palm in greeting; both hands open confidently beside waist; close hands and step near foot into guard; settled two-fist guard with enormous yellow eyes and broad smile.\nRow 3: broad red smile begins to purse; head draws back and cheeks puff; knees compress, shoulders roll back; cheeks fully inflated, elbows tucked BACK beside ribs.\nRow 4: explosive open-mouth SPIT RIGHT with head and neck snapping forward, hands remain BACK at ribs; hold open-mouth release briefly as cheeks deflate; head recoils, lips close and knees rise; broad red smile and balanced guard restored.\nRow 5: huge yellow eyes widen, smile sags; head jerks back, arms spread for balance; near blue palm touches thick collar; knees wobble and buckle.\nRow 6: hips lower, far palm reaches down; seated collapse, feet forward; roll onto left side, head LEFT feet RIGHT; fully side-lying, one elbow briefly props heavy head.\nRow 7: supporting elbow bends and head lowers; blue hand rests beside broad mouth; shoulder settles onto floor; red lips slacken, eyes half close.\nRow 8: fingers relax beside gold collar; tiny final shoulder drop; eyes close and body lies still; final completely still side-lying rest, swept blue head and collar attached. Preserve huge circular yellow eyes, cobalt swept head, broad red smile, yellow jaw crescent and thick gold collar in every frame. BLACK clothing throughout, no white patches. Crisp flat limited same-hue shading, no soft gradients. Do not draw pink reference background, text, effects or projectiles."
+    },
+    "ranged": true,
+    "deathStart": 16,
+    "frameCount": 32,
+    "job_id": "66438fa6-7dca-422f-aec2-60871dce1494",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_173006_66438fa6-7dca-422f-aec2-60871dce1494.png"
+  }
+]

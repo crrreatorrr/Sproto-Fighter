@@ -1,0 +1,68 @@
+[
+  {
+    "index": 300,
+    "entity": "vaudream",
+    "fighter": "vaudream",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "48ebd603-95dd-4814-b74f-457b92f703bb"
+        }
+      ],
+      "prompt": "Crisp fighting-game PIXEL ART, hard stepped edges, dark outlines, compact limited-color shading matching the current game. Exactly one complete machine in each cell, consistent chassis proportions and scale. Face angled toward RIGHT. Pure solid magenta #ff00ff background; no labels, grid lines, floor, shadows, trails or detached effects. Generous empty margins; complete spikes and casing wholly visible. ONLY the LARGE FOREGROUND FLOATING MACHINE in image 1. This character is named ᐯᕬᑌᗞᖇᕮᗋᕬ. A blue-violet handheld-console-shaped sentient machine: broad angled rectangular chassis, tilted recessed rectangular screen with yellow diagonal reflection, one enormous round yellow eye and a smaller yellow eye with black pupils, broad yellow toothy grille along lower edge, circular recessed buttons, small screws, and blue triangular top spikes. Preserve the exact asymmetry and face layout. Exclude the small blue creature in the background and all background yellow/black framing. This is ONE machine, NOT a twin. It has NO LEGS, NO FEET, NO ARMS, NO HANDS, no humanoid torso. Its chassis remains intact in every drawing. Extend only the cropped machine casing conservatively. All movement is anti-gravity hovering, pitch/roll/yaw, squash-free tilts and chassis thrusts. No standing, walking or kicking anatomy. No invented human limbs.\n\nExactly 32 complete machines in a regular 4-column by 8-row grid, read left-to-right, top-to-bottom. Row1 neutral hover; gentle raised hover; forward float pitch; settle forward glide. Row2 alternate glide bank; level cruise; strong forward dash lean; compressed downward hover anticipation. Row3 rising hover; falling hover; landing dip while still floating; recoil-back ram windup. Row4 strong forward chassis ram; retract ram; low tilt windup; upward chassis thrust. Row5 coil side bank; half side thrust; full forward machine ram; retract side thrust. Row6 low sweeping bank; restore hover; aerial bank chamber; aerial downward chassis strike. Row7 hit recoil with screen skew; defensive angled shell; telekinetic catch posture tilted forward; telekinetic hold posture. Row8 throw release with forward pitch; screen charging posture; screen projected-forward cast posture; triumphant wide upward machine tilt. No effects drawn. Keep chassis connected and rigid; poses convey different attitudes through rotation and screen/eyes."
+    }
+  },
+  {
+    "index": 301,
+    "entity": "vaudream",
+    "fighter": "vaudream",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "48ebd603-95dd-4814-b74f-457b92f703bb"
+        }
+      ],
+      "prompt": "Crisp fighting-game PIXEL ART, hard stepped edges, dark outlines, compact limited-color shading matching the current game. Exactly one complete machine in each cell, consistent chassis proportions and scale. Face angled toward RIGHT. Pure solid magenta #ff00ff background; no labels, grid lines, floor, shadows, trails or detached effects. Generous empty margins; complete spikes and casing wholly visible. ONLY the LARGE FOREGROUND FLOATING MACHINE in image 1. This character is named ᐯᕬᑌᗞᖇᕮᗋᕬ. A blue-violet handheld-console-shaped sentient machine: broad angled rectangular chassis, tilted recessed rectangular screen with yellow diagonal reflection, one enormous round yellow eye and a smaller yellow eye with black pupils, broad yellow toothy grille along lower edge, circular recessed buttons, small screws, and blue triangular top spikes. Preserve the exact asymmetry and face layout. Exclude the small blue creature in the background and all background yellow/black framing. This is ONE machine, NOT a twin. It has NO LEGS, NO FEET, NO ARMS, NO HANDS, no humanoid torso. Its chassis remains intact in every drawing. Extend only the cropped machine casing conservatively. All movement is anti-gravity hovering, pitch/roll/yaw, squash-free tilts and chassis thrusts. No standing, walking or kicking anatomy. No invented human limbs.\n\nExactly EIGHT complete machines in a regular 4-column by 2-row grid. Continuous floating glide loop: neutral hover, small forward pitch, gentle raised bank, settle bank, reverse bank, slight lower float, gentle upward pitch, settle neutral. No footwork, no legs. All frames preserve chassis dimensions, spikes and facial placement; tiny smooth vertical shifts and angles."
+    }
+  },
+  {
+    "index": 302,
+    "entity": "vaudream",
+    "fighter": "vaudream",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "48ebd603-95dd-4814-b74f-457b92f703bb"
+        }
+      ],
+      "prompt": "Crisp fighting-game PIXEL ART, hard stepped edges, dark outlines, compact limited-color shading matching the current game. Exactly one complete machine in each cell, consistent chassis proportions and scale. Face angled toward RIGHT. Pure solid magenta #ff00ff background; no labels, grid lines, floor, shadows, trails or detached effects. Generous empty margins; complete spikes and casing wholly visible. ONLY the LARGE FOREGROUND FLOATING MACHINE in image 1. This character is named ᐯᕬᑌᗞᖇᕮᗋᕬ. A blue-violet handheld-console-shaped sentient machine: broad angled rectangular chassis, tilted recessed rectangular screen with yellow diagonal reflection, one enormous round yellow eye and a smaller yellow eye with black pupils, broad yellow toothy grille along lower edge, circular recessed buttons, small screws, and blue triangular top spikes. Preserve the exact asymmetry and face layout. Exclude the small blue creature in the background and all background yellow/black framing. This is ONE machine, NOT a twin. It has NO LEGS, NO FEET, NO ARMS, NO HANDS, no humanoid torso. Its chassis remains intact in every drawing. Extend only the cropped machine casing conservatively. All movement is anti-gravity hovering, pitch/roll/yaw, squash-free tilts and chassis thrusts. No standing, walking or kicking anatomy. No invented human limbs.\n\nExactly 32 complete machines in a regular 4-column by 8-row grid. Frames0-3 intro: dormant screen/low hover, eyes awaken, proud upward tilt, settle ready. Frames4-11 special: rearward coil, screen charge attitude, forward powerful ram, retract shell, opposite bank strong second chassis thrust, recover bank, extreme forward diagonal machine strike, settle hover. Frames12-15 cast: screen angled inward, pitch back charge, forward screen thrust, retract. Frames16-19 recoil: sharp backward tilt, bank away, correct pitch, stable hover. Frames20-23 defeat: screen dims, losing hover altitude, tip to side, casing touching floor. Frames24-31: eight entirely side-lying grounded machine rest drawings, slowly settling into inert intact casing, eyes dim but recognizably yellow. Do NOT turn machine into a humanoid. No limbs, flames, shattering, detached components, or particles."
+    }
+  }
+]

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "auditScriptSha256": "f6cb10a009d1ae25627457a177631fac3031938a31e670daa324f8a6bd5cbcc2",
+  "manifestRevision": "reaction-size-20261102",
+  "manifestSha256": "8a83a83878eb99f22c91e53577834f9d4aac8a00a8a4b28b246c2abb34e0701e",
+  "sourceSha256": {
+    "src/core.ts": "7432e00e7d220f64b5950b13f440bec7db8e6cc4e57c0063b0fa5b8e647cb98e",
+    "src/poseAtlas.ts": "cadaf1aa25cdf38e3cbd1b8869c43e78460f5ccc6e12314cff3bc87fe0e33ff9",
+    "src/spriteRoster.ts": "6e37305fc52a40745b335fe38667933972186645e4e09161125da21b042d96ad",
+    "src/teamSpecial.ts": "57e5164ce0ae9d6b709ca7cd1028c09a5eb04b0de5de501cf7fffd6dbc6c5203",
+    "src/animationEvents.ts": "11497af4ea63f699caa65c07bd4d2810e2f30bc98200f967ffe801c62dca53ff",
+    "art/sprotos-expansion/process.py": "2415143074c309d0d51a65e2278740315eea725a4f69be891c03a6e4254f3029"
+  },
+  "scope": {
+    "playableFighters": 131,
+    "installedBodies": 150,
+    "installedFrameEntries": 15444,
+    "uniqueImages": 15308,
+    "facings": [
+      -1,
+      1
+    ]
+  },
+  "counters": {
+    "installedCellFacingDraws": 30888,
+    "hullRegistrationChecks": 14726,
+    "throwGripChecks": 524,
+    "runtimeSamples": 1080948,
+    "assistRuntimeSamples": 89230,
+    "imageDraws": 2449546,
+    "replayTicks": 360250,
+    "replayScenarios": 2882,
+    "damageScenarios": 2096,
+    "guardScenarios": 262,
+    "throwScenarios": 524
+  },
+  "failures": [],
+  "limits": [
+    "No browser visual approval. PNG alpha, complete draw matrices and deterministic state histories are checked.",
+    "Rotation, translation, floor-safe knockdown pivots, hover/ram motion, paired spacing, and separate effects can be intentional. Only source-pixel body scale/shear is invariant.",
+    "Runtime anchor-offset ranges are measured against the core root plus each companion body offset. Reaction pivots, camera/formation corrections, hover travel and pixel rounding can intentionally change them. Pixel envelopes are source-oriented; facing is checked on actual matrices.",
+    "Floor support uses decoded alpha pixel squares, allowing half a world pixel of translation rounding and one transformed source-pixel footprint for the installed origin/boundary hull conventions.",
+    "All installed cels are directly checked; runtime coverage counts distinguish selected cels from shadowed clips.",
+    "Core contact uses range/vertical thresholds, bodySpread and projectile radii, not per-pixel sprite hit/hurt boxes. Replay equality proves render independence, not visual contact accuracy.",
+    "Jessica mask: alpha>128, B>R+40, B>G+20, largest 8-connected component. Advisory for this blue head only; occlusion and rotation may change it."
+  ],
+  "artAdvisoryCount": 950,
+  "baselineChangeCount": 14,
+  "fullReportLocalPath": "/Users/kenhiraoka/Documents/Codex/2026-10-31/task/sproto-motion-followup/art/reaction-size-qa-20261102/numerical-final/report.json",
+  "fullReportSHA256": "663fcdd112a2b338bdb345b4de3295e6ed895249a2b890b74dadab7c295e6d56"
+}

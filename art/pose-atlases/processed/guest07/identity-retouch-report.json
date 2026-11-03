@@ -1,0 +1,386 @@
+[
+  {
+    "slot": 0,
+    "file": "00-guard.png",
+    "changedPixels": 299,
+    "bounds": [
+      140,
+      109,
+      172,
+      133
+    ],
+    "sourceSHA256": "274bf8009e06b43c82974303e018e16c5d721d08eca8f09db910cca9423b0d79"
+  },
+  {
+    "slot": 1,
+    "file": "01-breathe.png",
+    "changedPixels": 270,
+    "bounds": [
+      141,
+      107,
+      173,
+      128
+    ],
+    "sourceSHA256": "a264519644a5ddf0a4bfaeabed76e1c599afce4e0448bfbaf3eb57a559dafc01"
+  },
+  {
+    "slot": 2,
+    "file": "02-walkNear.png",
+    "changedPixels": 253,
+    "bounds": [
+      143,
+      107,
+      171,
+      129
+    ],
+    "sourceSHA256": "380a9d15fcb60dad2354dd86bdc2da8778a3398ff2b0f0e4207f90840fb75b58"
+  },
+  {
+    "slot": 3,
+    "file": "03-passNear.png",
+    "changedPixels": 279,
+    "bounds": [
+      142,
+      106,
+      173,
+      128
+    ],
+    "sourceSHA256": "e7b29a9f671a6dd34ef932023d0c0937032f833d02176b19f795d76b64091bc2"
+  },
+  {
+    "slot": 4,
+    "file": "04-walkFar.png",
+    "changedPixels": 288,
+    "bounds": [
+      142,
+      108,
+      173,
+      132
+    ],
+    "sourceSHA256": "14e61c32d5325a4c52d2fe8678a9256313e310a0d4f60a449f9a87d50a912534"
+  },
+  {
+    "slot": 5,
+    "file": "05-passFar.png",
+    "changedPixels": 253,
+    "bounds": [
+      142,
+      111,
+      172,
+      132
+    ],
+    "sourceSHA256": "372b56c002f1292a2f9d6f34d6e6682a6373a6bfb8edd2eac6bb5db945ca477c"
+  },
+  {
+    "slot": 6,
+    "file": "06-dash.png",
+    "changedPixels": 269,
+    "bounds": [
+      145,
+      132,
+      176,
+      153
+    ],
+    "sourceSHA256": "11869475417968456c21c629ed58b1108c85ae85e211d488f3ebb41d12df6815"
+  },
+  {
+    "slot": 7,
+    "file": "07-jumpAnticipation.png",
+    "changedPixels": 248,
+    "bounds": [
+      142,
+      128,
+      172,
+      149
+    ],
+    "sourceSHA256": "7c85482e5bf99c5b4d8b085d11cecf94b593e7bfecc58a738e200b29f5c6ac66"
+  },
+  {
+    "slot": 8,
+    "file": "08-airRise.png",
+    "changedPixels": 209,
+    "bounds": [
+      145,
+      103,
+      171,
+      122
+    ],
+    "sourceSHA256": "e5ff4482cccefb9c49a97d819de61615dc26afbfeafc26631d32a5f4a0b0fc5c"
+  },
+  {
+    "slot": 9,
+    "file": "09-airFall.png",
+    "changedPixels": 232,
+    "bounds": [
+      145,
+      108,
+      172,
+      129
+    ],
+    "sourceSHA256": "ff0a3c1994ee0080d28c0de2ab0148871c27b7994648b3eda8873411e1a61ea9"
+  },
+  {
+    "slot": 10,
+    "file": "10-crouchLanding.png",
+    "changedPixels": 262,
+    "bounds": [
+      142,
+      142,
+      173,
+      163
+    ],
+    "sourceSHA256": "c60b440b8e96f36531ff28561f78e6d6f734a6175fed1abeb1a46aa136bd215d"
+  },
+  {
+    "slot": 11,
+    "file": "11-punchWindup.png",
+    "changedPixels": 302,
+    "bounds": [
+      155,
+      121,
+      186,
+      146
+    ],
+    "sourceSHA256": "2d609ba96122b48710dff56e3132b4764bb8f40678f2e03449b612367bd8f37d"
+  },
+  {
+    "slot": 12,
+    "file": "12-punchExtended.png",
+    "changedPixels": 205,
+    "bounds": [
+      142,
+      116,
+      168,
+      135
+    ],
+    "sourceSHA256": "5289c99ea5a5b2ea1ed7164cae72e873e495f4e25015a80f92512f33d69505b7"
+  },
+  {
+    "slot": 13,
+    "file": "13-punchRecover.png",
+    "changedPixels": 232,
+    "bounds": [
+      143,
+      119,
+      170,
+      140
+    ],
+    "sourceSHA256": "e7dce6f7b3b014579a8c760721a371e1540f24dad494818085fd2d63e1a52606"
+  },
+  {
+    "slot": 14,
+    "file": "14-upperWindup.png",
+    "changedPixels": 238,
+    "bounds": [
+      144,
+      133,
+      172,
+      154
+    ],
+    "sourceSHA256": "f8f7c50374c6e0b17768a9712a949fac9d41cad6e9d9a518287a5913d95c9bbc"
+  },
+  {
+    "slot": 15,
+    "file": "15-uppercut.png",
+    "changedPixels": 222,
+    "bounds": [
+      137,
+      109,
+      162,
+      131
+    ],
+    "sourceSHA256": "faba03afb64913a07cbfcb69479717ae99c5a7927509ae461b02765a0ca5dd5b"
+  },
+  {
+    "slot": 16,
+    "file": "16-kickChamber.png",
+    "changedPixels": 220,
+    "bounds": [
+      141,
+      112,
+      168,
+      131
+    ],
+    "sourceSHA256": "89c2c0143f3b51f65b04ac1a5e4232c77d4e1082f9823dcb76ea4a3ec1514da5"
+  },
+  {
+    "slot": 17,
+    "file": "17-kickHalf.png",
+    "changedPixels": 245,
+    "bounds": [
+      141,
+      111,
+      168,
+      133
+    ],
+    "sourceSHA256": "22d955f7012d7fdd9f55380444a249ff686c5b67ded69d42d0d3ccb0b9baf824"
+  },
+  {
+    "slot": 18,
+    "file": "18-kickFull.png",
+    "changedPixels": 220,
+    "bounds": [
+      136,
+      115,
+      163,
+      134
+    ],
+    "sourceSHA256": "6603fa1942fd8f1d2c3ac89bf7593721fa68dbcd07501ee31b01905714c20fc3"
+  },
+  {
+    "slot": 19,
+    "file": "19-kickRecover.png",
+    "changedPixels": 221,
+    "bounds": [
+      139,
+      112,
+      166,
+      131
+    ],
+    "sourceSHA256": "995093e1d0fca692ccbc6494ce7fc50b898598c6526cea2820d8ec0de955ba41"
+  },
+  {
+    "slot": 20,
+    "file": "20-sweep.png",
+    "changedPixels": 254,
+    "bounds": [
+      142,
+      146,
+      172,
+      167
+    ],
+    "sourceSHA256": "2096b6d93b226a5c68ba032fb9766ace4be9b539d0063ca55f2df36d6e7c11b8"
+  },
+  {
+    "slot": 21,
+    "file": "21-sweepRecover.png",
+    "changedPixels": 253,
+    "bounds": [
+      142,
+      144,
+      172,
+      165
+    ],
+    "sourceSHA256": "c4bcb4d066c1c14f03fd276133678acafc0e0817d278b37cc7bc8220fdd7d4b3"
+  },
+  {
+    "slot": 22,
+    "file": "22-airKickChamber.png",
+    "changedPixels": 227,
+    "bounds": [
+      142,
+      122,
+      170,
+      141
+    ],
+    "sourceSHA256": "ef983c49f85434da347ead826b887732da56f285fea9ea9e838c1dbdbcbc6b7d"
+  },
+  {
+    "slot": 23,
+    "file": "23-airKickFull.png",
+    "changedPixels": 270,
+    "bounds": [
+      142,
+      133,
+      172,
+      155
+    ],
+    "sourceSHA256": "86c1a949cb962c71d4bc6fa77a1018c65d38202c2fb44b9962a7f54a1c7692e4"
+  },
+  {
+    "slot": 24,
+    "file": "24-hit.png",
+    "changedPixels": 168,
+    "bounds": [
+      141,
+      126,
+      156,
+      150
+    ],
+    "sourceSHA256": "b3952b0df27644a81fa71fd8815c0253c76703b0697ddf2ae1d2db964dd72481"
+  },
+  {
+    "slot": 25,
+    "file": "25-block.png",
+    "changedPixels": 139,
+    "bounds": [
+      140,
+      133,
+      160,
+      150
+    ],
+    "sourceSHA256": "9115de335c1b7ecf65f74776e49b2ac782101a5bea30c6e1b18f6d86ce2ebd08"
+  },
+  {
+    "slot": 26,
+    "file": "26-grabReach.png",
+    "changedPixels": 221,
+    "bounds": [
+      144,
+      130,
+      171,
+      149
+    ],
+    "sourceSHA256": "107551d6bf7383c9be7acf456cbfffbf589b374bde27fb7033183c5788666521"
+  },
+  {
+    "slot": 27,
+    "file": "27-grabHold.png",
+    "changedPixels": 227,
+    "bounds": [
+      142,
+      133,
+      170,
+      152
+    ],
+    "sourceSHA256": "bf3f8eb2be44aa2a118620504d912805fb2a8840a6ec21892c26cf2d560c762c"
+  },
+  {
+    "slot": 28,
+    "file": "28-throwRelease.png",
+    "changedPixels": 197,
+    "bounds": [
+      142,
+      139,
+      168,
+      157
+    ],
+    "sourceSHA256": "02e41efd627b85992c44feb0e96520a77641e835a31e3ff1d613aeb9148d136f"
+  },
+  {
+    "slot": 29,
+    "file": "29-powerCharge.png",
+    "changedPixels": 179,
+    "bounds": [
+      144,
+      148,
+      170,
+      165
+    ],
+    "sourceSHA256": "f3f9e8f8ce189d070059cc956d2d4d98e9bb5cbb09c851dafb727a8a9b06b5c2"
+  },
+  {
+    "slot": 30,
+    "file": "30-powerRelease.png",
+    "changedPixels": 208,
+    "bounds": [
+      134,
+      144,
+      160,
+      163
+    ],
+    "sourceSHA256": "b4919a8e0bb4558a6de77701daba4c6aa7d08446ba1dff7998036f485f2d6440"
+  },
+  {
+    "slot": 31,
+    "file": "31-special.png",
+    "changedPixels": 144,
+    "bounds": [
+      140,
+      128,
+      159,
+      148
+    ],
+    "sourceSHA256": "f03bafa6cbfda524a8511fae60571c93bfd7b2f70a20cebbf07be7fa4ce1bce8"
+  }
+]

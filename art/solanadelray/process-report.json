@@ -1,0 +1,46 @@
+[
+  {
+    "entity": "solanadelray",
+    "kind": "core",
+    "status": "already-normalized"
+  },
+  {
+    "entity": "solanadelray-companion",
+    "kind": "core",
+    "status": "already-normalized"
+  },
+  {
+    "entity": "solanadelray",
+    "kind": "walk",
+    "status": "already-normalized"
+  },
+  {
+    "entity": "solanadelray",
+    "kind": "events",
+    "status": "already-normalized"
+  },
+  {
+    "entity": "solanadelray-companion",
+    "kind": "walk",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "solanadelray-companion",
+    "kind": "events",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "solanadelray",
+    "kind": "motion",
+    "status": "normalized",
+    "issues": 0
+  },
+  {
+    "entity": "solanadelray-companion",
+    "kind": "motion",
+    "status": "normalized",
+    "issues": 0
+  }
+]

@@ -1,0 +1,116 @@
+[
+  {
+    "index": 1333,
+    "entity": "sproto2344",
+    "fighter": "sproto2344",
+    "kind": "walk",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "job_id": "9c233254-3a95-4b4a-9f37-d77f5e465d92",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "model": "gpt_image_2_5",
+    "retry": 10,
+    "estimatedCredits": 2.75
+  },
+  {
+    "index": 1334,
+    "entity": "sproto2344",
+    "fighter": "sproto2344",
+    "kind": "events",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "job_id": "e17786b2-78f2-44b6-b254-a359a7ba3f17",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "model": "gpt_image_2_5",
+    "retry": 10,
+    "estimatedCredits": 4.25
+  },
+  {
+    "index": 1335,
+    "entity": "sproto2344",
+    "fighter": "sproto2344",
+    "kind": "motion",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "job_id": "3cafa028-1d16-4a1e-a01e-4bc7a3f55b12",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "model": "gpt_image_2_5",
+    "retry": 10,
+    "estimatedCredits": 4.25
+  },
+  {
+    "index": 1336,
+    "entity": "sproto2344-companion",
+    "fighter": "sproto2344",
+    "kind": "walk",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "job_id": "d4b2b702-d31d-4aed-807d-cdc0179ae11e",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "model": "gpt_image_2_5",
+    "retry": 10,
+    "estimatedCredits": 2.75
+  },
+  {
+    "index": 1337,
+    "entity": "sproto2344-companion",
+    "fighter": "sproto2344",
+    "kind": "events",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "job_id": "58a0a8be-bd1e-4365-be82-bb33fe2478f9",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "model": "gpt_image_2_5",
+    "retry": 10,
+    "estimatedCredits": 4.25
+  },
+  {
+    "index": 1338,
+    "entity": "sproto2344-companion",
+    "fighter": "sproto2344",
+    "kind": "motion",
+    "revision": "2344-curvy-red-chubby-blue-1",
+    "job_id": "bc3199dc-7dc6-4dbe-aa4d-0f0810bc016d",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "model": "gpt_image_2_5",
+    "retry": 10,
+    "estimatedCredits": 4.25
+  }
+]

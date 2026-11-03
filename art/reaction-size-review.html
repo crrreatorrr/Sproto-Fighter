@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Reaction size review — all bodies</title>
+<style>:root{color-scheme:dark;background:#141e2e;color:#eef5ff;font:14px system-ui}body{margin:10px}header{position:sticky;left:0;top:0;background:#142335;padding:8px;z-index:2;width:1230px}h1{font-size:20px;margin:0 0 4px}button,select{font:inherit;padding:6px;background:#284360;color:white;border:1px solid #81a2c2}p{margin:5px 0;font-size:12px}canvas{display:block;image-rendering:pixelated;margin:8px 0;border:1px solid #69849e}#status{font:13px monospace;white-space:pre-wrap}#summary{font:12px monospace;white-space:pre-wrap}</style>
+<header><h1>Reaction size review</h1><button id="prev">Previous four</button> <label>Batch <select id="batch"></select></label> <button id="next">Next four</button> <button id="play">Run real-time reactions</button> <button id="step">Step 10 ticks</button>
+<p>Actual combat core and renderer. Both facings, every body. Camera centers each drawing without resizing it; fixed density throughout each row. Root placement is checked separately. Columns capture real impact, recoil, launch, fall, tumble, floor rest, get-up and recovery. Snapshot collection is not visual approval.</p><div id="status">Loading…</div></header><div id="wall"></div><pre id="summary"></pre>
+<script type="module">
+import {ROSTER,PLAYABLE_FIGHTERS,bodyAtlasIds,FLOOR} from '/src/core.ts';
+import {ensurePoseAtlases,drawPoseAtlas,getPoseAtlasDebug,getDuoPoseDebug,setPoseAtlasThrowState} from '/src/poseAtlas.ts';
+import {REACTION_COLUMNS,REACTION_CASES,reactionFixture} from './reaction-review-fixture.ts';
+const $=id=>document.getElementById(id),batches=[];
+for(let i=0;i<PLAYABLE_FIGHTERS.length;i+=4)batches.push(PLAYABLE_FIGHTERS.slice(i,i+4));
+for(const [i,ids]of batches.entries())$('batch').add(new Option(`${i+1} · ${ids.map(id=>ROSTER[id].name).join(' / ')}`,i));
+const request=Number(new URLSearchParams(location.search).get('batch'))||0;$('batch').value=String(Math.max(0,Math.min(request,batches.length-1)));
+let rows=[],ready=false,playing=false,caseIndex=0,age=0,last=0,acc=0,generation=0;
+const W=220,H=220;
+function stop(){playing=false;$('play').textContent='Run real-time reactions';}
+function show(){const n=rows.reduce((s,r)=>s+r.seen.size,0),total=rows.length*REACTION_COLUMNS.length;$('status').textContent=`${ready?'READY':'Loading'} · ${REACTION_CASES[caseIndex]??'COMPLETE'} · tick ${age} · ${playing?'PLAYING':'PAUSED'} · ${n}/${total} snapshots`;
+ $('summary').textContent=rows.map(r=>`${r.id} ${r.face===1?'RIGHT':'LEFT'}: ${[...r.seen.keys()].join(', ')}${caseIndex===3&&r.seen.size!==10?' — MISSING STATES':''}`).join('\n');}
+function stamp(row,key){if(row.seen.has(key))return;
+ const f=row.fixture.state.fighters[0],s=row.fixture.state,index=REACTION_COLUMNS.indexOf(key),c=row.canvas.getContext('2d'),x=index*W,z=row.scale;
+ c.save();c.beginPath();c.rect(x,0,W,H);c.clip();c.fillStyle=index%2?'#26374c':'#203045';c.fillRect(x,0,W,H);
+ c.fillStyle='#eff7ff';c.font='12px system-ui';c.fillText(key,x+7,18);c.font='10px monospace';c.fillText(`t${row.fixture.age} y${f.y.toFixed(0)} ${f.reaction?.phase??'stand'}`,x+7,33);
+ setPoseAtlasThrowState(s.throwState,s.fighters);
+ const buffer=document.createElement('canvas');buffer.width=600;buffer.height=500;const g=buffer.getContext('2d');g.translate(300,350);g.scale(z,z);g.translate(-f.x,-f.y);drawPoseAtlas(g,f,s.frame,false,s.freeze>0);
+ const rgba=g.getImageData(0,0,600,500).data;let l=600,t=500,r=0,b=0;for(let yy=0;yy<500;yy++)for(let xx=0;xx<600;xx++)if(rgba[(yy*600+xx)*4+3]){l=Math.min(l,xx);t=Math.min(t,yy);r=Math.max(r,xx+1);b=Math.max(b,yy+1);}
+ c.drawImage(buffer,x+W/2-(l+r)/2,H-12-b);c.restore();
+ if(r-l>W-4||b-t>H-48)row.cropWarnings.push({key,width:r-l,height:b-t});
+ const d=getPoseAtlasDebug(f,s.frame,s.freeze>0),members=getDuoPoseDebug(f,s.frame,s.freeze>0);row.seen.set(key,{tick:row.fixture.age,frame:s.frame,hp:f.hp,y:f.y,reaction:f.reaction?{...f.reaction}:null,source:members.length?members.map(m=>({id:m.entity,sequence:m.sequence,index:m.frameIndex})):[{id:row.id,sequence:d.sequence,index:d.frameIndex}]});
+}
+function neutralCenter(row){const c=document.createElement('canvas');c.width=800;c.height=400;const g=c.getContext('2d'),f=row.fixture.state.fighters[0];g.save();g.translate(400,350);g.translate(-f.x,-f.y);drawPoseAtlas(g,f,0);g.restore();const a=g.getImageData(0,0,800,400).data;let l=800,r=0;for(let y=0;y<400;y++)for(let x=0;x<800;x++)if(a[(y*800+x)*4+3]){l=Math.min(l,x);r=Math.max(r,x);}return (l+r)/2-400;}
+async function load(){const token=++generation;stop();ready=false;rows=[];caseIndex=0;age=0;$('wall').replaceChildren();show();$('play').disabled=true;$('step').disabled=true;
+ const ids=batches[Number($('batch').value)];await ensurePoseAtlases([...ids,'rivet']);if(token!==generation)return;
+ for(const id of ids)for(const face of [1,-1]){const h=document.createElement('h3');h.textContent=`${ROSTER[id].name} · ${id} · ${face===1?'RIGHT':'LEFT'} · ${bodyAtlasIds(id).join(' + ')}`;const canvas=document.createElement('canvas');canvas.width=W*10;canvas.height=H;$('wall').append(h,canvas);const row={id,face,canvas,scale:bodyAtlasIds(id).length>1?.48:.82,center:0,fixture:reactionFixture(id,face,'light'),seen:new Map(),cropWarnings:[]};row.center=neutralCenter(row);rows.push(row);stamp(row,'neutral');}
+ ready=true;$('play').disabled=false;$('step').disabled=false;show();}
+function advance(){if(!ready||caseIndex>=3)return;for(const row of rows)for(const key of row.fixture.advance())stamp(row,key);age++;
+ if(age===180){caseIndex++;age=0;if(caseIndex<3)for(const row of rows)row.fixture=reactionFixture(row.id,row.face,REACTION_CASES[caseIndex]);else{stop();document.body.dataset.coverage=JSON.stringify(rows.map(r=>({id:r.id,facing:r.face,snapshots:Object.fromEntries(r.seen),cropWarnings:r.cropWarnings})));}}show();}
+for(const [id,delta]of [['prev',-1],['next',1]])$(id).onclick=()=>{$('batch').value=String((Number($('batch').value)+delta+batches.length)%batches.length);load().catch(e=>$('status').textContent='ERROR '+e.message);};
+$('batch').onchange=()=>load().catch(e=>$('status').textContent='ERROR '+e.message);
+$('play').onclick=()=>{if(caseIndex===3)return;playing=!playing;$('play').textContent=playing?'Pause':'Run real-time reactions';last=0;acc=0;show();};$('step').onclick=()=>{stop();for(let i=0;i<10;i++)advance();};
+function loop(t){if(playing&&last){acc+=Math.min(100,t-last);while(acc>=1000/60&&playing){acc-=1000/60;advance();}}last=t;requestAnimationFrame(loop);}load().catch(e=>$('status').textContent='ERROR '+e.message);requestAnimationFrame(loop);
+</script></html>

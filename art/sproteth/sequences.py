@@ -1,0 +1,21 @@
+import json,sys
+from pathlib import Path
+HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[1]
+sys.path.insert(0,str(ROOT/'art/sprotos-expansion'));import make_requests as m
+info=json.loads((HERE/'identity.json').read_text());base=json.loads((HERE/'core-request.json').read_text())[0]['params'];core=next(j for j in json.loads((HERE/'jobs.json').read_text()) if j['kind']=='core')
+entrance=['relaxed friendly wide-eyed smile, arms low','tilt swept head in a friendly nod','near blue hand reaches thick gold collar','adjust the collar with attached blue fingertips, far palm at hip','release collar and lift near open palm in greeting','both hands open confidently beside waist','close hands and step near foot into guard','settled two-fist guard with enormous yellow eyes and broad smile']
+cast=['broad red smile begins to purse','head draws back and cheeks puff','knees compress, shoulders roll back','cheeks fully inflated, elbows tucked BACK beside ribs','explosive open-mouth SPIT RIGHT with head and neck snapping forward, hands remain BACK at ribs','hold open-mouth release briefly as cheeks deflate','head recoils, lips close and knees rise','broad red smile and balanced guard restored']
+death=['huge yellow eyes widen, smile sags','head jerks back, arms spread for balance','near blue palm touches thick collar','knees wobble and buckle','hips lower, far palm reaches down','seated collapse, feet forward','roll onto left side, head LEFT feet RIGHT','fully side-lying, one elbow briefly props heavy head','supporting elbow bends and head lowers','blue hand rests beside broad mouth','shoulder settles onto floor','red lips slacken, eyes half close','fingers relax beside gold collar','tiny final shoulder drop','eyes close and body lies still','final completely still side-lying rest, swept blue head and collar attached']
+intro='INTRO: relaxed wide-eyed smile with arms low; tilt swept head in friendly nod and adjust thick gold collar with near fingertips; open near palm in greeting with far hand on hip; settle into two-fist guard. No effects or text.'
+legacycast='CAST: lean head back and inflate cheeks, red lips pursed; coil knees and tuck both hands BACK at ribs; forceful open-mouth SPIT RIGHT with sharp forward head snap, hands still back; mouth closes and smile returns as knees straighten. Never a palm shot. No projectile.'
+defeat='DEFEAT START: huge eyes widen as smile sags; near hand reaches collar while knees buckle; seated collapse with arms balancing; roll onto left side, head LEFT feet RIGHT. DEFEAT FLOOR: entirely side-lying with elbow briefly propping heavy head; elbow bends; head lowers; shoulder settles. DEFEAT REST: red lips relax; eyes close; fingers loosen by collar; completely still side-lying rest.'
+events=m.EVENTS;events=events.replace(events.split('Row 1 INTRO:')[1].split('\nRow 2')[0],intro.removeprefix('INTRO: '));events=events.replace(events.split('Row 4 CAST:')[1].split('\nRow 5')[0],legacycast.removeprefix('CAST: '));events=events.split('Row 6 DEFEAT START:')[0]+'Row 6 to 8: '+defeat+' Exactly four figures per row, twelve defeat drawings total.'
+actions=entrance+cast+death
+identity='Exactly 32 complete drawings in a strict FOUR-column EIGHT-row grid. Rows1-2 eight ENTRANCE frames, rows3-4 eight MOUTH-SPIT frames, rows5-8 sixteen DEATH frames. Read left to right then top to bottom. Same single actor. No projectile, text, opponent, floor shadow or effects. Death frames24-31 entirely side-lying head LEFT feet RIGHT, never upright/kneeling.\n'+'\n'.join('Row '+str(row+1)+': '+'; '.join(actions[row*4:row*4+4])+'.' for row in range(8))
+requests=[]
+for index,kind,poses in [(1,'walk',m.WALK),(2,'events',events),(3,'identity',identity)]:
+ params={**base,'resolution':'2k' if kind=='walk' else '4k','aspect_ratio':'4:3' if kind=='walk' else '9:16','medias':base['medias']+[dict(role='image',value=core['job_id'])],'prompt':m.STYLE+'\nIDENTITY: '+info['identity']+' Reference image2 is the reviewed combat sheet; match its face, costume, proportions and crisp pixel style precisely.\n'+poses+info['appearanceRule']}
+ req=dict(index=index,entity=info['id'],fighter=info['id'],kind=kind,params=params)
+ if kind=='identity':req.update(ranged=True,deathStart=16,frameCount=32)
+ requests.append(req)
+(HERE/'sequence-requests.json').write_text(json.dumps(requests,indent=2)+'\n')

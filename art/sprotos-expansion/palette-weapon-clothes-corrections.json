@@ -1,0 +1,354 @@
+[
+  {
+    "index": 99,
+    "entity": "sproto1870",
+    "fighter": "sproto1870",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "0d9193cc-c910-4790-adac-d95d452e1b5b"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Isolate only the specified one of the two original figures.\n\nIDENTITY: ONE SINGLE legless floating Sproto shaped like the ENTIRE original image: large upper blue face with red swept spike fan, yellow forehead/side crescent and enormous yellow angular muzzle; small LOWER BLUE face with two huge round yellow eyes and rounded yellow muzzle. These TWO facial regions are JOINED into ONE CONTINUOUS BLUE head/body silhouette. One complete floating mass, not two detached characters. Preserve both facial regions and all FOUR yellow eyes as in the full reference. No neck, humanoid torso, arms, hands, legs, feet or shoes. Complete the cropped bottom with a rounded blue/yellow contour. VMU-like legless hovering motion, but remain this organic Sproto design, not a machine.\n\nExactly 32 separate complete floating heads in a FOUR-COLUMN by EIGHT-ROW grid. Exactly four drawings per row.\nRow 1: neutral hover; subtle upward bob; forward glide bank; glide transition.\nRow 2: opposite bank; return through level hover; fast forward lunge; downward coil hover.\nRow 3: rising airborne bank; falling level head; settle low hover; recoil back to charge a ram.\nRow 4: forward face-first ram; ram retract; upward bank anticipation; rising upward head strike.\nRow 5: rotate back to chamber; half-drive forward; fully extended forward body ram; retract to level.\nRow 6: low swooping sweep; swoop recover; aerial coil; forceful diagonal forward aerial ram.\nRow 7: hit recoil with squint; braced defensive head tuck; forward grab/catch lunge; braced close hold pose.\nRow 8: toss follow-through head flick; power charge with determined eyes; power release face forward, no projectile; triumphant special impact bank. Every drawing is a HEAD ONLY; no hands or legs."
+    }
+  },
+  {
+    "index": 147,
+    "entity": "sproto2616",
+    "fighter": "sproto2616",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "1b9afb76-040a-4c7a-b02d-4cc6aa124872"
+        }
+      ],
+      "prompt": "PIXEL-ART fighting-game animation sheet. Preserve this character's exact face, eyes, hair/spikes, colors, clothing and body proportions. TWO arms and TWO legs, all attached and fully visible. A LARGE RED-AND-GOLD STAFF about as tall as the actor, with a clearly curled/spiral top, is held securely in one or both hands in EVERY pose. This is a proper full-length staff, not a tiny wand. Every melee action hits with the STAFF: thrust, overhead swing, low sweep and airborne staff strike. Legs only support or tuck during jumps; do not kick as the attack. Coherent wrists and two-handed grips. Entire staff fits wholly inside each cell with generous empty margins. Solid pure magenta #ff00ff background, crisp stepped pixels, dark outlines, compact shading, no labels, grid lines, floating effects or detached props. Exactly one complete actor per cell.\n\nIDENTITY: Blue bald wrinkled round head with large round yellow ears, half-lidded yellow eyes, round red nose, yellow muzzle with red lips, yellow and blue torso with coiled red/yellow chest accessory. Keep accessories attached. Holds a large full-length RED-AND-GOLD curled STAFF about as tall as the actor. All attacks strike with the staff: thrust, overhead swing, low sweep and aerial staff strike, never punches or kicks.\n\nExactly 32 complete figures, regular FOUR columns by EIGHT rows. Four figures in every row.\nRow 1: staff guard; subtle breathing staff guard; near guarded step; passing step.\nRow 2: far guarded step; far passing step; low staff-guarded dash; jump anticipation.\nRow 3: rising jump with staff close; falling jump with staff close; crouched landing; draw staff back to thrust.\nRow 4: straight STAFF THRUST to RIGHT; retract staff; coil staff low for rising swing; UPWARD STAFF SWING.\nRow 5: chamber overhead staff swing; staff halfway through overhead swing; full STAFF IMPACT toward RIGHT, feet planted; retract after swing.\nRow 6: LOW STAFF SWEEP at knee height to RIGHT, no kick; sweep recovery; airborne STAFF STRIKE chamber, knees tucked; airborne STAFF STRIKE to RIGHT, no kick.\nRow 7: hit recoil retaining staff; high staff guard; hook staff forward to catch; staff-assisted hold, no opponent.\nRow 8: staff lever throw follow-through, no opponent; staff power charge; staff channel release to RIGHT, no projectile; powerful two-handed STAFF SPECIAL impact."
+    }
+  },
+  {
+    "index": 148,
+    "entity": "sproto2616",
+    "fighter": "sproto2616",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "1c56a864-6963-4edc-b5c6-1070313ae1b4"
+        }
+      ],
+      "prompt": "PIXEL-ART fighting-game animation sheet. Preserve this character's exact face, eyes, hair/spikes, colors, clothing and body proportions. TWO arms and TWO legs, all attached and fully visible. A LARGE RED-AND-GOLD STAFF about as tall as the actor, with a clearly curled/spiral top, is held securely in one or both hands in EVERY pose. This is a proper full-length staff, not a tiny wand. Every melee action hits with the STAFF: thrust, overhead swing, low sweep and airborne staff strike. Legs only support or tuck during jumps; do not kick as the attack. Coherent wrists and two-handed grips. Entire staff fits wholly inside each cell with generous empty margins. Solid pure magenta #ff00ff background, crisp stepped pixels, dark outlines, compact shading, no labels, grid lines, floating effects or detached props. Exactly one complete actor per cell.\n\nIDENTITY: Blue bald wrinkled round head with large round yellow ears, half-lidded yellow eyes, round red nose, yellow muzzle with red lips, yellow and blue torso with coiled red/yellow chest accessory. Keep accessories attached. Holds a large full-length RED-AND-GOLD curled STAFF about as tall as the actor. All attacks strike with the staff: thrust, overhead swing, low sweep and aerial staff strike, never punches or kicks. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly EIGHT separate figures in FOUR columns and TWO rows. Guarded footwork cycle with staff held securely in BOTH hands: near foot plants; weight transfers over near sole; far knee passes under low hips; far foot reaches; far foot plants; weight transfers over far sole; near knee passes; near foot reaches. Staff stays about body-height and attached to hands in every drawing. Same face and body size throughout. Feet alternate readable ground support without sliding hips. No running or weapons floating apart."
+    }
+  },
+  {
+    "index": 149,
+    "entity": "sproto2616",
+    "fighter": "sproto2616",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "826cbc8f-1570-4ec6-823b-9abc2f3827ec"
+        }
+      ],
+      "prompt": "PIXEL-ART fighting-game animation sheet. Preserve this character's exact face, eyes, hair/spikes, colors, clothing and body proportions. TWO arms and TWO legs, all attached and fully visible. A LARGE RED-AND-GOLD STAFF about as tall as the actor, with a clearly curled/spiral top, is held securely in one or both hands in EVERY pose. This is a proper full-length staff, not a tiny wand. Every melee action hits with the STAFF: thrust, overhead swing, low sweep and airborne staff strike. Legs only support or tuck during jumps; do not kick as the attack. Coherent wrists and two-handed grips. Entire staff fits wholly inside each cell with generous empty margins. Solid pure magenta #ff00ff background, crisp stepped pixels, dark outlines, compact shading, no labels, grid lines, floating effects or detached props. Exactly one complete actor per cell.\n\nIDENTITY: Blue bald wrinkled round head with large round yellow ears, half-lidded yellow eyes, round red nose, yellow muzzle with red lips, yellow and blue torso with coiled red/yellow chest accessory. Keep accessories attached. Holds a large full-length RED-AND-GOLD curled STAFF about as tall as the actor. All attacks strike with the staff: thrust, overhead swing, low sweep and aerial staff strike, never punches or kicks. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete figures, regular FOUR columns by EIGHT rows. Four figures in every row.\nRow 1 INTRO: guarded staff; secure small staff twirl; confident staff salute; settle staff guard.\nRow 2 SPECIAL A: staff back coil; strong two-handed windup; straight STAFF THRUST to RIGHT; retract staff.\nRow 3 SPECIAL B: overhead STAFF STRIKE; staff retract cover; emphatic finishing STAFF SWING to RIGHT; staff guard recovery.\nRow 4 CAST: staff close to chest; staff tip raised to aim; staff points forward to channel energy, no projectile; return staff guard.\nRow 5 RECOIL: chest recoil holding staff; head/torso lean; knees absorb; regain staff guard.\nRow 6 DEFEAT: stagger; knees buckle; drop with staff in hand; roll onto side, whole staff visible and touching hand.\nRow 7 FLOOR REST: side-lying, head LEFT feet RIGHT, staff safely beside body touching hand; settle lying; shoulder relaxes; entirely still lying.\nRow 8 FINAL REST: same complete lying body and staff; relaxed lying body; hold floor rest; final still side-lying body with staff. Never stand or kneel in the final eight frames."
+    }
+  },
+  {
+    "index": 150,
+    "entity": "sproto2789",
+    "fighter": "sproto2789",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "e683ef4d-2283-4e06-95e6-ae435cac6ba5"
+        }
+      ],
+      "prompt": "PIXEL-ART fighting-game animation sheet. Preserve this character's exact face, eyes, hair/spikes, colors, clothing and body proportions. TWO arms and TWO legs, all attached and fully visible. A LARGE RED-AND-GOLD STAFF about as tall as the actor, with a clearly curled/spiral top, is held securely in one or both hands in EVERY pose. This is a proper full-length staff, not a tiny wand. Every melee action hits with the STAFF: thrust, overhead swing, low sweep and airborne staff strike. Legs only support or tuck during jumps; do not kick as the attack. Coherent wrists and two-handed grips. Entire staff fits wholly inside each cell with generous empty margins. Solid pure magenta #ff00ff background, crisp stepped pixels, dark outlines, compact shading, no labels, grid lines, floating effects or detached props. Exactly one complete actor per cell.\n\nIDENTITY: Lavender blue swept spiky head, yellow eyes and broad red lips, lavender blue torso with paired red oval chest marks, yellow hand holding red/yellow twisted staff. Slim lavender low legs. Holds a large full-length RED-AND-GOLD curled STAFF about as tall as the actor. All attacks strike with the staff: thrust, overhead swing, low sweep and aerial staff strike, never punches or kicks.\n\nExactly 32 complete figures, regular FOUR columns by EIGHT rows. Four figures in every row.\nRow 1: staff guard; subtle breathing staff guard; near guarded step; passing step.\nRow 2: far guarded step; far passing step; low staff-guarded dash; jump anticipation.\nRow 3: rising jump with staff close; falling jump with staff close; crouched landing; draw staff back to thrust.\nRow 4: straight STAFF THRUST to RIGHT; retract staff; coil staff low for rising swing; UPWARD STAFF SWING.\nRow 5: chamber overhead staff swing; staff halfway through overhead swing; full STAFF IMPACT toward RIGHT, feet planted; retract after swing.\nRow 6: LOW STAFF SWEEP at knee height to RIGHT, no kick; sweep recovery; airborne STAFF STRIKE chamber, knees tucked; airborne STAFF STRIKE to RIGHT, no kick.\nRow 7: hit recoil retaining staff; high staff guard; hook staff forward to catch; staff-assisted hold, no opponent.\nRow 8: staff lever throw follow-through, no opponent; staff power charge; staff channel release to RIGHT, no projectile; powerful two-handed STAFF SPECIAL impact."
+    }
+  },
+  {
+    "index": 151,
+    "entity": "sproto2789",
+    "fighter": "sproto2789",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "88c8914e-aea0-4a2c-b6d9-18409bd013e0"
+        }
+      ],
+      "prompt": "PIXEL-ART fighting-game animation sheet. Preserve this character's exact face, eyes, hair/spikes, colors, clothing and body proportions. TWO arms and TWO legs, all attached and fully visible. A LARGE RED-AND-GOLD STAFF about as tall as the actor, with a clearly curled/spiral top, is held securely in one or both hands in EVERY pose. This is a proper full-length staff, not a tiny wand. Every melee action hits with the STAFF: thrust, overhead swing, low sweep and airborne staff strike. Legs only support or tuck during jumps; do not kick as the attack. Coherent wrists and two-handed grips. Entire staff fits wholly inside each cell with generous empty margins. Solid pure magenta #ff00ff background, crisp stepped pixels, dark outlines, compact shading, no labels, grid lines, floating effects or detached props. Exactly one complete actor per cell.\n\nIDENTITY: Lavender blue swept spiky head, yellow eyes and broad red lips, lavender blue torso with paired red oval chest marks, yellow hand holding red/yellow twisted staff. Slim lavender low legs. Holds a large full-length RED-AND-GOLD curled STAFF about as tall as the actor. All attacks strike with the staff: thrust, overhead swing, low sweep and aerial staff strike, never punches or kicks. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly EIGHT separate figures in FOUR columns and TWO rows. Guarded footwork cycle with staff held securely in BOTH hands: near foot plants; weight transfers over near sole; far knee passes under low hips; far foot reaches; far foot plants; weight transfers over far sole; near knee passes; near foot reaches. Staff stays about body-height and attached to hands in every drawing. Same face and body size throughout. Feet alternate readable ground support without sliding hips. No running or weapons floating apart."
+    }
+  },
+  {
+    "index": 152,
+    "entity": "sproto2789",
+    "fighter": "sproto2789",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "91ebeaf5-57b9-4046-a70d-76016ceece43"
+        }
+      ],
+      "prompt": "PIXEL-ART fighting-game animation sheet. Preserve this character's exact face, eyes, hair/spikes, colors, clothing and body proportions. TWO arms and TWO legs, all attached and fully visible. A LARGE RED-AND-GOLD STAFF about as tall as the actor, with a clearly curled/spiral top, is held securely in one or both hands in EVERY pose. This is a proper full-length staff, not a tiny wand. Every melee action hits with the STAFF: thrust, overhead swing, low sweep and airborne staff strike. Legs only support or tuck during jumps; do not kick as the attack. Coherent wrists and two-handed grips. Entire staff fits wholly inside each cell with generous empty margins. Solid pure magenta #ff00ff background, crisp stepped pixels, dark outlines, compact shading, no labels, grid lines, floating effects or detached props. Exactly one complete actor per cell.\n\nIDENTITY: Lavender blue swept spiky head, yellow eyes and broad red lips, lavender blue torso with paired red oval chest marks, yellow hand holding red/yellow twisted staff. Slim lavender low legs. Holds a large full-length RED-AND-GOLD curled STAFF about as tall as the actor. All attacks strike with the staff: thrust, overhead swing, low sweep and aerial staff strike, never punches or kicks. The attached image supplies this individual character's full-body combat design: copy its EXACT head size, body/clothing design and body proportions in these new poses.\n\nExactly 32 complete figures, regular FOUR columns by EIGHT rows. Four figures in every row.\nRow 1 INTRO: guarded staff; secure small staff twirl; confident staff salute; settle staff guard.\nRow 2 SPECIAL A: staff back coil; strong two-handed windup; straight STAFF THRUST to RIGHT; retract staff.\nRow 3 SPECIAL B: overhead STAFF STRIKE; staff retract cover; emphatic finishing STAFF SWING to RIGHT; staff guard recovery.\nRow 4 CAST: staff close to chest; staff tip raised to aim; staff points forward to channel energy, no projectile; return staff guard.\nRow 5 RECOIL: chest recoil holding staff; head/torso lean; knees absorb; regain staff guard.\nRow 6 DEFEAT: stagger; knees buckle; drop with staff in hand; roll onto side, whole staff visible and touching hand.\nRow 7 FLOOR REST: side-lying, head LEFT feet RIGHT, staff safely beside body touching hand; settle lying; shoulder relaxes; entirely still lying.\nRow 8 FINAL REST: same complete lying body and staff; relaxed lying body; hold floor rest; final still side-lying body with staff. Never stand or kneel in the final eight frames."
+    }
+  },
+  {
+    "index": 117,
+    "entity": "sproto2101",
+    "fighter": "sproto2101",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "94c6efec-bef2-4fbe-976a-f133501c9c86"
+        }
+      ],
+      "prompt": "Edit this existing PIXEL-ART fighting-game animation sheet. Preserve EXACTLY 32 figures, the grid, frame order, existing poses, complete connected limbs, head size and body proportions. Apply this correction to EVERY figure: Keep face, forehead and cheeks CLEAN BLUE with crisp palette boundaries. Remove red blush, red smears and red color bleeding from the blue face. RED is allowed ONLY in the original broad lips/muzzle and garment details. Yellow eyes, black pupils and square yellow teeth remain sharp. No painterly blending or anti-aliased red haze. Keep magenta #ff00ff background, generous margins and crisp stepped pixel edges with limited flat shading. Do not change poses, add figures or crop limbs."
+    }
+  },
+  {
+    "index": 118,
+    "entity": "sproto2101",
+    "fighter": "sproto2101",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "06f9d3ee-418b-4abe-9073-cf6e13ccb0b7"
+        }
+      ],
+      "prompt": "Edit this existing PIXEL-ART fighting-game animation sheet. Preserve EXACTLY 8 figures, the grid, frame order, existing poses, complete connected limbs, head size and body proportions. Apply this correction to EVERY figure: Keep face, forehead and cheeks CLEAN BLUE with crisp palette boundaries. Remove red blush, red smears and red color bleeding from the blue face. RED is allowed ONLY in the original broad lips/muzzle and garment details. Yellow eyes, black pupils and square yellow teeth remain sharp. No painterly blending or anti-aliased red haze. Keep magenta #ff00ff background, generous margins and crisp stepped pixel edges with limited flat shading. Do not change poses, add figures or crop limbs."
+    }
+  },
+  {
+    "index": 119,
+    "entity": "sproto2101",
+    "fighter": "sproto2101",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "09dd90e7-a1cb-495b-824e-267f804f1e88"
+        }
+      ],
+      "prompt": "Edit this existing PIXEL-ART fighting-game animation sheet. Preserve EXACTLY 32 figures, the grid, frame order, existing poses, complete connected limbs, head size and body proportions. Apply this correction to EVERY figure: Keep face, forehead and cheeks CLEAN BLUE with crisp palette boundaries. Remove red blush, red smears and red color bleeding from the blue face. RED is allowed ONLY in the original broad lips/muzzle and garment details. Yellow eyes, black pupils and square yellow teeth remain sharp. No painterly blending or anti-aliased red haze. Keep magenta #ff00ff background, generous margins and crisp stepped pixel edges with limited flat shading. Do not change poses, add figures or crop limbs."
+    }
+  },
+  {
+    "index": 138,
+    "entity": "sproto2381",
+    "fighter": "sproto2381",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "b3a18051-0180-463e-a92c-8b1ab773798a"
+        }
+      ],
+      "prompt": "Edit this existing PIXEL-ART fighting-game animation sheet. Preserve EXACTLY 32 figures, the grid, frame order, existing poses, complete connected limbs, head size and body proportions. Apply this correction to EVERY figure: Sharpen BOTH eyes: solid YELLOW eye whites, exactly ONE crisp BLACK pupil per eye, clean dark outlines, small clear white highlight only if present. Remove blurry gray haze, smeared pupils and doubled eye outlines. Keep the original large eyes, blue spiky face and broad red/yellow smile. Keep magenta #ff00ff background, generous margins and crisp stepped pixel edges with limited flat shading. Do not change poses, add figures or crop limbs."
+    }
+  },
+  {
+    "index": 139,
+    "entity": "sproto2381",
+    "fighter": "sproto2381",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "d559e05f-f462-48f5-976b-2d0ca4d1f147"
+        }
+      ],
+      "prompt": "Edit this existing PIXEL-ART fighting-game animation sheet. Preserve EXACTLY 8 figures, the grid, frame order, existing poses, complete connected limbs, head size and body proportions. Apply this correction to EVERY figure: Sharpen BOTH eyes: solid YELLOW eye whites, exactly ONE crisp BLACK pupil per eye, clean dark outlines, small clear white highlight only if present. Remove blurry gray haze, smeared pupils and doubled eye outlines. Keep the original large eyes, blue spiky face and broad red/yellow smile. Keep magenta #ff00ff background, generous margins and crisp stepped pixel edges with limited flat shading. Do not change poses, add figures or crop limbs."
+    }
+  },
+  {
+    "index": 140,
+    "entity": "sproto2381",
+    "fighter": "sproto2381",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "12e138e2-73cf-4eac-a17f-5e9a3424572f"
+        }
+      ],
+      "prompt": "Edit this existing PIXEL-ART fighting-game animation sheet. Preserve EXACTLY 32 figures, the grid, frame order, existing poses, complete connected limbs, head size and body proportions. Apply this correction to EVERY figure: Sharpen BOTH eyes: solid YELLOW eye whites, exactly ONE crisp BLACK pupil per eye, clean dark outlines, small clear white highlight only if present. Remove blurry gray haze, smeared pupils and doubled eye outlines. Keep the original large eyes, blue spiky face and broad red/yellow smile. Keep magenta #ff00ff background, generous margins and crisp stepped pixel edges with limited flat shading. Do not change poses, add figures or crop limbs."
+    }
+  },
+  {
+    "index": 165,
+    "entity": "sproto3215",
+    "fighter": "sproto3215",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "2e8e880f-4281-482f-9eb4-81b3082a217e"
+        }
+      ],
+      "prompt": "Edit this existing PIXEL-ART fighting-game animation sheet. Preserve EXACTLY 32 figures, the grid, frame order, existing poses, complete connected limbs, head size and body proportions. Apply this correction to EVERY figure: Fully clothe the character like the original: opaque BLACK vest/coat with original yellow collar over a yellow shirt, original red pendant, BLACK LONG PANTS completely cover both legs to the ankles, black shoes. No exposed green torso/hips/thighs/calves. Preserve original GREEN swept spiky head, sleepy yellow eyes, yellow muzzle/red lips, yellow hands and the existing poses. Keep magenta #ff00ff background, generous margins and crisp stepped pixel edges with limited flat shading. Do not change poses, add figures or crop limbs."
+    }
+  },
+  {
+    "index": 166,
+    "entity": "sproto3215",
+    "fighter": "sproto3215",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "332748bc-9768-4cc3-aa6b-18bcf5126100"
+        }
+      ],
+      "prompt": "Edit this existing PIXEL-ART fighting-game animation sheet. Preserve EXACTLY 8 figures, the grid, frame order, existing poses, complete connected limbs, head size and body proportions. Apply this correction to EVERY figure: Fully clothe the character like the original: opaque BLACK vest/coat with original yellow collar over a yellow shirt, original red pendant, BLACK LONG PANTS completely cover both legs to the ankles, black shoes. No exposed green torso/hips/thighs/calves. Preserve original GREEN swept spiky head, sleepy yellow eyes, yellow muzzle/red lips, yellow hands and the existing poses. Keep magenta #ff00ff background, generous margins and crisp stepped pixel edges with limited flat shading. Do not change poses, add figures or crop limbs."
+    }
+  },
+  {
+    "index": 167,
+    "entity": "sproto3215",
+    "fighter": "sproto3215",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "2c6e6375-110c-48ea-9387-c9e1fccc9783"
+        }
+      ],
+      "prompt": "Edit this existing PIXEL-ART fighting-game animation sheet. Preserve EXACTLY 32 figures, the grid, frame order, existing poses, complete connected limbs, head size and body proportions. Apply this correction to EVERY figure: Fully clothe the character like the original: opaque BLACK vest/coat with original yellow collar over a yellow shirt, original red pendant, BLACK LONG PANTS completely cover both legs to the ankles, black shoes. No exposed green torso/hips/thighs/calves. Preserve original GREEN swept spiky head, sleepy yellow eyes, yellow muzzle/red lips, yellow hands and the existing poses. Keep magenta #ff00ff background, generous margins and crisp stepped pixel edges with limited flat shading. Do not change poses, add figures or crop limbs."
+    }
+  }
+]

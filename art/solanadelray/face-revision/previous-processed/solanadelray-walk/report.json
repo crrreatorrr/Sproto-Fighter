@@ -1,0 +1,177 @@
+{
+  "entity": "solanadelray",
+  "kind": "walk",
+  "source": "art/solanadelray/raw/solanadelray-walk.png",
+  "uniformSourceScale": 0.2857142857142857,
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        66,
+        100,
+        344,
+        548
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        130.35157545605307,
+        448
+      ],
+      "canonicalBounds": [
+        75,
+        82,
+        154,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        475,
+        100,
+        738,
+        548
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        120.60157545605307,
+        448
+      ],
+      "canonicalBounds": [
+        78,
+        82,
+        153,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        912,
+        100,
+        1114,
+        547
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        69.85157545605307,
+        447
+      ],
+      "canonicalBounds": [
+        92,
+        82,
+        150,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1240,
+        99,
+        1534,
+        548
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        116.60157545605307,
+        449
+      ],
+      "canonicalBounds": [
+        79,
+        82,
+        163,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        66,
+        659,
+        358,
+        1103
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        141.35157545605307,
+        444
+      ],
+      "canonicalBounds": [
+        72,
+        83,
+        155,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        473,
+        659,
+        749,
+        1102
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        126.35157545605307,
+        443
+      ],
+      "canonicalBounds": [
+        76,
+        83,
+        155,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        910,
+        659,
+        1118,
+        1102
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        71.60157545605307,
+        443
+      ],
+      "canonicalBounds": [
+        92,
+        83,
+        151,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1240,
+        659,
+        1543,
+        1102
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        121.35157545605307,
+        443
+      ],
+      "canonicalBounds": [
+        77,
+        83,
+        164,
+        210
+      ]
+    }
+  ]
+}

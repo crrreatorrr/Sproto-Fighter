@@ -1,0 +1,124 @@
+[
+  {
+    "index": 48,
+    "entity": "peterpan-companion",
+    "fighter": "peterpan",
+    "kind": "core",
+    "job_id": "02e1e6ec-2036-40e4-9381-62bea6f006a0",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "superseded": true
+  },
+  {
+    "index": 48,
+    "entity": "peterpan-companion",
+    "fighter": "peterpan",
+    "kind": "core",
+    "job_id": "682750c0-f914-416d-94aa-28a85caf2050",
+    "status": "completed",
+    "retry": 1,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163402_682750c0-f914-416d-94aa-28a85caf2050.png"
+  },
+  {
+    "index": 49,
+    "entity": "peterpan-companion",
+    "fighter": "peterpan",
+    "kind": "walk",
+    "job_id": "f3915d51-c335-4b6e-88df-1978defaa089",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "superseded": true
+  },
+  {
+    "index": 50,
+    "entity": "peterpan-companion",
+    "fighter": "peterpan",
+    "kind": "events",
+    "job_id": "ded66def-5fa5-47f9-835b-707a44b928fc",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163749_ded66def-5fa5-47f9-835b-707a44b928fc.png"
+  },
+  {
+    "index": 51,
+    "entity": "peterpan-companion",
+    "fighter": "peterpan",
+    "kind": "motion",
+    "job_id": "ca55d84e-24bf-4b13-acef-9a6f477dbd94",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163843_ca55d84e-24bf-4b13-acef-9a6f477dbd94.png"
+  },
+  {
+    "index": 49,
+    "entity": "peterpan-companion",
+    "fighter": "peterpan",
+    "kind": "walk",
+    "job_id": "53faf807-2519-40c9-ac93-6a415f2f3c8e",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 3,
+    "retry": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_164138_53faf807-2519-40c9-ac93-6a415f2f3c8e.png"
+  }
+]

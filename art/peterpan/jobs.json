@@ -1,0 +1,118 @@
+[
+  {
+    "index": 44,
+    "entity": "peterpan",
+    "fighter": "peterpan",
+    "kind": "core",
+    "job_id": "445d303e-f531-4ff6-92d9-a913f6b947b1",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_162550_445d303e-f531-4ff6-92d9-a913f6b947b1.png"
+  },
+  {
+    "index": 45,
+    "entity": "peterpan",
+    "fighter": "peterpan",
+    "kind": "walk",
+    "job_id": "989e44f5-f58b-4022-8925-1a46ce934859",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163447_989e44f5-f58b-4022-8925-1a46ce934859.png"
+  },
+  {
+    "index": 46,
+    "entity": "peterpan",
+    "fighter": "peterpan",
+    "kind": "events",
+    "job_id": "8da0917b-4d87-47c2-92f3-7d743e31a5ab",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163615_8da0917b-4d87-47c2-92f3-7d743e31a5ab.png",
+    "superseded": true
+  },
+  {
+    "index": 47,
+    "entity": "peterpan",
+    "fighter": "peterpan",
+    "kind": "motion",
+    "job_id": "b081da1f-c12f-4b71-ac4e-68c6ee0aab70",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_163652_b081da1f-c12f-4b71-ac4e-68c6ee0aab70.png"
+  },
+  {
+    "index": 46,
+    "entity": "peterpan",
+    "fighter": "peterpan",
+    "kind": "events",
+    "job_id": "2a4d040c-9622-4180-b122-d754741522fb",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "animationVersion": 3,
+    "retry": 2,
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_164142_2a4d040c-9622-4180-b122-d754741522fb.png"
+  }
+]

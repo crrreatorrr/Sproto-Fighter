@@ -1,0 +1,530 @@
+{
+  "source": "art/pose-atlases/raw/vela-16.png",
+  "sourceSize": [
+    2048,
+    2048
+  ],
+  "uniformScale": 0.2831858407079646,
+  "threshold": 96,
+  "status": "requires visual acceptance and authored anchors",
+  "frames": [
+    {
+      "slot": 0,
+      "name": "guard",
+      "bounds": [
+        104,
+        41,
+        411,
+        493
+      ],
+      "sourceAnchor": [
+        184.95374449339207,
+        493
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        90,
+        82,
+        176,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 1,
+      "name": "walkLeft",
+      "bounds": [
+        574,
+        36,
+        908,
+        488
+      ],
+      "sourceAnchor": [
+        714.864,
+        488
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        73,
+        82,
+        167,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 2,
+      "name": "walkPass",
+      "bounds": [
+        1117,
+        35,
+        1396,
+        488
+      ],
+      "sourceAnchor": [
+        1188.5029761904761,
+        488
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        92,
+        82,
+        170,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 3,
+      "name": "walkRight",
+      "bounds": [
+        1620,
+        41,
+        1952,
+        489
+      ],
+      "sourceAnchor": [
+        1788.079306071871,
+        489
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        65,
+        84,
+        158,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 4,
+      "name": "punchWindup",
+      "bounds": [
+        74,
+        551,
+        438,
+        1009
+      ],
+      "sourceAnchor": [
+        206.1711956521739,
+        1009
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        75,
+        81,
+        177,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 5,
+      "name": "punchExtended",
+      "bounds": [
+        543,
+        550,
+        1014,
+        1009
+      ],
+      "sourceAnchor": [
+        676.0798898071625,
+        1009
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        75,
+        80,
+        208,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 6,
+      "name": "punchRecover",
+      "bounds": [
+        1094,
+        552,
+        1442,
+        1010
+      ],
+      "sourceAnchor": [
+        1211.1771159874609,
+        1010
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        79,
+        81,
+        177,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 7,
+      "name": "uppercut",
+      "bounds": [
+        1628,
+        529,
+        1952,
+        1011
+      ],
+      "sourceAnchor": [
+        1767.3291139240507,
+        1011
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        73,
+        74,
+        164,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 8,
+      "name": "kickChamber",
+      "bounds": [
+        97,
+        1061,
+        417,
+        1520
+      ],
+      "sourceAnchor": [
+        244.6083550913838,
+        1520
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        71,
+        80,
+        161,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 9,
+      "name": "kickHalf",
+      "bounds": [
+        553,
+        1064,
+        972,
+        1521
+      ],
+      "sourceAnchor": [
+        707.3735955056179,
+        1521
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        69,
+        81,
+        187,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 10,
+      "name": "kickFull",
+      "bounds": [
+        1042,
+        1060,
+        1537,
+        1520
+      ],
+      "sourceAnchor": [
+        1201.9936842105262,
+        1520
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        67,
+        80,
+        206,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 11,
+      "name": "kickRecover",
+      "bounds": [
+        1639,
+        1048,
+        1919,
+        1520
+      ],
+      "sourceAnchor": [
+        1766.1947368421052,
+        1520
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        76,
+        77,
+        154,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 12,
+      "name": "air",
+      "bounds": [
+        121,
+        1546,
+        416,
+        1945
+      ],
+      "sourceAnchor": [
+        269.99397590361446,
+        1945
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        70,
+        97,
+        153,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 13,
+      "name": "crouchGuard",
+      "bounds": [
+        573,
+        1628,
+        899,
+        2010
+      ],
+      "sourceAnchor": [
+        663.0957446808511,
+        2010
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [],
+      "canonicalBounds": [
+        87,
+        102,
+        178,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 14,
+      "name": "hit",
+      "bounds": [
+        1024,
+        1597,
+        1447,
+        2014
+      ],
+      "sourceAnchor": [
+        1231.678756476684,
+        2014
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [
+        {
+          "cell": 14,
+          "area": 469,
+          "bounds": [
+            1259,
+            1585,
+            1300,
+            1613
+          ]
+        },
+        {
+          "cell": 14,
+          "area": 387,
+          "bounds": [
+            1273,
+            1629,
+            1310,
+            1643
+          ]
+        },
+        {
+          "cell": 14,
+          "area": 301,
+          "bounds": [
+            1226,
+            1568,
+            1247,
+            1595
+          ]
+        }
+      ],
+      "canonicalBounds": [
+        54,
+        92,
+        173,
+        209
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    },
+    {
+      "slot": 15,
+      "name": "cast",
+      "bounds": [
+        1504,
+        1619,
+        1842,
+        2013
+      ],
+      "sourceAnchor": [
+        1654.0043604651164,
+        2013
+      ],
+      "anchorStatus": "estimated-needs-visual-review",
+      "discardedComponents": [
+        {
+          "cell": 15,
+          "area": 9661,
+          "bounds": [
+            1811,
+            1717,
+            2017,
+            1799
+          ]
+        },
+        {
+          "cell": 15,
+          "area": 685,
+          "bounds": [
+            1983,
+            1696,
+            2017,
+            1723
+          ]
+        },
+        {
+          "cell": 15,
+          "area": 508,
+          "bounds": [
+            1990,
+            1803,
+            2017,
+            1827
+          ]
+        },
+        {
+          "cell": 15,
+          "area": 458,
+          "bounds": [
+            1935,
+            1810,
+            1962,
+            1833
+          ]
+        },
+        {
+          "cell": 15,
+          "area": 268,
+          "bounds": [
+            1893,
+            1708,
+            1913,
+            1726
+          ]
+        },
+        {
+          "cell": 15,
+          "area": 209,
+          "bounds": [
+            1880,
+            1787,
+            1898,
+            1804
+          ]
+        },
+        {
+          "cell": 15,
+          "area": 186,
+          "bounds": [
+            1908,
+            1797,
+            1925,
+            1812
+          ]
+        }
+      ],
+      "canonicalBounds": [
+        70,
+        99,
+        165,
+        210
+      ],
+      "canonicalAnchor": [
+        112,
+        210
+      ]
+    }
+  ]
+}

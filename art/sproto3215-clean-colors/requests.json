@@ -1,0 +1,83 @@
+[
+  {
+    "index": 0,
+    "entity": "sproto3215",
+    "fighter": "sproto3215",
+    "kind": "core",
+    "revision": "3215-clean-palette-1",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "492b1f19-3a5a-4fea-8ac1-18edaf6b6702"
+        },
+        {
+          "role": "image",
+          "value": "fd4851f7-2b98-4fcc-84e1-f91ae1d279b0"
+        }
+      ],
+      "prompt": "Exactly 32 complete figures in FOUR columns and EIGHT rows. No extra cells or guard poses.\n\nCLEAN COLOR / PIXEL-EDGE EDIT of reference image 1, the existing completed sprite atlas. Preserve EXACT pose order, exact grid, exact number of actors, exact costume/face/anatomy, cape, body proportions and all complete silhouettes. Do not invent, remove, rearrange or re-pose any cel. Reference image 2 is the original character photo for identity only. The previous atlas has thousands of blurry near-duplicate colors, colored edge speckles, grain and dirty gradients. REQUIRED FIX: redraw its SAME forms with clean flat color clusters, crisp bold near-black outlines and a compact consistent palette. Pixel-art game production, clearly stepped chunky pixels, hard edges. Only ONE flat base tone and ONE deliberate broad shadow band per colored material. Large uninterrupted clean yellow suit areas, clean red sleeves/boots/cape lining, uniform olive-green swept head, solid mid-blue heavy eyelids, solid yellow visible eye ovals WITHOUT pupils, yellow muzzle, broad red smiling lips. Black shoulder mantle/cape with dark slate shadow, red lining. Preserve central red chest ornament and green/silver round brooch. Exactly two arms and two low-rooted legs; yellow covered legs, black belt, red gloves and boots. No new teeth, pupils, logos, glowing or white clothing highlights. No blur, soft brush, antialiasing, smudges, gradients, micro-shading, noise, grain, dithering, scattered flecks, texture or detached pixels. No transparency inside the actor. Restrict colors closely to this 24-color palette: #10121a, #252936, #454b56, #698e36, #89ae46, #b1ce69, #19588e, #2f78b5, #62a4ce, #b88913, #e6bb21, #ffe13c, #fff176, #6f181d, #a92228, #d73631, #f25a40, #dad8be, #f8f5db, #197d66, #3daf88, #9cceac, #965b24, #623c2b. Keep magenta background separate from the palette. Pure flat MAGENTA #ff00ff background, generous unchanged blank margins, no shadows, labels or grid lines. The cleanup must read much sharper than image 1 at small game size."
+    }
+  },
+  {
+    "index": 1,
+    "entity": "sproto3215",
+    "fighter": "sproto3215",
+    "kind": "walk",
+    "revision": "3215-clean-palette-1",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "83180162-1263-4add-b33b-37d203191da5"
+        },
+        {
+          "role": "image",
+          "value": "fd4851f7-2b98-4fcc-84e1-f91ae1d279b0"
+        }
+      ],
+      "prompt": "Exactly EIGHT complete figures in FOUR columns and TWO rows.\n\nCLEAN COLOR / PIXEL-EDGE EDIT of reference image 1, the existing completed sprite atlas. Preserve EXACT pose order, exact grid, exact number of actors, exact costume/face/anatomy, cape, body proportions and all complete silhouettes. Do not invent, remove, rearrange or re-pose any cel. Reference image 2 is the original character photo for identity only. The previous atlas has thousands of blurry near-duplicate colors, colored edge speckles, grain and dirty gradients. REQUIRED FIX: redraw its SAME forms with clean flat color clusters, crisp bold near-black outlines and a compact consistent palette. Pixel-art game production, clearly stepped chunky pixels, hard edges. Only ONE flat base tone and ONE deliberate broad shadow band per colored material. Large uninterrupted clean yellow suit areas, clean red sleeves/boots/cape lining, uniform olive-green swept head, solid mid-blue heavy eyelids, solid yellow visible eye ovals WITHOUT pupils, yellow muzzle, broad red smiling lips. Black shoulder mantle/cape with dark slate shadow, red lining. Preserve central red chest ornament and green/silver round brooch. Exactly two arms and two low-rooted legs; yellow covered legs, black belt, red gloves and boots. No new teeth, pupils, logos, glowing or white clothing highlights. No blur, soft brush, antialiasing, smudges, gradients, micro-shading, noise, grain, dithering, scattered flecks, texture or detached pixels. No transparency inside the actor. Restrict colors closely to this 24-color palette: #10121a, #252936, #454b56, #698e36, #89ae46, #b1ce69, #19588e, #2f78b5, #62a4ce, #b88913, #e6bb21, #ffe13c, #fff176, #6f181d, #a92228, #d73631, #f25a40, #dad8be, #f8f5db, #197d66, #3daf88, #9cceac, #965b24, #623c2b. Keep magenta background separate from the palette. Pure flat MAGENTA #ff00ff background, generous unchanged blank margins, no shadows, labels or grid lines. The cleanup must read much sharper than image 1 at small game size."
+    }
+  },
+  {
+    "index": 2,
+    "entity": "sproto3215",
+    "fighter": "sproto3215",
+    "kind": "events",
+    "revision": "3215-clean-palette-1",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "ac12617b-addc-4485-b4ee-9365e074474c"
+        },
+        {
+          "role": "image",
+          "value": "fd4851f7-2b98-4fcc-84e1-f91ae1d279b0"
+        }
+      ],
+      "prompt": "Exactly 32 complete figures in FOUR columns and EIGHT rows. No extra cells or guard poses.\n\nCLEAN COLOR / PIXEL-EDGE EDIT of reference image 1, the existing completed sprite atlas. Preserve EXACT pose order, exact grid, exact number of actors, exact costume/face/anatomy, cape, body proportions and all complete silhouettes. Do not invent, remove, rearrange or re-pose any cel. Reference image 2 is the original character photo for identity only. The previous atlas has thousands of blurry near-duplicate colors, colored edge speckles, grain and dirty gradients. REQUIRED FIX: redraw its SAME forms with clean flat color clusters, crisp bold near-black outlines and a compact consistent palette. Pixel-art game production, clearly stepped chunky pixels, hard edges. Only ONE flat base tone and ONE deliberate broad shadow band per colored material. Large uninterrupted clean yellow suit areas, clean red sleeves/boots/cape lining, uniform olive-green swept head, solid mid-blue heavy eyelids, solid yellow visible eye ovals WITHOUT pupils, yellow muzzle, broad red smiling lips. Black shoulder mantle/cape with dark slate shadow, red lining. Preserve central red chest ornament and green/silver round brooch. Exactly two arms and two low-rooted legs; yellow covered legs, black belt, red gloves and boots. No new teeth, pupils, logos, glowing or white clothing highlights. No blur, soft brush, antialiasing, smudges, gradients, micro-shading, noise, grain, dithering, scattered flecks, texture or detached pixels. No transparency inside the actor. Restrict colors closely to this 24-color palette: #10121a, #252936, #454b56, #698e36, #89ae46, #b1ce69, #19588e, #2f78b5, #62a4ce, #b88913, #e6bb21, #ffe13c, #fff176, #6f181d, #a92228, #d73631, #f25a40, #dad8be, #f8f5db, #197d66, #3daf88, #9cceac, #965b24, #623c2b. Keep magenta background separate from the palette. Pure flat MAGENTA #ff00ff background, generous unchanged blank margins, no shadows, labels or grid lines. The cleanup must read much sharper than image 1 at small game size."
+    }
+  }
+]

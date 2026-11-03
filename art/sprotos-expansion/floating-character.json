@@ -1,0 +1,20 @@
+{
+  "id": "vaudream",
+  "number": "machine",
+  "name": "ᐯᕬᑌᗞᖇᕮᗋᕬ",
+  "reference": "art/sprotos-expansion/references/vaudream.png",
+  "sha256": "506c4e411df9527eb6da1f01404e7d0bc217c92ab50e66c130d56f01a95ec348",
+  "size": [
+    468,
+    257
+  ],
+  "entities": [
+    {
+      "id": "vaudream",
+      "description": "Floating blue-violet handheld-machine body with asymmetric yellow eyes, yellow toothy grille, tilted rectangular screen with yellow reflection, circular buttons and triangular spikes along top. NO LEGS, feet, arms or humanoid torso. Exclude the small creature behind it."
+    }
+  ],
+  "locomotion": "hover",
+  "status": "installed-playable",
+  "visualQA": "sheet review and browser hover/special checks in both facings; focused automated checks passed"
+}

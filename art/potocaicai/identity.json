@@ -1,0 +1,28 @@
+{
+  "id": "potocaicai",
+  "name": "Poto Cai Cai",
+  "media": "7c85441f-2537-45c4-823f-aaa81bf34a23",
+  "role": "CROWN TRICK",
+  "special": "CAI CAI CASCADE",
+  "color": "#ffe85b",
+  "identity": "The asymmetric royal BLUE Sproto in the reference. Tall jagged blue tufts at back and sides. Small jagged GOLD/YELLOW crown with BLACK round ornaments along the top, attached to head. A large round YELLOW coin-like monocle/disc covers the near eye, decorated with several BLACK round speckles and white glints exactly like reference; preserve its little rim and side attachment. The other eye is a sleepy asymmetric layered YELLOW shape crossed by a long BLUE lid, with BLACK pupil marks as in reference. Small BLACK rounded nose; huge broad RED closed smiling lips and PURPLE lower jaw enclosed by a bright YELLOW curved jaw rim. Blue bare slender arms/hands, thick segmented YELLOW waist belt, red cloth at lower waist. Extend BLUE legs and simple red boots. Preserve the strange asymmetric facial markings, never replace them with generic matching eyes. No boxing gloves, cape, staff or handheld prop.",
+  "intro": "INTRO: stand with blue hands on hips and sly asymmetric gaze; lean head forward and tip the attached gold crown with two blue fingertips; straighten the crown and lift chin proudly, other hand still on hip; release crown and settle into cocky guard. Crown and monocle remain attached, no detached objects.",
+  "cast": "CAST: purse the broad red lips under the yellow coin monocle, tilt crowned head back and puff cheeks; low knees coil while arms tuck behind torso; explosive open-mouth SPIT to RIGHT with crowned head thrust forward and broad lips stretched, both hands back away from the face; recover sly closed red smile and straighten posture. No palm shot, projectile or effects drawn.",
+  "defeat": "DEFEAT START: sleepy eye opens in shock while one hand steadies attached crown; stagger with knees folding and crown tilted but still attached; collapse seated while both hands protect crown and monocle; roll onto side with head LEFT and feet RIGHT, all ornaments attached. DEFEAT FLOOR: fully side-lying body with one hand still touching the crown; elbow sinks to floor; hand slides beside face while monocle remains fixed; settle side-lying with crown clearly visible. DEFEAT REST: broad red mouth slackens; near hand opens; one tiny final shoulder drop; still side-lying rest, crown never floats or becomes a separate character.",
+  "ordinal": 2,
+  "artDirectory": "art/potocaicai",
+  "reference": "art/potocaicai/reference.png",
+  "referenceSHA256": "f27829e1beceb5364dcd879c1b8b7276ac250ad2049b5bb7d6e7efe39fb47958",
+  "status": "installed-playable",
+  "appearanceRule": " Preserve the same costume and face across every frame. Same-hue limited palette shading; no white clothing patches, text, floating effects, detached accessories or additional actors.",
+  "mouthPoint": [
+    146,
+    151
+  ],
+  "mouthOrigin": {
+    "forward": 42.5,
+    "height": 73.75
+  },
+  "installedFrames": 104,
+  "unlockRule": "Defeat this fighter in its campaign encounter to recruit for P1 play."
+}

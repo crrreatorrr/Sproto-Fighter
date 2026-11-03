@@ -1,0 +1,177 @@
+{
+  "entity": "potocaicai",
+  "kind": "walk",
+  "source": "art/potocaicai/raw/potocaicai-walk.png",
+  "uniformSourceScale": 0.28699551569506726,
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        45,
+        95,
+        362,
+        541
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        40.5,
+        446
+      ],
+      "canonicalBounds": [
+        100,
+        82,
+        191,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        445,
+        96,
+        761,
+        539
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        35.25,
+        443
+      ],
+      "canonicalBounds": [
+        102,
+        83,
+        193,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        842,
+        96,
+        1160,
+        539
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        33.75,
+        443
+      ],
+      "canonicalBounds": [
+        102,
+        83,
+        193,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1239,
+        96,
+        1570,
+        539
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        33.25,
+        443
+      ],
+      "canonicalBounds": [
+        102,
+        83,
+        197,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        45,
+        663,
+        362,
+        1102
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        37.0,
+        439
+      ],
+      "canonicalBounds": [
+        101,
+        84,
+        192,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        447,
+        663,
+        761,
+        1102
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        32.25,
+        439
+      ],
+      "canonicalBounds": [
+        103,
+        84,
+        193,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        844,
+        663,
+        1159,
+        1101
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        32.25,
+        438
+      ],
+      "canonicalBounds": [
+        103,
+        84,
+        193,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1242,
+        662,
+        1570,
+        1102
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        31.75,
+        440
+      ],
+      "canonicalBounds": [
+        103,
+        84,
+        197,
+        210
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "index": 27,
+  "entity": "solanadelray",
+  "fighter": "solanadelray",
+  "kind": "events",
+  "revision": "face-revision",
+  "params": {
+    "model": "flux_3_image",
+    "resolution": "4k",
+    "aspect_ratio": "9:16",
+    "count": 1,
+    "use_unlim": false,
+    "medias": [
+      {
+        "role": "image",
+        "value": "88d91aa3-76ea-431e-8f5d-beeec4a0e789"
+      },
+      {
+        "role": "image",
+        "value": "68d85ec9-c63f-4c14-a7d1-0b3aa768b74d"
+      },
+      {
+        "role": "image",
+        "value": "42160163-19f5-4542-98a9-42e6443247f0"
+      }
+    ],
+    "prompt": "Edit image 1 ONLY on the cartoon faces. Keep all 32 COMPLETE RED ATHLETIC-SUIT BODIES, their exact poses, long slim proportions, full clothing, foot positions and every cell's position unchanged. Four columns and eight rows. Keep the MAGENTA background. Replace each small pointed face with the BROAD ROUND red Sproto face shown in image 2 and already used in image 3: huge circular YELLOW eyes with black round pupils, broad RED smiling muzzle with two tiny black nostrils, red round ears, swept RED forelock, BLUE chin band. NO YELLOW HORNS or yellow spikes on this RED actor: the yellow horns belong to its separate blue partner, which is absent from this sheet. Keep the heads the same proportional size and face shape as the approved combat sprite in image 3. Preserve the opaque high-neck red athletic suit, leggings and shoes of image 1 exactly. Do not introduce a jacket, white shoe soles, cuffs, a chibi body, a childlike body, a shorter torso, or additional characters. Only facial identity changes. The existing mouth-spit row and all side-lying rest poses remain as drawn, with new matching faces. Crisp pixel art, black outlines, limited shading. No text."
+  }
+}

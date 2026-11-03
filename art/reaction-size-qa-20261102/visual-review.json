@@ -1,0 +1,112 @@
+{
+  "method": "Inspect browser-rendered, real-contact phase strips in both facings at fixed density. Each strip compares neutral, light impact, late recoil, launch impact, apex, falling, tumble, floor rest, get-up and recovered. This is phase sampling, not continuous human approval of every frame.",
+  "reviewedBatches": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33
+  ],
+  "findings": [
+    {
+      "id": "bront",
+      "status": "corrected and phase strip rechecked",
+      "note": "Impact source had smaller head, torso and limbs than guard/fall. Approved 1.22 source-density calibration; crouching/leaning height retained."
+    },
+    {
+      "id": "guest07",
+      "status": "corrected and phase strip rechecked",
+      "note": "Impact source had smaller head/body; approved 1.24 density calibration."
+    },
+    {
+      "id": "rune",
+      "status": "corrected and browser retest inspected",
+      "note": "1.10 hit source-density calibration; batch-02-retest and fixed-floor launch/knockdown/get-up inspected."
+    },
+    {
+      "id": "sproto282-companion",
+      "status": "phase strip inspected",
+      "note": "Recoil face and hand proportions differ from guard, but no confirmed whole-body density jump in the inspected phases."
+    },
+    {
+      "id": "guest12",
+      "status": "phase strip inspected",
+      "note": "Bitcoin Obama neck compresses in impact and extends in fall; head/hand dimensions do not indicate a uniform density error."
+    },
+    {
+      "id": "solanadelray-companion",
+      "status": "phase strip inspected",
+      "note": "Impact eyes widen while face/limb proportions vary; no confirmed uniform whole-body density jump in the inspected phases. Retained authored expression rather than rescaling the whole body."
+    }
+  ],
+  "fixedFloorSampling": {
+    "fighters": [
+      "bront",
+      "guest07",
+      "rune",
+      "bigswole",
+      "duo",
+      "sproto282",
+      "zepump",
+      "solanadelray"
+    ],
+    "method": "Normal-speed browser playback with captured samples; precise stepping for floor/rest/rise. This is not continuous human inspection of every intervening frame.",
+    "facings": [
+      -1,
+      1
+    ],
+    "details": "Launch sampled both facings for all eight; heavy knockdown, floor rest, rise and recovered sampled left-facing for the four single fighters."
+  },
+  "contactSampling": [
+    {
+      "fighter": "bront",
+      "action": "victimThrow",
+      "facing": 1,
+      "position": "center",
+      "tick": 18,
+      "result": "catch visible; hold contact at torso; both images inspected (second panel is a mirror, not a second simulation)"
+    },
+    {
+      "fighter": "guest07",
+      "action": "victimThrow",
+      "facing": -1,
+      "position": "left wall",
+      "tick": 18,
+      "result": "catch visible; attacker at x80; victim at x205.45; both images inspected"
+    }
+  ],
+  "matchSampling": {
+    "match": "Fat Head Dave versus Morelight CPU, Sproto Ranch",
+    "result": "Selected Dave, versus screen, countdown/intro, repeated damaging projectiles and pushback, left-wall recoil, lethal hit, KO result and rematch observed. No player save unlock was awarded in this free-play match.",
+    "limits": "Input attempt during projectile hitstun did not demonstrate a clean jump/air-medium; do not count it as one.",
+    "practiceInputs": "A separate standing-dummy run observed D movement from x380 to x647, W+K as an upward medium chord, and W held 260ms followed by K as airMedium at y446.7 (frame2031). Attack initiation checked; this air-medium whiff was not a damage/contact check."
+  }
+}

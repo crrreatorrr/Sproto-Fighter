@@ -1,0 +1,177 @@
+{
+  "entity": "reverend",
+  "kind": "walk",
+  "source": "art/reverend/raw/reverend-walk.png",
+  "uniformSourceScale": 0.29157175398633256,
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        63,
+        128,
+        343,
+        567
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        142.00104821802935,
+        439
+      ],
+      "canonicalBounds": [
+        71,
+        82,
+        153,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        472,
+        125,
+        745,
+        567
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        141.50104821802935,
+        442
+      ],
+      "canonicalBounds": [
+        71,
+        81,
+        151,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        882,
+        125,
+        1140,
+        567
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        130.50104821802935,
+        442
+      ],
+      "canonicalBounds": [
+        74,
+        81,
+        149,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1260,
+        124,
+        1557,
+        567
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        146.75104821802935,
+        443
+      ],
+      "canonicalBounds": [
+        69,
+        81,
+        156,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        53,
+        659,
+        343,
+        1100
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        153.50104821802935,
+        441
+      ],
+      "canonicalBounds": [
+        67,
+        81,
+        152,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        472,
+        657,
+        745,
+        1100
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        140.00104821802935,
+        443
+      ],
+      "canonicalBounds": [
+        71,
+        81,
+        151,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        875,
+        660,
+        1140,
+        1100
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        135.00104821802935,
+        440
+      ],
+      "canonicalBounds": [
+        73,
+        82,
+        150,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1261,
+        660,
+        1568,
+        1100
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        148.00104821802935,
+        440
+      ],
+      "canonicalBounds": [
+        69,
+        82,
+        159,
+        210
+      ]
+    }
+  ]
+}

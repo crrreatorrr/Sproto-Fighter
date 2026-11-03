@@ -1,0 +1,322 @@
+[
+  {
+    "index": 0,
+    "bob": 0,
+    "legs": [
+      {
+        "side": "far",
+        "hip": [
+          103.5,
+          183
+        ],
+        "knee": [
+          95.5625,
+          192.36
+        ],
+        "ankle": [
+          85.625,
+          201.0
+        ],
+        "planted": true,
+        "sourceFootY": 208
+      },
+      {
+        "side": "near",
+        "hip": [
+          131.5,
+          183
+        ],
+        "knee": [
+          142.0,
+          191.84
+        ],
+        "ankle": [
+          150.5,
+          200
+        ],
+        "planted": true,
+        "sourceFootY": 207
+      }
+    ]
+  },
+  {
+    "index": 1,
+    "bob": 0,
+    "legs": [
+      {
+        "side": "far",
+        "hip": [
+          103.5,
+          183
+        ],
+        "knee": [
+          98.53125,
+          190.96275700037538
+        ],
+        "ankle": [
+          89.5625,
+          198.31299423149113
+        ],
+        "planted": false,
+        "sourceFootY": 208
+      },
+      {
+        "side": "near",
+        "hip": [
+          131.5,
+          183
+        ],
+        "knee": [
+          140.0,
+          191.84
+        ],
+        "ankle": [
+          146.5,
+          200
+        ],
+        "planted": true,
+        "sourceFootY": 207
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "bob": -1,
+    "legs": [
+      {
+        "side": "far",
+        "hip": [
+          103.5,
+          182
+        ],
+        "knee": [
+          100.5,
+          189.904
+        ],
+        "ankle": [
+          93.5,
+          197.2
+        ],
+        "planted": false,
+        "sourceFootY": 208
+      },
+      {
+        "side": "near",
+        "hip": [
+          131.5,
+          182
+        ],
+        "knee": [
+          138.0,
+          191.36
+        ],
+        "ankle": [
+          142.5,
+          200
+        ],
+        "planted": true,
+        "sourceFootY": 207
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "bob": -1,
+    "legs": [
+      {
+        "side": "far",
+        "hip": [
+          103.5,
+          182
+        ],
+        "knee": [
+          102.46875,
+          190.4827570003754
+        ],
+        "ankle": [
+          97.4375,
+          198.31299423149113
+        ],
+        "planted": false,
+        "sourceFootY": 208
+      },
+      {
+        "side": "near",
+        "hip": [
+          131.5,
+          182
+        ],
+        "knee": [
+          136.0,
+          191.36
+        ],
+        "ankle": [
+          138.5,
+          200
+        ],
+        "planted": true,
+        "sourceFootY": 207
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "bob": 0,
+    "legs": [
+      {
+        "side": "far",
+        "hip": [
+          103.5,
+          183
+        ],
+        "knee": [
+          103.4375,
+          192.36
+        ],
+        "ankle": [
+          101.375,
+          201
+        ],
+        "planted": true,
+        "sourceFootY": 208
+      },
+      {
+        "side": "near",
+        "hip": [
+          131.5,
+          183
+        ],
+        "knee": [
+          134.0,
+          191.84
+        ],
+        "ankle": [
+          134.5,
+          200.0
+        ],
+        "planted": true,
+        "sourceFootY": 207
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "bob": 0,
+    "legs": [
+      {
+        "side": "far",
+        "hip": [
+          103.5,
+          183
+        ],
+        "knee": [
+          101.46875,
+          192.36
+        ],
+        "ankle": [
+          97.4375,
+          201
+        ],
+        "planted": true,
+        "sourceFootY": 208
+      },
+      {
+        "side": "near",
+        "hip": [
+          131.5,
+          183
+        ],
+        "knee": [
+          137.0,
+          190.51629610561878
+        ],
+        "ankle": [
+          138.5,
+          197.45441558772842
+        ],
+        "planted": false,
+        "sourceFootY": 207
+      }
+    ]
+  },
+  {
+    "index": 6,
+    "bob": -1,
+    "legs": [
+      {
+        "side": "far",
+        "hip": [
+          103.5,
+          182
+        ],
+        "knee": [
+          99.5,
+          191.88
+        ],
+        "ankle": [
+          93.5,
+          201
+        ],
+        "planted": true,
+        "sourceFootY": 208
+      },
+      {
+        "side": "near",
+        "hip": [
+          131.5,
+          182
+        ],
+        "knee": [
+          139.0,
+          189.488
+        ],
+        "ankle": [
+          142.5,
+          196.4
+        ],
+        "planted": false,
+        "sourceFootY": 207
+      }
+    ]
+  },
+  {
+    "index": 7,
+    "bob": -1,
+    "legs": [
+      {
+        "side": "far",
+        "hip": [
+          103.5,
+          182
+        ],
+        "knee": [
+          97.53125,
+          191.88
+        ],
+        "ankle": [
+          89.5625,
+          201
+        ],
+        "planted": true,
+        "sourceFootY": 208
+      },
+      {
+        "side": "near",
+        "hip": [
+          131.5,
+          182
+        ],
+        "knee": [
+          141.0,
+          190.0362961056188
+        ],
+        "ankle": [
+          146.5,
+          197.45441558772842
+        ],
+        "planted": false,
+        "sourceFootY": 207
+      }
+    ]
+  }
+]

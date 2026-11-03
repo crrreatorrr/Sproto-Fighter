@@ -1,0 +1,24 @@
+{
+  "model": "autosprite",
+  "outcomes": [
+    {
+      "job": "ee12eef7-bdb2-4373-a2ee-300986a9d895",
+      "kind": "walk",
+      "tier": "max",
+      "state": "failed"
+    },
+    {
+      "job": "47693f50-c24c-4e5e-ba80-71d99dcd3284",
+      "kind": "custom side kick",
+      "tier": "max",
+      "state": "failed"
+    },
+    {
+      "job": "4c0aa353-f6a8-4be5-a47a-5a1226545059",
+      "kind": "walk",
+      "tier": "pro",
+      "state": "failed"
+    }
+  ],
+  "reason": "The service returned failed without an error reason or usable output. No AutoSprite frames installed."
+}

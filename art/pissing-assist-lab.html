@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Independent special partner QA</title>
+<style>body{margin:16px;background:#111925;color:#e6edf6;font:14px system-ui}header{display:flex;gap:12px;align-items:center;flex-wrap:wrap}select,input,button{background:#24364c;color:white;padding:8px;border:1px solid #6c819b}input{width:60px}canvas{display:block;width:100%;max-width:1280px;image-rendering:pixelated;margin-top:12px}pre{white-space:pre-wrap}</style>
+<header><b>One assigned partner · twin pairs stay together</b><label>Fighter <select id="fighter"></select></label><label>Facing <select id="facing"><option value="1">Right</option><option value="-1">Left</option></select></label><button id="reset">Reset special</button><button id="play">Play</button><label>Frames <input id="frames" type="number" value="20" min="1" max="180"></label><button id="advance">Advance frames</button><button id="snapshot">Save QA image</button></header>
+<p id="status">Loading selected fighters and their special partner…</p><canvas id="arena" width="1280" height="720" aria-label="Actual combat rendering of the selected fighter and their one assigned partner"></canvas><pre id="debug"></pre>
+<script type="module">
+import{A,ROSTER,PLAYABLE_FIGHTERS,PARTNER_ATTACKS,specialPartnerIds,bodyAtlasIds,createState,step}from'/src/core.ts';
+import{ensurePoseAtlases,getPoseAtlasClipInventory}from'/src/poseAtlas.ts';
+import{loadStageArt,setStage}from'/src/stage.ts';
+import{ensurePowerArt}from'/src/powerArt.ts';
+import{render}from'/src/render.ts';
+import{getTeamSpecialAssistPlan,getTeamSpecialBodyDebug}from'/src/teamSpecial.ts';
+const $=id=>document.getElementById(id),c=$('arena').getContext('2d');
+for(const id of PLAYABLE_FIGHTERS){const option=document.createElement('option');option.value=id;option.textContent=ROSTER[id].name;$('fighter').append(option);}
+const params=new URLSearchParams(location.search);$('fighter').value=PLAYABLE_FIGHTERS.includes(params.get('fighter'))?params.get('fighter'):'sproto102';$('facing').value=params.get('facing')==='-1'?'-1':'1';let s,ready=false,playing=false,last=0,elapsed=0;
+function reset(){playing=false;$('play').textContent='Play';s=createState($('fighter').value,'dummy','rivet');const[a,b]=s.fighters,face=Number($('facing').value);a.x=params.get('position')==='wall'?(face===1?90:1190):(face===1?430:850);b.x=face===1?820:460;a.facing=face;b.facing=-face;a.pips=3;draw();}
+function advance(){if(!ready)return;step(s,[s.frame===0?A.special:0,0]);draw();}
+function draw(){if(!s)return;render(c,s);const a=s.fighters[0],assist=getTeamSpecialAssistPlan(a,s.fighters[1].x);$('debug').textContent=JSON.stringify({frame:s.frame,move:a.move,partnerAttack:PARTNER_ATTACKS[ROSTER[a.id].partner],bodyActions:getTeamSpecialBodyDebug(a),assignedPartner:specialPartnerIds(a.id).map(id=>({id,name:ROSTER[id].name,bodies:bodyAtlasIds(id)})),visiblePartners:assist.map(p=>p.id),assist,clips:getPoseAtlasClipInventory()[ROSTER[a.id].partner]},null,2);}
+async function load(){ready=false;$('status').textContent='Loading…';try{await ensurePoseAtlases([$('fighter').value,'rivet']);ready=true;$('status').textContent=`Ready · ${ROSTER[$('fighter').value].name} + ${ROSTER[ROSTER[$('fighter').value].partner].name} · one partner identity · real combat core/render · 3-pip QA fixture`;reset();for(let n=0;n<Math.min(140,Number(params.get('frames'))||0);n++)advance();}catch(e){$('status').textContent='Load failed: '+e.message;}}
+$('snapshot').onclick=()=>{
+ if(!s||!ready)return;const f=s.fighters[0],image=document.createElement('canvas');image.width=1280;image.height=770;
+ const ctx=image.getContext('2d');ctx.fillStyle='#111925';ctx.fillRect(0,0,1280,770);ctx.fillStyle='#e6edf6';ctx.font='18px monospace';
+ ctx.fillText(`${ROSTER[f.id].name} + ${ROSTER[ROSTER[f.id].partner].name} | facing ${f.facing} | special t=${f.move?.t??'finished'}`,18,30);
+ ctx.drawImage($('arena'),0,50);const link=document.createElement('a');link.download=`partner-${f.id}-${f.facing}-${f.move?.t??'done'}.png`;link.href=image.toDataURL('image/png');link.click();
+};
+$('fighter').onchange=load;$('facing').onchange=reset;$('reset').onclick=reset;
+$('advance').onclick=()=>{playing=false;$('play').textContent='Play';for(let n=0;n<Number($('frames').value);n++)advance();};
+$('play').onclick=()=>{playing=!playing;$('play').textContent=playing?'Pause':'Play';last=0;elapsed=0;};
+function loop(time){if(playing&&ready){if(last)elapsed+=Math.min(60,time-last);while(elapsed>=1000/60){advance();elapsed-=1000/60;if(s.frame>120){reset();playing=true;$('play').textContent='Pause';}}last=time;}requestAnimationFrame(loop);}requestAnimationFrame(loop);
+setStage('ranch');await Promise.all([loadStageArt(),ensurePowerArt()]);await load();
+</script></html>

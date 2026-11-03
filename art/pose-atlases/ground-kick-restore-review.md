@@ -1,0 +1,9 @@
+# Original ground-kick restoration review
+
+Restored ONLY slots17 kickHalf and18 kickFull for rivet, bront, mox, guest08, guest12 and rune from fresh32-frame raw atlas imports into temporary directories. Reapplied mox/guest08 facial retouch to those two restored slots only, with refreshed baselines. Copied the12 final frames to matching public directories. All360 non-target processed/public frame hashes remained unchanged, including walk and air-kick slots.
+
+Actual visual inspection: all24 cells in six16–19 strips at native resolution; additional4x inspection of mox, guest08 and rune detail corrections. Evidence is processed/{id}/ground-kick-review.png and ground-kick-review-4x.png.
+
+Passed this scoped review: connected hip/knee/foot anatomy, distinct chamber/extension/recovery silhouettes, no detached head or extra arm, original coherent head/body scale across16–19, no imported small-head pop. Golden skin/suit/green eyes preserved on rivet; Dave muscular split-color head and side ornaments preserved; mox fang/chin retouch preserved; Yoyo red nose and three spaced teeth preserved; guest12 long neck and red shirt retained; rune fused double face preserved. Rune17/18 blue shoe toe recolored ONLY within explicit foot rectangles to dark shoe tones compatible with19; alpha/anatomy unchanged and hands remain blue.
+
+Limits: this is not whole-roster or playback approval. Rivet17 is still a shallow partial extension; no new pose invented. Mox's original side-profile proportions remain less faithful to the broad reference face despite detail corrections. Existing22/23 corrective imports, walk cycles and other independent issues were untouched by instruction. Parent should review final browser timing/anchors. Reproducible script: restore_ground_kicks.py; machine report: ground-kick-restore-report.json.

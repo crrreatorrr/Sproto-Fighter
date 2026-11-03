@@ -1,0 +1,681 @@
+{
+  "entity": "prim",
+  "kind": "core",
+  "source": "art/prim/raw/prim-core.png",
+  "uniformSourceScale": 0.43243243243243246,
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        91,
+        27,
+        317,
+        323
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        84.15523465703971,
+        296
+      ],
+      "canonicalBounds": [
+        76,
+        82,
+        174,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        462,
+        27,
+        680,
+        323
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        81.15523465703971,
+        296
+      ],
+      "canonicalBounds": [
+        77,
+        82,
+        171,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        830,
+        24,
+        1064,
+        323
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        92.65523465703971,
+        299
+      ],
+      "canonicalBounds": [
+        72,
+        81,
+        173,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1229,
+        24,
+        1473,
+        323
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        103.40523465703971,
+        299
+      ],
+      "canonicalBounds": [
+        67,
+        81,
+        173,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        61,
+        360,
+        308,
+        657
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        111.65523465703971,
+        297
+      ],
+      "canonicalBounds": [
+        64,
+        82,
+        171,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        456,
+        361,
+        704,
+        657
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        103.15523465703971,
+        296
+      ],
+      "canonicalBounds": [
+        67,
+        82,
+        174,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        824,
+        385,
+        1118,
+        657
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        172.15523465703973,
+        272
+      ],
+      "canonicalBounds": [
+        38,
+        92,
+        165,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1284,
+        390,
+        1492,
+        657
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        85.65523465703971,
+        267
+      ],
+      "canonicalBounds": [
+        75,
+        95,
+        165,
+        210
+      ]
+    },
+    {
+      "index": 8,
+      "sourceBounds": [
+        83,
+        686,
+        321,
+        976
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        103.90523465703971,
+        290
+      ],
+      "canonicalBounds": [
+        67,
+        85,
+        170,
+        210
+      ]
+    },
+    {
+      "index": 9,
+      "sourceBounds": [
+        446,
+        685,
+        730,
+        992
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        121.15523465703971,
+        307
+      ],
+      "canonicalBounds": [
+        60,
+        77,
+        183,
+        210
+      ]
+    },
+    {
+      "index": 10,
+      "sourceBounds": [
+        841,
+        744,
+        1107,
+        997
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        142.15523465703973,
+        253
+      ],
+      "canonicalBounds": [
+        51,
+        101,
+        166,
+        210
+      ]
+    },
+    {
+      "index": 11,
+      "sourceBounds": [
+        1253,
+        707,
+        1533,
+        997
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        104.15523465703971,
+        290
+      ],
+      "canonicalBounds": [
+        67,
+        85,
+        188,
+        210
+      ]
+    },
+    {
+      "index": 12,
+      "sourceBounds": [
+        64,
+        1041,
+        373,
+        1335
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        87.15523465703971,
+        294
+      ],
+      "canonicalBounds": [
+        74,
+        83,
+        208,
+        210
+      ]
+    },
+    {
+      "index": 13,
+      "sourceBounds": [
+        484,
+        1032,
+        717,
+        1335
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        93.15523465703971,
+        303
+      ],
+      "canonicalBounds": [
+        72,
+        79,
+        173,
+        210
+      ]
+    },
+    {
+      "index": 14,
+      "sourceBounds": [
+        850,
+        1072,
+        1075,
+        1335
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        101.65523465703971,
+        263
+      ],
+      "canonicalBounds": [
+        68,
+        96,
+        165,
+        210
+      ]
+    },
+    {
+      "index": 15,
+      "sourceBounds": [
+        1233,
+        1025,
+        1506,
+        1336
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        110.65523465703971,
+        311
+      ],
+      "canonicalBounds": [
+        64,
+        76,
+        182,
+        210
+      ]
+    },
+    {
+      "index": 16,
+      "sourceBounds": [
+        56,
+        1369,
+        298,
+        1678
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        89.90523465703971,
+        309
+      ],
+      "canonicalBounds": [
+        73,
+        76,
+        178,
+        210
+      ]
+    },
+    {
+      "index": 17,
+      "sourceBounds": [
+        443,
+        1376,
+        756,
+        1681
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        87.15523465703971,
+        305
+      ],
+      "canonicalBounds": [
+        74,
+        78,
+        209,
+        210
+      ]
+    },
+    {
+      "index": 18,
+      "sourceBounds": [
+        841,
+        1376,
+        1186,
+        1676
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        87.40523465703971,
+        300
+      ],
+      "canonicalBounds": [
+        74,
+        80,
+        223,
+        210
+      ]
+    },
+    {
+      "index": 19,
+      "sourceBounds": [
+        1278,
+        1373,
+        1519,
+        1678
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        86.65523465703971,
+        305
+      ],
+      "canonicalBounds": [
+        75,
+        78,
+        179,
+        210
+      ]
+    },
+    {
+      "index": 20,
+      "sourceBounds": [
+        59,
+        1760,
+        370,
+        2026
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        97.15523465703971,
+        266
+      ],
+      "canonicalBounds": [
+        70,
+        95,
+        204,
+        210
+      ]
+    },
+    {
+      "index": 21,
+      "sourceBounds": [
+        458,
+        1752,
+        710,
+        2042
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        87.65523465703971,
+        290
+      ],
+      "canonicalBounds": [
+        74,
+        85,
+        183,
+        210
+      ]
+    },
+    {
+      "index": 22,
+      "sourceBounds": [
+        848,
+        1703,
+        1115,
+        2035
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        92.65523465703971,
+        332
+      ],
+      "canonicalBounds": [
+        72,
+        66,
+        187,
+        210
+      ]
+    },
+    {
+      "index": 23,
+      "sourceBounds": [
+        1224,
+        1707,
+        1560,
+        1985
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        72.65523465703971,
+        278
+      ],
+      "canonicalBounds": [
+        81,
+        90,
+        226,
+        210
+      ]
+    },
+    {
+      "index": 24,
+      "sourceBounds": [
+        42,
+        2066,
+        370,
+        2376
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        84.90523465703971,
+        310
+      ],
+      "canonicalBounds": [
+        75,
+        76,
+        217,
+        210
+      ]
+    },
+    {
+      "index": 25,
+      "sourceBounds": [
+        470,
+        2072,
+        687,
+        2377
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        86.15523465703971,
+        305
+      ],
+      "canonicalBounds": [
+        75,
+        78,
+        169,
+        210
+      ]
+    },
+    {
+      "index": 26,
+      "sourceBounds": [
+        833,
+        2074,
+        1165,
+        2377
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        107.15523465703971,
+        303
+      ],
+      "canonicalBounds": [
+        66,
+        79,
+        210,
+        210
+      ]
+    },
+    {
+      "index": 27,
+      "sourceBounds": [
+        1256,
+        2071,
+        1533,
+        2377
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        116.65523465703971,
+        306
+      ],
+      "canonicalBounds": [
+        62,
+        78,
+        182,
+        210
+      ]
+    },
+    {
+      "index": 28,
+      "sourceBounds": [
+        42,
+        2438,
+        369,
+        2759
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        138.90523465703973,
+        321
+      ],
+      "canonicalBounds": [
+        52,
+        71,
+        193,
+        210
+      ]
+    },
+    {
+      "index": 29,
+      "sourceBounds": [
+        463,
+        2438,
+        680,
+        2760
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        89.40523465703971,
+        322
+      ],
+      "canonicalBounds": [
+        73,
+        71,
+        167,
+        210
+      ]
+    },
+    {
+      "index": 30,
+      "sourceBounds": [
+        829,
+        2450,
+        1139,
+        2760
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        99.90523465703971,
+        310
+      ],
+      "canonicalBounds": [
+        69,
+        76,
+        203,
+        210
+      ]
+    },
+    {
+      "index": 31,
+      "sourceBounds": [
+        1212,
+        2423,
+        1560,
+        2775
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        142.65523465703973,
+        352
+      ],
+      "canonicalBounds": [
+        50,
+        58,
+        200,
+        210
+      ]
+    }
+  ]
+}

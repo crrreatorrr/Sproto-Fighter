@@ -1,0 +1,146 @@
+[
+  {
+    "index": 99,
+    "entity": "sproto1870",
+    "fighter": "sproto1870",
+    "kind": "core",
+    "retry": 35,
+    "estimatedCredits": 4.25,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "cf70fd86-5ca7-4fde-a34c-0e3744dbdcc3"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Preserve the complete single character identity specified below; multiple joined facial regions are part of that one character when explicitly described.\nIDENTITY: ONE SINGLE legless floating Sproto shaped like the ENTIRE original image: large upper blue face with red swept spike fan, yellow forehead/side crescent and enormous yellow angular muzzle; small LOWER BLUE face with two huge round yellow eyes and rounded yellow muzzle. These TWO facial regions are JOINED into ONE CONTINUOUS BLUE head/body silhouette. One complete floating mass, not two detached characters. Preserve both facial regions and all FOUR yellow eyes as in the full reference. No neck, humanoid torso, arms, hands, legs, feet or shoes. Complete the cropped bottom with a rounded blue/yellow contour. VMU-like legless hovering motion, but remain this organic Sproto design, not a machine.\n\nExactly 32 separate complete floating heads in a FOUR-COLUMN by EIGHT-ROW grid. Exactly four drawings per row.\nRow 1: neutral hover; subtle upward bob; forward glide bank; glide transition.\nRow 2: opposite bank; return through level hover; fast forward lunge; downward coil hover.\nRow 3: rising airborne bank; falling level head; settle low hover; recoil back to charge a ram.\nRow 4: forward face-first ram; ram retract; upward bank anticipation; rising upward head strike.\nRow 5: rotate back to chamber; half-drive forward; fully extended forward body ram; retract to level.\nRow 6: low swooping sweep; swoop recover; aerial coil; forceful diagonal forward aerial ram.\nRow 7: hit recoil with squint; braced defensive head tuck; forward grab/catch lunge; braced close hold pose.\nRow 8: toss follow-through head flick; power charge with determined eyes; power release face forward, no projectile; triumphant special impact bank. Every drawing is a HEAD ONLY; no hands or legs.\n\nDYNAMIC MELEE UPGRADE: The previous poses were too static. Draw much more expressive and distinct whole-body attack attitudes with clear anticipation, explosive contact, follow-through and recoil. Windups bank BACKWARD by 30 degrees. Straight RAM contacts lean FORWARD by 40 degrees, with intense focused eyes. UPWARD strike contacts pitch UP steeply by 55 degrees. LOW SWEEP rolls and banks DOWN by 35 degrees. AIR attack contacts form a steep 45 degree downward-forward dive, then bank back to recover. Maintain volume and exact identity; use whole floating silhouette motion, never growing limbs or humanoid parts. No static near-identical attacks. Heavy and air attacks must have visibly distinct consecutive silhouettes. No stretching or face morphing. One complete legless floating actor in every cell. Eye count must remain exact in EVERY drawing, including both joined facial regions and all FOUR yellow eyes for the organic Sproto; machine has exactly two asymmetric yellow eyes, a screen and grille. Do not lose the small lower face from the organic Sproto. No smoke, trails or effects. Precisely FOUR columns EIGHT rows, 32 complete drawings. Preserve the first neutral pose size and design from the reference sheet. New angled attacks keep the same volume and fit each cell. Main attacks face RIGHT and never left."
+    }
+  },
+  {
+    "index": 101,
+    "entity": "sproto1870",
+    "fighter": "sproto1870",
+    "kind": "events",
+    "retry": 35,
+    "estimatedCredits": 4.25,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "e5ca987f-0445-4d2f-a3ac-bfd398db019c"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Preserve the complete single character identity specified below; multiple joined facial regions are part of that one character when explicitly described.\nIDENTITY: ONE SINGLE legless floating Sproto shaped like the ENTIRE original image: large upper blue face with red swept spike fan, yellow forehead/side crescent and enormous yellow angular muzzle; small LOWER BLUE face with two huge round yellow eyes and rounded yellow muzzle. These TWO facial regions are JOINED into ONE CONTINUOUS BLUE head/body silhouette. One complete floating mass, not two detached characters. Preserve both facial regions and all FOUR yellow eyes as in the full reference. No neck, humanoid torso, arms, hands, legs, feet or shoes. Complete the cropped bottom with a rounded blue/yellow contour. VMU-like legless hovering motion, but remain this organic Sproto design, not a machine.\n\nExactly 32 complete floating HEAD drawings, FOUR columns and EIGHT rows. Exactly four per row.\nRow 1 INTRO: neutral hover; look determined; confident slight bank; settle neutral hover.\nRow 2 SPECIAL A: backward bank coil; drive forward; full forward ram impact; ram retract.\nRow 3 SPECIAL B: rotate upward with dynamic expression; retract through low bank; emphatic diagonal forward ram finish; recover level hover.\nRow 4 CAST: eyes focus; head tilts back slightly; forward power exhale, no projectile; return neutral.\nRow 5 RECOIL: face flinches and head tilts back; continuing bank recoil; stabilize lower hover; return neutral.\nRow 6 DEFEAT: drooping hover; loses lift; dropping turned head; settles on side at floor. No body or limbs.\nRow 7 FLOOR REST: whole head resting sideways; settles; eyes soften; entirely still resting head.\nRow 8 FINAL REST: same complete sideways resting head; same head with small eye relaxation; hold resting head; final still resting head. Remain a head-only character.\n\nDYNAMIC MELEE UPGRADE: The previous poses were too static. Draw much more expressive and distinct whole-body attack attitudes with clear anticipation, explosive contact, follow-through and recoil. Windups bank BACKWARD by 30 degrees. Straight RAM contacts lean FORWARD by 40 degrees, with intense focused eyes. UPWARD strike contacts pitch UP steeply by 55 degrees. LOW SWEEP rolls and banks DOWN by 35 degrees. AIR attack contacts form a steep 45 degree downward-forward dive, then bank back to recover. Maintain volume and exact identity; use whole floating silhouette motion, never growing limbs or humanoid parts. No static near-identical attacks. Heavy and air attacks must have visibly distinct consecutive silhouettes. No stretching or face morphing. One complete legless floating actor in every cell. Eye count must remain exact in EVERY drawing, including both joined facial regions and all FOUR yellow eyes for the organic Sproto; machine has exactly two asymmetric yellow eyes, a screen and grille. Do not lose the small lower face from the organic Sproto. No smoke, trails or effects. Precisely FOUR columns EIGHT rows, 32 complete drawings. Preserve the first neutral pose size and design from the reference sheet. New angled attacks keep the same volume and fit each cell. Main attacks face RIGHT and never left."
+    }
+  },
+  {
+    "index": 213,
+    "entity": "sproto1870",
+    "fighter": "sproto1870",
+    "kind": "motion",
+    "retry": 35,
+    "estimatedCredits": 4.25,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "3dc07305-cb3b-4e66-b5ce-7f45e1bbb386"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating Sproto HEAD per cell. The HEAD is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact head outline, eye count, pupils, face colors, muzzle and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any head spike or muzzle. Preserve the complete single character identity specified below; multiple joined facial regions are part of that one character when explicitly described.\nIDENTITY: ONE SINGLE legless floating Sproto shaped like the ENTIRE original image: large upper blue face with red swept spike fan, yellow forehead/side crescent and enormous yellow angular muzzle; small LOWER BLUE face with two huge round yellow eyes and rounded yellow muzzle. These TWO facial regions are JOINED into ONE CONTINUOUS BLUE head/body silhouette. One complete floating mass, not two detached characters. Preserve both facial regions and all FOUR yellow eyes as in the full reference. No neck, humanoid torso, arms, hands, legs, feet or shoes. Complete the cropped bottom with a rounded blue/yellow contour. VMU-like legless hovering motion, but remain this organic Sproto design, not a machine.\n\nExactly 32 complete floating HEAD drawings, FOUR columns and EIGHT rows. Exactly four per row.\nRow 1 DASH: back-bank anticipation; drive forward; fast forward tilt; stretched forward lunge by position, never deform face.\nRow 2 DASH/JUMP: braking bank; level hover recovery; rising glide; rising bank.\nRow 3 JUMP: upper-arc head; level at apex; descending head; descending recovery bank.\nRow 4 HEAVY RAM: low backward coil; windup bank; turn forward; strong forward ram contact.\nRow 5 HEAVY RECOVERY: sustain ram contact; retract bank; stabilize; level hover guard.\nRow 6 AIR RAM: aerial back-bank coil; drive upward; rotate forward; forceful diagonal aerial head ram.\nRow 7 AIR/VICTORY: retract from ram; balanced glide; proud floating guard; victory bank coil.\nRow 8 VICTORY: celebratory upward swoop; tilt proudly; settle confident floating head; final proud level hover. Absolutely no arms, hands, legs or feet.\n\nDYNAMIC MELEE UPGRADE: The previous poses were too static. Draw much more expressive and distinct whole-body attack attitudes with clear anticipation, explosive contact, follow-through and recoil. Windups bank BACKWARD by 30 degrees. Straight RAM contacts lean FORWARD by 40 degrees, with intense focused eyes. UPWARD strike contacts pitch UP steeply by 55 degrees. LOW SWEEP rolls and banks DOWN by 35 degrees. AIR attack contacts form a steep 45 degree downward-forward dive, then bank back to recover. Maintain volume and exact identity; use whole floating silhouette motion, never growing limbs or humanoid parts. No static near-identical attacks. Heavy and air attacks must have visibly distinct consecutive silhouettes. No stretching or face morphing. One complete legless floating actor in every cell. Eye count must remain exact in EVERY drawing, including both joined facial regions and all FOUR yellow eyes for the organic Sproto; machine has exactly two asymmetric yellow eyes, a screen and grille. Do not lose the small lower face from the organic Sproto. No smoke, trails or effects. Precisely FOUR columns EIGHT rows, 32 complete drawings. Preserve the first neutral pose size and design from the reference sheet. New angled attacks keep the same volume and fit each cell. Main attacks face RIGHT and never left."
+    }
+  },
+  {
+    "index": 300,
+    "entity": "vaudream",
+    "fighter": "vaudream",
+    "kind": "core",
+    "retry": 35,
+    "estimatedCredits": 4.25,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "3313cbb1-ec60-4397-ad61-7e7e56188edb"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating machine CHASSIS per cell. The machine CHASSIS is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact chassis outline, eye count, screen, buttons, teeth and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any chassis spike or screen. Preserve the complete single character identity specified below; multiple joined facial regions are part of that one character when explicitly described.\nIDENTITY: Floating blue-violet handheld-machine body with asymmetric yellow eyes, yellow toothy grille, tilted rectangular screen with yellow reflection, circular buttons and triangular spikes along top. NO LEGS, feet, arms or humanoid torso. Exclude the small creature behind it.\n\nExactly 32 separate complete floating chassiss in a FOUR-COLUMN by EIGHT-ROW grid. Exactly four drawings per row.\nRow 1: neutral hover; subtle upward bob; forward glide bank; glide transition.\nRow 2: opposite bank; return through level hover; fast forward lunge; downward coil hover.\nRow 3: rising airborne bank; falling level chassis; settle low hover; recoil back to charge a ram.\nRow 4: forward face-first ram; ram retract; upward bank anticipation; rising upward chassis strike.\nRow 5: rotate back to chamber; half-drive forward; fully extended forward body ram; retract to level.\nRow 6: low swooping sweep; swoop recover; aerial coil; forceful diagonal forward aerial ram.\nRow 7: hit recoil with squint; braced defensive chassis tuck; forward grab/catch lunge; braced close hold pose.\nRow 8: toss follow-through chassis flick; power charge with determined eyes; power release face forward, no projectile; triumphant special impact bank. Every drawing is a CHASSIS ONLY; no hands or legs.\n\nDYNAMIC MELEE UPGRADE: The previous poses were too static. Draw much more expressive and distinct whole-body attack attitudes with clear anticipation, explosive contact, follow-through and recoil. Windups bank BACKWARD by 30 degrees. Straight RAM contacts lean FORWARD by 40 degrees, with intense focused eyes. UPWARD strike contacts pitch UP steeply by 55 degrees. LOW SWEEP rolls and banks DOWN by 35 degrees. AIR attack contacts form a steep 45 degree downward-forward dive, then bank back to recover. Maintain volume and exact identity; use whole floating silhouette motion, never growing limbs or humanoid parts. No static near-identical attacks. Heavy and air attacks must have visibly distinct consecutive silhouettes. No stretching or face morphing. One complete legless floating actor in every cell. Eye count must remain exact in EVERY drawing, including both joined facial regions and all FOUR yellow eyes for the organic Sproto; machine has exactly two asymmetric yellow eyes, a screen and grille. Do not lose the small lower face from the organic Sproto. No smoke, trails or effects. Precisely FOUR columns EIGHT rows, 32 complete drawings. Preserve the first neutral pose size and design from the reference sheet. New angled attacks keep the same volume and fit each cell. Main attacks face RIGHT and never left."
+    }
+  },
+  {
+    "index": 302,
+    "entity": "vaudream",
+    "fighter": "vaudream",
+    "kind": "events",
+    "retry": 35,
+    "estimatedCredits": 4.25,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "f9eacaaa-ab1d-41e5-acda-d81d124c627a"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating machine CHASSIS per cell. The machine CHASSIS is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact chassis outline, eye count, screen, buttons, teeth and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any chassis spike or screen. Preserve the complete single character identity specified below; multiple joined facial regions are part of that one character when explicitly described.\nIDENTITY: Floating blue-violet handheld-machine body with asymmetric yellow eyes, yellow toothy grille, tilted rectangular screen with yellow reflection, circular buttons and triangular spikes along top. NO LEGS, feet, arms or humanoid torso. Exclude the small creature behind it.\n\nExactly 32 complete floating CHASSIS drawings, FOUR columns and EIGHT rows. Exactly four per row.\nRow 1 INTRO: neutral hover; look determined; confident slight bank; settle neutral hover.\nRow 2 SPECIAL A: backward bank coil; drive forward; full forward ram impact; ram retract.\nRow 3 SPECIAL B: rotate upward with dynamic expression; retract through low bank; emphatic diagonal forward ram finish; recover level hover.\nRow 4 CAST: eyes focus; chassis tilts back slightly; forward power exhale, no projectile; return neutral.\nRow 5 RECOIL: face flinches and chassis tilts back; continuing bank recoil; stabilize lower hover; return neutral.\nRow 6 DEFEAT: drooping hover; loses lift; dropping turned chassis; settles on side at floor. No body or limbs.\nRow 7 FLOOR REST: whole chassis resting sideways; settles; eyes soften; entirely still resting chassis.\nRow 8 FINAL REST: same complete sideways resting chassis; same chassis with small eye relaxation; hold resting chassis; final still resting chassis. Remain a chassis-only character.\n\nDYNAMIC MELEE UPGRADE: The previous poses were too static. Draw much more expressive and distinct whole-body attack attitudes with clear anticipation, explosive contact, follow-through and recoil. Windups bank BACKWARD by 30 degrees. Straight RAM contacts lean FORWARD by 40 degrees, with intense focused eyes. UPWARD strike contacts pitch UP steeply by 55 degrees. LOW SWEEP rolls and banks DOWN by 35 degrees. AIR attack contacts form a steep 45 degree downward-forward dive, then bank back to recover. Maintain volume and exact identity; use whole floating silhouette motion, never growing limbs or humanoid parts. No static near-identical attacks. Heavy and air attacks must have visibly distinct consecutive silhouettes. No stretching or face morphing. One complete legless floating actor in every cell. Eye count must remain exact in EVERY drawing, including both joined facial regions and all FOUR yellow eyes for the organic Sproto; machine has exactly two asymmetric yellow eyes, a screen and grille. Do not lose the small lower face from the organic Sproto. No smoke, trails or effects. Precisely FOUR columns EIGHT rows, 32 complete drawings. Preserve the first neutral pose size and design from the reference sheet. New angled attacks keep the same volume and fit each cell. Main attacks face RIGHT and never left."
+    }
+  },
+  {
+    "index": 2303,
+    "entity": "vaudream",
+    "fighter": "vaudream",
+    "kind": "motion",
+    "retry": 35,
+    "estimatedCredits": 4.25,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "3313cbb1-ec60-4397-ad61-7e7e56188edb"
+        }
+      ],
+      "prompt": "PIXEL ART fighting-game sprite atlas. One complete floating machine CHASSIS per cell. The machine CHASSIS is the entire character: absolutely NO legs, feet, shoes, arms, hands, neck or humanoid torso. This overrides all ordinary fighter anatomy. Preserve exact chassis outline, eye count, screen, buttons, teeth and expression across all poses. Crisp stepped pixels, dark outlines, compact shading, no smooth vector art. Face RIGHT consistently. Controlled banks and turns, not face morphing. Solid magenta #ff00ff background, no labels, motion trails, particles, grid lines or detached effects. Generous empty separation; never clip any chassis spike or screen. Preserve the complete single character identity specified below; multiple joined facial regions are part of that one character when explicitly described.\nIDENTITY: Floating blue-violet handheld-machine body with asymmetric yellow eyes, yellow toothy grille, tilted rectangular screen with yellow reflection, circular buttons and triangular spikes along top. NO LEGS, feet, arms or humanoid torso. Exclude the small creature behind it.\n\nExactly 32 complete floating CHASSIS drawings, FOUR columns and EIGHT rows. Exactly four per row.\nRow 1 DASH: back-bank anticipation; drive forward; fast forward tilt; stretched forward lunge by position, never deform face.\nRow 2 DASH/JUMP: braking bank; level hover recovery; rising glide; rising bank.\nRow 3 JUMP: upper-arc chassis; level at apex; descending chassis; descending recovery bank.\nRow 4 HEAVY RAM: low backward coil; windup bank; turn forward; strong forward ram contact.\nRow 5 HEAVY RECOVERY: sustain ram contact; retract bank; stabilize; level hover guard.\nRow 6 AIR RAM: aerial back-bank coil; drive upward; rotate forward; forceful diagonal aerial chassis ram.\nRow 7 AIR/VICTORY: retract from ram; balanced glide; proud floating guard; victory bank coil.\nRow 8 VICTORY: celebratory upward swoop; tilt proudly; settle confident floating chassis; final proud level hover. Absolutely no arms, hands, legs or feet.\n\nDYNAMIC MELEE UPGRADE: The previous poses were too static. Draw much more expressive and distinct whole-body attack attitudes with clear anticipation, explosive contact, follow-through and recoil. Windups bank BACKWARD by 30 degrees. Straight RAM contacts lean FORWARD by 40 degrees, with intense focused eyes. UPWARD strike contacts pitch UP steeply by 55 degrees. LOW SWEEP rolls and banks DOWN by 35 degrees. AIR attack contacts form a steep 45 degree downward-forward dive, then bank back to recover. Maintain volume and exact identity; use whole floating silhouette motion, never growing limbs or humanoid parts. No static near-identical attacks. Heavy and air attacks must have visibly distinct consecutive silhouettes. No stretching or face morphing. One complete legless floating actor in every cell. Eye count must remain exact in EVERY drawing, including both joined facial regions and all FOUR yellow eyes for the organic Sproto; machine has exactly two asymmetric yellow eyes, a screen and grille. Do not lose the small lower face from the organic Sproto. No smoke, trails or effects. Precisely FOUR columns EIGHT rows, 32 complete drawings. Preserve the first neutral pose size and design from the reference sheet. New angled attacks keep the same volume and fit each cell. Main attacks face RIGHT and never left."
+    }
+  }
+]

@@ -1,0 +1,66 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Submitted 3/3 image generations.\n- index 2: 8671d9c9-7497-4431-b209-a90703f84ff1 (pending)\n- index 3: 66981864-205b-435f-ba4e-519801c987de (pending)\n- index 4: 8d321b26-7b03-4b86-8f00-cf36d0245c8a (pending)\nWait for the complete requested set with jobs_wait, then show it together with show_generation_by_ids using the collected indexed jobs. This includes jobs submitted across separate calls. job_display accepts only one id and cannot display a group; do not pass ids or call it once per job."
+    }
+  ],
+  "structuredContent": {
+    "jobs": [
+      {
+        "index": 2,
+        "job_id": "8671d9c9-7497-4431-b209-a90703f84ff1",
+        "status": "pending",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+          },
+          "medias[1].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+          }
+        }
+      },
+      {
+        "index": 3,
+        "job_id": "66981864-205b-435f-ba4e-519801c987de",
+        "status": "pending",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+          },
+          "medias[1].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+          }
+        }
+      },
+      {
+        "index": 4,
+        "job_id": "8d321b26-7b03-4b86-8f00-cf36d0245c8a",
+        "status": "pending",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+          },
+          "medias[1].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+          }
+        }
+      }
+    ],
+    "submitted_count": 3,
+    "failed_count": 0
+  },
+  "isError": false
+}

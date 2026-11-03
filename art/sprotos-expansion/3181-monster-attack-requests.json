@@ -1,0 +1,74 @@
+[
+  {
+    "index": 162,
+    "entity": "sproto3181",
+    "fighter": "sproto3181",
+    "kind": "core",
+    "retry": 36,
+    "estimatedCredits": 4.25,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "9e613918-1e3e-4951-9ead-cc54babb3116"
+        }
+      ],
+      "prompt": "Edit this existing 32-frame pixel-art fighting-game atlas. Preserve FOUR columns EIGHT rows, exactly one complete connected blue actor per cell. Keep exact main blue head/face/red eyelids/red lips, yellow limbs, clothing, shoes and neutral proportions. The small navy/black monster on his STOMACH is an ATTACHED living creature, with spiky navy head, two large WHITE eyes with black pupils, large black muzzle and tiny red smile. USER CHANGE: blue actor no longer kicks: stomach creature EXPANDS and attacks. Its head grows substantially, extends FORWARD on an elastic navy neck connected to the blue stomach, opens its black/red mouth in a comical bite, then retracts/shrinks back to belly. Both monster white eyes and main blue red eyes remain distinct and crisp. This is a playful game attack, no gore or injury. The expanded creature never detaches, never becomes another fighter, never replaces the main blue head. Main blue hands cover/brace; legs only support or tuck when airborne. Dynamic windup, clear full extension, recoil and return. No fluid, projectiles, trails or effects. Preserve all non-replaced poses exactly. Pure solid magenta #ff00ff background, hard stepped pixels, dark outlines and compact shading, generous blank margins around the COMPLETE main body plus expanded monster. Fully include every monster tip, head, hand and shoe. No clipping, no extra figures, no yellow partner. Read slots left-to-right then top-to-bottom starting0.\n\nKEEP all other poses. REPLACE row5 (slots16,17,18,19) with BELLY MONSTER STRIKE: small monster coils at stomach; monster swells twice in size and reaches forward with connected navy neck; FULL CONTACT the monster head becomes about as large as blue main head and lunges RIGHT with open black/red maw, extended elastic navy neck still attached at blue stomach; monster retracts smaller to stomach. Blue actor plants both feet, hands raised, NO KICK.\nREPLACE row6 slots20,21 with low belly-monster lunge and retract. Slots22,23: blue actor airborne with both knees TUCKED, belly monster swells then lunges forward on attached navy neck. No extended attacking legs."
+    }
+  },
+  {
+    "index": 1219,
+    "entity": "sproto3181",
+    "fighter": "sproto3181",
+    "kind": "motion",
+    "retry": 36,
+    "estimatedCredits": 4.25,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "b6ccc80a-9851-4c79-9f2f-213e1908b0c3"
+        }
+      ],
+      "prompt": "Edit this existing 32-frame pixel-art fighting-game atlas. Preserve FOUR columns EIGHT rows, exactly one complete connected blue actor per cell. Keep exact main blue head/face/red eyelids/red lips, yellow limbs, clothing, shoes and neutral proportions. The small navy/black monster on his STOMACH is an ATTACHED living creature, with spiky navy head, two large WHITE eyes with black pupils, large black muzzle and tiny red smile. USER CHANGE: blue actor no longer kicks: stomach creature EXPANDS and attacks. Its head grows substantially, extends FORWARD on an elastic navy neck connected to the blue stomach, opens its black/red mouth in a comical bite, then retracts/shrinks back to belly. Both monster white eyes and main blue red eyes remain distinct and crisp. This is a playful game attack, no gore or injury. The expanded creature never detaches, never becomes another fighter, never replaces the main blue head. Main blue hands cover/brace; legs only support or tuck when airborne. Dynamic windup, clear full extension, recoil and return. No fluid, projectiles, trails or effects. Preserve all non-replaced poses exactly. Pure solid magenta #ff00ff background, hard stepped pixels, dark outlines and compact shading, generous blank margins around the COMPLETE main body plus expanded monster. Fully include every monster tip, head, hand and shoe. No clipping, no extra figures, no yellow partner. Read slots left-to-right then top-to-bottom starting0.\n\nKEEP first12 DASH/JUMP drawings and final6 VICTORY drawings exactly as reference including belly creature. REPLACE slots12-19 (row4 and row5) HEAVY ATTACK with: monster coils on stomach; monster begins swelling; monster stretches its attached elastic navy neck; giant monster head lunges RIGHT with black/red open maw; sustain the giant monster contact; monster head folds/retracts along navy neck; monster shrinks back to belly; neutral guard. Blue legs planted throughout, NO KICKS.\nREPLACE slots20-25 (row6 and first2 row7) AIR ATTACK with: blue airborne both knees bent/tucked, monster coils; monster swells; monster extends attached neck; giant monster head bites/lunges diagonally RIGHT; monster retracts; balanced airborne recover with monster back on stomach. NO leg extension or kick."
+    }
+  },
+  {
+    "index": 164,
+    "entity": "sproto3181",
+    "fighter": "sproto3181",
+    "kind": "events",
+    "retry": 36,
+    "estimatedCredits": 4.25,
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "bab55252-bf83-4d9d-94b1-f81dc703ace7"
+        }
+      ],
+      "prompt": "Edit this existing 32-frame pixel-art fighting-game atlas. Preserve FOUR columns EIGHT rows, exactly one complete connected blue actor per cell. Keep exact main blue head/face/red eyelids/red lips, yellow limbs, clothing, shoes and neutral proportions. The small navy/black monster on his STOMACH is an ATTACHED living creature, with spiky navy head, two large WHITE eyes with black pupils, large black muzzle and tiny red smile. USER CHANGE: blue actor no longer kicks: stomach creature EXPANDS and attacks. Its head grows substantially, extends FORWARD on an elastic navy neck connected to the blue stomach, opens its black/red mouth in a comical bite, then retracts/shrinks back to belly. Both monster white eyes and main blue red eyes remain distinct and crisp. This is a playful game attack, no gore or injury. The expanded creature never detaches, never becomes another fighter, never replaces the main blue head. Main blue hands cover/brace; legs only support or tuck when airborne. Dynamic windup, clear full extension, recoil and return. No fluid, projectiles, trails or effects. Preserve all non-replaced poses exactly. Pure solid magenta #ff00ff background, hard stepped pixels, dark outlines and compact shading, generous blank margins around the COMPLETE main body plus expanded monster. Fully include every monster tip, head, hand and shoe. No clipping, no extra figures, no yellow partner. Read slots left-to-right then top-to-bottom starting0.\n\nKEEP intro, cast, recoil and defeat rows unchanged. REPLACE ONLY SPECIAL rows2-3, 8 drawings with: belly monster coils; monster swells and neck extends; giant monster head lunges RIGHT with black/red open maw, navy elastic neck visibly connected to blue stomach; monster retracts halfway; a second monster lunge slightly upward; monster coils back at belly; giant final monster lunge straight RIGHT; monster fully shrinks back into belly and blue actor guards. Blue actor feet planted with bent support knees, arms cover his upper body, NO kicks or attacking punches. Monster head reaches roughly main blue head size at full expansion."
+    }
+  }
+]

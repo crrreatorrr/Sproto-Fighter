@@ -1,0 +1,43 @@
+{
+  "roster": {
+    "name": "Sproto #3215",
+    "color": "#ffe168",
+    "dark": "#263c64",
+    "speed": 5.0600000000000005,
+    "jump": 15.484,
+    "partner": "rivet",
+    "special": "SPROTO BURST 3215",
+    "role": "SKIRMISH",
+    "description": "Guarded footwork, a heavy kick and four-contact ranged relay."
+  },
+  "kit": {
+    "role": "SKIRMISH",
+    "specialName": "SPROTO BURST 3215",
+    "signature": "Guarded footwork, a heavy kick and four-contact ranged relay.",
+    "lightRange": 82,
+    "heavy": {
+      "range": 129,
+      "damage": 122
+    },
+    "bolt": {
+      "startup": 15,
+      "damage": 51
+    },
+    "projectile": {
+      "speed": 9,
+      "shape": "spark"
+    },
+    "specialFrames": [
+      14,
+      24,
+      36,
+      48
+    ],
+    "special": {
+      "range": 484,
+      "damage": 105,
+      "push": 3
+    },
+    "advance": 2
+  }
+}
