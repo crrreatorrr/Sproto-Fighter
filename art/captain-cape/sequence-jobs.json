@@ -1,0 +1,48 @@
+[
+  {
+    "index": 22,
+    "entity": "captain",
+    "fighter": "captain",
+    "kind": "walk",
+    "job_id": "ba368767-2112-4f84-868b-a607b56acbeb",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_060858_ba368767-2112-4f84-868b-a607b56acbeb.png"
+  },
+  {
+    "index": 23,
+    "entity": "captain",
+    "fighter": "captain",
+    "kind": "events",
+    "job_id": "d2f30684-e570-4ad7-8af7-695d471bc42b",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_060858_d2f30684-e570-4ad7-8af7-695d471bc42b.png"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "index": 1,
+    "job_id": "29397d1b-2db3-43c1-b76e-31862bc68785",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "highsproto",
+    "fighter": "highsproto",
+    "kind": "walk"
+  },
+  {
+    "index": 2,
+    "job_id": "e4e3f2fe-9e90-4316-a480-0fe1fe6a9897",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "highsproto",
+    "fighter": "highsproto",
+    "kind": "events"
+  }
+]

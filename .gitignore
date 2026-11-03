@@ -1,4 +1,4 @@
-node_modules/
+/node_modules
 dist/
 .DS_Store
 *.log
@@ -7,12 +7,11 @@ dist/
 __pycache__/
 *.pyc
 
-# Never commit local credentials or machine-specific state.
+# Local hub configuration must not be committed.
 .env
 .env.*
 !.env.example
-.aws/
-.codex/
-.agents/
-*.pem
-*.key
+
+# This vendored runtime is an input to the game build, not the game output.
+!vendor/hub-sdk/dist/
+!vendor/hub-sdk/dist/**

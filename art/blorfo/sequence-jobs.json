@@ -1,0 +1,48 @@
+[
+  {
+    "index": 10,
+    "entity": "blorfo",
+    "fighter": "blorfo",
+    "kind": "walk",
+    "job_id": "25deb9cc-6383-4da7-9dbf-a0d220cbfa2f",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_060855_25deb9cc-6383-4da7-9dbf-a0d220cbfa2f.png"
+  },
+  {
+    "index": 11,
+    "entity": "blorfo",
+    "fighter": "blorfo",
+    "kind": "events",
+    "job_id": "0348aaaf-e573-4828-be83-e12940e14a30",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_060856_0348aaaf-e573-4828-be83-e12940e14a30.png"
+  }
+]

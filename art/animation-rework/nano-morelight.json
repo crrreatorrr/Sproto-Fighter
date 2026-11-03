@@ -1,0 +1,44 @@
+{
+  "params": {
+    "model": "nano_banana_2_1",
+    "resolution": "1k",
+    "thinking_level": "high",
+    "aspect_ratio": "2:3",
+    "count": 1,
+    "use_unlim": false,
+    "prompt": "Create a complete pixel-art ANIMATION SHEET with exactly 32 full-body cels in a regular FOUR-COLUMN, EIGHT-ROW grid. Read left to right. Image1 is the original character identity; image2 is the installed game sprite and MUST govern body proportions, head size, pixel density and RIGHT-facing camera. Preserve the SAME anatomy and apparent scale in every cel. Friendly cobalt-blue fantasy mascot, broad soft torso, swept rear outline, thin brows, round yellow eyes and black pupils, huge red lips, blue hands/feet. Keep its exact red two-lobed torso graphic and yellow belly patch. Smooth nonsexual all-ages cartoon creature design, costume-free like the reference; no human anatomy details. No accessories or added garments.\nSolid magenta #FF00FF background. No borders, labels, text, shadows, effects, projectiles or extra characters. Every full body fits one cell with empty margin. All actions aim RIGHT; never reverse orientation. Crisp deliberate pixels. One connected body with exactly two arms/two legs. Keep hands/feet distinct; same scale for crouched and lying poses. Cheek puff is slight expansion of the attached blue face, not separate discs, bubbles or objects.\nEach row is FOUR successive key poses:\nROW1 INTRO: relaxed wide stance; chest rises with gentle inhale; cheerful open red smile and spread hands; settle raised hands into guard.\nROW2 SPECIAL: low torso compression with arms tucked; deep inhale with modest cheek expansion; plant feet and lean forward for RIGHT-facing breath; recoil slightly while hands pull back.\nROW3 SPECIAL continued: second RIGHT-facing breath with one arm stretched back; deep crouching inhale with both hands braced; strongest forward exhalation with visibly round open mouth and rear leg straight; relax cheeks into guard.\nROW4 SPIT CAST: chin draws back; cheeks subtly inflate; red lips round and open toward RIGHT; cheeks relax returning guard. No projected object or beam.\nROW5 RECOIL: upper torso flinches back from front hit; largest backward lean with bent knees and compressed belly; feet catch weight as head returns; guard restored.\nROW6 DEFEAT collapse: tired smile droops and hands lower; knees buckle; lower onto hip/forearm; fully lie on SIDE with face visible, feet supported and head resting toward RIGHT edge.\nROW7 DEFEAT grounded: side-rest with head on RIGHT; small head-lift effort; slightly raised head while hips/legs remain on floor; head lowers and shoulder settles. Never shrink the head.\nROW8 DEFEAT ending: hands relax on floor; shoulders settle; tired eyes close; final still side-lyingrest. ALL last 8 cels stay lying withhead at RIGHT and feet to LEFT. Never flip orientation, stand, kneel or resurrect. Same head size/bodyproportions.\n32 cels total. Precisely preserve installed guard's proportions and face across 8 rows. Every row is sequential continuous animation; fixed camera and character scale.",
+    "medias": [
+      {
+        "role": "image",
+        "value": "e128cc32-b361-451a-be1e-1bb654e1c6af"
+      },
+      {
+        "role": "image",
+        "value": "608459de-efb3-4b34-8e26-64cd150d9952"
+      }
+    ]
+  },
+  "submission": {
+    "jobs": [
+      {
+        "index": 7,
+        "job_id": "68119f5d-a489-45e3-83a0-e9d87ae6c949",
+        "status": "pending",
+        "adjustments": {
+          "medias[0].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+          },
+          "medias[1].role": {
+            "requested": "image",
+            "used": "image_references",
+            "reason": "Nano Banana 2.1 backend expects schema-key media roles"
+          }
+        }
+      }
+    ],
+    "submitted_count": 1,
+    "failed_count": 0
+  }
+}

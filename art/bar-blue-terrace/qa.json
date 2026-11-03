@@ -1,0 +1,13 @@
+{
+  "name": "Blue Terrace Bar",
+  "reference": "reference.png",
+  "model": "Higgsfield GPT Image2.5 Sunburst high4k",
+  "visualReview": "Reference blue terrace/railings, columns, flowering tree and painted sign preserved. No people or map overlay. Clear sidewalk floor at y578 verified with two fighter sprites. Browser1/1 loaded, zero errors.",
+  "checks": [
+    "production build passed",
+    "61 location hashes/dimensions/region mapping passed",
+    "46-stage image loading/preview/fallback checks passed"
+  ],
+  "mainBar": "Existing neon bar retained as first Bar story location.",
+  "screenshot": "/Users/kenhiraoka/Documents/Codex/2026-11-01/u/outputs/blue-terrace-bar.png"
+}

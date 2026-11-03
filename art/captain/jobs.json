@@ -1,0 +1,60 @@
+[
+  {
+    "index": 0,
+    "job_id": "cc7e06d7-20e4-48a3-9a85-49b01cbfd54d",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "captain",
+    "fighter": "captain",
+    "kind": "core",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_052319_cc7e06d7-20e4-48a3-9a85-49b01cbfd54d.png"
+  },
+  {
+    "index": 1,
+    "job_id": "6244bbe8-4170-4dc5-9715-93d32c0e65f8",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "captain",
+    "fighter": "captain",
+    "kind": "walk",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_052536_6244bbe8-4170-4dc5-9715-93d32c0e65f8.png"
+  },
+  {
+    "index": 2,
+    "job_id": "ca16d755-27de-4e28-baf3-476b569fcb62",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "captain",
+    "fighter": "captain",
+    "kind": "events",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_052536_ca16d755-27de-4e28-baf3-476b569fcb62.png"
+  }
+]

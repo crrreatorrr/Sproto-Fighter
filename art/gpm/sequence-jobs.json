@@ -1,0 +1,42 @@
+[
+  {
+    "index": 1,
+    "job_id": "679be28f-9c15-4741-9cdc-886d40019526",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "gpm",
+    "fighter": "gpm",
+    "kind": "walk"
+  },
+  {
+    "index": 2,
+    "job_id": "3b3bab28-ca35-420e-97e5-c982158e92d1",
+    "status": "pending",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "entity": "gpm",
+    "fighter": "gpm",
+    "kind": "events"
+  }
+]

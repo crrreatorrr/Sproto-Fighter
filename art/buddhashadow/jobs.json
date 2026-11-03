@@ -1,0 +1,211 @@
+[
+  {
+    "index": 0,
+    "entity": "buddhashadow",
+    "fighter": "buddhashadow",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "7db8ca14-245c-422c-8005-fdcd652f1186"
+        }
+      ],
+      "prompt": "Exactly 32 complete separate full-body drawings, FOUR columns and EIGHT rows, no extra cells.\nProduction PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and rounded stocky torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\nIDENTITY: The ONE rounded stocky BLACK Sproto in reference image1. Large smooth rounded BLACK head and thick black neck with a softly rounded chin. TWO enormous circular YELLOW eye surrounds with small glossy BLACK round pupils and tiny white glints. Subtle curved black brows, short broad rounded BLACK nose. Very broad curved RED closed smiling lips with a simple curved seam, no teeth or yellow jaw. FOUR pointed RED triangular spikes along the back/left side of the head. Preserve the distinctive BLACK body and RED spikes, never recolor skin blue. A thick RED rolled collar surrounds the neck, RED tunic with broad YELLOW shoulder bands and segmented YELLOW lower trim. Small fixed WHITE circular medallion at center of collar with a tiny BLACK abstract mark, no readable lettering. Extend cropped lower body conservatively with matching RED loose trousers and BLACK simple slippers with YELLOW soles. BLACK bare arms and hands, no boxing gloves. Chunky rounded torso, low pelvis, two complete attached arms and two complete attached legs. No hair, crown, cape, staff, weapon or extra actor. Keep the black face readable through a few charcoal same-hue shading steps and subtle dark-grey edges, not blue highlights.\nRow 1: relaxed combat guard; subtle exhale guard; forward guarded step with near foot leading; weight passes over near planted foot.\nRow 2: forward guarded step with far foot leading; weight passes over far planted foot; forward dash with low lean and both legs anatomically connected; jump anticipation with hips lowered and knees bent.\nRow 3: rising jump with both low-rooted knees gathered; falling jump with legs extending for landing; low crouched landing with both soles grounded; light punch anticipation with shoulder and elbow coiling.\nRow 4: fully extended straight punch toward the right; punch retracting to guard; uppercut low-body coil; clear rising uppercut with elbow then fist high, two legs retained.\nRow 5: side kick chamber, near knee lifted from LOW hip, support foot planted; half-extended kick with knee opening; fully extended waist-height side kick, low hip, ankle and toes aligned; kick knee retracts before planting.\nRow 6: low sweeping kick with one grounded bent support leg; sweep recovery returning over the low pelvis; airborne kick chamber with both legs originating at lower body; airborne kick full extension with coherent second leg folded.\nRow 7: recoiling from a chest hit, head and torso remain joined; solid two-arm high guard; reaching forward to catch with clearly visible open hand; close grab hold with both arms bent toward an imagined opponent but NO opponent drawn.\nRow 8: planted forward throw follow-through without opponent; ranged SPIT anticipation with cheeks inflated and lips pursed, elbows tucked back; open-mouth SPIT release to RIGHT with forward head snap, arms remain at ribs; broad triumphant Team Special finishing stance, complete body. Never fire from a hand. Engine draws projectile; do not draw one. Preserve BLACK skin/head/hands, RED rear spikes and rolled collar, enormous YELLOW eyes, red smile, yellow outfit bands and fixed white medallion in every frame. NO blue skin or blue highlights. Compact flat limited palette shading, no gradients, glowing body, text, shadows, effects or projectiles. Background pure MAGENTA, not the cyan reference background."
+    },
+    "job_id": "32783bd8-c18e-4c01-b5f8-ad7e65a04008",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_181801_32783bd8-c18e-4c01-b5f8-ad7e65a04008.png"
+  },
+  {
+    "index": 1,
+    "entity": "buddhashadow",
+    "fighter": "buddhashadow",
+    "kind": "walk",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "2k",
+      "aspect_ratio": "4:3",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "7db8ca14-245c-422c-8005-fdcd652f1186"
+        },
+        {
+          "role": "image",
+          "value": "32783bd8-c18e-4c01-b5f8-ad7e65a04008"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and rounded stocky torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\nIDENTITY: The ONE rounded stocky BLACK Sproto in reference image1. Large smooth rounded BLACK head and thick black neck with a softly rounded chin. TWO enormous circular YELLOW eye surrounds with small glossy BLACK round pupils and tiny white glints. Subtle curved black brows, short broad rounded BLACK nose. Very broad curved RED closed smiling lips with a simple curved seam, no teeth or yellow jaw. FOUR pointed RED triangular spikes along the back/left side of the head. Preserve the distinctive BLACK body and RED spikes, never recolor skin blue. A thick RED rolled collar surrounds the neck, RED tunic with broad YELLOW shoulder bands and segmented YELLOW lower trim. Small fixed WHITE circular medallion at center of collar with a tiny BLACK abstract mark, no readable lettering. Extend cropped lower body conservatively with matching RED loose trousers and BLACK simple slippers with YELLOW soles. BLACK bare arms and hands, no boxing gloves. Chunky rounded torso, low pelvis, two complete attached arms and two complete attached legs. No hair, crown, cape, staff, weapon or extra actor. Keep the black face readable through a few charcoal same-hue shading steps and subtle dark-grey edges, not blue highlights. Reference image2 is the reviewed combat sheet; match its BLACK skin, RED/YELLOW outfit, stocky proportions and crisp pixel style precisely.\nExactly EIGHT separate full-body drawings in a regular 4-column by 2-row grid. A continuous guarded fighting footwork loop, NOT a run. Upper body stays calm, head/torso size constant, hips stay at the same height and same x center. Both fists remain raised. Feet are clearly different on adjacent frames: 0 near foot forward grounded/far foot back grounded; 1 transfer weight to near sole, far heel lifts; 2 far knee passes under low pelvis with far foot lifted; 3 far foot reaches forward while near sole still supports; 4 far foot forward grounded/near foot back grounded; 5 transfer weight to far sole, near heel lifts; 6 near knee passes under low pelvis with near foot lifted; 7 near foot reaches forward ready to plant. No feet crossing through one another, no sliding torso, no detached hips. Each frame has at least one clearly grounded foot. Last frame loops to first. Same complete body and clothing as the combat reference. Preserve BLACK skin/head/hands, RED rear spikes and rolled collar, enormous YELLOW eyes, red smile, yellow outfit bands and fixed white medallion in every frame. NO blue skin or blue highlights. Compact flat limited palette shading, no gradients, glowing body, text, shadows, effects or projectiles. Background pure MAGENTA, not the cyan reference background."
+    },
+    "job_id": "1612ae9a-1313-4703-a34c-951d51f08626",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_181928_1612ae9a-1313-4703-a34c-951d51f08626.png"
+  },
+  {
+    "index": 2,
+    "entity": "buddhashadow",
+    "fighter": "buddhashadow",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "7db8ca14-245c-422c-8005-fdcd652f1186"
+        },
+        {
+          "role": "image",
+          "value": "32783bd8-c18e-4c01-b5f8-ad7e65a04008"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and rounded stocky torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\nIDENTITY: The ONE rounded stocky BLACK Sproto in reference image1. Large smooth rounded BLACK head and thick black neck with a softly rounded chin. TWO enormous circular YELLOW eye surrounds with small glossy BLACK round pupils and tiny white glints. Subtle curved black brows, short broad rounded BLACK nose. Very broad curved RED closed smiling lips with a simple curved seam, no teeth or yellow jaw. FOUR pointed RED triangular spikes along the back/left side of the head. Preserve the distinctive BLACK body and RED spikes, never recolor skin blue. A thick RED rolled collar surrounds the neck, RED tunic with broad YELLOW shoulder bands and segmented YELLOW lower trim. Small fixed WHITE circular medallion at center of collar with a tiny BLACK abstract mark, no readable lettering. Extend cropped lower body conservatively with matching RED loose trousers and BLACK simple slippers with YELLOW soles. BLACK bare arms and hands, no boxing gloves. Chunky rounded torso, low pelvis, two complete attached arms and two complete attached legs. No hair, crown, cape, staff, weapon or extra actor. Keep the black face readable through a few charcoal same-hue shading steps and subtle dark-grey edges, not blue highlights. Reference image2 is the reviewed combat sheet; match its BLACK skin, RED/YELLOW outfit, stocky proportions and crisp pixel style precisely.\nExactly 32 separate complete drawings, regular 4-column by 8-row grid, read left-to-right/top-to-bottom. All 32 are the SAME single actor, including lying floor drawings. No opponents or partner drawn.\nRow 1 INTRO:relaxed round black head and broad red smile with arms low; join attached black palms together below collar medallion and gently bow; straighten and open one palm in calm salute; settle into compact grounded guard. No text or effects.\nRow 2 SPECIAL A: low coil; shoulder windup; fully extended straight impact punch; punch retract.\nRow 3 SPECIAL B: alternate shoulder strike; retract to cover; two-arm finishing palm thrust to RIGHT; recover combat guard. No floating effects.\nRow 4 CAST:round black head draws back, red lips purse and cheeks inflate; knees coil and both black hands tuck BACK beside ribs; forceful open-mouth SPIT RIGHT with sharp neck and torso snap, hands stay BACK; red mouth closes and calm smile returns. Never a palm shot. No projectile.\nRow 5 RECOIL: chest impact arch; head/torso lean back with arms still connected; bend knees to absorb; regain combat guard.\nRow 6 to 8: DEFEAT START: yellow eyes widen and red smile sags; one black palm rests on medallion while knees buckle; seated collapse with arms balancing; roll onto left side, head LEFT feet RIGHT. DEFEAT FLOOR: entirely side-lying with elbow briefly supporting round head; elbow bends; head lowers; shoulder settles. DEFEAT REST: red lips relax; eyes close; black fingers loosen; completely still side-lying rest with collar, medallion and red rear spikes attached. Exactly four figures per row, twelve defeat drawings total. Preserve BLACK skin/head/hands, RED rear spikes and rolled collar, enormous YELLOW eyes, red smile, yellow outfit bands and fixed white medallion in every frame. NO blue skin or blue highlights. Compact flat limited palette shading, no gradients, glowing body, text, shadows, effects or projectiles. Background pure MAGENTA, not the cyan reference background."
+    },
+    "job_id": "c6756742-d3a9-4ba3-9308-5857c227e72f",
+    "status": "nsfw",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5"
+  },
+  {
+    "index": 3,
+    "entity": "buddhashadow",
+    "fighter": "buddhashadow",
+    "kind": "identity",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "7db8ca14-245c-422c-8005-fdcd652f1186"
+        },
+        {
+          "role": "image",
+          "value": "32783bd8-c18e-4c01-b5f8-ad7e65a04008"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and rounded stocky torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\nIDENTITY: The ONE rounded stocky BLACK Sproto in reference image1. Large smooth rounded BLACK head and thick black neck with a softly rounded chin. TWO enormous circular YELLOW eye surrounds with small glossy BLACK round pupils and tiny white glints. Subtle curved black brows, short broad rounded BLACK nose. Very broad curved RED closed smiling lips with a simple curved seam, no teeth or yellow jaw. FOUR pointed RED triangular spikes along the back/left side of the head. Preserve the distinctive BLACK body and RED spikes, never recolor skin blue. A thick RED rolled collar surrounds the neck, RED tunic with broad YELLOW shoulder bands and segmented YELLOW lower trim. Small fixed WHITE circular medallion at center of collar with a tiny BLACK abstract mark, no readable lettering. Extend cropped lower body conservatively with matching RED loose trousers and BLACK simple slippers with YELLOW soles. BLACK bare arms and hands, no boxing gloves. Chunky rounded torso, low pelvis, two complete attached arms and two complete attached legs. No hair, crown, cape, staff, weapon or extra actor. Keep the black face readable through a few charcoal same-hue shading steps and subtle dark-grey edges, not blue highlights. Reference image2 is the reviewed combat sheet; match its BLACK skin, RED/YELLOW outfit, stocky proportions and crisp pixel style precisely.\nExactly 32 complete drawings in a strict FOUR-column EIGHT-row grid. Rows1-2 eight ENTRANCE frames, rows3-4 eight MOUTH-SPIT frames, rows5-8 sixteen DEATH frames. Read left to right then top to bottom. Same single actor. No projectile, text, opponent, floor shadow or effects. Death frames24-31 entirely side-lying, head LEFT feet RIGHT, never upright or kneeling.\nRow 1: relaxed round black head and broad red smile, arms low; both BLACK palms rise toward chest; join two attached black palms together below red collar medallion; bow round black head gently over joined palms, red rear spikes stay attached.\nRow 2: straighten head, eyes open wide and smile softly; separate palms smoothly, one extended in a calm open-palm salute; lower center of gravity, bring both hands into compact guard; settled grounded guard, enormous yellow eyes and red smile.\nRow 3: red smile purses and eyes widen; round black head draws back, cheeks inflate; knees compress, shoulders roll back; fully puffed black cheeks, elbows tucked BACK near ribs.\nRow 4: forceful open-mouth SPIT RIGHT, neck and torso snap forward, hands remain BACK; hold wide red mouth release briefly, cheeks deflate; black head recoils, red lips close; settled calm smile and stocky grounded guard restored.\nRow 5: yellow eyes widen, red smile sags; round black head tilts back, black arms open for balance; one black palm rests on fixed white medallion; knees wobble and bend, red collar attached.\nRow 6: hips sink low, far palm braces downward; seated collapse, both feet forward; roll onto left side, head LEFT feet RIGHT; fully side-lying body, near elbow briefly supports head.\nRow 7: supporting elbow bends, head lowers; black hand rests beside red collar; shoulder settles on floor, gold tunic bands remain visible; red lips relax, yellow eyes half close.\nRow 8: black fingers loosen by medallion; tiny final shoulder drop; eyes close, whole body lies still; final completely still side-lying rest, red rear spikes attached. Preserve BLACK skin/head/hands, RED rear spikes and rolled collar, enormous YELLOW eyes, red smile, yellow outfit bands and fixed white medallion in every frame. NO blue skin or blue highlights. Compact flat limited palette shading, no gradients, glowing body, text, shadows, effects or projectiles. Background pure MAGENTA, not the cyan reference background."
+    },
+    "ranged": true,
+    "deathStart": 16,
+    "frameCount": 32,
+    "job_id": "e4e1e31c-bc39-484d-ac94-8387d9c0a692",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_181930_e4e1e31c-bc39-484d-ac94-8387d9c0a692.png"
+  },
+  {
+    "index": 4,
+    "entity": "buddhashadow",
+    "fighter": "buddhashadow",
+    "kind": "events",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "7db8ca14-245c-422c-8005-fdcd652f1186"
+        },
+        {
+          "role": "image",
+          "value": "32783bd8-c18e-4c01-b5f8-ad7e65a04008"
+        }
+      ],
+      "prompt": "A fully clothed friendly cartoon video-game actor, no injury detail or gore. Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and rounded stocky torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\nIDENTITY: The ONE rounded stocky BLACK Sproto in reference image1. Large smooth rounded BLACK head and thick black neck with a softly rounded chin. TWO enormous circular YELLOW eye surrounds with small glossy BLACK round pupils and tiny white glints. Subtle curved black brows, short broad rounded BLACK nose. Very broad curved RED closed smiling lips with a simple curved seam, no teeth or yellow jaw. FOUR pointed RED triangular spikes along the back/left side of the head. Preserve the distinctive BLACK body and RED spikes, never recolor skin blue. A thick RED rolled collar surrounds the neck, RED tunic with broad YELLOW shoulder bands and segmented YELLOW lower trim. Small fixed WHITE circular medallion at center of collar with a tiny BLACK abstract mark, no readable lettering. Extend cropped lower body conservatively with matching RED loose trousers and BLACK simple slippers with YELLOW soles. BLACK bare arms and hands, no boxing gloves. Chunky rounded torso, low pelvis, two complete attached arms and two complete attached legs. No hair, crown, cape, staff, weapon or extra actor. Keep the black face readable through a few charcoal same-hue shading steps and subtle dark-grey edges, not blue highlights. Reference image2 is the reviewed combat sheet; match its BLACK skin, RED/YELLOW outfit, stocky proportions and crisp pixel style precisely.\nExactly 32 separate complete drawings, regular 4-column by 8-row grid, read left-to-right/top-to-bottom. All 32 are the SAME single actor, including lying floor drawings. No opponents or partner drawn.\nRow 1 INTRO:relaxed round black head and broad red smile with arms low; join attached black palms together below collar medallion and gently bow; straighten and open one palm in calm salute; settle into compact grounded guard. No text or effects.\nRow 2 SPECIAL A: low coil; shoulder windup; fully extended straight impact punch; punch retract.\nRow 3 SPECIAL B: alternate shoulder strike; retract to cover; two-arm finishing palm thrust to RIGHT; recover combat guard. No floating effects.\nRow 4 CAST:round black head draws back, red lips purse and cheeks inflate; knees coil and both black hands tuck BACK beside ribs; forceful open-mouth SPIT RIGHT with sharp neck and torso snap, hands stay BACK; red mouth closes and calm smile returns. Never a palm shot. No projectile.\nRow 5 RECOIL: chest impact arch; head/torso lean back with arms still connected; bend knees to absorb; regain combat guard.\nRow 6 to 8: DEFEAT START: yellow eyes widen and red smile sags; one black palm rests on medallion while knees buckle; seated collapse with arms balancing; roll onto left side, head LEFT feet RIGHT. DEFEAT FLOOR: entirely side-lying with elbow briefly supporting round head; elbow bends; head lowers; shoulder settles. DEFEAT REST: red lips relax; eyes close; black fingers loosen; completely still side-lying rest with collar, medallion and red rear spikes attached. Exactly four figures per row, twelve defeat drawings total. Preserve BLACK skin/head/hands, RED rear spikes and rolled collar, enormous YELLOW eyes, red smile, yellow outfit bands and fixed white medallion in every frame. NO blue skin or blue highlights. Compact flat limited palette shading, no gradients, glowing body, text, shadows, effects or projectiles. Background pure MAGENTA, not the cyan reference background."
+    },
+    "retry": 1,
+    "job_id": "974b490f-b0a9-4a71-b9ec-daddff8c6bae",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_182106_974b490f-b0a9-4a71-b9ec-daddff8c6bae.png"
+  }
+]

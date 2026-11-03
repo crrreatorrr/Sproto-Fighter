@@ -1,0 +1,24 @@
+[
+  {
+    "index": 15,
+    "entity": "freshprince",
+    "fighter": "freshprince",
+    "kind": "core",
+    "params": {
+      "model": "gpt_image_2_5",
+      "variant": "sunburst",
+      "quality": "high",
+      "resolution": "4k",
+      "aspect_ratio": "9:16",
+      "count": 1,
+      "use_unlim": false,
+      "medias": [
+        {
+          "role": "image",
+          "value": "338d27db-67f0-4dcb-9303-91b10702afcc"
+        }
+      ],
+      "prompt": "Production PIXEL ART for the existing Sproto fighting game. Crisp stepped pixels, dark outlines, compact limited-color shading. Not smooth vector or painterly art. Each cell contains exactly ONE complete actor facing RIGHT, consistent three-quarter side view. Preserve the reference identity, facial shape, exact eye count, colors, clothing, accessories and slender long torso. Same head, torso and limb proportions in every frame. Exactly two arms and two legs per actor, legs rooted at the LOWEST pelvis below the belly. Low hip, chambered knee and connected ankle for every kick. Never attach legs to the chest. Keep all limbs and feet wholly inside their own cell with generous empty margins; no clipping. Flat solid pure MAGENTA #ff00ff background, no grid lines, labels, shadows, trails, floating particles or weapons. Worn/held identity accessories must remain attached to body or hand. Extend cropped lower bodies conservatively using matching skin/clothing colors and simple shoes. Complete separate body drawings; no limb cutouts. Both feet need readable soles. No extra subjects.\n\nIDENTITY: The ONE character in reference image 1. Large cobalt BLUE rounded head with sharp swept BLUE rear/top spikes. Huge almond YELLOW eyes with RED oval irises, BLACK centers and WHITE vertical glints, heavy blue eyelids and cheek creases. Large broad curved RED smiling muzzle/lips with curled red corners and closed mouth; no teeth. Bright YELLOW pointed stand-up collar around neck with RED shirt. BLUE bare arms/hands, extend RED trousers and simple yellow boots. No crown, hat, cape, gloves or jewelry. Exactly one head, two eyes, two arms and two low-rooted legs. Exclude reference background. Match all identity colors consistently.\n\nRow 1: relaxed combat guard; subtle exhale guard; forward guarded step with near foot leading; weight passes over near planted foot.\nRow 2: forward guarded step with far foot leading; weight passes over far planted foot; forward dash with low lean and both legs anatomically connected; jump anticipation with hips lowered and knees bent.\nRow 3: rising jump with both low-rooted knees gathered; falling jump with legs extending for landing; low crouched landing with both soles grounded; light punch anticipation with shoulder and elbow coiling.\nRow 4: fully extended straight punch toward the right; punch retracting to guard; uppercut low-body coil; clear rising uppercut with elbow then fist high, two legs retained.\nRow 5: side kick chamber, near knee lifted from LOW hip, support foot planted; half-extended kick with knee opening; fully extended waist-height side kick, low hip, ankle and toes aligned; kick knee retracts before planting.\nRow 6: low sweeping kick with one grounded bent support leg; sweep recovery returning over the low pelvis; airborne kick chamber with both legs originating at lower body; airborne kick full extension with coherent second leg folded.\nRow 7: recoiling from a chest hit, head and torso remain joined; solid two-arm high guard; reaching forward to catch with clearly visible open hand; close grab hold with both arms bent toward an imagined opponent but NO opponent drawn.\nRow 8: forward throw release with planted low legs and torso follow-through, no opponent; ranged power anticipation with hands close to chest; ranged power release with front hand extended, no projectile; broad triumphant Team Special impact stance with both arms and both legs visible. All clothing, spikes and accessories stay connected. Preserve asymmetry by anatomical side. No text, detached effects, weapons, floating shapes or extra subjects. No white clothing highlights; shading uses the same hue as the colored surface."
+    }
+  }
+]

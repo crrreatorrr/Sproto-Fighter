@@ -1,0 +1,265 @@
+{
+  "status": "Two-fighter pilot installed; latest authorized remaining-roster transfer returned HTTP 403 for all 19 files",
+  "model": {
+    "id": "nano_banana_2_1",
+    "resolution": "1k",
+    "thinking_level": "high",
+    "aspect_ratio": "2:3",
+    "quoted_credits_per_image": 1.5
+  },
+  "budget_proposal": {
+    "first_pass_images": 42,
+    "max_revision_images": 6,
+    "maximum_credits": 48,
+    "observed_balance": 62.5
+  },
+  "source": "Original user reference plus inspected installed full-body guard for consistent proportions; excluded withdrawn rigging image and bug screenshots.",
+  "format": "One4x8 complete-body32-cell sheet per fighter; retain inspected source draws only, repeat holds explicitly.",
+  "pilot": "Morelight and Golden Sproto first; validate likeness, connected anatomy, extraction and live motion before the remaining roster.",
+  "billing": "48 existing credits approved; 7 spent, 55.5 balance confirmed. Planned 19 remaining at 1.5 each = 28.5, projected 35.5 total. No purchase or subscription change. Latest specifically approved upload retry ran but all 19 PUT requests returned HTTP 403; no confirmations or new generation. No further retry or alternate route attempted.",
+  "fighters": {
+    "rivet": {
+      "intro": "Straighten red tie, roll shoulders and raise a confident guard.",
+      "special": "Four advancing alternating punches, pronounced coiled windup and full-body finishing cross.",
+      "cast": "Cheeks inflate, chin draws back, horizontal golden spit release, mouth relaxes.",
+      "recoil": "Chest hit bends sternum back while feet brace, then tucked return.",
+      "defeat": "Stagger, try to straighten tie, knees buckle, fall sideways and settle with face visible."
+    },
+    "vela": {
+      "intro": "Round bare belly inhale, open red-lipped smile, settle wide blue feet.",
+      "special": "Deep full-body inhale, plant feet, release a long straight prism breath, recoil and settle.",
+      "cast": "Round cheek puff and lips purse before a straight blue spit, feet stay planted.",
+      "recoil": "Soft belly compresses, shoulders rock back, feet catch the weight.",
+      "defeat": "Belly wobble, sit down heavily, tired backward recline with both feet and face visible."
+    },
+    "bront": {
+      "intro": "Muscular double-biceps flex, lower fists into heavy guard.",
+      "special": "Compress hips, two-handed overhead hammer, rising force and double-palm ground slam.",
+      "cast": "Brace muscular torso and push a heavy boulder from both palms.",
+      "recoil": "Broad chest absorbs hit, shoulders twist and knees brace.",
+      "defeat": "Strong stance falters, fists sink, one knee drops, chest tips onto side with arms relaxed."
+    },
+    "zephyr": {
+      "intro": "Present one pumpkin with sly grin, tuck it away and guard. No miniature companion.",
+      "special": "Circle pumpkin overhead, underhand lob, overhead harvest slam, recover.",
+      "cast": "Underhand pumpkin scoop and forward release with a trailing wrist.",
+      "recoil": "Red-clad torso twists, yellow collar stays connected, heels catch.",
+      "defeat": "Attempt to catch a falling pumpkin, knees fold, slump beside the pumpkin without dismemberment."
+    },
+    "mox": {
+      "intro": "Show fangs briefly, measured fencing salute, settle long guard.",
+      "special": "Five precise long-arm thrusts with changing shoulder lead and an extended final lunge.",
+      "cast": "Pinch a small dart, cock wrist, flick forward and recover.",
+      "recoil": "Lean torso recoils in a narrow S curve, balanced retreat step.",
+      "defeat": "Final exhausted salute, knees bend, tip sideways with feline head upright then resting."
+    },
+    "rune": {
+      "intro": "Both joined faces glance in turn, adjust suit, raise palms.",
+      "special": "Hands orbit a gravity core, pull inward then spread in a wide night burst.",
+      "cast": "Cup palms around an orb, spiral wrists, push orb forward.",
+      "recoil": "Joined head remains one connected form, torso rotates under it and returns.",
+      "defeat": "Both expressions sag, loosen knees, seated collapse with joined face intact."
+    },
+    "guest07": {
+      "intro": "Roll shoulders, purse thick red lips, alternate fists into guard.",
+      "special": "Low shoulder dip, advancing uppercuts, high stretched final uppercut, controlled recovery.",
+      "cast": "Large layered lips compress, cheeks fill, release straight citrus spit.",
+      "recoil": "Long neck and lip mass stay attached as chest arches and recovers.",
+      "defeat": "Lips droop, stagger one step, hands catch floor, roll to side with no duplicate arms."
+    },
+    "guest08": {
+      "intro": "Show three rounded teeth, swing a ring once, catch and guard.",
+      "special": "Wide ring cast, torso follow-through, catch return behind shoulder and sweep back.",
+      "cast": "Wrist winds a ring and releases forward, then open catching hand.",
+      "recoil": "Large goggles/head turn with shoulders; red suit creases at hips.",
+      "defeat": "Reach for returning ring and miss, drop into seated slump, ring rests beside hand."
+    },
+    "guest09": {
+      "intro": "Dust black shirt motif, red spiky head nod, fists up.",
+      "special": "Driving cross, advancing shoulder turn, third full-body redline punch and brake.",
+      "cast": "Pull fist to waist, punch an accelerating arrow-shaped shot forward.",
+      "recoil": "Red spiky head tilts with neck, chest recoils and stabilizes.",
+      "defeat": "Forward momentum stumbles, hands touch knees, collapse to side with shirt motif preserved."
+    },
+    "guest10": {
+      "intro": "Adjust Christmas hat brim/pom-pom, cheerful wave, guard.",
+      "special": "Produce a gift, lift overhead, four festive hammer/lob accents, guard.",
+      "cast": "Cradle gift at chest, two-handed gift-box toss, open fingers and recover.",
+      "recoil": "Hat follows head with delayed soft tip while blue torso braces.",
+      "defeat": "Hat slips but stays on, sink to knees, sit and droop forward with visible pom-pom."
+    },
+    "guest11": {
+      "intro": "Touch pendant, face halves exchange expression, open-palmed guard.",
+      "special": "Heart at chest, reaching palm drain, second expansive heart pulse, withdraw.",
+      "cast": "Hands form heart briefly, push fluttering heart forward.",
+      "recoil": "Split face stays joined and consistent, red shirt shoulders twist.",
+      "defeat": "Clutch pendant, shoulders sink, crouch then curl on side; spiral ornament remains attached."
+    },
+    "guest12": {
+      "intro": "Long neck turns toward opponent, adjust red collar, measured palms up.",
+      "special": "Coin flip, three diagonal addressing palm strikes, sweeping last hand.",
+      "cast": "Flip coin with thumb then flick it forward low.",
+      "recoil": "Long neck forms a controlled arc, no head detachment, torso catches up.",
+      "defeat": "Coin falls from palm, long neck lowers, sit and lean back with continuous neck."
+    },
+    "guest13": {
+      "intro": "Flare open coat hem subtly, red brow lifts, loose hook guard with visible neck.",
+      "special": "Coiling torso windup, long hook sweep, inward spiral pull, sharp outward release.",
+      "cast": "Head draws back above connected neck, purse lips and emit straight serpent spit.",
+      "recoil": "Coat swings with shoulders; visible neck remains between jaw and collar.",
+      "defeat": "Coat folds around bent knees, one hand on chest, seated side slump with neck visible."
+    },
+    "guest14": {
+      "intro": "Four pupils glance, white-gloved hands snap into jaunty guard.",
+      "special": "Three distinct phase-step lunges, quick white-palmed strikes and a sharp stop.",
+      "cast": "Arrange a small pixel cluster between palms, push it forward.",
+      "recoil": "Four-pupil eyes widen, gloved hands brace, body snaps back and settles.",
+      "defeat": "Flicker is an external effect only; body staggers, knees give way, flat side collapse with all limbs present."
+    },
+    "dumpstar": {
+      "intro": "Adjust tie and yellow shirt cuffs, roll wrists into workman guard; no shoulder props.",
+      "special": "Low sweeping scoop, heavy ground strike, cleanup push across floor.",
+      "cast": "Crouch and scoop ground debris forward with one broad hand.",
+      "recoil": "Yellow shirt folds at waist, head and tie trail the chest recoil.",
+      "defeat": "Exhausted hands on knees, tie hangs, kneel then lie on side; no objects above shoulders."
+    },
+    "crapto": {
+      "intro": "Adjust yellow goggles, bare blue chest inhale, long lips curl into guard.",
+      "special": "Goggles glint, acid charge at lips, three siphoning breath pulses, settle.",
+      "cast": "Long lips pucker and extend slightly, horizontal acid spit, chin recoils.",
+      "recoil": "Lean torso recoils, goggles remain on face, feet slide into brace.",
+      "defeat": "Goggles tilt but remain worn, knees tremble, hands catch floor then side rest."
+    },
+    "vamp": {
+      "intro": "Deadpan downward glance, shrug black jacket, one slow hand raises.",
+      "special": "Clutch heart, dramatic inward fold, three broken-heart pulses, tired outward palm and sigh.",
+      "cast": "Head dips, one palm releases broken heart while shoulders express a sigh.",
+      "recoil": "Small restrained flinch, jacket collar connected, shoulders close inward.",
+      "defeat": "Slow melancholy kneel, hand over heart, slump sideways with deadpan face. No self-harm imagery."
+    },
+    "alpha777": {
+      "intro": "Adjust blue goggles/red scarf, flip imaginary lucky token, grin and guard.",
+      "special": "Count three finger beats, rapid six jackpot hand impacts, triumphant open hand.",
+      "cast": "Trace a seven with finger then snap it forward.",
+      "recoil": "Scarf follows olive torso, goggles stay aligned with eyes.",
+      "defeat": "Look at empty palm, shoulders fall, sit cross-legged then exhausted side slump."
+    },
+    "mandela": {
+      "intro": "Lift chin, broad open-hand salute, connected long reach into guard.",
+      "special": "Cast linked energy, pull strongly with both arms, release in a wide freedom-chain arc.",
+      "cast": "Gather chain links between palms and throw one hand forward.",
+      "recoil": "Radial head spikes retain shape, collar and neck pivot together.",
+      "defeat": "Hands slowly open, one knee touches floor, settle on side with radial spikes intact."
+    },
+    "bigswole": {
+      "intro": "Tap chest, flex and set shoulders; white eyes and crescent earring stay clear.",
+      "special": "Deep hip compression, huge upward fist, overhead double-arm crash and low recovery.",
+      "cast": "Lift heavy rock from hip and shove forward with both arms.",
+      "recoil": "Broad chest twists, hips and knees absorb impact without a central leg spike.",
+      "defeat": "Attempt last flex, knees buckle, heavy seated fall then side rest; clean gap between legs."
+    },
+    "nate": {
+      "intro": "Small bouncing foot shuffle, wide blue-toothed grin, crouched pounce guard.",
+      "special": "Three short connected pounces with exaggerated paw reach and planted recovery.",
+      "cast": "Crouch, swipe a low paw-shaped shot forward, recoil back onto feet.",
+      "recoil": "Small torso compresses with yellow hood/spikes following head, feet stay distinct.",
+      "defeat": "Tiny stagger steps, sit with feet forward, curl onto side while blue face remains visible."
+    }
+  },
+  "approved_budget_credits": 48,
+  "legacy_two_sheet_proposal": {
+    "sheet_a": {
+      "intro": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "special": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "cast": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "sheet_b": {
+      "recoil": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "defeat": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    "note": "Initial 42-sheet proposal; superseded after the pilot rejected the first models."
+  },
+  "current_sheet_layout": {
+    "intro": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "special": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "cast": [
+      12,
+      13,
+      14,
+      15
+    ],
+    "recoil": [
+      16,
+      17,
+      18,
+      19
+    ],
+    "defeat": [
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "runtime_mapping": "See per-fighter corrections JSON. Rejected defeat cels are replaced with explicit accepted holds."
+  },
+  "latest_motion_direction": "Flashier full-body anticipation, weight transfer, distinct contact silhouettes and recovery; stronger specific intros/defeats without altered likeness, detached limbs or baked-in effects."
+}

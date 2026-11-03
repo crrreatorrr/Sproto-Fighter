@@ -1,0 +1,42 @@
+[
+  {
+    "id": "buddhashadow",
+    "name": "SPROTO BUDDHA (Shadow Mode)",
+    "media": "7db8ca14-245c-422c-8005-fdcd652f1186",
+    "ordinal": 0,
+    "role": "SHADOW POISE",
+    "special": "SHADOW AWAKENING",
+    "color": "#ffe238",
+    "artDirectory": "art/buddhashadow",
+    "reference": "art/buddhashadow/reference.png",
+    "status": "installed-playable",
+    "identity": "The ONE rounded stocky BLACK Sproto in reference image1. Large smooth rounded BLACK head and thick black neck with a softly rounded chin. TWO enormous circular YELLOW eye surrounds with small glossy BLACK round pupils and tiny white glints. Subtle curved black brows, short broad rounded BLACK nose. Very broad curved RED closed smiling lips with a simple curved seam, no teeth or yellow jaw. FOUR pointed RED triangular spikes along the back/left side of the head. Preserve the distinctive BLACK body and RED spikes, never recolor skin blue. A thick RED rolled collar surrounds the neck, RED tunic with broad YELLOW shoulder bands and segmented YELLOW lower trim. Small fixed WHITE circular medallion at center of collar with a tiny BLACK abstract mark, no readable lettering. Extend cropped lower body conservatively with matching RED loose trousers and BLACK simple slippers with YELLOW soles. BLACK bare arms and hands, no boxing gloves. Chunky rounded torso, low pelvis, two complete attached arms and two complete attached legs. No hair, crown, cape, staff, weapon or extra actor. Keep the black face readable through a few charcoal same-hue shading steps and subtle dark-grey edges, not blue highlights.",
+    "appearanceRule": " Preserve BLACK skin/head/hands, RED rear spikes and rolled collar, enormous YELLOW eyes, red smile, yellow outfit bands and fixed white medallion in every frame. NO blue skin or blue highlights. Compact flat limited palette shading, no gradients, glowing body, text, shadows, effects or projectiles. Background pure MAGENTA, not the cyan reference background.",
+    "referenceSHA256": "e0acc0868dbd1dee6c0fe529fc41d31532f73802467336e8cd5487299bfc698f",
+    "palette": [
+      "#08090b",
+      "#151517",
+      "#252527",
+      "#3b3b3f",
+      "#555357",
+      "#7e0917",
+      "#ba051c",
+      "#e81822",
+      "#ff3a31",
+      "#98630d",
+      "#d69c19",
+      "#f6ca25",
+      "#ffea35",
+      "#fff574",
+      "#c5c4c2",
+      "#ffffff"
+    ],
+    "mouthOrigin": {
+      "forward": 41.25,
+      "height": 85.0
+    },
+    "rangedAttack": "dark rings",
+    "review": "All104 generated drawings reviewed, complete stocky black actor, red spikes/collar and red/yellow outfit. Entrance joins palms and bows. Mouth release12 at canonical [145,142], scaled origin41.25/85. Dark ring has transparent center and charcoal edging. Defeat ends side-lying.",
+    "installedFrames": 104
+  }
+]

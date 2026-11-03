@@ -1,0 +1,19 @@
+{
+  "model": "nano_banana_2_1",
+  "resolution": "1k",
+  "thinking_level": "high",
+  "aspect_ratio": "2:3",
+  "count": 1,
+  "use_unlim": false,
+  "prompt": "Create a complete pixel-art ANIMATION SHEET with exactly 32 full-body cels in a regular FOUR-COLUMN, EIGHT-ROW grid. Read left to right. Image1 is the original character identity; image2 is the installed game sprite and MUST govern body proportions, head size, costume, pixel density and RIGHT-facing camera. Preserve its anatomy and apparent scale in every cel. Same black suit, yellow shirt, red tie, red neck scarf, black shoes, BARE YELLOW HANDS throughout. NO BOXING GLOVES. Green eye surrounds, large round eyes, broad red lips and black nose stay recognizable. No redesign or new clothing.\n\nSolid bright magenta #FF00FF background. No borders, labels, text, gradients, shadows, projectiles, extra characters or loose items. Each whole body fits in its cell with generous empty margin. All actions aim to the RIGHT edge, including the left-hand punch: never reverse the face or punch toward the left edge. Pixel clusters and clean outlines, no blur. One connected body with exactly two arms/two legs. Keep both hands and feet distinct. Do not enlarge crouched or lying figures.\n\nEach row contains FOUR successive key poses:\nROW1 INTRO: relaxed right-facing stance; right fingers adjust red tie; both shoulders roll and elbows rise; settle into raised bare-fist guard.\nROW2 SPECIAL: low compressed fighting coil; torso rotates backward with right fist loaded; right fist extends horizontally to RIGHT; retract right fist toward chest.\nROW3 SPECIAL continued: LEFT fist extends to RIGHT while right fist guards; waist twists and both fists coil; huge right finishing cross toward RIGHT with rear heel raised; retract into planted guard.\nROW4 SPIT CAST: pull chin back; slightly inflate cheeks naturally; round lips visibly open forward to RIGHT for exhalation; cheeks relax and return guard. Mouth changes visibly; no projected object or beam.\nROW5 RECOIL: upper torso flinches backward from a front hit; largest backward chest lean with knees bent; feet catch weight and head returns; guard restored.\nROW6 DEFEAT collapse: exhausted stagger while touching tie; knees buckle; lower onto hip/forearm with feet supported; fully lie on SIDE with face visible and head resting.\nROW7 DEFEAT grounded: side-rest with face visible; tiny effort to raise head; head lifted a little but hips/legs remain on floor; head lowers and shoulder settles.\nROW8 DEFEAT ending: relax hands on floor; shoulders settle; tired eyes close; final still SIDE-LYING pose. Every cell in ROW7 and ROW8 is already lying on the floor, NEVER standing or kneeling. The fully resting body lies sideways with bent elbows and knees, not a rigid rotated standing figure.\n\n32 cels total. Respect the installed guard image's precise proportions across all 8 rows. Every row is a sequence; keep continuity, fixed camera and fixed character scale.",
+  "medias": [
+    {
+      "role": "image",
+      "value": "62746c51-e983-41f3-a17a-194ac9319ba4"
+    },
+    {
+      "role": "image",
+      "value": "6082f006-e6c2-4fbd-9d6d-0b4e2cd72b9c"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "maps": {
+    "defeat": [
+      20,
+      21,
+      22,
+      23,
+      24,
+      24,
+      27,
+      27,
+      27,
+      27,
+      27,
+      27
+    ]
+  },
+  "rejected": {
+    "28-31": "Source-image edge contact; use intact frame27 for final rest",
+    "25-26": "Alert upper-body rise reads as recovery; omit from terminal defeat"
+  },
+  "note": "Terminal repeats are deliberate holds. Review failed-rise25/26 in browser before acceptance."
+}

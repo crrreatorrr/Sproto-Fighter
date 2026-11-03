@@ -1,122 +1,156 @@
 # Sproto Arena
 
-**Current work-in-progress snapshot:** published at the user's request before final QA. The duo CPU approach and blue kick recovery still need correction, and two throw-test fixture groups fail. See [the handoff](docs/CLAUDE-HANDOFF.md) for exact status.
+A local TypeScript / Canvas 2D fighting game with **131 installed fighters**,
+CPU/practice opponents, 70 selectable arenas and a campaign that grows with the installed roster.
+No game engine, multiplayer transport or deployment.
 
-An offline browser fighting-game prototype made with TypeScript and Canvas 2D, without a game engine. The repository is named **Sproto Fighter**; the game's visible title remains **Sproto Arena**.
+**Satoshi Sprototo, Xalt and Poto Cai Cai** are campaign opponents with 104 drawings each, including custom entrance8, mouth-spit8 and death16 sequences. Defeat each in the Verse to recruit them for play. [Animation and combat QA](docs/LATE-NAMED-NOV02-QA.md).
 
-There are **22 selectable fighters**, including Sproto Duo: two independently animated bodies sharing one player, health bar, input stream and combat state. The other fighters have individual attack profiles, powers and Team Specials. Character selection uses the original supplied portraits. Combat uses local complete-body pixel pose images; no generation service is needed to play.
+**Three new Ranch maps:** Dawn Orchard, Stormwind Mill and Moonlit Creek Crossing are selectable under The Ranch and appear in its story chapter. The Ranch now has seven stage choices. Artwork and prompts: `art/ranch-nov02/`.
 
-## Run locally
+## Play locally
 
-Use Node.js 22 or newer:
+Double-click **Play Sproto Arena.command**, or run:
 
 ```sh
-npm ci
+cd /Users/kenhiraoka/Documents/Codex/2026-10-31/task/neon-relay
+npm ci # only if dependencies are missing or after a fresh clone
 npm run dev -- --port 5173 --strictPort
 ```
 
-Open **http://127.0.0.1:5173/** on the same computer. Keep the server terminal running. On macOS, after installing dependencies, `Play Sproto Arena.command` also starts the game and opens the browser. This repository does not deploy or host the game.
+Open **http://127.0.0.1:5173/** on this Mac. Keep the server terminal open.
+The existing background service serves this main checkout for the current
+login session. After logout/reboot use the launcher again. The isolated
+stage-integration preview uses port 5197. Saves belong to their browser
+origin: 5173 and 5197 have separate progression. Use 5173 for normal play.
+This is not a hosted website.
 
-```sh
-npm run build
-npm run preview -- --port 4173
-```
+## Campaign and testing
 
-The production preview is then available at http://127.0.0.1:4173/.
+**Story worlds** opens the expanded illustrated world, fully fitted on first
+open. Select a rival or region for detail; **Fit map** restores the overview.
+The route grows from actual registered fighters, without inventing opponents.
+High Sproto starts the campaign; Fat Head Dave is also available. Golden Sproto
+is a late rival. Every story win, including a God Mode win, recruits the defeated
+fighter and opens the next encounter. Locked fighters can be previewed but
+cannot be P1 until recruited; CPU rival selection is unrestricted.
 
-## Play
+The route runs Trenches → City → Yacht → Castle → Bar → Verse → Hatchery,
+using the existing approved stage variations. The end of Verse is a sequential
+Artdude → Artchick encounter. The final encounter is Morelight → VMU. Each
+refills health for its second bout. Losing, restarting, leaving or reloading
+restarts that encounter from its first opponent; the first fighter's earned
+recruitment is retained. There is no saved halfway checkpoint.
 
-Select your fighter, CPU rival, stage and rival behavior, then choose **Start fight**. Random fighter changes the selected side; random stage changes both the preview and next arena. Practice offers standing and guarding dummies. Rounds have **no timer** and end on knockout. There is no local second-player or online mode. Five fighters are locked until you own the matching hub Relics (see Hub link).
+Saves migrate by fighter identity into `sproto-arena-story-v3`, retaining the
+original v1/v2 keys, completed encounters, recruits and previously earned God
+Mode. Newly installed rivals create new gaps to clear without erasing old wins.
+Continue selects the first uncleared encounter, not the number of old wins.
+
+**Settings → Testing → God Mode for testing** is immediately available. It
+prevents health loss and refills Team Special charge; changing it restarts the
+current encounter. Story wins persist in either mode; free-play wins do not.
+Testing mode turns off on reload. Completing the campaign also grants a durable
+God Mode selection reward. God Mode does not bypass P1 recruitment locks.
+
+This local checkpoint has 131 installed entries: 129 distinct rivals across
+126 encounters, including three two-opponent encounters. Nineteen additional roster
+entries and their assets are still needed for the requested 150. The route grows
+from registered fighters without inventing characters; at 150 entries it has 148
+rivals across 145 encounters. The map also passes a synthetic 150-node fixture.
+The last zone opens with Nick → Juicy, followed by Morelight → VMU. Previous
+Nick/Juicy wins and recruits are retained when their old encounters regroup.
+Scenes remain placeholders pending script approval. No videos or paid generations
+were made by this integration. Completed work is checkpointed on local main;
+the remaining roster and full live animation review are still open.
+
+The non-story selector groups all **70 installed backgrounds** into eight zones,
+including every approved story panorama. Ranch has its original arena plus the
+lantern-lit barn, green paddock and dusty farmhouse yard. Story scenery advances
+between sequential boss bouts while preserving their order and saves. The current
+route uses 60 of 61 story locations; Pearl Incubation Chamber is available in free
+play, with only four Hatchery bouts currently installed.
+
+See the [stage catalogue checkpoint](docs/STAGE-CATALOGUE-20261102.md) for exact
+counts, file mappings, checks and browser-verification limits.
+
+See [campaign expansion and browser QA](docs/CAMPAIGN-EXPANSION-UPDATE.md) for
+exact coverage, isolated preview commands and pending integration work.
+
+## Match introductions
+
+Every fight opens with both fighters' original profile pictures and names,
+including twins and each bout of the sequential story bosses. The versus preview
+waits for Enter, the Continue button or gamepad A. Space and gamepad Start do not dismiss it.
+A **3, 2, 1, FIGHT!** countdown follows. Entrances play during the countdown;
+combat starts on FIGHT. Escape pauses either introduction. Rounds have no time limit.
+
+## Controls
 
 | Action | Keyboard | Standard gamepad |
 | --- | --- | --- |
 | Move / hold away to block | A / D | Stick / D-pad |
-| Jump | W | Up, including diagonals |
-| Crouch / low guard | S | Down |
-| Light | J | South |
-| Medium / kick | K | West |
-| Finisher | L | East |
+| Jump / crouch | W / S | Up / down |
+| Light / medium / finisher | J / K / L | South / west / east |
 | Launcher | U | North |
 | Ranged power | I | Right bumper |
 | Grab | O | Left bumper |
 | Team Special | P | Right trigger |
-| Dash | Left Shift | Left trigger |
-| Pause | Escape | Start |
+| Dash / pause | Left Shift / Escape | Left trigger / Start |
 
-Keyboard and gamepad attack buttons can be remapped in **Controls**. Settings persist in browser storage. Holding jump through landing does not jump again. A two-frame chord window lets W + attack select a directional attack instead of an accidental jump.
+Settings supports remapping. W jumps once per press. W+J gives a rising strike;
+W+forward+K gives a diagonal strike. S+J/K gives low attacks, S+L sweeps, and
+S+K/L in the air dives. O plus forward/back/W/S selects a directional throw.
+Three damaging hits ending in a finisher earn one pip when the combo ends;
+three pips enable the Team Special. Blocks and misses grant no charge.
 
-- W + J: rising strike; W + forward + K: upward diagonal strike.
-- S + J/K: low attacks; S + L: sweep. Air S + K/L starts a dive on the first active frame.
-- O catches and throws a close grounded opponent. Neutral/forward tosses, back switches sides, W lifts, S slams. Direction is captured on press; a miss recovers normally. Incoming projectiles can interrupt a hold.
-- I uses the fighter's power. Golden Sproto, Morelight, Juicy, Jahon and Crapto spit horizontally even while airborne or holding a direction. Other powers retain their own trajectories, including Halloween 2008's pumpkins and VAMP's slowing broken hearts.
-- After a confirmed hit, Shift permits one dash cancel per combo. Attacks buffer for 14 simulation frames. Repeated lights and move reuse are limited to prevent endless routes.
+Try J → K → L close to a standing dummy, or U → W → J → K → L for an air route.
+Attacks buffer for 14 simulation frames, with hit/block cancels and bounded
+juggles. Organic spit travels horizontally even when crouching or airborne.
+Yannix emits a horizontal forehead mind beam. Other projectiles retain their
+own trajectories. All rounds are untimed.
 
-Try J → K → L close to a standing dummy, pressing each as the previous hit connects. Then try U → W → J → K → L for an aerial route. A completed combo of **at least three damaging hits ending with a finisher earns one pip**. Three pips allow P to call a partner cameo and the selected fighter's Team Special. Whiffs, blocks, time and the special itself do not charge it. There is no teammate switching or second teammate player.
+## Architecture and verification
 
-## Hub link (Metaverse Hub)
+- `src/core.ts`: fixed-step 60 Hz combat, frame-indexed inputs, attacks, CPU,
+  throws/reactions, God Mode, fighter profiles and assigned partner mechanics.
+- `src/poseAtlas.ts`: complete-body frame playback, paired identities, stable
+  formations, camera clearance and event presentation. Installed art bypasses
+  runtime limb cutouts. Paired menu normalization does not change fight scale.
+- `src/storyProgress.ts`, `storyMode.ts`, `campaignMap.ts`: saves, progression,
+  placeholder scenes and a real 100-node map. `stageVariants.ts` maps approved
+  scenes without changing opponent/save identities.
+- `src/selectionMenu.ts`, `arcadeSelection.css`: original portraits, stats,
+  full-height twin previews, random choices and stage selection.
+- `src/teamSpecial.ts`: partner appearances and attack choreography.
+- `public/`: local runtime art/fonts; no generation service is needed to play.
 
-Sproto Fighter is the fifth game in [Metaverse Hub](https://github.com/crrreatorrr/metaverse-hub). In the hub you enter it by walking up to the arcade cabinet in the **Bar** and pressing **E**. The hub opens this game with a one-time portal ticket (`#t=`), the same flow as the other games. The vendored client is `vendor/hub-sdk` (see its `VENDOR.md`); the hub game id is `sproto-fighter`.
+Run `npm run build`, `npm run qa`, `npm run partners-qa` and
+`node scripts/selection-menu-smoke.mjs`. Focused formation checks are
+`paired-spacing-probe.mjs`, `paired-wall-motion-smoke.mjs`, `duo-smoke.mjs`;
+map/stage checks are `campaign-map-smoke.mjs` and `stage-variants-smoke.mjs`
+(all under `scripts/`). Add `?qa` to the game URL for visible diagnostics.
 
-- **Relic:** win **Story World 1 (Tidebreaker Marina)** on a hub visit to earn the **Tidebreaker Belt**. The server grants it once per player. It sits on a plinth beside the Bar's arcade cabinet.
-- **Tickets:** every win against a fighting CPU (story or CPU sparring) earns 20 Tickets. Practice dummies, losses and draws earn nothing.
-- **Return to hub:** the header button closes the hub session and opens `<hub>#from=sproto-fighter`, which puts you back at the cabinet.
-- **Fighters unlocked by other games' Relics.** The other 17 fighters are always playable, and the CPU rival can use any fighter.
+The dev server excludes the large static `art/`, `docs/` and `public/` archives
+from watching. Reload after installing static assets. Application source still
+reloads normally; dependency scanning starts at `index.html`.
 
-| Relic (game) | Unlocks |
-| --- | --- |
-| HPOS10I Core (HPOS10I) | Halloween 2008 |
-| Genesis Block Shard (The People's Bitcoin) | $Bitcoin Obama |
-| Cone's Tip (NOBU: Saviour Dog) | Big Swole |
-| Tinubu's Crown (Sproto Duel) | Bongraker |
-| All four of the above | Sproto Duo |
+See [the factual handoff](docs/CLAUDE-HANDOFF.md) for integrated branches,
+checks and limitations, and [per-pair coverage](docs/PAIRED-QA-COVERAGE.csv).
+The latest progression, preview-lock and responsive-map changes are recorded in
+[the story/UI update](docs/STORY-UI-UPDATE.md).
+Older dated reports and authoring sources are preserved as history.
 
-The Tidebreaker Belt unlocks nothing here (a Relic never unlocks things in the game that awards it). Played without the hub, the game uses the Relic list from this browser's last hub visit, so fighters locked on a fresh browser stay locked until a hub visit confirms the Relics. The mapping is `src/hub/roster.ts`.
+No physical-controller test, per user instruction. A full manual 100-match
+campaign, every frame/matchup, long sessions and systematic cross-browser
+performance remain unverified. There is no online-readiness claim. This
+integration adds no purchases, generation calls, remote push or hosting.
 
-Build settings: `VITE_HUB_URL` (hub page, default `/hub/`), `VITE_NAKAMA_URL` (default `http://127.0.0.1:7350`) and `VITE_NAKAMA_SERVER_KEY` (Nakama's client server key; dev uses `defaultkey`, like the hub). The build uses a relative base, so it runs at the site root, at the hub's dev path `/play/sproto-fighter/`, or at `https://play.<domain>/sproto-fighter/`. The `Web build` workflow uploads `dist` as the `web-build` artifact that the hub's `npm run fetch:sproto-fighter` downloads.
 
-## Worlds and presentation
+## Metaverse Hub integration
 
-Four story worlds are selectable: Tidebreak Marina, Last Light Bar, Moonkeep Castle and Neon Tomorrow. Story text and between-level scenes are explicitly static placeholders. Wins progress; losses/draws retry. Progress lasts for the current session. Free play also offers Amber Ranch. Stage panoramas are static pixel art.
+The optional hub adapter comes from the published `claude/sweet-newton-l4tjnh` work. A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
 
-The red/blue/yellow selection screen includes original portraits, opposing combat previews, actual kit stats, stage thumbnails, random choices and keyboard/controller navigation.
+Story recruits remain playable. Hub Relics provide an additional route to Halloween 2008 (HPOS10I Core), $Bitcoin Obama (Genesis Block Shard), Big Swole (Cone’s Tip), Bongraker (Tinubu’s Crown), and Sproto Duo (all four). Fighters without a corresponding Relic retain their existing story rules. Locked fighters remain previewable and usable as CPU opponents. A lost/revoked Relic does not revoke a fighter recruited in the story.
 
-## Architecture
-
-- `src/core.ts`: fixed 60 Hz serializable combat simulation, frame-indexed input, fighter kits, throws, projectiles, combos, reactions and deterministic CPU.
-- `src/main.ts`: input collection, buffering, pause/restart, menus, recording and replay helpers.
-- `src/poseAtlas.ts`: full-body pose playback, travel-based gait, presentation clips and the duo's lead/support choreography and visual spacing.
-- `src/render.ts` / `src/powerArt.ts`: Canvas combat, effects and stage rendering.
-- `src/selectionMenu.ts` / `src/arcadeSelection.css`: character/stage selection and stats.
-- `src/storyMode.ts`: four-world navigation and placeholder progression.
-- `public/fighters/pose-atlas.json`: installed body frames, anchors, gait and event mappings. The duo has two body entries but one playable roster slot.
-
-The fixed-step core supports later networking experiments; it is **not online-ready**. There is no transport, matchmaking, rollback, remote input or cross-browser determinism guarantee.
-
-## Checks and review tools
-
-```sh
-npm run check
-npm test        # Vitest: hub roster locks, round reporting, hub link
-npm run qa
-node scripts/duo-smoke.mjs
-node scripts/pose-atlas-smoke.mjs
-node scripts/event-clips-smoke.mjs
-node scripts/presentation-smoke.mjs
-node scripts/selection-menu-smoke.mjs
-node scripts/stage-preview-smoke.mjs
-python3 art/pose-atlases/verify_pose_assets.py
-```
-
-The Python asset checker additionally needs Pillow. The game and build do not.
-
-Add `?qa` to the game URL for visible status, freeze and single-frame controls. The development pages `art/pose-atlas-lab.html` and `art/animation-event-lab.html` exercise the same runtime rendering with scenario controls. They are fixtures, not ordinary matches.
-
-See [the factual handoff](docs/CLAUDE-HANDOFF.md), [duo verification](docs/DUO-QA.md) and [fighter kits](docs/FIGHTER_KITS.md) for actual coverage and limits.
-
-## Prototype limits
-
-The first 21 fighters use 32 main pose slots plus eight locally derived guarded-step frames. Golden Sproto and Morelight have additional authored event clips. The remaining 19 event upgrades were stopped at the user's request; their existing playable art is preserved.
-
-Sproto Duo uses two complete-body atlases, four authored walking keys per body, and individual intro, special, cast, recoil and defeat clips. Some slots and terminal holds intentionally reuse drawings. These are sparse pose animations, not continuous generated video or a full joint rig. Foot locking, natural strides and attack in-betweens remain limited. The two bodies share a simplified combat envelope and can draw wider during floor/special poses.
-
-Physical controller hardware, exhaustive cross-browser testing, long-duration performance, final story/cutscenes, audio, competitive balance and online play remain outside the verified scope. Automated checks do not establish artistic quality or subjective feel.
+Configure `VITE_HUB_URL`, `VITE_NAKAMA_URL` and `VITE_NAKAMA_SERVER_KEY` for a hub deployment. The client server key is public configuration; never put backend secrets in Vite variables. Standalone play needs no backend. The relative build base supports the root and `/play/sproto-fighter/`; the integration does not start, migrate or deploy the hub server. Run `npm test` for hub adapter checks.

@@ -1,0 +1,94 @@
+[
+  {
+    "index": 0,
+    "fighter": "rivet",
+    "name": "Golden Sproto",
+    "sheet": "a",
+    "reference": "art/references/rivet.png",
+    "library_file_id": "libfile_589b206f4f408191ad99c687726d5180",
+    "params": {
+      "model": "flux_2",
+      "variant": "pro",
+      "resolution": "1k",
+      "aspect_ratio": "1:1",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Create a production sprite-sheet IMAGE for a side-view pixel-art fighting game. Exactly FOUR columns and FOUR rows, exactly SIXTEEN separate complete-character animation cels in a regular 4x4 grid. Read the poses left-to-right then top-to-bottom. No text, numbering, labels, borders or dividing lines. Pure flat vivid magenta #FF00FF background, including every gap; no ground shadow, scenery, gradient or checkerboard. Crisp deliberate pixel clusters, dark clean outlines, restrained highlights, no blur or antialiasing. Same character identity, head size, limb lengths, clothing and camera scale in every cell. Strict right-facing 3/4 fighting view, both eyes visible where anatomically appropriate. Exactly two arms and two legs, all attached, no baked resting arm beneath a moved arm, no duplicate hands. Keep every full silhouette inside its own 256x256 cell with 18 pixels of empty margin. Use the same ground line at y=230 within each cell. Standing head-to-foot height about 168 pixels; keep that anatomical scale for crouches and lying poses rather than enlarging them to fill the cell. Never crop ears, spikes, hands or feet. Preserve gaps between legs. No travelling projectiles, beams, particles, trails, detached props, partner or extra characters: draw BODY performance and established attire only; the game draws effects separately. The supplied original image is the authority for face and identity. Complete its unseen lower body consistently as described. The poses are successive purposeful key drawings, not recolored duplicates.\nFIGHTER: Golden Sproto. Use the supplied ORIGINAL reference as the identity authority, not previous rigging or generated bodies. Golden-yellow spiky feline head with pointed ears, one black inner-ear wedge; green heavy eyelids/eye surrounds; white eyes with large black pupils and white highlights; round black nose; broad deep-red curved lips. Yellow throat, red scarf/neck band, black formal jacket, yellow pointed shirt collar, red tie. all exposed body yellow; retain green eye surrounds and red lips rather than recoloring the entire face yellow. Continue formal black clothing, yellow shirt and red tie. Matching black trousers/shoes are a reasonable completion, not visible original facts. Preserve these distinctive details in every frame; do not normalize into a generic mascot. Full-body completion must remain consistent across all 32 frames.\nSheet A contains these exact 16 cels.\nROW1: Intro, four consecutive full-body poses: (1) relaxed guard; (2) first half of this signature introduction: Straighten red tie, roll shoulders and raise a confident guard.; (3) second half of that gesture; (4) settle into the same right-facing fighting guard.\nROW2: Signature special, first four poses: (5) body compresses and gathers strength; (6) full anticipation; (7) first clear contact silhouette; (8) controlled retraction. Performance: Four advancing alternating punches, pronounced coiled windup and full-body finishing cross. Draw the character only, no effects or actual projectile.\nROW3: Same signature special, last four poses: (9) second different contact silhouette using the other shoulder/arm; (10) retraction/coil before finishing; (11) strongest final contact with coherent hips/knees/ankles; (12) balanced planted recovery. These poses are used at actual combat contact times; do not invent extra limbs or multiple bodies to imply speed.\nROW4: Ranged cast, four consecutive poses: (13) prepare; (14) maximum anticipation; (15) release; (16) follow-through returning to guard. Performance: Cheeks inflate, chin draws back, horizontal golden spit release, mouth relaxes. The mouth/hands show release, but DO NOT draw the travelling spit/projectile. Mouth stays attached to face and both arms remain distinct.\nEvery cell must preserve the original identity exactly. No generic replacement mascot.",
+      "medias": [
+        {
+          "role": "image",
+          "value": "62746c51-e983-41f3-a17a-194ac9319ba4"
+        }
+      ]
+    }
+  },
+  {
+    "index": 1,
+    "fighter": "rivet",
+    "name": "Golden Sproto",
+    "sheet": "b",
+    "reference": "art/references/rivet.png",
+    "library_file_id": "libfile_589b206f4f408191ad99c687726d5180",
+    "params": {
+      "model": "flux_2",
+      "variant": "pro",
+      "resolution": "1k",
+      "aspect_ratio": "1:1",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Create a production sprite-sheet IMAGE for a side-view pixel-art fighting game. Exactly FOUR columns and FOUR rows, exactly SIXTEEN separate complete-character animation cels in a regular 4x4 grid. Read the poses left-to-right then top-to-bottom. No text, numbering, labels, borders or dividing lines. Pure flat vivid magenta #FF00FF background, including every gap; no ground shadow, scenery, gradient or checkerboard. Crisp deliberate pixel clusters, dark clean outlines, restrained highlights, no blur or antialiasing. Same character identity, head size, limb lengths, clothing and camera scale in every cell. Strict right-facing 3/4 fighting view, both eyes visible where anatomically appropriate. Exactly two arms and two legs, all attached, no baked resting arm beneath a moved arm, no duplicate hands. Keep every full silhouette inside its own 256x256 cell with 18 pixels of empty margin. Use the same ground line at y=230 within each cell. Standing head-to-foot height about 168 pixels; keep that anatomical scale for crouches and lying poses rather than enlarging them to fill the cell. Never crop ears, spikes, hands or feet. Preserve gaps between legs. No travelling projectiles, beams, particles, trails, detached props, partner or extra characters: draw BODY performance and established attire only; the game draws effects separately. The supplied original image is the authority for face and identity. Complete its unseen lower body consistently as described. The poses are successive purposeful key drawings, not recolored duplicates.\nFIGHTER: Golden Sproto. Use the supplied ORIGINAL reference as the identity authority, not previous rigging or generated bodies. Golden-yellow spiky feline head with pointed ears, one black inner-ear wedge; green heavy eyelids/eye surrounds; white eyes with large black pupils and white highlights; round black nose; broad deep-red curved lips. Yellow throat, red scarf/neck band, black formal jacket, yellow pointed shirt collar, red tie. all exposed body yellow; retain green eye surrounds and red lips rather than recoloring the entire face yellow. Continue formal black clothing, yellow shirt and red tie. Matching black trousers/shoes are a reasonable completion, not visible original facts. Preserve these distinctive details in every frame; do not normalize into a generic mascot. Full-body completion must remain consistent across all 32 frames.\nSheet B contains these exact 16 cels.\nCELLS1–6, reading left-to-right across rows: six consecutive GROUNDED RECOIL drawings: (1) first impact flinch; (2) shoulders push backward; (3) largest recoil with bent knees; (4) feet catch body weight; (5) chest returns; (6) settle to right-facing guard. Performance: Chest hit bends sternum back while feet brace, then tucked return. Face, neck and torso remain connected; feet land at the same ground line.\nCELLS7–16: ten consecutive DEFEAT drawings for this character. Signature emotion/action: Stagger, try to straighten tie, knees buckle, fall sideways and settle with face visible. No loose props; express the action with body and existing attire only.\n(7) exhausted standing stagger; (8) knees buckle; (9) controlled collapse onto a forearm/hip; (10) body contacts floor; (11) fully grounded side-rest with head visible; (12) slight effort to raise head/shoulder while staying grounded; (13) effort fails and shoulder settles; (14) relaxed side-rest, feet and arms coherent; (15) small final settling; (16) still defeated resting pose, eyes closed or tired, both limbs accounted for.\nCritical: CELLS11–16 are ALL on the floor and NEVER return to sitting or standing. They form a coherent short loop-free settling animation after an airborne KO already lands. Keep standing anatomical scale unchanged even though lying poses have smaller height and more width. No gore, self-harm imagery or dismemberment. Body supported by hip/side and forearm, not balanced on skull. Keep full silhouette within cell.\nNo rotation of one copied standing figure: draw bent joints and weight on the floor convincingly. Exactly 16 cels, no blank or duplicate extra cells.",
+      "medias": [
+        {
+          "role": "image",
+          "value": "62746c51-e983-41f3-a17a-194ac9319ba4"
+        }
+      ]
+    }
+  },
+  {
+    "index": 2,
+    "fighter": "vela",
+    "name": "Morelight",
+    "sheet": "a",
+    "reference": "art/references/vela.png",
+    "library_file_id": "libfile_889aeefde3908191a76b91223a747617",
+    "params": {
+      "model": "flux_2",
+      "variant": "pro",
+      "resolution": "1k",
+      "aspect_ratio": "1:1",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Create a production sprite-sheet IMAGE for a side-view pixel-art fighting game. Exactly FOUR columns and FOUR rows, exactly SIXTEEN separate complete-character animation cels in a regular 4x4 grid. Read the poses left-to-right then top-to-bottom. No text, numbering, labels, borders or dividing lines. Pure flat vivid magenta #FF00FF background, including every gap; no ground shadow, scenery, gradient or checkerboard. Crisp deliberate pixel clusters, dark clean outlines, restrained highlights, no blur or antialiasing. Same character identity, head size, limb lengths, clothing and camera scale in every cell. Strict right-facing 3/4 fighting view, both eyes visible where anatomically appropriate. Exactly two arms and two legs, all attached, no baked resting arm beneath a moved arm, no duplicate hands. Keep every full silhouette inside its own 256x256 cell with 18 pixels of empty margin. Use the same ground line at y=230 within each cell. Standing head-to-foot height about 168 pixels; keep that anatomical scale for crouches and lying poses rather than enlarging them to fill the cell. Never crop ears, spikes, hands or feet. Preserve gaps between legs. No travelling projectiles, beams, particles, trails, detached props, partner or extra characters: draw BODY performance and established attire only; the game draws effects separately. The supplied original image is the authority for face and identity. Complete its unseen lower body consistently as described. The poses are successive purposeful key drawings, not recolored duplicates.\nFIGHTER: Morelight. Use the supplied ORIGINAL reference as the identity authority, not previous rigging or generated bodies. Rounded cobalt-blue head/body with swept pointed rear outline, thin arched brows, round yellow eyes with black highlighted pupils, exceptionally broad red smiling lips. Lower crop visibly contains another red lip-like two-lobed shape above a yellow patch. NO CLOTHES. Bare blue cartoon body, blue hands/feet; retain the original's unusual red/yellow torso motif as a body marking, never a shirt, shorts, bra, belt or accessory. Avoid assigning unsupported anatomical meaning to that motif. Keep the broad soft body silhouette distinct from lean Crapto. Preserve these distinctive details in every frame; do not normalize into a generic mascot. Full-body completion must remain consistent across all 32 frames.\nSheet A contains these exact 16 cels.\nROW1: Intro, four consecutive full-body poses: (1) relaxed guard; (2) first half of this signature introduction: Round bare belly inhale, open red-lipped smile, settle wide blue feet.; (3) second half of that gesture; (4) settle into the same right-facing fighting guard.\nROW2: Signature special, first four poses: (5) body compresses and gathers strength; (6) full anticipation; (7) first clear contact silhouette; (8) controlled retraction. Performance: Deep full-body inhale, plant feet, release a long straight prism breath, recoil and settle. Draw the character only, no effects or actual projectile.\nROW3: Same signature special, last four poses: (9) second different contact silhouette using the other shoulder/arm; (10) retraction/coil before finishing; (11) strongest final contact with coherent hips/knees/ankles; (12) balanced planted recovery. These poses are used at actual combat contact times; do not invent extra limbs or multiple bodies to imply speed.\nROW4: Ranged cast, four consecutive poses: (13) prepare; (14) maximum anticipation; (15) release; (16) follow-through returning to guard. Performance: Round cheek puff and lips purse before a straight blue spit, feet stay planted. The mouth/hands show release, but DO NOT draw the travelling spit/projectile. Mouth stays attached to face and both arms remain distinct.\nEvery cell must preserve the original identity exactly. No generic replacement mascot.",
+      "medias": [
+        {
+          "role": "image",
+          "value": "e128cc32-b361-451a-be1e-1bb654e1c6af"
+        }
+      ]
+    }
+  },
+  {
+    "index": 3,
+    "fighter": "vela",
+    "name": "Morelight",
+    "sheet": "b",
+    "reference": "art/references/vela.png",
+    "library_file_id": "libfile_889aeefde3908191a76b91223a747617",
+    "params": {
+      "model": "flux_2",
+      "variant": "pro",
+      "resolution": "1k",
+      "aspect_ratio": "1:1",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Create a production sprite-sheet IMAGE for a side-view pixel-art fighting game. Exactly FOUR columns and FOUR rows, exactly SIXTEEN separate complete-character animation cels in a regular 4x4 grid. Read the poses left-to-right then top-to-bottom. No text, numbering, labels, borders or dividing lines. Pure flat vivid magenta #FF00FF background, including every gap; no ground shadow, scenery, gradient or checkerboard. Crisp deliberate pixel clusters, dark clean outlines, restrained highlights, no blur or antialiasing. Same character identity, head size, limb lengths, clothing and camera scale in every cell. Strict right-facing 3/4 fighting view, both eyes visible where anatomically appropriate. Exactly two arms and two legs, all attached, no baked resting arm beneath a moved arm, no duplicate hands. Keep every full silhouette inside its own 256x256 cell with 18 pixels of empty margin. Use the same ground line at y=230 within each cell. Standing head-to-foot height about 168 pixels; keep that anatomical scale for crouches and lying poses rather than enlarging them to fill the cell. Never crop ears, spikes, hands or feet. Preserve gaps between legs. No travelling projectiles, beams, particles, trails, detached props, partner or extra characters: draw BODY performance and established attire only; the game draws effects separately. The supplied original image is the authority for face and identity. Complete its unseen lower body consistently as described. The poses are successive purposeful key drawings, not recolored duplicates.\nFIGHTER: Morelight. Use the supplied ORIGINAL reference as the identity authority, not previous rigging or generated bodies. Rounded cobalt-blue head/body with swept pointed rear outline, thin arched brows, round yellow eyes with black highlighted pupils, exceptionally broad red smiling lips. Lower crop visibly contains another red lip-like two-lobed shape above a yellow patch. NO CLOTHES. Bare blue cartoon body, blue hands/feet; retain the original's unusual red/yellow torso motif as a body marking, never a shirt, shorts, bra, belt or accessory. Avoid assigning unsupported anatomical meaning to that motif. Keep the broad soft body silhouette distinct from lean Crapto. Preserve these distinctive details in every frame; do not normalize into a generic mascot. Full-body completion must remain consistent across all 32 frames.\nSheet B contains these exact 16 cels.\nCELLS1–6, reading left-to-right across rows: six consecutive GROUNDED RECOIL drawings: (1) first impact flinch; (2) shoulders push backward; (3) largest recoil with bent knees; (4) feet catch body weight; (5) chest returns; (6) settle to right-facing guard. Performance: Soft belly compresses, shoulders rock back, feet catch the weight. Face, neck and torso remain connected; feet land at the same ground line.\nCELLS7–16: ten consecutive DEFEAT drawings for this character. Signature emotion/action: Belly wobble, sit down heavily, tired backward recline with both feet and face visible. No loose props; express the action with body and existing attire only.\n(7) exhausted standing stagger; (8) knees buckle; (9) controlled collapse onto a forearm/hip; (10) body contacts floor; (11) fully grounded side-rest with head visible; (12) slight effort to raise head/shoulder while staying grounded; (13) effort fails and shoulder settles; (14) relaxed side-rest, feet and arms coherent; (15) small final settling; (16) still defeated resting pose, eyes closed or tired, both limbs accounted for.\nCritical: CELLS11–16 are ALL on the floor and NEVER return to sitting or standing. They form a coherent short loop-free settling animation after an airborne KO already lands. Keep standing anatomical scale unchanged even though lying poses have smaller height and more width. No gore, self-harm imagery or dismemberment. Body supported by hip/side and forearm, not balanced on skull. Keep full silhouette within cell.\nNo rotation of one copied standing figure: draw bent joints and weight on the floor convincingly. Exactly 16 cels, no blank or duplicate extra cells.",
+      "medias": [
+        {
+          "role": "image",
+          "value": "e128cc32-b361-451a-be1e-1bb654e1c6af"
+        }
+      ]
+    }
+  }
+]

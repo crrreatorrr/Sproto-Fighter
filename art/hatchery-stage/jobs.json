@@ -1,0 +1,19 @@
+[
+  {
+    "id": "hatchery",
+    "name": "The Hatchery",
+    "index": 0,
+    "job_id": "bfca6752-5b73-4735-8d31-21faef3e5062",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "type": "image",
+    "model": "gpt_image_2_5",
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_073443_bfca6752-5b73-4735-8d31-21faef3e5062.png"
+  }
+]

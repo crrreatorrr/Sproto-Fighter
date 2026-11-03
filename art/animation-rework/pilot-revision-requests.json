@@ -1,0 +1,40 @@
+[
+  {
+    "index": 4,
+    "fighter": "rivet",
+    "sheet": "a",
+    "params": {
+      "model": "seedream_v5_lite",
+      "quality": "basic",
+      "aspect_ratio": "1:1",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Pixel-art animation sprite sheet. EXACTLY 16 complete bodies in 4 rows x 4 columns, evenly spaced, reading left to right. Solid #FF00FF background. No lettering, numbers, grid lines, cast shadows or effects. All cells show the SAME character facing RIGHT, same head and limb size, fixed camera and floor baseline. Small pixel clusters, sharp dark outlines. Leave empty margin around every full body. Arms stay connected to shoulders, feet connected to legs. Reference identity is authoritative. This sheet is a sequence of different actions, not a character turnaround.\nCharacter: golden-yellow spiky feline mascot with green eye surrounds, round white eyes, round black nose and broad red smile; black suit and trousers, yellow shirt/collar, red tie and red neck scarf, black shoes. Match reference face; no exaggerated gritted teeth.\nROW 1, four INTRO drawings: relaxed guard; fingers straighten tie; shoulder roll with lifted elbows; confident boxing guard.\nROW 2, first SPECIAL drawings: crouched coil; large right-shoulder windup; right straight punch fully extended; punch retracted to chest.\nROW 3, final SPECIAL drawings: left straight punch fully extended; twist waist and pull both fists back; powerful forward finishing cross with rear heel raised; planted boxing guard.\nROW 4, CAST drawings: chin pulled back; cheeks visibly puffed; lean forward with round pursed lips releasing breath; cheeks relax and body settles. No visible travelling projectile.\n16 distinct whole-body cels in a four-by-four sheet.",
+      "medias": [
+        {
+          "role": "image",
+          "value": "62746c51-e983-41f3-a17a-194ac9319ba4"
+        }
+      ]
+    }
+  },
+  {
+    "index": 5,
+    "fighter": "vela",
+    "sheet": "a",
+    "params": {
+      "model": "seedream_v5_lite",
+      "quality": "basic",
+      "aspect_ratio": "1:1",
+      "count": 1,
+      "use_unlim": false,
+      "prompt": "Pixel-art animation sprite sheet. EXACTLY 16 complete bodies in 4 rows x 4 columns, evenly spaced, reading left to right. Solid #FF00FF background. No lettering, numbers, grid lines, cast shadows or effects. All cells show the SAME character facing RIGHT, same head and limb size, fixed camera and floor baseline. Small pixel clusters, sharp dark outlines. Leave empty margin around every full body. Arms stay connected to shoulders, feet connected to legs. Reference identity is authoritative. This sheet is a sequence of different actions, not a character turnaround.\nCharacter: the original friendly cobalt-blue fantasy mascot with a broad soft body, swept rear head spikes, thin brows, round yellow eyes with black pupils, huge red smile, blue hands and feet. Preserve the red two-lobed graphic marking above its yellow belly patch. A nonsexual cartoon creature; its smooth body is the costume-free design in the reference. All ages arcade art, no human anatomy details.\nROW 1, four INTRO drawings: relaxed wide stance; inhale with raised shoulders; open cheerful smile and spread arms; settle into guard.\nROW 2, first SPECIAL drawings: crouch and tuck arms; enormous cheek puff and backward lean; planted forward breath release with round mouth; brief backward recoil.\nROW 3, final SPECIAL drawings: wider breath release with both arms extended back; deep crouching inhale; strongest forward breath with straight back leg; planted guard and relaxed cheeks.\nROW 4, CAST drawings: chin pulled back; cheeks visibly puffed; lean forward with round pursed lips releasing breath; cheeks relax and body settles. No visible travelling projectile.\n16 distinct whole-body cels in a four-by-four sheet.",
+      "medias": [
+        {
+          "role": "image",
+          "value": "e128cc32-b361-451a-be1e-1bb654e1c6af"
+        }
+      ]
+    }
+  }
+]

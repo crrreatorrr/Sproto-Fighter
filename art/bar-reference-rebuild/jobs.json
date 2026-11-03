@@ -1,0 +1,133 @@
+[
+  {
+    "index": 0,
+    "id": "bar",
+    "name": "Last Light Bar",
+    "zone": "bar",
+    "job_id": "5c730890-a6b8-4af6-8d14-547d4a70a92b",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_185157_5c730890-a6b8-4af6-8d14-547d4a70a92b.png"
+  },
+  {
+    "index": 1,
+    "id": "cellar",
+    "name": "Bottle Vault Cellar",
+    "zone": "bar",
+    "job_id": "8d8b1cb2-48b1-4f37-ba48-855970b02aa5",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_185154_8d8b1cb2-48b1-4f37-ba48-855970b02aa5.png"
+  },
+  {
+    "index": 2,
+    "id": "rooftop",
+    "name": "Oakshade Patio",
+    "zone": "bar",
+    "job_id": "2fba3494-fd9f-4715-8b56-99fe7c0d2045",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_185154_2fba3494-fd9f-4715-8b56-99fe7c0d2045.png"
+  },
+  {
+    "index": 3,
+    "id": "backstage",
+    "name": "Mural Games Room",
+    "zone": "bar",
+    "job_id": "ea1157ed-b59e-415e-b881-823e722ebfc3",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_185156_ea1157ed-b59e-415e-b881-823e722ebfc3.png"
+  },
+  {
+    "index": 4,
+    "id": "lanterncourt",
+    "name": "Treehouse Club Exterior",
+    "zone": "bar",
+    "job_id": "482905f4-2aba-48c2-8bbb-56b13498015e",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[2].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_185155_482905f4-2aba-48c2-8bbb-56b13498015e.png"
+  },
+  {
+    "index": 5,
+    "id": "aquariumbar",
+    "name": "Neon Mural Lounge",
+    "zone": "bar",
+    "job_id": "78e9866c-3fbb-4c08-a308-82836a2a1a78",
+    "status": "completed",
+    "adjustments": {
+      "medias[0].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[1].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      },
+      "medias[2].role": {
+        "requested": "image",
+        "used": "image_references",
+        "reason": "GPT Image 2.5 backend expects schema-key media roles"
+      }
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261102_185156_78e9866c-3fbb-4c08-a308-82836a2a1a78.png"
+  }
+]
