@@ -101,7 +101,10 @@ export function hubConfigured(): boolean {
 
 function createBrowserSdk(): HubSdk {
   const serverUrl = (import.meta.env.VITE_NAKAMA_URL || 'http://127.0.0.1:7350').replace(/\/$/, '');
-  return createHubSdk({ serverUrl, hubUrl: hubPageUrl(), assign: () => redirectToHub() });
+  // Nakama's client server key (public, not a secret). Same rule as the hub: `defaultkey` in dev,
+  // `VITE_NAKAMA_SERVER_KEY` for a build. The SDK no longer embeds one.
+  const serverKey = import.meta.env.VITE_NAKAMA_SERVER_KEY ?? (import.meta.env.DEV ? 'defaultkey' : '');
+  return createHubSdk({ serverUrl, serverKey, hubUrl: hubPageUrl(), assign: () => redirectToHub() });
 }
 
 /** Build-time hub page. Dev default is same-origin `/hub/`; production is `https://<domain>/hub`. */
