@@ -218,7 +218,17 @@ NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/on
 
 The optional hub adapter comes from the published `claude/sweet-newton-l4tjnh` work. A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
 
-Story recruits remain playable. Hub Relics provide an additional route to Halloween 2008 (HPOS10I Core), $Bitcoin Obama (Genesis Block Shard), Big Swole (Cone’s Tip), Bongraker (Tinubu’s Crown), and Sproto Duo (all four). Fighters without a corresponding Relic retain their existing story rules. Locked fighters remain previewable and usable as CPU opponents. A lost/revoked Relic does not revoke a fighter recruited in the story.
+Five fighters come only from hub Relics and are not in story mode:
+
+| Relic (game) | Unlocks |
+| --- | --- |
+| Tinubu's Crown (Sproto Duel) | Captain Sproto |
+| Cone's Tip (NOBU: Saviour Dog) | Pissing Sproto |
+| HPOS10I Core (HPOS10I) | Sun God |
+| Genesis Block Shard (The People's Bitcoin) | Captain Green |
+| All four of the above | Error 333 |
+
+Every other fighter, including the earlier Relic picks (Halloween 2008, $Bitcoin Obama, Big Swole, Bongraker, Sproto Duo), is recruited in story mode. The mapping is `src/hub/roster.ts`; the story campaign leaves out the same five (`RELIC_ONLY_RECRUITS` in `src/storyProgress.ts`, kept equal by `tests/hub-roster.test.ts`). Locked fighters remain previewable and usable as CPU opponents. A save that already recruited one of the five in an older campaign keeps it.
 
 Rewards are reported by the game client (`src/hub/link.ts`); the server only
 caps Tickets per call and per day. A linked player with browser developer
