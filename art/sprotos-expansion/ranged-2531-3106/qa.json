@@ -1,0 +1,28 @@
+{
+  "characters": [
+    "sproto2531",
+    "sproto3106"
+  ],
+  "newFighterFrames": 72,
+  "projectiles": [
+    "miniSproto",
+    "referenceB"
+  ],
+  "testsPassed": [
+    "72 ground/air/facing/aim cases",
+    "eight single-hit/block outcomes",
+    "original aspect-ratio source sprite rendering",
+    "8 pose playback/contract groups",
+    "TypeScript and production build",
+    "9096 installed pose/frame entries validated for dimensions, anchors, hard alpha and transparent padding"
+  ],
+  "visualReview": [
+    "2531 full core/walk/event sheets and white eyes/pupils",
+    "2531 mouth-spit at frames16 and20, both facings",
+    "3106 held B windup frame10",
+    "3106 hand release frame21, both facings",
+    "upright B in leftward flight; miniature mirrors to its travel direction"
+  ],
+  "sourceFidelity": "B retains original opaque source RGB values; silhouette and red counters extracted directly from supplied reference. Mini uses complete airborne pose08 of revised2531.",
+  "limits": "Sampled exact frames and source sheets; not every possible combat input sequence."
+}

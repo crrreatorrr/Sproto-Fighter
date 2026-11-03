@@ -1,0 +1,177 @@
+{
+  "entity": "mox",
+  "kind": "walk",
+  "source": "art/sprotos-expansion/raw/mox-walk.png",
+  "uniformSourceScale": 0.3240506329113924,
+  "status": "normalized; visual review required",
+  "frames": [
+    {
+      "index": 0,
+      "sourceBounds": [
+        50,
+        134,
+        321,
+        529
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        133.66962305986695,
+        395
+      ],
+      "canonicalBounds": [
+        69,
+        82,
+        157,
+        210
+      ]
+    },
+    {
+      "index": 1,
+      "sourceBounds": [
+        462,
+        134,
+        724,
+        529
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        126.16962305986695,
+        395
+      ],
+      "canonicalBounds": [
+        71,
+        82,
+        156,
+        210
+      ]
+    },
+    {
+      "index": 2,
+      "sourceBounds": [
+        886,
+        134,
+        1120,
+        529
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        100.66962305986695,
+        395
+      ],
+      "canonicalBounds": [
+        79,
+        82,
+        155,
+        210
+      ]
+    },
+    {
+      "index": 3,
+      "sourceBounds": [
+        1268,
+        134,
+        1545,
+        529
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        114.66962305986695,
+        395
+      ],
+      "canonicalBounds": [
+        75,
+        82,
+        165,
+        210
+      ]
+    },
+    {
+      "index": 4,
+      "sourceBounds": [
+        49,
+        669,
+        321,
+        1061
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        134.66962305986695,
+        392
+      ],
+      "canonicalBounds": [
+        68,
+        83,
+        156,
+        210
+      ]
+    },
+    {
+      "index": 5,
+      "sourceBounds": [
+        459,
+        669,
+        716,
+        1061
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        123.66962305986695,
+        392
+      ],
+      "canonicalBounds": [
+        72,
+        83,
+        155,
+        210
+      ]
+    },
+    {
+      "index": 6,
+      "sourceBounds": [
+        880,
+        669,
+        1116,
+        1061
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        102.41962305986695,
+        392
+      ],
+      "canonicalBounds": [
+        79,
+        83,
+        155,
+        210
+      ]
+    },
+    {
+      "index": 7,
+      "sourceBounds": [
+        1268,
+        669,
+        1549,
+        1061
+      ],
+      "cellEdge": false,
+      "detachedComponents": [],
+      "estimatedAnchor": [
+        112.66962305986695,
+        392
+      ],
+      "canonicalBounds": [
+        75,
+        83,
+        166,
+        210
+      ]
+    }
+  ]
+}
