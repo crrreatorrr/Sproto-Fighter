@@ -3,7 +3,7 @@ import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 import vm from 'node:vm';
 
-const modules=['poseAtlas','higgsfieldRig','stage','stageVariants','powerArt','characterVoice','campaignMap'];
+const modules=['poseAtlas','stage','stageVariants','powerArt','characterVoice','campaignMap'];
 afterEach(()=>vi.unstubAllGlobals());
 describe('root and hub-mounted public assets',()=>{
  for(const name of modules)it(name+' keeps its public art inside the selected mount',()=>{

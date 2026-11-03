@@ -4,7 +4,7 @@ const asset=(path:string)=>{
  return base+path.replace(/^\/+/, '');
 };
 import { EVENT_CLIP_LENGTHS, ACTION_CLIP_LENGTHS, ASSIST_CLIP_LENGTHS, IDENTITY_CLIP_LENGTHS, entranceFrame, deathFrame, introFrame, defeatFrame, specialFrame, castFrame, recoilFrame, type AtlasClipName, type RoundPresentation } from './animationEvents';
-import { A, ROSTER, COMBAT_STYLES, CHARACTER_ACTIONS, DUO_SPREAD, FLOOR, WIDTH, getMove, bodyAtlasIds, bodyOffsets, specialPartnerIds, PARTNER_ATTACKS, partnerContactIndex, isPairedFighter, isCrouchingSpit, type Fighter, type ThrowState } from './core';
+import { A, ROSTER, COMBAT_STYLES, hasAuthoredProjectile, CHARACTER_ACTIONS, DUO_SPREAD, FLOOR, WIDTH, getMove, bodyAtlasIds, bodyOffsets, specialPartnerIds, PARTNER_ATTACKS, partnerContactIndex, isPairedFighter, isCrouchingSpit, type Fighter, type ThrowState } from './core';
 
 /** Complete-character frames, never articulated cutouts. Thirty-two authored poses
  * cover shared actions only; this does not invent missing per-character animation. */
@@ -170,26 +170,49 @@ export function loadPoseAtlases(): Promise<boolean> {
 }
 let selectionManifest:Promise<PoseAtlasManifest>|null=null;
 const bodyLoads=new Map<string,Promise<Atlas>>();
+const bodyConfigs=new Map<string,Promise<PoseAtlasConfig>>();
 let latestSelectionBodies=new Set<string>();
+/**
+ * The full manifest is about 20 MB. Builds and the dev server also publish it
+ * split (see poseAtlasSplit in vite.config.ts): a small index listing every
+ * body, and one file per body under /fighters/pose-atlas/. Index entries are
+ * empty; a body's config is fetched only when a match needs it, from a URL
+ * keyed by the revision so the browser can cache it. Without the split files
+ * (another static server) this falls back to the full manifest.
+ */
+async function loadSelectionManifest():Promise<PoseAtlasManifest>{
+  let response=await fetch(asset('/fighters/pose-atlas/index.json'),{cache:'no-cache'});
+  if(response.status===404||(response.ok&&response.headers.get('content-type')?.includes('text/html')))
+    response=await fetch(asset('/fighters/pose-atlas.json'),{cache:'no-store'});
+  if(!response.ok)throw new Error(`Pose atlas metadata: HTTP ${response.status}`);
+  const manifest=await response.json() as PoseAtlasManifest;
+  if(manifest.version!==1||!manifest.fighters)throw new Error('Unsupported pose atlas manifest');
+  for(const id of Object.keys(manifest.fighters))declaredAtlases.add(id);
+  return manifest;
+}
+function bodyConfig(manifest:PoseAtlasManifest,id:string):Promise<PoseAtlasConfig>{
+  const listed=manifest.fighters[id];if(!listed)throw new Error(`Missing complete body atlas: ${id}`);
+  if(listed.frames)return Promise.resolve(listed);
+  if(!bodyConfigs.has(id))bodyConfigs.set(id,(async()=>{
+    const response=await fetch(asset(`/fighters/pose-atlas/${encodeURIComponent(id)}.json`)+`?v=${encodeURIComponent(manifest.revision??'')}`);
+    if(!response.ok)throw new Error(`Pose atlas ${id}: HTTP ${response.status}`);
+    const cfg=(await response.json() as PoseAtlasManifest).fighters?.[id];
+    if(!cfg?.frames)throw new Error(`Pose atlas ${id}: missing body config`);
+    return cfg;
+  })().catch(error=>{bodyConfigs.delete(id);throw error;}));
+  return bodyConfigs.get(id)!;
+}
 /** Load the selected match and assists on demand. The large expansion must not
  * allocate every fighter's decoded animation images before the menu opens. */
 export async function ensurePoseAtlases(ids:readonly Fighter['id'][]):Promise<void>{
-  selectionManifest??=(async()=>{
-    const response=await fetch(asset('/fighters/pose-atlas.json'),{cache:'no-store'});
-    if(!response.ok)throw new Error(`Pose atlas metadata: HTTP ${response.status}`);
-    const manifest=await response.json() as PoseAtlasManifest;
-    if(manifest.version!==1||!manifest.fighters)throw new Error('Unsupported pose atlas manifest');
-    for(const id of Object.keys(manifest.fighters))declaredAtlases.add(id);
-    return manifest;
-  })().catch(error=>{selectionManifest=null;throw error;});
+  selectionManifest??=loadSelectionManifest().catch(error=>{selectionManifest=null;throw error;});
   try{
     const manifest=await selectionManifest;
     const needed=new Set(ids.flatMap(id=>[...bodyAtlasIds(id),...specialPartnerIds(id).flatMap(bodyAtlasIds)]));
     latestSelectionBodies=needed;
     const loaded=await Promise.all([...needed].map(async id=>{
       if(atlases.has(id))return [id,atlases.get(id)!] as const;
-      const cfg=manifest.fighters[id];if(!cfg)throw new Error(`Missing complete body atlas: ${id}`);
-      if(!bodyLoads.has(id))bodyLoads.set(id,loadAtlas(id,cfg,manifest.revision).finally(()=>bodyLoads.delete(id)));
+      if(!bodyLoads.has(id))bodyLoads.set(id,bodyConfig(manifest,id).then(cfg=>loadAtlas(id,cfg,manifest.revision)).finally(()=>bodyLoads.delete(id)));
       return [id,await bodyLoads.get(id)!] as const;
     }));
     for(const[id,atlas]of loaded){atlases.delete(id);atlases.set(id,atlas);}
@@ -312,7 +335,7 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:AtlasClipName
   if(isCrouchingSpit(f))return null;
   if(f.move?.id==='bolt'){
     const move=getMove(f,'bolt');
-    if(atlas.clips.ranged&&COMBAT_STYLES[f.id].projectile.shape!=='sun'){const age=f.move.t,start=move.startup,end=start+move.active+move.recovery;return choose('ranged',age<start?Math.min(3,Math.floor(age/start*4)):age<start+5?4:age<end-8?5:age<end-4?6:7);}
+    if(atlas.clips.ranged&&COMBAT_STYLES[f.id].projectile.shape!=='sun'&&!hasAuthoredProjectile(f.id)){const age=f.move.t,start=move.startup,end=start+move.active+move.recovery;return choose('ranged',age<start?Math.min(3,Math.floor(age/start*4)):age<start+5?4:age<end-8?5:age<end-4?6:7);}
     if(atlas.clips.signatureCast&&COMBAT_STYLES[f.id].projectile.shape!=='sun'){const age=f.move.t,start=move.startup,end=start+move.active+move.recovery;return choose('signatureCast',age<start?Math.min(3,Math.floor(age/start*4)):age<start+5?4:age<end-8?5:age<end-4?6:7);}
     if(COMBAT_STYLES[f.id].projectile.shape==='pelvicStream'){
       const t=f.move.t,total=move.startup+move.active+move.recovery;

@@ -9,7 +9,9 @@ const cu=url(compile('src/core.ts')),eu=url(compile('src/animationEvents.ts')),c
 const poses=await import(url(compile('src/poseAtlas.ts').replace("from './core'",`from '${cu}'`).replace("from './animationEvents'",`from '${eu}'`)));
 const manifest=JSON.parse(read('public/fighters/pose-atlas.json')),audit=JSON.parse(read('art/identity-actions/audit.json'));
 const profiles=JSON.parse(read('art/identity-actions/profiles.json'));
-const preserved=new Map(audit.filter(r=>!profiles[r.id].replaceRanged).map(r=>[r.id,r.kit.projectile]));
+// Projectiles deliberately redesigned after this audit, each covered by its own smoke.
+const LATER_REDESIGNED=new Set(['mox']); // Yannix mind beam: scripts/yannix-smoke.mjs
+const preserved=new Map(audit.filter(r=>!profiles[r.id].replaceRanged&&!LATER_REDESIGNED.has(r.id)).map(r=>[r.id,r.kit.projectile]));
 for(const[id,p]of preserved)assert.deepEqual(core.COMBAT_STYLES[id].projectile,p,id+' signature projectile preserved');
 assert.equal(core.COMBAT_STYLES.sproto651.projectile.shape,'painting');
 assert.equal(ev.entranceFrame(51),7);assert.equal(ev.deathFrame(95,false),15);assert.equal(ev.deathFrame(0,true),8);assert.equal(ev.deathFrame(95,true),15);

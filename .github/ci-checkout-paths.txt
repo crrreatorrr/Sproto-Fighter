@@ -1,0 +1,27 @@
+# Paths the build and every check under scripts/ need, in git's non-cone
+# sparse-checkout syntax. Everything else under art/ and docs/evidence/ is
+# authoring source and QA history (several GB) that neither the game nor its
+# checks read. CI uses this list; a local partial clone can use it too:
+#
+#   git clone --filter=blob:none --sparse https://github.com/crrreatorrr/Sproto-Fighter
+#   cd Sproto-Fighter
+#   git show HEAD:.github/ci-checkout-paths.txt | git sparse-checkout set --no-cone --stdin
+#
+# If a check starts failing with ENOENT under art/ or docs/, add its path here.
+/*
+!/art/
+!/docs/evidence/
+# Small metadata, labs and authoring scripts read by checks.
+/art/*.*
+/art/**/*.json
+/art/**/*.ts
+/art/**/*.html
+/art/**/*.py
+/art/**/*.mjs
+# Original portraits bundled by src/originalPortraits.ts.
+/art/references/
+/art/sprotos-expansion/references/
+/art/*/reference.png
+/art/*/reference/
+# Recorded review fixtures read by movement checks.
+/docs/evidence/movement-followup-20261102/

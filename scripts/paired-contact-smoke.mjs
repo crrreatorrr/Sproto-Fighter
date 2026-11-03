@@ -1,22 +1,46 @@
-// Real renderer selection for individually inspected source poses. This is not
-// live browser/motion approval. --preview validates the proposed mapping only.
+// Real renderer selection for individually inspected paired-body source poses,
+// one pass per review under art/movement-followup-20261102/. This is not live
+// browser/motion approval. --preview validates the proposed mappings only.
+//   node scripts/paired-contact-smoke.mjs               all reviews
+//   node scripts/paired-contact-smoke.mjs c2 root       only the named reviews
+// Replaces paired-contact-{b2,c,c2,root}-smoke.mjs.
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import ts from 'typescript';
+import {read as readText,compile,dataUrl} from './lib/load.mjs';
 
-const read=p=>readFileSync(new URL('../'+p,import.meta.url));
+const read=p=>readText(p,null);
 const hash=b=>createHash('sha256').update(b).digest('hex');
-const dataUrl=s=>'data:text/javascript;base64,'+Buffer.from(s).toString('base64');
-const compile=p=>ts.transpileModule(read(p).toString(),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const coreUrl=dataUrl(compile('src/core.ts')),eventsUrl=dataUrl(compile('src/animationEvents.ts'));
 const core=await import(coreUrl);
 const poses=await import(dataUrl(compile('src/poseAtlas.ts').replace("from './core'",`from '${coreUrl}'`).replace("from './animationEvents'",`from '${eventsUrl}'`)));
 const manifest=JSON.parse(read('public/fighters/pose-atlas.json'));
-const review=JSON.parse(read('art/movement-followup-20261102/paired-contact/review.json'));
+const REVIEWS={
+  'paired-contact':'five body clips',
+  'paired-contact-b2':'four reviewed clips across three paired bodies',
+  'paired-contact-c':'four reviewed clips across three companion bodies',
+  'paired-contact-c2':'six reviewed clips across three main bodies',
+  'paired-contact-root':'six reviewed clips across five paired bodies',
+};
+const wanted=process.argv.slice(2).filter(a=>!a.startsWith('--'));
+const selected=Object.keys(REVIEWS).filter(name=>!wanted.length||wanted.some(w=>name===w||name==='paired-contact-'+w));
+assert.ok(selected.length,'no matching review: '+wanted.join(' '));
 const preview=process.argv.includes('--preview');
+globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>manifest});
+globalThis.Image=class {
+  set src(value){
+    this.url=value;
+    const b=read('public'+value.split('?')[0]);
+    this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);
+    queueMicrotask(()=>this.onload());
+  }
+};
+for(const name of selected){
+const review=JSON.parse(read(`art/movement-followup-20261102/${name}/review.json`));
+// The first review stored {body: finding}; later ones store a findings list.
+const findings=review.findings??Object.entries(review.bodies).map(([body,finding])=>({...finding,body}));
 
-for(const [body,finding] of Object.entries(review.bodies)){
+for(const finding of findings){
+  const body=finding.body;
   const desired=finding.sourceIndices.map(index=>structuredClone(finding.before[index]));
   if(preview)manifest.fighters[body].clips[finding.clip]=desired;
   const installed=manifest.fighters[body].clips[finding.clip];
@@ -30,20 +54,12 @@ for(const [body,finding] of Object.entries(review.bodies)){
   for(const index of contract.startupSlots)assert.notEqual(installed[index].url,finding.approvedContactUrl,'full contact is not presented before startup completes');
 }
 
-globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>manifest});
-globalThis.Image=class {
-  set src(value){
-    this.url=value;
-    const b=read('public'+value.split('?')[0]);
-    this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);
-    queueMicrotask(()=>this.onload());
-  }
-};
-const owners=[...new Set(Object.values(review.bodies).map(f=>f.owner))];
+const owners=[...new Set(findings.map(f=>f.owner))];
 await poses.ensurePoseAtlases(owners);
 let phaseFrames=0,activeContacts=0,rearCoverageFrames=0,recoveries=0;
 const phaseCounts={startup:0,active:0,recovery:0},checkedBodies=new Set();
-for(const [body,finding] of Object.entries(review.bodies))for(const facing of [-1,1])for(const action of finding.clip==='heavy'?['heavy']:['airMedium','airHeavy']){
+for(const finding of findings)for(const facing of [-1,1])for(const action of finding.clip==='heavy'?['heavy']:['airMedium','airHeavy']){
+  const body=finding.body;
   const s=core.createState(finding.owner,'dummy'),f=s.fighters[0];
   f.x=640;f.y=action==='heavy'?core.FLOOR:core.FLOOR-100;f.facing=facing;
   const ids=core.bodyAtlasIds(f.id),lead=ids[facing===1?ids.length-1:0];
@@ -70,7 +86,7 @@ for(const [body,finding] of Object.entries(review.bodies))for(const facing of [-
         assert.equal(expected,finding.approvedContactUrl,`${body} ${action} age ${age}: held kick must match the inspected art`);
         activeContacts++;
       }
-      checkedBodies.add(body);
+      checkedBodies.add(body+'/'+finding.clip);
     }else{
       assert.notEqual(selected.sequence,finding.clip,`${body}: rear member covers rather than duplicating the melee contact`);
       rearCoverageFrames++;
@@ -89,5 +105,6 @@ for(const [body,finding] of Object.entries(review.bodies))for(const facing of [-
   }
   recoveries++;
 }
-assert.equal(checkedBodies.size,Object.keys(review.bodies).length,'each reviewed body supplied a real lead contact');
-console.log(`${preview?'PREVIEW ONLY':'PASS'}: ${phaseFrames} rendered phase frames (${JSON.stringify(phaseCounts)}), ${activeContacts} reviewed active contacts, ${rearCoverageFrames} rear-cover frames, ${recoveries} recoveries; five body clips and actual owner facings. No live-motion approval.`);
+assert.equal(checkedBodies.size,findings.length,'each reviewed body supplied a real lead contact');
+console.log(`${preview?'PREVIEW ONLY':'PASS'} ${name}: ${phaseFrames} rendered phase frames (${JSON.stringify(phaseCounts)}), ${activeContacts} reviewed active contacts, ${rearCoverageFrames} rear-cover frames, ${recoveries} recoveries; ${REVIEWS[name]} and actual owner facings. No live-motion approval.`);
+}

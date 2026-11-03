@@ -12,7 +12,8 @@ const poses=await import(url(compile('src/poseAtlas.ts').replace("from './core'"
 const original=JSON.parse(read('public/fighters/pose-atlas.json'));
 const profiles=JSON.parse(read('art/identity-actions/profiles.json'));
 const audit=JSON.parse(read('art/identity-actions/audit.json'));
-const rows=audit.filter(r=>profiles[r.id].replaceRanged);
+// Hand-authored throws (e.g. #1601's yellow 8) keep their reviewed cast; sproto1601-eight-smoke covers them.
+const rows=audit.filter(r=>profiles[r.id].replaceRanged&&!core.hasAuthoredProjectile(r.id));
 const manifest=structuredClone(original);
 let installed=0,fixtures=0;
 for(const r of rows)for(const id of r.bodies){
