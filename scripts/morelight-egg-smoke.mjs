@@ -13,7 +13,9 @@ for(const facing of [-1,1])for(const air of [false,true])for(const direction of 
  const s=createState('vela','dummy','rivet'),f=s.fighters[0];f.x=600;s.fighters[1].x=facing===1?1200:80;f.facing=facing;s.fighters[1].facing=-facing;if(air){f.y=FLOOR-250;f.vy=-4;}
  step(s,[A.bolt|direction,0]);let shot;for(let t=0;t<40&&!shot;t++){step(s,[0,0]);shot=s.projectiles[0];}
  assert.ok(shot);assert.equal(f.move.t,11);assert.equal(shot.shape,'egg');assert.equal(shot.damage,62);assert.equal(shot.vx,facing*12);assert.equal(shot.vy,0);assert.equal(shot.gravity,0);assert.equal(shot.wave,0);
- assert.ok(Math.abs(shot.x-f.x-facing*(59+12))<1e-8,'egg starts at the mouth before first movement');assert.ok(Math.abs(shot.y-(f.y-103))<1e-8);
+ const crouched=!air&&(direction&A.down);
+ if(crouched){assert.ok(shot.y>f.y-103,'crouched egg leaves the lower crouched mouth');assert.ok(Math.sign(shot.x-f.x)===facing);}
+ else{assert.ok(Math.abs(shot.x-f.x-facing*(59+12))<1e-8,'egg starts at the mouth before first movement');assert.ok(Math.abs(shot.y-(f.y-103))<1e-8);}
  const y=shot.y;tick(s,5);assert.equal(shot.y,y);tick(s,90);assert.equal(f.move,null);cases++;
 }
 for(const facing of [-1,1])for(const guard of [false,true]){

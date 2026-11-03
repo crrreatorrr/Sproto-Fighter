@@ -10,7 +10,7 @@ const manifest=JSON.parse(readFileSync(new URL('../public/fighters/pose-atlas.js
 globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>structuredClone(manifest)});
 globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}};
 const {A,FLOOR,ROSTER,COMBAT_STYLES,createState,step,getMove}=core;
-assert.equal(ROSTER.sproto1601.name,'Sproto #1601');assert.equal(ROSTER.sproto1601.partner,'sproto3152');const power=COMBAT_STYLES.sproto1601.projectile;
+assert.equal(ROSTER.sproto1601.name,'888');assert.equal(ROSTER.sproto1601.partner,'vaudream');const power=COMBAT_STYLES.sproto1601.projectile;
 assert.equal(power.shape,'yellowEight');assert.equal(power.speed,12);assert.deepEqual(power.origin,{forward:77.5,height:105});
 const tick=(s,n,a=0,b=0)=>{for(let t=0;t<n;t++)step(s,[a,b]);};let cases=0;
 for(const facing of [-1,1])for(const air of [false,true])for(const direction of [0,A.up,A.down,A.left,A.right,A.up|A.left,A.up|A.right,A.down|A.left,A.down|A.right]){
