@@ -46,6 +46,10 @@ for(const entry of [...batch.fighters,...batch.mergeBaseFighters]){
   add(entry.id,'live-batch-nov03',[-1,1],batch.states,entry.samples,'inspected atlas samples',
     batch.limits,entry.findings,'atlas samples inspected; runtime transform audit covers both facings');
 }
+const named=load('live-named-nov03');
+for(const f of named.fighters)if(!rows.has(f.id)){
+  add(f.id,'live-named-nov03',named.facings,named.states,named.observationCount,named.countUnit,named.gaps,f.findings);
+}
 const finalIntake=load('live-final-intake-nov03');
 for(const entry of finalIntake.fighters){
   add(entry.id,'live-final-intake-nov03',[-1,1],finalIntake.states,entry.samples,'inspected atlas samples',
