@@ -29,9 +29,9 @@ for(const id of installed)for(const facing of[-1,1]){
     assert.equal(c.images.length,core.bodyAtlasIds(id).length,id+' separate complete body drawings');
     for(let n=0;n<c.images.length;n++){
      const image=c.images[n],path=image[0].url.split('?')[0],data=frames.get(path);assert.ok(data,path+' has declared clip metadata');const margin=core.isPairedFighter(id)?0:6;const{cfg,frame}=data,[tx,ty]=c.translations[n],[sx,sy]=c.scales[n],[,dx,dy]=image;
-     assert.equal(ty,core.FLOOR,id+' floor root');const edges=[frame.bounds[0],frame.bounds[2]].map(b=>tx+(b+dx)*sx);
+     assert.equal(ty,core.FLOOR,id+' floor root');const k=image[3]/(frame.width??cfg.width),edges=[frame.bounds[0],frame.bounds[2]].map(b=>tx+(b*k+dx)*sx); // k: reviewed clipRegistration density
      assert.ok(Math.min(...edges)>=margin-1e-9,`${id}/${data.id} death${d.frameIndex} x${x}: left edge ${Math.min(...edges)}`);assert.ok(Math.max(...edges)<=core.WIDTH-margin+1e-9,`${id}/${data.id} death${d.frameIndex} x${x}: right edge ${Math.max(...edges)}`);
-     if(d.frameIndex>=8)assert.ok(Math.abs((frame.bounds[3]+dy)*sy)<=1,id+' lying rest reaches exact floor');
+     if(d.frameIndex>=8)assert.ok(Math.abs((frame.bounds[3]*k+dy)*sy)<=1,id+' lying rest reaches exact floor');
     }
    }
    assert.equal(JSON.stringify(s),snapshot,id+' presentation is read-only');ev.advanceRoundPresentation(out);

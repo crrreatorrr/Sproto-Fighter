@@ -29,7 +29,7 @@ await check('installed optional clips have exact current counts and inventory; a
 // Explicit legacy fixture keeps these contracts exercised even when every
 // installed character also has replacement entrance8/death16/ranged8.
 // Actual new clips are tested by identity-presentation/ranged QA separately.
-manifest=structuredClone(original);for(const cfg of Object.values(manifest.fighters))for(const name of ['entrance','death','ranged','signatureCast'])if(cfg.clips)delete cfg.clips[name];
+manifest=structuredClone(original);for(const cfg of Object.values(manifest.fighters))for(const name of ['entrance','death','ranged','signatureCast']){if(cfg.clips)delete cfg.clips[name];if(cfg.clipRegistration)delete cfg.clipRegistration[name];}
 await loadPoseAtlases();
 await check('intro clocks cover four frames without core mutation; identity excludes same-ID assist',()=>each('intro',(id,face)=>{
  const s=fresh(id,face),f=s.fighters[0],copy=structuredClone(f),p=createRoundPresentation(),before=JSON.stringify(s),seen=new Set();present(p,s.fighters);
@@ -57,7 +57,7 @@ await check('real grounded light recoil samples correctly; block, throw, airborn
 }));
 await check('defeat floor starts at4+, never rotates authored art, rests at source floor baseline, final result holds',()=>each('defeat',(id,face)=>{
  for(const fromFloor of [false,true]){const s=fresh(id,face),f=s.fighters[0],p=createRoundPresentation();f.hp=0;f.reaction=fromFloor?{kind:'knockdown',phase:'down',t:5,direction:-face}:null;beginRoundOutro(p,1,fromFloor);present(p,s.fighters);const seen=new Set();
- for(let t=0;t<140;t++){const d=debug(f,s.frame),c=ctx();assert.equal(d.sequence,'defeat');assert.equal(d.frameIndex,defeatFrame(p.frame,fromFloor));if(fromFloor)assert.ok(d.frameIndex>=4);seen.add(d.frameIndex);draw(c,f,s.frame);assert.ok(c.angles.every(angle=>angle===0),id+" authored art must not rotate: "+c.angles.join(","));assert.equal(c.translations[0][1],FLOOR);const cfg=original.fighters[id],frame=cfg.clips.defeat[d.frameIndex],anchor=frame.anchor??cfg.anchor,scale=cfg.scale??cfg.worldHeight/cfg.height;assert.deepEqual(c.scales,[[(fromFloor?-face:face)*(cfg.facing??1)*scale,scale]],id+' floor impact direction / standing facing');assert.equal(c.images[0][2],-anchor[1]);if(d.frameIndex>=4){assert.ok(Math.abs((frame.bounds[3]-anchor[1])*(cfg.scale??cfg.worldHeight/cfg.height))<=1,id+' authored floor bound');}advanceRoundPresentation(p);}
+ for(let t=0;t<140;t++){const d=debug(f,s.frame),c=ctx();assert.equal(d.sequence,'defeat');assert.equal(d.frameIndex,defeatFrame(p.frame,fromFloor));if(fromFloor)assert.ok(d.frameIndex>=4);seen.add(d.frameIndex);draw(c,f,s.frame);assert.ok(c.angles.every(angle=>angle===0),id+" authored art must not rotate: "+c.angles.join(","));assert.equal(c.translations[0][1],FLOOR);const cfg=original.fighters[id],frame=cfg.clips.defeat[d.frameIndex],anchor=frame.anchor??cfg.anchor,scale=cfg.scale??cfg.worldHeight/cfg.height;assert.deepEqual(c.scales,[[(fromFloor?-face:face)*(cfg.facing??1)*scale,scale]],id+' floor impact direction / standing facing');const reg=cfg.clipRegistration?.defeat,k=reg?.pixelScale??1,oy=reg?.anchorOffset?.[1]??0;assert.equal(c.images[0][2],-(anchor[1]+oy)*k);if(d.frameIndex>=4){assert.ok(Math.abs((frame.bounds[3]-anchor[1]-oy)*k*(cfg.scale??cfg.worldHeight/cfg.height))<=1,id+' authored floor bound');}advanceRoundPresentation(p);}
  assert.equal(p.phase,'result');assert.equal(debug(f,1).frameIndex,11);assert.ok(seen.has(11));assert.equal(debug(s.fighters[1],0).sequence,'poses');p.winner=2;assert.equal(debug(f,0).sequence,'defeat');present(null,[]);}
 }));
 await check('mixed-state double-KO presentation detect prone losers individually and retain opposite impact orientation',()=>each('defeat',(id,face)=>{
@@ -84,7 +84,7 @@ await check('all defeat frames stay inside six-pixel horizontal margins at both 
   for(let age=0;age<=events.OUTRO_FRAMES;age++){
    const d=debug(f,s.frame);if(!seen.has(d.frameIndex)){
     seen.add(d.frameIndex);const c=ctx();draw(c,f,s.frame);const source=cfg.clips.defeat[d.frameIndex];assert.ok(source.bounds,id+' defeat bounds required for wall test');
-    const [tx]=c.translations[0],[sx]=c.scales[0],[,dx]=c.images[0];const edges=[source.bounds[0],source.bounds[2]].map(b=>tx+(b+dx)*sx),left=Math.min(...edges),right=Math.max(...edges);
+    const [tx]=c.translations[0],[sx]=c.scales[0],[,dx]=c.images[0],k=cfg.clipRegistration?.defeat?.pixelScale??1;const edges=[source.bounds[0],source.bounds[2]].map(b=>tx+(b*k+dx)*sx),left=Math.min(...edges),right=Math.max(...edges);
     assert.ok(left>=6-1e-9,`${id} frame${d.frameIndex} x${x} facing${face} impact${direction} floor${fromFloor}: left ${left} <6`);
     assert.ok(right<=WIDTH-6+1e-9,`${id} frame${d.frameIndex} x${x} facing${face} impact${direction} floor${fromFloor}: right ${right} >${WIDTH-6}`);
     assert.equal(f.x,x);assert.ok(c.angles.every(angle=>angle===0),id+" authored art must not rotate: "+c.angles.join(","));assert.equal(JSON.stringify(s),before);
