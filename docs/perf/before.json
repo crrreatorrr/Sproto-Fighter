@@ -1,0 +1,39 @@
+{
+  "build": "main 322e333a (before)",
+  "network": "20 Mbit/s, 40 ms",
+  "picks": [
+    "sproto943",
+    "sproto865",
+    "azkarah",
+    "benjamin",
+    "berserk",
+    "bidnehhh",
+    "bigal",
+    "bigswole"
+  ],
+  "steps": {
+    "boot": {
+      "ms": 31871,
+      "requests": 157,
+      "mb": 11.13
+    },
+    "browse": {
+      "ms": 80773,
+      "requests": 165,
+      "mb": 16.77
+    },
+    "settle": {
+      "ms": 18802,
+      "requests": 1,
+      "mb": 0.02
+    },
+    "start": {
+      "ms": 793,
+      "requests": 1,
+      "mb": 1.52
+    }
+  },
+  "bodyFilesFetched": 14,
+  "decodedMB": 359,
+  "decodedHow": "estimated, 14 bodies held"
+}

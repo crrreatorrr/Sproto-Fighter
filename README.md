@@ -138,6 +138,13 @@ own trajectories. All rounds are untimed.
   normalization does not change fight scale. `pose-atlas.json` is the single
   source of frame data; the dev server and builds also publish it split per
   body under `/fighters/pose-atlas/` so a match loads only its own bodies.
+  Loading: the selection menu loads only each pick's standing pose, and the
+  full bodies once a pick has settled for 300 ms. Released builds pack each body
+  into one sprite sheet with every frame's transparent margin trimmed
+  (`scripts/build-sheets.py`), about a quarter of the decoded memory; frame
+  metadata is never changed, and `?atlas=frames` loads the individual PNGs
+  instead. The bodies of the match being played are pinned; other bodies are
+  released past 16 bodies or 160 MB. See [loading measurements](docs/perf/README.md).
 - `src/storyProgress.ts`, `storyMode.ts`, `campaignMap.ts`: saves, progression,
   placeholder scenes and a real 100-node map. `stageVariants.ts` maps approved
   scenes without changing opponent/save identities.
@@ -156,12 +163,16 @@ own trajectories. All rounds are untimed.
 ```sh
 npm run check      # TypeScript
 npm run test:all   # vitest, then every check under scripts/ in parallel
-npm run test:fast  # the same without the three slow roster-wide audits
+npm run test:fast  # the same without the four slow roster-wide audits
 node scripts/run-all.mjs throw duo   # only checks whose name matches
 ```
 
 GitHub Actions runs the typecheck, vitest, the build and every check on each
-push to main and each pull request. The older grouped commands (`npm run qa`,
+push to main and each pull request. Two checks guard art loading:
+`fighter-budget-qa` fails a body over 176 frames or about 16 MB decoded once
+trimmed, or a portrait over budget; `sheet-render-qa` needs a packed `dist/`
+(`npm run build && python3 scripts/build-sheets.py dist`) and renders the
+sheets against the frame PNGs in Chromium. The older grouped commands (`npm run qa`,
 `npm run partners-qa`, `npm run versus-smoke`, ...) still work. Add `?qa` to
 the game URL for visible diagnostics.
 
