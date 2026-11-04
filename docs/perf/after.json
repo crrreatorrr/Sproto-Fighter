@@ -1,0 +1,39 @@
+{
+  "build": "claude/sharp-sagan-jnc1kb (after)",
+  "network": "20 Mbit/s, 40 ms",
+  "picks": [
+    "sproto943",
+    "sproto865",
+    "azkarah",
+    "benjamin",
+    "berserk",
+    "bidnehhh",
+    "bigal",
+    "bigswole"
+  ],
+  "steps": {
+    "boot": {
+      "ms": 5406,
+      "requests": 157,
+      "mb": 11.18
+    },
+    "browse": {
+      "ms": 2159,
+      "requests": 153,
+      "mb": 1.4
+    },
+    "settle": {
+      "ms": 2083,
+      "requests": 0,
+      "mb": 0
+    },
+    "start": {
+      "ms": 821,
+      "requests": 1,
+      "mb": 1.52
+    }
+  },
+  "bodyFilesFetched": 4,
+  "decodedMB": 23,
+  "decodedHow": "game counter, 4 bodies held"
+}

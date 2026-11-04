@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       # The full tree is several GB of authoring art and QA history. Check out
       # only what the build and checks read (see .github/ci-checkout-paths.txt),
@@ -39,8 +39,11 @@ jobs:
       - run: npm run check
       - run: npm test
       - run: npm run build
-      # One sprite sheet per body instead of 100-140 frame requests; verified pixel-identical.
+      # One trimmed sprite sheet per body instead of 100-140 frame requests (about a
+      # quarter of the decoded memory); every frame verified unchanged.
       - run: python3 scripts/build-sheets.py dist --verify
+      # scripts/sheet-render-qa.mjs renders the packed sheets against the frame PNGs in Chromium.
+      - run: npx playwright install --with-deps chromium
       - name: Gameplay, art and story checks
         run: node scripts/run-all.mjs
       - uses: actions/upload-artifact@v4

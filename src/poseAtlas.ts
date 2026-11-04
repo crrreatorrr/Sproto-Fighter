@@ -33,8 +33,13 @@ export interface PoseFrameConfig {
   contactHull?: Point[];
 }
 export interface PoseAtlasConfig {
-  /** Added by scripts/build-sheets.py in built games: one image holding every frame, with each frame's top-left cell. */
-  sheet?: { url: string; cells: Record<string, [number, number]> };
+  /** Added by scripts/build-sheets.py in built games: one image holding every frame.
+   * A cell is [x, y] (the whole frame at that top-left) or [x, y, w, h, offsetX, offsetY]:
+   * the frame with its transparent margin trimmed, where (offsetX, offsetY) is the
+   * trimmed rectangle's top-left in the frame's own source pixels. The crop lives only
+   * here, so frame metadata (anchor, bounds, hull, holdContact) never changes and the
+   * individual-PNG fallback stays correct. */
+  sheet?: { url: string; cells: Record<string, SheetCell> };
   frames: (string | PoseFrameConfig)[];
   /** Optional complete-body walk cycle, 2–64 frames, sharing atlas scale. */
   walkFrames?: (string | PoseFrameConfig)[];
@@ -64,11 +69,17 @@ export interface PoseAtlasManifest {
   revision?: string;
   fighters: Record<string, PoseAtlasConfig>;
 }
-/** A decoded frame: its own image, or a slice of the body's sprite sheet. */
+export type SheetCell = [number, number] | [number, number, number, number, number, number];
+/** A decoded frame: its own image, or a region of the body's one sprite-sheet bitmap. */
 type FrameImage = HTMLImageElement | ImageBitmap;
 const imageSize = (image: FrameImage) => 'naturalWidth' in image ? [image.naturalWidth, image.naturalHeight] : [image.width, image.height];
-interface LoadedFrame { image: FrameImage; anchor: Point; width: number; height: number; bounds: [number,number,number,number]; fallLean:number; contactHull?:Point[] }
-interface Atlas { clips: Partial<Record<AtlasClipName, LoadedFrame[]>>; frames: LoadedFrame[]; walkFrames?: LoadedFrame[]; scale: number; facing: number; cycle: number; holdContact?: { hand:Point; torso:Point } }
+/** Sheet region [sx, sy, sw, sh, offsetX, offsetY]: source rectangle in the sheet and its
+ * top-left within the frame's own source pixels. Absent when the frame is its own image. */
+type FrameRegion = readonly [number, number, number, number, number, number];
+interface LoadedFrame { image: FrameImage; region?: FrameRegion; density: number; anchor: Point; width: number; height: number; bounds: [number,number,number,number]; fallLean:number; contactHull?:Point[] }
+interface Atlas { clips: Partial<Record<AtlasClipName, LoadedFrame[]>>; frames: LoadedFrame[]; walkFrames?: LoadedFrame[]; scale: number; facing: number; cycle: number; holdContact?: { hand:Point; torso:Point };
+  /** Decoded RGBA bytes this body holds, and the bitmaps to release when it is evicted. */
+  bytes: number; bitmaps: ImageBitmap[] }
 export interface PoseAtlasDebug {
   available: boolean;
   slot: PoseSlot;
@@ -88,7 +99,35 @@ let pending: Promise<boolean> | null = null;
 let loadState: 'unrequested' | 'loading' | 'absent' | 'ready' | 'error' = 'unrequested';
 let loadError: string | null = null;
 export const getPoseAtlasClipInventory = () => Object.fromEntries([...atlases].map(([id,a])=>[id,Object.fromEntries(Object.entries(a.clips).map(([name,frames])=>[name,frames.length]))]));
-export const getPoseAtlasLoadStatus = () => ({ state: loadState, error: loadError, ids: [...atlases.keys()] });
+export const getPoseAtlasLoadStatus = () => ({ state: loadState, error: loadError, ids: [...atlases.keys()],
+  decodedBytes: [...atlases.values()].reduce((sum, a) => sum + a.bytes, 0), sheets: [...atlases.values()].filter(a => a.bitmaps.length).length });
+/** Field kill switch: `?atlas=frames` ignores built sprite sheets and loads every frame PNG. */
+const sheetsDisabled = () => typeof location !== 'undefined' && new URLSearchParams(location.search).get('atlas') === 'frames';
+const loadImage = (url: string) => new Promise<HTMLImageElement>((resolve, reject) => {
+  const img = new Image();
+  img.onload = () => resolve(img);
+  img.onerror = () => reject(new Error(`failed to load ${url}`));
+  img.src = url;
+});
+/** The only two places that read a frame's pixels. Frames loaded as their own image keep
+ * the exact Canvas calls the game always made; sheet regions place the trimmed rectangle
+ * where it sat inside the full frame, so the drawn result is identical. */
+function drawFrame(c: CanvasRenderingContext2D, f: LoadedFrame, dx: number, dy: number, natural = false): void {
+  const r = f.region;
+  if (!r) { if (natural) c.drawImage(f.image, dx, dy); else c.drawImage(f.image, dx, dy, f.width, f.height); return; }
+  if (f.image.width === 0) return; // released by eviction: never drawn, but never throw mid-frame
+  const k = natural ? 1 : f.density;
+  c.drawImage(f.image, r[0], r[1], r[2], r[3], dx + r[4] * k, dy + r[5] * k, r[2] * k, r[3] * k);
+}
+/** Draw part (sx, sy, sw, sh) of a frame, in its own source pixels, into (dx, dy, dw, dh). */
+function drawFrameRect(c: CanvasRenderingContext2D, f: LoadedFrame, sx: number, sy: number, sw: number, sh: number, dx: number, dy: number, dw: number, dh: number): void {
+  const r = f.region;
+  if (!r) { c.drawImage(f.image, sx, sy, sw, sh, dx, dy, dw, dh); return; }
+  const x0 = Math.max(sx, r[4]), y0 = Math.max(sy, r[5]), x1 = Math.min(sx + sw, r[4] + r[2]), y1 = Math.min(sy + sh, r[5] + r[3]);
+  if (x1 <= x0 || y1 <= y0) return; // only trimmed transparent pixels were requested
+  const kx = dw / sw, ky = dh / sh;
+  c.drawImage(f.image, r[0] + x0 - r[4], r[1] + y0 - r[5], x1 - x0, y1 - y0, dx + (x0 - sx) * kx, dy + (y0 - sy) * ky, (x1 - x0) * kx, (y1 - y0) * ky);
+}
 const positive = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v) && v > 0;
 const point = (v: unknown): v is Point => Array.isArray(v) && v.length === 2 && v.every(x => typeof x === 'number' && Number.isFinite(x));
 const modulo = (n: number, m: number) => ((n % m) + m) % m;
@@ -120,14 +159,14 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
     if(!Object.hasOwn(POSE_SLOTS,name) || !registration || !positive(registration.pixelScale) || registration.pixelScale<.5 || registration.pixelScale>2 || !point(registration.anchorOffset))throw new Error(`Atlas ${id}: invalid ${name} pose registration`);
   }
   // One request for the whole body when the build packed a sprite sheet; individual frames otherwise or if it fails.
-  const sheetImage: Promise<HTMLImageElement | null> | null = cfg.sheet && typeof createImageBitmap === 'function'
-    ? new Promise<HTMLImageElement | null>(resolve => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => { console.warn(`Atlas ${id}: sprite sheet failed to load; using individual frames`); resolve(null); };
-      img.src = asset(cfg.sheet!.url);
+  // The sheet is decoded once into one bitmap that every frame draws a region of: no
+  // per-frame copies, and the browser cannot discard and re-decode it mid-fight.
+  const sheetImage: Promise<ImageBitmap | null> | null = cfg.sheet && typeof createImageBitmap === 'function' && !sheetsDisabled()
+    ? loadImage(asset(cfg.sheet.url)).then(img => createImageBitmap(img)).catch(() => {
+      console.warn(`Atlas ${id}: sprite sheet failed to load; using individual frames`); return null;
     })
     : null;
+  const ownImages = new Set<HTMLImageElement>();
   const loadFrames = (entries: (string | PoseFrameConfig)[], label:string) => Promise.all(entries.map(async (entry, slot): Promise<LoadedFrame> => {
     const f = typeof entry === 'string' ? { url: entry } : entry;
     if (!f || typeof f.url !== 'string') throw new Error(`Atlas ${id}, ${label} frame ${slot}: missing frame URL`);
@@ -139,27 +178,31 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
     if(f.contactHull&&(!Array.isArray(f.contactHull)||f.contactHull.length<3||f.contactHull.length>128||f.contactHull.some(p=>!point(p)||p[0]<0||p[1]<0||p[0]>width||p[1]>height)))throw new Error(`Atlas ${id}: invalid contact hull`);
     const cell = cfg.sheet?.cells[f.url];
     const sheet = cell && sheetImage ? await sheetImage : null;
-    const image: FrameImage = sheet && cell
-      ? await createImageBitmap(sheet, cell[0], cell[1], width, height)
-      : await new Promise<HTMLImageElement>((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = () => reject(new Error(`Atlas ${id}, ${label} frame ${slot}: failed to load ${f.url}`));
-        img.src = localUrl(f.url, revision);
-      });
-    const [naturalWidth, naturalHeight] = imageSize(image);
-    if (naturalWidth !== width || naturalHeight !== height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: image dimensions differ from metadata`);
+    let image: FrameImage, region: FrameRegion | undefined;
+    if (sheet && cell) {
+      const r: FrameRegion = cell.length === 2 ? [cell[0], cell[1], width, height, 0, 0] : cell;
+      if (r.length !== 6 || !r.every(Number.isInteger) || r[2] <= 0 || r[3] <= 0 || r[0] < 0 || r[1] < 0 || r[0] + r[2] > sheet.width || r[1] + r[3] > sheet.height
+        || r[4] < 0 || r[5] < 0 || r[4] + r[2] > width || r[5] + r[3] > height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: invalid sprite-sheet cell`);
+      image = sheet; region = r;
+    } else {
+      image = await loadImage(localUrl(f.url, revision)).catch(() => { throw new Error(`Atlas ${id}, ${label} frame ${slot}: failed to load ${f.url}`); });
+      const [naturalWidth, naturalHeight] = imageSize(image);
+      if (naturalWidth !== width || naturalHeight !== height) throw new Error(`Atlas ${id}, ${label} frame ${slot}: image dimensions differ from metadata`);
+      ownImages.add(image);
+    }
     const registration=label==='poses'?cfg.poseRegistration?.[names[slot][0] as keyof typeof POSE_SLOTS]:cfg.clipRegistration?.[label as AtlasClipName], density=registration?.pixelScale??1, offset=registration?.anchorOffset??[0,0];
     // All geometry uses the same calibrated coordinates as the drawn bitmap.
     // Keeping the foot origin, bounds and hull together also preserves camera
     // packing and floor/throw placement. Combat never reads this registration.
-    return { image, width:width*density, height:height*density,
+    return { image, region, density, width:width*density, height:height*density,
       anchor:[(anchor[0]+offset[0])*density,(anchor[1]+offset[1])*density],
       bounds:bounds.map(v=>v*density) as LoadedFrame['bounds'], fallLean:f.fallLean??0,
       contactHull:f.contactHull?.map(([x,y])=>[x*density,y*density]) };
   }));
   const [frames, walkFrames, clipEntries] = await Promise.all([loadFrames(cfg.frames, 'poses'), cfg.walkFrames ? loadFrames(cfg.walkFrames, 'walk') : undefined, Promise.all(Object.entries(cfg.clips??{}).map(async ([name,entries])=>[name,await loadFrames(entries!,name)] as const))]);
-  return { frames, walkFrames, clips:Object.fromEntries(clipEntries), scale: cfg.scale ?? cfg.worldHeight! / cfg.height, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact };
+  const sheet = sheetImage ? await sheetImage : null, bitmaps = sheet ? [sheet] : [];
+  const bytes = [...bitmaps, ...ownImages].reduce((sum, image) => { const [w, h] = imageSize(image); return sum + w * h * 4; }, 0);
+  return { frames, walkFrames, clips:Object.fromEntries(clipEntries), scale: cfg.scale ?? cfg.worldHeight! / cfg.height, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact, bytes, bitmaps };
 }
 /** Optional installation: 404 or an empty roster returns false. Invalid manifests
  * and failed assets reject and expose an error status; no partial atlas is used.
@@ -191,18 +234,38 @@ let selectionManifest:Promise<PoseAtlasManifest>|null=null;
 const bodyLoads=new Map<string,Promise<Atlas>>();
 const bodyConfigs=new Map<string,Promise<PoseAtlasConfig>>();
 let latestSelectionBodies=new Set<string>();
+/** Bodies of the match being played (or about to be): never evicted, so a frame
+ * on screen can never be released. Replaced by the next pinned request. */
+let pinnedBodies=new Set<string>();
+/** Recent-body cache limits: older bodies are released, least recently requested
+ * first, while more than 16 bodies or this many decoded bytes are held. The pinned
+ * and currently requested bodies are always kept, even past the limits. */
+export const POSE_ATLAS_CACHE_BYTES=160*1024*1024;
+const expandBodies=(ids:readonly Fighter['id'][])=>new Set(ids.flatMap(id=>[...bodyAtlasIds(id),...specialPartnerIds(id).flatMap(bodyAtlasIds)]));
+function evictAtlases():void{
+  const keep=(id:string)=>latestSelectionBodies.has(id)||pinnedBodies.has(id);
+  let bytes=[...atlases.values()].reduce((sum,a)=>sum+a.bytes,0);
+  // Map order is least recently requested first.
+  for(const [id,atlas] of [...atlases]){
+    if(atlases.size<=16&&bytes<=POSE_ATLAS_CACHE_BYTES)break;
+    if(keep(id))continue;
+    atlases.delete(id);bytes-=atlas.bytes;
+    for(const bitmap of atlas.bitmaps)bitmap.close();
+  }
+}
 /**
- * The full manifest is about 20 MB. Builds and the dev server also publish it
+ * The full manifest is several MB. Builds and the dev server also publish it
  * split (see poseAtlasSplit in vite.config.ts): a small index listing every
- * body, and one file per body under /fighters/pose-atlas/. Index entries are
- * empty; a body's config is fetched only when a match needs it, from a URL
- * keyed by the revision so the browser can cache it. Without the split files
- * (another static server) this falls back to the full manifest.
+ * body with its standing (first) pose, and one file per body under
+ * /fighters/pose-atlas/. A body's config is fetched only when a match needs it,
+ * from a URL keyed by the revision so the browser can cache it. Without the
+ * split files (another static server) this falls back to the full manifest.
  */
 async function loadSelectionManifest():Promise<PoseAtlasManifest>{
   let response=await fetch(asset('/fighters/pose-atlas/index.json'),{cache:'no-cache'});
   if(response.status===404||(response.ok&&response.headers.get('content-type')?.includes('text/html')))
-    response=await fetch(asset('/fighters/pose-atlas.json'),{cache:'no-store'});
+    // Revalidate rather than refetch: an unchanged manifest costs one 304, not several MB.
+    response=await fetch(asset('/fighters/pose-atlas.json'),{cache:'no-cache'});
   if(!response.ok)throw new Error(`Pose atlas metadata: HTTP ${response.status}`);
   const manifest=await response.json() as PoseAtlasManifest;
   if(manifest.version!==1||!manifest.fighters)throw new Error('Unsupported pose atlas manifest');
@@ -222,24 +285,56 @@ function bodyConfig(manifest:PoseAtlasManifest,id:string):Promise<PoseAtlasConfi
   return bodyConfigs.get(id)!;
 }
 /** Load the selected match and assists on demand. The large expansion must not
- * allocate every fighter's decoded animation images before the menu opens. */
-export async function ensurePoseAtlases(ids:readonly Fighter['id'][]):Promise<void>{
+ * allocate every fighter's decoded animation images before the menu opens.
+ * `pin` marks these bodies as the match being played: they stay loaded until
+ * another pinned request replaces them. */
+export async function ensurePoseAtlases(ids:readonly Fighter['id'][],options:{pin?:boolean}={}):Promise<void>{
   selectionManifest??=loadSelectionManifest().catch(error=>{selectionManifest=null;throw error;});
   try{
     const manifest=await selectionManifest;
-    const needed=new Set(ids.flatMap(id=>[...bodyAtlasIds(id),...specialPartnerIds(id).flatMap(bodyAtlasIds)]));
+    const needed=expandBodies(ids);
     latestSelectionBodies=needed;
+    if(options.pin)pinnedBodies=needed;
     const loaded=await Promise.all([...needed].map(async id=>{
       if(atlases.has(id))return [id,atlases.get(id)!] as const;
       if(!bodyLoads.has(id))bodyLoads.set(id,bodyConfig(manifest,id).then(cfg=>loadAtlas(id,cfg,manifest.revision)).finally(()=>bodyLoads.delete(id)));
       return [id,await bodyLoads.get(id)!] as const;
     }));
     for(const[id,atlas]of loaded){atlases.delete(id);atlases.set(id,atlas);}
-    // Keep a small recent-match cache. In-flight menu requests cannot evict the
-    // currently requested match; bodyLoads releases resolved promises as well.
-    for(const id of atlases.keys()){if(atlases.size<=16)break;if(!latestSelectionBodies.has(id))atlases.delete(id);}
+    // In-flight menu requests cannot evict the currently requested or pinned
+    // bodies; bodyLoads releases resolved promises as well.
+    evictAtlases();
     loadState='ready';loadError=null;
   }catch(error){loadError=error instanceof Error?error.message:String(error);loadState='error';throw error;}
+}
+/** Selection-menu previews need only each body's standing pose: one small image
+ * instead of 100-140 decoded frames. Full bodies load when the pick settles. */
+interface PreviewEntry { frame: string | PoseFrameConfig; width: number; height: number; anchor: Point; facing?: 1 | -1 }
+const previews=new Map<string,{source:LoadedFrame;facing:number}>();
+const previewLoads=new Map<string,Promise<void>>();
+function previewEntry(manifest:PoseAtlasManifest,id:string):PreviewEntry{
+  const listed=manifest.fighters[id] as PoseAtlasConfig & {preview?:PreviewEntry};
+  if(!listed)throw new Error(`Missing complete body atlas: ${id}`);
+  if(listed.preview)return listed.preview;
+  if(listed.frames)return {frame:listed.frames[0],width:listed.width,height:listed.height,anchor:listed.anchor,facing:listed.facing};
+  throw new Error(`Pose atlas ${id}: index has no preview pose`);
+}
+export async function ensurePosePreviews(ids:readonly Fighter['id'][]):Promise<void>{
+  selectionManifest??=loadSelectionManifest().catch(error=>{selectionManifest=null;throw error;});
+  const manifest=await selectionManifest;
+  await Promise.all([...expandBodies(ids)].map(id=>{
+    if(atlases.has(id)||previews.has(id))return undefined;
+    if(!previewLoads.has(id))previewLoads.set(id,(async()=>{
+      const entry=previewEntry(manifest,id),f=typeof entry.frame==='string'?{url:entry.frame}:entry.frame;
+      const width=f.width??entry.width,height=f.height??entry.height,anchor=f.anchor??entry.anchor;
+      const image=await loadImage(localUrl(f.url,manifest.revision)).catch(()=>{throw new Error(`Atlas ${id}: failed to load preview ${f.url}`);});
+      const [w,h]=imageSize(image);if(w!==width||h!==height)throw new Error(`Atlas ${id}: preview dimensions differ from metadata`);
+      previews.set(id,{facing:entry.facing??1,source:{image,density:1,anchor,width,height,bounds:f.bounds??[0,0,width,height],fallLean:0}});
+      // Each preview is one standing pose; keep the most recent few dozen.
+      for(const key of previews.keys()){if(previews.size<=48)break;previews.delete(key);}
+    })().finally(()=>previewLoads.delete(id)));
+    return previewLoads.get(id);
+  }));
 }
 interface Playback { frame:number; x:number; y:number; travel:number; stamp:string; slot:PoseSlot; landedAt:number; idleSince:number }
 const playback = new WeakMap<Fighter, Playback>();
@@ -672,24 +767,33 @@ export function getDuoLayoutDebug(f:Fighter,frame:number) {
   const actors=duoActors(f),samples=actors.map((actor,i)=>sample(actor,frame,false,bodyAtlasIds(f.id)[i],i/bodyAtlasIds(f.id).length));
   const {bounds,offsets}=duoLayout(f,actors,samples);return {bounds,offsets};
 }
+/** QA only (scripts/sheet-render-qa.mjs): a sub-pixel offset added to every fighter
+ * sprite, so a render comparison can move fighters without moving the stage. Always 0 in play. */
+let qaNudge:[number,number]=[0,0],qaNudgeOnly:string|undefined;
+/** `only` limits the nudge to one fighter id, so overlapping fighters can be moved independently. */
+export function setPoseAtlasQaNudge(x:number,y:number,only?:string):void{qaNudge=[x,y];qaNudgeOnly=only;}
 function paint(c: CanvasRenderingContext2D, f: Fighter, slot: PoseSlot, ghost: boolean, sampled?: PoseAtlasDebug, atlasId:string=f.id,offsetX=0): boolean {
   const data=paintData(f,slot,sampled,atlasId);if(!data)return false;
   const {atlas,source,transform,facing}=data;
-  c.save(); c.translate(Math.round(transform.x+offsetX),Math.round(transform.y));
+  const nudge=qaNudgeOnly===undefined||qaNudgeOnly===sceneActor(f).id?qaNudge:[0,0];
+  c.save(); c.translate(Math.round(transform.x+offsetX)+nudge[0],Math.round(transform.y)+nudge[1]);
   c.rotate(transform.angle); c.scale(facing * atlas.facing * atlas.scale, atlas.scale); c.imageSmoothingEnabled = false;
   const owner=sceneActor(f),scene=presentationScene,q=CHARACTER_ACTIONS[owner.id as keyof typeof CHARACTER_ACTIONS];
   if(scene?.fighters.includes(owner)&&scene.presentation.phase==='outro'&&scene.presentation.winner!==scene.fighters.indexOf(owner)&&owner.id==='sprotosales'&&!atlas.clips.death){
     const base=atlas.frames[0],u=Math.min(1,Math.max(0,scene.presentation.frame-12)/48);
     const parts=[[0,0,256,125,0,34],[0,125,94,51,-70,34],[94,125,42,51,0,34],[136,125,120,51,70,34],[0,176,112,80,-48,0],[112,176,144,80,48,0]];
-    for(const[x,y,w,h,dx,dy]of parts){c.save();c.translate(dx*u,dy*u);c.drawImage(base.image,x,y,w,h,x-base.anchor[0],y-base.anchor[1],w,h);c.restore();}c.restore();return true;
+    for(const[x,y,w,h,dx,dy]of parts){c.save();c.translate(dx*u,dy*u);drawFrameRect(c,base,x,y,w,h,x-base.anchor[0],y-base.anchor[1],w,h);c.restore();}c.restore();return true;
   }
   if(q?.replaceRanged&&f.move?.id==='bolt'&&!atlas.clips.ranged){
     const m=getMove(f,'bolt'),u=Math.min(1,f.move.t/(m.startup+m.active+m.recovery)),wave=Math.sin(u*Math.PI);
     c.translate((q.ranged%3-1)*wave*(3+q.ranged),-wave*(q.ranged%4));c.rotate((q.ranged%2?1:-1)*wave*.015*q.ranged);
   }
   if (ghost) c.globalAlpha *= .55;
+  // Hit flash keeps the filter: an additive second draw is cheaper, but sprite-sheet
+  // regions drawn with 'lighter' sample differently from whole PNGs in Chromium, so
+  // it would change the flash's pixels (scripts/sheet-render-qa.mjs caught this).
   if (f.flash > 0 && f.flash % 4 < 2) c.filter = 'brightness(1.8)';
-  c.drawImage(source.image, -source.anchor[0]-transform.pivotX, -source.anchor[1]-transform.pivotY,source.width,source.height); c.restore(); return true;
+  drawFrame(c, source, -source.anchor[0]-transform.pivotX, -source.anchor[1]-transform.pivotY); c.restore(); return true;
 }
 /** False means no installed complete atlas; caller decides the fallback. */
 export function drawPoseAtlas(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false): boolean {
@@ -721,19 +825,24 @@ export function drawPoseAtlasSample(c: CanvasRenderingContext2D, f: Fighter, fra
 const menuBounds=new WeakMap<LoadedFrame,readonly number[]>();
 function selectionBounds(source:LoadedFrame):readonly number[] {
   let bounds=menuBounds.get(source);if(bounds)return bounds;
-  const canvas=document.createElement('canvas');[canvas.width,canvas.height]=imageSize(source.image);
-  const context=canvas.getContext('2d',{willReadFrequently:true})!;context.drawImage(source.image,0,0);
+  // A sheet region reads only its trimmed rectangle; everything outside it is transparent.
+  const region=source.region,[ox,oy]=region?[region[4],region[5]]:[0,0];
+  const canvas=document.createElement('canvas');[canvas.width,canvas.height]=region?[region[2],region[3]]:imageSize(source.image);
+  const context=canvas.getContext('2d',{willReadFrequently:true})!;
+  if(region)context.drawImage(source.image,region[0],region[1],region[2],region[3],0,0,region[2],region[3]);else context.drawImage(source.image,0,0);
   const {data}=context.getImageData(0,0,canvas.width,canvas.height);
   let l=canvas.width,t=canvas.height,r=0,b=0;
   for(let y=0;y<canvas.height;y++)for(let x=0;x<canvas.width;x++)if(data[(y*canvas.width+x)*4+3]>0){l=Math.min(l,x);t=Math.min(t,y);r=Math.max(r,x+1);b=Math.max(b,y+1);}
-  bounds=r>l&&b>t?[l,t,r,b]:source.bounds;menuBounds.set(source,bounds);return bounds;
+  bounds=r>l&&b>t?[l+ox,t+oy,r+ox,b+oy]:source.bounds;menuBounds.set(source,bounds);return bounds;
 }
 /** Menu-only framing: every visible body has the same standing height.
  * Pack opaque silhouettes, then fit the complete team within its preview area. */
 export function drawSelectionPose(c:CanvasRenderingContext2D,f:Fighter,scale:number,maxWidth:number):boolean {
-  const ids=bodyAtlasIds(f.id);if(ids.some(id=>!atlases.has(id)))return false;
-  const bodies=ids.map(id=>{
-    const atlas=atlases.get(id)!,source=atlas.frames[0],bounds=selectionBounds(source);
+  // The full body when loaded, otherwise its standing-pose preview: the same image either way.
+  const ids=bodyAtlasIds(f.id),standing=ids.map(id=>{const loaded=atlases.get(id);return loaded?{facing:loaded.facing,source:loaded.frames[0]}:previews.get(id);});
+  if(standing.some(s=>!s))return false;
+  const bodies=standing.map(s=>{
+    const atlas={facing:s!.facing},source=s!.source,bounds=selectionBounds(source);
     const zoom=160/(bounds[3]-bounds[1]);
     return {atlas,source,bounds,zoom,width:(bounds[2]-bounds[0])*zoom};
   });
@@ -743,7 +852,27 @@ export function drawSelectionPose(c:CanvasRenderingContext2D,f:Fighter,scale:num
   let left=-width/2;
   for(const {atlas,source,bounds,zoom,width:bodyWidth} of bodies){
     c.save();c.translate(left+bodyWidth/2,0);c.scale(f.facing*atlas.facing*zoom,zoom);
-    c.drawImage(source.image,-(bounds[0]+bounds[2])/2,-bounds[3]);c.restore();left+=bodyWidth+gap;
+    drawFrame(c,source,-(bounds[0]+bounds[2])/2,-bounds[3],true);c.restore();left+=bodyWidth+gap;
   }
   c.restore();return true;
+}
+/** QA (scripts/sheet-render-qa.mjs): draw every loaded frame of one body through the
+ * same two helpers the game uses, in a grid, so a packed-sheet build can be compared
+ * pixel for pixel with the individual PNGs. `pieces` splits each frame into the six
+ * rectangles of the defeat break-apart. Returns the number of frames drawn. */
+export function drawPoseAtlasFramesForQa(c:CanvasRenderingContext2D,id:string,cell:number,transform:{scale:number;angle:number;flip:1|-1;pieces?:boolean;seams?:boolean}):number{
+  const atlas=atlases.get(id);if(!atlas)return 0;
+  const all=[...atlas.frames,...(atlas.walkFrames??[]),...Object.values(atlas.clips).flat()] as LoadedFrame[];
+  const perRow=Math.max(1,Math.floor(c.canvas.width/cell));
+  all.forEach((f,i)=>{
+    c.save();c.translate((i%perRow+.5)*cell,(Math.floor(i/perRow)+.5)*cell);c.rotate(transform.angle);c.scale(transform.flip*transform.scale,transform.scale);c.imageSmoothingEnabled=false;
+    // `seams` strokes the cut lines instead, so a comparison can tell edge pixels of a cut apart.
+    if(transform.pieces)for(const[x,y,w,h,dx]of[[0,0,256,125,0],[0,125,94,51,-9],[94,125,42,51,0],[136,125,120,51,9],[0,176,112,80,-6],[112,176,144,80,6]]){
+      if(transform.seams){c.lineWidth=2/transform.scale;c.strokeStyle='#fff';c.strokeRect(x-f.anchor[0]+dx,y-f.anchor[1],w,h);}
+      else drawFrameRect(c,f,x,y,w,h,x-f.anchor[0]+dx,y-f.anchor[1],w,h);
+    }
+    else drawFrame(c,f,-f.anchor[0],-f.anchor[1]);
+    c.restore();
+  });
+  return all.length;
 }

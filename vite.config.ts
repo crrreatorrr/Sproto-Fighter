@@ -7,7 +7,7 @@ const ATLAS = fileURLToPath(new URL('./public/fighters/pose-atlas.json', import.
 
 /**
  * public/fighters/pose-atlas.json stays the single source of truth (installers
- * and checks read and write it), but it is about 20 MB. The game only needs the
+ * and checks read and write it), but it is several MB. The game only needs the
  * bodies in the current match, so this publishes it split: an index with every
  * body id, and one small file per body, at /fighters/pose-atlas/<id>.json.
  * The dev server derives them on request; builds emit them next to the full file.
@@ -20,7 +20,11 @@ function poseAtlasSplit(): Plugin {
     const manifest = JSON.parse(readFileSync(ATLAS, 'utf8'));
     const head = {version: manifest.version, revision: manifest.revision};
     const files = new Map<string, string>();
-    files.set('index.json', JSON.stringify({...head, fighters: Object.fromEntries(Object.keys(manifest.fighters).map(id => [id, {}]))}));
+    // Each index entry carries the body's standing pose, so the selection menu can
+    // preview a fighter from one small image before its full body is requested.
+    const standing = (f: any) => typeof f === 'string' ? f : Object.fromEntries(['url', 'width', 'height', 'anchor', 'bounds'].filter(k => f[k] !== undefined).map(k => [k, f[k]]));
+    const preview = (cfg: any) => ({frame: standing(cfg.frames[0]), width: cfg.width, height: cfg.height, anchor: cfg.anchor, ...(cfg.facing === undefined ? {} : {facing: cfg.facing})});
+    files.set('index.json', JSON.stringify({...head, fighters: Object.fromEntries(Object.entries(manifest.fighters).map(([id, cfg]) => [id, {preview: preview(cfg)}]))}));
     for (const [id, cfg] of Object.entries(manifest.fighters)) files.set(`${id}.json`, JSON.stringify({...head, fighters: {[id]: cfg}}));
     cache = {mtime, files};
     return files;
