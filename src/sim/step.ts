@@ -215,8 +215,24 @@ export function step(s: CombatState, inputs: [
             // Reviewed emitting points in the complete-body cast release cels.
             // Keep this immutable combat data; rendering never moves a hitbox.
             const origin=isCrouchingSpit(f)?CROUCH_SPIT_ORIGINS[f.id]!:rawStyle.originByFacing?.[f.facing===1?'right':'left']??rawStyle.origin??(f.id==='rivet'?{forward:44,height:109}:f.id==='vela'?{forward:59,height:103}:isPairedFighter(f.id)?{forward:bodySpread(f.id)+65,height:75}:{forward:34,height:95});
-            s.projectiles.push({...style,owner:i,x:f.x+f.facing*origin.forward,y:style.ground&&dy===0?FLOOR-22:f.y-origin.height,vx:dx/length*speed,vy:dy/length*speed-(style.bounces&&dy===0&&!style.ground?3:0),life:style.beamFrames??100,damage:m.damage,age:0,
-                ...(style.beamLength?{beamDirection:f.facing,beamHit:false}:{})});
+            const {secondaryOrigin, ...projectileStyle} = style;
+            const origins = secondaryOrigin ? [origin, secondaryOrigin] : [origin];
+            for (const [shot, emitter] of origins.entries()) {
+                const damage = shot === 0 && secondaryOrigin ? Math.ceil(m.damage / 2)
+                    : shot === 1 ? Math.floor(m.damage / 2) : m.damage;
+                s.projectiles.push({
+                    ...projectileStyle,
+                    owner:i,
+                    x:f.x + f.facing * emitter.forward,
+                    y:style.ground && dy === 0 ? FLOOR - 22 : f.y - emitter.height,
+                    vx:dx / length * speed,
+                    vy:dy / length * speed - (style.bounces && dy === 0 && !style.ground ? 3 : 0),
+                    life:style.beamFrames ?? 100,
+                    damage,
+                    age:0,
+                    ...(style.beamLength ? {beamDirection:f.facing,beamHit:false} : {}),
+                });
+            }
         }
         let active = attack.t >= m.startup && attack.t < m.startup + m.active && !attack.hit;
         if (attack.id === 'special') {

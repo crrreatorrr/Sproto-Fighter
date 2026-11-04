@@ -29,3 +29,43 @@ for(const id of ['zephyr','guest12','guest10','nate']){const s=createState(id,'c
 for(const id of ['guest08','mandela']){const s=createState(id,'cpu');s.fighters[0].x=100;s.fighters[1].x=1200;step(s,[A.bolt,0]);let returned=false;for(let i=0;i<100;i++){step(s,[0,0]);returned ||= s.projectiles.some(p=>p.vx<0);}assert.ok(returned,id+' return reverses');}
 for(const id of ['vamp','crapto']){const s=createState(id,'cpu');s.fighters[0].hp=500;s.fighters[1].x=570;step(s,[A.bolt,0]);let applied=false;for(let i=0;i<80;i++){step(s,[0,0]);applied ||= id==='vamp'?s.fighters[1].slow>0:s.fighters[0].hp>500;}assert.ok(applied,id+' projectile power on hit');}
 console.log(`PASS: ${total} per-fighter cases, ${PLAYABLE_FIGHTERS.length} unique mechanical profiles, 8 trajectory/power interaction checks.`);
+
+const lowerTorsoShot = COMBAT_STYLES.lowernipple.projectile;
+const emitters = [{ forward: 7.5, height: 50 }, { forward: -16.25, height: 55 }];
+assert.deepEqual([lowerTorsoShot.origin, lowerTorsoShot.secondaryOrigin], emitters);
+
+let emitterCases = 0;
+for (const facing of [-1, 1]) {
+  for (const airborne of [false, true]) {
+    for (const aim of [0, A.up, A.down]) {
+      const game = createState('lowernipple', 'cpu', 'rivet');
+      const [fighter, rival] = game.fighters;
+      fighter.x = 600;
+      fighter.facing = facing;
+      rival.x = fighter.x + facing * 520;
+      rival.facing = -facing;
+      if (airborne) {
+        fighter.y = FLOOR - 250;
+        fighter.vy = -4;
+      }
+
+      step(game, [A.bolt | aim, 0]);
+      const move = getMove(fighter, 'bolt');
+      for (let frame = 0; frame < 40 && !game.projectiles.length; frame++) tick(game, 1);
+
+      assert.equal(fighter.move.t, move.startup);
+      assert.equal(game.projectiles.length, emitters.length);
+      assert.equal(game.projectiles.reduce((total, shot) => total + shot.damage, 0), move.damage);
+      for (const [index, shot] of game.projectiles.entries()) {
+        const { forward, height } = emitters[index];
+        assert.equal(shot.shape, 'lowerTorsoBolt');
+        assert.equal(shot.vx, facing * lowerTorsoShot.speed);
+        assert.equal(shot.vy, 0);
+        assert.equal(shot.x, fighter.x + facing * (forward + lowerTorsoShot.speed));
+        assert.equal(shot.y, fighter.y - height);
+      }
+      emitterCases++;
+    }
+  }
+}
+console.log(`PASS: ${emitterCases} SPROTO casts with both authored emitters, mirrored travel, and shared move damage.`);

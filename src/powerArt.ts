@@ -127,6 +127,11 @@ export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,col
    box((x-8)*2,(y-10)*2,2,2,shell);
   }
  }
+ else if(shape==='lowerTorsoBolt'){
+  // The simulation spawns a separate shot at each reviewed lower-torso emitter.
+  box(-14,-2,35,4,'#f43a32');
+  box(-12,-1,31,2,'#fff2a0');
+ }
  else if(shape==='eyeLaser'||shape==='chestLaser'){
   // Theo's two emitters are 20 world units apart and staggered by 5 vertically.
   const tracks=shape==='chestLaser'?[[-22,0],[-42,5]]:[[-22,-4],[-36,3]];

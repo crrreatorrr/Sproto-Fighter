@@ -11,7 +11,7 @@ export const STARTER_FIGHTERS:readonly PlayableFighterId[]=['highsproto','bront'
 // String pins keep this module compatible with the original 102-fighter registry.
 export const CAMPAIGN_RECRUITS:readonly string[]=['satoshi','xalt','potocaicai'];
 // Hub Relic fighters (src/hub/roster.ts RELIC_ONLY_FIGHTERS, kept equal by tests/hub-roster.test.ts) are
-// recruited only through hub Relics, never as story rivals: Captain Sproto, Sun God, Pissing Sproto,
+// recruited only through hub Relics, never as story rivals: Yelnacio Globulous, Sun God, Pissing Sproto,
 // Captain Green and Error 333. String pins, like CAMPAIGN_RECRUITS.
 export const RELIC_ONLY_RECRUITS:readonly string[]=['captain','sproto2616','sproto3152','sproto3215','sproto1870'];
 // Frozen orders are migration schemas, never the source of the live campaign roster.

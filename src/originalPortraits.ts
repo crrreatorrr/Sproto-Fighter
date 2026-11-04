@@ -1,6 +1,22 @@
 import { type FighterId } from './core';
 /** Original user-supplied fighter references only. No rigging diagram. */
 export const originalPortraits:Record<FighterId,string> = {
+/* FINAL INTAKE PORTRAITS BEGIN */
+    tradertimmy: new URL('../art/tradertimmy/reference.png', import.meta.url).href,
+    durlan: new URL('../art/durlan/reference.png', import.meta.url).href,
+    dollarbitcoin: new URL('../art/dollarbitcoin/reference.png', import.meta.url).href,
+    lowernipple: new URL('../art/lowernipple/reference.png', import.meta.url).href,
+    obamasega420: new URL('../art/obamasega420/reference.png', import.meta.url).href,
+    bigal: new URL('../art/bigal/reference.png', import.meta.url).href,
+    cryptorizzler: new URL('../art/cryptorizzler/reference.png', import.meta.url).href,
+    cryptomonger: new URL('../art/cryptomonger/reference.png', import.meta.url).href,
+    teahupoo: new URL('../art/teahupoo/reference.png', import.meta.url).href,
+    homosproto: new URL('../art/homosproto/reference.png', import.meta.url).href,
+    pars: new URL('../art/pars/reference.png', import.meta.url).href,
+    accidentallyrich: new URL('../art/accidentallyrich/reference.png', import.meta.url).href,
+    np: new URL('../art/np/reference.png', import.meta.url).href,
+    slabcorn: new URL('../art/slabcorn/reference.png', import.meta.url).href,
+/* FINAL INTAKE PORTRAITS END */
 /* NAMED INTAKE NOV03 PORTRAITS BEGIN */
     frej: new URL('../art/frej/reference.png', import.meta.url).href,
     crippledlover: new URL('../art/crippledlover/reference.png', import.meta.url).href,
@@ -208,7 +224,7 @@ export const originalPortraits:Record<FighterId,string> = {
  spruto:new URL('../art/spruto/reference.png',import.meta.url).href,
  ghostsprotocol:new URL('../art/ghostsprotocol/reference.png',import.meta.url).href,
  tdeth:new URL('../art/tdeth/reference.png',import.meta.url).href,
- vicoo:new URL('../art/vicoo/reference.png',import.meta.url).href,
+ vicoo:new URL('../art/sprotolicious/reference.png',import.meta.url).href,
  chonky:new URL('../art/chonky/reference.png',import.meta.url).href,
  degenpress:new URL('../art/degenpress/reference.png',import.meta.url).href,
  giavannykitchens:new URL('../art/giavannykitchens/reference.png',import.meta.url).href,

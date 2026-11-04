@@ -8,7 +8,8 @@ import { loadCore, read } from './lib/load.mjs';
 
 const { PLAYABLE_FIGHTERS } = await loadCore();
 const manifest = JSON.parse(read('public/portraits/manifest.json'));
-const listed = new Map([...read('src/originalPortraits.ts').matchAll(/^\s*([A-Za-z0-9_$]+)\s*:\s*new URL\('\.\.\/(art\/[^']+)'/gm)].map(m => [m[1], m[2]]));
+const portraitEntries = /^\s*(?:([A-Za-z_$][\w$]*)|["']([\w$-]+)["'])\s*:\s*new URL\('\.\.\/(art\/[^']+)'/gm;
+const listed = new Map([...read('src/originalPortraits.ts').matchAll(portraitEntries)].map(m => [m[1] ?? m[2], m[3]]));
 const root = new URL('../', import.meta.url);
 const missing = [], stale = [];
 for (const id of PLAYABLE_FIGHTERS) {
