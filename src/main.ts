@@ -163,7 +163,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
     try{await storyAnimation.load(storyAnimationPlan(setup.opponent,isStory));}
-    catch(error){selection.setReady(false,'Story animation could not load. Start this encounter again to retry.');console.error(error);return false;}
+    catch(error){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(error);return false;}
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode as Mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}

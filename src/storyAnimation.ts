@@ -76,8 +76,9 @@ export function createStoryAnimation(){
             if(sceneAnchorX===null){
                 const bounds=plan[drawPhase].map(key=>{
                     const cell=manifest[key],direction=facingFor(key,defeatFacing);
-                    const left=(direction===1?cell.x:cell.width-cell.x)*cell.scale;
-                    return {left,right:cell.width*cell.scale-left};
+                    const left=(direction===1?cell.x-cell.left:cell.right-cell.x)*cell.scale;
+                    const right=(direction===1?cell.right-cell.x:cell.x-cell.left)*cell.scale;
+                    return {left,right};
                 });
                 const left=Math.max(...bounds.map(v=>v.left)),right=Math.max(...bounds.map(v=>v.right));
                 sceneAnchorX=id==='nick-juicy'?spec.x*spec.scale:Math.max(left,Math.min(WIDTH-right,x));

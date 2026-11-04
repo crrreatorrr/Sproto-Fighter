@@ -18,7 +18,7 @@
         "nick-flight"
       ],
       "frames": 259,
-      "visible": 13
+      "visible": 1
     },
     {
       "id": "guest07",
@@ -37,7 +37,7 @@
         "mega-woman-growth"
       ],
       "frames": 240,
-      "visible": 12
+      "visible": 2
     },
     {
       "id": "vela",
@@ -49,7 +49,7 @@
         "morelight-exit"
       ],
       "frames": 1488,
-      "visible": 74
+      "visible": 57
     },
     {
       "id": "vaudream",
@@ -59,14 +59,15 @@
         "vmu-black-hole"
       ],
       "frames": 289,
-      "visible": 15
+      "visible": 14
     }
   ],
   "nickIntro": {
     "pause": true,
     "skip": true,
     "retry": true,
-    "combatFrames": 0
+    "combatFrames": 0,
+    "failedLoadRetry": true
   },
   "errors": [],
   "failures": []

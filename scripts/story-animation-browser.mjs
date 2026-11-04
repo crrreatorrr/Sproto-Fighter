@@ -53,7 +53,18 @@ try{
  await page.keyboard.press('Enter');await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='nick-juicy');
  assert.equal((await page.evaluate(()=>window.neonRelay.replay().frames.length)),0);
  assert.equal(before.replay.frames.length,0);
+ // A failed scene load must leave the controller's retry gate usable.
+ const retryContext=await browser.newContext({storageState:await context.storageState()}),retryPage=await retryContext.newPage();
+ await retryPage.route('**/story-animations/nick-juicy.png',route=>route.fulfill({status:404,body:'missing test fixture'}));
+ await retryPage.goto(base);await retryPage.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
+ await retryPage.locator('#story-worlds').click();await retryPage.locator('#journey-actions button').first().click();await retryPage.locator('#journey-actions button').first().click();
+ await retryPage.waitForFunction(()=>document.querySelector('#journey-title').textContent==='This match could not load.');
+ assert.equal(await retryPage.locator('#start').isDisabled(),false);
+ await retryPage.unroute('**/story-animations/nick-juicy.png');await retryPage.locator('#journey-actions button').first().click();
+ await retryPage.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='nick'&&!window.neonRelay.storySnapshot().launching);
+ await retryPage.keyboard.press('Enter');await retryPage.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='nick-juicy');
+ await retryContext.close();
  assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
- writeFileSync('docs/evidence/story-animations-20261104/browser.json',JSON.stringify({playback,nickIntro:{pause:true,skip:true,retry:true,combatFrames:0},errors,failures},null,2)+'\n');
+ writeFileSync('docs/evidence/story-animations-20261104/browser.json',JSON.stringify({playback,nickIntro:{pause:true,skip:true,retry:true,combatFrames:0,failedLoadRetry:true},errors,failures},null,2)+'\n');
  console.log('PASS: all 13 atlases decoded and rendered in Chrome; six bounded scene playlists; actual Nick intro pause, skip, retry and input/replay isolation.');
 }finally{await browser.close();}

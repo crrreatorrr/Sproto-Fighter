@@ -8,7 +8,9 @@
     "fps": 16,
     "x": 620,
     "y": 238,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 0,
+    "right": 849
   },
   "morelight-smoke": {
     "image": "morelight-smoke.png",
@@ -19,7 +21,9 @@
     "fps": 15,
     "x": 160,
     "y": 336,
-    "scale": 1.25
+    "scale": 1.25,
+    "left": 64,
+    "right": 270
   },
   "art-fusion": {
     "image": "art-fusion.png",
@@ -30,7 +34,9 @@
     "fps": 24,
     "x": 145,
     "y": 212,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 13,
+    "right": 368
   },
   "mega-woman-growth": {
     "image": "mega-woman-growth.png",
@@ -41,7 +47,9 @@
     "fps": 24,
     "x": 215,
     "y": 332,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 17,
+    "right": 367
   },
   "vmu-shield": {
     "image": "vmu-shield.png",
@@ -51,8 +59,10 @@
     "frames": 32,
     "fps": 16,
     "x": 320,
-    "y": 211,
-    "scale": 1.45
+    "y": 222,
+    "scale": 1.16,
+    "left": 195,
+    "right": 482
   },
   "nick-mount": {
     "image": "nick-mount.png",
@@ -63,7 +73,9 @@
     "fps": 16,
     "x": 65,
     "y": 198,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 31,
+    "right": 317
   },
   "nick-dragon": {
     "image": "nick-dragon.png",
@@ -74,7 +86,9 @@
     "fps": 18,
     "x": 150,
     "y": 198,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 15,
+    "right": 349
   },
   "nick-flight": {
     "image": "nick-flight.png",
@@ -85,7 +99,9 @@
     "fps": 16,
     "x": 192,
     "y": 198,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 79,
+    "right": 312
   },
   "juicy-robot": {
     "image": "juicy-robot.png",
@@ -96,7 +112,9 @@
     "fps": 16,
     "x": 139,
     "y": 201,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 41,
+    "right": 238
   },
   "morelight-mecha": {
     "image": "morelight-mecha.png",
@@ -107,7 +125,9 @@
     "fps": 16,
     "x": 139,
     "y": 201,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 31,
+    "right": 320
   },
   "vmu-black-hole": {
     "image": "vmu-black-hole.png",
@@ -117,8 +137,10 @@
     "frames": 45,
     "fps": 16,
     "x": 64,
-    "y": 139,
-    "scale": 1.45
+    "y": 172,
+    "scale": 3.33,
+    "left": 27,
+    "right": 341
   },
   "morelight-wizard": {
     "image": "morelight-wizard.png",
@@ -129,7 +151,9 @@
     "fps": 20,
     "x": 126,
     "y": 175,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 50,
+    "right": 202
   },
   "morelight-exit": {
     "image": "morelight-exit.png",
@@ -140,6 +164,8 @@
     "fps": 20,
     "x": 126,
     "y": 175,
-    "scale": 1.45
+    "scale": 1.45,
+    "left": 0,
+    "right": 320
   }
 }
