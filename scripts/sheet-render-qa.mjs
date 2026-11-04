@@ -54,7 +54,7 @@ const gridBodies = all ? bodies : sample;
 const matches = [['highsproto', 'vela'], ['duo', 'sprotosales'], ['sproto3181', 'michael'], ['rivet', 'buddhashadow'], ['theo', 'sproto832']];
 const menuFighters = ['highsproto', 'duo', 'sprotosales', 'sproto3181', 'theo'];
 
-const harness = `<!doctype html><meta charset="utf-8"><canvas id="c"></canvas>
+const harness = `<!doctype html><meta charset="utf-8"><link rel="icon" href="data:,"><canvas id="c"></canvas>
 <script type="module">
 import { ensurePoseAtlases, ensurePosePreviews, drawPoseAtlasFramesForQa, drawSelectionPose, getPoseAtlasLoadStatus, setPoseAtlasQaNudge } from '/src/poseAtlas.ts';
 import { createState, step, cpuInput, ROSTER, bodyAtlasIds } from '/src/core.ts';
@@ -153,11 +153,12 @@ const server = await createServer({
 });
 await server.listen();
 const base = server.resolvedUrls.local[0].replace(/\/$/, '');
-const browser = await chromium.launch();
+const browser = await chromium.launch({executablePath:process.env.CHROME_PATH||(process.platform==='darwin'?'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome':undefined)});
 const open = async query => {
   const page = await browser.newPage();
   const errors = [];
   page.on('pageerror', e => errors.push(String(e)));
+  page.on('response',r=>{if(r.status()>=400)errors.push(`${r.status()} ${r.url()}`);});
   page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
   await page.goto(`${base}/__sheet-render-qa.html${query}`);
   await page.waitForFunction(() => window.ready === true, null, { timeout: 120000 });

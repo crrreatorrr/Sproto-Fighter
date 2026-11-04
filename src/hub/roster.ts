@@ -6,8 +6,8 @@ import type { PlayableFighterId } from '../core';
  * Same rule as the hub's item matrix: a Relic unlocks things in the other games, never in its
  * own. The Tidebreaker Belt is earned here, so it unlocks nothing here.
  *
- * The five Relic fighters are Relic-only: they are left out of the story campaign
- * (storyProgress.campaignForStages), so the hub is the only way to recruit them. Every other
+ * The five Relic fighters remain Hub-only for player recruitment. Captain Green, Sun God
+ * and Pissing Sproto also appear as story guardians; beating them does not grant a Relic. Every other
  * fighter, including the earlier Relic picks (Halloween 2008, $Bitcoin Obama, Big Swole,
  * Bongraker, Sproto Duo), is recruited through the campaign. The CPU may still use any fighter.
  */
@@ -27,7 +27,7 @@ export const RELIC_FIGHTERS: Readonly<Record<string, PlayableFighterId>> = {
 /** Error 333 needs all four Four Lights Relics. */
 export const ALL_RELICS_FIGHTER: PlayableFighterId = 'sproto1870';
 
-/** Fighters only the hub can unlock. The story campaign skips them. */
+/** Fighters only the hub can newly recruit; three can be challenged in the story. */
 export const RELIC_ONLY_FIGHTERS: readonly PlayableFighterId[] = [...Object.values(RELIC_FIGHTERS), ALL_RELICS_FIGHTER];
 
 const RELIC_SOURCES: Readonly<Record<string, Omit<RelicUnlock, 'relic'>>> = {
@@ -98,6 +98,6 @@ export function isFighterAvailable(id:PlayableFighterId, storyUnlocked:boolean, 
 export function fighterLockReason(id:PlayableFighterId, storyUnlocked:boolean, relics:readonly string[]):string|null {
   if(isFighterAvailable(id,storyUnlocked,relics))return null;
   const relic=lockReason(id,relics);
-  if(relic)return relic+' (hub Relic only, not in story mode).';
+  if(relic)return relic+' (hub Relic only for player selection).';
   return 'Defeat this fighter in story mode to recruit them.';
 }

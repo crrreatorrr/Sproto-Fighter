@@ -17,7 +17,7 @@ try {
  const manifest=JSON.parse(readFileSync('public/stages/variations-v2/manifest.json','utf8'));
  const images=stage.STAGES.map(s=>stage.stageImageSource(s.id));
  const installed=readdirSync('public/stages',{recursive:true}).filter(path=>path.endsWith('.png')).map(path=>'/stages/'+path);
- assert.equal(stage.STAGES.length,73);assert.equal(new Set(images).size,73);
+ assert.equal(stage.STAGES.length,121);assert.equal(new Set(images).size,121);
  assert.deepEqual([...images].sort(),installed.sort(),'every installed runtime stage is selectable exactly once');
  for(const location of STORY_LOCATIONS)assert.ok(images.includes(location.image),'missing story scenery '+location.id);
  for(const approved of manifest){
@@ -26,9 +26,9 @@ try {
   assert.equal(createHash('sha256').update(bytes).digest('hex'),approved.sha256,'approved source unchanged');
  }
  const counts=Object.fromEntries(STAGE_ZONES.map(zone=>[zone.id,stagesInZone(zone.id).length]));
- assert.deepEqual(counts,{trenches:9,circuit:13,yacht:9,throne:13,bar:7,verse:9,hatchery:6,ranch:7});
+ assert.deepEqual(counts,{trenches:15,circuit:19,yacht:15,throne:19,bar:13,verse:15,hatchery:12,ranch:13});
  for(const entry of stage.STAGES)assert.ok(stagesInZone(stageZone(entry.id)).some(s=>s.id===entry.id));
- console.log('PASS: 73 unique installed arenas; all 64 story locations and 24 approved panoramas are selectable in eight zones; Ranch has seven choices.');
+ console.log('PASS: 121 unique installed arenas; all 112 story locations and 24 approved panoramas are selectable in eight zones; Ranch has thirteen choices.');
 
  const loads=[],blocked=new Set();
  globalThis.Image=class {
@@ -42,12 +42,12 @@ try {
  };
  const ranch=stagesInZone('ranch').map(s=>s.id);
  await Promise.all([stage.loadStageArt(ranch),stage.loadStageArt(ranch)]);
- assert.equal(loads.length,7,'zone requests deduplicate without preloading every large panorama');
- await stage.loadStageArt(ranch);assert.equal(loads.length,7);
+ assert.equal(loads.length,13,'zone requests deduplicate without preloading every large panorama');
+ await stage.loadStageArt(ranch);assert.equal(loads.length,13);
  const retry='00-trenches-drainage-floodgate',retryUrl=stage.stageImageSource(retry);
  blocked.add(retryUrl);await stage.loadStageArt([retry]);assert.ok(stage.getStageArtStatus().errors[retry]);
  blocked.delete(retryUrl);await stage.loadStageArt([retry]);assert.equal(stage.getStageArtStatus().errors[retry],undefined);
- await stage.loadStageArt();assert.equal(stage.getStageArtStatus().loaded.length,73);assert.deepEqual(stage.getStageArtStatus().errors,{});
+ await stage.loadStageArt();assert.equal(stage.getStageArtStatus().loaded.length,121);assert.deepEqual(stage.getStageArtStatus().errors,{});
  const ctx=()=>new Proxy({calls:[]},{get(o,k){return k in o?o[k]:(...args)=>o.calls.push([k,...args]);},set(o,k,v){o[k]=v;return true;}});
  for(const entry of stage.STAGES){
   stage.setStage('ranch');const preview=ctx();stage.drawStagePreview(preview,entry.id,256,110);
@@ -60,7 +60,7 @@ try {
   await loadStoryLocation(location);const story=ctx();assert.equal(drawStoryLocation(story,location),true);
   assert.equal(story.calls.find(call=>call[0]==='drawImage')[1].url,location.image);
  }
- console.log('PASS: all 73 preview/fight backgrounds match; all 64 story images load; scoped loading deduplicates and retries failed art.');
+ console.log('PASS: all 121 preview/fight backgrounds match; all 112 story images load; scoped loading deduplicates and retries failed art.');
 
  const values=new Map(),progress=createStoryProgress({getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)});
  assert.equal(progress.begin(0),true);assert.equal(progress.win(0,0),true);

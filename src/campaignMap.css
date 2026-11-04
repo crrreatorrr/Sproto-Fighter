@@ -74,3 +74,5 @@
   #journey-dialog .campaign-rival h3{font-size:18px;line-height:1.25}
   #journey-dialog .campaign-rival button{width:100%;flex:0 0 auto;min-height:44px;font-size:13px}
 }
+
+.story-scenery-choice{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}.story-scenery-choice select{max-width:100%;padding:10px;background:#182536;color:#e6edf7;border:1px solid #9c8050}

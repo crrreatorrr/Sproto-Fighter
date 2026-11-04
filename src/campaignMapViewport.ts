@@ -2,7 +2,7 @@
 export function campaignMapViewport(width:number,height:number,zoomPercent=100){
  const availableWidth=Math.max(1,width-24),availableHeight=Math.max(1,height-24);
  const fitWidth=Math.min(availableWidth,availableHeight*16/9);
- const maxZoom=Math.max(400,Math.ceil(3840/fitWidth*4)*25);
+ const maxZoom=Math.max(400,Math.ceil(7680/fitWidth*4)*25);
  const zoom=Math.max(100,Math.min(maxZoom,zoomPercent));
  const mapWidth=fitWidth*zoom/100;
  return {fitWidth,maxZoom,zoom,width:mapWidth,height:mapWidth*9/16,

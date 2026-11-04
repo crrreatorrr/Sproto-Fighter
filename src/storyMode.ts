@@ -1,6 +1,7 @@
+import {storySceneryChoices,setStorySceneryChoice,getStorySceneryChoice} from './stageVariants';
 import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
 import {ROSTER,type PlayableFighterId} from './core';
-import {STORY_ENCOUNTERS,STORY_OPPONENTS,storyProgress,type Encounter,type StoryProgress} from './storyProgress';
+import {STORY_ENCOUNTERS,STORY_OPPONENTS,storyProgress,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
 
 type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
 /** Real progression; chapter scenes remain placeholders pending script approval. */
@@ -12,6 +13,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     let view:'worlds'|'levels'|'scene'|'result'='worlds';
     let back:()=>void=()=>{};
     const total=STORY_ENCOUNTERS.length;
+    const recruitNote=(encounter:Encounter)=>encounter.opponents.every(isStoryRecruitable)?'Victory recruits each defeated fighter.':'Relic guardian: victory advances the story; player selection still requires the matching Hub Relic.';
     const names=(encounter:Encounter)=>encounter.opponents.map(id=>ROSTER[id].name).join(' → ');
     const gauntletNote=(encounter:Encounter)=>encounter.opponents.length>1?`${names(encounter)}. Health refills between bouts. Beat both without losing, restarting or leaving; the second bout has no saved checkpoint. `:'';
     const storageNote=()=>progress.snapshot().persistent?'Progress saves on this browser.':'Browser saving is unavailable. Progress lasts only while this page stays open.';
@@ -28,7 +30,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         progress.sync();
         const selectedFighter=hooks.selectedFighter?.();
         if(selectedFighter&&!(hooks.canPlayFighter?.(selectedFighter)??progress.isUnlocked(selectedFighter))){
-            $('journey-copy').textContent=`${ROSTER[selectedFighter].name} is a locked P1 preview. Return to the arena menu and choose an unlocked P1 fighter. Defeat ${ROSTER[selectedFighter].name} in story mode to recruit them.`;
+            $('journey-copy').textContent=`${ROSTER[selectedFighter].name} is a locked P1 preview. Return to the arena menu and choose an unlocked P1 fighter. ${isStoryRecruitable(selectedFighter)?'Defeat this fighter in story mode to recruit them.':'Player selection requires this fighter’s Hub Relic.'}`;
             return;
         }
         if(encounter){
@@ -48,20 +50,30 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
             back=()=>selector(true);open();console.warn(error);
         }finally{launching=false;}
     }
+    function sceneryPicker(encounter:Encounter){
+        const label=document.createElement('label');label.textContent='Story scenery ';label.className='story-scenery-choice';
+        const select=document.createElement('select');select.setAttribute('aria-label','Story scenery');
+        for(const item of [{id:'',title:'Follow the story route'},...storySceneryChoices(encounter.stage)]){
+            const option=document.createElement('option');option.value=item.id;option.textContent=item.title;select.append(option);
+        }
+        select.value=getStorySceneryChoice(encounter.stage);select.onchange=()=>setStorySceneryChoice(encounter.stage,select.value);
+        label.append(select);$('journey-content').append(label);
+    }
     function scene(encounter:Encounter,between=false){
         view='scene';const level=STAGES.find(s=>s.id===encounter.stage)!;
         $('journey-kicker').textContent='PLACEHOLDER CUTSCENE / MAJOR STAGE';
         $('journey-title').textContent=between?`Next stop: ${level.name}`:encounter.gauntlet==='final'?`Final gauntlet: ${level.name}`:encounter.index===0?`${level.name}: the journey begins`:`Return to ${level.name}`;
         $('journey-copy').textContent=`Chapter story and cutscene script pending approval. ${gauntletNote(encounter)}Next: encounter ${encounter.index+1} of ${total} against ${names(encounter)}. ${storageNote()}`;
         $('journey-content').innerHTML=`<div class="story-slate" style="--stage-accent:${level.accent}"><span>MAJOR STAGE ${encounter.chapter}</span><strong>${level.theme}</strong><p>CUTSCENE PLACEHOLDER / SCRIPT PENDING APPROVAL</p></div>`;
+        sceneryPicker(encounter);
         buttons([{label:`Fight ${ROSTER[encounter.opponent].name} →`,run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);
         back=()=>selector(true);open();
     }
     function encounterPreview(encounter:Encounter){
         view='result';$('journey-kicker').textContent=`STORY / ENCOUNTER ${encounter.index+1} OF ${total}`;
         $('journey-title').textContent=`Challenge ${names(encounter)}.`;
-        $('journey-copy').textContent=`${gauntletNote(encounter)}Win to recruit each defeated fighter and advance toward Verse Gate. ${storageNote()}`;
-        $('journey-content').replaceChildren();
+        $('journey-copy').textContent=`${gauntletNote(encounter)}${recruitNote(encounter)} Advance toward Verse Gate. ${storageNote()}`;
+        $('journey-content').replaceChildren();sceneryPicker(encounter);
         buttons([{label:'Start encounter →',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);back=()=>selector(true);open();
     }
     const firstInRegion=(encounter:Encounter)=>encounter.index===0||STORY_ENCOUNTERS[encounter.index-1].stage!==encounter.stage;
@@ -71,7 +83,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         view=story?'worlds':'levels';modal.classList.toggle('story-map-open',story);const save=progress.snapshot();
         $('journey-kicker').textContent=story?`STORY / ${save.cleared.length} OF ${total} ENCOUNTERS CLEARED`:'FREE PLAY / LEVEL SELECT';
         $('journey-title').textContent=story?'The road to Verse Gate.':'Pick a place to fight.';
-        $('journey-copy').textContent=story?`${STORY_OPPONENTS.length} distinct rivals across ${total} encounters. Victory recruits each defeated fighter. Sproto Ranch is the middle chapter. The final three zones are HPOS10i Club (Bar), The Hatchery, then Verse Gate. The art duo closes the Hatchery; Nick then Juicy lead into the Morelight and VMU finale at Verse Gate. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
+        $('journey-copy').textContent=story?`${STORY_OPPONENTS.length} distinct rivals across ${total} encounters. Victories recruit story fighters; the three Relic guardians keep their Hub-only player unlocks. Sproto Ranch is the middle chapter. The final three zones are HPOS10i Club (Bar), The Hatchery, then Verse Gate. The art duo closes the Hatchery; Nick then Juicy lead into the Morelight and VMU finale at Verse Gate. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
         const content=$('journey-content');content.replaceChildren();const grid=document.createElement('div');grid.className='world-grid'+(story?' campaign-chapter-list':'');content.append(grid);
         for(const level of story?worlds:STAGES){
             const encounters=STORY_ENCOUNTERS.filter(e=>e.stage===level.id),first=encounters[0],last=encounters.at(-1);
@@ -104,8 +116,8 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
             if(finishedWave+1<encounter.opponents.length){void launch(encounter.stage,encounter,finishedWave+1);return true;}
             const save=progress.snapshot(),next=save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
             if(next&&next.stage!==encounter.stage){scene(next,true);return true;}
-            $('journey-title').textContent=save.completed?'The route is complete. God Mode unlocked!':`${names(encounter)} recruited!`;
-            $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode stays unlocked as the roster grows. Ending cutscene pending script approval. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. Each defeated fighter is available as your fighter. ${storageNote()}`;
+            $('journey-title').textContent=save.completed?'The route is complete. God Mode unlocked!':`${names(encounter)} ${encounter.opponents.every(isStoryRecruitable)?'recruited':'defeated'}!`;
+            $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode stays unlocked as the roster grows. Ending cutscene pending script approval. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. ${recruitNote(encounter)} ${storageNote()}`;
             buttons(next?[{label:`Next: ${ROSTER[next.opponent].name} →`,run:()=>{void launch(next.stage,next);}},{label:'Story route',run:()=>selector(true)}]:[{label:'Story route',run:()=>selector(true)},{label:'Free-play levels',run:()=>selector(false)}]);
         }else{
             $('journey-title').textContent=result===2?'Draw — try this encounter again.':'Retry this encounter.';

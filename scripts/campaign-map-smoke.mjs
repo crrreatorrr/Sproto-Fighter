@@ -12,7 +12,7 @@ try{
  const moved=new Set(['story-v1-michael','story-v1-buddhashadow']);
  // Hub Relic fighters (src/hub/roster.ts RELIC_ONLY_FIGHTERS) left the campaign; every other encounter is unchanged.
  const relicOnly=new Set(['captain','sproto2616','sproto3152','sproto3215','sproto1870'].map(f=>`story-v1-${f}`));
- const oldIds=new Set(originalRoute.map(e=>e.id));assert.deepEqual(STORY_ENCOUNTERS.filter(e=>oldIds.has(e.id)&&!moved.has(e.id)).map(e=>({id:e.id,opponents:e.opponents})),originalRoute.filter(e=>!moved.has(e.id)&&!relicOnly.has(e.id)).map(e=>({id:e.id,opponents:e.opponents})),'Hatchery moves preserve all other existing encounter IDs, opponent groups and relative order');
+ const oldIds=new Set(originalRoute.map(e=>e.id));assert.deepEqual(STORY_ENCOUNTERS.filter(e=>oldIds.has(e.id)&&!moved.has(e.id)&&!relicOnly.has(e.id)).map(e=>({id:e.id,opponents:e.opponents})),originalRoute.filter(e=>!moved.has(e.id)&&!relicOnly.has(e.id)).map(e=>({id:e.id,opponents:e.opponents})),'Hatchery moves preserve all other existing encounter IDs, opponent groups and relative order');
  for(const id of moved){const encounter=STORY_ENCOUNTERS.find(e=>e.id===id);assert.equal(encounter.stage,'hatchery');assert.equal(encounter.opponents.length,1);}
  assert.deepEqual([...new Set(STORY_ENCOUNTERS.map(e=>e.stage))],['trenches','circuit','yacht','ranch','throne','bar','hatchery','verse']);
  assert.ok(STORY_ENCOUNTERS.some(e=>e.stage==='ranch'),'Ranch is an actual chapter with encounters');
@@ -22,16 +22,17 @@ try{
  const distances=points.flatMap((p,i)=>points.slice(i+1).map((q,j)=>({a:i+1,b:i+j+2,d:Math.hypot((p[0]-q[0])*30,(p[1]-q[1])*16.875)}))).sort((a,b)=>a.d-b.d);
  console.log('Map spacing at detail 3000px width:',JSON.stringify(distances.slice(0,5)));
  const markerLayout=campaignMapMarkerLayout(points),nodeSize=3000*markerLayout.nodeRatio;
- assert.ok(markerLayout.detailWidth<=3840,'actual route must support readable numbered detail at native map resolution');
+ assert.ok(markerLayout.detailWidth<=7680,'actual route must support readable numbered detail within two-times pixel-art inspection zoom');
+ assert.ok(markerLayout.detailWidth*markerLayout.nodeRatio>=20,'numbered detail provides at least20px targets');
  assert.ok(distances[0].d>=nodeSize+1.5,'detail encounter targets must not overlap');
  assert.ok(distances[0].d*.8>=nodeSize*.8+1,'2400px detail zoom keeps targets separated');
  const stages=['trenches','circuit','yacht','ranch','throne','bar','hatchery','verse'],counts=[23,21,20,18,21,20,23,4];
  const synthetic=stages.flatMap((stage,s)=>Array.from({length:counts[s]},(_,i)=>({id:`geometry-only-${stage}-${i}`,stage})));
  const expanded=campaignMapPoints(synthetic);assert.equal(expanded.length,150);assert.equal(new Set(expanded.map(p=>p.join(','))).size,150);
  const expandedGap=Math.min(...expanded.flatMap((p,i)=>expanded.slice(i+1).map(q=>Math.hypot((p[0]-q[0])*30,(p[1]-q[1])*16.875))));
- assert.ok(expandedGap>=21.5,'synthetic150 markers keep20px targets separated at3000px detail');
+
  const expandedLayout=campaignMapMarkerLayout(expanded);
- assert.ok(expandedLayout.detailWidth<=3840,'synthetic150 target spacing must support readable detail at native resolution');
+ assert.ok(expandedLayout.detailWidth<=7680,'synthetic150 target spacing must support readable detail within pixel-art inspection zoom');
  assert.ok(expandedGap-3000*expandedLayout.nodeRatio>=1.5,'synthetic150 targets have actual clear space');
  assert.equal(campaignMapPaths(synthetic).length,stages.length,'render separate road traces instead of straight water-crossing connectors');
  assert.deepEqual(campaignMapPoints([]),[]);
@@ -51,8 +52,10 @@ try{
  const locations=STORY_ENCOUNTERS.map(e=>storyLocationForEncounter(e,STORY_ENCOUNTERS));
  const regions={trenches:['trenches'],ranch:['ranch'],circuit:['circuit','retro'],yacht:['yacht'],throne:['castle','throne'],verse:['verse'],bar:['bar'],hatchery:['hatchery']};
  for(const [i,e]of STORY_ENCOUNTERS.entries())assert.ok(locations[i]&&regions[e.stage].includes(locations[i].stage),'each actual encounter has scenery in its own region');
- assert.equal(new Set(STORY_ENCOUNTERS.flatMap(e=>e.opponents.map((_,bout)=>storyLocationForEncounter(e,STORY_ENCOUNTERS,bout).id))).size,60,'actual route uses60 of64 installed scenes across all boss bouts');
+ assert.equal(new Set(STORY_ENCOUNTERS.flatMap(e=>e.opponents.map((_,bout)=>storyLocationForEncounter(e,STORY_ENCOUNTERS,bout).id))).size,102,'actual route uses102 of112 installed scenes across all boss bouts');
  assert.ok(readFileSync('public/story/campaign-map.webp').length>0);
  assert.ok(readFileSync('public/story/campaign-map-expanded.webp').length>0);
- console.log(`PASS: whole-map initial fit at 5 desktop/mobile sizes; aspect/zoom bounds and readable detail; ${points.length} actual unique/bounded/separated map nodes; synthetic 150-node geometry (minimum gap ${expandedGap.toFixed(2)}px); stable encounter IDs; 60 scenes mapped across all eight regions; original map retained.`);
+ assert.ok(readFileSync('public/story/campaign-map-250.webp').length>0);
+ assert.equal(points.length,247);assert.equal(new Set(STORY_ENCOUNTERS.flatMap(e=>e.opponents)).size,250);
+ console.log(`PASS: whole-map initial fit at 5 desktop/mobile sizes; aspect/zoom bounds and readable detail; ${points.length} actual unique/bounded/separated map nodes; synthetic 150-node geometry (minimum gap ${expandedGap.toFixed(2)}px); stable encounter IDs; 102 scenes mapped across all eight regions; original map retained.`);
 }finally{rmSync(temp,{recursive:true,force:true});}

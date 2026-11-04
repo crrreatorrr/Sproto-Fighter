@@ -1,0 +1,28 @@
+{
+  "jobId": "b90aad22-256d-487a-bb37-026c97b9af25",
+  "sourceUrl": "https://d8j0ntlcm91z4.cloudfront.net/user_3EhTMTxw0fkqxeeNVPZRAKwzj8d/hf_20261104_142022_b90aad22-256d-487a-bb37-026c97b9af25.png",
+  "referenceJobId": "effef71b-52dd-4453-bae8-c1a0a7e3ac59",
+  "estimatedCredits": 4.25,
+  "width": 3840,
+  "height": 2160,
+  "params": {
+    "model": "gpt_image_2_5",
+    "variant": "flare",
+    "quality": "high",
+    "resolution": "4k",
+    "aspect_ratio": "16:9",
+    "background": "opaque",
+    "count": 1,
+    "use_unlim": false,
+    "medias": [
+      {
+        "role": "image",
+        "value": "effef71b-52dd-4453-bae8-c1a0a7e3ac59"
+      }
+    ],
+    "prompt": "Expand the existing Sproto Fighter campaign world in the reference into a larger, more explorable high-quality 4K pixel-art map. Use the reference as the strong visual and architectural guide. This is a meaningful extension of that same world, not a different map and not merely an upscale. Preserve the distinctive blue nighttime sea, sheer layered island cliffs, glowing waterfalls, pine forests, snowy peaks, golden dirt roads, stone bridges, neon cyan/violet city, Bitcoin yacht marina, warm farm/ranch, purple fairytale castle, amber-lit bar/club, organic alien Hatchery and the luminous blue Verse portal. Keep each major landmark unique and recognizable; do not clone them.\nWiden the land terraces and broaden the road network, revealing roughly one-third more traversable countryside, coastal settlements, forest switchbacks, mountain passes and stone causeways between landmarks. The image should feel like the camera has pulled back to reveal a richer surrounding world while preserving the existing world\u2019s coherence. Eight readable areas in campaign order with abundant road space for the game to place 250 rival fights: 1) Trenches and rural villages in the lower-left and far-left; 2) sweeping neon city in the mid-left; 3) yacht marina/Bitcoin harbor in the central area; 4) large Sproto Ranch with farmhouses, fenced paddocks and fields in the lower-right; 5) royal castle/courtyards in the upper-middle; 6) HPOS10i club/bar on a distinct right-middle peninsula; 7) a separate alien Hatchery island above the club and just left of the portal; 8) final Verse Gate on the far upper-right floating island. Give the Hatchery and Verse Gate their own distinctly separated approach roads. Keep the castle, club, ranch and marina recognizable in approximately their original positions. Build coherent roads that remain on land and cross water only by visible bridges. Long, generously spaced winding path sections and clear open ground around the eight landmarks are essential so game UI markers can stay readable. Avoid extremely tight knots of roads, excessive empty sea, or dense clutter directly on the paths.\nMatch the reference\u2019s deliberate, highly detailed isometric 16-bit pixel-art technique with crisp pixel clusters and beautifully shaded stone, water and vegetation. Rich twilight blues, cyan waterfalls, warm amber lights, purple nebula and luminous blue portal; strong readable silhouettes, attractive terrain variety and consistent elevated isometric perspective. Keep the complete world within the canvas with comfortable edge margins. No UI, no buttons, no route dots, no numbers, no labels, no words, no pasted characters, no border, no photorealism, no painterly blur. The game will overlay the real encounter markers separately."
+  },
+  "runtimeAsset": "public/story/campaign-map-250.webp",
+  "notes": "Existing map used as visual reference with user authorization to spend credits. Original maps retained. Paths traced on a 1200x675 review of the new image.",
+  "runtimeSha256": "55ad356fb2dc2255b902dde04b4c7ea25f1d6931918db8609b563f4454ea8c2b"
+}

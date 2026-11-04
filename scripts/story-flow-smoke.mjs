@@ -48,6 +48,7 @@ try {
     get innerHTML(){return this.html??'';}
     replaceChildren(...nodes){this.children=nodes;this.html='';}
     append(...nodes){this.children.push(...nodes);}
+    setAttribute(name,value){this[name]=value;}
     showModal(){assert.equal(this.open,false);this.open=true;}
     close(){this.open=false;}
     addEventListener(event,fn){this.events[event]=fn;}
@@ -197,7 +198,7 @@ try {
         assert.ok(t.progress.isCleared(encounter.index));if(encounter.index<TOTAL-1){await t.action(0);await flush();}
       }
       const restored=createStoryProgress(t.disk);assert.equal(restored.snapshot().completed,true);assert.equal(restored.snapshot().nextIndex,null);assert.equal(restored.snapshot().godModeUnlocked,true);
-      for(const id of STORY_ENCOUNTERS.flatMap(e=>e.opponents))assert.ok(restored.isUnlocked(id),id);
+      for(const id of STORY_ENCOUNTERS.flatMap(e=>e.opponents))assert.equal(restored.isUnlocked(id),progressModule.isStoryRecruitable(id),id);
       outcomes.push(progressView(restored));
       const completed=progressView(t.progress);await t.begin();assert.equal(t.story.snapshot().encounter.index,0);await finishWave(t);
       assert.deepEqual(progressView(t.progress),completed,'replaying a cleared encounter retains the completion reward and all recruits');

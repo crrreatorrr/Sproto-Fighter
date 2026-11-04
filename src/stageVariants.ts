@@ -499,18 +499,77 @@ export const STORY_LOCATIONS:readonly StoryLocation[]=[
   {"id":"ranch-orchard","stage":"ranch","title":"Dawn Orchard","image":"/stages/higgsfield/ranch-orchard.png","width":1280,"height":720},
   {"id":"ranch-windmill","stage":"ranch","title":"Stormwind Mill","image":"/stages/higgsfield/ranch-windmill.png","width":1280,"height":720},
   {"id":"ranch-creek","stage":"ranch","title":"Moonlit Creek Crossing","image":"/stages/higgsfield/ranch-creek.png","width":1280,"height":720},
+  // Approved November 4 expansion; runtime dimensions match the arena canvas.
+  {"id":"nov04-trenches-1","stage":"trenches","title":"Copper Dawn","image":"/stages/nov04/nov04-trenches-1.png","width":1280,"height":720},
+  {"id":"nov04-trenches-2","stage":"trenches","title":"Violet Monsoon","image":"/stages/nov04/nov04-trenches-2.png","width":1280,"height":720},
+  {"id":"nov04-trenches-3","stage":"trenches","title":"Verdant Reclamation","image":"/stages/nov04/nov04-trenches-3.png","width":1280,"height":720},
+  {"id":"nov04-trenches-4","stage":"trenches","title":"Ember Shift","image":"/stages/nov04/nov04-trenches-4.png","width":1280,"height":720},
+  {"id":"nov04-trenches-5","stage":"trenches","title":"Winter Floodwall","image":"/stages/nov04/nov04-trenches-5.png","width":1280,"height":720},
+  {"id":"nov04-trenches-6","stage":"trenches","title":"Cobalt Blackout","image":"/stages/nov04/nov04-trenches-6.png","width":1280,"height":720},
+  {"id":"nov04-circuit-1","stage":"circuit","title":"Roseglass Commute","image":"/stages/nov04/nov04-circuit-1.png","width":1280,"height":720},
+  {"id":"nov04-circuit-2","stage":"circuit","title":"Jade Rain District","image":"/stages/nov04/nov04-circuit-2.png","width":1280,"height":720},
+  {"id":"nov04-circuit-3","stage":"circuit","title":"Amber Data Exchange","image":"/stages/nov04/nov04-circuit-3.png","width":1280,"height":720},
+  {"id":"nov04-circuit-4","stage":"circuit","title":"Ultraviolet Overpass","image":"/stages/nov04/nov04-circuit-4.png","width":1280,"height":720},
+  {"id":"nov04-circuit-5","stage":"circuit","title":"Pearl Cloud Terminal","image":"/stages/nov04/nov04-circuit-5.png","width":1280,"height":720},
+  {"id":"nov04-circuit-6","stage":"circuit","title":"Crimson Power Grid","image":"/stages/nov04/nov04-circuit-6.png","width":1280,"height":720},
+  {"id":"nov04-yacht-1","stage":"yacht","title":"Apricot Departure","image":"/stages/nov04/nov04-yacht-1.png","width":1280,"height":720},
+  {"id":"nov04-yacht-2","stage":"yacht","title":"Sapphire Squall","image":"/stages/nov04/nov04-yacht-2.png","width":1280,"height":720},
+  {"id":"nov04-yacht-3","stage":"yacht","title":"Coral Horizon","image":"/stages/nov04/nov04-yacht-3.png","width":1280,"height":720},
+  {"id":"nov04-yacht-4","stage":"yacht","title":"Seafoam Lagoon","image":"/stages/nov04/nov04-yacht-4.png","width":1280,"height":720},
+  {"id":"nov04-yacht-5","stage":"yacht","title":"Silver Moon Berth","image":"/stages/nov04/nov04-yacht-5.png","width":1280,"height":720},
+  {"id":"nov04-yacht-6","stage":"yacht","title":"Golden Regatta Club","image":"/stages/nov04/nov04-yacht-6.png","width":1280,"height":720},
+  {"id":"nov04-ranch-1","stage":"ranch","title":"Lavender Hayfields","image":"/stages/nov04/nov04-ranch-1.png","width":1280,"height":720},
+  {"id":"nov04-ranch-2","stage":"ranch","title":"Emerald Rain Paddock","image":"/stages/nov04/nov04-ranch-2.png","width":1280,"height":720},
+  {"id":"nov04-ranch-3","stage":"ranch","title":"Russet Harvest Yard","image":"/stages/nov04/nov04-ranch-3.png","width":1280,"height":720},
+  {"id":"nov04-ranch-4","stage":"ranch","title":"Frostblue Homestead","image":"/stages/nov04/nov04-ranch-4.png","width":1280,"height":720},
+  {"id":"nov04-ranch-5","stage":"ranch","title":"Honeywind Pasture","image":"/stages/nov04/nov04-ranch-5.png","width":1280,"height":720},
+  {"id":"nov04-ranch-6","stage":"ranch","title":"Moonflower Stable","image":"/stages/nov04/nov04-ranch-6.png","width":1280,"height":720},
+  {"id":"nov04-throne-1","stage":"throne","title":"Ruby Coronation Hall","image":"/stages/nov04/nov04-throne-1.png","width":1280,"height":720},
+  {"id":"nov04-throne-2","stage":"throne","title":"Azure Snow Court","image":"/stages/nov04/nov04-throne-2.png","width":1280,"height":720},
+  {"id":"nov04-throne-3","stage":"throne","title":"Jade Relay Sanctum","image":"/stages/nov04/nov04-throne-3.png","width":1280,"height":720},
+  {"id":"nov04-throne-4","stage":"throne","title":"Rose Quartz Battlement","image":"/stages/nov04/nov04-throne-4.png","width":1280,"height":720},
+  {"id":"nov04-throne-5","stage":"throne","title":"Amber Armory Vault","image":"/stages/nov04/nov04-throne-5.png","width":1280,"height":720},
+  {"id":"nov04-throne-6","stage":"throne","title":"Amethyst Eclipse Terrace","image":"/stages/nov04/nov04-throne-6.png","width":1280,"height":720},
+  {"id":"nov04-bar-1","stage":"bar","title":"Turquoise Afterhours","image":"/stages/nov04/nov04-bar-1.png","width":1280,"height":720},
+  {"id":"nov04-bar-2","stage":"bar","title":"Papaya Sunset Patio","image":"/stages/nov04/nov04-bar-2.png","width":1280,"height":720},
+  {"id":"nov04-bar-3","stage":"bar","title":"Magenta Vinyl Room","image":"/stages/nov04/nov04-bar-3.png","width":1280,"height":720},
+  {"id":"nov04-bar-4","stage":"bar","title":"Sage Morning Courtyard","image":"/stages/nov04/nov04-bar-4.png","width":1280,"height":720},
+  {"id":"nov04-bar-5","stage":"bar","title":"Indigo Lantern Balcony","image":"/stages/nov04/nov04-bar-5.png","width":1280,"height":720},
+  {"id":"nov04-bar-6","stage":"bar","title":"Copper Last Call","image":"/stages/nov04/nov04-bar-6.png","width":1280,"height":720},
+  {"id":"nov04-hatchery-1","stage":"hatchery","title":"Aquamarine Broodpool","image":"/stages/nov04/nov04-hatchery-1.png","width":1280,"height":720},
+  {"id":"nov04-hatchery-2","stage":"hatchery","title":"Amber Chrysalis Garden","image":"/stages/nov04/nov04-hatchery-2.png","width":1280,"height":720},
+  {"id":"nov04-hatchery-3","stage":"hatchery","title":"Violet Spore Cathedral","image":"/stages/nov04/nov04-hatchery-3.png","width":1280,"height":720},
+  {"id":"nov04-hatchery-4","stage":"hatchery","title":"Pearl Molting Grotto","image":"/stages/nov04/nov04-hatchery-4.png","width":1280,"height":720},
+  {"id":"nov04-hatchery-5","stage":"hatchery","title":"Crimson Root Chamber","image":"/stages/nov04/nov04-hatchery-5.png","width":1280,"height":720},
+  {"id":"nov04-hatchery-6","stage":"hatchery","title":"Mint Starlit Nursery","image":"/stages/nov04/nov04-hatchery-6.png","width":1280,"height":720},
+  {"id":"nov04-verse-1","stage":"verse","title":"Golden Nebula Causeway","image":"/stages/nov04/nov04-verse-1.png","width":1280,"height":720},
+  {"id":"nov04-verse-2","stage":"verse","title":"Iceblue Event Horizon","image":"/stages/nov04/nov04-verse-2.png","width":1280,"height":720},
+  {"id":"nov04-verse-3","stage":"verse","title":"Scarlet Comet Observatory","image":"/stages/nov04/nov04-verse-3.png","width":1280,"height":720},
+  {"id":"nov04-verse-4","stage":"verse","title":"Opal Aurora Bridge","image":"/stages/nov04/nov04-verse-4.png","width":1280,"height":720},
+  {"id":"nov04-verse-5","stage":"verse","title":"Emerald Dimensional Ruins","image":"/stages/nov04/nov04-verse-5.png","width":1280,"height":720},
+  {"id":"nov04-verse-6","stage":"verse","title":"Violet Final Threshold","image":"/stages/nov04/nov04-verse-6.png","width":1280,"height":720},
 ];
 
 const regionOrder:Partial<Record<StageId,readonly number[]>>={
- trenches:[0,1,2,24,25,38,39,40],
- ranch:[21,22,23,61,62,63],
- circuit:[3,5,4,8,6,7,26,27,41,42,43],
- yacht:[9,10,11,28,29,44,45,46],
- throne:[15,16,17,12,13,14,30,31,47,48,49],
- verse:[18,19,20,34,35,53,54,55],
- bar:[59,32,33,50,51,52,60],
- hatchery:[36,37,56,57,58],
+ trenches:[0,1,2,24,25,38,39,40,64,65,66,67,68,69],
+ ranch:[21,22,23,61,62,63,82,83,84,85,86,87],
+ circuit:[3,5,4,8,6,7,26,27,41,42,43,70,71,72,73,74,75],
+ yacht:[9,10,11,28,29,44,45,46,76,77,78,79,80,81],
+ throne:[15,16,17,12,13,14,30,31,47,48,49,88,89,90,91,92,93],
+ verse:[18,19,20,34,35,53,54,55,106,107,108,109,110,111],
+ bar:[59,32,33,50,51,52,60,94,95,96,97,98,99],
+ hatchery:[36,37,56,57,58,100,101,102,103,104,105],
 };
+/** Session-only scenery choice never changes the encounter, combat stage or save. */
+const sceneryChoices=new Map<StageId,string>();
+export const storySceneryChoices=(stage:StageId)=>STORY_LOCATIONS.filter(location=>location.stage===stage);
+export function setStorySceneryChoice(stage:StageId,id:string){
+ if(!id){sceneryChoices.delete(stage);return;}
+ if(!storySceneryChoices(stage).some(location=>location.id===id))throw new Error('Scenery does not belong to this story zone');
+ sceneryChoices.set(stage,id);
+}
+export const getStorySceneryChoice=(stage:StageId)=>sceneryChoices.get(stage)??'';
+
 /** Scenery selection never reorders opponents or changes a saved encounter ID.
  * Contiguous location blocks make travel legible instead of randomizing backdrops.
  * Every story zone has themed locations, including Bar and Hatchery. */
@@ -527,6 +586,8 @@ export function storyLocationForEncounter(
  const count=(e:typeof local[number])=>e.opponents?.length??1;
  const total=local.reduce((sum,e)=>sum+count(e),0);
  const offset=local.slice(0,position).reduce((sum,e)=>sum+count(e),0)+bout;
+ const chosen=sceneryChoices.get(encounter.stage);
+ if(chosen)return STORY_LOCATIONS.find(location=>location.id===chosen)??null;
  const slot=total>=pool.length?Math.floor(offset*pool.length/total):
      total===1?0:Math.round(offset*(pool.length-1)/(total-1));
  return STORY_LOCATIONS[pool[Math.min(pool.length-1,slot)]];

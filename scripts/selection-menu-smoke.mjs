@@ -61,7 +61,7 @@ check('zone selection filters variations and preserves launch identity',()=>{
 
 check('all 24 approved story panoramas are selectable, including the three new Ranch maps',()=>{
  const approved=JSON.parse(read('public/stages/variations-v2/manifest.json'));
- assert.equal(stages.length,73);
+ assert.equal(stages.length,121);
  for(const item of approved){
   const zone=groups.stageZone(item.id);zoneButtons().find(button=>button.dataset.zone===zone).click();
   const button=visibleStages().find(button=>button.dataset.stage===item.id);assert.ok(button,item.id);
@@ -69,7 +69,7 @@ check('all 24 approved story panoramas are selectable, including the three new R
   assert.equal(currentZone().dataset.zone,zone);assert.equal(button.getAttribute('aria-pressed'),'true');
  }
  zoneButtons().find(button=>button.dataset.zone==='ranch').click();
- assert.equal(visibleStages().length,7);assert.equal($('zone-stage-count').textContent,'7 STAGES');
+ assert.equal(visibleStages().length,13);assert.equal($('zone-stage-count').textContent,'13 STAGES');
  for(const button of visibleStages()){button.focus();menuPress([0]);assert.equal(menu.getSetup().stage,button.dataset.stage);menuPress([1]);assert.equal(document.activeElement,currentZone());}
  menu.setSetup({stage:'ranch'});
 });

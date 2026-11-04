@@ -14,9 +14,9 @@ try{
  const req=createRequire(import.meta.url),story=req(join(temp,'storyProgress.js'));
  const {PLAYABLE_FIGHTERS,isPairedFighter,createState,step,A}=req(join(temp,'core.js'));
  const {STORY_STAGE_IDS}=req(join(temp,'stage.js'));
- // Hub Relic fighters are recruited only through hub Relics, never as story rivals.
+ // Three curated guardians fight in story; all five retain Hub-only player recruitment.
  const RELIC_ONLY_FIGHTERS=story.RELIC_ONLY_RECRUITS;
- const inCampaign=f=>!STARTER_FIGHTERS.includes(f)&&!RELIC_ONLY_FIGHTERS.includes(f);
+ const inCampaign=f=>story.CAMPAIGN_RIVAL_IDS.includes(f);
  const relicCount=registry=>registry.filter(f=>RELIC_ONLY_FIGHTERS.includes(f)).length;
  const {campaignForStages,createStoryProgress,STORY_ENCOUNTERS,STORY_OPPONENTS,STARTER_FIGHTERS,STORY_ROSTER_COUNTS,CAMPAIGN_RECRUITS,STORY_SAVE_KEY,PREVIOUS_STORY_SAVE_KEY,LEGACY_STORY_SAVE_KEY,PREVIOUS_STORY_OPPONENTS,LEGACY_STORY_OPPONENTS}=story;
  const disk=(initial={})=>{const values=new Map(Object.entries(initial));return {getItem:key=>values.get(key)??null,setItem:(key,value)=>values.set(key,value)};};
@@ -28,7 +28,7 @@ try{
  function verifyRoute(registry,route){
   const opponents=route.flatMap(e=>e.opponents),expected=registry.filter(inCampaign);
   assert.equal(new Set(opponents).size,opponents.length);assert.deepEqual(new Set(opponents),new Set(expected));
-  assert.equal(route.length,registry.length-5-relicCount(registry));assert.equal(new Set(route.map(e=>e.id)).size,route.length);
+  assert.equal(route.length,expected.length-3);assert.equal(new Set(route.map(e=>e.id)).size,route.length);
   for(const [index,e] of route.entries()){assert.equal(e.index,index);assert.equal(e.opponent,e.opponents[0]);assert.ok(e.opponents.length===1||e.opponents.length===2);}
   assert.deepEqual(route.at(-4).opponents,['rivet']);assert.deepEqual(route.at(-3).opponents,['sproto865','sproto943']);assert.deepEqual(route.at(-2).opponents,['nick','guest07']);assert.deepEqual(route.at(-1).opponents,['vela','vaudream']);
   assert.equal(route.at(-3).gauntlet,'art');assert.equal(route.at(-3).stage,'hatchery');assert.equal(route.at(-2).gauntlet,'nick-juicy');assert.equal(route.at(-2).stage,'verse');assert.equal(route.at(-1).gauntlet,'final');assert.equal(route.at(-1).stage,'verse');
@@ -47,7 +47,7 @@ try{
 
  check('registered baseline102 and current roster each produce exact distinct opponents and grouped boss nodes',()=>{
   assert.equal(baseline.length,102);verifyRoute(baseline,campaignForStages(STORY_STAGE_IDS,baseline));verifyRoute(PLAYABLE_FIGHTERS,STORY_ENCOUNTERS);
-  assert.equal(STORY_ROSTER_COUNTS.installed,PLAYABLE_FIGHTERS.length);assert.equal(STORY_ROSTER_COUNTS.rivals,PLAYABLE_FIGHTERS.length-2-relicCount(PLAYABLE_FIGHTERS));assert.equal(STORY_ROSTER_COUNTS.encounters,PLAYABLE_FIGHTERS.length-5-relicCount(PLAYABLE_FIGHTERS));assert.equal(STORY_ROSTER_COUNTS.missing,Math.max(0,150-PLAYABLE_FIGHTERS.length));assert.deepEqual(STORY_OPPONENTS,STORY_ENCOUNTERS.flatMap(e=>e.opponents));
+  assert.equal(STORY_ROSTER_COUNTS.installed,PLAYABLE_FIGHTERS.length);assert.equal(STORY_ROSTER_COUNTS.rivals,250);assert.equal(STORY_ROSTER_COUNTS.encounters,247);assert.equal(STORY_ROSTER_COUNTS.missing,0);assert.deepEqual(STORY_OPPONENTS,STORY_ENCOUNTERS.flatMap(e=>e.opponents));
  });
  check('optional Satoshi/Xalt/Potocaicai pins appear in the Hatchery immediately before Golden only when registered',()=>{
   for(const registry of [baseline,PLAYABLE_FIGHTERS,futureRegistry]){
@@ -68,13 +68,14 @@ try{
   const fixture=join(temp,'baseline-typecheck');mkdirSync(fixture);
   writeFileSync(join(fixture,'core.ts'),`export const PLAYABLE_FIGHTERS=${JSON.stringify(baseline)} as const;export type PlayableFighterId=typeof PLAYABLE_FIGHTERS[number];export const isPairedFighter=(id:PlayableFighterId)=>new Set<string>(${JSON.stringify(baseline.filter(isPairedFighter))}).has(id);`);
   writeFileSync(join(fixture,'stage.ts'),`export const STORY_STAGE_IDS=${JSON.stringify(STORY_STAGE_IDS)} as const;export type StageId=typeof STORY_STAGE_IDS[number];`);
+  writeFileSync(join(fixture,'campaignRoster.ts'),readFileSync(resolve('src/campaignRoster.ts'),'utf8'));
   writeFileSync(join(fixture,'storyProgress.ts'),readFileSync(resolve('src/storyProgress.ts'),'utf8'));
   assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),join(fixture,'storyProgress.ts'),'--noEmit','--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0);
  });
- check('future registry creates only registered rivals and does not add fake runtime fighters',()=>{
+ check('future registrations leave the curated 250 rivals unchanged',()=>{
   assert.equal(futureRegistry.length,futureSize);const route=campaignForStages(STORY_STAGE_IDS,futureRegistry);verifyRoute(futureRegistry,route);
-  assert.equal(route.flatMap(e=>e.opponents).length,futureSize-2-relicCount(futureRegistry));assert.equal(route.length,futureSize-5-relicCount(futureRegistry));assert.ok(PLAYABLE_FIGHTERS.every(f=>!f.startsWith('qa_registered_fixture_')));
-  const p=createStoryProgress(disk(),route,futureRegistry);finish(p,route);assert.equal(p.snapshot().completed,true);assert.equal(p.snapshot().unlocked.length,futureSize-relicCount(futureRegistry));
+  assert.equal(route.flatMap(e=>e.opponents).length,250);assert.equal(route.length,247);assert.ok(PLAYABLE_FIGHTERS.every(f=>!f.startsWith('qa_registered_fixture_')));
+  const p=createStoryProgress(disk(),route,futureRegistry);finish(p,route);assert.equal(p.snapshot().completed,true);assert.equal(p.snapshot().unlocked.length,PLAYABLE_FIGHTERS.length-relicCount(PLAYABLE_FIGHTERS));
  });
  check('absent references never become opponents and duplicate registry inputs are harmless',()=>{
   const partial=baseline.filter(f=>!['rivet','sproto943','vaudream'].includes(f)),route=campaignForStages(STORY_STAGE_IDS,[...partial,...partial]);
@@ -120,7 +121,7 @@ try{
   const futureRoute=campaignForStages(STORY_STAGE_IDS,futureRegistry),future=createStoryProgress(store,futureRoute,futureRegistry);finish(future,futureRoute);
   const allFuture=JSON.parse(store.getItem(STORY_SAVE_KEY));older.win(0);const retained=JSON.parse(store.getItem(STORY_SAVE_KEY));
   for(const value of allFuture.cleared)assert.ok(retained.cleared.includes(value));for(const value of allFuture.unlocked)assert.ok(retained.unlocked.includes(value));
-  const reload=createStoryProgress(store,futureRoute,futureRegistry);assert.equal(reload.snapshot().completed,true);assert.equal(reload.snapshot().unlocked.length,futureSize-relicCount(futureRegistry));assert.ok(older.snapshot().unlocked.every(f=>baseline.includes(f)));
+  const reload=createStoryProgress(store,futureRoute,futureRegistry);assert.equal(reload.snapshot().completed,true);assert.equal(reload.snapshot().unlocked.length,PLAYABLE_FIGHTERS.length-relicCount(PLAYABLE_FIGHTERS));assert.ok(older.snapshot().unlocked.every(f=>baseline.includes(f)));
   const legacy=JSON.stringify(legacyRecord(1,50));store.setItem(LEGACY_STORY_SAVE_KEY,legacy);current.sync();assert.ok(current.isUnlocked('rivet'));current.win(0);assert.equal(store.getItem(LEGACY_STORY_SAVE_KEY),legacy);
  });
  for(const type of ['art','nick-juicy','final'])check(`${type} gauntlet recruits wave1 but only atomically clears after both sequential wins`,()=>{
@@ -157,5 +158,5 @@ try{
  check('unavailable storage retains session progress and reports that it is not persistent',()=>{
   const p=createStoryProgress({getItem(){throw Error('blocked');},setItem(){throw Error('quota');}});assert.equal(p.snapshot().persistent,false);assert.ok(p.win(0));assert.ok(p.win(1));assert.equal(p.snapshot().cleared.length,2);assert.equal(p.snapshot().persistent,false);
  });
- console.log(`${groups} expanded campaign groups passed; actual installed ${PLAYABLE_FIGHTERS.length}, rivals ${STORY_OPPONENTS.length}, encounters ${STORY_ENCOUNTERS.length}, missing to150 ${STORY_ROSTER_COUNTS.missing}.`);
+ console.log(`${groups} expanded campaign groups passed; actual installed ${PLAYABLE_FIGHTERS.length}, rivals ${STORY_OPPONENTS.length}, encounters ${STORY_ENCOUNTERS.length}, missing to250 ${STORY_ROSTER_COUNTS.missing}.`);
 }finally{rmSync(temp,{recursive:true,force:true});}

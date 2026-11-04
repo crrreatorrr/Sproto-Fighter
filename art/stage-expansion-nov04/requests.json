@@ -1,0 +1,1159 @@
+{
+  "approvedMaxCredits": 132,
+  "estimatePerImage": 2.75,
+  "scope": "Six new variations in each of eight story zones; 48 images total.",
+  "requests": [
+    {
+      "index": 0,
+      "id": "nov04-trenches-1",
+      "zone": "trenches",
+      "title": "Copper Dawn",
+      "referenceJobId": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: muddy industrial undercity, brick drains, battered corrugated metal and pipes. This variation is \"Copper Dawn\": peach sunrise, pale teal mist; a riverside pumping quay with brick sluices. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 1,
+      "id": "nov04-trenches-2",
+      "zone": "trenches",
+      "title": "Violet Monsoon",
+      "referenceJobId": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: muddy industrial undercity, brick drains, battered corrugated metal and pipes. This variation is \"Violet Monsoon\": violet rainy midnight, amber lamps; an underpass beside overflowing drainage locks. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 2,
+      "id": "nov04-trenches-3",
+      "zone": "trenches",
+      "title": "Verdant Reclamation",
+      "referenceJobId": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: muddy industrial undercity, brick drains, battered corrugated metal and pipes. This variation is \"Verdant Reclamation\": soft green overcast, moss and ferns; an abandoned scrapworks reclaimed by plants. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 3,
+      "id": "nov04-trenches-4",
+      "zone": "trenches",
+      "title": "Ember Shift",
+      "referenceJobId": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: muddy industrial undercity, brick drains, battered corrugated metal and pipes. This variation is \"Ember Shift\": burnt orange twilight and charcoal shadows; a distant furnace yard behind a packed-earth lane. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 4,
+      "id": "nov04-trenches-5",
+      "zone": "trenches",
+      "title": "Winter Floodwall",
+      "referenceJobId": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: muddy industrial undercity, brick drains, battered corrugated metal and pipes. This variation is \"Winter Floodwall\": icy blue snowfall and warm yellow windows; a broad floodwall beneath frosted pipes. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 5,
+      "id": "nov04-trenches-6",
+      "zone": "trenches",
+      "title": "Cobalt Blackout",
+      "referenceJobId": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "184e9681-21e3-4cc1-ba6b-bbc7eca338d9"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: muddy industrial undercity, brick drains, battered corrugated metal and pipes. This variation is \"Cobalt Blackout\": deep cobalt night, isolated red warning lights; a quiet canal maintenance station. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 6,
+      "id": "nov04-circuit-1",
+      "zone": "circuit",
+      "title": "Roseglass Commute",
+      "referenceJobId": "aa6c65f8-d61d-4890-be13-3598dc31c3b4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "aa6c65f8-d61d-4890-be13-3598dc31c3b4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: retrofuturistic neon city, cyan circuit architecture, civic technology. This variation is \"Roseglass Commute\": rosy sunrise and indigo shade; an elevated city commuter plaza with distant maglev trains. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 7,
+      "id": "nov04-circuit-2",
+      "zone": "circuit",
+      "title": "Jade Rain District",
+      "referenceJobId": "aa6c65f8-d61d-4890-be13-3598dc31c3b4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "aa6c65f8-d61d-4890-be13-3598dc31c3b4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: retrofuturistic neon city, cyan circuit architecture, civic technology. This variation is \"Jade Rain District\": emerald rainfall, warm shop glows; a broad street beneath green holographic awnings without text. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 8,
+      "id": "nov04-circuit-3",
+      "zone": "circuit",
+      "title": "Amber Data Exchange",
+      "referenceJobId": "aa6c65f8-d61d-4890-be13-3598dc31c3b4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "aa6c65f8-d61d-4890-be13-3598dc31c3b4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: retrofuturistic neon city, cyan circuit architecture, civic technology. This variation is \"Amber Data Exchange\": golden late afternoon, dark blue glass; an open concourse outside municipal data towers. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 9,
+      "id": "nov04-circuit-4",
+      "zone": "circuit",
+      "title": "Ultraviolet Overpass",
+      "referenceJobId": "aa6c65f8-d61d-4890-be13-3598dc31c3b4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "aa6c65f8-d61d-4890-be13-3598dc31c3b4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: retrofuturistic neon city, cyan circuit architecture, civic technology. This variation is \"Ultraviolet Overpass\": purple midnight, electric cyan accents; a raised expressway with stacked skyline bridges. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 10,
+      "id": "nov04-circuit-5",
+      "zone": "circuit",
+      "title": "Pearl Cloud Terminal",
+      "referenceJobId": "aa6c65f8-d61d-4890-be13-3598dc31c3b4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "aa6c65f8-d61d-4890-be13-3598dc31c3b4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: retrofuturistic neon city, cyan circuit architecture, civic technology. This variation is \"Pearl Cloud Terminal\": pearl gray daylight, turquoise reflections; a futuristic transit terminal with distant cloud towers. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 11,
+      "id": "nov04-circuit-6",
+      "zone": "circuit",
+      "title": "Crimson Power Grid",
+      "referenceJobId": "aa6c65f8-d61d-4890-be13-3598dc31c3b4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "aa6c65f8-d61d-4890-be13-3598dc31c3b4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: retrofuturistic neon city, cyan circuit architecture, civic technology. This variation is \"Crimson Power Grid\": crimson dusk and muted silver; a city power distribution courtyard with quiet arc pylons. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 12,
+      "id": "nov04-yacht-1",
+      "zone": "yacht",
+      "title": "Apricot Departure",
+      "referenceJobId": "51e58dae-5373-4ba4-8e37-1d5325d120eb",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "51e58dae-5373-4ba4-8e37-1d5325d120eb"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: luxury Bitcoin yacht, turquoise ocean, white hulls and elegant maritime terraces. This variation is \"Apricot Departure\": apricot dawn and pale mint water; an empty teak promenade alongside a moored superyacht. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 13,
+      "id": "nov04-yacht-2",
+      "zone": "yacht",
+      "title": "Sapphire Squall",
+      "referenceJobId": "51e58dae-5373-4ba4-8e37-1d5325d120eb",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "51e58dae-5373-4ba4-8e37-1d5325d120eb"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: luxury Bitcoin yacht, turquoise ocean, white hulls and elegant maritime terraces. This variation is \"Sapphire Squall\": stormy sapphire blue, amber cabin windows; a sheltered yacht-side dock with dramatic rain behind. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 14,
+      "id": "nov04-yacht-3",
+      "zone": "yacht",
+      "title": "Coral Horizon",
+      "referenceJobId": "51e58dae-5373-4ba4-8e37-1d5325d120eb",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "51e58dae-5373-4ba4-8e37-1d5325d120eb"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: luxury Bitcoin yacht, turquoise ocean, white hulls and elegant maritime terraces. This variation is \"Coral Horizon\": coral sunset and violet sea; a broad upper yacht terrace overlooking sail silhouettes. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 15,
+      "id": "nov04-yacht-4",
+      "zone": "yacht",
+      "title": "Seafoam Lagoon",
+      "referenceJobId": "51e58dae-5373-4ba4-8e37-1d5325d120eb",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "51e58dae-5373-4ba4-8e37-1d5325d120eb"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: luxury Bitcoin yacht, turquoise ocean, white hulls and elegant maritime terraces. This variation is \"Seafoam Lagoon\": bright seafoam daylight, cream stone; a sheltered luxury marina lagoon with glass pavilions. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 16,
+      "id": "nov04-yacht-5",
+      "zone": "yacht",
+      "title": "Silver Moon Berth",
+      "referenceJobId": "51e58dae-5373-4ba4-8e37-1d5325d120eb",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "51e58dae-5373-4ba4-8e37-1d5325d120eb"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: luxury Bitcoin yacht, turquoise ocean, white hulls and elegant maritime terraces. This variation is \"Silver Moon Berth\": silver moonlight and deep navy; an elegant dry marina berth with reflective water behind. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 17,
+      "id": "nov04-yacht-6",
+      "zone": "yacht",
+      "title": "Golden Regatta Club",
+      "referenceJobId": "51e58dae-5373-4ba4-8e37-1d5325d120eb",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "51e58dae-5373-4ba4-8e37-1d5325d120eb"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: luxury Bitcoin yacht, turquoise ocean, white hulls and elegant maritime terraces. This variation is \"Golden Regatta Club\": golden afternoon and cobalt shadows; a seaside yacht clubhouse terrace and distant regatta. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 18,
+      "id": "nov04-ranch-1",
+      "zone": "ranch",
+      "title": "Lavender Hayfields",
+      "referenceJobId": "fbe251cf-c0d5-4470-a638-d81596020734",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "fbe251cf-c0d5-4470-a638-d81596020734"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: rustic Sproto Ranch, old stone farm buildings, timber fences and rolling countryside. This variation is \"Lavender Hayfields\": lavender dawn, buttery windows; a wide dirt lane behind hayfields and a weathered stone barn. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 19,
+      "id": "nov04-ranch-2",
+      "zone": "ranch",
+      "title": "Emerald Rain Paddock",
+      "referenceJobId": "fbe251cf-c0d5-4470-a638-d81596020734",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "fbe251cf-c0d5-4470-a638-d81596020734"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: rustic Sproto Ranch, old stone farm buildings, timber fences and rolling countryside. This variation is \"Emerald Rain Paddock\": fresh emerald spring rainfall, gray sky; fenced paddocks and a low stone farmhouse. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 20,
+      "id": "nov04-ranch-3",
+      "zone": "ranch",
+      "title": "Russet Harvest Yard",
+      "referenceJobId": "fbe251cf-c0d5-4470-a638-d81596020734",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "fbe251cf-c0d5-4470-a638-d81596020734"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: rustic Sproto Ranch, old stone farm buildings, timber fences and rolling countryside. This variation is \"Russet Harvest Yard\": russet autumn dusk and amber lanterns; a cleared farmyard behind stacked distant hay and orchard rows. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 21,
+      "id": "nov04-ranch-4",
+      "zone": "ranch",
+      "title": "Frostblue Homestead",
+      "referenceJobId": "fbe251cf-c0d5-4470-a638-d81596020734",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "fbe251cf-c0d5-4470-a638-d81596020734"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: rustic Sproto Ranch, old stone farm buildings, timber fences and rolling countryside. This variation is \"Frostblue Homestead\": frost-blue winter morning and peach horizon; a level snow-dusted ranch lane beside a warm farmhouse. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 22,
+      "id": "nov04-ranch-5",
+      "zone": "ranch",
+      "title": "Honeywind Pasture",
+      "referenceJobId": "fbe251cf-c0d5-4470-a638-d81596020734",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "fbe251cf-c0d5-4470-a638-d81596020734"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: rustic Sproto Ranch, old stone farm buildings, timber fences and rolling countryside. This variation is \"Honeywind Pasture\": honey-gold midsummer noon and soft cyan sky; a windmill pasture and distant stone outbuildings. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 23,
+      "id": "nov04-ranch-6",
+      "zone": "ranch",
+      "title": "Moonflower Stable",
+      "referenceJobId": "fbe251cf-c0d5-4470-a638-d81596020734",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "fbe251cf-c0d5-4470-a638-d81596020734"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: rustic Sproto Ranch, old stone farm buildings, timber fences and rolling countryside. This variation is \"Moonflower Stable\": indigo moonlight and warm cream lanterns; an open ranch track with stable roofs and moonflowers behind. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 24,
+      "id": "nov04-throne-1",
+      "zone": "throne",
+      "title": "Ruby Coronation Hall",
+      "referenceJobId": "5d64957f-ed70-4ad5-9a9a-02eacedba96a",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5d64957f-ed70-4ad5-9a9a-02eacedba96a"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: regal castle and relay throne technology, gothic stone, purple and gold royal details. This variation is \"Ruby Coronation Hall\": ruby sunset stained glass and gold lamps; a grand empty castle gallery behind a broad stone floor. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 25,
+      "id": "nov04-throne-2",
+      "zone": "throne",
+      "title": "Azure Snow Court",
+      "referenceJobId": "5d64957f-ed70-4ad5-9a9a-02eacedba96a",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5d64957f-ed70-4ad5-9a9a-02eacedba96a"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: regal castle and relay throne technology, gothic stone, purple and gold royal details. This variation is \"Azure Snow Court\": azure winter moonlight and silver snow; an open castle courtyard with distant frosted spires. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 26,
+      "id": "nov04-throne-3",
+      "zone": "throne",
+      "title": "Jade Relay Sanctum",
+      "referenceJobId": "5d64957f-ed70-4ad5-9a9a-02eacedba96a",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5d64957f-ed70-4ad5-9a9a-02eacedba96a"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: regal castle and relay throne technology, gothic stone, purple and gold royal details. This variation is \"Jade Relay Sanctum\": jade-green energy and bronze stone; a royal relay chamber with a quiet crowned machine far behind. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 27,
+      "id": "nov04-throne-4",
+      "zone": "throne",
+      "title": "Rose Quartz Battlement",
+      "referenceJobId": "5d64957f-ed70-4ad5-9a9a-02eacedba96a",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5d64957f-ed70-4ad5-9a9a-02eacedba96a"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: regal castle and relay throne technology, gothic stone, purple and gold royal details. This variation is \"Rose Quartz Battlement\": rose dawn and violet mountains; broad castle battlements with banners and distant towers. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 28,
+      "id": "nov04-throne-5",
+      "zone": "throne",
+      "title": "Amber Armory Vault",
+      "referenceJobId": "5d64957f-ed70-4ad5-9a9a-02eacedba96a",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5d64957f-ed70-4ad5-9a9a-02eacedba96a"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: regal castle and relay throne technology, gothic stone, purple and gold royal details. This variation is \"Amber Armory Vault\": amber furnace glow and charcoal shade; a deep royal armory with weapons mounted only far behind. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 29,
+      "id": "nov04-throne-6",
+      "zone": "throne",
+      "title": "Amethyst Eclipse Terrace",
+      "referenceJobId": "5d64957f-ed70-4ad5-9a9a-02eacedba96a",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5d64957f-ed70-4ad5-9a9a-02eacedba96a"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: regal castle and relay throne technology, gothic stone, purple and gold royal details. This variation is \"Amethyst Eclipse Terrace\": amethyst eclipse sky and cold blue highlights; a royal terrace overlooking floating stone bridges. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 30,
+      "id": "nov04-bar-1",
+      "zone": "bar",
+      "title": "Turquoise Afterhours",
+      "referenceJobId": "5c730890-a6b8-4af6-8d14-547d4a70a92b",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5c730890-a6b8-4af6-8d14-547d4a70a92b"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: HPOS10i club, colorful mural-painted walls, rustic timber and relaxed neon nightlife. This variation is \"Turquoise Afterhours\": turquoise midnight and amber pendant lamps; an empty mural-lined club lounge with rustic timber. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 31,
+      "id": "nov04-bar-2",
+      "zone": "bar",
+      "title": "Papaya Sunset Patio",
+      "referenceJobId": "5c730890-a6b8-4af6-8d14-547d4a70a92b",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5c730890-a6b8-4af6-8d14-547d4a70a92b"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: HPOS10i club, colorful mural-painted walls, rustic timber and relaxed neon nightlife. This variation is \"Papaya Sunset Patio\": papaya sunset and lavender shadows; a wide club patio beneath leafy trees and painted walls. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 32,
+      "id": "nov04-bar-3",
+      "zone": "bar",
+      "title": "Magenta Vinyl Room",
+      "referenceJobId": "5c730890-a6b8-4af6-8d14-547d4a70a92b",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5c730890-a6b8-4af6-8d14-547d4a70a92b"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: HPOS10i club, colorful mural-painted walls, rustic timber and relaxed neon nightlife. This variation is \"Magenta Vinyl Room\": magenta late-night glow and cyan rim light; a music lounge with distant vinyl shelves and murals. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 33,
+      "id": "nov04-bar-4",
+      "zone": "bar",
+      "title": "Sage Morning Courtyard",
+      "referenceJobId": "5c730890-a6b8-4af6-8d14-547d4a70a92b",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5c730890-a6b8-4af6-8d14-547d4a70a92b"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: HPOS10i club, colorful mural-painted walls, rustic timber and relaxed neon nightlife. This variation is \"Sage Morning Courtyard\": sage green overcast and warm cream light; a quiet treehouse-club courtyard after rain. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 34,
+      "id": "nov04-bar-5",
+      "zone": "bar",
+      "title": "Indigo Lantern Balcony",
+      "referenceJobId": "5c730890-a6b8-4af6-8d14-547d4a70a92b",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5c730890-a6b8-4af6-8d14-547d4a70a92b"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: HPOS10i club, colorful mural-painted walls, rustic timber and relaxed neon nightlife. This variation is \"Indigo Lantern Balcony\": deep indigo evening and golden lanterns; a club balcony overlooking distant painted rooftops. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 35,
+      "id": "nov04-bar-6",
+      "zone": "bar",
+      "title": "Copper Last Call",
+      "referenceJobId": "5c730890-a6b8-4af6-8d14-547d4a70a92b",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "5c730890-a6b8-4af6-8d14-547d4a70a92b"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: HPOS10i club, colorful mural-painted walls, rustic timber and relaxed neon nightlife. This variation is \"Copper Last Call\": copper late-evening lamps, forest green shade; a cozy mural games room behind an open timber floor. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 36,
+      "id": "nov04-hatchery-1",
+      "zone": "hatchery",
+      "title": "Aquamarine Broodpool",
+      "referenceJobId": "bfca6752-5b73-4735-8d31-21faef3e5062",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "bfca6752-5b73-4735-8d31-21faef3e5062"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: alien organic Hatchery, strange eggs and bioluminescent roots in an otherworldly hive. This variation is \"Aquamarine Broodpool\": aquamarine glow and plum darkness; a broad organic stone ledge beside distant incubation pools. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 37,
+      "id": "nov04-hatchery-2",
+      "zone": "hatchery",
+      "title": "Amber Chrysalis Garden",
+      "referenceJobId": "bfca6752-5b73-4735-8d31-21faef3e5062",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "bfca6752-5b73-4735-8d31-21faef3e5062"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: alien organic Hatchery, strange eggs and bioluminescent roots in an otherworldly hive. This variation is \"Amber Chrysalis Garden\": amber luminescence and deep teal shadows; a garden of translucent egg pods and curling alien roots. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 38,
+      "id": "nov04-hatchery-3",
+      "zone": "hatchery",
+      "title": "Violet Spore Cathedral",
+      "referenceJobId": "bfca6752-5b73-4735-8d31-21faef3e5062",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "bfca6752-5b73-4735-8d31-21faef3e5062"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: alien organic Hatchery, strange eggs and bioluminescent roots in an otherworldly hive. This variation is \"Violet Spore Cathedral\": violet bioluminescence and pale green spores; a lofty organic vault with egg niches far behind. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 39,
+      "id": "nov04-hatchery-4",
+      "zone": "hatchery",
+      "title": "Pearl Molting Grotto",
+      "referenceJobId": "bfca6752-5b73-4735-8d31-21faef3e5062",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "bfca6752-5b73-4735-8d31-21faef3e5062"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: alien organic Hatchery, strange eggs and bioluminescent roots in an otherworldly hive. This variation is \"Pearl Molting Grotto\": pearl-white shell light and coral shadows; an alien shell cavern with distant molted husks. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 40,
+      "id": "nov04-hatchery-5",
+      "zone": "hatchery",
+      "title": "Crimson Root Chamber",
+      "referenceJobId": "bfca6752-5b73-4735-8d31-21faef3e5062",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "bfca6752-5b73-4735-8d31-21faef3e5062"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: alien organic Hatchery, strange eggs and bioluminescent roots in an otherworldly hive. This variation is \"Crimson Root Chamber\": crimson root veins and cold blue fungi; a deep Hatchery chamber with branching organic arches. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 41,
+      "id": "nov04-hatchery-6",
+      "zone": "hatchery",
+      "title": "Mint Starlit Nursery",
+      "referenceJobId": "bfca6752-5b73-4735-8d31-21faef3e5062",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "bfca6752-5b73-4735-8d31-21faef3e5062"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: alien organic Hatchery, strange eggs and bioluminescent roots in an otherworldly hive. This variation is \"Mint Starlit Nursery\": mint starlight and navy shade; an exposed alien nursery terrace beneath a starry dimensional sky. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 42,
+      "id": "nov04-verse-1",
+      "zone": "verse",
+      "title": "Golden Nebula Causeway",
+      "referenceJobId": "1945d396-b311-4b28-a1c1-062df777f3c4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "1945d396-b311-4b28-a1c1-062df777f3c4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: final Verse portal realm, cosmic stone platforms, luminous dimensional gateways. This variation is \"Golden Nebula Causeway\": gold nebula and deep purple; a cosmic stone causeway toward a distant circular portal. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 43,
+      "id": "nov04-verse-2",
+      "zone": "verse",
+      "title": "Iceblue Event Horizon",
+      "referenceJobId": "1945d396-b311-4b28-a1c1-062df777f3c4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "1945d396-b311-4b28-a1c1-062df777f3c4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: final Verse portal realm, cosmic stone platforms, luminous dimensional gateways. This variation is \"Iceblue Event Horizon\": ice-blue stars and pitch violet; a wide obsidian terrace above a distant black-hole horizon. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 44,
+      "id": "nov04-verse-3",
+      "zone": "verse",
+      "title": "Scarlet Comet Observatory",
+      "referenceJobId": "1945d396-b311-4b28-a1c1-062df777f3c4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "1945d396-b311-4b28-a1c1-062df777f3c4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: final Verse portal realm, cosmic stone platforms, luminous dimensional gateways. This variation is \"Scarlet Comet Observatory\": scarlet comet light and navy space; a portal observatory with orbiting fragments far behind. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 45,
+      "id": "nov04-verse-4",
+      "zone": "verse",
+      "title": "Opal Aurora Bridge",
+      "referenceJobId": "1945d396-b311-4b28-a1c1-062df777f3c4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "1945d396-b311-4b28-a1c1-062df777f3c4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: final Verse portal realm, cosmic stone platforms, luminous dimensional gateways. This variation is \"Opal Aurora Bridge\": opal rainbow aurora and muted midnight blue; a broad celestial bridge and distant gate pillars. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 46,
+      "id": "nov04-verse-5",
+      "zone": "verse",
+      "title": "Emerald Dimensional Ruins",
+      "referenceJobId": "1945d396-b311-4b28-a1c1-062df777f3c4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "1945d396-b311-4b28-a1c1-062df777f3c4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: final Verse portal realm, cosmic stone platforms, luminous dimensional gateways. This variation is \"Emerald Dimensional Ruins\": emerald dimensional haze and bronze stone; ancient floating ruins around a quiet small portal. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    },
+    {
+      "index": 47,
+      "id": "nov04-verse-6",
+      "zone": "verse",
+      "title": "Violet Final Threshold",
+      "referenceJobId": "1945d396-b311-4b28-a1c1-062df777f3c4",
+      "params": {
+        "model": "gpt_image_2_5",
+        "variant": "flare",
+        "quality": "high",
+        "resolution": "2k",
+        "aspect_ratio": "16:9",
+        "background": "opaque",
+        "count": 1,
+        "use_unlim": false,
+        "medias": [
+          {
+            "role": "image",
+            "value": "1945d396-b311-4b28-a1c1-062df777f3c4"
+          }
+        ],
+        "prompt": "Create ONE new high-quality pixel-art environment variation for the Sproto Fighter 2D fighting game. Use the supplied CURRENT STAGE image as the visual reference: preserve its recognizable zone identity and arcade pixel-art craftsmanship, while creating a distinctly new location, palette, atmosphere and scenic composition. Zone: final Verse portal realm, cosmic stone platforms, luminous dimensional gateways. This variation is \"Violet Final Threshold\": violet eclipse and brilliant cyan gate glow; a grand empty final gateway terrace. Do not simply recolor or duplicate the reference; make a fresh background location within the same world.\nProduction composition requirements: full seamless 16:9 side-view arena, fixed camera at fighter height, NO isometric camera. The combat floor is a single continuous flat horizontal walkable surface across the entire image, with its foot-contact line exactly 80.3 percent down the canvas (y=578 on a 1280x720 display). Empty low-contrast foreground below that line. Keep the full fighter lane x=4% to96%, y=45% to84% clear of occluding pillars, people, fences or foreground props. Put architectural landmarks and scenic details BEHIND the fighters and above the foot line. Level left and right corners, no broken platforms, stairs, cliffs, pits or water in the combat lane. Keep the upper 22% visually calm for HUD readability. Rich background depth, deliberate crisp stepped pixel clusters, strong material shading, coherent lighting and restrained high quality 1990s arcade pixel-art texture. Environment ONLY: NO characters, people, animals, enemies, silhouettes, text, words, logos, UI, borders, panels, photorealism, painterly blur or watermarks."
+      }
+    }
+  ]
+}

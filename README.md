@@ -1,6 +1,6 @@
 # Sproto Arena
 
-A local TypeScript / Canvas 2D fighting game with **131 installed fighters**,
+A local TypeScript / Canvas 2D fighting game with **254 installed fighters**,
 CPU/practice opponents, 70 selectable arenas and a campaign that grows with the installed roster.
 No game engine, multiplayer transport or deployment.
 
@@ -55,19 +55,23 @@ current encounter. Story wins persist in either mode; free-play wins do not.
 Testing mode turns off on reload. Completing the campaign also grants a durable
 God Mode selection reward. God Mode does not bypass P1 recruitment locks.
 
-This local checkpoint has 131 installed entries: 129 distinct rivals across
-126 encounters, including three two-opponent encounters. Nineteen additional roster
-entries and their assets are still needed for the requested 150. The route grows
-from registered fighters without inventing characters; at 150 entries it has 148
-rivals across 145 encounters. The map also passes a synthetic 150-node fixture.
-The last zone opens with Nick → Juicy, followed by Morelight → VMU. Previous
-Nick/Juicy wins and recruits are retained when their old encounters regroup.
-Scenes remain placeholders pending script approval. No videos or paid generations
-were made by this integration. Completed work is checkpointed on local main;
-the remaining roster and full live animation review are still open.
+The curated campaign contains exactly **250 distinct rivals across 247 encounters**,
+including Artdude → Artchick, Nick → Juicy, and Morelight → VMU as sequential
+pairs. The 254 registered fighters include two starters and two additional
+Hub-only fighters outside the campaign. Captain Green, Sun God and Pissing Sproto
+are new guardians at the ends of the Marina, Castle and Bar chapters; defeating
+them advances the story while their player selection still requires the matching
+Hub Relic. Existing earned recruits, wins, and God Mode rewards remain valid.
+The fixed campaign order is independent of menu registration order.
 
-The non-story selector groups all **70 installed backgrounds** into eight zones,
-including every approved story panorama. Ranch has its original arena plus the
+The expanded 3840 × 2160 Higgsfield map uses the existing world as its reference.
+All 247 encounter markers follow newly traced roads across the same eight regions;
+region shortcuts and “Find next fight” zoom to readable detail. Original map
+assets are retained. Boss animation sequences and the Nick/Juicy pre-fight scene
+remain in their established order.
+
+The non-story selector groups all **121 installed backgrounds** into eight zones,
+including every approved story panorama and 48 new Higgsfield variations (six per zone). Story encounter previews offer a scenery chooser; the default follows contiguous regional scenery blocks. Choices are session-only and leave opponent order, combat rules and saves unchanged. Ranch has its original arena plus the
 lantern-lit barn, green paddock and dusty farmhouse yard. Story scenery advances
 between sequential boss bouts while preserving their order and saves. The current
 route uses 60 of 61 story locations; Pearl Incubation Chamber is available in free
@@ -229,7 +233,7 @@ NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/on
 
 The optional hub adapter comes from the published `claude/sweet-newton-l4tjnh` work. A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
 
-Five fighters come only from hub Relics and are not in story mode:
+Five fighters require Hub Relics for new player recruitment:
 
 | Relic (game) | Unlocks |
 | --- | --- |
@@ -239,7 +243,7 @@ Five fighters come only from hub Relics and are not in story mode:
 | Genesis Block Shard (The People's Bitcoin) | Captain Green |
 | All four of the above | Error 333 |
 
-Every other fighter, including the earlier Relic picks (Halloween 2008, $Bitcoin Obama, Big Swole, Bongraker, Sproto Duo), is recruited in story mode. The mapping is `src/hub/roster.ts`; the story campaign leaves out the same five (`RELIC_ONLY_RECRUITS` in `src/storyProgress.ts`, kept equal by `tests/hub-roster.test.ts`). Locked fighters remain previewable and usable as CPU opponents. A save that already recruited one of the five in an older campaign keeps it.
+Every other fighter, including the earlier Relic picks (Halloween 2008, $Bitcoin Obama, Big Swole, Bongraker, Sproto Duo), is recruited in story mode. The mapping is `src/hub/roster.ts`; the story campaign includes three as guardians, while `RELIC_ONLY_RECRUITS` in `src/storyProgress.ts` preserves the same five player recruitment requirements. Locked fighters remain previewable and usable as CPU opponents. A save that already recruited one of the five in an older campaign keeps it.
 
 Rewards are reported by the game client (`src/hub/link.ts`); the server only
 caps Tickets per call and per day. A linked player with browser developer

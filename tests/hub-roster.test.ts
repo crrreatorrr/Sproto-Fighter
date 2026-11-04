@@ -46,9 +46,10 @@ describe('Relic-locked fighters', () => {
     }
   });
 
-  it('keeps the Relic fighters out of story mode (story list matches the hub list)', () => {
+  it('includes exactly three Relic guardians while retaining all five Hub recruitment requirements', () => {
     expect([...RELIC_ONLY_RECRUITS].sort()).toEqual([...RELIC_ONLY_FIGHTERS].sort());
-    for (const id of RELIC_FIVE) expect(STORY_OPPONENTS).not.toContain(id);
+    for (const id of ['captain','sproto1870']) expect(STORY_OPPONENTS).not.toContain(id);
+    for (const id of ['sproto2616','sproto3152','sproto3215']) expect(STORY_OPPONENTS.filter(f=>f===id)).toHaveLength(1);
     // The earlier Relic picks are story recruits now.
     for (const id of ['zephyr', 'guest12', 'bigswole', 'rune', 'duo']) {
       expect(STORY_OPPONENTS).toContain(id);
