@@ -3,7 +3,7 @@ import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
 import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,STORY_OPPONENTS,storyProgress,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
 
-type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
+type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;godMode?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
 /** Real progression; chapter scenes remain placeholders pending script approval. */
 export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
@@ -19,6 +19,8 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     const storageNote=()=>progress.snapshot().persistent?'Progress saves on this browser.':'Browser saving is unavailable. Progress lasts only while this page stays open.';
     const status=()=>{$('journey-status').textContent=active?`STORY / ${STAGES.find(s=>s.id===active!.stage)!.name.toUpperCase()} / ENCOUNTER ${active.index+1} OF ${total}${active.opponents.length>1?` / BOUT ${wave+1} OF ${active.opponents.length}`:''} / ${progress.snapshot().cleared.length} CLEARED`:'FREE PLAY / '+storageNote();};
     const open=()=>{if(!modal.open){hooks.pause();modal.showModal();}};
+    // God Mode (earned or testing) lets the player choose any encounter on the map.
+    const syncRoute=()=>{progress.sync();progress.setOpenRoute(!!hooks.godMode?.());};
     const close=()=>{modal.close();hooks.resume();};
     function buttons(actions:{label:string;run:()=>void}[]){
         const area=$('journey-actions');area.replaceChildren();
@@ -27,14 +29,14 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     async function launch(id:StageId,encounter?:Encounter,nextWave=0){
         if(launching)return;
         if(!hooks.ready()){$('journey-copy').textContent='Fighter sprites are still loading. Try again in a moment.';return;}
-        progress.sync();
+        syncRoute();
         const selectedFighter=hooks.selectedFighter?.();
         if(selectedFighter&&!(hooks.canPlayFighter?.(selectedFighter)??progress.isUnlocked(selectedFighter))){
             $('journey-copy').textContent=`${ROSTER[selectedFighter].name} is a locked P1 preview. Return to the arena menu and choose an unlocked P1 fighter. ${isStoryRecruitable(selectedFighter)?'Defeat this fighter in story mode to recruit them.':'Player selection requires this fighter’s Hub Relic.'}`;
             return;
         }
         if(encounter){
-            if(!progress.canPlay(encounter.index))return;
+            if(!progress.canPlay(encounter.index)){selector(true);$('journey-copy').textContent=`Encounter ${encounter.index+1} is locked. Clear the encounters before it, or turn on God Mode to choose any encounter.`;return;}
             if(nextWave===0){if(!progress.begin(encounter.index))return;}
             else if(progress.currentWave(encounter.index)!==nextWave)return;
         }
@@ -79,11 +81,12 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     const firstInRegion=(encounter:Encounter)=>encounter.index===0||STORY_ENCOUNTERS[encounter.index-1].stage!==encounter.stage;
     function showEncounter(encounter:Encounter,between=false){if(firstInRegion(encounter))scene(encounter,between);else encounterPreview(encounter);}
     function selector(story:boolean){
-        progress.sync();
+        syncRoute();
         view=story?'worlds':'levels';modal.classList.toggle('story-map-open',story);const save=progress.snapshot();
         $('journey-kicker').textContent=story?`STORY / ${save.cleared.length} OF ${total} ENCOUNTERS CLEARED`:'FREE PLAY / LEVEL SELECT';
         $('journey-title').textContent=story?'The road to Verse Gate.':'Pick a place to fight.';
         $('journey-copy').textContent=story?`${STORY_OPPONENTS.length} distinct rivals across ${total} encounters. Victories recruit story fighters; the three Relic guardians keep their Hub-only player unlocks. Sproto Ranch is the middle chapter. The final three zones are HPOS10i Club (Bar), The Hatchery, then Verse Gate. The art duo closes the Hatchery; Nick then Juicy lead into the Morelight and VMU finale at Verse Gate. ${storageNote()}`:`Standalone matches with your sparring settings. ${storageNote()}`;
+        if(story&&save.openRoute)$('journey-copy').textContent=`GOD MODE: every encounter is open. Pick any rival on the map. Wins still save and recruit. ${$('journey-copy').textContent}`;
         const content=$('journey-content');content.replaceChildren();const grid=document.createElement('div');grid.className='world-grid'+(story?' campaign-chapter-list':'');content.append(grid);
         for(const level of story?worlds:STAGES){
             const encounters=STORY_ENCOUNTERS.filter(e=>e.stage===level.id),first=encounters[0],last=encounters.at(-1);
@@ -114,7 +117,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         view='result';$('journey-content').replaceChildren();$('journey-kicker').textContent=`STORY / ENCOUNTER ${encounter.index+1} OF ${total}`;
         if(result===0){
             if(finishedWave+1<encounter.opponents.length){void launch(encounter.stage,encounter,finishedWave+1);return true;}
-            const save=progress.snapshot(),next=save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
+            const save=progress.snapshot(),next=save.openRoute?STORY_ENCOUNTERS[encounter.index+1]??null:save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
             if(next&&next.stage!==encounter.stage){scene(next,true);return true;}
             $('journey-title').textContent=save.completed?'The route is complete. God Mode unlocked!':`${names(encounter)} ${encounter.opponents.every(isStoryRecruitable)?'recruited':'defeated'}!`;
             $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode stays unlocked as the roster grows. Ending cutscene pending script approval. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. ${recruitNote(encounter)} ${storageNote()}`;
