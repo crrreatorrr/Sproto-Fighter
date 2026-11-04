@@ -1,6 +1,34 @@
 import { type FighterId } from './core';
 /** Original user-supplied fighter references only. No rigging diagram. */
 export const originalPortraits:Record<FighterId,string> = {
+/* NOV03 LATE PORTRAITS BEGIN */
+    "sprotopia": new URL('../art/roster-intake-nov03-late/sprotopia/reference.png', import.meta.url).href,
+    "lestrange": new URL('../art/roster-intake-nov03-late/lestrange/reference.png', import.meta.url).href,
+    "cryptobartender": new URL('../art/roster-intake-nov03-late/cryptobartender/reference.png', import.meta.url).href,
+    "razz": new URL('../art/roster-intake-nov03-late/razz/reference.png', import.meta.url).href,
+    "laserbach": new URL('../art/roster-intake-nov03-late/laserbach/reference.png', import.meta.url).href,
+    "freedfrida": new URL('../art/roster-intake-nov03-late/freedfrida/reference.png', import.meta.url).href,
+    "contresens": new URL('../art/roster-intake-nov03-late/contresens/reference.png', import.meta.url).href,
+    "sprotomidnightfx": new URL('../art/roster-intake-nov03-late/sprotomidnightfx/reference.png', import.meta.url).href,
+    "mildtacos": new URL('../art/roster-intake-nov03-late/mildtacos/reference.png', import.meta.url).href,
+    "sprotosurvivor": new URL('../art/roster-intake-nov03-late/sprotosurvivor/reference.png', import.meta.url).href,
+    "d86": new URL('../art/roster-intake-nov03-late/d86/reference.png', import.meta.url).href,
+    "cantankerous": new URL('../art/roster-intake-nov03-late/cantankerous/reference.png', import.meta.url).href,
+    "autistophrenicsprotagonist": new URL('../art/roster-intake-nov03-late/autistophrenicsprotagonist/reference.png', import.meta.url).href,
+    "sprotolg": new URL('../art/roster-intake-nov03-late/sprotolg/reference.png', import.meta.url).href,
+    "kerrieanne": new URL('../art/roster-intake-nov03-late/kerrieanne/reference.png', import.meta.url).href,
+    "yusuf": new URL('../art/roster-intake-nov03-late/yusuf/reference.png', import.meta.url).href,
+    "bobdobbs": new URL('../art/roster-intake-nov03-late/bobdobbs/reference.png', import.meta.url).href,
+    "gluttony": new URL('../art/roster-intake-nov03-late/gluttony/reference.png', import.meta.url).href,
+    "slakesly": new URL('../art/roster-intake-nov03-late/slakesly/reference.png', import.meta.url).href,
+    "jameskaminski": new URL('../art/roster-intake-nov03-late/jameskaminski/reference.png', import.meta.url).href,
+    "86gwei": new URL('../art/roster-intake-nov03-late/86gwei/reference.png', import.meta.url).href,
+    "sidelinereferee": new URL('../art/roster-intake-nov03-late/sidelinereferee/reference.png', import.meta.url).href,
+    "zebracorn": new URL('../art/roster-intake-nov03-late/zebracorn/reference.png', import.meta.url).href,
+    "corn": new URL('../art/roster-intake-nov03-late/corn/reference.png', import.meta.url).href,
+    "zakarum": new URL('../art/roster-intake-nov03-late/zakarum/reference.png', import.meta.url).href,
+    "bgbadger": new URL('../art/roster-intake-nov03-late/bgbadger/reference.png', import.meta.url).href,
+/* NOV03 LATE PORTRAITS END */
 /* NOV03 NINE PORTRAITS BEGIN */
     nomis: new URL('../art/roster-intake-nine-nov03/nomis/reference.png', import.meta.url).href,
     clobrwn: new URL('../art/roster-intake-nine-nov03/clobrwn/reference.png', import.meta.url).href,

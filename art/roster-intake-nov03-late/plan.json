@@ -1,0 +1,410 @@
+[
+  {
+    "id": "sprotopia",
+    "name": "Sprotopia",
+    "reference": "art/roster-intake-nov03-late/sprotopia/reference.png",
+    "attachment": "codex-clipboard-35538cc9-36a6-4b8e-934e-cfc79e38aaf6.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "f14c8bd8056ca1205a5e373e11ad946a469ea9694cb940dbe823c39b8628bb7a",
+    "rangedAttackRequirement": "Show a special orange aura on the fighter during ranged attacks.",
+    "identity": "Smooth rounded cobalt head without spikes, two wide slanted yellow eyes with small black pupils, enormous closed red smile, organic blue long double-lobed torso. Keep the lower yellow markings suggested by the crop attached to the belly. Blue arms, sturdy blue legs and simple red soles. Orange backdrop is reference context only; engine draws a special orange aura during the attack.",
+    "color": "#ff9129",
+    "style": 0,
+    "plan": "generate"
+  },
+  {
+    "id": "lestrange",
+    "name": "LeStrange",
+    "reference": "art/roster-intake-nov03-late/lestrange/reference.png",
+    "attachment": "codex-clipboard-8f68adb6-798e-4a4f-a1c2-46ab4c415c76.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "20d4cc7d11ee2340088e82070f82234ea9003864ca34aeecfa5b7ed35d97afc9",
+    "identity": "Starburst royal-blue head with distinct radial spikes, two circular yellow eyes, black button nose, thin wide red curl smile, slim blue arms and long torso, red waistband, prominent yellow hand shapes and blue legs.",
+    "color": "#fae341",
+    "style": 1,
+    "plan": "generate"
+  },
+  {
+    "id": "cryptobartender",
+    "name": "CryptoBARTENDER",
+    "reference": "art/roster-intake-nov03-late/cryptobartender/reference.png",
+    "attachment": "codex-clipboard-4504ca82-a606-44df-b6be-e0b7abd4e304.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "fb8566c7ea74c0ea82a24e22b77542a9529940e81511cbdc33b2d98128b7a773",
+    "identity": "Cobalt swept head with lower red rear spines, touching red-rimmed orange eyes, black oval pupils with white glints, broad red smile, red shirt, distinctive blue scarf or bow with coin ornament. Simple dark red trousers and blue hands.",
+    "color": "#ff7d3a",
+    "style": 2,
+    "plan": "generate"
+  },
+  {
+    "id": "razz",
+    "name": "Razz",
+    "reference": "art/roster-intake-nov03-late/razz/reference.png",
+    "attachment": "codex-clipboard-e70ac8c5-9059-498a-be41-f1a11391866e.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "a10044f86ea4534fa60f925f58556e8cc67b3e32685287126e16442eb67e006a",
+    "identity": "Blue swept spikes with small red rear accents, enormous glossy black pupils in yellow rims, bulbous long red nose, exceptionally large red lower face and lips, wide white collar, red top with small gold badge. Red trousers and blue hands.",
+    "color": "#f8d747",
+    "style": 3,
+    "plan": "generate"
+  },
+  {
+    "id": "laserbach",
+    "name": "Laserbach",
+    "reference": "art/roster-intake-nov03-late/laserbach/reference.png",
+    "attachment": "codex-clipboard-0500e2f3-3fc3-4017-90d0-16a7b606fb46.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "e517692d739c055e51cdafec6083f75cfda52c134dec1ac910cf6e2a58ea041f",
+    "identity": "Blue swooped crest, two yellow eyes with a confident asymmetrical brow, yellow outlined ears and tiny yellow nose bridge, wide red smile, black suit, white dress shirt, bright red tie and red inner collar.",
+    "color": "#ff412f",
+    "style": 0,
+    "plan": "generate"
+  },
+  {
+    "id": "freedfrida",
+    "name": "Freed Frida",
+    "reference": "art/roster-intake-nov03-late/freedfrida/reference.png",
+    "attachment": "codex-clipboard-c71553d2-541a-4686-9341-4a60d583f53c.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "0324986efb499d887d39a1054442f7e6f64a82b98dca20ebb9d7920403b8d8c6",
+    "identity": "Round drooping swept blue head, half-lidded yellow eyes, red oval nose and large red frown, broad yellow ear or side crescent, red shoulders, blue shirt and small white medallion.",
+    "color": "#f6dc3d",
+    "style": 1,
+    "plan": "generate"
+  },
+  {
+    "id": "contresens",
+    "name": "Contre-Sens",
+    "reference": "art/roster-intake-nov03-late/contresens/reference.png",
+    "attachment": "codex-clipboard-a0727e8a-1753-4fa3-91f2-58fc9b9370e5.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "2ddfa238b911fee1dd725736db193c14319ad6c9382b50b4bfbaffa37bcf2c68",
+    "identity": "Swept layered blue head with hooked rear spike, two big asymmetric yellow eyes, very large rounded red nose, red lip line and substantial blue chin. Thick red collar on a yellow outfit and bare blue hands.",
+    "color": "#ffd338",
+    "style": 2,
+    "plan": "generate"
+  },
+  {
+    "id": "captainhowdy",
+    "name": "Captain Howdy",
+    "reference": "art/roster-intake-nov03-late/captainhowdy/reference.png",
+    "attachment": "codex-clipboard-a5c0b957-8778-42fd-babc-4ac02cbe533b.png",
+    "size": [
+      385,
+      385
+    ],
+    "sha256": "0517535ac698a22f01e1938da5eec6ab69fce8bdf8e8ff777b2657a6a1ea8bb2",
+    "existingFighter": true,
+    "identity": "",
+    "color": "#60aaff",
+    "style": 3,
+    "plan": "reuse-identical-reference"
+  },
+  {
+    "id": "sprotomidnightfx",
+    "name": "SprotoMidnightFX",
+    "reference": "art/roster-intake-nov03-late/sprotomidnightfx/reference.png",
+    "attachment": "codex-clipboard-41a8afbc-ccd6-4606-8c9f-5d8f729f7ef1.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "a786b96308efd5aeac60808c5d8f73d75696baa3dd139aea13efdb0f90178d4e",
+    "identity": "Strong swept cobalt spikes, huge glossy black pupils in yellow eyes, bright bulbous red nose and red curved smile. Round yellow patch under chin and plain red collar and top.",
+    "color": "#ffda3c",
+    "style": 0,
+    "plan": "generate"
+  },
+  {
+    "id": "mildtacos",
+    "name": "mildtacos",
+    "reference": "art/roster-intake-nov03-late/mildtacos/reference.png",
+    "attachment": "codex-clipboard-276be3bd-0810-411d-b123-16184d04c6a3.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "933a289806d77828b8d78558f0f814f2b0c0f112f48b1ddf55d68a5a05cf7462",
+    "identity": "Long narrow electric-blue head with sharp swept back spikes and thin stray strands, small yellow eyes, enormous projecting red oval nose with tiny white glint, toothy red grin, yellow collar with gold clasp and red shirt.",
+    "color": "#ff6749",
+    "style": 1,
+    "plan": "generate"
+  },
+  {
+    "id": "sprotosurvivor",
+    "name": "Sproto Survivor",
+    "reference": "art/roster-intake-nov03-late/sprotosurvivor/reference.png",
+    "attachment": "codex-clipboard-13aaa740-2bd8-486e-929e-b211ef4ff2d6.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "e09913c69168de22ad335c38bc5d6659c6d6f4e8b7e36de4a8ae8b9a873b1404",
+    "identity": "Indigo-blue swept spikes, half-lidded yellow eyes, very broad deep-red lower face and mouth. Thick yellow neck ring, white pointed dress collar, red tie and indigo formal outfit.",
+    "color": "#e9d044",
+    "style": 2,
+    "plan": "generate"
+  },
+  {
+    "id": "d86",
+    "name": "D86",
+    "reference": "art/roster-intake-nov03-late/d86/reference.png",
+    "attachment": "codex-clipboard-53a14c03-9948-40d4-b427-f6d397fb076c.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "b6958b7e46eafbf002bd1f3f8099505b9b8744ee4667d4d98fcdfc437f0c5a2e",
+    "rangedAttackRequirement": "Fire ranged shots from the lower nipples shown on the cartoon torso.",
+    "identity": "One complete round cobalt cartoon actor with radial blue head spikes, exactly two round yellow main eyes, large red lips and long torso with red arms. Preserve the distinct THREE round pale yellow eye-like lower torso markings under the curved belly, including the pair of outer markings near the lower abdomen. Keep all lower markings visible at the ranged release. No second face or separate body. Blue low-rooted legs and red shoes.",
+    "color": "#ff6b3e",
+    "style": 3,
+    "plan": "generate"
+  },
+  {
+    "id": "cantankerous",
+    "name": "Can Tankerous",
+    "reference": "art/roster-intake-nov03-late/cantankerous/reference.png",
+    "attachment": "codex-clipboard-824bb1a9-c98f-4e13-9933-13b9aafc6e6e.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "bd8cc91d1354eff13cbfd3dbf9a0eb731f5542022831d8cbea5ab2a60f653411",
+    "identity": "Rounded blue head, two huge circular yellow eyes with glossy pupils and a yellow cap-like forehead shape, small red triangular nose, thick curved red smile and yellow muzzle. Preserve saturated yellow and blue and extend the cropped outfit with red accents.",
+    "color": "#ffd447",
+    "style": 0,
+    "plan": "generate"
+  },
+  {
+    "id": "autistophrenicsprotagonist",
+    "name": "Autistophrenic Sprotagonist",
+    "reference": "art/roster-intake-nov03-late/autistophrenicsprotagonist/reference.png",
+    "attachment": "codex-clipboard-9990b58c-2d5d-4317-a6cf-7732399f0fa3.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "881739e01ecd5a7bd1dabeb12b3d7ac6fabf313f90bd8aad24c0858a7e84989c",
+    "identity": "Strong cobalt backward spikes, two almond yellow eyes, slim red lips, elongated clean blue neck. Thick orange and yellow layered collar with blue bow clasp and tiny oval badge, red shirt and blue hands.",
+    "color": "#ff9b39",
+    "style": 1,
+    "plan": "generate"
+  },
+  {
+    "id": "sprotolg",
+    "name": "Sproto LG",
+    "reference": "art/roster-intake-nov03-late/sprotolg/reference.png",
+    "attachment": "codex-clipboard-2ac6aba0-8669-4615-b2df-59b51ec47fa3.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "ab768049772089cc2cc5aa0d3ef8fd7e28ab094f1423df39d6529cc14cc10eb8",
+    "identity": "Blue spined head with tiny yellow side ear, sleepy blue-lidded orange pupils, vivid huge yellow muzzle and wide red smile. Thin long blue torso, tiny yellow lower chest motifs and red hands.",
+    "color": "#ffe33c",
+    "style": 2,
+    "plan": "generate"
+  },
+  {
+    "id": "kerrieanne",
+    "name": "Kerrie Anne",
+    "reference": "art/roster-intake-nov03-late/kerrieanne/reference.png",
+    "attachment": "codex-clipboard-3012d7a2-0efb-4487-b5cc-cfe156ca820d.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "8ea01059db0f15cc99a13191425d8a85b876e1cf9c3c325b9a0b05a8f5d8da88",
+    "identity": "Periwinkle-blue swept head, EXACTLY THREE yellow eyes in a continuous row, small red nose and smiling red lips with blue opening, yellow curled ornaments and small fixed yellow star by temple, yellow arms and collar, blue tunic with red circular motifs.",
+    "color": "#fce44e",
+    "style": 3,
+    "plan": "generate"
+  },
+  {
+    "id": "yusuf",
+    "name": "Yusuf",
+    "reference": "art/roster-intake-nov03-late/yusuf/reference.png",
+    "attachment": "codex-clipboard-898a47ec-a3dc-4b43-98f0-8d906bb4b53e.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "3ffb69070fa7c96d2f228e20e2d4101eb88001ec4a1affb2adb11903857d59d4",
+    "identity": "Symmetric wide indigo double swept spikes, exactly ONE central circular yellow cyclops eye with black pupil, two tiny yellow oval forehead marks above it, rust-red oval lips, very wide red collar over dark shirt.",
+    "color": "#f0b945",
+    "style": 0,
+    "plan": "generate"
+  },
+  {
+    "id": "bobdobbs",
+    "name": "Bob Dobbs",
+    "reference": "art/roster-intake-nov03-late/bobdobbs/reference.png",
+    "attachment": "codex-clipboard-910ebb8b-3b05-4bda-9499-a1d5e2ae01f6.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "bbc4df7d0e7bc39cd3705ef44ea69866b4317eff50fdc1e7caae4abc360a7015",
+    "identity": "Long swept blue head and narrow eyelid line crossing two yellow eyes, flat wide red lips, two yellow oval patches on a rounded blue torso, broad red lower garment with short sturdy red legs and matching feet.",
+    "color": "#f6dc51",
+    "style": 1,
+    "plan": "generate"
+  },
+  {
+    "id": "gluttony",
+    "name": "GLUTTONY",
+    "reference": "art/roster-intake-nov03-late/gluttony/reference.png",
+    "attachment": "codex-clipboard-69d0a025-30ad-4ac4-954a-68ffdbb3274d.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "90c266c966c08226e2f69ae8b632970892322c56442c26b11bd6bcfea706af8a",
+    "identity": "Bright yellow wild swept mane around blue face, large round yellow eyes, yellow ears, two distinctive red bands across upper smile and lower lips, striped blue-and-yellow chin, yellow collar and hands over red shirt.",
+    "color": "#ffdc30",
+    "style": 2,
+    "plan": "generate"
+  },
+  {
+    "id": "slakesly",
+    "name": "Slakesly",
+    "reference": "art/roster-intake-nov03-late/slakesly/reference.png",
+    "attachment": "codex-clipboard-1f3856c4-7a59-4668-b858-7d3a7ab40e6b.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "dc82087b13c97e218a2f1081a9175766b3766e057505c3497074bdf62324be3d",
+    "identity": "Blue long smooth torso and long swept spikes, heavy-lidded yellow eyes, very large vivid red lips, red rear fins and red arms. Preserve the small green mottled circular badge on chest.",
+    "color": "#a7d842",
+    "style": 3,
+    "plan": "generate"
+  },
+  {
+    "id": "jameskaminski",
+    "name": "James Kaminski",
+    "reference": "art/roster-intake-nov03-late/jameskaminski/reference.png",
+    "attachment": "codex-clipboard-1ca9488c-6990-4117-ab50-de6c18d00d56.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "0d3ca558f5caaa2ab575cf691f2ce7129f74c689be465f3e0eaa74c75b173f9e",
+    "identity": "Blue long torso and jagged red-tipped rear blue head spikes, two pale yellow eyes with heart highlights, tiny red nose, wide red smile and the attached lower red ribbed lip-like abdominal patch. Two connected arms and legs.",
+    "color": "#ff4f45",
+    "style": 0,
+    "plan": "generate"
+  },
+  {
+    "id": "86gwei",
+    "name": "86.gwei",
+    "reference": "art/roster-intake-nov03-late/86gwei/reference.png",
+    "attachment": "codex-clipboard-c7359142-9fbf-438e-83e3-493896aaa55c.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "293e2f6b5d9aeee6f4af50e1e747893657265f041e725f9fc883f7bf4b2fe764",
+    "identity": "Blue swept spikes with yellow ear, two huge yellow eyes with glossy pupils, huge red smile, yellow vest and red sleeves, large blue bow with red clasp.",
+    "color": "#ffe039",
+    "style": 1,
+    "plan": "generate"
+  },
+  {
+    "id": "sidelinereferee",
+    "name": "The Sideline Referee",
+    "reference": "art/roster-intake-nov03-late/sidelinereferee/reference.png",
+    "attachment": "codex-clipboard-e9709371-2e3d-48d5-968e-81c55d5bbb13.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "25b1a07b25191e46a857f082a2f3322688e0f6f560a7242989888610d137c875",
+    "identity": "Periwinkle spiked head with wide yellow swept band, two oversized circular yellow eyes and big black pupils, red-orange grin and black nose, very slim looping yellow arms, layered yellow/blue collar and red-and-yellow legs with red shoes.",
+    "color": "#fcea53",
+    "style": 2,
+    "plan": "generate"
+  },
+  {
+    "id": "zebracorn",
+    "name": "Zebracorn",
+    "reference": "art/roster-intake-nov03-late/zebracorn/reference.png",
+    "attachment": "codex-clipboard-a9d5f575-24fa-4250-8cc9-774b4c7d4e2d.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "4628d7d5c2dd69ae5f3949507d4675de383d81ff94dcbdebf330feee64db68db",
+    "identity": "Sky-blue swept spikes, round yellow eyes, yellow side ear and huge yellow muzzle, red nose and white toothy grin. Wide yellow neck rings with red inner ring and red top.",
+    "color": "#ffe64b",
+    "style": 3,
+    "plan": "generate"
+  },
+  {
+    "id": "corn",
+    "name": "CORN",
+    "reference": "art/roster-intake-nov03-late/corn/reference.png",
+    "attachment": "codex-clipboard-eda7bbd0-2d0a-450b-974a-458469921a7b.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "6c080b69f5ca4185591321bbbb1a5a61fce5ea6a91755c9d01f3fec073f302d1",
+    "identity": "Cobalt twin high swept crests and long rear spikes, round yellow eyes, long teardrop red nose, wide red lips, red rolled collar with small gold clasp and clearly visible red segmented fingered hands.",
+    "color": "#ffc934",
+    "style": 0,
+    "plan": "generate"
+  },
+  {
+    "id": "zakarum",
+    "name": "Zakarum",
+    "reference": "art/roster-intake-nov03-late/zakarum/reference.png",
+    "attachment": "codex-clipboard-c7807171-5190-4d30-aa41-262b9ac2edc1.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "ed38d1a87568529f6459f8d3b9f268d65e7a5644e0fff27903f4a9db2b457857",
+    "identity": "Round saturated blue head with upward swept spikes and red rear fin, large circular yellow eyes, red bulbous nose, wide red smile, two distinct red round ear or cheek ornaments. Thick red collar on yellow top.",
+    "color": "#ffd43c",
+    "style": 1,
+    "plan": "generate"
+  },
+  {
+    "id": "bgbadger",
+    "name": "BGBadger",
+    "reference": "art/roster-intake-nov03-late/bgbadger/reference.png",
+    "attachment": "codex-clipboard-4279919a-3f99-4a78-8347-fe037cc51ea3.png",
+    "size": [
+      400,
+      400
+    ],
+    "sha256": "05755746074f1bf383d460bfbf1c849d9ff7e0b33f6c3a337d9fdf08e5e8ebc1",
+    "identity": "Long cobalt head and torso with bright yellow rear spikes, sleepy horizontal yellow eyes, broad vivid red lips and pair of large red rounded shapes low on torso. Keep lower markings attached, red outfit at base and blue arms and legs.",
+    "color": "#ff5041",
+    "style": 2,
+    "plan": "generate"
+  }
+]

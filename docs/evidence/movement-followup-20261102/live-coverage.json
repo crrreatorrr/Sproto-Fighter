@@ -1,10 +1,10 @@
 {
   "date": "2026-11-03",
   "pending": [],
-  "owners": 189,
-  "singleBodyOwners": 169,
+  "owners": 215,
+  "singleBodyOwners": 195,
   "pairedOwners": 20,
-  "bodyAtlases": 209,
+  "bodyAtlases": 235,
   "everyFrameVisuallyApproved": 0,
   "limits": [
     "Counts use different explicit units; do not add them as comparable frames.",
@@ -9021,6 +9021,916 @@
         "Sampled the installed body across all listed action families."
       ],
       "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "sprotopia",
+      "name": "Sprotopia",
+      "bodies": [
+        "sprotopia"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "lestrange",
+      "name": "LeStrange",
+      "bodies": [
+        "lestrange"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "cryptobartender",
+      "name": "CryptoBARTENDER",
+      "bodies": [
+        "cryptobartender"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "razz",
+      "name": "Razz",
+      "bodies": [
+        "razz"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "laserbach",
+      "name": "Laserbach",
+      "bodies": [
+        "laserbach"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "freedfrida",
+      "name": "Freed Frida",
+      "bodies": [
+        "freedfrida"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "contresens",
+      "name": "Contre-Sens",
+      "bodies": [
+        "contresens"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "sprotomidnightfx",
+      "name": "SprotoMidnightFX",
+      "bodies": [
+        "sprotomidnightfx"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "mildtacos",
+      "name": "mildtacos",
+      "bodies": [
+        "mildtacos"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "sprotosurvivor",
+      "name": "Sproto Survivor",
+      "bodies": [
+        "sprotosurvivor"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "d86",
+      "name": "D86",
+      "bodies": [
+        "d86"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "cantankerous",
+      "name": "Can Tankerous",
+      "bodies": [
+        "cantankerous"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "autistophrenicsprotagonist",
+      "name": "Autistophrenic Sprotagonist",
+      "bodies": [
+        "autistophrenicsprotagonist"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "sprotolg",
+      "name": "Sproto LG",
+      "bodies": [
+        "sprotolg"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "kerrieanne",
+      "name": "Kerrie Anne",
+      "bodies": [
+        "kerrieanne"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "yusuf",
+      "name": "Yusuf",
+      "bodies": [
+        "yusuf"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "bobdobbs",
+      "name": "Bob Dobbs",
+      "bodies": [
+        "bobdobbs"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "gluttony",
+      "name": "GLUTTONY",
+      "bodies": [
+        "gluttony"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "slakesly",
+      "name": "Slakesly",
+      "bodies": [
+        "slakesly"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "jameskaminski",
+      "name": "James Kaminski",
+      "bodies": [
+        "jameskaminski"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "86gwei",
+      "name": "86.gwei",
+      "bodies": [
+        "86gwei"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "sidelinereferee",
+      "name": "The Sideline Referee",
+      "bodies": [
+        "sidelinereferee"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "zebracorn",
+      "name": "Zebracorn",
+      "bodies": [
+        "zebracorn"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "corn",
+      "name": "CORN",
+      "bodies": [
+        "corn"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "zakarum",
+      "name": "Zakarum",
+      "bodies": [
+        "zakarum"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "bgbadger",
+      "name": "BGBadger",
+      "bodies": [
+        "bgbadger"
+      ],
+      "reviewer": "live-batch-nov03-late",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 34,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+        "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+      ],
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
     }
   ]
 }
