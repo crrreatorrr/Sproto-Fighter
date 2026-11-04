@@ -1,0 +1,20 @@
+{
+  "id": "vela",
+  "phase": "outro",
+  "seen": [
+    "morelight-smoke",
+    "morelight-mecha",
+    "morelight-ejection",
+    "morelight-wizard",
+    "morelight-exit"
+  ],
+  "frames": 1972,
+  "visible": 98,
+  "boundaryChecks": [
+    "mecha/ejection",
+    "ejection/wizard"
+  ],
+  "smallMorelightHeight": 158,
+  "mechaHeight": 228,
+  "referenceMechaFramesVerified": 26
+}

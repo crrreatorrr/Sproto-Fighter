@@ -1,15 +1,19 @@
 import {chromium} from 'playwright';
+import {createServer} from 'vite';
 import assert from 'node:assert/strict';
 import {writeFileSync} from 'node:fs';
-const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});
+const server=process.env.BASE_URL?null:await createServer({server:{host:'127.0.0.1',port:0}});
+if(server)await server.listen();
+const base=process.env.BASE_URL||'http://127.0.0.1:'+server.httpServer.address().port+'/';
+const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||(process.platform==='darwin'?'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome':undefined)}).catch(async error=>{await server?.close();throw error;});
 const context=await browser.newContext({viewport:{width:1500,height:1000}}),page=await context.newPage();
 const failures=[],errors=[];
 page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)failures.push([r.status(),r.url()]);});
-const base=process.env.BASE_URL||'http://127.0.0.1:5198/';
 try{
  await page.goto(base);await page.waitForFunction(()=>window.neonRelay&&document.querySelector('#start-fight')?.disabled===false);
  const playback=await page.evaluate(async()=>{
   const {createStoryAnimation,storyAnimationPlan}=await import('/src/storyAnimation.ts');
+  const {default:manifest}=await import('/src/storyAnimationManifest.json');
   const canvas=document.createElement('canvas');canvas.width=1280;canvas.height=720;
   const ctx=canvas.getContext('2d'),records=[];
   for(const id of ['nick','guest07','sproto943','vela','vaudream']){
@@ -17,15 +21,34 @@ try{
    for(const phase of ['intro','outro']){
     if(!plan[phase].length)continue;
     if(!animation.start(phase))throw Error('Cannot start '+id+'/'+phase);
-    const seen=[];let frames=0,visible=0;
+    const seen=[],boundaryChecks=[],referenceFramesChecked=new Set();let frames=0,visible=0,mechaEnd=null,ejectionEnd=null,smallMorelightHeight=null,mechaHeight=null;
     while(animation.active&&frames<10000){
      const snap=animation.snapshot();if(seen.at(-1)!==snap.clip)seen.push(snap.clip);
      ctx.clearRect(0,0,1280,720);animation.draw(ctx,1100,578,-1);
+     if(id==='vela'&&phase==='outro'){
+      const pixels=()=>ctx.getImageData(0,0,1280,720).data;
+      const visibleHeight=data=>{let min=720,max=-1;for(let y=0;y<720;y++)for(let x=0;x<1280;x++)if(data[(y*1280+x)*4+3]){min=Math.min(min,y);max=Math.max(max,y);}return max-min+1;};
+      if(snap.clip==='morelight-mecha'&&snap.frame===manifest['morelight-mecha'].frames-1){mechaEnd=pixels();mechaHeight=visibleHeight(mechaEnd);}
+      if(snap.clip==='morelight-ejection'&&snap.frame<manifest['morelight-ejection'].referenceMechaFrames&&mechaEnd&&!referenceFramesChecked.has(snap.frame)){
+       const now=pixels();if(!now.every((v,i)=>v===mechaEnd[i]))throw Error('Reference mecha changed or an unwanted chest object was added');
+       referenceFramesChecked.add(snap.frame);
+       if(!boundaryChecks.includes('mecha/ejection'))boundaryChecks.push('mecha/ejection');
+      }
+      if(snap.clip==='morelight-ejection'&&snap.frame===manifest['morelight-ejection'].frames-1){
+       ejectionEnd=pixels();smallMorelightHeight=visibleHeight(ejectionEnd);
+       if(Math.abs(smallMorelightHeight-159)>2||smallMorelightHeight>=mechaHeight*.75)throw Error('Morelight did not return to his small regular size');
+      }
+      if(snap.clip==='morelight-wizard'&&snap.frame===0&&ejectionEnd){
+       const now=pixels();if(!now.every((v,i)=>v===ejectionEnd[i]))throw Error('Ejection/wizard boundary moved');
+       if(!boundaryChecks.includes('ejection/wizard'))boundaryChecks.push('ejection/wizard');
+      }
+     }
      if(frames%20===0&&ctx.getImageData(0,0,1280,720).data.some((v,i)=>i%4===3&&v>0))visible++;
      animation.advance();frames++;
     }
     if(animation.active)throw Error('Unbounded scene');
-    records.push({id,phase,seen,frames,visible});
+    if(id==='vela'&&phase==='outro'&&(boundaryChecks.length!==2||referenceFramesChecked.size!==manifest['morelight-ejection'].referenceMechaFrames))throw Error('Missing Morelight boundary/reference verification');
+    records.push({id,phase,seen,frames,visible,boundaryChecks,...(smallMorelightHeight?{smallMorelightHeight,mechaHeight,referenceMechaFramesVerified:referenceFramesChecked.size}:{})});
    }
   }
   return records;
@@ -66,5 +89,5 @@ try{
  await retryContext.close();
  assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
  writeFileSync('docs/evidence/story-animations-20261104/browser.json',JSON.stringify({playback,nickIntro:{pause:true,skip:true,retry:true,combatFrames:0,failedLoadRetry:true},errors,failures},null,2)+'\n');
- console.log('PASS: all 13 atlases decoded and rendered in Chrome; six bounded scene playlists; actual Nick intro pause, skip, retry and input/replay isolation.');
-}finally{await browser.close();}
+ console.log('PASS: all 14 atlases decoded and rendered in Chrome; six bounded scene playlists; actual Nick intro pause, skip, retry and input/replay isolation.');
+}finally{await browser.close();await server?.close();}

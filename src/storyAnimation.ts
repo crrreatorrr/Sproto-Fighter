@@ -1,5 +1,5 @@
 import {TICK_RATE,WIDTH} from './core';
-import manifest from '../public/story-animations/manifest.json';
+import manifest from './storyAnimationManifest.json';
 
 export type StoryClip = keyof typeof manifest;
 export type StoryScenePhase = 'intro'|'outro';
@@ -14,7 +14,7 @@ export function storyAnimationPlan(opponent:string,isStory:boolean):StoryAnimati
         case 'nick':return {intro:['nick-juicy'],outro:['nick-mount','nick-dragon','nick-flight'],replaceDefeat:true};
         case 'guest07':return {...plan,outro:['juicy-robot'],replaceDefeat:true};
         case 'sproto943':return {...plan,outro:['art-fusion','mega-woman-growth'],replaceDefeat:true};
-        case 'vela':return {...plan,outro:['morelight-smoke','morelight-mecha','morelight-wizard','morelight-exit']};
+        case 'vela':return {...plan,outro:['morelight-smoke','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit']};
         case 'vaudream':return {...plan,outro:['vmu-shield','vmu-black-hole'],replaceDefeat:true};
         default:return plan;
     }
@@ -25,7 +25,7 @@ export function createStoryAnimation(){
     let phase:StoryScenePhase|null=null,index=0,age=0,skipRequested=false,generation=0;
     const consumed=new Set<StoryScenePhase>();
     let sceneAnchorX:number|null=null,heldOutro=false;
-    const facingFor=(id:StoryClip,defeatFacing:number)=>id==='morelight-smoke'?defeatFacing:['nick-juicy','morelight-wizard','morelight-exit'].includes(id)?1:-1;
+    const facingFor=(id:StoryClip,defeatFacing:number)=>id==='morelight-smoke'?defeatFacing:['nick-juicy','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'].includes(id)?1:-1;
     function reset(){phase=null;index=0;age=0;skipRequested=false;sceneAnchorX=null;heldOutro=false;consumed.clear();}
     function clear(){generation++;reset();images.clear();plan=storyAnimationPlan('',false);}
     function finish(){
@@ -84,10 +84,9 @@ export function createStoryAnimation(){
                 sceneAnchorX=id==='nick-juicy'?spec.x*spec.scale:Math.max(left,Math.min(WIDTH-right,x));
             }
             ctx.save();ctx.imageSmoothingEnabled=false;
-            ctx.translate(Math.round(sceneAnchorX),Math.round(y));ctx.scale(facing,1);
+            ctx.translate(Math.round(sceneAnchorX),Math.round(y));ctx.scale(facing*spec.scale,spec.scale);
             ctx.drawImage(image,frame%spec.columns*spec.width,Math.floor(frame/spec.columns)*spec.height,
-                spec.width,spec.height,-Math.round(spec.x*spec.scale),-Math.round(spec.y*spec.scale),
-                Math.round(spec.width*spec.scale),Math.round(spec.height*spec.scale));
+                spec.width,spec.height,-spec.x,-spec.y,spec.width,spec.height);
             ctx.restore();return true;
         },
         get replaceDefeat(){return plan.replaceDefeat;},

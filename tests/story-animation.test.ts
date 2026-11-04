@@ -2,7 +2,7 @@ import {afterEach,beforeEach,describe,expect,it,vi} from 'vitest';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 import {createStoryAnimation,storyAnimationPlan,type StoryClip} from '../src/storyAnimation';
-import manifest from '../public/story-animations/manifest.json';
+import manifest from '../src/storyAnimationManifest.json';
 import {createState} from '../src/core';
 import {createRoundPresentation,advanceRoundPresentation,beginRoundOutro} from '../src/animationEvents';
 
@@ -51,7 +51,7 @@ async function harness(id:string,win=0){
 
 describe('story animation ordering and lifecycle',()=>{
     it('uses each boss\'s own scenes and preserves Morelight\'s full transformation order',()=>{
-        expect(storyAnimationPlan('vela',true)).toEqual({intro:[],outro:['morelight-smoke','morelight-mecha','morelight-wizard','morelight-exit'],replaceDefeat:false});
+        expect(storyAnimationPlan('vela',true)).toEqual({intro:[],outro:['morelight-smoke','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'],replaceDefeat:false});
         expect(storyAnimationPlan('vaudream',true).outro).toEqual(['vmu-shield','vmu-black-hole']);
         expect(storyAnimationPlan('guest07',true).outro).toEqual(['juicy-robot']);
         expect(storyAnimationPlan('sproto943',true).outro).toEqual(['art-fusion','mega-woman-growth']);
@@ -80,7 +80,7 @@ describe('story animation ordering and lifecycle',()=>{
         expect(JSON.stringify(t.state)).toBe(snapshot);
         t.run(0);expect(t.calls).toEqual(['save','report','result']);
     });
-    it('lets Morelight die before smoke, mecha, wizard and flight',async()=>{
+    it('lets Morelight die before smoke, mecha, ejection, wizard and flight',async()=>{
         const t=await harness('vela');t.run(0);expect(t.presentation.phase).toBe('outro');expect(t.animation.active).toBe(null);
         for(let n=0;n<96;n++)t.run(0);
         expect(t.animation.snapshot().clip).toBe('morelight-smoke');

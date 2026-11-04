@@ -1,0 +1,66 @@
+{
+  "jobId": "e97463ff-c23a-4abc-9b42-c1237e8e74e0",
+  "model": "seedance_2_5",
+  "quotedCredits": 56,
+  "params": {
+    "model": "seedance_2_5",
+    "mode": "omni_reference",
+    "duration": 8,
+    "resolution": "720p",
+    "aspect_ratio": "4:3",
+    "generate_audio": false,
+    "bitrate_mode": "high",
+    "medias": [
+      {
+        "role": "start_image",
+        "value": "7f857f36-d832-4eeb-96f2-a5eec07df2d9"
+      },
+      {
+        "role": "end_image",
+        "value": "407ecc27-1aa5-434c-92ec-0410aba10301"
+      }
+    ],
+    "prompt": "Create a polished high quality hand-pixeled 2D fighting-game sprite animation, camera locked, side view, perfectly flat solid chroma green #00FF00 background throughout. Preserve exact character identities and 16-bit pixel-art palette and pixel edges from both reference frames. First reference is Morelight inside his blue and gold heavily armed mecha; final reference is the same real Morelight, a small BLUE furry sproto with round YELLOW belly, RED smiling muzzle, yellow eyes and spiky blue hair, in his regular unarmored form. He is NOT human. He is the sole pilot and must survive. Start exactly from the closed mecha first frame. 0-1s: reactor pulses hot orange, tiny sparks and shaking armor indicate overload. 1-3s: the mecha erupts into a dramatic layered orange/yellow/white pixel explosion with dark smoke, broken blue and gold armor plates tumbling outward; cockpit bursts open and ejects the real small blue Morelight upward, clearly visibly separate from the exploding machine, feet and arms flailing in an expressive cartoony arc. 3-5s: the fireball collapses to pixel smoke as the small regular Morelight descends, lands safely feet first and briefly crouches, dust puffs; all mechanical debris vanishes. 5-7s: Morelight stands and regains his exact regular unarmored stance. 7-8s: hold exactly the final reference pose, position, size and blue/yellow/red colors so it can seamlessly lead into the existing wizard transformation. Keep all effects and pilot in frame with comfortable margins. Crisp deliberate pixel clusters, rich limited-palette shading, readable silhouettes, energetic arcade timing, beautiful animated fire and smoke. No camera motion, zooms, realistic rendering, gradients, text, logos, extra people, wizard clothing, injuries, death, blood, green fire or green characters. Keep background perfectly pure green for sprite extraction, no floor or scenery."
+  },
+  "chestCorrection": {
+    "jobId": "a32f68d2-b924-49a3-aea7-beff995a8538",
+    "quotedCredits": 61,
+    "params": {
+      "model": "seedance_2_5",
+      "mode": "video_edit",
+      "resolution": "720p",
+      "generate_audio": false,
+      "bitrate_mode": "high",
+      "medias": [
+        {
+          "role": "video",
+          "value": "e97463ff-c23a-4abc-9b42-c1237e8e74e0"
+        },
+        {
+          "role": "image",
+          "value": "7f857f36-d832-4eeb-96f2-a5eec07df2d9"
+        }
+      ],
+      "prompt": "Edit this pixel-art mecha explosion/ejection video. Preserve its existing camera, framing, timing, solid chroma-green background, high quality 16-bit pixel animation style, mechanical debris, safe pilot ejection, landing, and ending on SMALL REGULAR BLUE MORELIGHT. Important correction: REMOVE the added white spherical bomb / bright white orb that appears on the mecha's chest before the explosion. There must be NO bomb, NO sphere, NO white glowing disk, NO attached explosive and NO added device on his chest in any frame. Restore and preserve the exact original closed rectangular blue-and-gold armored chest panel from the supplied reference image. Keep the mecha otherwise identical to that reference: same silhouette, blue and gold armor, red outline on its rectangular chest plate, missile pods, arms, gun, cockpit and Morelight's head; do not redesign any armor. Initiate the explosion with small orange sparks escaping armor seams and plates bursting outward, without adding or showing any bomb or white charge object. The explosion itself can retain its existing bright fireball; only remove the artificial chest bomb during the intact-mecha portion. After the explosion, the real small Morelight survives, is ejected and lands safely as the same small blue furry sproto with yellow belly and red muzzle. End on that small regular pilot, unarmored, with all mech parts gone. Do not enlarge the regular pilot, add wizard clothing, change his colors, introduce people, move the camera, add text, or change the flat green background."
+    }
+  },
+  "runtimeComposition": {
+    "sourceJobId": "e97463ff-c23a-4abc-9b42-c1237e8e74e0",
+    "rejectedEditJobId": "a32f68d2-b924-49a3-aea7-beff995a8538",
+    "rejectedEditReason": "Changed the reference chest panel into a round light; not used.",
+    "referenceMechaFrames": [
+      0,
+      25
+    ],
+    "firstGeneratedExplosionFrame": 26,
+    "sourceSha256": "02278182265aeeef41ce2e469318deea771fb7013cf1d352e0f801713c50c750",
+    "atlasSha256": "0bd3abd356983f58b7c6dfc660f7d83f4e0115c5615736132fb425f85667ced1",
+    "outputFrames": 129,
+    "outputFps": 16,
+    "actualSourceResolution": [
+      1112,
+      834
+    ],
+    "actualSourceDurationSeconds": 8.041667
+  }
+}

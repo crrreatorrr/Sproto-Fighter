@@ -125,7 +125,7 @@
     "fps": 16,
     "x": 139,
     "y": 201,
-    "scale": 1.45,
+    "scale": 1.4,
     "left": 31,
     "right": 320
   },
@@ -151,7 +151,7 @@
     "fps": 20,
     "x": 126,
     "y": 175,
-    "scale": 1.45,
+    "scale": 1.4,
     "left": 50,
     "right": 202
   },
@@ -164,8 +164,22 @@
     "fps": 20,
     "x": 126,
     "y": 175,
-    "scale": 1.45,
+    "scale": 1.4,
     "left": 0,
     "right": 320
+  },
+  "morelight-ejection": {
+    "image": "morelight-ejection.png",
+    "width": 320,
+    "height": 240,
+    "columns": 8,
+    "frames": 129,
+    "fps": 16,
+    "x": 139,
+    "y": 209,
+    "scale": 1.4,
+    "left": 0,
+    "right": 320,
+    "referenceMechaFrames": 26
   }
 }
