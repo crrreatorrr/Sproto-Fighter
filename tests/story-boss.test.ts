@@ -45,18 +45,23 @@ describe('fixed-screen story bosses',()=>{
         expect(ball.bounces).toBe(2);expect(ball.vy).toBeLessThan(0);
     });
 
-    it('VMU alternates lasers and explosive bombs with six staggered slow missiles',()=>{
-        const {state,boss,tick}=fight('vmu');
+    it.each(['dragon','giant','mecha','juicy','art','vmu'] as const)('%s launches eight slow missiles on varied paths early in the fight',form=>{
+        const {state,tick}=fight(form);
+        state.godMode=true;
+        while(state.frame<310)tick(A.right);
+        const missiles=state.projectiles.filter(p=>p.owner===1&&p.vx<3);
+        expect(missiles).toHaveLength(8);
+        expect(new Set(missiles.map(p=>p.vy)).size).toBeGreaterThan(3);
+        expect(missiles.every(p=>p.life>0)).toBe(true);
+    });
+
+    it('VMU uses custom laser and explosive bomb attacks between slow missile waves',()=>{
+        const {state,tick}=fight('vmu');
         state.godMode=true;
         while(state.frame<77)tick(A.right);
-        expect(state.projectiles).toContainEqual(expect.objectContaining({owner:1,art:'laser'}));
-        while(state.frame<221)tick();
-        expect(state.projectiles).toContainEqual(expect.objectContaining({owner:1,explodes:true}));
-        while(state.frame<365)tick();
-        expect(boss.pending).toHaveLength(5);
-        expect(state.projectiles).toContainEqual(expect.objectContaining({owner:1,art:'missile',vx:2.8}));
-        while(state.frame<417)tick();
-        expect(state.projectiles.filter(shot=>shot.owner===1&&shot.vx===2.8)).toHaveLength(6);
+        expect(state.projectiles).toContainEqual(expect.objectContaining({owner:1,art:'laser',variant:0}));
+        while(state.frame<365)tick(A.right);
+        expect(state.projectiles).toContainEqual(expect.objectContaining({owner:1,explodes:true,variant:1}));
     });
 
     it.each(['giant','mecha','dragon','juicy','art','vmu'] as const)('%s restores full health and records the refill starting point',form=>{

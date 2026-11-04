@@ -92,12 +92,14 @@ export function createStoryAnimation(){
                     return {left,right};
                 });
                 const left=Math.max(...bounds.map(v=>v.left)),right=Math.max(...bounds.map(v=>v.right));
-                sceneAnchorX=id==='nick-juicy'?spec.x*spec.scale:Math.max(left,Math.min(WIDTH-right,x));
+                sceneAnchorX=Math.max(left,Math.min(WIDTH-right,x));
             }
             ctx.save();ctx.imageSmoothingEnabled=false;
             const anchor=(id==='vmu-black-hole'||id==='vmu-shield')?storyBossX('vmu')
-                :id==='nick-mount'?storyBossX('dragon')-340
-                :id==='nick-flight'?storyBossX('dragon')
+                // Match Nick's idle pose center, which is left of his combat anchor.
+                :id==='nick-juicy'?x-17
+                :id==='nick-mount'?storyBossX('dragon')
+                :id==='nick-flight'?storyBossX('dragon')+1100*(age/(spec.frames*TICK_RATE/spec.fps-1))**2
                 :id==='art-fusion'||id==='mega-woman-growth'?storyBossX('art')
                 :id==='morelight-shrink'||id==='morelight-mecha'||id==='juicy-robot'?STORY_BOSS_X
                 :!drawPhase&&boss?storyBossX(boss):sceneAnchorX??x;
@@ -106,12 +108,35 @@ export function createStoryAnimation(){
                 ctx.drawImage(image,cel%spec.columns*spec.width+left,Math.floor(cel/spec.columns)*spec.height,
                     width,spec.height,left-spec.x+offset,-spec.y,width,spec.height);
             };
+            const emptyCockpit=(offset:number,closed:boolean,climbing:boolean)=>{
+                ctx.save();
+                ctx.translate(offset-spec.x,-spec.y);
+                if(closed||climbing){
+                    ctx.beginPath();
+                    const hatchInMotion=frame<=106||(frame>=176&&frame<=178);
+                    const hatchEdge=hatchInMotion?93:frame>=196?90:89;
+                    ctx.rect(climbing?159:128,72,57,closed?hatchEdge-72:38);
+                    ctx.clip();
+                }
+                ctx.fillStyle='#111d34';
+                ctx.beginPath();
+                ctx.moveTo(130,76);ctx.lineTo(159,75);ctx.lineTo(176,82);
+                ctx.lineTo(181,97);ctx.lineTo(174,106);ctx.lineTo(146,106);
+                ctx.lineTo(135,99);ctx.lineTo(130,89);ctx.closePath();ctx.fill();
+                ctx.restore();
+            };
             if(id==='morelight-mecha'&&drawPhase&&frame>=26&&frame<84){
-                // Hold the pilot in place and slide the parked suit in from the right.
+                // Hold the pilot in place and slide the parked suit in from the left.
                 const progress=Math.max(0,(frame-32)/52);
-                const travel=(WIDTH-anchor)/spec.scale+spec.x-88;
+                const travel=-anchor/spec.scale+spec.x-spec.width;
+                const offset=Math.round(travel*(1-progress)**2);
+                drawFrame(84,88,spec.width-88,offset);
+                emptyCockpit(offset,false,false);
                 drawFrame(Math.max(0,25-(frame-26)*2));
-                drawFrame(84,88,spec.width-88,Math.round(travel*(1-progress)**2));
+            }else if(id==='morelight-mecha'&&drawPhase&&frame>=84&&frame<198){
+                drawFrame(frame);
+                // The climbing pilot passes in front of the hatch before the head reveal.
+                emptyCockpit(0,frame>=101,frame>=153&&frame<=166);
             }else if(id==='morelight-ejection'&&frame>=26&&frame<60){
                 // Keep the blast centered on the cockpit and ease back to the ejection pose.
                 const scale=.66+.34*Math.max(0,(frame-48)/12);

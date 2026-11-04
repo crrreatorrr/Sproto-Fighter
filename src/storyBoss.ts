@@ -22,16 +22,47 @@ type Art=keyof typeof projectileUrls;
 const artSize:Record<Art,readonly [number,number]>={
     missile:[44,18],laser:[96,14],bolt:[30,10],diamond:[26,20],orb:[24,24],roller:[36,20],seed:[14,14],
 };
-type Attack={name:string;art:Art;speed:number;origin:readonly [number,number];pattern:'aim'|'fan'|'floor'|'arc'|'burst'|'bomb'|'screen'};
-const missileSpit:Attack={name:'Mouth missile',art:'missile',speed:5,origin:[100,-231],pattern:'aim'};
+type Pattern='aim'|'fan'|'floor'|'arc'|'burst'|'bomb'|'screen'|'stair'|'wave'|'sweep';
+type Attack={name:string;art:Art;speed:number;origin:readonly [number,number];pattern:Pattern;pose?:number};
 const attacks:Record<BossForm,readonly Attack[]>={
-    vmu:[{name:'Laser burst',art:'laser',speed:19,origin:[25,-89],pattern:'burst'},{name:'Bomb drop',art:'orb',speed:10,origin:[44,-68],pattern:'bomb'},{name:'Slow missile screen',art:'missile',speed:2.8,origin:[44,-68],pattern:'screen'}],
-    giant:[missileSpit,{name:'Spit spread',art:'seed',speed:7,origin:[100,-239],pattern:'fan'},{name:'Ground roll',art:'roller',speed:9,origin:[142,-156],pattern:'floor'}],
-    mecha:[{...missileSpit,name:'Missile barrage',pattern:'burst',speed:6,origin:[98,-213]},{name:'Cannon spread',art:'diamond',speed:9,origin:[203,-100],pattern:'fan'},{name:'Mortar',art:'orb',speed:8,origin:[194,-233],pattern:'arc'}],
-    dragon:[{name:'Dragonfire',art:'bolt',speed:10,origin:[174,-348],pattern:'burst'},{name:'Wing volley',art:'missile',speed:6,origin:[192,-196],pattern:'fan'},{name:'Ember roll',art:'roller',speed:8,origin:[188,-126],pattern:'floor'}],
-    art:[{name:'Paint burst',art:'orb',speed:7,origin:[65,-189],pattern:'burst'},{name:'Palette fan',art:'diamond',speed:8,origin:[56,-223],pattern:'fan'},{name:'Rolling ink',art:'roller',speed:10,origin:[50,-100],pattern:'floor'}],
-    juicy:[{name:'Rocket salvo',art:'missile',speed:6,origin:[48,-215],pattern:'burst'},{name:'Pulse fan',art:'orb',speed:8,origin:[-82,-254],pattern:'fan'},{name:'Ricochet mortar',art:'diamond',speed:8,origin:[-22,-248],pattern:'arc'}],
+    dragon:[
+        {name:'Dragonfire',art:'bolt',speed:10,origin:[214,-399],pattern:'burst'},
+        {name:'Wing volley',art:'missile',speed:6,origin:[212,-254],pattern:'fan'},
+        {name:'Ember roll',art:'roller',speed:8,origin:[216,-74],pattern:'floor'},
+        {name:'Coiling missiles',art:'missile',speed:2.6,origin:[212,-254],pattern:'wave',pose:1},
+    ],
+    giant:[
+        {name:'Mouth missile',art:'missile',speed:5,origin:[100,-231],pattern:'aim'},
+        {name:'Spit spread',art:'seed',speed:7,origin:[100,-239],pattern:'arc'},
+        {name:'Ground roll',art:'roller',speed:9,origin:[142,-156],pattern:'floor'},
+        {name:'Spit missile screen',art:'missile',speed:2.7,origin:[100,-231],pattern:'screen',pose:0},
+    ],
+    mecha:[
+        {name:'Missile barrage',art:'missile',speed:6,origin:[98,-213],pattern:'burst'},
+        {name:'Cannon spread',art:'diamond',speed:9,origin:[203,-100],pattern:'sweep'},
+        {name:'Mortar',art:'orb',speed:8,origin:[194,-233],pattern:'arc'},
+        {name:'Torpedo staircase',art:'missile',speed:2.6,origin:[98,-213],pattern:'stair',pose:0},
+    ],
+    juicy:[
+        {name:'Rocket salvo',art:'missile',speed:6,origin:[48,-215],pattern:'sweep'},
+        {name:'Pulse fan',art:'orb',speed:8,origin:[-82,-254],pattern:'wave'},
+        {name:'Ricochet mortar',art:'diamond',speed:8,origin:[-22,-248],pattern:'arc'},
+        {name:'Crossing torpedoes',art:'missile',speed:2.6,origin:[48,-215],pattern:'screen',pose:0},
+    ],
+    art:[
+        {name:'Paint burst',art:'orb',speed:7,origin:[65,-189],pattern:'fan'},
+        {name:'Palette fan',art:'diamond',speed:8,origin:[56,-223],pattern:'wave'},
+        {name:'Rolling ink',art:'roller',speed:10,origin:[50,-100],pattern:'floor'},
+        {name:'Paint missile cascade',art:'missile',speed:2.5,origin:[65,-189],pattern:'stair',pose:0},
+    ],
+    vmu:[
+        {name:'Laser burst',art:'laser',speed:19,origin:[25,-89],pattern:'burst'},
+        {name:'Bomb drop',art:'orb',speed:10,origin:[44,-68],pattern:'bomb'},
+        {name:'Slow missile screen',art:'missile',speed:2.8,origin:[44,-68],pattern:'screen'},
+        {name:'Zigzag pulse',art:'diamond',speed:8,origin:[44,-68],pattern:'wave',pose:2},
+    ],
 };
+const attackOrder=[0,3,1,2],vmuAttackOrder=[0,2,1,3];
 const formConfig={
     vmu:{title:'VMU · FINAL BOSS',target:[-92,-160,92,-16],period:144},
     giant:{title:'GIANT MORELIGHT',target:[-105,-313,135,0],period:166},
@@ -43,8 +74,8 @@ const formConfig={
 export const storyBossTitle=(form:BossForm)=>formConfig[form].title;
 
 type Box=readonly [left:number,top:number,right:number,bottom:number];
-type Shot=Projectile&{art:Art;hit?:boolean;explodes?:boolean;rolls?:boolean};
-type ShotPlan={x:number;y:number;vx:number;vy:number;gravity?:number;bounces?:number;delay?:number;explodes?:boolean;rolls?:boolean};
+type Shot=Projectile&{art:Art;hit?:boolean;explodes?:boolean;rolls?:boolean;wave?:number;variant?:number};
+type ShotPlan={x:number;y:number;vx:number;vy:number;gravity?:number;bounces?:number;delay?:number;explodes?:boolean;rolls?:boolean;wave?:number};
 export interface StoryBoss {
     form:BossForm;
     startFrame:number;
@@ -75,6 +106,8 @@ export function startStoryBoss(state:CombatState,form:BossForm):StoryBoss {
         invulnerableUntil:0,beamReadyAt:0,ballReadyAt:0,warning:null,pending:[],releasedAt:-100,lastAttack:0,blasts:[]};
 }
 
+function waveVelocity(shot:Shot){return ((shot.age??0)%32<=16?1:-1)*(shot.wave??0);}
+
 function within(value:number,min:number,max:number){return Math.max(min,Math.min(max,value));}
 function sweep(x:number,y:number,dx:number,dy:number,[left,top,right,bottom]:Box,w:number,h:number){
     let enter=0,exit=1;
@@ -96,7 +129,23 @@ function planAttack(form:BossForm,attack:Attack,playerX:number,playerY:number):S
         case 'burst':return [0,12,24].map(delay=>({x,y,vx,vy,delay}));
         case 'fan':return [-2.5,0,2.5].map(offset=>({x,y,vx,vy:vy+offset}));
         case 'floor':return [0,12].map(delay=>({x,y,vx:attack.speed,vy:1,gravity:.65,rolls:true,delay}));
-        case 'screen':return [20,65,112,38,90,136].map((height,i)=>({x,y,vx:attack.speed,vy:(FLOOR-height-y)/140,delay:i*10}));
+        case 'screen':return [20,65,112,38,90,136,54,155].map((height,i)=>({
+            x,y,vx:attack.speed,vy:(FLOOR-height-y)/(form==='juicy'?190-i*12:140),delay:i*8,
+        }));
+        case 'stair':return [18,42,66,90,114,138,162,186].map((height,i)=>({
+            x,y,vx:attack.speed+(i%3)*.15,vy:(FLOOR-height-y)/160,delay:i*8,
+        }));
+        case 'wave':{
+            const slow=attack.speed<3;
+            const lanes=slow?[-140,-90,-40,10,60,110,150,190]:[-36,0,36];
+            return lanes.map((height,i)=>({
+                x,y,vx:attack.speed,vy:slow?(FLOOR-y-105-height)/180:vy+height/22,
+                wave:i%2===0?1.6:-1.6,delay:i*(slow?8:10),
+            }));
+        }
+        case 'sweep':return [-2.4,-1.2,0,1.2,2.4].map((spread,i)=>({
+            x,y,vx,vy:vy+spread,delay:i*7,
+        }));
         case 'bomb':return [.72,1,1.27].map(factor=>({x,y,vx:dx/52*factor,vy:-5,gravity:.25,explodes:true}));
         case 'arc':return [-2,2].map(offset=>({x,y,vx:attack.speed+offset,vy:-4,gravity:.21,bounces:2}));
     }
@@ -147,7 +196,9 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
         fire('bossBall','orb',p.facing*8,2,51,{gravity:.4,bounces:3,life:180});boss.ballReadyAt=age+120;
     }
 
-    const pattern=attacks[boss.form],beat=age%config.period,attackIndex=Math.floor(age/config.period)%pattern.length;
+    const pattern=attacks[boss.form],beat=age%config.period;
+    const order=boss.form==='vmu'?vmuAttackOrder:attackOrder;
+    const attackIndex=order[Math.floor(age/config.period)%order.length];
     if(beat===24){
         boss.lastAttack=attackIndex;
         const attack=pattern[attackIndex];
@@ -161,7 +212,8 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
     for(const {shot,art,at} of boss.pending){
         if(age!==at)continue;
         const {delay,...trajectory}=shot;
-        shots.push({...trajectory,owner:1,shape:'bossHazard',art,damage:200,life:art==='missile'&&trajectory.vx<3?460:240});
+        shots.push({...trajectory,owner:1,shape:'bossHazard',art,variant:boss.lastAttack,
+            damage:200,life:art==='missile'&&trajectory.vx<3?460:240,age:0});
         boss.releasedAt=age;
     }
 
@@ -183,7 +235,8 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
     for(const shot of shots){
         if(shot.life<=0)continue;
         const x=shot.x,y=shot.y,[width,height]=artSize[shot.art];
-        shot.x+=shot.vx;shot.y+=shot.vy;shot.vy+=shot.gravity??0;shot.life--;
+        shot.age=(shot.age??0)+1;
+        shot.x+=shot.vx;shot.y+=shot.vy+waveVelocity(shot);shot.vy+=shot.gravity??0;shot.life--;
         if(shot.rolls&&shot.y+height/2>=FLOOR){
             shot.y=FLOOR-height/2;shot.vy=0;shot.gravity=0;
         }
@@ -221,36 +274,44 @@ async function loadImage(url:string){
 
 export async function loadStoryBossArt(form:BossForm){
     const forms:BossForm[]=form==='giant'?['giant','mecha']:[form];
-    const [projectiles,poses]=await Promise.all([
+    const [projectiles,poses,custom]=await Promise.all([
         Promise.all(Object.entries(projectileUrls).map(async ([key,url])=>[key,await loadImage(url)] as const)),
         Promise.all(forms.map(async key=>{
             const image=await loadImage(import.meta.env.BASE_URL+'story-animations/'+key+'-attacks.png');
-            if(image.naturalWidth!==1024||image.naturalHeight!==1024)throw new Error('Invalid boss attack sheet: '+key);
+            const size=key==='dragon'?1536:1024;
+            if(image.naturalWidth!==size||image.naturalHeight!==size)throw new Error('Invalid boss attack sheet: '+key);
+            return [key,image] as const;
+        })),
+        Promise.all(forms.map(async key=>{
+            const image=await loadImage(import.meta.env.BASE_URL+'story-animations/'+key+'-projectiles.png');
+            if(image.naturalWidth!==512||image.naturalHeight!==128)throw new Error('Invalid projectile sheet: '+key);
             return [key,image] as const;
         })),
     ]);
     return {
         projectiles:Object.fromEntries(projectiles) as Record<Art,HTMLImageElement>,
         poses:Object.fromEntries(poses) as Partial<Record<BossForm,HTMLImageElement>>,
+        custom:Object.fromEntries(custom) as Partial<Record<BossForm,HTMLImageElement>>,
     };
 }
 
 export function drawStoryBossPose(ctx:CanvasRenderingContext2D,state:CombatState,boss:StoryBoss,images:Awaited<ReturnType<typeof loadStoryBossArt>>){
     const image=images.poses[boss.form],releaseAge=state.frame-boss.startFrame-boss.releasedAt;
+    const attackPose=attacks[boss.form][boss.lastAttack].pose??boss.lastAttack;
     if(image&&boss.form==='vmu'){
         const frame=state.winner!==null?0:boss.warning?Math.min(3,Math.floor((state.frame-boss.startFrame)%formConfig.vmu.period/14)-1)
-            :releaseAge<24?4+boss.lastAttack*4+Math.floor(releaseAge/6):0;
+            :releaseAge<24?4+attackPose*4+Math.floor(releaseAge/6):0;
         ctx.save();ctx.imageSmoothingEnabled=false;
         ctx.drawImage(image,frame%4*256,Math.floor(frame/4)*256,256,256,storyBossX('vmu')-128,FLOOR-208,256,256);
         ctx.restore();return true;
     }
     if(!image||state.winner!==null||(!boss.warning&&releaseAge>=21))return false;
-    const frame=boss.warning||releaseAge>=14?0:boss.lastAttack+1;
+    const frame=boss.warning||releaseAge>=14?0:attackPose+1;
     ctx.save();ctx.imageSmoothingEnabled=false;
-    const scale=boss.form==='dragon'?2:1;
-    const drop=boss.form==='dragon'?36:0;
-    ctx.drawImage(image,frame%2*512,Math.floor(frame/2)*512,512,512,
-        storyBossX(boss.form)-256*scale,FLOOR-480*scale+drop,512*scale,512*scale);
+    const size=boss.form==='dragon'?768:512;
+    const anchorY=boss.form==='dragon'?580:480;
+    ctx.drawImage(image,frame%2*size,Math.floor(frame/2)*size,size,size,
+        storyBossX(boss.form)-size/2,FLOOR-anchorY,size,size);
     ctx.restore();
     return true;
 }
@@ -266,9 +327,12 @@ export function drawStoryBossAttacks(ctx:CanvasRenderingContext2D,state:CombatSt
     for(const shot of state.projectiles as Shot[]){
         const [width,height]=artSize[shot.art];
         ctx.save();ctx.translate(Math.round(shot.x),Math.round(shot.y));
-        if(shot.shape!=='bossBall')ctx.rotate(Math.atan2(shot.vy,shot.vx));
+        if(shot.shape!=='bossBall')ctx.rotate(Math.atan2(shot.vy+waveVelocity(shot),shot.vx));
         const drawWidth=shot.shape==='bossBeam'?62:width;
-        ctx.drawImage(images.projectiles[shot.art],-drawWidth/2,-height/2,drawWidth,height);
+        const custom=images.custom[boss.form];
+        if(shot.owner===1&&shot.variant!==undefined&&custom){
+            ctx.drawImage(custom,shot.variant*128,0,128,128,-drawWidth/2,-height/2,drawWidth,height);
+        }else ctx.drawImage(images.projectiles[shot.art],-drawWidth/2,-height/2,drawWidth,height);
         ctx.restore();
     }
     for(const blast of boss.blasts){
