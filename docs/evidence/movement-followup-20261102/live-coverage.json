@@ -1,10 +1,10 @@
 {
   "date": "2026-11-03",
   "pending": [],
-  "owners": 215,
-  "singleBodyOwners": 195,
+  "owners": 254,
+  "singleBodyOwners": 234,
   "pairedOwners": 20,
-  "bodyAtlases": 235,
+  "bodyAtlases": 274,
   "everyFrameVisuallyApproved": 0,
   "limits": [
     "Counts use different explicit units; do not add them as comparable frames.",
@@ -1252,7 +1252,7 @@
     },
     {
       "id": "captain",
-      "name": "Captain Sproto",
+      "name": "Yelnacio Globulous",
       "bodies": [
         "captain"
       ],
@@ -9021,6 +9021,1132 @@
         "Sampled the installed body across all listed action families."
       ],
       "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "frej",
+      "name": "FREJ",
+      "bodies": [
+        "frej"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "crippledlover",
+      "name": "Crippled lover",
+      "bodies": [
+        "crippledlover"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "pilgrim",
+      "name": "pilgrim",
+      "bodies": [
+        "pilgrim"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "usedtowels",
+      "name": "usedtowels",
+      "bodies": [
+        "usedtowels"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "drzmoody",
+      "name": "DrZMoody",
+      "bodies": [
+        "drzmoody"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "cam",
+      "name": "Cam",
+      "bodies": [
+        "cam"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "croy",
+      "name": "Croy",
+      "bodies": [
+        "croy"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "stonkyleg69",
+      "name": "StonkyLeg69",
+      "bodies": [
+        "stonkyleg69"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "janitor",
+      "name": "Janitor",
+      "bodies": [
+        "janitor"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "indiapolice",
+      "name": "IndiaPolice",
+      "bodies": [
+        "indiapolice"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "veryseriousinvestor",
+      "name": "veryseriousinvestor",
+      "bodies": [
+        "veryseriousinvestor"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "agentsproto",
+      "name": "Agent SPROTO",
+      "bodies": [
+        "agentsproto"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "glow",
+      "name": "glow",
+      "bodies": [
+        "glow"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "tingsmol",
+      "name": "tingsmol",
+      "bodies": [
+        "tingsmol"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "johnson",
+      "name": "Johnson",
+      "bodies": [
+        "johnson"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "loqi",
+      "name": "loqi",
+      "bodies": [
+        "loqi"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "marfrog",
+      "name": "MarFrog",
+      "bodies": [
+        "marfrog"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "familywagon",
+      "name": "familywagon.eth",
+      "bodies": [
+        "familywagon"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "otorps",
+      "name": "Otorps",
+      "bodies": [
+        "otorps"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "berserk",
+      "name": "𝔅𝔢𝔯𝔰𝔢𝔯𝔎",
+      "bodies": [
+        "berserk"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "crumpleii",
+      "name": "c𝘙𝘶𝘮ple 𝐈𝐈",
+      "bodies": [
+        "crumpleii"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "feistyboi",
+      "name": "Feisty boi",
+      "bodies": [
+        "feistyboi"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "isaac",
+      "name": "Isaac",
+      "bodies": [
+        "isaac"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "mikemike",
+      "name": "Mike Mike",
+      "bodies": [
+        "mikemike"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "godsson",
+      "name": "GodsSon",
+      "bodies": [
+        "godsson"
+      ],
+      "reviewer": "live-named-nov03",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Forward walk at simulation frame 16"
+      ],
+      "observationCount": 2,
+      "countUnit": "browser canvas samples per fighter",
+      "gaps": [
+        "This record covers one walk phase in each actual facing. It does not visually approve every animation frame.",
+        "The named fighter playback and whole-roster tests cover additional movement and combat states."
+      ],
+      "findings": [
+        "Both captures showed the expected fighter walking in the selected direction."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-named-nov03.json"
+    },
+    {
+      "id": "tradertimmy",
+      "name": "TraderTimmy",
+      "bodies": [
+        "tradertimmy"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "durlan",
+      "name": "Durlan",
+      "bodies": [
+        "durlan"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "dollarbitcoin",
+      "name": "$Bitcoin",
+      "bodies": [
+        "dollarbitcoin"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "lowernipple",
+      "name": "SPROTO",
+      "bodies": [
+        "lowernipple"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "obamasega420",
+      "name": "YES_WE_CAN_OBAMASEGA_420",
+      "bodies": [
+        "obamasega420"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "bigal",
+      "name": "Big al",
+      "bodies": [
+        "bigal"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "cryptorizzler",
+      "name": "CryptoRizzler",
+      "bodies": [
+        "cryptorizzler"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "cryptomonger",
+      "name": "Crypto Monger",
+      "bodies": [
+        "cryptomonger"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "teahupoo",
+      "name": "0xTeahupoo",
+      "bodies": [
+        "teahupoo"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "homosproto",
+      "name": "I Am Homo Sproto",
+      "bodies": [
+        "homosproto"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "pars",
+      "name": "PARS SPRO TOTO",
+      "bodies": [
+        "pars"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "accidentallyrich",
+      "name": "AccidentallyRich.eth",
+      "bodies": [
+        "accidentallyrich"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "np",
+      "name": "NP",
+      "bodies": [
+        "np"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
+    },
+    {
+      "id": "slabcorn",
+      "name": "Slabcorn",
+      "bodies": [
+        "slabcorn"
+      ],
+      "reviewer": "live-final-intake-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Two walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy kick",
+        "Aerial kick",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 11,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Eleven contact sheet samples per fighter, with left and right presentations across the selected poses. The automated runtime sweep covers all itinerary states in both actual facings."
+      ],
+      "findings": [
+        "Sampled silhouette, floor alignment, range of motion, and cast and defeat readability."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-final-intake-nov03.json"
     },
     {
       "id": "sprotopia",
