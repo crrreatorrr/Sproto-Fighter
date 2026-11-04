@@ -1,9 +1,10 @@
 {
-  "date": "2026-11-02",
-  "owners": 132,
-  "singleBodyOwners": 113,
-  "pairedOwners": 19,
-  "bodyAtlases": 151,
+  "date": "2026-11-03",
+  "pending": [],
+  "owners": 189,
+  "singleBodyOwners": 169,
+  "pairedOwners": 20,
+  "bodyAtlases": 209,
   "everyFrameVisuallyApproved": 0,
   "limits": [
     "Counts use different explicit units; do not add them as comparable frames.",
@@ -2281,7 +2282,7 @@
     },
     {
       "id": "sproto763",
-      "name": "rog",
+      "name": "Snarf",
       "bodies": [
         "sproto763"
       ],
@@ -3965,7 +3966,7 @@
     },
     {
       "id": "sproto2381",
-      "name": "Catso",
+      "name": "𝒮𝗉𝗋𝗈𝗋𝖺𝖾𝗆𝗈𝗇",
       "bodies": [
         "sproto2381"
       ],
@@ -4689,7 +4690,7 @@
     },
     {
       "id": "gryph",
-      "name": "Gryph",
+      "name": "gryph",
       "bodies": [
         "gryph",
         "gryph-companion"
@@ -7022,6 +7023,2004 @@
         "Both horizontal laser tracks start at the chest marks on release in both actual facings. The sampled recoil frame keeps the supporting boot at floor height."
       ],
       "record": "docs/evidence/movement-followup-20261102/live-theo.json"
+    },
+    {
+      "id": "nomis",
+      "name": "nomis",
+      "bodies": [
+        "nomis"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "clobrwn",
+      "name": "CloBrwn",
+      "bodies": [
+        "clobrwn"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "thesprotowholivedeth",
+      "name": "thesprotowholived.eth",
+      "bodies": [
+        "thesprotowholivedeth"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "sirbitcoin",
+      "name": "sir bitcoin",
+      "bodies": [
+        "sirbitcoin"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "saburdo",
+      "name": "saburdo",
+      "bodies": [
+        "saburdo"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "hermionemichelleamyrose",
+      "name": "HermioneMichelleAmyRose",
+      "bodies": [
+        "hermionemichelleamyrose"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "pongohpos10i",
+      "name": "Pongo HPOS10I",
+      "bodies": [
+        "pongohpos10i"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "julian",
+      "name": "JULIAN",
+      "bodies": [
+        "julian"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "stoto",
+      "name": "stoto",
+      "bodies": [
+        "stoto"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "herbpowell",
+      "name": "Herb Powell",
+      "bodies": [
+        "herbpowell"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "sirdidit",
+      "name": "sirdidit",
+      "bodies": [
+        "sirdidit"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "ceo",
+      "name": "CEO",
+      "bodies": [
+        "ceo"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "ciphersproto",
+      "name": "Cipher Sproto",
+      "bodies": [
+        "ciphersproto"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "sprotocius",
+      "name": "sprotocius",
+      "bodies": [
+        "sprotocius"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "rmacpdx",
+      "name": "RMacPDX",
+      "bodies": [
+        "rmacpdx"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "azkarah",
+      "name": "Azkarah",
+      "bodies": [
+        "azkarah"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "mrhorsemeat",
+      "name": "Mr. Horse Meat",
+      "bodies": [
+        "mrhorsemeat"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "wyrmblvnt",
+      "name": "wyrmblvnt",
+      "bodies": [
+        "wyrmblvnt"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "aktree",
+      "name": "Ak Tree",
+      "bodies": [
+        "aktree"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "fplgremlin",
+      "name": "FPL Gremlin",
+      "bodies": [
+        "fplgremlin"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "chrisfowler",
+      "name": "Chris Fowler",
+      "bodies": [
+        "chrisfowler"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "spruto",
+      "name": "Spruto",
+      "bodies": [
+        "spruto"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "ghostsprotocol",
+      "name": "ghost sprotocol",
+      "bodies": [
+        "ghostsprotocol"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "tdeth",
+      "name": "TD.eth",
+      "bodies": [
+        "tdeth"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "vicoo",
+      "name": "sprotolicious",
+      "bodies": [
+        "vicoo"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "chonky",
+      "name": "Chonky",
+      "bodies": [
+        "chonky"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "degenpress",
+      "name": "degenpress.base.eth",
+      "bodies": [
+        "degenpress"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "giavannykitchens",
+      "name": "Giavanny Kitchens",
+      "bodies": [
+        "giavannykitchens"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "seph0x",
+      "name": "Seph0x",
+      "bodies": [
+        "seph0x"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "rektina",
+      "name": "rektina",
+      "bodies": [
+        "rektina"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "twinnyneutron",
+      "name": "twinny neutron",
+      "bodies": [
+        "twinnyneutron",
+        "twinnyneutron-companion"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 26,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Both twin bodies were reviewed independently."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "melo",
+      "name": "melo",
+      "bodies": [
+        "melo"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families.",
+        "The red and gold sword remains visible in the sampled movement, attacks, recoil and floor rest."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "kern",
+      "name": "Kern",
+      "bodies": [
+        "kern"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "bs9090eth",
+      "name": "bs9090.eth",
+      "bodies": [
+        "bs9090eth"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "renzo",
+      "name": "RENZO",
+      "bodies": [
+        "renzo"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "micsash",
+      "name": "Micsash __/acc",
+      "bodies": [
+        "micsash"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "davidcd",
+      "name": "(Da,vid) DC",
+      "bodies": [
+        "davidcd"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "samixsproto",
+      "name": "samiXsproto",
+      "bodies": [
+        "samixsproto"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families.",
+        "The replacement event sheet contains all 32 frames."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "wireitwell",
+      "name": "_wireitwell_",
+      "bodies": [
+        "wireitwell"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "cryptoboy",
+      "name": "CryptoBoy",
+      "bodies": [
+        "cryptoboy"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "osho",
+      "name": "Osho",
+      "bodies": [
+        "osho"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "pr0lificeth",
+      "name": "Pr0lific.eth",
+      "bodies": [
+        "pr0lificeth"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "bidnehhh",
+      "name": "Bidnehhh",
+      "bodies": [
+        "bidnehhh"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "jayquant",
+      "name": "JayQuant",
+      "bodies": [
+        "jayquant"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "infinitysplitter",
+      "name": "infinitysplitter",
+      "bodies": [
+        "infinitysplitter"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "hdizzy",
+      "name": "HDIZZY ~ 197 IQ",
+      "bodies": [
+        "hdizzy"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "cryptoviking420",
+      "name": "420cryptoviking",
+      "bodies": [
+        "cryptoviking420"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "sweatpantstrust",
+      "name": "in sweatpants we trust",
+      "bodies": [
+        "sweatpantstrust"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "spunow",
+      "name": "spunow habichuelas",
+      "bodies": [
+        "spunow"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "sprotomichaelsaylor",
+      "name": "SprotoMichaelSaylor",
+      "bodies": [
+        "sprotomichaelsaylor"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "zippy",
+      "name": "zippy",
+      "bodies": [
+        "zippy"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "lilgoldied",
+      "name": "LilGoldieD",
+      "bodies": [
+        "lilgoldied"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "bitcoind1rk",
+      "name": "BITCOIN D1RK D1GGLER",
+      "bodies": [
+        "bitcoind1rk"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "felixsprotoarc",
+      "name": "felix (sproto arc)",
+      "bodies": [
+        "felixsprotoarc"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "onememeaday",
+      "name": "1 meme a day til $10",
+      "bodies": [
+        "onememeaday"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "zudi",
+      "name": "Zudi",
+      "bodies": [
+        "zudi"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
+    },
+    {
+      "id": "forchaneth",
+      "name": "Forchan.eth",
+      "bodies": [
+        "forchaneth"
+      ],
+      "reviewer": "live-batch-nov03",
+      "status": "atlas samples inspected; runtime transform audit covers both facings",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Walk phases",
+        "Dash",
+        "Jump",
+        "Punch",
+        "Heavy attack",
+        "Aerial attack",
+        "Ranged release",
+        "Recoil",
+        "Defeat"
+      ],
+      "observationCount": 13,
+      "countUnit": "inspected atlas samples",
+      "gaps": [
+        "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+        "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+      ],
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-batch-nov03.json"
     }
   ]
 }

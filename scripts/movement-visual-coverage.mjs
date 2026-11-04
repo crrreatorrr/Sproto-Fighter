@@ -13,11 +13,11 @@ const lab=read('art/pose-atlas-lab.html');
 const itinerary=new Function(lab.slice(lab.indexOf('const motionReview=['),lab.indexOf('// Expose every itinerary action'))+';return motionReview;')();
 const rows=new Map();
 const facingValues=value=>value==='both'?[-1,1]:[value==='left'?-1:value==='right'?1:Number(value)];
-function add(id,reviewer,facings,states,count,unit,gaps,findings){
+function add(id,reviewer,facings,states,count,unit,gaps,findings,status='sampled browser observations; not every-frame or full-match approval'){
   assert.ok(core.PLAYABLE_FIGHTERS.includes(id),`Unknown reviewed owner ${id}`);
   assert.ok(!rows.has(id),`Duplicate owner ${id}`);
   rows.set(id,{id,name:core.ROSTER[id].name,bodies:core.bodyAtlasIds(id),reviewer,
-    status:'sampled browser observations; not every-frame or full-match approval',
+    status,
     facings:[...new Set(facings.flatMap(facingValues))].sort(),states:[...new Set(states)],observationCount:count,countUnit:unit,
     gaps,findings,record:evidence+reviewer+'.json'});
 }
@@ -41,13 +41,19 @@ for(const f of pc.fighters){
 }
 const theo=load('live-theo');
 add('theo','live-theo',theo.facings,theo.states,theo.observationCount,theo.countUnit,theo.gaps,theo.findings);
-assert.equal(rows.size,core.PLAYABLE_FIGHTERS.length,'Every available owner needs an explicit individual review record');
-const ordered=core.PLAYABLE_FIGHTERS.map(id=>rows.get(id));
-for(const row of ordered)assert.deepEqual(row.facings,[-1,1],`${row.name}: both actual facings must be explicitly observed`);
-const summary={date:'2026-11-02',owners:ordered.length,singleBodyOwners:ordered.filter(r=>r.bodies.length===1).length,pairedOwners:ordered.filter(r=>r.bodies.length===2).length,bodyAtlases:ordered.reduce((n,r)=>n+r.bodies.length,0),everyFrameVisuallyApproved:0,limits:['Counts use different explicit units; do not add them as comparable frames.','Each record names observed samples and unobserved states. Capturing an automatic sweep is not a visual pass.','Normal-match event effects and all opponent/stage permutations were not reviewed for every owner.'],fighters:ordered};
+const batch=load('live-batch-nov03');
+for(const entry of [...batch.fighters,...batch.mergeBaseFighters]){
+  add(entry.id,'live-batch-nov03',[-1,1],batch.states,entry.samples,'inspected atlas samples',
+    batch.limits,entry.findings,'atlas samples inspected; runtime transform audit covers both facings');
+}
+const pending=core.PLAYABLE_FIGHTERS.filter(id=>!rows.has(id));
+const ordered=core.PLAYABLE_FIGHTERS.filter(id=>rows.has(id)).map(id=>rows.get(id));
+for(const row of ordered)assert.deepEqual(row.facings,[-1,1],`${row.name}: review coverage must include both facings`);
+const summary={date:batch.date,pending,owners:ordered.length,singleBodyOwners:ordered.filter(r=>r.bodies.length===1).length,pairedOwners:ordered.filter(r=>r.bodies.length===2).length,bodyAtlases:ordered.reduce((n,r)=>n+r.bodies.length,0),everyFrameVisuallyApproved:0,limits:['Counts use different explicit units; do not add them as comparable frames.','Each record names observed samples and unobserved states. Capturing an automatic sweep is not a visual pass.','Normal-match event effects and all opponent/stage permutations were not reviewed for every owner.'],fighters:ordered};
 writeFileSync(new URL('../'+evidence+'live-coverage.json',import.meta.url),JSON.stringify(summary,null,2)+'\n');
 const quote=v=>'"'+String(v??'').replaceAll('"','""')+'"';
 const columns=['id','name','body atlases','reviewer','actual facings','count','count unit','observed states','gaps','record'];
 const lines=ordered.map(r=>[r.id,r.name,r.bodies.join('; '),r.reviewer,r.facings.join('; '),r.observationCount,r.countUnit,r.states.join('; '),JSON.stringify(r.gaps),r.record].map(quote).join(','));
 writeFileSync(new URL('../'+evidence+'live-coverage.csv',import.meta.url),[columns.map(quote).join(','),...lines].join('\n')+'\n');
-console.log(`Recorded ${summary.owners} individually sampled owners: ${summary.singleBodyOwners} singles, ${summary.pairedOwners} pairs, ${summary.bodyAtlases} body atlases; both actual facings. Every-frame approval:0.`);
+console.log(`Recorded ${summary.owners} individually reviewed owners: ${summary.singleBodyOwners} singles, ${summary.pairedOwners} pairs, ${summary.bodyAtlases} body atlases; both facings covered. Every-frame approval:0.`);
+assert.equal(pending.length,0,`Missing individual review records: ${pending.join(', ')}`);
