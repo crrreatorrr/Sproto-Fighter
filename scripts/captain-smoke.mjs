@@ -1,4 +1,4 @@
-// Focused Captain Sproto integration checks. Laser appearance is reviewed in the browser.
+// Focused Yelnacio Globulous integration checks. Laser appearance is reviewed in the browser.
 import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -13,9 +13,9 @@ globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/js
 globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}};
 const {A,FLOOR,ROSTER,COMBAT_STYLES,PLAYABLE_FIGHTERS,bodyAtlasIds,createState,step}=core;
 assert.ok(PLAYABLE_FIGHTERS.includes('captain'));
-assert.equal(ROSTER.captain.name,'Captain Sproto');
+assert.equal(ROSTER.captain.name,'Yelnacio Globulous');
 assert.equal(COMBAT_STYLES.captain.role,'LASER CAPTAIN');
-assert.deepEqual(bodyAtlasIds('captain'),['captain'],'one independent Captain Sproto body');
+assert.deepEqual(bodyAtlasIds('captain'),['captain'],'one independent Yelnacio Globulous body');
 const cfg=manifest.fighters.captain;
 assert.equal(cfg.frames.length,32);assert.equal(cfg.walkFrames.length,8);assert.equal(cfg.anchor[1],210,'grounded foot anchor');
 for(const [name,count]of Object.entries({intro:4,special:8,cast:4,recoil:4,defeat:12}))assert.equal(cfg.clips[name].length,count);
@@ -40,7 +40,7 @@ for(const face of [-1,1])for(const direction of [0,A.up,A.down,face===1?A.left:A
 const s=createState('captain','cpu','rivet'),f=s.fighters[0];f.pips=3;s.fighters[1].x=480;step(s,[A.special,0]);let combo=0;
 for(let t=0;t<220;t++){combo=Math.max(combo,f.combo);step(s,[0,0]);}
 assert.equal(f.pips,0);assert.equal(combo,COMBAT_STYLES.captain.specialFrames.length);assert.equal(f.move,null);
-console.log('PASS: Captain Sproto identity and 72-frame asset contract; full gait in both facings, dash/jump/landing, five attacks, eight directional throws and four-contact Solar Salvo. Laser checks also run below.');
+console.log('PASS: Yelnacio Globulous identity and 72-frame asset contract; full gait in both facings, dash/jump/landing, five attacks, eight directional throws and four-contact Solar Salvo. Laser checks also run below.');
 
 const laser=COMBAT_STYLES.captain.projectile;
 assert.equal(laser.shape,'eyeLaser');assert.equal(laser.speed,22);assert.equal(laser.horizontal,true);assert.ok(laser.origin.forward>0&&laser.origin.height>0);

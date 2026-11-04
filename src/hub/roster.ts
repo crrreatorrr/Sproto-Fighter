@@ -21,7 +21,7 @@ export const RELIC_FIGHTERS: Readonly<Record<string, PlayableFighterId>> = {
   hpos10i_core: 'sproto2616', // Sun God
   genesis_shard: 'sproto3215', // Captain Green
   cones_tip: 'sproto3152', // Pissing Sproto
-  tinubu_crown: 'captain', // Captain Sproto
+  tinubu_crown: 'captain', // Yelnacio Globulous
 };
 
 /** Error 333 needs all four Four Lights Relics. */
