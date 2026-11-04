@@ -14,7 +14,7 @@ import {storyLocationForEncounter} from './stageVariants';
 /** One button per actual encounter; artwork never defines save order or adds rivals. */
 export function mountCampaignMap(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void){
  const save=progress.snapshot(),points=campaignMapPoints(STORY_ENCOUNTERS),root=document.createElement('section');root.className='campaign is-overview';
- const markerLayout=campaignMapMarkerLayout(points);
+ const markerLayout=campaignMapMarkerLayout(points),legend=save.openRoute?' God Mode: violet encounters are open too.':'';
  root.innerHTML='<div class="campaign-toolbar"><strong>OUT OF THE TRENCHES</strong><button class="quiet campaign-current">Find next fight</button><button class="quiet campaign-fit">Fit map</button><label>Map zoom <input class="campaign-zoom" type="range" min="100" max="800" step="25" value="100"><output class="campaign-zoom-value">Fit</output></label></div><p class="campaign-help">The full map is visible. Select a rival or region to zoom in. Arrow keys move between rivals; Enter selects. Gold is next, green is cleared, grey is locked.</p><div class="campaign-regions" aria-label="Jump to a map region"></div><div class="campaign-window" tabindex="0" aria-label="Scrollable campaign map"><div class="campaign-land"><img class="campaign-art" src="'+asset('/story/campaign-map-250.webp')+'" alt="Expanded pixel world: trench villages, neon city, Bitcoin yacht marina, castle, Sproto Ranch, HPOS10i Club, a separate alien Hatchery island and the final Verse portal." draggable="false"><svg class="campaign-trail" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg><div class="campaign-nodes" role="group"></div></div></div><div class="campaign-rival" aria-live="polite"></div>';
  parent.append(root);
  const chapters=parent.querySelector<HTMLElement>('.campaign-chapter-list');if(chapters)chapters.hidden=true;
@@ -37,7 +37,7 @@ export function mountCampaignMap(parent:HTMLElement,progress:StoryProgress,choos
   land.style.setProperty('--map-node-size',nodeSize+'px');land.style.setProperty('--map-node-font',Math.max(8,Math.min(size.nodeFont,nodeSize/2.4))+'px');
   root.classList.toggle('is-overview',size.overview||size.width*markerLayout.minGapRatio<24);
   zoomValue.value=size.zoom===100?'Fit':size.zoom+'%';zoom.setAttribute('aria-valuetext',size.zoom===100?'Entire map':size.zoom+' percent');
-  help.textContent=size.zoom===100?'The full map is visible. Select a rival or region to zoom in. Arrow keys move between rivals; Enter selects. Gold is next, green is cleared, grey is locked.':'Scroll to explore. Arrow keys move between rivals; Enter selects. Fit map shows the whole world. Gold is next, green is cleared, grey is locked.';
+  help.textContent=size.zoom===100?'The full map is visible. Select a rival or region to zoom in. Arrow keys move between rivals; Enter selects. Gold is next, green is cleared, grey is locked.'+legend:'Scroll to explore. Arrow keys move between rivals; Enter selects. Fit map shows the whole world. Gold is next, green is cleared, grey is locked.'+legend;
   if(size.zoom===100)viewport.scrollTo({left:0,top:0});else if(centerSelected)pan();
  }
  function detail(){
@@ -53,10 +53,11 @@ export function mountCampaignMap(parent:HTMLElement,progress:StoryProgress,choos
   const copy=document.createElement('div'),heading=document.createElement('h3');heading.textContent=`${String(selected+1).padStart(3,'0')} / ${names.join(' → ')}`;
   const info=document.createElement('p');info.textContent=`${level.name}${locations.length?' · '+[...new Set(locations.map(location=>location.title))].join(' → '):''} · ${cleared?(encounter.opponents.every(isStoryRecruitable)?'RECRUITED':'CLEARED'):available?'READY TO CHALLENGE':'LOCKED'}`;
   const note=document.createElement('p');note.textContent=encounter.opponents.length>1?`Gauntlet: defeat ${names.join(', then ')}. Health refills between bouts. Win both without leaving or losing.`:available?(encounter.opponents.every(isStoryRecruitable)?'Victory recruits this fighter and opens the next encounter, including in God Mode.':'Relic guardian: victory opens the next encounter. Player selection still requires the matching Hub Relic.'):'Clear preceding encounters to unlock this fight.';
+  if(available&&!cleared&&!progress.isOnRoute(selected))note.textContent='GOD MODE: open route. '+note.textContent.replace(' and opens the next encounter, including in God Mode','').replace(': victory opens the next encounter',': victory clears this encounter');
   copy.append(heading,info,note);const start=document.createElement('button');start.className='primary';start.disabled=!available;start.textContent=available?(cleared?'Replay encounter':encounter.opponents.length>1?'Challenge gauntlet':'Challenge rival'):'Locked';start.onclick=()=>choose(encounter);rival.append(portraits,copy,start);
  }
  for(const [i,encounter] of STORY_ENCOUNTERS.entries()){
-  const b=document.createElement('button'),cleared=progress.isCleared(i),available=progress.canPlay(i);b.className='campaign-node '+(cleared?'cleared':available?'available':'locked');
+  const b=document.createElement('button'),cleared=progress.isCleared(i),available=progress.canPlay(i);b.className='campaign-node '+(cleared?'cleared':available?'available':'locked');if(available&&!cleared&&!progress.isOnRoute(i))b.classList.add('god-open');
   const names=encounter.opponents.map(id=>ROSTER[id].name).join(' then ');
   b.style.left=points[i][0]+'%';b.style.top=points[i][1]+'%';b.dataset.encounter=encounter.id;b.textContent=String(i+1);b.title=names;
   b.setAttribute('aria-label',`Encounter ${i+1}: ${names}, ${cleared?'cleared':available?'available':'locked'}`);b.tabIndex=i===selected?0:-1;b.setAttribute('aria-pressed',String(i===selected));

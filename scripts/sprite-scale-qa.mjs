@@ -79,7 +79,7 @@ for (const [id, cfg] of Object.entries(manifest.fighters)) {
   for (const [sequence, frames] of Object.entries(sequences)) for (const [index, entry] of frames.entries()) {
     const frame = typeof entry === 'string' ? {url:entry} : entry;
     const pose=sequence==='poses'?Object.keys(poses.POSE_SLOTS).find(name=>poses.POSE_SLOTS[name]===index):null;
-    const registration=pose?cfg.poseRegistration?.[pose]:cfg.clipRegistration?.[sequence],pixelScale=registration?.pixelScale??1,offset=registration?.anchorOffset??[0,0],sourceAnchor=frame.anchor??cfg.anchor;
+    const registration=pose?cfg.poseRegistration?.[pose]:sequence==='walk'?cfg.walkRegistration:cfg.clipRegistration?.[sequence],pixelScale=registration?.pixelScale??1,offset=registration?.anchorOffset??[0,0],sourceAnchor=frame.anchor??cfg.anchor;
     const row = {key:`${id}/${sequence}/${index}`, body:id, sequence, index, pose:sequence === 'poses' ? Object.keys(poses.POSE_SLOTS).find(name => poses.POSE_SLOTS[name] === index) : null,
       url:localPath(frame.url), width:frame.width ?? cfg.width, height:frame.height ?? cfg.height,
       anchor:sourceAnchor.map((v,i)=>v+offset[i]), bounds:frame.bounds ?? [0, 0, frame.width ?? cfg.width, frame.height ?? cfg.height],
@@ -393,7 +393,7 @@ for(const [body,summary] of Object.entries(bodies)) {
       silhouetteWidth:span(extent.map(v=>v.width)),silhouetteHeight:span(extent.map(v=>v.height)),floorDelta:span(rows.map(row=>row.floorDeltaWorld)),
       anchors:[...new Set(rows.map(row=>JSON.stringify(row.anchor)))].map(JSON.parse)};
     if(sequence==='walk')for(const row of rows){
-      const ratio=(row.alphaBounds[3]-row.alphaBounds[1])/guardHeight;
+      const ratio=(row.alphaBounds[3]-row.alphaBounds[1])*row.scale/(guardHeight*guard.scale);
       if(ratio<.88||ratio>1.12)advisories.push({key:row.key,kind:'walk-envelope-height-change',ratio:round(ratio),note:'Heuristic only: weapon/hair/pose can change the envelope, and equal envelopes can hide body shrink.'});
     }
   }
