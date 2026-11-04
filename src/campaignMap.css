@@ -14,6 +14,9 @@
 .campaign.is-overview .campaign-node{width:var(--map-node-size,6px);min-width:var(--map-node-size,6px);font-size:0;border-width:1px;box-shadow:0 1px 0 #080e19}
 .campaign.is-overview .campaign-node[aria-pressed=true],.campaign.is-overview .campaign-node:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .campaign.is-overview .campaign-node.available{box-shadow:0 0 0 2px #523d26,0 0 8px #ffd36b}
+/* God Mode opens off-route encounters; violet keeps gold meaning the next story fight. */
+.campaign-node.available.god-open{background:#8f7bd8;color:#fff;border-color:#e2d9ff;box-shadow:0 0 0 4px #2f2552,0 0 12px #b9a6ff}
+.campaign.is-overview .campaign-node.available.god-open{box-shadow:0 0 0 2px #2f2552,0 0 6px #b9a6ff}
 .campaign-rival{display:flex;align-items:center;gap:16px;padding:16px;border-top:2px solid #94784b;min-height:130px}.campaign-rival>img{flex:none;width:96px;height:96px;object-fit:contain;background:#111e34;border:2px solid #5d6b83}.campaign-rival>div{flex:1;min-width:0;overflow-wrap:anywhere}.campaign-rival h3{font-size:24px;color:#ffe7a4;margin:0 0 6px}.campaign-rival p{font-size:14px;line-height:1.35;margin:5px 0}.campaign-rival button{flex:0 1 auto;max-width:100%;font-size:15px;white-space:normal;overflow-wrap:anywhere;line-height:1.4}
 @media(max-width:650px){.campaign-rival{flex-wrap:wrap;gap:10px}.campaign-rival>img{width:68px;height:68px}.campaign-rival>div{flex:1 1 150px;min-width:0}.campaign-rival h3{font-size:20px}.campaign-rival button{width:100%}.campaign-toolbar strong{font-size:16px}.campaign-window{height:400px}}
 

@@ -115,7 +115,9 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
     function combine(...saves:Save[]):Save{
         return normalize({version:3,cleared:saves.flatMap(s=>s.cleared),unlocked:saves.flatMap(s=>s.unlocked),godModeUnlocked:saves.some(s=>s.godModeUnlocked)});
     }
-    let save=empty(),persistent=!!storage,run:{id:string;wave:number}|null=null;
+    // God Mode opens every encounter. A run started on the open route can finish
+    // even if God Mode is switched off mid-gauntlet.
+    let save=empty(),persistent=!!storage,run:{id:string;wave:number;open?:boolean}|null=null,openRoute=false;
     const listeners=new Set<()=>void>();
     function read(){
         if(!storage)return empty();
@@ -128,21 +130,25 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
     function write(){try{if(!storage)throw new Error('Storage unavailable');storage.setItem(STORY_SAVE_KEY,JSON.stringify(save));persistent=true;}catch{persistent=false;}emit();}
     const isCleared=(index:number)=>!!encounters[index]&&save.cleared.includes(encounters[index].id);
     const nextIndex=()=>{const index=encounters.findIndex((_,i)=>!isCleared(i));return index<0?null:index;};
-    const canPlay=(index:number)=>Number.isInteger(index)&&index>=0&&index<encounters.length&&(isCleared(index)||index===nextIndex());
+    const onRoute=(index:number)=>isCleared(index)||index===nextIndex();
+    const canPlay=(index:number)=>Number.isInteger(index)&&index>=0&&index<encounters.length&&(openRoute||onRoute(index)||(!!run?.open&&run.id===encounters[index].id));
     const currentWave=(index:number)=>run&&run.id===encounters[index]?.id?run.wave:0;
     function abandonRun(){run=null;emit();}
     return {
-        snapshot:()=>({version:3 as const,cleared:encounters.filter((_,i)=>isCleared(i)).map(e=>e.id),unlocked:save.unlocked.filter(isAvailable),persistent,completed:routeComplete(new Set(save.cleared)),godModeUnlocked:save.godModeUnlocked,nextIndex:nextIndex(),activeRun:run?{...run}:null,finaleReady:!!run&&run.wave>0&&encounters.find(e=>e.id===run!.id)?.gauntlet==='final'}),
+        snapshot:()=>({version:3 as const,cleared:encounters.filter((_,i)=>isCleared(i)).map(e=>e.id),unlocked:save.unlocked.filter(isAvailable),persistent,completed:routeComplete(new Set(save.cleared)),godModeUnlocked:save.godModeUnlocked,nextIndex:nextIndex(),activeRun:run?{id:run.id,wave:run.wave}:null,openRoute,finaleReady:!!run&&run.wave>0&&encounters.find(e=>e.id===run!.id)?.gauntlet==='final'}),
         isUnlocked:(id:PlayableFighterId)=>available.has(id)&&save.unlocked.includes(id),isCleared,canPlay,currentWave,
+        /** True when the encounter is playable without God Mode's open route. */
+        isOnRoute:(index:number)=>Number.isInteger(index)&&index>=0&&index<encounters.length&&onRoute(index),
+        setOpenRoute(enabled:boolean){if(openRoute===enabled)return;openRoute=enabled;emit();},
         currentOpponent:(index:number)=>encounters[index]?.opponents[currentWave(index)],
-        begin(index:number){merge();if(!canPlay(index))return false;run={id:encounters[index].id,wave:0};return true;},
+        begin(index:number){merge();if(!canPlay(index))return false;run={id:encounters[index].id,wave:0,open:openRoute&&!onRoute(index)};return true;},
         win(index:number,wave=0){
             merge();const encounter=encounters[index];if(!canPlay(index)||!encounter||!Number.isInteger(wave)||wave<0||wave>=encounter.opponents.length)return false;
-            if(wave===0){if(run?.id===encounter.id&&run.wave!==0)return false;run={id:encounter.id,wave:0};}
+            if(wave===0){if(run?.id===encounter.id&&run.wave!==0)return false;run={id:encounter.id,wave:0,open:(run?.id===encounter.id&&run.open)||(openRoute&&!onRoute(index))};}
             else if(run?.id!==encounter.id||run.wave!==wave)return false;
             const opponent=encounter.opponents[wave];if(isStoryRecruitable(opponent)&&!save.unlocked.includes(opponent))save.unlocked.push(opponent);
             if(wave===encounter.opponents.length-1){if(!save.cleared.includes(encounter.id))save.cleared.push(encounter.id);run=null;save.godModeUnlocked||=routeComplete(new Set(save.cleared));}
-            else run={id:encounter.id,wave:wave+1};
+            else run={id:encounter.id,wave:wave+1,open:run.open};
             write();return true;
         },
         abandonRun,abandonFinale:abandonRun,
