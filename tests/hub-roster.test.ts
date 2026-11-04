@@ -5,6 +5,7 @@ import {
   ALL_FOUR_RELICS,
   ALL_RELICS_FIGHTER,
   RELIC_CACHE_KEY,
+  RELIC_ALTERNATIVES,
   RELIC_ONLY_FIGHTERS,
   RELIC_FIGHTERS,
   isUnlocked,
@@ -46,6 +47,28 @@ describe('Relic-locked fighters', () => {
     }
   });
 
+  it("lets the Breakwater Coin give Cone's Tip's award: Pissing Sproto, and nothing else", () => {
+    expect(RELIC_ALTERNATIVES).toEqual({ cones_tip: ['breakwater_coin'] });
+    expect(isUnlocked('sproto3152', ['breakwater_coin'])).toBe(true);
+    expect(lockReason('sproto3152', ['breakwater_coin'])).toBeNull();
+    expect(isUnlocked('sproto3152', ['cones_tip', 'breakwater_coin'])).toBe(true);
+    expect(PLAYABLE_FIGHTERS.filter((id) => isUnlocked(id, ['breakwater_coin']) && !isUnlocked(id, [])))
+      .toEqual(['sproto3152']);
+    expect(isFighterAvailable('sproto3152', false, ['breakwater_coin'])).toBe(true);
+    expect(fighterLockReason('sproto3152', false, ['breakwater_coin'])).toBeNull();
+    expect(isFighterAvailable('bigswole', false, ['breakwater_coin'])).toBe(false);
+  });
+
+  it('does not count the Breakwater Coin as a Four Lights Relic for Error 333', () => {
+    expect(ALL_FOUR_RELICS).not.toContain('breakwater_coin');
+    const coinForTip = ['hpos10i_core', 'genesis_shard', 'tinubu_crown', 'breakwater_coin'];
+    expect(isUnlocked('sproto1870', coinForTip)).toBe(false);
+    expect(lockReason('sproto1870', coinForTip)).toContain('1 still missing');
+    expect(isFighterAvailable('sproto1870', false, coinForTip)).toBe(false);
+    expect(requiredRelics('sproto1870').every((need) => need.alternatives.length === 0)).toBe(true);
+    expect(isUnlocked('sproto1870', [...coinForTip, 'cones_tip'])).toBe(true);
+  });
+
   it('includes exactly three Relic guardians while retaining all five Hub recruitment requirements', () => {
     expect([...RELIC_ONLY_RECRUITS].sort()).toEqual([...RELIC_ONLY_FIGHTERS].sort());
     for (const id of ['captain','sproto1870']) expect(STORY_OPPONENTS).not.toContain(id);
@@ -71,7 +94,7 @@ describe('Relic-locked fighters', () => {
   });
 
   it('names the Relic and game a locked fighter needs', () => {
-    expect(lockReason('sproto3152', [])).toBe("Earn Cone's Tip in NOBU: Saviour Dog");
+    expect(lockReason('sproto3152', [])).toBe("Earn Cone's Tip in NOBU: Saviour Dog or Breakwater Coin in Sproto Arcade");
     expect(lockReason('captain', [])).toBe("Earn Tinubu's Crown in Sproto Duel");
     expect(lockReason('rivet', [])).toBeNull();
   });
@@ -109,5 +132,6 @@ describe('Relic-locked fighters', () => {
     expect(isFighterAvailable('sproto3152',false,['cones_tip'])).toBe(true);
     expect(isFighterAvailable('bigswole',false,['cones_tip'])).toBe(false);
     expect(fighterLockReason('sproto3152',false,[])).toContain("Cone's Tip");
+    expect(fighterLockReason('sproto3152',false,[])).toContain('Breakwater Coin');
   });
 });

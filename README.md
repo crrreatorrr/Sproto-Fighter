@@ -231,17 +231,17 @@ NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/on
 
 ## Metaverse Hub integration
 
-The optional hub adapter comes from the published `claude/sweet-newton-l4tjnh` work. A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
+The optional hub adapter uses the vendored `@metaverse/hub-sdk` 0.6.0 (see `vendor/hub-sdk/VENDOR.md`). A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
 
 Five fighters require Hub Relics for new player recruitment:
 
 | Relic (game) | Unlocks |
 | --- | --- |
 | Tinubu's Crown (Sproto Duel) | Captain Sproto |
-| Cone's Tip (NOBU: Saviour Dog) | Pissing Sproto |
+| Cone's Tip (NOBU: Saviour Dog) or Breakwater Coin (Sproto Arcade) | Pissing Sproto |
 | HPOS10I Core (HPOS10I) | Sun God |
 | Genesis Block Shard (The People's Bitcoin) | Captain Green |
-| All four of the above | Error 333 |
+| All four Four Lights Relics (Crown, Tip, Core, Shard; the Coin does not count) | Error 333 |
 
 Every other fighter, including the earlier Relic picks (Halloween 2008, $Bitcoin Obama, Big Swole, Bongraker, Sproto Duo), is recruited in story mode. The mapping is `src/hub/roster.ts`; the story campaign includes three as guardians, while `RELIC_ONLY_RECRUITS` in `src/storyProgress.ts` preserves the same five player recruitment requirements. Locked fighters remain previewable and usable as CPU opponents. A save that already recruited one of the five in an older campaign keeps it.
 
