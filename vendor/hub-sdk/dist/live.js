@@ -1,7 +1,8 @@
 import { resolveHubEnv } from './env';
 import { HubSdkError } from './errors';
-import { sessionVarsFromToken } from './nakama';
+import { sessionVarsFromToken, tokenExpiryMs, userIdFromToken } from './nakama';
 import { getOrCreateDeviceId } from './storage';
+import { EMPTY_SAVE, encodeSave, readSaveResult } from './save';
 import { readTicketParam, stripTicketParam } from './ticket';
 import { GAME_IDS, canonicalGameId, isBoardId, isRelicId, } from './types';
 /** IndexedDB database for earn, event, and exchange writes that have not been acked. */
@@ -80,20 +81,42 @@ async function listWrites() {
         return [...memoryWrites.values()];
     return withStore('readonly', (store) => requestDone(store.getAll()));
 }
+async function putWrite(record) {
+    if (!useIndexedDb()) {
+        memoryWrites.set(record.key, record);
+        return;
+    }
+    await withStore('readwrite', (store) => {
+        store.put(record);
+    });
+}
 /** Commit the record before any RPC. An existing key is left untouched. */
 async function remember(record) {
     const existing = await readWrite(record.key);
     if (existing)
         return existing;
     const stored = { ...record, body: cloneBody(record.body) };
-    if (!useIndexedDb()) {
-        memoryWrites.set(stored.key, stored);
-        return stored;
-    }
-    await withStore('readwrite', (store) => {
-        store.put(stored);
-    });
+    await putWrite(stored);
     return stored;
+}
+function tokenUser(token) {
+    try {
+        return userIdFromToken(token);
+    }
+    catch {
+        return null;
+    }
+}
+/**
+ * The token's game session is gone: closed by a newer portal, by exit, or past its
+ * lease. Nakama answers an expired JWT with HTTP 401.
+ */
+function deadSession(error) {
+    if (!(error instanceof HubSdkError))
+        return false;
+    if (error.code === 'session_closed' || error.code === 'unauthorized' || error.code === 'not_game_session')
+        return true;
+    return error.code === 'rpc_failed' && error.status === 401;
 }
 async function forget(key) {
     if (!useIndexedDb()) {
@@ -131,6 +154,7 @@ export function createLiveHubSdk(env, client) {
                 ranked: parsed.ranked,
                 sid: parsed.sid,
                 token: parsed.token,
+                refreshToken: typeof parsed.refreshToken === 'string' ? parsed.refreshToken : undefined,
                 effects: flatEffects(parsed.effects),
                 relics: asRelics(parsed.relics),
                 ticketsCapLeft: typeof parsed.ticketsCapLeft === 'number' ? parsed.ticketsCapLeft : 0,
@@ -146,6 +170,15 @@ export function createLiveHubSdk(env, client) {
             resolved.session.removeItem(sessionKey(game));
         resolved.session.setItem(sessionKey(session.game), JSON.stringify(session));
         active = session;
+    }
+    function sessionInfo(session) {
+        return {
+            token: session.token,
+            playerId: session.playerId,
+            game: session.game,
+            ranked: session.ranked,
+            expiresAt: tokenExpiryMs(session.token),
+        };
     }
     function profileOf(session, serverTime) {
         return {
@@ -185,14 +218,43 @@ export function createLiveHubSdk(env, client) {
             noteGrant(active, response);
         return response;
     }
+    /**
+     * A queued row keeps the token it was first sent with. When that session has since
+     * closed, the same player's live session for the same game carries it instead.
+     * The server keys idempotency by (user, key) and checks it before the session, so
+     * a row the old session already applied returns its saved response, not a second
+     * credit. Another player's or another game's row is never re-pointed.
+     */
+    async function rebind(row) {
+        if (!active || row.gameId !== active.game || row.token === active.token)
+            return row;
+        const owner = tokenUser(row.token);
+        if (!owner || owner !== tokenUser(active.token))
+            return row;
+        const next = { ...row, token: active.token };
+        await putWrite(next);
+        return next;
+    }
     async function sendOnce(session, rpc, key, body) {
-        const row = await remember({ rpc, body, key, token: session.token, gameId: session.game });
+        const row = await rebind(await remember({ rpc, body, key, token: session.token, gameId: session.game }));
         return transmit(row);
     }
     async function drain() {
         const rows = await listWrites();
-        for (const row of rows)
-            await transmit(row);
+        for (const queued of rows) {
+            const row = await rebind(queued);
+            try {
+                await transmit(row);
+            }
+            catch (error) {
+                // A row on a dead session that this session cannot carry stays queued for a
+                // later session of its own player and game. It must not fail this init, or
+                // one stale row keeps every later launch from reaching the hub.
+                if (row.token !== active?.token && deadSession(error))
+                    continue;
+                throw error;
+            }
+        }
     }
     async function rememberAuth(game, auth) {
         const vars = sessionVarsFromToken(auth.token);
@@ -225,6 +287,7 @@ export function createLiveHubSdk(env, client) {
             ranked,
             sid: vars.sid,
             token: auth.token,
+            refreshToken: auth.refreshToken || undefined,
             effects,
             relics,
             ticketsCapLeft,
@@ -304,9 +367,55 @@ export function createLiveHubSdk(env, client) {
                 throw new HubSdkError('bad_board', `Unknown board "${boardId}"`);
             if (!Number.isFinite(value) || value < 0)
                 throw new HubSdkError('bad_score', 'Score must be a non-negative number');
-            if (!active || !active.ranked)
+            // The server owns eligibility (ranked gate, god mode, bounds), so unranked sessions post too.
+            if (!active)
                 return;
-            await client.rpc('score.submit', { boardId, value, meta: meta ?? {} }, { token: active.token });
+            const godMode = meta?.godMode === true;
+            return client.rpc('score.submit', { boardId, value, meta: meta ?? {}, godMode }, { token: active.token });
+        },
+        getSession() {
+            return active ? sessionInfo(active) : null;
+        },
+        async refreshSession() {
+            if (!active)
+                return null;
+            const session = active;
+            const expiresAt = tokenExpiryMs(session.token);
+            if (!expiresAt || expiresAt - resolved.now() > 300_000)
+                return sessionInfo(session);
+            if (!client.sessionRefresh || !session.refreshToken)
+                return sessionInfo(session);
+            const fresh = await client.sessionRefresh(session.refreshToken);
+            if (active !== session)
+                return active ? sessionInfo(active) : null;
+            session.token = fresh.token;
+            session.refreshToken = fresh.refreshToken;
+            writeCached(session);
+            return sessionInfo(session);
+        },
+        async getLeaderboard(boardId, opts) {
+            if (!isBoardId(boardId))
+                throw new HubSdkError('bad_board', `Unknown board "${boardId}"`);
+            const variant = opts?.variant ?? '';
+            if (!active)
+                return { boardId, variant, order: boardId === 'hpos10i_act_time' || boardId === 'nobu_trial_time' ? 'asc' : 'desc', rows: [], me: null };
+            const body = { boardId };
+            if (opts?.variant !== undefined)
+                body.variant = opts.variant;
+            if (opts?.limit !== undefined)
+                body.limit = opts.limit;
+            return client.rpc('leaderboard.top', body, { token: active.token });
+        },
+        async loadSave() {
+            if (!active)
+                return { ...EMPTY_SAVE };
+            return readSaveResult(await client.rpc('save.get', {}, { token: active.token }));
+        },
+        async writeSave(data) {
+            encodeSave(data);
+            if (!active)
+                return { ...EMPTY_SAVE };
+            return readSaveResult(await client.rpc('save.put', { data }, { token: active.token }));
         },
         async earnTickets(amount, reason, key) {
             if (!key)
