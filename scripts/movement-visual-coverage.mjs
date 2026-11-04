@@ -46,6 +46,10 @@ for(const entry of [...batch.fighters,...batch.mergeBaseFighters]){
   add(entry.id,'live-batch-nov03',[-1,1],batch.states,entry.samples,'inspected atlas samples',
     batch.limits,entry.findings,'atlas samples inspected; runtime transform audit covers both facings');
 }
+const named=load('live-named-nov03');
+for(const f of named.fighters)if(!rows.has(f.id)){
+  add(f.id,'live-named-nov03',named.facings,named.states,named.observationCount,named.countUnit,named.gaps,f.findings);
+}
 const pending=core.PLAYABLE_FIGHTERS.filter(id=>!rows.has(id));
 const ordered=core.PLAYABLE_FIGHTERS.filter(id=>rows.has(id)).map(id=>rows.get(id));
 for(const row of ordered)assert.deepEqual(row.facings,[-1,1],`${row.name}: review coverage must include both facings`);

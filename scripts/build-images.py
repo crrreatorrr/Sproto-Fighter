@@ -44,10 +44,13 @@ SIZES = {'thumb': (192, 82), 'large': (640, 86)}  # name: (longest side px, WebP
 
 def sources():
     text = SOURCE_LIST.read_text()
-    found = re.findall(r"^\s*([A-Za-z0-9_$]+)\s*:\s*new URL\('\.\./(art/[^']+)'", text, re.M)
+    found = re.findall(
+        r"""^\s*(?:([A-Za-z_$][\w$]*)|["']([\w$-]+)["'])\s*:\s*new URL\('\.\./(art/[^']+)'""",
+        text, re.M,
+    )
     if not found:
         sys.exit('no portraits found in src/originalPortraits.ts')
-    return {fighter: ROOT / path for fighter, path in found}
+    return {identifier or quoted: ROOT / path for identifier, quoted, path in found}
 
 
 STAGE_LIST = ROOT / 'src' / 'stage.ts'

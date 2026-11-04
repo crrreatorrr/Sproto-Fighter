@@ -1,6 +1,33 @@
 import { type FighterId } from './core';
 /** Original user-supplied fighter references only. No rigging diagram. */
 export const originalPortraits:Record<FighterId,string> = {
+/* NAMED INTAKE NOV03 PORTRAITS BEGIN */
+    frej: new URL('../art/frej/reference.png', import.meta.url).href,
+    crippledlover: new URL('../art/crippledlover/reference.png', import.meta.url).href,
+    pilgrim: new URL('../art/pilgrim/reference.png', import.meta.url).href,
+    usedtowels: new URL('../art/usedtowels/reference.png', import.meta.url).href,
+    drzmoody: new URL('../art/drzmoody/reference.png', import.meta.url).href,
+    cam: new URL('../art/cam/reference.png', import.meta.url).href,
+    croy: new URL('../art/croy/reference.png', import.meta.url).href,
+    stonkyleg69: new URL('../art/stonkyleg69/reference.png', import.meta.url).href,
+    janitor: new URL('../art/janitor/reference.png', import.meta.url).href,
+    indiapolice: new URL('../art/indiapolice/reference.png', import.meta.url).href,
+    veryseriousinvestor: new URL('../art/veryseriousinvestor/reference.png', import.meta.url).href,
+    agentsproto: new URL('../art/agentsproto/reference.png', import.meta.url).href,
+    glow: new URL('../art/glow/reference.png', import.meta.url).href,
+    tingsmol: new URL('../art/tingsmol/reference.png', import.meta.url).href,
+    johnson: new URL('../art/johnson/reference.png', import.meta.url).href,
+    loqi: new URL('../art/loqi/reference.png', import.meta.url).href,
+    marfrog: new URL('../art/marfrog/reference.png', import.meta.url).href,
+    familywagon: new URL('../art/familywagon/reference.png', import.meta.url).href,
+    otorps: new URL('../art/otorps/reference.png', import.meta.url).href,
+    berserk: new URL('../art/berserk/reference.png', import.meta.url).href,
+    crumpleii: new URL('../art/crumpleii/reference.png', import.meta.url).href,
+    feistyboi: new URL('../art/feistyboi/reference.png', import.meta.url).href,
+    isaac: new URL('../art/isaac/reference.png', import.meta.url).href,
+    mikemike: new URL('../art/mikemike/reference.png', import.meta.url).href,
+    godsson: new URL('../art/godsson/reference.png', import.meta.url).href,
+/* NAMED INTAKE NOV03 PORTRAITS END */
 /* NOV03 NINE PORTRAITS BEGIN */
     nomis: new URL('../art/roster-intake-nine-nov03/nomis/reference.png', import.meta.url).href,
     clobrwn: new URL('../art/roster-intake-nine-nov03/clobrwn/reference.png', import.meta.url).href,
