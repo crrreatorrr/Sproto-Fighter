@@ -45,7 +45,21 @@ describe('fixed-screen story bosses',()=>{
         expect(ball.bounces).toBe(2);expect(ball.vy).toBeLessThan(0);
     });
 
-    it.each(['giant','mecha','dragon','juicy','art'] as const)('%s can be cleared and can defeat the player',form=>{
+    it('VMU alternates lasers and explosive bombs with six staggered slow missiles',()=>{
+        const {state,boss,tick}=fight('vmu');
+        state.godMode=true;
+        while(state.frame<77)tick(A.right);
+        expect(state.projectiles).toContainEqual(expect.objectContaining({owner:1,art:'laser'}));
+        while(state.frame<221)tick();
+        expect(state.projectiles).toContainEqual(expect.objectContaining({owner:1,explodes:true}));
+        while(state.frame<365)tick();
+        expect(boss.pending).toHaveLength(5);
+        expect(state.projectiles).toContainEqual(expect.objectContaining({owner:1,art:'missile',vx:2.8}));
+        while(state.frame<417)tick();
+        expect(state.projectiles.filter(shot=>shot.owner===1&&shot.vx===2.8)).toHaveLength(6);
+    });
+
+    it.each(['giant','mecha','dragon','juicy','art','vmu'] as const)('%s can be cleared and can defeat the player',form=>{
         const attacking=fight(form);attacking.state.godMode=true;
         while(attacking.state.winner===null&&attacking.state.frame<2500){
             const t=attacking.state.frame;

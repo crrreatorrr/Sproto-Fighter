@@ -76,7 +76,7 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     }
     text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
-export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean, bossAttacks?:(ctx:CanvasRenderingContext2D)=>void,bossTitle?:string) {
+export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean, bossAttacks?:(ctx:CanvasRenderingContext2D)=>void,bossTitle?:string, portal?:{x:number;y:number;progress:number}) {
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
     if(!drawActiveStoryLocation(c))drawStage(c, s.frame);
@@ -84,6 +84,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     c.fillStyle='#071224b8';c.fillRect(0,0,1280,162);
     c.fillStyle='#07122455';c.fillRect(0,162,1280,10);
     for (const f of s.fighters) {
+        if(portal&&f===s.fighters[0])continue;
         c.fillStyle = '#040b1366';
         for(const offset of bodyOffsets(f.id)){
             c.beginPath();
@@ -102,6 +103,19 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         const landedKO=presentation?.fromFloor||(actor.reaction?.kind==='knockdown'&&actor.reaction.phase==='down');
         const facing=landedKO?(actor.reaction?.direction??actor.facing):actor.facing;
         if(index===1&&storyAnimation?.(c,actor.x,FLOOR,facing))continue;
+        if(index===0&&portal){
+            const t=portal.progress;
+            if(t>=1)continue;
+            const centerY=actor.y-80,angle=t*Math.PI*4;
+            const orbit=Math.sin(Math.PI*t)*55;
+            const x=actor.x+(portal.x-actor.x)*t+Math.sin(angle)*orbit;
+            const y=centerY+(FLOOR+portal.y-centerY)*t+Math.cos(angle)*orbit;
+            c.save();
+            c.translate(x,y);
+            c.rotate(angle);c.scale(1-t,1-t);c.translate(-actor.x,-centerY);
+            fighter(c,actor,s.frame,false,s.freeze>0,visualFrame);
+            c.restore();continue;
+        }
         fighter(c,actor,s.frame,false,s.freeze>0,visualFrame);
     }
     if(presentation&&(presentation.phase==='outro'||presentation.phase==='result'))for(const[i,f]of s.fighters.entries()){

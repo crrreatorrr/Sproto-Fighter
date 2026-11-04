@@ -118,9 +118,10 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         if(result===0){
             if(finishedWave+1<encounter.opponents.length){void launch(encounter.stage,encounter,finishedWave+1);return true;}
             const save=progress.snapshot(),next=save.openRoute?STORY_ENCOUNTERS[encounter.index+1]??null:save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
-            if(next&&next.stage!==encounter.stage){scene(next,true);return true;}
-            $('journey-title').textContent=save.completed?'The route is complete. God Mode unlocked!':`${names(encounter)} ${encounter.opponents.every(isStoryRecruitable)?'recruited':'defeated'}!`;
-            $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode stays unlocked as the roster grows. Ending cutscene pending script approval. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. ${recruitNote(encounter)} ${storageNote()}`;
+            const finaleWon=encounter.opponents[finishedWave]==='vaudream';
+            if(!finaleWon&&next&&next.stage!==encounter.stage){scene(next,true);return true;}
+            $('journey-title').textContent=save.completed||finaleWon?'Congratulations! You beat Sproto Fighter!':`${names(encounter)} ${encounter.opponents.every(isStoryRecruitable)?'recruited':'defeated'}!`;
+            $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode is unlocked and stays unlocked as the roster grows. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. ${recruitNote(encounter)} ${storageNote()}`;
             buttons(next?[{label:`Next: ${ROSTER[next.opponent].name} →`,run:()=>{void launch(next.stage,next);}},{label:'Story route',run:()=>selector(true)}]:[{label:'Story route',run:()=>selector(true)},{label:'Free-play levels',run:()=>selector(false)}]);
         }else{
             $('journey-title').textContent=result===2?'Draw — try this encounter again.':'Retry this encounter.';

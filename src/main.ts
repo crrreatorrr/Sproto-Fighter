@@ -668,6 +668,12 @@ function withoutP1Keys(bindings: Readonly<Record<Action, string>>): Record<Actio
 /** Advance one frame. `p2Input` is player 2's input in local versus; otherwise the CPU plays slot 2. */
 function advanceRoundFrame(input: number, p2Input?: number) {
     if(versus.advance())return;
+    function enterBoss(form:BossForm){
+        storyBoss=startStoryBoss(state,form);
+        bossStarts.push({frame:state.frame,form});
+        held.clear();queued=0;queued2=0;padNeedsRelease=true;
+        Object.assign(presentation,{phase:'fight',frame:0,winner:null,fromFloor:false});
+    }
     const scene=storyAnimation.active;
     if(scene){
         if(storyAnimation.advance())return;
@@ -676,12 +682,10 @@ function advanceRoundFrame(input: number, p2Input?: number) {
             advanceRoundPresentation(presentation,true);countdown.show();return;
         }
         if(scene==='boss'||scene==='mecha'){
-            const form=scene==='mecha'?'mecha':storyAnimation.bossForm!;
-            storyBoss=startStoryBoss(state,form);
-            bossStarts.push({frame:state.frame,form});
-            Object.assign(presentation,{phase:'fight',frame:0,winner:null,fromFloor:false});
+            enterBoss(scene==='mecha'?'mecha':storyAnimation.bossForm!);
             return;
         }
+        if(storyBoss?.form==='vmu')story.finishMatch(state.winner!);
         reportRound();story.onRoundEnd(state.winner!);return;
     }
     if(countdown.advance()){
@@ -723,7 +727,10 @@ function advanceRoundFrame(input: number, p2Input?: number) {
     if (state.winner !== null) {
         const nextPhase=state.winner===0&&storyAnimation.bossForm?
             (!storyBoss?'boss':storyBoss.form==='giant'?'mecha':null):null;
-        if(!nextPhase)story.finishMatch(state.winner);
+        if(nextPhase==='boss'&&storyAnimation.bossForm==='vmu'){
+            enterBoss('vmu');return;
+        }
+        if(!nextPhase&&(storyBoss?.form!=='vmu'||state.winner!==0))story.finishMatch(state.winner);
         const losers = state.fighters.filter((_, i) => state.winner === 2 || i !== state.winner);
         const fromFloor = losers.every(f => f.reaction?.kind === 'knockdown' && f.reaction.phase === 'down');
         beginRoundOutro(presentation, state.winner as 0 | 1 | 2, fromFloor);
@@ -770,7 +777,7 @@ function tick(now: number) {
         (c,x,y,facing)=>!storyAnimation.active&&storyBoss&&storyBossArt&&drawStoryBossPose(c,state,storyBoss,storyBossArt)
             ||storyAnimation.draw(c,x,y,facing,storyBoss?.form),
         storyBoss&&storyBossArt?(c)=>drawStoryBossAttacks(c,state,storyBoss!,storyBossArt!):undefined,
-        storyBoss?storyBossTitle(storyBoss.form):undefined);
+        storyBoss?storyBossTitle(storyBoss.form):undefined,storyAnimation.portalPull());
     if (online) updateOnlineStatus();
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = storyBoss ? 'Auto-fire · A/D or arrows move · Space double-jump · Shift dash · X shield · C beam · V ball · R retry' : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';

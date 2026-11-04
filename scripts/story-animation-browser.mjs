@@ -14,7 +14,7 @@ try{
  const playback=await page.evaluate(async()=>{
   const {createStoryAnimation,storyAnimationPlan}=await import('/src/storyAnimation.ts');
   const {STORY_BOSS_X,loadStoryBossArt}=await import('/src/storyBoss.ts');
-  await Promise.all(['giant','dragon','juicy','art'].map(form=>loadStoryBossArt(form)));
+  await Promise.all(['giant','dragon','juicy','art','vmu'].map(form=>loadStoryBossArt(form)));
   const {default:manifest}=await import('/src/storyAnimationManifest.json');
   const canvas=document.createElement('canvas');canvas.width=1280;canvas.height=720;
   const ctx=canvas.getContext('2d'),records=[];
@@ -100,15 +100,18 @@ try{
  await page.locator('#settings').click();await page.locator('#testing-god-mode').check();await page.locator('#close-settings').click();
  await page.locator('#story-worlds').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vela'&&!window.neonRelay.storySnapshot().launching);
+ async function winRegularBout(){
  await page.keyboard.press('Enter');
  for(let i=0;i<80;i++){
   const state=await page.evaluate(()=>window.neonRelay.snapshot());
-  if(state.winner===0)break;
+  if(state.winner===0||await page.evaluate(()=>window.neonRelay.replay().bossStarts?.length))break;
   const [player,opponent]=state.fighters;
   const walk=opponent.x>player.x?'KeyD':'KeyA';
   if(Math.abs(opponent.x-player.x)>155){await page.keyboard.down(walk);await page.waitForTimeout(150);await page.keyboard.up(walk);}
   await page.keyboard.press('KeyP');await page.waitForTimeout(165);
  }
+ }
+ await winRegularBout();
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='boss');
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().wave),0);
  await page.locator('#story-animation-skip').click();
@@ -133,7 +136,16 @@ try{
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='morelight-ejection');
  await page.locator('#story-animation-skip').click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vaudream'&&!window.neonRelay.storySnapshot().launching);
+ await winRegularBout();
+ await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.[0]?.form==='vmu');
+ assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().phase),null);
+ assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+ await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='vmu-black-hole');
+ assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+ await page.waitForFunction(()=>document.querySelector('#journey-title').textContent.includes('Congratulations'));
+ assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),true);
+ assert.equal(await page.evaluate(()=>window.neonRelay.verifyReplay()),true);
  assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
  writeFileSync('docs/evidence/story-animations-20261104/browser.json',JSON.stringify({playback,nickIntro:{pause:true,skip:true,retry:true,combatFrames:0,failedLoadRetry:true},morelightBoss:{progression:true,keyboardWeapons:true,replay:true,liveGodModeToggle:true},errors,failures},null,2)+'\n');
- console.log('PASS: all cinematic and attack atlases decoded and rendered in Chrome; nine bounded scene playlists; actual Nick intro pause, skip, retry and input/replay isolation; actual Morelight boss entry, C/V, replay and VMU progression.');
+ console.log('PASS: all cinematic and attack atlases decoded and rendered in Chrome; nine bounded scene playlists; actual Nick intro pause, skip, retry and input/replay isolation; actual Morelight and VMU boss progression, C/V, replay, and portal victory.');
 }finally{await browser.close();await server?.close();}

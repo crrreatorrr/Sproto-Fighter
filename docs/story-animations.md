@@ -8,7 +8,7 @@ Cinematics pause combat and replay input. For encounters with a playable boss, r
 | Juicy | Regular fight → robot transformation → mecha boss | Replaced |
 | Artchick | Regular fight → fusion with Artdude → growth → Mega Artchick boss | Replaced |
 | Morelight | Regular fight → smoke and growth → giant boss → mecha boarding → mecha boss → ejection, wizard transformation and exit | Retained before smoke |
-| VMU | Regular fight → shield and black-hole ending | Replaced |
+| VMU | Regular fight → VMU boss in the same form → bomb portal pulls the player in → congratulations | Skipped |
 
 Artdude keeps his existing first-bout presentation. These boss phases only run in Story mode. Pause and Settings freeze the fight or scene. Skip completes the current cinematic and enters the next playable form when one is due. Settings can toggle God Mode during a fight without restarting it.
 
@@ -16,7 +16,7 @@ Artdude keeps his existing first-bout presentation. These boss phases only run i
 
 Move with A/D or the arrows. Space jumps and can be pressed again in the air. Shift dashes, X shields, C fires a piercing beam, and V launches a bouncing explosive ball. Shooting is automatic in the direction the player faces. R retries and Escape pauses. Each boss form rotates through three telegraphed attacks. The player enters the boss fight at full health and carries their remaining health from giant Morelight into his mecha phase.
 
-The boss runtime uses Sproto Arcade's 60 Hz grounded movement, projectile physics, dash and shield timing, and recharge times, with hitboxes fitted to Fighter's larger sprites. The six projectile graphics in `src/story-boss-art` are copied from Arcade's `art/gameplay/projectiles`. Five new four-pose attack sheets were generated with Nano Banana Pro in Higgsfield's Unlimited mode. Each sheet has one shared anticipation pose and three attack-specific release poses, keyed and aligned to the existing idle sprite.
+The boss runtime uses Sproto Arcade's 60 Hz grounded movement, projectile physics, dash and shield timing, and recharge times, with hitboxes fitted to Fighter's larger sprites. The six projectile graphics in `src/story-boss-art` are copied from Arcade's `art/gameplay/projectiles`. The original five four-pose attack sheets were generated with Nano Banana Pro in Higgsfield's Unlimited mode. Each sheet has one shared anticipation pose and three attack-specific release poses, keyed and aligned to the existing idle sprite.
 
 ## Sources
 

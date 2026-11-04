@@ -16,12 +16,12 @@ export function storyAnimationPlan(opponent:string,isStory:boolean):StoryAnimati
         case 'guest07':return {...plan,boss:['juicy-robot'],form:'juicy',replaceDefeat:true};
         case 'sproto943':return {...plan,boss:['art-fusion','mega-woman-growth'],form:'art',replaceDefeat:true};
         case 'vela':return {...plan,boss:['morelight-smoke'],mecha:['morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit']};
-        case 'vaudream':return {...plan,outro:['vmu-shield','vmu-black-hole'],replaceDefeat:true};
+        case 'vaudream':return {...plan,outro:['vmu-black-hole'],form:'vmu',replaceDefeat:true};
         default:return plan;
     }
 }
 
-const bossClips:Record<BossForm,StoryClip>={
+const bossClips:Partial<Record<BossForm,StoryClip>>={
     giant:'morelight-smoke',mecha:'morelight-mecha',dragon:'nick-dragon',juicy:'juicy-robot',art:'mega-woman-growth',
 };
 
@@ -30,7 +30,7 @@ export function createStoryAnimation(){
     let phase:StoryScenePhase|null=null,index=0,age=0,skipRequested=false,generation=0;
     const consumed=new Set<StoryScenePhase>();
     let sceneAnchorX:number|null=null,heldOutro=false;
-    const facingFor=(id:StoryClip,defeatFacing:number)=>id==='morelight-smoke'?defeatFacing:['nick-juicy','nick-mount','nick-flight','juicy-robot','art-fusion','mega-woman-growth','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'].includes(id)?1:-1;
+    const facingFor=(id:StoryClip,defeatFacing:number)=>id==='morelight-smoke'?defeatFacing:id==='vmu-black-hole'?1:['nick-juicy','nick-mount','nick-flight','juicy-robot','art-fusion','mega-woman-growth','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'].includes(id)?1:-1;
     function reset(){phase=null;index=0;age=0;skipRequested=false;sceneAnchorX=null;heldOutro=false;consumed.clear();}
     function clear(){generation++;reset();images.clear();plan=storyAnimationPlan('',false);}
     function finish(){
@@ -43,7 +43,7 @@ export function createStoryAnimation(){
     return {
         async load(next:StoryAnimationPlan){
             const token=++generation;
-            const loaded=await Promise.all([...new Set([...next.intro,...next.outro,...(next.boss??[]),...(next.mecha??[]),...(next.form?[bossClips[next.form]]:[])])].map(async id=>{
+            const loaded=await Promise.all([...new Set([...next.intro,...next.outro,...(next.boss??[]),...(next.mecha??[]),...(next.form&&bossClips[next.form]?[bossClips[next.form]!]:[])])].map(async id=>{
                 const spec=manifest[id],asset=new Image();
                 asset.src=import.meta.env.BASE_URL+'story-animations/'+spec.image;
                 await asset.decode();
@@ -74,7 +74,9 @@ export function createStoryAnimation(){
         draw(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing=1,boss?:BossForm){
             const drawPhase=phase??(heldOutro?'outro':null);
             if(!drawPhase&&!boss)return false;
-            const id=drawPhase?plan[drawPhase]![index]:bossClips[boss!],spec=manifest[id],image=images.get(id);
+            const id=drawPhase?plan[drawPhase]![index]:bossClips[boss!];
+            if(!id)return false;
+            const spec=manifest[id],image=images.get(id);
             if(!image)return false;
             const frame=drawPhase?Math.min(spec.frames-1,Math.floor(age*spec.fps/TICK_RATE)):boss==='dragon'?0:spec.frames-1;
             // Mirror the recovery to match Morelight's landed KO; other clips face inward.
@@ -90,7 +92,8 @@ export function createStoryAnimation(){
                 sceneAnchorX=id==='nick-juicy'?spec.x*spec.scale:Math.max(left,Math.min(WIDTH-right,x));
             }
             ctx.save();ctx.imageSmoothingEnabled=false;
-            const anchor=id==='nick-mount'?storyBossX('dragon')-250
+            const anchor=id==='vmu-black-hole'?storyBossX('vmu')
+                :id==='nick-mount'?storyBossX('dragon')-250
                 :id==='art-fusion'||id==='mega-woman-growth'?storyBossX('art')
                 :id==='morelight-mecha'||id==='juicy-robot'?STORY_BOSS_X
                 :!drawPhase&&boss?storyBossX(boss):sceneAnchorX??x;
@@ -98,6 +101,14 @@ export function createStoryAnimation(){
             ctx.drawImage(image,frame%spec.columns*spec.width,Math.floor(frame/spec.columns)*spec.height,
                 spec.width,spec.height,-spec.x,-spec.y,spec.width,spec.height);
             ctx.restore();return true;
+        },
+        portalPull(){
+            if(plan.outro[index]!=='vmu-black-hole'||(phase!=='outro'&&!heldOutro))return;
+            const spec=manifest['vmu-black-hole'];
+            const frame=age*spec.fps/TICK_RATE;
+            if(frame<24)return;
+            return {x:storyBossX('vmu')+(256-spec.x)*spec.scale,y:(55-spec.y)*spec.scale,
+                progress:Math.min(1,(frame-24)/14)};
         },
         get bossForm(){return plan.form;},
         get replaceDefeat(){return plan.replaceDefeat;},

@@ -1,13 +1,14 @@
 import {A,FLOOR,type CombatState,type Projectile} from './core';
 import {makeFighter} from './sim/combat';
 import missile from './story-boss-art/missile.png';
+import laser from './story-boss-art/laser.svg';
 import bolt from './story-boss-art/bolt.svg';
 import diamond from './story-boss-art/diamond.svg';
 import orb from './story-boss-art/orb.svg';
 import roller from './story-boss-art/roller.svg';
 import seed from './story-boss-art/seed.svg';
 
-export type BossForm='giant'|'mecha'|'dragon'|'juicy'|'art';
+export type BossForm='giant'|'mecha'|'dragon'|'juicy'|'art'|'vmu';
 export const STORY_BOSS_X=220;
 export const storyBossX=(form:BossForm)=>form==='dragon'?430:form==='art'?315:STORY_BOSS_X;
 export const BOSS_BEAM=1<<12,BOSS_BALL=1<<13,BOSS_SHIELD=1<<14;
@@ -16,14 +17,15 @@ export const BOSS_KEYS:Readonly<Record<string,number>>={
     Space:A.up,
     ShiftLeft:A.dash,ShiftRight:A.dash,KeyX:BOSS_SHIELD,KeyC:BOSS_BEAM,KeyV:BOSS_BALL,
 };
-const projectileUrls={missile,bolt,diamond,orb,roller,seed};
+const projectileUrls={missile,laser,bolt,diamond,orb,roller,seed};
 type Art=keyof typeof projectileUrls;
 const artSize:Record<Art,readonly [number,number]>={
-    missile:[44,18],bolt:[30,10],diamond:[26,20],orb:[24,24],roller:[36,20],seed:[14,14],
+    missile:[44,18],laser:[96,14],bolt:[30,10],diamond:[26,20],orb:[24,24],roller:[36,20],seed:[14,14],
 };
-type Attack={name:string;art:Art;speed:number;pattern:'aim'|'fan'|'floor'|'arc'|'burst'};
+type Attack={name:string;art:Art;speed:number;pattern:'aim'|'fan'|'floor'|'arc'|'burst'|'bomb'|'screen'};
 const missileSpit:Attack={name:'Mouth missile',art:'missile',speed:5,pattern:'aim'};
 const attacks:Record<BossForm,readonly Attack[]>={
+    vmu:[{name:'Laser burst',art:'laser',speed:19,pattern:'burst'},{name:'Bomb drop',art:'orb',speed:10,pattern:'bomb'},{name:'Slow missile screen',art:'missile',speed:2.8,pattern:'screen'}],
     giant:[missileSpit,{name:'Spit spread',art:'seed',speed:7,pattern:'fan'},{name:'Ground roll',art:'roller',speed:9,pattern:'floor'}],
     mecha:[{...missileSpit,name:'Missile barrage',pattern:'burst',speed:6},{name:'Cannon spread',art:'diamond',speed:9,pattern:'fan'},{name:'Mortar',art:'orb',speed:8,pattern:'arc'}],
     dragon:[{name:'Dragonfire',art:'bolt',speed:10,pattern:'burst'},{name:'Wing volley',art:'missile',speed:6,pattern:'fan'},{name:'Ember roll',art:'roller',speed:8,pattern:'floor'}],
@@ -31,6 +33,7 @@ const attacks:Record<BossForm,readonly Attack[]>={
     juicy:[{name:'Rocket salvo',art:'missile',speed:6,pattern:'burst'},{name:'Pulse fan',art:'orb',speed:8,pattern:'fan'},{name:'Ricochet mortar',art:'diamond',speed:8,pattern:'arc'}],
 };
 const formConfig={
+    vmu:{title:'VMU · FINAL BOSS',mouth:[76,-90],target:[-92,-160,92,-16],period:144},
     giant:{title:'GIANT MORELIGHT',mouth:[66,-230],target:[-105,-313,135,0],period:166},
     mecha:{title:'MORELIGHT MECHA',mouth:[35,-151],target:[-121,-220,145,0],period:136},
     dragon:{title:'NICK & DRAGON',mouth:[114,-124],target:[-95,-151,115,-54],period:142},
@@ -40,8 +43,8 @@ const formConfig={
 export const storyBossTitle=(form:BossForm)=>formConfig[form].title;
 
 type Box=readonly [left:number,top:number,right:number,bottom:number];
-type Shot=Projectile&{art:Art;hit?:boolean};
-type ShotPlan={x:number;y:number;vx:number;vy:number;gravity?:number;bounces?:number;delay?:number};
+type Shot=Projectile&{art:Art;hit?:boolean;explodes?:boolean};
+type ShotPlan={x:number;y:number;vx:number;vy:number;gravity?:number;bounces?:number;delay?:number;explodes?:boolean};
 export interface StoryBoss {
     form:BossForm;
     startFrame:number;
@@ -92,6 +95,8 @@ function planAttack(form:BossForm,attack:Attack,playerX:number,playerY:number):S
         case 'burst':return [0,12,24].map(delay=>({x,y,vx,vy,delay}));
         case 'fan':return [-2.5,0,2.5].map(offset=>({x,y,vx,vy:vy+offset}));
         case 'floor':return [0,108].map(offset=>({x:x-offset,y:FLOOR-13,vx:attack.speed,vy:0}));
+        case 'screen':return [20,65,112,38,90,136].map((height,i)=>({x,y:FLOOR-height,vx:attack.speed,vy:0,delay:i*10}));
+        case 'bomb':return [.72,1,1.27].map(factor=>({x,y,vx:dx/52*factor,vy:-5,gravity:.25,explodes:true}));
         case 'arc':return [-2,2].map(offset=>({x,y,vx:attack.speed+offset,vy:-4,gravity:.21,bounces:2}));
     }
 }
@@ -155,7 +160,7 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
     for(const {shot,art,at} of boss.pending){
         if(age!==at)continue;
         const {delay,...trajectory}=shot;
-        shots.push({...trajectory,owner:1,shape:'bossHazard',art,damage:200,life:240});
+        shots.push({...trajectory,owner:1,shape:'bossHazard',art,damage:200,life:art==='missile'&&trajectory.vx<3?460:240});
         boss.releasedAt=age;
     }
 
@@ -170,10 +175,20 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
             if(hazard.owner===1&&(shot.x-hazard.x)**2+(shot.y-hazard.y)**2<=65**2)hazard.life=0;
         boss.blasts.push({x:shot.x,y:shot.y,until:age+20});shot.life=0;
     };
+    const hurtPlayer=()=>{
+        if(state.godMode||dashing||shield||age<boss.invulnerableUntil)return;
+        p.hp=Math.max(0,p.hp-200);p.flash=15;boss.invulnerableUntil=age+60;
+    };
     for(const shot of shots){
         if(shot.life<=0)continue;
         const x=shot.x,y=shot.y,[width,height]=artSize[shot.art];
         shot.x+=shot.vx;shot.y+=shot.vy;shot.vy+=shot.gravity??0;shot.life--;
+        if(shot.explodes&&shot.y+height/2>=FLOOR&&shot.vy>0){
+            const px=within(shot.x,p.x-20,p.x+20),py=within(FLOOR,p.y-109,p.y-8);
+            if((shot.x-px)**2+(FLOOR-py)**2<=65**2)hurtPlayer();
+            boss.blasts.push({x:shot.x,y:FLOOR,until:age+20});
+            shot.life=0;continue;
+        }
         if(shot.bounces!==undefined&&shot.y+height/2>=FLOOR&&shot.vy>0){
             shot.y=FLOOR-height/2;shot.vy=-Math.max(3,shot.vy*.65);
             if(--shot.bounces<0){if(shot.shape==='bossBall')blast(shot);else shot.life=0;continue;}
@@ -186,9 +201,8 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
         if(shot.shape==='bossBall'&&shot.life===0)blast(shot);
         if(shot.owner===1&&sweep(x,y,shot.x-x-(p.x-oldX),shot.y-y-(p.y-oldY),playerBox,width/2,height/2)){
             shot.life=0;
-            if(!state.godMode&&!dashing&&!shield&&age>=boss.invulnerableUntil){
-                p.hp=Math.max(0,p.hp-shot.damage);p.flash=15;boss.invulnerableUntil=age+60;
-            }
+            if(shot.explodes)boss.blasts.push({x:shot.x,y:shot.y,until:age+20});
+            hurtPlayer();
         }
     }
     state.projectiles=shots.filter(shot=>shot.life>0&&shot.x>-60&&shot.x<1340&&shot.y>135&&shot.y<FLOOR+30);
@@ -219,6 +233,13 @@ export async function loadStoryBossArt(form:BossForm){
 
 export function drawStoryBossPose(ctx:CanvasRenderingContext2D,state:CombatState,boss:StoryBoss,images:Awaited<ReturnType<typeof loadStoryBossArt>>){
     const image=images.poses[boss.form],releaseAge=state.frame-boss.startFrame-boss.releasedAt;
+    if(image&&boss.form==='vmu'){
+        const frame=state.winner!==null?0:boss.warning?Math.min(3,Math.floor((state.frame-boss.startFrame)%formConfig.vmu.period/14)-1)
+            :releaseAge<24?4+boss.lastAttack*4+Math.floor(releaseAge/6):0;
+        ctx.save();ctx.imageSmoothingEnabled=false;
+        ctx.drawImage(image,frame%4*256,Math.floor(frame/4)*256,256,256,storyBossX('vmu')-128,FLOOR-208,256,256);
+        ctx.restore();return true;
+    }
     if(!image||state.winner!==null||(!boss.warning&&releaseAge>=21))return false;
     const frame=boss.warning||releaseAge>=14?0:boss.lastAttack+1;
     ctx.save();ctx.imageSmoothingEnabled=false;
@@ -235,8 +256,8 @@ export function drawStoryBossAttacks(ctx:CanvasRenderingContext2D,state:CombatSt
     if(boss.warning){
         ctx.strokeStyle='#ffb570';ctx.lineWidth=2;ctx.setLineDash([7,8]);
         for(const shot of boss.warning.shots){
-            if(shot.delay)continue;
-            const ticks=within((1280-shot.x)/shot.vx,0,145);
+            if(shot.delay&&boss.warning.attack.pattern!=='screen')continue;
+            const ticks=within((1280-shot.x)/shot.vx,0,shot.gravity?145:460);
             ctx.beginPath();ctx.moveTo(shot.x,shot.y);
             if(shot.gravity){
                 for(let t=6;t<=ticks;t+=6){

@@ -54,7 +54,7 @@ async function harness(id:string,win=0){
 describe('story animation ordering and lifecycle',()=>{
     it('uses each boss\'s own scenes and preserves Morelight\'s full transformation order',()=>{
         expect(storyAnimationPlan('vela',true)).toEqual({intro:[],boss:['morelight-smoke'],mecha:['morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit'],replaceDefeat:false});
-        expect(storyAnimationPlan('vaudream',true).outro).toEqual(['vmu-shield','vmu-black-hole']);
+        expect(storyAnimationPlan('vaudream',true).outro).toEqual(['vmu-black-hole']);
         expect(storyAnimationPlan('guest07',true).boss).toEqual(['juicy-robot']);
         expect(storyAnimationPlan('sproto943',true).boss).toEqual(['art-fusion','mega-woman-growth']);
         expect(storyAnimationPlan('sproto865',true).outro).toEqual([]);
@@ -68,20 +68,26 @@ describe('story animation ordering and lifecycle',()=>{
         await a.load(storyAnimationPlan('guest07',true));expect(a.start('intro')).toBe(false);
         a.clear();expect(a.start('outro')).toBe(false);
     });
-    it('suppresses VMU death at KO, saves once, and reports only after scenes',async()=>{
-        const id='vaudream';
-        const t=await harness(id);t.run(0);
-        expect(t.presentation.phase).toBe('result');expect(t.animation.active).toBe('outro');
-        expect(t.calls).toEqual(['save']);const snapshot=JSON.stringify(t.state);
-        const seen:string[]=[];
-        for(let n=0;n<10000&&t.animation.active;n++){
-            const clip=t.animation.snapshot().clip!;if(seen.at(-1)!==clip)seen.push(clip);
+    it('starts VMU directly and plays the portal pull before saving victory',async()=>{
+        const t=await harness('vaudream');
+        t.run(0);
+        expect(t.presentation.phase).toBe('fight');
+        expect(t.animation.active).toBeNull();
+        expect(t.state.winner).toBeNull();
+        expect(t.calls).toEqual([]);
+        t.run(0);
+        expect(t.animation.snapshot().clip).toBe('vmu-black-hole');
+        expect(t.calls).toEqual([]);
+        let sawPull=false;
+        while(t.animation.active){
+            const pull=t.animation.portalPull();
+            if(pull&&pull.progress>0&&pull.progress<1)sawPull=true;
             t.run(0);
         }
-        expect(seen).toEqual(storyAnimationPlan(id,true).outro);
-        expect(t.calls).toEqual(['save','report','result']);expect(t.frames).toHaveLength(1);
-        expect(JSON.stringify(t.state)).toBe(snapshot);
-        t.run(0);expect(t.calls).toEqual(['save','report','result']);
+        expect(sawPull).toBe(true);
+        expect(t.animation.portalPull()?.progress).toBe(1);
+        expect(t.calls).toEqual(['save','report','result']);
+        expect(t.frames).toHaveLength(2);
     });
     it('requires both Morelight forms to be cleared before saving or playing the final scenes',async()=>{
         const t=await harness('vela');
@@ -119,8 +125,8 @@ describe('story animation ordering and lifecycle',()=>{
             expect(t.calls).toEqual(['save']);
         });
     it('skip completes the result once without leaking input or replay frames',async()=>{
-        const t=await harness('vaudream');t.run(0);t.animation.skip();t.run(255);
-        expect(t.calls).toEqual(['save','report','result']);expect(t.frames).toHaveLength(1);
+        const t=await harness('vaudream');t.run(0);t.run(0);t.animation.skip();t.run(255);
+        expect(t.calls).toEqual(['save','report','result']);expect(t.frames).toHaveLength(2);
         t.run(255);expect(t.calls).toEqual(['save','report','result']);
     });
     it.each([1,2])('loss/draw %s keeps normal outro and never plays boss scenes',async winner=>{
@@ -134,8 +140,8 @@ describe('story animation ordering and lifecycle',()=>{
         expect(t.calls).toEqual(['countdown']);expect(t.frames).toHaveLength(0);expect(t.state.winner).toBe(null);
     });
     it('cancels a result scene during retry without delivering another result',async()=>{
-        const t=await harness('vaudream');t.run(0);t.animation.cancel();t.run(0);
-        expect(t.animation.active).toBe(null);expect(t.calls).toEqual(['save']);
+        const t=await harness('vaudream');t.run(0);t.run(0);t.animation.cancel();t.run(0);
+        expect(t.animation.active).toBe(null);expect(t.calls).toEqual([]);
         t.animation.reset();expect(t.animation.start('outro')).toBe(true);
     });
     it('holds the last sprite after completion instead of flashing the death pose',async()=>{
