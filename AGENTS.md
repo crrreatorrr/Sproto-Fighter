@@ -19,6 +19,10 @@ npm run build
 
 `npm run test:all` adds the three slow roster-wide audits. CI runs the full set.
 
+## Art generation
+
+Follow `docs/higgsfield-workflow-guide.md`. This repo uses the **sprite sheet** workflow. If the owner says to skip approvals, follow that section of the guide.
+
 ## Working with other agents
 
 Claude Code, Codex, Cursor and Grok Bot all work on this repo.
