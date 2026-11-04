@@ -18,9 +18,10 @@ const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');
 
 // Over a minute each on a laptop. `--fast` leaves them out for quick local loops.
-const SLOW = new Set(['game-qa.mjs', 'throw-smoke.mjs', 'sprite-scale-qa.mjs']);
+const SLOW = new Set(['game-qa.mjs', 'throw-smoke.mjs', 'sprite-scale-qa.mjs', 'sheet-render-qa.mjs']);
 // Not checks: this runner and shared helpers.
-const NOT_CHECKS = new Set(['run-all.mjs', 'build-sim-bundle.mjs']);
+// perf-baseline.mjs measures loading; it reports numbers rather than passing or failing.
+const NOT_CHECKS = new Set(['run-all.mjs', 'build-sim-bundle.mjs', 'perf-baseline.mjs']);
 
 const args = process.argv.slice(2);
 let jobs = availableParallelism();

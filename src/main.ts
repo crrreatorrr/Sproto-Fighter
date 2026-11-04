@@ -1,4 +1,4 @@
-import { ensurePoseAtlases, getPoseAtlasLoadStatus } from './poseAtlas';
+import { ensurePoseAtlases, ensurePosePreviews, getPoseAtlasLoadStatus } from './poseAtlas';
 import { createSelectionMenu, type MenuMode, type SelectionSetup } from './selectionMenu';
 import './style.css';
 import './arcadeSelection.css';
@@ -97,7 +97,20 @@ let online: OnlineMatch | null = null;
 let hiddenClock: Worker | null = null;
 const canPlayFighter=(id:FighterId)=>isFighterAvailable(id,storyProgress.isUnlocked(id),hubRelics);
 const lockedFighter=(id:FighterId)=>fighterLockReason(id,storyProgress.isUnlocked(id),hubRelics);
-const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:ensurePoseAtlases,canPlay:canPlayFighter,locked:lockedFighter});
+/** Browsing the roster loads only each pick's standing pose. The full bodies start
+ * loading once a pick has settled for a moment, so they are usually ready by Start;
+ * picks the player has already moved past are never loaded. */
+const PICK_SETTLE_MS=300;
+let pickPrefetch:ReturnType<typeof setTimeout>|undefined,pickGeneration=0;
+async function prepareSelectionArt(ids:FighterId[]):Promise<void>{
+    const generation=++pickGeneration;
+    clearTimeout(pickPrefetch);
+    await ensurePosePreviews(ids);
+    // An earlier pick's preview can finish after a later pick started: only the latest arms the prefetch.
+    if(generation!==pickGeneration)return;
+    pickPrefetch=setTimeout(()=>{void ensurePoseAtlases(ids).catch(error=>console.warn('Fighter art prefetch failed; Start will retry.',error));},PICK_SETTLE_MS);
+}
+const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:prepareSelectionArt,canPlay:canPlayFighter,locked:lockedFighter});
 let toastTimer=0;
 function hubToast(title:string,sub:string){
  const toast=$('hub-toast');toast.replaceChildren();
@@ -144,7 +157,9 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
-    try{await Promise.all([ensurePoseAtlases(requiredFighters),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
+    // Usually already prefetched; otherwise the rest of the bodies load now.
+    $('selection-loading').textContent='Loading selected fighters…';
+    try{await Promise.all([ensurePoseAtlases(requiredFighters,{pin:true}),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
     try{await storyAnimation.load(storyAnimationPlan(setup.opponent,isStory));}
@@ -459,6 +474,8 @@ function pollPad(): number {
 }
 // Optional, visible read-only diagnostics for manual QA; never changes combat state.
 const qaPanel = new URLSearchParams(location.search).has('qa') ? document.createElement('pre') : null;
+// `?perf`: read-only art-loading status for scripts/perf-baseline.mjs.
+if (new URLSearchParams(location.search).has('perf')) (window as unknown as {sprotoAtlasStatus:typeof getPoseAtlasLoadStatus}).sprotoAtlasStatus = getPoseAtlasLoadStatus;
 let qaFrozen=false,qaSingleStep=false;
 let qaStopAtOutro=()=>{};
 const qaEvents:string[]=[];
@@ -543,7 +560,7 @@ function showOnlineOverlay(title: string, copy: string, button: string, kicker: 
 async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId], stageId: string, wager: boolean) {
     const stage = (STAGES.some(s => s.id === stageId) ? stageId : 'ranch') as StageId;
     showOnlineOverlay('Opponent found!', 'Loading fighters…', 'Loading…', 'ONLINE', null);
-    await Promise.all([loadStageArt([stage]), ensurePoseAtlases(fighters).catch(() => undefined)]);
+    await Promise.all([loadStageArt([stage]), ensurePoseAtlases(fighters,{pin:true}).catch(() => undefined)]);
     if (match !== online || !match.session) return;
     chosen = fighters[0]; opponent = fighters[1]; mode = 'versus';
     matchTesting = false; matchGodMode = false;
@@ -712,7 +729,7 @@ function tick(now: number) {
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
-ensurePoseAtlases(['highsproto','vela']).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
