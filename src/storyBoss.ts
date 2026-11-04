@@ -13,7 +13,7 @@ export const storyBossX=(form:BossForm)=>form==='dragon'?430:form==='art'?315:ST
 export const BOSS_BEAM=1<<12,BOSS_BALL=1<<13,BOSS_SHIELD=1<<14;
 export const BOSS_KEYS:Readonly<Record<string,number>>={
     KeyA:A.left,ArrowLeft:A.left,KeyD:A.right,ArrowRight:A.right,
-    KeyW:A.up,ArrowUp:A.up,Space:A.up,KeyS:A.down,ArrowDown:A.down,
+    Space:A.up,
     ShiftLeft:A.dash,ShiftRight:A.dash,KeyX:BOSS_SHIELD,KeyC:BOSS_BEAM,KeyV:BOSS_BALL,
 };
 const projectileUrls={missile,bolt,diamond,orb,roller,seed};
