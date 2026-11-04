@@ -11,8 +11,40 @@ import { FLOOR, ROSTER, COMBAT_STYLES, DUO_SPREAD, bodyOffsets, isPairedFighter,
 function text(c: CanvasRenderingContext2D, str: string, x: number, y: number, size = 14, color = '#93a5bd', align: CanvasTextAlign = 'left', weight = 600) { c.fillStyle = color; c.font = `${weight} ${size}px "Pixelify Sans", monospace`; c.textAlign = align; c.fillText(str, x, y); }
 function line(c: CanvasRenderingContext2D, x: number, y: number, x2: number, y2: number, color: string, width = 1) { c.beginPath(); c.moveTo(x, y); c.lineTo(x2, y2); c.strokeStyle = color; c.lineWidth = width; c.stroke(); }
 function poly(c: CanvasRenderingContext2D, points: number[][], color: string) { c.beginPath(); points.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath(); c.fillStyle = color; c.fill(); }
+
+function drawSprotopiaAura(c: CanvasRenderingContext2D, f: Fighter) {
+    if (f.id !== 'sprotopia' || f.move?.id !== 'bolt' || f.stun || f.blockstun || f.hp <= 0) return;
+    const { startup } = getMove(f, 'bolt');
+    const age = f.move.t;
+    const fade = Math.min(1, (age + 2) / 6, (startup + 10 - age) / 8);
+    if (fade <= 0) return;
+
+    const pulse = (Math.floor(age / 3) % 3) * 3;
+    const outline = [
+        [-56, -14], [-76, -49], [-66, -92], [-81, -120], [-52, -137],
+        [-42, -167], [-17, -158], [3, -184], [22, -166], [45, -173],
+        [59, -140], [78, -119], [66, -97], [78, -58], [59, -17], [0, -5],
+    ];
+    c.save();
+    c.translate(Math.round(f.x), Math.round(f.y));
+    c.globalAlpha = .44 * fade;
+    poly(c, outline.map(([x, y]) => [Math.round(x * (1 + pulse / 80)), y - pulse]), '#ff561c');
+    c.globalAlpha = .62 * fade;
+    poly(c, outline.map(([x, y]) => [Math.round(x * .85), Math.round((y + 90) * .88 - 90)]), '#ff9829');
+    c.globalAlpha = fade;
+    for (let spark = 0; spark < 8; spark++) {
+        const direction = spark % 2 === 0 ? -1 : 1;
+        const lift = (age * 3 + spark * 19) % 144;
+        const x = direction * (59 + ((spark * 11 + pulse) % 25));
+        c.fillStyle = spark % 3 === 0 ? '#ffd084' : '#ff771f';
+        c.fillRect(x, -32 - lift, spark % 3 === 0 ? 5 : 3, 5 + spark % 4);
+    }
+    c.restore();
+}
+
 function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost = false, frozen = false, visualFrame = frame) {
     if(drawRetainDefeat(c,f.id,f.hp,f.x,FLOOR,visualFrame))return;
+    drawSprotopiaAura(c, f);
     drawSprite(c,f,frame,ghost,frozen);
     if (f.blockstun > 0) {
         c.save();
