@@ -1,0 +1,517 @@
+{
+  "date": "2026-11-03",
+  "states": [
+    "Guard",
+    "Walk phases",
+    "Dash",
+    "Jump",
+    "Punch",
+    "Heavy attack",
+    "Aerial attack",
+    "Ranged release",
+    "Recoil",
+    "Defeat"
+  ],
+  "limits": [
+    "Contact-sheet samples are visual observations. The runtime scale audit drives both actual facings and tests the remaining animation states.",
+    "The shared workspace also contains concurrent roster batches. Their missing visual records, portrait assets and named-animation fixtures are tracked by the repository-wide checks separately from this intake."
+  ],
+  "fighters": [
+    {
+      "id": "stoto",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "herbpowell",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "sirdidit",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "ceo",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "ciphersproto",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "sprotocius",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "rmacpdx",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "azkarah",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "mrhorsemeat",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "wyrmblvnt",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "aktree",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "fplgremlin",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "chrisfowler",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "spruto",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "ghostsprotocol",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "tdeth",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "vicoo",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "chonky",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "degenpress",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "giavannykitchens",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "seph0x",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "rektina",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "twinnyneutron",
+      "samples": 26,
+      "findings": [
+        "Both twin bodies were reviewed independently."
+      ]
+    },
+    {
+      "id": "melo",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families.",
+        "The red and gold sword remains visible in the sampled movement, attacks, recoil and floor rest."
+      ]
+    },
+    {
+      "id": "kern",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "bs9090eth",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "renzo",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "micsash",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "davidcd",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "samixsproto",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families.",
+        "The replacement event sheet contains all 32 frames."
+      ]
+    },
+    {
+      "id": "wireitwell",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "cryptoboy",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "osho",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "pr0lificeth",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "bidnehhh",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "jayquant",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "infinitysplitter",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "hdizzy",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "cryptoviking420",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "sweatpantstrust",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "spunow",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "sprotomichaelsaylor",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "zippy",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "lilgoldied",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "bitcoind1rk",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "felixsprotoarc",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "onememeaday",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "zudi",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    },
+    {
+      "id": "forchaneth",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed body across all listed action families."
+      ]
+    }
+  ],
+  "batch": {
+    "submittedNames": 53,
+    "newPlayableFighters": 49,
+    "newBodyAtlases": 50,
+    "installedSpriteFiles": 5200,
+    "existingFightersReviewed": [
+      "gryph",
+      "emix",
+      "sproto763",
+      "sproto2381"
+    ],
+    "duplicateSubmissionsCombined": [
+      "Stoto"
+    ],
+    "namesUpdated": {
+      "sproto763": "Snarf",
+      "sproto2381": "𝒮𝗉𝗋𝗈𝗋𝖺𝖾𝗆𝗈𝗇",
+      "stoto": "stoto",
+      "gryph": "gryph",
+      "vicoo": "Vicoo"
+    },
+    "mergedUnreleasedAliases": {
+      "sprotolicious": "vicoo"
+    }
+  },
+  "automatedChecks": {
+    "batchSnapshotOwners": 183,
+    "batchSnapshotBodies": 203,
+    "vitestPassed": 38,
+    "standaloneChecksPassed": 62,
+    "facings": [
+      -1,
+      1
+    ],
+    "story": "Every submitted name resolves to one playable fighter and one story encounter.",
+    "browser": {
+      "fighters": 53,
+      "actions": [
+        "entrance",
+        "ranged",
+        "defeat"
+      ],
+      "inspectedScreenshots": [
+        "stoto",
+        "herbpowell",
+        "sirdidit",
+        "melo",
+        "twinnyneutron",
+        "gryph",
+        "emix"
+      ]
+    },
+    "preDeduplicationSnapshot": true,
+    "postDeduplication": {
+      "namesAndStoryEncounters": 53,
+      "browserActionPreviews": 159,
+      "browserMotionSamples": 1272,
+      "browserMotionScenarios": [
+        "walk",
+        "dash",
+        "jump",
+        "crouch",
+        "light",
+        "heavy",
+        "airMedium",
+        "bolt",
+        "hit",
+        "block",
+        "grab",
+        "special"
+      ],
+      "browserFacings": [
+        -1,
+        1
+      ],
+      "releaseSheets": 249,
+      "releaseFramesVerifiedPixelIdentical": 26420,
+      "coreMotionScenarios": {
+        "owners": 254,
+        "scenariosPerFacing": 52,
+        "facings": [
+          -1,
+          1
+        ],
+        "passed": 26416,
+        "failed": 0
+      },
+      "sharedWorkspaceChecksPending": [
+        "full-roster visual coverage records",
+        "portrait and versus assets for other roster batches"
+      ]
+    }
+  },
+  "mergeBaseFighters": [
+    {
+      "id": "clobrwn",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ]
+    },
+    {
+      "id": "hermionemichelleamyrose",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ]
+    },
+    {
+      "id": "julian",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ]
+    },
+    {
+      "id": "nomis",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ]
+    },
+    {
+      "id": "pongohpos10i",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ]
+    },
+    {
+      "id": "saburdo",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ]
+    },
+    {
+      "id": "sirbitcoin",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ]
+    },
+    {
+      "id": "thesprotowholivedeth",
+      "samples": 13,
+      "findings": [
+        "Sampled the installed atlas during merge verification for cf9b3254."
+      ]
+    }
+  ]
+}

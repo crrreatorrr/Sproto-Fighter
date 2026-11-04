@@ -1,0 +1,491 @@
+[
+  {
+    "id": "stoto",
+    "name": "stoto",
+    "reference": "art/stoto/reference.png",
+    "status": "sheets prepared",
+    "originalSubmittedName": "Stoto"
+  },
+  {
+    "id": "herbpowell",
+    "name": "Herb Powell",
+    "reference": "art/herbpowell/reference.png",
+    "status": "sheets prepared"
+  },
+  {
+    "id": "sirdidit",
+    "name": "sirdidit",
+    "reference": "art/sirdidit/reference.png",
+    "status": "sheets prepared"
+  },
+  {
+    "id": "ceo",
+    "name": "CEO",
+    "index": 30,
+    "file": "4203546b-7f44-4fe6-a60b-2c9c92868b21",
+    "identity": "Indigo swept spines and line curls, yellow ear and sleepy eyes, red rounded nose and double grin, black suit with oversized yellow lapels.",
+    "kind": "solo",
+    "reference": "art/ceo/reference.png"
+  },
+  {
+    "id": "ciphersproto",
+    "name": "Cipher Sproto",
+    "index": 40,
+    "file": "50049cfb-c81e-467c-b1f3-e7eac626d5e5",
+    "identity": "Smooth broad cobalt face, sleepy yellow eyes, large projecting red lips, black shirt and yellow collar.",
+    "kind": "solo",
+    "reference": "art/ciphersproto/reference.png"
+  },
+  {
+    "id": "sprotocius",
+    "name": "sprotocius",
+    "index": 50,
+    "file": "c5e12383-4d15-49b5-bb82-ad1d89fdf5ce",
+    "identity": "Cobalt head, rear yellow fin, relaxed almond yellow eyes, red lips and thick red collar, black sleeves and chest medal.",
+    "kind": "solo",
+    "reference": "art/sprotocius/reference.png"
+  },
+  {
+    "id": "rmacpdx",
+    "name": "RMacPDX",
+    "index": 60,
+    "file": "f26f67e1-ef03-453e-8d9a-0d9ea9f72e8e",
+    "identity": "Indigo swept blue head, two giant round yellow eyes and yellow ear strip, red lips, red collar over thick yellow neckband.",
+    "kind": "solo",
+    "reference": "art/rmacpdx/reference.png"
+  },
+  {
+    "id": "azkarah",
+    "name": "Azkarah",
+    "index": 70,
+    "file": "9e0046f1-dcaa-429d-8e17-0aa3208da881",
+    "identity": "Blue swept round head, two glowing solid red eyes with black pupils, bold red lips, thick red collar and blue body.",
+    "kind": "solo",
+    "reference": "art/azkarah/reference.png"
+  },
+  {
+    "id": "sproto763",
+    "name": "Snarf",
+    "index": 80,
+    "file": "c8f44bc3-8e78-4794-9670-3d27e3a8db4d",
+    "identity": "Bright red head and swept spines, white eyes rimmed blue, wide red grin with blue center, blue body, slim yellow arms and red hands.",
+    "kind": "solo",
+    "reference": "art/snarf/reference.png",
+    "existingId": "sproto763",
+    "generatedId": "snarf",
+    "status": "image matches existing fighter; updated display name and selection portrait"
+  },
+  {
+    "id": "mrhorsemeat",
+    "name": "Mr. Horse Meat",
+    "index": 90,
+    "file": "97003c7e-43cd-4f64-a73a-e6f4634cf118",
+    "identity": "Huge blue swept head, round yellow eyes, broad red lips enclosing a blue grin, red long sleeves and prominent yellow chest disc.",
+    "kind": "solo",
+    "reference": "art/mrhorsemeat/reference.png"
+  },
+  {
+    "id": "wyrmblvnt",
+    "name": "wyrmblvnt",
+    "index": 100,
+    "file": "c071d4c4-c03c-4de3-93b0-c2a922a52bcc",
+    "identity": "Cobalt face, giant white eyes with asymmetric shiny black pupils, broad red grin, red top with yellow collar and blue central knot.",
+    "kind": "solo",
+    "reference": "art/wyrmblvnt/reference.png"
+  },
+  {
+    "id": "gryph",
+    "name": "gryph",
+    "index": 110,
+    "file": "0476dca2-363f-45d7-8bec-19cb4aa41f70",
+    "identity": "Two actors: slim blue left figure with swept spike, yellow eyes, red curved nose, red/yellow top; round blue right figure with red lids, white eyes, small white head tabs, red collar and tunic. Keep actors separate.",
+    "kind": "existing twin",
+    "reference": "art/roster-intake-nov03/gryph/reference.png",
+    "status": "existing; review during batch QA",
+    "existingId": "gryph",
+    "bodies": [
+      "gryph",
+      "gryph-companion"
+    ]
+  },
+  {
+    "id": "aktree",
+    "name": "Ak Tree",
+    "index": 120,
+    "file": "23237e97-6476-4e07-acbc-7bc8d6093e15",
+    "identity": "Blue broad swept head with single rear yellow spike, mellow almond yellow eyes, red smile, yellow collar and red breast panel on light blue outfit.",
+    "kind": "solo",
+    "reference": "art/aktree/reference.png"
+  },
+  {
+    "id": "fplgremlin",
+    "name": "FPL Gremlin",
+    "index": 130,
+    "file": "054e4a70-86ed-4063-b36c-4b882498343b",
+    "identity": "Violet-blue swept head, round yellow eyes, lobed red nose and red smile, yellow collar over red shirt with light blue pendant.",
+    "kind": "solo",
+    "reference": "art/fplgremlin/reference.png"
+  },
+  {
+    "id": "chrisfowler",
+    "name": "Chris Fowler",
+    "index": 140,
+    "file": "d828b26f-4861-441e-ab5d-33a226b114ec",
+    "identity": "Periwinkle blue swept head, yellow forehead stripe, two round yellow eyes each with two small black dots, blue nose, red grin and red shoulders.",
+    "kind": "solo",
+    "reference": "art/chrisfowler/reference.png"
+  },
+  {
+    "id": "spruto",
+    "name": "Spruto",
+    "index": 150,
+    "file": "6ee60a19-c959-4e69-9244-d03add18c2e1",
+    "identity": "Dark blue mane, angular yellow ear and rear fin, narrowed yellow eyes, small black nose, dark red lips and big yellow lower muzzle.",
+    "kind": "solo",
+    "reference": "art/spruto/reference.png"
+  },
+  {
+    "id": "ghostsprotocol",
+    "name": "ghost sprotocol",
+    "index": 160,
+    "file": "87efbf35-82be-415b-ac8f-74523ffc74bb",
+    "identity": "Cobalt swept blue head with red accents inside back spines, wide yellow eyes, blue round nose, red smile, oversized red collar with yellow band.",
+    "kind": "solo",
+    "reference": "art/ghostsprotocol/reference.png"
+  },
+  {
+    "id": "tdeth",
+    "name": "TD.eth",
+    "index": 170,
+    "file": "90fa818c-1860-4b6c-9e98-59b1d2314231",
+    "identity": "Radial blue spikes, huge yellow eyes, little red nose, red grin with yellow corner fangs, red ear fins and yellow shoulder plates.",
+    "kind": "solo",
+    "reference": "art/tdeth/reference.png"
+  },
+  {
+    "id": "vicoo",
+    "name": "sprotolicious",
+    "index": 180,
+    "file": "211427eb-29db-43fd-bfdd-177e5522d952",
+    "identity": "Round saturated blue head, huge yellow eyes with shiny blue pupils, red oval nose and smile, yellow ear, broad red and yellow collar with green medal.",
+    "kind": "solo",
+    "reference": "art/vicoo/reference.png",
+    "matchedAlias": "sprotolicious",
+    "status": "matching in-progress fighter consolidated under Vicoo",
+    "alternateSubmittedName": "Vicoo"
+  },
+  {
+    "id": "chonky",
+    "name": "Chonky",
+    "index": 190,
+    "file": "73cd50a4-1836-462b-a462-16f1c16428bc",
+    "identity": "Broad blue head and torso, swept bright yellow spines, small yellow eyes, round red nose and wide red smile, red sleeves and yellow trim.",
+    "kind": "solo",
+    "reference": "art/chonky/reference.png"
+  },
+  {
+    "id": "degenpress",
+    "name": "degenpress.base.eth",
+    "index": 200,
+    "file": "50c5ef30-f24a-40bc-8f5a-963915277c0d",
+    "identity": "Blue broad swept head, two warm yellow eyes with red rims, red nose and lips, yellow ear and broad yellow collar on red top.",
+    "kind": "solo",
+    "reference": "art/degenpress/reference.png"
+  },
+  {
+    "id": "giavannykitchens",
+    "name": "Giavanny Kitchens",
+    "index": 210,
+    "file": "c87cff43-e57e-46a8-9271-2903d7f1c0be",
+    "identity": "Periwinkle blue stocky body and swept head, broad flat yellow ear-fin, yellow eyes, wide curved red grin and thick red collar. Preserve the red lower torso accents as markings on a blue uniform.",
+    "kind": "solo",
+    "reference": "art/giavannykitchens/reference.png"
+  },
+  {
+    "id": "seph0x",
+    "name": "Seph0x",
+    "index": 220,
+    "file": "59e10c9b-efd2-496b-a23c-8565ab73c7da",
+    "identity": "Indigo head with three eyes: one small yellow eye at rear and two yellow eyes in red round surrounds; yellow rear fin, red grin, red shirt and blue fasteners.",
+    "kind": "solo",
+    "reference": "art/seph0x/reference.png"
+  },
+  {
+    "id": "rektina",
+    "name": "rektina",
+    "index": 230,
+    "file": "81a7d054-d59e-4ed7-9860-4ca945594800",
+    "identity": "Blue spiked head, two round yellow eyes, blue drooping nose, red smile and separate lower red lip marking, curled yellow side ornaments, red jacket.",
+    "kind": "solo",
+    "reference": "art/rektina/reference.png"
+  },
+  {
+    "id": "twinnyneutron",
+    "name": "twinny neutron",
+    "index": 240,
+    "file": "99354aa7-bc54-457e-bd5a-27bafe84e2c4",
+    "identity": "Blue spiked lead with cream eyes and red nose, smile and collar, blue star badge. Cropped yellow-framed red-faced companion at right.",
+    "kind": "twin reference",
+    "reference": "art/twinnyneutron/reference.png"
+  },
+  {
+    "id": "melo",
+    "name": "melo",
+    "index": 250,
+    "file": "e253aa93-d743-40e9-9c27-0e650068dbae",
+    "identity": "Blue face and yellow crest, huge yellow eyes, red smile with yellow lower edge, red white and yellow armor. Holds the same elaborate red blade and gold curled guard and pommel shown in the portrait throughout all attacks and movement.",
+    "kind": "weapon",
+    "reference": "art/melo/reference.png"
+  },
+  {
+    "id": "kern",
+    "name": "Kern",
+    "index": 260,
+    "file": "449fdea3-5830-433b-afd8-e0c40b722cb9",
+    "identity": "Deep blue spines with yellow triangular inserts, vertical yellow ear patch, yellow eyes, big red muzzle with black oval nose, yellow collar and red sleeves.",
+    "kind": "solo",
+    "reference": "art/kern/reference.png"
+  },
+  {
+    "id": "sproto2381",
+    "name": "𝒮𝗉𝗋𝗈𝗋𝖺𝖾𝗆𝗈𝗇",
+    "index": 270,
+    "file": "7c9d9a01-65e0-4505-b26d-a554d77bcaa9",
+    "identity": "Round bright blue head with tiny pointed tips, huge yellow eyes, black nose, wide red smile and yellow lower jaw, black collar and red/yellow outfit.",
+    "kind": "solo",
+    "reference": "art/sproraemon/reference.png",
+    "existingId": "sproto2381",
+    "generatedId": "sproraemon",
+    "status": "image matches existing fighter; updated display name and selection portrait"
+  },
+  {
+    "id": "bs9090eth",
+    "name": "bs9090.eth",
+    "index": 280,
+    "file": "6fb6e100-af7c-4a28-85be-2980a28d5a14",
+    "identity": "Blue swept head, yellow crown patch, sleepy deep red eyelids, black nose, yellow upper teeth and yellow chin patch, pale yellow arms and eye-like markings on blue uniform.",
+    "kind": "solo",
+    "reference": "art/bs9090eth/reference.png"
+  },
+  {
+    "id": "renzo",
+    "name": "RENZO",
+    "index": 290,
+    "file": "c69df6b3-04fa-42ab-9d51-a3ceff7bb8e8",
+    "identity": "Blue swept head, thick yellow brows, white eyes and red irises, wide red layered lips, yellow collar with red button and blue uniform.",
+    "kind": "solo",
+    "reference": "art/renzo/reference.png"
+  },
+  {
+    "id": "micsash",
+    "name": "Micsash __/acc",
+    "index": 300,
+    "file": "9938d973-bad9-493b-b0f6-0892b0e8d6f5",
+    "identity": "Deep blue swept head and long neck, round yellow eyes, thin red smile and small red ear, dark red collar with yellow trim over a muted green top.",
+    "kind": "solo",
+    "reference": "art/micsash/reference.png"
+  },
+  {
+    "id": "davidcd",
+    "name": "(Da,vid) DC",
+    "index": 310,
+    "file": "1180e851-ac9e-4321-9106-d989659d5166",
+    "identity": "Blue swept crown, red mask-like eye surrounds and shiny black pupils, red smile, red top with yellow high collar and blue badge.",
+    "kind": "solo",
+    "reference": "art/davidcd/reference.png"
+  },
+  {
+    "id": "samixsproto",
+    "name": "samiXsproto",
+    "index": 320,
+    "file": "708baab5-1360-4b9f-a04f-de0a81f97709",
+    "identity": "Indigo swept head and heavy lid lines, yellow almond eyes and nose, thick red split smile, black shirt with small red-white patch.",
+    "kind": "solo",
+    "reference": "art/samixsproto/reference.png"
+  },
+  {
+    "id": "wireitwell",
+    "name": "_wireitwell_",
+    "index": 330,
+    "file": "7bc57e93-98c7-4c44-87ba-9b718c3c4419",
+    "identity": "Wide blue head with exactly three yellow eyes in a row, two red horizontal mouth shapes, asymmetric yellow and blue arms.",
+    "kind": "solo",
+    "reference": "art/wireitwell/reference.png"
+  },
+  {
+    "id": "cryptoboy",
+    "name": "CryptoBoy",
+    "index": 340,
+    "file": "6d37ce09-fed6-4771-861d-3f717f8fa436",
+    "identity": "Turquoise round head, yellow crown spines, round yellow eyes, red oval nose and smile, yellow lower muzzle, black top with red accent.",
+    "kind": "solo",
+    "reference": "art/cryptoboy/reference.png"
+  },
+  {
+    "id": "osho",
+    "name": "Osho",
+    "index": 350,
+    "file": "0dfc66c0-67d2-481b-a994-91f177cf44f1",
+    "identity": "Rounded blue head with three eyes: two large red eyes and one smaller yellow rear eye, yellow top fin, orange smile and red shirt.",
+    "kind": "solo",
+    "reference": "art/osho/reference.png"
+  },
+  {
+    "id": "pr0lificeth",
+    "name": "Pr0lific.eth",
+    "index": 360,
+    "file": "8f28d32a-fc3c-414d-a478-ff63e2cbb26f",
+    "identity": "Angular blue swept head, one large yellow lens over left eye and pale blue right eye, red rear spines and two red mouth markings, high red/yellow collar.",
+    "kind": "solo",
+    "reference": "art/pr0lificeth/reference.png"
+  },
+  {
+    "id": "bidnehhh",
+    "name": "Bidnehhh",
+    "index": 370,
+    "file": "908105ba-02d0-4fb8-9a89-925407903859",
+    "identity": "Cobalt swept spines, giant yellow eyes with many glints, red nose and lips, red rear knot, red jacket with yellow collar and blue badge.",
+    "kind": "solo",
+    "reference": "art/bidnehhh/reference.png"
+  },
+  {
+    "id": "jayquant",
+    "name": "JayQuant",
+    "index": 380,
+    "file": "540e7679-86b7-4fe7-a587-06df0f3fee54",
+    "identity": "Dark cobalt swept head, yellow ear fin with red spiral disc, sleepy yellow eyes, red mouth and nose accents, bright yellow collar, cobalt outfit.",
+    "kind": "solo",
+    "reference": "art/jayquant/reference.png"
+  },
+  {
+    "id": "infinitysplitter",
+    "name": "infinitysplitter",
+    "index": 390,
+    "file": "6d432f94-7b15-4549-a7f8-bf5f47b665f9",
+    "identity": "One large yellow cyclops eye, blue body and spines, long bright red spiked back silhouette, red smile and yellow hand accents.",
+    "kind": "solo",
+    "reference": "art/infinitysplitter/reference.png"
+  },
+  {
+    "id": "hdizzy",
+    "name": "HDIZZY ~ 197 IQ",
+    "index": 400,
+    "file": "13315f75-537c-4669-8961-d038e8a32acf",
+    "identity": "Blue swept head, one yellow forehead eye and two half-closed yellow eyes with brown lids, huge red grin and lower red mouth marking with white teeth.",
+    "kind": "solo",
+    "reference": "art/hdizzy/reference.png"
+  },
+  {
+    "id": "cryptoviking420",
+    "name": "420cryptoviking",
+    "index": 410,
+    "file": "c250ed72-fa7e-42a2-8acf-ac54b9ce807c",
+    "identity": "Dark blue cat-ear spikes, narrow white eyes over yellow lids, red pout, black nose, red rear spike and slim yellow arm.",
+    "kind": "solo",
+    "reference": "art/cryptoviking420/reference.png"
+  },
+  {
+    "id": "sweatpantstrust",
+    "name": "in sweatpants we trust",
+    "index": 420,
+    "file": "c056184e-82aa-4487-b0f4-8aa8f2f43663",
+    "identity": "Tall blue tapered head with giant uneven yellow eye shapes, angular red side fins and red pout; keep tiny facial motifs on the blue torso as costume markings. Blue sweatpants.",
+    "kind": "solo",
+    "reference": "art/sweatpantstrust/reference.png"
+  },
+  {
+    "id": "spunow",
+    "name": "spunow habichuelas",
+    "index": 430,
+    "file": "bf9ba861-7195-412b-a6bd-76833a8718ca",
+    "identity": "Blue head with two soft hooked swept spines, yellow upturned eyes, red nose, smile and rear fin, bright yellow high-neck top.",
+    "kind": "solo",
+    "reference": "art/spunow/reference.png"
+  },
+  {
+    "id": "sprotomichaelsaylor",
+    "name": "SprotoMichaelSaylor",
+    "index": 440,
+    "file": "2be3c095-a0f5-4792-aa26-a2ede907b643",
+    "identity": "Cobalt body, long red and yellow back spines, two thin antenna lines, green brows, round yellow eyes, wide red lips and rounded red fists.",
+    "kind": "solo",
+    "reference": "art/sprotomichaelsaylor/reference.png"
+  },
+  {
+    "id": "zippy",
+    "name": "zippy",
+    "index": 450,
+    "file": "6d961a7d-3466-4886-b581-9c2a6707c16c",
+    "identity": "Periwinkle round head with yellow sunray spikes and exactly three round yellow eyes, black muzzle patch, red lips, yellow collared shirt and red tie.",
+    "kind": "solo",
+    "reference": "art/zippy/reference.png"
+  },
+  {
+    "id": "emix",
+    "name": "0xEmix0",
+    "index": 460,
+    "file": "e64bdf5e-4455-4b67-8ca1-73fa6650bab7",
+    "identity": "Indigo swept head, red pupils inside yellow eyes, wide red lips, yellow collar, asymmetric red and yellow arms.",
+    "kind": "existing",
+    "reference": "art/roster-intake-nov03/emix/reference.png",
+    "status": "existing; review during batch QA",
+    "existingId": "emix",
+    "bodies": [
+      "emix"
+    ]
+  },
+  {
+    "id": "lilgoldied",
+    "name": "LilGoldieD",
+    "index": 470,
+    "file": "659c47f6-213b-451c-b0a2-b52b3826ec9a",
+    "identity": "Angular indigo tufted face, small yellow eyes, deep burgundy lips, yellow arms and medallions, black lower outfit with blue stripes.",
+    "kind": "solo",
+    "reference": "art/lilgoldied/reference.png"
+  },
+  {
+    "id": "bitcoind1rk",
+    "name": "BITCOIN D1RK D1GGLER",
+    "index": 480,
+    "file": "915ecdf1-e95f-44fa-a8ab-34530deee996",
+    "identity": "Blue swept head, round yellow eyes and drooping yellow nose, red lips, large pointed yellow collar with red clasp on red top.",
+    "kind": "solo",
+    "reference": "art/bitcoind1rk/reference.png"
+  },
+  {
+    "id": "felixsprotoarc",
+    "name": "felix (sproto arc)",
+    "index": 490,
+    "file": "05c30c32-b901-472a-bea8-35090b1f5638",
+    "identity": "Rounded blue head and two backward antenna-like spines, asymmetric yellow eyes with prominent red surround on larger eye, red nose, two teeth and thick red scarf over yellow top.",
+    "kind": "solo",
+    "reference": "art/felixsprotoarc/reference.png"
+  },
+  {
+    "id": "onememeaday",
+    "name": "1 meme a day til $10",
+    "index": 500,
+    "file": "f394b7a3-3205-4dd9-8801-402bbe5d2954",
+    "identity": "Cobalt swept head and yellow rear fins, crescent yellow eyes around blue and black pupils, big red lips and broad yellow collar on red top with green clasp.",
+    "kind": "solo",
+    "reference": "art/onememeaday/reference.png"
+  },
+  {
+    "id": "zudi",
+    "name": "Zudi",
+    "index": 510,
+    "file": "7cdbcf47-a603-4305-be99-6eb9a5f58d00",
+    "identity": "Radial cobalt spikes, two close yellow eyes and small blue pupils, red smile plus lower red lip marking, red side fins and thick yellow collar.",
+    "kind": "solo",
+    "reference": "art/zudi/reference.png"
+  },
+  {
+    "id": "forchaneth",
+    "name": "Forchan.eth",
+    "index": 520,
+    "file": "1f65d6fe-0023-42fb-aa1c-1bbf9754621f",
+    "identity": "Blue oval face with yellow crown spikes, narrow yellow eyes, rust-red smile with black center, yellow curled ear ornaments and yellow limbs, blue legs and red shoes.",
+    "kind": "solo",
+    "reference": "art/forchaneth/reference.png"
+  }
+]
