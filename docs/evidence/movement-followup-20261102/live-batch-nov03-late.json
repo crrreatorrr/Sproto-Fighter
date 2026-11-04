@@ -1,0 +1,296 @@
+{
+  "date": "2026-11-03",
+  "states": [
+    "Guard",
+    "Walk phases",
+    "Dash",
+    "Jump",
+    "Punch",
+    "Heavy attack",
+    "Aerial attack",
+    "Ranged release",
+    "Recoil",
+    "Defeat"
+  ],
+  "limits": [
+    "Contact sheet samples are visual observations. Automated atlas and simulation QA covers both facings.",
+    "Browser release checks sampled Sprotopia and D86. Full matches were not visually reviewed for every fighter."
+  ],
+  "fighters": [
+    {
+      "id": "sprotopia",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "lestrange",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "cryptobartender",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "razz",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "laserbach",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "freedfrida",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "contresens",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "sprotomidnightfx",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "mildtacos",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "sprotosurvivor",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "d86",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "cantankerous",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "autistophrenicsprotagonist",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "sprotolg",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "kerrieanne",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "yusuf",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "bobdobbs",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "gluttony",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "slakesly",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "jameskaminski",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "86gwei",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "sidelinereferee",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "zebracorn",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "corn",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "zakarum",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    },
+    {
+      "id": "bgbadger",
+      "samples": 34,
+      "findings": [
+        "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
+      ]
+    }
+  ],
+  "batch": {
+    "submittedNames": 53,
+    "newPlayableFighters": 49,
+    "newBodyAtlases": 50,
+    "installedSpriteFiles": 5200,
+    "existingFightersReviewed": [
+      "gryph",
+      "emix",
+      "sproto763",
+      "sproto2381"
+    ],
+    "duplicateSubmissionsCombined": [
+      "Stoto"
+    ],
+    "namesUpdated": {
+      "sproto763": "Snarf",
+      "sproto2381": "𝒮𝗉𝗋𝗈𝗋𝖺𝖾𝗆𝗈𝗇",
+      "stoto": "stoto",
+      "gryph": "gryph",
+      "vicoo": "Vicoo"
+    },
+    "mergedUnreleasedAliases": {
+      "sprotolicious": "vicoo"
+    }
+  },
+  "automatedChecks": {
+    "batchSnapshotOwners": 183,
+    "batchSnapshotBodies": 203,
+    "vitestPassed": 38,
+    "standaloneChecksPassed": 62,
+    "facings": [
+      -1,
+      1
+    ],
+    "story": "Every submitted name resolves to one playable fighter and one story encounter.",
+    "browser": {
+      "fighters": 53,
+      "actions": [
+        "entrance",
+        "ranged",
+        "defeat"
+      ],
+      "inspectedScreenshots": [
+        "stoto",
+        "herbpowell",
+        "sirdidit",
+        "melo",
+        "twinnyneutron",
+        "gryph",
+        "emix"
+      ]
+    },
+    "preDeduplicationSnapshot": true,
+    "postDeduplication": {
+      "namesAndStoryEncounters": 53,
+      "browserActionPreviews": 159,
+      "browserMotionSamples": 1272,
+      "browserMotionScenarios": [
+        "walk",
+        "dash",
+        "jump",
+        "crouch",
+        "light",
+        "heavy",
+        "airMedium",
+        "bolt",
+        "hit",
+        "block",
+        "grab",
+        "special"
+      ],
+      "browserFacings": [
+        -1,
+        1
+      ],
+      "releaseSheets": 249,
+      "releaseFramesVerifiedPixelIdentical": 26420,
+      "coreMotionScenarios": {
+        "owners": 254,
+        "scenariosPerFacing": 52,
+        "facings": [
+          -1,
+          1
+        ],
+        "passed": 26416,
+        "failed": 0
+      },
+      "sharedWorkspaceChecksPending": [
+        "full-roster visual coverage records",
+        "portrait and versus assets for other roster batches"
+      ]
+    }
+  }
+}
