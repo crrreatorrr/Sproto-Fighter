@@ -211,7 +211,7 @@ try {
     const d=dom(),progress=createStoryProgress(disk);
     for(let i=0;i<clearCount;i++)clearNode(progress,i);
     const main=read('src/main.ts'),parsed=ts.createSourceFile('main.ts',main,ts.ScriptTarget.Latest,true);
-    const names=['launchSelection','updateStage','returnToSelection','restart','updateGodModeLabel','setTestingGodMode','closeSettings'];
+    const names=['launchSelection','updateStage','returnToSelection','restart','updateGodModeLabel','setTestingGodMode','applyGodMode','closeSettings'];
     const functions=parsed.statements.filter(node=>ts.isFunctionDeclaration(node)&&names.includes(node.name?.text));
     assert.equal(functions.length,names.length,'all requested actual main hooks found');
     const start=main.indexOf('let resumeAfterJourney ='),end=main.indexOf("$('start').onclick = ",start);
@@ -221,7 +221,7 @@ try {
       const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition}=dependencies;
       const canPlayFighter=id=>storyProgress.isUnlocked(id),lockedFighter=()=> 'Defeat this fighter in story mode to recruit them.';
       let setup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'guard',godMode:false};
-      let online=null,queued2=0;const stopHiddenClock=()=>{};
+      let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};
       let mode='guard',running=false,started=false,chosen='highsproto',opponent='vela',matchGodMode=false,matchEarnedGodMode=false,testingGodMode=false,matchTesting=false;
       let state=createState(),presentation=createRoundPresentation(),accumulator=0,queued=0,qaSingleStep=false,resumeAfterSettings=false,remapping=null;
       let selectedStage='ranch',selectedLocation=null,assetFailure=false,mapChoose=null;
@@ -302,13 +302,12 @@ try {
       await finishWave(t);assert.ok(createStoryProgress(t.disk).isCleared(encounter.index));
     }
   });
-  await check('Settings God Mode during any second wave restarts that encounter and both wins still count',async()=>{
+  await check('Settings God Mode during any second wave preserves that bout and both wins still count',async()=>{
     for(const encounter of [ART,NICK_JUICY,FINAL]){
       const t=integration({disk:before(encounter.index)});await t.begin();await finishWave(t);
       assert.equal(t.inspect().state.fighters[1].id,encounter.opponents[1]);t.openSettings();t.setTestingGodMode(true);await flush();
-      assert.equal(t.inspect().running,false,'do not simulate behind Settings');assert.equal(t.inspect().state.fighters[1].id,encounter.opponents[0]);assert.equal(t.inspect().state.godMode,true);
+      assert.equal(t.inspect().running,false,'do not simulate behind Settings');assert.equal(t.inspect().state.fighters[1].id,encounter.opponents[1]);assert.equal(t.inspect().state.godMode,true);
       t.closeSettings();assert.equal(t.inspect().running,true);assert.equal(t.$('overlay').hidden,true);
-      await finishWave(t);assert.equal(t.inspect().state.fighters[1].id,encounter.opponents[1]);assert.equal(t.inspect().state.godMode,true);assert.equal(t.progress.isCleared(encounter.index),false);
       await finishWave(t);assert.ok(createStoryProgress(t.disk).isCleared(encounter.index));
     }
   });
@@ -350,13 +349,13 @@ try {
     t.failStage(id,false);assert.equal(await t.launchSelection({fighter:'highsproto',opponent:'vela',stage:id,mode:'cpu'}),true);
     assert.equal(t.inspect().selectedStage,id);
   });
-  await check('Settings testing toggle is immediate, restores a fresh round and resumes after result overlay',async()=>{
+  await check('Settings testing toggle is immediate and preserves the fight and its result',async()=>{
     const t=integration();t.setTestingGodMode(true);await t.begin();assert.equal(t.inspect().state.godMode,true);assert.equal(t.inspect().state.fighters[0].pips,3);assert.match(t.$('mode-label').textContent,/GOD MODE TEST/);
     t.inspect().state.fighters[0].hp=30;t.openSettings();t.setTestingGodMode(false);await flush();assert.equal(t.inspect().running,false);
-    t.closeSettings();assert.equal(t.inspect().state.fighters[0].hp,1000);assert.equal(!!t.inspect().state.godMode,false);assert.equal(t.inspect().running,true);
+    t.closeSettings();assert.equal(t.inspect().state.fighters[0].hp,30);assert.equal(!!t.inspect().state.godMode,false);assert.equal(t.inspect().running,true);
     assert.doesNotMatch(t.$('mode-label').textContent,/GOD MODE/);
     t.returnToSelection();await t.launchSelection({fighter:'highsproto',opponent:'vela',stage:'bar',mode:'cpu'});
-    t.openResultSettings();t.setTestingGodMode(true);assert.equal(t.inspect().running,false);t.closeSettings();assert.equal(t.inspect().running,true);assert.equal(t.$('overlay').hidden,true);assert.equal(t.inspect().state.fighters[0].hp,1000);
+    t.openResultSettings();t.setTestingGodMode(true);assert.equal(t.inspect().running,false);t.closeSettings();assert.equal(t.inspect().running,false);assert.equal(t.$('overlay').hidden,false);assert.equal(t.inspect().state.fighters[0].hp,1000);
   });
 
   await check('God Mode prevents melee, spit and throw damage while normal combat remains vulnerable',()=>{

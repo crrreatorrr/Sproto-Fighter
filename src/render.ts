@@ -57,9 +57,9 @@ function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost =
         c.restore();
     }
 }
-function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string) {
+function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string, bossTitle?:string) {
     const x = right ? 765 : 55, width = 460, color = ROSTER[f.id].color;
-    text(c, ROSTER[f.id].name, right ? 1225 : 55, 55, 24, '#eaf0f7', right ? 'right' : 'left', 850);
+    text(c, bossTitle??ROSTER[f.id].name, right ? 1225 : 55, 55, 24, '#eaf0f7', right ? 'right' : 'left', 850);
     text(c, (mode === 'versus' ? (right ? 'P2 / ' : 'P1 / ') : right ? (mode === 'cpu' ? 'CPU / ' : 'DUMMY / ') : 'YOU / ') + ROSTER[f.id].role, right ? 1225 : 55, 74, 10, color, right ? 'right' : 'left');
     c.fillStyle = '#2b3547';
     c.fillRect(x, 88, width, 19);
@@ -76,7 +76,7 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     }
     text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
-export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean) {
+export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean, bossAttacks?:(ctx:CanvasRenderingContext2D)=>void,bossTitle?:string) {
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
     if(!drawActiveStoryLocation(c))drawStage(c, s.frame);
@@ -139,7 +139,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     }
     for(const f of s.fighters)if(f.slow>0)text(c,'MELANCHOLY · SLOWED',f.x,f.y-170,9,'#c7a5eb','center',800);
     for (const p of s.projectiles) {
-        if(p.shape==='pelvicStream'||p.beamLength)continue;
+        if(p.shape==='pelvicStream'||p.beamLength||p.shape?.startsWith('boss'))continue;
         const owner=s.fighters[p.owner];
         const chestLaser=p.shape==='eyeLaser'&&owner.id==='theo';
         c.save();
@@ -149,6 +149,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         drawPower(c,chestLaser?'chestLaser':p.shape??'spark',p.age??0,ROSTER[owner.id].color);
         c.restore();
     }
+    bossAttacks?.(c);
     drawPelvicAttacks(c,s);
     drawMindBeams(c,s);
     for(const f of s.fighters)if(f.id==='michael'&&(f.move?.id==='bolt'||f.move?.id==='special')&&f.move.t<38){
@@ -189,7 +190,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         c.restore();
     }
     health(c, s.fighters[0], false, s.mode);
-    health(c, s.fighters[1], true, s.mode);
+    health(c, s.fighters[1], true, s.mode,bossTitle);
     text(c, 'ROUND 01', 640, 116, 9, '#b9cbdc', 'center');
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];

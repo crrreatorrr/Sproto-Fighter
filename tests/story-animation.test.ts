@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 import {createStoryAnimation,storyAnimationPlan,type StoryClip} from '../src/storyAnimation';
 import manifest from '../src/storyAnimationManifest.json';
+import {startStoryBoss} from '../src/storyBoss';
 import {createState} from '../src/core';
 import {createRoundPresentation,advanceRoundPresentation,beginRoundOutro} from '../src/animationEvents';
 
@@ -36,7 +37,8 @@ async function harness(id:string,win=0){
     const state=createState('highsproto','cpu',id as any),presentation=createRoundPresentation();presentation.phase='fight';
     const calls:string[]=[],frames:number[][]=[];
     const run=new Function('deps',`
-        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win}=deps;
+        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss}=deps;
+        let storyBoss=null;const bossStarts=[];const stepStoryBoss=()=>{state.winner=win;};
         const versus={advance:()=>false};const countdown={advance:()=>false,show:()=>calls.push('countdown')};
         const held=new Set();let queued=0,queued2=0,padNeedsRelease=false;
         const online=null,mode='cpu',qaPanel=null,qaRecord=()=>{},qaStopAtOutro=()=>{};
@@ -45,16 +47,16 @@ async function harness(id:string,win=0){
         const step=()=>{state.winner=win;};
         ${compiled}
         return advanceRoundFrame;
-    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win});
+    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss});
     return {animation,state,presentation,calls,frames,run};
 }
 
 describe('story animation ordering and lifecycle',()=>{
     it('uses each boss\'s own scenes and preserves Morelight\'s full transformation order',()=>{
-        expect(storyAnimationPlan('vela',true)).toEqual({intro:[],outro:['morelight-smoke','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'],replaceDefeat:false});
+        expect(storyAnimationPlan('vela',true)).toEqual({intro:[],boss:['morelight-smoke'],mecha:['morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit'],replaceDefeat:false});
         expect(storyAnimationPlan('vaudream',true).outro).toEqual(['vmu-shield','vmu-black-hole']);
-        expect(storyAnimationPlan('guest07',true).outro).toEqual(['juicy-robot']);
-        expect(storyAnimationPlan('sproto943',true).outro).toEqual(['art-fusion','mega-woman-growth']);
+        expect(storyAnimationPlan('guest07',true).boss).toEqual(['juicy-robot']);
+        expect(storyAnimationPlan('sproto943',true).boss).toEqual(['art-fusion','mega-woman-growth']);
         expect(storyAnimationPlan('sproto865',true).outro).toEqual([]);
         for(const id of ['nick','guest07','sproto943','vela','vaudream'])expect(storyAnimationPlan(id,false).outro).toEqual([]);
     });
@@ -66,7 +68,8 @@ describe('story animation ordering and lifecycle',()=>{
         await a.load(storyAnimationPlan('guest07',true));expect(a.start('intro')).toBe(false);
         a.clear();expect(a.start('outro')).toBe(false);
     });
-    it.each(['nick','guest07','sproto943','vaudream'])('suppresses %s death at KO, saves once, and reports only after scenes',async id=>{
+    it('suppresses VMU death at KO, saves once, and reports only after scenes',async()=>{
+        const id='vaudream';
         const t=await harness(id);t.run(0);
         expect(t.presentation.phase).toBe('result');expect(t.animation.active).toBe('outro');
         expect(t.calls).toEqual(['save']);const snapshot=JSON.stringify(t.state);
@@ -80,16 +83,43 @@ describe('story animation ordering and lifecycle',()=>{
         expect(JSON.stringify(t.state)).toBe(snapshot);
         t.run(0);expect(t.calls).toEqual(['save','report','result']);
     });
-    it('lets Morelight die before smoke, mecha, ejection, wizard and flight',async()=>{
-        const t=await harness('vela');t.run(0);expect(t.presentation.phase).toBe('outro');expect(t.animation.active).toBe(null);
+    it('requires both Morelight forms to be cleared before saving or playing the final scenes',async()=>{
+        const t=await harness('vela');
+        t.run(0);
+        expect(t.presentation.phase).toBe('outro');expect(t.calls).toEqual([]);
         for(let n=0;n<96;n++)t.run(0);
-        expect(t.animation.snapshot().clip).toBe('morelight-smoke');
+        expect(t.animation.snapshot()).toMatchObject({phase:'boss',clip:'morelight-smoke'});
+        expect(t.calls).toEqual([]);
+        t.animation.skip();t.run(0);
+        expect(t.presentation.phase).toBe('fight');expect(t.state.winner).toBe(null);
+        expect(t.calls).toEqual([]);
+        t.run(0);
+        expect(t.animation.snapshot().clip).toBe('morelight-mecha');
+        expect(t.calls).toEqual([]);
+        t.animation.skip();t.run(0);
+        expect(t.state.winner).toBe(null);
+        t.run(0);
+        expect(t.animation.snapshot().clip).toBe('morelight-ejection');
+        expect(t.calls).toEqual(['save']);
         const seen:string[]=[];
         while(t.animation.active){const id=t.animation.snapshot().clip!;if(seen.at(-1)!==id)seen.push(id);t.run(0);}
-        expect(seen).toEqual(storyAnimationPlan('vela',true).outro);expect(t.calls).toEqual(['save','report','result']);
+        expect(seen).toEqual(storyAnimationPlan('vela',true).outro);
+        expect(t.calls).toEqual(['save','report','result']);
+        expect(t.frames).toHaveLength(3);
     });
+    it.each([['nick','nick-mount'],['guest07','juicy-robot'],['sproto943','art-fusion']])(
+        '%s skips regular defeat and starts the boss transformation immediately',async(id,clip)=>{
+            const t=await harness(id);t.run(0);
+            expect(t.presentation.phase).toBe('result');
+            expect(t.animation.snapshot()).toMatchObject({phase:'boss',clip});
+            expect(t.calls).toEqual([]);
+            t.animation.skip();t.run(0);
+            expect(t.state.winner).toBe(null);
+            t.run(0);
+            expect(t.calls).toEqual(['save']);
+        });
     it('skip completes the result once without leaking input or replay frames',async()=>{
-        const t=await harness('nick');t.run(0);t.animation.skip();t.run(255);
+        const t=await harness('vaudream');t.run(0);t.animation.skip();t.run(255);
         expect(t.calls).toEqual(['save','report','result']);expect(t.frames).toHaveLength(1);
         t.run(255);expect(t.calls).toEqual(['save','report','result']);
     });
@@ -104,7 +134,7 @@ describe('story animation ordering and lifecycle',()=>{
         expect(t.calls).toEqual(['countdown']);expect(t.frames).toHaveLength(0);expect(t.state.winner).toBe(null);
     });
     it('cancels a result scene during retry without delivering another result',async()=>{
-        const t=await harness('guest07');t.run(0);t.animation.cancel();t.run(0);
+        const t=await harness('vaudream');t.run(0);t.animation.cancel();t.run(0);
         expect(t.animation.active).toBe(null);expect(t.calls).toEqual(['save']);
         t.animation.reset();expect(t.animation.start('outro')).toBe(true);
     });

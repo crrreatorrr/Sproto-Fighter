@@ -13,19 +13,22 @@ try{
  await page.goto(base);await page.waitForFunction(()=>window.neonRelay&&document.querySelector('#start-fight')?.disabled===false);
  const playback=await page.evaluate(async()=>{
   const {createStoryAnimation,storyAnimationPlan}=await import('/src/storyAnimation.ts');
+  const {STORY_BOSS_X,loadStoryBossArt}=await import('/src/storyBoss.ts');
+  await Promise.all(['giant','dragon','juicy','art'].map(form=>loadStoryBossArt(form)));
   const {default:manifest}=await import('/src/storyAnimationManifest.json');
   const canvas=document.createElement('canvas');canvas.width=1280;canvas.height=720;
   const ctx=canvas.getContext('2d'),records=[];
   for(const id of ['nick','guest07','sproto943','vela','vaudream']){
    const animation=createStoryAnimation(),plan=storyAnimationPlan(id,true);await animation.load(plan);
-   for(const phase of ['intro','outro']){
-    if(!plan[phase].length)continue;
+   let mechaEnd=null,mechaHeight=null;
+   for(const phase of ['intro','boss','mecha','outro']){
+    if(!plan[phase]?.length)continue;
     if(!animation.start(phase))throw Error('Cannot start '+id+'/'+phase);
-    const seen=[],boundaryChecks=[],referenceFramesChecked=new Set();let frames=0,visible=0,mechaEnd=null,ejectionEnd=null,smallMorelightHeight=null,mechaHeight=null;
+    const seen=[],boundaryChecks=[],referenceFramesChecked=new Set();let frames=0,visible=0,ejectionEnd=null,smallMorelightHeight=null;
     while(animation.active&&frames<10000){
      const snap=animation.snapshot();if(seen.at(-1)!==snap.clip)seen.push(snap.clip);
-     ctx.clearRect(0,0,1280,720);animation.draw(ctx,1100,578,-1);
-     if(id==='vela'&&phase==='outro'){
+     ctx.clearRect(0,0,1280,720);animation.draw(ctx,id==='vela'&&phase==='outro'?STORY_BOSS_X:1100,578,-1);
+     if(id==='vela'){
       const pixels=()=>ctx.getImageData(0,0,1280,720).data;
       const visibleHeight=data=>{let min=720,max=-1;for(let y=0;y<720;y++)for(let x=0;x<1280;x++)if(data[(y*1280+x)*4+3]){min=Math.min(min,y);max=Math.max(max,y);}return max-min+1;};
       if(snap.clip==='morelight-mecha'&&snap.frame===manifest['morelight-mecha'].frames-1){mechaEnd=pixels();mechaHeight=visibleHeight(mechaEnd);}
@@ -53,7 +56,7 @@ try{
   }
   return records;
  });
- assert.equal(playback.length,6);for(const r of playback)assert.ok(r.visible>0,r.id);
+ assert.equal(playback.length,9);for(const r of playback)assert.ok(r.visible>0,r.id);
  // Seed an isolated browser save immediately before Nick; use the actual story UI.
  await page.evaluate(async()=>{
   const {STORY_ENCOUNTERS,STORY_SAVE_KEY}=await import('/src/storyProgress.ts');
@@ -87,7 +90,50 @@ try{
  await retryPage.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='nick'&&!window.neonRelay.storySnapshot().launching);
  await retryPage.keyboard.press('Enter');await retryPage.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='nick-juicy');
  await retryContext.close();
+ // Run the finale through the browser UI with God Mode to isolate progression and inputs.
+ await page.evaluate(async()=>{
+  const {STORY_ENCOUNTERS,STORY_SAVE_KEY}=await import('/src/storyProgress.ts');
+  const index=STORY_ENCOUNTERS.findIndex(e=>e.gauntlet==='final');
+  localStorage.setItem(STORY_SAVE_KEY,JSON.stringify({version:3,cleared:STORY_ENCOUNTERS.slice(0,index).map(e=>e.id),unlocked:['highsproto'],godModeUnlocked:false}));
+ });
+ await page.reload();await page.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
+ await page.locator('#settings').click();await page.locator('#testing-god-mode').check();await page.locator('#close-settings').click();
+ await page.locator('#story-worlds').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
+ await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vela'&&!window.neonRelay.storySnapshot().launching);
+ await page.keyboard.press('Enter');
+ for(let i=0;i<80;i++){
+  const state=await page.evaluate(()=>window.neonRelay.snapshot());
+  if(state.winner===0)break;
+  const [player,opponent]=state.fighters;
+  const walk=opponent.x>player.x?'KeyD':'KeyA';
+  if(Math.abs(opponent.x-player.x)>155){await page.keyboard.down(walk);await page.waitForTimeout(150);await page.keyboard.up(walk);}
+  await page.keyboard.press('KeyP');await page.waitForTimeout(165);
+ }
+ await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='boss');
+ assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().wave),0);
+ await page.locator('#story-animation-skip').click();
+ await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.length===1);
+ await page.locator('#settings').click();
+ const pausedFrame=await page.evaluate(()=>window.neonRelay.snapshot().frame);
+ await page.locator('#testing-god-mode').uncheck();
+ assert.equal(await page.evaluate(()=>!!window.neonRelay.snapshot().godMode),false);
+ assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().frame),pausedFrame);
+ await page.locator('#testing-god-mode').check();
+ assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().frame),pausedFrame);
+ await page.locator('#close-settings').click();
+ await page.keyboard.down('KeyC');await page.keyboard.down('KeyV');
+ await page.waitForFunction(()=>['bossBeam','bossBall'].every(shape=>window.neonRelay.snapshot().projectiles.some(p=>p.shape===shape)));
+ await page.keyboard.up('KeyC');await page.keyboard.up('KeyV');
+ assert.equal(await page.evaluate(()=>window.neonRelay.verifyReplay()),true);
+ await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='mecha');
+ assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().wave),0);
+ await page.locator('#story-animation-skip').click();
+ await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.length===2);
+ assert.equal(await page.evaluate(()=>window.neonRelay.verifyReplay()),true);
+ await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='morelight-ejection');
+ await page.locator('#story-animation-skip').click();
+ await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vaudream'&&!window.neonRelay.storySnapshot().launching);
  assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
- writeFileSync('docs/evidence/story-animations-20261104/browser.json',JSON.stringify({playback,nickIntro:{pause:true,skip:true,retry:true,combatFrames:0,failedLoadRetry:true},errors,failures},null,2)+'\n');
- console.log('PASS: all 14 atlases decoded and rendered in Chrome; six bounded scene playlists; actual Nick intro pause, skip, retry and input/replay isolation.');
+ writeFileSync('docs/evidence/story-animations-20261104/browser.json',JSON.stringify({playback,nickIntro:{pause:true,skip:true,retry:true,combatFrames:0,failedLoadRetry:true},morelightBoss:{progression:true,keyboardWeapons:true,replay:true,liveGodModeToggle:true},errors,failures},null,2)+'\n');
+ console.log('PASS: all cinematic and attack atlases decoded and rendered in Chrome; nine bounded scene playlists; actual Nick intro pause, skip, retry and input/replay isolation; actual Morelight boss entry, C/V, replay and VMU progression.');
 }finally{await browser.close();await server?.close();}

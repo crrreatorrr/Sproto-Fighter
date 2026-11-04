@@ -14,7 +14,7 @@ describe('expanded campaign hub reporting',()=>{
   const progress=createStoryProgress(null),onRoundEnd=vi.fn();
   const firstChapter=STORY_ENCOUNTERS.filter(e=>e.chapter===1);
   let active=firstChapter[0];
-  const context={hub:{connected:true,onRoundEnd},state:{winner:0},mode:'cpu',chosen:'highsproto',matchGodMode:false,
+  const context={hub:{connected:true,onRoundEnd},state:{winner:0},mode:'cpu',chosen:'highsproto',matchGodMode:false,godModeChanges:[],
    story:{snapshot:()=>({encounter:active,active:active.stage,wave:active.opponents.length-1})},
    storyProgress:progress,STORY_ENCOUNTERS,selection:{getSetup:()=>({stage:'ranch'})},hubToast(){}};
   vm.createContext(context);vm.runInContext(code,context);
