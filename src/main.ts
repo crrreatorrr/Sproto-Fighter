@@ -18,6 +18,7 @@ import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, typ
 import { STAGES, setStage, loadStageArt, loadStagePreviews, getStageArtStatus, type StageId } from './stage';
 import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
+import {createStoryAnimation,storyAnimationPlan} from './storyAnimation';
 import { createStoryMode } from './storyMode';
 import { connectHub, hubConfigured, type HubLink } from './hub/link';
 import { OnlineMatch } from './net/onlineMatch';
@@ -70,12 +71,17 @@ let visualFrame = 0;
 const held = new Set<string>();
 const blockedKeys = new Set<string>();
 let queued = 0, queued2 = 0; // presses since the last frame, per playerqueued2=0;
+const storyAnimation=createStoryAnimation();
+const sceneSkip=document.createElement('button');
+sceneSkip.className='quiet';sceneSkip.textContent='Skip animation';sceneSkip.hidden=true;sceneSkip.id='story-animation-skip';
+sceneSkip.onclick=()=>{if(running&&!dialog.open&&!story.isOpen)storyAnimation.skip();};
+canvas.parentElement!.append(sceneSkip);
 const countdown=createFightCountdown(canvas.parentElement!);
 const versus=createVersusScreen($('fight-view'),()=>{
     // Dismissing a preview must never become an attack, jump or pause in combat.
     for(const code of held)blockedKeys.add(code);
     held.clear();queued=0;queued2=0;padNeedsRelease=true;
-    countdown.show();
+    if(!storyAnimation.start('intro'))countdown.show();
     if(running&&!dialog.open&&!story.isOpen)canvas.focus();
 });
 const frames: [
@@ -141,6 +147,8 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     try{await Promise.all([ensurePoseAtlases(requiredFighters),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
+    try{await storyAnimation.load(storyAnimationPlan(setup.opponent,isStory));}
+    catch(error){selection.setReady(false,'Story animation could not load. Start this encounter again to retry.');console.error(error);return false;}
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode as Mode;
     if(!isStory){story.leaveStory();freePlayMode=null;}
@@ -158,6 +166,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     return true;
 }
 function returnToSelection() {
+    storyAnimation.clear();
     if(online){if(online.phase==='playing'&&!window.confirm('Leave this online match? Leaving forfeits it.'))return;void online.leave();online=null;stopHiddenClock();}
     versus.hide();
     countdown.hide();
@@ -209,7 +218,7 @@ function bind(value: string | number) {
 function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; if(!selection.isOpen)$('start').focus(); }
 function start() {
     if (selection.isOpen || story.isOpen || dialog.open || ($('start') as HTMLButtonElement).disabled) return;
-    if (presentation.phase === 'result')
+    if (presentation.phase === 'result'&&!storyAnimation.active)
         restart();
     started = true;
     running = true;
@@ -223,7 +232,7 @@ function start() {
     canvas.focus();
 }
 function pause() {
-    if (!started || presentation.phase === 'result' || online)
+    if (!started || (presentation.phase === 'result'&&!storyAnimation.active) || online)
         return;
     if (running)
         showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume →');
@@ -231,6 +240,7 @@ function pause() {
         start();
 }
 function restart() {
+    storyAnimation.reset();
     matchTesting=testingGodMode&&mode!=='versus';matchGodMode=(testingGodMode||matchEarnedGodMode)&&mode!=='versus';
     state = createState(chosen, mode, opponent);
     if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
@@ -263,7 +273,7 @@ const story = createStoryMode({
     testing:()=>matchTesting,
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
-    resume: () => { if (resumeAfterJourney && started && presentation.phase !== 'result') start(); },
+    resume: () => { if (resumeAfterJourney && started && (presentation.phase !== 'result'||storyAnimation.active)) start(); },
     launch: (stage, isStory, storyOpponent) => {
         if(isStory)freePlayMode??=selection.getSetup().mode;
         const setup=selection.getSetup();
@@ -275,7 +285,7 @@ const story = createStoryMode({
 });
 $('start').onclick = () => overlayAction ? overlayAction() : start();
 $('pause').onclick = pause;
-$('reset').onclick = ()=>{if(!story.retryMatch())restart();};
+$('reset').onclick = ()=>{storyAnimation.cancel();if(!story.retryMatch())restart();};
 const dialog = $<HTMLDialogElement>('controls-dialog');
 $('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
 $('settings').onclick = () => {
@@ -426,7 +436,7 @@ function pollPad(): number {
     }
     const menu = !!buttons[9];
     if (menu && !previousStart && !dialog.open && !story.isOpen) {
-        if (!started || presentation.phase === 'result')
+        if (!started || (presentation.phase === 'result'&&!storyAnimation.active))
             start();
         else
             pause();
@@ -479,6 +489,7 @@ function onlineInputDelay(): number {
     try { const v = Number(localStorage.getItem(ONLINE_DELAY_KEY)); return v >= 1 && v <= 4 ? v : 2; } catch { return 2; }
 }
 async function queueOnline(setup: SelectionSetup, rematchOf?: string) {
+    storyAnimation.clear();
     if (online) { await online.leave(); online = null; }
     const wager = setup.mode === 'online-wager';
     const match = new OnlineMatch({
@@ -612,6 +623,15 @@ function withoutP1Keys(bindings: Readonly<Record<Action, string>>): Record<Actio
 /** Advance one frame. `p2Input` is player 2's input in local versus; otherwise the CPU plays slot 2. */
 function advanceRoundFrame(input: number, p2Input?: number) {
     if(versus.advance())return;
+    const scene=storyAnimation.active;
+    if(scene){
+        if(storyAnimation.advance())return;
+        held.clear();queued=0;queued2=0;padNeedsRelease=true;
+        if(scene==='intro'){
+            advanceRoundPresentation(presentation,true);countdown.show();return;
+        }
+        reportRound();story.onRoundEnd(state.winner!);return;
+    }
     if(countdown.advance()){
         // Entrances remain visible during the countdown; combat and replay wait.
         advanceRoundPresentation(presentation);
@@ -627,6 +647,7 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         advanceRoundPresentation(presentation);
         if ((presentation as RoundPresentation).phase !== 'result') return;
         if (online) { showOnlineResult(); return; }
+        if(state.winner===0&&storyAnimation.start('outro'))return;
         reportRound();
         if (story.onRoundEnd(state.winner!)) return;
         if (mode === 'versus') {
@@ -651,6 +672,7 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         const losers = state.fighters.filter((_, i) => state.winner === 2 || i !== state.winner);
         const fromFloor = losers.every(f => f.reaction?.kind === 'knockdown' && f.reaction.phase === 'down');
         beginRoundOutro(presentation, state.winner as 0 | 1 | 2, fromFloor);
+        if(state.winner===0&&storyAnimation.replaceDefeat&&storyAnimation.start('outro'))presentation.phase='result';
         qaStopAtOutro();
         held.clear(); queued = 0;queued2=0;
     }
@@ -674,13 +696,14 @@ function stepTo(now: number) {
                     input |= A[a];
             accumulator -= 1 / 60;
             advanceRoundFrame(input, p2);
-            if (!running || presentation.phase === 'result') break;
+            if (!running || (presentation.phase === 'result'&&!storyAnimation.active)) break;
         }
     }
 }
 function tick(now: number) {
     stepTo(now);
-    if(!selection.isOpen) render(ctx, state, presentation, visualFrame);
+    sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
+    if(!selection.isOpen) render(ctx, state, presentation, visualFrame,storyAnimation.draw);
     if (online) updateOnlineStatus();
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
@@ -694,7 +717,7 @@ document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
-Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, godMode:matchGodMode, frames: frames.map(f => [...f]) }), verifyReplay: () => {
+Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, godMode:matchGodMode, frames: frames.map(f => [...f]) }), verifyReplay: () => {
             const replay = createState(chosen, mode, opponent);
             if(matchGodMode){replay.godMode=true;replay.fighters[0].pips=3;}
             for (const frame of frames)

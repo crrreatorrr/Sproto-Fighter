@@ -76,7 +76,7 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     }
     text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
-export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0)) {
+export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean) {
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
     if(!drawActiveStoryLocation(c))drawStage(c, s.frame);
@@ -97,8 +97,13 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     const down0=isDown(s.fighters[0]),down1=isDown(s.fighters[1]);
     const foreground = s.throwState?.attacker ?? (down0!==down1?(down0?1:0):
         (s.fighters[0].move && !s.fighters[0].stun && !s.fighters[1].move ? 0 : 1));
-    fighter(c, s.fighters[1 - foreground], s.frame, false, s.freeze > 0, visualFrame);
-    fighter(c, s.fighters[foreground], s.frame, false, s.freeze > 0, visualFrame);
+    for(const index of [1-foreground,foreground]){
+        const actor=s.fighters[index];
+        const landedKO=presentation?.fromFloor||(actor.reaction?.kind==='knockdown'&&actor.reaction.phase==='down');
+        const facing=landedKO?(actor.reaction?.direction??actor.facing):actor.facing;
+        if(index===1&&storyAnimation?.(c,actor.x,FLOOR,facing))continue;
+        fighter(c,actor,s.frame,false,s.freeze>0,visualFrame);
+    }
     if(presentation&&(presentation.phase==='outro'||presentation.phase==='result'))for(const[i,f]of s.fighters.entries()){
       if(f.id!=='sproto651'||presentation.winner===i)continue;
       const age=presentation.frame,colors=['#f34545','#e9cb30','#367ee6','#b548cf','#39b9a5'];

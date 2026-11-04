@@ -226,6 +226,8 @@ try {
       let selectedStage='ranch',selectedLocation=null,assetFailure=false,mapChoose=null;
       const held=new Set(),frames=[],qaEvents=[],assetRequests=[],versusCalls=[];
       const countdown={hide(){}};
+      const storyAnimation={load:async()=>{},reset(){},clear(){},active:null};
+      const storyAnimationPlan=()=>({intro:[],outro:[]});
       const versus={show:(...ids)=>versusCalls.push(ids),hide(){}};
       const ensurePoseAtlases=async(ids)=>{assetRequests.push([...ids]);if(assetFailure)throw Error('asset failure');},ensurePowerArt=async()=>{};
       const setStage=id=>selectedStage=id,setActiveStoryLocation=value=>selectedLocation=value,loadStoryLocation=async()=>{};

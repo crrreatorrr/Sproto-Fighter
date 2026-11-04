@@ -1,0 +1,73 @@
+{
+  "playback": [
+    {
+      "id": "nick",
+      "phase": "intro",
+      "seen": [
+        "nick-juicy"
+      ],
+      "frames": 180,
+      "visible": 8
+    },
+    {
+      "id": "nick",
+      "phase": "outro",
+      "seen": [
+        "nick-mount",
+        "nick-dragon",
+        "nick-flight"
+      ],
+      "frames": 259,
+      "visible": 13
+    },
+    {
+      "id": "guest07",
+      "phase": "outro",
+      "seen": [
+        "juicy-robot"
+      ],
+      "frames": 900,
+      "visible": 45
+    },
+    {
+      "id": "sproto943",
+      "phase": "outro",
+      "seen": [
+        "art-fusion",
+        "mega-woman-growth"
+      ],
+      "frames": 240,
+      "visible": 12
+    },
+    {
+      "id": "vela",
+      "phase": "outro",
+      "seen": [
+        "morelight-smoke",
+        "morelight-mecha",
+        "morelight-wizard",
+        "morelight-exit"
+      ],
+      "frames": 1488,
+      "visible": 74
+    },
+    {
+      "id": "vaudream",
+      "phase": "outro",
+      "seen": [
+        "vmu-shield",
+        "vmu-black-hole"
+      ],
+      "frames": 289,
+      "visible": 15
+    }
+  ],
+  "nickIntro": {
+    "pause": true,
+    "skip": true,
+    "retry": true,
+    "combatFrames": 0
+  },
+  "errors": [],
+  "failures": []
+}
