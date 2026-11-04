@@ -53,7 +53,7 @@ async function harness(id:string,win=0){
 
 describe('story animation ordering and lifecycle',()=>{
     it('uses each boss\'s own scenes and preserves Morelight\'s full transformation order',()=>{
-        expect(storyAnimationPlan('vela',true)).toEqual({intro:[],boss:['morelight-smoke'],mecha:['morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit'],replaceDefeat:false});
+        expect(storyAnimationPlan('vela',true)).toEqual({intro:[],boss:['morelight-smoke'],mecha:['morelight-shrink','morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit'],replaceDefeat:false});
         expect(storyAnimationPlan('vaudream',true).outro).toEqual(['vmu-black-hole']);
         expect(storyAnimationPlan('guest07',true).boss).toEqual(['juicy-robot']);
         expect(storyAnimationPlan('sproto943',true).boss).toEqual(['art-fusion','mega-woman-growth']);
@@ -100,6 +100,8 @@ describe('story animation ordering and lifecycle',()=>{
         expect(t.presentation.phase).toBe('fight');expect(t.state.winner).toBe(null);
         expect(t.calls).toEqual([]);
         t.run(0);
+        expect(t.animation.snapshot().clip).toBe('morelight-shrink');
+        for(let n=0;n<100&&t.animation.snapshot().clip==='morelight-shrink';n++)t.run(0);
         expect(t.animation.snapshot().clip).toBe('morelight-mecha');
         expect(t.calls).toEqual([]);
         t.animation.skip();t.run(0);

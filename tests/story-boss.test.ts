@@ -59,6 +59,14 @@ describe('fixed-screen story bosses',()=>{
         expect(state.projectiles.filter(shot=>shot.owner===1&&shot.vx===2.8)).toHaveLength(6);
     });
 
+    it.each(['giant','mecha','dragon','juicy','art','vmu'] as const)('%s restores full health and records the refill starting point',form=>{
+        const state=createState('highsproto','cpu','vela');
+        state.fighters[0].hp=240;
+        const boss=startStoryBoss(state,form);
+        expect(state.fighters[0].hp).toBe(1000);
+        expect(boss.entryHp).toBe(240);
+    });
+
     it.each(['giant','mecha','dragon','juicy','art','vmu'] as const)('%s can be cleared and can defeat the player',form=>{
         const attacking=fight(form);attacking.state.godMode=true;
         while(attacking.state.winner===null&&attacking.state.frame<2500){

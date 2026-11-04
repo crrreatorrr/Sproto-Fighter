@@ -773,11 +773,14 @@ function stepTo(now: number) {
 function tick(now: number) {
     stepTo(now);
     sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
+    const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
+    const recovery=storyBoss&&storyBoss.entryHp<1000&&state.winner===null&&bossAge<54
+        ?{from:storyBoss.entryHp,progress:Math.min(1,bossAge/42)}:undefined;
     if(!selection.isOpen) render(ctx,state,presentation,visualFrame,
         (c,x,y,facing)=>!storyAnimation.active&&storyBoss&&storyBossArt&&drawStoryBossPose(c,state,storyBoss,storyBossArt)
             ||storyAnimation.draw(c,x,y,facing,storyBoss?.form),
         storyBoss&&storyBossArt?(c)=>drawStoryBossAttacks(c,state,storyBoss!,storyBossArt!):undefined,
-        storyBoss?storyBossTitle(storyBoss.form):undefined,storyAnimation.portalPull());
+        storyBoss?storyBossTitle(storyBoss.form):undefined,storyAnimation.portalPull(),recovery);
     if (online) updateOnlineStatus();
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = storyBoss ? 'Auto-fire · A/D or arrows move · Space double-jump · Shift dash · X shield · C beam · V ball · R retry' : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';

@@ -7,14 +7,14 @@ Cinematics pause combat and replay input. For encounters with a playable boss, r
 | Nick | Duet entrance → regular fight → Nick mounts and rides the dragon alone → dragon boss → flight exit → Juicy's regular bout | Replaced by standing mount scene |
 | Juicy | Regular fight → robot transformation → mecha boss | Replaced |
 | Artchick | Regular fight → fusion with Artdude → growth → Mega Artchick boss | Replaced |
-| Morelight | Regular fight → smoke and growth → giant boss → mecha boarding → mecha boss → ejection, wizard transformation and exit | Retained before smoke |
+| Morelight | Regular fight → smoke and growth → giant boss → shrink to normal size → mecha boarding → mecha boss → ejection, wizard transformation and exit | Retained before smoke |
 | VMU | Regular fight → VMU boss in the same form → bomb portal pulls the player in → congratulations | Skipped |
 
 Artdude keeps his existing first-bout presentation. These boss phases only run in Story mode. Pause and Settings freeze the fight or scene. Skip completes the current cinematic and enters the next playable form when one is due. Settings can toggle God Mode during a fight without restarting it.
 
 ## Fixed-screen boss controls
 
-Move with A/D or the arrows. Space jumps and can be pressed again in the air. Shift dashes, X shields, C fires a piercing beam, and V launches a bouncing explosive ball. Shooting is automatic in the direction the player faces. R retries and Escape pauses. Each boss form rotates through three telegraphed attacks. The player enters the boss fight at full health and carries their remaining health from giant Morelight into his mecha phase.
+Move with A/D or the arrows. Space jumps and can be pressed again in the air. Shift dashes, X shields, C fires a piercing beam, and V launches a bouncing explosive ball. Shooting is automatic in the direction the player faces. R retries and Escape pauses. Each boss form rotates through three telegraphed attacks. Every boss entry restores the player to full health and animates the refill in the HUD, including Morelight’s mecha phase.
 
 The boss runtime uses Sproto Arcade's 60 Hz grounded movement, projectile physics, dash and shield timing, and recharge times, with hitboxes fitted to Fighter's larger sprites. The six projectile graphics in `src/story-boss-art` are copied from Arcade's `art/gameplay/projectiles`. The original five four-pose attack sheets were generated with Nano Banana Pro in Higgsfield's Unlimited mode. Each sheet has one shared anticipation pose and three attack-specific release poses, keyed and aligned to the existing idle sprite.
 
@@ -32,7 +32,7 @@ The existing dragon attack clip supplies the mounted idle sprite. The new attack
 - `npm test`: includes actual main-frame-hook checks for all replacement deaths, Morelight's retained death, exact playlist order, intro/countdown order, skip/cancel, repeat-callback prevention, load failures, stale loads, and replay isolation.
 - `node scripts/story-flow-smoke.mjs`: real campaign/controller hooks, both bouts, saves/unlocks, losses/draws, retries, failures, and God Mode.
 - `node scripts/presentation-smoke.mjs` and `node scripts/versus-smoke.mjs`: existing combat/presentation and preview/controller boundaries.
-- `node scripts/story-animation-browser.mjs`: Chrome decodes the cinematic and attack atlases, checks nine cinematic playlists, and drives the actual Nick intro through pause, skip and retry. It also forces an HTTP 404 for the duet atlas, verifies the load-error screen, then successfully retries after restoring the asset. It uses an isolated test save and browser context. The check starts its own local Vite server and uses installed Playwright Chromium in CI (Chrome on macOS). Set `CHROME_PATH` or `BASE_URL` to override. The browser also plays through both Morelight phases and verifies C/V, live God Mode, replay, and progression into VMU. The other boss sequences and attack physics have targeted automated coverage.
+- `node scripts/story-animation-browser.mjs`: Chrome decodes the cinematic and attack atlases, checks nine cinematic playlists, and drives the actual Nick intro through pause, skip and retry. It also forces an HTTP 404 for the duet atlas, verifies the load-error screen, then successfully retries after restoring the asset. It uses an isolated test save and browser context. The check starts its own local Vite server and uses installed Playwright Chromium in CI (Chrome on macOS). Set `CHROME_PATH` or `BASE_URL` to override. The browser also plays through both Morelight phases and VMU’s boss fight, checks the shrink-to-boarding boundary, and verifies C/V, live God Mode, replay, and the portal victory. The other boss sequences and attack physics have targeted automated coverage.
 - `npm run build`: production bundling and TypeScript checks.
 
 Browser evidence lives in `docs/evidence/story-animations-20261104/`.

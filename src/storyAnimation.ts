@@ -15,7 +15,7 @@ export function storyAnimationPlan(opponent:string,isStory:boolean):StoryAnimati
         case 'nick':return {intro:['nick-juicy'],boss:['nick-mount'],outro:['nick-flight'],form:'dragon',replaceDefeat:true};
         case 'guest07':return {...plan,boss:['juicy-robot'],form:'juicy',replaceDefeat:true};
         case 'sproto943':return {...plan,boss:['art-fusion','mega-woman-growth'],form:'art',replaceDefeat:true};
-        case 'vela':return {...plan,boss:['morelight-smoke'],mecha:['morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit']};
+        case 'vela':return {...plan,boss:['morelight-smoke'],mecha:['morelight-shrink','morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit']};
         case 'vaudream':return {...plan,outro:['vmu-black-hole'],form:'vmu',replaceDefeat:true};
         default:return plan;
     }
@@ -30,7 +30,7 @@ export function createStoryAnimation(){
     let phase:StoryScenePhase|null=null,index=0,age=0,skipRequested=false,generation=0;
     const consumed=new Set<StoryScenePhase>();
     let sceneAnchorX:number|null=null,heldOutro=false;
-    const facingFor=(id:StoryClip,defeatFacing:number)=>id==='morelight-smoke'?defeatFacing:id==='vmu-black-hole'?1:['nick-juicy','nick-mount','nick-flight','juicy-robot','art-fusion','mega-woman-growth','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'].includes(id)?1:-1;
+    const facingFor=(id:StoryClip,defeatFacing:number)=>id==='morelight-smoke'?defeatFacing:id==='vmu-black-hole'?1:['nick-juicy','nick-mount','nick-flight','juicy-robot','art-fusion','mega-woman-growth','morelight-shrink','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'].includes(id)?1:-1;
     function reset(){phase=null;index=0;age=0;skipRequested=false;sceneAnchorX=null;heldOutro=false;consumed.clear();}
     function clear(){generation++;reset();images.clear();plan=storyAnimationPlan('',false);}
     function finish(){
@@ -95,7 +95,7 @@ export function createStoryAnimation(){
             const anchor=id==='vmu-black-hole'?storyBossX('vmu')
                 :id==='nick-mount'?storyBossX('dragon')-250
                 :id==='art-fusion'||id==='mega-woman-growth'?storyBossX('art')
-                :id==='morelight-mecha'||id==='juicy-robot'?STORY_BOSS_X
+                :id==='morelight-shrink'||id==='morelight-mecha'||id==='juicy-robot'?STORY_BOSS_X
                 :!drawPhase&&boss?storyBossX(boss):sceneAnchorX??x;
             ctx.translate(Math.round(anchor),Math.round(y));ctx.scale(facing*spec.scale,spec.scale);
             ctx.drawImage(image,frame%spec.columns*spec.width,Math.floor(frame/spec.columns)*spec.height,

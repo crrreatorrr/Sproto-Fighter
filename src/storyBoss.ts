@@ -48,6 +48,7 @@ type ShotPlan={x:number;y:number;vx:number;vy:number;gravity?:number;bounces?:nu
 export interface StoryBoss {
     form:BossForm;
     startFrame:number;
+    entryHp:number;
     jumpBuffer:number;
     dashReadyAt:number;
     airDash:boolean;
@@ -65,12 +66,12 @@ export interface StoryBoss {
 export function startStoryBoss(state:CombatState,form:BossForm):StoryBoss {
     const [player,opponent]=state.fighters;
     state.fighters=[
-        {...makeFighter(player.id,790,-1),hp:form==='mecha'?player.hp:1000,best:player.best},
+        {...makeFighter(player.id,790,-1),best:player.best},
         makeFighter(opponent.id,storyBossX(form),1),
     ];
     state.projectiles=[];state.effects=[];state.throwState=null;state.freeze=0;state.winner=null;
     state.notice=storyBossTitle(form);state.noticeLife=135;
-    return {form,startFrame:state.frame,jumpBuffer:0,dashReadyAt:0,airDash:true,shieldReadyAt:0,
+    return {form,startFrame:state.frame,entryHp:player.hp,jumpBuffer:0,dashReadyAt:0,airDash:true,shieldReadyAt:0,
         invulnerableUntil:0,beamReadyAt:0,ballReadyAt:0,warning:null,pending:[],releasedAt:-100,lastAttack:0,blasts:[]};
 }
 

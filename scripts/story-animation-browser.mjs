@@ -24,13 +24,19 @@ try{
    for(const phase of ['intro','boss','mecha','outro']){
     if(!plan[phase]?.length)continue;
     if(!animation.start(phase))throw Error('Cannot start '+id+'/'+phase);
-    const seen=[],boundaryChecks=[],referenceFramesChecked=new Set();let frames=0,visible=0,ejectionEnd=null,smallMorelightHeight=null;
+    const seen=[],boundaryChecks=[],referenceFramesChecked=new Set();let frames=0,visible=0,ejectionEnd=null,smallMorelightHeight=null,shrinkStart=null,shrinkEnd=null;
     while(animation.active&&frames<10000){
      const snap=animation.snapshot();if(seen.at(-1)!==snap.clip)seen.push(snap.clip);
      ctx.clearRect(0,0,1280,720);animation.draw(ctx,id==='vela'&&phase==='outro'?STORY_BOSS_X:1100,578,-1);
      if(id==='vela'){
       const pixels=()=>ctx.getImageData(0,0,1280,720).data;
       const visibleHeight=data=>{let min=720,max=-1;for(let y=0;y<720;y++)for(let x=0;x<1280;x++)if(data[(y*1280+x)*4+3]){min=Math.min(min,y);max=Math.max(max,y);}return max-min+1;};
+      if(snap.clip==='morelight-shrink'&&snap.frame===0&&!shrinkStart)shrinkStart=visibleHeight(pixels());
+      if(snap.clip==='morelight-shrink'&&snap.frame===manifest['morelight-shrink'].frames-1&&!shrinkEnd)shrinkEnd=visibleHeight(pixels());
+      if(snap.clip==='morelight-mecha'&&snap.frame===0&&shrinkEnd&&!boundaryChecks.includes('shrink/boarding')){
+       if(shrinkStart<300||Math.abs(visibleHeight(pixels())-shrinkEnd)>2)throw Error('Shrink does not match the start of boarding');
+       boundaryChecks.push('shrink/boarding');
+      }
       if(snap.clip==='morelight-mecha'&&snap.frame===manifest['morelight-mecha'].frames-1){mechaEnd=pixels();mechaHeight=visibleHeight(mechaEnd);}
       if(snap.clip==='morelight-ejection'&&snap.frame<manifest['morelight-ejection'].referenceMechaFrames&&mechaEnd&&!referenceFramesChecked.has(snap.frame)){
        const now=pixels();if(!now.every((v,i)=>v===mechaEnd[i]))throw Error('Reference mecha changed or an unwanted chest object was added');
@@ -50,6 +56,7 @@ try{
      animation.advance();frames++;
     }
     if(animation.active)throw Error('Unbounded scene');
+    if(id==='vela'&&phase==='mecha'&&!boundaryChecks.includes('shrink/boarding'))throw Error('Missing Morelight shrink boundary');
     if(id==='vela'&&phase==='outro'&&(boundaryChecks.length!==2||referenceFramesChecked.size!==manifest['morelight-ejection'].referenceMechaFrames))throw Error('Missing Morelight boundary/reference verification');
     records.push({id,phase,seen,frames,visible,boundaryChecks,...(smallMorelightHeight?{smallMorelightHeight,mechaHeight,referenceMechaFramesVerified:referenceFramesChecked.size}:{})});
    }

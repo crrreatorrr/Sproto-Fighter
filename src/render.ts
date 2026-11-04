@@ -57,26 +57,35 @@ function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost =
         c.restore();
     }
 }
-function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string, bossTitle?:string) {
+type HealthRecovery={from:number;progress:number};
+
+function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string, bossTitle?:string, recovery?:HealthRecovery) {
     const x = right ? 765 : 55, width = 460, color = ROSTER[f.id].color;
     text(c, bossTitle??ROSTER[f.id].name, right ? 1225 : 55, 55, 24, '#eaf0f7', right ? 'right' : 'left', 850);
     text(c, (mode === 'versus' ? (right ? 'P2 / ' : 'P1 / ') : right ? (mode === 'cpu' ? 'CPU / ' : 'DUMMY / ') : 'YOU / ') + ROSTER[f.id].role, right ? 1225 : 55, 74, 10, color, right ? 'right' : 'left');
     c.fillStyle = '#2b3547';
     c.fillRect(x, 88, width, 19);
     c.fillStyle = color;
-    const w = width * f.hp / 1000;
+    const hp=recovery?Math.round(recovery.from+(f.hp-recovery.from)*recovery.progress):f.hp;
+    const w = width * hp / 1000;
     c.fillRect(right ? x + width - w : x, 88, w, 19);
+    if(recovery){
+        const start=width*recovery.from/1000;
+        const glow=c.createLinearGradient(x+start,0,x+Math.max(w,start+1),0);
+        glow.addColorStop(0,'#54f5a744');glow.addColorStop(1,'#bdffdf');
+        c.fillStyle=glow;c.fillRect(x+start,88,Math.max(0,w-start),19);
+    }
     for (let i = 1; i < 10; i++)
         line(c, x + i * 46, 88, x + i * 46, 107, '#101b2b55');
-    text(c, `${f.hp} / 1000`, right ? x : x + width, 126, 10, '#c3d2e5', right ? 'left' : 'right');
+    text(c, `${hp} / 1000`, right ? x : x + width, 126, 10, '#c3d2e5', right ? 'left' : 'right');
     for (let i = 0; i < 3; i++) {
         const px = right ? x + width - 34 - i * 41 : x + i * 41;
         c.fillStyle = i < f.pips ? color : '#25354a';
         poly(c, [[px + 5, 120], [px + 34, 120], [px + 29, 130], [px, 130]], c.fillStyle as string);
     }
-    text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
+    text(c, recovery?'RECOVERING HEALTH':f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, recovery?'#bdffdf':f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
-export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean, bossAttacks?:(ctx:CanvasRenderingContext2D)=>void,bossTitle?:string, portal?:{x:number;y:number;progress:number}) {
+export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean, bossAttacks?:(ctx:CanvasRenderingContext2D)=>void,bossTitle?:string, portal?:{x:number;y:number;progress:number}, recovery?:HealthRecovery) {
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
     if(!drawActiveStoryLocation(c))drawStage(c, s.frame);
@@ -203,7 +212,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         }
         c.restore();
     }
-    health(c, s.fighters[0], false, s.mode);
+    health(c, s.fighters[0], false, s.mode,undefined,recovery);
     health(c, s.fighters[1], true, s.mode,bossTitle);
     text(c, 'ROUND 01', 640, 116, 9, '#b9cbdc', 'center');
     for (let i = 0; i < 2; i++) {
