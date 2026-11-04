@@ -1,6 +1,7 @@
 import { createHubSdk, HubSdkError, type HubSdk, type InitResult } from '@metaverse/hub-sdk';
 import { BELT_NAME, BELT_RELIC, HUB_GAME_ID } from './config';
 import { planFighterWin, type FighterWin } from './report';
+import { pageServerKey } from '../net/serverKey';
 
 export type Notify = (title: string, sub: string) => void;
 
@@ -101,9 +102,9 @@ export function hubConfigured(): boolean {
 
 function createBrowserSdk(): HubSdk {
   const serverUrl = (import.meta.env.VITE_NAKAMA_URL || 'http://127.0.0.1:7350').replace(/\/$/, '');
-  // Nakama's client server key (public, not a secret). Same rule as the hub: `defaultkey` in dev,
-  // `VITE_NAKAMA_SERVER_KEY` for a build. The SDK no longer embeds one.
-  const serverKey = import.meta.env.VITE_NAKAMA_SERVER_KEY ?? (import.meta.env.DEV ? 'defaultkey' : '');
+  // Nakama's client server key (public, not a secret). `VITE_NAKAMA_SERVER_KEY` for a build,
+  // `defaultkey` in dev or on a loopback host (see ../net/serverKey.ts). The SDK no longer embeds one.
+  const serverKey = pageServerKey();
   return createHubSdk({ serverUrl, serverKey, hubUrl: hubPageUrl(), assign: () => redirectToHub() });
 }
 

@@ -6,6 +6,7 @@ import { HubDuel, hubDuelSession, type DuelOutcome, type DuelStart } from './hub
 import { PeerLink, type LinkKind, type SignalMessage } from './peer';
 import { decodePacket, encodePacket } from './protocol';
 import { RollbackSession } from './rollback';
+import { pageServerKey } from './serverKey';
 
 export type OnlinePhase = 'connecting' | 'queued' | 'starting' | 'playing' | 'finished' | 'failed';
 
@@ -52,7 +53,7 @@ export class OnlineMatch {
     try { storage = window.sessionStorage; } catch { /* storage disabled */ }
     if (!storage) return null;
     const url = (import.meta.env.VITE_NAKAMA_URL || 'http://127.0.0.1:7350').replace(/\/$/, '');
-    const key = import.meta.env.VITE_NAKAMA_SERVER_KEY ?? (import.meta.env.DEV ? 'defaultkey' : '');
+    const key = pageServerKey();
     return hubDuelSession(storage, url, key);
   }
 
