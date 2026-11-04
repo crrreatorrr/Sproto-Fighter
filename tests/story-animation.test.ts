@@ -48,13 +48,13 @@ async function harness(id:string,win=0){
         ${compiled}
         return advanceRoundFrame;
     `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss});
-    return {animation,state,presentation,calls,frames,run};
+    return {animation,state,presentation,calls,frames,run,endBlackout(){for(let i=0;i<18;i++)run(0);}};
 }
 
 describe('story animation ordering and lifecycle',()=>{
     it('uses each boss\'s own scenes and preserves Morelight\'s full transformation order',()=>{
         expect(storyAnimationPlan('vela',true)).toEqual({intro:[],boss:['morelight-smoke'],mecha:['morelight-shrink','morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit'],replaceDefeat:false});
-        expect(storyAnimationPlan('vaudream',true).outro).toEqual(['vmu-black-hole']);
+        expect(storyAnimationPlan('vaudream',true).outro).toEqual(['vmu-shield','vmu-black-hole']);
         expect(storyAnimationPlan('guest07',true).boss).toEqual(['juicy-robot']);
         expect(storyAnimationPlan('sproto943',true).boss).toEqual(['art-fusion','mega-woman-growth']);
         expect(storyAnimationPlan('sproto865',true).outro).toEqual([]);
@@ -71,12 +71,17 @@ describe('story animation ordering and lifecycle',()=>{
     it('starts VMU directly and plays the portal pull before saving victory',async()=>{
         const t=await harness('vaudream');
         t.run(0);
+        for(let i=0;i<17;i++)t.run(0);
+        expect(t.animation.blackingOut).toBe(true);
+        expect(t.frames).toHaveLength(1);
+        t.run(0);
+        expect(t.animation.blackingOut).toBe(false);
         expect(t.presentation.phase).toBe('fight');
         expect(t.animation.active).toBeNull();
         expect(t.state.winner).toBeNull();
         expect(t.calls).toEqual([]);
         t.run(0);
-        expect(t.animation.snapshot().clip).toBe('vmu-black-hole');
+        expect(t.animation.snapshot().clip).toBe('vmu-shield');
         expect(t.calls).toEqual([]);
         let sawPull=false;
         while(t.animation.active){
@@ -93,7 +98,7 @@ describe('story animation ordering and lifecycle',()=>{
         const t=await harness('vela');
         t.run(0);
         expect(t.presentation.phase).toBe('outro');expect(t.calls).toEqual([]);
-        for(let n=0;n<96;n++)t.run(0);
+        t.endBlackout();
         expect(t.animation.snapshot()).toMatchObject({phase:'boss',clip:'morelight-smoke'});
         expect(t.calls).toEqual([]);
         t.animation.skip();t.run(0);
@@ -116,9 +121,10 @@ describe('story animation ordering and lifecycle',()=>{
         expect(t.frames).toHaveLength(3);
     });
     it.each([['nick','nick-mount'],['guest07','juicy-robot'],['sproto943','art-fusion']])(
-        '%s skips regular defeat and starts the boss transformation immediately',async(id,clip)=>{
+        '%s skips regular defeat and starts the boss transformation after the blackout',async(id,clip)=>{
             const t=await harness(id);t.run(0);
-            expect(t.presentation.phase).toBe('result');
+            expect(t.animation.blackingOut).toBe(true);
+            t.endBlackout();
             expect(t.animation.snapshot()).toMatchObject({phase:'boss',clip});
             expect(t.calls).toEqual([]);
             t.animation.skip();t.run(0);
@@ -127,7 +133,7 @@ describe('story animation ordering and lifecycle',()=>{
             expect(t.calls).toEqual(['save']);
         });
     it('skip completes the result once without leaking input or replay frames',async()=>{
-        const t=await harness('vaudream');t.run(0);t.run(0);t.animation.skip();t.run(255);
+        const t=await harness('vaudream');t.run(0);t.endBlackout();t.run(0);t.animation.skip();t.run(255);
         expect(t.calls).toEqual(['save','report','result']);expect(t.frames).toHaveLength(2);
         t.run(255);expect(t.calls).toEqual(['save','report','result']);
     });
@@ -142,7 +148,7 @@ describe('story animation ordering and lifecycle',()=>{
         expect(t.calls).toEqual(['countdown']);expect(t.frames).toHaveLength(0);expect(t.state.winner).toBe(null);
     });
     it('cancels a result scene during retry without delivering another result',async()=>{
-        const t=await harness('vaudream');t.run(0);t.run(0);t.animation.cancel();t.run(0);
+        const t=await harness('vaudream');t.run(0);t.endBlackout();t.run(0);t.animation.cancel();t.run(0);
         expect(t.animation.active).toBe(null);expect(t.calls).toEqual([]);
         t.animation.reset();expect(t.animation.start('outro')).toBe(true);
     });

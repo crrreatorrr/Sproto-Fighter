@@ -674,6 +674,13 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         held.clear();queued=0;queued2=0;padNeedsRelease=true;
         Object.assign(presentation,{phase:'fight',frame:0,winner:null,fromFloor:false});
     }
+    if(storyAnimation.blackingOut){
+        if(storyAnimation.advanceBlackout()){
+            if(storyAnimation.bossForm==='vmu')enterBoss('vmu');
+            else storyAnimation.start('boss');
+        }
+        return;
+    }
     const scene=storyAnimation.active;
     if(scene){
         if(storyAnimation.advance())return;
@@ -727,15 +734,13 @@ function advanceRoundFrame(input: number, p2Input?: number) {
     if (state.winner !== null) {
         const nextPhase=state.winner===0&&storyAnimation.bossForm?
             (!storyBoss?'boss':storyBoss.form==='giant'?'mecha':null):null;
-        if(nextPhase==='boss'&&storyAnimation.bossForm==='vmu'){
-            enterBoss('vmu');return;
-        }
         if(!nextPhase&&(storyBoss?.form!=='vmu'||state.winner!==0))story.finishMatch(state.winner);
         const losers = state.fighters.filter((_, i) => state.winner === 2 || i !== state.winner);
         const fromFloor = losers.every(f => f.reaction?.kind === 'knockdown' && f.reaction.phase === 'down');
         beginRoundOutro(presentation, state.winner as 0 | 1 | 2, fromFloor);
         if(state.winner===0){
-            if(nextPhase&&(storyAnimation.replaceDefeat||storyBoss)&&storyAnimation.start(nextPhase))
+            if(nextPhase==='boss')storyAnimation.startBossBlackout();
+            else if(nextPhase&&storyAnimation.start(nextPhase))
                 presentation.phase='result';
             else if(!nextPhase&&(storyAnimation.replaceDefeat||storyBoss)&&storyAnimation.start('outro'))
                 presentation.phase='result';
@@ -776,7 +781,10 @@ function tick(now: number) {
     const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
     const recovery=storyBoss&&storyBoss.entryHp<1000&&state.winner===null&&bossAge<54
         ?{from:storyBoss.entryHp,progress:Math.min(1,bossAge/42)}:undefined;
-    if(!selection.isOpen) render(ctx,state,presentation,visualFrame,
+    if(!selection.isOpen&&storyAnimation.blackingOut){
+        ctx.fillStyle='#000';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+    }else if(!selection.isOpen) render(ctx,state,presentation,visualFrame,
         (c,x,y,facing)=>!storyAnimation.active&&storyBoss&&storyBossArt&&drawStoryBossPose(c,state,storyBoss,storyBossArt)
             ||storyAnimation.draw(c,x,y,facing,storyBoss?.form),
         storyBoss&&storyBossArt?(c)=>drawStoryBossAttacks(c,state,storyBoss!,storyBossArt!):undefined,

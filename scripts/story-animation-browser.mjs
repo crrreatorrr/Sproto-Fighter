@@ -118,7 +118,18 @@ try{
   await page.keyboard.press('KeyP');await page.waitForTimeout(165);
  }
  }
+ await page.evaluate(()=>{
+  const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d');
+  const observe=()=>{
+   if(window.neonRelay.storyAnimationSnapshot().blackout>0){
+    window.blackoutPixel=[...ctx.getImageData(640,360,1,1).data];return;
+   }
+   requestAnimationFrame(observe);
+  };
+  requestAnimationFrame(observe);
+ });
  await winRegularBout();
+ assert.deepEqual(await page.evaluate(()=>window.blackoutPixel),[0,0,0,255]);
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='boss');
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().wave),0);
  await page.locator('#story-animation-skip').click();
@@ -147,6 +158,7 @@ try{
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.[0]?.form==='vmu');
  assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().phase),null);
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+ await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='vmu-shield');
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='vmu-black-hole');
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
  await page.waitForFunction(()=>document.querySelector('#journey-title').textContent.includes('Congratulations'));

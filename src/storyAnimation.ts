@@ -16,7 +16,7 @@ export function storyAnimationPlan(opponent:string,isStory:boolean):StoryAnimati
         case 'guest07':return {...plan,boss:['juicy-robot'],form:'juicy',replaceDefeat:true};
         case 'sproto943':return {...plan,boss:['art-fusion','mega-woman-growth'],form:'art',replaceDefeat:true};
         case 'vela':return {...plan,boss:['morelight-smoke'],mecha:['morelight-shrink','morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit']};
-        case 'vaudream':return {...plan,outro:['vmu-black-hole'],form:'vmu',replaceDefeat:true};
+        case 'vaudream':return {...plan,outro:['vmu-shield','vmu-black-hole'],form:'vmu',replaceDefeat:true};
         default:return plan;
     }
 }
@@ -29,9 +29,9 @@ export function createStoryAnimation(){
     let plan=storyAnimationPlan('',false),images=new Map<StoryClip,HTMLImageElement>();
     let phase:StoryScenePhase|null=null,index=0,age=0,skipRequested=false,generation=0;
     const consumed=new Set<StoryScenePhase>();
-    let sceneAnchorX:number|null=null,heldOutro=false;
-    const facingFor=(id:StoryClip,defeatFacing:number)=>id==='morelight-smoke'?defeatFacing:id==='vmu-black-hole'?1:['nick-juicy','nick-mount','nick-flight','juicy-robot','art-fusion','mega-woman-growth','morelight-shrink','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'].includes(id)?1:-1;
-    function reset(){phase=null;index=0;age=0;skipRequested=false;sceneAnchorX=null;heldOutro=false;consumed.clear();}
+    let sceneAnchorX:number|null=null,heldOutro=false,blackout=0;
+    const facingFor=(id:StoryClip,defeatFacing:number)=>id==='morelight-smoke'?defeatFacing:(id==='vmu-black-hole'||id==='vmu-shield')?1:['nick-juicy','nick-mount','nick-flight','juicy-robot','art-fusion','mega-woman-growth','morelight-shrink','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'].includes(id)?1:-1;
+    function reset(){phase=null;index=0;age=0;skipRequested=false;sceneAnchorX=null;heldOutro=false;blackout=0;consumed.clear();}
     function clear(){generation++;reset();images.clear();plan=storyAnimationPlan('',false);}
     function finish(){
         if(!phase)return false;
@@ -55,7 +55,10 @@ export function createStoryAnimation(){
             reset();images=new Map(loaded);plan=next;
         },
         clear,reset,
-        cancel(){heldOutro ||= phase==='outro';phase=null;skipRequested=false;},
+        startBossBlackout(){blackout=Math.round(.3*TICK_RATE);},
+        get blackingOut(){return blackout>0;},
+        advanceBlackout(){return --blackout===0;},
+        cancel(){blackout=0;heldOutro ||= phase==='outro';phase=null;skipRequested=false;},
         start(next:StoryScenePhase){
             if(phase||consumed.has(next)||!plan[next]?.length||!plan[next].every(id=>images.has(id)))return false;
             consumed.add(next);phase=next;index=0;age=0;skipRequested=false;sceneAnchorX=null;return true;
@@ -92,14 +95,29 @@ export function createStoryAnimation(){
                 sceneAnchorX=id==='nick-juicy'?spec.x*spec.scale:Math.max(left,Math.min(WIDTH-right,x));
             }
             ctx.save();ctx.imageSmoothingEnabled=false;
-            const anchor=id==='vmu-black-hole'?storyBossX('vmu')
-                :id==='nick-mount'?storyBossX('dragon')-250
+            const anchor=(id==='vmu-black-hole'||id==='vmu-shield')?storyBossX('vmu')
+                :id==='nick-mount'?storyBossX('dragon')-340
+                :id==='nick-flight'?storyBossX('dragon')
                 :id==='art-fusion'||id==='mega-woman-growth'?storyBossX('art')
                 :id==='morelight-shrink'||id==='morelight-mecha'||id==='juicy-robot'?STORY_BOSS_X
                 :!drawPhase&&boss?storyBossX(boss):sceneAnchorX??x;
             ctx.translate(Math.round(anchor),Math.round(y));ctx.scale(facing*spec.scale,spec.scale);
-            ctx.drawImage(image,frame%spec.columns*spec.width,Math.floor(frame/spec.columns)*spec.height,
-                spec.width,spec.height,-spec.x,-spec.y,spec.width,spec.height);
+            const drawFrame=(cel:number,left=0,width=spec.width,offset=0)=>{
+                ctx.drawImage(image,cel%spec.columns*spec.width+left,Math.floor(cel/spec.columns)*spec.height,
+                    width,spec.height,left-spec.x+offset,-spec.y,width,spec.height);
+            };
+            if(id==='morelight-mecha'&&drawPhase&&frame>=26&&frame<84){
+                // Hold the pilot in place and slide the parked suit in from the right.
+                const progress=Math.max(0,(frame-32)/52);
+                const travel=(WIDTH-anchor)/spec.scale+spec.x-88;
+                drawFrame(Math.max(0,25-(frame-26)*2));
+                drawFrame(84,88,spec.width-88,Math.round(travel*(1-progress)**2));
+            }else if(id==='morelight-ejection'&&frame>=26&&frame<60){
+                // Keep the blast centered on the cockpit and ease back to the ejection pose.
+                const scale=.66+.34*Math.max(0,(frame-48)/12);
+                ctx.translate(28,-112);ctx.scale(scale,scale);ctx.translate(-28,112);
+                drawFrame(frame);
+            }else drawFrame(frame);
             ctx.restore();return true;
         },
         portalPull(){
@@ -113,6 +131,6 @@ export function createStoryAnimation(){
         get bossForm(){return plan.form;},
         get replaceDefeat(){return plan.replaceDefeat;},
         get active(){return phase;},
-        snapshot:()=>({phase,clip:phase?plan[phase]![index]:null,frame:phase?Math.floor(age*manifest[plan[phase]![index]].fps/TICK_RATE):0}),
+        snapshot:()=>({phase,blackout,clip:phase?plan[phase]![index]:null,frame:phase?Math.floor(age*manifest[plan[phase]![index]].fps/TICK_RATE):0}),
     };
 }

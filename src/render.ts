@@ -212,6 +212,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         }
         c.restore();
     }
+    if(portal)return;
     health(c, s.fighters[0], false, s.mode,undefined,recovery);
     health(c, s.fighters[1], true, s.mode,bossTitle);
     text(c, 'ROUND 01', 640, 116, 9, '#b9cbdc', 'center');
