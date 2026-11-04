@@ -41,6 +41,10 @@ for(const f of pc.fighters){
 }
 const theo=load('live-theo');
 add('theo','live-theo',theo.facings,theo.states,theo.observationCount,theo.countUnit,theo.gaps,theo.findings);
+const named=load('live-named-nov03');
+for(const f of named.fighters)if(!rows.has(f.id)){
+  add(f.id,'live-named-nov03',named.facings,named.states,named.observationCount,named.countUnit,named.gaps,f.findings);
+}
 assert.equal(rows.size,core.PLAYABLE_FIGHTERS.length,'Every available owner needs an explicit individual review record');
 const ordered=core.PLAYABLE_FIGHTERS.map(id=>rows.get(id));
 for(const row of ordered)assert.deepEqual(row.facings,[-1,1],`${row.name}: both actual facings must be explicitly observed`);

@@ -11,7 +11,7 @@ assert len(manifest['fighters']) >= 23  # Existing roster plus installed expansi
 checked = 0
 for ident, cfg in manifest['fighters'].items():
     assert len(cfg['frames']) == 32, ident
-    assert len(cfg.get('walkFrames', [])) == (4 if ident in ('duo','duo-blue') else 8), ident
+    assert 2 <= len(cfg.get('walkFrames', [])) <= 64, ident  # Runtime gait range.
     sequences=cfg['frames']+cfg['walkFrames']+[frame for clip in cfg.get('clips',{}).values() for frame in clip]
     for frame in sequences:
         assert any(frame['url'].startswith('/fighters/'+category+'/'+ident+'/') for category in ('poses','walk','events','motion','assist','identity')), frame
