@@ -49,8 +49,8 @@ Expert is too strong against this particular reference to claim a calibrated
 difficulty endpoint. These limits remain open rather than tuning to force a
 desired result against one scripted opponent.
 
-Raw checkpoint records: [before](balance/cpu-calibration-checkpoint-before.json),
-[after](balance/cpu-calibration-checkpoint-after.json). Reproduce with the pinned
+Raw checkpoint records: [before](balance/cpu-calibration-checkpoint-before.json.gz),
+[after](balance/cpu-calibration-checkpoint-after.json.gz). Reproduce with the pinned
 measurement checkout at `44f777092c3e4795635879acd9b2fd9171d059b8`:
 
 ```sh
@@ -85,8 +85,8 @@ trials per encounter also leave wide uncertainty. This does not establish the
 Normal/Hard roster-balance gate or human feel.
 
 Curve records retain trial seeds, controller assignments, raw outcomes, final HP,
-duration and input/state hashes: [before](balance/cpu-calibration-curve-before.json),
-[after](balance/cpu-calibration-curve-after.json). Source and reference hashes are
+duration and input/state hashes: [before](balance/cpu-calibration-curve-before.json.gz),
+[after](balance/cpu-calibration-curve-after.json.gz). Source and reference hashes are
 embedded in the reports.
 
 ## Verification and compatibility

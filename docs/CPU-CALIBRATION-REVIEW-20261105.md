@@ -36,7 +36,7 @@ Reference-human calibration, the 15–65% story endpoints, empirical smoothness 
 the Normal/Hard roster-balance gate remain unmet or unverified. Reverse seats are
 paired observations; the small sample is diagnostic.
 
-[Current raw checkpoint](balance/cpu-calibration-checkpoint-reviewed.json).
+[Current raw checkpoint](balance/cpu-calibration-checkpoint-reviewed.json.gz).
 Reproduce with `scripts/lib/cpu-calibration-checkpoint.mjs` and the fixed metrics
 checkout described in the historical report.
 

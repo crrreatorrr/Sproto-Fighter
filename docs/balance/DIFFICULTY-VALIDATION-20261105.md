@@ -11,7 +11,7 @@ behavior comparisons rather than proof of roster balance.
 | Normal (4) | 1,016 | 0.30% | 23.06 s |
 | Hard (7) | 1,016 | 0.00% | 22.67 s |
 
-The exact results and source hashes are in `report-2026-11-05-difficulty.json`.
+The exact results and source hashes are in [report-2026-11-05-difficulty.json.gz](report-2026-11-05-difficulty.json.gz).
 Two sampled opponents per fighter is too small for the fairness target; 132
 Normal and 134 Hard fighter estimates fall outside 35–65% in this diagnostic.
 These results must not be described as an approved balance gate.

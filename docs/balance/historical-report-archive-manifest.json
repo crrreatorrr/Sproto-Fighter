@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "trackedSourceCommit": "385b478168fc8db0f586cd1aaa0451c8f2a6d242",
+  "method": "Exact Git blob bytes archived with gzip; decompression and both SHA-256 values verified. No JSON parsing/rewriting of report payloads.",
+  "protectedMaster": {
+    "path": "docs/GAMEPLAY-IMPLEMENTATION-20261105.md",
+    "gitBlob": "23c4a4d699e9625fecd3b7f7998e8feaac05fdf4"
+  },
+  "reports": [
+    {
+      "originalPath": "docs/balance/cpu-calibration-checkpoint-after.json",
+      "archivePath": "docs/balance/cpu-calibration-checkpoint-after.json.gz",
+      "schema": "CPU checkpoint bout report",
+      "originalGitBlob": "9fa95a504e5ac057edeec8726fa83f60f69c8bd4",
+      "rawBytes": 296701,
+      "rawLines": 16451,
+      "compressedBytes": 17960,
+      "rawSha256": "3d67afebc5171b21dee0f828a2d24f22bae0a93567bff2027a334f2af2cf53e5",
+      "compressedSha256": "7257a15e638bfbfb82dcf2f19279761a926072a583936780ef10538511de816d"
+    },
+    {
+      "originalPath": "docs/balance/cpu-calibration-checkpoint-before.json",
+      "archivePath": "docs/balance/cpu-calibration-checkpoint-before.json.gz",
+      "schema": "CPU checkpoint bout report",
+      "originalGitBlob": "d498ed1ca021f9f03346e3aa516b133c29c57ae0",
+      "rawBytes": 296090,
+      "rawLines": 16450,
+      "compressedBytes": 17126,
+      "rawSha256": "fc0785d4d8fe49aecf2d4c9a90d049a38ec47d676a55d946fbaa3d4b500d4546",
+      "compressedSha256": "1a8be4ea6abf21b5969de3ecaef7b48c207ed70039b8fd9cdcbe8d17e295b92d"
+    },
+    {
+      "originalPath": "docs/balance/cpu-calibration-checkpoint-reviewed.json",
+      "archivePath": "docs/balance/cpu-calibration-checkpoint-reviewed.json.gz",
+      "schema": "CPU checkpoint bout report",
+      "originalGitBlob": "25e5f83a91054645a78e5f3cfa5fbd6c1049b0fa",
+      "rawBytes": 296448,
+      "rawLines": 16447,
+      "compressedBytes": 17707,
+      "rawSha256": "051e5fb97f5189577d20443bee97ff27f20fb8dbc467a148b9866b8e5444483d",
+      "compressedSha256": "f828265af6a3601eb4c9183049ac424e5cdf703714baa79b5874d859d0658c96"
+    },
+    {
+      "originalPath": "docs/balance/cpu-calibration-curve-after.json",
+      "archivePath": "docs/balance/cpu-calibration-curve-after.json.gz",
+      "schema": "actual-route curve report",
+      "originalGitBlob": "b06d4972c9baa6aecc01c605bf6a68f226a2470e",
+      "rawBytes": 1740947,
+      "rawLines": 71169,
+      "compressedBytes": 92296,
+      "rawSha256": "9a9cc320a9aa65db4647b17a5d3c7033f57ffbd158f74082c152007c4db09569",
+      "compressedSha256": "c92c8b9f4720a0f12693175265946611d93956274019135ec479b968c2e31f1a"
+    },
+    {
+      "originalPath": "docs/balance/cpu-calibration-curve-before.json",
+      "archivePath": "docs/balance/cpu-calibration-curve-before.json.gz",
+      "schema": "actual-route curve report",
+      "originalGitBlob": "5b8933a7fa9f68ba83a4daf0257d1d993b6cb62e",
+      "rawBytes": 1758245,
+      "rawLines": 71790,
+      "compressedBytes": 92138,
+      "rawSha256": "d156a74cc7ebe0cfe18cae0012d9b8cafcd362b02036b7895d58a6705a0e1234",
+      "compressedSha256": "8b9e5b2b8bba305126a108cb21c81398967a72b6183baf6792bcd2ddabaa60cc"
+    },
+    {
+      "originalPath": "docs/balance/curve-2026-11-05-cpu-seeded.json",
+      "archivePath": "docs/balance/curve-2026-11-05-cpu-seeded.json.gz",
+      "schema": "actual-route curve report",
+      "originalGitBlob": "eb8a15d629c5ac25be6d9630f1402ec79de617a8",
+      "rawBytes": 841054,
+      "rawLines": 34416,
+      "compressedBytes": 41648,
+      "rawSha256": "cff1e6b0ed5f1566619f076c79e82787e7bd98377a8aa795635444905d1d7d55",
+      "compressedSha256": "d0d6544fae819293614dfd57d43243afd56b8eaa6b388d845b94902ed007cdae"
+    },
+    {
+      "originalPath": "docs/balance/report-2026-11-05-balance.json",
+      "archivePath": "docs/balance/report-2026-11-05-balance.json.gz",
+      "schema": "tournament report",
+      "originalGitBlob": "b87ab9931a4d7159aa0dab86ce389b30dc30e86f",
+      "rawBytes": 2296466,
+      "rawLines": 104122,
+      "compressedBytes": 120799,
+      "rawSha256": "58a5a645f28e611532530ec9ae697dc7128ba3c34bcfc77a96f6fb9f61536010",
+      "compressedSha256": "8335c4d3964f441c9d59e247ad1f65c484e7131eb8bd0919939617dcf7dd9a8a"
+    },
+    {
+      "originalPath": "docs/balance/report-2026-11-05-baseline.json",
+      "archivePath": "docs/balance/report-2026-11-05-baseline.json.gz",
+      "schema": "tournament report",
+      "originalGitBlob": "1f985af9501df52c690c5bb7c6c5662846bc78ff",
+      "rawBytes": 17899979,
+      "rawLines": 848729,
+      "compressedBytes": 634836,
+      "rawSha256": "4370c86f347b376be754d064d7f4c5ae1785c558f15206dfe9a8d27dae6e9fe3",
+      "compressedSha256": "cee9b7b7a1dfe87849507abe8c81dc9086dd80af968f5c9bb831842b356cb371"
+    },
+    {
+      "originalPath": "docs/balance/report-2026-11-05-cpu-seeded.json",
+      "archivePath": "docs/balance/report-2026-11-05-cpu-seeded.json.gz",
+      "schema": "tournament report",
+      "originalGitBlob": "f3689bcf73068c6989f47a648be627130e2e8d00",
+      "rawBytes": 2590364,
+      "rawLines": 116315,
+      "compressedBytes": 163196,
+      "rawSha256": "f6a74e339e7b474ed5db23fb51a503841465454766a3563bc635a4367f0353a9",
+      "compressedSha256": "053c06f51c03049bf4fe9408a0757f7615a210797277a17041c120ad8895237b"
+    },
+    {
+      "originalPath": "docs/balance/report-2026-11-05-defense.json",
+      "archivePath": "docs/balance/report-2026-11-05-defense.json.gz",
+      "schema": "tournament report",
+      "originalGitBlob": "b1b81602b70557f1b5e3ffc39c44893d6f4a7aa3",
+      "rawBytes": 2296634,
+      "rawLines": 104137,
+      "compressedBytes": 124569,
+      "rawSha256": "25c324031cfdc73cbb2857f608dbb85de62957020bad8b78294d7ba8b290f4ba",
+      "compressedSha256": "d85f8785ec4656db628ba1ed3126dcbb3e6319584ef4cdb20b7f51d8acd639ad"
+    },
+    {
+      "originalPath": "docs/balance/report-2026-11-05-depth-default.json",
+      "archivePath": "docs/balance/report-2026-11-05-depth-default.json.gz",
+      "schema": "tournament report",
+      "originalGitBlob": "fbe246f8557df1090c5c001235309b42d486b8bf",
+      "rawBytes": 2296561,
+      "rawLines": 104137,
+      "compressedBytes": 124522,
+      "rawSha256": "2910531414e267040d9bf0e47e4e528326dcc801cf43f0dd10a09d26d7d978ad",
+      "compressedSha256": "ff9b10c09a3b8acb399dd4e25549e491cb905c616945ea19b82601d98b27e89a"
+    },
+    {
+      "originalPath": "docs/balance/report-2026-11-05-difficulty.json",
+      "archivePath": "docs/balance/report-2026-11-05-difficulty.json.gz",
+      "schema": "tournament report",
+      "originalGitBlob": "760de889bc637270b105b98525a9cb5e5d1bceda",
+      "rawBytes": 2296835,
+      "rawLines": 104122,
+      "compressedBytes": 130124,
+      "rawSha256": "e0685480a0c171f76159e6f01d1c20fdc2efc1474820026231c83d1ecd98d451",
+      "compressedSha256": "cfb93244353cbf535b3bb7e2393cc1aa597564ccd52c1853e4bf060cfa6fb80c"
+    },
+    {
+      "originalPath": "docs/balance/report-2026-11-05-fast.json",
+      "archivePath": "docs/balance/report-2026-11-05-fast.json.gz",
+      "schema": "tournament report",
+      "originalGitBlob": "173e1326f87474c9ffab5d9f81a6884ae96367ae",
+      "rawBytes": 1177521,
+      "rawLines": 53219,
+      "compressedBytes": 53920,
+      "rawSha256": "ac0e7ee8de0c04d0feae348f11fa26cf1beddae935972a9033f9cda016a46625",
+      "compressedSha256": "86daa6fbffea8c82d906dc54e301916619d055082cd66620fc1ef9888197a3f1"
+    },
+    {
+      "originalPath": "docs/balance/report-2026-11-05-flow.json",
+      "archivePath": "docs/balance/report-2026-11-05-flow.json.gz",
+      "schema": "tournament report",
+      "originalGitBlob": "8c40dc30d93e62f4f889a395d99eea5429938999",
+      "rawBytes": 2296043,
+      "rawLines": 104137,
+      "compressedBytes": 120905,
+      "rawSha256": "43722de614bac8d5acc17f8840440592fb9d3cac5c425bc315d77b5931536e26",
+      "compressedSha256": "33d39975724a5ba853dd32f604d60ce5f636ef5c52de14ab82137db397409823"
+    },
+    {
+      "originalPath": "docs/balance/report-2026-11-05-reference.json",
+      "archivePath": "docs/balance/report-2026-11-05-reference.json.gz",
+      "schema": "tournament report",
+      "originalGitBlob": "df07ef32164815c305b11691a6327713a3ae0d51",
+      "rawBytes": 2098725,
+      "rawLines": 96930,
+      "compressedBytes": 95831,
+      "rawSha256": "95bdcbd4c0c9173b1ac25b2857a8607a69630dbe2f07e80bb65dde17670f29ef",
+      "compressedSha256": "0fdcbb6bf191127e994f7fe4a017494154d2fda63dcf3044b7d95643f50c3de7"
+    }
+  ],
+  "retained": [
+    {
+      "path": "docs/balance/curve-2026-11-05-post-cpu-review-manifest.json",
+      "gitBlob": "9e19cca8faa11ca0e5212b0b08748b06a1add4d6",
+      "rawSha256": "1850a72c1db838f094a7ff04b6e817b93fc7d20825eadc7b1704bd41016bd9e9",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/evidence/browser-2026-11-05.json",
+      "gitBlob": "bec1b6e65d408fc6d9333a13c3e897eba3644c91",
+      "rawSha256": "f28d46736798c7e93d8d15924b160bd9561f8fb3d8c1c608ac9b23051c010b50",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/evidence/browser-reviewed-cpu-20261105.json",
+      "gitBlob": "2a816e14769eea9c5319ddcb06757e2e14f1f79b",
+      "rawSha256": "2245e72fbd82a87f09468d024eb59c422ed54c40a5a10ea05578fc3c3044d79b",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/evidence/round-boundary-2026-11-05.json",
+      "gitBlob": "7a0b295d431fac04c162ef66b8a995af9c947826",
+      "rawSha256": "5c4d200a71800cbf4556c40c091450632558abadb329f04dcff6d4352ad69435",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/evidence/sprite-audit-final-manifest.json",
+      "gitBlob": "11ef645f71ca3f77ba5fce36c6cdee6e9383c3b9",
+      "rawSha256": "d5208894d345550ae356f32a3125aeb4aae3392eacf80836964b46915e02715f",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/final-calibration-kit-metadata.json",
+      "gitBlob": "b75ad67ae21d3c5c6fb4b48ac0d089dd6a8e5359",
+      "rawSha256": "503e73ff63a1a2bb8a5025b257728ffea7471828355f9ec44f560f3aeecf63d0",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/final-calibration-manifest.json",
+      "gitBlob": "4f49d02e8cc85f02bba6fdbb695f2771a0974660",
+      "rawSha256": "30be1cb85e199e5e56416d3e9b899509051677da77b01c75fc3f8761cd411afe",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/hitbox-measurements.json",
+      "gitBlob": "d6635ff8528b79d0ab682851cbf1f585b588e270",
+      "rawSha256": "c5671b330b202ba8360c7f58c9354edb8172844f7c3814ad7e3970a8a0b3d6f1",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/post-cpu-review-kit-features.json",
+      "gitBlob": "708e5f00d2fa4edc56fa368b22afc7c82c0ef1a1",
+      "rawSha256": "6b5d5990986c239264b1af07922359c3e3d4c37afee9b582a0cafdf412848557",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/post-cpu-review-manifest.json",
+      "gitBlob": "0f96b3afe69fca0a2d7effe8710fc3bc750d77b8",
+      "rawSha256": "07f77dc36268ae17ea97b80c6eb93d3dd933502e513b75751a63cb4cc70ff214",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/report-2026-11-05-final-match-depth-manifest.json",
+      "gitBlob": "4b1e450554ece040db79fcd7cba308628b20a15c",
+      "rawSha256": "6979f36954114e22d2c5c27aaf3bd38a6965e785d1e1ccbc8e47213c98abe458",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    },
+    {
+      "path": "docs/balance/story-target-diagnosis/manifest.json",
+      "gitBlob": "3e60eec1efa9452e8dd7d5d82977ecf7523b85e2",
+      "rawSha256": "aa4f90db2fd2ddf147960f4ea38184db5034f94814b72d4cfbc46c6dca350eb7",
+      "reason": "source metadata, manifest, geometry or UI evidence"
+    }
+  ],
+  "updatedMarkdown": [
+    "docs/CPU-CALIBRATION-REVIEW-20261105.md",
+    "docs/CPU-CALIBRATION-FOLLOWUP-20261105.md",
+    "docs/balance/DIFFICULTY-VALIDATION-20261105.md"
+  ],
+  "totals": {
+    "reports": 15,
+    "rawBytes": 40478613,
+    "rawLines": 1862571,
+    "compressedBytes": 1847577
+  }
+}
