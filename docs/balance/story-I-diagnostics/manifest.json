@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "efb5829c1230dac84337ba0212d92a84a527563b",
+  "simulationSourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+  "simVersion": "a4c7ddde49ec5a64",
+  "runnerSha256": "e5ebb83bb932216c1dd9565f49210d26fa9f7242082da8ab5c638eb89bc34453",
+  "files": {
+    "I-endpoints.json.gz": {
+      "rawSha256": "ebc4f67fcfc1cd190aa7df47bafc5d3029febc50a1970422bd3230d6774d1707",
+      "gzipSha256": "9c41068cdc1b65e09d907d0e7af24309f86bcdfc1216e8e3eeef7ba599ae82ac",
+      "rawBytes": 2636589,
+      "gzipBytes": 102161
+    },
+    "I-opening-sweep.json.gz": {
+      "rawSha256": "05ea665ef12295462e6af61ed83e6f58233ff2129eeabd26561877ff94c21a03",
+      "gzipSha256": "0aa758bdae40b45fda55db5872012d3cdb07bc39341209a1d3d03dcab4693c83",
+      "rawBytes": 2680721,
+      "gzipBytes": 100109
+    },
+    "F-endpoints.json.gz": {
+      "rawSha256": "1401753c54b58eb010abec769a3c446c839b62d3c7a1183faa976fc0c453c447",
+      "gzipSha256": "0ad3e069a9f44bbd1a49efac50dcca2c698c1be85ce9a42e2fd77c7b11a26e95",
+      "rawBytes": 2636453,
+      "gzipBytes": 101933
+    }
+  }
+}
