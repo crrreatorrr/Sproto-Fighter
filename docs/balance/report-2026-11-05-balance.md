@@ -597,4 +597,3 @@ Damage: melee 570788; projectile 1150147; special 7491; throw 9722.
 | accidentallyrich vs mrhorsemeat | 2 | 100.0% |
 | agentsproto vs alpha777 | 2 | 0.0% |
 | agentsproto vs sproto3235 | 2 | 100.0% |
-

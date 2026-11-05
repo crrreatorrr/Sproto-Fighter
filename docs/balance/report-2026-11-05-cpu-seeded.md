@@ -599,4 +599,3 @@ Damage: melee 552145; projectile 1144938; special 12556; throw 4931.
 | aaron vs wyrmblvnt | 2 | 100.0% |
 | aaron vs xav | 2 | 0.0% |
 | accidentallyrich vs brainsprot | 2 | 100.0% |
-

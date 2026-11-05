@@ -305,4 +305,3 @@ Damage: melee 1682197; projectile 338105; special 0; throw 0.
 | agentsproto vs sproto3235 | 2 | 100.0% |
 | aktree vs nick | 2 | 100.0% |
 | aktree vs sproto215 | 2 | 100.0% |
-

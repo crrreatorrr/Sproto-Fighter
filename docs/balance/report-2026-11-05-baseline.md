@@ -305,4 +305,3 @@ Damage: melee 30928600; projectile 6249654; special 0; throw 0.
 | 86gwei vs guest12 | 2 | 100.0% |
 | 86gwei vs guest13 | 2 | 0.0% |
 | 86gwei vs guest14 | 2 | 100.0% |
-

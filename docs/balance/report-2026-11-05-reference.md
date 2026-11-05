@@ -307,4 +307,3 @@ Damage: melee 1888696; projectile 612257; special 336; throw 374.
 | 86gwei vs nomis | 4 | 50.0% |
 | 86gwei vs sproto704 | 4 | 50.0% |
 | aaron vs bidnehhh | 4 | 50.0% |
-

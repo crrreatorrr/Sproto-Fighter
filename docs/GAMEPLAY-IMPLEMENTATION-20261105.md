@@ -61,7 +61,13 @@ The frozen final story measurement produced 30 CPU wins in 1,976 encounter
 trials against reference v2, which is itself not validated as a decent human.
 Thus neither the 15–65% endpoints nor empirical smoothness are accepted.
 Separate unintegrated CPU and role-calibration experiments are being measured;
-their results must not be substituted for this tested source's results.
+their results must not be substituted for this tested source's results. The
+[role experiment branch](https://github.com/crrreatorrr/Sproto-Fighter/tree/codex/gameplay-balance-calibration)
+reduces controlled-panel outliers but still fails the gate. Review also found
+that strategic zoning in the frozen CPU reads projectile habit counts before
+the visual delay; the separate CPU candidate is correcting this. Delayed
+position spacing may additionally bias faster-versus-slower matchups and needs
+controlled investigation before more role buffs. These are pre-merge blockers.
 
 Enabled optional rules completed 224 matches / 538 rounds across eight named
 fighters, covering six canonical archetypes, with no raw draws or cap exhaustion.

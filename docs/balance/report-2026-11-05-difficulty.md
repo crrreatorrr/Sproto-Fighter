@@ -597,4 +597,3 @@ Damage: melee 755201; projectile 910813; special 19322; throw 7065.
 | aleksander vs hdizzy | 2 | 100.0% |
 | aleksander vs yusuf | 2 | 100.0% |
 | alpha777 vs slakesly | 2 | 0.0% |
-

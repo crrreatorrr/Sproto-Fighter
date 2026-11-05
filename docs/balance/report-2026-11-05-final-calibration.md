@@ -601,4 +601,3 @@ Damage: melee 19012258; projectile 6546418; special 494484; throw 79082.
 | 86gwei vs np | 4 | 0.0% |
 | 86gwei vs pongohpos10i | 4 | 100.0% |
 | 86gwei vs sproto2381 | 4 | 0.0% |
-
