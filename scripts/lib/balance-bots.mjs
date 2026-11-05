@@ -48,4 +48,3 @@ export function createReferenceBot(core) {
     return held;
   };
 }
-
