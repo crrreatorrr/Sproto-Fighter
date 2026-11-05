@@ -1,72 +1,123 @@
-// Built-in CPU opponent.
+// The controller is a pure read. Only step advances its seeded observations and intent.
 import { getMove, grounded } from './combat';
-import { A } from './constants';
+import { A, FLOOR } from './constants';
 import { MOVES, bodySpread } from './roster';
-import { CombatState } from './types';
-/**
- * CPU tuning. Distances are the gap between the two nearest bodies (root
- * distance minus both fighters' body spread), so paired fighters behave like
- * single ones. Cycles are frame periods; "Frames" is how much of a cycle the
- * CPU spends on that choice.
- */
-export const CPU = {
-    approachGap: 105,   // walk in while farther than this
-    closeGap: 90,       // light attacks / grabs inside this
-    mediumGap: 125,     // medium attack inside this
-    guardGap: 180,      // block an incoming attack inside this
-    guardCycle: 120, guardFrames: 65,
-    grabCycle: 150, grabFrames: 22,
-    specialMaxGap: 450, // never fire the Team Special from farther than this
-    zoneGap: 260,       // ranged power beyond this
-    zoneRetreatGap: 390, zoneBoltCycle: 45, // Morelight keeps this distance
-    boltCycle: 90,
-    dashGap: 220, dashCycle: 120,
-    inputFrames: 4,
-} as const;
-/** Input the built-in CPU would press this frame for the fighter in `slot` (default: slot 1). */
-export function cpuInput(s: CombatState, slot: 0 | 1 = 1): number {
-    const f = s.fighters[slot], p = s.fighters[1 - slot], rootDistance = Math.abs(p.x - f.x), toward = p.x < f.x ? A.left : A.right, away = p.x < f.x ? A.right : A.left;
-    // Approach and ordinary attacks use the gap between the two front bodies.
-    // Root distance alone leaves a wide fighter stuck walking into collision.
-    const distance = Math.max(0, rootDistance - bodySpread(f.id) - bodySpread(p.id));
-    if (s.mode === 'dummy')
-        return 0;
-    if (s.mode === 'guard')
-        return away | (p.input & A.down);
-    if (f.stun || f.blockstun)
-        return 0;
-    if (f.move?.id === 'launcher' && f.move.connected && grounded(f))
-        return A.up | toward;
-    let input = distance > CPU.approachGap ? toward : 0;
-    if (s.frame % 2 === 0)
-        return input;
-    if (f.move?.connected) {
+import { cpuRandom, ensureCpuMemory } from './cpuState';
+import type { CombatState } from './types';
+
+export const CPU_SKILLS = [1, 4, 7, 10] as const;
+export const CPU_SKILL_VERSION = 1;
+export const CPU_DIFFICULTIES = [
+    { name: 'Easy', skill: 1 }, { name: 'Normal', skill: 4 },
+    { name: 'Hard', skill: 7 }, { name: 'Expert', skill: 10 },
+] as const;
+const anchors = [
+    { skill: 1, reaction: 28, guard: .25, low: .20, punish: 0, antiAir: 0, tech: 0, combo: .40 },
+    { skill: 4, reaction: 18, guard: .50, low: .45, punish: .30, antiAir: .25, tech: .20, combo: .70 },
+    { skill: 7, reaction: 12, guard: .70, low: .70, punish: .65, antiAir: .60, tech: .50, combo: .90 },
+    { skill: 10, reaction: 8, guard: .85, low: .90, punish: .90, antiAir: .85, tech: .75, combo: 1 },
+] as const;
+export function cpuTuning(skill = 4) {
+    const level = Math.max(1, Math.min(10, Number.isFinite(skill) ? skill : 4));
+    const index = level < 4 ? 0 : level < 7 ? 1 : 2;
+    const a = anchors[index], b = anchors[index + 1], t = (level - a.skill) / (b.skill - a.skill);
+    const mix = (key: Exclude<keyof typeof a, 'skill'>) => a[key] + (b[key] - a[key]) * t;
+    return { skill: level, reaction: Math.round(mix('reaction')), guard: mix('guard'), low: mix('low'),
+        punish: mix('punish'), antiAir: mix('antiAir'), tech: mix('tech'), combo: mix('combo') };
+}
+
+/** Called exactly once per simulation tick, even when neither seat is CPU controlled. */
+export function advanceCpuState(s: CombatState): void {
+    const memories = ensureCpuMemory(s);
+    for (const slot of [0, 1] as const) {
+        const memory = memories[slot], f = s.fighters[slot], p = s.fighters[1 - slot];
+        const move = p.move ? getMove(p, p.move.id) : null;
+        const previous = memory.observations.at(-1);
+        const newAttack = !!p.move && (previous?.move !== p.move.id || previous.age > p.move.t);
+        if (newAttack) {
+            memory.attackRoll = cpuRandom(memory); memory.lowRoll = cpuRandom(memory);
+            memory.habits.attacks++; memory.habits.lows += Number(!!move?.low);
+            memory.habits.projectiles += Number(!!move?.projectile);
+        }
+        memory.attackKey = p.move ? newAttack ? `${p.move.id}:${s.frame}` : memory.attackKey : '';
+        if (!grounded(p) && !memory.airborne) { memory.jumpRoll = cpuRandom(memory); memory.habits.jumps++; }
+        memory.airborne = !grounded(p);
+        const hold = s.throwState;
+        const caught = hold?.phase === 'hold' && hold.victim === slot;
+        if (caught && memory.throwKey < 0) { memory.throwRoll = cpuRandom(memory); memory.throwKey = s.frame; }
+        if (!caught) memory.throwKey = -1;
+        if (f.combo > 0 && memory.combo === 0) memory.comboRoll = cpuRandom(memory);
+        memory.combo = f.combo;
+        if (s.frame >= memory.nextDecision) {
+            memory.choice = cpuRandom(memory); memory.decisionAt = s.frame;
+            memory.nextDecision = s.frame + 8 + Math.floor(cpuRandom(memory) * 7);
+        }
+        memory.observations.push({ frame: s.frame, x: p.x, y: p.y, vy: p.vy, hp: p.hp,
+            move: p.move?.id ?? null, age: p.move?.t ?? 0, startup: move?.startup ?? 0,
+            active: move?.active ?? 0, recovery: move?.recovery ?? 0, low: !!move?.low,
+            input: p.input, attackRoll: memory.attackRoll, lowRoll: memory.lowRoll, jumpRoll: memory.jumpRoll,
+            shot: s.projectiles.some(projectile => projectile.owner !== slot && Math.abs(projectile.x - f.x) < 220) });
+        if (memory.observations.length > 30) memory.observations.shift();
+        // Strategic intent uses the oldest retained observation (at least as
+        // conservative as Easy's visual delay). Tactical reactions below use skill.
+        const perceived = memory.observations[0];
+        const gap = Math.abs(perceived.x - f.x) - bodySpread(f.id) - bodySpread(p.id);
+        memory.intent = perceived.move && perceived.age >= perceived.startup + perceived.active ? 'punish'
+            : perceived.move && gap < 200 ? 'defend' : gap > 250 && (f.hp > perceived.hp || memory.habits.projectiles > memory.habits.attacks / 2)
+                ? 'zone' : gap > 100 ? 'approach' : 'pressure';
+    }
+}
+
+/** Input-only replay invariant: this call is idempotent and never consumes RNG. */
+export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
+    const f = s.fighters[slot], current = s.fighters[1 - slot];
+    if (s.mode === 'dummy') return 0;
+    if (s.mode === 'guard') return (current.x < f.x ? A.right : A.left) | (current.input & A.down);
+    const memory = s.cpu?.[slot], tuning = cpuTuning(skill);
+    if (!memory) return 0;
+    // Throw recognition is a separate tactile 3-frame response. The ordinary visual
+    // reaction queue cannot fit in the universal 7-frame tech window (Phase 3).
+    if (s.throwState?.phase === 'hold' && s.throwState.victim === slot &&
+        s.throwState.t >= 3 && s.throwState.t <= 6 && memory.throwRoll < tuning.tech) return A.grab;
+    if (f.stun || f.hp <= 0) return 0;
+    const seen = memory.observations.find(o => o.frame >= s.frame - tuning.reaction);
+    if (!seen || s.frame < tuning.reaction) return 0;
+    const toward = seen.x < f.x ? A.left : A.right, away = seen.x < f.x ? A.right : A.left;
+    const distance = Math.max(0, Math.abs(seen.x - f.x) - bodySpread(f.id) - bodySpread(current.id));
+    const pulse = s.frame - memory.decisionAt < 2;
+    const light = getMove(f, 'light'), medium = getMove(f, 'medium'), heavy = getMove(f, 'heavy');
+    const meleeGap = (range: number) => range - bodySpread(f.id) - 8;
+    const approach = memory.intent === 'zone' && distance > 200
+        ? distance < 310 ? away : 0 : distance > meleeGap(light.range) ? toward : 0;
+    if (f.blockstun) return away | (seen.low && seen.lowRoll < tuning.low ? A.down : 0);
+    if (f.move?.connected && memory.comboRoll < tuning.combo) {
+        if (f.move.id === 'launcher' && grounded(f)) return A.up | toward;
         const rank = MOVES[f.move.id].rank;
-        if (rank === 1)
-            return input | A.medium;
-        if (rank === 2)
-            return input | (s.frame % 5 === 1 && grounded(f) ? A.launcher : A.heavy);
+        if (rank === 1) return approach | A.medium;
+        if (rank === 2) return approach | A.heavy;
     }
-    if (f.move)
-        return input;
-    if (p.move && distance < CPU.guardGap && s.frame % CPU.guardCycle < CPU.guardFrames)
-        return away | (p.input & A.down);
-    // Specials originate at the shared root; unlike ordinary melee their range
-    // does not include the attacker's formation spread.
-    if (f.pips === 3 && rootDistance - bodySpread(p.id) < Math.min(CPU.specialMaxGap, getMove(f, 'special').range))
-        return A.special;
-    if (f.id === 'vela' && distance > CPU.zoneGap) {
-        input = distance < CPU.zoneRetreatGap ? away : 0;
-        if (s.frame % CPU.zoneBoltCycle < CPU.inputFrames)
-            return input | A.bolt;
+    if (f.move) return 0;
+    const incoming = seen.move && seen.age < seen.startup + seen.active;
+    if (incoming && distance < 220 && seen.attackRoll < tuning.guard) {
+        return away | (seen.low && seen.lowRoll < tuning.low ? A.down : 0);
     }
-    if (distance < CPU.closeGap)
-        return input | (s.frame % CPU.grabCycle < CPU.grabFrames ? A.grab : A.light);
-    if (distance < CPU.mediumGap)
-        return input | A.medium;
-    if (distance > CPU.zoneGap && s.frame % CPU.boltCycle < 3)
-        return input | A.bolt;
-    if (distance > CPU.dashGap && s.frame % CPU.dashCycle < CPU.inputFrames)
-        return input | A.dash;
-    return input;
+    if (seen.y < FLOOR - 35 && seen.vy >= 0 && distance < 145 && seen.jumpRoll < tuning.antiAir)
+        return pulse ? A.launcher : 0;
+    const unsafe = seen.move && seen.age >= seen.startup + seen.active;
+    if (unsafe && (memory.intent === 'punish' || tuning.skill >= 4) && memory.choice < tuning.punish && pulse) {
+        return distance < meleeGap(heavy.range) && seen.recovery > heavy.startup ? A.heavy
+            : distance < meleeGap(medium.range) ? A.medium : distance < meleeGap(light.range) ? A.light : toward | A.dash;
+    }
+    const projectileActive = s.projectiles.some(p => p.owner === slot && p.life > 0);
+    if (seen.shot && memory.choice < tuning.guard) return away | (memory.choice < .15 ? A.down : 0);
+    if (f.pips === 3 && pulse && (tuning.skill >= 7 || (tuning.skill >= 4 && memory.choice < .5)) &&
+        (!incoming || unsafe) && Math.abs(seen.x - f.x) - bodySpread(current.id) < getMove(f, 'special').range) return A.special;
+    if (!pulse) return approach;
+    const lowHabit = memory.habits.attacks > 0 && memory.habits.lows / memory.habits.attacks > .5;
+    if (distance < meleeGap(getMove(f, 'grab').range) && memory.choice < (lowHabit ? .30 : .16)) return A.grab;
+    if (distance < meleeGap(light.range)) return memory.intent === 'pressure' && memory.choice < .25 ? A.down | A.light : A.light;
+    if (distance < meleeGap(medium.range)) return A.medium;
+    if (distance > 240 && !projectileActive && memory.choice < .65) return A.bolt | (f.hp > seen.hp && distance < 340 ? away : 0);
+    if (distance > 200 && memory.choice > .65 && f.dashLock === 0) return toward | A.dash;
+    return approach;
 }

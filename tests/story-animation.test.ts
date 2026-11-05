@@ -42,7 +42,7 @@ async function harness(id:string,win=0){
         const versus={advance:()=>false};const countdown={advance:()=>false,show:()=>calls.push('countdown')};
         const held=new Set();let queued=0,queued2=0,padNeedsRelease=false;
         const online=null,mode='cpu',qaPanel=null,qaRecord=()=>{},qaStopAtOutro=()=>{};
-        const cpuInput=()=>0,playRetainCallout=()=>{},reportRound=()=>calls.push('report');
+        const matchCpuSkill=4,cpuInput=()=>0,playRetainCallout=()=>{},reportRound=()=>calls.push('report');
         const story={finishMatch:()=>calls.push('save'),onRoundEnd:()=>{calls.push('result');return true;}};
         const step=()=>{state.winner=win;};
         ${compiled}

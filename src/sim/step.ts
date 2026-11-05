@@ -3,6 +3,7 @@ import { act, beginThrow, clamp, damage, effect, finishCombo, getMove, grounded,
 import { A, FLOOR, GRAVITY, WIDTH } from './constants';
 import { BACK_THROW_LIFT_FRAMES, COMBAT_STYLES, CROUCH_SPIT_ORIGINS, GETUP_FRAMES, KNOCKDOWN_FRAMES, MOVES, Move, MoveId, ROSTER, THROW_RECOVERY_FRAMES, bodySpread, fighterWall, isCrouchingSpit, isHorizontalSpit, isPairedFighter, isPracticeMode } from './roster';
 import { CombatState, Fighter } from './types';
+import { advanceCpuState } from './cpu';
 /**
  * Deterministic math for the simulation. Online play needs every browser to
  * compute identical states, and ECMAScript lets engines approximate Math.sin,
@@ -45,6 +46,7 @@ export function step(s: CombatState, inputs: [
     if(s.godMode){s.fighters[0].hp=1000;s.fighters[0].pips=3;}
     const endingKO=s.fighters.some(f=>f.hp<=0);
     if(endingKO)inputs=[0,0];
+    advanceCpuState(s);
     s.frame++;
     s.effects = s.effects.filter(e => --e.life > 0);
     if (s.noticeLife > 0)

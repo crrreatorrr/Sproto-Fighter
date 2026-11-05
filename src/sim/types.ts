@@ -70,6 +70,8 @@ export interface Projectile {
     age?:number; bounces?:number; shape?:string; gravity?:number; returnAt?:number; wave?:number; accel?:number; ground?:boolean;
 }
 export interface CombatState {
+    /** Advanced by step for both seats, never by cpuInput. Included in snapshots/replays. */
+    cpu?: [CpuMemory, CpuMemory];
     throwState: ThrowState | null;
     frame: number;
     fighters: [
@@ -84,4 +86,18 @@ export interface CombatState {
     winner: number | null;
     notice: string;
     noticeLife: number;
+}
+
+export type CpuIntent = 'approach' | 'zone' | 'pressure' | 'defend' | 'punish';
+export interface CpuObservation {
+    frame: number; x: number; y: number; vy: number; hp: number;
+    move: MoveId | null; age: number; startup: number; active: number; recovery: number;
+    low: boolean; input: number; attackRoll: number; lowRoll: number; jumpRoll: number; shot: boolean;
+}
+export interface CpuMemory {
+    seed: number; intent: CpuIntent; nextDecision: number; decisionAt: number; choice: number;
+    attackKey: string; attackRoll: number; lowRoll: number; jumpRoll: number;
+    throwKey: number; throwRoll: number; combo: number; comboRoll: number; airborne: boolean;
+    observations: CpuObservation[];
+    habits: { attacks: number; lows: number; jumps: number; projectiles: number };
 }
