@@ -113,8 +113,7 @@ export function drawTeamSpecialFront(c:CanvasRenderingContext2D,s:CombatState){
   const partner=fighterPartner(f);
   const style=COMBAT_STYLES[f.id],foe=s.fighters.find(actor=>actor!==f)!;
   const seed=hashText('team-special:'+partner);
-  const first=style.specialFrames[0],last=style.specialFrames.at(-1)!;
-  const sig=seed%12,secondary=(sig+1+(seed>>>8)%11)%12;
+  const palette=seed%4;
   const direction=seed&1?1:-1,pattern=(seed>>>4)%4;
   const teammate=assists.get(f)?.get(partner);
   const sourceX=(teammate?.x??f.x)+f.facing*26,sourceY=(teammate?.y??f.y)-85;
@@ -125,33 +124,24 @@ export function drawTeamSpecialFront(c:CanvasRenderingContext2D,s:CombatState){
    if(age<-7||age>12)continue;
    if(age<0){
     const u=(age+7)/7;
-    const arc=Math.sin(Math.PI*u)*(26+(seed>>>12)%46);
     for(let echo=0;echo<3;echo++){
-     const p=Math.max(0,u-echo*.17);
-     const x=sourceX+(impactX-sourceX)*p;
-     const y=sourceY+(impactY-sourceY)*p+(pattern%2===0?-arc:arc)*direction;
-     drawSpecialSprite(c,secondary,x,y,31-echo*6,p*direction,Math.min(1,u*3)*(1-echo*.24));
+     const progress=u-echo*.17;
+     if(progress<.14)continue;
+     const arc=Math.sin(Math.PI*progress)*(26+(seed>>>12)%46)*direction;
+     const x=sourceX+(impactX-sourceX)*progress;
+     const y=sourceY+(impactY-sourceY)*progress+(pattern%2===0?-arc:arc);
+     const frame=Math.min(3,Math.floor(progress*4));
+     const bearing=Math.atan2(impactY-sourceY,impactX-sourceX);
+     drawSpecialSprite(c,palette*4+frame,x,y,52-echo*10,bearing,1-echo*.25);
     }
     continue;
    }
    if(!f.move.connected||foe.move?.id==='special')continue;
-   const u=age/12,opacity=(1-u)**1.45;
-   drawSpecialSprite(c,(sig+beat)%12,impactX,impactY,66+84*u,direction*(u-.18),opacity);
-   for(let spark=0;spark<5;spark++){
-    const angle=spark*Math.PI*2/5+((seed>>>16)%9)*.25+direction*u*1.6;
-    const reach=16+u*(58+pattern*12);
-    const x=impactX+Math.cos(angle)*reach*(pattern===1?1.6:1);
-    const y=impactY+Math.sin(angle)*reach*(pattern===2?1.35:.8);
-    drawSpecialSprite(c,secondary,x,y,29-13*u,angle,opacity*.8);
-   }
-  }
-  if(t>=first-14&&t<last+9){
-   const orbit=t*.16*direction;
-   const fade=Math.min(1,(t-first+14)/8,(last+9-t)/8);
-   for(let i=0;i<3;i++){
-    const angle=orbit+i*Math.PI*2/3;
-    drawSpecialSprite(c,sig,sourceX+Math.cos(angle)*48,sourceY+Math.sin(angle)*29,28,angle,fade*.55);
-   }
+   const progress=age/12;
+   const frame=Math.min(3,Math.floor(age/3));
+   const size=[58,104,122,136][frame]+pattern*4;
+   const impactPalette=(palette+beat)%4;
+   drawSpecialSprite(c,16+impactPalette*4+frame,impactX,impactY,size,0,1-progress*.88);
   }
   if(t<55){c.save();c.globalAlpha=Math.min(ease((t+1)/6),clamp((55-t)/10));c.fillStyle='#101725ed';c.fillRect(365,157,550,62);c.fillStyle=color;c.font='900 19px "Pixelify Sans", monospace';c.textAlign='center';c.fillText(PARTNER_ATTACKS[fighterPartner(f)]?.name??ROSTER[f.id].special,640,183);c.fillStyle='#e5e9e2';c.font='600 11px "Pixelify Sans", monospace';c.fillText(`${[f.id,fighterPartner(f)].map(id=>ROSTER[id].name).join(" + ")} / TEAM RELAY`,640,205);c.restore();}
  }
