@@ -79,16 +79,18 @@ export function cpuProjectileThreat(seen: CpuObservation, id: FighterId, own: Fi
     const profile = COMBAT_STYLES[id].projectile;
     const facing = own.x >= seen.x ? 1 : -1;
     const horizontal = isHorizontalSpit(id) || profile.horizontal === true;
-    const crouch = isHorizontalSpit(id) && seen.y >= FLOOR && !!(seen.input & A.down);
-    const origin = crouch ? CROUCH_SPIT_ORIGINS[id]!
-        : profile.originByFacing?.[facing === 1 ? 'right' : 'left'] ?? profile.origin
+    const crouchOrigin = isHorizontalSpit(id) && seen.y >= FLOOR ? CROUCH_SPIT_ORIGINS[id] : undefined;
+    const origin = profile.originByFacing?.[facing === 1 ? 'right' : 'left'] ?? profile.origin
         ?? (isPairedFighter(id) ? { forward: bodySpread(id) + 65, height: 75 } : { forward: 34, height: 95 });
     const emitters = profile.secondaryOrigin ? [origin, profile.secondaryOrigin] : [origin];
+    // Cast aim is latched at acceptance, but the observation only contains current
+    // input. Include both possible mouth lanes instead of inferring aim from input.
+    if (crouchOrigin) emitters.push(crouchOrigin);
     const age = seen.age + combatTick - seen.combatTick - seen.startup;
     const lifetime = profile.beamFrames ?? 100;
     const width = HITBOX_DATA.body.halfWidth + bodySpread(own.id);
     if (age >= lifetime - 1) return { incoming: false, duck: false };
-    let incoming = false, duck = !!(crouch || profile.origin || profile.originByFacing) && horizontal && seen.y >= FLOOR && own.y >= FLOOR && !profile.ground;
+    let incoming = false, duck = !!(profile.origin || profile.originByFacing) && horizontal && seen.y >= FLOOR && own.y >= FLOOR && !profile.ground;
     const standing = getHurtbox({ ...own, input: 0 });
     const crouching = getHurtbox({ ...own, input: A.down });
     for (const emitter of emitters) {

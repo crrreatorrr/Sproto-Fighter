@@ -27,7 +27,7 @@ describe('delayed public-profile projectile threats',()=>{
         const s=setup('vela',500),o=s.cpu![1].observations.find(o=>o.frame>=s.frame-28)!;
         o.age=o.startup+o.active+2;
         expect(cpuProjectileThreat(o,'vela',s.fighters[1],s.cpu![1].combatTicks).incoming).toBe(true);
-        expect(cpuInput(s,1,1)).toBe(A.right|A.down);
+        expect(cpuInput(s,1,1)).toBe(A.right);
     });
     it('reacts to a real delayed cast while its shot is still traveling, before first contact',()=>{
         const s=createState('vela','versus','rivet');
@@ -36,13 +36,28 @@ describe('delayed public-profile projectile threats',()=>{
         expect(s.projectiles.length).toBeGreaterThan(0);expect(s.fighters[1].hp).toBe(1000);
         const memory=s.cpu![1];memory.decisionAt=s.frame-5;memory.choice=.99;
         for(const o of memory.observations)o.attackRoll=0;
-        expect(cpuInput(s,1,1)).toBe(A.right|A.down);
+        expect(cpuInput(s,1,1)).toBe(A.right);
         const guarded=structuredClone(s);
         for(let i=0;i<60;i++){
             step(s,[0,0]);step(guarded,[0,A.right|A.down]);
         }
         expect(s.fighters[1].hp).toBeLessThan(1000);
         expect(guarded.fighters[1].hp).toBe(1000);
+    });
+    it('never certifies a duck from current buttons when an earlier cast may have latched a low mouth',()=>{
+        const s=setup('vela',500),o=s.cpu![1].observations[0];
+        for(const input of [0,A.down]) {
+            o.input=input;
+            expect(cpuProjectileThreat(o,'vela',s.fighters[1],o.combatTick)).toMatchObject({incoming:true,duck:false});
+        }
+    });
+    it('retains latched crouch-spit uncertainty after the attacker releases down in real play',()=>{
+        const s=createState('vela','versus','rivet');s.fighters[0].x=100;s.fighters[1].x=600;
+        step(s,[A.down|A.bolt,0]);for(let n=0;n<28;n++)step(s,[0,0]);
+        expect(s.fighters[0].move?.aim).toBe('down');
+        const o=s.cpu![1].observations.find(o=>o.frame>=s.frame-12)!;
+        expect(o.input).toBe(0);expect(s.projectiles[0].y).toBe(FLOOR-85);
+        expect(cpuProjectileThreat(o,'vela',s.fighters[1],s.cpu![1].combatTicks)).toMatchObject({incoming:true,duck:false});
     });
     it('expires beams by unfrozen clock and excludes shots already past the body',()=>{
         const s=setup(),o=s.cpu![1].observations[0];
