@@ -1,7 +1,7 @@
 // The controller is a pure read. Only step advances its seeded observations and intent.
 import { getMove, grounded } from './combat';
 import { A, FLOOR } from './constants';
-import { MOVES, COMBAT_STYLES, CROUCH_SPIT_ORIGINS, bodySpread, isHorizontalSpit, isPairedFighter, type FighterId } from './roster';
+import { MOVES, BALANCE_KITS, COMBAT_STYLES, CROUCH_SPIT_ORIGINS, bodySpread, isHorizontalSpit, isPairedFighter, type FighterId } from './roster';
 import { cpuRandom, ensureCpuMemory } from './cpuState';
 import type { CombatState, CpuObservation, Fighter } from './types';
 import { getHurtbox, HITBOX_DATA } from './geometry';
@@ -159,6 +159,18 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     const incoming = seen.move && projectedAge < seen.startup + seen.active;
     const projectileThreat = cpuProjectileThreat(seen, current.id, f, memory.combatTicks);
     if (projectileThreat.incoming && seen.attackRoll < tuning.guard) return away | (projectileThreat.duck ? A.down : 0);
+    // A ray whose public startup fits inside our delay cannot be visually
+    // countered on its first cast. After observing a projectile-heavy habit,
+    // reserve the existing seeded forecast guard share for that possible lane.
+    // This is an anticipatory read, not information about a fresh hidden cast.
+    const ray = COMBAT_STYLES[current.id].projectile.beamLength;
+    if (ray && BALANCE_KITS[current.id].moves.bolt.startup <= tuning.reaction &&
+        seen.projectiles > 0 && seen.projectiles > seen.attacks / 2 && memory.choice < forecastGuardShare) {
+        const forecast = cpuProjectileThreat({ ...seen, move: 'bolt', age: 0,
+            startup: BALANCE_KITS[current.id].moves.bolt.startup, combatTick: memory.combatTicks },
+            current.id, f, memory.combatTicks);
+        if (forecast.incoming) return away | (forecast.duck ? A.down : 0);
+    }
     if (incoming && seen.move !== 'bolt' && distance < 220 && seen.attackRoll < tuning.guard) {
         return away | (seen.low && seen.lowRoll < tuning.low ? A.down : 0);
     }

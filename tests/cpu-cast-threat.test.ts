@@ -105,3 +105,30 @@ describe('delayed public-profile projectile threats',()=>{
         s.frame=5;expect(cpuInput(s,1,7)).toBe(0);
     });
 });
+
+describe('seeded learned instant-ray anticipation',()=>{
+    const learned=()=>{
+        const s=setup();s.cpu![1].choice=.1;
+        for(const o of s.cpu![1].observations)Object.assign(o,{move:null,age:0,attacks:2,projectiles:2});
+        return s;
+    };
+    it('uses only an already visible projectile-majority habit at delays too slow for the public startup',()=>{
+        const s=learned();expect(cpuInput(s,1,4)).toBe(A.right|A.down);
+        expect(cpuInput(s,1,1)).toBe(A.right|A.down);
+        expect(cpuInput(s,1,7)).not.toBe(A.right|A.down);
+        for(const o of s.cpu![1].observations){o.projectiles=0;o.attacks=0;}
+        s.cpu![1].habits.projectiles=100;
+        expect(cpuInput(s,1,4)).not.toBe(A.right|A.down);
+    });
+    it('respects seeded forecast intervals and is pure without observing a hidden new cast',()=>{
+        const s=learned(),before=hashState(s);
+        expect(cpuInput(s,1,4)).toBe(A.right|A.down);expect(hashState(s)).toBe(before);
+        s.fighters[0].move={id:'bolt',t:17,connected:false,hit:false,wave:0};
+        expect(cpuInput(s,1,4)).toBe(A.right|A.down);
+        s.cpu![1].choice=.9;expect(cpuInput(s,1,4)).not.toBe(A.right|A.down);
+    });
+    it('does not extend instantaneous-ray anticipation to ordinary shots or unreachable rays',()=>{
+        const s=learned();s.fighters[1].x=1000;expect(cpuInput(s,1,4)).not.toBe(A.right|A.down);
+        s.fighters[1].x=500;s.fighters[0].id='vela';expect(cpuInput(s,1,4)).not.toBe(A.right|A.down);
+    });
+});
