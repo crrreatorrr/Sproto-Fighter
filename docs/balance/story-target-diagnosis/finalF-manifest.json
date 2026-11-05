@@ -1,0 +1,47 @@
+{
+  "diagnosticNotAcceptance": true,
+  "generatorCommit": "4d69269f0d2abcbd0b99b3c5b36a6dad9fca72e2",
+  "generatorSha256": "e5ebb83bb932216c1dd9565f49210d26fa9f7242082da8ab5c638eb89bc34453",
+  "fixedReference": "reference-v2-persistent-delay18",
+  "referenceFighter": "highsproto",
+  "files": [
+    {
+      "file": "finalF-opening-sweep.json.gz",
+      "mode": "opening-sweep",
+      "repeats": 64,
+      "sourceCommit": "7b1ab9d19eef10f30bf9b701b2130d8b2d302ed0",
+      "simulationSourceSha256": "058d8215776d1db035c948b42cd224684e705f35ddc46fcb2841dd4b8e7ea495",
+      "simVersion": "c662aee33095a523",
+      "referenceSha256": "2aada800cc5ac2e80c41942a14db8a9a6bb8f541a8a9bc4cbdf5d640a364f4ff",
+      "routeSha256": "423ddc19a4e4bc93d4560b3d007110b23b45689c23e8084d80a6f0d4c57cea97",
+      "masterSeed": 20261105,
+      "primaryReferenceSeat": 0,
+      "reverseSeats": "paired audit; identical fighter/controller streams",
+      "reservedAcceptanceSeedUsed": false,
+      "jsonSha256": "2f9485d41245073009e54d43e45148b0110a5d9923c6de0a19387b2dab8bab4c",
+      "gzipSha256": "df4830f413cc13256ad0e112e7a5b6facdb37b7b6c94e3b2b0a1470d7d2e0c1d",
+      "resultSha256": "c84d2cae70a48ce6992c29ffda6caba862d5379fe8dfa8cf8413536b1101fcbe",
+      "bytes": 2680703,
+      "gzipBytes": 118572
+    },
+    {
+      "file": "finalF-endpoints.json.gz",
+      "mode": "endpoints",
+      "repeats": 256,
+      "sourceCommit": "7b1ab9d19eef10f30bf9b701b2130d8b2d302ed0",
+      "simulationSourceSha256": "058d8215776d1db035c948b42cd224684e705f35ddc46fcb2841dd4b8e7ea495",
+      "simVersion": "c662aee33095a523",
+      "referenceSha256": "2aada800cc5ac2e80c41942a14db8a9a6bb8f541a8a9bc4cbdf5d640a364f4ff",
+      "routeSha256": "423ddc19a4e4bc93d4560b3d007110b23b45689c23e8084d80a6f0d4c57cea97",
+      "masterSeed": 20261105,
+      "primaryReferenceSeat": 0,
+      "reverseSeats": "paired audit; identical fighter/controller streams",
+      "reservedAcceptanceSeedUsed": false,
+      "jsonSha256": "1401753c54b58eb010abec769a3c446c839b62d3c7a1183faa976fc0c453c447",
+      "gzipSha256": "3c64f29b129846dd9f5495ca467f865b5c131dc8c396e2688d9db7b276f1b513",
+      "resultSha256": "b1e51f278f5a363e0f953e72a034bb99f1f590994307fc33e56d16470c327362",
+      "bytes": 2636453,
+      "gzipBytes": 121018
+    }
+  ]
+}
