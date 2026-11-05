@@ -127,29 +127,63 @@ try{
  await page.locator('#settings').click();await page.locator('#testing-god-mode').check();await page.locator('#close-settings').click();
  await page.locator('#story-worlds').click();await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vela'&&!window.neonRelay.storySnapshot().launching);
- async function winRegularBout(){
- await page.keyboard.press('Enter');
- for(let i=0;i<80;i++){
-  const state=await page.evaluate(()=>window.neonRelay.snapshot());
-  if(state.winner===0||await page.evaluate(()=>window.neonRelay.replay().bossStarts?.length))break;
-  const [player,opponent]=state.fighters;
-  const walk=opponent.x>player.x?'KeyD':'KeyA';
-  if(Math.abs(opponent.x-player.x)>155){await page.keyboard.down(walk);await page.waitForTimeout(150);await page.keyboard.up(walk);}
-  await page.keyboard.press('KeyP');await page.waitForTimeout(165);
- }
+ const regularBouts=[];
+ async function winRegularBout({opponent}){
+  const maxCombatFrames=7200,wallCapMs=120000,started=Date.now(),recent=[];
+  let initialFrame=null,heldWalk=null,attempts=0,last=null;
+  const read=()=>page.evaluate(()=>{
+   const state=window.neonRelay.snapshot();
+   return {frame:state.frame,winner:state.winner,godMode:!!state.godMode,
+    fighters:state.fighters.map(f=>({id:f.id,x:f.x,hp:f.hp,move:f.move?.id??null,age:f.move?.t??0,stun:f.stun,blockstun:f.blockstun})),
+    storyOpponent:window.neonRelay.storySnapshot().opponent,scene:window.neonRelay.storyAnimationSnapshot(),
+    presentation:window.neonRelay.presentationSnapshot(),bossStarts:window.neonRelay.replay().bossStarts??[],visibility:document.visibilityState};
+  });
+  const diagnostic=()=>JSON.stringify({opponent,attempts,elapsedMs:Date.now()-started,initialFrame,maxCombatFrames,recent});
+  try{
+   await page.bringToFront();await page.keyboard.press('Enter');
+   await page.waitForFunction(()=>window.neonRelay.snapshot().frame>0||window.neonRelay.replay().bossStarts?.length,null,{timeout:Math.min(30000,wallCapMs)});
+   while(Date.now()-started<wallCapMs){
+    last=await read();initialFrame??=last.frame;recent.push(last);if(recent.length>6)recent.shift();
+    assert.equal(last.storyOpponent,opponent,'regular-bout fixture changed opponent: '+diagnostic());
+    assert.equal(last.godMode,true,'regular-bout fixture lost UI-enabled God Mode: '+diagnostic());
+    assert.equal(last.bossStarts.length,0,'boss entry occurred before an observed regular KO: '+diagnostic());
+    if(last.winner===0){
+     assert.equal(last.fighters[1].hp,0,'expected an actual regular-bout KO: '+diagnostic());
+     regularBouts.push({opponent,outcome:'ko',attempts,combatFrames:last.frame-initialFrame,elapsedMs:Date.now()-started,frame:last.frame});return;
+    }
+    assert.equal(last.winner,null,'player failed to win the regular bout: '+diagnostic());
+    assert.ok(last.frame-initialFrame<maxCombatFrames,'regular bout exceeded combat-frame cap: '+diagnostic());
+    const [player,rival]=last.fighters,walk=Math.abs(rival.x-player.x)>155?(rival.x>player.x?'KeyD':'KeyA'):null;
+    if(heldWalk!==walk){if(heldWalk)await page.keyboard.up(heldWalk);if(walk)await page.keyboard.down(walk);heldWalk=walk;}
+    await page.keyboard.press('KeyP');attempts++;
+    // Let real gameplay advance; wall-clock key counts are not evidence of a KO.
+    await page.waitForFunction(frame=>window.neonRelay.snapshot().frame>=frame+6||window.neonRelay.snapshot().winner!==null||window.neonRelay.replay().bossStarts?.length,last.frame,{timeout:Math.max(1,Math.min(10000,wallCapMs-(Date.now()-started)))});
+   }
+   assert.fail('regular bout exceeded wall-clock cap: '+diagnostic());
+  }catch(error){throw new Error('Story regular-bout verification failed: '+diagnostic(),{cause:error});}
+  finally{if(heldWalk)await page.keyboard.up(heldWalk);}
  }
  await page.evaluate(()=>{
   const canvas=document.querySelector('#game'),ctx=canvas.getContext('2d');
+  window.blackoutPixel=null;window.blackoutPaint=null;
   const observe=()=>{
    if(window.neonRelay.storyAnimationSnapshot().blackout>0){
-    window.blackoutPixel=[...ctx.getImageData(640,360,1,1).data];return;
+    // Observe a following painted frame, not merely the transition's state flag.
+    requestAnimationFrame(()=>{
+     const scene=window.neonRelay.storyAnimationSnapshot();
+     if(scene.blackout<=0){requestAnimationFrame(observe);return;}
+     window.blackoutPixel=[...ctx.getImageData(640,360,1,1).data];
+     window.blackoutPaint={frame:window.neonRelay.snapshot().frame,blackout:scene.blackout,pixel:window.blackoutPixel};
+    });return;
    }
    requestAnimationFrame(observe);
   };
   requestAnimationFrame(observe);
  });
- await winRegularBout();
- assert.deepEqual(await page.evaluate(()=>window.blackoutPixel),[0,0,0,255]);
+ await winRegularBout({opponent:'vela'});
+ try{await page.waitForFunction(()=>Array.isArray(window.blackoutPixel),null,{timeout:15000});}
+ catch(error){throw new Error('No painted pre-boss blackout after regular KO: '+JSON.stringify(await page.evaluate(()=>({state:window.neonRelay.snapshot().winner,scene:window.neonRelay.storyAnimationSnapshot(),presentation:window.neonRelay.presentationSnapshot(),paint:window.blackoutPaint}))),{cause:error});}
+ assert.deepEqual(await page.evaluate(()=>window.blackoutPixel),[0,0,0,255],'pre-boss blackout must paint opaque black');
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='boss');
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().wave),0);
  await page.locator('#story-animation-skip').click();
@@ -182,7 +216,7 @@ try{
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='morelight-ejection');
  await page.locator('#story-animation-skip').click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vaudream'&&!window.neonRelay.storySnapshot().launching);
- await winRegularBout();
+ await winRegularBout({opponent:'vaudream'});
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.[0]?.form==='vmu');
  assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().phase),null);
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
@@ -193,6 +227,6 @@ try{
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),true);
  assert.equal(await page.evaluate(()=>window.neonRelay.verifyReplay()),true);
  assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
- writeFileSync('docs/evidence/story-animations-20261104/browser.json',JSON.stringify({playback,nickIntro:{pause:true,skip:true,retry:true,combatFrames:0,failedLoadRetry:true},morelightBoss:{progression:true,keyboardWeapons:true,replay:true,liveGodModeToggle:true},errors,failures},null,2)+'\n');
+ writeFileSync('docs/evidence/story-animations-20261104/browser.json',JSON.stringify({playback,regularBouts,blackoutPaint:await page.evaluate(()=>window.blackoutPaint),nickIntro:{pause:true,skip:true,retry:true,combatFrames:0,failedLoadRetry:true},morelightBoss:{progression:true,keyboardWeapons:true,replay:true,liveGodModeToggle:true},errors,failures},null,2)+'\n');
  console.log('PASS: all cinematic and attack atlases decoded and rendered in Chrome; nine bounded scene playlists; actual Nick intro pause, skip, retry and input/replay isolation; actual Morelight and VMU boss progression, C/V, replay, and portal victory.');
 }finally{await browser.close();await server?.close();}
