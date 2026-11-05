@@ -1,0 +1,323 @@
+{
+  "source": {
+    "commit": "2c46e61473a842473c0668f479a783dd9bcf339c",
+    "sourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+    "simVersion": "373448bdc043a0e8",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9"
+  },
+  "reports": [
+    {
+      "file": "/tmp/report-post-cpu-review.json",
+      "sha256": "607d8938d242883e706df335d0036ffb7ca009e715adfc5434962b090afbdae3"
+    }
+  ],
+  "analysisSha256": "a6f1e27a0e6a6e3dcb82a16641861b39cb08f6b76712c21438fcbfb32956e1de",
+  "ordinaryActors": 253,
+  "excludedBeams": 208,
+  "excludedRawDraws": 33,
+  "definitions": {
+    "fit": "Nonnegative ridge least squares on standardized shared-feature differences; clipped probability predictions; no ID coefficients or production writes.",
+    "split": "Canonical pair SHA-256 mod10: 0–1 untouched matchup holdout across both repeats; 2–3 inner tuning at repeat0; 4–9 inner fit at repeat0; refit chosen model on2–9 repeat0. Repeat1 on2–9 is an additional seed holdout.",
+    "limitations": "Associational model under one frozen CPU policy. Reverse seats are paired, not independent. Actor/matchup overlap remains in seed holdout; matchup holdout still reuses roster actors. Constant safety features cannot identify safety coefficients. Beams excluded rather than given zero shot utility."
+  },
+  "features": [
+    {
+      "name": "lightDamagePerCommitment",
+      "rosterMean": 1.8764822134387347,
+      "rosterScale": 0.05117470541343708,
+      "standardizedCoefficient": 0.010978430692533256,
+      "perUnitCoefficient": 0.21452845900800477
+    },
+    {
+      "name": "heavyDamagePerCommitment",
+      "rosterMean": 2.3484498793026742,
+      "rosterScale": 0.0811514271008949,
+      "standardizedCoefficient": 0.012619535804517941,
+      "perUnitCoefficient": 0.15550602442059555
+    },
+    {
+      "name": "ordinaryProjectileThreat",
+      "rosterMean": 12.565705040450922,
+      "rosterScale": 0.06381574639921606,
+      "standardizedCoefficient": 0,
+      "perUnitCoefficient": 0
+    },
+    {
+      "name": "walkSpeed",
+      "rosterMean": 5.7272727272727355,
+      "rosterScale": 0.3566522989954336,
+      "standardizedCoefficient": 0.027135672808803236,
+      "perUnitCoefficient": 0.07608439055414772
+    },
+    {
+      "name": "nearestLightReach",
+      "rosterMean": 84.50592885375494,
+      "rosterScale": 2.975021909587747,
+      "standardizedCoefficient": 0.04279751211746484,
+      "perUnitCoefficient": 0.014385612415000786
+    },
+    {
+      "name": "nearestHeavyReach",
+      "rosterMean": 140.0592885375494,
+      "rosterScale": 8.0982383952604,
+      "standardizedCoefficient": 0.001166883951663012,
+      "perUnitCoefficient": 0.00014409108434569498
+    }
+  ],
+  "unidentified": [
+    "lightBlockAdvantageNominal",
+    "heavyBlockAdvantageNominal"
+  ],
+  "correlated": [],
+  "shared": {
+    "lambda": 0.0001,
+    "weights": [
+      0.010978430692533256,
+      0.012619535804517941,
+      0,
+      0.027135672808803236,
+      0.04279751211746484,
+      0.001166883951663012
+    ],
+    "tuning": [
+      {
+        "lambda": 0.0001,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24169207892918648,
+          "accuracy": 0.5763680096211665,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 0.001,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24169236264792776,
+          "accuracy": 0.5763680096211665,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 0.01,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.2416953359012109,
+          "accuracy": 0.5763680096211665,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 0.1,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24172335678531584,
+          "accuracy": 0.5799759470835839,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 1,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24241104911674355,
+          "accuracy": 0.5799759470835839,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 10,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24668517588590047,
+          "accuracy": 0.5799759470835839,
+          "neutralBrier": 0.25
+        }
+      }
+    ],
+    "pairHoldout": {
+      "bouts": 6606,
+      "independentPairs": 827,
+      "brier": 0.24114743465129457,
+      "accuracy": 0.5731153496821072,
+      "neutralBrier": 0.25
+    },
+    "seedHoldout": {
+      "bouts": 13308,
+      "independentPairs": 3331,
+      "brier": 0.2420876062195747,
+      "accuracy": 0.5771716260895702,
+      "neutralBrier": 0.25
+    },
+    "bySkill": [
+      {
+        "skill": 4,
+        "pairHoldout": {
+          "bouts": 3306,
+          "independentPairs": 827,
+          "brier": 0.2399514715853549,
+          "accuracy": 0.574410163339383,
+          "neutralBrier": 0.25
+        },
+        "seedHoldout": {
+          "bouts": 6659,
+          "independentPairs": 3330,
+          "brier": 0.23984567418927097,
+          "accuracy": 0.5883766331280973,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "skill": 7,
+        "pairHoldout": {
+          "bouts": 3300,
+          "independentPairs": 827,
+          "brier": 0.24234557219553546,
+          "accuracy": 0.5718181818181818,
+          "neutralBrier": 0.25
+        },
+        "seedHoldout": {
+          "bouts": 6649,
+          "independentPairs": 3325,
+          "brier": 0.24433291008329092,
+          "accuracy": 0.565949766882238,
+          "neutralBrier": 0.25
+        }
+      }
+    ]
+  },
+  "existingBudget": {
+    "lambda": 0.0001,
+    "weights": [
+      0.01809662255797982
+    ],
+    "tuning": [
+      {
+        "lambda": 0.0001,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.2489662263299744,
+          "accuracy": 0.5252555622369213,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 0.001,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24896646578489534,
+          "accuracy": 0.5252555622369213,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 0.01,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24896885897362456,
+          "accuracy": 0.5252555622369213,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 0.1,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24899261638684675,
+          "accuracy": 0.5252555622369213,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 1,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24919718538748822,
+          "accuracy": 0.5252555622369213,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "lambda": 10,
+        "score": {
+          "bouts": 3326,
+          "independentPairs": 832,
+          "brier": 0.24975461217880943,
+          "accuracy": 0.5252555622369213,
+          "neutralBrier": 0.25
+        }
+      }
+    ],
+    "pairHoldout": {
+      "bouts": 6606,
+      "independentPairs": 827,
+      "brier": 0.24885431389069645,
+      "accuracy": 0.5277020890099909,
+      "neutralBrier": 0.25
+    },
+    "seedHoldout": {
+      "bouts": 13308,
+      "independentPairs": 3331,
+      "brier": 0.2495801655159581,
+      "accuracy": 0.5168319807634506,
+      "neutralBrier": 0.25
+    },
+    "bySkill": [
+      {
+        "skill": 4,
+        "pairHoldout": {
+          "bouts": 3306,
+          "independentPairs": 827,
+          "brier": 0.24924048893600015,
+          "accuracy": 0.5248033877797943,
+          "neutralBrier": 0.25
+        },
+        "seedHoldout": {
+          "bouts": 6659,
+          "independentPairs": 3330,
+          "brier": 0.24944086706038907,
+          "accuracy": 0.5206487460579666,
+          "neutralBrier": 0.25
+        }
+      },
+      {
+        "skill": 7,
+        "pairHoldout": {
+          "bouts": 3300,
+          "independentPairs": 827,
+          "brier": 0.24846743670895047,
+          "accuracy": 0.5306060606060606,
+          "neutralBrier": 0.25
+        },
+        "seedHoldout": {
+          "bouts": 6649,
+          "independentPairs": 3325,
+          "brier": 0.24971967347441335,
+          "accuracy": 0.5130094751090389,
+          "neutralBrier": 0.25
+        }
+      }
+    ]
+  },
+  "clusterBootstrap": {
+    "unit": "canonical matchup",
+    "replicates": 1000,
+    "seed": 20261105,
+    "deltaSharedMinusExisting": -0.007706879239401887,
+    "percentile95": [
+      -0.01058102178682752,
+      -0.004523945414394897
+    ]
+  }
+}

@@ -1,22 +1,23 @@
 // Numeric combat templates. Rendering metadata and source artwork are never inputs.
 import type { Move, MoveId } from './roster';
+import defense from './data/hitboxes.json';
 
 export type Archetype = 'Pressure' | 'Footwork' | 'Zoning' | 'Counter' | 'Brawler' | 'Weapon' | 'Paired' | 'Hover';
 export interface BalanceTemplate {
     speed:number; jump:number;
-    lightRange:number; lightDamage:number;
+    lightRange:number; lightDamage:number; lightStartup:number;
     heavyRange:number; heavyDamage:number; heavyStartup:number;
     boltStartup:number; boltRecovery:number; projectileSpeed:number;
     specialRange:number; specialStartup:number; specialEnd:number; specialDamage:number;
 }
-const base:BalanceTemplate = {speed:5.6,jump:15.48,lightRange:84,lightDamage:38,heavyRange:135,heavyDamage:95,heavyStartup:11,boltStartup:18,boltRecovery:20,projectileSpeed:10,specialRange:430,specialStartup:14,specialEnd:46,specialDamage:285};
+const base:BalanceTemplate = {speed:5.6,jump:15.48,lightRange:84,lightDamage:38,lightStartup:5,heavyRange:135,heavyDamage:95,heavyStartup:11,boltStartup:18,boltRecovery:20,projectileSpeed:10,specialRange:430,specialStartup:14,specialEnd:46,specialDamage:285};
 export const BALANCE_TEMPLATES:Readonly<Record<Archetype,Readonly<BalanceTemplate>>> = {
     Pressure:{...base,specialRange:360,specialStartup:12,specialEnd:42},
-    Footwork:{...base,speed:6.2,boltRecovery:18,lightRange:86,lightDamage:37,heavyRange:140,heavyDamage:93,specialRange:400},
-    Zoning:{...base,speed:5.4,jump:15.1,lightRange:80,lightDamage:36,heavyDamage:91,boltStartup:20,boltRecovery:21,projectileSpeed:12,specialRange:750,specialStartup:18,specialEnd:54},
+    Footwork:{...base,speed:6.2,boltRecovery:18,lightRange:86,lightDamage:34,lightStartup:6,heavyRange:140,heavyDamage:93,specialRange:400},
+    Zoning:{...base,speed:5.4,jump:15.1,lightRange:94,lightDamage:36,heavyDamage:91,boltStartup:20,boltRecovery:21,projectileSpeed:12,specialRange:750,specialStartup:18,specialEnd:54},
     Counter:{...base,lightRange:86,heavyRange:145,heavyDamage:100,heavyStartup:12,specialRange:450,specialStartup:15,specialEnd:48},
-    Brawler:{...base,speed:5.2,lightRange:80,lightDamage:40,heavyDamage:105,heavyStartup:13,boltStartup:22,boltRecovery:22,projectileSpeed:9,specialRange:310,specialStartup:10,specialEnd:38},
-    Weapon:{...base,speed:5.3,lightRange:88,heavyRange:175,heavyStartup:14,boltStartup:20,boltRecovery:22,specialRange:500,specialStartup:16,specialEnd:50},
+    Brawler:{...base,speed:5.2,lightRange:94,lightDamage:40,heavyDamage:105,heavyStartup:13,boltStartup:22,boltRecovery:22,projectileSpeed:9,specialRange:310,specialStartup:10,specialEnd:38},
+    Weapon:{...base,speed:5.3,lightRange:100,heavyRange:175,heavyStartup:14,boltStartup:20,boltRecovery:22,specialRange:500,specialStartup:16,specialEnd:50},
     Paired:{...base,lightRange:82},
     Hover:{...base,speed:5.4,jump:16,lightRange:86,heavyRange:145,heavyDamage:92,heavyStartup:12,boltStartup:20,boltRecovery:21,specialRange:520,specialStartup:16,specialEnd:50},
 };
@@ -52,11 +53,16 @@ export function identityDeltas(role:string):IdentityDelta {
 }
 export interface BalancedKit { archetype:Archetype; template:BalanceTemplate; deltas:IdentityDelta; moves:Record<MoveId,Move>; projectileSpeed:number; specialFrames:number[]; }
 
-/** Fixed weights: commitment and safety/reach for melee, speed/commitment for shots. */
-export function budgetScore(moves:Record<MoveId,Move>,projectileSpeed:number):number {
-    const melee=(m:Move)=>m.damage/(m.startup+m.active+m.recovery)*(1+m.range/160)*(1+(15-m.recovery)/100);
+/** Exploratory weights motivated by neutral-mobility and light-spacing measurements. */
+export const BUDGET_WEIGHTS = {light:.65,heavy:.25,projectile:.10,neutralSpeed:5.6,neutralReach:84,safetyFrames:100} as const;
+export function budgetScore(moves:Record<MoveId,Move>,projectileSpeed:number,mobility:Pick<BalanceTemplate,'speed'|'jump'>=base):number {
+    const melee=(id:'light'|'heavy')=>{
+        const m=moves[id],advantage=(m.blockstun??defense.moves[id].blockstun)-(m.active+m.recovery-1);
+        return m.damage/(m.startup+m.active+m.recovery)*(1+m.range/160)*(1+advantage/BUDGET_WEIGHTS.safetyFrames);
+    };
     const shot=moves.bolt.damage*projectileSpeed/(moves.bolt.startup+moves.bolt.recovery);
-    return .4*melee(moves.light)+.35*melee(moves.heavy)+.18*shot;
+    const speed=mobility.speed/BUDGET_WEIGHTS.neutralSpeed,reach=moves.light.range/BUDGET_WEIGHTS.neutralReach;
+    return (BUDGET_WEIGHTS.light*melee('light')+BUDGET_WEIGHTS.heavy*melee('heavy')+BUDGET_WEIGHTS.projectile*shot)*speed*speed*reach;
 }
 
 /** Nominal total if contacts stay in one combo; real-step tests also cover combo resets. */
@@ -71,7 +77,7 @@ export function buildBalancedKit(role:string,paired:boolean,contacts:number,move
     const t={...template};
     for(const key of Object.keys(deltas) as (keyof IdentityDelta)[])t[key]=template[key]*(1+deltas[key]!);
     const result=Object.fromEntries(Object.entries(moves).map(([id,m])=>[id,{...m}])) as Record<MoveId,Move>;
-    result.light={...result.light,range:Math.round(t.lightRange),damage:Math.round(t.lightDamage)};
+    result.light={...result.light,range:Math.round(t.lightRange),damage:Math.round(t.lightDamage),startup:t.lightStartup};
     result.heavy={...result.heavy,range:Math.round(t.heavyRange),damage:Math.round(t.heavyDamage),startup:Math.round(t.heavyStartup)};
     if(archetype==='Weapon')result.sweep={...result.sweep,range:Math.round(t.heavyRange),startup:Math.max(12,Math.round(t.heavyStartup)-1)};
     // Aerial finishers retain their shorter commitment and moderate reach.
