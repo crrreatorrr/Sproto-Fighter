@@ -59,7 +59,7 @@ export function budgetScore(moves:Record<MoveId,Move>,projectileSpeed:number):nu
     return .4*melee(moves.light)+.35*melee(moves.heavy)+.18*shot;
 }
 
-/** Each clean Special deals exactly the same total after the existing combo scaling. */
+/** Nominal total if contacts stay in one combo; real-step tests also cover combo resets. */
 export function specialContactDamage(total:number,count:number,contact:number):number {
     const per=Math.floor(total/count),remainder=total-per*count;
     const actual=per+(contact<remainder?1:0);

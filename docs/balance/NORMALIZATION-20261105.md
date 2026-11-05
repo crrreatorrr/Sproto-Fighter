@@ -12,8 +12,11 @@ projectile damage times speed per commitment. Every role tradeoff must stay
 within 10%, and its score within 3% of its template. These weights and initial
 template strengths still need empirical calibration, not merely passing tests.
 
-Each clean Team Special removes 285 HP after the existing combo scaling, for
-two through six contacts. Contact counts and selected partner identity remain;
+Each Team Special budgets a nominal 285 HP after combo scaling, for two through
+six contacts. A real-step roster test verifies the required 270–300 actual damage
+band for all 254 leads with their default partners. A long gap can end the combo:
+guest11's two contacts currently remove 297 HP rather than the nominal 285.
+Contact counts and selected partner identity remain;
 contact timing comes from the template, with slower long-range zoning and faster
 short-range brawler relays. Specials keep the newer caster immunity and guard
 bypass from #22. Their horizontal range is deliberately restored as an effective

@@ -13,7 +13,7 @@ describe('normalized combat budgets',()=>{
             for(const move of Object.values(k.moves)){expect(move.startup).toBeGreaterThanOrEqual(3);expect(move.active).toBeGreaterThanOrEqual(2);expect(move.recovery).toBeGreaterThanOrEqual(6);}
         }
     });
-    it('normalizes every clean Special to 270–300 actual damage after scaling',()=>{
+    it('budgets every Special at 285 nominal damage for one uninterrupted combo',()=>{
         for(const id of PLAYABLE_FIGHTERS){
             const s=createState(id,'cpu','rivet'),f=s.fighters[0];
             let total=0;
@@ -22,6 +22,18 @@ describe('normalized combat budgets',()=>{
                 total+=Math.round(getMove(f,'special').damage*Math.max(.45,1-i*.08));
             }
             expect(total,id).toBe(285);
+        }
+    });
+    it('keeps all 254 default-partner Specials in the 270–300 actual damage band',()=>{
+        for(const id of PLAYABLE_FIGHTERS){
+            const s=createState(id,'cpu','rivet'),[a,b]=s.fighters;
+            a.x=400;b.x=a.x+60+bodySpread(a.id)+bodySpread(b.id);a.facing=1;b.facing=-1;a.pips=3;
+            step(s,[A.special,0]);
+            for(let frame=0;frame<180;frame++)step(s,[0,0]);
+            const actual=1000-b.hp;
+            expect(actual,id).toBeGreaterThanOrEqual(270);
+            expect(actual,id).toBeLessThanOrEqual(300);
+            expect(a.move,id).toBeNull();
         }
     });
     it('gives weapons longer heavy and sweep reach without hidden damage boosts',()=>{
