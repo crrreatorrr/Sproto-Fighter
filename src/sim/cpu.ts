@@ -6,7 +6,7 @@ import { cpuRandom, ensureCpuMemory } from './cpuState';
 import type { CombatState } from './types';
 
 export const CPU_SKILLS = [1, 4, 7, 10] as const;
-export const CPU_SKILL_VERSION = 1;
+export const CPU_SKILL_VERSION = 2;
 export const CPU_DIFFICULTIES = [
     { name: 'Easy', skill: 1 }, { name: 'Normal', skill: 4 },
     { name: 'Hard', skill: 7 }, { name: 'Expert', skill: 10 },
@@ -56,6 +56,7 @@ export function advanceCpuState(s: CombatState): void {
             move: p.move?.id ?? null, age: p.move?.t ?? 0, startup: move?.startup ?? 0,
             active: move?.active ?? 0, recovery: move?.recovery ?? 0, low: !!move?.low,
             input: p.input, attackRoll: memory.attackRoll, lowRoll: memory.lowRoll, jumpRoll: memory.jumpRoll,
+            attacks: memory.habits.attacks, lows: memory.habits.lows,
             shot: s.projectiles.some(projectile => projectile.owner !== slot && Math.abs(projectile.x - f.x) < 220) });
         if (memory.observations.length > 30) memory.observations.shift();
         // Strategic intent uses the oldest retained observation (at least as
@@ -63,7 +64,7 @@ export function advanceCpuState(s: CombatState): void {
         const perceived = memory.observations[0];
         const gap = Math.abs(perceived.x - f.x) - bodySpread(f.id) - bodySpread(p.id);
         memory.intent = perceived.move && perceived.age >= perceived.startup + perceived.active ? 'punish'
-            : perceived.move && gap < 200 ? 'defend' : gap > 250 && (f.hp > perceived.hp || memory.habits.projectiles > memory.habits.attacks / 2)
+            : (perceived.move || (perceived.attacks > 0 && memory.choice < .85)) && gap < 200 ? 'defend' : gap > 250 && (f.hp > perceived.hp || memory.habits.projectiles > memory.habits.attacks / 2)
                 ? 'zone' : gap > 100 ? 'approach' : 'pressure';
     }
 }
@@ -86,10 +87,21 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     const distance = Math.max(0, Math.abs(seen.x - f.x) - bodySpread(f.id) - bodySpread(current.id));
     const pulse = s.frame - memory.decisionAt < 2;
     const light = getMove(f, 'light'), medium = getMove(f, 'medium'), heavy = getMove(f, 'heavy');
-    const meleeGap = (range: number) => range - bodySpread(f.id) - 8;
+    const meleeGap = (range: number) => range - bodySpread(f.id) - 4;
+    const lowHabit = seen.attacks > 0 && seen.lows / seen.attacks > .5;
+    const grabChance = lowHabit || (seen.input & toward) ? .30 : .16;
+    // A throw read has to close beyond jab spacing. Keep that seeded plan for
+    // the decision interval instead of stopping forever outside grab reach.
+    const grabGap = meleeGap(getMove(f, 'grab').range);
+    const grabPlan = memory.choice > 1 - grabChance && grounded(f) && seen.y >= FLOOR && distance < 160;
+    const pressureGap = grabPlan ? grabGap : meleeGap(light.range);
     const approach = memory.intent === 'zone' && distance > 200
-        ? distance < 310 ? away : 0 : distance > meleeGap(light.range) ? toward : 0;
-    if (f.blockstun) return away | (seen.low && seen.lowRoll < tuning.low ? A.down : 0);
+        ? distance < 310 ? away : 0 : distance > pressureGap ? toward : 0;
+    const expectsLow = seen.low || (seen.attacks > 0 && seen.lows / seen.attacks > .2);
+    const guard = away | (expectsLow && seen.lowRoll < tuning.low ? A.down : 0);
+    // Finishing our own guard stun is a tactile opportunity, not a peek at the
+    // rival's future input. Buffer a short punish only at the end of that stun.
+    if (f.blockstun) return guard | (f.blockstun <= 2 && memory.choice < tuning.punish ? A.light : 0);
     if (f.move?.connected && memory.comboRoll < tuning.combo) {
         if (f.move.id === 'launcher' && grounded(f)) return A.up | toward;
         const rank = MOVES[f.move.id].rank;
@@ -97,24 +109,35 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
         if (rank === 2) return approach | A.heavy;
     }
     if (f.move) return 0;
-    const incoming = seen.move && seen.age < seen.startup + seen.active;
+    // Extrapolate the commitment we actually saw. An old recovery observation
+    // is not a fresh opening after the reaction queue has already consumed it.
+    const projectedAge = seen.age + s.frame - seen.frame;
+    const remaining = seen.startup + seen.active + seen.recovery - projectedAge;
+    const incoming = seen.move && projectedAge < seen.startup + seen.active;
     if (incoming && distance < 220 && seen.attackRoll < tuning.guard) {
         return away | (seen.low && seen.lowRoll < tuning.low ? A.down : 0);
     }
     if (seen.y < FLOOR - 35 && seen.vy >= 0 && distance < 145 && seen.jumpRoll < tuning.antiAir)
         return pulse ? A.launcher : 0;
-    const unsafe = seen.move && seen.age >= seen.startup + seen.active;
+    const unsafe = seen.move && projectedAge >= seen.startup + seen.active && remaining >= light.startup;
     if (unsafe && (memory.intent === 'punish' || tuning.skill >= 4) && memory.choice < tuning.punish && pulse) {
-        return distance < meleeGap(heavy.range) && seen.recovery > heavy.startup ? A.heavy
-            : distance < meleeGap(medium.range) ? A.medium : distance < meleeGap(light.range) ? A.light : toward | A.dash;
+        return distance < meleeGap(heavy.range) && remaining >= heavy.startup ? A.heavy
+            : distance < meleeGap(medium.range) && remaining >= medium.startup ? A.medium : distance < meleeGap(light.range) ? A.light : toward | A.dash;
     }
+    // Jabs are faster than visual reaction at every level. Anticipate pressure
+    // using only already-observed habits. A seeded decision remains fixed for
+    // its 8–14-frame interval; repeated reads never reroll guard probability.
+    if (!unsafe && !grabPlan && seen.attacks > 0 && distance < 190 && memory.choice < tuning.guard) return guard;
     const projectileActive = s.projectiles.some(p => p.owner === slot && p.life > 0);
     if (seen.shot && memory.choice < tuning.guard) return away | (memory.choice < .15 ? A.down : 0);
     if (f.pips === 3 && pulse && (tuning.skill >= 7 || (tuning.skill >= 4 && memory.choice < .5)) &&
         (!incoming || unsafe) && Math.abs(seen.x - f.x) - bodySpread(current.id) < getMove(f, 'special').range) return A.special;
-    if (!pulse) return approach;
-    const lowHabit = memory.habits.attacks > 0 && memory.habits.lows / memory.habits.attacks > .5;
-    if (distance < meleeGap(getMove(f, 'grab').range) && memory.choice < (lowHabit ? .30 : .16)) return A.grab;
+    if (grabPlan) return distance < grabGap ? A.grab : approach;
+    // Once a pressure plan reaches jab distance, take initiative as soon as
+    // our own commitment ends. Move state releases the button on the next tick;
+    // the seeded interval chooses the plan, not a periodic attack metronome.
+    const pressureReady = distance < meleeGap(light.range) && memory.choice >= tuning.guard;
+    if (!pulse && !pressureReady) return approach;
     if (distance < meleeGap(light.range)) return memory.intent === 'pressure' && memory.choice < .25 ? A.down | A.light : A.light;
     if (distance < meleeGap(medium.range)) return A.medium;
     if (distance > 240 && !projectileActive && memory.choice < .65) return A.bolt | (f.hp > seen.hp && distance < 340 ? away : 0);

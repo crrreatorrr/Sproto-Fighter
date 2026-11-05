@@ -4,6 +4,18 @@ import { createDifficultyRetry, storyDifficulty } from '../src/difficulty';
 import { STORY_ENCOUNTERS } from '../src/storyProgress';
 
 describe('seeded CPU controller', () => {
+    const neutralRead = (gap = 80) => {
+        const state=createState('rivet','cpu','vela');
+        for(let frame=0;frame<35;frame++)step(state,[0,0]);
+        state.fighters[1].x=state.fighters[0].x+gap;
+        const memory=state.cpu![0];memory.choice=.1;memory.decisionAt=state.frame-5;
+        memory.nextDecision=state.frame+8;memory.intent='pressure';
+        for(const observation of memory.observations){
+            observation.x=state.fighters[1].x;observation.move=null;observation.input=0;
+            observation.low=false;observation.lowRoll=0;observation.attacks=2;observation.lows=0;
+        }
+        return state;
+    };
     it('keeps reads pure and replays input masks without controller calls', () => {
         const played = createState('rivet', 'versus', 'vela'), replay = createState('rivet', 'versus', 'vela');
         for (let frame = 0; frame < 700 && played.winner === null; frame++) {
@@ -60,6 +72,46 @@ describe('seeded CPU controller', () => {
         state.fighters[0].blockstun=10;
         for(const observation of state.cpu![0].observations){observation.low=true;observation.lowRoll=0;}
         expect(cpuInput(state,0,4)).toBe(A.right|A.down);
+    });
+    it('anticipates learned pressure throughout a seeded guard interval without new attack information', () => {
+        const state=neutralRead(),memory=state.cpu![0];
+        memory.habits={attacks:2,lows:2,jumps:0,projectiles:0};
+        for(const observation of memory.observations)observation.lows=2;
+        for(let frame=0;frame<8;frame++){
+            const before=hashState(state),input=cpuInput(state,0,1);
+            expect(input).toBe(A.left|A.down);expect(cpuInput(state,0,1)).toBe(input);
+            expect(hashState(state)).toBe(before);step(state,[input,0]);
+        }
+    });
+    it('does not anticipate attacks from habit counts still hidden behind the reaction queue', () => {
+        const state=neutralRead(90),memory=state.cpu![0];
+        for(const observation of memory.observations){observation.attacks=0;observation.lows=0;}
+        memory.habits.attacks=100;memory.habits.lows=100;
+        expect(cpuInput(state,0,4)).toBe(A.right);
+    });
+    it('buffers a tactile punish at guard recovery, not during the committed part of blockstun', () => {
+        const state=neutralRead();state.fighters[0].blockstun=8;
+        expect(cpuInput(state,0,4)&A.light).toBe(0);
+        state.fighters[0].blockstun=2;expect(cpuInput(state,0,4)).toBe(A.left|A.light);
+        expect(cpuInput(state,0,1)&A.light).toBe(0);
+    });
+    it('does not treat a delayed opening as fresh after its observed commitment expires', () => {
+        const state=neutralRead();
+        for(const observation of state.cpu![0].observations){
+            observation.move='light';observation.age=1;observation.startup=5;observation.active=4;observation.recovery=11;
+        }
+        expect(cpuInput(state,0,4)).toBe(A.left);
+    });
+    it('closes a seeded throw read beyond jab spacing and commits when in legal grab reach', () => {
+        const state=neutralRead(76),memory=state.cpu![0];memory.choice=.95;
+        expect(cpuInput(state,0,4)).toBe(A.right);
+        state.fighters[1].x=state.fighters[0].x+66;
+        for(const observation of memory.observations)observation.x=state.fighters[1].x;
+        expect(cpuInput(state,0,4)).toBe(A.grab);
+    });
+    it('takes initiative when a pressure plan is already in jab range', () => {
+        const state=neutralRead(70);state.cpu![0].choice=.6;
+        expect(cpuInput(state,0,4)).toBe(A.light);
     });
 });
 
