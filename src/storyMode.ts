@@ -131,9 +131,9 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
             $('journey-title').textContent=result===2?'Draw — try this encounter again.':'Retry this encounter.';
             $('journey-copy').textContent=`${gauntletNote(encounter)}${ROSTER[encounter.opponent].name} is waiting. Defeats and draws do not advance the route. Already earned recruits are kept. ${storageNote()}`;
             const actions=[{label:'Retry match',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}];
-            if(difficultyRetry.offered(encounter.id)){
-                $('journey-copy').textContent+=' Optional help: retry with CPU skill reduced by one. Your fighter and rival stats stay the same.';
-                actions.splice(1,0,{label:'Retry with easier CPU (−1 skill)',run:()=>{void launch(encounter.stage,encounter,0,true);}});
+            if(difficultyRetry.offered(encounter.id) && storyDifficulty(encounter,STORY_ENCOUNTERS,true)<storyDifficulty(encounter,STORY_ENCOUNTERS)){
+                $('journey-copy').textContent+=' Optional help: retry with an easier CPU. Your fighter and rival stats stay the same.';
+                actions.splice(1,0,{label:'Retry with easier CPU',run:()=>{void launch(encounter.stage,encounter,0,true);}});
             }
             buttons(actions);
         }
