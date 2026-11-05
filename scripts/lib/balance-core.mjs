@@ -50,7 +50,7 @@ export function sourceMetadata() {
   try { commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(); } catch { /* source archives have no git */ }
   const simVersion = readFileSync(join(root, 'src/net/simVersion.ts'), 'utf8').match(/SIM_VERSION = '([^']+)'/)?.[1] ?? 'unknown';
   const harnessHash = createHash('sha256');
-  for (const path of ['scripts/balance-tournament.mjs', 'scripts/lib/balance-core.mjs', 'scripts/lib/balance-runner.mjs', 'scripts/lib/balance-bots.mjs'])
+  for (const path of ['scripts/balance-tournament.mjs', 'scripts/difficulty-curve.mjs', 'scripts/lib/balance-core.mjs', 'scripts/lib/balance-runner.mjs', 'scripts/lib/balance-bots.mjs', 'scripts/lib/balance-curve.mjs'])
     harnessHash.update(path + '\0').update(readFileSync(join(root, path))).update('\0');
   return { commit, sourceSha256: hash.digest('hex'), simVersion, harnessSha256:harnessHash.digest('hex') };
 }
