@@ -59,6 +59,8 @@ export interface PoseAtlasConfig {
   anchor: Point;
   /** Choose exactly one: source-pixel scale, or canonical frame world height. */
   scale?: number;
+  /** Presentation multiplier. Authored gameplay grips still use the base scale. */
+  visualScale?:number;
   worldHeight?: number;
   facing?: 1 | -1;
   /** World travel for one complete L/pass/R/pass cycle; defaults to 72. */
@@ -143,6 +145,7 @@ function localUrl(path: string, revision?: string): string {
 async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): Promise<Atlas> {
   if (!cfg || !Array.isArray(cfg.frames) || cfg.frames.length !== 32 || !positive(cfg.width) || !positive(cfg.height) || !point(cfg.anchor)) throw new Error(`Atlas ${id}: expected 32 frames, positive dimensions and foot anchor`);
   if ((cfg.scale !== undefined && cfg.worldHeight !== undefined) || (cfg.scale !== undefined && !positive(cfg.scale)) || (cfg.worldHeight !== undefined && !positive(cfg.worldHeight))) throw new Error(`Atlas ${id}: specify one positive scale or worldHeight`);
+  if(cfg.visualScale!==undefined&&!positive(cfg.visualScale))throw new Error(`Atlas ${id}: invalid visual scale`);
   if (cfg.scale === undefined && cfg.worldHeight === undefined) throw new Error(`Atlas ${id}: scale or worldHeight is required`);
   if (cfg.facing !== undefined && cfg.facing !== 1 && cfg.facing !== -1) throw new Error(`Atlas ${id}: facing must be 1 or -1`);
   if (cfg.walkCycleDistance !== undefined && !positive(cfg.walkCycleDistance)) throw new Error(`Atlas ${id}: invalid walkCycleDistance`);
@@ -205,8 +208,7 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
   const [frames, walkFrames, clipEntries] = await Promise.all([loadFrames(cfg.frames, 'poses'), cfg.walkFrames ? loadFrames(cfg.walkFrames, 'walk') : undefined, Promise.all(Object.entries(cfg.clips??{}).map(async ([name,entries])=>[name,await loadFrames(entries!,name)] as const))]);
   const sheet = sheetImage ? await sheetImage : null, bitmaps = sheet ? [sheet] : [];
   const bytes = [...bitmaps, ...ownImages].reduce((sum, image) => { const [w, h] = imageSize(image); return sum + w * h * 4; }, 0);
-  // Juicy's regular atlas scales around each cel's foot anchor. His story mecha uses separate art.
-  const scale=(cfg.scale ?? cfg.worldHeight! / cfg.height)*(id==='guest07'?1.1:1);
+  const scale=(cfg.scale ?? cfg.worldHeight! / cfg.height)*(cfg.visualScale??1);
   return { frames, walkFrames, clips:Object.fromEntries(clipEntries), scale, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact, bytes, bitmaps };
 }
 /** Optional installation: 404 or an empty roster returns false. Invalid manifests
