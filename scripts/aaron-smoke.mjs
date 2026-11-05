@@ -42,4 +42,11 @@ for(let t=0;t<220;t++){combo=Math.max(combo,f.combo);step(s,[0,0]);}
 assert.equal(f.pips,0);assert.equal(combo,COMBAT_STYLES.aaron.specialFrames.length);assert.equal(f.move,null);
 console.log('PASS: Aaron identity and 72-frame asset contract; full gait in both facings, dash/jump/landing, five attacks, eight directional throws and four-contact existing Team Special. Reference likeness and costume checked visually.');
 
-const prior=JSON.parse(readFileSync(new URL('../art/aaron-mouth/before-gameplay.json',import.meta.url),'utf8'));{const {partner:_now,...now}=ROSTER.aaron,{partner:_before,...before}=prior.roster;assert.deepEqual(now,before);} // partner reassigned later; partner-expansion-qa owns itassert.deepEqual(JSON.parse(JSON.stringify(COMBAT_STYLES.aaron)),prior.kit);console.log('PASS: art revision preserves the existing fighter name, kit and gameplay values.');
+// Phase 1 deliberately replaces kit numbers; retain the original art fixture as history.
+const prior=JSON.parse(readFileSync(new URL('../art/aaron-mouth/before-gameplay.json',import.meta.url),'utf8'));
+const approved=JSON.parse(readFileSync(new URL('./fixtures/gameplay-balance.json',import.meta.url),'utf8')).fighters.aaron;
+assert.deepEqual(ROSTER.aaron,approved.roster);
+assert.deepEqual(JSON.parse(JSON.stringify(COMBAT_STYLES.aaron)),approved.kit);
+for(const key of ['name','color','dark','special','role','description'])assert.equal(ROSTER.aaron[key],prior.roster[key]);
+assert.deepEqual(COMBAT_STYLES.aaron.projectile.origin,prior.kit.projectile.origin);
+console.log('PASS: pinned Phase 1 combat expectations and preserved historical Aaron identity and emission geometry.');

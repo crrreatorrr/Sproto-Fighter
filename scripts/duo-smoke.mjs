@@ -1,3 +1,4 @@
+// Phase 1 deliberately updates numeric combat expectations; authored art contracts remain pinned.
 // Deterministic geometry / playback contracts. This is not visual approval.
 import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
@@ -96,7 +97,7 @@ check('duo special has its own complete clips, consumes three pips and never dou
    if(beat>=0){const side=face*(beat%2?-1:1),i=side===1?1:0;assert.equal(d[i].frameIndex,beat===3?6:beat%2?4:2);assert.equal(d[1-i].frameIndex,beat%2?3:5);}
    const bounds=getDuoLayoutDebug(f,s.frame).bounds;assert.ok(bounds[1][0]-bounds[0][1]>=11.99);
   }maxCombo=Math.max(maxCombo,f.combo);step(s,[0,0]);}
-  assert.equal(f.pips,0);assert.equal(maxCombo,COMBAT_STYLES.duo.specialFrames.length);assert.ok(seen.has(6));assert.equal(s.fighters[1].hp,768);
+  assert.equal(f.pips,0);assert.equal(maxCombo,COMBAT_STYLES.duo.specialFrames.length);assert.ok(seen.has(6));assert.equal(s.fighters[1].hp,715);
  }
 });
 check('a projectile overlapping the shared duo envelope damages its one health pool once',()=>{

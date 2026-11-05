@@ -1,0 +1,129 @@
+{
+  "note": "Phase 1 pinned numeric expectations; balance calibration remains pending. Historical art before-gameplay files remain unchanged.",
+  "fighters": {
+    "aaron": {
+      "roster": {
+        "name": "Aaron",
+        "color": "#60aaff",
+        "dark": "#263c64",
+        "speed": 5.55,
+        "jump": 15.48,
+        "partner": "sproto834",
+        "special": "SPROTO BURST aaron",
+        "role": "SKIRMISH",
+        "description": "Guarded footwork, a heavy kick and four-contact ranged relay."
+      },
+      "kit": {
+        "role": "SKIRMISH",
+        "specialName": "SPROTO BURST aaron",
+        "signature": "Guarded footwork, a heavy kick and four-contact ranged relay.",
+        "lightRange": 88,
+        "heavy": {
+          "startup": 11,
+          "active": 6,
+          "recovery": 23,
+          "damage": 91,
+          "range": 140,
+          "stun": 32,
+          "push": 17,
+          "rank": 4,
+          "finisher": true
+        },
+        "bolt": {
+          "startup": 18,
+          "active": 2,
+          "recovery": 25,
+          "damage": 54,
+          "range": 0,
+          "stun": 25,
+          "push": 7,
+          "rank": 3,
+          "projectile": true
+        },
+        "projectile": {
+          "speed": 10,
+          "shape": "signature:95:15"
+        },
+        "specialFrames": [
+          14,
+          25,
+          35,
+          46
+        ],
+        "special": {
+          "startup": 14,
+          "active": 33,
+          "recovery": 30,
+          "damage": 72,
+          "range": 400,
+          "stun": 28,
+          "push": 4,
+          "rank": 6
+        },
+        "advance": 2
+      }
+    },
+    "sproto3215": {
+      "roster": {
+        "name": "Captain Green",
+        "color": "#ffe168",
+        "dark": "#263c64",
+        "speed": 5.55,
+        "jump": 15.48,
+        "partner": "sproto3152",
+        "special": "SPROTO BURST 3215",
+        "role": "SKIRMISH",
+        "description": "Guarded footwork, a heavy kick and four-contact ranged relay."
+      },
+      "kit": {
+        "role": "SKIRMISH",
+        "specialName": "SPROTO BURST 3215",
+        "signature": "Guarded footwork, a heavy kick and four-contact ranged relay.",
+        "lightRange": 88,
+        "heavy": {
+          "startup": 11,
+          "active": 6,
+          "recovery": 23,
+          "damage": 91,
+          "range": 140,
+          "stun": 32,
+          "push": 17,
+          "rank": 4,
+          "finisher": true
+        },
+        "bolt": {
+          "startup": 18,
+          "active": 2,
+          "recovery": 25,
+          "damage": 54,
+          "range": 0,
+          "stun": 25,
+          "push": 7,
+          "rank": 3,
+          "projectile": true
+        },
+        "projectile": {
+          "speed": 10,
+          "shape": "signature:80:0"
+        },
+        "specialFrames": [
+          14,
+          25,
+          35,
+          46
+        ],
+        "special": {
+          "startup": 14,
+          "active": 33,
+          "recovery": 30,
+          "damage": 72,
+          "range": 400,
+          "stun": 28,
+          "push": 4,
+          "rank": 6
+        },
+        "advance": 2
+      }
+    }
+  }
+}

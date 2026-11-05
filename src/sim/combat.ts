@@ -3,6 +3,8 @@ import { A, FLOOR, GRAVITY, WIDTH } from './constants';
 import { fighterPartner, AttackAim, COMBAT_STYLES, FighterId, MOVES, Mode, Move, MoveId, PARTNER_ATTACKS, PLAYABLE_FIGHTERS, PlayableFighterId, ROSTER, THROW_CATCH_FRAMES, THROW_HOLD_FRAMES, THROW_RECOVERY_FRAMES, ThrowDirection, bodySpread, fighterWall, getThrowGrip, isHorizontalSpit, isPairedFighter, partnerContactIndex } from './roster';
 import { CombatState, Effect, Fighter } from './types';
 import { createCpuMemory } from './cpuState';
+import { BALANCE_KITS } from './roster';
+import { specialContactDamage } from './balance';
 export const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, reaction:null, throwInvuln:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
 export function createState(id: PlayableFighterId = 'rivet', mode: Mode = 'cpu', opponent?: PlayableFighterId): CombatState { if (!PLAYABLE_FIGHTERS.includes(id) || (opponent && !PLAYABLE_FIGHTERS.includes(opponent)))
     throw new Error('Unknown roster selection.'); return { cpu:[createCpuMemory(104729),createCpuMemory(130363)], throwState:null, frame: 0, fighters: [makeFighter(id, 380, 1), makeFighter(opponent ?? (id === 'rivet' ? 'vela' : 'rivet'), 900, -1)], projectiles: [], effects: [], freeze: 0, mode, winner: null, notice: 'LIGHT → MEDIUM → FINISHER', noticeLife: 220 }; }
@@ -189,10 +191,13 @@ export function chooseMove(f: Fighter, buttons: number, directions=f.input): Mov
 }
 export function getMove(f: Fighter, id: MoveId): Move {
  const style=COMBAT_STYLES[f.id];
- let m:Move={...MOVES[id],...(id==='light'?{range:style.lightRange}:id==='heavy'||id==='airHeavy'?style.heavy:id==='bolt'?style.bolt:id==='special'?{...style.special,startup:style.specialFrames[0],active:style.specialFrames.at(-1)!-style.specialFrames[0]+1,recovery:30}:{} )};
+ const balanced=BALANCE_KITS[f.id];
+ let m:Move={...balanced.moves[id]};
  if(id==='special'){
   const partner=PARTNER_ATTACKS[fighterPartner(f)];
-  if(partner){const beat=partnerContactIndex(f.move?.id==='special'?f.move.t:0,style.specialFrames);m={...m,launch:0,low:false,...partner.hits[beat%partner.hits.length]};}
+  const beat=partnerContactIndex(f.move?.id==='special'?f.move.t:0,style.specialFrames);
+  if(partner)m={...m,launch:0,low:false,...partner.hits[beat%partner.hits.length]};
+  m.damage=specialContactDamage(balanced.template.specialDamage,style.specialFrames.length,beat);
  }
  const aim = f.move?.id === id ? f.move.aim : undefined;
  if(!m.projectile && id !== 'special' && id !== 'grab'){
@@ -238,7 +243,10 @@ export function act(s: CombatState, f: Fighter) {
             const withinRoute=f.combo===0||used<limit;
             const linkLight=f.move?.id==='light' && (id==='light'||id==='low');
             const canCancel = f.move && f.move.connected && (m.rank > MOVES[f.move.id].rank || linkLight) && f.move.id !== 'special' && id !== 'grab';
-            if (withinRoute && (!f.move || canCancel) && f.dash <= 8 && (id !== 'grab' || grounded(f)) && (id !== 'special' || f.pips === 3)) {
+            // A two-emitter cast is one volley. Another cast must wait until
+            // every shot from the previous volley has left the screen.
+            const ownShot=id==='bolt' && s.projectiles.some(p=>p.owner===s.fighters.indexOf(f)&&p.life>0);
+            if (!ownShot && withinRoute && (!f.move || canCancel) && f.dash <= 8 && (id !== 'grab' || grounded(f)) && (id !== 'special' || f.pips === 3)) {
                 if (id === 'special') {
                     f.pips = 0;
                     f.chargeEligible = false;

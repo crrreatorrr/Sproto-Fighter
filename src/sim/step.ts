@@ -249,7 +249,10 @@ export function step(s: CombatState, inputs: [
         const crouched = (other.input & A.down) && grounded(other);
         const dy=other.y-f.y;
         const vertical = attack.id === 'special' ? true : attack.id === 'grab' ? !s.throwState && grounded(f) && grounded(other) && other.stun === 0 && other.blockstun === 0 && other.throwInvuln===0 : attack.aim==='upForward' ? Math.abs(dy+10+Math.max(0,ahead)*.65)<65 : attack.aim==='up' ? dy>-190&&dy<45 : attack.aim==='down'&&!grounded(f) ? dy>-25&&dy<165 : Math.abs(dy)<85;
-        if (!endingKO && !specialImmune[1-i] && active && !m.projectile && (attack.id==='special' || (!isDown(other) && ahead >= -22 && ahead < m.range && vertical && !(crouched && m.air && grounded(f))))) {
+        // Specials keep their arena-wide vertical coverage and caster immunity,
+        // but their archetype's horizontal reach is now a real commitment.
+        const specialReach=Math.abs(other.x-f.x)-bodySpread(other.id)<m.range;
+        if (!endingKO && !specialImmune[1-i] && active && !m.projectile && (attack.id==='special' ? specialReach : (!isDown(other) && ahead >= -22 && ahead < m.range && vertical && !(crouched && m.air && grounded(f))))) {
             attack.hit = true;
             attack.connected = true;
             hits.push({ i, m, id: attack.id });

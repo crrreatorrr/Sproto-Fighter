@@ -4,6 +4,7 @@ import characterActions from './data/character-actions.json';
 import signatureProjectiles from './data/signature-projectiles.json';
 import { FLOOR, WALL } from './constants';
 import { Fighter } from './types';
+import { BalancedKit, buildBalancedKit } from './balance';
 /* SPROTOS TYPE BEGIN */
 export type SprotoFighterId = 'sproto102' | 'sproto215' | 'sproto282' | 'sproto313' | 'sproto651' | 'sproto704' | 'sproto763' | 'sproto818' | 'sproto831' | 'sproto832' | 'sproto834' | 'sproto837' | 'sproto865' | 'sproto943' | 'sproto999' | 'sproto1011' | 'sproto1093' | 'sproto1187' | 'sproto1335' | 'sproto1345' | 'sproto1414' | 'sproto1477' | 'sproto1499' | 'sproto1601' | 'sproto1625' | 'sproto1668' | 'sproto1815' | 'sproto1870' | 'sproto2010' | 'sproto2075' | 'sproto2101' | 'sproto2177' | 'sproto2210' | 'sproto2322' | 'sproto2344' | 'sproto2381' | 'sproto2531' | 'sproto2569' | 'sproto2616' | 'sproto2789' | 'sproto2884' | 'sproto3106' | 'sproto3152' | 'sproto3181' | 'sproto3215' | 'sproto3224' | 'sproto3235' | 'vaudream' | 'uncmasterflex' | 'gryph' | 'vitaliketh' | 'urmometh' | 'chaton' | 'loadthebags' | 'sisma' | 'captainhowdy' | 'sprotosales' | 'sprog' | 'jasper' | 'aaron' | 'brainsprot' | 'godmod3d' | 'sober' | 'nosmileclown' | 'olnoname' | 'greatcharly';
 /* SPROTOS TYPE END */
@@ -1161,3 +1162,17 @@ mrgoldrobe:{"forward": 45, "height": 62},
     guest07:{forward:65,height:79}, guest13:{forward:30,height:78}, crapto:{forward:39,height:80},
 };
 export const isCrouchingSpit = (f:Fighter) => isHorizontalSpit(f.id) && f.y>=FLOOR && f.move?.id==='bolt' && f.move.aim==='down';
+
+/** Effective kits are independent of generated intake-list tuning values. */
+export const BALANCE_KITS = Object.fromEntries(PLAYABLE_FIGHTERS.map(id=>{
+    const style=COMBAT_STYLES[id],balanced=buildBalancedKit(style.role,isPairedFighter(id),style.specialFrames.length,MOVES);
+    ROSTER[id].speed=balanced.template.speed;
+    ROSTER[id].jump=balanced.template.jump;
+    style.lightRange=balanced.moves.light.range;
+    style.heavy={...balanced.moves.heavy};
+    style.bolt={...balanced.moves.bolt};
+    style.projectile.speed=style.projectile.beamLength?0:balanced.projectileSpeed;
+    style.specialFrames=[...balanced.specialFrames];
+    style.special={...balanced.moves.special};
+    return [id,balanced];
+})) as Record<FighterId,BalancedKit>;
