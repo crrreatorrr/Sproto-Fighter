@@ -1,0 +1,284 @@
+{
+  "panel": {
+    "samples": 8,
+    "seed": 20261105,
+    "repeats": 2,
+    "skills": [
+      4,
+      7
+    ],
+    "fighters": 254,
+    "pairs": 2013,
+    "boutsPerCell": 16104,
+    "matchDepth": false
+  },
+  "cells": {
+    "A": {
+      "source": {
+        "commit": "db5508c5d1f3b94204328fa966f656e4a6b76d20",
+        "sourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+        "simVersion": "373448bdc043a0e8",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+        "cpuHasSkillParameter": true
+      },
+      "levels": [
+        {
+          "skill": 4,
+          "matches": 8052,
+          "outside35To65": 57,
+          "rawDraws": 5,
+          "rawDrawRate": 0.0006209637357178341,
+          "meanSeconds": 28.695413147872163,
+          "archetypes": {
+            "Footwork": 0.5811270801815431,
+            "Counter": 0.5393120393120393,
+            "Zoning": 0.36254152823920266,
+            "Pressure": 0.4766260162601626,
+            "Paired": 0.46033057851239667,
+            "Brawler": 0.390302066772655,
+            "Hover": 0.55,
+            "Weapon": 0.5
+          }
+        },
+        {
+          "skill": 7,
+          "matches": 8052,
+          "outside35To65": 40,
+          "rawDraws": 9,
+          "rawDrawRate": 0.0011177347242921013,
+          "meanSeconds": 34.351094966053985,
+          "archetypes": {
+            "Footwork": 0.5535579106737321,
+            "Counter": 0.5177914110429448,
+            "Zoning": 0.4027431421446384,
+            "Pressure": 0.49440488301119023,
+            "Paired": 0.46204620462046203,
+            "Brawler": 0.46190476190476193,
+            "Hover": 0.49166666666666664,
+            "Weapon": 0.49829931972789115
+          }
+        }
+      ],
+      "controlSource": "../report-2026-11-05-post-cpu-review.json.gz",
+      "selection": "Filter the existing full reviewed373 report onto these exact common8 directed keys; no duplicate large control report stored"
+    },
+    "B": {
+      "source": {
+        "commit": "b329efc630deb181ba94d66fea97907245afc873",
+        "sourceSha256": "a7f340e5e1bfc253206eb07d05d306893d15dffc209a84c805f4c2ec9550df71",
+        "simVersion": "dae133515ccb22a6",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+        "cpuHasSkillParameter": true
+      },
+      "levels": [
+        {
+          "skill": 4,
+          "matches": 8052,
+          "outside35To65": 42,
+          "rawDraws": 2,
+          "rawDrawRate": 0.00024838549428713363,
+          "meanSeconds": 27.871272147706573,
+          "archetypes": {
+            "Footwork": 0.5637291981845688,
+            "Counter": 0.5279312461632903,
+            "Zoning": 0.4007475083056478,
+            "Pressure": 0.4679878048780488,
+            "Paired": 0.4282178217821782,
+            "Brawler": 0.45548489666136727,
+            "Hover": 0.5916666666666667,
+            "Weapon": 0.5102040816326531
+          }
+        },
+        {
+          "skill": 7,
+          "matches": 8052,
+          "outside35To65": 49,
+          "rawDraws": 4,
+          "rawDrawRate": 0.0004967709885742673,
+          "meanSeconds": 30.490664845173043,
+          "archetypes": {
+            "Footwork": 0.5378357926598563,
+            "Counter": 0.5533742331288344,
+            "Zoning": 0.38870431893687707,
+            "Pressure": 0.491353001017294,
+            "Paired": 0.43564356435643564,
+            "Brawler": 0.4579365079365079,
+            "Hover": 0.525,
+            "Weapon": 0.5663265306122449
+          }
+        }
+      ],
+      "archive": "tracking-original.json.gz",
+      "rawBytes": 22773854,
+      "compressedBytes": 1222392,
+      "rawSha256": "7559167a42a65c3b97cdd5e81287c8f36b254fc97861e3117e50b1712057117f",
+      "compressedSha256": "cd502d88ac66632605c56159e6d36484ea0324f968286277d38e41ea47481338",
+      "pilotSha256": "435394cf7c4e46f7bb3b47b490d18dca19674854ae64e0e99271f2ec3ec966e6",
+      "expansion": [
+        {
+          "skill": 4,
+          "pilotBouts": 2032,
+          "checkpointReusedBouts": 0,
+          "newlySimulatedBouts": 6020,
+          "finalBouts": 8052
+        },
+        {
+          "skill": 7,
+          "pilotBouts": 2032,
+          "checkpointReusedBouts": 0,
+          "newlySimulatedBouts": 6020,
+          "finalBouts": 8052
+        }
+      ]
+    },
+    "E": {
+      "source": {
+        "commit": "cbbbaf7f8a3be4efe1d0b4ee17fee74d6ca32058",
+        "sourceSha256": "5902fe06f01222321fdf544cbd26a42798d5e4c286c40e854c542dbc05738df4",
+        "simVersion": "c662aee33095a523",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+        "cpuHasSkillParameter": true
+      },
+      "levels": [
+        {
+          "skill": 4,
+          "matches": 8052,
+          "outside35To65": 28,
+          "rawDraws": 4,
+          "rawDrawRate": 0.0004967709885742673,
+          "meanSeconds": 28.841637688359,
+          "archetypes": {
+            "Footwork": 0.5279878971255674,
+            "Counter": 0.5276412776412777,
+            "Zoning": 0.5099667774086378,
+            "Pressure": 0.4603658536585366,
+            "Paired": 0.4231404958677686,
+            "Brawler": 0.4093799682034976,
+            "Hover": 0.5,
+            "Weapon": 0.5391156462585034
+          }
+        },
+        {
+          "skill": 7,
+          "matches": 8052,
+          "outside35To65": 24,
+          "rawDraws": 10,
+          "rawDrawRate": 0.0012419274714356682,
+          "meanSeconds": 34.17611566484517,
+          "archetypes": {
+            "Footwork": 0.5009458948164964,
+            "Counter": 0.5085942295887047,
+            "Zoning": 0.5377906976744186,
+            "Pressure": 0.4954268292682927,
+            "Paired": 0.4430693069306931,
+            "Brawler": 0.46190476190476193,
+            "Hover": 0.4083333333333333,
+            "Weapon": 0.5221088435374149
+          }
+        }
+      ],
+      "archive": "reviewed-v3.json.gz",
+      "rawBytes": 22764048,
+      "compressedBytes": 1218073,
+      "rawSha256": "666c4255b3f71b7b304cb9bed02d759366a2d4e79a1abea2abd2497b75e2569c",
+      "compressedSha256": "85213a74eed239d289fbf0d4174e8c32db4873abcdd9bf5d0351f3ad03a42223",
+      "pilotSha256": "3c5aca67c6510b5aeaae6b43be361f2c55b818b444705e66e2c3ddd716005384",
+      "expansion": [
+        {
+          "skill": 4,
+          "pilotBouts": 2032,
+          "checkpointReusedBouts": 0,
+          "newlySimulatedBouts": 6020,
+          "finalBouts": 8052
+        },
+        {
+          "skill": 7,
+          "pilotBouts": 2032,
+          "checkpointReusedBouts": 0,
+          "newlySimulatedBouts": 6020,
+          "finalBouts": 8052
+        }
+      ]
+    },
+    "D": {
+      "source": {
+        "commit": "b702f62ded2625534af349018683e33d718747dd",
+        "sourceSha256": "8e6186983111ec4ffc0d41ab389481e0764305803364f1899ebf7d208c689092",
+        "simVersion": "4d75d73d27717592",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+        "cpuHasSkillParameter": true
+      },
+      "levels": [
+        {
+          "skill": 4,
+          "matches": 8052,
+          "outside35To65": 30,
+          "rawDraws": 4,
+          "rawDrawRate": 0.0004967709885742673,
+          "meanSeconds": 27.990586189766518,
+          "archetypes": {
+            "Footwork": 0.5132425274309497,
+            "Counter": 0.5248771498771498,
+            "Zoning": 0.5062292358803987,
+            "Pressure": 0.47815040650406504,
+            "Paired": 0.4249174917491749,
+            "Brawler": 0.4769475357710652,
+            "Hover": 0.575,
+            "Weapon": 0.47959183673469385
+          }
+        },
+        {
+          "skill": 7,
+          "matches": 8052,
+          "outside35To65": 28,
+          "rawDraws": 4,
+          "rawDrawRate": 0.0004967709885742673,
+          "meanSeconds": 30.75944278854115,
+          "archetypes": {
+            "Footwork": 0.4657715582450832,
+            "Counter": 0.5493865030674847,
+            "Zoning": 0.5519102990033222,
+            "Pressure": 0.47560975609756095,
+            "Paired": 0.43564356435643564,
+            "Brawler": 0.48333333333333334,
+            "Hover": 0.4083333333333333,
+            "Weapon": 0.5901360544217688
+          }
+        }
+      ],
+      "archive": "tracking-v3.json.gz",
+      "rawBytes": 22774522,
+      "compressedBytes": 1223340,
+      "rawSha256": "69c0eecf7f65c75726d49fe3a2e92171101177852ab8b9383599e46acd07177b",
+      "compressedSha256": "678c7f2f09a68d8650595329315850c97360915502314261c1b525358d7f1656",
+      "pilotSha256": "c9c6d49413b3e5a4f8773307ef4827869050ec34d4bdc9e48cd0e2364fb21ed0",
+      "expansion": [
+        {
+          "skill": 4,
+          "pilotBouts": 2032,
+          "checkpointReusedBouts": 0,
+          "newlySimulatedBouts": 6020,
+          "finalBouts": 8052
+        },
+        {
+          "skill": 7,
+          "pilotBouts": 2032,
+          "checkpointReusedBouts": 0,
+          "newlySimulatedBouts": 6020,
+          "finalBouts": 8052
+        }
+      ]
+    }
+  },
+  "keyHashes": {
+    "4": "aca5a5674a12b6c7e0d1f64a7bfba2befb8ccc363996cc412a893523ecc72933",
+    "7": "90f5545c9de8efe19da55a5f2e9a17e0fffb507b90d47aa7aab598abace0109b"
+  },
+  "helperSha256": "06a15847cfd5644ad3eb52be7e71c4cb574c0e030644dc71d40a0f9cec6187e2",
+  "sourceFactorAudit": {
+    "originalRolePackageIdenticalAcrossAandB": true,
+    "V3RolePackageIdenticalAcrossEandD": true,
+    "roleChangesTouchOnly": "src/sim/balance.ts",
+    "V3RolePackageSha256": "3429e7656af36689f50baaed551e2f42de090fc7c366bfbcf813322fe8a0365e"
+  }
+}

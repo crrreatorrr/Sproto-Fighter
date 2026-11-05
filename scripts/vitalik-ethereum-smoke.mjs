@@ -1,3 +1,6 @@
+// Phase 2/3: retimed template recovery/damage and 12% guarded chip; artwork contracts retained.
+import { assertProjectileKit } from './lib/gameplay-fixtures.mjs';
+// Phase 1 deliberately updates numeric combat expectations; authored art contracts remain pinned.
 import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -7,10 +10,11 @@ const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const load=async p=>import('data:text/javascript;base64,'+Buffer.from(compile(read(p))).toString('base64'));
 const core=await import('data:text/javascript;base64,'+Buffer.from(bundledCore()).toString('base64'));
+assertProjectileKit(core,'vitaliketh');
 const {A,FLOOR,COMBAT_STYLES,createState,step,getMove}=core;
 assert.equal(COMBAT_STYLES.vitaliketh.projectile.shape,'ethereum');
-assert.equal(COMBAT_STYLES.vitaliketh.projectile.speed,11);assert.equal(COMBAT_STYLES.vitaliketh.bolt.damage,57);assert.equal(COMBAT_STYLES.vitaliketh.bolt.startup,14);
-assert.deepEqual(COMBAT_STYLES.vitaliketh.specialFrames,[14,24,36,48]);
+assert.equal(COMBAT_STYLES.vitaliketh.projectile.speed,10);assert.equal(COMBAT_STYLES.vitaliketh.bolt.damage,45);assert.equal(COMBAT_STYLES.vitaliketh.bolt.startup,18);
+assert.deepEqual(COMBAT_STYLES.vitaliketh.specialFrames,[14,25,35,46]);
 let cases=0;
 for(const face of [-1,1])for(const air of [false,true])for(const direction of [0,A.up,A.down,A.left,A.right,A.up|A.left,A.up|A.right,A.down|A.left,A.down|A.right]){
  const s=createState('vitaliketh','cpu','rivet'),f=s.fighters[0];f.x=600;f.facing=face;s.fighters[1].x=face===1?1200:80;
@@ -19,14 +23,14 @@ for(const face of [-1,1])for(const air of [false,true])for(const direction of [0
  for(let t=0;t<40&&!p;t++){step(s,[0,0]);p=s.projectiles[0];}
  assert.ok(p);assert.equal(p.shape,'ethereum');assert.equal(p.owner,0);
  let dx=face,dy=0;if(direction&(A.up|A.down)){dy=direction&A.up?-1:1;dx=direction&A.left?-1:direction&A.right?1:0;}
- const length=Math.hypot(dx,dy)||1;assert.ok(Math.abs(p.vx-dx/length*11)<1e-9);assert.ok(Math.abs(p.vy-dy/length*11)<1e-9);
+ const length=Math.hypot(dx,dy)||1;assert.ok(Math.abs(p.vx-dx/length*10)<1e-9);assert.ok(Math.abs(p.vy-dy/length*10)<1e-9);
  assert.ok(Math.abs(p.x-f.x-face*100-p.vx)<1e-8,'hand-origin x');assert.ok(Math.abs(p.y-(f.y-100)-p.vy)<1e-8,'hand-origin y');
  if(!air)assert.equal(f.y,FLOOR);cases++;
 }
 for(const face of [-1,1])for(const blocked of [false,true]){
  const s=createState('vitaliketh','cpu','rivet'),f=s.fighters[0],b=s.fighters[1];f.x=600;f.facing=face;b.x=600+face*280;b.facing=-face;const away=face===1?A.right:A.left;
  step(s,[A.bolt,blocked?away:0]);for(let t=0;t<100;t++)step(s,[0,blocked?away:0]);
- assert.equal(b.hp,blocked?1000:943);assert.equal(f.move,null);assert.equal(s.projectiles.length,0);assert.equal(f.pips,0);
+ assert.equal(b.hp,1000-(blocked?Math.round(getMove(f,'bolt').damage*.12):getMove(f,'bolt').damage));assert.equal(f.move,null);assert.equal(s.projectiles.length,0);assert.equal(f.pips,0);
 }
 globalThis.Image=class{set src(value){this.srcValue=value;const b=readFileSync(new URL('../public'+value,import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);this.complete=true;queueMicrotask(()=>this.onload());}};
 const art=await load('src/powerArt.ts');await art.ensurePowerArt();

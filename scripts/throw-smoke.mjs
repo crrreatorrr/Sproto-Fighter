@@ -26,8 +26,8 @@ check('catch eases to authored grip, damages only at release, then fully recover
  const gap=THROW_GRIPS[a.id].hand[0]+THROW_GRIPS[b.id].torso[0];assert.equal(b.x-a.x,gap);
  until(s,()=>s.throwState.t===THROW_HOLD_FRAMES-1);const position=[b.x,b.y];
  tick(s,1,A.right|A.light,A.up|A.heavy);
- assert.deepEqual([b.x,b.y],position,'no release teleport');assert.equal(b.hp,885);assert.equal(b.vx,14);assert.equal(b.vy,-8);assert.equal(a.combo,1);assert.equal(s.throwState.phase,'release');
- until(s,()=>s.throwState===null);assert.equal(a.move,null);tick(s,100);assert.equal(b.hp,885);assert.equal(a.pips,0);assert.equal(b.reaction,null);assert.equal(b.stun,0);
+ assert.deepEqual([b.x,b.y],position,'no release teleport');assert.equal(b.hp,910);assert.equal(b.vx,14);assert.equal(b.vy,-8);assert.equal(a.combo,1);assert.equal(s.throwState.phase,'release');
+ until(s,()=>s.throwState===null);assert.equal(a.move,null);tick(s,100);assert.equal(b.hp,910);assert.equal(a.pips,0);assert.equal(b.reaction,null);assert.equal(b.stun,0);
 });
 for(const direction of ['forward','back','up','down'])check(`${direction} release, trajectory, knockdown and recovery in both facings`,()=>{
  for(const facing of [1,-1]){const s=fresh('rivet','bront',facing);catchTarget(s,button(direction,facing));until(s,()=>s.throwState.phase==='release');const [a,b]=s.fighters;
@@ -45,7 +45,7 @@ check('all roster pairs × 4 directions × 2 facings × 3 locations: bounded fin
   assert.ok(Math.abs((q.x-p.x)*f-gap)<1e-7,`${a}/${b}/${d}/${f}/${location} grip`);
   let crossed=false;
   for(let t=0;t<150;t++){tick(s);for(const x of s.fighters){assert.ok([x.x,x.y,x.vx,x.vy].every(Number.isFinite));assert.ok(x.x>=fighterWall(x.id)&&x.x<=WIDTH-fighterWall(x.id),`${a}/${b}/${d}/${f}/${location} tick ${t}: ${x.id} x=${x.x} bounds=${fighterWall(x.id)}..${WIDTH-fighterWall(x.id)}`);assert.ok(x.y<=FLOOR);}crossed ||= (q.x-p.x)*f<0;}
-  assert.equal(s.throwState,null);assert.equal(q.stun,0);assert.equal(q.reaction,null);assert.equal(q.hp,885);
+  assert.equal(s.throwState,null);assert.equal(q.stun,0);assert.equal(q.reaction,null);assert.equal(q.hp,910);
   // Corner-facing-away back throws hit the wall, so a side swap is impossible.
   if(d==='back' && location==='center')assert.ok(crossed,`${a}/${b} back must cross`);
   probes++;
@@ -53,7 +53,7 @@ check('all roster pairs × 4 directions × 2 facings × 3 locations: bounded fin
  assert.equal(probes,PLAYABLE_FIGHTERS.length**2*4*2*3);
 });
 check('guard loses to grab; misses and airborne/stunned targets do not latch',()=>{
- const s=fresh();s.mode='guard';catchTarget(s,A.grab,A.right);until(s,()=>s.throwState.phase==='release');assert.equal(s.fighters[1].hp,885);
+ const s=fresh();s.mode='guard';catchTarget(s,A.grab,A.right);until(s,()=>s.throwState.phase==='release');assert.equal(s.fighters[1].hp,910);
  for(const condition of ['far','air','stun']){const s=fresh();if(condition==='far')s.fighters[1].x=1000;if(condition==='air'){s.fighters[1].y=FLOOR-100;s.fighters[1].vy=-4;}if(condition==='stun')s.fighters[1].stun=12;tick(s,1,A.grab);tick(s,12);assert.equal(s.throwState,null);assert.equal(s.fighters[1].hp,1000);tick(s,60);assert.equal(s.fighters[0].move,null);}
 });
 check('projectile interrupts held attacker even while away is held, without teleport/damage to victim',()=>{
@@ -61,7 +61,7 @@ check('projectile interrupts held attacker even while away is held, without tele
  s.projectiles.push({owner:1,x:a.x,y:a.y-65,vx:0,vy:0,life:3,damage:55});const before=[b.x,b.y];tick(s,1,A.left);
  assert.equal(s.throwState,null);assert.equal(a.hp,945);assert.equal(a.move,null);assert.equal(b.hp,1000);assert.ok(Math.hypot(b.x-before[0],b.y-before[1])<25);tick(s,100);assert.equal(b.hp,1000);assert.equal(b.reaction,null);
 });
-check('held victim is protected from incidental projectiles',()=>{const s=fresh();catchTarget(s);until(s,()=>s.freeze===0);const b=s.fighters[1];s.projectiles.push({owner:0,x:b.x,y:b.y-65,vx:0,vy:0,life:3,damage:55});tick(s);assert.equal(b.hp,1000);assert.equal(s.throwState?.phase,'hold');until(s,()=>s.throwState?.phase==='release');assert.equal(b.hp,885);assert.equal(s.fighters[0].combo,1);});
+check('held victim is protected from incidental projectiles',()=>{const s=fresh();catchTarget(s);until(s,()=>s.freeze===0);const b=s.fighters[1];s.projectiles.push({owner:0,x:b.x,y:b.y-65,vx:0,vy:0,life:3,damage:55});tick(s);assert.equal(b.hp,1000);assert.equal(s.throwState?.phase,'hold');until(s,()=>s.throwState?.phase==='release');assert.equal(b.hp,910);assert.equal(s.fighters[0].combo,1);});
 check('simultaneous grabs break evenly; opposite directions cancel to forward',()=>{
  const s=fresh();tick(s,1,A.grab,A.grab);tick(s,10);assert.equal(s.throwState,null);for(const f of s.fighters){assert.equal(f.hp,1000);assert.equal(f.move,null);}
  for(const input of [A.left|A.right,A.up|A.down,A.up|A.down|A.left|A.right]){const s=fresh();catchTarget(s,input|A.grab);assert.equal(s.throwState.direction,'forward');}

@@ -1,0 +1,134 @@
+{
+  "source": {
+    "commit": "efb5829c1230dac84337ba0212d92a84a527563b",
+    "sourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+    "simVersion": "a4c7ddde49ec5a64",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "routeAndDifficultySha256": "89e7cfeabe66eb11f41902c9ef04cf8e6f08fe76c1c7d9be24d75df96de26f2f"
+  },
+  "config": {
+    "fighter": "highsproto",
+    "seed": 20261105,
+    "repeats": 4,
+    "maxFrames": 3600,
+    "encounterCount": 247
+  },
+  "referencePolicyVersion": "reference-v2-persistent-delay18",
+  "referencePolicyFileSha256": "2aada800cc5ac2e80c41942a14db8a9a6bb8f541a8a9bc4cbdf5d640a364f4ff",
+  "files": {
+    "curve-2026-11-05-I-final-route.json.gz": {
+      "rawSha256": "746c13fbf75c4dac6dadaa3f1a6f04fabd3e1e6a8fd7950647e7537aa15d5ef6",
+      "compressedSha256": "2d79ff092674db940207751ce88f2c9ca78266b52ab0319ed10ff5e8ad64a765",
+      "rawBytes": 3745982,
+      "compressedBytes": 157898
+    },
+    "comparison-2026-11-05-I-final-route-vs-F.json.gz": {
+      "rawSha256": "bba673bd973cd96e5ff69722ea49ba3e640cd251f13c7586be822b86d99442bb",
+      "compressedSha256": "b73ca8d9185d763dfb42db8de6c60641fd2d7acf20c963de85660ab59bf93410",
+      "rawBytes": 3950,
+      "compressedBytes": 1305
+    }
+  },
+  "comparisonHelperSha256": "052ca063c902a44db855dcd6d43058affbb10fea3f7ad9b807af6c7625f45121",
+  "routeTuplesIdenticalToF": true,
+  "routeTupleSha256": "c60c938d3de35fb1d9689743022cdde164c1c735c1248900be13f2e3e3a62b87",
+  "referenceFighterStatsIdenticalToF": true,
+  "initialSeedRecordsChecked": 3988,
+  "commonReachedBoutKeys": 1994,
+  "summary": {
+    "F": {
+      "encounters": 247,
+      "pairedSeatTrials": 1976,
+      "regularBouts": 1994,
+      "outcomes": {
+        "cpu-win": 202,
+        "reference-win": 1774,
+        "draw": 0
+      },
+      "naturalTrials": 988,
+      "naturalOutcomes": {
+        "cpu-win": 98,
+        "reference-win": 890,
+        "draw": 0
+      },
+      "first": {
+        "trials": 8,
+        "independentRepetitions": 4,
+        "cpuWins": 0,
+        "referenceWins": 8,
+        "rawDraws": 0,
+        "cpuDecidedWinRate": 0,
+        "cpuDecidedWilson95": [
+          0,
+          0.32440756488388023
+        ]
+      },
+      "finale": {
+        "trials": 8,
+        "independentRepetitions": 4,
+        "cpuWins": 6,
+        "referenceWins": 2,
+        "rawDraws": 0,
+        "cpuDecidedWinRate": 0.75,
+        "cpuDecidedWilson95": [
+          0.40927543031016883,
+          0.9285207872478909
+        ]
+      }
+    },
+    "I": {
+      "encounters": 247,
+      "pairedSeatTrials": 1976,
+      "regularBouts": 1994,
+      "outcomes": {
+        "cpu-win": 218,
+        "reference-win": 1758,
+        "draw": 0
+      },
+      "naturalTrials": 988,
+      "naturalOutcomes": {
+        "cpu-win": 109,
+        "reference-win": 879,
+        "draw": 0
+      },
+      "first": {
+        "trials": 8,
+        "independentRepetitions": 4,
+        "cpuWins": 0,
+        "referenceWins": 8,
+        "rawDraws": 0,
+        "cpuDecidedWinRate": 0,
+        "cpuDecidedWilson95": [
+          0,
+          0.32440756488388023
+        ]
+      },
+      "finale": {
+        "trials": 8,
+        "independentRepetitions": 4,
+        "cpuWins": 6,
+        "referenceWins": 2,
+        "rawDraws": 0,
+        "cpuDecidedWinRate": 0.75,
+        "cpuDecidedWilson95": [
+          0.40927543031016883,
+          0.9285207872478909
+        ]
+      }
+    }
+  },
+  "naturalSwitches": {
+    "reference-win \u2192 reference-win": 876,
+    "reference-win \u2192 cpu-win": 14,
+    "cpu-win \u2192 cpu-win": 95,
+    "cpu-win \u2192 reference-win": 3
+  },
+  "IreverseOutcomeAgreement": 980,
+  "limitations": [
+    "Reverse seats are dependent; four independent seed pairs per encounter",
+    "All reached wave streams independently rederived and common reached keys matched; second-wave counts may differ due first-wave outcomes",
+    "Pooled native Wilson intervals optimistic",
+    "Fixed reference is not human calibrated",
+    "No per-encounter smoothness or story target acceptance"
+  ]
+}

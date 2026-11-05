@@ -1,4 +1,5 @@
 import { bundledCore } from './lib/load.mjs';
+import { assertProjectileKit } from './lib/gameplay-fixtures.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
@@ -13,7 +14,8 @@ const profiles=JSON.parse(read('art/identity-actions/profiles.json'));
 // Projectiles deliberately redesigned after this audit, each covered by its own smoke.
 const LATER_REDESIGNED=new Set(['mox']); // Yannix mind beam: scripts/yannix-smoke.mjs
 const preserved=new Map(audit.filter(r=>!profiles[r.id].replaceRanged&&!LATER_REDESIGNED.has(r.id)).map(r=>[r.id,r.kit.projectile]));
-for(const[id,p]of preserved)assert.deepEqual(core.COMBAT_STYLES[id].projectile,p,id+' signature projectile preserved');
+// Speed is deliberately template-normalized; historical shape, origin and trajectory stay pinned.
+for(const[id,p]of preserved){assertProjectileKit(core,id);assert.deepEqual({...core.COMBAT_STYLES[id].projectile,speed:p.speed},p,id+' signature projectile geometry preserved');}
 assert.equal(core.COMBAT_STYLES.sproto651.projectile.shape,'painting');
 assert.equal(ev.entranceFrame(51),7);assert.equal(ev.deathFrame(95,false),15);assert.equal(ev.deathFrame(0,true),8);assert.equal(ev.deathFrame(95,true),15);
 globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>structuredClone(manifest)});

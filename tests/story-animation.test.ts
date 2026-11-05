@@ -4,7 +4,7 @@ import ts from 'typescript';
 import {createStoryAnimation,storyAnimationPlan,type StoryClip} from '../src/storyAnimation';
 import manifest from '../src/storyAnimationManifest.json';
 import {startStoryBoss} from '../src/storyBoss';
-import {createState} from '../src/core';
+import {createState,nextMatchRound} from '../src/core';
 import {createRoundPresentation,advanceRoundPresentation,beginRoundOutro} from '../src/animationEvents';
 
 const requests:string[]=[];
@@ -37,17 +37,18 @@ async function harness(id:string,win=0){
     const state=createState('highsproto','cpu',id as any),presentation=createRoundPresentation();presentation.phase='fight';
     const calls:string[]=[],frames:number[][]=[];
     const run=new Function('deps',`
-        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss}=deps;
+        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound}=deps;
         let storyBoss=null;const bossStarts=[];const stepStoryBoss=()=>{state.winner=win;};
         const versus={advance:()=>false};const countdown={advance:()=>false,show:()=>calls.push('countdown')};
         const held=new Set();let queued=0,queued2=0,padNeedsRelease=false;
+        const training=null,depthRoundStarts=[];
         const online=null,mode='cpu',qaPanel=null,qaRecord=()=>{},qaStopAtOutro=()=>{};
-        const cpuInput=()=>0,playRetainCallout=()=>{},reportRound=()=>calls.push('report');
+        const matchCpuSkill=4,cpuInput=()=>0,playRetainCallout=()=>{},reportRound=()=>calls.push('report');
         const story={finishMatch:()=>calls.push('save'),onRoundEnd:()=>{calls.push('result');return true;}};
         const step=()=>{state.winner=win;};
         ${compiled}
         return advanceRoundFrame;
-    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss});
+    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound});
     return {animation,state,presentation,calls,frames,run,endBlackout(){for(let i=0;i<90;i++)run(0);}};
 }
 

@@ -45,7 +45,7 @@ for(const id of ids){
  for(const face of [-1,1])for(const direction of [0,A.up,A.down,face===1?A.left:A.right]){
   const s=createState(id,'cpu','rivet'),f=s.fighters[0];f.x=640;s.fighters[1].x=640+face*(60+core.bodySpread(id));f.facing=face;s.fighters[1].facing=-face;step(s,[A.grab|direction,0]);let held=false;
   for(let t=0;t<180;t++){held||=s.throwState?.phase==='hold';step(s,[0,0]);for(const b of s.fighters)assert.ok([b.x,b.y,b.hp,b.vx,b.vy].every(Number.isFinite));}
-  assert.ok(held,id+' throw catches');assert.equal(s.throwState,null);assert.equal(s.fighters[1].hp,885);checks++;
+  assert.ok(held,id+' throw catches');assert.equal(s.throwState,null);assert.equal(s.fighters[1].hp,910);checks++;
  }
  const s=createState(id,'cpu','rivet'),f=s.fighters[0];f.pips=3;s.fighters[1].x=520;step(s,[A.special,0]);let combo=0;
  for(let t=0;t<220;t++){combo=Math.max(combo,f.combo);step(s,[0,0]);}

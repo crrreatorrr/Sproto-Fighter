@@ -1,0 +1,2214 @@
+{
+  "productionCommit": "a146a8d90",
+  "measurementSource": {
+    "commit": "6f768d2e6f292e71f707494bb7d9ee5078b61518",
+    "sourceSha256": "e151e77bbf53dc08bb3241921ffda7fee57615454e0b18a62be57dc7f4f20377",
+    "simVersion": "7d0ce00ef52b567a",
+    "harnessSha256": "45b19a0663cc4436f47de70b05e4bf3108b1206f34ded76f84c9da47b330bbec",
+    "cpuHasSkillParameter": true
+  },
+  "files": {
+    "report-2026-11-05-final-calibration.json.gz": {
+      "rawBytes": 46675008,
+      "compressedBytes": 2393522,
+      "rawSha256": "c25f07cb6ff67a8e8041d1c686001d13db7b5c32444e3899262d6932851dcc47",
+      "compressedSha256": "11265f91d236891cdeda42b86e2d8c4db56fc854e27d6bbf4ebce0c098012f90"
+    },
+    "curve-2026-11-05-final-calibration.json.gz": {
+      "rawBytes": 3751596,
+      "compressedBytes": 150247,
+      "rawSha256": "7183b1046e21d7f01091c97acd4a779467911e009b248c97e8255b72f8981f65",
+      "compressedSha256": "ab3f61a3b7746a932d71b156461fda473dbb3a5bd4339a2e8d12d57e384ce9f8"
+    },
+    "report-2026-11-05-final-match-depth.json.gz": {
+      "rawBytes": 488956,
+      "compressedBytes": 26423,
+      "rawSha256": "0b672896209b6651edc0206dc55b34b81eb0ae0ffac0322ce187b3de709c142a",
+      "compressedSha256": "f4c8b8a44a0d6c8a603767d5eaffc3cc6a5e37ec0836f7dd4dcd570240748e7c"
+    }
+  },
+  "levels": [
+    {
+      "skill": 4,
+      "matches": 16736,
+      "outside35To65": 107,
+      "outsideFighters": [
+        {
+          "fighter": "agentsproto",
+          "archetype": "Brawler",
+          "rate": 0.11538461538461539,
+          "matches": 104,
+          "wins": 12,
+          "losses": 92,
+          "draws": 0
+        },
+        {
+          "fighter": "aktree",
+          "archetype": "Zoning",
+          "rate": 0.29464285714285715,
+          "matches": 112,
+          "wins": 33,
+          "losses": 79,
+          "draws": 0
+        },
+        {
+          "fighter": "azkarah",
+          "archetype": "Zoning",
+          "rate": 0.34782608695652173,
+          "matches": 92,
+          "wins": 32,
+          "losses": 60,
+          "draws": 0
+        },
+        {
+          "fighter": "bgbadger",
+          "archetype": "Zoning",
+          "rate": 0.20833333333333334,
+          "matches": 96,
+          "wins": 20,
+          "losses": 76,
+          "draws": 0
+        },
+        {
+          "fighter": "bimba",
+          "archetype": "Footwork",
+          "rate": 0.6571428571428571,
+          "matches": 140,
+          "wins": 92,
+          "losses": 48,
+          "draws": 0
+        },
+        {
+          "fighter": "bitcoind1rk",
+          "archetype": "Footwork",
+          "rate": 0.6951219512195121,
+          "matches": 164,
+          "wins": 114,
+          "losses": 50,
+          "draws": 0
+        },
+        {
+          "fighter": "brainsprot",
+          "archetype": "Footwork",
+          "rate": 0.7727272727272727,
+          "matches": 132,
+          "wins": 102,
+          "losses": 30,
+          "draws": 0
+        },
+        {
+          "fighter": "cam",
+          "archetype": "Brawler",
+          "rate": 0.24242424242424243,
+          "matches": 132,
+          "wins": 32,
+          "losses": 100,
+          "draws": 0
+        },
+        {
+          "fighter": "captain",
+          "archetype": "Zoning",
+          "rate": 0.32432432432432434,
+          "matches": 148,
+          "wins": 48,
+          "losses": 100,
+          "draws": 0
+        },
+        {
+          "fighter": "captainhowdy",
+          "archetype": "Footwork",
+          "rate": 0.7419354838709677,
+          "matches": 124,
+          "wins": 92,
+          "losses": 32,
+          "draws": 0
+        },
+        {
+          "fighter": "ceo",
+          "archetype": "Zoning",
+          "rate": 0.32142857142857145,
+          "matches": 112,
+          "wins": 36,
+          "losses": 76,
+          "draws": 0
+        },
+        {
+          "fighter": "chaton",
+          "archetype": "Footwork",
+          "rate": 0.6833333333333333,
+          "matches": 120,
+          "wins": 82,
+          "losses": 38,
+          "draws": 0
+        },
+        {
+          "fighter": "chonky",
+          "archetype": "Footwork",
+          "rate": 0.8026315789473685,
+          "matches": 152,
+          "wins": 122,
+          "losses": 30,
+          "draws": 0
+        },
+        {
+          "fighter": "clobrwn",
+          "archetype": "Footwork",
+          "rate": 0.6527777777777778,
+          "matches": 144,
+          "wins": 94,
+          "losses": 50,
+          "draws": 0
+        },
+        {
+          "fighter": "contresens",
+          "archetype": "Zoning",
+          "rate": 0.18518518518518517,
+          "matches": 108,
+          "wins": 20,
+          "losses": 88,
+          "draws": 0
+        },
+        {
+          "fighter": "crapto",
+          "archetype": "Zoning",
+          "rate": 0.29545454545454547,
+          "matches": 132,
+          "wins": 39,
+          "losses": 93,
+          "draws": 0
+        },
+        {
+          "fighter": "crumpleii",
+          "archetype": "Brawler",
+          "rate": 0.25,
+          "matches": 120,
+          "wins": 30,
+          "losses": 90,
+          "draws": 0
+        },
+        {
+          "fighter": "cryptobartender",
+          "archetype": "Zoning",
+          "rate": 0.2571428571428571,
+          "matches": 140,
+          "wins": 36,
+          "losses": 104,
+          "draws": 0
+        },
+        {
+          "fighter": "degenpress",
+          "archetype": "Zoning",
+          "rate": 0.28125,
+          "matches": 128,
+          "wins": 36,
+          "losses": 92,
+          "draws": 0
+        },
+        {
+          "fighter": "dumpstar",
+          "archetype": "Brawler",
+          "rate": 0.6785714285714286,
+          "matches": 112,
+          "wins": 76,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "durlan",
+          "archetype": "Footwork",
+          "rate": 0.66875,
+          "matches": 160,
+          "wins": 107,
+          "losses": 53,
+          "draws": 0
+        },
+        {
+          "fighter": "emix",
+          "archetype": "Footwork",
+          "rate": 0.7258064516129032,
+          "matches": 124,
+          "wins": 90,
+          "losses": 34,
+          "draws": 0
+        },
+        {
+          "fighter": "familywagon",
+          "archetype": "Brawler",
+          "rate": 0.32894736842105265,
+          "matches": 152,
+          "wins": 50,
+          "losses": 102,
+          "draws": 0
+        },
+        {
+          "fighter": "felixsprotoarc",
+          "archetype": "Zoning",
+          "rate": 0.2661290322580645,
+          "matches": 124,
+          "wins": 33,
+          "losses": 91,
+          "draws": 0
+        },
+        {
+          "fighter": "forchaneth",
+          "archetype": "Footwork",
+          "rate": 0.7222222222222222,
+          "matches": 108,
+          "wins": 78,
+          "losses": 30,
+          "draws": 0
+        },
+        {
+          "fighter": "gluttony",
+          "archetype": "Zoning",
+          "rate": 0.3357142857142857,
+          "matches": 140,
+          "wins": 47,
+          "losses": 93,
+          "draws": 0
+        },
+        {
+          "fighter": "gpm",
+          "archetype": "Brawler",
+          "rate": 0.2647058823529412,
+          "matches": 136,
+          "wins": 36,
+          "losses": 100,
+          "draws": 0
+        },
+        {
+          "fighter": "greatcharly",
+          "archetype": "Footwork",
+          "rate": 0.6617647058823529,
+          "matches": 136,
+          "wins": 90,
+          "losses": 46,
+          "draws": 0
+        },
+        {
+          "fighter": "guest07",
+          "archetype": "Pressure",
+          "rate": 0.6554054054054054,
+          "matches": 148,
+          "wins": 97,
+          "losses": 51,
+          "draws": 0
+        },
+        {
+          "fighter": "guest12",
+          "archetype": "Zoning",
+          "rate": 0.3235294117647059,
+          "matches": 136,
+          "wins": 44,
+          "losses": 92,
+          "draws": 0
+        },
+        {
+          "fighter": "guest13",
+          "archetype": "Counter",
+          "rate": 0.6774193548387096,
+          "matches": 124,
+          "wins": 84,
+          "losses": 40,
+          "draws": 0
+        },
+        {
+          "fighter": "hdizzy",
+          "archetype": "Zoning",
+          "rate": 0.22580645161290322,
+          "matches": 124,
+          "wins": 28,
+          "losses": 96,
+          "draws": 0
+        },
+        {
+          "fighter": "highsproto",
+          "archetype": "Zoning",
+          "rate": 0.1111111111111111,
+          "matches": 144,
+          "wins": 16,
+          "losses": 128,
+          "draws": 0
+        },
+        {
+          "fighter": "homosproto",
+          "archetype": "Footwork",
+          "rate": 0.69375,
+          "matches": 160,
+          "wins": 111,
+          "losses": 49,
+          "draws": 0
+        },
+        {
+          "fighter": "indiapolice",
+          "archetype": "Counter",
+          "rate": 0.28378378378378377,
+          "matches": 148,
+          "wins": 42,
+          "losses": 106,
+          "draws": 0
+        },
+        {
+          "fighter": "infinitysplitter",
+          "archetype": "Footwork",
+          "rate": 0.7567567567567568,
+          "matches": 148,
+          "wins": 112,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "isaac",
+          "archetype": "Footwork",
+          "rate": 0.7638888888888888,
+          "matches": 144,
+          "wins": 110,
+          "losses": 34,
+          "draws": 0
+        },
+        {
+          "fighter": "jameskaminski",
+          "archetype": "Pressure",
+          "rate": 0.27941176470588236,
+          "matches": 136,
+          "wins": 38,
+          "losses": 98,
+          "draws": 0
+        },
+        {
+          "fighter": "janitor",
+          "archetype": "Brawler",
+          "rate": 0.3333333333333333,
+          "matches": 156,
+          "wins": 52,
+          "losses": 104,
+          "draws": 0
+        },
+        {
+          "fighter": "jasper",
+          "archetype": "Footwork",
+          "rate": 0.7045454545454546,
+          "matches": 132,
+          "wins": 93,
+          "losses": 39,
+          "draws": 0
+        },
+        {
+          "fighter": "johnson",
+          "archetype": "Brawler",
+          "rate": 0.2835820895522388,
+          "matches": 136,
+          "wins": 38,
+          "losses": 96,
+          "draws": 2
+        },
+        {
+          "fighter": "laserbach",
+          "archetype": "Pressure",
+          "rate": 0.3392857142857143,
+          "matches": 112,
+          "wins": 38,
+          "losses": 74,
+          "draws": 0
+        },
+        {
+          "fighter": "leviosa",
+          "archetype": "Footwork",
+          "rate": 0.7,
+          "matches": 120,
+          "wins": 84,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "lowernipple",
+          "archetype": "Zoning",
+          "rate": 0.325,
+          "matches": 160,
+          "wins": 52,
+          "losses": 108,
+          "draws": 0
+        },
+        {
+          "fighter": "marfrog",
+          "archetype": "Footwork",
+          "rate": 0.7878787878787878,
+          "matches": 132,
+          "wins": 104,
+          "losses": 28,
+          "draws": 0
+        },
+        {
+          "fighter": "maxbiggums",
+          "archetype": "Brawler",
+          "rate": 0.3275862068965517,
+          "matches": 116,
+          "wins": 38,
+          "losses": 78,
+          "draws": 0
+        },
+        {
+          "fighter": "melo",
+          "archetype": "Weapon",
+          "rate": 0.3026315789473684,
+          "matches": 152,
+          "wins": 46,
+          "losses": 106,
+          "draws": 0
+        },
+        {
+          "fighter": "mikemike",
+          "archetype": "Brawler",
+          "rate": 0.27941176470588236,
+          "matches": 136,
+          "wins": 38,
+          "losses": 98,
+          "draws": 0
+        },
+        {
+          "fighter": "moonshiller",
+          "archetype": "Brawler",
+          "rate": 0.22580645161290322,
+          "matches": 124,
+          "wins": 28,
+          "losses": 96,
+          "draws": 0
+        },
+        {
+          "fighter": "np",
+          "archetype": "Footwork",
+          "rate": 0.6986301369863014,
+          "matches": 148,
+          "wins": 102,
+          "losses": 44,
+          "draws": 2
+        },
+        {
+          "fighter": "pilgrim",
+          "archetype": "Brawler",
+          "rate": 0.296875,
+          "matches": 128,
+          "wins": 38,
+          "losses": 90,
+          "draws": 0
+        },
+        {
+          "fighter": "pirate",
+          "archetype": "Footwork",
+          "rate": 0.7058823529411765,
+          "matches": 136,
+          "wins": 96,
+          "losses": 40,
+          "draws": 0
+        },
+        {
+          "fighter": "pongohpos10i",
+          "archetype": "Zoning",
+          "rate": 0.16666666666666666,
+          "matches": 168,
+          "wins": 28,
+          "losses": 140,
+          "draws": 0
+        },
+        {
+          "fighter": "pr0lificeth",
+          "archetype": "Zoning",
+          "rate": 0.234375,
+          "matches": 128,
+          "wins": 30,
+          "losses": 98,
+          "draws": 0
+        },
+        {
+          "fighter": "prim",
+          "archetype": "Zoning",
+          "rate": 0.2962962962962963,
+          "matches": 108,
+          "wins": 32,
+          "losses": 76,
+          "draws": 0
+        },
+        {
+          "fighter": "rektina",
+          "archetype": "Footwork",
+          "rate": 0.7954545454545454,
+          "matches": 88,
+          "wins": 70,
+          "losses": 18,
+          "draws": 0
+        },
+        {
+          "fighter": "reverend",
+          "archetype": "Footwork",
+          "rate": 0.7258064516129032,
+          "matches": 124,
+          "wins": 90,
+          "losses": 34,
+          "draws": 0
+        },
+        {
+          "fighter": "rlarsson",
+          "archetype": "Footwork",
+          "rate": 0.6805555555555556,
+          "matches": 144,
+          "wins": 98,
+          "losses": 46,
+          "draws": 0
+        },
+        {
+          "fighter": "saburdo",
+          "archetype": "Pressure",
+          "rate": 0.3353658536585366,
+          "matches": 164,
+          "wins": 55,
+          "losses": 109,
+          "draws": 0
+        },
+        {
+          "fighter": "samixsproto",
+          "archetype": "Zoning",
+          "rate": 0.20535714285714285,
+          "matches": 112,
+          "wins": 23,
+          "losses": 89,
+          "draws": 0
+        },
+        {
+          "fighter": "sidelinereferee",
+          "archetype": "Zoning",
+          "rate": 0.14864864864864866,
+          "matches": 148,
+          "wins": 22,
+          "losses": 126,
+          "draws": 0
+        },
+        {
+          "fighter": "sirdidit",
+          "archetype": "Footwork",
+          "rate": 0.6875,
+          "matches": 128,
+          "wins": 88,
+          "losses": 40,
+          "draws": 0
+        },
+        {
+          "fighter": "sproteth",
+          "archetype": "Footwork",
+          "rate": 0.7575757575757576,
+          "matches": 132,
+          "wins": 100,
+          "losses": 32,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto102",
+          "archetype": "Footwork",
+          "rate": 0.7205882352941176,
+          "matches": 136,
+          "wins": 98,
+          "losses": 38,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1093",
+          "archetype": "Footwork",
+          "rate": 0.7058823529411765,
+          "matches": 136,
+          "wins": 96,
+          "losses": 40,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1187",
+          "archetype": "Footwork",
+          "rate": 0.7152777777777778,
+          "matches": 144,
+          "wins": 103,
+          "losses": 41,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1335",
+          "archetype": "Footwork",
+          "rate": 0.7903225806451613,
+          "matches": 124,
+          "wins": 98,
+          "losses": 26,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1345",
+          "archetype": "Footwork",
+          "rate": 0.7258064516129032,
+          "matches": 124,
+          "wins": 90,
+          "losses": 34,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1477",
+          "archetype": "Footwork",
+          "rate": 0.6527777777777778,
+          "matches": 144,
+          "wins": 94,
+          "losses": 50,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1601",
+          "archetype": "Zoning",
+          "rate": 0.2413793103448276,
+          "matches": 116,
+          "wins": 28,
+          "losses": 88,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1668",
+          "archetype": "Footwork",
+          "rate": 0.6842105263157895,
+          "matches": 152,
+          "wins": 104,
+          "losses": 48,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1815",
+          "archetype": "Weapon",
+          "rate": 0.2916666666666667,
+          "matches": 144,
+          "wins": 42,
+          "losses": 102,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2101",
+          "archetype": "Footwork",
+          "rate": 0.7,
+          "matches": 120,
+          "wins": 84,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto215",
+          "archetype": "Footwork",
+          "rate": 0.8035714285714286,
+          "matches": 112,
+          "wins": 90,
+          "losses": 22,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2177",
+          "archetype": "Footwork",
+          "rate": 0.6875,
+          "matches": 160,
+          "wins": 110,
+          "losses": 50,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2322",
+          "archetype": "Footwork",
+          "rate": 0.7,
+          "matches": 140,
+          "wins": 98,
+          "losses": 42,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2569",
+          "archetype": "Footwork",
+          "rate": 0.6935483870967742,
+          "matches": 124,
+          "wins": 86,
+          "losses": 38,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2616",
+          "archetype": "Weapon",
+          "rate": 0.18333333333333332,
+          "matches": 120,
+          "wins": 22,
+          "losses": 98,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2789",
+          "archetype": "Weapon",
+          "rate": 0.2638888888888889,
+          "matches": 144,
+          "wins": 38,
+          "losses": 106,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2884",
+          "archetype": "Footwork",
+          "rate": 0.66,
+          "matches": 100,
+          "wins": 66,
+          "losses": 34,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto3106",
+          "archetype": "Zoning",
+          "rate": 0.25675675675675674,
+          "matches": 148,
+          "wins": 38,
+          "losses": 110,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto313",
+          "archetype": "Footwork",
+          "rate": 0.717741935483871,
+          "matches": 124,
+          "wins": 89,
+          "losses": 35,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto3152",
+          "archetype": "Zoning",
+          "rate": 0.3194444444444444,
+          "matches": 144,
+          "wins": 46,
+          "losses": 98,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto3215",
+          "archetype": "Footwork",
+          "rate": 0.671875,
+          "matches": 128,
+          "wins": 86,
+          "losses": 42,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto651",
+          "archetype": "Footwork",
+          "rate": 0.7586206896551724,
+          "matches": 116,
+          "wins": 88,
+          "losses": 28,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto763",
+          "archetype": "Footwork",
+          "rate": 0.7794117647058824,
+          "matches": 136,
+          "wins": 106,
+          "losses": 30,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto818",
+          "archetype": "Footwork",
+          "rate": 0.6590909090909091,
+          "matches": 132,
+          "wins": 87,
+          "losses": 45,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto831",
+          "archetype": "Footwork",
+          "rate": 0.7884615384615384,
+          "matches": 104,
+          "wins": 82,
+          "losses": 22,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto834",
+          "archetype": "Footwork",
+          "rate": 0.72,
+          "matches": 100,
+          "wins": 72,
+          "losses": 28,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto837",
+          "archetype": "Footwork",
+          "rate": 0.7647058823529411,
+          "matches": 136,
+          "wins": 104,
+          "losses": 32,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto865",
+          "archetype": "Footwork",
+          "rate": 0.75,
+          "matches": 112,
+          "wins": 84,
+          "losses": 28,
+          "draws": 0
+        },
+        {
+          "fighter": "sprotolg",
+          "archetype": "Zoning",
+          "rate": 0.2647058823529412,
+          "matches": 136,
+          "wins": 36,
+          "losses": 100,
+          "draws": 0
+        },
+        {
+          "fighter": "sprotomidnightfx",
+          "archetype": "Pressure",
+          "rate": 0.3,
+          "matches": 140,
+          "wins": 42,
+          "losses": 98,
+          "draws": 0
+        },
+        {
+          "fighter": "sprotopia",
+          "archetype": "Zoning",
+          "rate": 0.2661290322580645,
+          "matches": 124,
+          "wins": 33,
+          "losses": 91,
+          "draws": 0
+        },
+        {
+          "fighter": "sprotopotamus",
+          "archetype": "Brawler",
+          "rate": 0.32432432432432434,
+          "matches": 148,
+          "wins": 48,
+          "losses": 100,
+          "draws": 0
+        },
+        {
+          "fighter": "sprotosales",
+          "archetype": "Footwork",
+          "rate": 0.6935483870967742,
+          "matches": 124,
+          "wins": 86,
+          "losses": 38,
+          "draws": 0
+        },
+        {
+          "fighter": "sprotosurvivor",
+          "archetype": "Zoning",
+          "rate": 0.125,
+          "matches": 112,
+          "wins": 14,
+          "losses": 98,
+          "draws": 0
+        },
+        {
+          "fighter": "spruto",
+          "archetype": "Footwork",
+          "rate": 0.7314814814814815,
+          "matches": 108,
+          "wins": 79,
+          "losses": 29,
+          "draws": 0
+        },
+        {
+          "fighter": "spunow",
+          "archetype": "Footwork",
+          "rate": 0.8125,
+          "matches": 96,
+          "wins": 78,
+          "losses": 18,
+          "draws": 0
+        },
+        {
+          "fighter": "tdeth",
+          "archetype": "Pressure",
+          "rate": 0.6515151515151515,
+          "matches": 132,
+          "wins": 86,
+          "losses": 46,
+          "draws": 0
+        },
+        {
+          "fighter": "theo",
+          "archetype": "Zoning",
+          "rate": 0.29285714285714287,
+          "matches": 140,
+          "wins": 41,
+          "losses": 99,
+          "draws": 0
+        },
+        {
+          "fighter": "thesprotowholivedeth",
+          "archetype": "Zoning",
+          "rate": 0.2702702702702703,
+          "matches": 148,
+          "wins": 40,
+          "losses": 108,
+          "draws": 0
+        },
+        {
+          "fighter": "uncmasterflex",
+          "archetype": "Footwork",
+          "rate": 0.7,
+          "matches": 120,
+          "wins": 84,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "urmometh",
+          "archetype": "Footwork",
+          "rate": 0.7578125,
+          "matches": 128,
+          "wins": 97,
+          "losses": 31,
+          "draws": 0
+        },
+        {
+          "fighter": "usedtowels",
+          "archetype": "Counter",
+          "rate": 0.2948717948717949,
+          "matches": 156,
+          "wins": 46,
+          "losses": 110,
+          "draws": 0
+        },
+        {
+          "fighter": "xalt",
+          "archetype": "Zoning",
+          "rate": 0.2459016393442623,
+          "matches": 124,
+          "wins": 30,
+          "losses": 92,
+          "draws": 2
+        },
+        {
+          "fighter": "xav",
+          "archetype": "Footwork",
+          "rate": 0.7129629629629629,
+          "matches": 108,
+          "wins": 77,
+          "losses": 31,
+          "draws": 0
+        }
+      ],
+      "canonicalArchetypes": {
+        "Footwork": {
+          "fighters": 85,
+          "matches": 11092,
+          "wins": 7323,
+          "losses": 3763,
+          "rawDraws": 6,
+          "damage": {
+            "melee": 7148256,
+            "projectile": 2127525,
+            "special": 188934,
+            "throw": 40486
+          },
+          "decidedWinRate": 0.6605628720909255
+        },
+        "Counter": {
+          "fighters": 49,
+          "matches": 6632,
+          "wins": 3379,
+          "losses": 3249,
+          "rawDraws": 4,
+          "damage": {
+            "melee": 3736888,
+            "projectile": 1376805,
+            "special": 47141,
+            "throw": 25802
+          },
+          "decidedWinRate": 0.50980687990344
+        },
+        "Brawler": {
+          "fighters": 21,
+          "matches": 2732,
+          "wins": 970,
+          "losses": 1760,
+          "rawDraws": 2,
+          "damage": {
+            "melee": 1240587,
+            "projectile": 595532,
+            "special": 5178,
+            "throw": 7512
+          },
+          "decidedWinRate": 0.3553113553113553
+        },
+        "Zoning": {
+          "fighters": 38,
+          "matches": 4964,
+          "wins": 1448,
+          "losses": 3514,
+          "rawDraws": 2,
+          "damage": {
+            "melee": 2206604,
+            "projectile": 1049293,
+            "special": 24627,
+            "throw": 19336
+          },
+          "decidedWinRate": 0.29181781539701734
+        },
+        "Pressure": {
+          "fighters": 31,
+          "matches": 4064,
+          "wins": 1939,
+          "losses": 2123,
+          "rawDraws": 2,
+          "damage": {
+            "melee": 2182689,
+            "projectile": 884027,
+            "special": 27822,
+            "throw": 14088
+          },
+          "decidedWinRate": 0.4773510585918267
+        },
+        "Weapon": {
+          "fighters": 8,
+          "matches": 1148,
+          "wins": 378,
+          "losses": 770,
+          "rawDraws": 0,
+          "damage": {
+            "melee": 566937,
+            "projectile": 184104,
+            "special": 10552,
+            "throw": 2138
+          },
+          "decidedWinRate": 0.32926829268292684
+        },
+        "Paired": {
+          "fighters": 20,
+          "matches": 2592,
+          "wins": 1162,
+          "losses": 1426,
+          "rawDraws": 4,
+          "damage": {
+            "melee": 1035438,
+            "projectile": 1036166,
+            "special": 8399,
+            "throw": 7438
+          },
+          "decidedWinRate": 0.44899536321483774
+        },
+        "Hover": {
+          "fighters": 2,
+          "matches": 248,
+          "wins": 127,
+          "losses": 121,
+          "rawDraws": 0,
+          "damage": {
+            "melee": 150329,
+            "projectile": 41001,
+            "special": 1870,
+            "throw": 810
+          },
+          "decidedWinRate": 0.5120967741935484
+        }
+      },
+      "associations": {
+        "speed": 0.778212141369607,
+        "spread": -0.09530799902141542,
+        "lightRange": 0.7255695830874628,
+        "heavyRange": 0.03158248746521054,
+        "heavyStartup": -0.30150915777514226,
+        "boltDamage": -0.24988126701178254,
+        "boltStartup": -0.595978282929921,
+        "beam": 0.03655805504411439,
+        "secondaryEmitter": -0.06582423893411883,
+        "originForward": -0.3589252481710314,
+        "budget": -0.019014071957250685
+      }
+    },
+    {
+      "skill": 7,
+      "matches": 16736,
+      "outside35To65": 102,
+      "outsideFighters": [
+        {
+          "fighter": "accidentallyrich",
+          "archetype": "Counter",
+          "rate": 0.6693548387096774,
+          "matches": 124,
+          "wins": 83,
+          "losses": 41,
+          "draws": 0
+        },
+        {
+          "fighter": "agentsproto",
+          "archetype": "Brawler",
+          "rate": 0.3269230769230769,
+          "matches": 104,
+          "wins": 34,
+          "losses": 70,
+          "draws": 0
+        },
+        {
+          "fighter": "aktree",
+          "archetype": "Zoning",
+          "rate": 0.2857142857142857,
+          "matches": 112,
+          "wins": 32,
+          "losses": 80,
+          "draws": 0
+        },
+        {
+          "fighter": "azkarah",
+          "archetype": "Zoning",
+          "rate": 0.26666666666666666,
+          "matches": 92,
+          "wins": 24,
+          "losses": 66,
+          "draws": 2
+        },
+        {
+          "fighter": "bgbadger",
+          "archetype": "Zoning",
+          "rate": 0.14893617021276595,
+          "matches": 96,
+          "wins": 14,
+          "losses": 80,
+          "draws": 2
+        },
+        {
+          "fighter": "bigal",
+          "archetype": "Brawler",
+          "rate": 0.3,
+          "matches": 120,
+          "wins": 36,
+          "losses": 84,
+          "draws": 0
+        },
+        {
+          "fighter": "bimba",
+          "archetype": "Footwork",
+          "rate": 0.7428571428571429,
+          "matches": 140,
+          "wins": 104,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "brainsprot",
+          "archetype": "Footwork",
+          "rate": 0.7272727272727273,
+          "matches": 132,
+          "wins": 96,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "bront",
+          "archetype": "Brawler",
+          "rate": 0.34,
+          "matches": 100,
+          "wins": 34,
+          "losses": 66,
+          "draws": 0
+        },
+        {
+          "fighter": "buddhashadow",
+          "archetype": "Footwork",
+          "rate": 0.6571428571428571,
+          "matches": 140,
+          "wins": 92,
+          "losses": 48,
+          "draws": 0
+        },
+        {
+          "fighter": "cantankerous",
+          "archetype": "Pressure",
+          "rate": 0.3181818181818182,
+          "matches": 88,
+          "wins": 28,
+          "losses": 60,
+          "draws": 0
+        },
+        {
+          "fighter": "captain",
+          "archetype": "Zoning",
+          "rate": 0.31756756756756754,
+          "matches": 148,
+          "wins": 47,
+          "losses": 101,
+          "draws": 0
+        },
+        {
+          "fighter": "captainhowdy",
+          "archetype": "Footwork",
+          "rate": 0.7096774193548387,
+          "matches": 124,
+          "wins": 88,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "ceo",
+          "archetype": "Zoning",
+          "rate": 0.23636363636363636,
+          "matches": 112,
+          "wins": 26,
+          "losses": 84,
+          "draws": 2
+        },
+        {
+          "fighter": "chaton",
+          "archetype": "Footwork",
+          "rate": 0.725,
+          "matches": 120,
+          "wins": 87,
+          "losses": 33,
+          "draws": 0
+        },
+        {
+          "fighter": "chonky",
+          "archetype": "Footwork",
+          "rate": 0.7133333333333334,
+          "matches": 152,
+          "wins": 107,
+          "losses": 43,
+          "draws": 2
+        },
+        {
+          "fighter": "contresens",
+          "archetype": "Zoning",
+          "rate": 0.2962962962962963,
+          "matches": 108,
+          "wins": 32,
+          "losses": 76,
+          "draws": 0
+        },
+        {
+          "fighter": "crapto",
+          "archetype": "Zoning",
+          "rate": 0.22727272727272727,
+          "matches": 132,
+          "wins": 30,
+          "losses": 102,
+          "draws": 0
+        },
+        {
+          "fighter": "crippledlover",
+          "archetype": "Footwork",
+          "rate": 0.7666666666666667,
+          "matches": 120,
+          "wins": 92,
+          "losses": 28,
+          "draws": 0
+        },
+        {
+          "fighter": "cryptobartender",
+          "archetype": "Zoning",
+          "rate": 0.29285714285714287,
+          "matches": 140,
+          "wins": 41,
+          "losses": 99,
+          "draws": 0
+        },
+        {
+          "fighter": "davidcd",
+          "archetype": "Footwork",
+          "rate": 0.6774193548387096,
+          "matches": 124,
+          "wins": 84,
+          "losses": 40,
+          "draws": 0
+        },
+        {
+          "fighter": "degenpress",
+          "archetype": "Zoning",
+          "rate": 0.25,
+          "matches": 128,
+          "wins": 32,
+          "losses": 96,
+          "draws": 0
+        },
+        {
+          "fighter": "durlan",
+          "archetype": "Footwork",
+          "rate": 0.74375,
+          "matches": 160,
+          "wins": 119,
+          "losses": 41,
+          "draws": 0
+        },
+        {
+          "fighter": "emix",
+          "archetype": "Footwork",
+          "rate": 0.6532258064516129,
+          "matches": 124,
+          "wins": 81,
+          "losses": 43,
+          "draws": 0
+        },
+        {
+          "fighter": "erik",
+          "archetype": "Footwork",
+          "rate": 0.75,
+          "matches": 112,
+          "wins": 84,
+          "losses": 28,
+          "draws": 0
+        },
+        {
+          "fighter": "familywagon",
+          "archetype": "Brawler",
+          "rate": 0.34210526315789475,
+          "matches": 152,
+          "wins": 52,
+          "losses": 100,
+          "draws": 0
+        },
+        {
+          "fighter": "felixsprotoarc",
+          "archetype": "Zoning",
+          "rate": 0.24193548387096775,
+          "matches": 124,
+          "wins": 30,
+          "losses": 94,
+          "draws": 0
+        },
+        {
+          "fighter": "forchaneth",
+          "archetype": "Footwork",
+          "rate": 0.75,
+          "matches": 108,
+          "wins": 81,
+          "losses": 27,
+          "draws": 0
+        },
+        {
+          "fighter": "ghostsprotocol",
+          "archetype": "Zoning",
+          "rate": 0.19672131147540983,
+          "matches": 124,
+          "wins": 24,
+          "losses": 98,
+          "draws": 2
+        },
+        {
+          "fighter": "gpm",
+          "archetype": "Brawler",
+          "rate": 0.29411764705882354,
+          "matches": 136,
+          "wins": 40,
+          "losses": 96,
+          "draws": 0
+        },
+        {
+          "fighter": "greatcharly",
+          "archetype": "Footwork",
+          "rate": 0.6911764705882353,
+          "matches": 136,
+          "wins": 94,
+          "losses": 42,
+          "draws": 0
+        },
+        {
+          "fighter": "guest08",
+          "archetype": "Zoning",
+          "rate": 0.29444444444444445,
+          "matches": 180,
+          "wins": 53,
+          "losses": 127,
+          "draws": 0
+        },
+        {
+          "fighter": "guest10",
+          "archetype": "Zoning",
+          "rate": 0.32786885245901637,
+          "matches": 124,
+          "wins": 40,
+          "losses": 82,
+          "draws": 2
+        },
+        {
+          "fighter": "guest13",
+          "archetype": "Counter",
+          "rate": 0.6935483870967742,
+          "matches": 124,
+          "wins": 86,
+          "losses": 38,
+          "draws": 0
+        },
+        {
+          "fighter": "highsproto",
+          "archetype": "Zoning",
+          "rate": 0.2013888888888889,
+          "matches": 144,
+          "wins": 29,
+          "losses": 115,
+          "draws": 0
+        },
+        {
+          "fighter": "homosproto",
+          "archetype": "Footwork",
+          "rate": 0.68125,
+          "matches": 160,
+          "wins": 109,
+          "losses": 51,
+          "draws": 0
+        },
+        {
+          "fighter": "infinitysplitter",
+          "archetype": "Footwork",
+          "rate": 0.7702702702702703,
+          "matches": 148,
+          "wins": 114,
+          "losses": 34,
+          "draws": 0
+        },
+        {
+          "fighter": "isaac",
+          "archetype": "Footwork",
+          "rate": 0.6527777777777778,
+          "matches": 144,
+          "wins": 94,
+          "losses": 50,
+          "draws": 0
+        },
+        {
+          "fighter": "janitor",
+          "archetype": "Brawler",
+          "rate": 0.3333333333333333,
+          "matches": 156,
+          "wins": 52,
+          "losses": 104,
+          "draws": 0
+        },
+        {
+          "fighter": "jasper",
+          "archetype": "Footwork",
+          "rate": 0.7878787878787878,
+          "matches": 132,
+          "wins": 104,
+          "losses": 28,
+          "draws": 0
+        },
+        {
+          "fighter": "johnson",
+          "archetype": "Brawler",
+          "rate": 0.2867647058823529,
+          "matches": 136,
+          "wins": 39,
+          "losses": 97,
+          "draws": 0
+        },
+        {
+          "fighter": "kerrieanne",
+          "archetype": "Counter",
+          "rate": 0.3409090909090909,
+          "matches": 132,
+          "wins": 45,
+          "losses": 87,
+          "draws": 0
+        },
+        {
+          "fighter": "leviosa",
+          "archetype": "Footwork",
+          "rate": 0.6833333333333333,
+          "matches": 120,
+          "wins": 82,
+          "losses": 38,
+          "draws": 0
+        },
+        {
+          "fighter": "maxbiggums",
+          "archetype": "Brawler",
+          "rate": 0.33620689655172414,
+          "matches": 116,
+          "wins": 39,
+          "losses": 77,
+          "draws": 0
+        },
+        {
+          "fighter": "np",
+          "archetype": "Footwork",
+          "rate": 0.7837837837837838,
+          "matches": 148,
+          "wins": 116,
+          "losses": 32,
+          "draws": 0
+        },
+        {
+          "fighter": "obamasega420",
+          "archetype": "Footwork",
+          "rate": 0.6714285714285714,
+          "matches": 140,
+          "wins": 94,
+          "losses": 46,
+          "draws": 0
+        },
+        {
+          "fighter": "osho",
+          "archetype": "Footwork",
+          "rate": 0.6928571428571428,
+          "matches": 140,
+          "wins": 97,
+          "losses": 43,
+          "draws": 0
+        },
+        {
+          "fighter": "pirate",
+          "archetype": "Footwork",
+          "rate": 0.6838235294117647,
+          "matches": 136,
+          "wins": 93,
+          "losses": 43,
+          "draws": 0
+        },
+        {
+          "fighter": "pongohpos10i",
+          "archetype": "Zoning",
+          "rate": 0.2857142857142857,
+          "matches": 168,
+          "wins": 48,
+          "losses": 120,
+          "draws": 0
+        },
+        {
+          "fighter": "pr0lificeth",
+          "archetype": "Zoning",
+          "rate": 0.28225806451612906,
+          "matches": 128,
+          "wins": 35,
+          "losses": 89,
+          "draws": 4
+        },
+        {
+          "fighter": "prim",
+          "archetype": "Zoning",
+          "rate": 0.2962962962962963,
+          "matches": 108,
+          "wins": 32,
+          "losses": 76,
+          "draws": 0
+        },
+        {
+          "fighter": "rainman",
+          "archetype": "Footwork",
+          "rate": 0.7058823529411765,
+          "matches": 136,
+          "wins": 96,
+          "losses": 40,
+          "draws": 0
+        },
+        {
+          "fighter": "rektina",
+          "archetype": "Footwork",
+          "rate": 0.7272727272727273,
+          "matches": 88,
+          "wins": 64,
+          "losses": 24,
+          "draws": 0
+        },
+        {
+          "fighter": "reverend",
+          "archetype": "Footwork",
+          "rate": 0.6612903225806451,
+          "matches": 124,
+          "wins": 82,
+          "losses": 42,
+          "draws": 0
+        },
+        {
+          "fighter": "rlarsson",
+          "archetype": "Footwork",
+          "rate": 0.7569444444444444,
+          "matches": 144,
+          "wins": 109,
+          "losses": 35,
+          "draws": 0
+        },
+        {
+          "fighter": "rmacpdx",
+          "archetype": "Footwork",
+          "rate": 0.6621621621621622,
+          "matches": 148,
+          "wins": 98,
+          "losses": 50,
+          "draws": 0
+        },
+        {
+          "fighter": "samixsproto",
+          "archetype": "Zoning",
+          "rate": 0.3482142857142857,
+          "matches": 112,
+          "wins": 39,
+          "losses": 73,
+          "draws": 0
+        },
+        {
+          "fighter": "sidelinereferee",
+          "archetype": "Zoning",
+          "rate": 0.2876712328767123,
+          "matches": 148,
+          "wins": 42,
+          "losses": 104,
+          "draws": 2
+        },
+        {
+          "fighter": "slabcorn",
+          "archetype": "Brawler",
+          "rate": 0.27419354838709675,
+          "matches": 124,
+          "wins": 34,
+          "losses": 90,
+          "draws": 0
+        },
+        {
+          "fighter": "sprog",
+          "archetype": "Footwork",
+          "rate": 0.7066666666666667,
+          "matches": 152,
+          "wins": 106,
+          "losses": 44,
+          "draws": 2
+        },
+        {
+          "fighter": "sproto102",
+          "archetype": "Footwork",
+          "rate": 0.75,
+          "matches": 136,
+          "wins": 102,
+          "losses": 34,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1093",
+          "archetype": "Footwork",
+          "rate": 0.6911764705882353,
+          "matches": 136,
+          "wins": 94,
+          "losses": 42,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1187",
+          "archetype": "Footwork",
+          "rate": 0.6875,
+          "matches": 144,
+          "wins": 99,
+          "losses": 45,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1335",
+          "archetype": "Footwork",
+          "rate": 0.7016129032258065,
+          "matches": 124,
+          "wins": 87,
+          "losses": 37,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1345",
+          "archetype": "Footwork",
+          "rate": 0.8064516129032258,
+          "matches": 124,
+          "wins": 100,
+          "losses": 24,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1414",
+          "archetype": "Footwork",
+          "rate": 0.6818181818181818,
+          "matches": 132,
+          "wins": 90,
+          "losses": 42,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto1601",
+          "archetype": "Zoning",
+          "rate": 0.2413793103448276,
+          "matches": 116,
+          "wins": 28,
+          "losses": 88,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2101",
+          "archetype": "Footwork",
+          "rate": 0.6916666666666667,
+          "matches": 120,
+          "wins": 83,
+          "losses": 37,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto215",
+          "archetype": "Footwork",
+          "rate": 0.7272727272727273,
+          "matches": 112,
+          "wins": 80,
+          "losses": 30,
+          "draws": 2
+        },
+        {
+          "fighter": "sproto2177",
+          "archetype": "Footwork",
+          "rate": 0.7375,
+          "matches": 160,
+          "wins": 118,
+          "losses": 42,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2322",
+          "archetype": "Footwork",
+          "rate": 0.6785714285714286,
+          "matches": 140,
+          "wins": 95,
+          "losses": 45,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2344",
+          "archetype": "Paired",
+          "rate": 0.3402777777777778,
+          "matches": 144,
+          "wins": 49,
+          "losses": 95,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2381",
+          "archetype": "Footwork",
+          "rate": 0.725,
+          "matches": 120,
+          "wins": 87,
+          "losses": 33,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2569",
+          "archetype": "Footwork",
+          "rate": 0.7419354838709677,
+          "matches": 124,
+          "wins": 92,
+          "losses": 32,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto2616",
+          "archetype": "Weapon",
+          "rate": 0.18333333333333332,
+          "matches": 120,
+          "wins": 22,
+          "losses": 98,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto3106",
+          "archetype": "Zoning",
+          "rate": 0.25675675675675674,
+          "matches": 148,
+          "wins": 38,
+          "losses": 110,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto3152",
+          "archetype": "Zoning",
+          "rate": 0.3472222222222222,
+          "matches": 144,
+          "wins": 50,
+          "losses": 94,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto3215",
+          "archetype": "Footwork",
+          "rate": 0.6875,
+          "matches": 128,
+          "wins": 88,
+          "losses": 40,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto651",
+          "archetype": "Footwork",
+          "rate": 0.8103448275862069,
+          "matches": 116,
+          "wins": 94,
+          "losses": 22,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto763",
+          "archetype": "Footwork",
+          "rate": 0.7352941176470589,
+          "matches": 136,
+          "wins": 100,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto818",
+          "archetype": "Footwork",
+          "rate": 0.6893939393939394,
+          "matches": 132,
+          "wins": 91,
+          "losses": 41,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto831",
+          "archetype": "Footwork",
+          "rate": 0.6826923076923077,
+          "matches": 104,
+          "wins": 71,
+          "losses": 33,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto834",
+          "archetype": "Footwork",
+          "rate": 0.72,
+          "matches": 100,
+          "wins": 72,
+          "losses": 28,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto837",
+          "archetype": "Footwork",
+          "rate": 0.7272727272727273,
+          "matches": 136,
+          "wins": 96,
+          "losses": 36,
+          "draws": 4
+        },
+        {
+          "fighter": "sproto865",
+          "archetype": "Footwork",
+          "rate": 0.6607142857142857,
+          "matches": 112,
+          "wins": 74,
+          "losses": 38,
+          "draws": 0
+        },
+        {
+          "fighter": "sproto943",
+          "archetype": "Footwork",
+          "rate": 0.6774193548387096,
+          "matches": 124,
+          "wins": 84,
+          "losses": 40,
+          "draws": 0
+        },
+        {
+          "fighter": "sprotolg",
+          "archetype": "Zoning",
+          "rate": 0.19117647058823528,
+          "matches": 136,
+          "wins": 26,
+          "losses": 110,
+          "draws": 0
+        },
+        {
+          "fighter": "sprotopia",
+          "archetype": "Zoning",
+          "rate": 0.29508196721311475,
+          "matches": 124,
+          "wins": 36,
+          "losses": 86,
+          "draws": 2
+        },
+        {
+          "fighter": "sprotosales",
+          "archetype": "Footwork",
+          "rate": 0.7903225806451613,
+          "matches": 124,
+          "wins": 98,
+          "losses": 26,
+          "draws": 0
+        },
+        {
+          "fighter": "sprotosurvivor",
+          "archetype": "Zoning",
+          "rate": 0.1875,
+          "matches": 112,
+          "wins": 21,
+          "losses": 91,
+          "draws": 0
+        },
+        {
+          "fighter": "spruto",
+          "archetype": "Footwork",
+          "rate": 0.7129629629629629,
+          "matches": 108,
+          "wins": 77,
+          "losses": 31,
+          "draws": 0
+        },
+        {
+          "fighter": "spunow",
+          "archetype": "Footwork",
+          "rate": 0.7708333333333334,
+          "matches": 96,
+          "wins": 74,
+          "losses": 22,
+          "draws": 0
+        },
+        {
+          "fighter": "theo",
+          "archetype": "Zoning",
+          "rate": 0.32142857142857145,
+          "matches": 140,
+          "wins": 45,
+          "losses": 95,
+          "draws": 0
+        },
+        {
+          "fighter": "thesprotowholivedeth",
+          "archetype": "Zoning",
+          "rate": 0.27702702702702703,
+          "matches": 148,
+          "wins": 41,
+          "losses": 107,
+          "draws": 0
+        },
+        {
+          "fighter": "uncmasterflex",
+          "archetype": "Footwork",
+          "rate": 0.7,
+          "matches": 120,
+          "wins": 84,
+          "losses": 36,
+          "draws": 0
+        },
+        {
+          "fighter": "urmometh",
+          "archetype": "Footwork",
+          "rate": 0.796875,
+          "matches": 128,
+          "wins": 102,
+          "losses": 26,
+          "draws": 0
+        },
+        {
+          "fighter": "usedtowels",
+          "archetype": "Counter",
+          "rate": 0.3269230769230769,
+          "matches": 156,
+          "wins": 51,
+          "losses": 105,
+          "draws": 0
+        },
+        {
+          "fighter": "vamp",
+          "archetype": "Zoning",
+          "rate": 0.3,
+          "matches": 120,
+          "wins": 36,
+          "losses": 84,
+          "draws": 0
+        },
+        {
+          "fighter": "vela",
+          "archetype": "Zoning",
+          "rate": 0.21621621621621623,
+          "matches": 148,
+          "wins": 32,
+          "losses": 116,
+          "draws": 0
+        },
+        {
+          "fighter": "wifebeater",
+          "archetype": "Brawler",
+          "rate": 0.34210526315789475,
+          "matches": 152,
+          "wins": 52,
+          "losses": 100,
+          "draws": 0
+        },
+        {
+          "fighter": "xalt",
+          "archetype": "Zoning",
+          "rate": 0.2661290322580645,
+          "matches": 124,
+          "wins": 33,
+          "losses": 91,
+          "draws": 0
+        },
+        {
+          "fighter": "xav",
+          "archetype": "Footwork",
+          "rate": 0.6666666666666666,
+          "matches": 108,
+          "wins": 72,
+          "losses": 36,
+          "draws": 0
+        }
+      ],
+      "canonicalArchetypes": {
+        "Footwork": {
+          "fighters": 85,
+          "matches": 11092,
+          "wins": 7360,
+          "losses": 3720,
+          "rawDraws": 12,
+          "damage": {
+            "melee": 7526704,
+            "projectile": 1723070,
+            "special": 280707,
+            "throw": 26700
+          },
+          "decidedWinRate": 0.6642599277978339
+        },
+        "Counter": {
+          "fighters": 49,
+          "matches": 6632,
+          "wins": 3278,
+          "losses": 3350,
+          "rawDraws": 4,
+          "damage": {
+            "melee": 3861814,
+            "projectile": 1181590,
+            "special": 78957,
+            "throw": 17648
+          },
+          "decidedWinRate": 0.4945684972842486
+        },
+        "Brawler": {
+          "fighters": 21,
+          "matches": 2732,
+          "wins": 1016,
+          "losses": 1714,
+          "rawDraws": 2,
+          "damage": {
+            "melee": 1327521,
+            "projectile": 560767,
+            "special": 23658,
+            "throw": 6096
+          },
+          "decidedWinRate": 0.37216117216117217
+        },
+        "Zoning": {
+          "fighters": 38,
+          "matches": 4964,
+          "wins": 1469,
+          "losses": 3477,
+          "rawDraws": 18,
+          "damage": {
+            "melee": 2269494,
+            "projectile": 1042221,
+            "special": 24079,
+            "throw": 12244
+          },
+          "decidedWinRate": 0.29700768297614233
+        },
+        "Pressure": {
+          "fighters": 31,
+          "matches": 4064,
+          "wins": 1927,
+          "losses": 2125,
+          "rawDraws": 12,
+          "damage": {
+            "melee": 2260447,
+            "projectile": 778721,
+            "special": 57756,
+            "throw": 9644
+          },
+          "decidedWinRate": 0.4755676209279368
+        },
+        "Weapon": {
+          "fighters": 8,
+          "matches": 1148,
+          "wins": 413,
+          "losses": 729,
+          "rawDraws": 6,
+          "damage": {
+            "melee": 615609,
+            "projectile": 161029,
+            "special": 15230,
+            "throw": 2070
+          },
+          "decidedWinRate": 0.361646234676007
+        },
+        "Paired": {
+          "fighters": 20,
+          "matches": 2592,
+          "wins": 1133,
+          "losses": 1453,
+          "rawDraws": 6,
+          "damage": {
+            "melee": 1002084,
+            "projectile": 1060648,
+            "special": 10814,
+            "throw": 4320
+          },
+          "decidedWinRate": 0.4381283836040217
+        },
+        "Hover": {
+          "fighters": 2,
+          "matches": 248,
+          "wins": 110,
+          "losses": 138,
+          "rawDraws": 0,
+          "damage": {
+            "melee": 148585,
+            "projectile": 38372,
+            "special": 3283,
+            "throw": 360
+          },
+          "decidedWinRate": 0.4435483870967742
+        }
+      },
+      "associations": {
+        "speed": 0.8216967391922443,
+        "spread": -0.12062027151635892,
+        "lightRange": 0.7524208287383068,
+        "heavyRange": 0.0486867336026437,
+        "heavyStartup": -0.30195909953398237,
+        "boltDamage": -0.2454378493772921,
+        "boltStartup": -0.5910739276792959,
+        "beam": -0.03158508103039595,
+        "secondaryEmitter": -0.05360316631384078,
+        "originForward": -0.2924626970793256,
+        "budget": -0.03479289777620317
+      }
+    }
+  ],
+  "canonicalKitMetadataSha256": "503e73ff63a1a2bb8a5025b257728ffea7471828355f9ec44f560f3aeecf63d0",
+  "eligibleForObserved35To65Gate": false,
+  "curve": {
+    "encounters": 247,
+    "repetitions": 4,
+    "cpuWins": 30,
+    "referenceWins": 1946,
+    "rawDraws": 0,
+    "first": {
+      "trials": 8,
+      "independentRepetitions": 4,
+      "cpuWins": 0,
+      "referenceWins": 8,
+      "rawDraws": 0,
+      "cpuDecidedWinRate": 0,
+      "cpuDecidedWilson95": [
+        0,
+        0.32440756488388023
+      ]
+    },
+    "last": {
+      "trials": 8,
+      "independentRepetitions": 4,
+      "cpuWins": 2,
+      "referenceWins": 6,
+      "rawDraws": 0,
+      "cpuDecidedWinRate": 0.25,
+      "cpuDecidedWilson95": [
+        0.071479212752109,
+        0.5907245696898311
+      ]
+    }
+  }
+}

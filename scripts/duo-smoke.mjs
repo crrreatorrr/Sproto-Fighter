@@ -1,3 +1,4 @@
+// Phase 1 deliberately updates numeric combat expectations; authored art contracts remain pinned.
 // Deterministic geometry / playback contracts. This is not visual approval.
 import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
@@ -42,11 +43,14 @@ check('CPU reaches melee contact against and as the duo in both facings and at e
  assert.equal(probes,pairs.length*4);
 });
 check('CPU special respects root-based reach instead of spending charge beyond its formation',()=>{
- const s=createState('duo','cpu','duo');s.frame=1;s.fighters[1].pips=3;
- s.fighters[1].x=300;s.fighters[0].x=860;
- assert.equal(core.cpuInput(s)&A.special,0);
- s.fighters[0].x=800;
- assert.ok(core.cpuInput(s)&A.special);
+ // Hard CPU has a delayed observation queue and seeded decision pulses.
+ // Observe both cases through real ticks rather than requiring an immediate input.
+ for(const [rootGap,expected]of [[560,false],[500,true]]){
+  const s=createState('duo','cpu','duo');s.fighters[1].pips=3;
+  s.fighters[1].x=300;s.fighters[0].x=300+rootGap;let special=false;
+  for(let t=0;t<90;t++){special||=!!(core.cpuInput(s,1,7)&A.special);step(s,[0,0]);}
+  assert.equal(special,expected,'delayed CPU respects root-based Special reach');
+ }
 });
 check('blue kick recovery returns through its coherent raised-knee pose before planting',()=>{
  assert.deepEqual(manifest.fighters['duo-blue'].frames[19],manifest.fighters['duo-blue'].frames[16]);
@@ -73,7 +77,7 @@ check('contact geometry matches each facing-specific front body, including forma
 check('back throw keeps the catching body through release even when attacker facing flips',()=>{
  for(const face of [1,-1]){const s=fresh(face),f=s.fighters[0];step(s,[A.grab|(face===1?A.left:A.right),0]);let hold=false,released=false;
   for(let t=0;t<65;t++){setPoseAtlasThrowState(s.throwState,s.fighters);const d=getDuoPoseDebug(f,s.frame);if(s.throwState?.phase==='hold'){hold=true;assert.equal(d[face===1?1:0].slot,26);assert.equal(d[face===1?0:1].slot,25);}if(s.throwState?.phase==='release'&&s.throwState.t<6){released=true;assert.equal(f.facing,-face);assert.equal(d[face===1?1:0].slot,28);assert.equal(d[face===1?0:1].slot,25);}step(s,[0,0]);}
-  assert.ok(hold&&released);assert.equal(s.fighters[1].hp,885);
+  assert.ok(hold&&released);assert.equal(s.fighters[1].hp,910);
  }
 });
 check('intro and floor defeat reach both entity clips only for the actual scene actor',()=>{
@@ -96,7 +100,7 @@ check('duo special has its own complete clips, consumes three pips and never dou
    if(beat>=0){const side=face*(beat%2?-1:1),i=side===1?1:0;assert.equal(d[i].frameIndex,beat===3?6:beat%2?4:2);assert.equal(d[1-i].frameIndex,beat%2?3:5);}
    const bounds=getDuoLayoutDebug(f,s.frame).bounds;assert.ok(bounds[1][0]-bounds[0][1]>=11.99);
   }maxCombo=Math.max(maxCombo,f.combo);step(s,[0,0]);}
-  assert.equal(f.pips,0);assert.equal(maxCombo,COMBAT_STYLES.duo.specialFrames.length);assert.ok(seen.has(6));assert.equal(s.fighters[1].hp,768);
+  assert.equal(f.pips,0);assert.equal(maxCombo,COMBAT_STYLES.duo.specialFrames.length);assert.ok(seen.has(6));assert.equal(s.fighters[1].hp,715);
  }
 });
 check('a projectile overlapping the shared duo envelope damages its one health pool once',()=>{

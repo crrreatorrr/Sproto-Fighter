@@ -1,3 +1,6 @@
+// Phase 2/3: retimed template recovery/damage and 12% guarded chip; artwork contracts retained.
+import { assertProjectileKit } from './lib/gameplay-fixtures.mjs';
+// Phase 1 deliberately updates numeric combat expectations; authored art contracts remain pinned.
 // Focused Yelnacio Globulous integration checks. Laser appearance is reviewed in the browser.
 import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
@@ -11,7 +14,8 @@ const poses=await import(url(compile('../src/poseAtlas.ts').replace("from './cor
 const manifest=JSON.parse(readFileSync(new URL('../public/fighters/pose-atlas.json',import.meta.url),'utf8'));
 globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>structuredClone(manifest)});
 globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}};
-const {A,FLOOR,ROSTER,COMBAT_STYLES,PLAYABLE_FIGHTERS,bodyAtlasIds,createState,step}=core;
+assertProjectileKit(core,'captain');
+const {A,FLOOR,ROSTER,COMBAT_STYLES,PLAYABLE_FIGHTERS,bodyAtlasIds,createState,step,getMove}=core;
 assert.ok(PLAYABLE_FIGHTERS.includes('captain'));
 assert.equal(ROSTER.captain.name,'Yelnacio Globulous');
 assert.equal(COMBAT_STYLES.captain.role,'LASER CAPTAIN');
@@ -35,7 +39,7 @@ for(const face of [-1,1])for(const direction of [0,A.up,A.down,face===1?A.left:A
  const s=createState('captain','cpu','rivet'),f=s.fighters[0];f.x=600;s.fighters[1].x=600+face*60;f.facing=face;s.fighters[1].facing=-face;
  step(s,[A.grab|direction,0]);let held=false;
  for(let t=0;t<180;t++){held||=s.throwState?.phase==='hold';step(s,[0,0]);for(const f of s.fighters)assert.ok([f.x,f.y,f.hp,f.vx,f.vy].every(Number.isFinite));}
- assert.ok(held,'Captain throw catches');assert.equal(s.throwState,null);assert.equal(s.fighters[1].hp,885);
+ assert.ok(held,'Captain throw catches');assert.equal(s.throwState,null);assert.equal(s.fighters[1].hp,910);
 }
 const s=createState('captain','cpu','rivet'),f=s.fighters[0];f.pips=3;s.fighters[1].x=480;step(s,[A.special,0]);let combo=0;
 for(let t=0;t<220;t++){combo=Math.max(combo,f.combo);step(s,[0,0]);}
@@ -43,21 +47,21 @@ assert.equal(f.pips,0);assert.equal(combo,COMBAT_STYLES.captain.specialFrames.le
 console.log('PASS: Yelnacio Globulous identity and 72-frame asset contract; full gait in both facings, dash/jump/landing, five attacks, eight directional throws and four-contact Solar Salvo. Laser checks also run below.');
 
 const laser=COMBAT_STYLES.captain.projectile;
-assert.equal(laser.shape,'eyeLaser');assert.equal(laser.speed,22);assert.equal(laser.horizontal,true);assert.ok(laser.origin.forward>0&&laser.origin.height>0);
+assert.equal(laser.shape,'eyeLaser');assert.equal(laser.speed,12);assert.equal(laser.horizontal,true);assert.ok(laser.origin.forward>0&&laser.origin.height>0);
 let cases=0;
 for(const face of [-1,1])for(const air of [false,true])for(const direction of [0,A.up,A.down,A.left,A.right,A.up|A.left,A.up|A.right,A.down|A.left,A.down|A.right]){
  const s=createState('captain','cpu','rivet'),f=s.fighters[0];f.x=600;s.fighters[1].x=face===1?1200:80;f.facing=face;s.fighters[1].facing=-face;
  if(air){f.y=FLOOR-250;f.vy=-4;}
  step(s,[A.bolt|direction,0]);let shot;
  for(let t=0;t<40&&!shot;t++){step(s,[0,0]);shot=s.projectiles[0];}
- assert.ok(shot,'laser spawns');assert.equal(shot.shape,'eyeLaser');assert.equal(shot.vx,face*22);assert.equal(shot.vy,0);assert.equal(shot.gravity,0);assert.equal(shot.wave,0);
- assert.ok(Math.abs(shot.x-f.x-face*(laser.origin.forward+22))<1e-8,'beam starts at reviewed eyes before first movement');assert.ok(Math.abs(shot.y-(f.y-laser.origin.height))<1e-8);
+ assert.ok(shot,'laser spawns');assert.equal(shot.shape,'eyeLaser');assert.equal(shot.vx,face*12);assert.equal(shot.vy,0);assert.equal(shot.gravity,0);assert.equal(shot.wave,0);
+ assert.ok(Math.abs(shot.x-f.x-face*(laser.origin.forward+12))<1e-8,'beam starts at reviewed eyes before first movement');assert.ok(Math.abs(shot.y-(f.y-laser.origin.height))<1e-8);
  const y=shot.y;for(let t=0;t<5;t++){step(s,[0,0]);assert.equal(shot.y,y,'laser never droops or curves');}
  cases++;
 }
 for(const face of [-1,1])for(const guard of [false,true]){
  const s=createState('captain','cpu','rivet');s.fighters[0].x=600;s.fighters[1].x=600+face*260;s.fighters[0].facing=face;s.fighters[1].facing=-face;
- const back=face===1?A.right:A.left;step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(s.fighters[1].hp,guard?1000:936,'one laser causes one 64HP hit, guard blocks it');
+ const back=face===1?A.right:A.left;step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(s.fighters[1].hp,1000-(guard?Math.round(getMove(s.fighters[0],'bolt').damage*.12):getMove(s.fighters[0],'bolt').damage),'one laser causes one normalized hit, guard blocks it');
 }
 const visual=await import(url(compile('../src/powerArt.ts')));const boxes=[];
 const context={save(){},restore(){},fillRect(x,y,w,h){boxes.push({x,y,w,h,color:this.fillStyle});}};

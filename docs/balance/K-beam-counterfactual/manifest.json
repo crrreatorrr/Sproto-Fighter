@@ -1,0 +1,177 @@
+{
+  "sources": {
+    "I": {
+      "commit": "efb5829c1230dac84337ba0212d92a84a527563b",
+      "sourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+      "simVersion": "a4c7ddde49ec5a64",
+      "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9"
+    },
+    "K": {
+      "commit": "94a9325f6a3adc9e94b6b63d45a46eae2c22fe4e",
+      "sourceSha256": "d346b96d7f6b2f6463507c09d87052c560418a1c5b27c06bab6708272538a3ab",
+      "simVersion": "741fe07b68b4a674",
+      "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9"
+    }
+  },
+  "selectionSha256": "322e1277b7601d4f809ae7906b81b784534d74a168f57d96472912641a2c973e",
+  "helperSha256": "ac1f76a1beaff101f1ca404ae2bfcb5f4a0b7758f9290c543dd8867f8b8c83e8",
+  "rawSha256": "85daa8cd8c22e4d6c5734520071c38ac1e3de078892f4fff97ad5bd7ac5a868e",
+  "compressedSha256": "b1a9925163db72876421e2f33ad75690914060fdafbfc6be5371ed85a8105924",
+  "rawBytes": 1813449,
+  "compressedBytes": 85358,
+  "boutsPerCore": 512,
+  "pairedKeysIdentical": true,
+  "summary": [
+    {
+      "skill": 4,
+      "stats": {
+        "I": {
+          "independentSeedPairs": 128,
+          "naturalWins": 87,
+          "naturalLosses": 41,
+          "naturalRawDraws": 0,
+          "naturalUnresolved": 0,
+          "meanBeamProjectileDamage": 475.9921875,
+          "naturalMeanSeconds": 24.674609375,
+          "reverseOutcomeAgreement": 123,
+          "bothSeatsBeam": {
+            "archetype": "Counter",
+            "matches": 256,
+            "wins": 173,
+            "losses": 83,
+            "draws": 0,
+            "rawWins": 173,
+            "rawLosses": 83,
+            "rawDraws": 0,
+            "frames": 378428,
+            "recoveryFrames": 71168,
+            "damage": {
+              "melee": 96541,
+              "projectile": 121934,
+              "special": 544,
+              "throw": 11246
+            },
+            "decidedWinRate": 0.67578125,
+            "rawDecidedWinRate": 0.67578125,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 24.637239583333333,
+            "meanRecoverySeconds": 4.633333333333334
+          }
+        },
+        "K": {
+          "independentSeedPairs": 128,
+          "naturalWins": 84,
+          "naturalLosses": 44,
+          "naturalRawDraws": 0,
+          "naturalUnresolved": 0,
+          "meanBeamProjectileDamage": 474.2734375,
+          "naturalMeanSeconds": 25.61796875,
+          "reverseOutcomeAgreement": 128,
+          "bothSeatsBeam": {
+            "archetype": "Counter",
+            "matches": 256,
+            "wins": 168,
+            "losses": 88,
+            "draws": 0,
+            "rawWins": 168,
+            "rawLosses": 88,
+            "rawDraws": 0,
+            "frames": 393941,
+            "recoveryFrames": 72602,
+            "damage": {
+              "melee": 98729,
+              "projectile": 121197,
+              "special": 1098,
+              "throw": 6844
+            },
+            "decidedWinRate": 0.65625,
+            "rawDecidedWinRate": 0.65625,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 25.647200520833334,
+            "meanRecoverySeconds": 4.726692708333333
+          }
+        }
+      },
+      "pairedBeamWinsLost": 28,
+      "pairedBeamWinsGained": 25
+    },
+    {
+      "skill": 7,
+      "stats": {
+        "I": {
+          "independentSeedPairs": 128,
+          "naturalWins": 82,
+          "naturalLosses": 46,
+          "naturalRawDraws": 0,
+          "naturalUnresolved": 0,
+          "meanBeamProjectileDamage": 460.671875,
+          "naturalMeanSeconds": 30.128385416666667,
+          "reverseOutcomeAgreement": 127,
+          "bothSeatsBeam": {
+            "archetype": "Counter",
+            "matches": 256,
+            "wins": 165,
+            "losses": 91,
+            "draws": 0,
+            "rawWins": 165,
+            "rawLosses": 91,
+            "rawDraws": 0,
+            "frames": 461428,
+            "recoveryFrames": 79356,
+            "damage": {
+              "melee": 101607,
+              "projectile": 117834,
+              "special": 1882,
+              "throw": 7280
+            },
+            "decidedWinRate": 0.64453125,
+            "rawDecidedWinRate": 0.64453125,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 30.040885416666665,
+            "meanRecoverySeconds": 5.16640625
+          }
+        },
+        "K": {
+          "independentSeedPairs": 128,
+          "naturalWins": 89,
+          "naturalLosses": 39,
+          "naturalRawDraws": 0,
+          "naturalUnresolved": 0,
+          "meanBeamProjectileDamage": 426.4296875,
+          "naturalMeanSeconds": 29.45859375,
+          "reverseOutcomeAgreement": 128,
+          "bothSeatsBeam": {
+            "archetype": "Counter",
+            "matches": 256,
+            "wins": 178,
+            "losses": 78,
+            "draws": 0,
+            "rawWins": 178,
+            "rawLosses": 78,
+            "rawDraws": 0,
+            "frames": 452675,
+            "recoveryFrames": 79467,
+            "damage": {
+              "melee": 108641,
+              "projectile": 109201,
+              "special": 5178,
+              "throw": 6382
+            },
+            "decidedWinRate": 0.6953125,
+            "rawDecidedWinRate": 0.6953125,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 29.471028645833332,
+            "meanRecoverySeconds": 5.1736328125
+          }
+        }
+      },
+      "pairedBeamWinsLost": 26,
+      "pairedBeamWinsGained": 33
+    }
+  ],
+  "scope": "Mechanic-selected diagnostic only; no wider K screen or acceptance"
+}

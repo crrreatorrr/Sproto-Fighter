@@ -1,0 +1,2586 @@
+{
+  "productionCommit": "a146a8d90",
+  "source": {
+    "commit": "6f768d2e6f292e71f707494bb7d9ee5078b61518",
+    "sourceSha256": "e151e77bbf53dc08bb3241921ffda7fee57615454e0b18a62be57dc7f4f20377",
+    "simVersion": "7d0ce00ef52b567a",
+    "harnessSha256": "45b19a0663cc4436f47de70b05e4bf3108b1206f34ded76f84c9da47b330bbec",
+    "cpuHasSkillParameter": true
+  },
+  "config": {
+    "seed": 20261105,
+    "samples": 7,
+    "maxFrames": 10800,
+    "skills": [
+      4,
+      7
+    ],
+    "bot": "cpu",
+    "repeats": 2,
+    "matchDepth": true,
+    "roster": [
+      "bront",
+      "duo",
+      "highsproto",
+      "rivet",
+      "rune",
+      "sproto1011",
+      "vela",
+      "zephyr"
+    ],
+    "schedule": [
+      [
+        "bront",
+        "duo"
+      ],
+      [
+        "bront",
+        "highsproto"
+      ],
+      [
+        "bront",
+        "rivet"
+      ],
+      [
+        "bront",
+        "rune"
+      ],
+      [
+        "bront",
+        "sproto1011"
+      ],
+      [
+        "bront",
+        "vela"
+      ],
+      [
+        "bront",
+        "zephyr"
+      ],
+      [
+        "duo",
+        "highsproto"
+      ],
+      [
+        "duo",
+        "rivet"
+      ],
+      [
+        "duo",
+        "rune"
+      ],
+      [
+        "duo",
+        "sproto1011"
+      ],
+      [
+        "duo",
+        "vela"
+      ],
+      [
+        "duo",
+        "zephyr"
+      ],
+      [
+        "highsproto",
+        "rivet"
+      ],
+      [
+        "highsproto",
+        "rune"
+      ],
+      [
+        "highsproto",
+        "sproto1011"
+      ],
+      [
+        "highsproto",
+        "vela"
+      ],
+      [
+        "highsproto",
+        "zephyr"
+      ],
+      [
+        "rivet",
+        "rune"
+      ],
+      [
+        "rivet",
+        "sproto1011"
+      ],
+      [
+        "rivet",
+        "vela"
+      ],
+      [
+        "rivet",
+        "zephyr"
+      ],
+      [
+        "rune",
+        "sproto1011"
+      ],
+      [
+        "rune",
+        "vela"
+      ],
+      [
+        "rune",
+        "zephyr"
+      ],
+      [
+        "sproto1011",
+        "vela"
+      ],
+      [
+        "sproto1011",
+        "zephyr"
+      ],
+      [
+        "vela",
+        "zephyr"
+      ]
+    ]
+  },
+  "rawBytes": 488956,
+  "compressedBytes": 26423,
+  "rawSha256": "0b672896209b6651edc0206dc55b34b81eb0ae0ffac0322ce187b3de709c142a",
+  "compressedSha256": "f4c8b8a44a0d6c8a603767d5eaffc3cc6a5e37ec0836f7dd4dcd570240748e7c",
+  "summary": [
+    {
+      "skill": 4,
+      "summary": {
+        "matches": 112,
+        "rawDraws": 0,
+        "rawDrawRate": 0,
+        "unresolved": 0,
+        "drawRate": 0,
+        "rounds": {
+          "completed": 265,
+          "partial": 0,
+          "draws": 0,
+          "timerDecisions": 0,
+          "wins": [
+            133,
+            132
+          ],
+          "meanSeconds": 21.21069182389937
+        },
+        "timeouts": 0,
+        "meanSeconds": 50.186011904761905,
+        "medianSeconds": 47.375,
+        "fighters": {
+          "bront": {
+            "archetype": "Brawler",
+            "matches": 28,
+            "wins": 12,
+            "losses": 16,
+            "draws": 0,
+            "rawWins": 12,
+            "rawLosses": 16,
+            "rawDraws": 0,
+            "frames": 90374,
+            "recoveryFrames": 15552,
+            "damage": {
+              "melee": 39078,
+              "projectile": 15132,
+              "special": 570,
+              "throw": 0
+            },
+            "decidedWinRate": 0.42857142857142855,
+            "rawDecidedWinRate": 0.42857142857142855,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 53.794047619047625,
+            "meanRecoverySeconds": 9.257142857142858
+          },
+          "duo": {
+            "archetype": "Paired",
+            "matches": 28,
+            "wins": 16,
+            "losses": 12,
+            "draws": 0,
+            "rawWins": 16,
+            "rawLosses": 12,
+            "rawDraws": 0,
+            "frames": 91668,
+            "recoveryFrames": 16422,
+            "damage": {
+              "melee": 23751,
+              "projectile": 29296,
+              "special": 891,
+              "throw": 0
+            },
+            "decidedWinRate": 0.5714285714285714,
+            "rawDecidedWinRate": 0.5714285714285714,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 54.56428571428571,
+            "meanRecoverySeconds": 9.775
+          },
+          "highsproto": {
+            "archetype": "Zoning",
+            "matches": 28,
+            "wins": 8,
+            "losses": 20,
+            "draws": 0,
+            "rawWins": 8,
+            "rawLosses": 20,
+            "rawDraws": 0,
+            "frames": 78774,
+            "recoveryFrames": 12704,
+            "damage": {
+              "melee": 28706,
+              "projectile": 10880,
+              "special": 1334,
+              "throw": 180
+            },
+            "decidedWinRate": 0.2857142857142857,
+            "rawDecidedWinRate": 0.2857142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 46.88928571428571,
+            "meanRecoverySeconds": 7.561904761904762
+          },
+          "rivet": {
+            "archetype": "Pressure",
+            "matches": 28,
+            "wins": 20,
+            "losses": 8,
+            "draws": 0,
+            "rawWins": 20,
+            "rawLosses": 8,
+            "rawDraws": 0,
+            "frames": 76908,
+            "recoveryFrames": 15319,
+            "damage": {
+              "melee": 43871,
+              "projectile": 9876,
+              "special": 2136,
+              "throw": 0
+            },
+            "decidedWinRate": 0.7142857142857143,
+            "rawDecidedWinRate": 0.7142857142857143,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 45.77857142857143,
+            "meanRecoverySeconds": 9.118452380952382
+          },
+          "rune": {
+            "archetype": "Pressure",
+            "matches": 28,
+            "wins": 22,
+            "losses": 6,
+            "draws": 0,
+            "rawWins": 22,
+            "rawLosses": 6,
+            "rawDraws": 0,
+            "frames": 76304,
+            "recoveryFrames": 15201,
+            "damage": {
+              "melee": 45985,
+              "projectile": 9716,
+              "special": 1711,
+              "throw": 0
+            },
+            "decidedWinRate": 0.7857142857142857,
+            "rawDecidedWinRate": 0.7857142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 45.419047619047625,
+            "meanRecoverySeconds": 9.048214285714286
+          },
+          "sproto1011": {
+            "archetype": "Weapon",
+            "matches": 28,
+            "wins": 12,
+            "losses": 16,
+            "draws": 0,
+            "rawWins": 12,
+            "rawLosses": 16,
+            "rawDraws": 0,
+            "frames": 92546,
+            "recoveryFrames": 17004,
+            "damage": {
+              "melee": 33840,
+              "projectile": 18996,
+              "special": 572,
+              "throw": 0
+            },
+            "decidedWinRate": 0.42857142857142855,
+            "rawDecidedWinRate": 0.42857142857142855,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 55.08690476190476,
+            "meanRecoverySeconds": 10.121428571428572
+          },
+          "vela": {
+            "archetype": "Hover",
+            "matches": 28,
+            "wins": 10,
+            "losses": 18,
+            "draws": 0,
+            "rawWins": 10,
+            "rawLosses": 18,
+            "rawDraws": 0,
+            "frames": 85132,
+            "recoveryFrames": 14567,
+            "damage": {
+              "melee": 32267,
+              "projectile": 12931,
+              "special": 1578,
+              "throw": 180
+            },
+            "decidedWinRate": 0.35714285714285715,
+            "rawDecidedWinRate": 0.35714285714285715,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.673809523809524,
+            "meanRecoverySeconds": 8.670833333333333
+          },
+          "zephyr": {
+            "archetype": "Pressure",
+            "matches": 28,
+            "wins": 12,
+            "losses": 16,
+            "draws": 0,
+            "rawWins": 12,
+            "rawLosses": 16,
+            "rawDraws": 0,
+            "frames": 82794,
+            "recoveryFrames": 14956,
+            "damage": {
+              "melee": 29416,
+              "projectile": 19518,
+              "special": 410,
+              "throw": 0
+            },
+            "decidedWinRate": 0.42857142857142855,
+            "rawDecidedWinRate": 0.42857142857142855,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 49.28214285714286,
+            "meanRecoverySeconds": 8.902380952380952
+          }
+        },
+        "archetypes": {
+          "Brawler": {
+            "matches": 28,
+            "wins": 12,
+            "losses": 16,
+            "draws": 0,
+            "rawWins": 12,
+            "rawLosses": 16,
+            "rawDraws": 0,
+            "frames": 90374,
+            "recoveryFrames": 15552,
+            "damage": {
+              "melee": 39078,
+              "projectile": 15132,
+              "special": 570,
+              "throw": 0
+            },
+            "decidedWinRate": 0.42857142857142855,
+            "rawDecidedWinRate": 0.42857142857142855,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 53.794047619047625,
+            "meanRecoverySeconds": 9.257142857142858
+          },
+          "Paired": {
+            "matches": 28,
+            "wins": 16,
+            "losses": 12,
+            "draws": 0,
+            "rawWins": 16,
+            "rawLosses": 12,
+            "rawDraws": 0,
+            "frames": 91668,
+            "recoveryFrames": 16422,
+            "damage": {
+              "melee": 23751,
+              "projectile": 29296,
+              "special": 891,
+              "throw": 0
+            },
+            "decidedWinRate": 0.5714285714285714,
+            "rawDecidedWinRate": 0.5714285714285714,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 54.56428571428571,
+            "meanRecoverySeconds": 9.775
+          },
+          "Zoning": {
+            "matches": 28,
+            "wins": 8,
+            "losses": 20,
+            "draws": 0,
+            "rawWins": 8,
+            "rawLosses": 20,
+            "rawDraws": 0,
+            "frames": 78774,
+            "recoveryFrames": 12704,
+            "damage": {
+              "melee": 28706,
+              "projectile": 10880,
+              "special": 1334,
+              "throw": 180
+            },
+            "decidedWinRate": 0.2857142857142857,
+            "rawDecidedWinRate": 0.2857142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 46.88928571428571,
+            "meanRecoverySeconds": 7.561904761904762
+          },
+          "Pressure": {
+            "matches": 84,
+            "wins": 54,
+            "losses": 30,
+            "draws": 0,
+            "rawWins": 54,
+            "rawLosses": 30,
+            "rawDraws": 0,
+            "frames": 236006,
+            "recoveryFrames": 45476,
+            "damage": {
+              "melee": 119272,
+              "projectile": 39110,
+              "special": 4257,
+              "throw": 0
+            },
+            "decidedWinRate": 0.6428571428571429,
+            "rawDecidedWinRate": 0.6428571428571429,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 46.8265873015873,
+            "meanRecoverySeconds": 9.023015873015874
+          },
+          "Weapon": {
+            "matches": 28,
+            "wins": 12,
+            "losses": 16,
+            "draws": 0,
+            "rawWins": 12,
+            "rawLosses": 16,
+            "rawDraws": 0,
+            "frames": 92546,
+            "recoveryFrames": 17004,
+            "damage": {
+              "melee": 33840,
+              "projectile": 18996,
+              "special": 572,
+              "throw": 0
+            },
+            "decidedWinRate": 0.42857142857142855,
+            "rawDecidedWinRate": 0.42857142857142855,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 55.08690476190476,
+            "meanRecoverySeconds": 10.121428571428572
+          },
+          "Hover": {
+            "matches": 28,
+            "wins": 10,
+            "losses": 18,
+            "draws": 0,
+            "rawWins": 10,
+            "rawLosses": 18,
+            "rawDraws": 0,
+            "frames": 85132,
+            "recoveryFrames": 14567,
+            "damage": {
+              "melee": 32267,
+              "projectile": 12931,
+              "special": 1578,
+              "throw": 180
+            },
+            "decidedWinRate": 0.35714285714285715,
+            "rawDecidedWinRate": 0.35714285714285715,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.673809523809524,
+            "meanRecoverySeconds": 8.670833333333333
+          }
+        },
+        "controllers": {
+          "cpu": {
+            "matches": 224,
+            "wins": 112,
+            "losses": 112,
+            "draws": 0,
+            "rawWins": 112,
+            "rawLosses": 112,
+            "rawDraws": 0,
+            "frames": 674500,
+            "recoveryFrames": 121725,
+            "damage": {
+              "melee": 276914,
+              "projectile": 126345,
+              "special": 9202,
+              "throw": 360
+            },
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.186011904761905,
+            "meanRecoverySeconds": 9.056919642857142
+          }
+        },
+        "seats": [
+          {
+            "matches": 112,
+            "wins": 56,
+            "losses": 56,
+            "draws": 0,
+            "rawWins": 56,
+            "rawLosses": 56,
+            "rawDraws": 0,
+            "frames": 337250,
+            "recoveryFrames": 60928,
+            "damage": {
+              "melee": 138787,
+              "projectile": 63109,
+              "special": 4685,
+              "throw": 180
+            },
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.186011904761905,
+            "meanRecoverySeconds": 9.066666666666666
+          },
+          {
+            "matches": 112,
+            "wins": 56,
+            "losses": 56,
+            "draws": 0,
+            "rawWins": 56,
+            "rawLosses": 56,
+            "rawDraws": 0,
+            "frames": 337250,
+            "recoveryFrames": 60797,
+            "damage": {
+              "melee": 138127,
+              "projectile": 63236,
+              "special": 4517,
+              "throw": 180
+            },
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.186011904761905,
+            "meanRecoverySeconds": 9.047172619047618
+          }
+        ],
+        "worstMatchups": [
+          {
+            "key": "bront:highsproto",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 13748,
+            "recoveryFrames": 2472,
+            "damage": {
+              "melee": 7778,
+              "projectile": 1662,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "highsproto"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 57.28333333333333,
+            "meanRecoverySeconds": 10.3
+          },
+          {
+            "key": "bront:rune",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 12632,
+            "recoveryFrames": 1904,
+            "damage": {
+              "melee": 5552,
+              "projectile": 1094,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "rune"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 52.63333333333333,
+            "meanRecoverySeconds": 7.933333333333334
+          },
+          {
+            "key": "bront:vela",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 13240,
+            "recoveryFrames": 2138,
+            "damage": {
+              "melee": 5692,
+              "projectile": 1660,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "vela"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 55.166666666666664,
+            "meanRecoverySeconds": 8.908333333333333
+          },
+          {
+            "key": "duo:vela",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 14370,
+            "recoveryFrames": 2592,
+            "damage": {
+              "melee": 2128,
+              "projectile": 5872,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "vela"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 59.875,
+            "meanRecoverySeconds": 10.8
+          },
+          {
+            "key": "highsproto:rivet",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 8798,
+            "recoveryFrames": 1136,
+            "damage": {
+              "melee": 2442,
+              "projectile": 566,
+              "special": 0,
+              "throw": 180
+            },
+            "fighters": [
+              "highsproto",
+              "rivet"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 36.65833333333333,
+            "meanRecoverySeconds": 4.733333333333333
+          },
+          {
+            "key": "highsproto:rune",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 9246,
+            "recoveryFrames": 1242,
+            "damage": {
+              "melee": 2838,
+              "projectile": 924,
+              "special": 570,
+              "throw": 0
+            },
+            "fighters": [
+              "highsproto",
+              "rune"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 38.525,
+            "meanRecoverySeconds": 5.175
+          },
+          {
+            "key": "rivet:sproto1011",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 9746,
+            "recoveryFrames": 2268,
+            "damage": {
+              "melee": 5922,
+              "projectile": 1526,
+              "special": 552,
+              "throw": 0
+            },
+            "fighters": [
+              "rivet",
+              "sproto1011"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 40.608333333333334,
+            "meanRecoverySeconds": 9.45
+          },
+          {
+            "key": "rivet:vela",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 9978,
+            "recoveryFrames": 2031,
+            "damage": {
+              "melee": 6458,
+              "projectile": 936,
+              "special": 606,
+              "throw": 0
+            },
+            "fighters": [
+              "rivet",
+              "vela"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 41.575,
+            "meanRecoverySeconds": 8.4625
+          },
+          {
+            "key": "rune:vela",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 8654,
+            "recoveryFrames": 2016,
+            "damage": {
+              "melee": 6626,
+              "projectile": 1056,
+              "special": 318,
+              "throw": 0
+            },
+            "fighters": [
+              "rune",
+              "vela"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 36.05833333333333,
+            "meanRecoverySeconds": 8.4
+          },
+          {
+            "key": "rune:zephyr",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 10110,
+            "recoveryFrames": 2372,
+            "damage": {
+              "melee": 6730,
+              "projectile": 2666,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "rune",
+              "zephyr"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 42.125,
+            "meanRecoverySeconds": 9.883333333333333
+          },
+          {
+            "key": "bront:duo",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 12084,
+            "recoveryFrames": 2138,
+            "damage": {
+              "melee": 6924,
+              "projectile": 1070,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "duo"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.35,
+            "meanRecoverySeconds": 8.908333333333333
+          },
+          {
+            "key": "bront:rivet",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 12966,
+            "recoveryFrames": 2324,
+            "damage": {
+              "melee": 6400,
+              "projectile": 1996,
+              "special": 570,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "rivet"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 54.025,
+            "meanRecoverySeconds": 9.683333333333334
+          },
+          {
+            "key": "bront:sproto1011",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 10928,
+            "recoveryFrames": 1974,
+            "damage": {
+              "melee": 4524,
+              "projectile": 1704,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "sproto1011"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 45.53333333333333,
+            "meanRecoverySeconds": 8.225
+          },
+          {
+            "key": "bront:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 14776,
+            "recoveryFrames": 2602,
+            "damage": {
+              "melee": 2208,
+              "projectile": 5946,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 61.56666666666667,
+            "meanRecoverySeconds": 10.841666666666667
+          },
+          {
+            "key": "duo:highsproto",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 13328,
+            "recoveryFrames": 2036,
+            "damage": {
+              "melee": 3304,
+              "projectile": 4668,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "highsproto"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 55.53333333333333,
+            "meanRecoverySeconds": 8.483333333333333
+          },
+          {
+            "key": "duo:rivet",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 11410,
+            "recoveryFrames": 1615,
+            "damage": {
+              "melee": 3570,
+              "projectile": 2890,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "rivet"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 47.541666666666664,
+            "meanRecoverySeconds": 6.729166666666667
+          },
+          {
+            "key": "duo:rune",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 12298,
+            "recoveryFrames": 2361,
+            "damage": {
+              "melee": 5873,
+              "projectile": 1620,
+              "special": 285,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "rune"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 51.24166666666667,
+            "meanRecoverySeconds": 9.8375
+          },
+          {
+            "key": "duo:sproto1011",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 17272,
+            "recoveryFrames": 3522,
+            "damage": {
+              "melee": 294,
+              "projectile": 8434,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "sproto1011"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 71.96666666666667,
+            "meanRecoverySeconds": 14.675
+          },
+          {
+            "key": "duo:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 10906,
+            "recoveryFrames": 2148,
+            "damage": {
+              "melee": 1860,
+              "projectile": 4600,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 45.44166666666667,
+            "meanRecoverySeconds": 8.95
+          },
+          {
+            "key": "highsproto:sproto1011",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 13154,
+            "recoveryFrames": 2242,
+            "damage": {
+              "melee": 5988,
+              "projectile": 1020,
+              "special": 522,
+              "throw": 0
+            },
+            "fighters": [
+              "highsproto",
+              "sproto1011"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 54.80833333333333,
+            "meanRecoverySeconds": 9.341666666666667
+          },
+          {
+            "key": "highsproto:vela",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 10666,
+            "recoveryFrames": 1926,
+            "damage": {
+              "melee": 4962,
+              "projectile": 1112,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "highsproto",
+              "vela"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 44.44166666666667,
+            "meanRecoverySeconds": 8.025
+          },
+          {
+            "key": "highsproto:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 9834,
+            "recoveryFrames": 1616,
+            "damage": {
+              "melee": 4030,
+              "projectile": 666,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "highsproto",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 40.975,
+            "meanRecoverySeconds": 6.733333333333333
+          },
+          {
+            "key": "rivet:rune",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 10534,
+            "recoveryFrames": 2068,
+            "damage": {
+              "melee": 7120,
+              "projectile": 614,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "rivet",
+              "rune"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 43.891666666666666,
+            "meanRecoverySeconds": 8.616666666666667
+          },
+          {
+            "key": "rivet:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 13476,
+            "recoveryFrames": 2928,
+            "damage": {
+              "melee": 6984,
+              "projectile": 1080,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "rivet",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 56.15,
+            "meanRecoverySeconds": 12.2
+          },
+          {
+            "key": "rune:sproto1011",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 12830,
+            "recoveryFrames": 2458,
+            "damage": {
+              "melee": 7746,
+              "projectile": 1176,
+              "special": 142,
+              "throw": 0
+            },
+            "fighters": [
+              "rune",
+              "sproto1011"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 53.458333333333336,
+            "meanRecoverySeconds": 10.241666666666667
+          },
+          {
+            "key": "sproto1011:vela",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 16574,
+            "recoveryFrames": 3068,
+            "damage": {
+              "melee": 8798,
+              "projectile": 2052,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "sproto1011",
+              "vela"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 69.05833333333334,
+            "meanRecoverySeconds": 12.783333333333333
+          },
+          {
+            "key": "sproto1011:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 12042,
+            "recoveryFrames": 2030,
+            "damage": {
+              "melee": 4844,
+              "projectile": 2314,
+              "special": 424,
+              "throw": 0
+            },
+            "fighters": [
+              "sproto1011",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.175,
+            "meanRecoverySeconds": 8.458333333333334
+          },
+          {
+            "key": "vela:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 11650,
+            "recoveryFrames": 1984,
+            "damage": {
+              "melee": 5864,
+              "projectile": 882,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "vela",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 48.541666666666664,
+            "meanRecoverySeconds": 8.266666666666667
+          }
+        ]
+      }
+    },
+    {
+      "skill": 7,
+      "summary": {
+        "matches": 112,
+        "rawDraws": 0,
+        "rawDrawRate": 0,
+        "unresolved": 0,
+        "drawRate": 0,
+        "rounds": {
+          "completed": 273,
+          "partial": 0,
+          "draws": 0,
+          "timerDecisions": 0,
+          "wins": [
+            135,
+            138
+          ],
+          "meanSeconds": 21.914285714285715
+        },
+        "timeouts": 0,
+        "meanSeconds": 53.41607142857143,
+        "medianSeconds": 52.45,
+        "fighters": {
+          "bront": {
+            "archetype": "Brawler",
+            "matches": 28,
+            "wins": 8,
+            "losses": 20,
+            "draws": 0,
+            "rawWins": 8,
+            "rawLosses": 20,
+            "rawDraws": 0,
+            "frames": 90474,
+            "recoveryFrames": 15570,
+            "damage": {
+              "melee": 37012,
+              "projectile": 14850,
+              "special": 1008,
+              "throw": 360
+            },
+            "decidedWinRate": 0.2857142857142857,
+            "rawDecidedWinRate": 0.2857142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 53.85357142857143,
+            "meanRecoverySeconds": 9.267857142857142
+          },
+          "duo": {
+            "archetype": "Paired",
+            "matches": 28,
+            "wins": 15,
+            "losses": 13,
+            "draws": 0,
+            "rawWins": 15,
+            "rawLosses": 13,
+            "rawDraws": 0,
+            "frames": 100872,
+            "recoveryFrames": 18960,
+            "damage": {
+              "melee": 25985,
+              "projectile": 32170,
+              "special": 1087,
+              "throw": 0
+            },
+            "decidedWinRate": 0.5357142857142857,
+            "rawDecidedWinRate": 0.5357142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 60.04285714285714,
+            "meanRecoverySeconds": 11.285714285714285
+          },
+          "highsproto": {
+            "archetype": "Zoning",
+            "matches": 28,
+            "wins": 5,
+            "losses": 23,
+            "draws": 0,
+            "rawWins": 5,
+            "rawLosses": 23,
+            "rawDraws": 0,
+            "frames": 83436,
+            "recoveryFrames": 13161,
+            "damage": {
+              "melee": 30270,
+              "projectile": 10709,
+              "special": 2254,
+              "throw": 360
+            },
+            "decidedWinRate": 0.17857142857142858,
+            "rawDecidedWinRate": 0.17857142857142858,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 49.66428571428571,
+            "meanRecoverySeconds": 7.833928571428571
+          },
+          "rivet": {
+            "archetype": "Pressure",
+            "matches": 28,
+            "wins": 22,
+            "losses": 6,
+            "draws": 0,
+            "rawWins": 22,
+            "rawLosses": 6,
+            "rawDraws": 0,
+            "frames": 85504,
+            "recoveryFrames": 16058,
+            "damage": {
+              "melee": 44222,
+              "projectile": 13090,
+              "special": 1272,
+              "throw": 0
+            },
+            "decidedWinRate": 0.7857142857142857,
+            "rawDecidedWinRate": 0.7857142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.8952380952381,
+            "meanRecoverySeconds": 9.558333333333334
+          },
+          "rune": {
+            "archetype": "Pressure",
+            "matches": 28,
+            "wins": 20,
+            "losses": 8,
+            "draws": 0,
+            "rawWins": 20,
+            "rawLosses": 8,
+            "rawDraws": 0,
+            "frames": 86332,
+            "recoveryFrames": 15236,
+            "damage": {
+              "melee": 50000,
+              "projectile": 8088,
+              "special": 3564,
+              "throw": 0
+            },
+            "decidedWinRate": 0.7142857142857143,
+            "rawDecidedWinRate": 0.7142857142857143,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 51.38809523809524,
+            "meanRecoverySeconds": 9.069047619047618
+          },
+          "sproto1011": {
+            "archetype": "Weapon",
+            "matches": 28,
+            "wins": 20,
+            "losses": 8,
+            "draws": 0,
+            "rawWins": 20,
+            "rawLosses": 8,
+            "rawDraws": 0,
+            "frames": 83460,
+            "recoveryFrames": 16408,
+            "damage": {
+              "melee": 36672,
+              "projectile": 15040,
+              "special": 2164,
+              "throw": 0
+            },
+            "decidedWinRate": 0.7142857142857143,
+            "rawDecidedWinRate": 0.7142857142857143,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 49.67857142857143,
+            "meanRecoverySeconds": 9.766666666666667
+          },
+          "vela": {
+            "archetype": "Hover",
+            "matches": 28,
+            "wins": 8,
+            "losses": 20,
+            "draws": 0,
+            "rawWins": 8,
+            "rawLosses": 20,
+            "rawDraws": 0,
+            "frames": 86976,
+            "recoveryFrames": 13990,
+            "damage": {
+              "melee": 38404,
+              "projectile": 8204,
+              "special": 1896,
+              "throw": 0
+            },
+            "decidedWinRate": 0.2857142857142857,
+            "rawDecidedWinRate": 0.2857142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 51.77142857142857,
+            "meanRecoverySeconds": 8.327380952380953
+          },
+          "zephyr": {
+            "archetype": "Pressure",
+            "matches": 28,
+            "wins": 14,
+            "losses": 14,
+            "draws": 0,
+            "rawWins": 14,
+            "rawLosses": 14,
+            "rawDraws": 0,
+            "frames": 100858,
+            "recoveryFrames": 18192,
+            "damage": {
+              "melee": 32372,
+              "projectile": 28080,
+              "special": 570,
+              "throw": 0
+            },
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 60.034523809523805,
+            "meanRecoverySeconds": 10.828571428571427
+          }
+        },
+        "archetypes": {
+          "Brawler": {
+            "matches": 28,
+            "wins": 8,
+            "losses": 20,
+            "draws": 0,
+            "rawWins": 8,
+            "rawLosses": 20,
+            "rawDraws": 0,
+            "frames": 90474,
+            "recoveryFrames": 15570,
+            "damage": {
+              "melee": 37012,
+              "projectile": 14850,
+              "special": 1008,
+              "throw": 360
+            },
+            "decidedWinRate": 0.2857142857142857,
+            "rawDecidedWinRate": 0.2857142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 53.85357142857143,
+            "meanRecoverySeconds": 9.267857142857142
+          },
+          "Paired": {
+            "matches": 28,
+            "wins": 15,
+            "losses": 13,
+            "draws": 0,
+            "rawWins": 15,
+            "rawLosses": 13,
+            "rawDraws": 0,
+            "frames": 100872,
+            "recoveryFrames": 18960,
+            "damage": {
+              "melee": 25985,
+              "projectile": 32170,
+              "special": 1087,
+              "throw": 0
+            },
+            "decidedWinRate": 0.5357142857142857,
+            "rawDecidedWinRate": 0.5357142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 60.04285714285714,
+            "meanRecoverySeconds": 11.285714285714285
+          },
+          "Zoning": {
+            "matches": 28,
+            "wins": 5,
+            "losses": 23,
+            "draws": 0,
+            "rawWins": 5,
+            "rawLosses": 23,
+            "rawDraws": 0,
+            "frames": 83436,
+            "recoveryFrames": 13161,
+            "damage": {
+              "melee": 30270,
+              "projectile": 10709,
+              "special": 2254,
+              "throw": 360
+            },
+            "decidedWinRate": 0.17857142857142858,
+            "rawDecidedWinRate": 0.17857142857142858,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 49.66428571428571,
+            "meanRecoverySeconds": 7.833928571428571
+          },
+          "Pressure": {
+            "matches": 84,
+            "wins": 56,
+            "losses": 28,
+            "draws": 0,
+            "rawWins": 56,
+            "rawLosses": 28,
+            "rawDraws": 0,
+            "frames": 272694,
+            "recoveryFrames": 49486,
+            "damage": {
+              "melee": 126594,
+              "projectile": 49258,
+              "special": 5406,
+              "throw": 0
+            },
+            "decidedWinRate": 0.6666666666666666,
+            "rawDecidedWinRate": 0.6666666666666666,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 54.10595238095238,
+            "meanRecoverySeconds": 9.818650793650793
+          },
+          "Weapon": {
+            "matches": 28,
+            "wins": 20,
+            "losses": 8,
+            "draws": 0,
+            "rawWins": 20,
+            "rawLosses": 8,
+            "rawDraws": 0,
+            "frames": 83460,
+            "recoveryFrames": 16408,
+            "damage": {
+              "melee": 36672,
+              "projectile": 15040,
+              "special": 2164,
+              "throw": 0
+            },
+            "decidedWinRate": 0.7142857142857143,
+            "rawDecidedWinRate": 0.7142857142857143,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 49.67857142857143,
+            "meanRecoverySeconds": 9.766666666666667
+          },
+          "Hover": {
+            "matches": 28,
+            "wins": 8,
+            "losses": 20,
+            "draws": 0,
+            "rawWins": 8,
+            "rawLosses": 20,
+            "rawDraws": 0,
+            "frames": 86976,
+            "recoveryFrames": 13990,
+            "damage": {
+              "melee": 38404,
+              "projectile": 8204,
+              "special": 1896,
+              "throw": 0
+            },
+            "decidedWinRate": 0.2857142857142857,
+            "rawDecidedWinRate": 0.2857142857142857,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 51.77142857142857,
+            "meanRecoverySeconds": 8.327380952380953
+          }
+        },
+        "controllers": {
+          "cpu": {
+            "matches": 224,
+            "wins": 112,
+            "losses": 112,
+            "draws": 0,
+            "rawWins": 112,
+            "rawLosses": 112,
+            "rawDraws": 0,
+            "frames": 717912,
+            "recoveryFrames": 127575,
+            "damage": {
+              "melee": 294937,
+              "projectile": 130231,
+              "special": 13815,
+              "throw": 720
+            },
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 53.41607142857143,
+            "meanRecoverySeconds": 9.4921875
+          }
+        },
+        "seats": [
+          {
+            "matches": 112,
+            "wins": 55,
+            "losses": 57,
+            "draws": 0,
+            "rawWins": 55,
+            "rawLosses": 57,
+            "rawDraws": 0,
+            "frames": 358956,
+            "recoveryFrames": 63842,
+            "damage": {
+              "melee": 147280,
+              "projectile": 65193,
+              "special": 6890,
+              "throw": 360
+            },
+            "decidedWinRate": 0.49107142857142855,
+            "rawDecidedWinRate": 0.49107142857142855,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 53.41607142857143,
+            "meanRecoverySeconds": 9.500297619047618
+          },
+          {
+            "matches": 112,
+            "wins": 57,
+            "losses": 55,
+            "draws": 0,
+            "rawWins": 57,
+            "rawLosses": 55,
+            "rawDraws": 0,
+            "frames": 358956,
+            "recoveryFrames": 63733,
+            "damage": {
+              "melee": 147657,
+              "projectile": 65038,
+              "special": 6925,
+              "throw": 360
+            },
+            "decidedWinRate": 0.5089285714285714,
+            "rawDecidedWinRate": 0.5089285714285714,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 53.41607142857143,
+            "meanRecoverySeconds": 9.484077380952382
+          }
+        ],
+        "worstMatchups": [
+          {
+            "key": "bront:duo",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 14582,
+            "recoveryFrames": 2472,
+            "damage": {
+              "melee": 7818,
+              "projectile": 832,
+              "special": 438,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "duo"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 60.75833333333333,
+            "meanRecoverySeconds": 10.3
+          },
+          {
+            "key": "bront:rivet",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 8622,
+            "recoveryFrames": 1162,
+            "damage": {
+              "melee": 3332,
+              "projectile": 1020,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "rivet"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 35.925,
+            "meanRecoverySeconds": 4.841666666666667
+          },
+          {
+            "key": "bront:rune",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 14986,
+            "recoveryFrames": 2662,
+            "damage": {
+              "melee": 8010,
+              "projectile": 1520,
+              "special": 0,
+              "throw": 180
+            },
+            "fighters": [
+              "bront",
+              "rune"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 62.44166666666667,
+            "meanRecoverySeconds": 11.091666666666667
+          },
+          {
+            "key": "duo:rivet",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 14018,
+            "recoveryFrames": 2362,
+            "damage": {
+              "melee": 984,
+              "projectile": 5208,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "rivet"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 58.40833333333333,
+            "meanRecoverySeconds": 9.841666666666667
+          },
+          {
+            "key": "duo:sproto1011",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 14576,
+            "recoveryFrames": 2744,
+            "damage": {
+              "melee": 816,
+              "projectile": 6096,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "sproto1011"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 60.733333333333334,
+            "meanRecoverySeconds": 11.433333333333334
+          },
+          {
+            "key": "duo:vela",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 10308,
+            "recoveryFrames": 1896,
+            "damage": {
+              "melee": 4724,
+              "projectile": 3276,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "vela"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 42.95,
+            "meanRecoverySeconds": 7.9
+          },
+          {
+            "key": "highsproto:rivet",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 13464,
+            "recoveryFrames": 2058,
+            "damage": {
+              "melee": 4682,
+              "projectile": 964,
+              "special": 1140,
+              "throw": 0
+            },
+            "fighters": [
+              "highsproto",
+              "rivet"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 56.1,
+            "meanRecoverySeconds": 8.575
+          },
+          {
+            "key": "highsproto:rune",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 10558,
+            "recoveryFrames": 1320,
+            "damage": {
+              "melee": 4328,
+              "projectile": 678,
+              "special": 570,
+              "throw": 180
+            },
+            "fighters": [
+              "highsproto",
+              "rune"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 43.99166666666667,
+            "meanRecoverySeconds": 5.5
+          },
+          {
+            "key": "highsproto:sproto1011",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 12144,
+            "recoveryFrames": 1824,
+            "damage": {
+              "melee": 4879,
+              "projectile": 775,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "highsproto",
+              "sproto1011"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.6,
+            "meanRecoverySeconds": 7.6
+          },
+          {
+            "key": "highsproto:zephyr",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 7926,
+            "recoveryFrames": 956,
+            "damage": {
+              "melee": 2692,
+              "projectile": 470,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "highsproto",
+              "zephyr"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 33.025,
+            "meanRecoverySeconds": 3.9833333333333334
+          },
+          {
+            "key": "rivet:vela",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 15980,
+            "recoveryFrames": 2892,
+            "damage": {
+              "melee": 8930,
+              "projectile": 1500,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "rivet",
+              "vela"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 66.58333333333333,
+            "meanRecoverySeconds": 12.05
+          },
+          {
+            "key": "rune:sproto1011",
+            "matches": 4,
+            "wins": 0,
+            "losses": 4,
+            "draws": 0,
+            "rawWins": 0,
+            "rawLosses": 4,
+            "rawDraws": 0,
+            "frames": 12016,
+            "recoveryFrames": 1696,
+            "damage": {
+              "melee": 5114,
+              "projectile": 828,
+              "special": 618,
+              "throw": 0
+            },
+            "fighters": [
+              "rune",
+              "sproto1011"
+            ],
+            "decidedWinRate": 0,
+            "rawDecidedWinRate": 0,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 50.06666666666667,
+            "meanRecoverySeconds": 7.066666666666666
+          },
+          {
+            "key": "rune:vela",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 13028,
+            "recoveryFrames": 2524,
+            "damage": {
+              "melee": 8444,
+              "projectile": 984,
+              "special": 414,
+              "throw": 0
+            },
+            "fighters": [
+              "rune",
+              "vela"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 54.28333333333333,
+            "meanRecoverySeconds": 10.516666666666667
+          },
+          {
+            "key": "rune:zephyr",
+            "matches": 4,
+            "wins": 4,
+            "losses": 0,
+            "draws": 0,
+            "rawWins": 4,
+            "rawLosses": 0,
+            "rawDraws": 0,
+            "frames": 13666,
+            "recoveryFrames": 2720,
+            "damage": {
+              "melee": 6728,
+              "projectile": 2832,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "rune",
+              "zephyr"
+            ],
+            "decidedWinRate": 1,
+            "rawDecidedWinRate": 1,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 56.94166666666667,
+            "meanRecoverySeconds": 11.333333333333334
+          },
+          {
+            "key": "duo:highsproto",
+            "matches": 4,
+            "wins": 3,
+            "losses": 1,
+            "draws": 0,
+            "rawWins": 3,
+            "rawLosses": 1,
+            "rawDraws": 0,
+            "frames": 15478,
+            "recoveryFrames": 3004,
+            "damage": {
+              "melee": 3031,
+              "projectile": 5784,
+              "special": 35,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "highsproto"
+            ],
+            "decidedWinRate": 0.75,
+            "rawDecidedWinRate": 0.75,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 64.49166666666666,
+            "meanRecoverySeconds": 12.516666666666667
+          },
+          {
+            "key": "bront:highsproto",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 10054,
+            "recoveryFrames": 1560,
+            "damage": {
+              "melee": 5232,
+              "projectile": 648,
+              "special": 570,
+              "throw": 180
+            },
+            "fighters": [
+              "bront",
+              "highsproto"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 41.891666666666666,
+            "meanRecoverySeconds": 6.5
+          },
+          {
+            "key": "bront:sproto1011",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 12494,
+            "recoveryFrames": 2310,
+            "damage": {
+              "melee": 5272,
+              "projectile": 1672,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "sproto1011"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 52.05833333333333,
+            "meanRecoverySeconds": 9.625
+          },
+          {
+            "key": "bront:vela",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 10716,
+            "recoveryFrames": 1882,
+            "damage": {
+              "melee": 5128,
+              "projectile": 1508,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "vela"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 44.65,
+            "meanRecoverySeconds": 7.841666666666667
+          },
+          {
+            "key": "bront:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 19020,
+            "recoveryFrames": 3522,
+            "damage": {
+              "melee": 2220,
+              "projectile": 7650,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "bront",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 79.25,
+            "meanRecoverySeconds": 14.675
+          },
+          {
+            "key": "duo:rune",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 11076,
+            "recoveryFrames": 1916,
+            "damage": {
+              "melee": 6910,
+              "projectile": 684,
+              "special": 570,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "rune"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 46.15,
+            "meanRecoverySeconds": 7.983333333333333
+          },
+          {
+            "key": "duo:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 20834,
+            "recoveryFrames": 4336,
+            "damage": {
+              "melee": 1076,
+              "projectile": 9646,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "duo",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 86.80833333333334,
+            "meanRecoverySeconds": 18.066666666666666
+          },
+          {
+            "key": "highsproto:vela",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 13812,
+            "recoveryFrames": 2630,
+            "damage": {
+              "melee": 7532,
+              "projectile": 1218,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "highsproto",
+              "vela"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 57.55,
+            "meanRecoverySeconds": 10.958333333333334
+          },
+          {
+            "key": "rivet:rune",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 11002,
+            "recoveryFrames": 1848,
+            "damage": {
+              "melee": 5026,
+              "projectile": 1320,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "rivet",
+              "rune"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 45.84166666666667,
+            "meanRecoverySeconds": 7.7
+          },
+          {
+            "key": "rivet:sproto1011",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 9710,
+            "recoveryFrames": 1852,
+            "damage": {
+              "melee": 6626,
+              "projectile": 384,
+              "special": 514,
+              "throw": 0
+            },
+            "fighters": [
+              "rivet",
+              "sproto1011"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 40.458333333333336,
+            "meanRecoverySeconds": 7.716666666666667
+          },
+          {
+            "key": "rivet:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 12708,
+            "recoveryFrames": 2300,
+            "damage": {
+              "melee": 7338,
+              "projectile": 1212,
+              "special": 296,
+              "throw": 0
+            },
+            "fighters": [
+              "rivet",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 52.95,
+            "meanRecoverySeconds": 9.583333333333334
+          },
+          {
+            "key": "sproto1011:vela",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 9474,
+            "recoveryFrames": 2154,
+            "damage": {
+              "melee": 5694,
+              "projectile": 970,
+              "special": 0,
+              "throw": 0
+            },
+            "fighters": [
+              "sproto1011",
+              "vela"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 39.475,
+            "meanRecoverySeconds": 8.975
+          },
+          {
+            "key": "sproto1011:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 13046,
+            "recoveryFrames": 2570,
+            "damage": {
+              "melee": 6202,
+              "projectile": 1826,
+              "special": 570,
+              "throw": 0
+            },
+            "fighters": [
+              "sproto1011",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 54.358333333333334,
+            "meanRecoverySeconds": 10.708333333333334
+          },
+          {
+            "key": "vela:zephyr",
+            "matches": 4,
+            "wins": 2,
+            "losses": 2,
+            "draws": 0,
+            "rawWins": 2,
+            "rawLosses": 2,
+            "rawDraws": 0,
+            "frames": 13658,
+            "recoveryFrames": 2322,
+            "damage": {
+              "melee": 7172,
+              "projectile": 1354,
+              "special": 60,
+              "throw": 0
+            },
+            "fighters": [
+              "vela",
+              "zephyr"
+            ],
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 56.90833333333333,
+            "meanRecoverySeconds": 9.675
+          }
+        ]
+      }
+    }
+  ]
+}

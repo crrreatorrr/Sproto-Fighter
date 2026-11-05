@@ -21,6 +21,7 @@ try {
   const {ROSTER,PLAYABLE_FIGHTERS,createState,step,A,isFreePlayAddition}=core;
   const {STAGES,STORY_STAGE_IDS}=req(join(temp,'stage.js'));
   const {createStoryMode}=req(join(temp,'storyMode.js'));
+  const {storyDifficulty}=req(join(temp,'difficulty.js'));
   const {storyLocationForEncounter}=req(join(temp,'stageVariants.js'));
   const {createRoundPresentation}=req(join(temp,'animationEvents.js'));
   const TOTAL=STORY_ENCOUNTERS.length;
@@ -119,6 +120,42 @@ try {
       assert.equal(createStoryProgress(t.disk).snapshot().nextIndex,1);
     }
   });
+  await check('three losses at the story skill floor do not offer a no-op easier retry',async()=>{
+    const t=fresh();await t.begin();const saved=progressView(t.progress);
+    assert.equal(t.launches().at(-1).rest[0].skill,1);
+    for(let loss=1;loss<=3;loss++){
+      await finishWave(t,1);
+      const labels=t.$('journey-actions').children.map(button=>button.textContent);
+      assert.equal(labels.some(label=>/easier CPU/i.test(label)),false,'the skill-1 floor cannot be reduced');
+      assert.doesNotMatch(t.$('journey-copy').textContent,/Optional help|reduced by one|−1 skill/);
+      assert.deepEqual(progressView(t.progress),saved,'losses do not change recruitment or progression');
+      if(loss<3){await t.action(0);await flush();}
+    }
+    await t.action(0);await flush();
+    assert.deepEqual(t.launches().at(-1).rest[0],{skill:1,assisted:false});
+  });
+  await check('a reducible fractional encounter offers optional easier CPU without promising an exact one-skill drop',async()=>{
+    const encounter=STORY_ENCOUNTERS.find(e=>{const skill=storyDifficulty(e,STORY_ENCOUNTERS);return skill>1&&skill<2;});
+    assert.ok(encounter,'installed route has a fractional opening difficulty');
+    const t=fresh(before(encounter.index));await t.begin();const saved=progressView(t.progress),base=storyDifficulty(encounter,STORY_ENCOUNTERS);
+    for(let loss=1;loss<=3;loss++){
+      await finishWave(t,1);
+      const labels=t.$('journey-actions').children.map(button=>button.textContent);
+      assert.equal(labels.includes('Retry with easier CPU'),loss===3,'offer only after three straight losses');
+      if(loss<3){await t.action(0);await flush();}
+    }
+    assert.doesNotMatch(t.$('journey-copy').textContent,/reduced by one|−1 skill/);
+    assert.deepEqual(progressView(t.progress),saved);
+    // The ordinary retry remains available and does not activate help.
+    await t.action(0);await flush();assert.deepEqual(t.launches().at(-1).rest[0],{skill:base,assisted:false});
+    await finishWave(t,1);
+    const help=t.$('journey-actions').children.findIndex(button=>button.textContent==='Retry with easier CPU');assert.ok(help>=0);
+    await t.action(help);await flush();
+    const selected=t.launches().at(-1).rest[0];assert.deepEqual(selected,{skill:1,assisted:true});
+    assert.ok(base-selected.skill>0&&base-selected.skill<1,'the floor clamps the fractional reduction');
+    assert.equal(t.story.snapshot().assisted,true);assert.equal(t.story.snapshot().cpuSkill,1);
+    assert.deepEqual(progressView(t.progress),saved,'taking help itself grants no progression/recruit');
+  });
   await check('restart of a settled ordinary round accepts a new outcome once',async()=>{
     const t=fresh();await t.begin();t.story.finishMatch(1);assert.equal(t.story.retryMatch(),true);await flush();t.story.finishMatch(0);assert.ok(t.progress.isCleared(0));
   });
@@ -208,7 +245,7 @@ try {
   });
 
   // Extract the real main hooks. Only browser/canvas/asset I/O is substituted.
-  function integration({disk=storage(),clearCount=0}={}) {
+  function integration({disk=storage(),clearCount=0,depth=false}={}) {
     const d=dom(),progress=createStoryProgress(disk);
     for(let i=0;i<clearCount;i++)clearNode(progress,i);
     const main=read('src/main.ts'),parsed=ts.createSourceFile('main.ts',main,ts.ScriptTarget.Latest,true);
@@ -219,11 +256,13 @@ try {
     assert.ok(start>=0&&end>start,'actual createStoryMode hook block found');
     const code=compile(functions.map(node=>node.getText(parsed)).join('\n')+'\n'+main.slice(start,end));
     const fixture=new Function('dependencies',`
-      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition}=dependencies;
+      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth}=dependencies;
       const canPlayFighter=id=>storyProgress.isUnlocked(id),lockedFighter=()=> 'Defeat this fighter in story mode to recruit them.';
       let setup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'guard',godMode:false};
       let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};
+      let matchCpuSkill=4,matchDifficultyAssist=false;
       let mode='guard',running=false,started=false,chosen='highsproto',opponent='vela',matchGodMode=false,matchEarnedGodMode=false,testingGodMode=false,matchTesting=false;
+      const depthModifier='none',depthRoundStarts=[];let matchDepthOptions=null;
       let state=createState(),presentation=createRoundPresentation(),accumulator=0,queued=0,qaSingleStep=false,resumeAfterSettings=false,remapping=null;
       let selectedStage='ranch',selectedLocation=null,assetFailure=false,mapChoose=null;
       const held=new Set(),frames=[],qaEvents=[],assetRequests=[],versusCalls=[];
@@ -249,11 +288,22 @@ try {
         openSettings(){resumeAfterSettings=running;running=false;dialog.open=true;},
         openResultSettings(){running=false;presentation.phase='result';dialog.open=true;resumeAfterSettings=false;$('overlay').hidden=false;},
         mapPick(index){if(!mapChoose)throw Error('Map not mounted');mapChoose(STORY_ENCOUNTERS[index]);},
-        inspect:()=>({setup,mode,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
+        inspect:()=>({setup,mode,matchDepthOptions,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
     `)({createStoryMode:hooks=>createStoryMode(hooks,progress),storyProgress:progress,STAGES,ROSTER,$:d.$,createRoundPresentation,createState,
-      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition});
+      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth});
     return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);await d.action(0);await flush();}};
   }
+  await check('failed launch preserves the active experimental match and replay options',async()=>{
+    const t=integration({depth:true});
+    assert.equal(await t.launchSelection({fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'cpu'}),true);
+    const before=t.inspect(),options=before.matchDepthOptions;
+    assert.ok(before.state.matchDepth);assert.deepEqual(options,{rounds:true,modifier:'none'});
+    assert.equal(await t.launchSelection({fighter:STORY_ENCOUNTERS[1].opponent,opponent:'vela',stage:'bar',mode:'dummy'}),false);
+    assert.equal(t.inspect().state,before.state);assert.equal(t.inspect().matchDepthOptions,options);
+    t.failAssets();const savedError=console.error;console.error=()=>{};
+    try{assert.equal(await t.launchSelection({fighter:'bront',opponent:'vela',stage:'bar',mode:'guard'}),false);}finally{console.error=savedError;}
+    assert.equal(t.inspect().state,before.state);assert.equal(t.inspect().matchDepthOptions,options);
+  });
   await check('actual main rejects every unrecruited campaign P1 including former free-play additions',async()=>{
     const t=integration(),original=t.inspect().state;
     for(const id of progressModule.STORY_OPPONENTS){

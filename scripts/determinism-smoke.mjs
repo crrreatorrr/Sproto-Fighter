@@ -24,7 +24,7 @@ for (const engine of ['chromium', 'firefox', 'webkit']) {
   let browser;
   try {
     if (!playwright) throw new Error('playwright is not installed');
-    browser = await playwright[engine].launch();
+    browser = await playwright[engine].launch(engine === 'chromium' && process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
   } catch (error) {
     assert.ok(!required.includes(engine), `${engine} is required but could not launch: ${error.message.split('\n')[0]}`);
     console.log(`SKIP ${engine}: not available`);

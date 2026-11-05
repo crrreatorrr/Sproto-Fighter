@@ -21,6 +21,8 @@ class Element{
 }
 globalThis.document={createElement:tag=>new Element(tag)};
 let checks=0;const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};
+// Explicit ambient main state for hooks extracted into their own VM context.
+const optionalMainState=()=>({training:null,depthRoundStarts:[],matchDepthOptions:null,cpuSkill:4});
 function ui(done=()=>{}){const host=new Element('div'),screen=createVersusScreen(host,done),root=host.children[0],lineup=root.children[1];return {screen,root,cards:[lineup.children[0],lineup.children[2]],button:root.children[2]};}
 check('all installed portraits exist and all ordered matchups preserve exact selector names, original images and pair identity',()=>{
  const t=ui();for(const id of core.PLAYABLE_FIGHTERS)assert.ok(existsSync(new URL('../public'+portraitLarge(id),import.meta.url)),id+' versus portrait exists');
@@ -49,13 +51,13 @@ check('pause suspends previews and countdowns without losing their phase or hidi
 const main=ts.createSourceFile('main.ts',read('main.ts'),ts.ScriptTarget.Latest,true);
 const fn=name=>main.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text===name).getText(main);
 check('actual keyboard accepts a fresh Enter only, rejecting Space, combat keys and repeat',()=>{
- let handler;const {screen}=ui();const c={storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,window:{addEventListener(type,fn){handler=fn;}},story:{isOpen:false},dialog:{open:false},selection:{isOpen:false},running:true,blockedKeys:new Set(),versus:screen};
+ let handler;const {screen}=ui();const c={...optionalMainState(),storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,window:{addEventListener(type,fn){handler=fn;}},story:{isOpen:false},dialog:{open:false},selection:{isOpen:false},running:true,blockedKeys:new Set(),versus:screen};
  vm.createContext(c);const registration=main.statements.find(n=>ts.isExpressionStatement(n)&&n.getText(main).startsWith("window.addEventListener('keydown'"));vm.runInContext(compile(registration.getText(main)),c);
  screen.show('guest08','guest09');for(const [code,repeat] of [['Space',false],['KeyA',false],['Enter',true]]){let prevented=false;handler({code,repeat,preventDefault(){prevented=true;}});assert.ok(prevented);assert.ok(screen.isOpen);}
  handler({code:'Enter',repeat:false,preventDefault(){}});assert.equal(screen.isOpen,false);assert.ok(c.blockedKeys.has('Enter'));
 });
 function combatFixture(){
- const c={storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,advanceBossReveal(){},reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,...core,...events,countdown:{advance:()=>false},state:core.createState('highsproto','dummy','vela'),presentation:events.createRoundPresentation(),frames:[],held:new Set(),queued:0,padNeedsRelease:false,qaPanel:null,qaRecord(){},playRetainCallout(){},qaStopAtOutro(){},story:{finishMatch(){},onRoundEnd:()=>false},showOverlay(){}};
+ const c={...optionalMainState(),storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,advanceBossReveal(){},reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,matchCpuSkill:4,matchDifficultyAssist:false,...core,...events,countdown:{advance:()=>false},state:core.createState('highsproto','dummy','vela'),mode:'dummy',presentation:events.createRoundPresentation(),frames:[],held:new Set(),queued:0,padNeedsRelease:false,qaPanel:null,qaRecord(){},playRetainCallout(){},qaStopAtOutro(){},story:{finishMatch(){},onRoundEnd:()=>false},showOverlay(){}};
  const t=ui(()=>{c.held.clear();c.queued=0;c.padNeedsRelease=true;});c.versus=t.screen;vm.createContext(c);vm.runInContext(compile(fn('advanceRoundFrame')),c);return {c,...t};
 }
 check('actual main freezes combat, CPU, replay and entrance clock during versus, then retains the full entrance',()=>{
@@ -80,7 +82,7 @@ check('actual main shows 3/2/1 for one second each, plays entrances without dama
 });
 check('actual gamepad preview consumes only fresh A, requires neutral after skipping, and never leaks an attack',()=>{
  let current={connected:true,axes:[0,0],buttons:Array.from({length:16},()=>({pressed:false}))};
- const c={storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,document:{querySelector:()=>null},...core,versusPads,previousPad2:[],selection:{isOpen:false,pollPad(){}},story:{isOpen:false},dialog:{open:false},running:true,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:true,presentation:{phase:'intro'},navigator:{getGamepads:()=>[current]},$:()=>({}),padKeys:{light:0},performance:{now:()=>0},start(){throw Error('preview Start leaked');},pause(){throw Error('preview Start paused');}};
+ const c={...optionalMainState(),storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,document:{querySelector:()=>null},...core,versusPads,previousPad2:[],selection:{isOpen:false,pollPad(){}},story:{isOpen:false},dialog:{open:false},running:true,remapping:null,previousPad:[],previousStart:false,padNeedsRelease:false,modalDirection:'',modalRepeatAt:0,started:true,presentation:{phase:'intro'},navigator:{getGamepads:()=>[current]},$:()=>({}),padKeys:{light:0},performance:{now:()=>0},start(){throw Error('preview Start leaked');},pause(){throw Error('preview Start paused');}};
  const {screen}=ui(()=>{c.padNeedsRelease=true;});c.versus=screen;vm.createContext(c);vm.runInContext(compile(fn('pollPad')),c);
  screen.show('guest08','guest09');current.buttons[9].pressed=true;assert.equal(c.pollPad(),0);assert.ok(screen.isOpen,'Start must not confirm');current.buttons[9].pressed=false;c.pollPad();
  screen.show('guest08','guest09');c.padNeedsRelease=true;current.buttons[0].pressed=true;assert.equal(c.pollPad(),0);assert.ok(screen.isOpen,'held A cannot skip a new preview');current.buttons[0].pressed=false;c.pollPad();
@@ -93,7 +95,7 @@ check('actual gamepad preview consumes only fresh A, requires neutral after skip
 });
 check('actual restart refreshes both fighter identities and return to selection removes the preview',()=>{
  const {screen,cards}=ui(),elements=new Map();
- const c={storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,...core,...events,countdown:{hide(){}},versus:screen,chosen:'guest08',opponent:'guest09',mode:'dummy',testingGodMode:false,matchEarnedGodMode:false,matchTesting:false,matchGodMode:false,state:core.createState(),presentation:events.createRoundPresentation(),frames:[],qaEvents:[],accumulator:0,held:new Set(),queued:0,started:false,running:false,qaSingleStep:false,resumeAfterSettings:false,resumeAfterJourney:false,story:{leaveStory(){}},selection:{show(){}},updateGodModeLabel(){},start(){},$:id=>{if(!elements.has(id))elements.set(id,{});return elements.get(id);}};
+ const c={...optionalMainState(),storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,matchCpuSkill:4,matchDifficultyAssist:false,...core,...events,countdown:{hide(){}},versus:screen,chosen:'guest08',opponent:'guest09',mode:'dummy',testingGodMode:false,matchEarnedGodMode:false,matchTesting:false,matchGodMode:false,state:core.createState(),presentation:events.createRoundPresentation(),frames:[],qaEvents:[],accumulator:0,held:new Set(),queued:0,started:false,running:false,qaSingleStep:false,resumeAfterSettings:false,resumeAfterJourney:false,story:{leaveStory(){}},selection:{show(){}},updateGodModeLabel(){},start(){},$:id=>{if(!elements.has(id))elements.set(id,{});return elements.get(id);}};
  vm.createContext(c);vm.runInContext(compile(fn('restart')+'\n'+fn('returnToSelection')),c);c.restart();
  assert.equal(cards[0].children[2].children[0].textContent,'Yoyo');assert.equal(cards[1].children[2].children[0].textContent,'Red Kev');assert.ok(screen.isOpen);
  c.opponent='vaudream';c.restart();assert.equal(cards[1].children[1].src,portraitLarge('vaudream'));

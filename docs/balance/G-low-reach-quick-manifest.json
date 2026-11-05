@@ -1,0 +1,138 @@
+{
+  "candidateSource": {
+    "commit": "05397f05169a1581a44e4b138025dd071865480c",
+    "sourceSha256": "b78ee795990bc2b8e73c064c0348ba9a868eb49242a6967765bec3fcea56920d",
+    "simVersion": "c662aee33095a523",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "baselineSource": {
+    "commit": "7b1ab9d19eef10f30bf9b701b2130d8b2d302ed0",
+    "sourceSha256": "058d8215776d1db035c948b42cd224684e705f35ddc46fcb2841dd4b8e7ea495",
+    "simVersion": "c662aee33095a523",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "files": {
+    "report-2026-11-05-G-low-reach-quick.json.gz": {
+      "rawSha256": "39f3457d681c91e5e353609fc39acf3c4d83e79e1e9953783111578451a63a34",
+      "compressedSha256": "267aee0323975911910af275d3bdaed2acb6f997ecb200a1e7d02cca1933073f",
+      "rawBytes": 6055700,
+      "compressedBytes": 333668
+    },
+    "comparison-2026-11-05-G-low-reach-vs-F.json.gz": {
+      "rawSha256": "f04140d1f5f161f0b1c5b6bbe19a172a807f1fd74b9bcf3cc31b04e50d7857b1",
+      "compressedSha256": "fde283009324a4ab4dca2e3ba652edc51e1fd2229eb8c733cf0c62a318db83fa",
+      "rawBytes": 952548,
+      "compressedBytes": 70889
+    }
+  },
+  "FroleDistribution": {
+    "source": {
+      "commit": "7b1ab9d19eef10f30bf9b701b2130d8b2d302ed0",
+      "sourceSha256": "058d8215776d1db035c948b42cd224684e705f35ddc46fcb2841dd4b8e7ea495",
+      "simVersion": "c662aee33095a523",
+      "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+      "cpuHasSkillParameter": true
+    },
+    "statistics": [
+      {
+        "skill": 4,
+        "archetype": "Brawler",
+        "actors": 21,
+        "minimum": {
+          "actor": "johnson",
+          "rate": 0.27205882352941174
+        },
+        "median": 0.3879310344827586,
+        "maximum": {
+          "actor": "dumpstar",
+          "rate": 0.5272727272727272
+        },
+        "above60": 0,
+        "above65": 0
+      },
+      {
+        "skill": 4,
+        "archetype": "Paired",
+        "actors": 20,
+        "minimum": {
+          "actor": "godmod3d",
+          "rate": 0.29464285714285715
+        },
+        "median": 0.4154761904761905,
+        "maximum": {
+          "actor": "peterpan",
+          "rate": 0.5083333333333333
+        },
+        "above60": 0,
+        "above65": 0
+      },
+      {
+        "skill": 4,
+        "archetype": "Footwork",
+        "actors": 85,
+        "minimum": {
+          "actor": "drzmoody",
+          "rate": 0.391025641025641
+        },
+        "median": 0.5454545454545454,
+        "maximum": {
+          "actor": "sproto2101",
+          "rate": 0.65
+        },
+        "above60": 15,
+        "above65": 0
+      },
+      {
+        "skill": 7,
+        "archetype": "Brawler",
+        "actors": 21,
+        "minimum": {
+          "actor": "bront",
+          "rate": 0.31
+        },
+        "median": 0.43243243243243246,
+        "maximum": {
+          "actor": "dumpstar",
+          "rate": 0.5803571428571429
+        },
+        "above60": 0,
+        "above65": 0
+      },
+      {
+        "skill": 7,
+        "archetype": "Paired",
+        "actors": 20,
+        "minimum": {
+          "actor": "sproto704",
+          "rate": 0.3482142857142857
+        },
+        "median": 0.44762277951933127,
+        "maximum": {
+          "actor": "sproto832",
+          "rate": 0.5909090909090909
+        },
+        "above60": 0,
+        "above65": 0
+      },
+      {
+        "skill": 7,
+        "archetype": "Footwork",
+        "actors": 85,
+        "minimum": {
+          "actor": "mildtacos",
+          "rate": 0.3888888888888889
+        },
+        "median": 0.5161290322580645,
+        "maximum": {
+          "actor": "xav",
+          "rate": 0.6388888888888888
+        },
+        "above60": 7,
+        "above65": 0
+      }
+    ]
+  },
+  "scope": "Diagnostic only; no G full panel or promotion"
+}

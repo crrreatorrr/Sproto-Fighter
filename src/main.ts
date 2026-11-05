@@ -1,3 +1,5 @@
+import { enableMatchDepth, nextMatchRound, chapterBossModifier, type MatchModifier } from './core';
+import { TrainingRecorder, drawTrainingGeometry, trainingReadout } from './training';
 import { ensurePoseAtlases, ensurePosePreviews, getPoseAtlasLoadStatus } from './poseAtlas';
 import { createSelectionMenu, type MenuMode, type SelectionSetup } from './selectionMenu';
 import './style.css';
@@ -58,6 +60,13 @@ try {
 }
 catch { /* Storage may be disabled. Defaults still work. */ }
 resolveKeyConflicts(keys, keys2);
+const depthParams = new URLSearchParams(location.search);
+const depthEnabled = depthParams.has('matchDepth');
+const depthModifiers: MatchModifier[] = ['none','double-meter','low-gravity','specials-only','sudden-death','reflect-projectiles'];
+const depthModifier = depthModifiers.find(m => m === depthParams.get('modifier')) ?? 'none';
+const depthRoundStarts: number[] = [];
+const training = depthParams.has('training') ? new TrainingRecorder() : null;
+let matchDepthOptions: { rounds: boolean; modifier: MatchModifier } | null = null;
 let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
     action: Action;
     device: 'key' | 'pad';
@@ -65,6 +74,7 @@ let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: M
 } | null = null;
 /** Which player's mappings the Controls panel is showing. */
 let controlsPlayer: 1 | 2 = 1;
+let matchCpuSkill=4,matchDifficultyAssist=false;
 let matchGodMode=false, matchEarnedGodMode=false, testingGodMode=false, matchTesting=false;
 let presentation = createRoundPresentation();
 let modalDirection='',modalRepeatAt=0,padNeedsRelease=true;
@@ -157,7 +167,8 @@ function updateStage(stage:StageId) {
     $('stage-title').textContent=location.name.toUpperCase();
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
-async function launchSelection(setup:SelectionSetup,isStory=false) {
+async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{skill:number;assisted:boolean}) {
+    let requestedMatchDepthOptions = depthEnabled && !isStory && (setup.mode === 'cpu' || setup.mode === 'versus') ? { rounds: true, modifier: depthModifier } : null;
     if(!isStory&&(setup.mode==='online'||setup.mode==='online-wager')){void queueOnline(setup);return true;}
     // Reconcile wins from another tab or a restored page before the final P1 gate.
     storyProgress.sync();
@@ -171,6 +182,10 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
         return false;
     }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
+    // Standard chapter-end encounters can opt into rule variety. Transformed boss forms
+    // use a separate combat controller and keep their existing campaign rules.
+    if(depthEnabled && encounter && STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter && !storyAnimationPlan(e.opponents.at(-1)!,true).form).at(-1)?.index===encounter.index && setup.opponent===encounter.opponents.at(-1))
+        requestedMatchDepthOptions = { rounds: false, modifier: chapterBossModifier(encounter.chapter-1) };
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
     const selectedPartner=setup.partner;
     if(selectedPartner&&selectedPartner!==ROSTER[setup.fighter].partner&&PLAYABLE_FIGHTERS.includes(selectedPartner as FighterId))requiredFighters.push(selectedPartner as FighterId);
@@ -186,8 +201,10 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
         storyBossArt=bossArt;
     }
     catch(error){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(error);return false;}
+    matchDepthOptions = requestedMatchDepthOptions;
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode as Mode;
+    matchCpuSkill=difficulty?.skill??setup.cpuSkill??4;matchDifficultyAssist=!!difficulty?.assisted;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);setActiveStoryLocation(scenery);
     if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
@@ -202,6 +219,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
         const gauntletName=encounter.gauntlet==='art'?'ART DUO':encounter.gauntlet==='nick-juicy'?'NICK → JUICY':'FINAL GAUNTLET';
         $('mode-label').textContent+=` / ${gauntletName} / BOUT ${bout} OF ${encounter.opponents.length}${bout>1?' / HEALTH REFILLED':''}`;
     }
+    if(mode==='cpu')$('mode-label').textContent+=` / CPU SKILL ${matchCpuSkill.toFixed(1)}${matchDifficultyAssist?' / EASIER RETRY':''}`;
     updateGodModeLabel();
     return true;
 }
@@ -255,7 +273,7 @@ function bind(value: string | number) {
     updateControls();
     $('binding-status').textContent = 'Saved on this browser.';
 }
-function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; if(!selection.isOpen)$('start').focus(); }
+function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; $('overlay-hint').textContent = state.matchDepth ? (state.matchDepth.rounds ? 'First to two round wins · 60-second combat clock' : 'Chapter rule · 60-second combat clock') : 'Play your way · No round timer'; if(!selection.isOpen)$('start').focus(); }
 function start() {
     if (selection.isOpen || story.isOpen || dialog.open || ($('start') as HTMLButtonElement).disabled) return;
     if (presentation.phase === 'result'&&!storyAnimation.active)
@@ -284,6 +302,8 @@ function restart() {
     matchTesting=testingGodMode&&mode!=='versus';matchGodMode=(testingGodMode||matchEarnedGodMode)&&mode!=='versus';
     const partner=state.fighters[0].id===chosen?state.fighters[0].partner:undefined;
     state = createState(chosen, mode, opponent);
+    depthRoundStarts.length = 0;
+    if (matchDepthOptions) enableMatchDepth(state, matchDepthOptions);
     if(partner)state.fighters[0].partner=partner;
     if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
@@ -330,13 +350,13 @@ const story = createStoryMode({
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume'); },
     resume: () => { if (resumeAfterJourney && started && (presentation.phase !== 'result'||storyAnimation.active)) start(); },
-    launch: (stage, isStory, storyOpponent) => {
+    launch: (stage, isStory, storyOpponent, difficulty) => {
         if(isStory)freePlayMode??=selection.getSetup().mode;
         const setup=selection.getSetup();
         if(storyOpponent)setup.opponent=storyOpponent;
         setup.stage=stage;setup.mode=isStory?'cpu':freePlayMode??setup.mode;
         if(!isStory)freePlayMode=null;
-        return launchSelection(setup,isStory);
+        return launchSelection(setup,isStory,difficulty);
     },
 });
 $('start').onclick = () => overlayAction ? overlayAction() : start();
@@ -538,6 +558,17 @@ function pollPad(): number {
 }
 // Optional, visible read-only diagnostics for manual QA; never changes combat state.
 const qaPanel = new URLSearchParams(location.search).has('qa') ? document.createElement('pre') : null;
+const trainingPanel = training ? document.createElement('pre') : null;
+let trainingPlayButton: HTMLButtonElement | null = null;
+if (training && trainingPanel) {
+    const controls = document.createElement('div'); controls.id = 'training-controls';
+    for (const [label, action] of [['Record P1 route', () => training.record()], ['Stop', () => training.stop()], ['Loop on standing dummy', () => { if(mode==='dummy')training.play(); }]] as const) {
+        const button = document.createElement('button'); button.textContent = label; button.onclick = action; if(label==='Loop on standing dummy')trainingPlayButton=button; controls.append(button);
+    }
+    trainingPanel.id = 'training-readout'; trainingPanel.style.cssText = 'white-space:pre-wrap;font:14px monospace;padding:12px';
+    document.querySelector('#app')!.append(controls, trainingPanel);
+}
+
 // `?perf`: read-only art-loading status for scripts/perf-baseline.mjs.
 if (new URLSearchParams(location.search).has('perf')) (window as unknown as {sprotoAtlasStatus:typeof getPoseAtlasLoadStatus}).sprotoAtlasStatus = getPoseAtlasLoadStatus;
 let qaFrozen=false,qaSingleStep=false;
@@ -633,6 +664,7 @@ async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId],
     matchTesting = false; matchGodMode = false;
     updateStage(stage);
     state = match.session.state;
+    matchDepthOptions = null; depthRoundStarts.length = 0;
     presentation = createRoundPresentation();
     countdown.hide();
     versus.show(chosen, opponent);
@@ -750,6 +782,13 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         advanceRoundPresentation(presentation);
         if ((presentation as RoundPresentation).phase !== 'result') return;
         if (online) { showOnlineResult(); return; }
+        if (nextMatchRound(state)) {
+            depthRoundStarts.push(state.frame);
+            presentation = createRoundPresentation();
+            countdown.hide(); versus.show(state.fighters[0].id, state.fighters[1].id);
+            held.clear(); queued = 0; queued2 = 0;
+            return;
+        }
         if(state.winner===0&&((!storyBoss&&storyAnimation.start('boss'))||storyAnimation.start('outro')))return;
         reportRound();
         if (story.onRoundEnd(state.winner!)) return;
@@ -763,7 +802,11 @@ function advanceRoundFrame(input: number, p2Input?: number) {
     }
     if (presentation.phase !== 'fight') return;
     if (online) { advanceOnlineFrame(input); return; }
-    const pair: [number, number] = [input, storyBoss?0:p2Input ?? cpuInput(state)];
+    const pair: [number, number] = [input, storyBoss?0:p2Input ?? cpuInput(state,1,matchCpuSkill)];
+    if (training && !story.isActive && !online && (mode === 'dummy' || mode === 'guard')) {
+        if(mode==='guard' && training.playing)training.stop();
+        pair[1] = training.input(state, pair[0], pair[1]);
+    }
     frames.push(pair);
     const qaBefore = qaPanel ? [state.fighters[0].move?.id,state.fighters[0].combo,state.fighters[0].pips,state.fighters[0].hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|') : '';
     const previousMoves=state.fighters.map(f=>f.move);
@@ -847,7 +890,10 @@ function tick(now: number) {
         ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.restore();
     }
+    if (training && !selection.isOpen && !online && !story.isActive && (mode === 'dummy' || mode === 'guard')) drawTrainingGeometry(ctx, state);
     if (online) updateOnlineStatus();
+    if(trainingPlayButton)trainingPlayButton.disabled = mode!=='dummy' || story.isActive || !!online;
+    if (trainingPanel) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${training?.recording ? 'ON' : 'off'} · ${training?.frames.length ?? 0} frames · playback ${training?.playing ? 'ON' : 'off'}`;
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = storyBoss ? 'Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · X shield · C beam · V ball · R retry' : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);
@@ -860,8 +906,9 @@ document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
-Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, ...(state.fighters[0].partner?{partner:state.fighters[0].partner}:{}), godMode:matchGodMode, ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {
+Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, cpuSkill:matchCpuSkill, difficultyAssisted:matchDifficultyAssist, ...(state.fighters[0].partner?{partner:state.fighters[0].partner}:{}), godMode:matchGodMode, ...(matchDepthOptions?{matchDepth:{...matchDepthOptions,roundStarts:[...depthRoundStarts]}}:{}), ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {
             const replay = createState(chosen, mode, opponent);
+            if(matchDepthOptions)enableMatchDepth(replay,matchDepthOptions);
             if(state.fighters[0].partner)replay.fighters[0].partner=state.fighters[0].partner;
             if(matchGodMode){replay.godMode=true;replay.fighters[0].pips=3;}
             let boss:StoryBoss|null=null,next=0,toggle=0;
@@ -870,6 +917,7 @@ Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClon
                     applyGodMode(replay,godModeChanges[toggle++].enabled);
             };
             for(const frame of frames){
+                if(depthRoundStarts.includes(replay.frame))nextMatchRound(replay);
                 if(replay.frame===bossStarts[next]?.frame)boss=startStoryBoss(replay,bossStarts[next++].form);
                 applyChanges();
                 if(boss)stepStoryBoss(replay,boss,frame[0]);
@@ -877,5 +925,6 @@ Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClon
             }
             if(replay.frame===bossStarts[next]?.frame)boss=startStoryBoss(replay,bossStarts[next].form);
             applyChanges();
+            if(depthRoundStarts.includes(replay.frame))nextMatchRound(replay);
             return JSON.stringify(replay)===JSON.stringify(state)&&JSON.stringify(boss)===JSON.stringify(storyBoss);
         } } });

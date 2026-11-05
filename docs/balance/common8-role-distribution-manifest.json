@@ -1,0 +1,54 @@
+{
+  "dataset": "Common8 four-cell role distributions",
+  "sourceCells": {
+    "A-reviewed": {
+      "source": {
+        "commit": "db5508c5d1f3b94204328fa966f656e4a6b76d20",
+        "sourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+        "simVersion": "373448bdc043a0e8",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+        "cpuHasSkillParameter": true
+      },
+      "rawReportSha256": "cf5dd1290703c4bc7321e08718dd2c6914cc67c8796e882b1a0edf20a9023ec8"
+    },
+    "B-tracking": {
+      "source": {
+        "commit": "b329efc630deb181ba94d66fea97907245afc873",
+        "sourceSha256": "a7f340e5e1bfc253206eb07d05d306893d15dffc209a84c805f4c2ec9550df71",
+        "simVersion": "dae133515ccb22a6",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+        "cpuHasSkillParameter": true
+      },
+      "rawReportSha256": "7559167a42a65c3b97cdd5e81287c8f36b254fc97861e3117e50b1712057117f"
+    },
+    "E-reviewed-V3": {
+      "source": {
+        "commit": "cbbbaf7f8a3be4efe1d0b4ee17fee74d6ca32058",
+        "sourceSha256": "5902fe06f01222321fdf544cbd26a42798d5e4c286c40e854c542dbc05738df4",
+        "simVersion": "c662aee33095a523",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+        "cpuHasSkillParameter": true
+      },
+      "rawReportSha256": "666c4255b3f71b7b304cb9bed02d759366a2d4e79a1abea2abd2497b75e2569c"
+    },
+    "D-tracking-V3": {
+      "source": {
+        "commit": "b702f62ded2625534af349018683e33d718747dd",
+        "sourceSha256": "8e6186983111ec4ffc0d41ab389481e0764305803364f1899ebf7d208c689092",
+        "simVersion": "4d75d73d27717592",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+        "cpuHasSkillParameter": true
+      },
+      "rawReportSha256": "69c0eecf7f65c75726d49fe3a2e92171101177852ab8b9383599e46acd07177b"
+    }
+  },
+  "commonDirectedBoutKeys": 16104,
+  "keySha256": "006c01adec3ac8ae513186703098ce9e32bd177036ca5978812c15a2daeca1bb",
+  "keyEncoding": "SHA256 of UTF8 newline-joined lexicographically sorted compact JSON arrays [skill,fighters,controllers,repeat,initialSeeds]",
+  "distributionFile": "common8-role-distributions.json.gz",
+  "rawBytes": 120290,
+  "rawSha256": "122f25695f6e297061fdb3bf2d186c9ac455fef65c67a6fe5b00eba0b11a2e69",
+  "gzipBytes": 7845,
+  "gzipSha256": "5e4276aeb53bb9c3d64629be3b54d5d6fbb3519a377f7a3ebdfc17169750416f",
+  "limits": "Observed point estimates from samples8/repeats2; not population confidence or human-playtest approval. Reverse seats share seeds. No individual-ID tuning."
+}

@@ -1,0 +1,33 @@
+
+> metaverse-hub@0.0.0 test
+> npm run build -w @metaverse/hub-sdk && tsx packages/hub-sdk/test/sdk.test.ts && tsx packages/hub-sdk/test/realtime.test.ts && tsx packages/hub-sdk/test/realtime-mock.test.ts && tsx scripts/sim-capsule.ts && tsx apps/hub/test/net.test.ts && tsx apps/hub/test/arcade.test.ts && tsx server/test/unit/run.ts
+
+
+> @metaverse/hub-sdk@0.6.1 build
+> tsc -p tsconfig.build.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+hub-sdk tests ok
+hub-sdk realtime tests ok
+hub-sdk realtime mock tests ok
+capsule sim ok { restY: '1.775', jump: '0.718' }
+hub net tests ok
+arcade cabinet ok
+chat guard tests ok
+hub match tests ok
+item grant tests ok
+leaderboard tests ok
+server scaffold tests ok
+pb_world ok
+sproto_arcade tests ok
+sproto_arena tests ok
+server module tests ok (8 files)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

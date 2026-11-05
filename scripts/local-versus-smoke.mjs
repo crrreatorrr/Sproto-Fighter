@@ -11,7 +11,9 @@ check('the CPU decides identically from either slot', () => {
     const s = createState(p1, 'cpu', p2);
     for (let t = 0; t < 900; t++) {
       // The same situation with the fighters' slots swapped.
-      const swapped = structuredClone(s); swapped.fighters.reverse();
+      const swapped = structuredClone(s); swapped.fighters.reverse(); swapped.cpu?.reverse();
+      if(swapped.throwState){swapped.throwState.attacker=1-swapped.throwState.attacker;swapped.throwState.victim=1-swapped.throwState.victim;}
+      for(const projectile of swapped.projectiles)projectile.owner=1-projectile.owner;
       assert.equal(cpuInput(s, 1), cpuInput(swapped, 0), `${p1} vs ${p2} frame ${t}`);
       assert.equal(cpuInput(s, 0), cpuInput(swapped, 1), `${p1} vs ${p2} frame ${t}`);
       step(s, [cpuInput(s, 0), cpuInput(s, 1)]);

@@ -64,11 +64,21 @@ for(const [main,partner]of Object.entries(rules.assignments))for(const face of [
  if(x===600){assert.equal(maxCombo,COMBAT_STYLES[main].specialFrames.length,main+' all contacts connect');if(PARTNER_ATTACKS[partner].kind==='frost')assert.ok(maxSlow>0,'frost actually slows a confirmed target');}
  cases++;
 }
-// Every Team Special connects at long range through either guard.
-for(const main of ['olnoname','vitaliketh'])for(const crouch of [false,true]){
- const s=createState(main,'cpu','rivet'),[f,foe]=s.fighters;f.x=500;foe.x=1180;f.pips=3;
- step(s,[A.special,A.right|(crouch?A.down:0)]);for(let t=0;t<25;t++)step(s,[0,A.right|(crouch?A.down:0)]);
- assert.ok(foe.hp<1000,main+' connects across the arena through guard');
+// Phase 1 gives Specials finite archetype reach; Phase 3 makes them guardable.
+// Use a non-low reference partner so standing and crouching guard are both valid.
+for(const main of ['olnoname','vitaliketh'])for(const face of [-1,1])for(const crouch of [false,true]){
+ const s=createState(main,'versus','rivet'),[f,foe]=s.fighters;
+ f.x=600;foe.x=600+face*180;f.facing=face;foe.facing=-face;f.partner='rivet';f.pips=3;
+ const away=face===1?A.right:A.left,guard=away|(crouch?A.down:0);let blocked=false;
+ for(let t=0;t<160;t++){step(s,[t===0?A.special:0,guard]);blocked ||= foe.blockstun>0;}
+ assert.ok(blocked,main+' Special is guarded inside its effective reach');
+ assert.ok(foe.hp<1000&&foe.hp>950,main+' guard takes chip, not full Special damage');
+ assert.equal(f.best,0,main+' blocked contacts do not become a damaging combo');
+}
+for(const main of ['olnoname','vitaliketh']){
+ const s=createState(main,'versus','rivet'),[f,foe]=s.fighters;f.x=100;foe.x=1180;f.pips=3;
+ for(let t=0;t<160;t++)step(s,[t===0?A.special:0,0]);
+ assert.equal(foe.hp,1000,main+' Special cannot connect across the arena outside its reach');
 }
 // Incoming projectiles pass through an active Special, then can hit again after recovery.
 const immune=createState('rivet','cpu','vela'),[caster]=immune.fighters;
@@ -96,4 +106,4 @@ assert.deepEqual(clash.fighters.map(fighter=>fighter.hp),[1000,1000],'simultaneo
 const shapes=new Set();
 for(const id of ids){const log=[],ctx=new Proxy({globalAlpha:1},{get:(o,k)=>k in o?o[k]:(...args)=>log.push([k,...args]),set:(o,k,v)=>(o[k]=v,true)});const a={x:300,y:460,targetX:800,targetY:500,floor:FLOOR,age:2,beat:0,body:0,facing:1};effects.drawPartnerEffect(ctx,PARTNER_ATTACKS[id],a);const first=JSON.stringify(log);log.length=0;effects.drawPartnerEffect(ctx,PARTNER_ATTACKS[id],a);assert.equal(JSON.stringify(log),first,'deterministic drawing');shapes.add(first);}
 assert.equal(shapes.size,13,'each effect has different geometry');
-console.log(`PASS: 10 new single partners + 3 twin pairs; 13 attack geometries and contact profiles; ${cases} facing/wall scenarios; both twin bodies attack (${twinContacts} captured attack frames), exact single-partner loading, long-range hits through guard, frost slow, meter, damage schedules and render purity.`);
+console.log(`PASS: 10 new single partners + 3 twin pairs; 13 attack geometries and contact profiles; ${cases} facing/wall scenarios; both twin bodies attack (${twinContacts} captured attack frames), exact single-partner loading, finite Special reach and guarded chip, frost slow, meter, damage schedules and render purity.`);

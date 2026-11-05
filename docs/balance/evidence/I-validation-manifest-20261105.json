@@ -1,0 +1,64 @@
+{
+  "simulation": "a4c7ddde49ec5a64",
+  "productionSourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+  "functionalCiCommit": "724c8d22c",
+  "unitTests": 196,
+  "fastStandaloneChecks": 68,
+  "fullLocalSuite": "F source only:195unit/72standalone; I full suite ran in CI",
+  "ciRuns": [
+    41981168622,
+    41981168254
+  ],
+  "ciConclusion": "success;build+Chromium/Firefox/WebKit",
+  "liveGojaReplays": 5,
+  "liveRelayGroups": 4,
+  "humanPlaytest": "not performed",
+  "directWebRTC": "not verified",
+  "files": {
+    "I-check-20261105.txt": {
+      "bytes": 252,
+      "sha256": "f86bd21368dc4e3b01f758ad9ab215b6771568c02014779727d99cc899c46edc"
+    },
+    "I-fast-20261105.txt": {
+      "bytes": 4388,
+      "sha256": "282f832a9a13875d047875a7adf4271c18e1b1edfd38f93326a57dac02b97ee0"
+    },
+    "I-build-20261105.txt": {
+      "bytes": 25227,
+      "sha256": "1f602740df9a55264dcb82af65a2d8ea65785d36b7bdd844a5ce0f0951928e45"
+    },
+    "I-pack-20261105.txt": {
+      "bytes": 116,
+      "sha256": "3395b5240e5c17f227df254eb776c08212617c9b03489a401d185d9831cc53a7"
+    },
+    "I-hub-check-20261105.txt": {
+      "bytes": 1326,
+      "sha256": "f1d8265d557848e804780f6c92d7cd04ec4966e6e74aca9c4bb640bb991a2e04"
+    },
+    "I-hub-test-20261105.txt": {
+      "bytes": 1168,
+      "sha256": "c310a739ab0b113a45aefe38785448530c49be4af5e428ec5842cfb3c79e8398"
+    },
+    "I-hub-build-20261105.txt": {
+      "bytes": 3912,
+      "sha256": "e0edb76aab231d5feb78c7bdca9be21f8666b4574fe55deab0b81545790c9b75"
+    },
+    "I-hub-lint-20261105.txt": {
+      "bytes": 248,
+      "sha256": "f217b14abb41862792d3f0c9ecb726635570a9b017210198c1a9c68b7c3de800"
+    },
+    "I-hub-replay-20261105.txt": {
+      "bytes": 402,
+      "sha256": "b332e3815c830b27952bd66f0ac9db83adb35af859444bc433f1065d9cbfc49c"
+    },
+    "I-hub-duel-20261105.txt": {
+      "bytes": 400,
+      "sha256": "28c91f8d476ee20af6ec8d3286e4a79f3f93843ff769e91f275eab2bb95930ba"
+    },
+    "I-online-browser-20261105.txt": {
+      "bytes": 311,
+      "sha256": "afcb5918f04413c24fbe139be25ccfa4d2208726ad7cf2a742b7b6f618a812ae"
+    }
+  },
+  "twoChromiumRelayWagerAndRematch": "passed"
+}

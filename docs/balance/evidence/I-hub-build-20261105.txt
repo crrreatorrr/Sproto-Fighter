@@ -1,0 +1,69 @@
+
+> metaverse-hub@0.0.0 build
+> npm run build -w @metaverse/hub-sdk && node server/modules/embed-shop.mjs && tsc -p server/modules/tsconfig.json && node server/modules/append-vendor.mjs && npm run build -w @metaverse/hub && node scripts/check-prod-bundle.mjs
+
+
+> @metaverse/hub-sdk@0.6.1 build
+> tsc -p tsconfig.build.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+shop seed 99 rows
+
+> @metaverse/hub@0.0.0 build
+> tsc --noEmit && vite build
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:16:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 140 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/play/sproto/index.html                                     1.54 kB │ gzip:   0.70 kB
+dist/assets/press-start-2p-latin-400-normal-KLytu4cr.woff       6.32 kB
+dist/hub/index.html                                             8.87 kB │ gzip:   2.45 kB
+dist/assets/vt323-latin-400-normal-Dqn9ZSPj.woff                9.75 kB
+dist/assets/inter-vietnamese-wght-normal-CBcvBZtf.woff2        10.25 kB
+dist/assets/inter-greek-ext-wght-normal-DlzME5K_.woff2         11.23 kB
+dist/assets/press-start-2p-latin-400-normal-_wFEWmAB.woff2     12.51 kB
+dist/assets/vt323-latin-400-normal-wDgJuOC9.woff2              17.93 kB
+dist/assets/inter-cyrillic-wght-normal-DqGufNeO.woff2          18.74 kB
+dist/assets/inter-greek-wght-normal-CkhJZR-_.woff2             18.99 kB
+dist/assets/inter-cyrillic-ext-wght-normal-BOeWTOD4.woff2      25.96 kB
+dist/assets/inter-latin-wght-normal-Dx4kXJAl.woff2             48.25 kB
+dist/assets/basis_transcoder-o4Hde_L7.js                       57.52 kB
+dist/assets/inter-latin-ext-wght-normal-DO1Apj_S.woff2         85.06 kB
+dist/assets/basis_transcoder-VXdx5NbI.wasm                    527.33 kB │ gzip: 248.94 kB
+dist/assets/sproto-BVYAT4bH.css                                 0.90 kB │ gzip:   0.49 kB
+dist/assets/login-DBRo0DJK.css                                 11.30 kB │ gzip:   3.12 kB
+dist/assets/main-CRvVNf7m.css                                  39.68 kB │ gzip:   8.68 kB
+dist/assets/modulepreload-polyfill-P2Xu9kJm.js                  0.67 kB │ gzip:   0.38 kB
+dist/assets/hub-Dc0e49Ra.js                                     1.96 kB │ gzip:   1.04 kB
+dist/assets/nakama-DG5Dx93V.js                                  5.63 kB │ gzip:   2.37 kB
+dist/assets/login-bB1YjCDp.js                                   9.31 kB │ gzip:   3.55 kB
+dist/assets/sproto-Ctu0077n.js                                 35.79 kB │ gzip:   8.94 kB
+dist/assets/main-1-cfaAJ9.js                                1,026.83 kB │ gzip: 288.65 kB
+
+✓ built in 2.87s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 900 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+hub js 1195264 bytes, gzip 331046 bytes, files 13
+production bundle has no debug globals
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

@@ -1,0 +1,21 @@
+{
+  "source": {
+    "commit": "e95741f75c1a9f7f58d8b4643aa9bbdd9b1ee612",
+    "sourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+    "simVersion": "373448bdc043a0e8",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9"
+  },
+  "projectileWhiff": {
+    "file": "projectile-whiff-budget-observations.json.gz",
+    "rawBytes": 160643,
+    "rawSha256": "8b9bdc0efb778832855e3fa348003d1f18c77e4da9fe116a7dba6554e3b942d0",
+    "gzipBytes": 5350,
+    "gzipSha256": "271dd616110f28ba292c63811205ec8ed923dc2f3498105692318bdb9d81790e"
+  },
+  "selectedPartnerInventory": {
+    "file": "selected-partner-utility-inventory.json",
+    "bytes": 5932,
+    "sha256": "53fc0639a8d1393bb6409e50f592bca53ff39a7a175c68dcf2a0a4351d89f9e7"
+  },
+  "limits": "Numeric metadata and synthetic-whiff observations, not utility prices. Actor IDs are join keys, never proposed win-rate coefficients. No game source, geometry, artwork, HP or partner assignments changed."
+}

@@ -1,0 +1,252 @@
+{
+  "sourceBase": "41ca8e82c43f177c81ba194d984447d6ea829c0c",
+  "simulationSourceSha256": "058d8215776d1db035c948b42cd224684e705f35ddc46fcb2841dd4b8e7ea495",
+  "simVersion": "c662aee33095a523",
+  "fixtureSha256": "91a1372df8ce7a23b6fe37fe694b85f5b2fe7f715df18f8920d8c1ef1518248e",
+  "automated": true,
+  "humanPlaytest": false,
+  "ci": {
+    "run": 41974396406,
+    "job": 127069799363,
+    "url": "https://github.com/crrreatorrr/Sproto-Fighter/actions/runs/41974396406/job/127069799363",
+    "parallelChecks": 4,
+    "storyCheckElapsedSeconds": 67.8,
+    "result": "undefined blackoutPixel; expected [0,0,0,255]; 71/72 checks passed"
+  },
+  "originalFocusedLoop": {
+    "cpuThrottle": 8,
+    "attempts": 20,
+    "elapsedMs": 12793,
+    "frame": 459,
+    "winner": 0,
+    "godMode": true,
+    "hp": [
+      1000,
+      0
+    ],
+    "scene": {
+      "phase": null,
+      "blackout": 80,
+      "clip": null,
+      "frame": 0
+    },
+    "bossStarts": [],
+    "visibility": "visible",
+    "blackoutPixel": [
+      0,
+      0,
+      0,
+      255
+    ],
+    "result": "passed in this focused run; exact CI cause not reproduced"
+  },
+  "delayedObserver": {
+    "testObserverPublicationDelayMs": 1000,
+    "cpuThrottle": 8,
+    "attempts": 58,
+    "elapsedMs": 50592,
+    "immediate": {
+      "pixel": null,
+      "scene": {
+        "phase": null,
+        "blackout": 70,
+        "clip": null,
+        "frame": 0
+      },
+      "winner": 0
+    },
+    "published": {
+      "blackout": 29,
+      "publishedAt": 60040.59999999963,
+      "pixel": [
+        0,
+        0,
+        0,
+        255
+      ]
+    },
+    "frame": 1290,
+    "winner": 0,
+    "godMode": true,
+    "hp": [
+      1000,
+      0
+    ],
+    "scene": {
+      "phase": null,
+      "blackout": 11,
+      "clip": null,
+      "frame": 0
+    },
+    "bossStarts": [],
+    "visibility": "visible",
+    "regularBouts": [
+      {
+        "opponent": "vela",
+        "outcome": "ko",
+        "attempts": 58,
+        "combatFrames": 1285,
+        "elapsedMs": 48150,
+        "frame": 1290
+      }
+    ],
+    "replay": true
+  },
+  "fullAffectedCheck": {
+    "command": "BASE_URL=<isolated Vite server> CHROME_PATH=/usr/bin/chromium node scripts/story-animation-browser.mjs",
+    "cacheDir": "/tmp/sproto-story-fixed-cache",
+    "hmr": false,
+    "playback": [
+      {
+        "id": "nick",
+        "phase": "intro",
+        "seen": [
+          "nick-juicy"
+        ],
+        "frames": 180,
+        "visible": 8,
+        "boundaryChecks": []
+      },
+      {
+        "id": "nick",
+        "phase": "boss",
+        "seen": [
+          "nick-mount"
+        ],
+        "frames": 60,
+        "visible": 3,
+        "boundaryChecks": []
+      },
+      {
+        "id": "nick",
+        "phase": "outro",
+        "seen": [
+          "nick-flight"
+        ],
+        "frames": 30,
+        "visible": 2,
+        "boundaryChecks": []
+      },
+      {
+        "id": "guest07",
+        "phase": "boss",
+        "seen": [
+          "juicy-robot"
+        ],
+        "frames": 900,
+        "visible": 45,
+        "boundaryChecks": []
+      },
+      {
+        "id": "sproto943",
+        "phase": "boss",
+        "seen": [
+          "art-fusion",
+          "mega-woman-growth"
+        ],
+        "frames": 660,
+        "visible": 33,
+        "boundaryChecks": [
+          "fusion/growth",
+          "growth/boss idle"
+        ]
+      },
+      {
+        "id": "vela",
+        "phase": "boss",
+        "seen": [
+          "morelight-smoke"
+        ],
+        "frames": 332,
+        "visible": 17,
+        "boundaryChecks": []
+      },
+      {
+        "id": "vela",
+        "phase": "mecha",
+        "seen": [
+          "morelight-shrink",
+          "morelight-mecha"
+        ],
+        "frames": 970,
+        "visible": 49,
+        "boundaryChecks": [
+          "shrink/boarding"
+        ]
+      },
+      {
+        "id": "vela",
+        "phase": "outro",
+        "seen": [
+          "morelight-ejection",
+          "morelight-wizard",
+          "morelight-exit"
+        ],
+        "frames": 928,
+        "visible": 46,
+        "boundaryChecks": [
+          "mecha/ejection",
+          "ejection/wizard"
+        ],
+        "smallMorelightHeight": 158,
+        "mechaHeight": 228,
+        "referenceMechaFramesVerified": 26
+      },
+      {
+        "id": "vaudream",
+        "phase": "outro",
+        "seen": [
+          "vmu-shield",
+          "vmu-black-hole"
+        ],
+        "frames": 360,
+        "visible": 18,
+        "boundaryChecks": []
+      }
+    ],
+    "regularBouts": [
+      {
+        "opponent": "vela",
+        "outcome": "ko",
+        "attempts": 111,
+        "combatFrames": 674,
+        "elapsedMs": 14281,
+        "frame": 676
+      },
+      {
+        "opponent": "vaudream",
+        "outcome": "ko",
+        "attempts": 83,
+        "combatFrames": 495,
+        "elapsedMs": 11261,
+        "frame": 496
+      }
+    ],
+    "blackoutPaint": {
+      "frame": 676,
+      "blackout": 89,
+      "pixel": [
+        0,
+        0,
+        0,
+        255
+      ]
+    },
+    "nickIntro": {
+      "pause": true,
+      "skip": true,
+      "retry": true,
+      "combatFrames": 0,
+      "failedLoadRetry": true
+    },
+    "morelightBoss": {
+      "progression": true,
+      "keyboardWeapons": true,
+      "replay": true,
+      "liveGodModeToggle": true
+    },
+    "errors": [],
+    "failures": [],
+    "rawReportSha256": "e4a91b1b92618b9e43911dc369ccafe0283458897fad8abf815b18510517f6fe"
+  }
+}

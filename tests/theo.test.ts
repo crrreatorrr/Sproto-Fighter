@@ -118,7 +118,8 @@ it.each([1, -1] as const)('fires Captain’s laser from Theo’s chest and resol
     expect(laser.vy).toBe(0);
     expect(getPoseAtlasDebug(theo, state.frame)).toMatchObject({ sequence: 'ranged', frameIndex: 4 });
     for (let frame = 0; frame < 80; frame++) step(state, [0, input]);
-    expect(rival.hp).toBe(defense === 'none' ? 936 : 1000);
+    const damage = getMove(theo, 'bolt').damage;
+    expect(rival.hp).toBe(1000 - (defense === 'none' ? damage : defense === 'block' ? Math.round(damage * .12) : 0));
     expect(theo.move).toBeNull();
   }
 });

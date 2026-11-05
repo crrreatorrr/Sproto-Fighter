@@ -46,5 +46,18 @@ export function runScenario(core) {
     }
     results.push({ matchup: `${p1} vs ${p2}`, hashes });
   }
+  // Experimental local rules are fingerprinted and replayed by every engine too.
+  for (const modifier of ['none', 'double-meter', 'low-gravity', 'specials-only', 'sudden-death', 'reflect-projectiles']) {
+    const s = createState('rivet', 'versus', 'vela');
+    core.enableMatchDepth(s, { modifier }); s.matchDepth.remaining = 120;
+    const hashes = [];
+    for (let frame = 0; frame < 600; frame++) {
+      if (s.matchDepth.complete) { s.winner = null; core.enableMatchDepth(s, { modifier }); s.matchDepth.remaining = 120; }
+      step(s, [moves[Math.floor(frame / 8) % moves.length], moves[Math.floor(frame / 11 + 3) % moves.length]]);
+      if (s.matchDepth.round > 1 && s.matchDepth.remaining > 120) s.matchDepth.remaining = 120;
+      if ((frame + 1) % CHECK_EVERY === 0) hashes.push(hashState(s));
+    }
+    results.push({ matchup: 'match-depth / ' + modifier, hashes });
+  }
   return { results, stats };
 }

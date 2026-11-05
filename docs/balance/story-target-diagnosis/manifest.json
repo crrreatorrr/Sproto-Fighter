@@ -1,0 +1,91 @@
+{
+  "referenceBot": "reference-v2-persistent-delay18",
+  "referenceSha256": "2aada800cc5ac2e80c41942a14db8a9a6bb8f541a8a9bc4cbdf5d640a364f4ff",
+  "referenceFighter": "highsproto",
+  "seed": 20261105,
+  "primaryReferenceSeat": 0,
+  "reverseSeats": "paired audit; share fighter/controller streams",
+  "files": [
+    {
+      "file": "reviewed-fixed-panel.json.gz",
+      "source": "db5508c5d",
+      "simVersion": "373448bdc043a0e8",
+      "simulationSourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+      "referenceSha256": "2aada800cc5ac2e80c41942a14db8a9a6bb8f541a8a9bc4cbdf5d640a364f4ff",
+      "routeSha256": "423ddc19a4e4bc93d4560b3d007110b23b45689c23e8084d80a6f0d4c57cea97",
+      "mode": "panel",
+      "repeats": 8,
+      "seedRange": [
+        0,
+        7
+      ],
+      "jsonSha256": "cbfb70eca314a7802a14986fef4422c3b34cc1f39d55bb34e3c7898f07416f18",
+      "gzipSha256": "f2c6339e0b30e5595f3943f26b2a7d2dbf94b32891c346e3451d7cf1e64015bb",
+      "resultPayloadSha256": "bdf44e2bf623fe2b3c2cf6545a2efa25dc5395face5b0852a2af41d7927ae8af",
+      "payloadDefinition": "JSON.stringify(records)",
+      "bytes": 1083247,
+      "gzipBytes": 58971
+    },
+    {
+      "file": "reviewed-endpoints.json.gz",
+      "source": "db5508c5d",
+      "simVersion": "373448bdc043a0e8",
+      "simulationSourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+      "referenceSha256": "2aada800cc5ac2e80c41942a14db8a9a6bb8f541a8a9bc4cbdf5d640a364f4ff",
+      "routeSha256": "423ddc19a4e4bc93d4560b3d007110b23b45689c23e8084d80a6f0d4c57cea97",
+      "mode": "endpoints",
+      "repeats": 256,
+      "seedRange": [
+        0,
+        255
+      ],
+      "jsonSha256": "6667707410c35e49d84ec1e0f5b67cfc356a07a599d8595eaecc2b51f4e10574",
+      "gzipSha256": "116f6602aba923b3b2cf89c8e9dce8f1687ffe5fa3cdc298b22435ef62ddd9bc",
+      "resultPayloadSha256": "8f09725d5272d1367c59f856d5b3b9ac55d067bc37250ad2e1d3af5bd72e33a9",
+      "payloadDefinition": "JSON.stringify(encounters.map(({id,index,skill,trials})=>({id,index,skill,trials})))",
+      "bytes": 2353385,
+      "gzipBytes": 113609
+    },
+    {
+      "file": "tracking-endpoints.json.gz",
+      "source": "b329efc630deb181ba94d66fea97907245afc873",
+      "simVersion": "dae133515ccb22a6",
+      "simulationSourceSha256": "a7f340e5e1bfc253206eb07d05d306893d15dffc209a84c805f4c2ec9550df71",
+      "referenceSha256": "2aada800cc5ac2e80c41942a14db8a9a6bb8f541a8a9bc4cbdf5d640a364f4ff",
+      "routeSha256": "423ddc19a4e4bc93d4560b3d007110b23b45689c23e8084d80a6f0d4c57cea97",
+      "mode": "endpoints",
+      "repeats": 256,
+      "seedRange": [
+        0,
+        255
+      ],
+      "jsonSha256": "cd3c9ea293b74e965a72bd77f0a04e799b793c29de6431f9c8e8986b4832b8e0",
+      "gzipSha256": "2b20b3378ad6367f609d5b2bc5dd56c456710b37d0fc77955c65f308c32db830",
+      "resultPayloadSha256": "367530e472f92bd133cab7430726a800ffda6daf4b907b8e081a21e0930f5fde",
+      "payloadDefinition": "JSON.stringify(encounters.map(({id,index,skill,trials})=>({id,index,skill,trials})))",
+      "bytes": 2177077,
+      "gzipBytes": 105684
+    },
+    {
+      "file": "spawn-endpoints.json.gz",
+      "source": "7e4bc3c7be66fe8e2c378892299d432411b01c1e",
+      "simVersion": "7652495407d4df08",
+      "simulationSourceSha256": "f4dba7662ae40526b2529fb74440a49df6154b62b1e79280061897fc32b20127",
+      "referenceSha256": "2aada800cc5ac2e80c41942a14db8a9a6bb8f541a8a9bc4cbdf5d640a364f4ff",
+      "routeSha256": "423ddc19a4e4bc93d4560b3d007110b23b45689c23e8084d80a6f0d4c57cea97",
+      "mode": "endpoints",
+      "repeats": 256,
+      "seedRange": [
+        0,
+        255
+      ],
+      "jsonSha256": "de832082b1168e067e12d35b7eb1efa2f2281186dbf2dde82c307c78862ddf32",
+      "gzipSha256": "c33cd9c423a76d72cc569252905d2593dc45ad6dad3dab5d020b5fdfedf9b9ab",
+      "resultPayloadSha256": "80cc7984d18f47757201ed80b616ad9dcb7ec3f0733afaeb4b45ab082ab4d9d8",
+      "payloadDefinition": "JSON.stringify(encounters.map(({id,index,skill,trials})=>({id,index,skill,trials})))",
+      "bytes": 2143736,
+      "gzipBytes": 104266
+    }
+  ],
+  "generatorSha256": "5d9be7505d21e5d1521f8319f0070bbaa2c3077f4f481d73f171fdbaa2397d70"
+}

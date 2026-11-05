@@ -1,0 +1,31 @@
+{
+  "source": {
+    "commit": "db5508c5d1f3b94204328fa966f656e4a6b76d20",
+    "sourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+    "simVersion": "373448bdc043a0e8",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "routeAndDifficultySha256": "b8209fcdbf31c5209e40da5853f78cbd80f3bb8a8d1e00c8d921ed5073f3e7c7"
+  },
+  "config": {
+    "fighter": "highsproto",
+    "seed": 20261105,
+    "repeats": 4,
+    "maxFrames": 3600,
+    "encounterCount": 247
+  },
+  "referenceBotVersion": "reference-v2-persistent-delay18",
+  "summary": {
+    "encounters": 247,
+    "pairedSeatTrials": 1976,
+    "regularFighterBouts": 1996,
+    "cpuWins": 212,
+    "referenceWins": 1764,
+    "rawDraws": 0,
+    "independentSeedPairsPerEncounter": 4
+  },
+  "rawBytes": 3749232,
+  "compressedBytes": 156207,
+  "rawSha256": "39d98efb0be0c8053e2a1daf0f5e2f3ff65f910721023c545dcefad118e86c91",
+  "compressedSha256": "99cd3156dc46428f71ffa39feca934b520f4870d6b6fdf041939dd1ba2e6e5fa",
+  "uncertainty": "Reverse seats are paired; nominal trial-wise Wilson intervals in raw JSON count8 outcomes and can overstate precision. At most4 independent seeds per encounter; use independent endpoint diagnostics for endpoint uncertainty."
+}

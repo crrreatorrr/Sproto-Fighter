@@ -254,9 +254,14 @@ for (const facing of [-1, 1]) for (const guard of [false, true]) {
   for (let frame = 0; frame < 90; frame++) {
     const hp = rival.hp;
     step(game, [frame === 0 ? A.bolt : 0, defense]);
-    if (rival.hp < hp) hits++;
+    if (rival.hp < hp) {
+      hits++;
+      assert.ok(guard ? rival.blockstun > 0 : rival.stun > 0, 'each D86 contact resolves as the requested guard or hit');
+    }
   }
-  assert.equal(hits, guard ? 0 : 2, 'D86 sends two independently blockable shots');
-  if (!guard) assert.ok(1000 - rival.hp <= getMove(fighter, 'bolt').damage);
+  assert.equal(hits, 2, 'D86 sends two independently blockable contacts, including chip on guard');
+  const damage = getMove(fighter, 'bolt').damage;
+  if (guard) assert.equal(1000 - rival.hp, Math.round(Math.ceil(damage / 2) * .12) + Math.round(Math.floor(damage / 2) * .12), 'each half-damage shot deals its own guarded chip');
+  else assert.ok(1000 - rival.hp <= damage);
 }
 console.log(`PASS: ${plan.length} fighters, ${frames.size} referenced PNGs, ${slots} combat slot draws, ${casts} ranged and ${throws} directional throw cases.`);

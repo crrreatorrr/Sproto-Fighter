@@ -35,17 +35,19 @@ for(const face of [-1,1])for(const direction of [0,A.up,A.down,face===1?A.left:A
  const s=createState('sproto3215','cpu','rivet'),f=s.fighters[0];f.x=600;s.fighters[1].x=600+face*60;f.facing=face;s.fighters[1].facing=-face;
  step(s,[A.grab|direction,0]);let held=false;
  for(let t=0;t<180;t++){held||=s.throwState?.phase==='hold';step(s,[0,0]);for(const f of s.fighters)assert.ok([f.x,f.y,f.hp,f.vx,f.vy].every(Number.isFinite));}
- assert.ok(held,'Sproto #3215 throw catches');assert.equal(s.throwState,null);assert.equal(s.fighters[1].hp,885);
+ assert.ok(held,'Sproto #3215 throw catches');assert.equal(s.throwState,null);assert.equal(s.fighters[1].hp,910);
 }
 const s=createState('sproto3215','cpu','rivet'),f=s.fighters[0];f.pips=3;s.fighters[1].x=480;step(s,[A.special,0]);let combo=0;
 for(let t=0;t<220;t++){combo=Math.max(combo,f.combo);step(s,[0,0]);}
 assert.equal(f.pips,0);assert.equal(combo,COMBAT_STYLES.sproto3215.specialFrames.length);assert.equal(f.move,null);
 console.log('PASS: Captain Green identity and 72-frame asset contract; full gait in both facings, dash/jump/landing, five attacks, eight directional throws and four-contact existing Team Special. This is automated coverage; likeness is recorded separately.');
 
+// Phase 1 combat expectations live outside immutable historical art fixtures.
 const prior=JSON.parse(readFileSync(new URL('../art/sproto3215-hero/before-gameplay.json',import.meta.url),'utf8'));
-assert.equal(ROSTER.sproto3215.partner,'sproto3152','preserve the separately approved individual partner assignment');
-assert.deepEqual({...ROSTER.sproto3215,name:prior.roster.name,partner:prior.roster.partner},prior.roster);
-const currentKit=JSON.parse(JSON.stringify(COMBAT_STYLES.sproto3215));
-assert.equal(currentKit.projectile.shape,'signature:80:0','preserve the later fighter-specific projectile art');
-assert.deepEqual({...currentKit,projectile:{...currentKit.projectile,shape:prior.kit.projectile.shape}},prior.kit);
-console.log('PASS: art revision preserves combat values alongside the later Captain Green name and individual partner assignment.');
+const approved=JSON.parse(readFileSync(new URL('./fixtures/gameplay-balance.json',import.meta.url),'utf8')).fighters.sproto3215;
+assert.deepEqual(ROSTER.sproto3215,approved.roster);
+assert.deepEqual(JSON.parse(JSON.stringify(COMBAT_STYLES.sproto3215)),approved.kit);
+assert.equal(ROSTER.sproto3215.partner,'sproto3152','preserve the individual partner assignment');
+assert.equal(COMBAT_STYLES.sproto3215.projectile.shape,'signature:80:0','preserve the fighter-specific projectile art');
+assert.deepEqual(COMBAT_STYLES.sproto3215.projectile.origin,prior.kit.projectile.origin);
+console.log('PASS: pinned Phase 1 combat expectations and preserved Captain Green identity and individual partner.');

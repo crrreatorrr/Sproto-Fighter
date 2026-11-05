@@ -1,9 +1,10 @@
+import {createDifficultyRetry,storyDifficulty} from './difficulty';
 import {storySceneryChoices,setStorySceneryChoice,getStorySceneryChoice} from './stageVariants';
 import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
 import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,STORY_OPPONENTS,storyProgress,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
 
-type Hooks={beforeStory?:()=>Promise<boolean>;pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;godMode?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
+type Hooks={beforeStory?:()=>Promise<boolean>;pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId,difficulty?:{skill:number;assisted:boolean})=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;godMode?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
 /** Real progression; chapter scenes remain placeholders pending script approval. */
 export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
@@ -13,6 +14,8 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     let view:'worlds'|'levels'|'scene'|'result'='worlds';
     let back:()=>void=()=>{};
     const total=STORY_ENCOUNTERS.length;
+    const difficultyRetry=createDifficultyRetry();
+    let assisted=false;
     const recruitNote=(encounter:Encounter)=>encounter.opponents.every(isStoryRecruitable)?'Victory recruits each defeated fighter.':'Relic guardian: victory advances the story; player selection still requires the matching Hub Relic.';
     const names=(encounter:Encounter)=>encounter.opponents.map(id=>ROSTER[id].name).join(' → ');
     const gauntletNote=(encounter:Encounter)=>encounter.opponents.length>1?`${names(encounter)}. Health refills between bouts. Beat both without losing, restarting or leaving; the second bout has no saved checkpoint. `:'';
@@ -26,7 +29,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         const area=$('journey-actions');area.replaceChildren();
         for(const action of actions){const button=document.createElement('button');button.className='quiet';button.textContent=action.label;button.onclick=action.run;area.append(button);}
     }
-    async function launch(id:StageId,encounter?:Encounter,nextWave=0){
+    async function launch(id:StageId,encounter?:Encounter,nextWave=0,assist=false){
         if(launching)return;
         if(!hooks.ready()){$('journey-copy').textContent='Fighter sprites are still loading. Try again in a moment.';return;}
         syncRoute();
@@ -37,13 +40,13 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         }
         if(encounter){
             if(!progress.canPlay(encounter.index)){selector(true);$('journey-copy').textContent=`Encounter ${encounter.index+1} is locked. Clear the encounters before it, or turn on God Mode to choose any encounter.`;return;}
-            if(nextWave===0){if(!progress.begin(encounter.index))return;}
+            if(nextWave===0){if(!progress.begin(encounter.index))return;difficultyRetry.begin(encounter.id);}
             else if(progress.currentWave(encounter.index)!==nextWave)return;
         }
         launching=true;modal.close();
         try{
-            if(!await hooks.launch(id,!!encounter,encounter?.opponents[nextWave]))throw new Error('Fighter art could not load.');
-            active=encounter??null;wave=nextWave;settled=null;status();
+            if(!await hooks.launch(id,!!encounter,encounter?.opponents[nextWave],encounter?{skill:storyDifficulty(encounter,STORY_ENCOUNTERS,assist),assisted:assist}:undefined))throw new Error('Fighter art could not load.');
+            active=encounter??null;wave=nextWave;settled=null;assisted=assist;status();
         }catch(error){
             progress.abandonRun();active=null;settled=null;wave=0;
             $('journey-title').textContent='This match could not load.';
@@ -108,6 +111,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     function finishMatch(winner:number){
         if(!active||launching||settled!==null||![0,1,2].includes(winner))return false;
         if(winner===0&&!progress.win(active.index,wave))return false;
+        difficultyRetry.record(active.id,winner,wave===active.opponents.length-1);
         settled=winner;if(winner!==0)progress.abandonRun();status();return true;
     }
     function onRoundEnd(winner:number):boolean{
@@ -116,7 +120,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         const encounter=active,result=settled,finishedWave=wave;active=null;settled=null;
         view='result';$('journey-content').replaceChildren();$('journey-kicker').textContent=`STORY / ENCOUNTER ${encounter.index+1} OF ${total}`;
         if(result===0){
-            if(finishedWave+1<encounter.opponents.length){void launch(encounter.stage,encounter,finishedWave+1);return true;}
+            if(finishedWave+1<encounter.opponents.length){void launch(encounter.stage,encounter,finishedWave+1,assisted);return true;}
             const save=progress.snapshot(),next=save.openRoute?STORY_ENCOUNTERS[encounter.index+1]??null:save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
             const finaleWon=encounter.opponents[finishedWave]==='vaudream';
             if(!finaleWon&&next&&next.stage!==encounter.stage){scene(next,true);return true;}
@@ -126,7 +130,12 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         }else{
             $('journey-title').textContent=result===2?'Draw — try this encounter again.':'Retry this encounter.';
             $('journey-copy').textContent=`${gauntletNote(encounter)}${ROSTER[encounter.opponent].name} is waiting. Defeats and draws do not advance the route. Already earned recruits are kept. ${storageNote()}`;
-            buttons([{label:'Retry match',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);
+            const actions=[{label:'Retry match',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}];
+            if(difficultyRetry.offered(encounter.id) && storyDifficulty(encounter,STORY_ENCOUNTERS,true)<storyDifficulty(encounter,STORY_ENCOUNTERS)){
+                $('journey-copy').textContent+=' Optional help: retry with an easier CPU. Your fighter and rival stats stay the same.';
+                actions.splice(1,0,{label:'Retry with easier CPU',run:()=>{void launch(encounter.stage,encounter,0,true);}});
+            }
+            buttons(actions);
         }
         status();back=()=>selector(true);open();return true;
     }
@@ -145,6 +154,6 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
             settled=null;progress.abandonRun();return false;
         },
         leaveStory(){progress.abandonRun();active=null;settled=null;wave=0;status();},
-        snapshot:()=>({active:active?.stage??null,encounter:active?{...active,opponents:[...active.opponents]}:null,wave,opponent:active?.opponents[wave]??null,view,launching,...progress.snapshot()}),
+        snapshot:()=>({active:active?.stage??null,encounter:active?{...active,opponents:[...active.opponents]}:null,wave,assisted,cpuSkill:active?storyDifficulty(active,STORY_ENCOUNTERS,assisted):null,opponent:active?.opponents[wave]??null,view,launching,...progress.snapshot()}),
     };
 }

@@ -1,0 +1,471 @@
+{
+  "source": "c367f98c4a93218dc069372d952c929ed25c4975",
+  "engine": "155.0.8059.79",
+  "automated": true,
+  "humanPlaytest": false,
+  "records": [
+    {
+      "scenario": "High Sproto vs Fat Head Dave Hard CPU; no player combat input, actual round1 completion and automatic round2 preview",
+      "start": {
+        "frame": 11,
+        "mode": "cpu",
+        "winner": null,
+        "freeze": 0,
+        "matchDepth": {
+          "round": 1,
+          "wins": [
+            0,
+            0
+          ],
+          "remaining": 3589,
+          "roundRecorded": false,
+          "complete": false,
+          "rounds": true,
+          "modifier": "none",
+          "startHp": [
+            1000,
+            1000
+          ],
+          "meter": [
+            0,
+            0
+          ],
+          "backPressed": [
+            -100,
+            -100
+          ],
+          "juggles": [
+            0,
+            0
+          ]
+        },
+        "fighters": [
+          {
+            "id": "highsproto",
+            "hp": 1000,
+            "x": 380,
+            "y": 578,
+            "move": null,
+            "combo": 0,
+            "stun": 0
+          },
+          {
+            "id": "bront",
+            "hp": 1000,
+            "x": 900,
+            "y": 578,
+            "move": null,
+            "combo": 0,
+            "stun": 0
+          }
+        ]
+      },
+      "roundEnd": {
+        "frame": 1296,
+        "mode": "cpu",
+        "winner": 1,
+        "freeze": 0,
+        "matchDepth": {
+          "round": 1,
+          "wins": [
+            0,
+            1
+          ],
+          "remaining": 2379,
+          "roundRecorded": true,
+          "complete": false,
+          "rounds": true,
+          "modifier": "none",
+          "startHp": [
+            1000,
+            1000
+          ],
+          "meter": [
+            5000,
+            0
+          ],
+          "backPressed": [
+            -100,
+            1213
+          ],
+          "juggles": [
+            0,
+            0
+          ]
+        },
+        "fighters": [
+          {
+            "id": "highsproto",
+            "hp": 0,
+            "x": 80,
+            "y": 578,
+            "move": null,
+            "combo": 0,
+            "stun": 19
+          },
+          {
+            "id": "bront",
+            "hp": 1000,
+            "x": 407.27411821091283,
+            "y": 578,
+            "move": null,
+            "combo": 0,
+            "stun": 0
+          }
+        ]
+      },
+      "boundary": {
+        "state": {
+          "frame": 1296,
+          "mode": "cpu",
+          "winner": null,
+          "freeze": 0,
+          "matchDepth": {
+            "round": 2,
+            "wins": [
+              0,
+              1
+            ],
+            "remaining": 3600,
+            "roundRecorded": false,
+            "complete": false,
+            "rounds": true,
+            "modifier": "none",
+            "startHp": [
+              1000,
+              1000
+            ],
+            "meter": [
+              0,
+              0
+            ],
+            "backPressed": [
+              -100,
+              -100
+            ],
+            "juggles": [
+              0,
+              0
+            ]
+          },
+          "fighters": [
+            {
+              "id": "highsproto",
+              "hp": 1000,
+              "x": 380,
+              "y": 578,
+              "move": null,
+              "combo": 0,
+              "stun": 0
+            },
+            {
+              "id": "bront",
+              "hp": 1000,
+              "x": 900,
+              "y": 578,
+              "move": null,
+              "combo": 0,
+              "stun": 0
+            }
+          ]
+        },
+        "presentation": {
+          "phase": "intro",
+          "frame": 0,
+          "winner": null,
+          "fromFloor": false
+        },
+        "replay": true,
+        "roundStarts": [
+          1296
+        ]
+      },
+      "afterEnter": {
+        "state": {
+          "frame": 1319,
+          "mode": "cpu",
+          "winner": null,
+          "freeze": 0,
+          "matchDepth": {
+            "round": 2,
+            "wins": [
+              0,
+              1
+            ],
+            "remaining": 3577,
+            "roundRecorded": false,
+            "complete": false,
+            "rounds": true,
+            "modifier": "none",
+            "startHp": [
+              1000,
+              1000
+            ],
+            "meter": [
+              0,
+              0
+            ],
+            "backPressed": [
+              -100,
+              -100
+            ],
+            "juggles": [
+              0,
+              0
+            ]
+          },
+          "fighters": [
+            {
+              "id": "highsproto",
+              "hp": 1000,
+              "x": 380,
+              "y": 578,
+              "move": null,
+              "combo": 0,
+              "stun": 0
+            },
+            {
+              "id": "bront",
+              "hp": 1000,
+              "x": 779.7111324860872,
+              "y": 578,
+              "move": {
+                "id": "bolt",
+                "t": 1,
+                "hit": false,
+                "connected": false,
+                "wave": -1,
+                "aim": "level",
+                "shotX": -1,
+                "shotY": 0
+              },
+              "combo": 0,
+              "stun": 0
+            }
+          ]
+        },
+        "replay": true
+      },
+      "errors": [],
+      "captures": [
+        "/tmp/sproto-round1-end-canvas.png",
+        "/tmp/sproto-round2-preview-canvas.png",
+        "/tmp/sproto-round2-live-canvas.png"
+      ]
+    },
+    {
+      "scenario": "Jessica vs paired Candles standing dummy; approach, heavy, QA frozen after actual contact in active window",
+      "before": {
+        "frame": 135,
+        "mode": "dummy",
+        "winner": null,
+        "freeze": 0,
+        "fighters": [
+          {
+            "id": "sproto1815",
+            "hp": 1000,
+            "x": 851.7024999999983,
+            "y": 578,
+            "move": null,
+            "combo": 0,
+            "stun": 0
+          },
+          {
+            "id": "duo",
+            "hp": 1000,
+            "x": 978.7024999999983,
+            "y": 578,
+            "move": null,
+            "combo": 0,
+            "stun": 0
+          }
+        ]
+      },
+      "contact": {
+        "frame": 149,
+        "mode": "dummy",
+        "winner": null,
+        "freeze": 9,
+        "fighters": [
+          {
+            "id": "sproto1815",
+            "hp": 1000,
+            "x": 851.7024999999983,
+            "y": 578,
+            "move": {
+              "id": "heavy",
+              "t": 14,
+              "hit": true,
+              "connected": true,
+              "wave": -1,
+              "aim": "level",
+              "shotX": 1,
+              "shotY": 0,
+              "hitConfirmed": true
+            },
+            "combo": 1,
+            "stun": 0
+          },
+          {
+            "id": "duo",
+            "hp": 909,
+            "x": 978.7024999999983,
+            "y": 577,
+            "move": null,
+            "combo": 0,
+            "stun": 32
+          }
+        ]
+      },
+      "geometry": {
+        "move": {
+          "startup": 14,
+          "active": 6,
+          "recovery": 23,
+          "damage": 91,
+          "range": 189,
+          "stun": 32,
+          "push": 17,
+          "rank": 4,
+          "finisher": true,
+          "blockstun": 18,
+          "blockPush": 0.6,
+          "chip": 0.12
+        },
+        "hitbox": {
+          "left": 851.7024999999983,
+          "right": 1015.7024999999983,
+          "top": 440,
+          "bottom": 513
+        },
+        "hurtboxes": [
+          {
+            "left": 826.7024999999983,
+            "right": 918.7024999999983,
+            "top": 433,
+            "bottom": 578
+          },
+          {
+            "left": 881.7024999999983,
+            "right": 1075.7024999999983,
+            "top": 447,
+            "bottom": 565
+          }
+        ]
+      },
+      "lastDrawCalls": [
+        {
+          "color": "#65ef8e",
+          "args": [
+            826.7024999999983,
+            433,
+            92,
+            145
+          ]
+        },
+        {
+          "color": "#ff6a69",
+          "args": [
+            851.7024999999983,
+            440,
+            164,
+            73
+          ]
+        },
+        {
+          "color": "#65ef8e",
+          "args": [
+            881.7024999999983,
+            447,
+            194,
+            118
+          ]
+        },
+        {
+          "color": "#65ef8e",
+          "args": [
+            826.7024999999983,
+            433,
+            92,
+            145
+          ]
+        },
+        {
+          "color": "#ff6a69",
+          "args": [
+            851.7024999999983,
+            440,
+            164,
+            73
+          ]
+        },
+        {
+          "color": "#65ef8e",
+          "args": [
+            881.7024999999983,
+            447,
+            194,
+            118
+          ]
+        },
+        {
+          "color": "#65ef8e",
+          "args": [
+            826.7024999999983,
+            433,
+            92,
+            145
+          ]
+        },
+        {
+          "color": "#ff6a69",
+          "args": [
+            851.7024999999983,
+            440,
+            164,
+            73
+          ]
+        },
+        {
+          "color": "#65ef8e",
+          "args": [
+            881.7024999999983,
+            447,
+            194,
+            118
+          ]
+        },
+        {
+          "color": "#65ef8e",
+          "args": [
+            826.7024999999983,
+            433,
+            92,
+            145
+          ]
+        },
+        {
+          "color": "#ff6a69",
+          "args": [
+            851.7024999999983,
+            440,
+            164,
+            73
+          ]
+        },
+        {
+          "color": "#65ef8e",
+          "args": [
+            881.7024999999983,
+            447,
+            194,
+            118
+          ]
+        }
+      ],
+      "replay": true,
+      "errors": [],
+      "capture": "/tmp/sproto-jessica-heavy-active-canvas.png"
+    }
+  ]
+}

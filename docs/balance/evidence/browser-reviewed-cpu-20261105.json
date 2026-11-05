@@ -1,0 +1,39 @@
+{
+  "engine": "155.0.8059.79",
+  "automated": true,
+  "humanPlaytest": false,
+  "records": [
+    {
+      "scenario": "High Sproto vs Fat Head Dave, Hard CPU, optional clock, movement/light, pause, replay",
+      "frame": 60,
+      "clock": 3540,
+      "browserErrors": []
+    },
+    {
+      "scenario": "weapon standing-dummy training, approach/heavy/bolt, record/loop, exact overlay, pause, replay",
+      "fighters": [
+        "sproto1815",
+        "duo"
+      ],
+      "draws": {
+        "hurt": 645,
+        "hit": 10,
+        "projectile": 0
+      },
+      "browserErrors": []
+    },
+    {
+      "scenario": "paired standing-dummy training, approach/heavy/bolt, record/loop, exact overlay, pause, replay",
+      "fighters": [
+        "duo",
+        "sproto1815"
+      ],
+      "draws": {
+        "hurt": 641,
+        "hit": 9,
+        "projectile": 0
+      },
+      "browserErrors": []
+    }
+  ]
+}
