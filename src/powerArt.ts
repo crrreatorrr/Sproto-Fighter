@@ -8,6 +8,9 @@ let retainCoin: HTMLImageElement | undefined;
 let referenceB: HTMLImageElement | undefined;
 let miniSproto: HTMLImageElement | undefined;
 let ethereum: HTMLImageElement | undefined;
+let weedLeaf: HTMLImageElement | undefined;
+let sharedRanged:HTMLImageElement|undefined;
+let specialEffects:HTMLImageElement|undefined;
 let coinReady: Promise<void> | undefined;
 export function ensurePowerArt(): Promise<void> {
  const load=(url:string)=>new Promise<HTMLImageElement>((resolve,reject)=>{
@@ -19,7 +22,23 @@ export function ensurePowerArt(): Promise<void> {
   load('/fighters/powers/sproto3106-reference-b.png'),
   load('/fighters/powers/sproto2531-mini.png'),
   load('/fighters/powers/vitalik-ethereum.png'),
- ]).then(([coin,b,mini,eth])=>{retainCoin=coin;referenceB=b;miniSproto=mini;ethereum=eth;}).catch(error=>{coinReady=undefined;throw error;});
+  load('/fighters/powers/highsproto-weed-leaf.png'),
+  load('/fighters/powers/shared-ranged-atlas.png'),
+  load('/fighters/powers/team-special-effects.png'),
+ ]).then(([coin,b,mini,eth,leaf,ranged,effects])=>{retainCoin=coin;referenceB=b;miniSproto=mini;ethereum=eth;weedLeaf=leaf;sharedRanged=ranged;specialEffects=effects;}).catch(error=>{coinReady=undefined;throw error;});
+}
+export function drawSharedRanged(c:CanvasRenderingContext2D,index:number){
+ if(!sharedRanged?.naturalWidth)return false;
+ c.save();c.imageSmoothingEnabled=false;
+ c.drawImage(sharedRanged,index%8*96,Math.floor(index/8)*96,96,96,-23,-23,46,46);
+ c.restore();return true;
+}
+export function drawSpecialSprite(c:CanvasRenderingContext2D,index:number,x:number,y:number,size:number,angle:number,opacity:number){
+ if(!specialEffects?.naturalWidth)return;
+ c.save();c.imageSmoothingEnabled=false;c.globalAlpha*=opacity;
+ c.translate(Math.round(x),Math.round(y));c.rotate(angle);
+ c.drawImage(specialEffects,index%4*128,Math.floor(index/4)*128,128,128,-size/2,-size/2,size,size);
+ c.restore();
 }
 /** A pixel stream starts exactly at the caller's covered pelvic anchor. */
 export function drawPelvicStream(c:CanvasRenderingContext2D,reach:number,age:number){
@@ -142,7 +161,12 @@ export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,col
   const pixels:number[][]=[];for(const[letterIndex,letter]of [...'RETAIN'].entries())font[letter].forEach((row,y)=>[...row].forEach((bit,x)=>{if(bit==='1')pixels.push([-53+letterIndex*18+x*3,-10+y*3]);}));
   for(const[x,y]of pixels)box(x-1,y-1,5,5,'#17132c');for(const[x,y]of pixels)box(x,y,3,3,'#ffe66b');
  }
- else if(shape==='joint'){box(-18,-4,37,8,'#978c79');box(-16,-3,34,6,'#f5efd9');box(-16,-3,8,6,'#c7a478');box(-7,-2,23,1,'#fffef0');box(17,-3,4,6,'#65605a');box(20,-2,3,4,age%6<3?'#ff7040':'#eb492c');box(22,-1,2,2,'#ffcb70');const rise=Math.round(age*.4)%7;box(16,-9-rise,3,3,'#c8cbd0');box(10,-14-rise,3,3,'#949ba5');}
+ else if(shape==='joint'){
+  if(weedLeaf?.naturalWidth){
+   const w=42,h=weedLeaf.naturalHeight*w/weedLeaf.naturalWidth;
+   c.rotate(Math.sin(age*.32)*.15);c.drawImage(weedLeaf,-w/2,-h/2,w,h);
+  }else if(!coinReady)void ensurePowerArt().catch(error=>console.error(error));
+ }
  else if(shape==='egg'){box(-8,-12,16,24,'#e6d5ac');box(-12,-7,24,17,'#fff6de');box(-6,-15,12,6,'#fff6de');box(-3,-7,7,10,'#f3cf4a');box(-7,10,14,4,'#d7c39d');}
  else if(shape==='drop'){box(-2,-17,4,6,'#8bdcf5');box(-5,-11,10,6,'#51b5f1');box(-9,-5,18,6,'#3089db');box(-12,1,24,9,'#2073c6');box(-8,10,16,5,'#15539b');box(-5,-2,4,8,'#d6f8ff');}
  else if(shape==='acid'){box(-14,-6,27,12,'#76a72b');box(-9,-10,19,21,'#b4e862');box(-4,-13,10,6,'#dcff8d');box(12,-2,7,8,'#8eca3e');box(-8,8,5,7,'#91c73b');box(4,10,4,9,'#b4e862');box(-20,-3,4,5,'#b4e862');}

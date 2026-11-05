@@ -1,13 +1,20 @@
 import {drawActiveStoryLocation} from './stageVariants';
 import { setPoseAtlasThrowState, setPoseAtlasPresentation } from './poseAtlas';
 import type { RoundPresentation } from './animationEvents';
-import { drawPower, drawRetainDefeat, drawVitalikDefeatCaption } from './powerArt';
+import { drawPower, drawSharedRanged, drawRetainDefeat, drawVitalikDefeatCaption } from './powerArt';
 import { drawMindBeams } from './mindBeamArt';
 import { drawPelvicAttacks } from './pelvicAttack';
 import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
 import { drawSprite } from './spriteRoster';
 import { drawStage } from './stage';
-import { FLOOR, ROSTER, COMBAT_STYLES, DUO_SPREAD, bodyOffsets, isPairedFighter, isDown, getMove, type CombatState, type Fighter } from './core';
+import { FLOOR, ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, hashText, DUO_SPREAD, bodyOffsets, isPairedFighter, isDown, getMove, type CombatState, type Fighter } from './core';
+// Shuffle once by fighter identity, then deal all 48 sprites before reusing any.
+const genericRanged=new Set(['orb','spark','prism','ring','coin']);
+const sharedRangedAssignments=new Map(
+    PLAYABLE_FIGHTERS.filter(id=>id!=='guest12'&&genericRanged.has(COMBAT_STYLES[id].projectile.shape))
+        .sort((a,b)=>hashText('ranged-v1:'+a)-hashText('ranged-v1:'+b))
+        .map((id,index)=>[id,index%48] as const)
+);
 function text(c: CanvasRenderingContext2D, str: string, x: number, y: number, size = 14, color = '#93a5bd', align: CanvasTextAlign = 'left', weight = 600) { c.fillStyle = color; c.font = `${weight} ${size}px "Pixelify Sans", monospace`; c.textAlign = align; c.fillText(str, x, y); }
 function line(c: CanvasRenderingContext2D, x: number, y: number, x2: number, y2: number, color: string, width = 1) { c.beginPath(); c.moveTo(x, y); c.lineTo(x2, y2); c.strokeStyle = color; c.lineWidth = width; c.stroke(); }
 function poly(c: CanvasRenderingContext2D, points: number[][], color: string) { c.beginPath(); points.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath(); c.fillStyle = color; c.fill(); }
@@ -57,26 +64,35 @@ function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost =
         c.restore();
     }
 }
-function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string) {
+type HealthRecovery={from:number;progress:number};
+
+function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string, bossTitle?:string, recovery?:HealthRecovery) {
     const x = right ? 765 : 55, width = 460, color = ROSTER[f.id].color;
-    text(c, ROSTER[f.id].name, right ? 1225 : 55, 55, 24, '#eaf0f7', right ? 'right' : 'left', 850);
+    text(c, bossTitle??ROSTER[f.id].name, right ? 1225 : 55, 55, 24, '#eaf0f7', right ? 'right' : 'left', 850);
     text(c, (mode === 'versus' ? (right ? 'P2 / ' : 'P1 / ') : right ? (mode === 'cpu' ? 'CPU / ' : 'DUMMY / ') : 'YOU / ') + ROSTER[f.id].role, right ? 1225 : 55, 74, 10, color, right ? 'right' : 'left');
     c.fillStyle = '#2b3547';
     c.fillRect(x, 88, width, 19);
     c.fillStyle = color;
-    const w = width * f.hp / 1000;
+    const hp=recovery?Math.round(recovery.from+(f.hp-recovery.from)*recovery.progress):f.hp;
+    const w = width * hp / 1000;
     c.fillRect(right ? x + width - w : x, 88, w, 19);
+    if(recovery){
+        const start=width*recovery.from/1000;
+        const glow=c.createLinearGradient(x+start,0,x+Math.max(w,start+1),0);
+        glow.addColorStop(0,'#54f5a744');glow.addColorStop(1,'#bdffdf');
+        c.fillStyle=glow;c.fillRect(x+start,88,Math.max(0,w-start),19);
+    }
     for (let i = 1; i < 10; i++)
         line(c, x + i * 46, 88, x + i * 46, 107, '#101b2b55');
-    text(c, `${f.hp} / 1000`, right ? x : x + width, 126, 10, '#c3d2e5', right ? 'left' : 'right');
+    text(c, `${hp} / 1000`, right ? x : x + width, 126, 10, '#c3d2e5', right ? 'left' : 'right');
     for (let i = 0; i < 3; i++) {
         const px = right ? x + width - 34 - i * 41 : x + i * 41;
         c.fillStyle = i < f.pips ? color : '#25354a';
         poly(c, [[px + 5, 120], [px + 34, 120], [px + 29, 130], [px, 130]], c.fillStyle as string);
     }
-    text(c, f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
+    text(c, recovery?'RECOVERING HEALTH':f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, recovery?'#bdffdf':f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
-export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean) {
+export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean, bossAttacks?:(ctx:CanvasRenderingContext2D)=>void,bossTitle?:string, portal?:{x:number;y:number;progress:number}, recovery?:HealthRecovery) {
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
     if(!drawActiveStoryLocation(c))drawStage(c, s.frame);
@@ -84,6 +100,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     c.fillStyle='#071224b8';c.fillRect(0,0,1280,162);
     c.fillStyle='#07122455';c.fillRect(0,162,1280,10);
     for (const f of s.fighters) {
+        if(portal&&f===s.fighters[0])continue;
         c.fillStyle = '#040b1366';
         for(const offset of bodyOffsets(f.id)){
             c.beginPath();
@@ -102,6 +119,19 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         const landedKO=presentation?.fromFloor||(actor.reaction?.kind==='knockdown'&&actor.reaction.phase==='down');
         const facing=landedKO?(actor.reaction?.direction??actor.facing):actor.facing;
         if(index===1&&storyAnimation?.(c,actor.x,FLOOR,facing))continue;
+        if(index===0&&portal){
+            const t=portal.progress;
+            if(t>=1)continue;
+            const centerY=actor.y-80,angle=t*Math.PI*4;
+            const orbit=Math.sin(Math.PI*t)*55;
+            const x=actor.x+(portal.x-actor.x)*t+Math.sin(angle)*orbit;
+            const y=centerY+(FLOOR+portal.y-centerY)*t+Math.cos(angle)*orbit;
+            c.save();
+            c.translate(x,y);
+            c.rotate(angle);c.scale(1-t,1-t);c.translate(-actor.x,-centerY);
+            fighter(c,actor,s.frame,false,s.freeze>0,visualFrame);
+            c.restore();continue;
+        }
         fighter(c,actor,s.frame,false,s.freeze>0,visualFrame);
     }
     if(presentation&&(presentation.phase==='outro'||presentation.phase==='result'))for(const[i,f]of s.fighters.entries()){
@@ -139,16 +169,19 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     }
     for(const f of s.fighters)if(f.slow>0)text(c,'MELANCHOLY · SLOWED',f.x,f.y-170,9,'#c7a5eb','center',800);
     for (const p of s.projectiles) {
-        if(p.shape==='pelvicStream'||p.beamLength)continue;
+        if(p.shape==='pelvicStream'||p.beamLength||p.shape?.startsWith('boss'))continue;
         const owner=s.fighters[p.owner];
         const chestLaser=p.shape==='eyeLaser'&&owner.id==='theo';
         c.save();
         c.translate(p.shape==='retain'?Math.round(p.x):p.x,p.shape==='retain'?Math.round(p.y):p.y);
         if(p.shape==='miniSproto'||chestLaser)c.scale(p.vx<0?-1:1,1);
         else if(p.shape!=='retain'&&p.shape!=='referenceB'&&p.shape!=='yellowEight'&&p.shape!=='ethereum')c.rotate(Math.atan2(p.vy,p.vx));
-        drawPower(c,chestLaser?'chestLaser':p.shape??'spark',p.age??0,ROSTER[owner.id].color);
+        const shared=sharedRangedAssignments.get(owner.id as typeof PLAYABLE_FIGHTERS[number]);
+        if(shared===undefined||p.shape!==COMBAT_STYLES[owner.id].projectile.shape||!drawSharedRanged(c,shared))
+            drawPower(c,chestLaser?'chestLaser':p.shape??'spark',p.age??0,ROSTER[owner.id].color);
         c.restore();
     }
+    bossAttacks?.(c);
     drawPelvicAttacks(c,s);
     drawMindBeams(c,s);
     for(const f of s.fighters)if(f.id==='michael'&&(f.move?.id==='bolt'||f.move?.id==='special')&&f.move.t<38){
@@ -188,14 +221,15 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         }
         c.restore();
     }
-    health(c, s.fighters[0], false, s.mode);
-    health(c, s.fighters[1], true, s.mode);
+    if(portal)return;
+    health(c, s.fighters[0], false, s.mode,undefined,recovery);
+    health(c, s.fighters[1], true, s.mode,bossTitle);
     text(c, 'ROUND 01', 640, 116, 9, '#b9cbdc', 'center');
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
         if(f.move && f.move.t>0){
             const aim=f.move.aim,powerShape=f.id==='theo'?'chestLaser':COMBAT_STYLES[f.id].projectile.shape;
-            const label=f.move.id==='grab'?(f.move.throwDirection??'forward').toUpperCase()+' THROW':f.move.id==='bolt'?(powerShape==='yellowEight'?'YELLOW 8':powerShape.startsWith('signature:')?'RANGED ATTACK':powerShape==='painting'?'PAINTING THROW':powerShape.replace(/([A-Z])/g,' $1').toUpperCase()):aim==='upForward'?'DIAGONAL STRIKE':aim==='up'?'RISING STRIKE':aim==='down'?(f.y<FLOOR?'DIVE STRIKE':'LOW STRIKE'):'';
+            const label=f.move.id==='grab'?(f.move.throwDirection??'forward').toUpperCase()+' THROW':f.move.id==='bolt'?(powerShape==='joint'?'WEED LEAF':powerShape==='yellowEight'?'YELLOW 8':powerShape.startsWith('signature:')?'RANGED ATTACK':powerShape==='painting'?'PAINTING THROW':powerShape.replace(/([A-Z])/g,' $1').toUpperCase()):aim==='upForward'?'DIAGONAL STRIKE':aim==='up'?'RISING STRIKE':aim==='down'?(f.y<FLOOR?'DIVE STRIKE':'LOW STRIKE'):'';
             if(label&&!(f.id==='michael'&&f.move.id==='bolt'&&f.move.t<38))text(c,label,f.x,f.y-200,10,'#e8e4cc','center',750);
             if(f.move.connected&&f.move.id!=='special'&&f.move.id!=='grab')text(c,f.dashCanceled?'CHAIN READY':'CHAIN / DASH CANCEL',f.x,f.y+35,9,'#b4f8c8','center',750);
         }

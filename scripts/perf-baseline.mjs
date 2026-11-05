@@ -58,7 +58,7 @@ const picks = await page.$$eval('.portrait-choice', buttons => buttons.map(b => 
 await page.click('#choose-rival');
 await measure('browse', async () => { for (const id of picks) { await page.click(`.portrait-choice[data-fighter="${id}"]`); await page.waitForTimeout(150); } }, ready);
 await measure('settle', async () => { await page.click('.portrait-choice[data-fighter="vela"]'); await page.waitForTimeout(2000); }, ready);
-await measure('start', () => page.click('#start-fight'), () => !document.getElementById('fight-view').hidden);
+await measure('start', async () => { await page.click('#start-fight'); await page.click('#partner-confirm'); }, () => !document.getElementById('fight-view').hidden);
 await page.waitForTimeout(1500);
 const counter = await page.evaluate(() => window.sprotoAtlasStatus?.());
 let decodedMB, how;

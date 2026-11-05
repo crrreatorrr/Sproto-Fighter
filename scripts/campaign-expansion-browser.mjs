@@ -25,7 +25,7 @@ try{
   for(const location of data.locations.filter(l=>l.stage===zone)){
    await page.locator('.stage-rail[aria-labelledby="variations-heading"] [data-stage="'+location.id+'"]').click();
    assert.equal(await page.locator('#selected-stage-name').textContent(),location.title);
-   await page.locator('#start-fight').click();await page.waitForFunction(title=>document.querySelector('#stage-title').textContent===title.toUpperCase(),location.title);
+   await page.locator('#start-fight').click();await page.locator('#partner-confirm').click();await page.waitForFunction(title=>document.querySelector('#stage-title').textContent===title.toUpperCase(),location.title);
    assert.ok((await page.locator('#stage-title').textContent()).includes(location.title.toUpperCase()));
    await page.locator('.versus-skip').click();
    if(out)await page.locator('#game').screenshot({path:out+'/'+location.id+'-fight.png'});
@@ -36,7 +36,7 @@ try{
  for(const zone of [...new Set(data.locations.map(l=>l.stage))]){
   const encounter=data.route.find(e=>e.stage===zone);
   for(const location of data.locations.filter(l=>l.stage===zone)){
-   await page.locator('#story-worlds').click();
+   await page.locator('#story-worlds').click();await page.locator('#partner-confirm').click();
    await page.locator('.campaign-node[data-encounter="'+encounter.id+'"]').click();
    await page.locator('.campaign-rival .primary').click();
    const picker=page.getByRole('combobox',{name:'Story scenery'});await picker.selectOption(location.id);
@@ -53,7 +53,7 @@ try{
    storyChoices.push(location.id);await page.locator('#back-select').click({force:true});
   }
  }
- await page.locator('#story-worlds').click();
+ await page.locator('#story-worlds').click();await page.locator('#partner-confirm').click();
  const sizes=[];
  for(const [width,height] of [[1500,1000],[390,844]]){
   await page.setViewportSize({width,height});await page.locator('.campaign-fit').click();

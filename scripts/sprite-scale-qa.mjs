@@ -48,15 +48,17 @@ const legacyUrl=moduleUrl(legacyNames.map(name=>`export function ${name}(){throw
 const runtimeSpriteUrl=moduleUrl(spriteCode.replace(/from\s*['"]\.\/([^'"]+)['"]/g,(_,name)=>`from '${name==='poseAtlas'?poseUrl:name==='core'?coreUrl:legacyUrl}'`));
 const runtimeSprites=await import(runtimeSpriteUrl);
 const spriteUrl = moduleUrl(`import {drawSprite as drawRuntimeSprite} from '${runtimeSpriteUrl}';
+import {isPairedFighter} from '${coreUrl}';
 export function drawSprite(c,f,frame,ghost=false,frozen=false) {
   const first=c.draws.length;
-  drawRuntimeSprite(c,f,frame,ghost,frozen);
+  c.assistScale=isPairedFighter(f.id)?1.08:1.16;
+  try{drawRuntimeSprite(c,f,frame,ghost,frozen);}finally{delete c.assistScale;}
   if(c.draws.length===first)throw new Error('Missing installed assist body: '+f.id);
   globalThis.__spriteScaleAuditAssist(c,f,frame,first);
 }`);
 // Effects have intentionally independent sizes. Keep real assist placement and
 // body drawing, but omit effect artwork from this body-scale audit.
-const effectsUrl = moduleUrl('export function drawPower(){} export function drawPelvicStream(){} export function drawPartnerEffect(){}');
+const effectsUrl = moduleUrl('export function drawSpecialSprite(){}');
 const team = await import(moduleUrl(compile('src/teamSpecial.ts')
   .replace("from './core'", `from '${coreUrl}'`).replace("from './poseAtlas'", `from '${poseUrl}'`)
   .replace("from './spriteRoster'", `from '${spriteUrl}'`).replace("from './powerArt'", `from '${effectsUrl}'`)
@@ -73,7 +75,7 @@ const localPath = url => {
 };
 const cells = [], byUrl = new Map(), bodies = {};
 for (const [id, cfg] of Object.entries(manifest.fighters)) {
-  const scale = cfg.scale ?? cfg.worldHeight / cfg.height;
+  const scale = (cfg.scale ?? cfg.worldHeight / cfg.height)*(cfg.visualScale??1);
   const sequences = {poses:cfg.frames, ...(cfg.walkFrames ? {walk:cfg.walkFrames} : {}), ...cfg.clips};
   bodies[id] = {scale, authoredFacing:cfg.facing ?? 1, owners:core.PLAYABLE_FIGHTERS.filter(owner => core.bodyAtlasIds(owner).includes(id)), sequences:{}, runtimeTransforms:{}};
   for (const [sequence, frames] of Object.entries(sequences)) for (const [index, entry] of frames.entries()) {
@@ -224,9 +226,10 @@ function context() {
       const m=multiply(this.matrix,[dw/sw,0,0,dh/sh,dx-sx*dw/sw,dy-sy*dh/sh]);
       const xScale=Math.hypot(m[0],m[1]),yScale=Math.hypot(m[2],m[3]);
       const candidates=byUrl.get(image.url);assert.ok(candidates?.length, 'only installed body art enters body audit');
-      const match=candidates.find(cell=>Math.abs(cell.scale-xScale)<1e-8);
+      const assistScale=this.assistScale??1;
+      const match=candidates.find(cell=>Math.abs(cell.scale*assistScale-xScale)<1e-8);
       assert.ok(match, `${image.url}: ${xScale} source-pixel world scale differs from declared atlas scale`);
-      near(yScale,match.scale,'vertical source-pixel world scale');
+      near(yScale,match.scale*assistScale,'vertical source-pixel world scale');
       near(m[0]*m[2]+m[1]*m[3],0,'no shear or nonuniform body distortion');
       this.draws.push({url:image.url,matrix:m,source:[sx,sy,sw,sh]});counters.imageDraws++;
     },

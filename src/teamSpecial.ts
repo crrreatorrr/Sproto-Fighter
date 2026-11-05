@@ -1,6 +1,5 @@
-import {drawPower,drawPelvicStream} from './powerArt';
-import {drawPartnerEffect} from './partnerEffects';
-import { FLOOR, WIDTH, ROSTER, COMBAT_STYLES, specialPartnerIds, PARTNER_ATTACKS, isPairedFighter, bodySpread, type FighterId, type CombatState, type Fighter } from './core';
+import {drawSpecialSprite} from './powerArt';
+import { FLOOR, WIDTH, ROSTER, COMBAT_STYLES, fighterPartner, PARTNER_ATTACKS, hashText, isPairedFighter, bodySpread, type FighterId, type CombatState, type Fighter } from './core';
 import { drawSprite } from './spriteRoster';
 import { getDuoLayoutDebug, getPartnerAssistBodyPlan, setPoseAtlasAssistTiming } from './poseAtlas';
 const clamp=(n:number)=>Math.max(0,Math.min(1,n));
@@ -10,7 +9,7 @@ const entries=new WeakMap<Fighter,{move:Fighter['move'];side:number}>();
 function actorFor(owner:Fighter,id:FighterId){let group=assists.get(owner);if(!group){group=new Map();assists.set(owner,group);}let actor=group.get(id);if(!actor){actor={...owner};group.set(id,actor);}return actor;}
 interface AssistBeat{id:FighterId;contacts:readonly number[];start:number;rank:number}
 function schedule(f:Fighter):AssistBeat[]{
- const id=ROSTER[f.id].partner,hits=COMBAT_STYLES[f.id].specialFrames;
+ const id=fighterPartner(f),hits=COMBAT_STYLES[f.id].specialFrames;
  if(PARTNER_ATTACKS[id]||['sproto3152','vaudream','sproto3181'].includes(id))return[{id,contacts:hits,start:4,rank:0}];
  return[];
 }
@@ -26,7 +25,7 @@ export function getTeamSpecialAssistPlan(f:Fighter,targetX=f.x+f.facing*240){
   const into=ease((t-beat.start)/Math.max(1,first-beat.start)),out=ease((t-last-10)/retreat);
   const profile=PARTNER_ATTACKS[beat.id];
   const spread=profile?(isPairedFighter(beat.id)?320:200):beat.id==='sproto3181'?180:beat.id==='vaudream'?160:110;
-  const offset=entry.side*(-(spread+140)+into*140-out*220),margin=beat.id==='sproto3181'?160:90;
+  const offset=entry.side*(-(spread+155)+into*115-out*180),margin=beat.id==='sproto3181'?160:90;
   let x=Math.max(margin,Math.min(WIDTH-margin,f.x+f.facing*offset)),y=FLOOR-(beat.id==='vaudream'?85:0);
   if(profile){
    const drive=Math.max(...beat.contacts.map(hit=>t<hit?ease((t-hit+8)/8):1-ease((t-hit)/8)));
@@ -38,12 +37,22 @@ export function getTeamSpecialAssistPlan(f:Fighter,targetX=f.x+f.facing*240){
   const source=beat.id==='vaudream'?{x:x+f.facing*35,y:y-125}:{x:x+f.facing*30,y:y-50};
   let contact=-1;for(let i=0;i<beat.contacts.length;i++)if(t>=beat.contacts[i]&&t<=beat.contacts[i]+9)contact=i;
   const attack=beat.id==='sproto3181'&&contact>=0?(contact%2===0?'yellowStrike':'stomachSlam'):null;
-  return[{...beat,x,y,facing:f.facing,t,opacity:clamp(into*(1-out))*.93,source,attack,impactScale:attack==='stomachSlam'?2.6:.7,
+  return[{...beat,x,y,facing:f.facing,t,opacity:clamp(Math.sqrt(into)*(1-out)),source,attack,impactScale:attack==='stomachSlam'?2.6:.7,
    reach:Math.max(40,(COMBAT_STYLES[f.id].special.range??480)+(f.x-x)*f.facing-30)}];
  });
 }
-export function getTeamSpecialAssistDebug(f:Fighter){return getTeamSpecialAssistPlan(f).find(a=>a.id===ROSTER[f.id].partner)??null;}
-export function getTeamSpecialBodyDebug(f:Fighter){const actor=assists.get(f)?.get(ROSTER[f.id].partner);return actor?getPartnerAssistBodyPlan(actor):[];}
+export function getTeamSpecialAssistDebug(f:Fighter){return getTeamSpecialAssistPlan(f).find(a=>a.id===fighterPartner(f))??null;}
+export function getTeamSpecialBodyDebug(f:Fighter){const actor=assists.get(f)?.get(fighterPartner(f));return actor?getPartnerAssistBodyPlan(actor):[];}
+function drawAssist(c:CanvasRenderingContext2D,actor:Fighter,s:CombatState,opacity:number){
+ c.save();
+ c.globalAlpha*=opacity;
+ c.translate(actor.x,actor.y);
+ const scale=isPairedFighter(actor.id)?1.08:1.16;
+ c.scale(scale,scale);
+ c.translate(-actor.x,-actor.y);
+ drawSprite(c,actor,s.frame,false,s.freeze>0);
+ c.restore();
+}
 /** Partners share the lead fighter's contact schedule; these effects add no damage. */
 const assistLanes=new WeakMap<Fighter,{attack:Fighter['move'];raised:boolean}>();
 export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
@@ -58,76 +67,82 @@ export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
     const teammate=actorFor(f,a.id);
     Object.assign(teammate,f,{id:a.id,x:a.x,y:a.y,hp:1000,flash:0,stun:0,blockstun:0,reaction:null,vx:0,vy:0,move:{...f.move,t}});
     setPoseAtlasAssistTiming(teammate,a.contacts,a.start);
-    c.save();c.globalAlpha=a.opacity;drawSprite(c,teammate,s.frame,false,s.freeze>0);
-    for(const [i,hit]of a.contacts.entries()){
-     const age=t-hit;if(age<0||age>9)continue;const foe=s.fighters.find(actor=>actor!==f)!;
-     c.save();c.globalAlpha=a.opacity*(1-age/10);
-     if(a.id==='sproto3152'){
-      c.translate(Math.round(a.source.x),Math.round(a.source.y));c.scale(f.facing,1);drawPelvicStream(c,a.reach,age+i*3);
-     }else if(a.id==='vaudream'){
-      for(const[width,stroke]of [[16,'#185a96'],[8,'#38dcff'],[3,'#f3ffff']]as const){c.lineWidth=width;c.strokeStyle=stroke;c.beginPath();c.moveTo(a.source.x,a.source.y);c.lineTo(foe.x,foe.y-65);c.stroke();}
-      c.fillStyle='#f3ffff';c.fillRect(Math.round(a.source.x)-5,Math.round(a.source.y)-5,10,10);
-     }else if(a.id==='sproto3181'){
-      const big=i%2===1,r=(22+age*4)*(big?2.6:.7),cx=foe.x,cy=foe.y-65;
-      c.strokeStyle=big?'#111a34':'#ffe26a';c.lineWidth=big?15:4;c.beginPath();c.arc(cx,cy,r,0,Math.PI*2);c.stroke();
-      if(big){c.strokeStyle='#ffe26a';c.lineWidth=4;c.beginPath();c.arc(cx,cy,r+7,0,Math.PI*2);c.stroke();for(let k=0;k<8;k++){const angle=k*Math.PI/4;c.fillStyle='#ffe26a';c.fillRect(Math.round(cx+Math.cos(angle)*r),Math.round(cy+Math.sin(angle)*r),8,8);}}
-     }
-     c.restore();
-    }
-    c.restore();
+    drawAssist(c,teammate,s,a.opacity);
+
    }
    continue;
   }
   if(t<4||t>65)continue;
   const entry=ease((t-4)/8),exit=ease((t-48)/17);
-  const offset=-250+(entry*160)+(t>=27?ease((t-27)/12)*65:0)-exit*220;
-  const teammate=actorFor(f,ROSTER[f.id].partner);
+  const offset=-260+entry*96-exit*150;
+  const teammate=actorFor(f,fighterPartner(f));
   let assistX=f.x+f.facing*offset,assistY=FLOOR;
+  if(!isPairedFighter(f.id)){
+   const signature=hashText('team-special:'+fighterPartner(f));
+   const motion=Math.sin(Math.PI*clamp((t-9)/40));
+   assistX+=f.facing*motion*((signature%31)-15);
+   assistY-=motion*((signature>>>7)%4)*12;
+   let lane=assistLanes.get(f);
+   if(!lane||lane.attack!==f.move){
+    lane={attack:f.move,raised:assistX<95||assistX>WIDTH-95};
+    assistLanes.set(f,lane);
+   }
+   if(lane.raised){
+    assistX=Math.max(95,Math.min(WIDTH-95,f.x-f.facing*65));
+    assistY-=148;
+   }
+  }
   if(isPairedFighter(f.id)){
    // Keep the cameo outside the whole paired formation, not inside its rear body.
    const bounds=getDuoLayoutDebug(f,s.frame).bounds;
    const rear=f.facing===1?bounds[0][0]:bounds.at(-1)![1];
-   const margin=125+bodySpread(ROSTER[f.id].partner)+(1-entry)*45+exit*45;
+   const margin=125+bodySpread(fighterPartner(f))+(1-entry)*45+exit*45;
    assistX=rear-f.facing*margin;
    let lane=assistLanes.get(f);
    if(!lane||lane.attack!==f.move){lane={attack:f.move,raised:assistX<105||assistX>1175};assistLanes.set(f,lane);}
    if(lane.raised){assistX=Math.max(385,Math.min(895,f.x));assistY=FLOOR-190;}
   }
-  Object.assign(teammate,f,{id:ROSTER[f.id].partner,x:assistX,y:assistY,hp:1000,flash:0,stun:0,blockstun:0,reaction:null,vx:0,vy:0,move:{...f.move,t}});
+  Object.assign(teammate,f,{id:fighterPartner(f),x:assistX,y:assistY,hp:1000,flash:0,stun:0,blockstun:0,reaction:null,vx:0,vy:0,move:{...f.move,t}});
   setPoseAtlasAssistTiming(teammate,COMBAT_STYLES[f.id].specialFrames);
-  c.save();c.globalAlpha=clamp(entry*(1-exit))*.93;drawSprite(c,teammate,s.frame,false,s.freeze>0);c.restore();
+  drawAssist(c,teammate,s,clamp(Math.sqrt(entry)*(1-exit)));
  }
 }
 export function drawTeamSpecialFront(c:CanvasRenderingContext2D,s:CombatState){
  for(const f of s.fighters){
   if(f.move?.id!=='special')continue;const t=f.move.t,color=ROSTER[f.id].color;
-  const profile=PARTNER_ATTACKS[ROSTER[f.id].partner];
-  if(profile){
-   const teammate=assists.get(f)?.get(ROSTER[f.id].partner),foe=s.fighters.find(actor=>actor!==f)!;
-   if(teammate)for(const plan of getTeamSpecialAssistPlan(f,foe.x)){
-    const bodies=getPartnerAssistBodyPlan(teammate),layout=isPairedFighter(teammate.id)?getDuoLayoutDebug(teammate,s.frame):null;
-    for(const[beat,hit]of plan.contacts.entries()){
-     const age=t-hit;if(age<-8||age>9)continue;const body=beat%bodies.length;
-     const sourceX=layout?(layout.bounds[body][0]+layout.bounds[body][1])/2:teammate.x+f.facing*35;
-     c.save();c.globalAlpha=plan.opacity;
-     drawPartnerEffect(c,profile,{x:sourceX,y:teammate.y+(bodies[body]?.y??0)-90,targetX:foe.x,targetY:foe.y-65,floor:FLOOR,age,beat,body,facing:f.facing});c.restore();
+  const partner=fighterPartner(f);
+  const style=COMBAT_STYLES[f.id],foe=s.fighters.find(actor=>actor!==f)!;
+  const seed=hashText('team-special:'+partner);
+  const palette=seed%4;
+  const direction=seed&1?1:-1,pattern=(seed>>>4)%4;
+  const teammate=assists.get(f)?.get(partner);
+  const sourceX=(teammate?.x??f.x)+f.facing*26,sourceY=(teammate?.y??f.y)-85;
+  const impactX=foe.x;
+  const impactY=style.special.low?FLOOR-26:foe.y-74;
+  for(const [beat,contact]of style.specialFrames.entries()){
+   const age=t-contact;
+   if(age<-7||age>12)continue;
+   if(age<0){
+    const u=(age+7)/7;
+    for(let echo=0;echo<3;echo++){
+     const progress=u-echo*.17;
+     if(progress<.14)continue;
+     const arc=Math.sin(Math.PI*progress)*(26+(seed>>>12)%46)*direction;
+     const x=sourceX+(impactX-sourceX)*progress;
+     const y=sourceY+(impactY-sourceY)*progress+(pattern%2===0?-arc:arc);
+     const frame=Math.min(3,Math.floor(progress*4));
+     const bearing=Math.atan2(impactY-sourceY,impactX-sourceX);
+     drawSpecialSprite(c,palette*4+frame,x,y,52-echo*10,bearing,1-echo*.25);
     }
+    continue;
    }
+   if(!f.move.connected||foe.move?.id==='special')continue;
+   const progress=age/12;
+   const frame=Math.min(3,Math.floor(age/3));
+   const size=[58,104,122,136][frame]+pattern*4;
+   const impactPalette=(palette+beat)%4;
+   drawSpecialSprite(c,16+impactPalette*4+frame,impactX,impactY,size,0,1-progress*.88);
   }
-  if(!profile)for(const [i,hit] of COMBAT_STYLES[f.id].specialFrames.entries()){
-   const age=t-hit;if(age<0||age>10)continue;const progress=age/10;
-   c.save();c.globalAlpha=(1-progress)*.72;c.strokeStyle=color;c.lineWidth=(i===2?10:6)*(1-progress)+1;
-   const style=COMBAT_STYLES[f.id];
-   if(style.projectile.shape==='pelvicStream'){c.restore();continue;}
-   const reachNow=70+progress*(style.special.range??580),x=f.x+f.facing*reachNow,y=style.special.low?FLOOR-22:f.y-80;
-   c.save();c.translate(x,y);c.scale(2+progress,2+progress);drawPower(c,style.projectile.shape,t, color);c.restore();
-   if(style.power==='slow'){c.fillStyle='#78608b';for(let k=0;k<9;k++)c.fillRect(f.x+f.facing*(k*65+30),250+(t*8+k*21)%280,3,14);}
-   if(style.power==='pull'){c.beginPath();c.moveTo(f.x,y);c.lineTo(x,y);c.setLineDash([10,7]);c.stroke();c.setLineDash([]);}
-   if(style.power==='slam'){c.beginPath();c.moveTo(x-65,FLOOR);c.lineTo(x,FLOOR-110*(1-progress));c.lineTo(x+65,FLOOR);c.stroke();}
-   c.beginPath();c.moveTo(f.x+f.facing*30,y+(i===1?45:-30));c.lineTo(x,y-(i===1?90:-20));c.stroke();
-   c.beginPath();c.arc(x,y,20+progress*(i===2?100:65),-.8,Math.PI+.8);c.stroke();
-   c.fillStyle='#f7ffe4';for(let j=0;j<7;j++){const angle=j*Math.PI*2/7;c.fillRect(x+Math.cos(angle)*progress*85,y+Math.sin(angle)*progress*85,4,4);}c.restore();
-  }
-  if(t<55){c.save();c.globalAlpha=Math.min(ease((t+1)/6),clamp((55-t)/10));c.fillStyle='#101725ed';c.fillRect(365,157,550,62);c.fillStyle=color;c.font='900 19px "Pixelify Sans", monospace';c.textAlign='center';c.fillText(PARTNER_ATTACKS[ROSTER[f.id].partner]?.name??ROSTER[f.id].special,640,183);c.fillStyle='#e5e9e2';c.font='600 11px "Pixelify Sans", monospace';c.fillText(`${[f.id,...specialPartnerIds(f.id)].map(id=>ROSTER[id].name).join(" + ")} / TEAM RELAY`,640,205);c.restore();}
+  if(t<55){c.save();c.globalAlpha=Math.min(ease((t+1)/6),clamp((55-t)/10));c.fillStyle='#101725ed';c.fillRect(365,157,550,62);c.fillStyle=color;c.font='900 19px "Pixelify Sans", monospace';c.textAlign='center';c.fillText(PARTNER_ATTACKS[fighterPartner(f)]?.name??ROSTER[f.id].special,640,183);c.fillStyle='#e5e9e2';c.font='600 11px "Pixelify Sans", monospace';c.fillText(`${[f.id,fighterPartner(f)].map(id=>ROSTER[id].name).join(" + ")} / TEAM RELAY`,640,205);c.restore();}
  }
 }

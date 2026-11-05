@@ -192,6 +192,7 @@ export function step(s: CombatState, inputs: [
         b.x = clamp(b.x + overlap * d, fighterWall(b.id), WIDTH - fighterWall(b.id));
     }
     // Collect active melee hits before applying them, so same-frame strikes can trade.
+    const specialImmune=s.fighters.map(f=>f.move?.id==='special');
     const hits: {
         i: number;
         m: Move;
@@ -246,7 +247,7 @@ export function step(s: CombatState, inputs: [
         const crouched = (other.input & A.down) && grounded(other);
         const dy=other.y-f.y;
         const vertical = attack.id === 'special' ? true : attack.id === 'grab' ? !s.throwState && grounded(f) && grounded(other) && other.stun === 0 && other.blockstun === 0 && other.throwInvuln===0 : attack.aim==='upForward' ? Math.abs(dy+10+Math.max(0,ahead)*.65)<65 : attack.aim==='up' ? dy>-190&&dy<45 : attack.aim==='down'&&!grounded(f) ? dy>-25&&dy<165 : Math.abs(dy)<85;
-        if (!endingKO && !isDown(other) && active && !m.projectile && ahead >= -22 && ahead < m.range && vertical && !(crouched && m.air && grounded(f))) {
+        if (!endingKO && !specialImmune[1-i] && active && !m.projectile && (attack.id==='special' || (!isDown(other) && ahead >= -22 && ahead < m.range && vertical && !(crouched && m.air && grounded(f))))) {
             attack.hit = true;
             attack.connected = true;
             hits.push({ i, m, id: attack.id });
@@ -290,7 +291,7 @@ export function step(s: CombatState, inputs: [
         const horizontalContact=p.beamLength
             ? !p.beamHit&&ahead+radius>=0&&ahead-radius<=p.beamLength
             : Math.abs(p.x-target.x)<(p.shape==='retain'?53:34)+bodySpread(target.id);
-        if (!endingKO && !isDown(target) && horizontalContact && Math.abs(p.y - (target.y - targetHeight)) < targetRadius) {
+        if (!endingKO && !specialImmune[1-p.owner] && !isDown(target) && horizontalContact && Math.abs(p.y - (target.y - targetHeight)) < targetRadius) {
             damage(s, p.owner, { ...getMove(s.fighters[p.owner],'bolt'), damage: p.damage }, 'bolt', true);
             if(p.beamLength)p.beamHit=true;else p.life=0;
         }

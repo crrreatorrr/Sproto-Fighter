@@ -10,11 +10,12 @@ const load = async name => import('data:text/javascript;base64,'+Buffer.from(com
 const core=await import('data:text/javascript;base64,'+Buffer.from(bundledCore()).toString('base64')), events=await load('animationEvents.ts');
 const main=ts.createSourceFile('main.ts',read('main.ts'),ts.ScriptTarget.Latest,true);
 const names=['advanceRoundFrame','start','pause','restart'];
-const functions=main.statements.filter(n=>ts.isFunctionDeclaration(n)&&names.includes(n.name?.text)).map(n=>n.getText(main)).join('\n');
-assert.equal(functions.match(/function /g).length,names.length);
+const declarations=main.statements.filter(n=>ts.isFunctionDeclaration(n)&&names.includes(n.name?.text));
+assert.equal(declarations.length,names.length);
+const functions=declarations.map(n=>n.getText(main)).join('\n');
 function fixture(storyResult=false){
  const elements=new Map();
- const c={storyAnimation:{active:null,reset(){},start(){return false;},replaceDefeat:false},online:null,...core,...events,countdown:{advance:()=>false,hide(){},suspend(){}},versus:{advance:()=>false,show(){},suspend(){}},state:core.createState('rivet','dummy'),presentation:events.createRoundPresentation(),chosen:'rivet',mode:'dummy',opponent:undefined,testingGodMode:false,matchTesting:false,matchGodMode:false,matchEarnedGodMode:false,updateGodModeLabel(){},reports:0,reportRound(){c.reports++;},frames:[],qaEvents:[],qaPanel:null,qaRecord(){},qaStopAtOutro(){},held:new Set(),queued:0,selection:{isOpen:false},dialog:{open:false},padNeedsRelease:false,running:true,started:true,accumulator:0,storyCalls:0,overlays:0,canvas:{focus(){}},$:id=>{if(!elements.has(id))elements.set(id,{disabled:false});return elements.get(id);}};
+ const c={storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,advanceBossReveal(){},reset(){},start(){return false;},replaceDefeat:false},online:null,...core,...events,countdown:{advance:()=>false,hide(){},suspend(){}},versus:{advance:()=>false,show(){},suspend(){}},state:core.createState('rivet','dummy'),presentation:events.createRoundPresentation(),chosen:'rivet',mode:'dummy',opponent:undefined,testingGodMode:false,matchTesting:false,matchGodMode:false,matchEarnedGodMode:false,updateGodModeLabel(){},reports:0,reportRound(){c.reports++;},frames:[],qaEvents:[],qaPanel:null,qaRecord(){},qaStopAtOutro(){},held:new Set(),queued:0,selection:{isOpen:false},dialog:{open:false},padNeedsRelease:false,running:true,started:true,accumulator:0,storyCalls:0,overlays:0,canvas:{focus(){}},$:id=>{if(!elements.has(id))elements.set(id,{disabled:false});return elements.get(id);}};
  c.story={isOpen:false,finishMatch(){},onRoundEnd(){c.storyCalls++;if(storyResult)c.running=false;return storyResult;}};
  c.showOverlay=()=>{c.overlays++;c.running=false;};
  vm.createContext(c);vm.runInContext(compile(functions),c);return c;
@@ -40,6 +41,6 @@ for(const storyResult of [false,true])check(`winner freezes combat and replay fo
  c.advanceRoundFrame(0);assert.equal(c.storyCalls,1);assert.equal(c.reports,1);assert.equal(JSON.stringify(c.state),state);assert.equal(c.frames.length,count);
 });
 check('floor defeat uses the landed knockout reaction',()=>{const c=fixture();c.presentation.phase='fight';c.state.fighters[0].hp=0;c.state.fighters[0].reaction={kind:'knockdown',phase:'down',t:0,direction:1};c.advanceRoundFrame(0);assert.equal(c.presentation.fromFloor,true);});
-assert.match(read('main.ts'),/render\(ctx, state, presentation, visualFrame,storyAnimation.draw\)/);
+assert.match(read('main.ts'),/render\(ctx,displayState,displayPresentation,visualFrame,/);
 assert.match(read('main.ts'),/presentationSnapshot: \(\) => structuredClone\(presentation\)/);
 console.log('Presentation integration checks passed. DOM rendering and sprite aesthetics require separate browser review.');

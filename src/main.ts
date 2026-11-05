@@ -18,8 +18,10 @@ import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, typ
 import { STAGES, setStage, loadStageArt, loadStagePreviews, getStageArtStatus, type StageId } from './stage';
 import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
+import {BOSS_KEYS,drawStoryBossAttacks,drawStoryBossPose,loadStoryBossArt,startStoryBoss,stepStoryBoss,storyBossPlayerPose,storyBossTitle,type StoryBoss,type BossForm} from './storyBoss';
 import {createStoryAnimation,storyAnimationPlan} from './storyAnimation';
 import { createStoryMode } from './storyMode';
+import {createPartnerPicker} from './partnerPicker';
 import { connectHub, hubConfigured, type HubLink } from './hub/link';
 import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
@@ -72,6 +74,10 @@ const held = new Set<string>();
 const blockedKeys = new Set<string>();
 let queued = 0, queued2 = 0; // presses since the last frame, per playerqueued2=0;
 const storyAnimation=createStoryAnimation();
+let storyBoss:StoryBoss|null=null;
+let storyBossArt:Awaited<ReturnType<typeof loadStoryBossArt>>|null=null;
+const bossStarts:{frame:number;form:BossForm}[]=[];
+const godModeChanges:{frame:number;enabled:boolean}[]=[];
 const sceneSkip=document.createElement('button');
 sceneSkip.className='quiet';sceneSkip.textContent='Skip animation';sceneSkip.hidden=true;sceneSkip.id='story-animation-skip';
 sceneSkip.onclick=()=>{if(running&&!dialog.open&&!story.isOpen)storyAnimation.skip();};
@@ -110,7 +116,16 @@ async function prepareSelectionArt(ids:FighterId[]):Promise<void>{
     if(generation!==pickGeneration)return;
     pickPrefetch=setTimeout(()=>{void ensurePoseAtlases(ids).catch(error=>console.warn('Fighter art prefetch failed; Start will retry.',error));},PICK_SETTLE_MS);
 }
-const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:prepareSelectionArt,canPlay:canPlayFighter,locked:lockedFighter});
+const partnerPicker=createPartnerPicker(canPlayFighter);
+const selection = createSelectionMenu({
+    start:setup=>{void chooseFightPartner(setup);},
+    prepare:prepareSelectionArt,canPlay:canPlayFighter,locked:lockedFighter,
+});
+async function chooseFightPartner(setup:SelectionSetup){
+    if(setup.mode==='online'||setup.mode==='online-wager'){await launchSelection(setup);return;}
+    const partner=await partnerPicker.choose(setup.fighter,setup.partner);
+    if(partner)await launchSelection({...setup,partner});
+}
 let toastTimer=0;
 function hubToast(title:string,sub:string){
  const toast=$('hub-toast');toast.replaceChildren();
@@ -134,7 +149,7 @@ function reportRound(){
  const chapterComplete=!!encounter&&current.wave===encounter.opponents.length-1&&
   STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter).every(e=>storyProgress.isCleared(e.index));
  void hub.onRoundEnd({winner:state.winner,mode,storyWorld:chapterComplete?encounter!.chapter:null,
-  stage:current.active??selection.getSetup().stage,fighter:chosen,assisted:matchGodMode},hubToast);
+  stage:current.active??selection.getSetup().stage,fighter:chosen,assisted:matchGodMode||godModeChanges.some(change=>change.enabled)},hubToast);
 }
 function updateStage(stage:StageId) {
     setStage(stage);setActiveStoryLocation(null);
@@ -157,12 +172,19 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
+    const selectedPartner=setup.partner;
+    if(selectedPartner&&selectedPartner!==ROSTER[setup.fighter].partner&&PLAYABLE_FIGHTERS.includes(selectedPartner as FighterId))requiredFighters.push(selectedPartner as FighterId);
     // Usually already prefetched; otherwise the rest of the bodies load now.
     $('selection-loading').textContent='Loading selected fighters…';
-    try{await Promise.all([ensurePoseAtlases(requiredFighters,{pin:true}),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
+    try{await Promise.all([ensurePoseAtlases(requiredFighters,{pin:true}),ensurePowerArt()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
-    try{await storyAnimation.load(storyAnimationPlan(setup.opponent,isStory));}
+    try{
+        const plan=storyAnimationPlan(setup.opponent,isStory);
+        const bossArt=plan.form?await loadStoryBossArt(plan.form):null;
+        await storyAnimation.load(plan);
+        storyBossArt=bossArt;
+    }
     catch(error){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(error);return false;}
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode as Mode;
@@ -170,7 +192,10 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     updateStage(setup.stage);setActiveStoryLocation(scenery);
     if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
     selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
-    started=false;restart();start();
+    started=false;restart();
+    delete state.fighters[0].partner;
+    if(selectedPartner&&selectedPartner!==ROSTER[chosen].partner)state.fighters[0].partner=selectedPartner;
+    start();
     $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
     if(encounter&&encounter.opponents.length>1){
         const bout=encounter.opponents.indexOf(setup.opponent)+1;
@@ -181,8 +206,8 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     return true;
 }
 function returnToSelection() {
-    storyAnimation.clear();
     if(online){if(online.phase==='playing'&&!window.confirm('Leave this online match? Leaving forfeits it.'))return;void online.leave();online=null;stopHiddenClock();}
+    storyAnimation.clear();storyBoss=null;storyBossArt=null;bossStarts.length=0;
     versus.hide();
     countdown.hide();
     story.leaveStory();
@@ -250,14 +275,16 @@ function pause() {
     if (!started || (presentation.phase === 'result'&&!storyAnimation.active) || online)
         return;
     if (running)
-        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume →');
+        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume');
     else
         start();
 }
 function restart() {
-    storyAnimation.reset();
+    storyAnimation.reset();storyBoss=null;bossStarts.length=0;godModeChanges.length=0;
     matchTesting=testingGodMode&&mode!=='versus';matchGodMode=(testingGodMode||matchEarnedGodMode)&&mode!=='versus';
+    const partner=state.fighters[0].id===chosen?state.fighters[0].partner:undefined;
     state = createState(chosen, mode, opponent);
+    if(partner)state.fighters[0].partner=partner;
     if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
     countdown.hide();
@@ -272,23 +299,36 @@ function restart() {
         start();
 }
 function updateGodModeLabel(){
-    const label=$('mode-label');label.textContent=(label.textContent??'').replace(/ \/ GOD MODE(?: TEST)?$/,'')+(matchTesting?' / GOD MODE TEST':matchGodMode?' / GOD MODE':'');
+    const label=$('mode-label');label.textContent=(label.textContent??'').replace(/ \/ GOD MODE(?: TEST)?$/,'')+(state.godMode?(matchTesting?' / GOD MODE TEST':' / GOD MODE'):'');
+}
+function applyGodMode(target:CombatState,enabled:boolean){
+    if(enabled)target.godMode=true;
+    else delete target.godMode;
 }
 function setTestingGodMode(enabled:boolean){
     testingGodMode=enabled;
-    // Restart is deliberately blocked while Settings is open. Resume the new
-    // round on close even if the previous one was already on its result screen.
-    if(started&&!selection.isOpen){resumeAfterSettings=true;if(!story.retryMatch())restart();}
+    if(!started||selection.isOpen||online||mode==='versus'||state.winner!==null)return;
+    applyGodMode(state,enabled);
+    godModeChanges.push({frame:state.frame,enabled});
+    matchTesting=enabled;updateGodModeLabel();
 }
 let resumeAfterJourney = false, freePlayMode: MenuMode | null = null;
 const story = createStoryMode({
+    beforeStory:async()=>{
+        held.clear();queued=0;queued2=0;padNeedsRelease=true;
+        const setup=selection.getSetup();
+        const partner=await partnerPicker.choose(setup.fighter,setup.partner);
+        if(!partner)return false;
+        selection.setSetup({partner});
+        return true;
+    },
     map:mountCampaignMap,
     selectedFighter:()=>selection.getSetup().fighter,
     canPlayFighter,
     testing:()=>matchTesting,
     godMode:()=>testingGodMode||(storyProgress.snapshot().godModeUnlocked&&!!selection.getSetup().godMode),
     ready: () => !($('start') as HTMLButtonElement).disabled,
-    pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
+    pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume'); },
     resume: () => { if (resumeAfterJourney && started && (presentation.phase !== 'result'||storyAnimation.active)) start(); },
     launch: (stage, isStory, storyOpponent) => {
         if(isStory)freePlayMode??=selection.getSetup().mode;
@@ -305,7 +345,9 @@ $('reset').onclick = ()=>{storyAnimation.cancel();if(!story.retryMatch())restart
 const dialog = $<HTMLDialogElement>('controls-dialog');
 $('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
 $('settings').onclick = () => {
-    $<HTMLInputElement>('testing-god-mode').checked=testingGodMode;
+    const godMode=$<HTMLInputElement>('testing-god-mode');
+    godMode.checked=started&&!selection.isOpen?!!state.godMode:testingGodMode;
+    godMode.disabled=!!online||(started&&!selection.isOpen&&mode==='versus');
     resumeAfterSettings = running;
     if (running)
         pause();
@@ -338,7 +380,7 @@ $('defaults').onclick = () => {
 for (const p of [1, 2] as const) $(`controls-p${p}`).onclick = () => { controlsPlayer = p; remapping = null; updateControls(); };
 $('controls-tabs').onkeydown = e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); controlsPlayer = controlsPlayer === 1 ? 2 : 1; remapping = null; updateControls(); $(`controls-p${controlsPlayer}`).focus(); } };
 window.addEventListener('keydown', e => {
-    if (story.isOpen) return;
+    if (story.isOpen||(typeof document!=='undefined'&&document.querySelector?.('#partner-picker:not([hidden])'))) return;
     if (dialog.open) {
         if (remapping?.device === 'key') {
             e.preventDefault();
@@ -363,6 +405,16 @@ window.addEventListener('keydown', e => {
     if(blockedKeys.has(e.code)){e.preventDefault();return;}
     if(versus.isOpen){
         e.preventDefault();if(e.code==='Enter'&&!e.repeat){blockedKeys.add(e.code);versus.skip();}return;
+    }
+    if(storyBoss){
+        if(e.code==='KeyR'&&!e.repeat){e.preventDefault();$('reset').click();return;}
+        const action=BOSS_KEYS[e.code];
+        if(action){
+            e.preventDefault();
+            if(!held.has(e.code))queued|=action;
+            held.add(e.code);
+        }
+        return;
     }
     if (Object.values(keys).includes(e.code)) {
         e.preventDefault();
@@ -397,6 +449,7 @@ function pollPad(): number {
     const pads = navigator.getGamepads?.() || [];
     const pad = Array.from(pads).find(p => p?.connected);
     const wasSelection=selection.isOpen,wasModal=story.isOpen||dialog.open,wasOverlay=!running&&!selection.isOpen;
+    const wasPartnerOpen=!!document.querySelector?.('#partner-picker:not([hidden])');
     selection.pollPad(pad??null);
     if (!pad) {
         if (!online) $('device').textContent = 'KEYBOARD READY';
@@ -405,6 +458,13 @@ function pollPad(): number {
     }
     if (!online) $('device').textContent = 'CONTROLLER CONNECTED';
     const buttons = pad.buttons.map(b => b.pressed ? 1 : 0);
+    if(document.querySelector?.('#partner-picker:not([hidden])')){
+        if(wasPartnerOpen)partnerPicker.pollPad(pad,buttons,previousPad);
+        previousPad=buttons;
+        previousStart=!!buttons[9];
+        padNeedsRelease=true;
+        return 0;
+    }
     let boundPadThisFrame=false;
     // Remapping listens to the remapped player's own controller: player 2's is
     // the second one connected (falling back to the first if there is only one).
@@ -423,14 +483,17 @@ function pollPad(): number {
         const now=performance.now();
         if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
             const controls=Array.from(activeDialog.querySelectorAll<HTMLElement>('button:not(:disabled), select, input')).filter(el=>el.offsetParent!==null);
-            const index=controls.indexOf(document.activeElement as HTMLElement);controls[(index+(direction==='previous'?-1:1)+controls.length)%controls.length]?.focus();
+            const active=document.activeElement as HTMLElement;
+            const index=controls.indexOf(active);controls[(index+(direction==='previous'?-1:1)+controls.length)%controls.length]?.focus();
             modalRepeatAt=now+(direction===modalDirection?160:360);
         }
         modalDirection=direction;
         if(buttons[1]&&!previousPad[1])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
-        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLElement&&document.activeElement.matches('button,input[type=checkbox]'))document.activeElement.click();
+        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLElement){
+            if(document.activeElement.matches('button,input[type=checkbox]'))document.activeElement.click();
+        }
     }else if(!wasOverlay)modalDirection='';
-    if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen){
+    if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen&&!document.querySelector?.('#partner-picker:not([hidden])')){
         const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
         const now=performance.now();
         if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
@@ -507,7 +570,7 @@ function onlineInputDelay(): number {
     try { const v = Number(localStorage.getItem(ONLINE_DELAY_KEY)); return v >= 1 && v <= 4 ? v : 2; } catch { return 2; }
 }
 async function queueOnline(setup: SelectionSetup, rematchOf?: string) {
-    storyAnimation.clear();
+    storyAnimation.clear();storyBoss=null;storyBossArt=null;bossStarts.length=0;
     if (online) { await online.leave(); online = null; }
     const wager = setup.mode === 'online-wager';
     const match = new OnlineMatch({
@@ -518,11 +581,11 @@ async function queueOnline(setup: SelectionSetup, rematchOf?: string) {
                 setTimeout(() => {
                     if (match !== online || match.phase !== 'queued') return;
                     void match.leave(); online = null;
-                    showOnlineOverlay('No rematch', 'Your opponent didn’t choose Rematch.', 'Find another opponent →', 'ONLINE', () => void queueOnline(setup));
+                    showOnlineOverlay('No rematch', 'Your opponent didn’t choose Rematch.', 'Find another opponent', 'ONLINE', () => void queueOnline(setup));
                 }, 30000);
             }
             else if (phase === 'queued') showOnlineOverlay('Finding an opponent…', wager ? 'Both players stake 10 Tickets; the winner takes 20. The hub verifies the result before paying.' : 'Looking for another player. Pick “Fighter select” to stop searching.', 'Searching…', 'ONLINE', null);
-            if (phase === 'failed' && presentation.phase !== 'result') showOnlineOverlay('Online match unavailable', onlineFailureText(detail), 'Back to fighter select →', 'ONLINE', returnToSelection);
+            if (phase === 'failed' && presentation.phase !== 'result') showOnlineOverlay('Online match unavailable', onlineFailureText(detail), 'Back to fighter select', 'ONLINE', returnToSelection);
         },
         onStart: start => { if (match === online) void beginOnline(match, start.fighters as [FighterId, FighterId], start.stage, !!start.wager); },
         onEvent: event => {
@@ -561,7 +624,10 @@ function showOnlineOverlay(title: string, copy: string, button: string, kicker: 
 async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId], stageId: string, wager: boolean) {
     const stage = (STAGES.some(s => s.id === stageId) ? stageId : 'ranch') as StageId;
     showOnlineOverlay('Opponent found!', 'Loading fighters…', 'Loading…', 'ONLINE', null);
-    await Promise.all([loadStageArt([stage]), ensurePoseAtlases(fighters,{pin:true}).catch(() => undefined)]);
+    await Promise.all([
+        loadStageArt([stage]),ensurePoseAtlases(fighters,{pin:true}).catch(()=>undefined),
+        ensurePowerArt().catch(()=>undefined),
+    ]);
     if (match !== online || !match.session) return;
     chosen = fighters[0]; opponent = fighters[1]; mode = 'versus';
     matchTesting = false; matchGodMode = false;
@@ -610,7 +676,7 @@ function showOnlineResult() {
     const winnerSeat = outcome?.status === 'settled' ? outcome.winnerSeat : state.winner;
     running = false; started = false;
     const title = winnerSeat === 2 ? 'Double knockout.' : winnerSeat === seat ? 'You win.' : winnerSeat === null || winnerSeat === undefined ? 'Match over.' : 'You lose.';
-    showOnlineOverlay(title, outcome ? onlineOutcomeText(outcome, seat) : 'Waiting for the hub to confirm the result…', 'Rematch →', match.start.wager ? 'ONLINE / 10-TICKET WAGER' : 'ONLINE VERSUS', () => {
+    showOnlineOverlay(title, outcome ? onlineOutcomeText(outcome, seat) : 'Waiting for the hub to confirm the result…', 'Rematch', match.start.wager ? 'ONLINE / 10-TICKET WAGER' : 'ONLINE VERSUS', () => {
         void match.leave(); online = null; stopHiddenClock();
         void queueOnline({ ...selection.getSetup(), mode: match.start?.wager ? 'online-wager' : 'online' }, match.matchId ?? undefined);
     });
@@ -641,6 +707,20 @@ function withoutP1Keys(bindings: Readonly<Record<Action, string>>): Record<Actio
 /** Advance one frame. `p2Input` is player 2's input in local versus; otherwise the CPU plays slot 2. */
 function advanceRoundFrame(input: number, p2Input?: number) {
     if(versus.advance())return;
+    function enterBoss(form:BossForm){
+        storyBoss=startStoryBoss(state,form);
+        bossStarts.push({frame:state.frame,form});
+        held.clear();queued=0;queued2=0;padNeedsRelease=true;
+        Object.assign(presentation,{phase:'fight',frame:0,winner:null,fromFloor:false});
+    }
+    if(storyAnimation.blackingOut){
+        if(storyAnimation.advanceBlackout()){
+            if(storyAnimation.bossForm==='vmu')enterBoss('vmu');
+            else storyAnimation.start('boss');
+        }
+        return;
+    }
+    storyAnimation.advanceBossReveal();
     const scene=storyAnimation.active;
     if(scene){
         if(storyAnimation.advance())return;
@@ -648,6 +728,11 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         if(scene==='intro'){
             advanceRoundPresentation(presentation,true);countdown.show();return;
         }
+        if(scene==='boss'||scene==='mecha'){
+            enterBoss(scene==='mecha'?'mecha':storyAnimation.bossForm!);
+            return;
+        }
+        if(storyBoss?.form==='vmu')story.finishMatch(state.winner!);
         reportRound();story.onRoundEnd(state.winner!);return;
     }
     if(countdown.advance()){
@@ -665,32 +750,41 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         advanceRoundPresentation(presentation);
         if ((presentation as RoundPresentation).phase !== 'result') return;
         if (online) { showOnlineResult(); return; }
-        if(state.winner===0&&storyAnimation.start('outro'))return;
+        if(state.winner===0&&((!storyBoss&&storyAnimation.start('boss'))||storyAnimation.start('outro')))return;
         reportRound();
         if (story.onRoundEnd(state.winner!)) return;
         if (mode === 'versus') {
-            showOverlay(state.winner === 2 ? 'Double knockout.' : `Player ${state.winner! + 1} wins.`, `Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch →', 'LOCAL VERSUS');
+            showOverlay(state.winner === 2 ? 'Double knockout.' : `Player ${state.winner! + 1} wins.`, `Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch', 'LOCAL VERSUS');
             return;
         }
         const won = state.winner === 0;
-        showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again →', 'ROUND COMPLETE');
+        showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again', 'ROUND COMPLETE');
         return;
     }
     if (presentation.phase !== 'fight') return;
     if (online) { advanceOnlineFrame(input); return; }
-    const pair: [number, number] = [input, p2Input ?? cpuInput(state)];
+    const pair: [number, number] = [input, storyBoss?0:p2Input ?? cpuInput(state)];
     frames.push(pair);
     const qaBefore = qaPanel ? [state.fighters[0].move?.id,state.fighters[0].combo,state.fighters[0].pips,state.fighters[0].hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|') : '';
     const previousMoves=state.fighters.map(f=>f.move);
-    step(state, pair);
+    if(storyBoss)stepStoryBoss(state,storyBoss,input);
+    else step(state, pair);
     for(const [i,f] of state.fighters.entries())if(f.id==='michael'&&f.move!==previousMoves[i]&&(f.move?.id==='bolt'||f.move?.id==='special'))playRetainCallout();
     qaRecord(qaBefore);
     if (state.winner !== null) {
-        story.finishMatch(state.winner);
+        const nextPhase=state.winner===0&&storyAnimation.bossForm?
+            (!storyBoss?'boss':storyBoss.form==='giant'?'mecha':null):null;
+        if(!nextPhase&&(storyBoss?.form!=='vmu'||state.winner!==0))story.finishMatch(state.winner);
         const losers = state.fighters.filter((_, i) => state.winner === 2 || i !== state.winner);
         const fromFloor = losers.every(f => f.reaction?.kind === 'knockdown' && f.reaction.phase === 'down');
         beginRoundOutro(presentation, state.winner as 0 | 1 | 2, fromFloor);
-        if(state.winner===0&&storyAnimation.replaceDefeat&&storyAnimation.start('outro'))presentation.phase='result';
+        if(state.winner===0){
+            if(nextPhase==='boss')storyAnimation.startBossBlackout();
+            else if(nextPhase&&storyAnimation.start(nextPhase))
+                presentation.phase='result';
+            else if(!nextPhase&&(storyAnimation.replaceDefeat||storyBoss)&&storyAnimation.start('outro'))
+                presentation.phase='result';
+        }
         qaStopAtOutro();
         held.clear(); queued = 0;queued2=0;
     }
@@ -702,16 +796,19 @@ function stepTo(now: number) {
     // Keep KO icon rotation alive on the result screen without advancing combat.
     visualFrame += qaFrozen ? (qaSingleStep ? 1 : 0) : elapsed * 60;
     const pad = pollPad();
-    if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen)) && (!qaFrozen||qaSingleStep)) {
+    if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen && !partnerPicker.isOpen)) && (!qaFrozen||qaSingleStep)) {
         accumulator = qaSingleStep?1/60:accumulator+elapsed;
         qaSingleStep=false;
         while (accumulator >= 1 / 60) {
             let input = pad | queued;
             const p2 = mode === 'versus' ? padMask(versusPads(Array.from(navigator.getGamepads?.() ?? []))[1], padKeys2) | queued2 | keyboardMask(held, withoutP1Keys(keys2)) : undefined;
             queued = 0;queued2=0;
-            for (const a of Object.keys(A) as Action[])
-                if (held.has(keys[a]))
-                    input |= A[a];
+            if(storyBoss){
+                for(const code of held)input|=BOSS_KEYS[code]??0;
+            }else{
+                for(const a of Object.keys(A) as Action[])
+                    if(held.has(keys[a]))input|=A[a];
+            }
             accumulator -= 1 / 60;
             advanceRoundFrame(input, p2);
             if (!running || (presentation.phase === 'result'&&!storyAnimation.active)) break;
@@ -721,24 +818,64 @@ function stepTo(now: number) {
 function tick(now: number) {
     stepTo(now);
     sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
-    if(!selection.isOpen) render(ctx, state, presentation, visualFrame,storyAnimation.draw);
+    const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
+    const recovery=storyBoss&&storyBoss.entryHp<1000&&state.winner===null&&bossAge<54
+        ?{from:storyBoss.entryHp,progress:Math.min(1,bossAge/42)}:undefined;
+    const bossScene=storyAnimation.active==='boss'||storyAnimation.active==='mecha';
+    // Show the player at the boss spawn before the cinematic; the regular round replay stays intact.
+    const displayState:CombatState=bossScene?{
+        ...state,fighters:[storyBossPlayerPose(state.fighters[0]),state.fighters[1]],
+        effects:[],projectiles:[],freeze:0,throwState:null,
+    }:state;
+    const displayPresentation=bossScene?undefined:presentation;
+    if(!selection.isOpen&&storyAnimation.blackingOut){
+        ctx.fillStyle='#000';
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+    }else if(!selection.isOpen) render(ctx,displayState,displayPresentation,visualFrame,
+        (c,x,y,facing)=>!storyAnimation.active&&storyBoss&&storyBossArt&&drawStoryBossPose(c,state,storyBoss,storyBossArt)
+            ||storyAnimation.draw(c,x,y,facing,storyBoss?.form),
+        storyBoss&&storyBossArt?(c)=>drawStoryBossAttacks(c,state,storyBoss!,storyBossArt!):undefined,
+        storyBoss?storyBossTitle(storyBoss.form):undefined,storyAnimation.portalPull(),recovery);
+    if(!selection.isOpen&&storyAnimation.bossRevealOpacity>0){
+        const opacity=storyAnimation.bossRevealOpacity;
+        const x=canvas.width/2,y=canvas.height*.62;
+        const reveal=ctx.createRadialGradient(x,y,0,x,y,Math.hypot(x,y));
+        reveal.addColorStop(0,`rgba(0,0,0,${opacity**1.65})`);
+        reveal.addColorStop(.58,`rgba(0,0,0,${opacity})`);
+        reveal.addColorStop(1,`rgba(0,0,0,${opacity**.65})`);
+        ctx.save();ctx.fillStyle=reveal;
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+        ctx.restore();
+    }
     if (online) updateOnlineStatus();
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
-    $('coach').textContent = mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
+    $('coach').textContent = storyBoss ? 'Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · X shield · C beam · V ball · R retry' : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);
 }
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
-ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
-Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, godMode:matchGodMode, frames: frames.map(f => [...f]) }), verifyReplay: () => {
+Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, ...(state.fighters[0].partner?{partner:state.fighters[0].partner}:{}), godMode:matchGodMode, ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {
             const replay = createState(chosen, mode, opponent);
+            if(state.fighters[0].partner)replay.fighters[0].partner=state.fighters[0].partner;
             if(matchGodMode){replay.godMode=true;replay.fighters[0].pips=3;}
-            for (const frame of frames)
-                step(replay, frame);
-            return JSON.stringify(replay) === JSON.stringify(state);
+            let boss:StoryBoss|null=null,next=0,toggle=0;
+            const applyChanges=()=>{
+                while(replay.frame===godModeChanges[toggle]?.frame)
+                    applyGodMode(replay,godModeChanges[toggle++].enabled);
+            };
+            for(const frame of frames){
+                if(replay.frame===bossStarts[next]?.frame)boss=startStoryBoss(replay,bossStarts[next++].form);
+                applyChanges();
+                if(boss)stepStoryBoss(replay,boss,frame[0]);
+                else step(replay,frame);
+            }
+            if(replay.frame===bossStarts[next]?.frame)boss=startStoryBoss(replay,bossStarts[next].form);
+            applyChanges();
+            return JSON.stringify(replay)===JSON.stringify(state)&&JSON.stringify(boss)===JSON.stringify(storyBoss);
         } } });

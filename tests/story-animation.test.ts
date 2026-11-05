@@ -3,6 +3,7 @@ import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 import {createStoryAnimation,storyAnimationPlan,type StoryClip} from '../src/storyAnimation';
 import manifest from '../src/storyAnimationManifest.json';
+import {startStoryBoss} from '../src/storyBoss';
 import {createState} from '../src/core';
 import {createRoundPresentation,advanceRoundPresentation,beginRoundOutro} from '../src/animationEvents';
 
@@ -12,7 +13,7 @@ class FakeImage {
     async decode(){
         requests.push(this.src);
         const spec=Object.values(manifest).find(v=>this.src.endsWith(v.image))!;
-        this.naturalWidth=spec.width*spec.columns;this.naturalHeight=Math.ceil(spec.frames/spec.columns)*spec.height;
+        this.naturalWidth=spec.width*spec.columns;this.naturalHeight=Math.ceil(('atlasFrames' in spec?spec.atlasFrames:spec.frames)/spec.columns)*spec.height;
     }
 }
 beforeEach(()=>{requests.length=0;vi.stubGlobal('Image',FakeImage);});
@@ -36,7 +37,8 @@ async function harness(id:string,win=0){
     const state=createState('highsproto','cpu',id as any),presentation=createRoundPresentation();presentation.phase='fight';
     const calls:string[]=[],frames:number[][]=[];
     const run=new Function('deps',`
-        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win}=deps;
+        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss}=deps;
+        let storyBoss=null;const bossStarts=[];const stepStoryBoss=()=>{state.winner=win;};
         const versus={advance:()=>false};const countdown={advance:()=>false,show:()=>calls.push('countdown')};
         const held=new Set();let queued=0,queued2=0,padNeedsRelease=false;
         const online=null,mode='cpu',qaPanel=null,qaRecord=()=>{},qaStopAtOutro=()=>{};
@@ -45,16 +47,16 @@ async function harness(id:string,win=0){
         const step=()=>{state.winner=win;};
         ${compiled}
         return advanceRoundFrame;
-    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win});
-    return {animation,state,presentation,calls,frames,run};
+    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss});
+    return {animation,state,presentation,calls,frames,run,endBlackout(){for(let i=0;i<90;i++)run(0);}};
 }
 
 describe('story animation ordering and lifecycle',()=>{
     it('uses each boss\'s own scenes and preserves Morelight\'s full transformation order',()=>{
-        expect(storyAnimationPlan('vela',true)).toEqual({intro:[],outro:['morelight-smoke','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'],replaceDefeat:false});
+        expect(storyAnimationPlan('vela',true)).toEqual({intro:[],boss:['morelight-smoke'],mecha:['morelight-shrink','morelight-mecha'],form:'giant',outro:['morelight-ejection','morelight-wizard','morelight-exit'],replaceDefeat:false});
         expect(storyAnimationPlan('vaudream',true).outro).toEqual(['vmu-shield','vmu-black-hole']);
-        expect(storyAnimationPlan('guest07',true).outro).toEqual(['juicy-robot']);
-        expect(storyAnimationPlan('sproto943',true).outro).toEqual(['art-fusion','mega-woman-growth']);
+        expect(storyAnimationPlan('guest07',true).boss).toEqual(['juicy-robot']);
+        expect(storyAnimationPlan('sproto943',true).boss).toEqual(['art-fusion','mega-woman-growth']);
         expect(storyAnimationPlan('sproto865',true).outro).toEqual([]);
         for(const id of ['nick','guest07','sproto943','vela','vaudream'])expect(storyAnimationPlan(id,false).outro).toEqual([]);
     });
@@ -66,31 +68,78 @@ describe('story animation ordering and lifecycle',()=>{
         await a.load(storyAnimationPlan('guest07',true));expect(a.start('intro')).toBe(false);
         a.clear();expect(a.start('outro')).toBe(false);
     });
-    it.each(['nick','guest07','sproto943','vaudream'])('suppresses %s death at KO, saves once, and reports only after scenes',async id=>{
-        const t=await harness(id);t.run(0);
-        expect(t.presentation.phase).toBe('result');expect(t.animation.active).toBe('outro');
-        expect(t.calls).toEqual(['save']);const snapshot=JSON.stringify(t.state);
-        const seen:string[]=[];
-        for(let n=0;n<10000&&t.animation.active;n++){
-            const clip=t.animation.snapshot().clip!;if(seen.at(-1)!==clip)seen.push(clip);
+    it('starts VMU directly and plays the portal pull before saving victory',async()=>{
+        const t=await harness('vaudream');
+        t.run(0);
+        for(let i=0;i<89;i++)t.run(0);
+        expect(t.animation.blackingOut).toBe(true);
+        expect(t.frames).toHaveLength(1);
+        t.run(0);
+        expect(t.animation.blackingOut).toBe(false);
+        expect(t.animation.bossRevealOpacity).toBe(1);
+        for(let i=0;i<20;i++)t.animation.advanceBossReveal();
+        expect(t.animation.bossRevealOpacity).toBe(.5);
+        for(let i=0;i<20;i++)t.animation.advanceBossReveal();
+        expect(t.animation.bossRevealOpacity).toBe(0);
+        expect(t.presentation.phase).toBe('fight');
+        expect(t.animation.active).toBeNull();
+        expect(t.state.winner).toBeNull();
+        expect(t.calls).toEqual([]);
+        t.run(0);
+        expect(t.animation.snapshot().clip).toBe('vmu-shield');
+        expect(t.calls).toEqual([]);
+        let sawPull=false;
+        while(t.animation.active){
+            const pull=t.animation.portalPull();
+            if(pull&&pull.progress>0&&pull.progress<1)sawPull=true;
             t.run(0);
         }
-        expect(seen).toEqual(storyAnimationPlan(id,true).outro);
-        expect(t.calls).toEqual(['save','report','result']);expect(t.frames).toHaveLength(1);
-        expect(JSON.stringify(t.state)).toBe(snapshot);
-        t.run(0);expect(t.calls).toEqual(['save','report','result']);
+        expect(sawPull).toBe(true);
+        expect(t.animation.portalPull()?.progress).toBe(1);
+        expect(t.calls).toEqual(['save','report','result']);
+        expect(t.frames).toHaveLength(2);
     });
-    it('lets Morelight die before smoke, mecha, ejection, wizard and flight',async()=>{
-        const t=await harness('vela');t.run(0);expect(t.presentation.phase).toBe('outro');expect(t.animation.active).toBe(null);
-        for(let n=0;n<96;n++)t.run(0);
-        expect(t.animation.snapshot().clip).toBe('morelight-smoke');
+    it('requires both Morelight forms to be cleared before saving or playing the final scenes',async()=>{
+        const t=await harness('vela');
+        t.run(0);
+        expect(t.presentation.phase).toBe('outro');expect(t.calls).toEqual([]);
+        t.endBlackout();
+        expect(t.animation.snapshot()).toMatchObject({phase:'boss',clip:'morelight-smoke'});
+        expect(t.calls).toEqual([]);
+        t.animation.skip();t.run(0);
+        expect(t.presentation.phase).toBe('fight');expect(t.state.winner).toBe(null);
+        expect(t.calls).toEqual([]);
+        t.run(0);
+        expect(t.animation.snapshot().clip).toBe('morelight-shrink');
+        for(let n=0;n<100&&t.animation.snapshot().clip==='morelight-shrink';n++)t.run(0);
+        expect(t.animation.snapshot().clip).toBe('morelight-mecha');
+        expect(t.calls).toEqual([]);
+        t.animation.skip();t.run(0);
+        expect(t.state.winner).toBe(null);
+        t.run(0);
+        expect(t.animation.snapshot().clip).toBe('morelight-ejection');
+        expect(t.calls).toEqual(['save']);
         const seen:string[]=[];
         while(t.animation.active){const id=t.animation.snapshot().clip!;if(seen.at(-1)!==id)seen.push(id);t.run(0);}
-        expect(seen).toEqual(storyAnimationPlan('vela',true).outro);expect(t.calls).toEqual(['save','report','result']);
+        expect(seen).toEqual(storyAnimationPlan('vela',true).outro);
+        expect(t.calls).toEqual(['save','report','result']);
+        expect(t.frames).toHaveLength(3);
     });
+    it.each([['nick','nick-mount'],['guest07','juicy-robot'],['sproto943','art-fusion']])(
+        '%s skips regular defeat and starts the boss transformation after the blackout',async(id,clip)=>{
+            const t=await harness(id);t.run(0);
+            expect(t.animation.blackingOut).toBe(true);
+            t.endBlackout();
+            expect(t.animation.snapshot()).toMatchObject({phase:'boss',clip});
+            expect(t.calls).toEqual([]);
+            t.animation.skip();t.run(0);
+            expect(t.state.winner).toBe(null);
+            t.run(0);
+            expect(t.calls).toEqual(['save']);
+        });
     it('skip completes the result once without leaking input or replay frames',async()=>{
-        const t=await harness('nick');t.run(0);t.animation.skip();t.run(255);
-        expect(t.calls).toEqual(['save','report','result']);expect(t.frames).toHaveLength(1);
+        const t=await harness('vaudream');t.run(0);t.endBlackout();t.run(0);t.animation.skip();t.run(255);
+        expect(t.calls).toEqual(['save','report','result']);expect(t.frames).toHaveLength(2);
         t.run(255);expect(t.calls).toEqual(['save','report','result']);
     });
     it.each([1,2])('loss/draw %s keeps normal outro and never plays boss scenes',async winner=>{
@@ -104,8 +153,8 @@ describe('story animation ordering and lifecycle',()=>{
         expect(t.calls).toEqual(['countdown']);expect(t.frames).toHaveLength(0);expect(t.state.winner).toBe(null);
     });
     it('cancels a result scene during retry without delivering another result',async()=>{
-        const t=await harness('guest07');t.run(0);t.animation.cancel();t.run(0);
-        expect(t.animation.active).toBe(null);expect(t.calls).toEqual(['save']);
+        const t=await harness('vaudream');t.run(0);t.endBlackout();t.run(0);t.animation.cancel();t.run(0);
+        expect(t.animation.active).toBe(null);expect(t.calls).toEqual([]);
         t.animation.reset();expect(t.animation.start('outro')).toBe(true);
     });
     it('holds the last sprite after completion instead of flashing the death pose',async()=>{
