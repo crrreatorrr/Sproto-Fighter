@@ -161,17 +161,10 @@ export function createStoryAnimation(){
                 hideMechaHead();
                 ctx.restore();
                 drawFrame(Math.max(0,25-(frame-26)*2));
-            }else if(id==='morelight-mecha'&&drawPhase&&frame>=190&&frame<210){
-                // Lift the same pilot drawing through the opening; the rim hides it until it clears the hatch.
-                drawFrame(210);hideMechaHead();
-                ctx.save();clipMechaHead();
-                const t=Math.max(0,(frame-194)/16);
-                ctx.translate(0,Math.round(32*(1-t)**2));
-                clipMechaHead();drawFrame(210);
-                ctx.restore();
-            }else if(id==='morelight-mecha'&&drawPhase&&frame>=84&&frame<190){
+            }else if(id==='morelight-mecha'&&drawPhase&&frame>=84&&frame<198){
                 drawFrame(frame);
-                // The climbing pilot passes in front of the hatch before the head reveal.
+                // Keep the hatch and climbing pilot from the boarding cels. Hide the
+                // baked-in eyes until the atlas begins its own head and hatch movement.
                 emptyCockpit(0,frame>=101,frame>=153&&frame<=166);
             }else if(id==='art-fusion'){
                 // Give the approach and joining flash three times as long on screen.
