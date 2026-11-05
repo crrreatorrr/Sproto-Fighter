@@ -16,9 +16,9 @@ export const BALANCE_TEMPLATES:Readonly<Record<Archetype,Readonly<BalanceTemplat
     Footwork:{...base,speed:6.2,boltRecovery:18,lightRange:86,lightDamage:34,lightStartup:6,heavyRange:140,heavyDamage:93,specialRange:400},
     Zoning:{...base,speed:5.4,jump:15.1,lightRange:94,lightDamage:36,heavyDamage:91,boltStartup:20,boltRecovery:21,projectileSpeed:12,specialRange:750,specialStartup:18,specialEnd:54},
     Counter:{...base,lightRange:86,heavyRange:145,heavyDamage:100,heavyStartup:12,specialRange:450,specialStartup:15,specialEnd:48},
-    Brawler:{...base,speed:5.2,lightRange:80,lightDamage:40,heavyDamage:105,heavyStartup:13,boltStartup:22,boltRecovery:22,projectileSpeed:9,specialRange:310,specialStartup:10,specialEnd:38},
+    Brawler:{...base,speed:5.2,lightRange:86,lightDamage:40,heavyDamage:105,heavyStartup:13,boltStartup:22,boltRecovery:22,projectileSpeed:9,specialRange:310,specialStartup:10,specialEnd:38},
     Weapon:{...base,speed:5.3,lightRange:88,heavyRange:175,heavyStartup:14,boltStartup:20,boltRecovery:22,specialRange:500,specialStartup:16,specialEnd:50},
-    Paired:{...base,lightRange:82},
+    Paired:{...base,lightRange:86},
     Hover:{...base,speed:5.4,jump:16,lightRange:86,heavyRange:145,heavyDamage:92,heavyStartup:12,boltStartup:20,boltRecovery:21,specialRange:520,specialStartup:16,specialEnd:50},
 };
 
