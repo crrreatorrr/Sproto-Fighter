@@ -57,6 +57,9 @@ export function sourceMetadata() {
 
 /** An analysis grouping of existing roles, not a production kit assignment. */
 export function archetype(core, id) {
+  // Normalized cores publish the definitive assignment; legacy role heuristics
+  // are retained only to reproduce tooling on the pre-normalization baseline.
+  if (core.BALANCE_KITS?.[id]?.archetype) return core.BALANCE_KITS[id].archetype;
   const role = `${core.ROSTER[id].role} ${core.COMBAT_STYLES[id].role}`.toLowerCase();
   if (core.isPairedFighter(id)) return 'Paired';
   if (/staff|halberd|sword|weapon/.test(role) || ['sirsproto', 'sir', 'sungod', 'retainer', 'sproto1815', 'melo'].includes(id)) return 'Weapon';

@@ -130,6 +130,8 @@ for (const report of [one, referenceOne]) {
 
 const rows = frameRows(original);
 assert.equal(new Set(rows.map(row => row.fighter)).size, original.PLAYABLE_FIGHTERS.length, 'every fighter exported');
+if(original.BALANCE_KITS)for(const row of rows)assert.equal(row.archetype,original.BALANCE_KITS[row.fighter].archetype,'frame reports use canonical production kit assignments');
+if(original.BALANCE_KITS)for(const [id,stats] of Object.entries(one.levels[0].summary.fighters))assert.equal(stats.archetype,original.BALANCE_KITS[id].archetype,'tournament reports use canonical production kit assignments');
 for (const id of original.PLAYABLE_FIGHTERS) {
   const contacts = rows.filter(row => row.fighter === id && row.move === 'special');
   assert.deepEqual(contacts.map(row => row.contactTick), original.COMBAT_STYLES[id].specialFrames, 'every actual Special contact exported');
