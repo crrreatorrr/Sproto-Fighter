@@ -100,7 +100,7 @@ export function cpuProjectileThreat(seen: CpuObservation, id: FighterId, own: Fi
         const half = profile.beamLength ? HITBOX_DATA.projectile.beamHalfHeight : HITBOX_DATA.projectile.halfHeight;
         const y = seen.y - emitter.height;
         const intersectsStanding = !horizontal || (y + half > standing.top && y - half < standing.bottom);
-        if (gap + width > traveled - HITBOX_DATA.projectile.halfWidth && gap - width < reach && intersectsStanding) incoming = true;
+        if (gap + width > traveled - (profile.shape === 'retain' ? HITBOX_DATA.projectile.retainerHalfWidth : HITBOX_DATA.projectile.halfWidth) && gap - width < reach && intersectsStanding) incoming = true;
         // Every emitter must clear the crouch hull. No probabilistic lane guessing.
         duck &&= y + half <= crouching.top;
     }

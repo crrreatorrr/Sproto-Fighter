@@ -58,6 +58,14 @@ describe('delayed public-profile projectile threats',()=>{
         o.age=o.startup+style.projectile.returnAt!+8;
         expect(cpuProjectileThreat(o,id as keyof typeof COMBAT_STYLES,s.fighters[1],o.combatTick).incoming).toBe(true);
     });
+    it('keeps the authored wide retainer shot threatening while its trailing edge overlaps',()=>{
+        const [id,style]=Object.entries(COMBAT_STYLES).find(([,style])=>style.projectile.shape==='retain')!;
+        const s=setup(),o=s.cpu![1].observations[0];
+        const profile=style.projectile;
+        o.age=o.startup+40;
+        s.fighters[1].x=o.x+(profile.origin?.forward??34)+40*profile.speed-25-15;
+        expect(cpuProjectileThreat(o,id as keyof typeof COMBAT_STYLES,s.fighters[1],o.combatTick).incoming).toBe(true);
+    });
     it('ignores fresh enemy position, input, move, projectile arrays and unobserved habits',()=>{
         const s=setup(),before=cpuInput(s,1,7);
         Object.assign(s.fighters[0],{x:900,y:100,input:A.down,move:null});s.projectiles=[];
