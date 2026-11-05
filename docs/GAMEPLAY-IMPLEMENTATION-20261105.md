@@ -1,24 +1,18 @@
 # Gameplay implementation and review checkpoint
 
-## Continued calibration checkpoint
+This is a draft implementation; the quantitative and human acceptance targets
+are not complete. The reviewed CPU fixes are integrated, and further controlled
+role/controller calibration is underway. Nothing has been merged or deployed.
 
-The reviewed CPU candidate is now integrated at `db5508c5d`, simulation
-`373448bdc043a0e8`. The matching hub branch has been refreshed to that version.
-Its delayed projectile history, unfrozen commitment forecasts and Expert jab
-initiative fixes are part of the primary implementation. Typecheck, production
-build, 159 unit tests and matching hub unit/type checks pass; all 68 fast standalone checks are covered after rerunning the two browser
-checks with the installed Chromium path. The initial fast command passed66/68
-and failed to launch those browsers; both targeted reruns pass. Three-engine
-determinism CI is green; the full CI audit is running. New common-seed broad roster and actual-route
-story measurements are running. The quantitative and full-audit evidence below
-is explicitly the prior `7d0ce00ef52b567a` checkpoint until replaced by new results.
-No merge, deployment or public PR-description update is authorized.
+Current simulation: `373448bdc043a0e8`, production source SHA-256
+`6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4`.
+The matching [hub draft #59](https://github.com/crrreatorrr/metaverse-hub/pull/59)
+is refreshed to that version. Production/live parity is not claimed: before
+this work Fighter main expected `af94139cc59e4dfd` and hub main `dc3a64b592b94faf`.
 
-This is a draft implementation, not acceptance of all gameplay targets. The
-source plan is the unchanged 228-line document from `3f1b1234`. Work started
-from main `209f16eec` after PR #22. Main still points there; concurrent cinematic
-PR #23 remains open and was not incorporated or overwritten. Heads of the
-still-open stacked PRs #17–21 are already ancestors of this integration baseline.
+The unchanged 228-line plan comes from `3f1b1234`. Integration began at main
+`209f16eec` after PR #22; the heads of still-open PRs #17–21 were already its
+ancestors. Concurrent cinematic PR #23 was preserved and remains separate.
 
 ## Reviewable changes
 
@@ -35,12 +29,6 @@ These are stacked branches, in the table's order. Later branches include fixture
 reconciliation needed by the combined rules. They remain drafts. The integration
 branch is `codex/gameplay-match-depth-review`; the full working checkout is
 `/workspace/Sproto-Fighter`.
-
-The matching [hub draft #59](https://github.com/crrreatorrr/metaverse-hub/pull/59)
-vendors simulation `373448bdc043a0e8`, matching the current Fighter implementation.
-Fighter main was `af94139cc59e4dfd` while hub main was `dc3a64b592b94faf` before
-this work; no claim is made that production is currently in parity. Neither
-repository was merged or deployed.
 
 ## Deliberate rule decisions
 
@@ -61,70 +49,96 @@ repository was merged or deployed.
   facing-relative route recording. Looping uses a standing dummy; guard dummy
   supports readout/recording while retaining its established movement lock.
 
-## Evidence and limits
+## Current quantitative evidence
 
-The prior `7d0ce00ef52b567a` broad frozen calibration ran 33,472 bouts, with independent seeded
-repetitions and both seats. The 35–65% gate fails for 107 Normal and 102 Hard
-fighters. Canonical Footwork wins about 66%; Zoning about 29%; Weapon about
-33–36%; Brawler about 36–37%. The formula omits mobility and is not a calibrated
-fairness certificate. See [the full analysis](balance/FINAL-CALIBRATION-20261105.md)
-and its compressed raw evidence, source/harness hashes and exact gate failures.
-The stricter 40–60% and matchup 70/30 targets are not established.
+The same 33,472-bout, all-254-fighter schedule, two independent seed pairs per
+matchup and both seats was rerun after the reviewed CPU integration. Raw draws
+remain separate from measurement tie-breaks. Each matchup has only four paired
+rows; these data cannot certify the population 70/30 matchup bound.
 
-The frozen final story measurement produced 30 CPU wins in 1,976 encounter
-trials against reference v2, which is itself not validated as a decent human.
-Thus neither the 15–65% endpoints nor empirical smoothness are accepted.
-Separate unintegrated CPU and role-calibration experiments are being measured;
-their results must not be substituted for this tested source's results. The
-[role experiment branch](https://github.com/crrreatorrr/Sproto-Fighter/tree/codex/gameplay-balance-calibration)
-reduces controlled-panel outliers but still fails the gate. Review also found
-that strategic zoning in the prior CPU read projectile habit counts before
-the visual delay. The independently reviewed
-[CPU candidate](https://github.com/crrreatorrr/Sproto-Fighter/tree/codex/gameplay-cpu-calibration)
-fixes that leak, forecasts commitment using unfrozen ticks, and reserves Expert
-jab initiative. Its 20 focused tests pass. Its new fixed-seed checkpoint gives
-CPU wins Easy 0/64, Normal 0/64, Hard 9/64, Expert 30/64; the earlier full-curve
-640/1,976 result belongs to a superseded candidate and is not this result.
-The CPU candidate is now integrated and paired with the refreshed hub bundle;
-its new full measurements and broader validation are in progress. The role
-experiment remains separate and unpaired with the hub. Delayed
-position spacing may additionally bias faster-versus-slower matchups and needs
-controlled investigation before more role buffs. These are pre-merge blockers.
-Expert meter baiting has not been independently established. Balance CI remains
-advisory because the acceptance gate fails; promoting it to a gate is pending.
+| Observed result | Prior `7d0ce00ef52b567a` | Reviewed `373448bdc043a0e8` |
+| --- | ---: | ---: |
+| Outside 35–65%, Normal / Hard | 107 / 102 | 28 / 18 |
+| Outside 40–60%, Normal / Hard | Not a pass | 81 / 51 |
+| Mean bout seconds, Normal / Hard | 22.39 / 22.38 | 28.79 / 34.35 |
+| Raw draws, Normal / Hard | 0.06% / 0.18% | 0.04% / 0.16% |
+| Actual-route CPU wins / 1,976 paired-seat rows | 30 | 212 |
 
-Enabled optional rules completed 224 matches / 538 rounds across eight named
-fighters, covering six canonical archetypes, with no raw draws or cap exhaustion.
-Mean rounds were 21.21/21.91 seconds at Normal/Hard. This is CPU measurement,
-not human pacing. [Enabled-mode report](balance/report-2026-11-05-final-match-depth.md).
+The observed 35–65% gate still fails. Normal/Hard Zoning rates are 37.35/38.84%,
+Brawler 40.87/45.53%, Footwork 56.72/55.27%. See the
+[current controlled report](balance/POST-CPU-REVIEW-CALIBRATION-20261105.md),
+raw gzip/hash manifest and [historical baseline](balance/FINAL-CALIBRATION-20261105.md).
+CPU duration does not establish the human 30–45 second pacing target.
 
-At the prior checkpoint, typecheck, build and 148 unit tests passed. The measurement smoke covered
-840 complete-state equality checkpoints, including guarded chip. Node and
-installed Chromium match at 130 checkpoints across 11 scenarios; the GitHub
-three-engine determinism job for this source also passed. Packed sheets verify
-all 29,020 frames unchanged. The complete standalone runner finished 70/71
-checks; its only failure was stale sprite guard expectations. After updating
-those numeric fixtures for chip and faster back-walk, the corrected audit passed:
-254 fighters, 2,076,832 runtime samples, 5,588 replay scenarios, zero hard failures
-and zero art baseline changes. Its 950 advisory silhouette flags remain a visual
-review queue. [Audit evidence](balance/evidence/sprite-audit-final-summary.md)
-includes compressed raw output and hashes. The newly added enabled-mode tooling
-smoke passed separately. A second complete standalone run was not performed.
-The latest documentation/test-only push has a GitHub build still in progress.
+Larger actual endpoint diagnostics use 256 independent seed pairs, with Story's
+natural seat as primary. The reviewed CPU wins 0/256 at encounter one and
+165/255 decided at the regular-fighter finale (64.71%, plus one raw draw).
+The finale is near the target; the opening clearly fails. Reverse seats agree
+for every pair and must not double the effective sample size. The fixed
+reference is unchanged and unvalidated as a decent human. See
+[story target diagnosis and proposed decisions](balance/STORY-TARGET-DIAGNOSIS-20261105.md).
+The sparse full-route rows do not certify adjacent 10-point smoothness.
+Dedicated transformed boss controllers are outside these measurements.
 
-Automated Chromium checks exercised Hard CPU play, weapon/paired training,
-recording/looping, overlays, pause and replay. A real Round 1 KO advanced to
-Round 2 preview and live combat with replay equality at both boundaries.
-Jessica's actual heavy contact was frozen at active tick 14 with red/green
-geometry. This is automated/static inspection, not a human playtest.
+Tracking from delayed motion and a known-spawn prototype remain unselected.
+Their endpoint rates are 1.56%/90.23% and 3.125%/94.14%, respectively: greater
+capability does not meet both endpoints. The all-roster tracking pilot is mixed
+across skills. Controlled expansions compare identical Footwork/Zoning role
+changes with and without tracking before any promotion. Earlier Brawler/Weapon
+buffs are being omitted because the reviewed CPU changed their effects.
 
-The matching local Nakama stack replayed five logs with exact winner, frame and
-state-hash equality and rejected bad versions/malformed logs. Four live relay
-duel groups and a two-Chromium wager/rematch passed with Tickets conserved and
-local rule flags disabled. Direct WebRTC was not established; its default test
-remains strict. TURN and production connectivity were not tested.
+Budget identity bounds are tested, but the production weights are not a fairness
+certificate. Experimental budgets include mobility and actual action-ready
+block advantage. Held-out fits are modest and policy-dependent; constant safety
+features cannot be priced empirically without interventions. Expert meter
+baiting is not independently established. Balance CI remains advisory until the
+initial gate passes. No reference, target, hidden stats or per-fighter bonuses
+are changed to manufacture a pass.
 
-No file under `art/` or `public/fighters/`, atlas registration, clip length or
-throw grip was edited. Offline hull reports describe whole-body envelopes and
-explicit alpha fallbacks; they do not approve semantic fist/blade contact.
+The prior optional-mode sample completed 224 matches / 538 rounds across eight
+fighters and six archetypes, with no raw draws/cap exhaustion. It is not a
+full-roster optional-mode or human-pacing certificate.
+[Enabled-mode report](balance/report-2026-11-05-final-match-depth.md).
+
+## Validation and practical limits
+
+The reviewed CPU checkpoint passes typecheck, build, 159 unit tests and all 68
+fast standalone checks when the two browser checks are rerun with system
+Chromium. The initial fast command passed 66/68 and failed only to launch those
+browsers because the Chromium path was absent. Both targeted reruns pass.
+The later training-readout correction passes typecheck and all 172 unit tests;
+its real-step probes check +7 light hit, -5 light block and -12 heavy block.
+Movement, knockdown, throw, Special and future-projectile contexts show no
+numeric advantage rather than misleading stun arithmetic. It does not predict
+cancels or combo routes.
+
+Node/Chromium agree at 130 checkpoints over 11 scenarios. Three-engine
+[determinism CI](https://github.com/crrreatorrr/Sproto-Fighter/actions/runs/41969600478)
+passed for the reviewed CPU checkpoint, including the full gameplay/art/story
+audit. The later training UI regression checks are separate until the final
+candidate CI run.
+
+At the prior `7d0ce00ef52b567a` checkpoint, packed sheets verified all 29,020
+frames unchanged. The full standalone runner passed 70/71; its stale guard
+expectations were corrected, then the complete sprite audit passed across 254
+fighters, 2,076,832 runtime samples and 5,588 replay scenarios, with zero hard
+failures or art baseline changes. Its 950 silhouette advisories remain a visual
+review queue. [Audit evidence](balance/evidence/sprite-audit-final-summary.md).
+This is versioned prior evidence, not an unperformed final full-suite run.
+
+Automated Chromium exercised Hard CPU play, weapon/paired training, recording,
+overlays, pause and replay. Actual Round 1 KO → Round 2 preview/live boundaries
+were replay-equal. Reviewed-CPU browser reruns also passed the campaign's 48
+new stage launches, 121 selectors, desktop/mobile map and actual cinematic/boss
+progression. These are automated checks, not human playtesting.
+
+The matching local Nakama verifier replayed five logs with exact winner/frame/
+hash equality and rejected bad versions/malformed logs. Four live relay duel
+groups passed. The prior two-Chromium wager/rematch conserved Tickets and
+rejected local experiment flags. Direct WebRTC was not established; its default
+test remains strict. TURN and production connectivity were not verified.
+
+No `art/**`, `public/fighters/**`, atlas registration, clip length or throw grip
+was edited. Frozen collision rectangles are provisional numeric geometry;
+offline body-hull measurements do not approve semantic fist/blade contact.
 Human feel/contact testing remains a required acceptance step.
