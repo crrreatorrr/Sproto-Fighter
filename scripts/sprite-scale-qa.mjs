@@ -56,7 +56,7 @@ export function drawSprite(c,f,frame,ghost=false,frozen=false) {
 }`);
 // Effects have intentionally independent sizes. Keep real assist placement and
 // body drawing, but omit effect artwork from this body-scale audit.
-const effectsUrl = moduleUrl('export function drawPower(){} export function drawPelvicStream(){} export function drawPartnerEffect(){}');
+const effectsUrl = moduleUrl('export function drawSpecialSprite(){}');
 const team = await import(moduleUrl(compile('src/teamSpecial.ts')
   .replace("from './core'", `from '${coreUrl}'`).replace("from './poseAtlas'", `from '${poseUrl}'`)
   .replace("from './spriteRoster'", `from '${spriteUrl}'`).replace("from './powerArt'", `from '${effectsUrl}'`)

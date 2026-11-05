@@ -371,6 +371,7 @@ buddhashadow:{"name":"SPROTO BUDDHA (Shadow Mode)","color":"#ffe238","dark":"#24
  dumpstar:{name:'Dumpstar',color:'#77a9ff',dark:'#345bb3',speed:5.5,jump:15.8,"partner":"sproto102",special:'TEAM RELAY',role:'SHARED KIT',description:'Shared Golden Sproto movement and attacks. Face and attire from the supplied reference; shoulder objects omitted.'},
 };
 /** One roster identity per assist. Its complete twin body set is resolved by bodyAtlasIds. */
+export const fighterPartner=(fighter:Pick<Fighter,'id'|'partner'>):FighterId=>fighter.partner??ROSTER[fighter.id].partner;
 export const specialPartnerIds=(id:FighterId):readonly FighterId[]=>[ROSTER[id].partner];
 /** Authored partner choreography and confirmed-contact properties. One identity
  * still shares the main fighter's meter and contact clock; twins alternate bodies. */

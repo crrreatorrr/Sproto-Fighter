@@ -13,6 +13,7 @@ export interface Attack {
 }
 export interface Fighter {
     id: FighterId;
+    partner?: FighterId;
     x: number;
     y: number;
     vx: number;

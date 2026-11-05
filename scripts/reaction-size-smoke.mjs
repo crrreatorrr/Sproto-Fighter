@@ -17,7 +17,7 @@ globalThis.Image=class {set src(u){this.url=u;const b=read('public'+u.split('?')
 await poses.loadPoseAtlases();
 for(const item of review){const cfg=original.fighters[item.id];
  for(const [slot,key] of [[0,'neutralSHA256'],[24,'hitSHA256']])assert.equal(createHash('sha256').update(read('public'+cfg.frames[slot].url)).digest('hex'),item[key],`${item.id} source changed: repeat anatomical review`);
- assert.deepEqual(cfg.poseRegistration,{hit:{pixelScale:item.pixelScale,anchorOffset:item.anchorOffset}});
+ assert.deepEqual(cfg.poseRegistration?.hit,{pixelScale:item.pixelScale,anchorOffset:item.anchorOffset});
  for(const face of [-1,1]){const s=core.createState(item.id,'dummy'),f=s.fighters[0];f.facing=face;f.stun=12;f.reaction={kind:'launch',phase:'flight',t:0,direction:-face};f.y=core.FLOOR-30;
   const draws=[],ctx={save(){},restore(){},translate(){},rotate(){},scale(){},drawImage(i,x,y,w,h){draws.push({i,x,y,w,h});}};const before=JSON.stringify(s);poses.drawPoseAtlas(ctx,f,0);
   assert.equal(JSON.stringify(s),before);assert.equal(poses.getPoseAtlasDebug(f,0).slot,24);

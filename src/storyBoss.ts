@@ -103,7 +103,7 @@ export interface StoryBoss {
 }
 
 export function storyBossPlayerPose(player:CombatState['fighters'][0]){
-    return {...makeFighter(player.id,790,-1),best:player.best,hp:player.hp};
+    return {...makeFighter(player.id,790,-1),best:player.best,hp:player.hp,...(player.partner?{partner:player.partner}:{})};
 }
 
 export function startStoryBoss(state:CombatState,form:BossForm):StoryBoss {

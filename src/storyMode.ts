@@ -3,7 +3,7 @@ import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
 import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,STORY_OPPONENTS,storyProgress,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
 
-type Hooks={pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;godMode?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
+type Hooks={beforeStory?:()=>Promise<boolean>;pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;godMode?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
 /** Real progression; chapter scenes remain placeholders pending script approval. */
 export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
@@ -48,7 +48,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
             progress.abandonRun();active=null;settled=null;wave=0;
             $('journey-title').textContent='This match could not load.';
             $('journey-copy').textContent=`Your earned progress is unchanged. ${encounter&&encounter.opponents.length>1?'The two-bout encounter restarts from its first opponent. ':''}Try again or choose another destination.`;
-            buttons([{label:encounter?'Retry encounter →':'Retry match →',run:()=>{void launch(id,encounter);}},{label:'Story route',run:()=>selector(true)}]);
+            buttons([{label:encounter?'Retry encounter':'Retry match',run:()=>{void launch(id,encounter);}},{label:'Story route',run:()=>selector(true)}]);
             back=()=>selector(true);open();console.warn(error);
         }finally{launching=false;}
     }
@@ -68,7 +68,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         $('journey-copy').textContent=`Chapter story and cutscene script pending approval. ${gauntletNote(encounter)}Next: encounter ${encounter.index+1} of ${total} against ${names(encounter)}. ${storageNote()}`;
         $('journey-content').innerHTML=`<div class="story-slate" style="--stage-accent:${level.accent}"><span>MAJOR STAGE ${encounter.chapter}</span><strong>${level.theme}</strong><p>CUTSCENE PLACEHOLDER / SCRIPT PENDING APPROVAL</p></div>`;
         sceneryPicker(encounter);
-        buttons([{label:`Fight ${ROSTER[encounter.opponent].name} →`,run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);
+        buttons([{label:`Fight ${ROSTER[encounter.opponent].name}`,run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);
         back=()=>selector(true);open();
     }
     function encounterPreview(encounter:Encounter){
@@ -76,7 +76,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         $('journey-title').textContent=`Challenge ${names(encounter)}.`;
         $('journey-copy').textContent=`${gauntletNote(encounter)}${recruitNote(encounter)} Advance toward Verse Gate. ${storageNote()}`;
         $('journey-content').replaceChildren();sceneryPicker(encounter);
-        buttons([{label:'Start encounter →',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);back=()=>selector(true);open();
+        buttons([{label:'Start encounter',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);back=()=>selector(true);open();
     }
     const firstInRegion=(encounter:Encounter)=>encounter.index===0||STORY_ENCOUNTERS[encounter.index-1].stage!==encounter.stage;
     function showEncounter(encounter:Encounter,between=false){if(firstInRegion(encounter))scene(encounter,between);else encounterPreview(encounter);}
@@ -99,7 +99,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         }
         if(story)hooks.map?.(content,progress,encounter=>showEncounter(encounter));
         buttons(story?[
-            {label:save.completed?'Replay from the beginning':'Continue story →',run:()=>showEncounter(STORY_ENCOUNTERS[save.nextIndex??0],true)},
+            {label:save.completed?'Replay from the beginning':'Continue story',run:()=>showEncounter(STORY_ENCOUNTERS[save.nextIndex??0],true)},
             {label:'Free-play levels',run:()=>selector(false)},{label:'Back to arena',run:close},
         ]:[{label:'Story route',run:()=>selector(true)},{label:'Back to arena',run:close}]);
         back=close;open();
@@ -122,15 +122,18 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
             if(!finaleWon&&next&&next.stage!==encounter.stage){scene(next,true);return true;}
             $('journey-title').textContent=save.completed||finaleWon?'Congratulations! You beat Sproto Fighter!':`${names(encounter)} ${encounter.opponents.every(isStoryRecruitable)?'recruited':'defeated'}!`;
             $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode is unlocked and stays unlocked as the roster grows. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. ${recruitNote(encounter)} ${storageNote()}`;
-            buttons(next?[{label:`Next: ${ROSTER[next.opponent].name} →`,run:()=>{void launch(next.stage,next);}},{label:'Story route',run:()=>selector(true)}]:[{label:'Story route',run:()=>selector(true)},{label:'Free-play levels',run:()=>selector(false)}]);
+            buttons(next?[{label:`Next: ${ROSTER[next.opponent].name}`,run:()=>{void launch(next.stage,next);}},{label:'Story route',run:()=>selector(true)}]:[{label:'Story route',run:()=>selector(true)},{label:'Free-play levels',run:()=>selector(false)}]);
         }else{
             $('journey-title').textContent=result===2?'Draw — try this encounter again.':'Retry this encounter.';
             $('journey-copy').textContent=`${gauntletNote(encounter)}${ROSTER[encounter.opponent].name} is waiting. Defeats and draws do not advance the route. Already earned recruits are kept. ${storageNote()}`;
-            buttons([{label:'Retry match →',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);
+            buttons([{label:'Retry match',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);
         }
         status();back=()=>selector(true);open();return true;
     }
-    $('story-worlds').onclick=()=>selector(true);$('free-levels').onclick=()=>selector(false);$('journey-back').onclick=()=>back();
+    $('story-worlds').onclick=()=>{
+        if(hooks.beforeStory)void hooks.beforeStory().then(confirmed=>{if(confirmed)selector(true);});
+        else selector(true);
+    };$('free-levels').onclick=()=>selector(false);$('journey-back').onclick=()=>back();
     modal.addEventListener('cancel',e=>{e.preventDefault();back();});progress.subscribe(status);status();
     return {
         get isOpen(){return modal.open;},get isActive(){return !!active;},finishMatch,onRoundEnd,

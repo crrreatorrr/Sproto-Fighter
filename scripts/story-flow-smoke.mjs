@@ -234,6 +234,7 @@ try {
       const setStage=id=>selectedStage=id,setActiveStoryLocation=value=>selectedLocation=value,loadStoryLocation=async()=>{};
       const stageRequests=[],stageErrors={};
       const loadStageArt=async(ids)=>{stageRequests.push([...ids]);},getStageArtStatus=()=>({errors:stageErrors});
+      const partnerPicker={isOpen:false,choose:async id=>ROSTER[id].partner};
       const selection={isOpen:true,getSetup:()=>({...setup}),setSetup:next=>setup={...setup,...next},hide(){this.isOpen=false;},show(){this.isOpen=true;},setReady(){}};
       const mountCampaignMap=(_parent,_progress,choose)=>mapChoose=choose;
       const dialog=$('controls-dialog'),updateControls=()=>{};
@@ -250,7 +251,7 @@ try {
         inspect:()=>({setup,mode,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
     `)({createStoryMode:hooks=>createStoryMode(hooks,progress),storyProgress:progress,STAGES,ROSTER,$:d.$,createRoundPresentation,createState,
       STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition});
-    return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await d.action(0);await d.action(0);await flush();}};
+    return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);await d.action(0);await flush();}};
   }
   await check('actual main rejects every unrecruited campaign P1 including former free-play additions',async()=>{
     const t=integration(),original=t.inspect().state;

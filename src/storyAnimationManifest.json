@@ -146,16 +146,19 @@
   },
   "vmu-black-hole": {
     "image": "vmu-black-hole.png",
-    "width": 384,
-    "height": 224,
+    "width": 768,
+    "height": 448,
     "columns": 8,
-    "frames": 45,
+    "frames": 64,
     "fps": 16,
-    "x": 64,
-    "y": 172,
-    "scale": 3.33,
-    "left": 27,
-    "right": 341
+    "x": 128,
+    "y": 344,
+    "scale": 1.665,
+    "left": 54,
+    "right": 682,
+    "portalX": 512,
+    "portalY": 110,
+    "pullFrame": 34
   },
   "morelight-wizard": {
     "image": "morelight-wizard.png",

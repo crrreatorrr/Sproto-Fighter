@@ -88,9 +88,10 @@ try{
   localStorage.setItem(STORY_SAVE_KEY,JSON.stringify({version:3,cleared:STORY_ENCOUNTERS.slice(0,index).map(e=>e.id),unlocked:['highsproto','bront'],godModeUnlocked:false}));
  });
  await page.reload();await page.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
- await page.locator('#story-worlds').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
+ await page.locator('#story-worlds').click();await page.locator('#partner-choice').selectOption('bront');await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='nick'&&!window.neonRelay.storySnapshot().launching);
  await page.keyboard.press('Enter');await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='intro');
+ assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().fighters[0].partner),'bront');
  const before=await page.evaluate(()=>({state:window.neonRelay.snapshot(),replay:window.neonRelay.replay()}));
  await page.locator('#pause').click();const paused=await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot());
  await page.waitForTimeout(250);assert.deepEqual(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot()),paused);
@@ -107,7 +108,7 @@ try{
  const retryContext=await browser.newContext({storageState:await context.storageState()}),retryPage=await retryContext.newPage();
  await retryPage.route('**/story-animations/nick-juicy.png',route=>route.fulfill({status:404,body:'missing test fixture'}));
  await retryPage.goto(base);await retryPage.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
- await retryPage.locator('#story-worlds').click();await retryPage.locator('#journey-actions button').first().click();await retryPage.locator('#journey-actions button').first().click();
+ await retryPage.locator('#story-worlds').click();await retryPage.locator('#partner-confirm').click();await retryPage.locator('#journey-actions button').first().click();await retryPage.locator('#journey-actions button').first().click();
  await retryPage.waitForFunction(()=>document.querySelector('#journey-title').textContent==='This match could not load.');
  assert.equal(await retryPage.locator('#start').isDisabled(),false);
  await retryPage.unroute('**/story-animations/nick-juicy.png');await retryPage.locator('#journey-actions button').first().click();
@@ -122,7 +123,7 @@ try{
  });
  await page.reload();await page.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
  await page.locator('#settings').click();await page.locator('#testing-god-mode').check();await page.locator('#close-settings').click();
- await page.locator('#story-worlds').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
+ await page.locator('#story-worlds').click();await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vela'&&!window.neonRelay.storySnapshot().launching);
  async function winRegularBout(){
  await page.keyboard.press('Enter');

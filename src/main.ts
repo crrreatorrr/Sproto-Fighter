@@ -21,6 +21,7 @@ import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from
 import {BOSS_KEYS,drawStoryBossAttacks,drawStoryBossPose,loadStoryBossArt,startStoryBoss,stepStoryBoss,storyBossPlayerPose,storyBossTitle,type StoryBoss,type BossForm} from './storyBoss';
 import {createStoryAnimation,storyAnimationPlan} from './storyAnimation';
 import { createStoryMode } from './storyMode';
+import {createPartnerPicker} from './partnerPicker';
 import { connectHub, hubConfigured, type HubLink } from './hub/link';
 import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
@@ -115,7 +116,16 @@ async function prepareSelectionArt(ids:FighterId[]):Promise<void>{
     if(generation!==pickGeneration)return;
     pickPrefetch=setTimeout(()=>{void ensurePoseAtlases(ids).catch(error=>console.warn('Fighter art prefetch failed; Start will retry.',error));},PICK_SETTLE_MS);
 }
-const selection = createSelectionMenu({start:setup=>{void launchSelection(setup);},prepare:prepareSelectionArt,canPlay:canPlayFighter,locked:lockedFighter});
+const partnerPicker=createPartnerPicker(canPlayFighter);
+const selection = createSelectionMenu({
+    start:setup=>{void chooseFightPartner(setup);},
+    prepare:prepareSelectionArt,canPlay:canPlayFighter,locked:lockedFighter,
+});
+async function chooseFightPartner(setup:SelectionSetup){
+    if(setup.mode==='online'||setup.mode==='online-wager'){await launchSelection(setup);return;}
+    const partner=await partnerPicker.choose(setup.fighter,setup.partner);
+    if(partner)await launchSelection({...setup,partner});
+}
 let toastTimer=0;
 function hubToast(title:string,sub:string){
  const toast=$('hub-toast');toast.replaceChildren();
@@ -162,9 +172,11 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
+    const selectedPartner=setup.partner;
+    if(selectedPartner&&selectedPartner!==ROSTER[setup.fighter].partner&&PLAYABLE_FIGHTERS.includes(selectedPartner as FighterId))requiredFighters.push(selectedPartner as FighterId);
     // Usually already prefetched; otherwise the rest of the bodies load now.
     $('selection-loading').textContent='Loading selected fighters…';
-    try{await Promise.all([ensurePoseAtlases(requiredFighters,{pin:true}),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh','highsproto'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
+    try{await Promise.all([ensurePoseAtlases(requiredFighters,{pin:true}),ensurePowerArt()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
     try{
@@ -180,7 +192,10 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     updateStage(setup.stage);setActiveStoryLocation(scenery);
     if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
     selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
-    started=false;restart();start();
+    started=false;restart();
+    delete state.fighters[0].partner;
+    if(selectedPartner&&selectedPartner!==ROSTER[chosen].partner)state.fighters[0].partner=selectedPartner;
+    start();
     $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
     if(encounter&&encounter.opponents.length>1){
         const bout=encounter.opponents.indexOf(setup.opponent)+1;
@@ -260,14 +275,16 @@ function pause() {
     if (!started || (presentation.phase === 'result'&&!storyAnimation.active) || online)
         return;
     if (running)
-        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume →');
+        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume');
     else
         start();
 }
 function restart() {
     storyAnimation.reset();storyBoss=null;bossStarts.length=0;godModeChanges.length=0;
     matchTesting=testingGodMode&&mode!=='versus';matchGodMode=(testingGodMode||matchEarnedGodMode)&&mode!=='versus';
+    const partner=state.fighters[0].id===chosen?state.fighters[0].partner:undefined;
     state = createState(chosen, mode, opponent);
+    if(partner)state.fighters[0].partner=partner;
     if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
     countdown.hide();
@@ -297,13 +314,21 @@ function setTestingGodMode(enabled:boolean){
 }
 let resumeAfterJourney = false, freePlayMode: MenuMode | null = null;
 const story = createStoryMode({
+    beforeStory:async()=>{
+        held.clear();queued=0;queued2=0;padNeedsRelease=true;
+        const setup=selection.getSetup();
+        const partner=await partnerPicker.choose(setup.fighter,setup.partner);
+        if(!partner)return false;
+        selection.setSetup({partner});
+        return true;
+    },
     map:mountCampaignMap,
     selectedFighter:()=>selection.getSetup().fighter,
     canPlayFighter,
     testing:()=>matchTesting,
     godMode:()=>testingGodMode||(storyProgress.snapshot().godModeUnlocked&&!!selection.getSetup().godMode),
     ready: () => !($('start') as HTMLButtonElement).disabled,
-    pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume →'); },
+    pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume'); },
     resume: () => { if (resumeAfterJourney && started && (presentation.phase !== 'result'||storyAnimation.active)) start(); },
     launch: (stage, isStory, storyOpponent) => {
         if(isStory)freePlayMode??=selection.getSetup().mode;
@@ -355,7 +380,7 @@ $('defaults').onclick = () => {
 for (const p of [1, 2] as const) $(`controls-p${p}`).onclick = () => { controlsPlayer = p; remapping = null; updateControls(); };
 $('controls-tabs').onkeydown = e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); controlsPlayer = controlsPlayer === 1 ? 2 : 1; remapping = null; updateControls(); $(`controls-p${controlsPlayer}`).focus(); } };
 window.addEventListener('keydown', e => {
-    if (story.isOpen) return;
+    if (story.isOpen||(typeof document!=='undefined'&&document.querySelector?.('#partner-picker[open]'))) return;
     if (dialog.open) {
         if (remapping?.device === 'key') {
             e.preventDefault();
@@ -423,7 +448,7 @@ canvas.addEventListener('pointerdown', () => canvas.focus());
 function pollPad(): number {
     const pads = navigator.getGamepads?.() || [];
     const pad = Array.from(pads).find(p => p?.connected);
-    const wasSelection=selection.isOpen,wasModal=story.isOpen||dialog.open,wasOverlay=!running&&!selection.isOpen;
+    const wasSelection=selection.isOpen,wasModal=story.isOpen||dialog.open||!!document.querySelector?.('#partner-picker[open]'),wasOverlay=!running&&!selection.isOpen;
     selection.pollPad(pad??null);
     if (!pad) {
         if (!online) $('device').textContent = 'KEYBOARD READY';
@@ -444,20 +469,29 @@ function pollPad(): number {
         if (index >= 0 && index !== 9){bind(index);boundPadThisFrame=true;}
     }
     previousPad2 = secondButtons;
-    if(wasModal&&(story.isOpen||dialog.open)&&!remapping&&!boundPadThisFrame){
+    if(wasModal&&(story.isOpen||dialog.open||!!document.querySelector?.('#partner-picker[open]'))&&!remapping&&!boundPadThisFrame){
         const activeDialog=document.querySelector<HTMLDialogElement>('dialog[open]')!;
         const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
         const now=performance.now();
         if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
             const controls=Array.from(activeDialog.querySelectorAll<HTMLElement>('button:not(:disabled), select, input')).filter(el=>el.offsetParent!==null);
-            const index=controls.indexOf(document.activeElement as HTMLElement);controls[(index+(direction==='previous'?-1:1)+controls.length)%controls.length]?.focus();
+            const active=document.activeElement as HTMLElement;
+            if(activeDialog.id==='partner-picker'&&active.tagName==='SELECT'&&(buttons[14]||buttons[15]||Math.abs(pad.axes[0])>.55)){
+                const select=active as HTMLSelectElement;
+                select.selectedIndex=(select.selectedIndex+(direction==='previous'?-1:1)+select.length)%select.length;
+            }else{
+                const index=controls.indexOf(active);controls[(index+(direction==='previous'?-1:1)+controls.length)%controls.length]?.focus();
+            }
             modalRepeatAt=now+(direction===modalDirection?160:360);
         }
         modalDirection=direction;
         if(buttons[1]&&!previousPad[1])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
-        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLElement&&document.activeElement.matches('button,input[type=checkbox]'))document.activeElement.click();
+        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLElement){
+            if(document.activeElement.matches('button,input[type=checkbox]'))document.activeElement.click();
+            else if(activeDialog.id==='partner-picker'&&document.activeElement.matches('select'))$('partner-confirm').click();
+        }
     }else if(!wasOverlay)modalDirection='';
-    if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen){
+    if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen&&!document.querySelector?.('#partner-picker[open]')){
         const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
         const now=performance.now();
         if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
@@ -545,11 +579,11 @@ async function queueOnline(setup: SelectionSetup, rematchOf?: string) {
                 setTimeout(() => {
                     if (match !== online || match.phase !== 'queued') return;
                     void match.leave(); online = null;
-                    showOnlineOverlay('No rematch', 'Your opponent didn’t choose Rematch.', 'Find another opponent →', 'ONLINE', () => void queueOnline(setup));
+                    showOnlineOverlay('No rematch', 'Your opponent didn’t choose Rematch.', 'Find another opponent', 'ONLINE', () => void queueOnline(setup));
                 }, 30000);
             }
             else if (phase === 'queued') showOnlineOverlay('Finding an opponent…', wager ? 'Both players stake 10 Tickets; the winner takes 20. The hub verifies the result before paying.' : 'Looking for another player. Pick “Fighter select” to stop searching.', 'Searching…', 'ONLINE', null);
-            if (phase === 'failed' && presentation.phase !== 'result') showOnlineOverlay('Online match unavailable', onlineFailureText(detail), 'Back to fighter select →', 'ONLINE', returnToSelection);
+            if (phase === 'failed' && presentation.phase !== 'result') showOnlineOverlay('Online match unavailable', onlineFailureText(detail), 'Back to fighter select', 'ONLINE', returnToSelection);
         },
         onStart: start => { if (match === online) void beginOnline(match, start.fighters as [FighterId, FighterId], start.stage, !!start.wager); },
         onEvent: event => {
@@ -590,7 +624,7 @@ async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId],
     showOnlineOverlay('Opponent found!', 'Loading fighters…', 'Loading…', 'ONLINE', null);
     await Promise.all([
         loadStageArt([stage]),ensurePoseAtlases(fighters,{pin:true}).catch(()=>undefined),
-        fighters.includes('highsproto')?ensurePowerArt().catch(()=>undefined):Promise.resolve(),
+        ensurePowerArt().catch(()=>undefined),
     ]);
     if (match !== online || !match.session) return;
     chosen = fighters[0]; opponent = fighters[1]; mode = 'versus';
@@ -640,7 +674,7 @@ function showOnlineResult() {
     const winnerSeat = outcome?.status === 'settled' ? outcome.winnerSeat : state.winner;
     running = false; started = false;
     const title = winnerSeat === 2 ? 'Double knockout.' : winnerSeat === seat ? 'You win.' : winnerSeat === null || winnerSeat === undefined ? 'Match over.' : 'You lose.';
-    showOnlineOverlay(title, outcome ? onlineOutcomeText(outcome, seat) : 'Waiting for the hub to confirm the result…', 'Rematch →', match.start.wager ? 'ONLINE / 10-TICKET WAGER' : 'ONLINE VERSUS', () => {
+    showOnlineOverlay(title, outcome ? onlineOutcomeText(outcome, seat) : 'Waiting for the hub to confirm the result…', 'Rematch', match.start.wager ? 'ONLINE / 10-TICKET WAGER' : 'ONLINE VERSUS', () => {
         void match.leave(); online = null; stopHiddenClock();
         void queueOnline({ ...selection.getSetup(), mode: match.start?.wager ? 'online-wager' : 'online' }, match.matchId ?? undefined);
     });
@@ -718,11 +752,11 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         reportRound();
         if (story.onRoundEnd(state.winner!)) return;
         if (mode === 'versus') {
-            showOverlay(state.winner === 2 ? 'Double knockout.' : `Player ${state.winner! + 1} wins.`, `Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch →', 'LOCAL VERSUS');
+            showOverlay(state.winner === 2 ? 'Double knockout.' : `Player ${state.winner! + 1} wins.`, `Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch', 'LOCAL VERSUS');
             return;
         }
         const won = state.winner === 0;
-        showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again →', 'ROUND COMPLETE');
+        showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again', 'ROUND COMPLETE');
         return;
     }
     if (presentation.phase !== 'fight') return;
@@ -760,7 +794,7 @@ function stepTo(now: number) {
     // Keep KO icon rotation alive on the result screen without advancing combat.
     visualFrame += qaFrozen ? (qaSingleStep ? 1 : 0) : elapsed * 60;
     const pad = pollPad();
-    if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen)) && (!qaFrozen||qaSingleStep)) {
+    if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen && !partnerPicker.isOpen)) && (!qaFrozen||qaSingleStep)) {
         accumulator = qaSingleStep?1/60:accumulator+elapsed;
         qaSingleStep=false;
         while (accumulator >= 1 / 60) {
@@ -819,13 +853,14 @@ function tick(now: number) {
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
-ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume →';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
-Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, godMode:matchGodMode, ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {
+Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, ...(state.fighters[0].partner?{partner:state.fighters[0].partner}:{}), godMode:matchGodMode, ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {
             const replay = createState(chosen, mode, opponent);
+            if(state.fighters[0].partner)replay.fighters[0].partner=state.fighters[0].partner;
             if(matchGodMode){replay.godMode=true;replay.fighters[0].pips=3;}
             let boss:StoryBoss|null=null,next=0,toggle=0;
             const applyChanges=()=>{

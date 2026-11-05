@@ -205,9 +205,9 @@ export function createStoryAnimation(){
             if(plan.outro[index]!=='vmu-black-hole'||(phase!=='outro'&&!heldOutro))return;
             const spec=manifest['vmu-black-hole'];
             const frame=age*spec.fps/TICK_RATE;
-            if(frame<24)return;
-            return {x:storyBossX('vmu')+(256-spec.x)*spec.scale,y:(55-spec.y)*spec.scale,
-                progress:Math.min(1,(frame-24)/14)};
+            if(frame<spec.pullFrame)return;
+            return {x:storyBossX('vmu')+(spec.portalX-spec.x)*spec.scale,y:(spec.portalY-spec.y)*spec.scale,
+                progress:Math.min(1,(frame-spec.pullFrame)/14)};
         },
         get bossForm(){return plan.form;},
         get replaceDefeat(){return plan.replaceDefeat;},

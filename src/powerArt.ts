@@ -9,6 +9,8 @@ let referenceB: HTMLImageElement | undefined;
 let miniSproto: HTMLImageElement | undefined;
 let ethereum: HTMLImageElement | undefined;
 let weedLeaf: HTMLImageElement | undefined;
+let sharedRanged:HTMLImageElement|undefined;
+let specialEffects:HTMLImageElement|undefined;
 let coinReady: Promise<void> | undefined;
 export function ensurePowerArt(): Promise<void> {
  const load=(url:string)=>new Promise<HTMLImageElement>((resolve,reject)=>{
@@ -21,7 +23,22 @@ export function ensurePowerArt(): Promise<void> {
   load('/fighters/powers/sproto2531-mini.png'),
   load('/fighters/powers/vitalik-ethereum.png'),
   load('/fighters/powers/highsproto-weed-leaf.png'),
- ]).then(([coin,b,mini,eth,leaf])=>{retainCoin=coin;referenceB=b;miniSproto=mini;ethereum=eth;weedLeaf=leaf;}).catch(error=>{coinReady=undefined;throw error;});
+  load('/fighters/powers/shared-ranged-atlas.png'),
+  load('/fighters/powers/team-special-effects.png'),
+ ]).then(([coin,b,mini,eth,leaf,ranged,effects])=>{retainCoin=coin;referenceB=b;miniSproto=mini;ethereum=eth;weedLeaf=leaf;sharedRanged=ranged;specialEffects=effects;}).catch(error=>{coinReady=undefined;throw error;});
+}
+export function drawSharedRanged(c:CanvasRenderingContext2D,index:number){
+ if(!sharedRanged?.naturalWidth)return false;
+ c.save();c.imageSmoothingEnabled=false;
+ c.drawImage(sharedRanged,index%8*96,Math.floor(index/8)*96,96,96,-23,-23,46,46);
+ c.restore();return true;
+}
+export function drawSpecialSprite(c:CanvasRenderingContext2D,index:number,x:number,y:number,size:number,angle:number,opacity:number){
+ if(!specialEffects?.naturalWidth)return;
+ c.save();c.imageSmoothingEnabled=false;c.globalAlpha*=opacity;
+ c.translate(Math.round(x),Math.round(y));c.rotate(angle);
+ c.drawImage(specialEffects,index%4*128,Math.floor(index/4)*128,128,128,-size/2,-size/2,size,size);
+ c.restore();
 }
 /** A pixel stream starts exactly at the caller's covered pelvic anchor. */
 export function drawPelvicStream(c:CanvasRenderingContext2D,reach:number,age:number){

@@ -1,13 +1,20 @@
 import {drawActiveStoryLocation} from './stageVariants';
 import { setPoseAtlasThrowState, setPoseAtlasPresentation } from './poseAtlas';
 import type { RoundPresentation } from './animationEvents';
-import { drawPower, drawRetainDefeat, drawVitalikDefeatCaption } from './powerArt';
+import { drawPower, drawSharedRanged, drawRetainDefeat, drawVitalikDefeatCaption } from './powerArt';
 import { drawMindBeams } from './mindBeamArt';
 import { drawPelvicAttacks } from './pelvicAttack';
 import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
 import { drawSprite } from './spriteRoster';
 import { drawStage } from './stage';
-import { FLOOR, ROSTER, COMBAT_STYLES, DUO_SPREAD, bodyOffsets, isPairedFighter, isDown, getMove, type CombatState, type Fighter } from './core';
+import { FLOOR, ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, hashText, DUO_SPREAD, bodyOffsets, isPairedFighter, isDown, getMove, type CombatState, type Fighter } from './core';
+// Shuffle once by fighter identity, then deal all 48 sprites before reusing any.
+const genericRanged=new Set(['orb','spark','prism','ring','coin']);
+const sharedRangedAssignments=new Map(
+    PLAYABLE_FIGHTERS.filter(id=>id!=='guest12'&&genericRanged.has(COMBAT_STYLES[id].projectile.shape))
+        .sort((a,b)=>hashText('ranged-v1:'+a)-hashText('ranged-v1:'+b))
+        .map((id,index)=>[id,index%48] as const)
+);
 function text(c: CanvasRenderingContext2D, str: string, x: number, y: number, size = 14, color = '#93a5bd', align: CanvasTextAlign = 'left', weight = 600) { c.fillStyle = color; c.font = `${weight} ${size}px "Pixelify Sans", monospace`; c.textAlign = align; c.fillText(str, x, y); }
 function line(c: CanvasRenderingContext2D, x: number, y: number, x2: number, y2: number, color: string, width = 1) { c.beginPath(); c.moveTo(x, y); c.lineTo(x2, y2); c.strokeStyle = color; c.lineWidth = width; c.stroke(); }
 function poly(c: CanvasRenderingContext2D, points: number[][], color: string) { c.beginPath(); points.forEach(([x, y], i) => i ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath(); c.fillStyle = color; c.fill(); }
@@ -169,7 +176,9 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         c.translate(p.shape==='retain'?Math.round(p.x):p.x,p.shape==='retain'?Math.round(p.y):p.y);
         if(p.shape==='miniSproto'||chestLaser)c.scale(p.vx<0?-1:1,1);
         else if(p.shape!=='retain'&&p.shape!=='referenceB'&&p.shape!=='yellowEight'&&p.shape!=='ethereum')c.rotate(Math.atan2(p.vy,p.vx));
-        drawPower(c,chestLaser?'chestLaser':p.shape??'spark',p.age??0,ROSTER[owner.id].color);
+        const shared=sharedRangedAssignments.get(owner.id as typeof PLAYABLE_FIGHTERS[number]);
+        if(shared===undefined||p.shape!==COMBAT_STYLES[owner.id].projectile.shape||!drawSharedRanged(c,shared))
+            drawPower(c,chestLaser?'chestLaser':p.shape??'spark',p.age??0,ROSTER[owner.id].color);
         c.restore();
     }
     bossAttacks?.(c);

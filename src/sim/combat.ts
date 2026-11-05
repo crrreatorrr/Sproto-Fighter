@@ -1,6 +1,6 @@
 // State creation, effects, combos, throws, damage and move selection.
 import { A, FLOOR, GRAVITY, WIDTH } from './constants';
-import { AttackAim, COMBAT_STYLES, FighterId, MOVES, Mode, Move, MoveId, PARTNER_ATTACKS, PLAYABLE_FIGHTERS, PlayableFighterId, ROSTER, THROW_CATCH_FRAMES, THROW_HOLD_FRAMES, THROW_RECOVERY_FRAMES, ThrowDirection, bodySpread, fighterWall, getThrowGrip, isHorizontalSpit, isPairedFighter, partnerContactIndex } from './roster';
+import { fighterPartner, AttackAim, COMBAT_STYLES, FighterId, MOVES, Mode, Move, MoveId, PARTNER_ATTACKS, PLAYABLE_FIGHTERS, PlayableFighterId, ROSTER, THROW_CATCH_FRAMES, THROW_HOLD_FRAMES, THROW_RECOVERY_FRAMES, ThrowDirection, bodySpread, fighterWall, getThrowGrip, isHorizontalSpit, isPairedFighter, partnerContactIndex } from './roster';
 import { CombatState, Effect, Fighter } from './types';
 export const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, reaction:null, throwInvuln:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
 export function createState(id: PlayableFighterId = 'rivet', mode: Mode = 'cpu', opponent?: PlayableFighterId): CombatState { if (!PLAYABLE_FIGHTERS.includes(id) || (opponent && !PLAYABLE_FIGHTERS.includes(opponent)))
@@ -139,7 +139,7 @@ export function damage(s: CombatState, index: number, m: Move, kind: MoveId, pro
         // an ascending attacker. Finishers still knock downward; route limits remain.
         b.vy = kind === 'airHeavy' ? 10 : m.air && !grounded(a) ? Math.min(-4.5,a.vy) : -4.5;
     }
-    if(kind==='special'&&PARTNER_ATTACKS[ROSTER[a.id].partner]?.kind==='frost')b.slow=90;
+    if(kind==='special'&&PARTNER_ATTACKS[fighterPartner(a)]?.kind==='frost')b.slow=90;
     const power=COMBAT_STYLES[a.id].power;
     if(kind==='special'||(projectile&&(a.id==='vamp'||a.id==='crapto'))){
       if(power==='slow')b.slow=90;
@@ -190,7 +190,7 @@ export function getMove(f: Fighter, id: MoveId): Move {
  const style=COMBAT_STYLES[f.id];
  let m:Move={...MOVES[id],...(id==='light'?{range:style.lightRange}:id==='heavy'||id==='airHeavy'?style.heavy:id==='bolt'?style.bolt:id==='special'?{...style.special,startup:style.specialFrames[0],active:style.specialFrames.at(-1)!-style.specialFrames[0]+1,recovery:30}:{} )};
  if(id==='special'){
-  const partner=PARTNER_ATTACKS[ROSTER[f.id].partner];
+  const partner=PARTNER_ATTACKS[fighterPartner(f)];
   if(partner){const beat=partnerContactIndex(f.move?.id==='special'?f.move.t:0,style.specialFrames);m={...m,launch:0,low:false,...partner.hits[beat%partner.hits.length]};}
  }
  const aim = f.move?.id === id ? f.move.aim : undefined;
