@@ -55,7 +55,7 @@ export function createStoryAnimation(){
             reset();images=new Map(loaded);plan=next;
         },
         clear,reset,
-        startBossBlackout(){blackout=Math.round(.3*TICK_RATE);},
+        startBossBlackout(){blackout=3*TICK_RATE;},
         get blackingOut(){return blackout>0;},
         advanceBlackout(){return --blackout===0;},
         cancel(){blackout=0;heldOutro ||= phase==='outro';phase=null;skipRequested=false;},
@@ -83,7 +83,7 @@ export function createStoryAnimation(){
             if(!image)return false;
             const frame=drawPhase?Math.min(spec.frames-1,Math.floor(age*spec.fps/TICK_RATE)):boss==='dragon'?0:spec.frames-1;
             // Mirror the recovery to match Morelight's landed KO; other clips face inward.
-            const facing=drawPhase?facingFor(id,defeatFacing):1;
+            const facing=drawPhase?(id==='morelight-exit'&&frame>=23?-1:facingFor(id,defeatFacing)):1;
             if(drawPhase&&sceneAnchorX===null){
                 const bounds=plan[drawPhase]!.map(key=>{
                     const cell=manifest[key],direction=facingFor(key,defeatFacing);
@@ -115,7 +115,7 @@ export function createStoryAnimation(){
                     ctx.beginPath();
                     const hatchInMotion=frame<=106||(frame>=176&&frame<=178);
                     const hatchEdge=hatchInMotion?93:frame>=196?90:89;
-                    ctx.rect(climbing?159:128,72,57,closed?hatchEdge-72:38);
+                    ctx.rect(climbing?159:128,72,57,closed?(frame<=102?94:hatchEdge)-72:38);
                     ctx.clip();
                 }
                 ctx.fillStyle='#111d34';
@@ -125,23 +125,43 @@ export function createStoryAnimation(){
                 ctx.lineTo(135,99);ctx.lineTo(130,89);ctx.closePath();ctx.fill();
                 ctx.restore();
             };
+            const clipMechaHead=()=>{
+                ctx.beginPath();
+                const outline=[[129,75],[144,74],[169,74],[180,86],[179,104],[151,105],[140,100]];
+                outline.forEach(([px,py],i)=>{
+                    if(i===0)ctx.moveTo(px-spec.x,py-spec.y);
+                    else ctx.lineTo(px-spec.x,py-spec.y);
+                });
+                ctx.closePath();ctx.clip();
+            };
+            const hideMechaHead=()=>{
+                ctx.save();clipMechaHead();
+                ctx.fillStyle='#111d34';
+                ctx.fillRect(125-spec.x,72-spec.y,60,36);
+                ctx.restore();
+            };
             if(id==='morelight-mecha'&&drawPhase&&frame>=26&&frame<84){
                 // Hold the pilot in place and slide the parked suit in from the left.
                 const progress=Math.max(0,(frame-32)/52);
                 const travel=-anchor/spec.scale+spec.x-spec.width;
                 const offset=Math.round(travel*(1-progress)**2);
-                drawFrame(84,88,spec.width-88,offset);
-                emptyCockpit(offset,false,false);
+                drawFrame(210,0,spec.width,offset);
+                ctx.save();ctx.translate(offset,0);
+                hideMechaHead();
+                ctx.restore();
                 drawFrame(Math.max(0,25-(frame-26)*2));
-            }else if(id==='morelight-mecha'&&drawPhase&&frame>=84&&frame<198){
+            }else if(id==='morelight-mecha'&&drawPhase&&frame>=190&&frame<210){
+                // Lift the same pilot drawing through the opening; the rim hides it until it clears the hatch.
+                drawFrame(210);hideMechaHead();
+                ctx.save();clipMechaHead();
+                const t=Math.max(0,(frame-194)/16);
+                ctx.translate(0,Math.round(32*(1-t)**2));
+                clipMechaHead();drawFrame(210);
+                ctx.restore();
+            }else if(id==='morelight-mecha'&&drawPhase&&frame>=84&&frame<190){
                 drawFrame(frame);
                 // The climbing pilot passes in front of the hatch before the head reveal.
                 emptyCockpit(0,frame>=101,frame>=153&&frame<=166);
-            }else if(id==='morelight-ejection'&&frame>=26&&frame<60){
-                // Keep the blast centered on the cockpit and ease back to the ejection pose.
-                const scale=.66+.34*Math.max(0,(frame-48)/12);
-                ctx.translate(28,-112);ctx.scale(scale,scale);ctx.translate(-28,112);
-                drawFrame(frame);
             }else drawFrame(frame);
             ctx.restore();return true;
         },

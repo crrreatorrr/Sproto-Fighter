@@ -1,6 +1,6 @@
 import {describe,expect,it} from 'vitest';
 import {A,createState,FLOOR} from '../src/core';
-import {BOSS_BALL,BOSS_BEAM,BOSS_SHIELD,startStoryBoss,stepStoryBoss,type BossForm} from '../src/storyBoss';
+import {BOSS_BALL,BOSS_BEAM,BOSS_SHIELD,startStoryBoss,stepStoryBoss,storyBossPlayerPose,type BossForm} from '../src/storyBoss';
 
 function fight(form:BossForm='giant'){
     const state=createState('highsproto','cpu','vela');
@@ -17,6 +17,27 @@ describe('fixed-screen story bosses',()=>{
         while(state.frame<76)tick(A.right);
         const missile=state.projectiles.find(p=>p.shape==='bossHazard')!;
         expect(missile).toMatchObject({art:'missile',vx:plan.vx,vy:plan.vy});
+    });
+
+    it('keeps Nick’s dragon shots visible through empty space until they reach the sprite',()=>{
+        const {state,boss,tick}=fight('dragon');
+        const target=state.fighters[1];
+        state.projectiles.push({owner:0,shape:'bossAutoShot',art:'seed',x:705,y:FLOOR-89,vx:-16,vy:0,damage:17,life:60} as typeof state.projectiles[number]);
+        tick();
+        expect(target.hp).toBe(1000);
+        expect(state.projectiles[0].x).toBe(689);
+        while(!boss.impacts.length&&state.frame<40)tick();
+        expect(target.hp).toBe(983);
+        expect(boss.impacts[0].x).toBeLessThan(330);
+    });
+
+    it('uses the cinematic spawn for the first playable frame and restores health there',()=>{
+        const state=createState('highsproto','cpu','vela');
+        state.fighters[0].hp=240;
+        const pose=storyBossPlayerPose(state.fighters[0]);
+        startStoryBoss(state,'giant');
+        expect(state.fighters[0]).toMatchObject({x:pose.x,y:pose.y,facing:pose.facing,hp:1000});
+        expect(pose.hp).toBe(240);
     });
 
     it('uses Arcade ground speed, jump, double jump and one air dash',()=>{

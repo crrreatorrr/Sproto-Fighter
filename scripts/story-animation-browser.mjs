@@ -13,13 +13,15 @@ try{
  await page.goto(base);await page.waitForFunction(()=>window.neonRelay&&document.querySelector('#start-fight')?.disabled===false);
  const playback=await page.evaluate(async()=>{
   const {createStoryAnimation,storyAnimationPlan}=await import('/src/storyAnimation.ts');
-  const {STORY_BOSS_X,loadStoryBossArt}=await import('/src/storyBoss.ts');
+  const {STORY_BOSS_X,loadStoryBossArt,startStoryBoss,drawStoryBossPose}=await import('/src/storyBoss.ts');
   await Promise.all(['giant','dragon','juicy','art','vmu'].map(form=>loadStoryBossArt(form)));
+  const {createState}=await import('/src/core.ts');
   const {default:manifest}=await import('/src/storyAnimationManifest.json');
   const canvas=document.createElement('canvas');canvas.width=1280;canvas.height=720;
   const ctx=canvas.getContext('2d'),records=[];
   for(const id of ['nick','guest07','sproto943','vela','vaudream']){
    const animation=createStoryAnimation(),plan=storyAnimationPlan(id,true);await animation.load(plan);
+   const art=id==='sproto943'?await loadStoryBossArt('art'):null;
    let mechaEnd=null,mechaHeight=null;
    for(const phase of ['intro','boss','mecha','outro']){
     if(!plan[phase]?.length)continue;
@@ -28,6 +30,13 @@ try{
     while(animation.active&&frames<10000){
      const snap=animation.snapshot();if(seen.at(-1)!==snap.clip)seen.push(snap.clip);
      ctx.clearRect(0,0,1280,720);animation.draw(ctx,id==='vela'&&phase==='outro'?STORY_BOSS_X:1100,578,-1);
+     if(art&&snap.clip==='mega-woman-growth'&&snap.frame===manifest[snap.clip].frames-1&&!boundaryChecks.includes('growth/boss idle')){
+      const final=ctx.getImageData(0,0,1280,720).data;
+      const state=createState('highsproto','cpu',id),boss=startStoryBoss(state,'art');
+      ctx.clearRect(0,0,1280,720);drawStoryBossPose(ctx,state,boss,art);
+      if(!ctx.getImageData(0,0,1280,720).data.every((v,i)=>v===final[i]))throw Error('Mega Artchick changes appearance at boss start');
+      boundaryChecks.push('growth/boss idle');
+     }
      if(id==='vela'){
       const pixels=()=>ctx.getImageData(0,0,1280,720).data;
       const visibleHeight=data=>{let min=720,max=-1;for(let y=0;y<720;y++)for(let x=0;x<1280;x++)if(data[(y*1280+x)*4+3]){min=Math.min(min,y);max=Math.max(max,y);}return max-min+1;};
@@ -55,6 +64,7 @@ try{
      if(frames%20===0&&ctx.getImageData(0,0,1280,720).data.some((v,i)=>i%4===3&&v>0))visible++;
      animation.advance();frames++;
     }
+    if(art&&phase==='boss'&&!boundaryChecks.includes('growth/boss idle'))throw Error('Missing Mega Artchick boundary check');
     if(animation.active)throw Error('Unbounded scene');
     if(id==='vela'&&phase==='mecha'&&!boundaryChecks.includes('shrink/boarding'))throw Error('Missing Morelight shrink boundary');
     if(id==='vela'&&phase==='outro'&&(boundaryChecks.length!==2||referenceFramesChecked.size!==manifest['morelight-ejection'].referenceMechaFrames))throw Error('Missing Morelight boundary/reference verification');
@@ -142,6 +152,14 @@ try{
  await page.locator('#testing-god-mode').check();
  assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().frame),pausedFrame);
  await page.locator('#close-settings').click();
+ const floor=await page.evaluate(()=>window.neonRelay.snapshot().fighters[0].y);
+ await page.keyboard.down('KeyW');
+ await page.waitForFunction(floor=>window.neonRelay.snapshot().fighters[0].y<floor,floor);
+ await page.keyboard.up('KeyW');
+ await page.waitForFunction(()=>window.neonRelay.snapshot().fighters[0].input===0);
+ await page.keyboard.down('ArrowUp');
+ await page.waitForFunction(()=>window.neonRelay.snapshot().fighters[0].airJumps===1);
+ await page.keyboard.up('ArrowUp');
  await page.keyboard.down('KeyC');await page.keyboard.down('KeyV');
  await page.waitForFunction(()=>['bossBeam','bossBall'].every(shape=>window.neonRelay.snapshot().projectiles.some(p=>p.shape===shape)));
  await page.keyboard.up('KeyC');await page.keyboard.up('KeyV');
