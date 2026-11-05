@@ -1,0 +1,26 @@
+{
+  "candidateCommit": "531c32cae0f33d91ab4884bb22bed42faaa8b6be",
+  "baselineCommit": "efb5829c1230dac84337ba0212d92a84a527563b",
+  "candidateSourceSha256": "6f9d4323303198bdd21e6d347a524edbae9637894aff77586e15029957d45dc4",
+  "simVersion": "a4c7ddde49ec5a64",
+  "files": {
+    "panel.json.gz": {
+      "rawSha256": "d7f3ccf2ecef38374d2d5774b051a22246dca380ee2ccc2195d1bb415638f815",
+      "gzipSha256": "f621d8b5e79cd8a9d8b7302e8c3a2f0422f6fe1a7618b12aa8b5388d3214c223",
+      "rawBytes": 664624,
+      "gzipBytes": 41793
+    },
+    "preservation.json.gz": {
+      "rawSha256": "2b1830598f08726b502e9c1fff9f487525c1b8db2b60fdc4077bcb637ad25621",
+      "gzipSha256": "9f2145f7ace521a72df64e2d03ffa7a3a24519c66b2c2b6cf8c1f6bbd4c957b0",
+      "rawBytes": 371,
+      "gzipBytes": 231
+    },
+    "panel-runner.mjs": {
+      "sha256": "2271fbc1a3a3d7aaa59b814dd25f80bc9ba5892cb5666e95dec7cc99d10afeab"
+    },
+    "preservation-runner.mjs": {
+      "sha256": "a034552b1e7fa87a632b812abebbdf854661b8e8e0888c8f288ccf3388ee7b1a"
+    }
+  }
+}
