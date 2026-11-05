@@ -1,0 +1,42 @@
+{
+  "candidateCommit": "3923f108f3a1617393f5f6e9fa1573161799a496",
+  "baselineCommit": "efb5829c1230dac84337ba0212d92a84a527563b",
+  "candidateSourceSha256": "6984af1637ebadca38340dced749c774fafc9fbcc3989adc1eadd724acb412fe",
+  "simVersion": "a4c7ddde49ec5a64",
+  "referenceSha256": "2aada800cc5ac2e80c41942a14db8a9a6bb8f541a8a9bc4cbdf5d640a364f4ff",
+  "files": {
+    "freefight-panel.json.gz": {
+      "rawSha256": "2404598d43809192eb6f31b4d045c1e347c5784aa3013fdbf90f2a53f9c26622",
+      "gzipSha256": "1ca78e0b83b632aaf4444e6bd7a77491b4e399e304a21500c20dbe7ee2a5e067",
+      "rawBytes": 664738,
+      "gzipBytes": 41998
+    },
+    "causal-preservation.json.gz": {
+      "rawSha256": "43c551e883642c90833759bcef2e938095e2f33f00a02d70058b1ffcbede2076",
+      "gzipSha256": "7172eab1279aaf01f57c4caf57936a2b291ecca30788c1c7cbfe4f941575484a",
+      "rawBytes": 3011,
+      "gzipBytes": 424
+    },
+    "first-256.json.gz": {
+      "rawSha256": "ec5abdd7c67db4b31f83d8b56174fe4a86f6acdf6b0a6d0046c307d01481d36d",
+      "gzipSha256": "af4f907e47d9fdcb6bfc70745159c89aad9d7ed7b3d1948b3ad23e570e34fc53",
+      "rawBytes": 755653,
+      "gzipBytes": 34407
+    },
+    "I-endpoint-baseline.json.gz": {
+      "rawSha256": "ebc4f67fcfc1cd190aa7df47bafc5d3029febc50a1970422bd3230d6774d1707",
+      "gzipSha256": "9c41068cdc1b65e09d907d0e7af24309f86bcdfc1216e8e3eeef7ba599ae82ac",
+      "rawBytes": 2636589,
+      "gzipBytes": 102161
+    },
+    "freefight-runner.mjs": {
+      "sha256": "83fed41540edb91b08f391eacc7b2f4ace67a30e40b7c4ab426749c601841cd7"
+    },
+    "causal-preservation-runner.mjs": {
+      "sha256": "6e81d7d272621770e2595c97a1a30128ae087baadba62b67e187276e176d33af"
+    },
+    "first-256-runner.mjs": {
+      "sha256": "e2bce205f31f0b44ac42abe6f7a72cfb1e91ee36504973656b3d352368d41a1b"
+    }
+  }
+}
