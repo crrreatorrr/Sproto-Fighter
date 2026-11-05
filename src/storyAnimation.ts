@@ -25,7 +25,7 @@ const bossClips:Partial<Record<BossForm,StoryClip>>={
     giant:'morelight-smoke',mecha:'morelight-mecha',dragon:'nick-dragon',juicy:'juicy-robot',art:'mega-woman-growth',
 };
 
-const BOSS_REVEAL_TICKS=Math.round(.4*TICK_RATE);
+const BOSS_REVEAL_TICKS=Math.round(2*TICK_RATE/3);
 
 export function createStoryAnimation(){
     let plan=storyAnimationPlan('',false),images=new Map<StoryClip,HTMLImageElement>();
@@ -49,7 +49,8 @@ export function createStoryAnimation(){
                 const spec=manifest[id],asset=new Image();
                 asset.src=import.meta.env.BASE_URL+'story-animations/'+spec.image;
                 await asset.decode();
-                if(asset.naturalWidth!==spec.columns*spec.width||asset.naturalHeight<Math.ceil(spec.frames/spec.columns)*spec.height)
+                const atlasFrames='atlasFrames' in spec?spec.atlasFrames:spec.frames;
+                if(asset.naturalWidth!==spec.columns*spec.width||asset.naturalHeight<Math.ceil(atlasFrames/spec.columns)*spec.height)
                     throw new Error('Invalid story animation dimensions: '+id);
                 return [id,asset] as const;
             }));
@@ -57,7 +58,7 @@ export function createStoryAnimation(){
             reset();images=new Map(loaded);plan=next;
         },
         clear,reset,
-        startBossBlackout(){blackout=3*TICK_RATE;},
+        startBossBlackout(){blackout=Math.round(1.5*TICK_RATE);},
         get blackingOut(){return blackout>0;},
         advanceBlackout(){
             if(--blackout>0)return false;
@@ -172,6 +173,15 @@ export function createStoryAnimation(){
                 drawFrame(frame);
                 // The climbing pilot passes in front of the hatch before the head reveal.
                 emptyCockpit(0,frame>=101,frame>=153&&frame<=166);
+            }else if(id==='mega-woman-growth'&&frame>=7){
+                // Scale three high-resolution poses around the boot line instead of duplicating a cel for each tick.
+                const linear=Math.min(1,(frame-7)/124);
+                const t=linear*linear*(3-2*linear);
+                const stage=frame<38?0:frame<78?1:2;
+                const sourceHeight=[518,590,622][stage];
+                const zoom=(444+178*t)/sourceHeight;
+                ctx.translate(-78*(1-t),0);ctx.scale(zoom,zoom);
+                drawFrame(7+stage);
             }else drawFrame(frame);
             ctx.restore();return true;
         },

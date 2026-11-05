@@ -14,16 +14,16 @@
   },
   "morelight-smoke": {
     "image": "morelight-smoke.png",
-    "width": 320,
+    "width": 400,
     "height": 384,
     "columns": 6,
-    "frames": 49,
+    "frames": 83,
     "fps": 15,
     "x": 160,
     "y": 336,
     "scale": 1.25,
     "left": 64,
-    "right": 270
+    "right": 373
   },
   "art-fusion": {
     "image": "art-fusion.png",
@@ -40,16 +40,17 @@
   },
   "mega-woman-growth": {
     "image": "mega-woman-growth.png",
-    "width": 480,
-    "height": 384,
+    "width": 960,
+    "height": 768,
     "columns": 6,
-    "frames": 59,
+    "frames": 144,
     "fps": 24,
-    "x": 215,
-    "y": 332,
-    "scale": 1.45,
-    "left": 17,
-    "right": 367
+    "x": 430,
+    "y": 664,
+    "scale": 0.725,
+    "left": 110,
+    "right": 717,
+    "atlasFrames": 10
   },
   "vmu-shield": {
     "image": "vmu-shield.png",

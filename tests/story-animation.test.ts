@@ -13,7 +13,7 @@ class FakeImage {
     async decode(){
         requests.push(this.src);
         const spec=Object.values(manifest).find(v=>this.src.endsWith(v.image))!;
-        this.naturalWidth=spec.width*spec.columns;this.naturalHeight=Math.ceil(spec.frames/spec.columns)*spec.height;
+        this.naturalWidth=spec.width*spec.columns;this.naturalHeight=Math.ceil(('atlasFrames' in spec?spec.atlasFrames:spec.frames)/spec.columns)*spec.height;
     }
 }
 beforeEach(()=>{requests.length=0;vi.stubGlobal('Image',FakeImage);});
@@ -48,7 +48,7 @@ async function harness(id:string,win=0){
         ${compiled}
         return advanceRoundFrame;
     `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss});
-    return {animation,state,presentation,calls,frames,run,endBlackout(){for(let i=0;i<180;i++)run(0);}};
+    return {animation,state,presentation,calls,frames,run,endBlackout(){for(let i=0;i<90;i++)run(0);}};
 }
 
 describe('story animation ordering and lifecycle',()=>{
@@ -71,15 +71,15 @@ describe('story animation ordering and lifecycle',()=>{
     it('starts VMU directly and plays the portal pull before saving victory',async()=>{
         const t=await harness('vaudream');
         t.run(0);
-        for(let i=0;i<179;i++)t.run(0);
+        for(let i=0;i<89;i++)t.run(0);
         expect(t.animation.blackingOut).toBe(true);
         expect(t.frames).toHaveLength(1);
         t.run(0);
         expect(t.animation.blackingOut).toBe(false);
         expect(t.animation.bossRevealOpacity).toBe(1);
-        for(let i=0;i<12;i++)t.animation.advanceBossReveal();
+        for(let i=0;i<20;i++)t.animation.advanceBossReveal();
         expect(t.animation.bossRevealOpacity).toBe(.5);
-        for(let i=0;i<12;i++)t.animation.advanceBossReveal();
+        for(let i=0;i<20;i++)t.animation.advanceBossReveal();
         expect(t.animation.bossRevealOpacity).toBe(0);
         expect(t.presentation.phase).toBe('fight');
         expect(t.animation.active).toBeNull();

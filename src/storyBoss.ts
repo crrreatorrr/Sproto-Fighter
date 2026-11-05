@@ -56,10 +56,10 @@ const attacks:Record<BossForm,readonly Attack[]>={
         {name:'Crossing torpedoes',art:'missile',speed:2.6,origin:[48,-215],pattern:'screen',pose:0},
     ],
     art:[
-        {name:'Paint burst',art:'orb',speed:7,origin:paintOrigin(339,151),pattern:'fan'},
-        {name:'Palette fan',art:'diamond',speed:8,origin:paintOrigin(363,171),pattern:'wave'},
-        {name:'Rolling ink',art:'roller',speed:10,origin:paintOrigin(369,201),pattern:'floor'},
-        {name:'Paint missile cascade',art:'missile',speed:2.5,origin:paintOrigin(339,151),pattern:'stair',pose:0},
+        {name:'Paint burst',art:'orb',speed:7,origin:paintOrigin(708,303),pattern:'fan'},
+        {name:'Palette fan',art:'diamond',speed:8,origin:paintOrigin(714,303),pattern:'wave'},
+        {name:'Rolling ink',art:'roller',speed:10,origin:paintOrigin(678,368),pattern:'floor'},
+        {name:'Paint missile cascade',art:'missile',speed:2.5,origin:paintOrigin(708,303),pattern:'stair',pose:0},
     ],
     vmu:[
         {name:'Laser burst',art:'laser',speed:19,origin:[25,-89],pattern:'burst'},

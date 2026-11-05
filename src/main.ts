@@ -798,9 +798,13 @@ function tick(now: number) {
         storyBoss&&storyBossArt?(c)=>drawStoryBossAttacks(c,state,storyBoss!,storyBossArt!):undefined,
         storyBoss?storyBossTitle(storyBoss.form):undefined,storyAnimation.portalPull(),recovery);
     if(!selection.isOpen&&storyAnimation.bossRevealOpacity>0){
-        ctx.save();
-        ctx.globalAlpha=storyAnimation.bossRevealOpacity;
-        ctx.fillStyle='#000';
+        const opacity=storyAnimation.bossRevealOpacity;
+        const x=canvas.width/2,y=canvas.height*.62;
+        const reveal=ctx.createRadialGradient(x,y,0,x,y,Math.hypot(x,y));
+        reveal.addColorStop(0,`rgba(0,0,0,${opacity**1.65})`);
+        reveal.addColorStop(.58,`rgba(0,0,0,${opacity})`);
+        reveal.addColorStop(1,`rgba(0,0,0,${opacity**.65})`);
+        ctx.save();ctx.fillStyle=reveal;
         ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.restore();
     }
