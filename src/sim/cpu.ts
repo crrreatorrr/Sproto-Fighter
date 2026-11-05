@@ -1,9 +1,10 @@
 // The controller is a pure read. Only step advances its seeded observations and intent.
 import { getMove, grounded } from './combat';
 import { A, FLOOR } from './constants';
-import { MOVES, bodySpread } from './roster';
+import { MOVES, COMBAT_STYLES, CROUCH_SPIT_ORIGINS, bodySpread, isHorizontalSpit, isPairedFighter, type FighterId } from './roster';
 import { cpuRandom, ensureCpuMemory } from './cpuState';
-import type { CombatState } from './types';
+import type { CombatState, CpuObservation, Fighter } from './types';
+import { getHurtbox, HITBOX_DATA } from './geometry';
 
 export const CPU_SKILLS = [1, 4, 7, 10] as const;
 export const CPU_SKILL_VERSION = 3;
@@ -69,6 +70,43 @@ export function advanceCpuState(s: CombatState): void {
     }
 }
 
+/** Conservative flight forecast from a delayed cast and public kit, never live rival state.
+ * Unknown aimed/curved paths reserve guard rather than claiming a safe duck.
+ * An observed cast can threaten beyond its two active emission frames.
+ */
+export function cpuProjectileThreat(seen: CpuObservation, id: FighterId, own: Fighter, combatTick: number) {
+    if (seen.move !== 'bolt') return { incoming: false, duck: false };
+    const profile = COMBAT_STYLES[id].projectile;
+    const facing = own.x >= seen.x ? 1 : -1;
+    const horizontal = isHorizontalSpit(id) || profile.horizontal === true;
+    const crouch = isHorizontalSpit(id) && seen.y >= FLOOR && !!(seen.input & A.down);
+    const origin = crouch ? CROUCH_SPIT_ORIGINS[id]!
+        : profile.originByFacing?.[facing === 1 ? 'right' : 'left'] ?? profile.origin
+        ?? (isPairedFighter(id) ? { forward: bodySpread(id) + 65, height: 75 } : { forward: 34, height: 95 });
+    const emitters = profile.secondaryOrigin ? [origin, profile.secondaryOrigin] : [origin];
+    const age = seen.age + combatTick - seen.combatTick - seen.startup;
+    const lifetime = profile.beamFrames ?? 100;
+    const width = HITBOX_DATA.body.halfWidth + bodySpread(own.id);
+    if (age >= lifetime - 1) return { incoming: false, duck: false };
+    let incoming = false, duck = !!(crouch || profile.origin || profile.originByFacing) && horizontal && seen.y >= FLOOR && own.y >= FLOOR && !profile.ground;
+    const standing = getHurtbox({ ...own, input: 0 });
+    const crouching = getHurtbox({ ...own, input: A.down });
+    for (const emitter of emitters) {
+        const gap = Math.abs(own.x - seen.x) - emitter.forward;
+        const reach = profile.beamLength ?? profile.speed * (lifetime - 1) + Math.max(0, profile.accel ?? 0) * lifetime * (lifetime - 1) / 2;
+        // Straight horizontal shots already past our present body are no longer a threat.
+        // Curved/returning paths retain a conservative lifetime envelope.
+        const traveled = !profile.beamLength && horizontal ? Math.max(0, age) * profile.speed : 0;
+        const half = profile.beamLength ? HITBOX_DATA.projectile.beamHalfHeight : HITBOX_DATA.projectile.halfHeight;
+        const y = seen.y - emitter.height;
+        const intersectsStanding = !horizontal || (y + half > standing.top && y - half < standing.bottom);
+        if (gap + width > traveled - HITBOX_DATA.projectile.halfWidth && gap - width < reach && intersectsStanding) incoming = true;
+        // Every emitter must clear the crouch hull. No probabilistic lane guessing.
+        duck &&= y + half <= crouching.top;
+    }
+    return { incoming, duck: incoming && duck };
+}
+
 /** Input-only replay invariant: this call is idempotent and never consumes RNG. */
 export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     const f = s.fighters[slot], current = s.fighters[1 - slot];
@@ -117,7 +155,9 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     const projectedAge = seen.age + memory.combatTicks - seen.combatTick;
     const remaining = seen.startup + seen.active + seen.recovery - projectedAge;
     const incoming = seen.move && projectedAge < seen.startup + seen.active;
-    if (incoming && distance < 220 && seen.attackRoll < tuning.guard) {
+    const projectileThreat = cpuProjectileThreat(seen, current.id, f, memory.combatTicks);
+    if (projectileThreat.incoming && seen.attackRoll < tuning.guard) return away | (projectileThreat.duck ? A.down : 0);
+    if (incoming && seen.move !== 'bolt' && distance < 220 && seen.attackRoll < tuning.guard) {
         return away | (seen.low && seen.lowRoll < tuning.low ? A.down : 0);
     }
     if (seen.y < FLOOR - 35 && seen.vy >= 0 && distance < 145 && seen.jumpRoll < tuning.antiAir)
