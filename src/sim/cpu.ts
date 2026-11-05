@@ -96,7 +96,7 @@ export function cpuProjectileThreat(seen: CpuObservation, id: FighterId, own: Fi
         const reach = profile.beamLength ?? profile.speed * (lifetime - 1) + Math.max(0, profile.accel ?? 0) * lifetime * (lifetime - 1) / 2;
         // Straight horizontal shots already past our present body are no longer a threat.
         // Curved/returning paths retain a conservative lifetime envelope.
-        const traveled = !profile.beamLength && horizontal ? Math.max(0, age) * profile.speed : 0;
+        const traveled = !profile.beamLength && horizontal && !profile.returnAt ? Math.max(0, age) * profile.speed : 0;
         const half = profile.beamLength ? HITBOX_DATA.projectile.beamHalfHeight : HITBOX_DATA.projectile.halfHeight;
         const y = seen.y - emitter.height;
         const intersectsStanding = !horizontal || (y + half > standing.top && y - half < standing.bottom);

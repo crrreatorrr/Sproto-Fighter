@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { A, FLOOR, createState, step, cpuInput, hashState, getMove } from '../src/core';
+import { A, FLOOR, createState, step, cpuInput, hashState, getMove, COMBAT_STYLES } from '../src/core';
 import { cpuProjectileThreat } from '../src/sim/cpu';
 import type { CpuObservation } from '../src/sim/types';
 function setup(id: 'mox'|'vela'|'rivet'='mox', gap=400) {
@@ -29,11 +29,34 @@ describe('delayed public-profile projectile threats',()=>{
         expect(cpuProjectileThreat(o,'vela',s.fighters[1],s.cpu![1].combatTicks).incoming).toBe(true);
         expect(cpuInput(s,1,1)).toBe(A.right|A.down);
     });
+    it('reacts to a real delayed cast while its shot is still traveling, before first contact',()=>{
+        const s=createState('vela','versus','rivet');
+        s.fighters[0].x=100;s.fighters[1].x=600;
+        step(s,[A.bolt,0]);for(let i=0;i<28;i++)step(s,[0,0]);
+        expect(s.projectiles.length).toBeGreaterThan(0);expect(s.fighters[1].hp).toBe(1000);
+        const memory=s.cpu![1];memory.decisionAt=s.frame-5;memory.choice=.99;
+        for(const o of memory.observations)o.attackRoll=0;
+        expect(cpuInput(s,1,1)).toBe(A.right|A.down);
+        const guarded=structuredClone(s);
+        for(let i=0;i<60;i++){
+            step(s,[0,0]);step(guarded,[0,A.right|A.down]);
+        }
+        expect(s.fighters[1].hp).toBeLessThan(1000);
+        expect(guarded.fighters[1].hp).toBe(1000);
+    });
     it('expires beams by unfrozen clock and excludes shots already past the body',()=>{
         const s=setup(),o=s.cpu![1].observations[0];
         o.age=o.startup+12;expect(cpuProjectileThreat(o,'mox',s.fighters[1],o.combatTick).incoming).toBe(false);
         const shot=setup('vela',100),so=shot.cpu![1].observations[0];
         so.age=so.startup+80;expect(cpuProjectileThreat(so,'vela',shot.fighters[1],so.combatTick).incoming).toBe(false);
+    });
+    it('retains returning-shot threats rather than applying outbound straight-line expiry',()=>{
+        const entry=Object.entries(COMBAT_STYLES).find(([,style])=>style.projectile.returnAt && style.projectile.horizontal);
+        expect(entry).toBeDefined();
+        const [id,style]=entry!;
+        const s=setup(),o=s.cpu![1].observations[0];
+        o.age=o.startup+style.projectile.returnAt!+8;
+        expect(cpuProjectileThreat(o,id as keyof typeof COMBAT_STYLES,s.fighters[1],o.combatTick).incoming).toBe(true);
     });
     it('ignores fresh enemy position, input, move, projectile arrays and unobserved habits',()=>{
         const s=setup(),before=cpuInput(s,1,7);
