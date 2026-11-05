@@ -1,0 +1,45 @@
+{
+  "analysis": "scripts/lib/budget-calibration.mjs",
+  "analysisSha256": "a6f1e27a0e6a6e3dcb82a16641861b39cb08f6b76712c21438fcbfb32956e1de",
+  "models": {
+    "reviewed373": {
+      "file": "budget-association-reviewed373.json.gz",
+      "source": {
+        "commit": "2c46e61473a842473c0668f479a783dd9bcf339c",
+        "sourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+        "simVersion": "373448bdc043a0e8",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9"
+      },
+      "rawSha256": "44e429c2ca7bb7da8373ac9da4327ae318093a3c8ebc292f1a01e8d03a7215f4",
+      "rawBytes": 8965,
+      "gzipSha256": "d21198ae523e68ce971d792e982fbd9b8d994da7e2427c0780ad03c598751dff",
+      "gzipBytes": 2158,
+      "inputReports": [
+        {
+          "file": "/tmp/report-post-cpu-review.json",
+          "sha256": "607d8938d242883e706df335d0036ffb7ca009e715adfc5434962b090afbdae3"
+        }
+      ]
+    },
+    "reviewed-role-v1": {
+      "file": "budget-association-reviewed-role-v1.json.gz",
+      "source": {
+        "commit": "db5508c5d1f3b94204328fa966f656e4a6b76d20",
+        "sourceSha256": "b47bdccb19191650e464522533c68ac1305ac980193d82faa718c4784634be49",
+        "simVersion": "9c2242ec19366cde",
+        "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9"
+      },
+      "rawSha256": "a687a85566b049e4a4ee30f2c745a60c10bda3504fe117c4e8117fffb9db4798",
+      "rawBytes": 9028,
+      "gzipSha256": "11a6583849dce60c2d135dac3d5f40f97c70a03dbc2d90e78a248ab3b720e736",
+      "gzipBytes": 2204,
+      "inputReports": [
+        {
+          "file": "/tmp/sproto-role-reviewed.json",
+          "sha256": "ee1a6f28cff517d89a04591d9b73e98a39cdfa8b4c5741a1764ae5fc95964994"
+        }
+      ]
+    }
+  },
+  "limits": "Held-out predictive associations, not causal prices. No ID coefficients or production writes; beams excluded; constant safety unidentified."
+}
