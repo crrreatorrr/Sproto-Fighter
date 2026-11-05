@@ -18,6 +18,9 @@ describe('speed and flow',()=>{
     const s=fresh(),f=s.fighters[0];tick(s,1,A.right|A.dash);tick(s,1,A.right);tick(s,15,A.right|A.dash);
     expect(f.dash).toBe(0);expect(f.runDirection).toBe(0);expect(f.vx).toBe(ROSTER.rivet.speed);
   });
+  it('remembers a run release during hitstop',()=>{
+    const s=fresh(),f=s.fighters[0];tick(s,14,A.right|A.dash);s.freeze=3;tick(s,1,A.right);expect(f.runDirection).toBe(0);tick(s,4,A.right|A.dash);expect(f.runDirection).toBe(0);expect(f.vx).toBe(ROSTER.rivet.speed);
+  });
   it('jump-cancels a medium after damage, never guard or whiff',()=>{
     for(const guarded of [false,true]){const s=fresh(),[f,b]=s.fighters;b.x=f.x+75;tick(s,1,A.medium,guarded?A.right:0);for(let i=0;i<40&&!f.move?.connected;i++)tick(s,1,0,guarded?A.right:0);expect(f.move?.connected).toBe(true);expect(f.move?.hitConfirmed===true).toBe(!guarded);tick(s,12,A.up,guarded?A.right:0);expect(f.y<FLOOR).toBe(!guarded);}
     const miss=fresh();tick(miss,1,A.medium);tick(miss,5,A.up);expect(miss.fighters[0].y).toBe(FLOOR);

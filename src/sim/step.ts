@@ -54,6 +54,9 @@ export function step(s: CombatState, inputs: [
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
         f.input = inputs[i];
+        // Release cancels a run even during hitstop; it must not reappear on thaw.
+        const runInput=((f.input&A.right)?1:0)-((f.input&A.left)?1:0);
+        if (!(f.input&A.dash) || runInput!==f.runDirection || (f.input&(A.up|A.down))) f.runDirection=0;
         if(s.throwState && ((i===s.throwState.attacker && (s.throwState.phase==='hold'||s.throwState.t<THROW_RECOVERY_FRAMES-6)) || (s.throwState.phase==='hold'&&i===s.throwState.victim))){
             f.buffer=0;f.bufferLife=0;f.jumpBuffer=0;f.jumpDelay=0;f.dashBuffer=0;f.prev=f.input;continue;
         }
