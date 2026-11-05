@@ -1,0 +1,6 @@
+  2437 confirmed frames, winner seat 0, rollback frames 112/45
+PASS: wagered duel over the server relay: verified winner takes the 20-Ticket pot
+PASS: a player who stops streaming inputs to the server forfeits, even while still connected
+PASS: quitting mid-match forfeits the stake to the opponent
+PASS: a player without 10 Tickets cancels the match before anything is held
+4 hub duel groups passed.

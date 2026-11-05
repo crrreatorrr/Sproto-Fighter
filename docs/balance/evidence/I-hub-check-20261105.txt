@@ -1,0 +1,37 @@
+
+> metaverse-hub@0.0.0 typecheck
+> npm run typecheck -w @metaverse/hub-sdk && npm run build -w @metaverse/hub-sdk && node server/modules/embed-shop.mjs && tsc -p server/modules/tsconfig.json && npm run typecheck -w @metaverse/hub && tsc -p scripts/tsconfig.json --noEmit && tsc -p server/test/tsconfig.json
+
+
+> @metaverse/hub-sdk@0.6.1 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+
+> @metaverse/hub-sdk@0.6.1 build
+> tsc -p tsconfig.build.json
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+shop seed 99 rows
+
+> @metaverse/hub@0.0.0 typecheck
+> tsc --noEmit
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

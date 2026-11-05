@@ -2,17 +2,17 @@
 
 This is a draft implementation; the quantitative and human acceptance targets
 are not complete. The reviewed CPU fixes are integrated, and further controlled
-role/controller calibration is underway. Nothing has been merged or deployed.
+role/controller calibration is documented below. Nothing has been merged or deployed.
 
 Selected calibration [draft #30](https://github.com/crrreatorrr/Sproto-Fighter/pull/30)
-is stacked on #29. Its shared-role changes are Footwork light startup/damage6/34,
-Zoning light reach94, Brawler light reach86 and Paired light reach86. Weapon stays
+is stacked on #29. Its shared-role changes are Footwork light startup/damage 6/34,
+Zoning light reach 94, Brawler light reach 86 and Paired light reach 86. Weapon stays
 unchanged; tracking, spawn and additional habit/threat experiments are unselected.
 It includes the reviewed low-variety correction. Simulation `a4c7ddde49ec5a64`,
 production source SHA-256
 `612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f`.
 The matching [hub draft #59](https://github.com/crrreatorrr/metaverse-hub/pull/59)
-is being refreshed to `a4c7ddde49ec5a64`. Production/live parity is not claimed: before
+has been refreshed to `a4c7ddde49ec5a64`. Production/live parity is not claimed: before
 this work Fighter main expected `af94139cc59e4dfd` and hub main `dc3a64b592b94faf`.
 
 The unchanged 228-line plan comes from `3f1b1234`. Integration began at main
@@ -57,24 +57,41 @@ branch is `codex/gameplay-calibration-review`; the full working checkout is
 ## Selected I evidence and acceptance status
 
 The full 33,472-bout common-seed I run leaves **12 Normal and 7 Hard fighters**
-outside the observed35–65% gate. The prior reviewed CPU had28/18, and F17/7.
-The gate still fails. Raw draws are5/3 and remain separate from resolved results.
-Brawler and Paired Hard means are50.18%/48.38%; their Normal means42.64%/44.17%.
+outside the observed 35–65% gate. The prior reviewed CPU had 28/18, and F 17/7.
+The gate still fails. Raw draws are 5/3 and remain separate from resolved results.
+Brawler and Paired Hard means are 50.18%/48.38%; their Normal means 42.64%/44.17%.
 No per-ID bonuses, HP/speed changes or artwork were used.
 [Full I report](balance/I-ROLE-REACH-FINAL17-20261105.md).
 
-The unchanged fixed reference still beats the opening CPU255/256 times; the
-finale CPU wins131/256 (51.17%). Finale complete trial payloads are identical to F;
+The unchanged fixed reference still beats the opening CPU 255/256 times; the
+finale CPU wins 131/256 (51.17%). Finale complete trial payloads are identical to F;
 opening trajectories change despite equal aggregate rates. The opening sweep
-shows15% point estimates only near skills7–9, with wide uncertainty. Neither a
+shows 15% point estimates only near skills 7–9, with wide uncertainty. Neither a
 remap nor a target/reference change is authorized by these diagnostics.
 [Independent-seed I story report](balance/STORY-I-DIAGNOSTICS-20261105.md).
 
-F passed the literal complete local test command:195 unit tests and72/72
-standalone checks, plus packed-sheet verification. I adds two shared ranges;
-its integrated unit/fast checks and final CI are being rerun. The upstream CI
-browser fixture's unpublished blackout-pixel failure is being corrected without
-weakening its black RGBA assertion or altering application/artwork.
+I passes typecheck, build, **196 unit tests and 68/68 fast standalone checks**.
+The preceding F source passed the literal full local command: 195 unit tests and
+72/72 standalone checks. I's final packed-sheet audit verifies all 274 sheets /
+29,020 frames unchanged. Both full GitHub CI runs on functional commit
+`724c8d22c` pass, including Chromium/Firefox/WebKit determinism:
+[runs 41981168622](https://github.com/crrreatorrr/Sproto-Fighter/actions/runs/41981168622)
+and [41981168254](https://github.com/crrreatorrr/Sproto-Fighter/actions/runs/41981168254).
+
+The reported story-browser assertion was corrected by waiting for actual regular
+KO and observer publication, preserving the exact black RGBA assertion. The
+previous fixture could silently exhaust a wall-loop bound and race rendering.
+The original CI failure's precise cause is not proved; port occupancy is not
+claimed as causal. The affected test, delayed-observer stress and final CI pass.
+
+The actual 247-encounter route has 218 CPU wins / 1,976 paired-seat trials, with
+no raw draws. Four independent pairs per encounter remain screening evidence,
+not certification of adjacent difficulty smoothness.
+[Full route](balance/I-FINAL-ROUTE-20261105.md).
+
+[Calibration decisions](GAMEPLAY-CALIBRATION-DECISIONS-20261105.md) preserves failed
+gates and proposed choices. [Human playtest form](GAMEPLAY-HUMAN-PLAYTEST-20261105.md)
+is a proposed protocol with blank results; no human playtest is claimed.
 
 ## Reviewed-CPU checkpoint evidence
 
@@ -162,11 +179,24 @@ progression. These are automated checks, not human playtesting.
 
 The matching local Nakama verifier replayed five logs with exact winner/frame/
 hash equality and rejected bad versions/malformed logs. Four live relay duel
-groups passed. The prior two-Chromium wager/rematch conserved Tickets and
-rejected local experiment flags. Direct WebRTC was not established; its default
+groups passed on final I. The final I two-Chromium relay wager/rematch conserved
+Tickets and rejected local experiment flags. [Final I logs and manifest](balance/evidence/I-validation-manifest-20261105.json).
+Direct WebRTC was not established; its default
 test remains strict. TURN and production connectivity were not verified.
 
 No `art/**`, `public/fighters/**`, atlas registration, clip length or throw grip
 was edited. Frozen collision rectangles are provisional numeric geometry;
 offline body-hull measurements do not approve semantic fist/blade contact.
 Human feel/contact testing remains a required acceptance step.
+
+## Isolated crouch correctness follow-up
+
+The separate [T/HoldCrouch branch](https://github.com/crrreatorrr/Sproto-Fighter/tree/codex/gameplay-cpu-hold-crouch)
+fixes a confirmed CPU stance defect: committed low/sweep inputs release crouch,
+so a high jab can hit the standing numeric hurtbox during a low move. T holds
+only down through those moves, preserving earlier combo-cancel behavior. Its
+80 focused tests and 365,760 protected-path comparisons pass; 7,620 changed
+outputs are confined to the intended grounded low/sweep cases. Its 576-bout
+representative panel is mixed and opening wins remain 2/256. It is a reviewable
+follow-up, not silently included in I's source-specific quantitative results.
+[Source and evidence](https://github.com/crrreatorrr/Sproto-Fighter/blob/codex/gameplay-cpu-hold-crouch/docs/balance/CPU-HOLD-CROUCH-EXPERIMENT-20261105.md).

@@ -1,0 +1,112 @@
+
+> sproto-arena@0.1.0 test:fast
+> vitest run && node scripts/run-all.mjs --fast
+
+
+ RUN  v3.2.7 /workspace/Sproto-Fighter
+
+ ✓ tests/story-boss.test.ts (24 tests) 263ms
+ ✓ tests/balance-budget.test.ts (11 tests) 555ms
+   ✓ normalized combat budgets > keeps all 254 default-partner Specials in the 270–300 actual damage band  351ms
+ ✓ tests/cpu-difficulty.test.ts (20 tests) 640ms
+   ✓ seeded CPU controller > keeps reads pure and replays input masks without controller calls  495ms
+ ✓ tests/cpu-low-variety.test.ts (20 tests) 322ms
+ ✓ tests/mounted-assets.test.ts (8 tests) 299ms
+ ✓ tests/story-250.test.ts (3 tests) 293ms
+ ✓ tests/flow.test.ts (9 tests) 194ms
+ ✓ tests/theo.test.ts (5 tests) 142ms
+ ✓ tests/training-readout.test.ts (13 tests) 73ms
+ ✓ tests/match-depth.test.ts (16 tests) 202ms
+ ✓ tests/hub-roster.test.ts (11 tests) 38ms
+ ✓ tests/defense.test.ts (15 tests) 24ms
+ ✓ tests/story-animation.test.ts (15 tests) 21ms
+ ✓ tests/god-mode-route.test.ts (3 tests) 10ms
+ ✓ tests/hub-campaign.test.ts (1 test) 14ms
+ ✓ tests/training-geometry.test.ts (1 test) 7ms
+ ✓ tests/hub-report.test.ts (4 tests) 7ms
+ ✓ tests/sim-isolation.test.ts (1 test) 7ms
+ ✓ tests/hub-link.test.ts (4 tests) 9ms
+ ✓ tests/hub-server-key.test.ts (4 tests) 6ms
+ ✓ tests/local-input.test.ts (8 tests) 8ms
+
+ Test Files  21 passed (21)
+      Tests  196 passed (196)
+   Start at  06:32:14
+   Duration  4.75s (transform 1.14s, setup 0ms, collect 5.06s, tests 3.14s, environment 4ms, prepare 1.68s)
+
+Running 68 checks with 4 parallel jobs (--fast).
+PASS     2.3s  balance-tooling-smoke.mjs
+PASS     2.8s  aaron-smoke.mjs
+PASS     4.5s  buddhashadow-smoke.mjs
+PASS     3.4s  captain-smoke.mjs
+PASS     2.9s  directional-smoke.mjs
+PASS     5.2s  determinism-smoke.mjs
+PASS     7.7s  campaign-map-smoke.mjs
+PASS     0.7s  fighter-budget-qa.mjs
+PASS     2.5s  fighter-qa.mjs
+PASS     1.4s  guard-observer-smoke.mjs
+PASS     4.1s  highsproto-smoke.mjs
+PASS    10.4s  duo-smoke.mjs
+PASS     0.7s  hub-duel-smoke.mjs
+PASS     2.5s  hitbox-measurements-smoke.mjs
+PASS     1.0s  hub-replay-smoke.mjs
+PASS     6.9s  identity-actions-qa.mjs
+PASS    10.8s  identity-presentation-qa.mjs
+PASS     5.7s  late-named-smoke.mjs
+PASS     2.6s  local-versus-smoke.mjs
+PASS     1.7s  match-depth-tooling-smoke.mjs
+PASS     3.0s  michael-smoke.mjs
+PASS     3.3s  midday-roster-smoke.mjs
+PASS     1.3s  morelight-egg-smoke.mjs
+PASS    24.3s  identity-ranged-qa.mjs
+PASS    46.4s  event-clips-smoke.mjs
+PASS    11.8s  motion-fix-smoke.mjs
+PASS     1.5s  movement-smoke.mjs
+PASS     1.1s  movement-visual-coverage.mjs
+PASS    23.4s  motion-review-smoke.mjs
+PASS    11.8s  named-nov03-animation-smoke.mjs
+PASS     0.1s  online-browser-smoke.mjs
+PASS     4.5s  paired-spacing-probe.mjs
+PASS     6.5s  nov03-late-sprite-qa.mjs
+PASS     6.8s  paired-wall-motion-smoke.mjs
+PASS    42.8s  motion-roster-lab-smoke.mjs
+PASS     1.2s  portraits-smoke.mjs
+PASS    20.2s  partner-expansion-qa.mjs
+PASS     1.5s  presentation-smoke.mjs
+PASS    33.6s  reaction-size-smoke.mjs
+PASS     2.7s  reaction-smoke.mjs
+PASS    40.6s  pose-atlas-smoke.mjs
+PASS     1.1s  reference-projectiles-smoke.mjs
+PASS    55.6s  pissing-assist-qa.mjs
+PASS     0.9s  signature-projectiles-qa.mjs
+PASS     0.3s  sim-version-smoke.mjs
+PASS     3.4s  single-body-fighters-smoke.mjs
+PASS     7.2s  selection-menu-smoke.mjs
+PASS     3.2s  solanadelray-smoke.mjs
+PASS     5.5s  smoke.mjs
+PASS     1.4s  spit-smoke.mjs
+PASS     1.7s  sproto1601-eight-smoke.mjs
+PASS     3.1s  sproteth-smoke.mjs
+PASS     1.7s  sproto3215-smoke.mjs
+PASS    16.6s  rollback-smoke.mjs
+PASS     1.0s  stage-preview-smoke.mjs
+PASS     1.6s  stage-previews-smoke.mjs
+PASS     4.7s  stage-catalog-smoke.mjs
+PASS     1.5s  stage-variants-smoke.mjs
+PASS     9.0s  sprotos-expansion-qa.mjs
+PASS     1.4s  story-stages-smoke.mjs
+PASS     3.4s  sun-god-smoke.mjs
+PASS     9.1s  twin-spacing-probe.mjs
+PASS     1.6s  versus-smoke.mjs
+PASS     1.3s  vitalik-ethereum-smoke.mjs
+PASS     0.7s  yannix-smoke.mjs
+PASS    27.5s  story-smoke.mjs
+PASS   201.6s  campaign-expansion-browser.mjs
+PASS   110.0s  story-animation-browser.mjs
+
+68/68 checks passed in 271s.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

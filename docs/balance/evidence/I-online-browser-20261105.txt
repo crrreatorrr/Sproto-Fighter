@@ -1,0 +1,3 @@
+  results: You win. The hub verified the result. +10 Tickets (20-Ticket pot). | You lose. The hub verified the result. −10 Tickets.
+  rematch: You win. | You lose.
+PASS: two browsers matched over relay, showed the hub-verified result, conserved Tickets, kept local round flags disabled, and played a rematch.
