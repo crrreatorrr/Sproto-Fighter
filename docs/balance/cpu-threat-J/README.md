@@ -5,16 +5,16 @@ This is an isolated CPU experiment from F (`7b1ab9d19`), not a selected balance 
 ## Frozen candidates
 
 - J1 reactive forecast: `87c925046`, source SHA256 `a97ecfb7e1e3f8f133958c2c355f026ab9cd39e32e907f681cc4a9b01d0f35c4`, branch `codex/gameplay-cpu-cast-threat`.
-- J2 adds seeded learned instant-ray anticipation: `1e6dea894`, source SHA256 `f15ea76e1d6c9cb2ec18c6c369a56039dc44705a79ea95d42e56c94558ee227b`, branch `codex/gameplay-cpu-beam-habit`.
+- J2 adds seeded learned instant-ray anticipation: `a0c3645d6`, source SHA256 `4b9bbaef5f5683a46679d5c2a46f0e603678508014cc6dd29ce0d2a77b2a8564`, branch `codex/gameplay-cpu-beam-habit`.
 - Verifier simulation fingerprint remains `c662aee33095a523`: `cpuInput` is excluded by tree shaking from the input-driven server verifier bundle. Observation schema, simulation stepping, RNG advancement, attack kits, numeric contact geometry, origins and artwork are unchanged.
 
 J1 replaces the visible-cast projectile branch's fixed 220-unit guard cutoff and emission-only lifetime with a conservative public-profile flight envelope. It uses the delayed cast x/y/age and unfrozen clock against the defender's current position. Published attack-roll guard probabilities remain unchanged. Grounded horizontal profiles permit a duck only if every possible authored emission lane clears the numeric crouch hull. Both standing and crouching mouth origins are considered because queued current input does not expose latched cast aim. Returning and wide retainer shots use their respective conservative lifetime/width.
 
-J2 anticipates a possible ray only after a delayed projectile-majority habit, when the public ray startup fits inside that skill's visual delay. It uses the existing seeded forecast-guard share, without reading a new hidden cast, consuming RNG, or changing published visible-attack guard/low anchors. No fighter ID selects behavior.
+J2 anticipates a possible ray only when the selected delayed observation contains no visible attack and only after a delayed projectile-majority habit, when the public ray startup fits inside that skill's visual delay. It uses the existing seeded forecast-guard share, without reading a new hidden cast, consuming RNG, or changing published visible-attack guard/low anchors. It cannot add a second habit guard chance after a visible attack fails its guard roll; an earlier J2 trial that permitted that is superseded by the frozen source and data here. No fighter ID selects behavior.
 
 ## Checks
 
-J2: TypeScript check and 56 focused tests passed (16 threat/anticipation, 20 difficulty/replay, 20 low-variety). Causal fixtures include a real traveling Vela shot before first contact and a crouch-spit whose attacker releases down during startup. Additional assertions cover long beam range, unfrozen expiry, returning/wide shots, hidden state independence, reaction delay, mirrored defense, guard anchors and habit gating. Independent Speed review found the returning-width and latched-aim issues before the frozen candidates above; they are corrected with regressions.
+J2: TypeScript check and 57 focused tests passed (17 threat/anticipation, 20 difficulty/replay, 20 low-variety). Causal fixtures include a real traveling Vela shot before first contact and a crouch-spit whose attacker releases down during startup. Additional assertions cover long beam range, unfrozen expiry, returning/wide shots, hidden state independence, reaction delay, mirrored defense, guard anchors and habit gating. Independent Speed review found the returning-width and latched-aim issues before the frozen candidates above; they are corrected with regressions.
 
 ## Bounded common-seed panel
 
@@ -24,7 +24,7 @@ Mox versus High Sproto, Rivet, Vela, Bront and retainer (`sproto2789`), CPU vers
 
 | Skill | F Mox wins | J1 Mox wins | J2 Mox wins | Trials per source |
 | --- | ---: | ---: | ---: | ---: |
-| Normal | 18 | 18 | 16 | 20 |
+| Normal | 18 | 18 | 18 | 20 |
 | Hard | 14 | 18 | 18 | 20 |
 
 Six projectile fighters (Mox, Vela, Rivet, Bront, D86, retainer) versus the fixed High Sproto reference, crossing seats:
