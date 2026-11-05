@@ -1,5 +1,5 @@
 {
-  "note": "Pinned Phase 1 templates after Phase 2 speed tuning and Phase 3 defense integration; historical art before-gameplay files remain unchanged. Calibration remains pending.",
+  "note": "Role-only calibration candidate: movement retained, Footwork ground-light commitment tax and slower-role reach compensation; historical art snapshots remain unchanged.",
   "fighters": {
     "aaron": {
       "roster": {
@@ -132,6 +132,7 @@
       "jump": 15.48,
       "lightRange": 84,
       "lightDamage": 38,
+      "lightStartup": 5,
       "heavyRange": 135,
       "heavyDamage": 95,
       "heavyStartup": 11,
@@ -147,7 +148,8 @@
       "speed": 6.2,
       "jump": 15.48,
       "lightRange": 86,
-      "lightDamage": 37,
+      "lightDamage": 34,
+      "lightStartup": 6,
       "heavyRange": 140,
       "heavyDamage": 93,
       "heavyStartup": 11,
@@ -162,8 +164,9 @@
     "Zoning": {
       "speed": 5.4,
       "jump": 15.1,
-      "lightRange": 80,
+      "lightRange": 94,
       "lightDamage": 36,
+      "lightStartup": 5,
       "heavyRange": 135,
       "heavyDamage": 91,
       "heavyStartup": 11,
@@ -180,6 +183,7 @@
       "jump": 15.48,
       "lightRange": 86,
       "lightDamage": 38,
+      "lightStartup": 5,
       "heavyRange": 145,
       "heavyDamage": 100,
       "heavyStartup": 12,
@@ -194,8 +198,9 @@
     "Brawler": {
       "speed": 5.2,
       "jump": 15.48,
-      "lightRange": 80,
+      "lightRange": 94,
       "lightDamage": 40,
+      "lightStartup": 5,
       "heavyRange": 135,
       "heavyDamage": 105,
       "heavyStartup": 13,
@@ -210,8 +215,9 @@
     "Weapon": {
       "speed": 5.3,
       "jump": 15.48,
-      "lightRange": 88,
+      "lightRange": 100,
       "lightDamage": 38,
+      "lightStartup": 5,
       "heavyRange": 175,
       "heavyDamage": 95,
       "heavyStartup": 14,
@@ -228,6 +234,7 @@
       "jump": 15.48,
       "lightRange": 82,
       "lightDamage": 38,
+      "lightStartup": 5,
       "heavyRange": 135,
       "heavyDamage": 95,
       "heavyStartup": 11,
@@ -244,6 +251,7 @@
       "jump": 16,
       "lightRange": 86,
       "lightDamage": 38,
+      "lightStartup": 5,
       "heavyRange": 145,
       "heavyDamage": 92,
       "heavyStartup": 12,

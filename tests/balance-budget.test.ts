@@ -2,12 +2,24 @@ import { describe, expect, it } from 'vitest';
 import { A, BALANCE_KITS, BALANCE_TEMPLATES, COMBAT_STYLES, MOVES, PLAYABLE_FIGHTERS, ROSTER, bodySpread, buildBalancedKit, budgetScore, createState, getMove, isPairedFighter, step } from '../src/core';
 
 describe('normalized combat budgets',()=>{
+    it('charges for faster neutral movement and longer effective light reach',()=>{
+        const k=BALANCE_KITS.rivet;
+        const base=budgetScore(k.moves,k.projectileSpeed,{speed:5.6,jump:15.48});
+        expect(budgetScore(k.moves,k.projectileSpeed,{speed:6.2,jump:15.48})).toBeGreaterThan(base);
+        const extended={...k.moves,light:{...k.moves.light,range:k.moves.light.range+10}};
+        expect(budgetScore(extended,k.projectileSpeed,{speed:5.6,jump:15.48})).toBeGreaterThan(base);
+        const committed={...k.moves,light:{...k.moves.light,startup:k.moves.light.startup+1,damage:k.moves.light.damage-4}};
+        expect(budgetScore(committed,k.projectileSpeed,{speed:5.6,jump:15.48})).toBeLessThan(base);
+        expect(BALANCE_TEMPLATES.Pressure.speed).toBe(5.6);
+        expect(BALANCE_TEMPLATES.Footwork.speed).toBe(6.2);
+        expect(BALANCE_TEMPLATES.Brawler.speed).toBe(5.2);
+    });
     it('classifies the complete roster, with at most three bounded identity tradeoffs',()=>{
         for(const id of PLAYABLE_FIGHTERS){
             const k=BALANCE_KITS[id],baseline=buildBalancedKit(COMBAT_STYLES[id].role,isPairedFighter(id),k.specialFrames.length,MOVES,false);
             expect(Object.keys(k.deltas).length,id).toBeLessThanOrEqual(3);
             for(const delta of Object.values(k.deltas))expect(Math.abs(delta!),id).toBeLessThanOrEqual(.1);
-            const ratio=budgetScore(k.moves,k.projectileSpeed)/budgetScore(baseline.moves,baseline.projectileSpeed);
+            const ratio=budgetScore(k.moves,k.projectileSpeed,k.template)/budgetScore(baseline.moves,baseline.projectileSpeed,baseline.template);
             expect(ratio,id).toBeGreaterThanOrEqual(.97);expect(ratio,id).toBeLessThanOrEqual(1.03);
             expect(ROSTER[id].speed).toBe(BALANCE_TEMPLATES[k.archetype].speed);
             for(const move of Object.values(k.moves)){expect(move.startup).toBeGreaterThanOrEqual(3);expect(move.active).toBeGreaterThanOrEqual(2);expect(move.recovery).toBeGreaterThanOrEqual(6);}
