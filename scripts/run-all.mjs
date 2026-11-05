@@ -21,7 +21,7 @@ const root = join(here, '..');
 const SLOW = new Set(['game-qa.mjs', 'throw-smoke.mjs', 'sprite-scale-qa.mjs', 'sheet-render-qa.mjs']);
 // Not checks: this runner and shared helpers.
 // perf-baseline.mjs measures loading; it reports numbers rather than passing or failing.
-const NOT_CHECKS = new Set(['run-all.mjs', 'build-sim-bundle.mjs', 'perf-baseline.mjs']);
+const NOT_CHECKS = new Set(['run-all.mjs', 'build-sim-bundle.mjs', 'perf-baseline.mjs', 'balance-tournament.mjs', 'frame-data.mjs']);
 
 const args = process.argv.slice(2);
 let jobs = availableParallelism();

@@ -5,6 +5,8 @@
   "type": "module",
   "description": "Local Canvas 2D fighting-game prototype",
   "scripts": {
+    "balance": "node scripts/balance-tournament.mjs",
+    "frame-data": "node scripts/frame-data.mjs",
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",

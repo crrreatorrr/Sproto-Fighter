@@ -38,6 +38,16 @@ jobs:
       - run: npm ci
       - run: npm run check
       - run: npm test
+      # Advisory until Phase 1 establishes the normalized balance gate.
+      - name: Balance baseline (advisory)
+        continue-on-error: true
+        run: npm run balance -- --fast --out docs/balance/ci
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: balance-report
+          path: docs/balance/ci.*
+          if-no-files-found: warn
       - run: npm run build
       # One trimmed sprite sheet per body instead of 100-140 frame requests (about a
       # quarter of the decoded memory); every frame verified unchanged.

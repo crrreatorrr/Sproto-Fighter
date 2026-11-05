@@ -9,6 +9,7 @@ by relative path. Use this page to find the current material first.
 | Document | What it is |
 | --- | --- |
 | [../README.md](../README.md) | How to run, play and check the game; architecture; hub notes |
+| [GAMEPLAY-PLAN-20261105.md](GAMEPLAY-PLAN-20261105.md), [balance/README.md](balance/README.md) | Gameplay phases and reproducible balance measurements |
 | [WEAPON-SCALE-QA-20261104.md](WEAPON-SCALE-QA-20261104.md) | Weapon-wielder sprite size repair, `walkRegistration`, Anni size and the GodsSon rename |
 | [INTEGRATION-20261103.md](INTEGRATION-20261103.md) | Latest integration: 131 fighters, 73 stages, hub adapter, checks run |
 | [GITHUB-INTEGRATION-20261103.md](GITHUB-INTEGRATION-20261103.md) | How the full history reached GitHub; repository size |

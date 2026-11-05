@@ -95,8 +95,10 @@ try{
  const before=await page.evaluate(()=>({state:window.neonRelay.snapshot(),replay:window.neonRelay.replay()}));
  await page.locator('#pause').click();const paused=await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot());
  await page.waitForTimeout(250);assert.deepEqual(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot()),paused);
- await page.locator('#start').click();
  await page.locator('#game').screenshot({path:'docs/evidence/story-animations-20261104/nick-intro.png'});
+ // Capture while paused: a loaded CI host can finish the short intro during
+ // screenshot encoding, hiding the skip button before the next action.
+ await page.locator('#start').click();
  await page.locator('#story-animation-skip').click();await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase===null);
  assert.equal((await page.evaluate(()=>window.neonRelay.replay().frames.length)),0);
  assert.equal((await page.evaluate(()=>window.neonRelay.snapshot().winner)),null);
