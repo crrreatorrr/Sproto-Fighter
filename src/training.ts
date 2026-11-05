@@ -1,4 +1,4 @@
-import { A, COMBAT_STYLES, getHitbox, getHurtbox, getMove, getProjectileHitbox, type CombatState } from './core';
+import { A, COMBAT_STYLES, getHitbox, getHurtbox, getMove, getProjectileHitbox, grounded, type CombatState } from './core';
 const actions = Object.entries(A);
 export const inputLabel = (mask: number): string => actions.filter(([, bit]) => mask & bit).map(([name]) => name).join(' + ') || 'neutral';
 const mirror = (mask: number): number => (mask & ~(A.left | A.right)) | (mask & A.left ? A.right : 0) | (mask & A.right ? A.left : 0);
@@ -24,10 +24,14 @@ export function trainingReadout(s: CombatState): string {
         // owner can start an uncancelled action one tick after commitment ends.
         // A neutral fighter can act on the next tick, even at stun 1.
         const nextAction = Math.max(1, f.stun, f.blockstun, f.move ? remaining + 1 : 1);
-        const contextual = s.throwState || s.fighters.some(fighter => fighter.reaction?.kind === 'knockdown');
+        // Landing can clear air moves early; dash/jump buffers can change the
+        // next action. These and knockdown/throw timing need more than a countdown.
+        const contextual = s.winner !== null || s.throwState || s.fighters.some(fighter =>
+            fighter.hp <= 0 || !grounded(fighter) || fighter.dash > 0 || fighter.dashBuffer > 0 || fighter.jumpBuffer > 0 ||
+            fighter.reaction?.kind === 'knockdown');
         const advantage = !contextual && (other.stun || other.blockstun)
             ? Math.max(1, other.stun, other.blockstun) - nextAction : null;
-        return `P${i+1}: ${inputLabel(f.input)} | ${f.move?.id ?? 'neutral'} | commitment ${remaining}f | advantage ${advantage === null ? '—' : (advantage >= 0 ? '+' : '') + advantage + 'f'} | HP ${f.hp}`;
+        return `P${i+1}: ${inputLabel(f.input)} | ${f.move?.id ?? 'neutral'} | commitment ${remaining}f | uncancelled advantage ${advantage === null ? '—' : (advantage >= 0 ? '+' : '') + advantage + 'f'} | HP ${f.hp}`;
     }).join('\n');
 }
 

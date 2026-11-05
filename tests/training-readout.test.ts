@@ -25,7 +25,7 @@ function nextGrabTick(s: CombatState, seat: 0 | 1): number {
     }
     throw new Error('Fighter did not accept grab');
 }
-const advantage = (s: CombatState): string => trainingReadout(s).split('\n')[0].match(/advantage ([^|]+)/)![1].trim();
+const advantage = (s: CombatState): string => trainingReadout(s).split('\n')[0].match(/uncancelled advantage ([^|]+)/)![1].trim();
 const signed = (n: number): string => `${n >= 0 ? '+' : ''}${n}f`;
 
 it.each([
@@ -83,4 +83,46 @@ it('uses observed projectile contact timing rather than a fixed travel advantage
         expect(advantage(s)).toBe(signed(observed));
     }
     expect(readings[1]).toBeGreaterThan(readings[0]);
+});
+
+it('does not report dash commitment as an immediately actionable neutral state', () => {
+    const s = contact('light', false);
+    step(s, [A.dash, 0]);
+    while (s.freeze) step(s, [0, 0]);
+    step(s, [0, 0]);
+    expect(s.fighters[0].move).toBeNull();
+    expect(s.fighters[0].dash).toBe(10);
+    expect(nextGrabTick(s, 0)).toBe(3);
+    expect(nextGrabTick(s, 1)).toBe(22);
+    expect(advantage(s)).toBe('—');
+});
+
+it('does not predict airborne commitment when landing can clear the move early', () => {
+    const s = createState('rivet', 'versus', 'vela');
+    s.fighters[0].x = 550;
+    s.fighters[1].x = 600;
+    for (let tick = 0; tick < 90 && !s.fighters[1].stun; tick++) {
+        step(s, [tick === 0 ? A.up : tick === 30 ? A.light : 0, 0]);
+    }
+    const f = s.fighters[0], move = getMove(f, 'airLight');
+    expect(f.move?.id).toBe('airLight');
+    expect(f.vy).toBeGreaterThan(0);
+    // The no-cancel probe can grab on touchdown, before airLight's listed end.
+    expect(nextGrabTick(s, 0) - s.freeze).toBeLessThan(move.startup + move.active + move.recovery - f.move!.t + 1);
+    expect(advantage(s)).toBe('—');
+});
+
+
+it.each([A.dash, A.up])('does not predict a pending movement buffer during hitstop (%s)', input => {
+    const s = contact('light', false);
+    step(s, [input, 0]);
+    expect(s.freeze).toBeGreaterThan(0);
+    expect(s.fighters[0].dashBuffer || s.fighters[0].jumpBuffer).toBeGreaterThan(0);
+    expect(advantage(s)).toBe('—');
+});
+
+it('does not report action timing after the match has ended', () => {
+    const s = contact('light', false);
+    s.winner = 0;
+    expect(advantage(s)).toBe('—');
 });
