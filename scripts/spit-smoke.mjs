@@ -8,12 +8,15 @@ const { A, FLOOR, HORIZONTAL_SPIT_FIGHTERS, createState, step, getMove, isCrouch
 let checks=0;
 // The supplied shorter fighters have authored mouth origins below the ducking
 // lane. Preserve those reference-aligned origins instead of assuming every
-// standing cast has the original five fighters' high trajectory. In pairs,
+// standing cast has the original five fighters' high trajectory. Phase 3's
+// 87-unit crouched hurtbox and 10-unit projectile half-height mean standing
+// mouth centers below 97 units intersect it. Pin the reviewed lane outcomes
+// here rather than computing expectations from the runtime collision helper. In pairs,
 // which body leads makes the lane facing-dependent. These are explicit expected
 // collision outcomes, independent of the runtime overlap calculation.
 const lowStandingFaces=new Set([
- 'zepump/1','peterpan/1',
- ...['willuminati','prim','benjamin','maxbiggums','fiatfudder','godether','cyberviber','mrgoldrobe'].flatMap(id=>[`${id}/1`,`${id}/-1`]),
+ 'zepump/1','peterpan/1','solanadelray/1',
+ ...['guest07','guest13','crapto','reverend','willuminati','prim','benjamin','maxbiggums','xav','rainman','fiatfudder','godether','cyberviber','realityarchitect','mrgoldrobe'].flatMap(id=>[`${id}/1`,`${id}/-1`]),
 ]);
 const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};
 function fresh(id='rivet',face=1){const s=createState(id,'cpu');s.fighters[0].x=face===1?200:1080;s.fighters[1].x=face===1?1100:180;s.fighters[0].facing=face;return s;}
