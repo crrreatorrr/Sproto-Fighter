@@ -356,7 +356,9 @@ for(const id of core.PLAYABLE_FIGHTERS) for(const facing of [-1,1]) check(`${id}
 // tick, including core's numerical hurt/contact rules (it has no sprite boxes).
 for(const id of core.PLAYABLE_FIGHTERS) for(const facing of [-1,1]) for(const [label,button,gap,defense] of [
   ['light-contact',core.A.light,70,0],['medium-contact',core.A.medium,70,0],['heavy-contact',core.A.heavy,70,0],
-  ['low-guard',core.A.down|core.A.light,70,'guard'],['sweep-guard',core.A.down|core.A.heavy,70,'crouch'],
+  // Begin the high-guard probe close enough that the faster back-walk cannot
+  // escape the low during startup; this scenario tests guard height, not reach.
+  ['low-guard',core.A.down|core.A.light,55,'guard'],['sweep-guard',core.A.down|core.A.heavy,70,'crouch'],
   ['launcher',core.A.launcher,70,0],['ranged',core.A.bolt,180,0],['special',core.A.special,150,0],
   ['grab-forward',core.A.grab,60,0],['grab-back',core.A.grab,60,0],['whiff',core.A.medium,440,0],
 ]) check(`${id} facing ${facing} replay ${label}`,()=>{
@@ -364,7 +366,7 @@ for(const id of core.PLAYABLE_FIGHTERS) for(const facing of [-1,1]) for(const [l
   f.x=450;foe.x=f.x+facing*(gap+core.bodySpread(id)+core.bodySpread(foe.id));f.pips=3;
   const control=structuredClone(rendered),back=facing===1?core.A.left:core.A.right,foeBack=facing===1?core.A.right:core.A.left;
   const attack=label==='grab-back'?core.A.grab|back:button;
-  let sawThrow=false,sawProjectile=false,sawGuard=false,sawDamage=false;
+  let sawThrow=false,sawProjectile=false,sawGuard=false,sawDamage=false,minTargetHp=1000,maxTargetStun=0;
   for(let tick=0;tick<125;tick++) {
     const inputs=[tick===0?attack:0,defense==='crouch'?foeBack|core.A.down:defense==='guard'?foeBack:0];
     const emitted=[[],[]];
@@ -375,11 +377,17 @@ for(const id of core.PLAYABLE_FIGHTERS) for(const facing of [-1,1]) for(const [l
     assert.deepEqual(rendered,control,'rendered and unrendered collision/damage/state histories agree');counters.replayTicks++;
     assert.deepEqual(emitted[0],emitted[1],'even immediately consumed projectile spawns have identical geometry');
     sawThrow ||= !!rendered.throwState;sawProjectile ||= emitted[0].length>0||rendered.projectiles.length>0;sawGuard ||= foe.blockstun>0;sawDamage ||= foe.hp<1000;
+    minTargetHp=Math.min(minTargetHp,foe.hp);maxTargetStun=Math.max(maxTargetStun,foe.stun);
   }
   // Dummy mode restores HP at frame90. Observe damage at contact, not only the
   // final frame, or a real hit followed by dummy healing looks like a whiff.
   if(label==='whiff')assert.equal(sawDamage,false,'far attack really whiffs');
-  else if(label==='sweep-guard'){assert.equal(sawDamage,false,'crouch guard prevents sweep damage');assert.ok(sawGuard,'guard actually triggered');counters.guardScenarios++;}
+  else if(label==='sweep-guard'){
+    const chip=Math.round(core.getMove(f,'sweep').damage*.12);
+    assert.equal(minTargetHp,1000-chip,'crouch guard permits exactly one chip contact');
+    assert.equal(maxTargetStun,0,'guard prevents hitstun and knockdown');
+    assert.ok(sawGuard,'guard actually triggered');counters.guardScenarios++;
+  }
   else if(label==='ranged')assert.ok(sawProjectile,'projectile really spawned');
   else{assert.ok(sawDamage,`${label} really causes damage`);counters.damageScenarios++;}
   if(label.startsWith('grab')){assert.ok(sawThrow,'actual held/released throw path');counters.throwScenarios++;}
@@ -430,7 +438,7 @@ const report={schemaVersion:1,auditScriptSha256,manifestRevision:manifest.revisi
     'Runtime anchor-offset ranges are measured against the core root plus each companion body offset. Reaction pivots, camera/formation corrections, hover travel and pixel rounding can intentionally change them. Pixel envelopes are source-oriented; facing is checked on actual matrices.',
     'Floor support uses decoded alpha pixel squares, allowing half a world pixel of translation rounding and one transformed source-pixel footprint for the installed origin/boundary hull conventions.',
     'All installed cels are directly checked; runtime coverage counts distinguish selected cels from shadowed clips.',
-    'Core contact uses range/vertical thresholds, bodySpread and projectile radii, not per-pixel sprite hit/hurt boxes. Replay equality proves render independence, not visual contact accuracy.',
+    'Core contact uses frozen numeric hit/hurt rectangles and formation spacing, not per-pixel sprite collision. Replay equality proves render independence, not visual contact accuracy.',
     'Jessica mask: alpha>128, B>R+40, B>G+20, largest 8-connected component. Advisory for this blue head only; occlusion and rotation may change it.']};
 const summaryLines=[`# Sprite scale audit`, '', `Manifest: ${manifest.revision} (${report.manifestSha256.slice(0,12)})`, '',
   `${report.scope.playableFighters} selectable fighters; ${report.scope.installedBodies} installed bodies; ${cells.length} frame entries; both facings.`,
