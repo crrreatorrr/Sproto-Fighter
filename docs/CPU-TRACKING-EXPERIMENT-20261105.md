@@ -66,6 +66,14 @@ The reference checkpoint reproducer is `scripts/lib/cpu-calibration-checkpoint.m
 Self-play uses that harness's `runTournament` with the eight IDs in the records,
 `samples:7`, `repeats:4`, `skills:[4,7]`, `seed:20261105`, `maxFrames:3600`, `bot:'cpu'`.
 
+Independent actual-endpoint testing used 256 seeded pairs per endpoint against
+the same fixed reference; reverse-seat outcomes were identical. Zephyr at Easy
+won 4/256 pairs (1.56%; Wilson 95% 0.61–3.95%). The ordinary Vela→Vaudream Expert
+gauntlet won 231/256 (90.23%; 85.98–93.30%). There were no draws. Thus this source
+misses both the requested 15% opening and 65% finale against this reference. The
+reference remains uncalibrated to humans; these are paired seeds, not 512
+independent observations. No later candidate's endpoints are attributed here.
+
 ## Verification and limits
 
 - 167 unit tests, TypeScript and production build pass. The focused CPU/tracking
