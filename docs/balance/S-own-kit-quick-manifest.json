@@ -1,0 +1,47 @@
+{
+  "source": {
+    "commit": "340ae0bbc1104751a56e27555978bace4ce35824",
+    "sourceSha256": "6f9d4323303198bdd21e6d347a524edbae9637894aff77586e15029957d45dc4",
+    "simVersion": "a4c7ddde49ec5a64",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "baselineSource": {
+    "commit": "efb5829c1230dac84337ba0212d92a84a527563b",
+    "sourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+    "simVersion": "a4c7ddde49ec5a64",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "files": {
+    "report-2026-11-05-S-own-kit-quick.json.gz": {
+      "rawSha256": "65fac4ac2ad3148422d8593184104281049ad6f4711316f5dc759a6c3483929f",
+      "compressedSha256": "d0fb0202f1d4b27edb4eda85a8dcd179ec9667421f3346621ce12af1102978a8",
+      "rawBytes": 6053985,
+      "compressedBytes": 331921
+    },
+    "comparison-2026-11-05-S-own-kit-vs-I.json.gz": {
+      "rawSha256": "ddcab5b3b1108ba7ed70e42443d46014179ff6631b36572e4631e2c76f47a44e",
+      "compressedSha256": "02b82ecedb1c3e6397ff71bd33d4a253d6c079178b2ef7dc25b550d78cc2ed4f",
+      "rawBytes": 954388,
+      "compressedBytes": 71601
+    }
+  },
+  "bouts": 4064,
+  "pairedKeysIdentical": true,
+  "levels": [
+    {
+      "skill": 4,
+      "beforeOutsideCount": 125,
+      "afterOutsideCount": 113,
+      "outlierListsLocation": "Complete lists retained in comparison gzip archive"
+    },
+    {
+      "skill": 7,
+      "beforeOutsideCount": 112,
+      "afterOutsideCount": 132,
+      "outlierListsLocation": "Complete lists retained in comparison gzip archive"
+    }
+  ],
+  "scope": "Sparse free-fight policy screen only; no Story/full/promotion"
+}
