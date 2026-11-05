@@ -26,10 +26,17 @@ try{
    for(const phase of ['intro','boss','mecha','outro']){
     if(!plan[phase]?.length)continue;
     if(!animation.start(phase))throw Error('Cannot start '+id+'/'+phase);
-    const seen=[],boundaryChecks=[],referenceFramesChecked=new Set();let frames=0,visible=0,ejectionEnd=null,smallMorelightHeight=null,shrinkStart=null,shrinkEnd=null;
+    const seen=[],boundaryChecks=[],referenceFramesChecked=new Set();let frames=0,visible=0,ejectionEnd=null,smallMorelightHeight=null,shrinkStart=null,shrinkEnd=null,fusionEnd=null;
     while(animation.active&&frames<10000){
      const snap=animation.snapshot();if(seen.at(-1)!==snap.clip)seen.push(snap.clip);
      ctx.clearRect(0,0,1280,720);animation.draw(ctx,id==='vela'&&phase==='outro'?STORY_BOSS_X:1100,578,-1);
+     if(art&&snap.clip==='art-fusion'&&snap.frame===manifest[snap.clip].frames-1&&!fusionEnd)
+      fusionEnd=ctx.getImageData(0,0,1280,720).data;
+     if(art&&snap.clip==='mega-woman-growth'&&snap.frame===0&&!boundaryChecks.includes('fusion/growth')){
+      const first=ctx.getImageData(0,0,1280,720).data;
+      if(!fusionEnd||!first.every((pixel,i)=>pixel===fusionEnd[i]))throw Error('Mega Artchick changes pose before growth');
+      boundaryChecks.push('fusion/growth');
+     }
      if(art&&snap.clip==='mega-woman-growth'&&snap.frame===manifest[snap.clip].frames-1&&!boundaryChecks.includes('growth/boss idle')){
       const final=ctx.getImageData(0,0,1280,720).data;
       const state=createState('highsproto','cpu',id),boss=startStoryBoss(state,'art');

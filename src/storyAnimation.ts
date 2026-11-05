@@ -173,15 +173,31 @@ export function createStoryAnimation(){
                 drawFrame(frame);
                 // The climbing pilot passes in front of the hatch before the head reveal.
                 emptyCockpit(0,frame>=101,frame>=153&&frame<=166);
-            }else if(id==='mega-woman-growth'&&frame>=7){
-                // Scale three high-resolution poses around the boot line instead of duplicating a cel for each tick.
-                const linear=Math.min(1,(frame-7)/124);
+            }else if(id==='art-fusion'){
+                // Give the approach and joining flash three times as long on screen.
+                const sourceFrame=frame<12?frame:frame<66?12+Math.floor((frame-12)/3)
+                    :frame<79?29+Math.floor((frame-66)/5):50+Math.min(9,Math.floor((frame-79)/2));
+                const blend=Math.max(0,Math.min(1,(frame-89)/16));
+                if(blend<1){
+                    ctx.save();ctx.globalAlpha*=1-blend;drawFrame(sourceFrame);ctx.restore();
+                }
+                if(blend>0){
+                    const growth=manifest['mega-woman-growth'],atlas=images.get('mega-woman-growth')!;
+                    const ratio=growth.scale/spec.scale;
+                    const zoom=444/622;
+                    ctx.scale(ratio,ratio);ctx.translate(-78,0);ctx.scale(zoom,zoom);
+                    ctx.globalAlpha*=blend;
+                    ctx.drawImage(atlas,3*growth.width,growth.height,growth.width,growth.height,
+                        -growth.x,-growth.y,growth.width,growth.height);
+                }
+            }else if(id==='mega-woman-growth'){
+                // Start with the same standing sprite and foot position shown at the end of fusion.
+                const linear=Math.min(1,Math.max(0,(frame-12)/119));
                 const t=linear*linear*(3-2*linear);
-                const stage=frame<38?0:frame<78?1:2;
-                const sourceHeight=[518,590,622][stage];
-                const zoom=(444+178*t)/sourceHeight;
+                const wings=frame>=38&&frame<78;
+                const zoom=(444+178*t)/(wings?590:622);
                 ctx.translate(-78*(1-t),0);ctx.scale(zoom,zoom);
-                drawFrame(7+stage);
+                drawFrame(wings?8:9);
             }else drawFrame(frame);
             ctx.restore();return true;
         },
