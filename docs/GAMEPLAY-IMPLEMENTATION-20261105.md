@@ -1,5 +1,19 @@
 # Gameplay implementation and review checkpoint
 
+## Continued calibration checkpoint
+
+The reviewed CPU candidate is now integrated at `db5508c5d`, simulation
+`373448bdc043a0e8`. The matching hub branch has been refreshed to that version.
+Its delayed projectile history, unfrozen commitment forecasts and Expert jab
+initiative fixes are part of the primary implementation. Typecheck, production
+build, 159 unit tests and matching hub unit/type checks pass; all 68 fast standalone checks are covered after rerunning the two browser
+checks with the installed Chromium path. The initial fast command passed66/68
+and failed to launch those browsers; both targeted reruns pass. Three-engine
+determinism CI is green; the full CI audit is running. New common-seed broad roster and actual-route
+story measurements are running. The quantitative and full-audit evidence below
+is explicitly the prior `7d0ce00ef52b567a` checkpoint until replaced by new results.
+No merge, deployment or public PR-description update is authorized.
+
 This is a draft implementation, not acceptance of all gameplay targets. The
 source plan is the unchanged 228-line document from `3f1b1234`. Work started
 from main `209f16eec` after PR #22. Main still points there; concurrent cinematic
@@ -23,7 +37,7 @@ branch is `codex/gameplay-match-depth-review`; the full working checkout is
 `/workspace/Sproto-Fighter`.
 
 The matching [hub draft #59](https://github.com/crrreatorrr/metaverse-hub/pull/59)
-vendors simulation `7d0ce00ef52b567a`, matching this Fighter implementation.
+vendors simulation `373448bdc043a0e8`, matching the current Fighter implementation.
 Fighter main was `af94139cc59e4dfd` while hub main was `dc3a64b592b94faf` before
 this work; no claim is made that production is currently in parity. Neither
 repository was merged or deployed.
@@ -49,7 +63,7 @@ repository was merged or deployed.
 
 ## Evidence and limits
 
-The broad frozen calibration ran 33,472 bouts, with independent seeded
+The prior `7d0ce00ef52b567a` broad frozen calibration ran 33,472 bouts, with independent seeded
 repetitions and both seats. The 35–65% gate fails for 107 Normal and 102 Hard
 fighters. Canonical Footwork wins about 66%; Zoning about 29%; Weapon about
 33–36%; Brawler about 36–37%. The formula omits mobility and is not a calibrated
@@ -64,15 +78,16 @@ Separate unintegrated CPU and role-calibration experiments are being measured;
 their results must not be substituted for this tested source's results. The
 [role experiment branch](https://github.com/crrreatorrr/Sproto-Fighter/tree/codex/gameplay-balance-calibration)
 reduces controlled-panel outliers but still fails the gate. Review also found
-that strategic zoning in the frozen CPU reads projectile habit counts before
+that strategic zoning in the prior CPU read projectile habit counts before
 the visual delay. The independently reviewed
 [CPU candidate](https://github.com/crrreatorrr/Sproto-Fighter/tree/codex/gameplay-cpu-calibration)
 fixes that leak, forecasts commitment using unfrozen ticks, and reserves Expert
 jab initiative. Its 20 focused tests pass. Its new fixed-seed checkpoint gives
 CPU wins Easy 0/64, Normal 0/64, Hard 9/64, Expert 30/64; the earlier full-curve
 640/1,976 result belongs to a superseded candidate and is not this result.
-Neither experimental branch is integrated or paired with the published hub
-bundle; both need fresh full measurements and broader validation. Delayed
+The CPU candidate is now integrated and paired with the refreshed hub bundle;
+its new full measurements and broader validation are in progress. The role
+experiment remains separate and unpaired with the hub. Delayed
 position spacing may additionally bias faster-versus-slower matchups and needs
 controlled investigation before more role buffs. These are pre-merge blockers.
 Expert meter baiting has not been independently established. Balance CI remains
@@ -83,7 +98,7 @@ fighters, covering six canonical archetypes, with no raw draws or cap exhaustion
 Mean rounds were 21.21/21.91 seconds at Normal/Hard. This is CPU measurement,
 not human pacing. [Enabled-mode report](balance/report-2026-11-05-final-match-depth.md).
 
-Typecheck, build and 148 unit tests pass. The updated measurement smoke covers
+At the prior checkpoint, typecheck, build and 148 unit tests passed. The measurement smoke covered
 840 complete-state equality checkpoints, including guarded chip. Node and
 installed Chromium match at 130 checkpoints across 11 scenarios; the GitHub
 three-engine determinism job for this source also passed. Packed sheets verify
