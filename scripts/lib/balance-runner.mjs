@@ -37,8 +37,12 @@ export function matchSeeds(seed, ids, controllers, repeat = 0, context = '') {
   });
 }
 
-export function playMatch(core, ids, { maxFrames = 3600, skill = null, referenceSlot = null, initialSeeds = null, repeat = 0 } = {}) {
+export function playMatch(core, ids, { matchDepth = false, maxFrames = matchDepth ? 10800 : 3600, skill = null, referenceSlot = null, initialSeeds = null, repeat = 0 } = {}) {
   const state = core.createState(ids[0], 'versus', ids[1]);
+  if (matchDepth) {
+    assert.equal(typeof core.enableMatchDepth, 'function', 'match-depth requires optional match rules in the selected core');
+    core.enableMatchDepth(state);
+  }
   if (initialSeeds && state.cpu) {
     assert.ok(initialSeeds.length === 2 && initialSeeds.every(seed => Number.isSafeInteger(seed) && seed > 0 && seed < 2147483647), 'valid Park–Miller initial seeds');
     state.cpu.forEach((memory, slot) => { memory.seed = initialSeeds[slot]; });
@@ -46,9 +50,12 @@ export function playMatch(core, ids, { maxFrames = 3600, skill = null, reference
   const actualInitialSeeds = state.cpu?.map(memory => memory.seed) ?? null;
   const reference = referenceSlot === null ? null : createReferenceBot(core);
   const recoveryFrames = [0, 0], damage = [emptyDamage(), emptyDamage()];
+  const rounds = [];
+  let roundStartFrame = 0;
   let inputHash = 0x811c9dc5;
   core.__balanceReset();
-  for (let frame = 0; frame < maxFrames && state.winner === null; frame++) {
+  const complete = () => matchDepth ? state.matchDepth.complete : state.winner !== null;
+  for (let frame = 0; frame < maxFrames && !complete(); frame++) {
     if (state.freeze === 0) for (const [slot, fighter] of state.fighters.entries()) {
       if (fighter.move) {
         const move = core.getMove(fighter, fighter.move.id);
@@ -58,20 +65,31 @@ export function playMatch(core, ids, { maxFrames = 3600, skill = null, reference
     const inputs = [0, 1].map(slot => referenceSlot === slot ? reference(state, slot) : core.cpuInput(state, slot, skill ?? 4));
     for (const input of inputs) inputHash = Math.imul(inputHash ^ input, 0x01000193) >>> 0;
     core.step(state, inputs);
+    if (state.winner !== null && (!matchDepth || state.matchDepth.roundRecorded) && rounds.at(-1)?.round !== (state.matchDepth?.round ?? 1)) {
+      rounds.push({ round:state.matchDepth?.round ?? 1, complete:true, frames:state.frame-roundStartFrame,
+        winner:state.winner < 2 ? state.winner : null, outcome:state.matchDepth?.remaining === 0 ? 'timer' : state.winner === 2 ? 'double-ko' : 'ko',
+        hp:state.fighters.map(f=>f.hp) });
+      roundStartFrame=state.frame;
+    }
   }
+  if (state.frame > roundStartFrame) rounds.push({ round:state.matchDepth?.round ?? 1, complete:false,
+    frames:state.frame-roundStartFrame, winner:null, outcome:'frame-cap', hp:state.fighters.map(f=>f.hp) });
   const events = core.__balanceRead();
   for (const event of events) {
     assert.ok(SOURCES.includes(event.source) && Number.isFinite(event.amount) && event.amount >= 0, 'valid observed damage event');
     damage[event.owner][event.source] += event.amount;
   }
   const hp = state.fighters.map(f => f.hp);
-  const rawWinner = state.winner === 0 || state.winner === 1 ? state.winner : null;
+  const rawWinner = complete() && (state.winner === 0 || state.winner === 1) ? state.winner : null;
   const totalDamage = damage.map(sources => Object.values(sources).reduce((a, b) => a + b, 0));
-  const winner = rawWinner ?? (hp[0] !== hp[1] ? (hp[0] > hp[1] ? 0 : 1) : totalDamage[0] !== totalDamage[1] ? (totalDamage[0] > totalDamage[1] ? 0 : 1) : null);
+  const score = state.matchDepth?.wins;
+  const scoreWinner = score && score[0] !== score[1] ? score[0] > score[1] ? 0 : 1 : null;
+  const winner = rawWinner ?? scoreWinner ?? (hp[0] !== hp[1] ? (hp[0] > hp[1] ? 0 : 1) : totalDamage[0] !== totalDamage[1] ? (totalDamage[0] > totalDamage[1] ? 0 : 1) : null);
   return { fighters:ids, controllers:[0, 1].map(slot => slot === referenceSlot ? 'reference' : 'cpu'), skill, repeat,
     initialSeeds:actualInitialSeeds,
-    frames:state.frame, hp, rawWinner, rawOutcome:state.winner === null ? 'timeout' : state.winner === 2 ? 'double-ko' : 'ko',
-    winner, resolution:rawWinner !== null ? 'ko' : hp[0] !== hp[1] ? 'hp' : winner !== null ? 'damage' : 'unresolved',
+    matchDepth:matchDepth ? { complete:state.matchDepth.complete, wins:[...score], modifier:state.matchDepth.modifier } : null, rounds,
+    frames:state.frame, hp, rawWinner, rawOutcome:!complete() ? 'timeout' : state.winner === 2 ? 'double-ko' : rounds.at(-1)?.outcome === 'timer' ? 'timer' : 'ko',
+    winner, resolution:rawWinner !== null ? 'game-result' : scoreWinner !== null ? 'round-score' : hp[0] !== hp[1] ? 'hp' : winner !== null ? 'damage' : 'unresolved',
     damage, totalDamage, recoveryFrames, inputHash, finalHash:core.hashState(state) };
 }
 
@@ -117,7 +135,12 @@ export function summarize(core, matches) {
   const frames = matches.map(m => m.frames).sort((a, b) => a - b);
   const rawDraws = matches.filter(m => m.rawWinner === null).length;
   const unresolved = matches.filter(m => m.winner === null).length;
+  const completedRounds = matches.flatMap(m=>m.rounds??[]).filter(r=>r.complete);
   return { matches:matches.length, rawDraws, rawDrawRate:rawDraws / matches.length, unresolved, drawRate:unresolved / matches.length,
+    rounds:{ completed:completedRounds.length, partial:matches.flatMap(m=>m.rounds??[]).filter(r=>!r.complete).length,
+      draws:completedRounds.filter(r=>r.winner===null).length, timerDecisions:completedRounds.filter(r=>r.outcome==='timer').length,
+      wins:[0,1].map(slot=>completedRounds.filter(r=>r.winner===slot).length),
+      meanSeconds:completedRounds.length ? completedRounds.reduce((n,r)=>n+r.frames,0)/completedRounds.length/60 : null },
     timeouts:matches.filter(m => m.rawOutcome === 'timeout').length,
     meanSeconds:frames.reduce((a, b) => a + b, 0) / frames.length / 60,
     medianSeconds:frames.length % 2 ? frames[(frames.length - 1) / 2] / 60 : (frames[frames.length / 2 - 1] + frames[frames.length / 2]) / 120,
@@ -130,7 +153,7 @@ export function summarize(core, matches) {
   };
 }
 
-export async function runTournament(core, { ids = core.PLAYABLE_FIGHTERS, samples = 40, seed = 20261105, maxFrames = 3600, skills = [null], bot = 'cpu', repeats = 1, progress } = {}) {
+export async function runTournament(core, { ids = core.PLAYABLE_FIGHTERS, samples = 40, seed = 20261105, matchDepth = false, maxFrames = matchDepth ? 10800 : 3600, skills = [null], bot = 'cpu', repeats = 1, progress } = {}) {
   assert.ok(ids.length >= 2, 'at least two fighters');
   assert.ok(Number.isSafeInteger(repeats) && repeats > 0, 'positive independent repetition count');
   const schedule = makeSchedule(ids, samples, seed), levels = [];
@@ -142,9 +165,9 @@ export async function runTournament(core, { ids = core.PLAYABLE_FIGHTERS, sample
       for (let repeat = 0; repeat < repeats; repeat++) for (const referenceId of bot === 'reference' ? pair : [null]) {
         const controllers = pair.map(id => id === referenceId ? 'reference' : 'cpu');
         const initialSeeds = matchSeeds(seed, pair, controllers, repeat);
-        const first = playMatch(core, pair, { maxFrames, skill, repeat, initialSeeds, referenceSlot:referenceId === null ? null : pair.indexOf(referenceId) });
+        const first = playMatch(core, pair, { maxFrames, skill, repeat, initialSeeds, matchDepth, referenceSlot:referenceId === null ? null : pair.indexOf(referenceId) });
         const reverseIds = [...pair].reverse();
-        const reverse = playMatch(core, reverseIds, { maxFrames, skill, repeat, initialSeeds:[...initialSeeds].reverse(), referenceSlot:referenceId === null ? null : reverseIds.indexOf(referenceId) });
+        const reverse = playMatch(core, reverseIds, { maxFrames, skill, repeat, initialSeeds:[...initialSeeds].reverse(), matchDepth, referenceSlot:referenceId === null ? null : reverseIds.indexOf(referenceId) });
         resolveSeatPair(first, reverse);
         matches.push(first, reverse);
       }
@@ -153,5 +176,5 @@ export async function runTournament(core, { ids = core.PLAYABLE_FIGHTERS, sample
     levels.push({ skill, summary:summarize(core, matches), matches });
   }
   return { harnessVersion:HARNESS_VERSION, referenceBotVersion:REFERENCE_BOT_VERSION,
-    config:{ seed, samples, maxFrames, skills, bot, repeats, roster:[...ids].sort(), schedule }, levels };
+    config:{ seed, samples, maxFrames, skills, bot, repeats, matchDepth, roster:[...ids].sort(), schedule }, levels };
 }

@@ -26,8 +26,8 @@ export function instrumentCombat(source) {
     + 'export function __balanceRead(){return __balanceEvents.map(e=>({...e}));}\n';
 }
 
-export async function loadBalanceCore() {
-  const source = await bundle('src/core.ts', { plugins: [{
+export async function loadBalanceCore({ entry = 'src/core.ts' } = {}) {
+  const source = await bundle(entry, { plugins: [{
     name: 'headless-balance-observer',
     setup(build) {
       build.onLoad({ filter: /\/src\/(?:sim\/combat|core)\.ts$/ }, args => {

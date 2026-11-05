@@ -11,16 +11,17 @@ import { loadBalanceCore, sourceMetadata } from './lib/balance-core.mjs';
 import { runTournament } from './lib/balance-runner.mjs';
 
 export function parseOptions(args) {
-  const options = { fast:false, seed:20261105, samples:40, maxFrames:3600, skills:[4, 7], bot:'cpu', repeats:1, out:`docs/balance/report-${new Date().toISOString().slice(0, 10)}`, compare:null, gate:false, ids:null };
-  let explicitSamples = false;
+  const options = { fast:false, seed:20261105, samples:40, maxFrames:3600, skills:[4, 7], bot:'cpu', repeats:1, matchDepth:false, out:`docs/balance/report-${new Date().toISOString().slice(0, 10)}`, compare:null, gate:false, ids:null };
+  let explicitSamples = false, explicitMaxFrames = false;
   for (let i = 0; i < args.length; i++) {
     const flag = args[i];
     if (flag === '--fast') options.fast = true;
+    else if (flag === '--match-depth') options.matchDepth = true;
     else if (flag === '--gate') options.gate = true;
     else if (flag === '--seed') options.seed = Number(args[++i]);
     else if (flag === '--samples') { options.samples = Number(args[++i]); explicitSamples = true; }
     else if (flag === '--repeats') options.repeats = Number(args[++i]);
-    else if (flag === '--max-frames') options.maxFrames = Number(args[++i]);
+    else if (flag === '--max-frames') { options.maxFrames = Number(args[++i]); explicitMaxFrames = true; }
     else if (flag === '--skills') options.skills = args[++i]?.split(',').map(Number);
     else if (flag === '--bot') options.bot = args[++i];
     else if (flag === '--out') options.out = args[++i];
@@ -29,6 +30,7 @@ export function parseOptions(args) {
     else throw new Error(`Unknown argument: ${flag}`);
   }
   if (options.fast && !explicitSamples) options.samples = 2;
+  if (options.matchDepth && !explicitMaxFrames) options.maxFrames = 10800;
   assert.ok(Number.isSafeInteger(options.seed) && options.seed >= 0 && options.seed <= 4294967295, '--seed must be uint32');
   for (const key of ['samples', 'maxFrames', 'repeats']) assert.ok(Number.isSafeInteger(options[key]) && options[key] > 0, `${key} must be a positive integer`);
   assert.ok(options.skills?.length && options.skills.every(x => Number.isFinite(x) && x >= 1 && x <= 10), '--skills values must be between 1 and 10');
@@ -47,12 +49,14 @@ export function markdown(report) {
     report.source.cpuHasSkillParameter ? 'The parameterized CPU receives the requested skill for each level.' : 'The current CPU has no skill parameter. Requested levels were collapsed to a single legacy baseline; Normal/Hard balance claims cannot yet be made.', '',
     `Reference controller: ${report.referenceBotVersion}. It is not calibrated as a decent human player. Human feel, human round duration, online hub behavior, and complete matchup coverage are not established by this headless report.`, '',
     'One repetition provides one independent seed pair per matchup, with two paired seats. Small sample matchup extremes cannot establish or disprove the 70/30 population target; use additional repetitions and inspect uncertainty.', ''];
+  if(report.config.matchDepth) lines.push('Optional match depth is enabled: best-of-three rounds continue until the match is complete. The frame cap applies to the whole match. Raw cap exhaustion remains a draw; measurement tie-breaks compare round score before HP and damage. Entrances and between-round presentation are excluded.', '');
   for (const level of report.levels) {
     const s = level.summary;
     lines.push(`## ${level.skill === null ? 'Legacy CPU' : `Skill ${level.skill}`}`, '',
       `${s.matches} bouts; raw draws ${percent(s.rawDrawRate)} (${s.rawDraws}); unresolved ${percent(s.drawRate)} (${s.unresolved}); timeouts ${s.timeouts}. Mean ${s.meanSeconds.toFixed(2)} s; median ${s.medianSeconds.toFixed(2)} s.`, '',
       '| Seat | Measurement wins | Raw wins | Raw draws | Mean recovery |', '| --- | ---: | ---: | ---: | ---: |');
     for (const [seat, stats] of s.seats.entries()) lines.push(`| ${seat + 1} | ${percent(stats.decidedWinRate)} | ${percent(stats.rawDecidedWinRate)} | ${percent(stats.rawDrawRate)} | ${stats.meanRecoverySeconds.toFixed(2)} s |`);
+    if(report.config.matchDepth)lines.push('', `${s.rounds.completed} completed rounds; ${s.rounds.partial} partial rounds at the whole-match cap; ${s.rounds.draws} round draws; ${s.rounds.timerDecisions} timer decisions; mean completed round ${s.rounds.meanSeconds?.toFixed(2)??'n/a'} s.`);
     lines.push('', '| Archetype | Bouts | Measurement wins | Raw wins | Raw draws |', '| --- | ---: | ---: | ---: | ---: |');
     for (const [id, stats] of Object.entries(s.archetypes)) lines.push(`| ${id} | ${stats.matches} | ${percent(stats.decidedWinRate)} | ${percent(stats.rawDecidedWinRate)} | ${percent(stats.rawDrawRate)} |`);
     if (s.controllers.reference) lines.push('', `CPU win rate against the fixed reference bot: ${percent(s.controllers.cpu.decidedWinRate)} measurement-resolved, ${percent(s.controllers.cpu.rawDecidedWinRate)} raw decided.`);

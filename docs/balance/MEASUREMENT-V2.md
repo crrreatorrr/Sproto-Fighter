@@ -11,6 +11,7 @@ legacy CPU without RNG simply repeats identical behavior.
 node scripts/balance-tournament.mjs --fast --repeats 1 --out docs/balance/seeded-fast
 node scripts/balance-tournament.mjs --samples 40 --repeats 20 --skills 4,7 --out docs/balance/seeded-full
 node scripts/difficulty-curve.mjs --repeats 1 --out docs/balance/story-curve
+node scripts/balance-tournament.mjs --fast --match-depth --out docs/balance/optional-match-depth
 ```
 
 One repetition gives one independent CPU seed pair per matchup and controller
@@ -37,3 +38,11 @@ Damage observation wraps the real simulation function inside a headless-only
 bundle. It records actual target HP loss across chip, normal damage, god-mode
 and KO-cap branches. Production simulation files stay unchanged. Effective
 per-move blockstun is used by the nominal frame-data export once available.
+
+`--match-depth` enables the optional best-of-three, timer and combat-depth rules
+when the selected core supports them. The default 10,800-frame cap applies to the
+whole match. Intermediate round results do not stop simulation: each round's
+winner, timer decision, HP and combat-frame duration are recorded separately from
+the final match result. Raw whole-match cap exhaustion remains a draw. The
+measurement tie-break considers round score before remaining HP and damage.
+Entrances and between-round presentation are excluded from measured combat time.
