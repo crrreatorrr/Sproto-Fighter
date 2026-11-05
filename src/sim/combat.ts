@@ -105,14 +105,14 @@ export function throwDirection(input:number,facing:number):ThrowDirection {
 export const isDown = (f:Fighter) => !!f.reaction && f.reaction.phase!=='flight';
 export function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile = false): boolean {
     const a = s.fighters[index], b = s.fighters[1 - index];
-    if (b.hp <= 0 || isDown(b))
+    if (b.hp <= 0 || (kind!=='special'&&isDown(b)))
         return false;
     const hold=s.throwState;
     // A held victim cannot take incidental projectile damage; only release hits.
     if(hold?.phase==='hold' && hold.victim===1-index && kind!=='grab')return false;
     const heldAttacker=!!hold && hold.attacker===1-index;
     const back = b.facing === 1 ? A.left : A.right;
-    const guarding = !heldAttacker && kind !== 'grab' && b.stun === 0 && !b.move && b.dash === 0 && (b.input & back) !== 0 && (!m.low || (b.input & A.down) !== 0) && (!m.air || (b.input & A.down) === 0);
+    const guarding = !heldAttacker && kind !== 'grab' && kind !== 'special' && b.stun === 0 && !b.move && b.dash === 0 && (b.input & back) !== 0 && (!m.low || (b.input & A.down) !== 0) && (!m.air || (b.input & A.down) === 0);
     if (guarding) {
         b.blockstun = 15;
         b.vx = a.facing * m.push * .45;

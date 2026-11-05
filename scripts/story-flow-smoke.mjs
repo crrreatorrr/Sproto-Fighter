@@ -56,6 +56,7 @@ try {
   }
   function dom() {
     const elements=new Map([...(read('index.html')+read('src/selectionMenu.ts')).matchAll(/\bid="([^"]+)"/g)].map(m=>[m[1],new Element()]));
+    elements.set('free-levels',new Element());
     const $=id=>{assert.ok(elements.has(id),'missing #'+id);return elements.get(id);};
     globalThis.document={getElementById:$,createElement:()=>new Element()};
     return {$,pick:i=>$('journey-content').children[0].children[i].onclick(),action:i=>$('journey-actions').children[i].onclick(),escape:()=>$('journey-dialog').events.cancel({preventDefault(){}})};

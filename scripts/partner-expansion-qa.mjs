@@ -64,14 +64,36 @@ for(const [main,partner]of Object.entries(rules.assignments))for(const face of [
  if(x===600){assert.equal(maxCombo,COMBAT_STYLES[main].specialFrames.length,main+' all contacts connect');if(PARTNER_ATTACKS[partner].kind==='frost')assert.ok(maxSlow>0,'frost actually slows a confirmed target');}
  cases++;
 }
-// Low partners require crouch blocking, and their effect cannot apply through guard.
+// Every Team Special connects at long range through either guard.
 for(const main of ['olnoname','vitaliketh'])for(const crouch of [false,true]){
- const s=createState(main,'cpu','rivet'),[f,foe]=s.fighters;f.x=500;foe.x=650;f.pips=3;
+ const s=createState(main,'cpu','rivet'),[f,foe]=s.fighters;f.x=500;foe.x=1180;f.pips=3;
  step(s,[A.special,A.right|(crouch?A.down:0)]);for(let t=0;t<25;t++)step(s,[0,A.right|(crouch?A.down:0)]);
- assert.equal(foe.hp<1000,!crouch,main+' low requires crouch guard');if(crouch)assert.equal(foe.slow,0,'blocked frost does not slow');
+ assert.ok(foe.hp<1000,main+' connects across the arena through guard');
 }
+// Incoming projectiles pass through an active Special, then can hit again after recovery.
+const immune=createState('rivet','cpu','vela'),[caster]=immune.fighters;
+caster.pips=3;
+step(immune,[A.special,0]);
+assert.equal(caster.move?.id,'special');
+const shot={owner:1,x:caster.x,y:caster.y-65,vx:0,vy:0,life:5,damage:60};
+immune.projectiles.push(shot);
+step(immune,[0,0]);
+assert.equal(caster.hp,1000);
+assert.equal(caster.move?.id,'special');
+assert.ok(immune.projectiles.includes(shot),'immune contact does not consume the shot');
+while(caster.move)step(immune,[0,0]);
+immune.projectiles.push({...shot,x:caster.x,y:caster.y-65,life:5});
+step(immune,[0,0]);
+assert.ok(caster.hp<1000,'damage resumes after the Special');
+
+const clash=createState('rivet','versus','rivet');
+for(const fighter of clash.fighters)fighter.pips=3;
+step(clash,[A.special,A.special]);
+for(let i=0;i<90;i++)step(clash,[0,0]);
+assert.deepEqual(clash.fighters.map(fighter=>fighter.hp),[1000,1000],'simultaneous Specials respect both immunity windows');
+
 // Distinct geometry is deterministic; color/name changes alone cannot satisfy this.
 const shapes=new Set();
 for(const id of ids){const log=[],ctx=new Proxy({globalAlpha:1},{get:(o,k)=>k in o?o[k]:(...args)=>log.push([k,...args]),set:(o,k,v)=>(o[k]=v,true)});const a={x:300,y:460,targetX:800,targetY:500,floor:FLOOR,age:2,beat:0,body:0,facing:1};effects.drawPartnerEffect(ctx,PARTNER_ATTACKS[id],a);const first=JSON.stringify(log);log.length=0;effects.drawPartnerEffect(ctx,PARTNER_ATTACKS[id],a);assert.equal(JSON.stringify(log),first,'deterministic drawing');shapes.add(first);}
 assert.equal(shapes.size,13,'each effect has different geometry');
-console.log(`PASS: 10 new single partners + 3 twin pairs; 13 attack geometries and contact profiles; ${cases} facing/wall scenarios; both twin bodies attack (${twinContacts} captured attack frames), exact single-partner loading, low guards, frost slow, meter, damage schedules and render purity.`);
+console.log(`PASS: 10 new single partners + 3 twin pairs; 13 attack geometries and contact profiles; ${cases} facing/wall scenarios; both twin bodies attack (${twinContacts} captured attack frames), exact single-partner loading, long-range hits through guard, frost slow, meter, damage schedules and render purity.`);

@@ -88,7 +88,7 @@ try{
   localStorage.setItem(STORY_SAVE_KEY,JSON.stringify({version:3,cleared:STORY_ENCOUNTERS.slice(0,index).map(e=>e.id),unlocked:['highsproto','bront'],godModeUnlocked:false}));
  });
  await page.reload();await page.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
- await page.locator('#story-worlds').click();await page.locator('#partner-choice').selectOption('bront');await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
+ await page.locator('#story-worlds').click();await page.locator('#partner-picker [data-partner=bront]').click();await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='nick'&&!window.neonRelay.storySnapshot().launching);
  await page.keyboard.press('Enter');await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='intro');
  assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().fighters[0].partner),'bront');

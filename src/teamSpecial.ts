@@ -25,7 +25,7 @@ export function getTeamSpecialAssistPlan(f:Fighter,targetX=f.x+f.facing*240){
   const into=ease((t-beat.start)/Math.max(1,first-beat.start)),out=ease((t-last-10)/retreat);
   const profile=PARTNER_ATTACKS[beat.id];
   const spread=profile?(isPairedFighter(beat.id)?320:200):beat.id==='sproto3181'?180:beat.id==='vaudream'?160:110;
-  const offset=entry.side*(-(spread+140)+into*140-out*220),margin=beat.id==='sproto3181'?160:90;
+  const offset=entry.side*(-(spread+155)+into*115-out*180),margin=beat.id==='sproto3181'?160:90;
   let x=Math.max(margin,Math.min(WIDTH-margin,f.x+f.facing*offset)),y=FLOOR-(beat.id==='vaudream'?85:0);
   if(profile){
    const drive=Math.max(...beat.contacts.map(hit=>t<hit?ease((t-hit+8)/8):1-ease((t-hit)/8)));
@@ -37,12 +37,22 @@ export function getTeamSpecialAssistPlan(f:Fighter,targetX=f.x+f.facing*240){
   const source=beat.id==='vaudream'?{x:x+f.facing*35,y:y-125}:{x:x+f.facing*30,y:y-50};
   let contact=-1;for(let i=0;i<beat.contacts.length;i++)if(t>=beat.contacts[i]&&t<=beat.contacts[i]+9)contact=i;
   const attack=beat.id==='sproto3181'&&contact>=0?(contact%2===0?'yellowStrike':'stomachSlam'):null;
-  return[{...beat,x,y,facing:f.facing,t,opacity:clamp(into*(1-out))*.93,source,attack,impactScale:attack==='stomachSlam'?2.6:.7,
+  return[{...beat,x,y,facing:f.facing,t,opacity:clamp(Math.sqrt(into)*(1-out)),source,attack,impactScale:attack==='stomachSlam'?2.6:.7,
    reach:Math.max(40,(COMBAT_STYLES[f.id].special.range??480)+(f.x-x)*f.facing-30)}];
  });
 }
 export function getTeamSpecialAssistDebug(f:Fighter){return getTeamSpecialAssistPlan(f).find(a=>a.id===fighterPartner(f))??null;}
 export function getTeamSpecialBodyDebug(f:Fighter){const actor=assists.get(f)?.get(fighterPartner(f));return actor?getPartnerAssistBodyPlan(actor):[];}
+function drawAssist(c:CanvasRenderingContext2D,actor:Fighter,s:CombatState,opacity:number){
+ c.save();
+ c.globalAlpha*=opacity;
+ c.translate(actor.x,actor.y);
+ const scale=isPairedFighter(actor.id)?1.08:1.16;
+ c.scale(scale,scale);
+ c.translate(-actor.x,-actor.y);
+ drawSprite(c,actor,s.frame,false,s.freeze>0);
+ c.restore();
+}
 /** Partners share the lead fighter's contact schedule; these effects add no damage. */
 const assistLanes=new WeakMap<Fighter,{attack:Fighter['move'];raised:boolean}>();
 export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
@@ -57,14 +67,14 @@ export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
     const teammate=actorFor(f,a.id);
     Object.assign(teammate,f,{id:a.id,x:a.x,y:a.y,hp:1000,flash:0,stun:0,blockstun:0,reaction:null,vx:0,vy:0,move:{...f.move,t}});
     setPoseAtlasAssistTiming(teammate,a.contacts,a.start);
-    c.save();c.globalAlpha=a.opacity;drawSprite(c,teammate,s.frame,false,s.freeze>0);
+    drawAssist(c,teammate,s,a.opacity);
 
    }
    continue;
   }
   if(t<4||t>65)continue;
   const entry=ease((t-4)/8),exit=ease((t-48)/17);
-  const offset=-250+(entry*160)+(t>=27?ease((t-27)/12)*65:0)-exit*220;
+  const offset=-260+entry*96-exit*150;
   const teammate=actorFor(f,fighterPartner(f));
   let assistX=f.x+f.facing*offset,assistY=FLOOR;
   if(!isPairedFighter(f.id)){
@@ -72,6 +82,15 @@ export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
    const motion=Math.sin(Math.PI*clamp((t-9)/40));
    assistX+=f.facing*motion*((signature%31)-15);
    assistY-=motion*((signature>>>7)%4)*12;
+   let lane=assistLanes.get(f);
+   if(!lane||lane.attack!==f.move){
+    lane={attack:f.move,raised:assistX<95||assistX>WIDTH-95};
+    assistLanes.set(f,lane);
+   }
+   if(lane.raised){
+    assistX=Math.max(95,Math.min(WIDTH-95,f.x-f.facing*65));
+    assistY-=148;
+   }
   }
   if(isPairedFighter(f.id)){
    // Keep the cameo outside the whole paired formation, not inside its rear body.
@@ -85,13 +104,13 @@ export function drawTeamSpecialBack(c:CanvasRenderingContext2D,s:CombatState){
   }
   Object.assign(teammate,f,{id:fighterPartner(f),x:assistX,y:assistY,hp:1000,flash:0,stun:0,blockstun:0,reaction:null,vx:0,vy:0,move:{...f.move,t}});
   setPoseAtlasAssistTiming(teammate,COMBAT_STYLES[f.id].specialFrames);
-  c.save();c.globalAlpha=clamp(entry*(1-exit))*.93;drawSprite(c,teammate,s.frame,false,s.freeze>0);c.restore();
+  drawAssist(c,teammate,s,clamp(Math.sqrt(entry)*(1-exit)));
  }
 }
 export function drawTeamSpecialFront(c:CanvasRenderingContext2D,s:CombatState){
  for(const f of s.fighters){
   if(f.move?.id!=='special')continue;const t=f.move.t,color=ROSTER[f.id].color;
-  const partner=fighterPartner(f),profile=PARTNER_ATTACKS[partner];
+  const partner=fighterPartner(f);
   const style=COMBAT_STYLES[f.id],foe=s.fighters.find(actor=>actor!==f)!;
   const seed=hashText('team-special:'+partner);
   const first=style.specialFrames[0],last=style.specialFrames.at(-1)!;
@@ -99,7 +118,7 @@ export function drawTeamSpecialFront(c:CanvasRenderingContext2D,s:CombatState){
   const direction=seed&1?1:-1,pattern=(seed>>>4)%4;
   const teammate=assists.get(f)?.get(partner);
   const sourceX=(teammate?.x??f.x)+f.facing*26,sourceY=(teammate?.y??f.y)-85;
-  const impactX=profile||f.move.connected?foe.x:f.x+f.facing*Math.min(style.special.range??580,230);
+  const impactX=foe.x;
   const impactY=style.special.low?FLOOR-26:foe.y-74;
   for(const [beat,contact]of style.specialFrames.entries()){
    const age=t-contact;
@@ -115,6 +134,7 @@ export function drawTeamSpecialFront(c:CanvasRenderingContext2D,s:CombatState){
     }
     continue;
    }
+   if(!f.move.connected||foe.move?.id==='special')continue;
    const u=age/12,opacity=(1-u)**1.45;
    drawSpecialSprite(c,(sig+beat)%12,impactX,impactY,66+84*u,direction*(u-.18),opacity);
    for(let spark=0;spark<5;spark++){

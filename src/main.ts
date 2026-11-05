@@ -380,7 +380,7 @@ $('defaults').onclick = () => {
 for (const p of [1, 2] as const) $(`controls-p${p}`).onclick = () => { controlsPlayer = p; remapping = null; updateControls(); };
 $('controls-tabs').onkeydown = e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); controlsPlayer = controlsPlayer === 1 ? 2 : 1; remapping = null; updateControls(); $(`controls-p${controlsPlayer}`).focus(); } };
 window.addEventListener('keydown', e => {
-    if (story.isOpen||(typeof document!=='undefined'&&document.querySelector?.('#partner-picker[open]'))) return;
+    if (story.isOpen||(typeof document!=='undefined'&&document.querySelector?.('#partner-picker:not([hidden])'))) return;
     if (dialog.open) {
         if (remapping?.device === 'key') {
             e.preventDefault();
@@ -448,7 +448,8 @@ canvas.addEventListener('pointerdown', () => canvas.focus());
 function pollPad(): number {
     const pads = navigator.getGamepads?.() || [];
     const pad = Array.from(pads).find(p => p?.connected);
-    const wasSelection=selection.isOpen,wasModal=story.isOpen||dialog.open||!!document.querySelector?.('#partner-picker[open]'),wasOverlay=!running&&!selection.isOpen;
+    const wasSelection=selection.isOpen,wasModal=story.isOpen||dialog.open,wasOverlay=!running&&!selection.isOpen;
+    const wasPartnerOpen=!!document.querySelector?.('#partner-picker:not([hidden])');
     selection.pollPad(pad??null);
     if (!pad) {
         if (!online) $('device').textContent = 'KEYBOARD READY';
@@ -457,6 +458,13 @@ function pollPad(): number {
     }
     if (!online) $('device').textContent = 'CONTROLLER CONNECTED';
     const buttons = pad.buttons.map(b => b.pressed ? 1 : 0);
+    if(document.querySelector?.('#partner-picker:not([hidden])')){
+        if(wasPartnerOpen)partnerPicker.pollPad(pad,buttons,previousPad);
+        previousPad=buttons;
+        previousStart=!!buttons[9];
+        padNeedsRelease=true;
+        return 0;
+    }
     let boundPadThisFrame=false;
     // Remapping listens to the remapped player's own controller: player 2's is
     // the second one connected (falling back to the first if there is only one).
@@ -469,29 +477,23 @@ function pollPad(): number {
         if (index >= 0 && index !== 9){bind(index);boundPadThisFrame=true;}
     }
     previousPad2 = secondButtons;
-    if(wasModal&&(story.isOpen||dialog.open||!!document.querySelector?.('#partner-picker[open]'))&&!remapping&&!boundPadThisFrame){
+    if(wasModal&&(story.isOpen||dialog.open)&&!remapping&&!boundPadThisFrame){
         const activeDialog=document.querySelector<HTMLDialogElement>('dialog[open]')!;
         const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
         const now=performance.now();
         if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
             const controls=Array.from(activeDialog.querySelectorAll<HTMLElement>('button:not(:disabled), select, input')).filter(el=>el.offsetParent!==null);
             const active=document.activeElement as HTMLElement;
-            if(activeDialog.id==='partner-picker'&&active.tagName==='SELECT'&&(buttons[14]||buttons[15]||Math.abs(pad.axes[0])>.55)){
-                const select=active as HTMLSelectElement;
-                select.selectedIndex=(select.selectedIndex+(direction==='previous'?-1:1)+select.length)%select.length;
-            }else{
-                const index=controls.indexOf(active);controls[(index+(direction==='previous'?-1:1)+controls.length)%controls.length]?.focus();
-            }
+            const index=controls.indexOf(active);controls[(index+(direction==='previous'?-1:1)+controls.length)%controls.length]?.focus();
             modalRepeatAt=now+(direction===modalDirection?160:360);
         }
         modalDirection=direction;
         if(buttons[1]&&!previousPad[1])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
         else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLElement){
             if(document.activeElement.matches('button,input[type=checkbox]'))document.activeElement.click();
-            else if(activeDialog.id==='partner-picker'&&document.activeElement.matches('select'))$('partner-confirm').click();
         }
     }else if(!wasOverlay)modalDirection='';
-    if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen&&!document.querySelector?.('#partner-picker[open]')){
+    if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen&&!document.querySelector?.('#partner-picker:not([hidden])')){
         const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
         const now=performance.now();
         if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
