@@ -7,6 +7,11 @@ import type { CombatState } from './types';
 
 export const CPU_SKILLS = [1, 4, 7, 10] as const;
 export const CPU_SKILL_VERSION = 3;
+/** Provisional offensive habit read; defense anchors and decision shares stay fixed. */
+export const CPU_OFFENSIVE_READ = {
+    minimumAttacks: 3, maximumLowShare: .10, maximumProjectileShare: .20,
+    defaultLowShare: .25, highGroundLowShare: .65,
+} as const;
 export const CPU_DIFFICULTIES = [
     { name: 'Easy', skill: 1 }, { name: 'Normal', skill: 4 },
     { name: 'Hard', skill: 7 }, { name: 'Expert', skill: 10 },
@@ -97,7 +102,13 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     const jabEnd = 1 - grabChance;
     if (grounded(f) && memory.choice >= forecastGuardShare && memory.choice <= jabEnd) {
         const variant = (memory.choice - forecastGuardShare) / (jabEnd - forecastGuardShare);
-        jabInput = variant < .25 ? A.down | A.light : A.light;
+        // Only queued observations can establish this read. Newly changed
+        // attacks, projectiles or airborne state must wait the visual delay.
+        const highGround = seen.y >= FLOOR && seen.attacks >= CPU_OFFENSIVE_READ.minimumAttacks
+            && seen.lows / seen.attacks < CPU_OFFENSIVE_READ.maximumLowShare
+            && seen.projectiles / seen.attacks < CPU_OFFENSIVE_READ.maximumProjectileShare;
+        const lowShare = highGround ? CPU_OFFENSIVE_READ.highGroundLowShare : CPU_OFFENSIVE_READ.defaultLowShare;
+        jabInput = variant < lowShare ? A.down | A.light : A.light;
     }
     // Pick the variant before spacing. A selected grounded low owns its real
     // reach; an unrelated low plan must not change an active combo's movement.
