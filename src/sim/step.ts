@@ -52,6 +52,13 @@ export function step(s: CombatState, inputs: [
     s.effects = s.effects.filter(e => --e.life > 0);
     if (s.noticeLife > 0)
         s.noticeLife--;
+    // Resolve the tactile tech before either seat can buffer an input. Otherwise
+    // a slot-0 victim would free slot 1 early enough to queue an attack, while
+    // the mirrored slot-1 victim would not free slot 0 until its input was lost.
+    let brokeThrow = false;
+    for (let i = 0; i < 2; i++) {
+        if ((inputs[i] & ~s.fighters[i].prev & A.grab) && breakThrow(s, i)) { brokeThrow = true; break; }
+    }
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
         f.input = inputs[i];
@@ -59,7 +66,7 @@ export function step(s: CombatState, inputs: [
         const runInput=((f.input&A.right)?1:0)-((f.input&A.left)?1:0);
         if (!(f.input&A.dash) || runInput!==f.runDirection || (f.input&(A.up|A.down))) f.runDirection=0;
         const pressed = f.input & ~f.prev;
-        if ((pressed & A.grab) && breakThrow(s, i)) { f.prev = f.input; continue; }
+        if (brokeThrow) { f.prev = f.input; continue; }
         if(s.throwState && ((i===s.throwState.attacker && (s.throwState.phase==='hold'||s.throwState.t<THROW_RECOVERY_FRAMES-6)) || (s.throwState.phase==='hold'&&i===s.throwState.victim))){
             f.buffer=0;f.bufferLife=0;f.jumpBuffer=0;f.jumpDelay=0;f.dashBuffer=0;f.prev=f.input;continue;
         }

@@ -96,6 +96,20 @@ describe('defensive decisions', () => {
         const late = hold(); late.throwState!.t = 7; step(late, [0, A.grab]); expect(late.throwState?.phase).toBe('hold');
         const held = hold(); held.fighters[1].prev = A.grab; step(held, [0, A.grab]); expect(held.throwState?.phase).toBe('hold');
     });
+    it('discards both catch inputs symmetrically when either seat breaks', () => {
+        for (const victim of [0, 1]) {
+            const s = fresh(), attacker = 1 - victim, f = s.fighters[attacker];
+            f.move = { id: 'grab', t: 6, hit: false, connected: false, wave: -1 };
+            beginThrow(s, attacker);
+            const inputs: [number, number] = [0, 0];
+            inputs[victim] = A.grab; inputs[attacker] = A.light;
+            step(s, inputs);
+            expect(s.throwState).toBeNull();
+            expect(s.fighters.map(x => x.buffer)).toEqual([0, 0]);
+            for (let i = 0; i < 13; i++) step(s, [0, 0]);
+            expect(s.fighters.map(x => x.move)).toEqual([null, null]);
+        }
+    });
     it('grants exactly three strike-protected simulation ticks on rise', () => {
         const s = fresh(), b = s.fighters[1];
         b.reaction = { kind: 'knockdown', phase: 'rise', t: GETUP_FRAMES - 1, direction: 1 };
