@@ -27,7 +27,7 @@ for(const face of [-1,1])for(const air of [false,true])for(const direction of [0
 for(const face of [-1,1])for(const blocked of [false,true]){
  const s=createState('vitaliketh','cpu','rivet'),f=s.fighters[0],b=s.fighters[1];f.x=600;f.facing=face;b.x=600+face*280;b.facing=-face;const away=face===1?A.right:A.left;
  step(s,[A.bolt,blocked?away:0]);for(let t=0;t<100;t++)step(s,[0,blocked?away:0]);
- assert.equal(b.hp,blocked?1000:946);assert.equal(f.move,null);assert.equal(s.projectiles.length,0);assert.equal(f.pips,0);
+ assert.equal(b.hp,1000-(blocked?Math.round(getMove(f,'bolt').damage*.12):getMove(f,'bolt').damage));assert.equal(f.move,null);assert.equal(s.projectiles.length,0);assert.equal(f.pips,0);
 }
 globalThis.Image=class{set src(value){this.srcValue=value;const b=readFileSync(new URL('../public'+value,import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);this.complete=true;queueMicrotask(()=>this.onload());}};
 const art=await load('src/powerArt.ts');await art.ensurePowerArt();

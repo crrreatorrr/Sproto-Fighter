@@ -26,14 +26,14 @@ for(const facing of [-1,1])for(const air of [false,true])for(const direction of 
 }
 for(const facing of [-1,1])for(const guard of [false,true]){
  const s=createState('sproto2616','dummy','rivet'),[a,b]=s.fighters;a.x=600;b.x=600+facing*260;a.facing=facing;b.facing=-facing;const back=facing===1?A.right:A.left;
- step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(b.hp,guard?1000:942,'one sun gives one 58HP hit; guard blocks it');
+ step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(b.hp,1000-(guard?Math.round(58*.12):58),'one sun gives one 58HP hit; guard blocks it');
 }
 for(const facing of [-1,1]){
- const s=createState('sproto2616','dummy','rivet'),[a,b]=s.fighters;a.x=600;b.x=600+facing*260;a.facing=facing;b.facing=-facing;step(s,[A.bolt,A.down]);tick(s,65,0,A.down);assert.equal(b.hp,1000,'crouching ducks the level sun');
+ const s=createState('sproto2616','dummy','rivet'),[a,b]=s.fighters;a.x=600;b.x=600+facing*260;a.facing=facing;b.facing=-facing;step(s,[A.bolt,A.down]);tick(s,65,0,A.down);assert.equal(b.hp,1000-getMove(a,'bolt').damage,'level staff shot intersects the crouched hurtbox; guard is required');
 }
 await poses.ensurePoseAtlases(['sproto2616','rivet']);
 const s=createState('sproto2616','dummy','rivet');s.fighters[1].x=1200;step(s,[A.bolt,0]);tick(s,21);const debug=poses.getPoseAtlasDebug(s.fighters[0],s.frame);assert.equal(debug.sequence,'cast');assert.equal(debug.frameIndex,2,'staff casting follow-through stays visible while the sun clears its tip');
 const calls=[],angles=[];const c={save(){},restore(){},rotate(angle){angles.push(angle);},fillRect(x,y,w,h){calls.push({x,y,w,h,color:this.fillStyle});}};
 art.drawPower(c,'sun',0,'#60aaff');assert.ok(calls.some(r=>r.color==='#ffdf36'));assert.ok(calls.some(r=>r.color==='#ffc52e'));assert.ok(calls.some(r=>r.x>25)&&calls.some(r=>r.x<-25),'rays surround the solar disc');art.drawPower(c,'sun',7,'#60aaff');assert.notEqual(angles[0],angles[1],'rays turn in flight');
 const f=createState('sproto2616','dummy','rivet').fighters[0];assert.equal(getMove(f,'bolt').startup,20);assert.equal(getMove(f,'bolt').damage,58);assert.equal(getMove(f,'bolt').recovery,26);
-console.log(`PASS: ${cases} sun ground/air/facing/aim cases; staff-tip emission, four hit/block outcomes, crouch evasion, rotating rays and casting follow-through.`);
+console.log(`PASS: ${cases} sun ground/air/facing/aim cases; staff-tip emission, four hit/block outcomes, crouched-hurtbox contact, rotating rays and casting follow-through.`);

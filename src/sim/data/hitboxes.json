@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "provenance": "Authored world-unit rectangles based on the existing simulation ranges. These are provisional gameplay geometry, not measured sprite contact hulls. No sprite pixels are read by the simulation.",
+  "body": { "halfWidth": 25, "standingHeight": 145, "crouchHeight": 87, "airHeight": 130, "airBottom": 12, "recoveryExtension": 42 },
+  "moves": {
+    "light": { "forward": [0, 82], "height": [92, 126], "blockstun": 11, "blockPush": 0.45, "chip": 0 },
+    "medium": { "forward": [0, 112], "height": [50, 118], "blockstun": 14, "blockPush": 0.5, "chip": 0 },
+    "heavy": { "forward": [0, 135], "height": [65, 138], "blockstun": 18, "blockPush": 0.6, "chip": 0.12 },
+    "low": { "forward": [0, 95], "height": [10, 42], "blockstun": 10, "blockPush": 0.4, "chip": 0 },
+    "sweep": { "forward": [0, 135], "height": [5, 34], "blockstun": 17, "blockPush": 0.6, "chip": 0.12 },
+    "airLight": { "forward": [0, 86], "height": [45, 100], "blockstun": 11, "blockPush": 0.4, "chip": 0 },
+    "airMedium": { "forward": [0, 113], "height": [35, 110], "blockstun": 14, "blockPush": 0.5, "chip": 0 },
+    "airHeavy": { "forward": [0, 139], "height": [20, 100], "blockstun": 18, "blockPush": 0.6, "chip": 0.12 },
+    "launcher": { "forward": [0, 102], "height": [35, 190], "blockstun": 16, "blockPush": 0.5, "chip": 0 },
+    "bolt": { "forward": [0, 0], "height": [0, 0], "blockstun": 13, "blockPush": 0.55, "chip": 0.12 },
+    "grab": { "forward": [0, 72], "height": [35, 115], "blockstun": 0, "blockPush": 0, "chip": 0 },
+    "special": { "forward": [-22, 680], "height": [0, 200], "blockstun": 18, "blockPush": 0.5, "chip": 0.12 }
+  },
+  "aims": {
+    "up": { "height": [35, 235] },
+    "upForward": { "height": [15, 200] },
+    "downAir": { "height": [-100, 65] }
+  },
+  "projectile": { "halfWidth": 9, "halfHeight": 10, "retainerHalfWidth": 28, "beamHalfHeight": 6 }
+}

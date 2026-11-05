@@ -32,7 +32,7 @@ for(const [id,shape]of [['sproto2531','miniSproto'],['sproto3106','referenceB']]
  for(const face of [-1,1])for(const guard of [false,true]){
   const s=createState(id,'cpu','rivet'),f=s.fighters[0];f.x=600;s.fighters[1].x=600+face*260;f.facing=face;s.fighters[1].facing=-face;
   const back=face===1?A.right:A.left;step(s,[A.bolt,guard?back:0]);tick(s,90,0,guard?back:0);
-  assert.equal(s.fighters[1].hp,guard?1000:1000-getMove(f,'bolt').damage,id+' one projectile, one hit; guard blocks');
+  assert.equal(s.fighters[1].hp,1000-(guard?Math.round(getMove(f,'bolt').damage*.12):getMove(f,'bolt').damage),id+' one projectile, one hit; guard blocks');
   assert.equal(s.projectiles.length,0);assert.equal(f.pips,0);assert.equal(f.move,null);
  }
 }

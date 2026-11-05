@@ -1,5 +1,6 @@
 // Deterministic math, state checksum and the per-frame step.
-import { act, beginThrow, clamp, damage, effect, finishCombo, getMove, grounded, isDown, updateThrow } from './combat';
+import { act, beginThrow, breakThrow, clamp, damage, effect, finishCombo, getMove, grounded, isDown, updateThrow } from './combat';
+import { clashProjectiles, getHitbox, getHurtbox, getProjectileHitbox, rectanglesOverlap } from './geometry';
 import { A, FLOOR, GRAVITY, WIDTH } from './constants';
 import { BACK_THROW_LIFT_FRAMES, COMBAT_STYLES, CROUCH_SPIT_ORIGINS, GETUP_FRAMES, KNOCKDOWN_FRAMES, MOVES, Move, MoveId, ROSTER, THROW_RECOVERY_FRAMES, bodySpread, fighterWall, isCrouchingSpit, isHorizontalSpit, isPairedFighter, isPracticeMode } from './roster';
 import { CombatState, Fighter } from './types';
@@ -57,10 +58,11 @@ export function step(s: CombatState, inputs: [
         // Release cancels a run even during hitstop; it must not reappear on thaw.
         const runInput=((f.input&A.right)?1:0)-((f.input&A.left)?1:0);
         if (!(f.input&A.dash) || runInput!==f.runDirection || (f.input&(A.up|A.down))) f.runDirection=0;
+        const pressed = f.input & ~f.prev;
+        if ((pressed & A.grab) && breakThrow(s, i)) { f.prev = f.input; continue; }
         if(s.throwState && ((i===s.throwState.attacker && (s.throwState.phase==='hold'||s.throwState.t<THROW_RECOVERY_FRAMES-6)) || (s.throwState.phase==='hold'&&i===s.throwState.victim))){
             f.buffer=0;f.bufferLife=0;f.jumpBuffer=0;f.jumpDelay=0;f.dashBuffer=0;f.prev=f.input;continue;
         }
-        const pressed = f.input & ~f.prev;
         if(pressed&A.dash){
             // Vertical+dash is not stored as a surprise dash after the vertical
             // direction is released. Up retains jump/chord priority; Down crouches.
@@ -87,12 +89,13 @@ export function step(s: CombatState, inputs: [
         const f = s.fighters[i], other = s.fighters[1 - i];
         if(f.slow>0)f.slow--;
         if(f.throwInvuln>0)f.throwInvuln--;
+        if(f.strikeInvuln>0)f.strikeInvuln--;
         if(f.reaction){
             f.reaction.t++;
             if(f.reaction.kind==='knockdown'){
                 if(f.reaction.phase==='flight')f.stun=Math.max(f.stun,2);
                 else if(f.reaction.phase==='down'&&f.reaction.t>=(f.riseDelay||KNOCKDOWN_FRAMES)){f.reaction.phase='rise';f.reaction.t=0;f.stun=GETUP_FRAMES+1;}
-                else if(f.reaction.phase==='rise'&&f.reaction.t>=GETUP_FRAMES){f.reaction=null;f.riseDelay=0;f.stun=0;f.throwInvuln=Math.max(f.throwInvuln,12);}
+                else if(f.reaction.phase==='rise'&&f.reaction.t>=GETUP_FRAMES){f.reaction=null;f.riseDelay=0;f.stun=0;f.throwInvuln=Math.max(f.throwInvuln,12);f.strikeInvuln=Math.max(f.strikeInvuln,3);}
             }else if(f.stun<=1)f.reaction=null;
         }
         if (f.flash > 0)
@@ -203,6 +206,9 @@ export function step(s: CombatState, inputs: [
     }
     // Collect active melee hits before applying them, so same-frame strikes can trade.
     const specialImmune=s.fighters.map(f=>f.move?.id==='special');
+    // Both active phases advance together. Capture both exposed hurtboxes before
+    // collecting strikes so a startup boundary cannot favor the later seat.
+    const meleeHurtboxes = s.fighters.map(f => getHurtbox(f, f.move ? getMove(f, f.move.id) : undefined, f.move ? f.move.t + 1 : 0));
     const hits: {
         i: number;
         m: Move;
@@ -253,14 +259,9 @@ export function step(s: CombatState, inputs: [
                 attack.wave = wave;
             }
         }
-        const ahead = (other.x - f.x) * f.facing-bodySpread(other.id);
-        const crouched = (other.input & A.down) && grounded(other);
-        const dy=other.y-f.y;
-        const vertical = attack.id === 'special' ? true : attack.id === 'grab' ? !s.throwState && grounded(f) && grounded(other) && other.stun === 0 && other.blockstun === 0 && other.throwInvuln===0 : attack.aim==='upForward' ? Math.abs(dy+10+Math.max(0,ahead)*.65)<65 : attack.aim==='up' ? dy>-190&&dy<45 : attack.aim==='down'&&!grounded(f) ? dy>-25&&dy<165 : Math.abs(dy)<85;
-        // Specials keep their arena-wide vertical coverage and caster immunity,
-        // but their archetype's horizontal reach is now a real commitment.
-        const specialReach=Math.abs(other.x-f.x)-bodySpread(other.id)<m.range;
-        if (!endingKO && !specialImmune[1-i] && active && !m.projectile && (attack.id==='special' ? specialReach : (!isDown(other) && ahead >= -22 && ahead < m.range && vertical && !(crouched && m.air && grounded(f))))) {
+        const contact = rectanglesOverlap(getHitbox(f, attack.id, m), meleeHurtboxes[1-i]);
+        const throwable = attack.id !== 'grab' || (!s.throwState && grounded(f) && grounded(other) && other.stun === 0 && other.blockstun === 0 && other.throwInvuln === 0);
+        if (!endingKO && !specialImmune[1-i] && active && !m.projectile && (attack.id === 'special' || !isDown(other)) && throwable && contact && (attack.id === 'grab' || other.strikeInvuln === 0)) {
             attack.hit = true;
             attack.connected = true;
             hits.push({ i, m, id: attack.id });
@@ -294,17 +295,13 @@ export function step(s: CombatState, inputs: [
         if((p.bounces??0)>0&&p.y>=FLOOR-20){p.y=FLOOR-20;p.vy=-Math.max(3,Math.abs(p.vy)*.75);p.bounces!--;}
         else if(p.ground&&p.y>FLOOR-20){p.y=FLOOR-20;p.vy=0;}
         p.life--;
+    }
+    clashProjectiles(s.projectiles);
+    for (const p of s.projectiles) {
+        if (p.life <= 0 || p.beamHit) continue;
         const target = s.fighters[1 - p.owner];
-        const crouching = (target.input & A.down) && grounded(target);
-        // Eye beams meet the standing head; crouching still ducks the high shot.
-        const crouchedSpitTarget=crouching && isHorizontalSpit(s.fighters[p.owner].id);
-        const targetHeight=crouchedSpitTarget?60:crouching?30:(p.shape==='eyeLaser'||p.beamLength)?135:65;
-        const targetRadius=crouchedSpitTarget?32:crouching?25:(p.shape==='eyeLaser'||p.beamLength)?40:50;
-        const ahead=(target.x-p.x)*(p.beamDirection??1),radius=34+bodySpread(target.id);
-        const horizontalContact=p.beamLength
-            ? !p.beamHit&&ahead+radius>=0&&ahead-radius<=p.beamLength
-            : Math.abs(p.x-target.x)<(p.shape==='retain'?53:34)+bodySpread(target.id);
-        if (!endingKO && !specialImmune[1-p.owner] && !isDown(target) && horizontalContact && Math.abs(p.y - (target.y - targetHeight)) < targetRadius) {
+        const targetMove = target.move ? getMove(target, target.move.id) : undefined;
+        if (!endingKO && !specialImmune[1-p.owner] && !isDown(target) && target.strikeInvuln === 0 && rectanglesOverlap(getProjectileHitbox(p), getHurtbox(target, targetMove))) {
             damage(s, p.owner, { ...getMove(s.fighters[p.owner],'bolt'), damage: p.damage }, 'bolt', true);
             if(p.beamLength)p.beamHit=true;else p.life=0;
         }

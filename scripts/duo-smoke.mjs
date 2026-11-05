@@ -74,7 +74,7 @@ check('contact geometry matches each facing-specific front body, including forma
 check('back throw keeps the catching body through release even when attacker facing flips',()=>{
  for(const face of [1,-1]){const s=fresh(face),f=s.fighters[0];step(s,[A.grab|(face===1?A.left:A.right),0]);let hold=false,released=false;
   for(let t=0;t<65;t++){setPoseAtlasThrowState(s.throwState,s.fighters);const d=getDuoPoseDebug(f,s.frame);if(s.throwState?.phase==='hold'){hold=true;assert.equal(d[face===1?1:0].slot,26);assert.equal(d[face===1?0:1].slot,25);}if(s.throwState?.phase==='release'&&s.throwState.t<6){released=true;assert.equal(f.facing,-face);assert.equal(d[face===1?1:0].slot,28);assert.equal(d[face===1?0:1].slot,25);}step(s,[0,0]);}
-  assert.ok(hold&&released);assert.equal(s.fighters[1].hp,885);
+  assert.ok(hold&&released);assert.equal(s.fighters[1].hp,910);
  }
 });
 check('intro and floor defeat reach both entity clips only for the actual scene actor',()=>{

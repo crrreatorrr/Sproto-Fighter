@@ -35,7 +35,7 @@ for(const face of [-1,1])for(const direction of [0,A.up,A.down,face===1?A.left:A
  const s=createState('michael','cpu','rivet'),f=s.fighters[0];f.x=600;s.fighters[1].x=600+face*60;f.facing=face;s.fighters[1].facing=-face;
  step(s,[A.grab|direction,0]);let held=false;
  for(let t=0;t<180;t++){held||=s.throwState?.phase==='hold';step(s,[0,0]);for(const f of s.fighters)assert.ok([f.x,f.y,f.hp,f.vx,f.vy].every(Number.isFinite));}
- assert.ok(held,'Michael D. Sproto - Chad Dev throw catches');assert.equal(s.throwState,null);assert.equal(s.fighters[1].hp,885);
+ assert.ok(held,'Michael D. Sproto - Chad Dev throw catches');assert.equal(s.throwState,null);assert.equal(s.fighters[1].hp,910);
 }
 const s=createState('michael','cpu','rivet'),f=s.fighters[0];f.pips=3;s.fighters[1].x=480;step(s,[A.special,0]);let combo=0;
 for(let t=0;t<220;t++){combo=Math.max(combo,f.combo);step(s,[0,0]);}
@@ -52,7 +52,7 @@ for(const face of [-1,1])for(const air of [false,true])for(const direction of [0
 }
 for(const face of [-1,1])for(const guard of [false,true]){
  const s=createState('michael','cpu','rivet');s.fighters[0].x=600;s.fighters[1].x=600+face*260;s.fighters[0].facing=face;s.fighters[1].facing=-face;const back=face===1?A.right:A.left;
- step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(s.fighters[1].hp,guard?1000:1000-COMBAT_STYLES.michael.bolt.damage);
+ step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(s.fighters[1].hp,1000-(guard?Math.round(COMBAT_STYLES.michael.bolt.damage*.12):COMBAT_STYLES.michael.bolt.damage));
 }
 const art=await import(url(compile('../src/powerArt.ts')));await art.ensurePowerArt();
 const draws=[],widths=[],angles=[];const c={save(){},restore(){},translate(){},rotate(a){angles.push(a);},scale(x,y){widths.push(x);},drawImage(image,x,y,w,h){draws.push({image,x,y,w,h});}};

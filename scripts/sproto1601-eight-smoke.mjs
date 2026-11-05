@@ -26,7 +26,7 @@ for(const facing of [-1,1])for(const air of [false,true])for(const direction of 
 }
 for(const facing of [-1,1])for(const guard of [false,true]){
  const s=createState('sproto1601','dummy','rivet'),[a,b]=s.fighters;a.x=600;b.x=600+facing*260;a.facing=facing;b.facing=-facing;const back=facing===1?A.right:A.left;
- step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(b.hp,guard?1000:952,'one thrown 8 gives one normalized 48HP hit; guard blocks it');
+ step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(b.hp,1000-(guard?Math.round(getMove(a,'bolt').damage*.12):getMove(a,'bolt').damage),'one thrown 8 gives one normalized hit; guard blocks it');
 }
 for(const facing of [-1,1]){
  const s=createState('sproto1601','dummy','rivet'),[a,b]=s.fighters;a.x=600;b.x=600+facing*260;a.facing=facing;b.facing=-facing;step(s,[A.bolt,A.down]);tick(s,65,0,A.down);assert.equal(b.hp,1000,'crouching ducks the level throw');

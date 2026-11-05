@@ -25,6 +25,7 @@ export interface Fighter {
     slow: number;
     reaction:HitReaction|null;
     throwInvuln:number;
+    strikeInvuln:number;
     stun: number;
     blockstun: number;
     move: Attack | null;
@@ -89,6 +90,8 @@ export interface CombatState {
     freeze: number;
     mode: Mode;
     godMode?: boolean;
+    /** Chip is nonlethal by default, including Story. Optional harder rules may enable it. */
+    chipKO?: boolean;
     winner: number | null;
     notice: string;
     noticeLife: number;

@@ -71,7 +71,7 @@ for (const [id, name, role, anchorY] of FIGHTERS) {
       for (const x of s.fighters) assert.ok([x.x, x.y, x.hp, x.vx, x.vy].every(Number.isFinite), at('finite throw state'));
     }
     assert.ok(held, at('throw catches')); assert.equal(s.throwState, null, at('throw clears'));
-    assert.equal(s.fighters[1].hp, 885, at('throw damage'));
+    assert.equal(s.fighters[1].hp, 910, at('throw damage'));
   }
 
   const s = createState(id, 'cpu', 'rivet'), f = s.fighters[0];

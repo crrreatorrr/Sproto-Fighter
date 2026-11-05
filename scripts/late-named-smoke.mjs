@@ -33,7 +33,7 @@ for(const info of plan){
  for(const action of ['light','medium','heavy','launcher','bolt']){const s=createState(id,'cpu','rivet');s.fighters[1].x=1200;step(s,[A[action],0]);assert.equal(s.fighters[0].move?.id,action);tick(s,110);assert.equal(s.fighters[0].move,null);}
  for(const facing of [-1,1])for(const direction of [0,A.up,A.down,facing===1?A.left:A.right]){
   const s=createState(id,'cpu','rivet'),[a,b]=s.fighters;a.x=600;b.x=600+facing*60;a.facing=facing;b.facing=-facing;step(s,[A.grab|direction,0]);let held=false;
-  for(let n=0;n<180;n++){held||=s.throwState?.phase==='hold';step(s,[0,0]);for(const f of s.fighters)assert.ok([f.x,f.y,f.hp,f.vx,f.vy].every(Number.isFinite));}assert.ok(held);assert.equal(b.hp,885);assert.equal(s.throwState,null);throws++;
+  for(let n=0;n<180;n++){held||=s.throwState?.phase==='hold';step(s,[0,0]);for(const f of s.fighters)assert.ok([f.x,f.y,f.hp,f.vx,f.vy].every(Number.isFinite));}assert.ok(held);assert.equal(b.hp,910);assert.equal(s.throwState,null);throws++;
  }
  for(const facing of [-1,1])for(const air of [false,true])for(const direction of [0,A.up,A.down,A.left,A.right,A.up|A.left,A.up|A.right,A.down|A.left,A.down|A.right]){
   const s=createState(id,'cpu','rivet'),[a,b]=s.fighters;a.x=600;b.x=facing===1?1200:80;a.facing=facing;b.facing=-facing;if(air){a.y=FLOOR-250;a.vy=-4;}
@@ -44,7 +44,7 @@ for(const info of plan){
    step(s,[0,0]);
   }assert.ok(shot);assert.equal(seen.size,8);assert.equal(a.move,null);casts++;
  }
- for(const facing of [-1,1])for(const guard of [false,true]){const s=createState(id,'cpu','rivet'),[a,b]=s.fighters;a.x=600;b.x=600+facing*260;a.facing=facing;b.facing=-facing;const back=facing===1?A.right:A.left;step(s,[A.bolt,guard?back:0]);tick(s,70,0,guard?back:0);assert.equal(b.hp,guard?1000:1000-getMove(a,'bolt').damage,id+' single hit or block');}
+ for(const facing of [-1,1])for(const guard of [false,true]){const s=createState(id,'cpu','rivet'),[a,b]=s.fighters;a.x=600;b.x=600+facing*260;a.facing=facing;b.facing=-facing;const back=facing===1?A.right:A.left;step(s,[A.bolt,guard?back:0]);tick(s,70,0,guard?back:0);assert.equal(b.hp,1000-(guard?Math.round(getMove(a,'bolt').damage*.12):getMove(a,'bolt').damage),id+' single hit or block');}
  const s=createState(id,'cpu','rivet'),a=s.fighters[0];a.pips=3;s.fighters[1].x=480;step(s,[A.special,0]);let combo=0;for(let n=0;n<220;n++){combo=Math.max(combo,a.combo);step(s,[0,0]);}assert.equal(combo,4);assert.equal(a.pips,0);assert.equal(a.move,null);
  console.log('PASS:',info.name,'104-frame contract, distinct entrance8/spit8/death16 playback, both-facing movement, attacks, throws and four-contact special.');
 }

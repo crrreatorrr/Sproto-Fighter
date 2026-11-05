@@ -5,7 +5,9 @@ import { CombatState, Effect, Fighter } from './types';
 import { createCpuMemory } from './cpuState';
 import { BALANCE_KITS } from './roster';
 import { specialContactDamage } from './balance';
-export const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, reaction:null, throwInvuln:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, runDirection:0, riseDelay:0, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
+import { HITBOX_DATA } from './geometry';
+export const THROW_BREAK_FRAMES = 7;
+export const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, reaction:null, throwInvuln:0, strikeInvuln:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, runDirection:0, riseDelay:0, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
 export function createState(id: PlayableFighterId = 'rivet', mode: Mode = 'cpu', opponent?: PlayableFighterId): CombatState { if (!PLAYABLE_FIGHTERS.includes(id) || (opponent && !PLAYABLE_FIGHTERS.includes(opponent)))
     throw new Error('Unknown roster selection.'); return { cpu:[createCpuMemory(104729),createCpuMemory(130363)], throwState:null, frame: 0, fighters: [makeFighter(id, 380, 1), makeFighter(opponent ?? (id === 'rivet' ? 'vela' : 'rivet'), 900, -1)], projectiles: [], effects: [], freeze: 0, mode, winner: null, notice: 'LIGHT → MEDIUM → FINISHER', noticeLife: 220 }; }
 export const grounded = (f: Fighter) => f.y >= FLOOR;
@@ -43,6 +45,23 @@ export function interruptThrow(s:CombatState):void {
     }
     if(a.move?.id==='grab')a.move=null;
     s.throwState=null;
+}
+/** A fresh grab press during the first seven catch ticks breaks without damage. */
+export function breakThrow(s: CombatState, slot: number): boolean {
+    const hold = s.throwState;
+    if (!hold || hold.phase !== 'hold' || hold.victim !== slot || hold.t >= THROW_BREAK_FRAMES) return false;
+    const a = s.fighters[hold.attacker], b = s.fighters[hold.victim];
+    for (const f of [a, b]) {
+        f.move = null; f.stun = 10; f.blockstun = 0; f.dash = 0;
+        f.buffer = 0; f.bufferLife = 0; f.jumpBuffer = 0; f.dashBuffer = 0;
+        f.throwInvuln = Math.max(f.throwInvuln, 20); f.reaction = null;
+    }
+    a.vx = -hold.facing * 7; b.vx = hold.facing * 7;
+    s.throwState = null;
+    s.freeze = Math.max(s.freeze, 3);
+    effect(s, (a.x + b.x) / 2, Math.min(a.y, b.y) - 70, 'block', '#85c8ff');
+    s.notice = 'THROW BREAK'; s.noticeLife = 60;
+    return true;
 }
 export function positionHeldVictim(s:CombatState):void {
     const hold=s.throwState;if(!hold||hold.phase!=='hold')return;
@@ -108,17 +127,19 @@ export function throwDirection(input:number,facing:number):ThrowDirection {
 export const isDown = (f:Fighter) => !!f.reaction && f.reaction.phase!=='flight';
 export function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile = false): boolean {
     const a = s.fighters[index], b = s.fighters[1 - index];
-    if (b.hp <= 0 || (kind!=='special'&&isDown(b)))
+    if (b.hp <= 0 || (kind !== 'grab' && b.strikeInvuln > 0) || (kind!=='special'&&isDown(b)))
         return false;
     const hold=s.throwState;
     // A held victim cannot take incidental projectile damage; only release hits.
     if(hold?.phase==='hold' && hold.victim===1-index && kind!=='grab')return false;
     const heldAttacker=!!hold && hold.attacker===1-index;
     const back = b.facing === 1 ? A.left : A.right;
-    const guarding = !heldAttacker && kind !== 'grab' && kind !== 'special' && b.stun === 0 && !b.move && b.dash === 0 && (b.input & back) !== 0 && (!m.low || (b.input & A.down) !== 0) && (!m.air || (b.input & A.down) === 0);
+    const guarding = !heldAttacker && kind !== 'grab' && b.stun === 0 && !b.move && b.dash === 0 && (b.input & back) !== 0 && (!m.low || (b.input & A.down) !== 0) && (!m.air || (b.input & A.down) === 0);
     if (guarding) {
-        b.blockstun = 15;
-        b.vx = a.facing * m.push * .45;
+        b.blockstun = m.blockstun ?? HITBOX_DATA.moves[kind].blockstun;
+        b.vx = a.facing * m.push * (m.blockPush ?? HITBOX_DATA.moves[kind].blockPush);
+        const chip = Math.round(m.damage * (m.chip ?? HITBOX_DATA.moves[kind].chip));
+        if (!(s.godMode && index === 1)) b.hp = Math.max(s.chipKO ? 0 : 1, b.hp - chip);
         effect(s, b.x, b.y - 65, 'block', '#85c8ff');
         s.freeze = Math.max(s.freeze, 3);
         return false;
@@ -212,7 +233,7 @@ export function getMove(f: Fighter, id: MoveId): Move {
  }
  // Melee originates at the front member. The shared root stays between both.
  if(isPairedFighter(f.id)&&!m.projectile&&id!=='special')m.range+=bodySpread(f.id);
- return {...m, startup:Math.max(3,m.startup), active:Math.max(2,m.active), recovery:Math.max(6,m.recovery)};
+ return {...m, startup:Math.max(3,m.startup), active:Math.max(2,m.active), recovery:Math.max(6,m.recovery), blockstun:HITBOX_DATA.moves[id].blockstun, blockPush:HITBOX_DATA.moves[id].blockPush, chip:HITBOX_DATA.moves[id].chip};
 }
 export function act(s: CombatState, f: Fighter) {
     if (f.hp<=0 || s.fighters.some(other=>other.hp<=0) || f.stun || f.blockstun || (s.throwState && (s.fighters[s.throwState.attacker]===f || (s.throwState.phase==='hold'&&s.fighters[s.throwState.victim]===f))))
