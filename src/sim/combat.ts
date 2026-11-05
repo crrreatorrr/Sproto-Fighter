@@ -1,3 +1,4 @@
+import { grantMeter } from './matchRules';
 // State creation, effects, combos, throws, damage and move selection.
 import { A, FLOOR, GRAVITY, WIDTH } from './constants';
 import { fighterPartner, AttackAim, COMBAT_STYLES, FighterId, MOVES, Mode, Move, MoveId, PARTNER_ATTACKS, PLAYABLE_FIGHTERS, PlayableFighterId, ROSTER, THROW_CATCH_FRAMES, THROW_HOLD_FRAMES, THROW_RECOVERY_FRAMES, ThrowDirection, bodySpread, fighterWall, getThrowGrip, isHorizontalSpit, isPairedFighter, partnerContactIndex } from './roster';
@@ -18,7 +19,7 @@ export function finishCombo(s: CombatState, attacker: Fighter) {
         return;
     attacker.best = Math.max(attacker.best, attacker.combo);
     if (attacker.combo >= 3 && attacker.lastFinisher && attacker.chargeEligible) {
-        attacker.pips = Math.min(3, attacker.pips + 1);
+        grantMeter(s, s.fighters.indexOf(attacker), 10000);
         effect(s, attacker.x, attacker.y - 130, 'charge', ROSTER[attacker.id].color);
         // Against the CPU only the human (slot 0) gets coaching notices; in local versus both do.
         const slot = s.fighters.indexOf(attacker);
@@ -127,6 +128,7 @@ export function throwDirection(input:number,facing:number):ThrowDirection {
 export const isDown = (f:Fighter) => !!f.reaction && f.reaction.phase!=='flight';
 export function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile = false): boolean {
     const a = s.fighters[index], b = s.fighters[1 - index];
+    if (s.matchDepth && s.matchDepth.juggles[1-index] >= 8 && !grounded(b)) return false;
     if (b.hp <= 0 || (kind !== 'grab' && b.strikeInvuln > 0) || (kind!=='special'&&isDown(b)))
         return false;
     const hold=s.throwState;
@@ -136,18 +138,28 @@ export function damage(s: CombatState, index: number, m: Move, kind: MoveId, pro
     const back = b.facing === 1 ? A.left : A.right;
     const guarding = !heldAttacker && kind !== 'grab' && b.stun === 0 && !b.move && b.dash === 0 && (b.input & back) !== 0 && (!m.low || (b.input & A.down) !== 0) && (!m.air || (b.input & A.down) === 0);
     if (guarding) {
-        b.blockstun = m.blockstun ?? HITBOX_DATA.moves[kind].blockstun;
+        const justDefend = !!s.matchDepth && s.frame - s.matchDepth.backPressed[1-index] <= 3;
+        const normalBlockstun = m.blockstun ?? HITBOX_DATA.moves[kind].blockstun;
+        b.blockstun = justDefend ? Math.ceil(normalBlockstun / 2) : normalBlockstun;
         b.vx = a.facing * m.push * (m.blockPush ?? HITBOX_DATA.moves[kind].blockPush);
         const chip = Math.round(m.damage * (m.chip ?? HITBOX_DATA.moves[kind].chip));
+        const chipHpBefore = b.hp;
         if (!(s.godMode && index === 1)) b.hp = Math.max(s.chipKO ? 0 : 1, b.hp - chip);
-        effect(s, b.x, b.y - 65, 'block', '#85c8ff');
+        if (s.matchDepth) grantMeter(s, 1-index, (justDefend ? 800 : 300) + (chipHpBefore - b.hp) * 15);
+        effect(s, b.x, b.y - 65, 'block', justDefend ? '#fff3ad' : '#85c8ff');
         s.freeze = Math.max(s.freeze, 3);
         return false;
     }
     if(heldAttacker)interruptThrow(s);
-    const scaling = Math.max(.45, 1 - a.combo * .08), amount = Math.round(m.damage * scaling);
+    const counterHit = !!s.matchDepth && !!b.move && b.move.t < getMove(b, b.move.id).startup;
+    const scaling = Math.max(.45, 1 - a.combo * .08), amount = Math.round(m.damage * scaling * (counterHit ? 1.25 : 1));
+    const beforeHp = b.hp;
     b.hp = Math.max(0, b.hp - (s.godMode && index === 1 ? 0 : amount));
-    b.stun = m.stun;
+    if (s.matchDepth) {
+        grantMeter(s, 1-index, (beforeHp - b.hp) * 15);
+        if (!grounded(b)) s.matchDepth.juggles[1-index]++;
+    }
+    b.stun = m.stun + (counterHit ? 6 : 0);
     b.blockstun = 0;
     b.move = null;
     b.dash = 0;
@@ -174,7 +186,9 @@ export function damage(s: CombatState, index: number, m: Move, kind: MoveId, pro
       if(kind==='special'&&power==='slam'&&a.move?.wave===COMBAT_STYLES[a.id].specialFrames.length-1)b.vy=16;
     }
     const finalSpecial=kind==='special' && a.move?.wave===COMBAT_STYLES[a.id].specialFrames.length-1;
-    const hard=!!m.finisher||finalSpecial||b.hp===0||b.reaction?.kind==='knockdown';
+    const juggleEnd=!!s.matchDepth && s.matchDepth.juggles[1-index]>=8;
+    if(juggleEnd){b.vy=10;b.stun=Math.max(b.stun,20);}
+    const hard=juggleEnd||!!m.finisher||finalSpecial||b.hp===0||b.reaction?.kind==='knockdown';
     if(hard && grounded(b) && !m.launch){
         b.y=FLOOR-1;b.vy=kind==='sweep'?-5:kind==='airHeavy'?6:-8;
     }
@@ -191,7 +205,7 @@ export function damage(s: CombatState, index: number, m: Move, kind: MoveId, pro
         a.move.connected = true;
         a.move.hitConfirmed = true;
     }
-    effect(s, b.x - a.facing * 18, b.y - 65, kind === 'special' ? 'special' : 'hit', ROSTER[a.id].color);
+    effect(s, b.x - a.facing * 18, b.y - 65, kind === 'special' ? 'special' : 'hit', counterHit ? '#ff8844' : ROSTER[a.id].color);
     const hitstop = finalSpecial ? 12 : kind === 'heavy' || kind === 'airHeavy' || kind === 'sweep' ? 9 : kind === 'medium' || kind === 'airMedium' ? 6 : 4;
     s.freeze = Math.max(s.freeze, hitstop);
     return true;

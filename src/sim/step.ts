@@ -1,3 +1,4 @@
+import { matchGravity, matchInput, nextMatchRound, tickMatchDepth } from './matchRules';
 // Deterministic math, state checksum and the per-frame step.
 import { act, beginThrow, breakThrow, clamp, damage, effect, finishCombo, getMove, grounded, isDown, updateThrow } from './combat';
 import { clashProjectiles, getHitbox, getHurtbox, getProjectileHitbox, rectanglesOverlap } from './geometry';
@@ -42,8 +43,9 @@ export function step(s: CombatState, inputs: [
     number,
     number
 ]): void {
-    if (s.winner !== null)
+    if (s.winner !== null && !nextMatchRound(s))
         return;
+    inputs = [matchInput(s, inputs[0]), matchInput(s, inputs[1])];
     if(s.godMode){s.fighters[0].hp=1000;s.fighters[0].pips=3;}
     const endingKO=s.fighters.some(f=>f.hp<=0);
     if(endingKO)inputs=[0,0];
@@ -67,6 +69,12 @@ export function step(s: CombatState, inputs: [
         if (!(f.input&A.dash) || runInput!==f.runDirection || (f.input&(A.up|A.down))) f.runDirection=0;
         const pressed = f.input & ~f.prev;
         if (brokeThrow) { f.prev = f.input; continue; }
+        if (s.matchDepth) {
+            const back = f.facing === 1 ? A.left : A.right;
+            if ((f.input & back) && !(f.prev & back)) s.matchDepth.backPressed[i] = s.frame;
+            if (grounded(f) && !f.stun) s.matchDepth.juggles[i] = 0;
+            if (s.matchDepth.modifier === 'specials-only') f.pips = 3;
+        }
         if(s.throwState && ((i===s.throwState.attacker && (s.throwState.phase==='hold'||s.throwState.t<THROW_RECOVERY_FRAMES-6)) || (s.throwState.phase==='hold'&&i===s.throwState.victim))){
             f.buffer=0;f.bufferLife=0;f.jumpBuffer=0;f.jumpDelay=0;f.dashBuffer=0;f.prev=f.input;continue;
         }
@@ -161,7 +169,7 @@ export function step(s: CombatState, inputs: [
         f.x = clamp(nextX, fighterWall(f.id), WIDTH - fighterWall(f.id));
         if(nextX!==f.x){f.vx=0;f.dash=0;f.dashBuffer=0;f.runDirection=0;}
         if (!grounded(f) || f.vy < 0) {
-            f.vy += GRAVITY;
+            f.vy += matchGravity(s);
             f.y += f.vy;
             if (f.y >= FLOOR) {
                 f.y = FLOOR;
@@ -309,6 +317,9 @@ export function step(s: CombatState, inputs: [
         const target = s.fighters[1 - p.owner];
         const targetMove = target.move ? getMove(target, target.move.id) : undefined;
         if (!endingKO && !specialImmune[1-p.owner] && !isDown(target) && target.strikeInvuln === 0 && rectanglesOverlap(getProjectileHitbox(p), getHurtbox(target, targetMove))) {
+            if(s.matchDepth?.modifier==='reflect-projectiles' && (target.input & (target.facing===1?A.left:A.right)) && !p.beamLength){
+                p.owner=1-p.owner;p.vx=-p.vx;p.vy=-p.vy;p.x=target.x+target.facing*(bodySpread(target.id)+40);continue;
+            }
             damage(s, p.owner, { ...getMove(s.fighters[p.owner],'bolt'), damage: p.damage }, 'bolt', true);
             if(p.beamLength)p.beamHit=true;else p.life=0;
         }
@@ -332,6 +343,7 @@ export function step(s: CombatState, inputs: [
         s.winner = a.hp === b.hp ? 2 : a.hp > b.hp ? 0 : 1;
         s.throwState=null;
     }
+    tickMatchDepth(s);
     if(s.godMode){a.hp=1000;a.pips=3;}
     if (isPracticeMode(s.mode) && b.stun === 0 && a.combo === 0 && s.frame % 90 === 0)
         b.hp = 1000;

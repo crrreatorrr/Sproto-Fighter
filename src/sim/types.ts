@@ -1,3 +1,4 @@
+import type { MatchDepth } from './matchRules';
 // Simulation state types.
 import { AttackAim, FighterId, HitReaction, Mode, MoveId, ThrowDirection, ThrowState } from './roster';
 export interface Attack {
@@ -79,6 +80,7 @@ export interface Projectile {
 export interface CombatState {
     /** Advanced by step for both seats, never by cpuInput. Included in snapshots/replays. */
     cpu?: [CpuMemory, CpuMemory];
+    matchDepth?: MatchDepth;
     throwState: ThrowState | null;
     frame: number;
     fighters: [

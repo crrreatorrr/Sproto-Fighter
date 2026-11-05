@@ -224,7 +224,12 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     if(portal)return;
     health(c, s.fighters[0], false, s.mode,undefined,recovery);
     health(c, s.fighters[1], true, s.mode,bossTitle);
-    text(c, 'ROUND 01', 640, 116, 9, '#b9cbdc', 'center');
+    text(c, s.matchDepth ? 'ROUND '+s.matchDepth.round : 'ROUND 01', 640, 116, 9, '#b9cbdc', 'center');
+    if(s.matchDepth){
+        text(c, String(Math.ceil(s.matchDepth.remaining/60)),640,96,28,'#fff3ad','center');
+        text(c, s.matchDepth.wins[0]+' — '+s.matchDepth.wins[1],640,136,13,'#eaf0f7','center');
+        if(s.matchDepth.modifier!=='none')text(c,s.matchDepth.modifier.replaceAll('-',' ').toUpperCase(),640,153,8,'#fff3ad','center');
+    }
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
         if(f.move && f.move.t>0){

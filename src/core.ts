@@ -18,3 +18,6 @@ export type { AttackAim, CombatStyle, FighterId, HitReaction, Mode, MoveId, Part
 export type { Attack, CombatState, Effect, Fighter, Projectile } from './sim/types';
 export { saveState, loadState } from './sim/snapshot';
 export type { Snapshot } from './sim/snapshot';
+
+export { enableMatchDepth, nextMatchRound, chapterBossModifier } from './sim/matchRules';
+export type { MatchDepth, MatchModifier } from './sim/matchRules';

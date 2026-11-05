@@ -225,6 +225,7 @@ try {
       let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};
       let matchCpuSkill=4,matchDifficultyAssist=false;
       let mode='guard',running=false,started=false,chosen='highsproto',opponent='vela',matchGodMode=false,matchEarnedGodMode=false,testingGodMode=false,matchTesting=false;
+      const depthEnabled=false,depthModifier='none',depthRoundStarts=[];let matchDepthOptions=null;
       let state=createState(),presentation=createRoundPresentation(),accumulator=0,queued=0,qaSingleStep=false,resumeAfterSettings=false,remapping=null;
       let selectedStage='ranch',selectedLocation=null,assetFailure=false,mapChoose=null;
       const held=new Set(),frames=[],qaEvents=[],assetRequests=[],versusCalls=[];
