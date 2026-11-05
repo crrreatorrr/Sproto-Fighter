@@ -1,0 +1,247 @@
+{
+  "source": {
+    "commit": "e95741f75c1a9f7f58d8b4643aa9bbdd9b1ee612",
+    "sourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+    "simVersion": "373448bdc043a0e8",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9"
+  },
+  "rosterSha256": "a35ca46eb03c3e9bbd95453281b397a908449f8137036443f6c09646ac484f14",
+  "defaults": {
+    "push": 4,
+    "stun": 28,
+    "launch": 0,
+    "low": false
+  },
+  "genericDefaultLeadCount": 241,
+  "partners": {
+    "sproto313": {
+      "name": "FOUR-EYE PINBALL",
+      "kind": "prism",
+      "motion": "hover",
+      "color": "#6bf5ff",
+      "hits": [
+        {
+          "push": 5,
+          "stun": 32
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto1414": {
+      "name": "BLUE GEYSER",
+      "kind": "geyser",
+      "motion": "rise",
+      "color": "#378dff",
+      "hits": [
+        {
+          "push": 2,
+          "stun": 34,
+          "launch": 6
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto2884": {
+      "name": "CAP COMET",
+      "kind": "comet",
+      "motion": "orbit",
+      "color": "#ffe55b",
+      "hits": [
+        {
+          "push": 8,
+          "stun": 30
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto215": {
+      "name": "RED-EYE VORTEX",
+      "kind": "vortex",
+      "motion": "hover",
+      "color": "#fa587f",
+      "hits": [
+        {
+          "push": -5,
+          "stun": 36
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto102": {
+      "name": "SHOULDER BLITZ",
+      "kind": "blitz",
+      "motion": "rush",
+      "color": "#ffaf4c",
+      "hits": [
+        {
+          "push": 11,
+          "stun": 29
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto834": {
+      "name": "CRIMSON DIVE",
+      "kind": "dive",
+      "motion": "dive",
+      "color": "#ff416b",
+      "hits": [
+        {
+          "push": 3,
+          "stun": 33,
+          "launch": 4
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto1815": {
+      "name": "HOOKED REAPER",
+      "kind": "halberd",
+      "motion": "sweep",
+      "color": "#ff4747",
+      "hits": [
+        {
+          "push": -3,
+          "stun": 35,
+          "low": true
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto1601": {
+      "name": "LUCKY EIGHT RAIN",
+      "kind": "eights",
+      "motion": "throw",
+      "color": "#ffe45a",
+      "hits": [
+        {
+          "push": 4,
+          "stun": 31
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto2789": {
+      "name": "STORMSTAFF",
+      "kind": "storm",
+      "motion": "rise",
+      "color": "#c791ff",
+      "hits": [
+        {
+          "push": 1,
+          "stun": 39,
+          "launch": 5
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto818": {
+      "name": "FROST ECHO",
+      "kind": "frost",
+      "motion": "pulse",
+      "color": "#9cecff",
+      "hits": [
+        {
+          "push": 0,
+          "stun": 42,
+          "low": true
+        }
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto282": {
+      "name": "RED / BLUE CROSSFIRE",
+      "kind": "crossfire",
+      "motion": "paired",
+      "color": "#f77294",
+      "hits": [
+        {
+          "push": 7,
+          "stun": 32
+        },
+        {
+          "push": -2,
+          "stun": 35
+        }
+      ],
+      "bodyAttacks": [
+        "Red fan shot",
+        "Blue ground zigzag"
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto2075": {
+      "name": "SKY / QUAKE",
+      "kind": "quakeDive",
+      "motion": "paired",
+      "color": "#ffe368",
+      "hits": [
+        {
+          "push": 2,
+          "stun": 34,
+          "launch": 7
+        },
+        {
+          "push": 10,
+          "stun": 37,
+          "low": true,
+          "launch": -9
+        }
+      ],
+      "bodyAttacks": [
+        "Small Sproto sky dive",
+        "Large Sproto earthquake stomp"
+      ],
+      "defaultLeadCount": 1
+    },
+    "sproto704": {
+      "name": "BOULDER / BOOMERANG",
+      "kind": "boomerang",
+      "motion": "paired",
+      "color": "#7be7c1",
+      "hits": [
+        {
+          "push": 13,
+          "stun": 30
+        },
+        {
+          "push": -4,
+          "stun": 38
+        }
+      ],
+      "bodyAttacks": [
+        "Large Sproto boulder throw",
+        "Small Sproto returning boomerang"
+      ],
+      "defaultLeadCount": 1
+    }
+  },
+  "declaredStylePowerCounts": {
+    "none": 241,
+    "slam": 3,
+    "pull": 4,
+    "launch": 3,
+    "drain": 2,
+    "slow": 1
+  },
+  "specialAdvanceCounts": {
+    "0": 14,
+    "1": 164,
+    "2": 70,
+    "3": 2,
+    "4": 1,
+    "5": 1,
+    "6": 1,
+    "8": 1
+  },
+  "runtimeRules": {
+    "frost": "Selected partner kind frost applies 90slow frames on a confirmed Special hit; does not stack with another90-frame slow.",
+    "casterSlow": "Legacy caster power slow applies 90slow frames on confirmed Special hits.",
+    "casterDrain": "Legacy caster power drain heals rounded 20% of per-contact damage on confirmed Special hits, capped at 1000 HP.",
+    "casterFinalPull": "Legacy caster power pull sets final Special victim horizontal velocity 18 times facing.",
+    "casterFinalSlam": "Legacy caster power slam sets final Special victim vertical velocity 16.",
+    "projectileEligibility": "Only the existing two legacy caster identities receive their style slow/drain effect on projectiles; declared tags alone do not imply generic projectile effects.",
+    "specialInvulnerability": "An active Special move protects its caster throughout the move; own advance and selected partner contact effects are not in the scalar budget."
+  },
+  "limits": "Metadata inventory, not empirical utility prices. Selected partner effects may alter stun, knockdown, low guard, push/pull and slow without changing the normalized nominal 285 damage. No fighter values, geometry, artwork or partner assignments changed."
+}
