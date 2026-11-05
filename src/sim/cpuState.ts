@@ -2,7 +2,7 @@ import type { CombatState, CpuMemory } from './types';
 
 /** Fixed seeds are part of match state, so snapshots and input-only replays agree. */
 export const createCpuMemory = (seed: number): CpuMemory => ({
-    seed, intent: 'approach', nextDecision: 0, decisionAt: -1, choice: 0,
+    seed, combatTicks: 0, intent: 'approach', nextDecision: 0, decisionAt: -1, choice: 0,
     attackKey: '', attackRoll: 1, lowRoll: 1, jumpRoll: 1, throwKey: -1, throwRoll: 1,
     combo: 0, comboRoll: 1, airborne: false, observations: [],
     habits: { attacks: 0, lows: 0, jumps: 0, projectiles: 0 },

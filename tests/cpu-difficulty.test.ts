@@ -89,6 +89,54 @@ describe('seeded CPU controller', () => {
         memory.habits.attacks=100;memory.habits.lows=100;
         expect(cpuInput(state,0,4)).toBe(A.right);
     });
+    it('keeps unobserved projectile habits out of zoning intent', () => {
+        const state=createState('rivet','cpu','vela');
+        for(let frame=0;frame<35;frame++)step(state,[0,0]);
+        const memory=state.cpu![0];
+        memory.habits.attacks=100;memory.habits.projectiles=100;
+        expect(memory.observations.every(observation=>observation.projectiles===0)).toBe(true);
+        step(state,[0,0]);expect(memory.intent).toBe('approach');
+    });
+    it('reserves seeded Expert decisions for guard, jab pressure and throw reads', () => {
+        const original=neutralRead(66),choices=new Set<string>();
+        for(let seed=1;seed<=32;seed++){
+            const state=structuredClone(original),memory=state.cpu![0];
+            memory.seed=seed*104729+1;memory.nextDecision=state.frame;
+            step(state,[0,0]);
+            const input=cpuInput(state,0,10);
+            choices.add(input&A.grab?'throw':input&A.light?'jab':input&A.left?'guard':'other');
+        }
+        expect(choices.has('guard')).toBe(true);expect(choices.has('jab')).toBe(true);expect(choices.has('throw')).toBe(true);
+    });
+    it('does not project an observed attack through frozen frames', () => {
+        const state=neutralRead();state.freeze=9;
+        for(const observation of state.cpu![0].observations){
+            observation.move='heavy';observation.age=3;observation.startup=10;observation.active=6;observation.recovery=30;
+            observation.combatTick=state.cpu![0].combatTicks;observation.attackRoll=0;
+        }
+        const before=state.cpu![0].combatTicks;
+        for(let frame=0;frame<9;frame++)step(state,[0,0]);
+        expect(state.cpu![0].combatTicks).toBe(before);
+        state.cpu![0].choice=.1;state.cpu![0].decisionAt=state.frame;
+        expect(cpuInput(state,0,4)).toBe(A.left);
+    });
+    it('replays unfrozen commitment counters without controller reads through hitstop', () => {
+        const played=createState('rivet','versus','vela');played.freeze=12;
+        const replay=structuredClone(played);
+        for(let frame=0;frame<24;frame++){
+            const pair:[number,number]=[cpuInput(played,0,4),cpuInput(played,1,10)];
+            step(played,pair);step(replay,pair);expect(hashState(replay)).toBe(hashState(played));
+        }
+        expect(played.cpu![0].combatTicks).toBe(12);
+    });
+    it('does not count a fresh throw-tech hitstop frame as gameplay progression', () => {
+        const state=createState('rivet','versus','vela');
+        state.throwState={attacker:0,victim:1,phase:'hold',t:3,facing:1} as any;
+        step(state,[0,A.grab]);expect(state.throwState).toBeNull();
+        expect(state.cpu![0].combatTicks).toBe(0);
+        step(state,[0,0]);step(state,[0,0]);expect(state.cpu![0].combatTicks).toBe(0);
+        step(state,[0,0]);expect(state.cpu![0].combatTicks).toBe(1);
+    });
     it('buffers a tactile punish at guard recovery, not during the committed part of blockstun', () => {
         const state=neutralRead();state.fighters[0].blockstun=8;
         expect(cpuInput(state,0,4)&A.light).toBe(0);

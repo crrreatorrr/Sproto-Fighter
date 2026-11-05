@@ -1,5 +1,10 @@
 # Phase 4 follow-up: proactive defense and pressure
 
+**Historical candidate:** this document and its four linked before/after reports
+record commit `bb0452eab` (simulation `462b87f2f3e19a3e`). They do not describe later
+controller revisions. See [the review follow-up](CPU-CALIBRATION-REVIEW-20261105.md)
+for the current candidate and its separately generated checkpoint.
+
 This is a separate review candidate. It does not replace the previously validated
 integration stack or establish the gameplay plan's human difficulty targets.
 

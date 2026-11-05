@@ -100,6 +100,9 @@ export function step(s: CombatState, inputs: [
             f.prev = f.input;
         return;
     }
+    // Inputs can begin hitstop (for example a throw break). Advance known
+    // commitment only after that early return, with the same ticks as physics.
+    for (const memory of s.cpu!) memory.combatTicks++;
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i], other = s.fighters[1 - i];
         if(f.slow>0)f.slow--;
