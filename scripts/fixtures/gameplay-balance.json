@@ -1,5 +1,5 @@
 {
-  "note": "Reviewed CPU V3 without tracking: only Footwork light commitment/damage and Zoning light reach change; no Brawler/Weapon light buffs; actual action-ready safety budget.",
+  "note": "Candidate I from selected F: only Brawler and Paired nearest-body light range become 86; movement, damage, Counter, projectile geometry and identity caps are unchanged.",
   "fighters": {
     "aaron": {
       "roster": {
@@ -198,7 +198,7 @@
     "Brawler": {
       "speed": 5.2,
       "jump": 15.48,
-      "lightRange": 80,
+      "lightRange": 86,
       "lightDamage": 40,
       "lightStartup": 5,
       "heavyRange": 135,
@@ -232,7 +232,7 @@
     "Paired": {
       "speed": 5.6,
       "jump": 15.48,
-      "lightRange": 82,
+      "lightRange": 86,
       "lightDamage": 38,
       "lightStartup": 5,
       "heavyRange": 135,
