@@ -127,6 +127,11 @@ describe('seeded learned instant-ray anticipation',()=>{
         expect(cpuInput(s,1,4)).toBe(A.right|A.down);
         s.cpu![1].choice=.9;expect(cpuInput(s,1,4)).not.toBe(A.right|A.down);
     });
+    it('does not add a habit reroll after a visible attack failed its published guard roll',()=>{
+        const s=learned();
+        for(const o of s.cpu![1].observations)Object.assign(o,{move:'bolt',attackRoll:.9});
+        expect(cpuInput(s,1,4)).not.toBe(A.right|A.down);
+    });
     it('does not extend instantaneous-ray anticipation to ordinary shots or unreachable rays',()=>{
         const s=learned();s.fighters[1].x=1000;expect(cpuInput(s,1,4)).not.toBe(A.right|A.down);
         s.fighters[1].x=500;s.fighters[0].id='vela';expect(cpuInput(s,1,4)).not.toBe(A.right|A.down);

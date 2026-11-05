@@ -164,7 +164,7 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     // reserve the existing seeded forecast guard share for that possible lane.
     // This is an anticipatory read, not information about a fresh hidden cast.
     const ray = COMBAT_STYLES[current.id].projectile.beamLength;
-    if (ray && BALANCE_KITS[current.id].moves.bolt.startup <= tuning.reaction &&
+    if (!seen.move && ray && BALANCE_KITS[current.id].moves.bolt.startup <= tuning.reaction &&
         seen.projectiles > 0 && seen.projectiles > seen.attacks / 2 && memory.choice < forecastGuardShare) {
         const forecast = cpuProjectileThreat({ ...seen, move: 'bolt', age: 0,
             startup: BALANCE_KITS[current.id].moves.bolt.startup, combatTick: memory.combatTicks },
