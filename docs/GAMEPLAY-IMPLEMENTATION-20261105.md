@@ -5,7 +5,11 @@ are not complete. The reviewed CPU fixes are integrated, and further controlled
 role/controller calibration is underway. Nothing has been merged or deployed.
 
 Current simulation: `373448bdc043a0e8`, production source SHA-256
-`6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4`.
+`e3c3f0637ebe2f45ec8fe484b4a745da8720dbdcfd49435a03cd2acf82a84663`.
+The selected-ground-jab low-variety correction is now integrated. It changes
+only pure input selection, so regeneration preserves replay compatibility
+`373448bdc043a0e8`. Quantitative tables below remain the frozen earlier input
+policy, source `6dbb1f97…`; new final-policy measurements are pending.
 The matching [hub draft #59](https://github.com/crrreatorrr/metaverse-hub/pull/59)
 is refreshed to that version. Production/live parity is not claimed: before
 this work Fighter main expected `af94139cc59e4dfd` and hub main `dc3a64b592b94faf`.
@@ -106,11 +110,12 @@ The reviewed CPU checkpoint passes typecheck, build, 159 unit tests and all 68
 fast standalone checks when the two browser checks are rerun with system
 Chromium. The initial fast command passed 66/68 and failed only to launch those
 browsers because the Chromium path was absent. Both targeted reruns pass.
-The later training-readout correction passes typecheck and all 172 unit tests;
+The later training-readout correction passed typecheck and all 172 unit tests;
 its real-step probes check +7 light hit, -5 light block and -12 heavy block.
 Movement, knockdown, throw, Special and future-projectile contexts show no
 numeric advantage rather than misleading stun arithmetic. It does not predict
-cancels or combo routes.
+cancels or combo routes. The subsequent low-choice correction passed 40 focused
+tests and the full 192-test unit suite; final outcome measurements follow selection.
 
 Node/Chromium agree at 130 checkpoints over 11 scenarios. Three-engine
 [determinism CI](https://github.com/crrreatorrr/Sproto-Fighter/actions/runs/41969600478)
