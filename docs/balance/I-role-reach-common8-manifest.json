@@ -1,0 +1,62 @@
+{
+  "candidateSource": {
+    "commit": "efb5829c1230dac84337ba0212d92a84a527563b",
+    "sourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+    "simVersion": "a4c7ddde49ec5a64",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "baselineSource": {
+    "commit": "7b1ab9d19eef10f30bf9b701b2130d8b2d302ed0",
+    "sourceSha256": "058d8215776d1db035c948b42cd224684e705f35ddc46fcb2841dd4b8e7ea495",
+    "simVersion": "c662aee33095a523",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "files": {
+    "report-2026-11-05-I-role-reach-common8.json.gz": {
+      "rawSha256": "85e17d980a3ebc7f0b4c360915108179374395428810468229cae6f77957cc46",
+      "compressedSha256": "5ea6d7ee083b6a8c2887291b7077a4dca1cfebfaf293aafbd577ad51affade91",
+      "rawBytes": 22762334,
+      "compressedBytes": 1217267
+    },
+    "comparison-2026-11-05-I-role-reach-common8-vs-F.json.gz": {
+      "rawSha256": "c8b2c5b10bde2ee0d260ac80d309e849f3cc05161b8b7b9838527c6d2ad9a4ed",
+      "compressedSha256": "f6fab6aa3a5a75c52a48ad48201f4ddea7a9234d528b32073b1a94432a82507d",
+      "rawBytes": 1013987,
+      "compressedBytes": 91645
+    }
+  },
+  "scope": "Diagnostic only; 16104 bouts, no full-17 I expansion or promotion",
+  "pairedKeysVerified": true,
+  "expansion": {
+    "pilotFile": "/tmp/report-I-role-reach-quick.json",
+    "pilotSha256": "6e51807579597a2962c253f9bb7b931e047f14f7361291546f7d041e6126ecbe",
+    "pilotSource": {
+      "commit": "efb5829c1230dac84337ba0212d92a84a527563b",
+      "sourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+      "simVersion": "a4c7ddde49ec5a64",
+      "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+      "cpuHasSkillParameter": true
+    },
+    "helperSha256": "06a15847cfd5644ad3eb52be7e71c4cb574c0e030644dc71d40a0f9cec6187e2",
+    "command": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node /tmp/expand-sproto-panel.mjs /tmp/report-I-role-reach-quick.json /workspace/Sproto-Balance-I 8 /tmp/report-I-role-reach-common8",
+    "method": "Only missing pair/repetition streams simulated; original pilot records retained byte-equivalently after JSON parse; source/harness/version guards and atomic checkpoints",
+    "levels": [
+      {
+        "skill": 4,
+        "pilotBouts": 2032,
+        "checkpointReusedBouts": 0,
+        "newlySimulatedBouts": 6020,
+        "finalBouts": 8052
+      },
+      {
+        "skill": 7,
+        "pilotBouts": 2032,
+        "checkpointReusedBouts": 0,
+        "newlySimulatedBouts": 6020,
+        "finalBouts": 8052
+      }
+    ]
+  }
+}
