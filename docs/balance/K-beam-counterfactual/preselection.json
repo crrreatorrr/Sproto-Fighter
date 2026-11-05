@@ -1,0 +1,145 @@
+{
+  "protocol": "Existing beam leads versus first and floor(N/2) lexically sorted nonbeam per canonical archetype; selection saved before outcomes",
+  "sources": {
+    "I": {
+      "commit": "efb5829c1230dac84337ba0212d92a84a527563b",
+      "sourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+      "simVersion": "a4c7ddde49ec5a64",
+      "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9"
+    },
+    "K": {
+      "commit": "94a9325f6a3adc9e94b6b63d45a46eae2c22fe4e",
+      "sourceSha256": "d346b96d7f6b2f6463507c09d87052c560418a1c5b27c06bab6708272538a3ab",
+      "simVersion": "741fe07b68b4a674",
+      "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9"
+    }
+  },
+  "seed": 20261105,
+  "skills": [
+    4,
+    7
+  ],
+  "repeats": 8,
+  "bothSeats": true,
+  "maxFrames": 3600,
+  "beamLeads": [
+    "mox"
+  ],
+  "groups": [
+    {
+      "archetype": "Brawler",
+      "eligibleCount": 21,
+      "indices": [
+        0,
+        10
+      ],
+      "opponents": [
+        "agentsproto",
+        "janitor"
+      ]
+    },
+    {
+      "archetype": "Counter",
+      "eligibleCount": 48,
+      "indices": [
+        0,
+        24
+      ],
+      "opponents": [
+        "accidentallyrich",
+        "lilgoldied"
+      ]
+    },
+    {
+      "archetype": "Footwork",
+      "eligibleCount": 85,
+      "indices": [
+        0,
+        42
+      ],
+      "opponents": [
+        "86gwei",
+        "rmacpdx"
+      ]
+    },
+    {
+      "archetype": "Hover",
+      "eligibleCount": 2,
+      "indices": [
+        0,
+        1
+      ],
+      "opponents": [
+        "sproto1870",
+        "vaudream"
+      ]
+    },
+    {
+      "archetype": "Paired",
+      "eligibleCount": 20,
+      "indices": [
+        0,
+        10
+      ],
+      "opponents": [
+        "duo",
+        "sproto2210"
+      ]
+    },
+    {
+      "archetype": "Pressure",
+      "eligibleCount": 31,
+      "indices": [
+        0,
+        15
+      ],
+      "opponents": [
+        "alpha777",
+        "nate"
+      ]
+    },
+    {
+      "archetype": "Weapon",
+      "eligibleCount": 8,
+      "indices": [
+        0,
+        4
+      ],
+      "opponents": [
+        "blorfo",
+        "sproto1011"
+      ]
+    },
+    {
+      "archetype": "Zoning",
+      "eligibleCount": 38,
+      "indices": [
+        0,
+        19
+      ],
+      "opponents": [
+        "aktree",
+        "lowernipple"
+      ]
+    }
+  ],
+  "opponents": [
+    "agentsproto",
+    "janitor",
+    "accidentallyrich",
+    "lilgoldied",
+    "86gwei",
+    "rmacpdx",
+    "sproto1870",
+    "vaudream",
+    "duo",
+    "sproto2210",
+    "alpha777",
+    "nate",
+    "blorfo",
+    "sproto1011",
+    "aktree",
+    "lowernipple"
+  ],
+  "helperSha256": "ac1f76a1beaff101f1ca404ae2bfcb5f4a0b7758f9290c543dd8867f8b8c83e8"
+}
