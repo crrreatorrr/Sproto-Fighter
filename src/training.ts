@@ -20,7 +20,13 @@ export function trainingReadout(s: CombatState): string {
     return s.fighters.map((f, i) => {
         const other = s.fighters[1-i], move = f.move && getMove(f, f.move.id);
         const remaining = move && f.move ? Math.max(0, move.startup + move.active + move.recovery - f.move.t) : 0;
-        const advantage = other.stun || other.blockstun ? Math.max(other.stun, other.blockstun) - remaining : null;
+        // Stun decrements before act(), but a move clears after act(): its
+        // owner can start an uncancelled action one tick after commitment ends.
+        // A neutral fighter can act on the next tick, even at stun 1.
+        const nextAction = Math.max(1, f.stun, f.blockstun, f.move ? remaining + 1 : 1);
+        const contextual = s.throwState || s.fighters.some(fighter => fighter.reaction?.kind === 'knockdown');
+        const advantage = !contextual && (other.stun || other.blockstun)
+            ? Math.max(1, other.stun, other.blockstun) - nextAction : null;
         return `P${i+1}: ${inputLabel(f.input)} | ${f.move?.id ?? 'neutral'} | commitment ${remaining}f | advantage ${advantage === null ? '—' : (advantage >= 0 ? '+' : '') + advantage + 'f'} | HP ${f.hp}`;
     }).join('\n');
 }
