@@ -21,6 +21,7 @@ try {
   const {ROSTER,PLAYABLE_FIGHTERS,createState,step,A,isFreePlayAddition}=core;
   const {STAGES,STORY_STAGE_IDS}=req(join(temp,'stage.js'));
   const {createStoryMode}=req(join(temp,'storyMode.js'));
+  const {storyDifficulty}=req(join(temp,'difficulty.js'));
   const {storyLocationForEncounter}=req(join(temp,'stageVariants.js'));
   const {createRoundPresentation}=req(join(temp,'animationEvents.js'));
   const TOTAL=STORY_ENCOUNTERS.length;
@@ -118,6 +119,42 @@ try {
       assert.equal(t.story.finishMatch(0),true);assert.equal(t.story.finishMatch(0),false);assert.equal(t.story.onRoundEnd(0),true);assert.equal(t.story.onRoundEnd(0),false);
       assert.equal(createStoryProgress(t.disk).snapshot().nextIndex,1);
     }
+  });
+  await check('three losses at the story skill floor do not offer a no-op easier retry',async()=>{
+    const t=fresh();await t.begin();const saved=progressView(t.progress);
+    assert.equal(t.launches().at(-1).rest[0].skill,1);
+    for(let loss=1;loss<=3;loss++){
+      await finishWave(t,1);
+      const labels=t.$('journey-actions').children.map(button=>button.textContent);
+      assert.equal(labels.some(label=>/easier CPU/i.test(label)),false,'the skill-1 floor cannot be reduced');
+      assert.doesNotMatch(t.$('journey-copy').textContent,/Optional help|reduced by one|−1 skill/);
+      assert.deepEqual(progressView(t.progress),saved,'losses do not change recruitment or progression');
+      if(loss<3){await t.action(0);await flush();}
+    }
+    await t.action(0);await flush();
+    assert.deepEqual(t.launches().at(-1).rest[0],{skill:1,assisted:false});
+  });
+  await check('a reducible fractional encounter offers optional easier CPU without promising an exact one-skill drop',async()=>{
+    const encounter=STORY_ENCOUNTERS.find(e=>{const skill=storyDifficulty(e,STORY_ENCOUNTERS);return skill>1&&skill<2;});
+    assert.ok(encounter,'installed route has a fractional opening difficulty');
+    const t=fresh(before(encounter.index));await t.begin();const saved=progressView(t.progress),base=storyDifficulty(encounter,STORY_ENCOUNTERS);
+    for(let loss=1;loss<=3;loss++){
+      await finishWave(t,1);
+      const labels=t.$('journey-actions').children.map(button=>button.textContent);
+      assert.equal(labels.includes('Retry with easier CPU'),loss===3,'offer only after three straight losses');
+      if(loss<3){await t.action(0);await flush();}
+    }
+    assert.doesNotMatch(t.$('journey-copy').textContent,/reduced by one|−1 skill/);
+    assert.deepEqual(progressView(t.progress),saved);
+    // The ordinary retry remains available and does not activate help.
+    await t.action(0);await flush();assert.deepEqual(t.launches().at(-1).rest[0],{skill:base,assisted:false});
+    await finishWave(t,1);
+    const help=t.$('journey-actions').children.findIndex(button=>button.textContent==='Retry with easier CPU');assert.ok(help>=0);
+    await t.action(help);await flush();
+    const selected=t.launches().at(-1).rest[0];assert.deepEqual(selected,{skill:1,assisted:true});
+    assert.ok(base-selected.skill>0&&base-selected.skill<1,'the floor clamps the fractional reduction');
+    assert.equal(t.story.snapshot().assisted,true);assert.equal(t.story.snapshot().cpuSkill,1);
+    assert.deepEqual(progressView(t.progress),saved,'taking help itself grants no progression/recruit');
   });
   await check('restart of a settled ordinary round accepts a new outcome once',async()=>{
     const t=fresh();await t.begin();t.story.finishMatch(1);assert.equal(t.story.retryMatch(),true);await flush();t.story.finishMatch(0);assert.ok(t.progress.isCleared(0));
