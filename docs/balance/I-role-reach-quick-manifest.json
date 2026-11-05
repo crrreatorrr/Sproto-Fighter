@@ -1,0 +1,32 @@
+{
+  "candidateSource": {
+    "commit": "efb5829c1230dac84337ba0212d92a84a527563b",
+    "sourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+    "simVersion": "a4c7ddde49ec5a64",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "baselineSource": {
+    "commit": "7b1ab9d19eef10f30bf9b701b2130d8b2d302ed0",
+    "sourceSha256": "058d8215776d1db035c948b42cd224684e705f35ddc46fcb2841dd4b8e7ea495",
+    "simVersion": "c662aee33095a523",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "files": {
+    "report-2026-11-05-I-role-reach-quick.json.gz": {
+      "rawSha256": "6e51807579597a2962c253f9bb7b931e047f14f7361291546f7d041e6126ecbe",
+      "compressedSha256": "411382ec784180e16e9756284d033c8a874280bffe2cc279fa8e3cc0e6c6f3f6",
+      "rawBytes": 6055313,
+      "compressedBytes": 333935
+    },
+    "comparison-2026-11-05-I-role-reach-vs-F.json.gz": {
+      "rawSha256": "a3bcb0f2b8aaa5b044a55dafd7670ce0d0ffe24133400ecc45f0d429b0d56771",
+      "compressedSha256": "f8d657215fb3ff2ae19c45caa8b91665a9c7a2dc38c08fb80b2309d5cb18a8f3",
+      "rawBytes": 952330,
+      "compressedBytes": 70252
+    }
+  },
+  "scope": "Diagnostic only; 4064 bouts, no full I expansion or promotion",
+  "pairedKeysVerified": true
+}
