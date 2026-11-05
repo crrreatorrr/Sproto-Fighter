@@ -1,13 +1,14 @@
 // Diagnostic instruments, never a balance gate or a human-skill certification.
-// node scripts/lib/story-target-diagnosis.mjs CORE_ROOT FIXED_HARNESS_ROOT OUT.json panel|endpoints REPEATS SOURCE_COMMIT
+// node scripts/lib/story-target-diagnosis.mjs CORE_ROOT FIXED_HARNESS_ROOT OUT.json panel|endpoints|opening-sweep [REPEATS] [SOURCE_COMMIT]
+// opening-sweep defaults to 64 independent seed pairs per skill; other defaults remain 8.
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve, join, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-const [coreArg, harnessArg, out, mode, repeatArg='8', sourceCommit] = process.argv.slice(2);
-assert.ok(coreArg && harnessArg && out && ['panel','endpoints'].includes(mode), 'supply core root, fixed harness root, output, panel|endpoints, repetitions, source commit');
-const coreRoot=resolve(coreArg), harnessRoot=resolve(harnessArg), repeats=Number(repeatArg);
+const [coreArg, harnessArg, out, mode, repeatArg, sourceCommit] = process.argv.slice(2);
+assert.ok(coreArg && harnessArg && out && ['panel','endpoints','opening-sweep'].includes(mode), 'supply core root, fixed harness root, output, panel|endpoints|opening-sweep, repetitions, source commit');
+const coreRoot=resolve(coreArg), harnessRoot=resolve(harnessArg), repeats=Number(repeatArg??(mode==='opening-sweep'?64:8));
 assert.ok(Number.isSafeInteger(repeats)&&repeats>0,'positive independent seed repetitions');
 const at=name=>import(pathToFileURL(join(harnessRoot,'scripts/lib',name)).href);
 const {loadBalanceCore}=await at('balance-core.mjs');
@@ -29,7 +30,26 @@ const {storyDifficulty}=await import(dataUrl(await bundle(join(coreRoot,'src/dif
 const provenance={declaredSourceCommit:sourceCommit??null,simulationSourceSha256:sourceHash.digest('hex'),simVersion:readFileSync(join(coreRoot,'src/net/simVersion.ts'),'utf8').match(/SIM_VERSION = '([^']+)'/)[1],referenceBotVersion:REFERENCE_BOT_VERSION,referenceSha256,routeSha256:sha(JSON.stringify(route)),coreRoot,harnessRoot};
 const seed=20261105,referenceFighter='highsproto',maxFrames=3600;
 let report,naturalSeatAnalysis,resultSha256;
-if(mode==='endpoints'){
+if(mode==='opening-sweep'){
+ const first=route[0],skills=Array.from({length:10},(_,i)=>i+1),levels=[];
+ assert.ok(first,'installed route must have an opening encounter');
+ const actualMarkedBoss=!!first.gauntlet||first.index>=route.length-15;
+ naturalSeatAnalysis=[];
+ for(const skill of skills){
+  // Reuse the actual-route encounter/wave seed namespace at every skill. The
+  // override is diagnostic only; storyDifficulty and the product stay untouched.
+  const curve=await runCurve(core,[first],()=>skill,{fighter:referenceFighter,seed,repeats,maxFrames});
+  // Native runCurve's subset-length boss marker is not valid for this one row.
+  const encounter={...curve.encounters[0],markedBoss:actualMarkedBoss};
+  levels.push({skill,encounter});
+  const trials=encounter.trials.filter(t=>t.referenceSlot===0),wins=trials.filter(t=>t.outcome==='cpu-win').length,losses=trials.filter(t=>t.outcome==='reference-win').length;
+  const pairs=new Map();for(const t of encounter.trials){if(!pairs.has(t.repeat))pairs.set(t.repeat,[]);pairs.get(t.repeat).push(t.outcome);}
+  naturalSeatAnalysis.push({id:first.id,index:first.index,skill,actualMarkedBoss,independentSeeds:repeats,cpuWins:wins,referenceWins:losses,draws:trials.length-wins-losses,rawCpuWinRate:wins/trials.length,decidedCpuWinRate:wins+losses?wins/(wins+losses):null,pointwiseWilson95:winInterval(wins,losses),discordantReverseSeats:[...pairs.values()].filter(p=>p[0]!==p[1]).length});
+ }
+ report={schemaVersion:1,config:{referenceFighter,seed,repeats,maxFrames,sourceRouteLength:route.length,firstEncounter:first,plannedStorySkill:storyDifficulty(first,route),testedSkills:skills,skillOverrideDiagnosticOnly:true,seedContext:'actual encounter.id + : + wave; common streams across skills',primaryReferenceSeat:0,reverseSeats:'paired bias audit, not extra independent repetitions'},levels,
+  limitations:['Fixed reference v2 is an independent instrument, not a validated human model.','No story mapping or product CPU was modified.','Natural-seat pointwise intervals do not certify a scalar remap or simultaneous skill/route targets.','Reference and CPU seat swaps share streams; repeated skill levels also share common seed pairs.','Regular fighter waves only; dedicated transformed boss controllers are excluded.']};
+ resultSha256=sha(JSON.stringify(levels));
+}else if(mode==='endpoints'){
  report=await runCurve(core,[route[0],route.at(-1)],e=>storyDifficulty(e,route),{fighter:referenceFighter,seed,repeats,maxFrames});
  resultSha256=sha(JSON.stringify(report.encounters));
  naturalSeatAnalysis=report.encounters.map(e=>{
