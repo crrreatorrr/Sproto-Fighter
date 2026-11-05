@@ -65,9 +65,18 @@ their results must not be substituted for this tested source's results. The
 [role experiment branch](https://github.com/crrreatorrr/Sproto-Fighter/tree/codex/gameplay-balance-calibration)
 reduces controlled-panel outliers but still fails the gate. Review also found
 that strategic zoning in the frozen CPU reads projectile habit counts before
-the visual delay; the separate CPU candidate is correcting this. Delayed
+the visual delay. The independently reviewed
+[CPU candidate](https://github.com/crrreatorrr/Sproto-Fighter/tree/codex/gameplay-cpu-calibration)
+fixes that leak, forecasts commitment using unfrozen ticks, and reserves Expert
+jab initiative. Its 20 focused tests pass. Its new fixed-seed checkpoint gives
+CPU wins Easy 0/64, Normal 0/64, Hard 9/64, Expert 30/64; the earlier full-curve
+640/1,976 result belongs to a superseded candidate and is not this result.
+Neither experimental branch is integrated or paired with the published hub
+bundle; both need fresh full measurements and broader validation. Delayed
 position spacing may additionally bias faster-versus-slower matchups and needs
 controlled investigation before more role buffs. These are pre-merge blockers.
+Expert meter baiting has not been independently established. Balance CI remains
+advisory because the acceptance gate fails; promoting it to a gate is pending.
 
 Enabled optional rules completed 224 matches / 538 rounds across eight named
 fighters, covering six canonical archetypes, with no raw draws or cap exhaustion.
