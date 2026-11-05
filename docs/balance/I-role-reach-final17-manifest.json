@@ -1,0 +1,226 @@
+{
+  "source": {
+    "commit": "efb5829c1230dac84337ba0212d92a84a527563b",
+    "sourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+    "simVersion": "a4c7ddde49ec5a64",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "files": {
+    "report-2026-11-05-I-role-reach-final17.json.gz": {
+      "rawBytes": 46890936,
+      "compressedBytes": 2476254,
+      "rawSha256": "9b90f43ab2dc647c483cd11734be577fefb3bdff435c200943c2292f4a1f8f2a",
+      "compressedSha256": "0e69393465a9ce23d11f1e9e4b064d66700856473b6a5537b12530b795812cb7"
+    },
+    "comparison-2026-11-05-I-final17-vs-F.json.gz": {
+      "rawBytes": 1136636,
+      "compressedBytes": 106769,
+      "rawSha256": "7590d3d7215ef5f746523effa2a52cf7a60fbfab818b661e1a5aa5933d5f77a7",
+      "compressedSha256": "4cdb733ca657f9578d10e93b7d1431cc57e9b24722245061f60557e444fa0eb2"
+    },
+    "comparison-2026-11-05-I-final17-vs-reviewed373.json.gz": {
+      "rawBytes": 1140163,
+      "compressedBytes": 108204,
+      "rawSha256": "ea718c5e8a9004ee5932eb1927820ca8c99cb13ebedb5894a94c0c704851aba6",
+      "compressedSha256": "3891037c94f5c8c79d489ccbb2a46ed980b85ec2a33ddc523f372d5f3de2bf0c"
+    }
+  },
+  "expansion": {
+    "pilotFile": "/tmp/report-I-role-reach-common8.json",
+    "pilotSha256": "85e17d980a3ebc7f0b4c360915108179374395428810468229cae6f77957cc46",
+    "pilotSource": {
+      "commit": "efb5829c1230dac84337ba0212d92a84a527563b",
+      "sourceSha256": "612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f",
+      "simVersion": "a4c7ddde49ec5a64",
+      "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+      "cpuHasSkillParameter": true
+    },
+    "helperSha256": "06a15847cfd5644ad3eb52be7e71c4cb574c0e030644dc71d40a0f9cec6187e2",
+    "command": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node /tmp/expand-sproto-panel.mjs /tmp/report-I-role-reach-common8.json /workspace/Sproto-Balance-I 17 /tmp/report-I-role-reach-final17",
+    "method": "Only missing pair/repetition streams simulated; original pilot records retained byte-equivalently after JSON parse; source/harness/version guards and atomic checkpoints",
+    "levels": [
+      {
+        "skill": 4,
+        "pilotBouts": 8052,
+        "checkpointReusedBouts": 0,
+        "newlySimulatedBouts": 8684,
+        "finalBouts": 16736
+      },
+      {
+        "skill": 7,
+        "pilotBouts": 8052,
+        "checkpointReusedBouts": 0,
+        "newlySimulatedBouts": 8684,
+        "finalBouts": 16736
+      }
+    ]
+  },
+  "levels": [
+    {
+      "skill": 4,
+      "outliers": [
+        {
+          "id": "aktree",
+          "archetype": "Zoning",
+          "rate": 0.2857142857142857,
+          "matches": 112
+        },
+        {
+          "id": "azkarah",
+          "archetype": "Zoning",
+          "rate": 0.32608695652173914,
+          "matches": 92
+        },
+        {
+          "id": "bigal",
+          "archetype": "Brawler",
+          "rate": 0.3333333333333333,
+          "matches": 120
+        },
+        {
+          "id": "cantankerous",
+          "archetype": "Pressure",
+          "rate": 0.3409090909090909,
+          "matches": 88
+        },
+        {
+          "id": "gpm",
+          "archetype": "Brawler",
+          "rate": 0.33088235294117646,
+          "matches": 136
+        },
+        {
+          "id": "greatcharly",
+          "archetype": "Footwork",
+          "rate": 0.6617647058823529,
+          "matches": 136
+        },
+        {
+          "id": "janitor",
+          "archetype": "Brawler",
+          "rate": 0.33974358974358976,
+          "matches": 156
+        },
+        {
+          "id": "mox",
+          "archetype": "Counter",
+          "rate": 0.7403846153846154,
+          "matches": 104
+        },
+        {
+          "id": "rune",
+          "archetype": "Counter",
+          "rate": 0.6666666666666666,
+          "matches": 132
+        },
+        {
+          "id": "satoshi",
+          "archetype": "Pressure",
+          "rate": 0.3482142857142857,
+          "matches": 112
+        },
+        {
+          "id": "sisma",
+          "archetype": "Pressure",
+          "rate": 0.2727272727272727,
+          "matches": 132
+        },
+        {
+          "id": "sproto1187",
+          "archetype": "Footwork",
+          "rate": 0.6736111111111112,
+          "matches": 144
+        }
+      ],
+      "outliersByArchetype": {
+        "Zoning": 2,
+        "Brawler": 3,
+        "Pressure": 3,
+        "Footwork": 2,
+        "Counter": 2
+      },
+      "rawDraws": 5,
+      "unresolved": 4,
+      "meanSeconds": 28.09125139420013,
+      "roleRates": {
+        "Footwork": 0.5386834986474301,
+        "Counter": 0.5171945701357467,
+        "Pressure": 0.4586410635155096,
+        "Zoning": 0.4983883964544722,
+        "Paired": 0.4417438271604938,
+        "Weapon": 0.49564459930313587,
+        "Brawler": 0.42637362637362636,
+        "Hover": 0.4596774193548387
+      }
+    },
+    {
+      "skill": 7,
+      "outliers": [
+        {
+          "id": "crapto",
+          "archetype": "Zoning",
+          "rate": 0.7196969696969697,
+          "matches": 132
+        },
+        {
+          "id": "guest13",
+          "archetype": "Counter",
+          "rate": 0.6612903225806451,
+          "matches": 124
+        },
+        {
+          "id": "sproto1601",
+          "archetype": "Zoning",
+          "rate": 0.6724137931034483,
+          "matches": 116
+        },
+        {
+          "id": "sproto2101",
+          "archetype": "Footwork",
+          "rate": 0.6583333333333333,
+          "matches": 120
+        },
+        {
+          "id": "sproto651",
+          "archetype": "Footwork",
+          "rate": 0.3448275862068966,
+          "matches": 116
+        },
+        {
+          "id": "sproto832",
+          "archetype": "Paired",
+          "rate": 0.6742424242424242,
+          "matches": 132
+        },
+        {
+          "id": "vamp",
+          "archetype": "Zoning",
+          "rate": 0.6583333333333333,
+          "matches": 120
+        }
+      ],
+      "outliersByArchetype": {
+        "Zoning": 3,
+        "Counter": 1,
+        "Footwork": 2,
+        "Paired": 1
+      },
+      "rawDraws": 3,
+      "unresolved": 0,
+      "meanSeconds": 32.60295869184194,
+      "roleRates": {
+        "Footwork": 0.5045077533357375,
+        "Counter": 0.5006031363088058,
+        "Pressure": 0.484498031496063,
+        "Zoning": 0.5209508460918614,
+        "Paired": 0.4837962962962963,
+        "Weapon": 0.4642857142857143,
+        "Brawler": 0.5018301610541728,
+        "Hover": 0.4314516129032258
+      }
+    }
+  ],
+  "pairedKeysVerified": 33472,
+  "scope": "Full sampled CPU panel; no human/story acceptance claim"
+}
