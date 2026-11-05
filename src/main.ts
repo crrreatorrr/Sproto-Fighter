@@ -168,7 +168,7 @@ function updateStage(stage:StageId) {
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
 async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{skill:number;assisted:boolean}) {
-    matchDepthOptions = depthEnabled && !isStory && (setup.mode === 'cpu' || setup.mode === 'versus') ? { rounds: true, modifier: depthModifier } : null;
+    let requestedMatchDepthOptions = depthEnabled && !isStory && (setup.mode === 'cpu' || setup.mode === 'versus') ? { rounds: true, modifier: depthModifier } : null;
     if(!isStory&&(setup.mode==='online'||setup.mode==='online-wager')){void queueOnline(setup);return true;}
     // Reconcile wins from another tab or a restored page before the final P1 gate.
     storyProgress.sync();
@@ -184,8 +184,8 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
     // Standard chapter-end encounters can opt into rule variety. Transformed boss forms
     // use a separate combat controller and keep their existing campaign rules.
-    if(depthEnabled && encounter && STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter).at(-1)?.index===encounter.index && setup.opponent===encounter.opponents.at(-1) && !storyAnimationPlan(setup.opponent,true).form)
-        matchDepthOptions = { rounds: false, modifier: chapterBossModifier(encounter.chapter-1) };
+    if(depthEnabled && encounter && STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter && !storyAnimationPlan(e.opponents.at(-1)!,true).form).at(-1)?.index===encounter.index && setup.opponent===encounter.opponents.at(-1))
+        requestedMatchDepthOptions = { rounds: false, modifier: chapterBossModifier(encounter.chapter-1) };
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
     const selectedPartner=setup.partner;
     if(selectedPartner&&selectedPartner!==ROSTER[setup.fighter].partner&&PLAYABLE_FIGHTERS.includes(selectedPartner as FighterId))requiredFighters.push(selectedPartner as FighterId);
@@ -201,6 +201,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
         storyBossArt=bossArt;
     }
     catch(error){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(error);return false;}
+    matchDepthOptions = requestedMatchDepthOptions;
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode as Mode;
     matchCpuSkill=difficulty?.skill??setup.cpuSkill??4;matchDifficultyAssist=!!difficulty?.assisted;
@@ -558,10 +559,11 @@ function pollPad(): number {
 // Optional, visible read-only diagnostics for manual QA; never changes combat state.
 const qaPanel = new URLSearchParams(location.search).has('qa') ? document.createElement('pre') : null;
 const trainingPanel = training ? document.createElement('pre') : null;
+let trainingPlayButton: HTMLButtonElement | null = null;
 if (training && trainingPanel) {
     const controls = document.createElement('div'); controls.id = 'training-controls';
-    for (const [label, action] of [['Record P1 route', () => training.record()], ['Stop', () => training.stop()], ['Loop on dummy', () => training.play()]] as const) {
-        const button = document.createElement('button'); button.textContent = label; button.onclick = action; controls.append(button);
+    for (const [label, action] of [['Record P1 route', () => training.record()], ['Stop', () => training.stop()], ['Loop on standing dummy', () => { if(mode==='dummy')training.play(); }]] as const) {
+        const button = document.createElement('button'); button.textContent = label; button.onclick = action; if(label==='Loop on standing dummy')trainingPlayButton=button; controls.append(button);
     }
     trainingPanel.id = 'training-readout'; trainingPanel.style.cssText = 'white-space:pre-wrap;font:14px monospace;padding:12px';
     document.querySelector('#app')!.append(controls, trainingPanel);
@@ -662,6 +664,7 @@ async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId],
     matchTesting = false; matchGodMode = false;
     updateStage(stage);
     state = match.session.state;
+    matchDepthOptions = null; depthRoundStarts.length = 0;
     presentation = createRoundPresentation();
     countdown.hide();
     versus.show(chosen, opponent);
@@ -800,7 +803,10 @@ function advanceRoundFrame(input: number, p2Input?: number) {
     if (presentation.phase !== 'fight') return;
     if (online) { advanceOnlineFrame(input); return; }
     const pair: [number, number] = [input, storyBoss?0:p2Input ?? cpuInput(state,1,matchCpuSkill)];
-    if (training && !story.isActive && !online && (mode === 'dummy' || mode === 'guard')) pair[1] = training.input(state, pair[0], pair[1]);
+    if (training && !story.isActive && !online && (mode === 'dummy' || mode === 'guard')) {
+        if(mode==='guard' && training.playing)training.stop();
+        pair[1] = training.input(state, pair[0], pair[1]);
+    }
     frames.push(pair);
     const qaBefore = qaPanel ? [state.fighters[0].move?.id,state.fighters[0].combo,state.fighters[0].pips,state.fighters[0].hp,state.fighters[1].hp,state.throwState?.phase,state.fighters[1].reaction?.phase].join('|') : '';
     const previousMoves=state.fighters.map(f=>f.move);
@@ -885,7 +891,8 @@ function tick(now: number) {
         ctx.restore();
     }
     if (online) updateOnlineStatus();
-    if (trainingPanel) trainingPanel.textContent = 'TRAINING · choose Standing dummy or Guard dummy\n' + trainingReadout(state) + `\nRecording ${training?.recording ? 'ON' : 'off'} · ${training?.frames.length ?? 0} frames · playback ${training?.playing ? 'ON' : 'off'}`;
+    if(trainingPlayButton)trainingPlayButton.disabled = mode!=='dummy' || story.isActive || !!online;
+    if (trainingPanel) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\n' + trainingReadout(state) + `\nRecording ${training?.recording ? 'ON' : 'off'} · ${training?.frames.length ?? 0} frames · playback ${training?.playing ? 'ON' : 'off'}`;
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = storyBoss ? 'Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · X shield · C beam · V ball · R retry' : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     requestAnimationFrame(tick);

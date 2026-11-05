@@ -208,7 +208,7 @@ try {
   });
 
   // Extract the real main hooks. Only browser/canvas/asset I/O is substituted.
-  function integration({disk=storage(),clearCount=0}={}) {
+  function integration({disk=storage(),clearCount=0,depth=false}={}) {
     const d=dom(),progress=createStoryProgress(disk);
     for(let i=0;i<clearCount;i++)clearNode(progress,i);
     const main=read('src/main.ts'),parsed=ts.createSourceFile('main.ts',main,ts.ScriptTarget.Latest,true);
@@ -219,13 +219,13 @@ try {
     assert.ok(start>=0&&end>start,'actual createStoryMode hook block found');
     const code=compile(functions.map(node=>node.getText(parsed)).join('\n')+'\n'+main.slice(start,end));
     const fixture=new Function('dependencies',`
-      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition}=dependencies;
+      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth}=dependencies;
       const canPlayFighter=id=>storyProgress.isUnlocked(id),lockedFighter=()=> 'Defeat this fighter in story mode to recruit them.';
       let setup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'guard',godMode:false};
       let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};
       let matchCpuSkill=4,matchDifficultyAssist=false;
       let mode='guard',running=false,started=false,chosen='highsproto',opponent='vela',matchGodMode=false,matchEarnedGodMode=false,testingGodMode=false,matchTesting=false;
-      const depthEnabled=false,depthModifier='none',depthRoundStarts=[];let matchDepthOptions=null;
+      const depthModifier='none',depthRoundStarts=[];let matchDepthOptions=null;
       let state=createState(),presentation=createRoundPresentation(),accumulator=0,queued=0,qaSingleStep=false,resumeAfterSettings=false,remapping=null;
       let selectedStage='ranch',selectedLocation=null,assetFailure=false,mapChoose=null;
       const held=new Set(),frames=[],qaEvents=[],assetRequests=[],versusCalls=[];
@@ -251,11 +251,22 @@ try {
         openSettings(){resumeAfterSettings=running;running=false;dialog.open=true;},
         openResultSettings(){running=false;presentation.phase='result';dialog.open=true;resumeAfterSettings=false;$('overlay').hidden=false;},
         mapPick(index){if(!mapChoose)throw Error('Map not mounted');mapChoose(STORY_ENCOUNTERS[index]);},
-        inspect:()=>({setup,mode,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
+        inspect:()=>({setup,mode,matchDepthOptions,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
     `)({createStoryMode:hooks=>createStoryMode(hooks,progress),storyProgress:progress,STAGES,ROSTER,$:d.$,createRoundPresentation,createState,
-      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition});
+      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth});
     return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);await d.action(0);await flush();}};
   }
+  await check('failed launch preserves the active experimental match and replay options',async()=>{
+    const t=integration({depth:true});
+    assert.equal(await t.launchSelection({fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'cpu'}),true);
+    const before=t.inspect(),options=before.matchDepthOptions;
+    assert.ok(before.state.matchDepth);assert.deepEqual(options,{rounds:true,modifier:'none'});
+    assert.equal(await t.launchSelection({fighter:STORY_ENCOUNTERS[1].opponent,opponent:'vela',stage:'bar',mode:'dummy'}),false);
+    assert.equal(t.inspect().state,before.state);assert.equal(t.inspect().matchDepthOptions,options);
+    t.failAssets();const savedError=console.error;console.error=()=>{};
+    try{assert.equal(await t.launchSelection({fighter:'bront',opponent:'vela',stage:'bar',mode:'guard'}),false);}finally{console.error=savedError;}
+    assert.equal(t.inspect().state,before.state);assert.equal(t.inspect().matchDepthOptions,options);
+  });
   await check('actual main rejects every unrecruited campaign P1 including former free-play additions',async()=>{
     const t=integration(),original=t.inspect().state;
     for(const id of progressModule.STORY_OPPONENTS){

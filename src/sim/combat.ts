@@ -1,4 +1,4 @@
-import { grantMeter } from './matchRules';
+import { grantMeter, matchGravity } from './matchRules';
 // State creation, effects, combos, throws, damage and move selection.
 import { A, FLOOR, GRAVITY, WIDTH } from './constants';
 import { fighterPartner, AttackAim, COMBAT_STYLES, FighterId, MOVES, Mode, Move, MoveId, PARTNER_ATTACKS, PLAYABLE_FIGHTERS, PlayableFighterId, ROSTER, THROW_CATCH_FRAMES, THROW_HOLD_FRAMES, THROW_RECOVERY_FRAMES, ThrowDirection, bodySpread, fighterWall, getThrowGrip, isHorizontalSpit, isPairedFighter, partnerContactIndex } from './roster';
@@ -126,6 +126,11 @@ export function throwDirection(input:number,facing:number):ThrowDirection {
     return horizontal*facing<0?'back':'forward';
 }
 export const isDown = (f:Fighter) => !!f.reaction && f.reaction.phase!=='flight';
+/** Shared guard eligibility for damage resolution and optional projectile reflection. */
+export function canGuard(s: CombatState, index: number, m: Move, kind: MoveId): boolean {
+    const b=s.fighters[1-index],back=b.facing===1?A.left:A.right;
+    return s.throwState?.attacker!==1-index && kind!=='grab' && b.stun===0 && !b.move && b.dash===0 && (b.input&back)!==0 && (!m.low || (b.input&A.down)!==0) && (!m.air || (b.input&A.down)===0);
+}
 export function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile = false): boolean {
     const a = s.fighters[index], b = s.fighters[1 - index];
     if (s.matchDepth && s.matchDepth.juggles[1-index] >= 8 && !grounded(b)) return false;
@@ -135,8 +140,7 @@ export function damage(s: CombatState, index: number, m: Move, kind: MoveId, pro
     // A held victim cannot take incidental projectile damage; only release hits.
     if(hold?.phase==='hold' && hold.victim===1-index && kind!=='grab')return false;
     const heldAttacker=!!hold && hold.attacker===1-index;
-    const back = b.facing === 1 ? A.left : A.right;
-    const guarding = !heldAttacker && kind !== 'grab' && b.stun === 0 && !b.move && b.dash === 0 && (b.input & back) !== 0 && (!m.low || (b.input & A.down) !== 0) && (!m.air || (b.input & A.down) === 0);
+    const guarding = canGuard(s,index,m,kind);
     if (guarding) {
         const justDefend = !!s.matchDepth && s.frame - s.matchDepth.backPressed[1-index] <= 3;
         const normalBlockstun = m.blockstun ?? HITBOX_DATA.moves[kind].blockstun;
@@ -272,7 +276,7 @@ export function act(s: CombatState, f: Fighter) {
         }
     }
     // Resolve a last-instant landing press as a grounded move after physics.
-    const landingThisFrame = !grounded(f) && f.vy >= 0 && f.y + f.vy + GRAVITY >= FLOOR;
+    const landingThisFrame = !grounded(f) && f.vy >= 0 && f.y + f.vy + matchGravity(s) >= FLOOR;
     // Keep the spit buffered through the normal two-frame jump chord window.
     const waitingForSpitJump = grounded(f) && f.jumpBuffer>0 && isHorizontalSpit(f.id) && chooseMove(f,f.buffer,f.bufferInput)==='bolt' && (f.bufferInput&A.up);
     if (f.bufferLife > 0 && !landingThisFrame && !waitingForSpitJump) {

@@ -1,6 +1,6 @@
 import { matchGravity, matchInput, nextMatchRound, tickMatchDepth } from './matchRules';
 // Deterministic math, state checksum and the per-frame step.
-import { act, beginThrow, breakThrow, clamp, damage, effect, finishCombo, getMove, grounded, isDown, updateThrow } from './combat';
+import { act, beginThrow, breakThrow, canGuard, clamp, damage, effect, finishCombo, getMove, grounded, isDown, updateThrow } from './combat';
 import { clashProjectiles, getHitbox, getHurtbox, getProjectileHitbox, rectanglesOverlap } from './geometry';
 import { A, FLOOR, GRAVITY, WIDTH } from './constants';
 import { BACK_THROW_LIFT_FRAMES, COMBAT_STYLES, CROUCH_SPIT_ORIGINS, GETUP_FRAMES, KNOCKDOWN_FRAMES, MOVES, Move, MoveId, ROSTER, THROW_RECOVERY_FRAMES, bodySpread, fighterWall, isCrouchingSpit, isHorizontalSpit, isPairedFighter, isPracticeMode } from './roster';
@@ -317,7 +317,7 @@ export function step(s: CombatState, inputs: [
         const target = s.fighters[1 - p.owner];
         const targetMove = target.move ? getMove(target, target.move.id) : undefined;
         if (!endingKO && !specialImmune[1-p.owner] && !isDown(target) && target.strikeInvuln === 0 && rectanglesOverlap(getProjectileHitbox(p), getHurtbox(target, targetMove))) {
-            if(s.matchDepth?.modifier==='reflect-projectiles' && (target.input & (target.facing===1?A.left:A.right)) && !p.beamLength){
+            if(s.matchDepth?.modifier==='reflect-projectiles' && canGuard(s,p.owner,getMove(s.fighters[p.owner],'bolt'),'bolt') && !p.beamLength){
                 p.owner=1-p.owner;p.vx=-p.vx;p.vy=-p.vy;p.x=target.x+target.facing*(bodySpread(target.id)+40);continue;
             }
             damage(s, p.owner, { ...getMove(s.fighters[p.owner],'bolt'), damage: p.damage }, 'bolt', true);

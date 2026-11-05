@@ -104,3 +104,17 @@ it('reuses introductions between rounds without reporting an intermediate result
   fixture.run();expect(fixture.presentation().phase).toBe('intro');expect(fixture.calls).toEqual(['countdown','versus']);
   expect(fixture.depthRoundStarts).toEqual([state.frame]);expect(state.matchDepth!.round).toBe(2);expect(state.winner).toBeNull();
 });
+
+it.each(['stun','attack','dash'])('does not reflect while guard is unavailable: %s',reason=>{
+  const s=createState();enableMatchDepth(s,{modifier:'reflect-projectiles'});const b=s.fighters[1];
+  if(reason==='stun')b.stun=5;
+  if(reason==='attack')b.move={id:'heavy',t:0,hit:false,connected:false,wave:-1};
+  if(reason==='dash')b.dash=3;
+  s.projectiles.push({owner:0,x:b.x,y:b.y-65,vx:1,vy:0,life:50,damage:50});step(s,[0,A.right]);
+  expect(s.fighters[1].hp).toBeLessThan(1000);expect(s.projectiles.some(p=>p.owner===1)).toBe(false);
+});
+
+it('uses effective low gravity when predicting a buffered near-floor attack',()=>{
+  const s=createState();enableMatchDepth(s,{modifier:'low-gravity'});s.fighters[0].y=FLOOR-.7;
+  step(s,[A.light,0]);expect(s.fighters[0].y).toBeLessThan(FLOOR);expect(s.fighters[0].move?.id).toBe('airLight');
+});

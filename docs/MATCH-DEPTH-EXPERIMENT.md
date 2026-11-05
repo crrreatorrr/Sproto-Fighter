@@ -27,7 +27,7 @@ coverage for those six forms. The HUD states the enabled rule.
 
 Open `/?training` and choose a standing or guard dummy for the input display, remaining commitment
 and current stun advantage readout. Record P1 route captures up to 3600 input frames relative to
-P1 facing; Stop ends recording and Loop on dummy repeats the route relative to the dummy facing.
+P1 facing; Stop ends recording and Loop on standing dummy repeats the route relative to the dummy facing. Guard dummy supports the readout and recording; looping is disabled there because its established movement lock is preserved.
 Synthetic dummy inputs are recorded in the ordinary replay input stream. The numeric hitbox overlay
 must be connected to Phase 3's pure geometry exports during integration; no approximate sprite boxes
 are presented as actual hitboxes.
