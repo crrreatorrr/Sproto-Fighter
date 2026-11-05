@@ -141,7 +141,17 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     // the seeded interval chooses the plan, not a periodic attack metronome.
     const pressureReady = distance < meleeGap(light.range) && memory.choice >= forecastGuardShare;
     if (!pulse && !pressureReady) return approach;
-    if (distance < meleeGap(light.range)) return memory.intent === 'pressure' && memory.choice < .25 ? A.down | A.light : A.light;
+    if (distance < meleeGap(light.range)) {
+        const jabEnd = 1 - grabChance;
+        if (grounded(f) && memory.choice >= forecastGuardShare && memory.choice <= jabEnd) {
+            // Guard/throw already consumed the other intervals. Choose the
+            // grounded jab variant within its own interval, regardless of the
+            // older strategic label (which may still say "defend").
+            const variant = (memory.choice - forecastGuardShare) / (jabEnd - forecastGuardShare);
+            return variant < .25 ? A.down | A.light : A.light;
+        }
+        return memory.intent === 'pressure' && memory.choice < .25 ? A.down | A.light : A.light;
+    }
     if (distance < meleeGap(medium.range)) return A.medium;
     if (distance > 240 && !projectileActive && memory.choice < .65) return A.bolt | (f.hp > seen.hp && distance < 340 ? away : 0);
     if (distance > 200 && memory.choice > .65 && f.dashLock === 0) return toward | A.dash;
