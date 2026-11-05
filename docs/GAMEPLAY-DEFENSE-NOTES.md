@@ -48,3 +48,19 @@ caster immunity, throw-tech boundaries, rise protection, projectile clashes and 
 for chip. The level Sun God shot originates 80 units above the root and now intersects the
 87-unit crouched hurtbox, so its smoke test explicitly requires guarding rather than treating
 crouch alone as invulnerability. Higher eye/egg/hand lanes still duck when rectangles do not overlap. Human feel and full art-contact approval are not claimed by these automated checks.
+
+## Offline active-pose measurements
+
+`node scripts/hitbox-measurements.mjs` records all 254 fighters' twelve move IDs in both facings,
+using the renderer's selected active-pose cells and actual composed draw matrices. The generated
+`docs/balance/hitbox-measurements.csv` freezes root-relative forward/height envelopes beside the
+current numerical attack rectangles. Its JSON companion records source hashes, exact coverage,
+missing metadata hulls and limits. Missing hulls are decoded offline from PNG alpha with Pillow;
+transparent canvas bounds are not treated as body contact.
+
+These measurements are a comparison and review queue. No hitbox value is automatically replaced.
+They measure full-body silhouettes, which may include weapons and effects, rather than semantic
+fist/blade contact regions. They cover level attacks (launcher up), center placement and the
+ordinary air move IDs; other aim variants, partner cameos, projectile artwork and visual contact
+approval still need review. `scripts/hitbox-measurements-smoke.mjs` exercises source provenance,
+single/paired coverage, mirroring and decoded-alpha fallback without modifying art or simulation.
