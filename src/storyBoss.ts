@@ -355,6 +355,8 @@ export function drawStoryBossPose(ctx:CanvasRenderingContext2D,state:CombatState
     }
     if(!image||state.winner!==null||(!boss.warning&&releaseAge>=21))return false;
     const frame=attackFrame(boss,state.frame-boss.startFrame);
+    // The mecha's neutral pose is the last boarding cel, including during warnings.
+    if(boss.form==='mecha'&&frame===0)return false;
     ctx.save();ctx.imageSmoothingEnabled=false;
     const size=boss.form==='dragon'?768:512;
     const anchorY=boss.form==='dragon'?580:480;

@@ -22,6 +22,7 @@ try{
   for(const id of ['nick','guest07','sproto943','vela','vaudream']){
    const animation=createStoryAnimation(),plan=storyAnimationPlan(id,true);await animation.load(plan);
    const art=id==='sproto943'?await loadStoryBossArt('art'):null;
+   const mechaArt=id==='vela'?await loadStoryBossArt('giant'):null;
    let mechaEnd=null,mechaHeight=null;
    for(const phase of ['intro','boss','mecha','outro']){
     if(!plan[phase]?.length)continue;
@@ -53,6 +54,14 @@ try{
        if(shrinkStart<300||Math.abs(visibleHeight(pixels())-shrinkEnd)>2)throw Error('Shrink does not match the start of boarding');
        boundaryChecks.push('shrink/boarding');
       }
+      if(snap.clip==='morelight-mecha'&&snap.frame>=84&&snap.frame<=198){
+       const {x,y,scale}=manifest[snap.clip];
+       const left=Math.ceil(STORY_BOSS_X+((snap.frame>=153&&snap.frame<=166?159:155)-x)*scale);
+       const right=Math.floor(STORY_BOSS_X+(172-x)*scale);
+       const eyes=ctx.getImageData(left,Math.ceil(578+(82-y)*scale),right-left,15).data;
+       const visibleEyes=eyes.some((r,i)=>i%4===0&&r>145&&eyes[i+1]>125&&eyes[i+2]<105&&eyes[i+3]>200);
+       if(visibleEyes!==(snap.frame===198))throw Error('Morelight cockpit reveal is out of sync at frame '+snap.frame);
+      }
       if(snap.clip==='morelight-mecha'&&snap.frame===manifest['morelight-mecha'].frames-1){mechaEnd=pixels();mechaHeight=visibleHeight(mechaEnd);}
       if(snap.clip==='morelight-ejection'&&snap.frame<manifest['morelight-ejection'].referenceMechaFrames&&mechaEnd&&!referenceFramesChecked.has(snap.frame)){
        const now=pixels();if(!now.every((v,i)=>v===mechaEnd[i]))throw Error('Reference mecha changed or an unwanted chest object was added');
@@ -74,6 +83,14 @@ try{
     if(art&&phase==='boss'&&!boundaryChecks.includes('growth/boss idle'))throw Error('Missing Mega Artchick boundary check');
     if(animation.active)throw Error('Unbounded scene');
     if(id==='vela'&&phase==='mecha'&&!boundaryChecks.includes('shrink/boarding'))throw Error('Missing Morelight shrink boundary');
+    if(mechaArt&&phase==='mecha'){
+     const state=createState('highsproto','cpu',id),boss=startStoryBoss(state,'mecha');
+     boss.warning={attack:{name:'QA warning'}};
+     ctx.clearRect(0,0,1280,720);
+     drawStoryBossPose(ctx,state,boss,mechaArt)||animation.draw(ctx,STORY_BOSS_X,578,1,'mecha');
+     if(!ctx.getImageData(0,0,1280,720).data.every((v,i)=>v===mechaEnd[i]))throw Error('Mecha changes its neutral pose during a warning');
+     boundaryChecks.push('boarding/boss warning');
+    }
     if(id==='vela'&&phase==='outro'&&(boundaryChecks.length!==2||referenceFramesChecked.size!==manifest['morelight-ejection'].referenceMechaFrames))throw Error('Missing Morelight boundary/reference verification');
     records.push({id,phase,seen,frames,visible,boundaryChecks,...(smallMorelightHeight?{smallMorelightHeight,mechaHeight,referenceMechaFramesVerified:referenceFramesChecked.size}:{})});
    }
