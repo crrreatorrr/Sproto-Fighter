@@ -111,7 +111,9 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
         if (rank === 1) return approach | A.medium;
         if (rank === 2) return approach | A.heavy;
     }
-    if (f.move) return 0;
+    // Release attack buttons during commitment while keeping the stance of
+    // the grounded low we already selected. Hurtboxes read held down input.
+    if (f.move) return grounded(f) && (f.move.id === 'low' || f.move.id === 'sweep') ? A.down : 0;
     // Extrapolate the commitment we actually saw. An old recovery observation
     // is not a fresh opening after the reaction queue has already consumed it.
     const projectedAge = seen.age + memory.combatTicks - seen.combatTick;
