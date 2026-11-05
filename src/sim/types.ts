@@ -104,6 +104,8 @@ export interface CpuObservation {
     frame: number; x: number; y: number; vy: number; hp: number;
     move: MoveId | null; age: number; startup: number; active: number; recovery: number;
     low: boolean; input: number; attackRoll: number; lowRoll: number; jumpRoll: number; shot: boolean;
+    /** Habit counts at observation time, so anticipation cannot read future attacks. */
+    attacks: number; lows: number;
 }
 export interface CpuMemory {
     seed: number; intent: CpuIntent; nextDecision: number; decisionAt: number; choice: number;
