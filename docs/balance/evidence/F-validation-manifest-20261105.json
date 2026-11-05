@@ -1,0 +1,15 @@
+{
+  "simulation": "c662aee33095a523",
+  "productionSourceSha256": "058d8215776d1db035c948b42cd224684e705f35ddc46fcb2841dd4b8e7ea495",
+  "applicationTestCommit": "41ca8e82c43f177c81ba194d984447d6ea829c0c",
+  "unitTests": 195,
+  "standaloneChecks": 72,
+  "failed": 0,
+  "threeEngineDeterminism": "passed",
+  "liveGojaReplays": 5,
+  "liveRelayGroups": 4,
+  "twoChromiumRelayWagerAndRematch": "passed",
+  "directWebRTC": "not verified",
+  "humanPlaytest": "not performed",
+  "notes": "Full suite included the UI aid floor fix merged before it started; later story-browser fixture revision is validated separately. This is F evidence, not a full I suite claim."
+}

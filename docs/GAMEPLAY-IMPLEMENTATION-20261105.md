@@ -4,14 +4,15 @@ This is a draft implementation; the quantitative and human acceptance targets
 are not complete. The reviewed CPU fixes are integrated, and further controlled
 role/controller calibration is underway. Nothing has been merged or deployed.
 
-Current simulation: `373448bdc043a0e8`, production source SHA-256
-`e3c3f0637ebe2f45ec8fe484b4a745da8720dbdcfd49435a03cd2acf82a84663`.
-The selected-ground-jab low-variety correction is now integrated. It changes
-only pure input selection, so regeneration preserves replay compatibility
-`373448bdc043a0e8`. Quantitative tables below remain the frozen earlier input
-policy, source `6dbb1f97…`; new final-policy measurements are pending.
+Selected calibration [draft #30](https://github.com/crrreatorrr/Sproto-Fighter/pull/30)
+is stacked on #29. Its shared-role changes are Footwork light startup/damage6/34,
+Zoning light reach94, Brawler light reach86 and Paired light reach86. Weapon stays
+unchanged; tracking, spawn and additional habit/threat experiments are unselected.
+It includes the reviewed low-variety correction. Simulation `a4c7ddde49ec5a64`,
+production source SHA-256
+`612b5e933e3e5b268ecef90db543d1572e8f4827a6d3db5a3fc1da7606d1bf3f`.
 The matching [hub draft #59](https://github.com/crrreatorrr/metaverse-hub/pull/59)
-is refreshed to that version. Production/live parity is not claimed: before
+is being refreshed to `a4c7ddde49ec5a64`. Production/live parity is not claimed: before
 this work Fighter main expected `af94139cc59e4dfd` and hub main `dc3a64b592b94faf`.
 
 The unchanged 228-line plan comes from `3f1b1234`. Integration began at main
@@ -31,7 +32,7 @@ ancestors. Concurrent cinematic PR #23 was preserved and remains separate.
 
 These are stacked branches, in the table's order. Later branches include fixture
 reconciliation needed by the combined rules. They remain drafts. The integration
-branch is `codex/gameplay-match-depth-review`; the full working checkout is
+branch is `codex/gameplay-calibration-review`; the full working checkout is
 `/workspace/Sproto-Fighter`.
 
 ## Deliberate rule decisions
@@ -53,7 +54,29 @@ branch is `codex/gameplay-match-depth-review`; the full working checkout is
   facing-relative route recording. Looping uses a standing dummy; guard dummy
   supports readout/recording while retaining its established movement lock.
 
-## Current quantitative evidence
+## Selected I evidence and acceptance status
+
+The full 33,472-bout common-seed I run leaves **12 Normal and 7 Hard fighters**
+outside the observed35–65% gate. The prior reviewed CPU had28/18, and F17/7.
+The gate still fails. Raw draws are5/3 and remain separate from resolved results.
+Brawler and Paired Hard means are50.18%/48.38%; their Normal means42.64%/44.17%.
+No per-ID bonuses, HP/speed changes or artwork were used.
+[Full I report](balance/I-ROLE-REACH-FINAL17-20261105.md).
+
+The unchanged fixed reference still beats the opening CPU255/256 times; the
+finale CPU wins131/256 (51.17%). Finale complete trial payloads are identical to F;
+opening trajectories change despite equal aggregate rates. The opening sweep
+shows15% point estimates only near skills7–9, with wide uncertainty. Neither a
+remap nor a target/reference change is authorized by these diagnostics.
+[Independent-seed I story report](balance/STORY-I-DIAGNOSTICS-20261105.md).
+
+F passed the literal complete local test command:195 unit tests and72/72
+standalone checks, plus packed-sheet verification. I adds two shared ranges;
+its integrated unit/fast checks and final CI are being rerun. The upstream CI
+browser fixture's unpublished blackout-pixel failure is being corrected without
+weakening its black RGBA assertion or altering application/artwork.
+
+## Reviewed-CPU checkpoint evidence
 
 The same 33,472-bout, all-254-fighter schedule, two independent seed pairs per
 matchup and both seats was rerun after the reviewed CPU integration. Raw draws
