@@ -1,7 +1,7 @@
 // The controller is a pure read. Only step advances its seeded observations and intent.
 import { getMove, grounded } from './combat';
 import { A, FLOOR } from './constants';
-import { MOVES, bodySpread } from './roster';
+import { BALANCE_KITS, COMBAT_STYLES, MOVES, bodySpread } from './roster';
 import { cpuRandom, ensureCpuMemory } from './cpuState';
 import type { CombatState } from './types';
 
@@ -98,7 +98,14 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     const grabGap = meleeGap(getMove(f, 'grab').range);
     const grabPlan = memory.choice > 1 - grabChance && grounded(f) && seen.y >= FLOOR && distance < 160;
     const pressureGap = grabPlan ? grabGap : meleeGap(light.range);
-    const approach = memory.intent === 'zone' && distance > 200
+    // Interpret a conservative strategic label through our own public kit.
+    // A melee kit does not counter-zone just because it has seen one bolt.
+    // Protect a meaningful delayed life lead; otherwise close ranged pressure.
+    const rangedKit = BALANCE_KITS[f.id].archetype === 'Zoning' || !!COMBAT_STYLES[f.id].projectile.beamLength;
+    const neutralGround = grounded(f) && !f.move;
+    const zone = memory.intent === 'zone' && (!neutralGround || rangedKit || f.hp - seen.hp >= 100);
+    const boltShare = neutralGround && !rangedKit ? .20 : .65;
+    const approach = zone && distance > 200
         ? distance < 310 ? away : 0 : distance > pressureGap ? toward : 0;
     const expectsLow = seen.low || (seen.attacks > 0 && seen.lows / seen.attacks > .2);
     const guard = away | (expectsLow && seen.lowRoll < tuning.low ? A.down : 0);
@@ -153,7 +160,7 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
         return memory.intent === 'pressure' && memory.choice < .25 ? A.down | A.light : A.light;
     }
     if (distance < meleeGap(medium.range)) return A.medium;
-    if (distance > 240 && !projectileActive && memory.choice < .65) return A.bolt | (f.hp > seen.hp && distance < 340 ? away : 0);
+    if (distance > 240 && !projectileActive && memory.choice < boltShare) return A.bolt | (f.hp > seen.hp && distance < 340 ? away : 0);
     if (distance > 200 && memory.choice > .65 && f.dashLock === 0) return toward | A.dash;
     return approach;
 }
