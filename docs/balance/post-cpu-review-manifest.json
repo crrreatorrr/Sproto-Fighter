@@ -1,0 +1,1181 @@
+{
+  "source": {
+    "commit": "db5508c5d1f3b94204328fa966f656e4a6b76d20",
+    "sourceSha256": "6dbb1f97b0bdedd2d0de3f21ef694c170f1e2fbd11f8ac74d22d047dd6f4c0f4",
+    "simVersion": "373448bdc043a0e8",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "panelConfig": {
+    "seed": 20261105,
+    "samples": 17,
+    "maxFrames": 3600,
+    "skills": [
+      4,
+      7
+    ],
+    "bot": "cpu",
+    "repeats": 2,
+    "matchDepth": false,
+    "roster": [
+      "86gwei",
+      "aaron",
+      "accidentallyrich",
+      "agentsproto",
+      "aktree",
+      "aleksander",
+      "alpha777",
+      "anni",
+      "autistophrenicsprotagonist",
+      "azkarah",
+      "benjamin",
+      "berserk",
+      "bgbadger",
+      "bidnehhh",
+      "bigal",
+      "bigswole",
+      "bimba",
+      "bitcoind1rk",
+      "blorfo",
+      "bobdobbs",
+      "brainsprot",
+      "bront",
+      "bs9090eth",
+      "buddhashadow",
+      "cam",
+      "cantankerous",
+      "captain",
+      "captainhowdy",
+      "ceo",
+      "chaton",
+      "chonky",
+      "chrisfowler",
+      "ciphersproto",
+      "clobrwn",
+      "contresens",
+      "corn",
+      "crapto",
+      "crippledlover",
+      "croy",
+      "crumpleii",
+      "cryptobartender",
+      "cryptoboy",
+      "cryptomonger",
+      "cryptorizzler",
+      "cryptoviking420",
+      "cyberviber",
+      "d86",
+      "danocrypto",
+      "davidcd",
+      "degenpress",
+      "dollarbitcoin",
+      "drzmoody",
+      "dumpstar",
+      "duo",
+      "durlan",
+      "emix",
+      "erik",
+      "familywagon",
+      "feistyboi",
+      "felixsprotoarc",
+      "fiatfudder",
+      "forchaneth",
+      "fplgremlin",
+      "freedfrida",
+      "frej",
+      "freshprince",
+      "ghostsprotocol",
+      "giavannykitchens",
+      "glow",
+      "gluttony",
+      "godether",
+      "godmod3d",
+      "godsson",
+      "gpm",
+      "greatcharly",
+      "gryph",
+      "guest07",
+      "guest08",
+      "guest09",
+      "guest10",
+      "guest11",
+      "guest12",
+      "guest13",
+      "guest14",
+      "hdizzy",
+      "herbpowell",
+      "hermionemichelleamyrose",
+      "highsproto",
+      "homosproto",
+      "indiapolice",
+      "infinitysplitter",
+      "isaac",
+      "jameskaminski",
+      "janitor",
+      "jasper",
+      "jayquant",
+      "johnson",
+      "julian",
+      "kern",
+      "kerrieanne",
+      "laserbach",
+      "lestrange",
+      "leviosa",
+      "lifeisameme",
+      "lilgoldied",
+      "loadthebags",
+      "loqi",
+      "lowernipple",
+      "mandela",
+      "marfrog",
+      "maxbiggums",
+      "melo",
+      "michael",
+      "micsash",
+      "mikemike",
+      "mildtacos",
+      "mlk",
+      "moonshiller",
+      "mox",
+      "mrgoldrobe",
+      "mrhorsemeat",
+      "nate",
+      "nick",
+      "nomis",
+      "nosmileclown",
+      "np",
+      "obamasega420",
+      "olnoname",
+      "onememeaday",
+      "osho",
+      "otorps",
+      "pars",
+      "peterpan",
+      "pilgrim",
+      "pinewaffle",
+      "pirate",
+      "pongohpos10i",
+      "potocaicai",
+      "pr0lificeth",
+      "prim",
+      "rainman",
+      "razz",
+      "realityarchitect",
+      "rektina",
+      "renzo",
+      "reverend",
+      "rivet",
+      "rlarsson",
+      "rmacpdx",
+      "rune",
+      "saburdo",
+      "samixsproto",
+      "satoshi",
+      "seph0x",
+      "sidelinereferee",
+      "sirbitcoin",
+      "sirdidit",
+      "sisma",
+      "slabcorn",
+      "slakesly",
+      "sober",
+      "solanadelray",
+      "sprog",
+      "sproteth",
+      "sproto1011",
+      "sproto102",
+      "sproto1093",
+      "sproto1187",
+      "sproto1335",
+      "sproto1345",
+      "sproto1414",
+      "sproto1477",
+      "sproto1499",
+      "sproto1601",
+      "sproto1625",
+      "sproto1668",
+      "sproto1815",
+      "sproto1870",
+      "sproto2010",
+      "sproto2075",
+      "sproto2101",
+      "sproto215",
+      "sproto2177",
+      "sproto2210",
+      "sproto2322",
+      "sproto2344",
+      "sproto2381",
+      "sproto2531",
+      "sproto2569",
+      "sproto2616",
+      "sproto2789",
+      "sproto282",
+      "sproto2884",
+      "sproto3106",
+      "sproto313",
+      "sproto3152",
+      "sproto3181",
+      "sproto3215",
+      "sproto3224",
+      "sproto3235",
+      "sproto651",
+      "sproto704",
+      "sproto763",
+      "sproto818",
+      "sproto831",
+      "sproto832",
+      "sproto834",
+      "sproto837",
+      "sproto865",
+      "sproto943",
+      "sproto999",
+      "sprotocius",
+      "sprotolg",
+      "sprotomichaelsaylor",
+      "sprotomidnightfx",
+      "sprotopia",
+      "sprotopotamus",
+      "sprotosales",
+      "sprotosurvivor",
+      "spruto",
+      "spunow",
+      "stonkyleg69",
+      "stoto",
+      "sweatpantstrust",
+      "tdeth",
+      "teahupoo",
+      "theo",
+      "thesprotowholivedeth",
+      "thxobama",
+      "tingsmol",
+      "tradertimmy",
+      "twinnyneutron",
+      "uncmasterflex",
+      "urmometh",
+      "usedtowels",
+      "vamp",
+      "vaudream",
+      "vela",
+      "veryseriousinvestor",
+      "vicoo",
+      "vitaliketh",
+      "wifebeater",
+      "willuminati",
+      "wireitwell",
+      "wyrmblvnt",
+      "xalt",
+      "xav",
+      "yusuf",
+      "zakarum",
+      "zebracorn",
+      "zephyr",
+      "zepump",
+      "zippy",
+      "zudi"
+    ],
+    "schedulePairs": 4184,
+    "scheduleSha256": "85ddfefb50a47502b2cdaf7c52514432edf0860efcaee2cc589f230aee9b9d02",
+    "scheduleLocation": "Exact schedule retained in report-2026-11-05-post-cpu-review.json.gz"
+  },
+  "assembly": {
+    "method": "Independent frozen-source level processes, lossless level concatenation; no simulation records rewritten",
+    "parts": [
+      {
+        "path": "/tmp/report-post-cpu-review-normal.json",
+        "sha256": "7d46157953c4ba4d9606143685d39330be89e7a1698b37498ddad5a8c4a77272",
+        "skill": 4,
+        "matches": 16736
+      },
+      {
+        "path": "/tmp/report-post-cpu-review-hard.json",
+        "sha256": "ad0d78fdab3307daac8d5f2426d9f6c740759e6a7ad63571630e93fcf5fa1469",
+        "skill": 7,
+        "matches": 16736
+      }
+    ]
+  },
+  "files": {
+    "report-2026-11-05-post-cpu-review.json.gz": {
+      "rawBytes": 46753287,
+      "compressedBytes": 2465767,
+      "rawSha256": "607d8938d242883e706df335d0036ffb7ca009e715adfc5434962b090afbdae3",
+      "compressedSha256": "ebf788799df15a75c278715b6401cfaec6c9b8da3e11d9a9e2262c6aee2b0dec"
+    },
+    "comparison-2026-11-05-reviewed373-vs-original7d.json.gz": {
+      "rawBytes": 1167788,
+      "compressedBytes": 109973,
+      "rawSha256": "bda1e1fa01bd8a8975532b8f59f729929b28d734a7775f2ff767dcb893e60212",
+      "compressedSha256": "64816bbb101d1c4e70619c960f89d6f4f37e06e7deaab23e030a5268586b5473"
+    },
+    "report-2026-11-05-tracking-quick-panel.json.gz": {
+      "rawBytes": 6058424,
+      "compressedBytes": 335123,
+      "rawSha256": "435394cf7c4e46f7bb3b47b490d18dca19674854ae64e0e99271f2ec3ec966e6",
+      "compressedSha256": "0c3af402bd058ec12391e0992229e93ab2bcead0b1d8f682e7dcad353fb34018"
+    },
+    "comparison-2026-11-05-tracking-vs-reviewed373.json.gz": {
+      "rawBytes": 953985,
+      "compressedBytes": 71651,
+      "rawSha256": "35c0b45c3eddc4d59dc22cc401e5ecbf42d4d661dba4f797b21b6e5307817230",
+      "compressedSha256": "1743dcb30a52ad371d85659447a11eb13242e2be272d47e2852317d12b47a484"
+    }
+  },
+  "levels": [
+    {
+      "skill": 4,
+      "outside35To65": [
+        {
+          "fighter": "aktree",
+          "archetype": "Zoning",
+          "rate": 0.30357142857142855,
+          "matches": 112
+        },
+        {
+          "fighter": "bgbadger",
+          "archetype": "Zoning",
+          "rate": 0.3229166666666667,
+          "matches": 96
+        },
+        {
+          "fighter": "contresens",
+          "archetype": "Zoning",
+          "rate": 0.3148148148148148,
+          "matches": 108
+        },
+        {
+          "fighter": "crumpleii",
+          "archetype": "Brawler",
+          "rate": 0.30833333333333335,
+          "matches": 120
+        },
+        {
+          "fighter": "cryptomonger",
+          "archetype": "Footwork",
+          "rate": 0.6666666666666666,
+          "matches": 132
+        },
+        {
+          "fighter": "d86",
+          "archetype": "Zoning",
+          "rate": 0.265625,
+          "matches": 128
+        },
+        {
+          "fighter": "felixsprotoarc",
+          "archetype": "Zoning",
+          "rate": 0.33064516129032256,
+          "matches": 124
+        },
+        {
+          "fighter": "ghostsprotocol",
+          "archetype": "Zoning",
+          "rate": 0.3467741935483871,
+          "matches": 124
+        },
+        {
+          "fighter": "godether",
+          "archetype": "Counter",
+          "rate": 0.6532258064516129,
+          "matches": 124
+        },
+        {
+          "fighter": "greatcharly",
+          "archetype": "Footwork",
+          "rate": 0.6544117647058824,
+          "matches": 136
+        },
+        {
+          "fighter": "guest10",
+          "archetype": "Zoning",
+          "rate": 0.3467741935483871,
+          "matches": 124
+        },
+        {
+          "fighter": "highsproto",
+          "archetype": "Zoning",
+          "rate": 0.3125,
+          "matches": 144
+        },
+        {
+          "fighter": "jayquant",
+          "archetype": "Counter",
+          "rate": 0.6590909090909091,
+          "matches": 132
+        },
+        {
+          "fighter": "johnson",
+          "archetype": "Brawler",
+          "rate": 0.2867647058823529,
+          "matches": 136
+        },
+        {
+          "fighter": "lowernipple",
+          "archetype": "Zoning",
+          "rate": 0.325,
+          "matches": 160
+        },
+        {
+          "fighter": "mikemike",
+          "archetype": "Brawler",
+          "rate": 0.3161764705882353,
+          "matches": 136
+        },
+        {
+          "fighter": "nomis",
+          "archetype": "Pressure",
+          "rate": 0.3333333333333333,
+          "matches": 120
+        },
+        {
+          "fighter": "olnoname",
+          "archetype": "Footwork",
+          "rate": 0.6693548387096774,
+          "matches": 124
+        },
+        {
+          "fighter": "pr0lificeth",
+          "archetype": "Zoning",
+          "rate": 0.328125,
+          "matches": 128
+        },
+        {
+          "fighter": "rektina",
+          "archetype": "Footwork",
+          "rate": 0.7159090909090909,
+          "matches": 88
+        },
+        {
+          "fighter": "sproto1345",
+          "archetype": "Footwork",
+          "rate": 0.6612903225806451,
+          "matches": 124
+        },
+        {
+          "fighter": "sproto1601",
+          "archetype": "Zoning",
+          "rate": 0.3103448275862069,
+          "matches": 116
+        },
+        {
+          "fighter": "sproto2616",
+          "archetype": "Weapon",
+          "rate": 0.2916666666666667,
+          "matches": 120
+        },
+        {
+          "fighter": "sproto3106",
+          "archetype": "Zoning",
+          "rate": 0.28378378378378377,
+          "matches": 148
+        },
+        {
+          "fighter": "sproto3215",
+          "archetype": "Footwork",
+          "rate": 0.671875,
+          "matches": 128
+        },
+        {
+          "fighter": "sprotopotamus",
+          "archetype": "Brawler",
+          "rate": 0.33783783783783783,
+          "matches": 148
+        },
+        {
+          "fighter": "vela",
+          "archetype": "Zoning",
+          "rate": 0.34459459459459457,
+          "matches": 148
+        },
+        {
+          "fighter": "xalt",
+          "archetype": "Zoning",
+          "rate": 0.3387096774193548,
+          "matches": 124
+        }
+      ],
+      "outside40To60": 81,
+      "summary": {
+        "matches": 16736,
+        "rawDraws": 7,
+        "rawDrawRate": 0.0004182600382409178,
+        "unresolved": 6,
+        "drawRate": 0.00035850860420650097,
+        "rounds": {
+          "completed": 16736,
+          "partial": 0,
+          "draws": 7,
+          "timerDecisions": 0,
+          "wins": [
+            8356,
+            8373
+          ],
+          "meanSeconds": 28.785971359145954
+        },
+        "timeouts": 0,
+        "meanSeconds": 28.785971359145954,
+        "medianSeconds": 28.8,
+        "archetypes": {
+          "Footwork": {
+            "matches": 11092,
+            "wins": 6291,
+            "losses": 4801,
+            "draws": 0,
+            "rawWins": 6291,
+            "rawLosses": 4800,
+            "rawDraws": 1,
+            "frames": 18775662,
+            "recoveryFrames": 3444442,
+            "damage": {
+              "melee": 6038381,
+              "projectile": 2037472,
+              "special": 458978,
+              "throw": 680118
+            },
+            "decidedWinRate": 0.5671655247024883,
+            "rawDecidedWinRate": 0.5672166621585069,
+            "drawRate": 0,
+            "rawDrawRate": 9.015506671474937e-05,
+            "meanSeconds": 28.212017670393077,
+            "meanRecoverySeconds": 5.175564971751412
+          },
+          "Counter": {
+            "matches": 6632,
+            "wins": 3609,
+            "losses": 3019,
+            "draws": 4,
+            "rawWins": 3609,
+            "rawLosses": 3019,
+            "rawDraws": 4,
+            "frames": 11410449,
+            "recoveryFrames": 2131315,
+            "damage": {
+              "melee": 3531987,
+              "projectile": 1403498,
+              "special": 170865,
+              "throw": 352623
+            },
+            "decidedWinRate": 0.5445081472540736,
+            "rawDecidedWinRate": 0.5445081472540736,
+            "drawRate": 0.0006031363088057901,
+            "rawDrawRate": 0.0006031363088057901,
+            "meanSeconds": 28.675233715319663,
+            "meanRecoverySeconds": 5.356139425010053
+          },
+          "Pressure": {
+            "matches": 4064,
+            "wins": 1980,
+            "losses": 2082,
+            "draws": 2,
+            "rawWins": 1980,
+            "rawLosses": 2082,
+            "rawDraws": 2,
+            "frames": 7036970,
+            "recoveryFrames": 1307409,
+            "damage": {
+              "melee": 2042736,
+              "projectile": 861618,
+              "special": 102009,
+              "throw": 215215
+            },
+            "decidedWinRate": 0.4874446085672083,
+            "rawDecidedWinRate": 0.4874446085672083,
+            "drawRate": 0.0004921259842519685,
+            "rawDrawRate": 0.0004921259842519685,
+            "meanSeconds": 28.858964895013123,
+            "meanRecoverySeconds": 5.361749507874015
+          },
+          "Zoning": {
+            "matches": 4964,
+            "wins": 1854,
+            "losses": 3110,
+            "draws": 0,
+            "rawWins": 1854,
+            "rawLosses": 3110,
+            "rawDraws": 0,
+            "frames": 8977409,
+            "recoveryFrames": 1608193,
+            "damage": {
+              "melee": 2262545,
+              "projectile": 1102464,
+              "special": 94731,
+              "throw": 269487
+            },
+            "decidedWinRate": 0.3734891216760677,
+            "rawDecidedWinRate": 0.3734891216760677,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 30.141717029277466,
+            "meanRecoverySeconds": 5.399519876443729
+          },
+          "Paired": {
+            "matches": 2592,
+            "wins": 1169,
+            "losses": 1421,
+            "draws": 2,
+            "rawWins": 1168,
+            "rawLosses": 1421,
+            "rawDraws": 3,
+            "frames": 4420365,
+            "recoveryFrames": 785020,
+            "damage": {
+              "melee": 1059429,
+              "projectile": 912831,
+              "special": 31634,
+              "throw": 118292
+            },
+            "decidedWinRate": 0.45135135135135135,
+            "rawDecidedWinRate": 0.4511394360757049,
+            "drawRate": 0.0007716049382716049,
+            "rawDrawRate": 0.0011574074074074073,
+            "meanSeconds": 28.423128858024693,
+            "meanRecoverySeconds": 5.047710905349794
+          },
+          "Weapon": {
+            "matches": 1148,
+            "wins": 590,
+            "losses": 558,
+            "draws": 0,
+            "rawWins": 590,
+            "rawLosses": 558,
+            "rawDraws": 0,
+            "frames": 1998853,
+            "recoveryFrames": 384213,
+            "damage": {
+              "melee": 628839,
+              "projectile": 205351,
+              "special": 32194,
+              "throw": 57982
+            },
+            "decidedWinRate": 0.5139372822299652,
+            "rawDecidedWinRate": 0.5139372822299652,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 29.0193524970964,
+            "meanRecoverySeconds": 5.578005226480837
+          },
+          "Brawler": {
+            "matches": 2732,
+            "wins": 1115,
+            "losses": 1613,
+            "draws": 4,
+            "rawWins": 1115,
+            "rawLosses": 1613,
+            "rawDraws": 4,
+            "frames": 4753952,
+            "recoveryFrames": 835816,
+            "damage": {
+              "melee": 1294456,
+              "projectile": 623185,
+              "special": 33025,
+              "throw": 137024
+            },
+            "decidedWinRate": 0.4087243401759531,
+            "rawDecidedWinRate": 0.4087243401759531,
+            "drawRate": 0.0014641288433382138,
+            "rawDrawRate": 0.0014641288433382138,
+            "meanSeconds": 29.00165934602245,
+            "meanRecoverySeconds": 5.098926305514885
+          },
+          "Hover": {
+            "matches": 248,
+            "wins": 122,
+            "losses": 126,
+            "draws": 0,
+            "rawWins": 122,
+            "rawLosses": 126,
+            "rawDraws": 0,
+            "frames": 437782,
+            "recoveryFrames": 82409,
+            "damage": {
+              "melee": 137396,
+              "projectile": 43510,
+              "special": 7448,
+              "throw": 12974
+            },
+            "decidedWinRate": 0.49193548387096775,
+            "rawDecidedWinRate": 0.49193548387096775,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 29.420833333333334,
+            "meanRecoverySeconds": 5.538239247311828
+          }
+        },
+        "controllers": {
+          "cpu": {
+            "matches": 33472,
+            "wins": 16730,
+            "losses": 16730,
+            "draws": 12,
+            "rawWins": 16729,
+            "rawLosses": 16729,
+            "rawDraws": 14,
+            "frames": 57811442,
+            "recoveryFrames": 10578817,
+            "damage": {
+              "melee": 16995769,
+              "projectile": 7189929,
+              "special": 930884,
+              "throw": 1843715
+            },
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0.00035850860420650097,
+            "rawDrawRate": 0.0004182600382409178,
+            "meanSeconds": 28.785971359145954,
+            "meanRecoverySeconds": 5.267495717813895
+          }
+        },
+        "seats": [
+          {
+            "matches": 16736,
+            "wins": 8356,
+            "losses": 8374,
+            "draws": 6,
+            "rawWins": 8356,
+            "rawLosses": 8373,
+            "rawDraws": 7,
+            "frames": 28905721,
+            "recoveryFrames": 5288270,
+            "damage": {
+              "melee": 8491969,
+              "projectile": 3593980,
+              "special": 466074,
+              "throw": 924462
+            },
+            "decidedWinRate": 0.4994620442319187,
+            "rawDecidedWinRate": 0.4994919002929045,
+            "drawRate": 0.00035850860420650097,
+            "rawDrawRate": 0.0004182600382409178,
+            "meanSeconds": 28.785971359145954,
+            "meanRecoverySeconds": 5.266361934353091
+          },
+          {
+            "matches": 16736,
+            "wins": 8374,
+            "losses": 8356,
+            "draws": 6,
+            "rawWins": 8373,
+            "rawLosses": 8356,
+            "rawDraws": 7,
+            "frames": 28905721,
+            "recoveryFrames": 5290547,
+            "damage": {
+              "melee": 8503800,
+              "projectile": 3595949,
+              "special": 464810,
+              "throw": 919253
+            },
+            "decidedWinRate": 0.5005379557680812,
+            "rawDecidedWinRate": 0.5005080997070954,
+            "drawRate": 0.00035850860420650097,
+            "rawDrawRate": 0.0004182600382409178,
+            "meanSeconds": 28.785971359145954,
+            "meanRecoverySeconds": 5.268629501274698
+          }
+        ]
+      }
+    },
+    {
+      "skill": 7,
+      "outside35To65": [
+        {
+          "fighter": "accidentallyrich",
+          "archetype": "Counter",
+          "rate": 0.6774193548387096,
+          "matches": 124
+        },
+        {
+          "fighter": "aktree",
+          "archetype": "Zoning",
+          "rate": 0.25,
+          "matches": 112
+        },
+        {
+          "fighter": "alpha777",
+          "archetype": "Pressure",
+          "rate": 0.6640625,
+          "matches": 128
+        },
+        {
+          "fighter": "azkarah",
+          "archetype": "Zoning",
+          "rate": 0.33695652173913043,
+          "matches": 92
+        },
+        {
+          "fighter": "bgbadger",
+          "archetype": "Zoning",
+          "rate": 0.3020833333333333,
+          "matches": 96
+        },
+        {
+          "fighter": "bront",
+          "archetype": "Brawler",
+          "rate": 0.34,
+          "matches": 100
+        },
+        {
+          "fighter": "cryptobartender",
+          "archetype": "Zoning",
+          "rate": 0.30714285714285716,
+          "matches": 140
+        },
+        {
+          "fighter": "degenpress",
+          "archetype": "Zoning",
+          "rate": 0.28125,
+          "matches": 128
+        },
+        {
+          "fighter": "emix",
+          "archetype": "Footwork",
+          "rate": 0.6774193548387096,
+          "matches": 124
+        },
+        {
+          "fighter": "fplgremlin",
+          "archetype": "Pressure",
+          "rate": 0.6810344827586207,
+          "matches": 116
+        },
+        {
+          "fighter": "lowernipple",
+          "archetype": "Zoning",
+          "rate": 0.2375,
+          "matches": 160
+        },
+        {
+          "fighter": "mox",
+          "archetype": "Counter",
+          "rate": 0.6730769230769231,
+          "matches": 104
+        },
+        {
+          "fighter": "osho",
+          "archetype": "Footwork",
+          "rate": 0.6785714285714286,
+          "matches": 140
+        },
+        {
+          "fighter": "sprotolg",
+          "archetype": "Zoning",
+          "rate": 0.34558823529411764,
+          "matches": 136
+        },
+        {
+          "fighter": "sprotomichaelsaylor",
+          "archetype": "Zoning",
+          "rate": 0.27205882352941174,
+          "matches": 136
+        },
+        {
+          "fighter": "sprotopia",
+          "archetype": "Zoning",
+          "rate": 0.25,
+          "matches": 124
+        },
+        {
+          "fighter": "uncmasterflex",
+          "archetype": "Footwork",
+          "rate": 0.6666666666666666,
+          "matches": 120
+        },
+        {
+          "fighter": "zakarum",
+          "archetype": "Footwork",
+          "rate": 0.6774193548387096,
+          "matches": 124
+        }
+      ],
+      "outside40To60": 51,
+      "summary": {
+        "matches": 16736,
+        "rawDraws": 26,
+        "rawDrawRate": 0.0015535372848948376,
+        "unresolved": 4,
+        "drawRate": 0.0002390057361376673,
+        "rounds": {
+          "completed": 16714,
+          "partial": 22,
+          "draws": 4,
+          "timerDecisions": 0,
+          "wins": [
+            8355,
+            8355
+          ],
+          "meanSeconds": 34.31266303697499
+        },
+        "timeouts": 22,
+        "meanSeconds": 34.346429851816445,
+        "medianSeconds": 34.15,
+        "archetypes": {
+          "Footwork": {
+            "matches": 11092,
+            "wins": 6128,
+            "losses": 4960,
+            "draws": 4,
+            "rawWins": 6120,
+            "rawLosses": 4951,
+            "rawDraws": 21,
+            "frames": 22510508,
+            "recoveryFrames": 3894967,
+            "damage": {
+              "melee": 6186191,
+              "projectile": 1854096,
+              "special": 551714,
+              "throw": 490925
+            },
+            "decidedWinRate": 0.5526695526695526,
+            "rawDecidedWinRate": 0.5527955920874357,
+            "drawRate": 0.0003606202668589975,
+            "rawDrawRate": 0.0018932564010097368,
+            "meanSeconds": 33.82393917538165,
+            "meanRecoverySeconds": 5.852516828945786
+          },
+          "Counter": {
+            "matches": 6632,
+            "wins": 3520,
+            "losses": 3112,
+            "draws": 0,
+            "rawWins": 3515,
+            "rawLosses": 3110,
+            "rawDraws": 7,
+            "frames": 13555218,
+            "recoveryFrames": 2384465,
+            "damage": {
+              "melee": 3622809,
+              "projectile": 1290311,
+              "special": 226461,
+              "throw": 259404
+            },
+            "decidedWinRate": 0.5307599517490953,
+            "rawDecidedWinRate": 0.5305660377358491,
+            "drawRate": 0,
+            "rawDrawRate": 0.0010554885404101327,
+            "meanSeconds": 34.06518395657419,
+            "meanRecoverySeconds": 5.992322577402493
+          },
+          "Pressure": {
+            "matches": 4064,
+            "wins": 2015,
+            "losses": 2047,
+            "draws": 2,
+            "rawWins": 2013,
+            "rawLosses": 2041,
+            "rawDraws": 10,
+            "frames": 8346757,
+            "recoveryFrames": 1462018,
+            "damage": {
+              "melee": 2061362,
+              "projectile": 806991,
+              "special": 170721,
+              "throw": 159404
+            },
+            "decidedWinRate": 0.4960610536681438,
+            "rawDecidedWinRate": 0.4965466206216083,
+            "drawRate": 0.0004921259842519685,
+            "rawDrawRate": 0.0024606299212598425,
+            "meanSeconds": 34.230466699475066,
+            "meanRecoverySeconds": 5.99580872703412
+          },
+          "Zoning": {
+            "matches": 4964,
+            "wins": 1927,
+            "losses": 3035,
+            "draws": 2,
+            "rawWins": 1923,
+            "rawLosses": 3031,
+            "rawDraws": 10,
+            "frames": 10709934,
+            "recoveryFrames": 1833136,
+            "damage": {
+              "melee": 2351419,
+              "projectile": 1040006,
+              "special": 124624,
+              "throw": 197000
+            },
+            "decidedWinRate": 0.3883514711809754,
+            "rawDecidedWinRate": 0.38817117480823576,
+            "drawRate": 0.00040290088638195,
+            "rawDrawRate": 0.00201450443190975,
+            "meanSeconds": 35.958682514101525,
+            "meanRecoverySeconds": 6.1547676604888535
+          },
+          "Paired": {
+            "matches": 2592,
+            "wins": 1202,
+            "losses": 1390,
+            "draws": 0,
+            "rawWins": 1201,
+            "rawLosses": 1389,
+            "rawDraws": 2,
+            "frames": 5268490,
+            "recoveryFrames": 901991,
+            "damage": {
+              "melee": 1131488,
+              "projectile": 840851,
+              "special": 51283,
+              "throw": 89668
+            },
+            "decidedWinRate": 0.4637345679012346,
+            "rawDecidedWinRate": 0.4637065637065637,
+            "drawRate": 0,
+            "rawDrawRate": 0.0007716049382716049,
+            "meanSeconds": 33.87660751028807,
+            "meanRecoverySeconds": 5.799839248971193
+          },
+          "Weapon": {
+            "matches": 1148,
+            "wins": 583,
+            "losses": 565,
+            "draws": 0,
+            "rawWins": 583,
+            "rawLosses": 565,
+            "rawDraws": 0,
+            "frames": 2377476,
+            "recoveryFrames": 433190,
+            "damage": {
+              "melee": 636980,
+              "projectile": 211574,
+              "special": 33265,
+              "throw": 41310
+            },
+            "decidedWinRate": 0.5078397212543554,
+            "rawDecidedWinRate": 0.5078397212543554,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 34.51620209059233,
+            "meanRecoverySeconds": 6.289053426248548
+          },
+          "Brawler": {
+            "matches": 2732,
+            "wins": 1244,
+            "losses": 1488,
+            "draws": 0,
+            "rawWins": 1242,
+            "rawLosses": 1488,
+            "rawDraws": 2,
+            "frames": 5684669,
+            "recoveryFrames": 967851,
+            "damage": {
+              "melee": 1350957,
+              "projectile": 607235,
+              "special": 56834,
+              "throw": 105658
+            },
+            "decidedWinRate": 0.45534407027818447,
+            "rawDecidedWinRate": 0.45494505494505494,
+            "drawRate": 0,
+            "rawDrawRate": 0.0007320644216691069,
+            "meanSeconds": 34.6795326988775,
+            "meanRecoverySeconds": 5.9044106881405565
+          },
+          "Hover": {
+            "matches": 248,
+            "wins": 113,
+            "losses": 135,
+            "draws": 0,
+            "rawWins": 113,
+            "rawLosses": 135,
+            "rawDraws": 0,
+            "frames": 525570,
+            "recoveryFrames": 91436,
+            "damage": {
+              "melee": 132583,
+              "projectile": 41452,
+              "special": 12530,
+              "throw": 8634
+            },
+            "decidedWinRate": 0.45564516129032256,
+            "rawDecidedWinRate": 0.45564516129032256,
+            "drawRate": 0,
+            "rawDrawRate": 0,
+            "meanSeconds": 35.32056451612903,
+            "meanRecoverySeconds": 6.144892473118279
+          }
+        },
+        "controllers": {
+          "cpu": {
+            "matches": 33472,
+            "wins": 16732,
+            "losses": 16732,
+            "draws": 8,
+            "rawWins": 16710,
+            "rawLosses": 16710,
+            "rawDraws": 52,
+            "frames": 68978622,
+            "recoveryFrames": 11969054,
+            "damage": {
+              "melee": 17473789,
+              "projectile": 6692516,
+              "special": 1227432,
+              "throw": 1352003
+            },
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0.0002390057361376673,
+            "rawDrawRate": 0.0015535372848948376,
+            "meanSeconds": 34.346429851816445,
+            "meanRecoverySeconds": 5.95973450446144
+          }
+        },
+        "seats": [
+          {
+            "matches": 16736,
+            "wins": 8366,
+            "losses": 8366,
+            "draws": 4,
+            "rawWins": 8355,
+            "rawLosses": 8355,
+            "rawDraws": 26,
+            "frames": 34489311,
+            "recoveryFrames": 5984689,
+            "damage": {
+              "melee": 8738205,
+              "projectile": 3347171,
+              "special": 612887,
+              "throw": 676639
+            },
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0.0002390057361376673,
+            "rawDrawRate": 0.0015535372848948376,
+            "meanSeconds": 34.346429851816445,
+            "meanRecoverySeconds": 5.959895833333333
+          },
+          {
+            "matches": 16736,
+            "wins": 8366,
+            "losses": 8366,
+            "draws": 4,
+            "rawWins": 8355,
+            "rawLosses": 8355,
+            "rawDraws": 26,
+            "frames": 34489311,
+            "recoveryFrames": 5984365,
+            "damage": {
+              "melee": 8735584,
+              "projectile": 3345345,
+              "special": 614545,
+              "throw": 675364
+            },
+            "decidedWinRate": 0.5,
+            "rawDecidedWinRate": 0.5,
+            "drawRate": 0.0002390057361376673,
+            "rawDrawRate": 0.0015535372848948376,
+            "meanSeconds": 34.346429851816445,
+            "meanRecoverySeconds": 5.959573175589548
+          }
+        ]
+      }
+    }
+  ],
+  "trackingCandidateSource": {
+    "commit": "b329efc630deb181ba94d66fea97907245afc873",
+    "sourceSha256": "a7f340e5e1bfc253206eb07d05d306893d15dffc209a84c805f4c2ec9550df71",
+    "simVersion": "dae133515ccb22a6",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "kitFeaturesSha256": "6b5d5990986c239264b1af07922359c3e3d4c37afee9b582a0cafdf412848557"
+}
