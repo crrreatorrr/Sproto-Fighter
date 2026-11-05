@@ -66,7 +66,7 @@ function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost =
 }
 type HealthRecovery={from:number;progress:number};
 
-function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string, bossTitle?:string, recovery?:HealthRecovery) {
+function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string, bossTitle?:string, recovery?:HealthRecovery, meterUnits=0) {
     const x = right ? 765 : 55, width = 460, color = ROSTER[f.id].color;
     text(c, bossTitle??ROSTER[f.id].name, right ? 1225 : 55, 55, 24, '#eaf0f7', right ? 'right' : 'left', 850);
     text(c, (mode === 'versus' ? (right ? 'P2 / ' : 'P1 / ') : right ? (mode === 'cpu' ? 'CPU / ' : 'DUMMY / ') : 'YOU / ') + ROSTER[f.id].role, right ? 1225 : 55, 74, 10, color, right ? 'right' : 'left');
@@ -89,6 +89,10 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
         const px = right ? x + width - 34 - i * 41 : x + i * 41;
         c.fillStyle = i < f.pips ? color : '#25354a';
         poly(c, [[px + 5, 120], [px + 34, 120], [px + 29, 130], [px, 130]], c.fillStyle as string);
+        if(i===f.pips && meterUnits>0){
+            c.save();c.beginPath();c.rect(px,120,34*meterUnits/10000,10);c.clip();
+            poly(c,[[px+5,120],[px+34,120],[px+29,130],[px,130]],color);c.restore();
+        }
     }
     text(c, recovery?'RECOVERING HEALTH':f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, recovery?'#bdffdf':f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
@@ -222,8 +226,8 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         c.restore();
     }
     if(portal)return;
-    health(c, s.fighters[0], false, s.mode,undefined,recovery);
-    health(c, s.fighters[1], true, s.mode,bossTitle);
+    health(c, s.fighters[0], false, s.mode,undefined,recovery,s.matchDepth?.meter[0]);
+    health(c, s.fighters[1], true, s.mode,bossTitle,undefined,s.matchDepth?.meter[1]);
     text(c, s.matchDepth ? 'ROUND '+s.matchDepth.round : 'ROUND 01', 640, 116, 9, '#b9cbdc', 'center');
     if(s.matchDepth){
         text(c, String(Math.ceil(s.matchDepth.remaining/60)),640,96,28,'#fff3ad','center');
