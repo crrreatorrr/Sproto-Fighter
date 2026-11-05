@@ -25,13 +25,15 @@ const bossClips:Partial<Record<BossForm,StoryClip>>={
     giant:'morelight-smoke',mecha:'morelight-mecha',dragon:'nick-dragon',juicy:'juicy-robot',art:'mega-woman-growth',
 };
 
+const BOSS_REVEAL_TICKS=Math.round(.4*TICK_RATE);
+
 export function createStoryAnimation(){
     let plan=storyAnimationPlan('',false),images=new Map<StoryClip,HTMLImageElement>();
     let phase:StoryScenePhase|null=null,index=0,age=0,skipRequested=false,generation=0;
     const consumed=new Set<StoryScenePhase>();
-    let sceneAnchorX:number|null=null,heldOutro=false,blackout=0;
+    let sceneAnchorX:number|null=null,heldOutro=false,blackout=0,reveal=0;
     const facingFor=(id:StoryClip,defeatFacing:number)=>id==='morelight-smoke'?defeatFacing:(id==='vmu-black-hole'||id==='vmu-shield')?1:['nick-juicy','nick-mount','nick-flight','juicy-robot','art-fusion','mega-woman-growth','morelight-shrink','morelight-mecha','morelight-ejection','morelight-wizard','morelight-exit'].includes(id)?1:-1;
-    function reset(){phase=null;index=0;age=0;skipRequested=false;sceneAnchorX=null;heldOutro=false;blackout=0;consumed.clear();}
+    function reset(){phase=null;index=0;age=0;skipRequested=false;sceneAnchorX=null;heldOutro=false;blackout=0;reveal=0;consumed.clear();}
     function clear(){generation++;reset();images.clear();plan=storyAnimationPlan('',false);}
     function finish(){
         if(!phase)return false;
@@ -57,8 +59,16 @@ export function createStoryAnimation(){
         clear,reset,
         startBossBlackout(){blackout=3*TICK_RATE;},
         get blackingOut(){return blackout>0;},
-        advanceBlackout(){return --blackout===0;},
-        cancel(){blackout=0;heldOutro ||= phase==='outro';phase=null;skipRequested=false;},
+        advanceBlackout(){
+            if(--blackout>0)return false;
+            reveal=BOSS_REVEAL_TICKS;return true;
+        },
+        advanceBossReveal(){if(reveal>0)reveal--;},
+        get bossRevealOpacity(){
+            const t=reveal/BOSS_REVEAL_TICKS;
+            return t*t*(3-2*t);
+        },
+        cancel(){blackout=0;reveal=0;heldOutro ||= phase==='outro';phase=null;skipRequested=false;},
         start(next:StoryScenePhase){
             if(phase||consumed.has(next)||!plan[next]?.length||!plan[next].every(id=>images.has(id)))return false;
             consumed.add(next);phase=next;index=0;age=0;skipRequested=false;sceneAnchorX=null;return true;

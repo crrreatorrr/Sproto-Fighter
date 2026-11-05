@@ -55,7 +55,7 @@ check('actual keyboard accepts a fresh Enter only, rejecting Space, combat keys 
  handler({code:'Enter',repeat:false,preventDefault(){}});assert.equal(screen.isOpen,false);assert.ok(c.blockedKeys.has('Enter'));
 });
 function combatFixture(){
- const c={storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,...core,...events,countdown:{advance:()=>false},state:core.createState('highsproto','dummy','vela'),presentation:events.createRoundPresentation(),frames:[],held:new Set(),queued:0,padNeedsRelease:false,qaPanel:null,qaRecord(){},playRetainCallout(){},qaStopAtOutro(){},story:{finishMatch(){},onRoundEnd:()=>false},showOverlay(){}};
+ const c={storyBoss:null,storyBossArt:null,bossStarts:[],godModeChanges:[],storyAnimation:{active:null,advanceBossReveal(){},reset(){},clear(){},start(){return false;},replaceDefeat:false},online:null,...core,...events,countdown:{advance:()=>false},state:core.createState('highsproto','dummy','vela'),presentation:events.createRoundPresentation(),frames:[],held:new Set(),queued:0,padNeedsRelease:false,qaPanel:null,qaRecord(){},playRetainCallout(){},qaStopAtOutro(){},story:{finishMatch(){},onRoundEnd:()=>false},showOverlay(){}};
  const t=ui(()=>{c.held.clear();c.queued=0;c.padNeedsRelease=true;});c.versus=t.screen;vm.createContext(c);vm.runInContext(compile(fn('advanceRoundFrame')),c);return {c,...t};
 }
 check('actual main freezes combat, CPU, replay and entrance clock during versus, then retains the full entrance',()=>{

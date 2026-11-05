@@ -76,6 +76,11 @@ describe('story animation ordering and lifecycle',()=>{
         expect(t.frames).toHaveLength(1);
         t.run(0);
         expect(t.animation.blackingOut).toBe(false);
+        expect(t.animation.bossRevealOpacity).toBe(1);
+        for(let i=0;i<12;i++)t.animation.advanceBossReveal();
+        expect(t.animation.bossRevealOpacity).toBe(.5);
+        for(let i=0;i<12;i++)t.animation.advanceBossReveal();
+        expect(t.animation.bossRevealOpacity).toBe(0);
         expect(t.presentation.phase).toBe('fight');
         expect(t.animation.active).toBeNull();
         expect(t.state.winner).toBeNull();
