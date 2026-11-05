@@ -31,8 +31,11 @@ clients then completed a hub-verified wager and rematch over the relay with
 Tickets conserved and local experimental flags disabled. Direct WebRTC was not
 established in this environment; the default direct-link test remains strict.
 
-The full packed-sheet/roster audit is running separately. Final three-engine CI,
-human feel/contact review, calibrated story targets and full-roster fairness
-remain separate acceptance criteria. Transformed boss forms retain their
+Packed-sheet verification preserved all 29,020 frames. The full runner passed
+70/71 checks; its sole stale guard fixture was corrected, then the complete
+sprite audit passed with 2,076,832 runtime samples, 5,588 replay scenarios and no
+hard failures or art baseline changes. Three-engine CI passed for this simulation
+source. Human feel/contact review, calibrated story targets and full-roster
+fairness remain acceptance criteria. Transformed boss forms retain their
 dedicated controller and are excluded from the optional modifier/difficulty
 claims. Nothing was merged or deployed to production.

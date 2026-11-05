@@ -1,0 +1,13 @@
+{
+  "simulation": "7d0ce00ef52b567a",
+  "auditCommit": "71db3b186393fbf253430e4f05e0907c193cea81",
+  "command": "node scripts/sprite-scale-qa.mjs --out /tmp/sproto-final-sprite-audit",
+  "rawBytes": 51583312,
+  "rawSha256": "9bd3e7a2f0ddb4e45dd3e2e075a90b77e220ba0bd73eee66009a5a3bc024b191",
+  "gzipBytes": 4267534,
+  "hardFailures": 0,
+  "advisoryFlags": 950,
+  "runtimeSamples": 2076832,
+  "replayScenarios": 5588,
+  "artBaselineChanges": 0
+}

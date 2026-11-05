@@ -19,8 +19,8 @@ still-open stacked PRs #17–21 are already ancestors of this integration baseli
 
 These are stacked branches, in the table's order. Later branches include fixture
 reconciliation needed by the combined rules. They remain drafts. The integration
-checkout is `/workspace/Sproto-Integration`, branch
-`codex/gameplay-match-depth-review`.
+branch is `codex/gameplay-match-depth-review`; the full working checkout is
+`/workspace/Sproto-Fighter`.
 
 The matching [hub draft #59](https://github.com/crrreatorrr/metaverse-hub/pull/59)
 vendors simulation `7d0ce00ef52b567a`, matching this Fighter implementation.
@@ -72,8 +72,15 @@ Typecheck, build and 148 unit tests pass. The updated measurement smoke covers
 840 complete-state equality checkpoints, including guarded chip. Node and
 installed Chromium match at 130 checkpoints across 11 scenarios; the GitHub
 three-engine determinism job for this source also passed. Packed sheets verify
-all 29,020 frames unchanged. The full roster audit and corrected chip-aware
-sprite audit are still running; final results will be recorded separately.
+all 29,020 frames unchanged. The complete standalone runner finished 70/71
+checks; its only failure was stale sprite guard expectations. After updating
+those numeric fixtures for chip and faster back-walk, the corrected audit passed:
+254 fighters, 2,076,832 runtime samples, 5,588 replay scenarios, zero hard failures
+and zero art baseline changes. Its 950 advisory silhouette flags remain a visual
+review queue. [Audit evidence](balance/evidence/sprite-audit-final-summary.md)
+includes compressed raw output and hashes. The newly added enabled-mode tooling
+smoke passed separately. A second complete standalone run was not performed.
+The latest documentation/test-only push has a GitHub build still in progress.
 
 Automated Chromium checks exercised Hard CPU play, weapon/paired training,
 recording/looping, overlays, pause and replay. A real Round 1 KO advanced to
