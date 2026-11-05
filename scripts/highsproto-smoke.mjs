@@ -1,3 +1,5 @@
+// Phase 2/3: retimed template recovery/damage and 12% guarded chip; artwork contracts retained.
+import { assertProjectileKit } from './lib/gameplay-fixtures.mjs';
 // Focused High Sproto integration checks. Projectile appearance is reviewed in the browser.
 import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
@@ -11,6 +13,7 @@ const poses=await import(url(compile('../src/poseAtlas.ts').replace("from './cor
 const manifest=JSON.parse(readFileSync(new URL('../public/fighters/pose-atlas.json',import.meta.url),'utf8'));
 globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>structuredClone(manifest)});
 globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.url=value;this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}};
+assertProjectileKit(core,'highsproto');
 const {A,FLOOR,ROSTER,COMBAT_STYLES,PLAYABLE_FIGHTERS,bodyAtlasIds,createState,step}=core;
 assert.ok(PLAYABLE_FIGHTERS.includes('highsproto'));
 assert.equal(ROSTER.highsproto.name,'High Sproto');
@@ -57,7 +60,7 @@ for(const face of [-1,1])for(const air of [false,true])for(const direction of [0
 }
 for(const face of [-1,1])for(const guard of [false,true]){
  const s=createState('highsproto','cpu','rivet');s.fighters[0].x=600;s.fighters[1].x=600+face*260;s.fighters[0].facing=face;s.fighters[1].facing=-face;
- const back=face===1?A.right:A.left;step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(s.fighters[1].hp,1000-(guard?Math.round(58*.12):58),'one joint causes one 58HP hit, guard blocks it');
+ const back=face===1?A.right:A.left;step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(s.fighters[1].hp,1000-(guard?Math.round(43*.12):43),'one joint causes one normalized 43HP hit, guard blocks it');
 }
 const visual=await import(url(compile('../src/powerArt.ts')));const draws=[];
 const context={save(){},restore(){},rotate(){},drawImage(...args){draws.push(args);}};

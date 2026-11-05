@@ -1,3 +1,5 @@
+// Phase 2/3: retimed template recovery/damage and 12% guarded chip; artwork contracts retained.
+import { assertProjectileKit } from './lib/gameplay-fixtures.mjs';
 // Phase 1 deliberately updates numeric combat expectations; authored art contracts remain pinned.
 // Focused Yelnacio Globulous integration checks. Laser appearance is reviewed in the browser.
 import { bundledCore } from './lib/load.mjs';
@@ -12,6 +14,7 @@ const poses=await import(url(compile('../src/poseAtlas.ts').replace("from './cor
 const manifest=JSON.parse(readFileSync(new URL('../public/fighters/pose-atlas.json',import.meta.url),'utf8'));
 globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>structuredClone(manifest)});
 globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}};
+assertProjectileKit(core,'captain');
 const {A,FLOOR,ROSTER,COMBAT_STYLES,PLAYABLE_FIGHTERS,bodyAtlasIds,createState,step,getMove}=core;
 assert.ok(PLAYABLE_FIGHTERS.includes('captain'));
 assert.equal(ROSTER.captain.name,'Yelnacio Globulous');

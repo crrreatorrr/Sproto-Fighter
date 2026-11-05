@@ -43,11 +43,14 @@ check('CPU reaches melee contact against and as the duo in both facings and at e
  assert.equal(probes,pairs.length*4);
 });
 check('CPU special respects root-based reach instead of spending charge beyond its formation',()=>{
- const s=createState('duo','cpu','duo');s.frame=1;s.fighters[1].pips=3;
- s.fighters[1].x=300;s.fighters[0].x=860;
- assert.equal(core.cpuInput(s)&A.special,0);
- s.fighters[0].x=800;
- assert.ok(core.cpuInput(s)&A.special);
+ // Hard CPU has a delayed observation queue and seeded decision pulses.
+ // Observe both cases through real ticks rather than requiring an immediate input.
+ for(const [rootGap,expected]of [[560,false],[500,true]]){
+  const s=createState('duo','cpu','duo');s.fighters[1].pips=3;
+  s.fighters[1].x=300;s.fighters[0].x=300+rootGap;let special=false;
+  for(let t=0;t<90;t++){special||=!!(core.cpuInput(s,1,7)&A.special);step(s,[0,0]);}
+  assert.equal(special,expected,'delayed CPU respects root-based Special reach');
+ }
 });
 check('blue kick recovery returns through its coherent raised-knee pose before planting',()=>{
  assert.deepEqual(manifest.fighters['duo-blue'].frames[19],manifest.fighters['duo-blue'].frames[16]);

@@ -1,3 +1,5 @@
+// Phase 2/3: retimed template recovery/damage and 12% guarded chip; artwork contracts retained.
+import { assertProjectileKit } from './lib/gameplay-fixtures.mjs';
 // Phase 1 deliberately updates numeric combat expectations; authored art contracts remain pinned.
 import { bundledCore } from './lib/load.mjs';
 import assert from 'node:assert/strict';
@@ -8,9 +10,10 @@ const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const load=async p=>import('data:text/javascript;base64,'+Buffer.from(compile(read(p))).toString('base64'));
 const core=await import('data:text/javascript;base64,'+Buffer.from(bundledCore()).toString('base64'));
+assertProjectileKit(core,'vitaliketh');
 const {A,FLOOR,COMBAT_STYLES,createState,step,getMove}=core;
 assert.equal(COMBAT_STYLES.vitaliketh.projectile.shape,'ethereum');
-assert.equal(COMBAT_STYLES.vitaliketh.projectile.speed,10);assert.equal(COMBAT_STYLES.vitaliketh.bolt.damage,54);assert.equal(COMBAT_STYLES.vitaliketh.bolt.startup,18);
+assert.equal(COMBAT_STYLES.vitaliketh.projectile.speed,10);assert.equal(COMBAT_STYLES.vitaliketh.bolt.damage,45);assert.equal(COMBAT_STYLES.vitaliketh.bolt.startup,18);
 assert.deepEqual(COMBAT_STYLES.vitaliketh.specialFrames,[14,25,35,46]);
 let cases=0;
 for(const face of [-1,1])for(const air of [false,true])for(const direction of [0,A.up,A.down,A.left,A.right,A.up|A.left,A.up|A.right,A.down|A.left,A.down|A.right]){

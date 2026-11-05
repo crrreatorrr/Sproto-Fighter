@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const source=bundledCore();
-const {A,FLOOR,PLAYABLE_FIGHTERS,isHorizontalSpit,COMBAT_STYLES,createState,step,getMove}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const core=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const {A,FLOOR,PLAYABLE_FIGHTERS,isHorizontalSpit,COMBAT_STYLES,createState,step,getMove}=core;
 const tick=(s,n,a=0,b=0)=>{for(let i=0;i<n;i++)step(s,[a,b]);};
 let total=0;
 for(const id of PLAYABLE_FIGHTERS){
@@ -24,11 +25,13 @@ for(const id of PLAYABLE_FIGHTERS){
  total++;
  console.log(`PASS: ${id}: four directional inputs / ${isHorizontalSpit(id)?'horizontal':'aimed'} ${style.projectile.shape} casts, ${contacts.length}-contact ${style.specialName}, spend/recovery/no self charge`);
 }
-assert.equal(new Set(Object.values(COMBAT_STYLES).map(s=>JSON.stringify([s.heavy,s.projectile,s.special,s.specialFrames,s.power,s.advance]))).size,PLAYABLE_FIGHTERS.length,'all mechanical profiles differ');
+// Normalization deliberately shares a budget across fighters, replacing intake-order uniqueness.
+assert.equal(new Set(PLAYABLE_FIGHTERS.map(id=>core.BALANCE_KITS[id].archetype)).size,8,'all eight normalized archetypes represented');
+for(const id of PLAYABLE_FIGHTERS)assert.ok(core.BALANCE_KITS[id],id+' complete effective kit');
 for(const id of ['zephyr','guest12','guest10','nate']){const s=createState(id,'cpu');s.fighters[0].x=100;s.fighters[1].x=1200;step(s,[A.bolt,0]);let bounced=false;for(let i=0;i<130;i++){step(s,[0,0]);bounced ||= s.projectiles.some(p=>(p.bounces??0)<COMBAT_STYLES[id].projectile.bounces&&p.vy<0);}assert.ok(bounced,id+' actual floor bounce');}
 for(const id of ['guest08','mandela']){const s=createState(id,'cpu');s.fighters[0].x=100;s.fighters[1].x=1200;step(s,[A.bolt,0]);let returned=false;for(let i=0;i<100;i++){step(s,[0,0]);returned ||= s.projectiles.some(p=>p.vx<0);}assert.ok(returned,id+' return reverses');}
 for(const id of ['vamp','crapto']){const s=createState(id,'cpu');s.fighters[0].hp=500;s.fighters[1].x=570;step(s,[A.bolt,0]);let applied=false;for(let i=0;i<80;i++){step(s,[0,0]);applied ||= id==='vamp'?s.fighters[1].slow>0:s.fighters[0].hp>500;}assert.ok(applied,id+' projectile power on hit');}
-console.log(`PASS: ${total} per-fighter cases, ${PLAYABLE_FIGHTERS.length} unique mechanical profiles, 8 trajectory/power interaction checks.`);
+console.log(`PASS: ${total} per-fighter cases, ${PLAYABLE_FIGHTERS.length} assigned kits across eight budgeted archetypes, 8 trajectory/power interaction checks.`);
 
 const lowerTorsoShot = COMBAT_STYLES.lowernipple.projectile;
 const emitters = [{ forward: 7.5, height: 50 }, { forward: -16.25, height: 55 }];

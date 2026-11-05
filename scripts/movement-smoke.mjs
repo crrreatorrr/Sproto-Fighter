@@ -4,12 +4,12 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
 const source=bundledCore();
-const {A,FLOOR,WALL,GRAVITY,ROSTER,fighterWall,createState,step}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const {A,FLOOR,WALL,GRAVITY,ROSTER,BALANCE_KITS,fighterWall,createState,step}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
 let checks=0;
 const check=(name,fn)=>{fn();checks++;console.log('PASS:',name);};
 function fresh(id='rivet'){const s=createState(id,'dummy');s.fighters[0].x=Math.max(180,fighterWall(id)+20);s.fighters[1].x=850;return s;}
 function tick(s,n=1,input=0){for(let i=0;i<n;i++)step(s,[input,0]);}
-check('all 21 fighters reach full run in 2 frames, reverse in 2, brake in 2',()=>{
+check('all installed fighters reach full walk speed in 2 frames, reverse in 2, brake in 2',()=>{
  for(const id of Object.keys(ROSTER)){const s=fresh(id),f=s.fighters[0],speed=ROSTER[id].speed;
  tick(s,1,A.right);assert.ok(f.vx>0&&f.vx<speed,id+' ramps instead of snapping');
  tick(s,1,A.right);assert.equal(f.vx,speed,id+' full speed');tick(s,2,A.left);assert.equal(f.vx,-speed,id+' reverse');
@@ -128,21 +128,25 @@ function jumpTrajectory(id){
  }
  return {id,height:FLOOR-peak,airFrames:landing-takeoff,takeoff};
 }
-check('firm jump arc measures 134px and 35 airborne frames for Golden Sproto',()=>{
+check('normalized Golden Sproto jump retains a firm 134px, 35-frame arc',()=>{
  const result=jumpTrajectory('rivet');assert.equal(GRAVITY,.85);
- assert.ok(Math.abs(result.height-134.362)<.01,JSON.stringify(result));
+ assert.ok(Math.abs(result.height-134.29)<.01,JSON.stringify(result));
  assert.equal(result.airFrames,35);assert.equal(result.takeoff,2,'preserve directional chord window');
- assert.ok(Math.abs(ROSTER.rivet.speed-5.06)<.001);assert.ok(Math.abs(ROSTER.rivet.jump-15.484)<.001);
+ assert.ok(Math.abs(ROSTER.rivet.speed-5.6)<.001);assert.ok(Math.abs(ROSTER.rivet.jump-15.48)<.001);
 });
-check('all fighters retain controlled 31–35-frame neutral arcs and faster dash impulse',()=>{
+// Phase 1 freezes distinct jump arcs by archetype; Phase 2 keeps the dash impulse.
+const archetypeArcs={Zoning:{height:127.65,airFrames:34},Hover:{height:143.65,airFrames:36}};
+check('all archetypes retain their reviewed 34–36-frame arcs and dash impulse',()=>{
  for(const id of Object.keys(ROSTER)){
-  const result=jumpTrajectory(id);assert.ok(result.airFrames>=31&&result.airFrames<=35,JSON.stringify(result));
-  assert.ok(result.height>=115&&result.height<=135,JSON.stringify(result));
+  const result=jumpTrajectory(id),expected=archetypeArcs[BALANCE_KITS[id].archetype]??{height:134.29,airFrames:35};
+  assert.equal(result.airFrames,expected.airFrames,JSON.stringify(result));
+  assert.ok(Math.abs(result.height-expected.height)<.01,JSON.stringify(result));
+  assert.equal(result.takeoff,2,id+' directional chord window');
   const s=fresh(id),f=s.fighters[0];tick(s,1,A.right|A.dash);
   assert.ok(Math.abs(f.vx-(id==='vela'?13:15)*.94)<.00001,id+' dash impulse changed');assert.equal(f.dash,10);
  }
 });
-check('firmer gravity preserves the human-paced four-hit aerial route for all21 fighters',()=>{
+check('normalized kits preserve the human-paced four-hit aerial route for all installed fighters',()=>{
  for(const id of Object.keys(ROSTER)){
   const s=fresh(id),a=s.fighters[0],b=s.fighters[1];a.x=840;b.x=900;
   tick(s,10,A.launcher);tick(s,7,A.up);tick(s,8,A.light);tick(s,8,A.medium);tick(s,9,A.heavy);
