@@ -5,7 +5,7 @@ import { CombatState, Effect, Fighter } from './types';
 import { createCpuMemory } from './cpuState';
 import { BALANCE_KITS } from './roster';
 import { specialContactDamage } from './balance';
-export const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, reaction:null, throwInvuln:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
+export const makeFighter = (id: FighterId, x: number, facing: number): Fighter => ({ id, x, y: FLOOR, vx: 0, vy: 0, facing, hp: 1000, slow:0, reaction:null, throwInvuln:0, stun: 0, blockstun: 0, move: null, prev: 0, input: 0, buffer: 0, bufferLife: 0, bufferInput:0, usedMoves:{}, dashCanceled:false, jumpBuffer: 0, jumpDelay: 0, airJumps: 0, dash: 0, dashLock: 0, dashBuffer:0, dashDirection:facing, runDirection:0, riseDelay:0, pips: 0, combo: 0, comboDamage: 0, lastFinisher: false, chargeEligible: true, best: 0, flash: 0 });
 export function createState(id: PlayableFighterId = 'rivet', mode: Mode = 'cpu', opponent?: PlayableFighterId): CombatState { if (!PLAYABLE_FIGHTERS.includes(id) || (opponent && !PLAYABLE_FIGHTERS.includes(opponent)))
     throw new Error('Unknown roster selection.'); return { cpu:[createCpuMemory(104729),createCpuMemory(130363)], throwState:null, frame: 0, fighters: [makeFighter(id, 380, 1), makeFighter(opponent ?? (id === 'rivet' ? 'vela' : 'rivet'), 900, -1)], projectiles: [], effects: [], freeze: 0, mode, winner: null, notice: 'LIGHT → MEDIUM → FINISHER', noticeLife: 220 }; }
 export const grounded = (f: Fighter) => f.y >= FLOOR;
@@ -68,7 +68,7 @@ export function beginThrow(s:CombatState,index:number):void {
     s.throwState={attacker:index,victim:1-index,phase:'hold',t:0,direction:a.move.throwDirection??'forward',facing:a.facing,
         startAttackerX:a.x,startVictimX:b.x,startVictimY:b.y,
         gripAttackerX:ax,gripVictimX:ax+a.facing*gap,gripVictimY:Math.min(FLOOR,a.y+hand[1]-torso[1])};
-    a.vx=0;a.vy=0;a.move.hit=true;a.move.connected=false;
+    a.vx=0;a.vy=0;a.runDirection=0;b.runDirection=0;a.move.hit=true;a.move.connected=false;
     b.move=null;b.dash=0;b.blockstun=0;b.reaction=null;
     for(const f of [a,b]){f.buffer=0;f.bufferLife=0;f.jumpBuffer=0;f.jumpDelay=0;f.dashBuffer=0;}
     positionHeldVictim(s);
@@ -130,6 +130,8 @@ export function damage(s: CombatState, index: number, m: Move, kind: MoveId, pro
     b.blockstun = 0;
     b.move = null;
     b.dash = 0;
+    b.runDirection = 0;
+    b.riseDelay = 0;
     b.buffer = 0;
     b.flash = 10;
     b.vx = a.facing * m.push * (a.combo > 0 && !m.finisher ? .55 : 1);
@@ -166,9 +168,11 @@ export function damage(s: CombatState, index: number, m: Move, kind: MoveId, pro
     if (!projectile && a.move) {
         a.move.hit = true;
         a.move.connected = true;
+        a.move.hitConfirmed = true;
     }
     effect(s, b.x - a.facing * 18, b.y - 65, kind === 'special' ? 'special' : 'hit', ROSTER[a.id].color);
-    s.freeze = Math.max(s.freeze, kind === 'heavy' || kind === 'airHeavy' ? 8 : 5);
+    const hitstop = finalSpecial ? 12 : kind === 'heavy' || kind === 'airHeavy' || kind === 'sweep' ? 9 : kind === 'medium' || kind === 'airMedium' ? 6 : 4;
+    s.freeze = Math.max(s.freeze, hitstop);
     return true;
 }
 export function chooseMove(f: Fighter, buttons: number, directions=f.input): MoveId | null {
@@ -208,7 +212,7 @@ export function getMove(f: Fighter, id: MoveId): Move {
  }
  // Melee originates at the front member. The shared root stays between both.
  if(isPairedFighter(f.id)&&!m.projectile&&id!=='special')m.range+=bodySpread(f.id);
- return m;
+ return {...m, startup:Math.max(3,m.startup), active:Math.max(2,m.active), recovery:Math.max(6,m.recovery)};
 }
 export function act(s: CombatState, f: Fighter) {
     if (f.hp<=0 || s.fighters.some(other=>other.hp<=0) || f.stun || f.blockstun || (s.throwState && (s.fighters[s.throwState.attacker]===f || (s.throwState.phase==='hold'&&s.fighters[s.throwState.victim]===f))))
@@ -219,13 +223,14 @@ export function act(s: CombatState, f: Fighter) {
     const directionalChord = (f.input & A.up) && (just & chordAttacks);
     if (directionalChord) f.jumpBuffer = 0;
     if (f.jumpBuffer > 0 && f.jumpDelay === 0) {
-        if (grounded(f) && f.dash <= 8 && (!f.move || (f.move.id === 'launcher' && f.move.connected))) {
+        if (grounded(f) && f.dash <= 8 && (!f.move || ((f.move.id === 'launcher' || f.move.id === 'medium') && f.move.hitConfirmed))) {
             const chasing = f.move?.id === 'launcher';
             f.vy = chasing ? -17 : ROSTER[f.id].jump * -1;
             f.y -= 1;
             f.jumpBuffer = 0;
             f.dash = 0;
             f.dashBuffer = 0;
+            f.runDirection = 0;
             f.move = null;
             if (chasing)
                 f.vx = f.facing * 3;
@@ -260,6 +265,7 @@ export function act(s: CombatState, f: Fighter) {
                 const vertical = spit?0:directions&A.up?-1:directions&A.down?1:0;
                 const horizontal = vertical ? ((directions&A.left)?-1:(directions&A.right)?1:0) : f.facing;
                 f.dash = 0;
+                f.runDirection = 0;
                 // The selected attack wins a simultaneous dash/attack chord.
                 f.dashBuffer = 0;
                 f.move = { id, t: 0, hit: false, connected: false, wave: -1, aim: spit?(grounded(f)&&(directions&A.down)&&!(directions&A.up)?'down':'level'):id==='launcher' && aim==='level'?'up':aim, shotX:horizontal,shotY:vertical, throwDirection:id==='grab'?throwDirection(directions,f.facing):undefined };
@@ -273,7 +279,8 @@ export function act(s: CombatState, f: Fighter) {
     if (!f.move && !f.jumpBuffer && f.dashBuffer>0 && f.dashLock === 0) {
         f.dash = 11;
         f.dashBuffer=0;
-        f.dashLock = 28;
+        f.dashLock = 20;
+        f.runDirection = f.dashDirection;
         f.vx = f.dashDirection * (f.id === 'vela' ? 13 : 15);
         effect(s, f.x, f.y - 50, 'dash', ROSTER[f.id].color);
     }

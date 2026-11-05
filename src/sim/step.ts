@@ -69,7 +69,7 @@ export function step(s: CombatState, inputs: [
         const attacks = pressed & (A.light | A.medium | A.heavy | A.launcher | A.bolt | A.grab | A.special);
         if (attacks) {
             f.buffer = attacks;
-            f.bufferLife = 14;
+            f.bufferLife = 8;
             f.bufferInput = f.input;
             if(f.input&A.up && attacks&(A.light|A.medium|A.heavy|A.grab|(isHorizontalSpit(f.id)?0:A.bolt))){f.jumpBuffer=0;f.jumpDelay=0;}
         }
@@ -88,8 +88,8 @@ export function step(s: CombatState, inputs: [
             f.reaction.t++;
             if(f.reaction.kind==='knockdown'){
                 if(f.reaction.phase==='flight')f.stun=Math.max(f.stun,2);
-                else if(f.reaction.phase==='down'&&f.reaction.t>=KNOCKDOWN_FRAMES){f.reaction.phase='rise';f.reaction.t=0;f.stun=GETUP_FRAMES+1;}
-                else if(f.reaction.phase==='rise'&&f.reaction.t>=GETUP_FRAMES){f.reaction=null;f.stun=0;f.throwInvuln=Math.max(f.throwInvuln,12);}
+                else if(f.reaction.phase==='down'&&f.reaction.t>=(f.riseDelay||KNOCKDOWN_FRAMES)){f.reaction.phase='rise';f.reaction.t=0;f.stun=GETUP_FRAMES+1;}
+                else if(f.reaction.phase==='rise'&&f.reaction.t>=GETUP_FRAMES){f.reaction=null;f.riseDelay=0;f.stun=0;f.throwInvuln=Math.max(f.throwInvuln,12);}
             }else if(f.stun<=1)f.reaction=null;
         }
         if (f.flash > 0)
@@ -109,6 +109,7 @@ export function step(s: CombatState, inputs: [
         if(f.dash>0&&f.dash<=8&&((f.input&A.down)||(horizontal&&horizontal*f.vx<0))){
             f.dash=0;f.dashBuffer=0;
         }
+        if (!(f.input&A.dash) || horizontal!==f.runDirection || horizontal*f.facing<=0 || (f.input&(A.down|A.up)) || f.stun || f.blockstun || f.move) f.runDirection=0;
         act(s, f);
         if (f.dash > 0) {
             f.dash--;
@@ -126,7 +127,8 @@ export function step(s: CombatState, inputs: [
                 if (dir && (dir*f.vx<=0 || Math.abs(f.vx)<speed)) approach(dir * speed, steering);
                 else f.vx *= .995;
             } else if (!f.move) {
-                const target = (f.input & A.down) ? 0 : dir * speed;
+                const running=f.runDirection!==0 && dir===f.runDirection;
+                const target = (f.input & A.down) ? 0 : dir * speed * (running?1.35:1);
                 const acceleration = target === 0 ? speed * .7 : target * f.vx < 0 ? speed * 1.45 : speed * .55;
                 approach(target, acceleration);
             } else if(f.move.id==='special' && f.move.t>=6 && f.move.t<=COMBAT_STYLES[f.id].specialFrames.at(-1)!){f.vx=f.facing*Math.min(COMBAT_STYLES[f.id].advance??0,Math.max(0,(other.x-f.x)*f.facing-65));}
@@ -144,7 +146,7 @@ export function step(s: CombatState, inputs: [
         }
         const nextX=f.x+f.vx;
         f.x = clamp(nextX, fighterWall(f.id), WIDTH - fighterWall(f.id));
-        if(nextX!==f.x){f.vx=0;f.dash=0;f.dashBuffer=0;}
+        if(nextX!==f.x){f.vx=0;f.dash=0;f.dashBuffer=0;f.runDirection=0;}
         if (!grounded(f) || f.vy < 0) {
             f.vy += GRAVITY;
             f.y += f.vy;
@@ -155,7 +157,10 @@ export function step(s: CombatState, inputs: [
                 if (f.move && MOVES[f.move.id].air)
                     f.move = null;
                 if(f.reaction?.kind==='knockdown'&&f.reaction.phase==='flight'){
-                    f.reaction.phase='down';f.reaction.t=0;f.stun=KNOCKDOWN_FRAMES+GETUP_FRAMES+1;
+                    // Down quick-rises; Up delays. Sample on landing, not later during get-up.
+                    f.riseDelay=(f.input&A.down)?6:(f.input&A.up)?24:KNOCKDOWN_FRAMES;
+                    f.jumpBuffer=0;f.jumpDelay=0;
+                    f.reaction.phase='down';f.reaction.t=0;f.stun=f.riseDelay+GETUP_FRAMES+1;
                     f.vx*=.25;effect(s,f.x,FLOOR-8,'hit',ROSTER[f.id].color);
                 }
                 // Resolve a cross-up before executing a buffered grounded action.

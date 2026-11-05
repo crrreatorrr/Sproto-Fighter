@@ -34,8 +34,8 @@ export interface Move {
     projectile?: boolean;
 }
 export const MOVES: Record<MoveId, Move> = {
-    light: { startup: 5, active: 4, recovery: 13, damage: 38, range: 82, stun: 23, push: 5, rank: 1 },
-    medium: { startup: 7, active: 5, recovery: 17, damage: 60, range: 112, stun: 28, push: 8, rank: 2 },
+    light: { startup: 5, active: 4, recovery: 11, damage: 38, range: 82, stun: 23, push: 5, rank: 1 },
+    medium: { startup: 7, active: 5, recovery: 14, damage: 60, range: 112, stun: 28, push: 8, rank: 2 },
     heavy: { startup: 11, active: 6, recovery: 23, damage: 95, range: 135, stun: 32, push: 17, rank: 4, finisher: true },
     low: { startup: 5, active: 5, recovery: 14, damage: 34, range: 95, stun: 24, push: 3, rank: 1, low: true },
     sweep: { startup: 10, active: 6, recovery: 24, damage: 85, range: 135, stun: 32, push: 12, rank: 4, finisher: true, low: true },
@@ -43,7 +43,7 @@ export const MOVES: Record<MoveId, Move> = {
     airMedium: { startup: 6, active: 6, recovery: 14, damage: 58, range: 113, stun: 28, push: 5, rank: 2, air: true },
     airHeavy: { startup: 8, active: 7, recovery: 21, damage: 92, range: 139, stun: 33, push: 14, rank: 4, air: true, finisher: true },
     launcher: { startup: 8, active: 6, recovery: 23, damage: 64, range: 102, stun: 45, push: 3, rank: 3, launch: 16 },
-    bolt: { startup: 16, active: 1, recovery: 27, damage: 55, range: 0, stun: 25, push: 7, rank: 3, projectile: true },
+    bolt: { startup: 16, active: 2, recovery: 27, damage: 55, range: 0, stun: 25, push: 7, rank: 3, projectile: true },
     grab: { startup: 6, active: 3, recovery: 30, damage: 115, range: 72, stun: 35, push: 16, rank: 5, finisher: true },
     special: { startup: 12, active: 40, recovery: 30, damage: 90, range: 680, stun: 28, push: 4, rank: 6 }
 };
@@ -759,7 +759,7 @@ for(const [id,shape]of Object.entries(SIGNATURE_PROJECTILES))if(!AUTHORED_PROJEC
 export type AttackAim = 'level' | 'up' | 'upForward' | 'down';
 export type ThrowDirection = 'forward' | 'back' | 'up' | 'down';
 export const THROW_HOLD_FRAMES=12, THROW_RECOVERY_FRAMES=18;
-export const THROW_CATCH_FRAMES=4, BACK_THROW_LIFT_FRAMES=6, KNOCKDOWN_FRAMES=14, GETUP_FRAMES=6;
+export const THROW_CATCH_FRAMES=4, BACK_THROW_LIFT_FRAMES=6, KNOCKDOWN_FRAMES=12, GETUP_FRAMES=6;
 export interface HitReaction { kind:'recoil'|'launch'|'knockdown'; phase:'flight'|'down'|'rise'; t:number; direction:number; }
 export interface ThrowState {
     attacker:number; victim:number; phase:'hold'|'release'; t:number; direction:ThrowDirection; facing:number;

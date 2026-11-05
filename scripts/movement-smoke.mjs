@@ -114,7 +114,7 @@ check('airborne facing stays stable across opponent, then resolves on touchdown'
 });
 check('frozen-frame attack tap survives and executes once after hitstop',()=>{
  const s=fresh(),f=s.fighters[0];s.freeze=6;tick(s,1,A.light);tick(s,5);
- assert.equal(f.move,null);assert.equal(f.bufferLife,14);tick(s);assert.equal(f.move.id,'light');
+ assert.equal(f.move,null);assert.equal(f.bufferLife,8);tick(s);assert.equal(f.move.id,'light');
  tick(s,30);assert.equal(f.move,null);assert.equal(f.bufferLife,0);
 });
 

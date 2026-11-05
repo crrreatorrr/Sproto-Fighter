@@ -5,6 +5,8 @@ export interface Attack {
     t: number;
     hit: boolean;
     connected: boolean;
+    /** Damage confirmation; connected also includes guard contact. */
+    hitConfirmed?: boolean;
     wave: number;
     aim?: AttackAim;
     shotX?: number;
@@ -41,6 +43,10 @@ export interface Fighter {
     dashBuffer:number;
     /** Direction at the dash press, preserved through hitstop/recovery. */
     dashDirection:number;
+    /** Accepted dash direction for held forward run. */
+    runDirection:number;
+    /** Down-state frames sampled on knockdown landing; zero uses default. */
+    riseDelay:number;
     pips: number;
     combo: number;
     comboDamage: number;
