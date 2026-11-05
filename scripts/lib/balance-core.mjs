@@ -8,13 +8,20 @@ import { join, relative } from 'node:path';
 import { bundle, dataUrl } from './load.mjs';
 
 export const root = fileURLToPath(new URL('../../', import.meta.url));
-const hpAssignment = 'b.hp = Math.max(0, b.hp - (s.godMode && index === 1 ? 0 : amount));';
+const damageDeclaration = 'export function damage(';
 
 /** Fail closed when the observed source changes, rather than silently reporting zero damage. */
 export function instrumentCombat(source) {
-  assert.equal(source.split(hpAssignment).length, 2, 'balance instrumentation: expected exactly one damage HP assignment; review observer against combat.ts');
-  return source.replace(hpAssignment, `const __balanceHpBefore = b.hp;\n    ${hpAssignment}\n    __balanceEvents.push({ frame:s.frame, owner:index, source:projectile?'projectile':kind==='special'?'special':kind==='grab'?'throw':'melee', amount:__balanceHpBefore-b.hp });`)
+  assert.equal(source.split(damageDeclaration).length, 2, 'balance instrumentation: expected exactly one damage function declaration; review observer against combat.ts');
+  return source.replace(damageDeclaration, 'function __balanceOriginalDamage(')
     + '\nconst __balanceEvents: {frame:number;owner:number;source:string;amount:number}[] = [];\n'
+    + `export function damage(s:CombatState,index:number,m:Move,kind:MoveId,projectile=false):boolean {
+      const before=s.fighters[1-index].hp;
+      const hit=__balanceOriginalDamage(s,index,m,kind,projectile);
+      const amount=before-s.fighters[1-index].hp;
+      if(amount>0)__balanceEvents.push({frame:s.frame,owner:index,source:projectile?'projectile':kind==='special'?'special':kind==='grab'?'throw':'melee',amount});
+      return hit;
+    }\n`
     + 'export function __balanceReset(){__balanceEvents.length=0;}\n'
     + 'export function __balanceRead(){return __balanceEvents.map(e=>({...e}));}\n';
 }
