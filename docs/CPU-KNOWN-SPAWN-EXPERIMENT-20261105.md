@@ -35,9 +35,16 @@ These small paired samples are diagnostic and the reference is not a human model
 
 No bout was a draw. Easy gains two wins, Normal loses six, Hard is unchanged and
 Expert gains three. This is not uniform improvement and does not establish a
-15% Easy floor, 65% finale, empirical smoothness or roster balance. Per-encounter
-seeded endpoint measurements are being evaluated independently; no outcome from
-an earlier source version is attributed to this one.
+15% Easy floor, 65% finale, empirical smoothness or roster balance.
+
+Independent actual-endpoint testing on this exact source used 256 seed pairs per
+endpoint. Reverse-seat outcomes were identical: Zephyr at Easy won 8/256 pairs
+(3.125%; Wilson 95% 1.59–6.04%); the ordinary Vela→Vaudream Expert gauntlet won
+241/256 (94.14%; 90.56–96.42%). There were no draws. The tracking baseline was
+4/256 and 231/256 respectively. The opening improves modestly while the finale
+overshoot worsens, so this candidate is held rather than automatically promoted.
+These are 256 paired seeds, not 512 independent observations. Dedicated
+transformed bosses and human calibration remain outside these measurements.
 
 [Raw tracking baseline](balance/cpu-known-spawn-checkpoint-before.json),
 [raw known-spawn checkpoint](balance/cpu-known-spawn-checkpoint-after.json).
@@ -45,7 +52,8 @@ Source/reference hashes, initial seeds, controller assignments and raw outcomes
 are retained. Reproduce with the existing checkpoint script and pinned metrics
 checkout `44f777092c3e4795635879acd9b2fd9171d059b8`.
 
-Thirty-two focused CPU/tracking/opening tests and TypeScript pass. Four new tests
+All 171 unit tests, TypeScript and production build pass. The focused
+CPU/tracking/opening suite has 32 tests. Four new tests
 cover immediate neutral movement, no leak of post-start changes, full visual
 delay and input-only replay through the opening. Full roster/route acceptance,
 three-browser determinism, matching hub bundle, broad gameplay/audit checks and
