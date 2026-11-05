@@ -3,10 +3,11 @@ import { getMove, grounded } from './combat';
 import { A, FLOOR } from './constants';
 import { MOVES, bodySpread } from './roster';
 import { cpuRandom, ensureCpuMemory } from './cpuState';
+import { cpuCastHasLane, cpuTrackingBounds, projectCpuMotion } from './cpuTracking';
 import type { CombatState } from './types';
 
 export const CPU_SKILLS = [1, 4, 7, 10] as const;
-export const CPU_SKILL_VERSION = 3;
+export const CPU_SKILL_VERSION = 4;
 export const CPU_DIFFICULTIES = [
     { name: 'Easy', skill: 1 }, { name: 'Normal', skill: 4 },
     { name: 'Hard', skill: 7 }, { name: 'Expert', skill: 10 },
@@ -52,7 +53,11 @@ export function advanceCpuState(s: CombatState): void {
             memory.choice = cpuRandom(memory); memory.decisionAt = s.frame;
             memory.nextDecision = s.frame + 8 + Math.floor(cpuRandom(memory) * 7);
         }
-        memory.observations.push({ frame: s.frame, combatTick: memory.combatTicks, x: p.x, y: p.y, vy: p.vy, hp: p.hp,
+        const horizontal = ((p.input & A.right) ? 1 : 0) - ((p.input & A.left) ? 1 : 0);
+        const vxDamping = p.stun || p.blockstun ? grounded(p) ? .84 : .985
+            : p.dash ? .94 : p.move && grounded(p) ? .7
+                : grounded(p) && ((p.input & A.down) || !horizontal) ? .3 : grounded(p) ? 1 : .995;
+        memory.observations.push({ frame: s.frame, combatTick: memory.combatTicks, x: p.x, y: p.y, vx: p.vx, vxDamping, vy: p.vy, hp: p.hp,
             move: p.move?.id ?? null, age: p.move?.t ?? 0, startup: move?.startup ?? 0,
             active: move?.active ?? 0, recovery: move?.recovery ?? 0, low: !!move?.low,
             input: p.input, attackRoll: memory.attackRoll, lowRoll: memory.lowRoll, jumpRoll: memory.jumpRoll,
@@ -62,7 +67,8 @@ export function advanceCpuState(s: CombatState): void {
         // Strategic intent uses the oldest retained observation (at least as
         // conservative as Easy's visual delay). Tactical reactions below use skill.
         const perceived = memory.observations[0];
-        const gap = Math.abs(perceived.x - f.x) - bodySpread(f.id) - bodySpread(p.id);
+        const tracked = projectCpuMotion(perceived, memory.combatTicks - perceived.combatTick, cpuTrackingBounds(f, p.id));
+        const gap = Math.abs(tracked.x - f.x) - bodySpread(f.id) - bodySpread(p.id);
         memory.intent = perceived.move && perceived.age >= perceived.startup + perceived.active ? 'punish'
             : (perceived.move || (perceived.attacks > 0 && memory.choice < .85)) && gap < 200 ? 'defend' : gap > 250 && (f.hp > perceived.hp || perceived.projectiles > perceived.attacks / 2)
                 ? 'zone' : gap > 100 ? 'approach' : 'pressure';
@@ -83,8 +89,10 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     if (f.stun || f.hp <= 0) return 0;
     const seen = memory.observations.find(o => o.frame >= s.frame - tuning.reaction);
     if (!seen || s.frame < tuning.reaction) return 0;
-    const toward = seen.x < f.x ? A.left : A.right, away = seen.x < f.x ? A.right : A.left;
-    const distance = Math.max(0, Math.abs(seen.x - f.x) - bodySpread(f.id) - bodySpread(current.id));
+    const elapsed = memory.combatTicks - seen.combatTick;
+    const tracked = projectCpuMotion(seen, elapsed, cpuTrackingBounds(f, current.id));
+    const toward = tracked.x < f.x ? A.left : A.right, away = tracked.x < f.x ? A.right : A.left;
+    const distance = Math.max(0, Math.abs(tracked.x - f.x) - bodySpread(f.id) - bodySpread(current.id));
     const pulse = s.frame - memory.decisionAt < 2;
     const light = getMove(f, 'light'), medium = getMove(f, 'medium'), heavy = getMove(f, 'heavy');
     const meleeGap = (range: number) => range - bodySpread(f.id) - 4;
@@ -134,7 +142,7 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     const projectileActive = s.projectiles.some(p => p.owner === slot && p.life > 0);
     if (seen.shot && memory.choice < tuning.guard) return away | (memory.choice < .15 ? A.down : 0);
     if (f.pips === 3 && pulse && (tuning.skill >= 7 || (tuning.skill >= 4 && memory.choice < .5)) &&
-        (!incoming || unsafe) && Math.abs(seen.x - f.x) - bodySpread(current.id) < getMove(f, 'special').range) return A.special;
+        (!incoming || unsafe) && Math.abs(tracked.x - f.x) - bodySpread(current.id) < getMove(f, 'special').range) return A.special;
     if (grabPlan) return distance < grabGap ? A.grab : approach;
     // Once a pressure plan reaches jab distance, take initiative as soon as
     // our own commitment ends. Move state releases the button on the next tick;
@@ -143,7 +151,7 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     if (!pulse && !pressureReady) return approach;
     if (distance < meleeGap(light.range)) return memory.intent === 'pressure' && memory.choice < .25 ? A.down | A.light : A.light;
     if (distance < meleeGap(medium.range)) return A.medium;
-    if (distance > 240 && !projectileActive && memory.choice < .65) return A.bolt | (f.hp > seen.hp && distance < 340 ? away : 0);
+    if (distance > 240 && !projectileActive && memory.choice < .65 && cpuCastHasLane(s, slot, seen, elapsed)) return A.bolt | (f.hp > seen.hp && distance < 340 ? away : 0);
     if (distance > 200 && memory.choice > .65 && f.dashLock === 0) return toward | A.dash;
     return approach;
 }

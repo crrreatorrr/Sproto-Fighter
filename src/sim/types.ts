@@ -101,7 +101,7 @@ export interface CombatState {
 
 export type CpuIntent = 'approach' | 'zone' | 'pressure' | 'defend' | 'punish';
 export interface CpuObservation {
-    frame: number; combatTick: number; x: number; y: number; vy: number; hp: number;
+    frame: number; combatTick: number; x: number; y: number; vx: number; vxDamping: number; vy: number; hp: number;
     move: MoveId | null; age: number; startup: number; active: number; recovery: number;
     low: boolean; input: number; attackRoll: number; lowRoll: number; jumpRoll: number; shot: boolean;
     /** Habit counts at observation time, so anticipation cannot read future attacks. */
