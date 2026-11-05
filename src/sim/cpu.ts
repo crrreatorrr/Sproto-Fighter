@@ -7,7 +7,7 @@ import { cpuCastHasLane, cpuTrackingBounds, projectCpuMotion } from './cpuTracki
 import type { CombatState } from './types';
 
 export const CPU_SKILLS = [1, 4, 7, 10] as const;
-export const CPU_SKILL_VERSION = 4;
+export const CPU_SKILL_VERSION = 5;
 export const CPU_DIFFICULTIES = [
     { name: 'Easy', skill: 1 }, { name: 'Normal', skill: 4 },
     { name: 'Hard', skill: 7 }, { name: 'Expert', skill: 10 },
@@ -84,11 +84,13 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     if (!memory) return 0;
     // Throw recognition is a separate tactile 3-frame response. The ordinary visual
     // reaction queue cannot fit in the universal 7-frame tech window (Phase 3).
-    if (s.throwState?.phase === 'hold' && s.throwState.victim === slot &&
-        s.throwState.t >= 3 && s.throwState.t <= 6 && memory.throwRoll < tuning.tech) return A.grab;
+    if (s.throwState?.phase === 'hold' && s.throwState.victim === slot) {
+        if (s.throwState.t >= 3 && s.throwState.t <= 6 && memory.throwRoll < tuning.tech) return A.grab;
+        return 0;
+    }
     if (f.stun || f.hp <= 0) return 0;
     const seen = memory.observations.find(o => o.frame >= s.frame - tuning.reaction);
-    if (!seen || s.frame < tuning.reaction) return 0;
+    if (!seen) return 0;
     const elapsed = memory.combatTicks - seen.combatTick;
     const tracked = projectCpuMotion(seen, elapsed, cpuTrackingBounds(f, current.id));
     const toward = tracked.x < f.x ? A.left : A.right, away = tracked.x < f.x ? A.right : A.left;
@@ -120,6 +122,10 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
         if (rank === 2) return approach | A.heavy;
     }
     if (f.move) return 0;
+    // Both static spawn positions were visible during the introduction. Begin
+    // neutral approach from that public fact; no opening attacks or post-start
+    // movement/attack information bypasses the ordinary reaction queue.
+    if (seen.knownSpawn) return approach;
     // Extrapolate the commitment we actually saw. An old recovery observation
     // is not a fresh opening after the reaction queue has already consumed it.
     const projectedAge = seen.age + memory.combatTicks - seen.combatTick;

@@ -101,6 +101,8 @@ export interface CombatState {
 
 export type CpuIntent = 'approach' | 'zone' | 'pressure' | 'defend' | 'punish';
 export interface CpuObservation {
+    /** Static public spawn, known during the introduction; never a post-start sample. */
+    knownSpawn?: boolean;
     frame: number; combatTick: number; x: number; y: number; vx: number; vxDamping: number; vy: number; hp: number;
     move: MoveId | null; age: number; startup: number; active: number; recovery: number;
     low: boolean; input: number; attackRoll: number; lowRoll: number; jumpRoll: number; shot: boolean;

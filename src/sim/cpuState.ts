@@ -17,3 +17,15 @@ export function cpuRandom(memory: CpuMemory): number {
 export function ensureCpuMemory(s: CombatState): [CpuMemory, CpuMemory] {
     return s.cpu ??= [createCpuMemory(104729), createCpuMemory(130363)];
 }
+
+/** Only createState calls this, before any input or motion can occur. */
+export function primeCpuSpawn(s: CombatState): void {
+    for (const slot of [0, 1] as const) {
+        const p = s.fighters[1-slot];
+        ensureCpuMemory(s)[slot].observations.push({ knownSpawn: true,
+            frame: 0, combatTick: 0, x: p.x, y: p.y, vx: 0, vxDamping: 1, vy: 0, hp: p.hp,
+            move: null, age: 0, startup: 0, active: 0, recovery: 0, low: false,
+            input: 0, attackRoll: 1, lowRoll: 1, jumpRoll: 1, shot: false,
+            attacks: 0, lows: 0, projectiles: 0 });
+    }
+}
