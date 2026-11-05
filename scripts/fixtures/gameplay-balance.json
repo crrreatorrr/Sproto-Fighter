@@ -1,5 +1,5 @@
 {
-  "note": "Candidate I from selected F: only Brawler and Paired nearest-body light range become 86; movement, damage, Counter, projectile geometry and identity caps are unchanged.",
+  "note": "Exploratory K from I: beam-only mechanical cost uses the greatest integer fee affordable within existing three-field, ten-percent and three-percent kit caps. Untaxed damage stays fixed before commitment fees; Pressure, drain, geometry and all other kits are unchanged.",
   "fighters": {
     "aaron": {
       "roster": {
@@ -376,6 +376,27 @@
       "blockstun": 13,
       "blockPush": 0.55,
       "chip": 0.12
+    }
+  },
+  "projectileProfiles": {
+    "beam": {
+      "Counter": {
+        "kind": "beam",
+        "base": {
+          "damage": 48,
+          "startup": 18,
+          "recovery": 20
+        },
+        "applied": {
+          "damage": 47,
+          "startup": 19,
+          "recovery": 22
+        },
+        "templateScore": 4.187274090619078,
+        "beforeScore": 4.187274090619078,
+        "afterScore": 4.06767631569396,
+        "feasibleCandidates": 21
+      }
     }
   }
 }

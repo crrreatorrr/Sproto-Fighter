@@ -42,16 +42,22 @@ export function archetypeFor(role:string,paired=false):Archetype {
     return result;
 }
 
-export type IdentityDelta = Partial<Pick<BalanceTemplate,'lightRange'|'heavyRange'|'heavyDamage'|'heavyStartup'>>;
+type RoleDelta = Partial<Pick<BalanceTemplate,'lightRange'|'heavyRange'|'heavyDamage'|'heavyStartup'>>;
+type ProjectileDelta = Partial<Record<'boltDamage'|'boltStartup'|'boltRecovery',number>>;
+export type IdentityDelta = RoleDelta & ProjectileDelta;
 // At most two small, role-based tradeoffs. No per-fighter or list-index bonuses.
-export function identityDeltas(role:string):IdentityDelta {
+export function identityDeltas(role:string):RoleDelta {
     if(role==='STAFF')return {heavyRange:.04,heavyDamage:-.02};
     if(role==='HALBERD')return {heavyRange:.08,heavyDamage:-.04};
     if(role==='SWORD')return {heavyStartup:-.07,heavyDamage:-.02};
     if(role==='SKIRMISH')return {lightRange:.02,heavyDamage:-.02};
     return {};
 }
-export interface BalancedKit { archetype:Archetype; template:BalanceTemplate; deltas:IdentityDelta; moves:Record<MoveId,Move>; projectileSpeed:number; specialFrames:number[]; }
+export interface ProjectileProfileCost {
+    kind:'beam'; base:{damage:number;startup:number;recovery:number}; applied:{damage:number;startup:number;recovery:number};
+    templateScore:number; beforeScore:number; afterScore:number; feasibleCandidates:number;
+}
+export interface BalancedKit { archetype:Archetype; template:BalanceTemplate; deltas:IdentityDelta; moves:Record<MoveId,Move>; projectileSpeed:number; specialFrames:number[]; projectileProfileCost?:ProjectileProfileCost; }
 
 /** Exploratory weights motivated by neutral-mobility and light-spacing measurements. */
 export const BUDGET_WEIGHTS = {light:.65,heavy:.25,projectile:.10,neutralSpeed:5.6,neutralReach:84,safetyFrames:100} as const;
@@ -72,10 +78,10 @@ export function specialContactDamage(total:number,count:number,contact:number):n
     return Math.round(actual/Math.max(.45,1-contact*.08));
 }
 
-export function buildBalancedKit(role:string,paired:boolean,contacts:number,moves:Record<MoveId,Move>,applyIdentity=true):BalancedKit {
-    const archetype=archetypeFor(role,paired),template={...BALANCE_TEMPLATES[archetype]},deltas=applyIdentity?identityDeltas(role):{};
+export function buildBalancedKit(role:string,paired:boolean,contacts:number,moves:Record<MoveId,Move>,applyIdentity=true,mechanics:{beam?:boolean}={}):BalancedKit {
+    const archetype=archetypeFor(role,paired),template={...BALANCE_TEMPLATES[archetype]},deltas:IdentityDelta=applyIdentity?identityDeltas(role):{};
     const t={...template};
-    for(const key of Object.keys(deltas) as (keyof IdentityDelta)[])t[key]=template[key]*(1+deltas[key]!);
+    for(const key of Object.keys(deltas) as (keyof RoleDelta)[])t[key]=template[key]*(1+deltas[key]!);
     const result=Object.fromEntries(Object.entries(moves).map(([id,m])=>[id,{...m}])) as Record<MoveId,Move>;
     result.light={...result.light,range:Math.round(t.lightRange),damage:Math.round(t.lightDamage),startup:t.lightStartup};
     result.heavy={...result.heavy,range:Math.round(t.heavyRange),damage:Math.round(t.heavyDamage),startup:Math.round(t.heavyStartup)};
@@ -88,5 +94,36 @@ export function buildBalancedKit(role:string,paired:boolean,contacts:number,move
     const specialFrames=Array.from({length:contacts},(_,i)=>Math.round(t.specialStartup+(t.specialEnd-t.specialStartup)*i/Math.max(1,contacts-1)));
     result.special={...result.special,startup:specialFrames[0],active:specialFrames.at(-1)!-specialFrames[0]+1,recovery:30,range:t.specialRange,damage:specialContactDamage(t.specialDamage,contacts,0)};
     for(const m of Object.values(result)){m.startup=Math.max(3,m.startup);m.active=Math.max(2,m.active);m.recovery=Math.max(6,m.recovery);}
-    return {archetype,template,deltas,moves:result,projectileSpeed:t.projectileSpeed,specialFrames};
+    let projectileProfileCost:ProjectileProfileCost|undefined;
+    if(mechanics.beam){
+        // This is a bounded exploratory fee for an existing mechanic, not a
+        // premium added to the budget. Base damage is already frozen from the
+        // untaxed template commitment above; longer taxed commitment cannot
+        // automatically increase that damage and undo the fee.
+        const reference=buildBalancedKit(role,paired,contacts,moves,false);
+        const templateScore=budgetScore(reference.moves,reference.projectileSpeed,reference.template);
+        const beforeScore=budgetScore(result,t.projectileSpeed,template),baseBolt={...result.bolt};
+        const roleFields=Object.keys(deltas).length;
+        let best:Move|undefined,bestScore=Infinity,bestDeltas:ProjectileDelta={},feasibleCandidates=0;
+        for(let damage=Math.ceil(baseBolt.damage*.9);damage<=baseBolt.damage;damage++)
+        for(let startup=baseBolt.startup;startup<=Math.floor(baseBolt.startup*1.1);startup++)
+        for(let recovery=baseBolt.recovery;recovery<=Math.floor(baseBolt.recovery*1.1);recovery++){
+            const cost:ProjectileDelta={};
+            if(damage!==baseBolt.damage)cost.boltDamage=(damage-baseBolt.damage)/baseBolt.damage;
+            if(startup!==baseBolt.startup)cost.boltStartup=(startup-baseBolt.startup)/baseBolt.startup;
+            if(recovery!==baseBolt.recovery)cost.boltRecovery=(recovery-baseBolt.recovery)/baseBolt.recovery;
+            if(roleFields+Object.keys(cost).length>3)continue;
+            const candidate={...baseBolt,damage,startup,recovery};
+            const score=budgetScore({...result,bolt:candidate},t.projectileSpeed,template);
+            if(score<templateScore*.97||score>templateScore*1.03)continue;
+            feasibleCandidates++;
+            if(score<bestScore){best=candidate;bestScore=score;bestDeltas=cost;}
+        }
+        if(!best)throw new Error('Beam profile has no fee within the existing identity/budget bounds.');
+        result.bolt=best;Object.assign(deltas,bestDeltas);
+        projectileProfileCost={kind:'beam',base:{damage:baseBolt.damage,startup:baseBolt.startup,recovery:baseBolt.recovery},
+            applied:{damage:best.damage,startup:best.startup,recovery:best.recovery},templateScore,beforeScore,afterScore:bestScore,feasibleCandidates};
+    }
+    return {archetype,template,deltas,moves:result,projectileSpeed:t.projectileSpeed,specialFrames,
+        ...(projectileProfileCost?{projectileProfileCost}:{})};
 }

@@ -1168,7 +1168,7 @@ export const isCrouchingSpit = (f:Fighter) => isHorizontalSpit(f.id) && f.y>=FLO
 
 /** Effective kits are independent of generated intake-list tuning values. */
 export const BALANCE_KITS = Object.fromEntries(PLAYABLE_FIGHTERS.map(id=>{
-    const style=COMBAT_STYLES[id],balanced=buildBalancedKit(style.role,isPairedFighter(id),style.specialFrames.length,MOVES);
+    const style=COMBAT_STYLES[id],balanced=buildBalancedKit(style.role,isPairedFighter(id),style.specialFrames.length,MOVES,true,{beam:(style.projectile.beamLength??0)>0});
     ROSTER[id].speed=balanced.template.speed;
     ROSTER[id].jump=balanced.template.jump;
     style.lightRange=balanced.moves.light.range;
