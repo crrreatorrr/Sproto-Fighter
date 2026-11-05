@@ -126,3 +126,31 @@ it('does not report action timing after the match has ended', () => {
     s.winner = 0;
     expect(advantage(s)).toBe('—');
 });
+
+it('does not predict advantage before later Special waves refresh stun', () => {
+    const s = createState('rivet', 'versus', 'vela');
+    s.fighters[0].x = 550;
+    s.fighters[1].x = 600;
+    s.fighters[0].pips = 3;
+    for (let tick = 0; tick < 100 && !s.fighters[1].stun; tick++) step(s, [tick === 0 ? A.special : 0, 0]);
+    expect(s.fighters[0].move?.wave).toBe(0);
+    expect(s.fighters[1].reaction?.kind).toBe('recoil');
+    expect(nextGrabTick(s, 0)).toBe(86);
+    expect(nextGrabTick(s, 1)).toBe(90);
+    expect(advantage(s)).toBe('—');
+});
+
+it('does not predict advantage while the next projectile in a volley can still hit', () => {
+    const s = createState('d86', 'versus', 'vela');
+    s.fighters[0].x = 350;
+    s.fighters[1].x = 650;
+    for (let tick = 0; tick < 120 && !s.fighters[1].stun; tick++) step(s, [tick === 0 ? A.bolt : 0, 0]);
+    expect(s.fighters[1].stun).toBeGreaterThan(0);
+    expect(s.projectiles.some(p => p.life > 0 && !p.beamHit)).toBe(true);
+    expect(advantage(s)).toBe('—');
+    const hp = s.fighters[1].hp;
+    for (let tick = 0; tick < 100 && s.fighters[1].hp === hp; tick++) step(s, [0, 0]);
+    expect(s.fighters[1].hp).toBeLessThan(hp);
+    expect(s.projectiles).toHaveLength(0);
+    expect(advantage(s)).toBe(signed(nextGrabTick(s, 1) - nextGrabTick(s, 0)));
+});

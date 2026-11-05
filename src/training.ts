@@ -25,10 +25,11 @@ export function trainingReadout(s: CombatState): string {
         // A neutral fighter can act on the next tick, even at stun 1.
         const nextAction = Math.max(1, f.stun, f.blockstun, f.move ? remaining + 1 : 1);
         // Landing can clear air moves early; dash/jump buffers can change the
-        // next action. These and knockdown/throw timing need more than a countdown.
-        const contextual = s.winner !== null || s.throwState || s.fighters.some(fighter =>
+        // next action. Future Special waves/projectiles can refresh stun, while
+        // knockdown/throw timing also needs more than the current countdown.
+        const contextual = s.winner !== null || s.throwState || s.projectiles.some(p => p.life > 0 && !p.beamHit) || s.fighters.some(fighter =>
             fighter.hp <= 0 || !grounded(fighter) || fighter.dash > 0 || fighter.dashBuffer > 0 || fighter.jumpBuffer > 0 ||
-            fighter.reaction?.kind === 'knockdown');
+            fighter.move?.id === 'special' || fighter.reaction?.kind === 'knockdown');
         const advantage = !contextual && (other.stun || other.blockstun)
             ? Math.max(1, other.stun, other.blockstun) - nextAction : null;
         return `P${i+1}: ${inputLabel(f.input)} | ${f.move?.id ?? 'neutral'} | commitment ${remaining}f | uncancelled advantage ${advantage === null ? '—' : (advantage >= 0 ? '+' : '') + advantage + 'f'} | HP ${f.hp}`;
