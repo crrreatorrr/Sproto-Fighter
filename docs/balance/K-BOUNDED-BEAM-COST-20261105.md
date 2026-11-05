@@ -20,4 +20,8 @@ All199 unit tests, TypeScript check, production build and the focused beam/Aaron
 
 Focused budget tests include actual Special casts for all254 leads (270–300 band), all-roster identity/phase bounds, pinned template and profile scores, rejection of the stronger over-budget fee, a hypothetical role-plus-beam allowance case, deterministic construction and unchanged inputs. Beam smoke retains both-facing contact, crouch/block, finite range, moving airborne origin, interruption and replay checks. Updated numeric expectations live outside historical art fixtures.
 
-A small preselected common-seed beam panel must precede any roster screen. Match results and broader acceptance gates are pending; no human feel/playtest claim is made.
+Independent Defense review passed: a separate enumeration across all254 hypothetical beam roles confirmed the legal optimum and field bounds, and the reviewer independently repeated all parity checks. No material finding was reported.
+
+The preselected common-seed beam counterfactual is complete: **1024 bouts total, 512 per core**, with16 opponents chosen mechanically before outcomes, both seats, eight repeats and skills4/7. Natural beam-lead-left wins changed **87→84/128 Normal** and **82→89/128 Hard**. There were no raw draws or unresolved outcomes. Normal mean duration changed24.67→25.62s; Hard30.13→29.46s. The bounded fee does not consistently lower beam win rate in this small panel, so it does not support automatic promotion or a full roster run. This is not a confirmation with100 independent seeds per matchup.
+
+Complete preselection, exact runner, both-seat raw outcomes, reverse-seat bias audit and hashes are in report-only commit `28dab4e97` on the FinalSelected evidence branch: `docs/balance/K-BEAM-COUNTERFACTUAL-20261105.md` and `K-beam-counterfactual/`. No4k/full K screen was run, broader acceptance gates are untested, and no human feel/playtest claim is made.
