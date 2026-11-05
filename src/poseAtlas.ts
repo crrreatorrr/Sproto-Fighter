@@ -205,7 +205,9 @@ async function loadAtlas(id: string, cfg: PoseAtlasConfig, revision?: string): P
   const [frames, walkFrames, clipEntries] = await Promise.all([loadFrames(cfg.frames, 'poses'), cfg.walkFrames ? loadFrames(cfg.walkFrames, 'walk') : undefined, Promise.all(Object.entries(cfg.clips??{}).map(async ([name,entries])=>[name,await loadFrames(entries!,name)] as const))]);
   const sheet = sheetImage ? await sheetImage : null, bitmaps = sheet ? [sheet] : [];
   const bytes = [...bitmaps, ...ownImages].reduce((sum, image) => { const [w, h] = imageSize(image); return sum + w * h * 4; }, 0);
-  return { frames, walkFrames, clips:Object.fromEntries(clipEntries), scale: cfg.scale ?? cfg.worldHeight! / cfg.height, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact, bytes, bitmaps };
+  // Juicy's regular atlas scales around each cel's foot anchor. His story mecha uses separate art.
+  const scale=(cfg.scale ?? cfg.worldHeight! / cfg.height)*(id==='guest07'?1.1:1);
+  return { frames, walkFrames, clips:Object.fromEntries(clipEntries), scale, facing: cfg.facing ?? 1, cycle: cfg.walkCycleDistance ?? 72, holdContact:cfg.holdContact, bytes, bitmaps };
 }
 /** Optional installation: 404 or an empty roster returns false. Invalid manifests
  * and failed assets reject and expose an error status; no partial atlas is used.

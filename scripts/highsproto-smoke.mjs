@@ -10,7 +10,7 @@ const core=await import(cu);
 const poses=await import(url(compile('../src/poseAtlas.ts').replace("from './core'",`from '${cu}'`).replace("from './animationEvents'",`from '${eu}'`)));
 const manifest=JSON.parse(readFileSync(new URL('../public/fighters/pose-atlas.json',import.meta.url),'utf8'));
 globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>structuredClone(manifest)});
-globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}};
+globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.url=value;this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);queueMicrotask(()=>this.onload());}};
 const {A,FLOOR,ROSTER,COMBAT_STYLES,PLAYABLE_FIGHTERS,bodyAtlasIds,createState,step}=core;
 assert.ok(PLAYABLE_FIGHTERS.includes('highsproto'));
 assert.equal(ROSTER.highsproto.name,'High Sproto');
@@ -59,7 +59,11 @@ for(const face of [-1,1])for(const guard of [false,true]){
  const s=createState('highsproto','cpu','rivet');s.fighters[0].x=600;s.fighters[1].x=600+face*260;s.fighters[0].facing=face;s.fighters[1].facing=-face;
  const back=face===1?A.right:A.left;step(s,[A.bolt,guard?back:0]);tick(s,65,0,guard?back:0);assert.equal(s.fighters[1].hp,guard?1000:942,'one joint causes one 58HP hit, guard blocks it');
 }
-const visual=await import(url(compile('../src/powerArt.ts')));const boxes=[];
-const context={save(){},restore(){},fillRect(x,y,w,h){boxes.push({x,y,w,h,color:this.fillStyle});}};
-visual.drawPower(context,'joint',0,'#ef473b');assert.ok(boxes.some(r=>r.w>=30&&r.h<=8),'rolled paper silhouette');assert.ok(boxes.some(r=>r.color==='#f5efd9'),'off-white paper');assert.ok(boxes.some(r=>r.color==='#c7a478'),'tan end');assert.ok(boxes.some(r=>r.color==='#ff7040'),'glowing tip');
-console.log(`PASS: ${cases} joint ground/air/facing/aim cases; finger-flick emission, straight fast travel, 4 hit/block outcomes and rolled-paper/tan-end/ember rendering.`);
+const visual=await import(url(compile('../src/powerArt.ts')));const draws=[];
+const context={save(){},restore(){},rotate(){},drawImage(...args){draws.push(args);}};
+await visual.ensurePowerArt();
+visual.drawPower(context,'joint',0,'#ef473b');
+assert.equal(draws.length,1);
+assert.equal(draws[0][0].url,'/fighters/powers/highsproto-weed-leaf.png');
+assert.equal(draws[0][3],42);
+console.log(`PASS: ${cases} projectile ground/air/facing/aim cases; finger-flick emission, straight fast travel, 4 hit/block outcomes and weed-leaf sprite rendering.`);

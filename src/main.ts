@@ -164,7 +164,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false) {
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
     // Usually already prefetched; otherwise the rest of the bodies load now.
     $('selection-loading').textContent='Loading selected fighters…';
-    try{await Promise.all([ensurePoseAtlases(requiredFighters,{pin:true}),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
+    try{await Promise.all([ensurePoseAtlases(requiredFighters,{pin:true}),requiredFighters.some(id=>['michael','sproto2531','sproto3106','vitaliketh','highsproto'].includes(id))?ensurePowerArt():Promise.resolve()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
     if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
     try{
@@ -588,7 +588,10 @@ function showOnlineOverlay(title: string, copy: string, button: string, kicker: 
 async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId], stageId: string, wager: boolean) {
     const stage = (STAGES.some(s => s.id === stageId) ? stageId : 'ranch') as StageId;
     showOnlineOverlay('Opponent found!', 'Loading fighters…', 'Loading…', 'ONLINE', null);
-    await Promise.all([loadStageArt([stage]), ensurePoseAtlases(fighters,{pin:true}).catch(() => undefined)]);
+    await Promise.all([
+        loadStageArt([stage]),ensurePoseAtlases(fighters,{pin:true}).catch(()=>undefined),
+        fighters.includes('highsproto')?ensurePowerArt().catch(()=>undefined):Promise.resolve(),
+    ]);
     if (match !== online || !match.session) return;
     chosen = fighters[0]; opponent = fighters[1]; mode = 'versus';
     matchTesting = false; matchGodMode = false;
