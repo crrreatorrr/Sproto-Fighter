@@ -1,4 +1,4 @@
-import { A, getMove, type CombatState } from './core';
+import { A, COMBAT_STYLES, getHitbox, getHurtbox, getMove, getProjectileHitbox, type CombatState } from './core';
 const actions = Object.entries(A);
 export const inputLabel = (mask: number): string => actions.filter(([, bit]) => mask & bit).map(([name]) => name).join(' + ') || 'neutral';
 const mirror = (mask: number): number => (mask & ~(A.left | A.right)) | (mask & A.left ? A.right : 0) | (mask & A.right ? A.left : 0);
@@ -23,4 +23,24 @@ export function trainingReadout(s: CombatState): string {
         const advantage = other.stun || other.blockstun ? Math.max(other.stun, other.blockstun) - remaining : null;
         return `P${i+1}: ${inputLabel(f.input)} | ${f.move?.id ?? 'neutral'} | commitment ${remaining}f | advantage ${advantage === null ? '—' : (advantage >= 0 ? '+' : '') + advantage + 'f'} | HP ${f.hp}`;
     }).join('\n');
+}
+
+/** Draw the same frozen world rectangles used by collision, without changing combat state. */
+export function drawTrainingGeometry(c: CanvasRenderingContext2D, s: CombatState): void {
+    c.save();
+    c.lineWidth = 2;
+    const rectangle = (box: { left: number; right: number; top: number; bottom: number }, color: string) => {
+        c.strokeStyle = color;
+        c.strokeRect(box.left, box.top, box.right - box.left, box.bottom - box.top);
+    };
+    for (const f of s.fighters) {
+        const move = f.move ? getMove(f, f.move.id) : undefined;
+        rectangle(getHurtbox(f, move), f.strikeInvuln > 0 ? '#aaaaaa' : '#65ef8e');
+        if (!f.move || !move || move.projectile) continue;
+        const active = f.move.id === 'special' ? COMBAT_STYLES[f.id].specialFrames.includes(f.move.t)
+            : f.move.t >= move.startup && f.move.t < move.startup + move.active;
+        if (active) rectangle(getHitbox(f, f.move.id, move), '#ff6a69');
+    }
+    for (const p of s.projectiles) if (p.life > 0 && !p.beamHit) rectangle(getProjectileHitbox(p), '#6ad8ff');
+    c.restore();
 }

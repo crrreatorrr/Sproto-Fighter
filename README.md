@@ -122,10 +122,22 @@ Three damaging hits ending in a finisher earn one pip when the combo ends;
 three pips enable the Team Special. Blocks and misses grant no charge.
 
 Try J → K → L close to a standing dummy, or U → W → J → K → L for an air route.
-Attacks buffer for 14 simulation frames, with hit/block cancels and bounded
+Attacks buffer for 8 simulation frames, with hit/block cancels and bounded
 juggles. Organic spit travels horizontally even when crouching or airborne.
 Yannix emits a horizontal forehead mind beam. Other projectiles retain their
 own trajectories. All rounds are untimed.
+
+Gameplay changes are being evaluated in staged drafts described in
+[the gameplay plan](docs/GAMEPLAY-PLAN-20261105.md) and [measurement notes](docs/balance/README.md).
+Free fights have Easy, Normal, Hard and Expert CPU choices (Normal by default).
+Story difficulty follows the actual 247-encounter route and offers an optional
+easier retry after three losses on an encounter.
+
+For the local experimental rules, open `/?matchDepth`: best of three round wins,
+a 60-second combat clock, counter-hits, defense meter and just-defend. Open
+`/?training` with a practice dummy for exact collision rectangles, input/advantage
+readouts and route recording. These flags do not enable the experimental round
+rules online. [Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
 
 ## Architecture and verification
 

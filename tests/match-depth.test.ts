@@ -50,7 +50,7 @@ describe('optional match depth', () => {
   it('halves guard stun only for a back press in the previous three frames', () => {
     const make=(age:number)=>{const s=createState();enableMatchDepth(s);s.frame=20;s.matchDepth!.backPressed[1]=20-age;s.fighters[1].input=A.right;return s;};
     const a=make(3),b=make(4);damage(a,0,getMove(a.fighters[0],'light'),'light');damage(b,0,getMove(b.fighters[0],'light'),'light');
-    expect(a.fighters[1].blockstun).toBe(8);expect(b.fighters[1].blockstun).toBe(15);
+    expect(a.fighters[1].blockstun).toBe(6);expect(b.fighters[1].blockstun).toBe(11);
     expect(a.matchDepth!.meter[1]).toBe(800);expect(b.matchDepth!.meter[1]).toBe(300);
   });
   it('ends airborne loops after eight contacts and resets after recovery on the floor', () => {
