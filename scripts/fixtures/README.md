@@ -23,3 +23,9 @@ The duo CPU Special reach fixture now advances real ticks to fill the bot's
 observation queue and tests Hard decision pulses inside/outside the same root
 range; it no longer assumes an instantaneous CPU response. Artwork, pose slots,
 paired identities, throw grips and playback checks remain in place.
+
+Exploratory role calibration retains those movement and ranged values. Footwork
+ground light now starts in 6 frames for 34 damage; Zoning/Brawler nearest-body
+light reach is 94 and Weapon reach 100. The V2 SKIRMISH identity tradeoff uses
++2% heavy reach and −2% heavy damage. Numeric kit pins are refreshed; this does
+not claim the unresolved roster-wide balance gate passes.

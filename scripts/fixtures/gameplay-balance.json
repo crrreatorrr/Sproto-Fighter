@@ -1,5 +1,5 @@
 {
-  "note": "Role-only calibration candidate: movement retained, Footwork ground-light commitment tax and slower-role reach compensation; historical art snapshots remain unchanged.",
+  "note": "Role-only calibration candidate v2: preserved movement, Footwork ground-light commitment tax; slower-role reach compensation; SKIRMISH heavy-reach tradeoff. Historical art snapshots remain unchanged.",
   "fighters": {
     "aaron": {
       "roster": {
@@ -17,13 +17,13 @@
         "role": "SKIRMISH",
         "specialName": "SPROTO BURST aaron",
         "signature": "Guarded footwork, a heavy kick and four-contact ranged relay.",
-        "lightRange": 88,
+        "lightRange": 86,
         "heavy": {
           "startup": 11,
           "active": 6,
           "recovery": 23,
           "damage": 91,
-          "range": 140,
+          "range": 143,
           "stun": 32,
           "push": 17,
           "rank": 4,
@@ -79,13 +79,13 @@
         "role": "SKIRMISH",
         "specialName": "SPROTO BURST 3215",
         "signature": "Guarded footwork, a heavy kick and four-contact ranged relay.",
-        "lightRange": 88,
+        "lightRange": 86,
         "heavy": {
           "startup": 11,
           "active": 6,
           "recovery": 23,
           "damage": 91,
-          "range": 140,
+          "range": 143,
           "stun": 32,
           "push": 17,
           "rank": 4,

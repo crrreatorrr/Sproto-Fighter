@@ -1,5 +1,6 @@
 // Numeric combat templates. Rendering metadata and source artwork are never inputs.
 import type { Move, MoveId } from './roster';
+import defense from './data/hitboxes.json';
 
 export type Archetype = 'Pressure' | 'Footwork' | 'Zoning' | 'Counter' | 'Brawler' | 'Weapon' | 'Paired' | 'Hover';
 export interface BalanceTemplate {
@@ -47,17 +48,21 @@ export function identityDeltas(role:string):IdentityDelta {
     if(role==='STAFF')return {heavyRange:.04,heavyDamage:-.02};
     if(role==='HALBERD')return {heavyRange:.08,heavyDamage:-.04};
     if(role==='SWORD')return {heavyStartup:-.07,heavyDamage:-.02};
-    if(role==='SKIRMISH')return {lightRange:.02,heavyDamage:-.02};
+    if(role==='SKIRMISH')return {heavyRange:.02,heavyDamage:-.02};
     return {};
 }
 export interface BalancedKit { archetype:Archetype; template:BalanceTemplate; deltas:IdentityDelta; moves:Record<MoveId,Move>; projectileSpeed:number; specialFrames:number[]; }
 
-/** Mobility and light spacing matter in neutral; the seeded tournament calibrates role-level weights. */
+/** Exploratory weights motivated by neutral-mobility and light-spacing measurements. */
+export const BUDGET_WEIGHTS = {light:.65,heavy:.25,projectile:.10,neutralSpeed:5.6,neutralReach:84,safetyFrames:100} as const;
 export function budgetScore(moves:Record<MoveId,Move>,projectileSpeed:number,mobility:Pick<BalanceTemplate,'speed'|'jump'>=base):number {
-    const melee=(m:Move)=>m.damage/(m.startup+m.active+m.recovery)*(1+m.range/160)*(1+(15-m.recovery)/100);
+    const melee=(id:'light'|'heavy')=>{
+        const m=moves[id],advantage=(m.blockstun??defense.moves[id].blockstun)-(m.active+m.recovery-1);
+        return m.damage/(m.startup+m.active+m.recovery)*(1+m.range/160)*(1+advantage/BUDGET_WEIGHTS.safetyFrames);
+    };
     const shot=moves.bolt.damage*projectileSpeed/(moves.bolt.startup+moves.bolt.recovery);
-    const speed=mobility.speed/5.6,reach=moves.light.range/84;
-    return (.65*melee(moves.light)+.25*melee(moves.heavy)+.10*shot)*speed*speed*reach;
+    const speed=mobility.speed/BUDGET_WEIGHTS.neutralSpeed,reach=moves.light.range/BUDGET_WEIGHTS.neutralReach;
+    return (BUDGET_WEIGHTS.light*melee('light')+BUDGET_WEIGHTS.heavy*melee('heavy')+BUDGET_WEIGHTS.projectile*shot)*speed*speed*reach;
 }
 
 /** Nominal total if contacts stay in one combo; real-step tests also cover combo resets. */

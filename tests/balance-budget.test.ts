@@ -1,7 +1,18 @@
 import { describe, expect, it } from 'vitest';
 import { A, BALANCE_KITS, BALANCE_TEMPLATES, COMBAT_STYLES, MOVES, PLAYABLE_FIGHTERS, ROSTER, bodySpread, buildBalancedKit, budgetScore, createState, getMove, isPairedFighter, step } from '../src/core';
+import { BUDGET_WEIGHTS } from '../src/sim/balance';
 
 describe('normalized combat budgets',()=>{
+    it('pins exploratory weights and all eight template budget scores for review',()=>{
+        expect(BUDGET_WEIGHTS).toEqual({light:.65,heavy:.25,projectile:.10,neutralSpeed:5.6,neutralReach:84,safetyFrames:100});
+        const expected={Pressure:4.075285550986842,Footwork:4.769255013359776,Zoning:4.166292423161414,Counter:4.249954987105721,
+            Brawler:4.136182307507014,Weapon:4.531271995123704,Paired:3.963637100368108,Hover:3.8538059152521815};
+        for(const [archetype,score] of Object.entries(expected)){
+            const id=PLAYABLE_FIGHTERS.find(id=>BALANCE_KITS[id].archetype===archetype)!;
+            const k=buildBalancedKit(COMBAT_STYLES[id].role,isPairedFighter(id),COMBAT_STYLES[id].specialFrames.length,MOVES,false);
+            expect(budgetScore(k.moves,k.projectileSpeed,k.template),archetype).toBeCloseTo(score,12);
+        }
+    });
     it('charges for faster neutral movement and longer effective light reach',()=>{
         const k=BALANCE_KITS.rivet;
         const base=budgetScore(k.moves,k.projectileSpeed,{speed:5.6,jump:15.48});
@@ -10,6 +21,8 @@ describe('normalized combat budgets',()=>{
         expect(budgetScore(extended,k.projectileSpeed,{speed:5.6,jump:15.48})).toBeGreaterThan(base);
         const committed={...k.moves,light:{...k.moves.light,startup:k.moves.light.startup+1,damage:k.moves.light.damage-4}};
         expect(budgetScore(committed,k.projectileSpeed,{speed:5.6,jump:15.48})).toBeLessThan(base);
+        const safer={...k.moves,heavy:{...k.moves.heavy,blockstun:22}};
+        expect(budgetScore(safer,k.projectileSpeed,k.template)).toBeGreaterThan(base);
         expect(BALANCE_TEMPLATES.Pressure.speed).toBe(5.6);
         expect(BALANCE_TEMPLATES.Footwork.speed).toBe(6.2);
         expect(BALANCE_TEMPLATES.Brawler.speed).toBe(5.2);
