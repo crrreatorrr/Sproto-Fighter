@@ -84,7 +84,9 @@ describe('seeded CPU controller', () => {
         }
     });
     it('does not anticipate attacks from habit counts still hidden behind the reaction queue', () => {
-        const state=neutralRead(90),memory=state.cpu![0];
+        // Stay outside both the high and low ranges; this checks hidden
+        // information rather than which valid pressure spacing was selected.
+        const state=neutralRead(100),memory=state.cpu![0];
         for(const observation of memory.observations){observation.attacks=0;observation.lows=0;}
         memory.habits.attacks=100;memory.habits.lows=100;
         expect(cpuInput(state,0,4)).toBe(A.right);

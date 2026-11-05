@@ -93,11 +93,20 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     // Forecast defense is separate from the published visible-attack guard
     // probability. Disjoint intervals reserve space for guard, jab and throw.
     const forecastGuardShare = tuning.guard * (1 - grabChance) * .9;
+    let jabInput = memory.intent === 'pressure' && memory.choice < .25 ? A.down | A.light : A.light;
+    const jabEnd = 1 - grabChance;
+    if (grounded(f) && memory.choice >= forecastGuardShare && memory.choice <= jabEnd) {
+        const variant = (memory.choice - forecastGuardShare) / (jabEnd - forecastGuardShare);
+        jabInput = variant < .25 ? A.down | A.light : A.light;
+    }
+    // Pick the variant before spacing. A selected grounded low owns its real
+    // reach; an unrelated low plan must not change an active combo's movement.
+    const jabRange = grounded(f) && !f.move && (jabInput & A.down) ? getMove(f, 'low').range : light.range;
     // A throw read has to close beyond jab spacing. Keep that seeded plan for
     // the decision interval instead of stopping forever outside grab reach.
     const grabGap = meleeGap(getMove(f, 'grab').range);
     const grabPlan = memory.choice > 1 - grabChance && grounded(f) && seen.y >= FLOOR && distance < 160;
-    const pressureGap = grabPlan ? grabGap : meleeGap(light.range);
+    const pressureGap = grabPlan ? grabGap : meleeGap(jabRange);
     const approach = memory.intent === 'zone' && distance > 200
         ? distance < 310 ? away : 0 : distance > pressureGap ? toward : 0;
     const expectsLow = seen.low || (seen.attacks > 0 && seen.lows / seen.attacks > .2);
@@ -139,19 +148,9 @@ export function cpuInput(s: CombatState, slot: 0 | 1 = 1, skill = 4): number {
     // Once a pressure plan reaches jab distance, take initiative as soon as
     // our own commitment ends. Move state releases the button on the next tick;
     // the seeded interval chooses the plan, not a periodic attack metronome.
-    const pressureReady = distance < meleeGap(light.range) && memory.choice >= forecastGuardShare;
+    const pressureReady = distance < meleeGap(jabRange) && memory.choice >= forecastGuardShare;
     if (!pulse && !pressureReady) return approach;
-    if (distance < meleeGap(light.range)) {
-        const jabEnd = 1 - grabChance;
-        if (grounded(f) && memory.choice >= forecastGuardShare && memory.choice <= jabEnd) {
-            // Guard/throw already consumed the other intervals. Choose the
-            // grounded jab variant within its own interval, regardless of the
-            // older strategic label (which may still say "defend").
-            const variant = (memory.choice - forecastGuardShare) / (jabEnd - forecastGuardShare);
-            return variant < .25 ? A.down | A.light : A.light;
-        }
-        return memory.intent === 'pressure' && memory.choice < .25 ? A.down | A.light : A.light;
-    }
+    if (distance < meleeGap(jabRange)) return jabInput;
     if (distance < meleeGap(medium.range)) return A.medium;
     if (distance > 240 && !projectileActive && memory.choice < .65) return A.bolt | (f.hp > seen.hp && distance < 340 ? away : 0);
     if (distance > 200 && memory.choice > .65 && f.dashLock === 0) return toward | A.dash;
