@@ -1,12 +1,15 @@
 // Golden state-hash fixture: the scripted determinism scenario plus long seeded
 // CPU-vs-CPU matches. tests/golden-state-hashes.test.ts recomputes these and
-// compares them with tests/fixtures/golden-state-hashes.json, so a refactor that
-// changes any simulated state fails even when every engine agrees with the others.
+// compares them with tests/fixtures/golden-state-hashes.json, so a change to any
+// simulated state fails even when every engine agrees with the others. The hash is
+// FNV-1a of the state's JSON, so it also covers field names and key order:
+// renaming or reordering state fields moves every hash even when behaviour is the
+// same. It proves neutrality only for refactors that leave the state shape alone.
 // Pure: no clocks, no Math.random, no DOM. Takes the sim through `core`.
 import { runScenario } from './determinism-scenario.mjs';
 
 export const GOLDEN_VERSION = 1;
-export const CPU_CHECK_EVERY = 300;
+export const CPU_CHECK_EVERY = 120;
 
 /** Long CPU-vs-CPU fights. Seeds replace the CPU memories' Park-Miller seeds; the
  * third match plays best-of-three match-depth rounds. Each covers different kits:

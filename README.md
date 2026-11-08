@@ -152,7 +152,11 @@ rules online. [Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
   `tests/golden-state-hashes.test.ts` (in `npm test`) also replays the same
   scripted scenario and three long seeded CPU-vs-CPU matches and compares
   every `hashState` checkpoint with `tests/fixtures/golden-state-hashes.json`,
-  so a refactor that should not change the game can prove it. A deliberate
+  both through `src/core` and through the hub's ES2015 server bundle. A
+  refactor that leaves the stored state's shape alone (code renames, moves,
+  derived selectors) can prove it did not change the game. The hash is taken
+  over the state's JSON, so renaming, adding or reordering state fields
+  changes every hash even when behaviour is identical. A deliberate
   behaviour change regenerates it locally with `UPDATE_GOLDENS=1 npx vitest run
   tests/golden-state-hashes.test.ts` (refused when `CI` is set).
 - `src/poseAtlas.ts`: complete-body frame playback, paired identities, stable
