@@ -28,6 +28,11 @@ import { connectHub, hubConfigured, type HubLink } from './hub/link';
 import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
+import { crashGuard, createFrameLoop } from './crash';
+import { showCrashPanel } from './crashPanel';
+// Uncaught errors and rejections share the frame loop's counter; the panel opens once the game pauses.
+crashGuard.install(window);
+crashGuard.onFatal(report => showCrashPanel(report));
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
 $('roster-count').textContent=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · UNLIMITED ROUND TIME`;
@@ -727,7 +732,7 @@ function startHiddenClock() {
     if (hiddenClock || typeof Worker === 'undefined') return;
     const source = URL.createObjectURL(new Blob(['setInterval(() => postMessage(0), 16);'], { type: 'text/javascript' }));
     hiddenClock = new Worker(source);
-    hiddenClock.onmessage = () => { if (document.hidden && online) stepTo(performance.now()); };
+    hiddenClock.onmessage = () => { if (document.hidden && online && !crashGuard.paused) stepTo(performance.now()); };
 }
 function stopHiddenClock() { hiddenClock?.terminate(); hiddenClock = null; }
 
@@ -858,7 +863,8 @@ function stepTo(now: number) {
         }
     }
 }
-function tick(now: number) {
+/** One rendered frame. The loop below runs it through the crash guard (crash.ts). */
+function frameTick(now: number) {
     stepTo(now);
     sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
     const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
@@ -896,12 +902,14 @@ function tick(now: number) {
     if (trainingPanel) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${training?.recording ? 'ON' : 'off'} · ${training?.frames.length ?? 0} frames · playback ${training?.playing ? 'ON' : 'off'}`;
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = storyBoss ? 'Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · X shield · C beam · V ball · R retry' : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
-    requestAnimationFrame(tick);
 }
+/** Always reschedules, even when a frame throws; a throw ends that frame's fixed steps.
+ * After a few failing frames in a row the game pauses and shows "Something broke". */
+const tick = createFrameLoop(frameTick);
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
-ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);crashGuard.report(error,'boot');});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
