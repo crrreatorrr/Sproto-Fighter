@@ -149,6 +149,12 @@ rules online. [Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
   throws, damage, move selection), `cpu.ts` and `step.ts` (the fixed 60 Hz
   step, deterministic math and `hashState`). It produces identical results in
   every browser engine; `scripts/determinism-smoke.mjs` checks this.
+  `tests/golden-state-hashes.test.ts` (in `npm test`) also replays the same
+  scripted scenario and three long seeded CPU-vs-CPU matches and compares
+  every `hashState` checkpoint with `tests/fixtures/golden-state-hashes.json`,
+  so a refactor that should not change the game can prove it. A deliberate
+  behaviour change regenerates it locally with `UPDATE_GOLDENS=1 npx vitest run
+  tests/golden-state-hashes.test.ts` (refused when `CI` is set).
 - `src/poseAtlas.ts`: complete-body frame playback, paired identities, stable
   formations, camera clearance and event presentation. Paired menu
   normalization does not change fight scale. `pose-atlas.json` is the single
