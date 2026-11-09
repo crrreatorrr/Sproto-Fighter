@@ -1,17 +1,34 @@
-# Vendor
+# Vendored @metaverse/hub-sdk
 
-`@metaverse/hub-sdk` 0.6.0 packed from https://github.com/crrreatorrr/metaverse-hub
-(`packages/hub-sdk`, branch `claude/kind-bardeen-h2fhj8`, commit `ee187cf`), the commit that
-adds the `sproto-arcade` game id, the `breakwater_coin` Relic, the `arcade.boss_defeated` event
-and optional cloud saves. That hub commit was not yet merged to `main` when this copy was made.
-Source maps were removed.
+- repo: https://github.com/crrreatorrr/metaverse-hub
+- branch: main
+- sha: 5cc4e48
+- package: packages/hub-sdk @ 0.6.3
+- built with: `node scripts/vendor-sdk.mjs`
+- iife: dist/hub-sdk.iife.js (global HubSDK; classic script, not a CDN import)
+- iife sha256: 4ceb36321fc09820c4ef6292b8bd31ebaa198f0a9b90d38bcbd458505222df76
+- source src/createHubSdk.ts: 9f7e0ba81d728cf011fe996ec424b38c882717b4883e5032031e34a22940a655
+- source src/env.ts: c3a8eb38ea73539fa4d971da705e004355bed8258079a73a2ecbda912c35ef46
+- source src/errors.ts: 4eaba836a4dfad994b3926d90b66a158c4384ce6f100bf8a0791877c0646b541
+- source src/events.ts: 982ae3376590c85933f9e54b2b93edef11a7cf68ab4b072c9a69838ad92d74b8
+- source src/index.ts: a3721b5d01e8e9b7a00c78d88848602e213717132e65cb7db63e54ef055a8d91
+- source src/live.ts: f203c2ab652b3cd1c303cb221cd361590e3ba0855f18bac1d36da64fa9cc1e04
+- source src/nakama.ts: 67a701b47178244f1a63b433f8d715aea824b1599a49f140b35b401950ee266a
+- source src/pbShop.ts: 0233bbe424a2991dc6e370ae0ca05987165f5eb64a66926e357acb185c088b3e
+- source src/realtime/chatRules.ts: 26913facb5c4c28c0a3529a4ecb6a3a50fadfe067736c74fb571184a9aa81b0e
+- source src/realtime/client.ts: 09b799cc261ae06eb36a3141722e7752b603c58eac66fdb2b2a4f88f4ae08b79
+- source src/realtime/friends.ts: d2b309fca509ab6e46def7d4be20e470d7d932f6eacef63287ce7697225f86ef
+- source src/realtime/mock.ts: e476f22d8c78c0b1e0dc5cb0e7fc553bfd3534dd22d45920aeb903c8dfa049a7
+- source src/realtime/protocol.ts: 9f25c52103c82110eb518043395fed92a71f5c713f70c6e7369072ce988ea14e
+- source src/realtime/types.ts: dc8a6a5f62c5e0f2874819a79dd473b5b41b3cbdb29aad8bfd2a0fc4687734cf
+- source src/save.ts: 098fb0a6834e43bdad620c2729b0abf28a9551b8c4ab8cc7cb3428ebba8aea98
+- source src/storage.ts: 7a1f52e2f432026590ed99e85c318ea21ef10c6fe83b9e0c1ebe8c173ced5344
+- source src/ticket.ts: b01e1635c7031dd0e6855ecb22b99af1654395c41f0296863b627a31ded41033
+- source src/types.ts: d826fbade3dd59646ffa409e2dc2b79a9128d66aaeededf37795f6be5fcbb011
 
-Refresh after that hub change merges: `npm run pack:sdk` in metaverse-hub, unpack the tarball's
-`package/` here, delete `*.map`, copy `packages/hub-sdk/src` into `src/`, run
-`npm run build:hub-sdk` here, and update the commit above.
-
-`src/` holds the SDK source from that same hub commit (`ee187cfb8f24a417ee075655f984b239540aa370`).
+`src/` holds the SDK source from that same hub commit (`5cc4e4809180f5bc0b016301d9222c26a80e6d4c`).
 `tsconfig.build.json` is this repo's standalone copy (the hub's extends a base config that is not
-vendored, and turns on source maps). `npm run build:hub-sdk` rebuilds `dist/` from `src/`; the output
-matches the packed tarball apart from its `sourceMappingURL` comments. Runtime JS and declarations
-are tracked so clean installs work. No changes were made to the hub checkout.
+vendored, and turns on source maps). `npm run build:hub-sdk` rebuilds the ESM `dist/` from `src/`
+and matches the vendored JavaScript and declarations. `dist/hub-sdk.iife.js` is the esbuild classic
+script from `node scripts/vendor-sdk.mjs` (global `HubSDK`); tsc does not emit it. Runtime JS and
+declarations are tracked so clean installs work. No changes were made to the hub checkout.

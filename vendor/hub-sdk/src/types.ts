@@ -1,5 +1,14 @@
 /** Game ids stored on the server and used in `/hub#from=<game>` and `play/<game>`. */
-export const GAME_IDS = ['hpos10i', 'nobu', 'peoples-bitcoin', 'sproto', 'sproto-fighter', 'sproto-arcade'] as const;
+export const GAME_IDS = [
+  'hpos10i',
+  'nobu',
+  'peoples-bitcoin',
+  'sproto',
+  'sproto-fighter',
+  'sproto-arcade',
+  'sproto-shooter',
+  'sproto-coop-battle',
+] as const;
 export type GameId = (typeof GAME_IDS)[number];
 
 /** Earn-once relics. The primary key on the server is (user, relic). */
@@ -20,7 +29,8 @@ export type RelicId = (typeof RELIC_IDS)[number];
  */
 export const FOUR_LIGHTS_RELIC_IDS = ['hpos10i_core', 'genesis_shard', 'cones_tip', 'tinubu_crown'] as const;
 
-export const RELIC_BY_GAME: Record<GameId, RelicId> = {
+/** Games with no entry here have no Relic. Shooter and Coop Battle are in that set. */
+export const RELIC_BY_GAME: Partial<Record<GameId, RelicId>> = {
   hpos10i: 'hpos10i_core',
   'peoples-bitcoin': 'genesis_shard',
   nobu: 'cones_tip',
@@ -60,6 +70,19 @@ export const MOCK_TICKET_EARN_CAP = 1000;
 /** Portal tickets are single-use and short-lived. */
 export const MOCK_TICKET_TTL_SECONDS = 60;
 
+/**
+ * One hub gate as `init()` may show it. `unlocked` is cosmetic.
+ * The server does not send the missing item ids, and this type has nowhere to put them.
+ */
+export interface HubGateView {
+  gateId: string;
+  unlocked: boolean;
+  actionType: string;
+  /** Allowlisted realm id or session/zone key. Never a URL. */
+  target: string | null;
+  lockedHintPool: string | null;
+}
+
 export interface InitResult {
   playerId: string;
   ranked: boolean;
@@ -69,6 +92,16 @@ export interface InitResult {
   ticketsCapLeft: number;
   /** Nakama server clock at this response, epoch milliseconds. */
   serverTime: number;
+  /**
+   * Owned union from the server (starters, relic-derived, item_owned, keepsake-derived).
+   * Omitted when this response did not come from `profile.get`.
+   */
+  items?: string[];
+  /**
+   * Per-gate unlocked bools. Omitted when this response did not come from `profile.get`.
+   * Never includes the server's missing-item list.
+   */
+  gates?: HubGateView[];
 }
 
 export interface EarnResult {
@@ -117,6 +150,8 @@ export interface TicketBalanceResult {
 
 export interface EventResult {
   granted?: RelicId;
+  /** Cosmetic items (pets) this event granted, from the live server (migration 0030). `[]` when none. */
+  granted_items?: string[];
 }
 
 /** Nakama session from `redeemTicket`. The HTTP key is not involved. */
@@ -213,8 +248,12 @@ export interface LeaderboardTop {
   me: LeaderboardRow | null;
 }
 
-/** NOBU time-trial floors per level, integer ms (Contract C13). The same numbers are in NOBU's src/config/trials.js. */
-export const NOBU_TRIAL_FLOOR_MS: Readonly<Record<'1' | '2' | '3', number>> = { '1': 15000, '2': 15000, '3': 12000 };
+/** NOBU time-trial floors per Classic level, versioned layout or Chapter 2 level, integer ms (Contract C13). */
+export const NOBU_TRIAL_FLOOR_MS: Readonly<Record<'1' | '2' | '3' | '1v2' | '2v2' | '3v2' | '4' | '6' | '5', number>> = {
+  '1': 15000, '2': 15000, '3': 12000,
+  '1v2': 25700, '2v2': 26000, '3v2': 20600,
+  '4': 24000, '6': 30000, '5': 21000,
+};
 /** NOBU time-trial ceiling, integer ms. */
 export const NOBU_TRIAL_CEIL_MS = 1_800_000;
 
