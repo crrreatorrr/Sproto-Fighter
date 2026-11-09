@@ -93,16 +93,49 @@ combat starts on FIGHT. Escape pauses either introduction. Rounds have no time l
 
 ## Controls
 
-| Action | Keyboard | Standard gamepad |
+| Action | Keyboard | Controller (standard mapping) |
 | --- | --- | --- |
-| Move / hold away to block | A / D | Stick / D-pad |
+| Move / hold away to block | A / D | Left stick / D-pad |
 | Jump / crouch | W / S | Up / down |
-| Light / medium / finisher | J / K / L | South / west / east |
-| Launcher | U | North |
-| Ranged power | I | Right bumper |
-| Grab | O | Left bumper |
-| Team Special | P | Right trigger |
-| Dash / pause | Left Shift / Escape | Left trigger / Start |
+| Light / medium / finisher | J / K / L | X / Y / B |
+| Launcher | U | A |
+| Ranged power | I | RB |
+| Grab | O | LB |
+| Team Special | P | RT |
+| Dash | Left Shift | LT |
+| Pause / resume | Escape | Start (either controller in local versus) |
+
+| Menus | Keyboard | Controller |
+| --- | --- | --- |
+| Move focus | Arrow keys or W A S D (Tab also works) | D-pad or left stick (holding repeats) |
+| Confirm | Enter or Space | A |
+| Back / close | Escape | B |
+| Fighter select: jump to Start Fight / switch P1 and rival tabs | — | Start / X |
+| Partner picker: continue | Enter on Continue | Start |
+
+The controller layout follows four-button tag fighters: Light → Medium →
+Finisher rolls clockwise over X → Y → B so a chain is one thumb sweep, and the
+Launcher sits on A like those games' launcher button. The left index finger
+dashes on LT while the right thumb keeps attacking, so dash cancels never take
+the thumb off the face buttons. Ranged power and Grab are the bumpers and the
+Team Special is RT. Movement is the stick or D-pad (radial deadzone 0.2).
+The pause menu has **Resume**, **Restart**, **Fighter select** and, when the
+game was opened from the hub, **Return to hub**; the fighter select reaches the
+header (Story worlds, Settings, Return to hub) by moving up past Random Stage.
+Fight-screen prompts follow the device you used last. On the keyboard, player 1
+stays on W A S D with the attacks under the right hand; the arrow keys belong to
+player 2 in local versus (the story-boss forms and menus accept both).
+
+Plug in a controller at any time; the browser shows it after its first press.
+Buttons held while a controller appears (such as the A that entered the game
+from the hub) are ignored until released. Unplugging a player's controller
+mid-round pauses the round. The first controller is player 1 and drives the
+menus, the second is player 2; a player who reconnects keeps their side.
+
+In a transformed story-boss form the fight controls carry over: Light or
+Ranged fires the beam, Medium throws the ball, Finisher raises the shield and
+Launcher (or up) jumps. The original boss keys still work: C beam, V ball, X
+shield, R retry, and the arrow keys also move.
 
 **Local versus:** choose *Local versus · Second player* as the rival behavior,
 then pick player 2's fighter on the rival tab. Player 2 uses the arrow keys,
@@ -114,8 +147,9 @@ earns hub rewards and has no God Mode.
 **Settings → Controls** has a tab for each player, with separate keyboard and
 controller mappings. A key can belong to only one action across both players:
 binding a key the other player uses swaps it. Player 2's controller buttons
-are remapped from the second connected controller. Mappings save in the
-browser. The online multiplayer plan is in [docs/MULTIPLAYER-PLAN.md](docs/MULTIPLAYER-PLAN.md). W jumps once per press. W+J gives a rising strike;
+are remapped from the second connected controller; Start cancels a controller
+remap. Mappings save in the browser, and a saved mapping is kept as it is when
+the defaults change. The online multiplayer plan is in [docs/MULTIPLAYER-PLAN.md](docs/MULTIPLAYER-PLAN.md). W jumps once per press. W+J gives a rising strike;
 W+forward+K gives a diagonal strike. S+J/K gives low attacks, S+L sweeps, and
 S+K/L in the air dives. O plus forward/back/W/S selects a directional throw.
 Three damaging hits ending in a finisher earn one pip when the combo ends;
@@ -213,7 +247,7 @@ The latest progression, preview-lock and responsive-map changes are recorded in
 [the story/UI update](docs/STORY-UI-UPDATE.md).
 Older dated reports and authoring sources are preserved as history.
 
-No physical-controller test, per user instruction. A full manual 100-match
+No physical-controller test, per user instruction: controller support is checked with stubbed `navigator.getGamepads` only. A full manual 100-match
 campaign, every frame/matchup, long sessions and systematic cross-browser
 performance remain unverified. Online play is tested against a local hub only; it has
 not run against a deployed hub or through a TURN server. This
@@ -234,6 +268,9 @@ a result the server verified. Tickets have no real-money value.
 - The status line shows the link (DIRECT or RELAY), ping and rollback frames.
 - After a match, **Rematch →** pairs you with the same opponent if they choose
   it too.
+- Online rounds cannot pause. Leaving a live online match forfeits it after a
+  browser confirmation that a controller cannot answer. On a controller, wait
+  for the result screen, then choose Rematch or press B for fighter select.
 
 Configuration: `VITE_NAKAMA_URL` and `VITE_NAKAMA_SERVER_KEY` as below, and
 optionally `VITE_ICE_SERVERS` (a JSON array of `RTCIceServer`, e.g. with a
