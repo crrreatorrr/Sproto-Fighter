@@ -61,6 +61,19 @@ export interface ProfileResult {
   serverTime?: number;
   /** Hub pets. Sent once `profile.get` is wired to `HubPets.profilePets` (docs/m6-server-prep.md). */
   pets?: { owned: string[]; active: string | null };
+  /** Owned item union. Present once the server ships hub gates. Not a list of missing items. */
+  items?: string[];
+  /**
+   * Enabled hub gates with an unlocked bool. No missing-item list and no required item ids.
+   * `target` is an allowlisted realm id or session/zone key, never a URL.
+   */
+  gates?: {
+    gateId: string;
+    unlocked: boolean;
+    actionType: string;
+    target: string | null;
+    lockedHintPool: string | null;
+  }[];
 }
 
 export interface PortalEnterResult {
@@ -151,7 +164,7 @@ export function createNakamaClient(options: NakamaClientOptions): NakamaClient {
       body: JSON.stringify(body),
     });
     const text = await response.text();
-    if (!response.ok) throw new HubSdkError('auth_failed', text || `HTTP ${response.status}`);
+    if (!response.ok) throw new HubSdkError('auth_failed', text || `HTTP ${response.status}`, response.status);
     const parsed = JSON.parse(text) as { token?: string; refresh_token?: string; refreshToken?: string };
     if (!parsed.token) throw new HubSdkError('auth_failed', 'Auth did not return a token');
     return {
