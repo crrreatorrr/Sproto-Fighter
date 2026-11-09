@@ -187,3 +187,11 @@ dialog p { font-size: 16px; line-height: 1.5; }
   #selection-view[data-paired=true] .fighter-summary dl > div { display: flex; }
   #selection-view[data-paired=true] .versus { top: 232px; width: 38px; height: 32px; font-size: 19px; }
 }
+
+/* "Something broke": the crash guard's panel (crash.ts, crashPanel.ts), above every view. */
+.crash-overlay { position: fixed; z-index: 1000; }
+.crash-overlay > div { width: min(520px, 94vw); text-align: center; }
+.crash-overlay h2 { font-size: 32px; margin: 12px 0; }
+.crash-overlay details { margin: 12px 0 0; text-align: left; color: #b6c7dc; font-size: 13px; }
+.crash-overlay summary { cursor: pointer; }
+.crash-overlay pre { max-height: 30vh; overflow: auto; margin: 8px 0 0; padding: 10px; background: #050913; border: 2px solid #5c7295; color: #ffb3bb; font: 12px/1.4 ui-monospace, monospace; white-space: pre-wrap; word-break: break-word; }

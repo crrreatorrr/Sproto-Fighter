@@ -149,6 +149,16 @@ rules online. [Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
   throws, damage, move selection), `cpu.ts` and `step.ts` (the fixed 60 Hz
   step, deterministic math and `hashState`). It produces identical results in
   every browser engine; `scripts/determinism-smoke.mjs` checks this.
+  `tests/golden-state-hashes.test.ts` (in `npm test`) also replays the same
+  scripted scenario and three long seeded CPU-vs-CPU matches and compares
+  every `hashState` checkpoint with `tests/fixtures/golden-state-hashes.json`,
+  both through `src/core` and through the hub's ES2015 server bundle. A
+  refactor that leaves the stored state's shape alone (code renames, moves,
+  derived selectors) can prove it did not change the game. The hash is taken
+  over the state's JSON, so renaming, adding or reordering state fields
+  changes every hash even when behaviour is identical. A deliberate
+  behaviour change regenerates it locally with `UPDATE_GOLDENS=1 npx vitest run
+  tests/golden-state-hashes.test.ts` (refused when `CI` is set).
 - `src/poseAtlas.ts`: complete-body frame playback, paired identities, stable
   formations, camera clearance and event presentation. Paired menu
   normalization does not change fight scale. `pose-atlas.json` is the single
@@ -243,7 +253,7 @@ NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/on
 
 ## Metaverse Hub integration
 
-The optional hub adapter uses the vendored `@metaverse/hub-sdk` 0.6.0 (see `vendor/hub-sdk/VENDOR.md`). A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
+The optional hub adapter uses the vendored `@metaverse/hub-sdk` 0.6.3 (see `vendor/hub-sdk/VENDOR.md`). A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
 
 Five fighters require Hub Relics for new player recruitment:
 

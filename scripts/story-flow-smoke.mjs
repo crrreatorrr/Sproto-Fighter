@@ -96,6 +96,7 @@ try {
   });
   await check('initial region gates block jumps while free-play arenas stay available',async()=>{
     const t=fresh();t.$('story-worlds').onclick();const cards=t.$('journey-content').children[0].children;
+    assert.equal(globalThis.document.activeElement?.textContent,'Continue story','Continue is the default button');
     assert.equal(cards[0].disabled,false);
     for(let i=1;i<cards.length;i++){assert.equal(cards[i].disabled,true);await t.pick(i);}
     assert.equal(t.launches().length,0);
@@ -106,7 +107,9 @@ try {
     for(const testing of [false,true]){
       const t=fresh();t.setTesting(testing);await t.begin();await finishWave(t);
       const restored=createStoryProgress(t.disk);assert.ok(restored.isUnlocked(STORY_ENCOUNTERS[0].opponent));assert.ok(restored.isCleared(0));assert.equal(restored.snapshot().nextIndex,1);
-      assert.match(t.$('journey-title').textContent,/recruited/i);await t.action(0);await flush();assert.equal(t.story.snapshot().encounter.index,1);
+      assert.match(t.$('journey-title').textContent,/recruited/i);
+      assert.equal(globalThis.document.activeElement,t.$('journey-actions').children[0],'Next opponent is the default button');assert.match(globalThis.document.activeElement.textContent,/^Next: /);
+      await t.action(0);await flush();assert.equal(t.story.snapshot().encounter.index,1);
       await finishWave(t);outcomes.push(progressView(createStoryProgress(t.disk)));
     }
     assert.deepEqual(outcomes[0],outcomes[1]);
@@ -115,6 +118,7 @@ try {
     for(const winner of [1,2]){
       const t=fresh();await t.begin();const saved=progressView(t.progress);await finishWave(t,winner);
       assert.deepEqual(progressView(t.progress),saved);assert.match(t.$('journey-title').textContent,winner===2?/Draw/:/Retry/);
+      assert.equal(globalThis.document.activeElement?.textContent,'Retry match','Retry is the default button');
       await t.action(0);await flush();assert.equal(t.story.snapshot().encounter.index,0);
       assert.equal(t.story.finishMatch(0),true);assert.equal(t.story.finishMatch(0),false);assert.equal(t.story.onRoundEnd(0),true);assert.equal(t.story.onRoundEnd(0),false);
       assert.equal(createStoryProgress(t.disk).snapshot().nextIndex,1);

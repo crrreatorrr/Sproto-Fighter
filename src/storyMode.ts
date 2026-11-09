@@ -21,13 +21,17 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     const gauntletNote=(encounter:Encounter)=>encounter.opponents.length>1?`${names(encounter)}. Health refills between bouts. Beat both without losing, restarting or leaving; the second bout has no saved checkpoint. `:'';
     const storageNote=()=>progress.snapshot().persistent?'Progress saves on this browser.':'Browser saving is unavailable. Progress lasts only while this page stays open.';
     const status=()=>{$('journey-status').textContent=active?`STORY / ${STAGES.find(s=>s.id===active!.stage)!.name.toUpperCase()} / ENCOUNTER ${active.index+1} OF ${total}${active.opponents.length>1?` / BOUT ${wave+1} OF ${active.opponents.length}`:''} / ${progress.snapshot().cleared.length} CLEARED`:'FREE PLAY / '+storageNote();};
-    const open=()=>{if(!modal.open){hooks.pause();modal.showModal();}};
+    // The first action (Continue, Fight, Next opponent, Retry) is the default: Enter or controller A presses it.
+    let primary:HTMLButtonElement|null=null;
+    const focusDefault=()=>primary?.focus({preventScroll:true});
+    const open=()=>{if(!modal.open){hooks.pause();modal.showModal();}focusDefault();};
     // God Mode (earned or testing) lets the player choose any encounter on the map.
     const syncRoute=()=>{progress.sync();progress.setOpenRoute(!!hooks.godMode?.());};
     const close=()=>{modal.close();hooks.resume();};
     function buttons(actions:{label:string;run:()=>void}[]){
-        const area=$('journey-actions');area.replaceChildren();
-        for(const action of actions){const button=document.createElement('button');button.className='quiet';button.textContent=action.label;button.onclick=action.run;area.append(button);}
+        const area=$('journey-actions');area.replaceChildren();primary=null;
+        for(const action of actions){const button=document.createElement('button');button.className='quiet';button.textContent=action.label;button.onclick=action.run;area.append(button);primary??=button;}
+        focusDefault();
     }
     async function launch(id:StageId,encounter?:Encounter,nextWave=0,assist=false){
         if(launching)return;
