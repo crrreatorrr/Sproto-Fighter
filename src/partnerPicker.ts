@@ -1,5 +1,7 @@
 import {PLAYABLE_FIGHTERS,ROSTER,type FighterId,type PlayableFighterId} from './core';
 import {portraitThumb,portraitLarge} from './portraits';
+import {MenuRepeat,PAD,menuDirection,type PadLike} from './gamepad';
+import {menuKeyDirection} from './localInput';
 
 export function createPartnerPicker(canPlay:(id:PlayableFighterId)=>boolean){
     const screen=document.getElementById('partner-picker')!;
@@ -25,7 +27,7 @@ export function createPartnerPicker(canPlay:(id:PlayableFighterId)=>boolean){
     const buttons=new Map<FighterId,HTMLButtonElement>();
     let selected:FighterId;
     let close:((partner:FighterId|null)=>void)|undefined;
-    let lastDirection='',repeatAt=0;
+    const repeat=new MenuRepeat();
 
     function pick(id:FighterId){
         selected=id;
@@ -55,27 +57,23 @@ export function createPartnerPicker(canPlay:(id:PlayableFighterId)=>boolean){
     confirm.onclick=()=>close?.(selected);
     back.onclick=()=>close?.(null);
     screen.addEventListener('keydown',event=>{
+        const direction=event.ctrlKey||event.metaKey||event.altKey?'':menuKeyDirection(event.code);
         if(event.key==='Escape'){event.preventDefault();event.stopPropagation();back.click();}
-        else if(event.key.startsWith('Arrow')){
+        else if(direction){
             event.preventDefault();
-            move(event.key.slice(5).toLowerCase());
+            move(direction);
         }
     });
 
     return {
         get isOpen(){return !screen.hidden;},
-        pollPad(pad:Gamepad,buttons:number[],previous:number[]){
-            const direction=buttons[14]||pad.axes[0]<-.55?'left':buttons[15]||pad.axes[0]>.55?'right'
-                :buttons[12]||pad.axes[1]<-.55?'up':buttons[13]||pad.axes[1]>.55?'down':'';
-            const now=performance.now();
-            if(direction&&(direction!==lastDirection||now>=repeatAt)){
-                move(direction);
-                repeatAt=now+(direction===lastDirection?150:360);
-            }
-            lastDirection=direction;
-            if(buttons[1]&&!previous[1])back.click();
-            else if(buttons[9]&&!previous[9])confirm.click();
-            else if(buttons[0]&&!previous[0]&&document.activeElement instanceof HTMLButtonElement)
+        /** A picks the focused partner or button, Start continues, B goes back. */
+        pollPad(pad:PadLike,buttons:readonly number[],previous:readonly number[]){
+            const direction=menuDirection(buttons,pad.axes);
+            if(repeat.next(direction,performance.now()))move(direction);
+            if(buttons[PAD.b]&&!previous[PAD.b])back.click();
+            else if(buttons[PAD.start]&&!previous[PAD.start])confirm.click();
+            else if(buttons[PAD.a]&&!previous[PAD.a]&&document.activeElement instanceof HTMLButtonElement)
                 document.activeElement.click();
         },
         choose(fighter:PlayableFighterId,prior?:FighterId){
@@ -105,7 +103,7 @@ export function createPartnerPicker(canPlay:(id:PlayableFighterId)=>boolean){
             const previousViews=[fighterView.hidden,fightView.hidden];
             fighterView.hidden=true;fightView.hidden=true;nav.inert=true;
             screen.hidden=false;
-            lastDirection='';
+            repeat.reset();
             confirm.focus({preventScroll:true});
             window.scrollTo(0,0);
             return new Promise<FighterId|null>(resolve=>{

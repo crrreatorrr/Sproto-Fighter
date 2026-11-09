@@ -11,7 +11,8 @@ import './versusScreen.css';
 import {createVersusScreen} from './versusScreen';
 import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';
-import { P2_KEYS, UNBOUND, keyboardMask, pressedMask, padMask, versusPads, rebindKey, rebindPad, resolveKeyConflicts } from './localInput';
+import { P2_KEYS, PAD_DEFAULTS, UNBOUND, keyboardMask, menuKeyDirection, pressedMask, padMask, rebindKey, rebindPad, resolveKeyConflicts } from './localInput';
+import { PAD, PadInput, MenuRepeat, menuDirection, padButtonName, canBindPadButton, type MenuDirection, type PadView } from './gamepad';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
@@ -20,7 +21,7 @@ import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, typ
 import { STAGES, setStage, loadStageArt, loadStagePreviews, getStageArtStatus, type StageId } from './stage';
 import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
-import {BOSS_KEYS,drawStoryBossAttacks,drawStoryBossPose,loadStoryBossArt,startStoryBoss,stepStoryBoss,storyBossPlayerPose,storyBossTitle,type StoryBoss,type BossForm} from './storyBoss';
+import {bossFightInput,bossKeyInput,drawStoryBossAttacks,drawStoryBossPose,loadStoryBossArt,startStoryBoss,stepStoryBoss,storyBossPlayerPose,storyBossTitle,type StoryBoss,type BossForm} from './storyBoss';
 import {createStoryAnimation,storyAnimationPlan} from './storyAnimation';
 import { createStoryMode } from './storyMode';
 import {createPartnerPicker} from './partnerPicker';
@@ -37,7 +38,8 @@ const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as 
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
 $('roster-count').textContent=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · UNLIMITED ROUND TIME`;
 const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: 'ShiftLeft' };
-const padDefaults: Partial<Record<Action, number>> = { light: 0, medium: 2, heavy: 1, launcher: 3, bolt: 5, grab: 4, special: 7, dash: 6 };
+// Controller defaults for both players; see PAD_DEFAULTS for the reasoning.
+const padDefaults: Partial<Record<Action, number>> = PAD_DEFAULTS;
 const labels: Record<Action, string> = { left: 'Move left', right: 'Move right', up: 'Jump', down: 'Crouch', light: 'Light', medium: 'Medium', heavy: 'Finisher', launcher: 'Launcher', bolt: 'Ranged power', grab: 'Grab', special: 'Team special', dash: 'Dash' };
 // Player 1 and player 2 (local versus) each have their own keyboard and gamepad mappings.
 let keys = { ...defaults }, padKeys = { ...padDefaults };
@@ -82,7 +84,13 @@ let controlsPlayer: 1 | 2 = 1;
 let matchCpuSkill=4,matchDifficultyAssist=false;
 let matchGodMode=false, matchEarnedGodMode=false, testingGodMode=false, matchTesting=false;
 let presentation = createRoundPresentation();
-let modalDirection='',modalRepeatAt=0,padNeedsRelease=true;
+let padNeedsRelease=true;
+/** Every connected controller, read once per frame: sticky P1/P2 assignment and latch-on-connect. */
+const padInput = new PadInput(), menuRepeat = new MenuRepeat();
+/** Player 2's controller as of the last poll (local versus). */
+let padP2: PadView | null = null;
+/** The device the player last used; decides which prompts the fight screen shows. */
+let lastDevice: 'key' | 'pad' = 'key';
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousPad2: number[] = [], previousStart = false;
 let visualFrame = 0;
 const held = new Set<string>();
@@ -148,7 +156,7 @@ function hubToast(title:string,sub:string){
  toast.append(heading,document.createTextNode(sub));toast.hidden=false;
  clearTimeout(toastTimer);toastTimer=window.setTimeout(()=>{toast.hidden=true;},6000);
 }
-$('return-hub').onclick=()=>{if(hub)hub.exitHub();};
+$('return-hub').onclick=$('overlay-hub').onclick=()=>{if(hub)hub.exitHub();};
 if(hubConfigured())$('return-hub').hidden=false;
 void connectHub().then(link=>{
  hub=link;
@@ -249,10 +257,24 @@ function save() {
     }
     catch { /* Nonpersistent mode. */ }
 }
-function updateControls() {
-    $('directional-help').textContent = `${keyName(keys.up)} + ${keyName(keys.light)}: Rising strike · ${keyName(keys.up)} + forward + ${keyName(keys.medium)}: Diagonal · ${keyName(keys.down)} + ${keyName(keys.medium)}/${keyName(keys.heavy)}: Low / dive · ${keyName(keys.bolt)}: Horizontal spit (${keyName(keys.down)}: crouch low / ${keyName(keys.up)}: jump high) / aim other powers · ${keyName(keys.dash)} after hit: Dash cancel`;
+/** Player 1's control for `action` in the current prompt device (keyboard key or controller button). */
+function controlPrompt(action: Action): string {
+    if (lastDevice === 'key') return keyName(keys[action]);
+    if (action === 'left' || action === 'right') return 'Stick / D-pad ' + (action === 'left' ? '←' : '→');
+    if (action === 'up' || action === 'down') return action === 'up' ? '↑' : '↓';
+    return padButtonName(padKeys[action]);
+}
+/** The fight screen's prompts, which follow the device the player last used. */
+function updatePrompts() {
+    const p = controlPrompt;
+    $('directional-help').textContent = `${p('up')} + ${p('light')}: Rising strike · ${p('up')} + forward + ${p('medium')}: Diagonal · ${p('down')} + ${p('medium')}/${p('heavy')}: Low / dive · ${p('bolt')}: Horizontal spit (${p('down')}: crouch low / ${p('up')}: jump high) / aim other powers · ${p('dash')} after hit: Dash cancel`;
 
-    $('controls-strip').innerHTML = `<span class="control"><kbd>${keyName(keys.left)} ${keyName(keys.right)}</kbd> Move / block</span>` + (['up', 'down', 'light', 'medium', 'heavy', 'launcher', 'bolt', 'grab', 'special', 'dash'] as Action[]).map(a => `<span class="control"><kbd>${keyName(keys[a])}</kbd>${labels[a]}</span>`).join('');
+    $('controls-strip').innerHTML = `<span class="control"><kbd>${lastDevice === 'pad' ? 'Stick / D-pad' : keyName(keys.left) + ' ' + keyName(keys.right)}</kbd> Move / block</span>` + (['up', 'down', 'light', 'medium', 'heavy', 'launcher', 'bolt', 'grab', 'special', 'dash'] as Action[]).map(a => `<span class="control"><kbd>${lastDevice === 'pad' && (a === 'up' || a === 'down') ? 'Stick ' + p(a) : p(a)}</kbd>${labels[a]}</span>`).join('') + (lastDevice === 'pad' ? '<span class="control"><kbd>Start</kbd>Pause</span>' : '');
+    $('controls-strip').setAttribute('aria-label', lastDevice === 'pad' ? 'Current controller bindings' : 'Current keyboard bindings');
+    $('pause').innerHTML = `Pause <kbd>${lastDevice === 'pad' ? 'Start' : 'Esc'}</kbd>`;
+}
+function updateControls() {
+    updatePrompts();
     document.querySelectorAll<HTMLElement>('[data-key]').forEach(el => el.textContent = keyName(keys[el.dataset.key as Action]));
     const playerKeys = controlsPlayer === 1 ? keys : keys2, playerPad = controlsPlayer === 1 ? padKeys : padKeys2;
     for (const p of [1, 2] as const) { const tab = $(`controls-p${p}`); tab.setAttribute('aria-selected', String(controlsPlayer === p)); tab.tabIndex = controlsPlayer === p ? 0 : -1; }
@@ -260,8 +282,11 @@ function updateControls() {
     $('controls-player-note').textContent = controlsPlayer === 1 ? 'Player 1 plays every mode and drives the menus with the first controller.' : 'Player 2 plays in Local versus with these keys or the second controller connected.';
     $('defaults').textContent = `Restore player ${controlsPlayer} defaults`;
     const pending = (a: string, device: 'key' | 'pad') => remapping?.player === controlsPlayer && remapping.action === a && remapping.device === device;
-    $('bindings').innerHTML = Object.entries(labels).map(([a, label]) => `<div class="binding-row ${remapping?.player === controlsPlayer && remapping.action === a ? 'pending' : ''}"><span>${label}</span><button class="quiet" data-map="${a}" data-device="key">${pending(a, 'key') ? 'Press a key…' : playerKeys[a as Action] === UNBOUND ? '—' : keyName(playerKeys[a as Action])}</button>${a in padDefaults ? `<button class="quiet" data-map="${a}" data-device="pad">${pending(a, 'pad') ? 'Press a button…' : 'Pad ' + playerPad[a as Action]}</button>` : '<span class="micro">D-pad / left stick</span>'}</div>`).join('');
-    document.querySelectorAll<HTMLButtonElement>('[data-map]').forEach(b => b.onclick = () => { remapping = { action: b.dataset.map as Action, device: b.dataset.device as 'key' | 'pad', player: controlsPlayer }; $('binding-status').textContent = 'Escape cancels. A key another action or player uses is swapped.'; updateControls(); });
+    // Rebuilding the rows must not drop keyboard or controller focus from the binding being changed.
+    const focused = document.activeElement instanceof HTMLElement && document.activeElement.dataset.map ? document.activeElement : null;
+    $('bindings').innerHTML = Object.entries(labels).map(([a, label]) => `<div class="binding-row ${remapping?.player === controlsPlayer && remapping.action === a ? 'pending' : ''}"><span>${label}</span><button class="quiet" data-map="${a}" data-device="key">${pending(a, 'key') ? 'Press a key…' : playerKeys[a as Action] === UNBOUND ? '—' : keyName(playerKeys[a as Action])}</button>${a in padDefaults ? `<button class="quiet" data-map="${a}" data-device="pad">${pending(a, 'pad') ? 'Press a button…' : padButtonName(playerPad[a as Action])}</button>` : '<span class="micro">D-pad / left stick</span>'}</div>`).join('');
+    document.querySelectorAll<HTMLButtonElement>('[data-map]').forEach(b => b.onclick = () => { remapping = { action: b.dataset.map as Action, device: b.dataset.device as 'key' | 'pad', player: controlsPlayer }; $('binding-status').textContent = b.dataset.device === 'pad' ? 'Start cancels. A button another action uses is swapped.' : 'Escape cancels. A key another action or player uses is swapped.'; updateControls(); });
+    if (focused) document.querySelector<HTMLButtonElement>(`[data-map="${focused.dataset.map}"][data-device="${focused.dataset.device}"]`)?.focus();
 }
 function bind(value: string | number) {
     if (!remapping)
@@ -278,7 +303,27 @@ function bind(value: string | number) {
     updateControls();
     $('binding-status').textContent = 'Saved on this browser.';
 }
-function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') { running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; $('overlay-hint').textContent = state.matchDepth ? (state.matchDepth.rounds ? 'First to two round wins · 60-second combat clock' : 'Chapter rule · 60-second combat clock') : 'Play your way · No round timer'; if(!selection.isOpen)$('start').focus(); }
+function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') {
+    // Buttons held as the overlay opens (attacks mashed through a KO, the Start that paused) act only after release.
+    padInput.holdCurrent(Array.from(navigator.getGamepads?.() || []));
+    // The pause and result screens offer the hub wherever the header does; online screens leave through fighter select.
+    $('overlay-hub').hidden = $('return-hub').hidden || !!online;
+    // Restart sits in the pause menu of a local round in progress (the footer's Restart, reachable by controller).
+    $('overlay-restart').hidden = !started || !!online || (presentation.phase === 'result' && !storyAnimation.active);
+    running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; $('overlay-hint').textContent = state.matchDepth ? (state.matchDepth.rounds ? 'First to two round wins · 60-second combat clock' : 'Chapter rule · 60-second combat clock') : 'Play your way · No round timer'; if(!selection.isOpen)$('start').focus(); }
+/** The pause / result overlay's buttons that can be used right now, top to bottom. */
+function overlayChoices(): HTMLButtonElement[] {
+    const choices = ['start', 'overlay-restart', 'overlay-select', 'overlay-hub'].map(id => $<HTMLButtonElement>(id)).filter(b => b && !b.hidden && !b.disabled);
+    // While an unsettled online match is up, Fighter select would forfeit through a browser confirm; the controller skips it.
+    return online?.phase === 'playing' ? choices.filter(b => b.id !== 'overlay-select') : choices;
+}
+/** Menu-style focus movement between the overlay's buttons (keyboard arrows / W S, controller D-pad / stick). */
+function moveOverlayFocus(direction: MenuDirection) {
+    const choices = overlayChoices();
+    if (!direction || !choices.length) return;
+    const index = choices.indexOf(document.activeElement as HTMLButtonElement), step = direction === 'up' || direction === 'left' ? -1 : 1;
+    choices[index < 0 ? 0 : (index + step + choices.length) % choices.length].focus();
+}
 function start() {
     if (selection.isOpen || story.isOpen || dialog.open || ($('start') as HTMLButtonElement).disabled) return;
     if (presentation.phase === 'result'&&!storyAnimation.active)
@@ -291,7 +336,6 @@ function start() {
     held.clear();
     queued = 0;queued2=0;
     $('overlay').hidden = true;
-    $('pause').innerHTML = 'Pause <kbd>Esc</kbd>';
     canvas.focus();
 }
 function pause() {
@@ -367,6 +411,7 @@ const story = createStoryMode({
 $('start').onclick = () => overlayAction ? overlayAction() : start();
 $('pause').onclick = pause;
 $('reset').onclick = ()=>{storyAnimation.cancel();if(!story.retryMatch())restart();};
+$('overlay-restart').onclick = () => $('reset').click();
 const dialog = $<HTMLDialogElement>('controls-dialog');
 $('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
 $('settings').onclick = () => {
@@ -425,15 +470,19 @@ window.addEventListener('keydown', e => {
             pause();
         return;
     }
-    if (!running)
+    if (!running) {
+        // Paused and result screens: arrows or W/S move between the buttons; Enter or Space presses one.
+        const direction = menuKeyDirection(e.code);
+        if (direction && !$('overlay').hidden && !e.ctrlKey && !e.metaKey && !e.altKey) { e.preventDefault(); moveOverlayFocus(direction); }
         return;
+    }
     if(blockedKeys.has(e.code)){e.preventDefault();return;}
     if(versus.isOpen){
         e.preventDefault();if(e.code==='Enter'&&!e.repeat){blockedKeys.add(e.code);versus.skip();}return;
     }
     if(storyBoss){
         if(e.code==='KeyR'&&!e.repeat){e.preventDefault();$('reset').click();return;}
-        const action=BOSS_KEYS[e.code];
+        const action=bossKeyInput(e.code,keys);
         if(action){
             e.preventDefault();
             if(!held.has(e.code))queued|=action;
@@ -471,75 +520,79 @@ document.addEventListener('visibilitychange', () => {
 });
 canvas.addEventListener('pointerdown', () => canvas.focus());
 function pollPad(): number {
-    const pads = navigator.getGamepads?.() || [];
-    const pad = Array.from(pads).find(p => p?.connected);
+    const pads = Array.from(navigator.getGamepads?.() || []);
+    // Outside a match a lone player 2 pad moves up to player 1; inside one, assignments stay put.
+    const frame = padInput.poll(pads, !started || selection.isOpen);
+    padP2 = frame.p2;
+    if (frame.active) noteDevice('pad');
+    // A controller unplugged mid-round pauses it (player 2's only matters in local versus).
+    if (running && started && (frame.lost.includes(1) || (mode === 'versus' && frame.lost.includes(2)))) pause();
+    const pad = frame.p1, second = frame.p2;
     const wasSelection=selection.isOpen,wasModal=story.isOpen||dialog.open,wasOverlay=!running&&!selection.isOpen;
     const wasPartnerOpen=!!document.querySelector?.('#partner-picker:not([hidden])');
-    selection.pollPad(pad??null);
+    selection.pollPad(pad);
     if (!pad) {
         if (!online) $('device').textContent = 'KEYBOARD READY';
         previousPad = [];
         return 0;
     }
-    if (!online) $('device').textContent = 'CONTROLLER CONNECTED';
+    if (!online) $('device').textContent = frame.count > 1 ? '2 CONTROLLERS CONNECTED' : 'CONTROLLER CONNECTED';
     const buttons = pad.buttons.map(b => b.pressed ? 1 : 0);
     if(document.querySelector?.('#partner-picker:not([hidden])')){
         if(wasPartnerOpen)partnerPicker.pollPad(pad,buttons,previousPad);
         previousPad=buttons;
-        previousStart=!!buttons[9];
+        previousStart=!!buttons[PAD.start];
         padNeedsRelease=true;
         return 0;
     }
     let boundPadThisFrame=false;
     // Remapping listens to the remapped player's own controller: player 2's is
     // the second one connected (falling back to the first if there is only one).
-    const second = versusPads(Array.from(pads))[1];
+    // Start cancels a controller remap.
     const secondButtons = second ? second.buttons.map(b => b.pressed ? 1 : 0) : [];
     if (remapping?.device === 'pad') {
         const fromSecond = remapping.player === 2 && !!second;
         const source = fromSecond ? secondButtons : buttons, before = fromSecond ? previousPad2 : previousPad;
         const index = source.findIndex((b, i) => b && !before[i]);
-        if (index >= 0 && index !== 9){bind(index);boundPadThisFrame=true;}
+        if (index === PAD.start) { remapping = null; updateControls(); boundPadThisFrame = true; }
+        else if (index >= 0 && canBindPadButton(index)) { bind(index); boundPadThisFrame = true; }
     }
+    else if (remapping?.device === 'key' && ((buttons[PAD.b] && !previousPad[PAD.b]) || (buttons[PAD.start] && !previousPad[PAD.start]))) {
+        // A key remap started from the controller can be cancelled from it too.
+        remapping = null; updateControls(); boundPadThisFrame = true;
+    }
+    // Either player's Start pauses local versus.
+    const secondStart = mode === 'versus' && !!secondButtons[PAD.start] && !previousPad2[PAD.start];
     previousPad2 = secondButtons;
     if(wasModal&&(story.isOpen||dialog.open)&&!remapping&&!boundPadThisFrame){
         const activeDialog=document.querySelector<HTMLDialogElement>('dialog[open]')!;
-        const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
-        const now=performance.now();
-        if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
-            const controls=Array.from(activeDialog.querySelectorAll<HTMLElement>('button:not(:disabled), select, input')).filter(el=>el.offsetParent!==null);
-            const active=document.activeElement as HTMLElement;
-            const index=controls.indexOf(active);controls[(index+(direction==='previous'?-1:1)+controls.length)%controls.length]?.focus();
-            modalRepeatAt=now+(direction===modalDirection?160:360);
-        }
-        modalDirection=direction;
-        if(buttons[1]&&!previousPad[1])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
-        else if(buttons[0]&&!previousPad[0]&&document.activeElement instanceof HTMLElement){
+        const direction=menuDirection(buttons,pad.axes);
+        if(menuRepeat.next(direction,performance.now()))navigateDialog(activeDialog,direction);
+        if(buttons[PAD.b]&&!previousPad[PAD.b])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
+        else if(buttons[PAD.a]&&!previousPad[PAD.a]&&document.activeElement instanceof HTMLElement){
             if(document.activeElement.matches('button,input[type=checkbox]'))document.activeElement.click();
         }
-    }else if(!wasOverlay)modalDirection='';
+    }else if(!wasOverlay)menuRepeat.reset();
     if(wasOverlay&&!wasModal&&!dialog.open&&!story.isOpen&&!document.querySelector?.('#partner-picker:not([hidden])')){
-        const direction=buttons[12]||buttons[14]||pad.axes[1]<-.55||pad.axes[0]<-.55?'previous':buttons[13]||buttons[15]||pad.axes[1]>.55||pad.axes[0]>.55?'next':'';
-        const now=performance.now();
-        if(direction&&(direction!==modalDirection||now>=modalRepeatAt)){
-            const choices=[$('start'),$('overlay-select')],index=choices.indexOf(document.activeElement as HTMLElement);
-            choices[(index+(direction==='previous'?-1:1)+choices.length)%choices.length].focus();modalRepeatAt=now+250;
-        }
-        modalDirection=direction;
-        if(buttons[1]&&!previousPad[1])returnToSelection();
-        else if(buttons[9]&&!previousPad[9])start();
-        else if(buttons[0]&&!previousPad[0]){const active=document.activeElement;if(active===$('start')||active===$('overlay-select'))(active as HTMLElement).click();else $('start').focus();}
+        const direction=menuDirection(buttons,pad.axes);
+        if(menuRepeat.next(direction,performance.now()))moveOverlayFocus(direction);
+        // B backs out: from a pause it resumes; from a result or online screen it returns to fighter select.
+        // Leaving an online match the hub has not settled asks a browser confirm a controller cannot answer, so B waits.
+        const paused=started&&!online&&!(presentation.phase==='result'&&!storyAnimation.active);
+        if(buttons[PAD.b]&&!previousPad[PAD.b]){if(paused)start();else if(online?.phase!=='playing')returnToSelection();}
+        else if((buttons[PAD.start]&&!previousPad[PAD.start])||secondStart)start();
+        else if(buttons[PAD.a]&&!previousPad[PAD.a]){const active=document.activeElement as HTMLButtonElement,choices=overlayChoices();if(choices.includes(active))active.click();else (choices[0]??$('start')).focus();}
     }
-    if(wasSelection||wasModal||wasOverlay||selection.isOpen||story.isOpen||dialog.open){padNeedsRelease=true;previousStart=!!buttons[9];previousPad=buttons;return 0;}
-    if(padNeedsRelease){previousStart=!!buttons[9];previousPad=buttons;if(!buttons.some(Boolean)&&pad.axes.every(axis=>Math.abs(axis)<.3))padNeedsRelease=false;return 0;}
+    if(wasSelection||wasModal||wasOverlay||selection.isOpen||story.isOpen||dialog.open){padNeedsRelease=true;previousStart=!!buttons[PAD.start];previousPad=buttons;return 0;}
+    if(padNeedsRelease){previousStart=!!buttons[PAD.start];previousPad=buttons;if(!buttons.some(Boolean)&&pad.axes.every(axis=>Math.abs(axis)<.3))padNeedsRelease=false;return 0;}
     if(versus.isOpen){
-        const skip=!!buttons[0]&&!previousPad[0];
-        previousStart=!!buttons[9];previousPad=buttons;
+        const skip=!!buttons[PAD.a]&&!previousPad[PAD.a];
+        previousStart=!!buttons[PAD.start];previousPad=buttons;
         if(skip)versus.skip();
         return 0;
     }
-    const menu = !!buttons[9];
-    if (menu && !previousStart && !dialog.open && !story.isOpen) {
+    const menu = !!buttons[PAD.start];
+    if (((menu && !previousStart) || secondStart) && !dialog.open && !story.isOpen) {
         if (!started || (presentation.phase === 'result'&&!storyAnimation.active))
             start();
         else
@@ -547,20 +600,45 @@ function pollPad(): number {
     }
     previousStart = menu;
     previousPad = buttons;
-    let mask = 0;
-    if (pad.axes[0] < -.3 || buttons[14])
-        mask |= A.left;
-    if (pad.axes[0] > .3 || buttons[15])
-        mask |= A.right;
-    if (pad.axes[1] < -.55 || buttons[12])
-        mask |= A.up;
-    if (pad.axes[1] > .55 || buttons[13])
-        mask |= A.down;
-    for (const a of Object.keys(padKeys) as Action[])
-        if (buttons[padKeys[a]!])
-            mask |= A[a];
-    return mask;
+    return padMask(pad, padKeys);
 }
+/**
+ * Controller focus inside an open dialog. Up/down step through the tabbable
+ * controls (so the campaign map's roving rivals count once); left/right cycle a
+ * select, nudge a slider, or act as arrow keys for widgets that handle their
+ * own (campaign rivals, player tabs), and otherwise step like up/down.
+ */
+function navigateDialog(dialog: HTMLDialogElement, direction: MenuDirection) {
+    const active = document.activeElement instanceof HTMLElement && dialog.contains(document.activeElement) ? document.activeElement : null;
+    const step = direction === 'up' || direction === 'left' ? -1 : 1;
+    if (active && (direction === 'left' || direction === 'right')) {
+        if (active instanceof HTMLSelectElement) {
+            if (!active.options.length) return;
+            active.selectedIndex = (active.selectedIndex + step + active.options.length) % active.options.length;
+            active.dispatchEvent(new Event('change', { bubbles: true }));
+            return;
+        }
+        if (active instanceof HTMLInputElement && active.type === 'range') {
+            if (step > 0) active.stepUp(); else active.stepDown();
+            active.dispatchEvent(new Event('input', { bubbles: true }));
+            return;
+        }
+        const handled = !active.dispatchEvent(new KeyboardEvent('keydown', { key: step > 0 ? 'ArrowRight' : 'ArrowLeft', code: step > 0 ? 'ArrowRight' : 'ArrowLeft', bubbles: true, cancelable: true }));
+        if (handled) return;
+    }
+    const controls = Array.from(dialog.querySelectorAll<HTMLElement>('button:not(:disabled), select:not(:disabled), input:not(:disabled)'))
+        .filter(el => el.offsetParent !== null && el.tabIndex >= 0);
+    if (!controls.length) return;
+    const index = active ? controls.indexOf(active) : -1;
+    controls[index < 0 ? (step > 0 ? 0 : controls.length - 1) : (index + step + controls.length) % controls.length].focus();
+}
+/** Switch on-screen prompts between keyboard keys and controller buttons. */
+function noteDevice(device: 'key' | 'pad') {
+    if (device === lastDevice) return;
+    lastDevice = device;
+    updatePrompts();
+}
+window.addEventListener('keydown', () => noteDevice('key'));
 // Optional, visible read-only diagnostics for manual QA; never changes combat state.
 const qaPanel = new URLSearchParams(location.search).has('qa') ? document.createElement('pre') : null;
 const trainingPanel = training ? document.createElement('pre') : null;
@@ -854,11 +932,12 @@ function stepTo(now: number): number | null {
         qaSingleStep=false;
         let steps = 0;
         while (accumulator >= 1 / 60) {
-            let input = pad | queued;
-            const p2 = mode === 'versus' ? padMask(versusPads(Array.from(navigator.getGamepads?.() ?? []))[1], padKeys2) | queued2 | keyboardMask(held, withoutP1Keys(keys2)) : undefined;
+            // Boss forms reuse the fight buttons and keys for their own actions (see bossFightInput).
+            let input = (storyBoss ? bossFightInput(pad) : pad) | queued;
+            const p2 = mode === 'versus' ? padMask(padP2, padKeys2) | queued2 | keyboardMask(held, withoutP1Keys(keys2)) : undefined;
             queued = 0;queued2=0;
             if(storyBoss){
-                for(const code of held)input|=BOSS_KEYS[code]??0;
+                for(const code of held)input|=bossKeyInput(code,keys);
             }else{
                 for(const a of Object.keys(A) as Action[])
                     if(held.has(keys[a]))input|=A[a];
@@ -916,7 +995,8 @@ function frameTick(now: number): boolean {
     if(trainingPlayButton)trainingPlayButton.disabled = mode!=='dummy' || story.isActive || !!online;
     if (trainingPanel) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${training?.recording ? 'ON' : 'off'} · ${training?.frames.length ?? 0} frames · playback ${training?.playing ? 'ON' : 'off'}`;
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
-    $('coach').textContent = storyBoss ? 'Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · X shield · C beam · V ball · R retry' : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
+    const padName = (a: Action) => padButtonName(padKeys[a]);
+    $('coach').textContent = storyBoss ? (lastDevice === 'pad' ? `Auto-fire · stick / D-pad move · ↑ or ${padName('launcher')} double-jump · ${padName('dash')} dash · ${padName('light')} beam · ${padName('medium')} ball · ${padName('heavy')} shield · Start pauses (Restart is in the menu)` : `Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · ${keyName(keys.light)} or C beam · ${keyName(keys.medium)} or V ball · ${keyName(keys.heavy)} or X shield · R retry`) : mode === 'versus' && lastDevice === 'pad' ? `Controller 1 plays P1, controller 2 plays P2 · ${padName('light')} ${padName('medium')} ${padName('heavy')} attack · either Start pauses. Remap both in Settings.` : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${controlPrompt('special')} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     return frameJudged(steps);
 }
 /** Always reschedules, even when a frame throws; a throw ends that frame's fixed steps.

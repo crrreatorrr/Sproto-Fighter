@@ -1,6 +1,6 @@
 import {describe,expect,it} from 'vitest';
 import {A,createState,FLOOR} from '../src/core';
-import {BOSS_BALL,BOSS_BEAM,BOSS_SHIELD,startStoryBoss,stepStoryBoss,storyBossPlayerPose,type BossForm} from '../src/storyBoss';
+import {BOSS_BALL,BOSS_BEAM,BOSS_SHIELD,bossFightInput,bossKeyInput,startStoryBoss,stepStoryBoss,storyBossPlayerPose,type BossForm} from '../src/storyBoss';
 
 function fight(form:BossForm='giant'){
     const state=createState('highsproto','cpu','vela');
@@ -103,5 +103,24 @@ describe('fixed-screen story bosses',()=>{
         const retreating=fight(form);
         while(retreating.state.winner===null&&retreating.state.frame<3500)retreating.tick(A.right);
         expect(retreating.state.winner).toBe(1);
+    });
+});
+
+describe('boss-form controls from the fight bindings',()=>{
+    const keys={left:'KeyA',right:'KeyD',up:'KeyW',down:'KeyS',light:'KeyJ',medium:'KeyK',heavy:'KeyL',launcher:'KeyU',bolt:'KeyI',grab:'KeyO',special:'KeyP',dash:'ShiftLeft'};
+    it('maps Light/Ranged to the beam, Medium to the ball, Finisher to the shield and Launcher to a jump',()=>{
+        expect(bossFightInput(A.light)).toBe(BOSS_BEAM);
+        expect(bossFightInput(A.bolt)).toBe(BOSS_BEAM);
+        expect(bossFightInput(A.medium)).toBe(BOSS_BALL);
+        expect(bossFightInput(A.heavy)).toBe(BOSS_SHIELD);
+        expect(bossFightInput(A.launcher)).toBe(A.up);
+        expect(bossFightInput(A.left|A.dash|A.grab|A.special)).toBe(A.left|A.dash);
+    });
+    it('keeps the fixed boss keys and adds the fight keys alongside them',()=>{
+        expect(['KeyX','KeyC','KeyV','KeyW','ArrowUp','ShiftRight'].map(code=>bossKeyInput(code,keys))).toEqual([BOSS_SHIELD,BOSS_BEAM,BOSS_BALL,A.up,A.up,A.dash]);
+        expect(['KeyJ','KeyK','KeyL','KeyU','KeyI','KeyP','KeyZ'].map(code=>bossKeyInput(code,keys))).toEqual([BOSS_BEAM,BOSS_BALL,BOSS_SHIELD,A.up,BOSS_BEAM,0,0]);
+        // A remapped fight key follows the player's binding; a fixed boss key keeps its meaning.
+        expect(bossKeyInput('KeyX',{...keys,light:'KeyX'})).toBe(BOSS_SHIELD);
+        expect(bossKeyInput('KeyN',{...keys,medium:'KeyN'})).toBe(BOSS_BALL);
     });
 });

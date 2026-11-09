@@ -1,4 +1,5 @@
 import { A, type Action } from './core';
+import { PAD, type MenuDirection } from './gamepad';
 
 /**
  * Player 2's keyboard in local versus. Chosen to sit on the right half of a
@@ -47,12 +48,31 @@ export function padMask(pad: PadState | null | undefined, buttons: Readonly<Part
 }
 
 /**
- * Gamepad for each player in local versus: the first connected pad belongs to
- * player 1 (it also drives menus), the second to player 2.
+ * Default controller layout (standard mapping) for both players. Modelled on
+ * four-button tag fighters: Light → Medium → Finisher roll clockwise over
+ * X → Y → B so the chain is one thumb sweep, and the Launcher (the S button of
+ * that genre) sits on A. Ranged power and Grab use the bumpers, Team Special
+ * the right trigger, and Dash the left trigger so the left index finger dashes
+ * while the right thumb keeps attacking. Movement, jump and crouch are the
+ * stick and D-pad; Start pauses. README "Controls" lists it.
  */
-export function versusPads<T extends { connected: boolean } | null>(pads: readonly T[]): [T | null, T | null] {
-  const connected = pads.filter((p): p is NonNullable<T> => !!p?.connected);
-  return [connected[0] ?? null, connected[1] ?? null];
+export const PAD_DEFAULTS: Readonly<Partial<Record<Action, number>>> = {
+  light: PAD.x, medium: PAD.y, heavy: PAD.b, launcher: PAD.a,
+  bolt: PAD.rb, grab: PAD.lb, special: PAD.rt, dash: PAD.lt,
+};
+
+/**
+ * Menu focus direction for a keyboard key (`KeyboardEvent.code`): the arrow
+ * keys and W A S D both move, matching the fight's movement keys.
+ */
+export function menuKeyDirection(code: string): MenuDirection {
+  switch (code) {
+    case 'ArrowUp': case 'KeyW': return 'up';
+    case 'ArrowDown': case 'KeyS': return 'down';
+    case 'ArrowLeft': case 'KeyA': return 'left';
+    case 'ArrowRight': case 'KeyD': return 'right';
+    default: return '';
+  }
 }
 
 /** Unbound key slot: shown as "—" and never matched. */
