@@ -1,6 +1,7 @@
 import {dragonHitBands} from './storyDragonHitbox';
 import storyClips from './storyAnimationManifest.json';
-import {A,FLOOR,type CombatState,type Projectile} from './core';
+import {A,FLOOR,type Action,type CombatState,type Projectile} from './core';
+import {pressedMask} from './localInput';
 import {makeFighter} from './sim/combat';
 import missile from './story-boss-art/missile.png';
 import laser from './story-boss-art/laser.svg';
@@ -19,6 +20,25 @@ export const BOSS_KEYS:Readonly<Record<string,number>>={
     KeyW:A.up,ArrowUp:A.up,
     ShiftLeft:A.dash,ShiftRight:A.dash,KeyX:BOSS_SHIELD,KeyC:BOSS_BEAM,KeyV:BOSS_BALL,
 };
+/**
+ * A boss form's actions from the player's fight controls, so the same buttons
+ * and keys work in both: movement and dash carry over, Launcher also jumps,
+ * Light and Ranged power fire the beam, Medium throws the ball and Finisher
+ * raises the shield (controller defaults: A jump, X/RB beam, Y ball, B shield,
+ * LT dash; keyboard defaults: U jump, J/I beam, K ball, L shield).
+ */
+export function bossFightInput(mask:number):number{
+    let input=mask&(A.left|A.right|A.up|A.down|A.dash);
+    if(mask&A.launcher)input|=A.up;
+    if(mask&(A.light|A.bolt))input|=BOSS_BEAM;
+    if(mask&A.medium)input|=BOSS_BALL;
+    if(mask&A.heavy)input|=BOSS_SHIELD;
+    return input;
+}
+/** Boss-form input for one key: its fixed BOSS_KEYS action, or else what its fight binding means in the form. */
+export function bossKeyInput(code:string,bindings:Readonly<Record<Action,string>>):number{
+    return BOSS_KEYS[code]??bossFightInput(pressedMask(code,bindings));
+}
 const projectileUrls={missile,laser,bolt,diamond,orb,roller,seed};
 type Art=keyof typeof projectileUrls;
 const artSize:Record<Art,readonly [number,number]>={

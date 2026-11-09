@@ -6,6 +6,7 @@ const asset=(path:string)=>{
 import {campaignMapMarkerLayout,campaignMapPaths,campaignMapPoints} from './campaignMapLayout';
 import {campaignMapViewport} from './campaignMapViewport';
 import {ROSTER} from './core';
+import {menuKeyDirection} from './localInput';
 import {portraitThumb} from './portraits';
 import {STAGES} from './stage';
 import {STORY_ENCOUNTERS,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
@@ -61,7 +62,7 @@ export function mountCampaignMap(parent:HTMLElement,progress:StoryProgress,choos
   const names=encounter.opponents.map(id=>ROSTER[id].name).join(' then ');
   b.style.left=points[i][0]+'%';b.style.top=points[i][1]+'%';b.dataset.encounter=encounter.id;b.textContent=String(i+1);b.title=names;
   b.setAttribute('aria-label',`Encounter ${i+1}: ${names}, ${cleared?'cleared':available?'available':'locked'}`);b.tabIndex=i===selected?0:-1;b.setAttribute('aria-pressed',String(i===selected));
-  b.onclick=()=>focus(i);b.onfocus=()=>select(i,true);b.onkeydown=e=>{const delta=e.key==='ArrowRight'||e.key==='ArrowDown'?1:e.key==='ArrowLeft'||e.key==='ArrowUp'?-1:0;if(delta){e.preventDefault();e.stopPropagation();focus(i+delta);}};nodes.append(b);buttons.push(b);
+  b.onclick=()=>focus(i);b.onfocus=()=>select(i,true);b.onkeydown=e=>{const direction=e.ctrlKey||e.metaKey||e.altKey?'':menuKeyDirection(e.code),delta=direction==='right'||direction==='down'?1:direction==='left'||direction==='up'?-1:0;if(delta){e.preventDefault();e.stopPropagation();focus(i+delta);}};nodes.append(b);buttons.push(b);
  }
  const regionLabels:Record<string,string>={trenches:'Trenches',circuit:'City',yacht:'Marina',ranch:'Sproto Ranch',throne:'Castle'};
  for(const stage of [...new Set(STORY_ENCOUNTERS.map(e=>e.stage))]){const b=document.createElement('button');b.className='quiet';b.textContent=regionLabels[stage]??STAGES.find(s=>s.id===stage)!.name;b.onclick=()=>focus(STORY_ENCOUNTERS.findIndex(e=>e.stage===stage));regionBar.append(b);}
