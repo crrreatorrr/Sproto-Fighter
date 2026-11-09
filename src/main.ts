@@ -29,6 +29,11 @@ import { connectHub, hubConfigured, type HubLink } from './hub/link';
 import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
+import { crashGuard, createFrameLoop } from './crash';
+import { showCrashPanel } from './crashPanel';
+// Uncaught errors and rejections share the frame loop's counter; the panel opens once the game pauses.
+crashGuard.install(window, document);
+crashGuard.onFatal(report => showCrashPanel(report));
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
 $('roster-count').textContent=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · UNLIMITED ROUND TIME`;
@@ -805,7 +810,8 @@ function startHiddenClock() {
     if (hiddenClock || typeof Worker === 'undefined') return;
     const source = URL.createObjectURL(new Blob(['setInterval(() => postMessage(0), 16);'], { type: 'text/javascript' }));
     hiddenClock = new Worker(source);
-    hiddenClock.onmessage = () => { if (document.hidden && online) stepTo(performance.now()); };
+    // Hidden-tab steps run under the crash guard too: a throw is counted, never left uncaught.
+    hiddenClock.onmessage = () => { if (document.hidden && online) crashGuard.runFrame(() => frameJudged(stepTo(performance.now()))); };
 }
 function stopHiddenClock() { hiddenClock?.terminate(); hiddenClock = null; }
 
@@ -911,7 +917,11 @@ function advanceRoundFrame(input: number, p2Input?: number) {
     }
 }
 /** Advance the simulation by the real time since the last call. Shared by the frame loop and the hidden-tab clock. */
-function stepTo(now: number) {
+/**
+ * Runs the fixed steps that are due and returns how many ran, or null when combat is idle (paused,
+ * a menu or dialog open, QA frozen), so the crash guard can tell "no step was due" from "idle".
+ */
+function stepTo(now: number): number | null {
     const elapsed = Math.min((now - lastTime) / 1000, .1);
     lastTime = now;
     // Keep KO icon rotation alive on the result screen without advancing combat.
@@ -920,6 +930,7 @@ function stepTo(now: number) {
     if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen && !partnerPicker.isOpen)) && (!qaFrozen||qaSingleStep)) {
         accumulator = qaSingleStep?1/60:accumulator+elapsed;
         qaSingleStep=false;
+        let steps = 0;
         while (accumulator >= 1 / 60) {
             // Boss forms reuse the fight buttons and keys for their own actions (see bossFightInput).
             let input = (storyBoss ? bossFightInput(pad) : pad) | queued;
@@ -933,12 +944,22 @@ function stepTo(now: number) {
             }
             accumulator -= 1 / 60;
             advanceRoundFrame(input, p2);
+            steps++;
             if (!running || (presentation.phase === 'result'&&!storyAnimation.active)) break;
         }
+        return steps;
     }
+    return null;
 }
-function tick(now: number) {
-    stepTo(now);
+/**
+ * Whether the crash guard counts a frame as good: only when a step ran cleanly or combat is idle.
+ * At 120/144 Hz many frames run no step; counting those as good would let a step that throws
+ * every time it runs reset the streak forever and never show the panel.
+ */
+function frameJudged(steps: number | null): boolean { return steps === null || steps > 0; }
+/** One rendered frame. The loop below runs it through the crash guard (crash.ts). */
+function frameTick(now: number): boolean {
+    const steps = stepTo(now);
     sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
     const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
     const recovery=storyBoss&&storyBoss.entryHp<1000&&state.winner===null&&bossAge<54
@@ -976,12 +997,15 @@ function tick(now: number) {
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     const padName = (a: Action) => padButtonName(padKeys[a]);
     $('coach').textContent = storyBoss ? (lastDevice === 'pad' ? `Auto-fire · stick / D-pad move · ↑ or ${padName('launcher')} double-jump · ${padName('dash')} dash · ${padName('light')} beam · ${padName('medium')} ball · ${padName('heavy')} shield · Start pauses (Restart is in the menu)` : `Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · ${keyName(keys.light)} or C beam · ${keyName(keys.medium)} or V ball · ${keyName(keys.heavy)} or X shield · R retry`) : mode === 'versus' && lastDevice === 'pad' ? `Controller 1 plays P1, controller 2 plays P2 · ${padName('light')} ${padName('medium')} ${padName('heavy')} attack · either Start pauses. Remap both in Settings.` : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${controlPrompt('special')} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
-    requestAnimationFrame(tick);
+    return frameJudged(steps);
 }
+/** Always reschedules, even when a frame throws; a throw ends that frame's fixed steps.
+ * After a few failing frames in a row the game pauses and shows "Something broke". */
+const tick = createFrameLoop(frameTick);
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
-ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);console.error(error);});
+ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);crashGuard.report(error,'boot');});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
