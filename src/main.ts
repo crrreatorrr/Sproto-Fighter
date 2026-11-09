@@ -31,7 +31,7 @@ import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache 
 import { crashGuard, createFrameLoop } from './crash';
 import { showCrashPanel } from './crashPanel';
 // Uncaught errors and rejections share the frame loop's counter; the panel opens once the game pauses.
-crashGuard.install(window);
+crashGuard.install(window, document);
 crashGuard.onFatal(report => showCrashPanel(report));
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
@@ -732,7 +732,8 @@ function startHiddenClock() {
     if (hiddenClock || typeof Worker === 'undefined') return;
     const source = URL.createObjectURL(new Blob(['setInterval(() => postMessage(0), 16);'], { type: 'text/javascript' }));
     hiddenClock = new Worker(source);
-    hiddenClock.onmessage = () => { if (document.hidden && online && !crashGuard.paused) stepTo(performance.now()); };
+    // Hidden-tab steps run under the crash guard too: a throw is counted, never left uncaught.
+    hiddenClock.onmessage = () => { if (document.hidden && online) crashGuard.runFrame(() => frameJudged(stepTo(performance.now()))); };
 }
 function stopHiddenClock() { hiddenClock?.terminate(); hiddenClock = null; }
 
@@ -838,7 +839,11 @@ function advanceRoundFrame(input: number, p2Input?: number) {
     }
 }
 /** Advance the simulation by the real time since the last call. Shared by the frame loop and the hidden-tab clock. */
-function stepTo(now: number) {
+/**
+ * Runs the fixed steps that are due and returns how many ran, or null when combat is idle (paused,
+ * a menu or dialog open, QA frozen), so the crash guard can tell "no step was due" from "idle".
+ */
+function stepTo(now: number): number | null {
     const elapsed = Math.min((now - lastTime) / 1000, .1);
     lastTime = now;
     // Keep KO icon rotation alive on the result screen without advancing combat.
@@ -847,6 +852,7 @@ function stepTo(now: number) {
     if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen && !partnerPicker.isOpen)) && (!qaFrozen||qaSingleStep)) {
         accumulator = qaSingleStep?1/60:accumulator+elapsed;
         qaSingleStep=false;
+        let steps = 0;
         while (accumulator >= 1 / 60) {
             let input = pad | queued;
             const p2 = mode === 'versus' ? padMask(versusPads(Array.from(navigator.getGamepads?.() ?? []))[1], padKeys2) | queued2 | keyboardMask(held, withoutP1Keys(keys2)) : undefined;
@@ -859,13 +865,22 @@ function stepTo(now: number) {
             }
             accumulator -= 1 / 60;
             advanceRoundFrame(input, p2);
+            steps++;
             if (!running || (presentation.phase === 'result'&&!storyAnimation.active)) break;
         }
+        return steps;
     }
+    return null;
 }
+/**
+ * Whether the crash guard counts a frame as good: only when a step ran cleanly or combat is idle.
+ * At 120/144 Hz many frames run no step; counting those as good would let a step that throws
+ * every time it runs reset the streak forever and never show the panel.
+ */
+function frameJudged(steps: number | null): boolean { return steps === null || steps > 0; }
 /** One rendered frame. The loop below runs it through the crash guard (crash.ts). */
-function frameTick(now: number) {
-    stepTo(now);
+function frameTick(now: number): boolean {
+    const steps = stepTo(now);
     sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
     const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
     const recovery=storyBoss&&storyBoss.entryHp<1000&&state.winner===null&&bossAge<54
@@ -902,6 +917,7 @@ function frameTick(now: number) {
     if (trainingPanel) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${training?.recording ? 'ON' : 'off'} · ${training?.frames.length ?? 0} frames · playback ${training?.playing ? 'ON' : 'off'}`;
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     $('coach').textContent = storyBoss ? 'Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · X shield · C beam · V ball · R retry' : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${keyName(keys.special)} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
+    return frameJudged(steps);
 }
 /** Always reschedules, even when a frame throws; a throw ends that frame's fixed steps.
  * After a few failing frames in a row the game pauses and shows "Something broke". */

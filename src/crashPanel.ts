@@ -12,6 +12,15 @@ export function showCrashPanel(
   const parent = opts.parent ?? document.body;
   const doc = parent.ownerDocument;
   parent.querySelector(':scope > .crash-overlay')?.remove();
+  // A dialog opened with showModal() (Settings, Story) sits in the top layer above any z-index and
+  // makes the rest of the page inert, which would hide the panel and its button: close it first.
+  for (const open of Array.from(doc.querySelectorAll<HTMLDialogElement>('dialog[open]'))) {
+    try {
+      open.close();
+    } catch {
+      open.removeAttribute('open');
+    }
+  }
   const boot = report.source === 'boot';
 
   const overlay = doc.createElement('div');
