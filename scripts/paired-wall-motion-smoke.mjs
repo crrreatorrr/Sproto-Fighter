@@ -110,7 +110,7 @@ for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const dir of 
 }
 // A full backdash, a backdash interrupted by a wall, and a crouch brake
 // all ease the extra space out before returning to the compact formation.
-for(const [id,start,dir,brake] of [['sproto282',640,-1,-1],['sproto282',252,-1,-1],['sproto3224',170,1,3]]){
+for(const [id,start,dir,brake] of [['sproto282',640,-1,-1],['sproto282',252,-1,-1],['sproto282',272,-1,11],['sproto3224',170,1,3]]){
  const s=createState(id,'versus','rivet'),[f,b]=s.fighters;
  f.x=start;b.x=Math.min(core.WIDTH-core.fighterWall(b.id),start+490);f.facing=1;
  let prior,release;
@@ -119,14 +119,33 @@ for(const [id,start,dir,brake] of [['sproto282',640,-1,-1],['sproto282',252,-1,-
   const {offsets,bounds}=getDuoLayoutDebug(f,s.frame);
   const separation=offsets[1]-offsets[0];
   if(!f.dash&&prior!==undefined){
-   const wallRoom=Math.abs(bounds[0][0]-6)<.01 ? 12 : 7;
    release??=separation;
-   assert.ok(prior-separation<=wallRoom+1e-7,`${id}: the support must close dash spacing gradually`);
+   assert.ok(prior-separation<=7+1e-7,`${id}: the support must close dash spacing gradually`);
    assert.ok(bounds[0][0]>=6-.01&&bounds[1][1]<=core.WIDTH-6+.01,`${id}: recovery stays inside the arena`);
   }
   prior=separation;
  }
  assert.ok(release>prior,`${id}: the fixture must exercise dash recovery`);
+}
+{
+ const s=createState('sproto282','versus','rivet'),[f,b]=s.fighters;
+ f.x=640;b.x=1130;
+ for(let t=0;t<5;t++){
+  step(s,[t===0?A.left|A.dash:0,0]);
+  getDuoLayoutDebug(f,s.frame);
+ }
+ const presentation=events.createRoundPresentation();
+ events.beginRoundOutro(presentation,0,false);
+ setPoseAtlasPresentation(presentation,s.fighters);
+ for(let t=0;t<8;t++){
+  events.advanceRoundPresentation(presentation);
+  const fresh={...f};
+  setPoseAtlasPresentation(presentation,[fresh,b]);
+  const expected=getDuoLayoutDebug(fresh,s.frame);
+  setPoseAtlasPresentation(presentation,s.fighters);
+  assert.deepEqual(getDuoLayoutDebug(f,s.frame),expected,'victory presentation ignores the previous dash formation');
+ }
+ setPoseAtlasPresentation(null,[]);
 }
 for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const side of [-1,1]){
  const s=createState(id,'dummy','rivet'),[f,b]=s.fighters;

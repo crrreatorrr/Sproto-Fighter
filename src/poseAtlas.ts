@@ -710,6 +710,13 @@ function pairedDashFormation(owner:Fighter,neutral:MovementFormation):DashFormat
   const closing=required.map((_,i)=>Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.max(0,i-j))));
   const widest=Math.max(...required);
   const xs=outlines.flatMap(pair=>pair.flatMap((outline,body)=>outline.map(([x])=>x+(body===support?widest*sign:0))));
+  // Leave room for the wider guard and crouch cels while the dash spacing
+  // settles. Changing the recovery pose must not squeeze the support inward.
+  for(const [body,atlas] of sources.entries()){
+    const extra=body===support?widest*sign:0;
+    xs.push(...neutral.envelopes[body].map(x=>x+extra));
+    for(const [x] of dashOutline(atlas,atlas.frames[POSE_SLOTS.crouchLanding],owner.facing,positions[body]))xs.push(x+extra);
+  }
   const result={opening,closing,rawGaps,left:Math.min(...xs),right:Math.max(...xs)};
   dashFormations.set(key,result);
   return result;
@@ -895,6 +902,10 @@ const dashSpacingPlayback=new WeakMap<Fighter,DashSpacingSample>();
 
 function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[],frame:number) {
   const layout=baseDuoLayout(owner,actors,samples);
+  if(presentationScene?.fighters.includes(owner)&&presentationScene.presentation.phase!=='fight'){
+    dashSpacingPlayback.delete(owner);
+    return layout;
+  }
   const last=dashSpacingPlayback.get(owner);
   if(actors.length!==2||(!last&&layout.dashClearance===undefined))return layout;
   const lead=duoLeadIndex(owner),support=1-lead,sign=lead===0?1:-1;
