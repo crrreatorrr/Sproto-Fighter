@@ -690,7 +690,7 @@ function silhouetteGap(left:Point[],right:Point[]):number {
   };
   return Math.min(...rows.map(y=>edge(right,y,false)-edge(left,y,true)));
 }
-interface DashFormation { offsets:number[][]; gaps:number[]; left:number; right:number }
+interface DashFormation { spacing:number[]; widest:number; rawGaps:number[]; left:number; right:number }
 function pairedDashFormation(owner:Fighter,neutral:MovementFormation):DashFormation {
   const key=owner.id+':'+owner.facing;
   const cached=dashFormations.get(key);
@@ -704,15 +704,14 @@ function pairedDashFormation(owner:Fighter,neutral:MovementFormation):DashFormat
   )));
   const rawGaps=outlines.map(([left,right])=>silhouetteGap(left,right));
   const required=rawGaps.map(gap=>Math.max(idle,dashGap-gap));
-  const offsets=required.map((_,i)=>{
+  const spacing=required.map((_,i)=>{
     // Prepare for the widest synchronized pose and retain the space until the
     // teammate can close it at walking speed. No retiming of authored cels.
-    const distance=Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.abs(i-j)));
-    return lead===0?[0,distance]:[-distance,0];
+    return Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.abs(i-j)));
   });
-  const gaps=rawGaps.map((gap,i)=>gap+offsets[i][1]-offsets[i][0]);
-  const xs=outlines.flatMap((pair,i)=>pair.flatMap((outline,body)=>outline.map(([x])=>x+offsets[i][body])));
-  const result={offsets,gaps,left:Math.min(...xs),right:Math.max(...xs)};
+  const widest=Math.max(...spacing);
+  const xs=outlines.flatMap(pair=>pair.flatMap((outline,body)=>outline.map(([x])=>x+(body===support?widest*sign:0))));
+  const result={spacing,widest,rawGaps,left:Math.min(...xs),right:Math.max(...xs)};
   dashFormations.set(key,result);
   return result;
 }
@@ -788,9 +787,16 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
       // authored cel as the renderer, even across a fractional boundary.
       const phase=dashCel(11-earlier)===dashCel(owner.dash)?earlier:Math.min(10,earlier+1);
       const [l,r]=pairedMovementLimits(owner,neutral,dash);
-      const shift=owner.x+l<6?6-owner.x-l:owner.x+r>WIDTH-6?WIDTH-6-owner.x-r:0;
-      const positions=schedule.offsets[phase].map(offset=>offset+shift);
-      return {data,offsets:positions,bounds:bounds.map(([l,r],i)=>[l+positions[i],r+positions[i]]),dashClearance:schedule.gaps[phase]};
+      const left=6-l,right=WIDTH-6-r;
+      const x=Math.max(left,Math.min(right,owner.x));
+      const room=Math.min(x-left,right-x);
+      // When the wall pins the lead, hold the support at a fixed spacing.
+      // Open that space at no more than the travel the lead has left.
+      const wallSpacing=schedule.widest-Math.max(0,room-dashSpacingPerTick);
+      const distance=Math.max(schedule.spacing[phase],wallSpacing);
+      const shift=x-owner.x;
+      const positions=duoLeadIndex(owner)===0?[shift,shift+distance]:[shift-distance,shift];
+      return {data,offsets:positions,bounds:bounds.map(([l,r],i)=>[l+positions[i],r+positions[i]]),dashClearance:schedule.rawGaps[phase]+distance};
     }
     // Large silhouette differences cannot be eased across a short dash
     // without making the trailing body travel opposite the lead. Establish

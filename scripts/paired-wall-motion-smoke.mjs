@@ -51,19 +51,26 @@ for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing 
 }
 console.log('Stable guard/walk spacing and clear, synchronized dash outlines across the paired roster.');
 
-// Step a real dash and check world-space travel of both bodies once the
-// dash silhouette is established. The support must never moonwalk.
-for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing of [-1,1])for(const dir of [-1,1]){
+// Step real dashes at center and at distances that pin the visual anchor
+// during different active cels. Neither body should move against the dash.
+const dashStarts=[...Array.from({length:33},(_,i)=>5*i),480];
+for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing of [-1,1])for(const dir of [-1,1])for(const margin of dashStarts){
  const s=createState(id,'dummy','rivet'),[f,b]=s.fighters;
- f.x=640;f.facing=facing;b.x=facing===1?1130:150;
+ const wall=core.fighterWall(id);
+ // At the wall, face inward so the rival can stay outside push range.
+ f.x=margin===480?core.WIDTH/2:facing===1?wall+margin:core.WIDTH-wall-margin;
+ f.facing=facing;
+ const rivalWall=core.fighterWall(b.id);
+ b.x=Math.max(rivalWall,Math.min(core.WIDTH-rivalWall,f.x+facing*490));
  let prior=getDuoLayoutDebug(f,0).offsets.map(offset=>f.x+offset);
  for(let t=0;t<12;t++){
   step(s,[t===0?(dir===1?A.right:A.left)|A.dash:0,0]);
   const x=getDuoLayoutDebug(f,s.frame).offsets.map(offset=>f.x+offset);
   // Check both boundaries too for the Sproto 3181 facing that can ease
   // without sacrificing clearance.
-  if((t>0&&f.dash>0)||(id==='sproto3181'&&facing===1)){
-   assert.ok(x.every((body,i)=>(body-prior[i])*dir>=-1e-7),`${id}: dash bodies must travel together`);
+  if((t>0&&f.dash>0)||(margin===480&&id==='sproto3181'&&facing===1)){
+   assert.ok(x.every((body,i)=>(body-prior[i])*dir>=-1e-7),
+    `${id} facing ${facing}, dash ${dir}, ${margin}px from wall, tick ${t}: dash bodies must travel together`);
   }
   prior=x;
   if(f.dash===0)break;
