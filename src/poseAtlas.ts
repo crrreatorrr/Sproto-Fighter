@@ -97,6 +97,7 @@ export interface PoseAtlasDebug {
 }
 const atlases = new Map<string, Atlas>();
 const movementFormations = new Map<string, MovementFormation>();
+const dashFormations = new Map<string, DashFormation>();
 const declaredAtlases = new Set<string>();
 /** Declared but loading/broken art must never silently reveal the old rig. */
 export const isPoseAtlasDeclared = (id:string) => declaredAtlases.has(id);
@@ -222,13 +223,13 @@ export function loadPoseAtlases(): Promise<boolean> {
     const response = await fetch(asset('/fighters/pose-atlas.json'), { cache: 'no-store' });
     if (response.status === 404 || (response.ok && response.headers.get('content-type')?.includes('text/html'))) {
       // Development SPA servers can return their HTML shell for missing files.
-      atlases.clear(); movementFormations.clear(); declaredAtlases.clear(); loadState = 'absent'; return false;
+      atlases.clear(); movementFormations.clear(); dashFormations.clear(); declaredAtlases.clear(); loadState = 'absent'; return false;
     }
     if (!response.ok) throw new Error(`Pose atlas metadata: HTTP ${response.status}`);
     const manifest = await response.json() as PoseAtlasManifest;
     if (manifest?.version !== 1 || !manifest.fighters || typeof manifest.fighters !== 'object' || Array.isArray(manifest.fighters)) throw new Error('Unsupported pose atlas manifest');
     declaredAtlases.clear(); for(const id of Object.keys(manifest.fighters))declaredAtlases.add(id);
-    atlases.clear(); movementFormations.clear();
+    atlases.clear(); movementFormations.clear(); dashFormations.clear();
     const loaded = await Promise.all(Object.entries(manifest.fighters).map(async ([id, cfg]) => [id, await loadAtlas(id, cfg, manifest.revision)] as const));
     atlases.clear(); for (const [id, atlas] of loaded) atlases.set(id, atlas);
     loadState = loaded.length ? 'ready' : 'absent';
@@ -258,7 +259,7 @@ function evictAtlases():void{
     if(atlases.size<=16&&bytes<=POSE_ATLAS_CACHE_BYTES)break;
     if(keep(id))continue;
     atlases.delete(id);bytes-=atlas.bytes;
-    movementFormations.clear();
+    movementFormations.clear(); dashFormations.clear();
     for(const bitmap of atlas.bitmaps)bitmap.close();
   }
 }
@@ -478,7 +479,7 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:AtlasClipName
       :(heavy?5:4)+Math.min(heavy?2:1,Math.floor((age-move.startup-move.active)/Math.max(1,move.recovery)*(heavy?3:2)));
     return choose(heavy?'heavy':'airKick',frame);
   }
-  if(f.dash>0)return choose('dash',Math.min(5,Math.floor(Math.max(0,10-f.dash)*.6)));
+  if(f.dash>0)return choose('dash',dashCel(f.dash));
   if(f.y<FLOOR&&!f.move){
     const impulse=ROSTER[f.id].jump;
     return choose('jump',Math.max(0,Math.min(5,Math.floor((f.vy+impulse)/(2*impulse)*6))));
@@ -662,6 +663,59 @@ function paintBounds(data:PaintData):[number,number] {
   const xs=points.map(([x,y])=>t.x+(x-source.anchor[0]-t.pivotX)*facing*atlas.facing*atlas.scale*Math.cos(t.angle)-(y-source.anchor[1]-t.pivotY)*atlas.scale*Math.sin(t.angle));
   return [Math.min(...xs),Math.max(...xs)];
 }
+const dashCel=(remaining:number)=>Math.min(5,Math.floor(Math.max(0,10-remaining)*.6));
+const dashGap=7; // Includes one pixel for rounding the two draw origins.
+const dashSpacingPerTick=7; // A normal dash still travels 7.59 px on its last tick.
+function dashOutline(atlas:Atlas,frame:LoadedFrame,facing:number,x:number):Point[] {
+  const hull=frame.contactHull;
+  const [l,t,r,b]=frame.bounds;
+  const points:Point[]=hull??[[l,t],[r,t],[r,b],[l,b]];
+  return points.map(([px,py])=>[x+(px-frame.anchor[0])*facing*atlas.facing*atlas.scale,
+    (py-frame.anchor[1])*atlas.scale]);
+}
+
+/** Gap measured only where both silhouettes occupy the same height. A raised
+ * elbow can pass above the other actor's leg without either body intersecting. */
+function silhouetteGap(left:Point[],right:Point[]):number {
+  const rows=[...left,...right].map(([,y])=>y);
+  const edge=(outline:Point[],y:number,rightSide:boolean)=>{
+    let x=rightSide?-Infinity:Infinity;
+    for(let i=0;i<outline.length;i++){
+      const [ax,ay]=outline[i],[bx,by]=outline[(i+1)%outline.length];
+      if(y<Math.min(ay,by)||y>Math.max(ay,by))continue;
+      const hit=ay===by?(rightSide?Math.max(ax,bx):Math.min(ax,bx)):ax+(bx-ax)*(y-ay)/(by-ay);
+      x=rightSide?Math.max(x,hit):Math.min(x,hit);
+    }
+    return x;
+  };
+  return Math.min(...rows.map(y=>edge(right,y,false)-edge(left,y,true)));
+}
+interface DashFormation { offsets:number[][]; gaps:number[]; left:number; right:number }
+function pairedDashFormation(owner:Fighter,neutral:MovementFormation):DashFormation {
+  const key=owner.id+':'+owner.facing;
+  const cached=dashFormations.get(key);
+  if(cached)return cached;
+  const sources=bodyAtlasIds(owner.id).map(id=>atlases.get(id)!);
+  const positions=bodyOffsets(owner.id),lead=duoLeadIndex(owner);
+  const sign=lead===0?1:-1,support=1-lead;
+  const idle=neutral.offsets[support]*sign;
+  const outlines=Array.from({length:11},(_,i)=>sources.map((atlas,body)=>dashOutline(
+    atlas,atlas.clips.dash?.[dashCel(11-i)]??atlas.frames[POSE_SLOTS.dash],owner.facing,positions[body],
+  )));
+  const rawGaps=outlines.map(([left,right])=>silhouetteGap(left,right));
+  const required=rawGaps.map(gap=>Math.max(idle,dashGap-gap));
+  const offsets=required.map((_,i)=>{
+    // Prepare for the widest synchronized pose and retain the space until the
+    // teammate can close it at walking speed. No retiming of authored cels.
+    const distance=Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.abs(i-j)));
+    return lead===0?[0,distance]:[-distance,0];
+  });
+  const gaps=rawGaps.map((gap,i)=>gap+offsets[i][1]-offsets[i][0]);
+  const xs=outlines.flatMap((pair,i)=>pair.flatMap((outline,body)=>outline.map(([x])=>x+offsets[i][body])));
+  const result={offsets,gaps,left:Math.min(...xs),right:Math.max(...xs)};
+  dashFormations.set(key,result);
+  return result;
+}
 interface MovementFormation {
   envelopes: number[][];
   offsets: number[];
@@ -701,7 +755,14 @@ function pairedMovementFormation(owner:Fighter,dashing:boolean):MovementFormatio
 }
 /** Cover both formations and their small easing range even during a jump
  * beside a wall, so swapping pose families cannot move the lead anchor. */
-function pairedMovementLimits(neutral:MovementFormation,dash:MovementFormation):[number,number] {
+function pairedMovementLimits(owner:Fighter,neutral:MovementFormation,dash:MovementFormation):[number,number] {
+  if(neutral.offsets.length===2){
+    const schedule=pairedDashFormation(owner,neutral);
+    return [
+      Math.min(schedule.left,...neutral.envelopes.map(([l],i)=>l+neutral.offsets[i])),
+      Math.max(schedule.right,...neutral.envelopes.map(([,r],i)=>r+neutral.offsets[i])),
+    ];
+  }
   return [
     Math.min(...neutral.envelopes.map(([left],i)=>
       Math.min(left,dash.envelopes[i][0])+Math.min(neutral.offsets[i],dash.offsets[i]))),
@@ -720,6 +781,17 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
     (sample.sequence==='poses'&&sample.slot<=POSE_SLOTS.dash));
   if(locomotion&&usesMovementFormation){
     const neutral=pairedMovementFormation(owner,false),dash=pairedMovementFormation(owner,true);
+    if(owner.dash>0&&offsets.length===2){
+      const schedule=pairedDashFormation(owner,neutral);
+      const earlier=Math.max(0,Math.min(10,Math.floor(11-owner.dash)));
+      // The pose lab can scrub between ticks. Its layout must use the same
+      // authored cel as the renderer, even across a fractional boundary.
+      const phase=dashCel(11-earlier)===dashCel(owner.dash)?earlier:Math.min(10,earlier+1);
+      const [l,r]=pairedMovementLimits(owner,neutral,dash);
+      const shift=owner.x+l<6?6-owner.x-l:owner.x+r>WIDTH-6?WIDTH-6-owner.x-r:0;
+      const positions=schedule.offsets[phase].map(offset=>offset+shift);
+      return {data,offsets:positions,bounds:bounds.map(([l,r],i)=>[l+positions[i],r+positions[i]]),dashClearance:schedule.gaps[phase]};
+    }
     // Large silhouette differences cannot be eased across a short dash
     // without making the trailing body travel opposite the lead. Establish
     // those formations on the first dash cel, then keep them together.
@@ -735,7 +807,7 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
     for(let i=lead+1;i<offsets.length;i++)offsets[i]=Math.max(offsets[i],bounds[i-1][1]+offsets[i-1]-bounds[i][0]+gap);
     // Reserve room for both footprints, including the blend between their
     // offsets. A cel change should not move the lead at a wall.
-    const [limitLeft,limitRight]=pairedMovementLimits(neutral,dash);
+    const [limitLeft,limitRight]=pairedMovementLimits(owner,neutral,dash);
     const left=Math.min(owner.x+limitLeft,...bounds.map(([l],i)=>l+offsets[i]));
     const right=Math.max(owner.x+limitRight,...bounds.map(([,r],i)=>r+offsets[i]));
     const shift=left<6?6-left:right>WIDTH-6?WIDTH-6-right:0;
@@ -766,7 +838,7 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
       let left=Math.min(...bounds.map((b,i)=>b[0]+offsets[i])),right=Math.max(...bounds.map((b,i)=>b[1]+offsets[i]));
       if(locomotion){
         const neutral=pairedMovementFormation(owner,false),dash=pairedMovementFormation(owner,true);
-        const [limitLeft,limitRight]=pairedMovementLimits(neutral,dash);
+        const [limitLeft,limitRight]=pairedMovementLimits(owner,neutral,dash);
         left=Math.min(left,owner.x+limitLeft);
         right=Math.max(right,owner.x+limitRight);
       }
@@ -816,7 +888,7 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
 }
 export function getDuoLayoutDebug(f:Fighter,frame:number) {
   const actors=duoActors(f),samples=actors.map((actor,i)=>sample(actor,frame,false,bodyAtlasIds(f.id)[i],i/bodyAtlasIds(f.id).length));
-  const {bounds,offsets}=duoLayout(f,actors,samples);return {bounds,offsets};
+  const {bounds,offsets,dashClearance}=duoLayout(f,actors,samples);return {bounds,offsets,dashClearance};
 }
 /** QA only (scripts/sheet-render-qa.mjs): a sub-pixel offset added to every fighter
  * sprite, so a render comparison can move fighters without moving the stage. Always 0 in play. */

@@ -36,8 +36,10 @@ for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing 
   const lead=facing===1?layout.offsets.length-1:0;
   assert.ok(Math.abs(layout.offsets[lead]-start[lead])<1e-7,`${id}: dash keeps the lead anchor`);
   if(dash===0)assert.deepEqual(layout.offsets,start,`${id}: returns to compact guard after dash`);
-  assert.ok(layout.bounds.every(([l,r],i)=>l>=6-.01&&r<=core.WIDTH-6+.01&&(i===0||l>=layout.bounds[i-1][1]+5.99)),
-    `${id} facing ${facing}, edge ${edge}: separate silhouettes stay in frame`);
+  assert.ok(layout.bounds.every(([l,r])=>l>=6-.01&&r<=core.WIDTH-6+.01),
+    `${id} facing ${facing}, edge ${edge}: silhouettes stay in frame`);
+  if(layout.dashClearance!==undefined)assert.ok(layout.dashClearance>=6.99,`${id}: synchronized dash outlines stay apart`);
+  else assert.ok(layout.bounds.every(([l],i)=>i===0||l>=layout.bounds[i-1][1]+5.99),`${id}: guard bodies stay apart`);
  }
  if(edge===0){
   for(let frame=14;frame<=42;frame++){
@@ -47,7 +49,7 @@ for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing 
   }
  }
 }
-console.log('Stable guard/walk spacing and anchored dash formations across the paired roster.');
+console.log('Stable guard/walk spacing and clear, synchronized dash outlines across the paired roster.');
 
 // Step a real dash and check world-space travel of both bodies once the
 // dash silhouette is established. The support must never moonwalk.
