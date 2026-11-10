@@ -690,7 +690,7 @@ function silhouetteGap(left:Point[],right:Point[]):number {
   };
   return Math.min(...rows.map(y=>edge(right,y,false)-edge(left,y,true)));
 }
-interface DashFormation { spacing:number[]; widest:number; rawGaps:number[]; left:number; right:number }
+interface DashFormation { opening:number[]; closing:number[]; rawGaps:number[]; left:number; right:number }
 function pairedDashFormation(owner:Fighter,neutral:MovementFormation):DashFormation {
   const key=owner.id+':'+owner.facing;
   const cached=dashFormations.get(key);
@@ -704,14 +704,13 @@ function pairedDashFormation(owner:Fighter,neutral:MovementFormation):DashFormat
   )));
   const rawGaps=outlines.map(([left,right])=>silhouetteGap(left,right));
   const required=rawGaps.map(gap=>Math.max(idle,dashGap-gap));
-  const spacing=required.map((_,i)=>{
-    // Prepare for the widest synchronized pose and retain the space until the
-    // teammate can close it at walking speed. No retiming of authored cels.
-    return Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.abs(i-j)));
-  });
-  const widest=Math.max(...spacing);
+  // The support can close in on a forward dash or spread on a backdash.
+  // Spacing changes then carry it in the dash direction even at a hard stop.
+  const opening=required.map((_,i)=>Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.max(0,j-i))));
+  const closing=required.map((_,i)=>Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.max(0,i-j))));
+  const widest=Math.max(...required);
   const xs=outlines.flatMap(pair=>pair.flatMap((outline,body)=>outline.map(([x])=>x+(body===support?widest*sign:0))));
-  const result={spacing,widest,rawGaps,left:Math.min(...xs),right:Math.max(...xs)};
+  const result={opening,closing,rawGaps,left:Math.min(...xs),right:Math.max(...xs)};
   dashFormations.set(key,result);
   return result;
 }
@@ -789,11 +788,7 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
       const [l,r]=pairedMovementLimits(owner,neutral,dash);
       const left=6-l,right=WIDTH-6-r;
       const x=Math.max(left,Math.min(right,owner.x));
-      const room=Math.min(x-left,right-x);
-      // When the wall pins the lead, hold the support at a fixed spacing.
-      // Open that space at no more than the travel the lead has left.
-      const wallSpacing=schedule.widest-Math.max(0,room-dashSpacingPerTick);
-      const distance=Math.max(schedule.spacing[phase],wallSpacing);
+      const distance=(owner.dashDirection===owner.facing?schedule.closing:schedule.opening)[phase];
       const shift=x-owner.x;
       const positions=duoLeadIndex(owner)===0?[shift,shift+distance]:[shift-distance,shift];
       return {data,offsets:positions,bounds:bounds.map(([l,r],i)=>[l+positions[i],r+positions[i]]),dashClearance:schedule.rawGaps[phase]+distance};

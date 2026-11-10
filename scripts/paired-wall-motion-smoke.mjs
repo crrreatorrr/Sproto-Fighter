@@ -76,6 +76,24 @@ for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing 
   if(f.dash===0)break;
  }
 }
+// A head-on dash can stop both leads before either reaches an arena wall.
+// The teammate should still close the formation in the dash direction.
+for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const dir of [-1,1])for(const gap of [180,223,270]){
+ const s=createState(id,'versus','rivet'),[f,b]=s.fighters;
+ f.x=core.WIDTH/2-dir*gap/2;b.x=f.x+dir*gap;f.facing=dir;b.facing=-dir;
+ let prior;
+ for(let t=0;t<11;t++){
+  const left=A.left|A.dash,right=A.right|A.dash;
+  step(s,t===0?dir===1?[right,left]:[left,right]:[0,0]);
+  if(!f.dash)break;
+  const positions=getDuoLayoutDebug(f,s.frame).offsets;
+  const support=dir===1?0:positions.length-1;
+  const lead=positions.length-1-support;
+  const relative=positions[support]-positions[lead];
+  if(prior!==undefined)assert.ok((relative-prior)*dir>=-1e-7,`${id}: a collision must not reverse the support relative to the lead`);
+  prior=relative;
+ }
+}
 for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const side of [-1,1]){
  const s=createState(id,'dummy','rivet'),[f,b]=s.fighters;
  f.x=side===-1?core.fighterWall(id):core.WIDTH-core.fighterWall(id);
