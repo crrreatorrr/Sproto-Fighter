@@ -164,6 +164,46 @@ function dragonBoxes(x:number,y:number,frame:number){
     });
 }
 
+/** Idle movement fades to the registered pose before the attack tell. Airborne
+ * forms hover. Grounded forms move above the same planted floor anchor. */
+function bossBodyMotion(state:CombatState,boss:StoryBoss){
+    const age=state.frame-boss.startFrame,period=formConfig[boss.form].period;
+    const beat=age%period,untilWarning=beat<24?24-beat:period+24-beat;
+    if(state.winner!==null||boss.warning||boss.pending.length||age-boss.releasedAt<24){
+        return {lift:0,scaleY:1};
+    }
+    const fade=within(Math.min(age,age-boss.releasedAt-24,untilWarning)/12,0,1);
+    const pulse=fade*fade*(3-2*fade)*Math.sin(age*Math.PI/84)**2;
+    if(boss.form==='dragon'||boss.form==='vmu')return {lift:-7*pulse,scaleY:1};
+    return {lift:0,scaleY:1+.018*pulse};
+}
+
+export function storyBossHurtboxes(state:CombatState,boss:StoryBoss):Box[]{
+    const target=state.fighters[1],bounds=formConfig[boss.form].target;
+    const boxes:Box[]=boss.form==='dragon'
+        ?dragonBoxes(target.x,target.y,attackFrame(boss,state.frame-boss.startFrame))
+        :[[target.x+bounds[0],target.y+bounds[1],target.x+bounds[2],target.y+bounds[3]]];
+    const {lift,scaleY}=bossBodyMotion(state,boss);
+    if(lift===0&&scaleY===1)return boxes;
+    const y=(value:number)=>FLOOR+lift+(value-FLOOR)*scaleY;
+    return boxes.map(([left,top,right,bottom])=>[left,y(top),right,y(bottom)]);
+}
+
+/** The idle sheet and the cinematic's held neutral pose share the same motion. */
+export function drawMovingStoryBoss(
+    ctx:CanvasRenderingContext2D,state:CombatState,boss:StoryBoss,draw:()=>boolean,
+):boolean{
+    const {lift,scaleY}=bossBodyMotion(state,boss);
+    if(lift===0&&scaleY===1)return draw();
+    ctx.save();
+    ctx.translate(0,FLOOR+lift);
+    ctx.scale(1,scaleY);
+    ctx.translate(0,-FLOOR);
+    const painted=draw();
+    ctx.restore();
+    return painted;
+}
+
 function planAttack(form:BossForm,attack:Attack,playerX:number,playerY:number):ShotPlan[]{
     const [offsetX,offsetY]=attack.origin,x=storyBossX(form)+offsetX,y=FLOOR+offsetY;
     const dx=Math.max(60,playerX-x),dy=playerY-55-y;
@@ -270,8 +310,7 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
 
     boss.pending=boss.pending.filter(shot=>shot.at>age);
 
-    const targetBox:Box=[target.x+bounds[0],target.y+bounds[1],target.x+bounds[2],target.y+bounds[3]];
-    const hitBoxes=boss.form==='dragon'?dragonBoxes(target.x,target.y,attackFrame(boss,age)):[targetBox];
+    const hitBoxes=storyBossHurtboxes(state,boss);
     const playerBox:Box=[oldX-20,oldY-109,oldX+20,oldY-8];
     const blast=(shot:Shot)=>{
         if(hitBoxes.some(([left,top,right,bottom])=>

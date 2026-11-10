@@ -22,3 +22,29 @@ for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing 
  for(let age=0;age<100;age++){const forward=f.facing===1?A.right:A.left,back=f.facing===1?A.left:A.right;step(s,[age===0?forward|A.dash:age===38?back|A.dash:0,0]);setPoseAtlasThrowState(null,[]);const before=JSON.stringify(s),l=getDuoLayoutDebug(f,s.frame),left=Math.min(...l.bounds.map(b=>b[0])),right=Math.max(...l.bounds.map(b=>b[1])),bleed=Math.max(0,6-left,right-(core.WIDTH-6));assert.equal(JSON.stringify(s),before);if(bleed>worst)worst=bleed;if(bleed>.01)bad.push({id,facing,edge,age,bleed,dash:f.dash,bounds:l.bounds,offsets:l.offsets});checks++;}
 }
 console.log(JSON.stringify({checks,worst,outside:bad.length,examples:bad.sort((a,b)=>b.bleed-a.bleed).slice(0,5)},null,2));assert.equal(bad.length,0,'paired dash silhouettes must stay inside the arena');
+
+// Guard and walk share a compact footprint. Dash can open the formation,
+// but the lead anchor stays fixed and the full silhouettes stay separated.
+for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing of [-1,1])for(const edge of [-1,0,1]){
+ const f=createState(id,'dummy').fighters[0];
+ f.facing=facing;
+ f.x=edge===-1?core.fighterWall(id):edge===1?core.WIDTH-core.fighterWall(id):core.WIDTH/2;
+ const start=getDuoLayoutDebug(f,0).offsets;
+ for(let dash=11;dash>=0;dash--){
+  f.dash=dash;
+  const layout=getDuoLayoutDebug(f,12-dash);
+  const lead=facing===1?layout.offsets.length-1:0;
+  assert.equal(layout.offsets[lead],start[lead],`${id}: dash keeps the lead anchor`);
+  if(dash===0)assert.deepEqual(layout.offsets,start,`${id}: returns to compact guard after dash`);
+  assert.ok(layout.bounds.every(([l,r],i)=>l>=6-.01&&r<=core.WIDTH-6+.01&&(i===0||l>=layout.bounds[i-1][1]+5.99)),
+    `${id} facing ${facing}, edge ${edge}: separate silhouettes stay in frame`);
+ }
+ if(edge===0){
+  for(let frame=14;frame<=42;frame++){
+   f.vx=frame<28?4:-4;
+   f.x+=f.vx;
+   assert.deepEqual(getDuoLayoutDebug(f,frame).offsets,start,`${id}: stable formation through walk and reversal`);
+  }
+ }
+}
+console.log('Stable guard/walk spacing and anchored dash formations across the paired roster.');

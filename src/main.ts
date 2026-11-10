@@ -21,7 +21,7 @@ import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, typ
 import { STAGES, setStage, loadStageArt, loadStagePreviews, getStageArtStatus, type StageId } from './stage';
 import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
-import {bossFightInput,bossKeyInput,drawStoryBossAttacks,drawStoryBossPose,loadStoryBossArt,startStoryBoss,stepStoryBoss,storyBossPlayerPose,storyBossTitle,type StoryBoss,type BossForm} from './storyBoss';
+import {bossFightInput,bossKeyInput,drawMovingStoryBoss,drawStoryBossAttacks,drawStoryBossPose,loadStoryBossArt,startStoryBoss,stepStoryBoss,storyBossPlayerPose,storyBossTitle,type StoryBoss,type BossForm} from './storyBoss';
 import {createStoryAnimation,storyAnimationPlan} from './storyAnimation';
 import { createStoryMode } from './storyMode';
 import {createPartnerPicker} from './partnerPicker';
@@ -975,8 +975,14 @@ function frameTick(now: number): boolean {
         ctx.fillStyle='#000';
         ctx.fillRect(0,0,canvas.width,canvas.height);
     }else if(!selection.isOpen) render(ctx,displayState,displayPresentation,visualFrame,
-        (c,x,y,facing)=>!storyAnimation.active&&storyBoss&&storyBossArt&&drawStoryBossPose(c,state,storyBoss,storyBossArt)
-            ||storyAnimation.draw(c,x,y,facing,storyBoss?.form),
+        (c,x,y,facing)=>{
+            const boss=storyBoss,art=storyBossArt;
+            if(!storyAnimation.active&&boss&&art){
+                return drawMovingStoryBoss(c,state,boss,()=>drawStoryBossPose(c,state,boss,art)
+                    ||storyAnimation.draw(c,x,y,facing,boss.form));
+            }
+            return storyAnimation.draw(c,x,y,facing,boss?.form);
+        },
         storyBoss&&storyBossArt?(c)=>drawStoryBossAttacks(c,state,storyBoss!,storyBossArt!):undefined,
         storyBoss?storyBossTitle(storyBoss.form):undefined,storyAnimation.portalPull(),recovery);
     if(!selection.isOpen&&storyAnimation.bossRevealOpacity>0){
