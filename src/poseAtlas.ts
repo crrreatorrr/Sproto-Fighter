@@ -343,7 +343,7 @@ export async function ensurePosePreviews(ids:readonly Fighter['id'][]):Promise<v
     return previewLoads.get(id);
   }));
 }
-interface Playback { frame:number; x:number; y:number; travel:number; stamp:string; slot:PoseSlot; landedAt:number; idleSince:number }
+interface Playback { frame:number; x:number; y:number; travel:number; stamp:string; slot:PoseSlot; landedAt:number; idleSince:number; advancing:boolean }
 const playback = new WeakMap<Fighter, Playback>();
 /** Stable full-body actors, not articulated limb cutouts. Formation is fixed in
  * world space, so changing facing cannot exchange the two entities instantly. */
@@ -484,7 +484,7 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:AtlasClipName
   return null;
 }
 function walking(f: Fighter): boolean { return f.y >= FLOOR && Math.abs(f.vx) > .5 && !f.move && !f.stun && !f.blockstun && !f.dash && !(f.input & A.down); }
-function selectSlot(f:Fighter,phase:number,frame:number,landedAt:number,idleSince:number):PoseSlot {
+function selectSlot(f:Fighter,phase:number,frame:number,state:Playback):PoseSlot {
   const S=POSE_SLOTS;
   if(f.reaction?.phase==='rise')return f.reaction.t<4?S.crouchLanding:S.guard;
   // Let the impact silhouette relax into a complete falling pose. A rotated
@@ -539,12 +539,12 @@ function selectSlot(f:Fighter,phase:number,frame:number,landedAt:number,idleSinc
   }
   if(f.y<FLOOR)return f.vy<0?S.airRise:S.airFall;
   if(f.jumpDelay>0)return S.jumpAnticipation;
-  if((f.input&A.down)||frame-landedAt<3)return S.crouchLanding;
+  if((f.input&A.down)||frame-state.landedAt<3)return S.crouchLanding;
   if(f.dash)return S.dash;
-  if(walking(f))return [S.walkNear,S.passNear,S.walkFar,S.passFar][Math.floor(phase*4)%4];
+  if(state.advancing&&walking(f))return [S.walkNear,S.passNear,S.walkFar,S.passFar][Math.floor(phase*4)%4];
   // Re-enter the authored guard after locomotion/recovery. Using global time
   // could jump straight to a differently posed breath on the stop frame.
-  const idleAge=Math.max(0,frame-idleSince);
+  const idleAge=Math.max(0,frame-state.idleSince);
   if(idleAge<36)return S.guard;
   return Math.floor((idleAge+(componentOwner.get(f)?.side===1?18:0))/36)%2?S.breathe:S.guard;
 }
@@ -553,16 +553,20 @@ function sample(f:Fighter,frame:number,frozen:boolean,atlasId:string=f.id,phaseO
   const scene=throwScene?.state;
   const stamp=[f.x,f.y,f.move?.id,f.move?.t,f.stun,f.blockstun,f.dash,scene?.phase,scene?.t].join(':');
   let state=playback.get(f);
-  if(!state||frame<state.frame){state={frame,x:f.x,y:f.y,travel:0,stamp:'',slot:0,landedAt:-100,idleSince:frame};playback.set(f,state);}
+  if(!state||frame<state.frame){state={frame,x:f.x,y:f.y,travel:0,stamp:'',slot:0,landedAt:-100,idleSince:frame,advancing:walking(f)};playback.set(f,state);}
   if(frame!==state.frame&&!frozen){
     // Backsteps reverse the authored gait instead of moonwalking the forward
     // cycle. This is rendering state only; combat and replay inputs are untouched.
-    if(walking(f))state.travel+=(f.x-state.x)*f.facing;
+    // Use post-collision travel in the intended direction. A pinned actor
+    // may still have input velocity, or even be pushed backward by a rival.
+    const dx=f.x-state.x;
+    state.advancing=walking(f)&&dx*Math.sign(f.vx)>.5;
+    if(state.advancing&&state.y>=FLOOR)state.travel+=dx*f.facing;
     if(state.y<FLOOR&&f.y>=FLOOR)state.landedAt=frame;
-    if(f.move||f.stun||f.blockstun||f.dash||f.y<FLOOR||Math.abs(f.vx)>.5||(f.input&A.down))state.idleSince=frame;
+    if(f.move||f.stun||f.blockstun||f.dash||f.y<FLOOR||state.advancing||(f.input&A.down))state.idleSince=frame;
   }
   const phase=modulo(state.travel+cycle*phaseOffset,cycle)/cycle;
-  if(!frozen||state.stamp!==stamp)state.slot=selectSlot(f,phase,frame,state.landedAt,state.idleSince);
+  if(!frozen||state.stamp!==stamp)state.slot=selectSlot(f,phase,frame,state);
   state.frame=frame;state.x=f.x;state.y=f.y;state.stamp=stamp;
   const sequence = atlas?.walkFrames && state.slot >= POSE_SLOTS.walkNear && state.slot <= POSE_SLOTS.passFar ? 'walk' : 'poses';
   const sequenceLength = sequence === 'walk' ? atlas!.walkFrames!.length : 32;

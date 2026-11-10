@@ -221,7 +221,12 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
     const oldX=p.x,oldY=p.y;
     const config=formConfig[boss.form],bounds=config.target;
     const nearEdge=boss.form==='art'?artRightHand:bounds[2];
-    p.x=within(p.x+p.vx,target.x+nearEdge+22,1258);
+    const nextX=p.x+p.vx;
+    p.x=within(nextX,target.x+nearEdge+22,1258);
+    if(p.x!==nextX){
+        p.vx=p.x-oldX;
+        p.dash=0;
+    }
     p.y=Math.min(FLOOR,p.y+p.vy);
     if(p.y===FLOOR){
         p.vy=0;p.airJumps=0;

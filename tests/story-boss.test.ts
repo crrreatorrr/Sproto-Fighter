@@ -54,6 +54,25 @@ describe('fixed-screen story bosses',()=>{
         expect(p.y).toBe(FLOOR);expect(p.airJumps).toBe(0);
     });
 
+    it.each(['giant','mecha','dragon','juicy','art','vmu'] as const)('%s clears a dash at both arena boundaries',form=>{
+        const {state,tick}=fight(form);
+        state.godMode=true;
+        const p=state.fighters[0];
+        for(let i=0;i<120;i++)tick(A.left);
+        const inside=p.x;
+        expect(p.vx).toBe(0);
+        tick(A.left|A.dash);
+        expect(p).toMatchObject({x:inside,vx:0,dash:0});
+        tick(A.right);
+        expect(p.x).toBe(inside+5);
+        for(let i=0;i<240;i++)tick(A.right);
+        expect(p).toMatchObject({x:1258,vx:0});
+        tick(A.right|A.dash);
+        expect(p).toMatchObject({x:1258,vx:0,dash:0});
+        tick(A.left);
+        expect(p.x).toBe(1253);
+    });
+
     it('uses independent cooldowns, piercing beam and bouncing ball',()=>{
         const {state,boss,tick}=fight();
         tick(BOSS_BEAM|BOSS_BALL|BOSS_SHIELD);tick(BOSS_BEAM|BOSS_BALL);
