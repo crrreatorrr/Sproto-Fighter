@@ -690,7 +690,7 @@ function silhouetteGap(left:Point[],right:Point[]):number {
   };
   return Math.min(...rows.map(y=>edge(right,y,false)-edge(left,y,true)));
 }
-interface DashFormation { opening:number[]; closing:number[]; rawGaps:number[]; left:number; right:number }
+interface DashFormation { opening:number[]; closing:number[]; rawGaps:number[]; left:number; right:number; recoveryEdge:number }
 function pairedDashFormation(owner:Fighter,neutral:MovementFormation):DashFormation {
   const key=owner.id+':'+owner.facing;
   const cached=dashFormations.get(key);
@@ -710,14 +710,10 @@ function pairedDashFormation(owner:Fighter,neutral:MovementFormation):DashFormat
   const closing=required.map((_,i)=>Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.max(0,i-j))));
   const widest=Math.max(...required);
   const xs=outlines.flatMap(pair=>pair.flatMap((outline,body)=>outline.map(([x])=>x+(body===support?widest*sign:0))));
-  // Leave room for the wider guard and crouch cels while the dash spacing
-  // settles. Changing the recovery pose must not squeeze the support inward.
-  for(const [body,atlas] of sources.entries()){
-    const extra=body===support?widest*sign:0;
-    xs.push(...neutral.envelopes[body].map(x=>x+extra));
-    for(const [x] of dashOutline(atlas,atlas.frames[POSE_SLOTS.crouchLanding],owner.facing,positions[body]))xs.push(x+extra);
-  }
-  const result={opening,closing,rawGaps,left:Math.min(...xs),right:Math.max(...xs)};
+  const atlas=sources[support];
+  const crouch=dashOutline(atlas,atlas.frames[POSE_SLOTS.crouchLanding],owner.facing,positions[support]);
+  const recoveryEdge=Math.max(...neutral.envelopes[support].map(x=>x*sign),...crouch.map(([x])=>x*sign));
+  const result={opening,closing,rawGaps,left:Math.min(...xs),right:Math.max(...xs),recoveryEdge};
   dashFormations.set(key,result);
   return result;
 }
@@ -923,7 +919,9 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[],frame
   // Close the extra dash space over several cels after a brake or a wall
   // stop. The lead keeps its authored anchor, and the support stays in frame.
   const [left,right]=layout.bounds[support];
-  const room=sign===1?WIDTH-6-right:left-6;
+  const edge=pairedDashFormation(owner,pairedMovementFormation(owner,false)).recoveryEdge;
+  const recoveryRoom=(sign===1?WIDTH-6:-6)-(owner.x+layout.offsets[support])*sign-edge;
+  const room=Math.min(sign===1?WIDTH-6-right:left-6,recoveryRoom);
   const extra=Math.min(room,last.distance-distance-(frame-last.frame)*dashSpacingPerTick);
   if(extra>0){
     const dx=extra*sign;

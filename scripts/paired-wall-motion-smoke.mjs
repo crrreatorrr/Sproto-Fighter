@@ -119,13 +119,23 @@ for(const [id,start,dir,brake] of [['sproto282',640,-1,-1],['sproto282',252,-1,-
   const {offsets,bounds}=getDuoLayoutDebug(f,s.frame);
   const separation=offsets[1]-offsets[0];
   if(!f.dash&&prior!==undefined){
+   // A wall can limit the very first recovery cel. Later crouching must
+   // share that footprint and can no longer cause a second jump in spacing.
+   const limit=release===undefined&&start<300&&dir===-1?34:7;
    release??=separation;
-   assert.ok(prior-separation<=7+1e-7,`${id}: the support must close dash spacing gradually`);
+   assert.ok(prior-separation<=limit+1e-7,`${id}: the support must close dash spacing gradually`);
    assert.ok(bounds[0][0]>=6-.01&&bounds[1][1]<=core.WIDTH-6+.01,`${id}: recovery stays inside the arena`);
   }
   prior=separation;
  }
  assert.ok(release>prior,`${id}: the fixture must exercise dash recovery`);
+}
+{
+ const s=createState('sproto282','versus','rivet'),[f,b]=s.fighters;
+ f.x=210;b.x=700;
+ const guard=f.x+getDuoLayoutDebug(f,s.frame).offsets[1];
+ step(s,[A.light,0]);
+ assert.equal(f.x+getDuoLayoutDebug(f,s.frame).offsets[1],guard,'reserving recovery space must not move an idle lead into a light attack');
 }
 {
  const s=createState('sproto282','versus','rivet'),[f,b]=s.fighters;
