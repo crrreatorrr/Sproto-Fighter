@@ -724,9 +724,10 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
     // without making the trailing body travel opposite the lead. Establish
     // those formations on the first dash cel, then keep them together.
     const travel=Math.max(...offsets.map((_,i)=>Math.abs(dash.offsets[i]-neutral.offsets[i])));
-    const blend=owner.dash>0?(travel<=12?Math.min(1,(11-owner.dash)/3,owner.dash/3):1):0;
-    const eased=blend*blend*(3-2*blend);
-    for(let i=0;i<offsets.length;i++)offsets[i]=neutral.offsets[i]+(dash.offsets[i]-neutral.offsets[i])*eased;
+    // A linear ramp spreads a modest opening over three frames without
+    // concentrating its largest shift at the slow end of the dash.
+    const blend=owner.dash>0?(travel<=22?Math.min(1,(11-owner.dash)/3,owner.dash/3):1):0;
+    for(let i=0;i<offsets.length;i++)offsets[i]=neutral.offsets[i]+(dash.offsets[i]-neutral.offsets[i])*blend;
     // Start and end close to the walking formation, but give a wider cel
     // room immediately when it would otherwise cover the lead or teammate.
     const lead=duoLeadIndex(owner),gap=offsets.length>2?12:6;

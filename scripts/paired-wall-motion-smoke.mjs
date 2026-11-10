@@ -54,13 +54,17 @@ console.log('Stable guard/walk spacing and anchored dash formations across the p
 for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing of [-1,1])for(const dir of [-1,1]){
  const s=createState(id,'dummy','rivet'),[f,b]=s.fighters;
  f.x=640;f.facing=facing;b.x=facing===1?1130:150;
- let prior;
+ let prior=getDuoLayoutDebug(f,0).offsets.map(offset=>f.x+offset);
  for(let t=0;t<12;t++){
   step(s,[t===0?(dir===1?A.right:A.left)|A.dash:0,0]);
-  if(f.dash===0)break;
   const x=getDuoLayoutDebug(f,s.frame).offsets.map(offset=>f.x+offset);
-  if(prior)assert.ok(x.every((body,i)=>(body-prior[i])*dir>=-1e-7),`${id}: dash bodies must travel together`);
+  // Check both boundaries too for the Sproto 3181 facing that can ease
+  // without sacrificing clearance.
+  if((t>0&&f.dash>0)||(id==='sproto3181'&&facing===1)){
+   assert.ok(x.every((body,i)=>(body-prior[i])*dir>=-1e-7),`${id}: dash bodies must travel together`);
+  }
   prior=x;
+  if(f.dash===0)break;
  }
 }
 for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const side of [-1,1]){
