@@ -224,7 +224,7 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
     const nextX=p.x+p.vx;
     p.x=within(nextX,target.x+nearEdge+22,1258);
     if(p.x!==nextX){
-        p.vx=p.x-oldX;
+        p.vx=0;
         p.dash=0;
     }
     p.y=Math.min(FLOOR,p.y+p.vy);

@@ -71,6 +71,9 @@ describe('fixed-screen story bosses',()=>{
         expect(p).toMatchObject({x:1258,vx:0,dash:0});
         tick(A.left);
         expect(p.x).toBe(1253);
+        for(let i=0;i<40;i++)tick();
+        tick(A.right|A.dash);
+        expect(p).toMatchObject({x:1258,vx:0,dash:0});
     });
 
     it('uses independent cooldowns, piercing beam and bouncing ball',()=>{
