@@ -60,6 +60,17 @@ check('ground gait stops at contact and resumes without advancing during knockba
   assert.equal(landed.walkPhase,moving.walkPhase,id+' airborne distance excluded');
  }
 });
+check('air dashes use the dash pose with or without a dedicated animation clip',()=>{
+ for(const id of PLAYABLE_FIGHTERS)for(const facing of [-1,1]){
+  const f=createState(id,'dummy').fighters[0];
+  Object.assign(f,{x:600,y:FLOOR-60,facing,vy:-3,dash:8});
+  const dashing=getPoseAtlasDebug(f,1);
+  assert.equal(dashing.sequence==='dash'||dashing.name==='dash',true,id+' airborne dash pose');
+  f.dash=0;
+  const released=getPoseAtlasDebug(f,2);
+  assert.notEqual(released.name,'dash',id+' return to jump pose');
+ }
+});
 check('organic crouched casts retain the complete crouch pose instead of the standing cast clip',()=>{
  for(const id of core.HORIZONTAL_SPIT_FIGHTERS)for(const face of [1,-1]){
   const s=createState(id,'cpu'),f=s.fighters[0];f.x=face===1?200:1080;s.fighters[1].x=face===1?1100:180;f.facing=face;

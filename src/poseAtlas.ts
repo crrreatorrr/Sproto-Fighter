@@ -537,10 +537,10 @@ function selectSlot(f:Fighter,phase:number,frame:number,state:Playback):PoseSlot
     }
     return startup?S.punchWindup:active?S.punchExtended:S.punchRecover;
   }
+  if(f.dash)return S.dash;
   if(f.y<FLOOR)return f.vy<0?S.airRise:S.airFall;
   if(f.jumpDelay>0)return S.jumpAnticipation;
   if((f.input&A.down)||frame-state.landedAt<3)return S.crouchLanding;
-  if(f.dash)return S.dash;
   if(state.advancing&&walking(f))return [S.walkNear,S.passNear,S.walkFar,S.passFar][Math.floor(phase*4)%4];
   // Re-enter the authored guard after locomotion/recovery. Using global time
   // could jump straight to a differently posed breath on the stop frame.
