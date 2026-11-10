@@ -1,6 +1,6 @@
 import {describe,expect,it} from 'vitest';
 import {A,createState,FLOOR} from '../src/core';
-import {BOSS_BALL,BOSS_BEAM,BOSS_SHIELD,bossFightInput,bossKeyInput,startStoryBoss,stepStoryBoss,storyBossPlayerPose,type BossForm} from '../src/storyBoss';
+import {BOSS_BALL,BOSS_BEAM,BOSS_SHIELD,bossFightInput,bossKeyInput,drawMovingStoryBoss,startStoryBoss,storyBossHurtboxes,stepStoryBoss,storyBossPlayerPose,type BossForm} from '../src/storyBoss';
 
 function fight(form:BossForm='giant'){
     const state=createState('highsproto','cpu','vela');
@@ -9,6 +9,35 @@ function fight(form:BossForm='giant'){
 }
 
 describe('fixed-screen story bosses',()=>{
+    it.each(['giant','mecha','dragon','juicy','art','vmu'] as const)('%s idle animation shares its transform with collision',form=>{
+        const {state,boss,tick}=fight(form);
+        state.godMode=true;
+        const registered=storyBossHurtboxes(state,boss);
+        const [left,top,right,bottom]=registered[0];
+        let previous=top,visibleMotion=false;
+        for(let age=1;age<=24;age++){
+            tick();
+            let translation=0,scale=1;
+            const context={
+                save(){},restore(){},
+                translate(_x:number,y:number){translation+=scale*y;},
+                scale(_x:number,y:number){scale*=y;},
+            } as unknown as CanvasRenderingContext2D;
+            expect(drawMovingStoryBoss(context,state,boss,()=>true)).toBe(true);
+            const [l,t,r,b]=storyBossHurtboxes(state,boss)[0];
+            expect([l,r]).toEqual([left,right]);
+            expect(t).toBeCloseTo(top*scale+translation,9);
+            expect(b).toBeCloseTo(bottom*scale+translation,9);
+            expect(Math.abs(t-previous)).toBeLessThan(1);
+            previous=t;
+            visibleMotion ||= Math.abs(t-top)>.5;
+            if(form!=='vmu'&&form!=='dragon')expect(FLOOR*scale+translation).toBeCloseTo(FLOOR,9);
+        }
+        expect(visibleMotion).toBe(true);
+        expect(boss.warning).not.toBeNull();
+        expect(storyBossHurtboxes(state,boss)).toEqual(registered);
+    });
+
     it('auto-fires and locks the missile trajectory before launch',()=>{
         const {state,boss,tick}=fight();
         while(state.frame<24)tick();
@@ -52,6 +81,28 @@ describe('fixed-screen story bosses',()=>{
         tick(A.dash|A.right);expect(p.vx).toBe(22);expect(p.vy).toBe(0);
         for(let i=0;i<75;i++)tick();
         expect(p.y).toBe(FLOOR);expect(p.airJumps).toBe(0);
+    });
+
+    it.each(['giant','mecha','dragon','juicy','art','vmu'] as const)('%s clears a dash at both arena boundaries',form=>{
+        const {state,tick}=fight(form);
+        state.godMode=true;
+        const p=state.fighters[0];
+        for(let i=0;i<120;i++)tick(A.left);
+        const inside=p.x;
+        expect(p.vx).toBe(0);
+        tick(A.left|A.dash);
+        expect(p).toMatchObject({x:inside,vx:0,dash:0});
+        tick(A.right);
+        expect(p.x).toBe(inside+5);
+        for(let i=0;i<240;i++)tick(A.right);
+        expect(p).toMatchObject({x:1258,vx:0});
+        tick(A.right|A.dash);
+        expect(p).toMatchObject({x:1258,vx:0,dash:0});
+        tick(A.left);
+        expect(p.x).toBe(1253);
+        for(let i=0;i<40;i++)tick();
+        tick(A.right|A.dash);
+        expect(p).toMatchObject({x:1258,vx:0,dash:0});
     });
 
     it('uses independent cooldowns, piercing beam and bouncing ball',()=>{

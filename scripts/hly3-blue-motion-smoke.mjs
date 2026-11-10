@@ -21,7 +21,9 @@ assert.equal(hash(read('public'+review.coreIdle.url)),review.coreIdleSha256);
 for(const [source,expected]of Object.entries(review.reviewedSourceHashes))assert.equal(hash(read('public'+source)),expected,source+' source pixels must remain unchanged');
 for(const [clip,before]of Object.entries(review.before)){
   assert.deepEqual(cfg.clips[clip],review.sourceIndices[clip].map(i=>before[i]),clip+' exact reviewed mapping');
-  assert.deepEqual(cfg.clipRegistration[clip],review.registration,clip+' uses one fixed sheet registration');
+  // The paired dash has its own horizontal origin. Jump and attacks retain the reviewed sheet origin.
+  const registration=clip==='dash'?{...review.registration,anchorOffset:[15,0]}:review.registration;
+  assert.deepEqual(cfg.clipRegistration[clip],registration,clip+' uses one fixed sheet registration');
 }
 assert.deepEqual(cfg.clips.heavy[4],cfg.clips.heavy[3],'heavy contact holds the extended leg');
 assert.deepEqual(cfg.clips.airKick[3],cfg.clips.airKick[2],'air contact holds the extended leg');

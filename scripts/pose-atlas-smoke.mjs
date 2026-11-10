@@ -37,6 +37,40 @@ check('all selectable fighters: complete forward/reverse gait, hitstop, and neut
   assert.equal(f.vx,0);assert.equal(getPoseAtlasDebug(f,s.frame).slot,0,id+' stop must enter guard, not global-clock breath');
  }
 });
+check('ground gait stops at contact and resumes without advancing during knockback or landing',()=>{
+ for(const id of PLAYABLE_FIGHTERS)for(const facing of [-1,1]){
+  const f=createState(id,'dummy').fighters[0];
+  Object.assign(f,{x:600,y:FLOOR,facing,vx:facing*5});
+  getPoseAtlasDebug(f,0);
+  f.x+=f.vx;
+  const moving=getPoseAtlasDebug(f,1);
+  assert.equal(moving.sequence,'walk',id+' actual forward travel');
+  const blocked=getPoseAtlasDebug(f,2);
+  assert.equal(blocked.slot,0,id+' blocked by contact');
+  assert.equal(blocked.walkPhase,moving.walkPhase,id+' blocked phase');
+  f.x-=f.vx;
+  assert.equal(getPoseAtlasDebug(f,3).walkPhase,moving.walkPhase,id+' displaced against intent');
+  f.y=FLOOR-20;
+  f.x+=f.vx;
+  getPoseAtlasDebug(f,4);
+  f.y=FLOOR;
+  f.x+=f.vx;
+  const landed=getPoseAtlasDebug(f,5);
+  assert.equal(landed.slot,10,id+' landing pose');
+  assert.equal(landed.walkPhase,moving.walkPhase,id+' airborne distance excluded');
+ }
+});
+check('air dashes use the dash pose with or without a dedicated animation clip',()=>{
+ for(const id of PLAYABLE_FIGHTERS)for(const facing of [-1,1]){
+  const f=createState(id,'dummy').fighters[0];
+  Object.assign(f,{x:600,y:FLOOR-60,facing,vy:-3,dash:8});
+  const dashing=getPoseAtlasDebug(f,1);
+  assert.equal(dashing.sequence==='dash'||dashing.name==='dash',true,id+' airborne dash pose');
+  f.dash=0;
+  const released=getPoseAtlasDebug(f,2);
+  assert.notEqual(released.name,'dash',id+' return to jump pose');
+ }
+});
 check('organic crouched casts retain the complete crouch pose instead of the standing cast clip',()=>{
  for(const id of core.HORIZONTAL_SPIT_FIGHTERS)for(const face of [1,-1]){
   const s=createState(id,'cpu'),f=s.fighters[0];f.x=face===1?200:1080;s.fighters[1].x=face===1?1100:180;f.facing=face;

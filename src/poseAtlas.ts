@@ -96,6 +96,8 @@ export interface PoseAtlasDebug {
   source: 'authored-full-pose';
 }
 const atlases = new Map<string, Atlas>();
+const movementFormations = new Map<string, MovementFormation>();
+const dashFormations = new Map<string, DashFormation>();
 const declaredAtlases = new Set<string>();
 /** Declared but loading/broken art must never silently reveal the old rig. */
 export const isPoseAtlasDeclared = (id:string) => declaredAtlases.has(id);
@@ -221,13 +223,13 @@ export function loadPoseAtlases(): Promise<boolean> {
     const response = await fetch(asset('/fighters/pose-atlas.json'), { cache: 'no-store' });
     if (response.status === 404 || (response.ok && response.headers.get('content-type')?.includes('text/html'))) {
       // Development SPA servers can return their HTML shell for missing files.
-      atlases.clear(); declaredAtlases.clear(); loadState = 'absent'; return false;
+      atlases.clear(); movementFormations.clear(); dashFormations.clear(); declaredAtlases.clear(); loadState = 'absent'; return false;
     }
     if (!response.ok) throw new Error(`Pose atlas metadata: HTTP ${response.status}`);
     const manifest = await response.json() as PoseAtlasManifest;
     if (manifest?.version !== 1 || !manifest.fighters || typeof manifest.fighters !== 'object' || Array.isArray(manifest.fighters)) throw new Error('Unsupported pose atlas manifest');
     declaredAtlases.clear(); for(const id of Object.keys(manifest.fighters))declaredAtlases.add(id);
-    atlases.clear();
+    atlases.clear(); movementFormations.clear(); dashFormations.clear();
     const loaded = await Promise.all(Object.entries(manifest.fighters).map(async ([id, cfg]) => [id, await loadAtlas(id, cfg, manifest.revision)] as const));
     atlases.clear(); for (const [id, atlas] of loaded) atlases.set(id, atlas);
     loadState = loaded.length ? 'ready' : 'absent';
@@ -257,6 +259,7 @@ function evictAtlases():void{
     if(atlases.size<=16&&bytes<=POSE_ATLAS_CACHE_BYTES)break;
     if(keep(id))continue;
     atlases.delete(id);bytes-=atlas.bytes;
+    movementFormations.clear(); dashFormations.clear();
     for(const bitmap of atlas.bitmaps)bitmap.close();
   }
 }
@@ -343,7 +346,7 @@ export async function ensurePosePreviews(ids:readonly Fighter['id'][]):Promise<v
     return previewLoads.get(id);
   }));
 }
-interface Playback { frame:number; x:number; y:number; travel:number; stamp:string; slot:PoseSlot; landedAt:number; idleSince:number }
+interface Playback { frame:number; x:number; y:number; travel:number; stamp:string; slot:PoseSlot; landedAt:number; idleSince:number; advancing:boolean }
 const playback = new WeakMap<Fighter, Playback>();
 /** Stable full-body actors, not articulated limb cutouts. Formation is fixed in
  * world space, so changing facing cannot exchange the two entities instantly. */
@@ -476,7 +479,7 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:AtlasClipName
       :(heavy?5:4)+Math.min(heavy?2:1,Math.floor((age-move.startup-move.active)/Math.max(1,move.recovery)*(heavy?3:2)));
     return choose(heavy?'heavy':'airKick',frame);
   }
-  if(f.dash>0)return choose('dash',Math.min(5,Math.floor(Math.max(0,10-f.dash)*.6)));
+  if(f.dash>0)return choose('dash',dashCel(f.dash));
   if(f.y<FLOOR&&!f.move){
     const impulse=ROSTER[f.id].jump;
     return choose('jump',Math.max(0,Math.min(5,Math.floor((f.vy+impulse)/(2*impulse)*6))));
@@ -484,7 +487,7 @@ function eventSelection(f:Fighter,atlas:Atlas|undefined):{sequence:AtlasClipName
   return null;
 }
 function walking(f: Fighter): boolean { return f.y >= FLOOR && Math.abs(f.vx) > .5 && !f.move && !f.stun && !f.blockstun && !f.dash && !(f.input & A.down); }
-function selectSlot(f:Fighter,phase:number,frame:number,landedAt:number,idleSince:number):PoseSlot {
+function selectSlot(f:Fighter,phase:number,frame:number,state:Playback):PoseSlot {
   const S=POSE_SLOTS;
   if(f.reaction?.phase==='rise')return f.reaction.t<4?S.crouchLanding:S.guard;
   // Let the impact silhouette relax into a complete falling pose. A rotated
@@ -537,14 +540,14 @@ function selectSlot(f:Fighter,phase:number,frame:number,landedAt:number,idleSinc
     }
     return startup?S.punchWindup:active?S.punchExtended:S.punchRecover;
   }
+  if(f.dash)return S.dash;
   if(f.y<FLOOR)return f.vy<0?S.airRise:S.airFall;
   if(f.jumpDelay>0)return S.jumpAnticipation;
-  if((f.input&A.down)||frame-landedAt<3)return S.crouchLanding;
-  if(f.dash)return S.dash;
-  if(walking(f))return [S.walkNear,S.passNear,S.walkFar,S.passFar][Math.floor(phase*4)%4];
+  if((f.input&A.down)||frame-state.landedAt<3)return S.crouchLanding;
+  if(state.advancing&&walking(f))return [S.walkNear,S.passNear,S.walkFar,S.passFar][Math.floor(phase*4)%4];
   // Re-enter the authored guard after locomotion/recovery. Using global time
   // could jump straight to a differently posed breath on the stop frame.
-  const idleAge=Math.max(0,frame-idleSince);
+  const idleAge=Math.max(0,frame-state.idleSince);
   if(idleAge<36)return S.guard;
   return Math.floor((idleAge+(componentOwner.get(f)?.side===1?18:0))/36)%2?S.breathe:S.guard;
 }
@@ -553,16 +556,20 @@ function sample(f:Fighter,frame:number,frozen:boolean,atlasId:string=f.id,phaseO
   const scene=throwScene?.state;
   const stamp=[f.x,f.y,f.move?.id,f.move?.t,f.stun,f.blockstun,f.dash,scene?.phase,scene?.t].join(':');
   let state=playback.get(f);
-  if(!state||frame<state.frame){state={frame,x:f.x,y:f.y,travel:0,stamp:'',slot:0,landedAt:-100,idleSince:frame};playback.set(f,state);}
+  if(!state||frame<state.frame){state={frame,x:f.x,y:f.y,travel:0,stamp:'',slot:0,landedAt:-100,idleSince:frame,advancing:walking(f)};playback.set(f,state);}
   if(frame!==state.frame&&!frozen){
     // Backsteps reverse the authored gait instead of moonwalking the forward
     // cycle. This is rendering state only; combat and replay inputs are untouched.
-    if(walking(f))state.travel+=(f.x-state.x)*f.facing;
+    // Use post-collision travel in the intended direction. A pinned actor
+    // may still have input velocity, or even be pushed backward by a rival.
+    const dx=f.x-state.x;
+    state.advancing=walking(f)&&dx*Math.sign(f.vx)>.5;
+    if(state.advancing&&state.y>=FLOOR)state.travel+=dx*f.facing;
     if(state.y<FLOOR&&f.y>=FLOOR)state.landedAt=frame;
-    if(f.move||f.stun||f.blockstun||f.dash||f.y<FLOOR||Math.abs(f.vx)>.5||(f.input&A.down))state.idleSince=frame;
+    if(f.move||f.stun||f.blockstun||f.dash||f.y<FLOOR||state.advancing||(f.input&A.down))state.idleSince=frame;
   }
   const phase=modulo(state.travel+cycle*phaseOffset,cycle)/cycle;
-  if(!frozen||state.stamp!==stamp)state.slot=selectSlot(f,phase,frame,state.landedAt,state.idleSince);
+  if(!frozen||state.stamp!==stamp)state.slot=selectSlot(f,phase,frame,state);
   state.frame=frame;state.x=f.x;state.y=f.y;state.stamp=stamp;
   const sequence = atlas?.walkFrames && state.slot >= POSE_SLOTS.walkNear && state.slot <= POSE_SLOTS.passFar ? 'walk' : 'poses';
   const sequenceLength = sequence === 'walk' ? atlas!.walkFrames!.length : 32;
@@ -656,76 +663,192 @@ function paintBounds(data:PaintData):[number,number] {
   const xs=points.map(([x,y])=>t.x+(x-source.anchor[0]-t.pivotX)*facing*atlas.facing*atlas.scale*Math.cos(t.angle)-(y-source.anchor[1]-t.pivotY)*atlas.scale*Math.sin(t.angle));
   return [Math.min(...xs),Math.max(...xs)];
 }
-const movementFormationBounds=new Map<string,[number,number]>();
-/** Reserve camera room for a complete dash before it starts. This is a visual
- * formation envelope, not a larger collision body. Using current-cel bounds at
- * a wall made the whole pair jump sideways as each dash drawing widened. */
-function pairedMovementEnvelope(owner:Fighter):[number,number]{
-  const key=owner.id+':'+owner.facing,cached=movementFormationBounds.get(key);if(cached)return cached;
-  const ids=bodyAtlasIds(owner.id),lead=owner.facing===1?ids.length-1:0;
-  const forms=['neutral','dash'].map(kind=>{
-    const envelopes=ids.map((id,i)=>{
-      const atlas=atlases.get(id)!,flip=owner.facing*atlas.facing*atlas.scale;
-      const frames=kind==='dash'?(atlas.clips.dash??[atlas.frames[POSE_SLOTS.dash]]):atlas.walkFrames?.length?[...atlas.frames.slice(0,2),...atlas.walkFrames]:atlas.frames.slice(0,6);
-      const xs=frames.flatMap(s=>[(s.bounds[0]-s.anchor[0])*flip+bodyOffsets(owner.id)[i],(s.bounds[2]-s.anchor[0])*flip+bodyOffsets(owner.id)[i]]);
-      return [Math.min(...xs),Math.max(...xs)];
-    }),shifts=ids.map(()=>0);
-    for(let i=lead-1;i>=0;i--){const gap=envelopes[i+1][0]+shifts[i+1]-envelopes[i][1]-shifts[i];shifts[i]-=Math.max(0,6-gap);}
-    for(let i=lead+1;i<ids.length;i++){const gap=envelopes[i][0]+shifts[i]-envelopes[i-1][1]-shifts[i-1];shifts[i]+=Math.max(0,6-gap);}
-    for(let i=lead-1;i>=0;i--)shifts[i]+=Math.max(0,Math.min(60,envelopes[i+1][0]+shifts[i+1]-envelopes[i][1]-shifts[i]-6));
-    for(let i=lead+1;i<ids.length;i++)shifts[i]-=Math.max(0,Math.min(60,envelopes[i][0]+shifts[i]-envelopes[i-1][1]-shifts[i-1]-6));
-    return [Math.min(...envelopes.map((b,i)=>b[0]+shifts[i])),Math.max(...envelopes.map((b,i)=>b[1]+shifts[i]))];
+const dashCel=(remaining:number)=>Math.min(5,Math.floor(Math.max(0,10-remaining)*.6));
+const dashGap=7; // Includes one pixel for rounding the two draw origins.
+const dashSpacingPerTick=7; // A normal dash still travels 7.59 px on its last tick.
+function dashOutline(atlas:Atlas,frame:LoadedFrame,facing:number,x:number):Point[] {
+  const hull=frame.contactHull;
+  const [l,t,r,b]=frame.bounds;
+  const points:Point[]=hull??[[l,t],[r,t],[r,b],[l,b]];
+  return points.map(([px,py])=>[x+(px-frame.anchor[0])*facing*atlas.facing*atlas.scale,
+    (py-frame.anchor[1])*atlas.scale]);
+}
+
+/** Gap measured only where both silhouettes occupy the same height. A raised
+ * elbow can pass above the other actor's leg without either body intersecting. */
+function silhouetteGap(left:Point[],right:Point[]):number {
+  const rows=[...left,...right].map(([,y])=>y);
+  const edge=(outline:Point[],y:number,rightSide:boolean)=>{
+    let x=rightSide?-Infinity:Infinity;
+    for(let i=0;i<outline.length;i++){
+      const [ax,ay]=outline[i],[bx,by]=outline[(i+1)%outline.length];
+      if(y<Math.min(ay,by)||y>Math.max(ay,by))continue;
+      const hit=ay===by?(rightSide?Math.max(ax,bx):Math.min(ax,bx)):ax+(bx-ax)*(y-ay)/(by-ay);
+      x=rightSide?Math.max(x,hit):Math.min(x,hit);
+    }
+    return x;
+  };
+  return Math.min(...rows.map(y=>edge(right,y,false)-edge(left,y,true)));
+}
+interface DashFormation { opening:number[]; closing:number[]; rawGaps:number[]; left:number; right:number; recoveryEdge:number }
+function pairedDashFormation(owner:Fighter,neutral:MovementFormation):DashFormation {
+  const key=owner.id+':'+owner.facing;
+  const cached=dashFormations.get(key);
+  if(cached)return cached;
+  const sources=bodyAtlasIds(owner.id).map(id=>atlases.get(id)!);
+  const positions=bodyOffsets(owner.id),lead=duoLeadIndex(owner);
+  const sign=lead===0?1:-1,support=1-lead;
+  const idle=neutral.offsets[support]*sign;
+  const outlines=Array.from({length:11},(_,i)=>sources.map((atlas,body)=>dashOutline(
+    atlas,atlas.clips.dash?.[dashCel(11-i)]??atlas.frames[POSE_SLOTS.dash],owner.facing,positions[body],
+  )));
+  const rawGaps=outlines.map(([left,right])=>silhouetteGap(left,right));
+  const required=rawGaps.map(gap=>Math.max(idle,dashGap-gap));
+  // The support can close in on a forward dash or spread on a backdash.
+  // Spacing changes then carry it in the dash direction even at a hard stop.
+  const opening=required.map((_,i)=>Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.max(0,j-i))));
+  const closing=required.map((_,i)=>Math.max(...required.map((value,j)=>value-dashSpacingPerTick*Math.max(0,i-j))));
+  const widest=Math.max(...required);
+  const xs=outlines.flatMap(pair=>pair.flatMap((outline,body)=>outline.map(([x])=>x+(body===support?widest*sign:0))));
+  const atlas=sources[support];
+  const crouch=dashOutline(atlas,atlas.frames[POSE_SLOTS.crouchLanding],owner.facing,positions[support]);
+  const recoveryEdge=Math.max(...neutral.envelopes[support].map(x=>x*sign),...crouch.map(([x])=>x*sign));
+  const result={opening,closing,rawGaps,left:Math.min(...xs),right:Math.max(...xs),recoveryEdge};
+  dashFormations.set(key,result);
+  return result;
+}
+interface MovementFormation {
+  envelopes: number[][];
+  offsets: number[];
+}
+/** Keep guard and walk compact. Dash uses its own envelope because wide
+ * silhouettes would spread a standing team farther apart than necessary. */
+function pairedMovementFormation(owner:Fighter,dashing:boolean):MovementFormation {
+  const key=owner.id+':'+owner.facing+':'+dashing;
+  const cached=movementFormations.get(key);
+  if(cached)return cached;
+  const sources=bodyAtlasIds(owner.id).map(id=>atlases.get(id)!);
+  const positions=bodyOffsets(owner.id);
+  const envelopes=sources.map((atlas,i)=>{
+    const flip=owner.facing*atlas.facing*atlas.scale;
+    const walk=atlas.walkFrames??atlas.frames.slice(POSE_SLOTS.walkNear,POSE_SLOTS.passFar+1);
+    const dash=atlas.clips.dash??[atlas.frames[POSE_SLOTS.dash]];
+    const frames=dashing?dash:[atlas.frames[POSE_SLOTS.guard],atlas.frames[POSE_SLOTS.breathe],...walk];
+    const xs=frames.flatMap(frame=>[
+      positions[i]+(frame.bounds[0]-frame.anchor[0])*flip,
+      positions[i]+(frame.bounds[2]-frame.anchor[0])*flip,
+    ]);
+    return [Math.min(...xs),Math.max(...xs)];
   });
-  const envelope:[number,number]=[Math.min(...forms.map(b=>b[0])),Math.max(...forms.map(b=>b[1]))];movementFormationBounds.set(key,envelope);return envelope;
+  const lead=duoLeadIndex(owner),gap=sources.length>2?12:6;
+  const offsets=sources.map(()=>0);
+  for(let i=lead-1;i>=0;i--){
+    const clearance=envelopes[i+1][0]+offsets[i+1]-envelopes[i][1]-gap;
+    offsets[i]=Math.min(60,clearance);
+  }
+  for(let i=lead+1;i<sources.length;i++){
+    const clearance=envelopes[i][0]-envelopes[i-1][1]-offsets[i-1]-gap;
+    offsets[i]=-Math.min(60,clearance);
+  }
+  const formation={envelopes,offsets};
+  movementFormations.set(key,formation);
+  return formation;
+}
+/** Cover both formations and their small easing range even during a jump
+ * beside a wall, so swapping pose families cannot move the lead anchor. */
+function pairedMovementLimits(owner:Fighter,neutral:MovementFormation,dash:MovementFormation):[number,number] {
+  if(neutral.offsets.length===2){
+    const schedule=pairedDashFormation(owner,neutral);
+    return [
+      Math.min(schedule.left,...neutral.envelopes.map(([l],i)=>l+neutral.offsets[i])),
+      Math.max(schedule.right,...neutral.envelopes.map(([,r],i)=>r+neutral.offsets[i])),
+    ];
+  }
+  return [
+    Math.min(...neutral.envelopes.map(([left],i)=>
+      Math.min(left,dash.envelopes[i][0])+Math.min(neutral.offsets[i],dash.offsets[i]))),
+    Math.max(...neutral.envelopes.map(([,right],i)=>
+      Math.max(right,dash.envelopes[i][1])+Math.max(neutral.offsets[i],dash.offsets[i]))),
+  ];
 }
 /** Falling bodies are wider than standing bodies. Separate their complete
  * silhouettes as one camera-bounded formation, without changing hit/throw state.
  * The low feet/floor anchors remain untouched. */
-function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
+function baseDuoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
   const data=actors.map((actor,i)=>paintData(actor,samples[i].slot,samples[i],bodyAtlasIds(owner.id)[i])!);
   const bounds=data.map(paintBounds),offsets=actors.map(()=>0);
+  const locomotion=!owner.move&&!owner.stun&&!owner.blockstun&&!owner.reaction&&!throwScene?.fighters.includes(owner);
+  const usesMovementFormation=samples.every(sample=>sample.sequence==='walk'||sample.sequence==='dash'||
+    (sample.sequence==='poses'&&sample.slot<=POSE_SLOTS.dash));
+  if(locomotion&&usesMovementFormation){
+    const neutral=pairedMovementFormation(owner,false),dash=pairedMovementFormation(owner,true);
+    if(owner.dash>0&&offsets.length===2){
+      const schedule=pairedDashFormation(owner,neutral);
+      const earlier=Math.max(0,Math.min(10,Math.floor(11-owner.dash)));
+      // The pose lab can scrub between ticks. Its layout must use the same
+      // authored cel as the renderer, even across a fractional boundary.
+      const phase=dashCel(11-earlier)===dashCel(owner.dash)?earlier:Math.min(10,earlier+1);
+      const [l,r]=pairedMovementLimits(owner,neutral,dash);
+      const left=6-l,right=WIDTH-6-r;
+      const x=Math.max(left,Math.min(right,owner.x));
+      // A second dash input can buffer another direction while this dash is
+      // still committed. Only the current dash's velocity drives its layout.
+      const direction=Math.sign(owner.vx)||owner.dashDirection;
+      const distance=(direction===owner.facing?schedule.closing:schedule.opening)[phase];
+      const shift=x-owner.x;
+      const positions=duoLeadIndex(owner)===0?[shift,shift+distance]:[shift-distance,shift];
+      return {data,offsets:positions,bounds:bounds.map(([l,r],i)=>[l+positions[i],r+positions[i]]),dashClearance:schedule.rawGaps[phase]+distance};
+    }
+    // Large silhouette differences cannot be eased across a short dash
+    // without making the trailing body travel opposite the lead. Establish
+    // those formations on the first dash cel, then keep them together.
+    const travel=Math.max(...offsets.map((_,i)=>Math.abs(dash.offsets[i]-neutral.offsets[i])));
+    // A linear ramp spreads a modest opening over three frames without
+    // concentrating its largest shift at the slow end of the dash.
+    const blend=owner.dash>0?(travel<=22?Math.min(1,(11-owner.dash)/3,owner.dash/3):1):0;
+    for(let i=0;i<offsets.length;i++)offsets[i]=neutral.offsets[i]+(dash.offsets[i]-neutral.offsets[i])*blend;
+    // Start and end close to the walking formation, but give a wider cel
+    // room immediately when it would otherwise cover the lead or teammate.
+    const lead=duoLeadIndex(owner),gap=offsets.length>2?12:6;
+    for(let i=lead-1;i>=0;i--)offsets[i]=Math.min(offsets[i],bounds[i+1][0]+offsets[i+1]-bounds[i][1]-gap);
+    for(let i=lead+1;i<offsets.length;i++)offsets[i]=Math.max(offsets[i],bounds[i-1][1]+offsets[i-1]-bounds[i][0]+gap);
+    // Reserve room for both footprints, including the blend between their
+    // offsets. A cel change should not move the lead at a wall.
+    const [limitLeft,limitRight]=pairedMovementLimits(owner,neutral,dash);
+    const left=Math.min(owner.x+limitLeft,...bounds.map(([l],i)=>l+offsets[i]));
+    const right=Math.max(owner.x+limitRight,...bounds.map(([,r],i)=>r+offsets[i]));
+    const shift=left<6?6-left:right>WIDTH-6?WIDTH-6-right:0;
+    return {data,offsets:offsets.map(offset=>offset+shift),bounds:bounds.map(([l,r],i)=>[l+offsets[i]+shift,r+offsets[i]+shift])};
+  }
   const finish=()=>{
-    // Draw the supporting bodies nearer to the lead while leaving the lead's
-    // combat/throw contact exactly where the simulation places it. Move only
-    // into unused silhouette clearance, so unlike a fixed offset this also
-    // works for wide bodies and at the arena edges.
+    // Preserve contact on the lead body. Broader special cels can limit how
+    // far a supporting body packs inward, even before the impact frame.
     {
       const lead=duoLeadIndex(owner),gap=6,maxShift=60;
-      // A broad strike can already overlap before any inward adjustment.
-      // Open only supporting bodies enough to preserve the readable gap.
-      // A special's drawings extend much farther than its current keyframe.
-      // Limit any inward shift by the full clip envelope, so a later strike
-      // cannot overlap its partner after the formation closes.
-      // Pack idle and the entire gait together. Per-cel inward limits caused
-      // visible lateral snaps on footfall, even when every pose had a clear gap.
-      const neutral=samples.every(s=>s.sequence==='walk'||(s.sequence==='poses'&&s.slot<=5));
-      const dash=samples.every(s=>s.sequence==='dash');
-      const specialEnvelope=neutral||dash ? actors.map((actor,i)=>{
-        const atlas=atlases.get(bodyAtlasIds(owner.id)[i])!,flip=actor.facing*atlas.facing*atlas.scale;
-        const sources=dash?(atlas.clips.dash??[atlas.frames[POSE_SLOTS.dash]]):atlas.walkFrames?.length?[...atlas.frames.slice(0,2),...atlas.walkFrames]:atlas.frames.slice(0,6);
-        const xs=sources.flatMap(s=>[(s.bounds[0]-s.anchor[0])*flip+actor.x,(s.bounds[2]-s.anchor[0])*flip+actor.x]);
-        return [Math.min(...xs),Math.max(...xs)] as [number,number];
-      }):owner.move?.id==='special' ? actors.map((actor,i)=>{
+      const specialEnvelope=owner.move?.id==='special' ? actors.map((actor,i)=>{
         const atlas=atlases.get(bodyAtlasIds(owner.id)[i])!,flip=actor.facing*atlas.facing*atlas.scale;
         const xs=(assistTiming.has(owner)?atlas.clips.assistAttack??atlas.clips.special??[]:atlas.clips.special??[]).flatMap(s=>[(s.bounds[0]-s.anchor[0])*flip+actor.x,(s.bounds[2]-s.anchor[0])*flip+actor.x]);
         return xs.length?[Math.min(...xs),Math.max(...xs)] as [number,number]:bounds[i];
       }):bounds;
-      const packing=neutral||dash?specialEnvelope:bounds;
-      for(let i=lead-1;i>=0;i--){const clear=packing[i+1][0]+offsets[i+1]-packing[i][1]-offsets[i];offsets[i]-=Math.max(0,gap-clear);}
-      for(let i=lead+1;i<actors.length;i++){const clear=packing[i][0]+offsets[i]-packing[i-1][1]-offsets[i-1];offsets[i]+=Math.max(0,gap-clear);}
+      for(let i=lead-1;i>=0;i--){const clear=bounds[i+1][0]+offsets[i+1]-bounds[i][1]-offsets[i];offsets[i]-=Math.max(0,gap-clear);}
+      for(let i=lead+1;i<actors.length;i++){const clear=bounds[i][0]+offsets[i]-bounds[i-1][1]-offsets[i-1];offsets[i]+=Math.max(0,gap-clear);}
       for(let i=lead-1;i>=0;i--){
-        const available=Math.min(packing[i+1][0]-packing[i][1],specialEnvelope[i+1][0]-specialEnvelope[i][1])+offsets[i+1]-offsets[i]-gap;
+        const available=Math.min(bounds[i+1][0]-bounds[i][1],specialEnvelope[i+1][0]-specialEnvelope[i][1])+offsets[i+1]-offsets[i]-gap;
         offsets[i]+=Math.max(0,Math.min(maxShift,available));
       }
       for(let i=lead+1;i<actors.length;i++){
-        const available=Math.min(packing[i][0]-packing[i-1][1],specialEnvelope[i][0]-specialEnvelope[i-1][1])+offsets[i]-offsets[i-1]-gap;
+        const available=Math.min(bounds[i][0]-bounds[i-1][1],specialEnvelope[i][0]-specialEnvelope[i-1][1])+offsets[i]-offsets[i-1]-gap;
         offsets[i]-=Math.max(0,Math.min(maxShift,available));
       }
     }
-    const locomotion=!owner.move&&!owner.stun&&!owner.blockstun&&!owner.reaction&&!throwScene?.fighters.includes(owner);
     if(locomotion||owner.reaction||owner.move?.id==='special'){
       let left=Math.min(...bounds.map((b,i)=>b[0]+offsets[i])),right=Math.max(...bounds.map((b,i)=>b[1]+offsets[i]));
-      if(locomotion){const envelope=pairedMovementEnvelope(owner);left=Math.min(left,owner.x+envelope[0]);right=Math.max(right,owner.x+envelope[1]);}
+      if(locomotion){
+        const neutral=pairedMovementFormation(owner,false),dash=pairedMovementFormation(owner,true);
+        const [limitLeft,limitRight]=pairedMovementLimits(owner,neutral,dash);
+        left=Math.min(left,owner.x+limitLeft);
+        right=Math.max(right,owner.x+limitRight);
+      }
       const shift=left<6?6-left:right>WIDTH-6?WIDTH-6-right:0;
       for(let i=0;i<offsets.length;i++)offsets[i]+=shift;
     }
@@ -770,9 +893,51 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
   }
   return finish();
 }
+interface DashSpacingSample { frame:number; id:Fighter['id']; facing:number; distance:number; keepUntil:number }
+const dashSpacingPlayback=new WeakMap<Fighter,DashSpacingSample>();
+
+function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[],frame:number) {
+  const layout=baseDuoLayout(owner,actors,samples);
+  if(presentationScene?.fighters.includes(owner)&&presentationScene.presentation.phase!=='fight'){
+    dashSpacingPlayback.delete(owner);
+    return layout;
+  }
+  const last=dashSpacingPlayback.get(owner);
+  if(actors.length!==2||(!last&&layout.dashClearance===undefined))return layout;
+  const lead=duoLeadIndex(owner),support=1-lead,sign=lead===0?1:-1;
+  const distance=(layout.offsets[support]-layout.offsets[lead])*sign;
+  if(layout.dashClearance!==undefined){
+    if(owner.vx)dashSpacingPlayback.set(owner,{frame,id:owner.id,facing:owner.facing,distance,keepUntil:frame+3});
+    else dashSpacingPlayback.delete(owner);
+    return layout;
+  }
+  if(!last||last.id!==owner.id||last.facing!==owner.facing||last.frame>frame||
+    owner.move||owner.stun||owner.blockstun||owner.reaction||throwScene?.fighters.includes(owner)){
+    dashSpacingPlayback.delete(owner);
+    return layout;
+  }
+  // Close the extra dash space over several cels after a brake or a wall
+  // stop. The lead keeps its authored anchor, and the support stays in frame.
+  const [left,right]=layout.bounds[support];
+  const edge=pairedDashFormation(owner,pairedMovementFormation(owner,false)).recoveryEdge;
+  const recoveryRoom=(sign===1?WIDTH-6:-6)-(owner.x+layout.offsets[support])*sign-edge;
+  const room=Math.min(sign===1?WIDTH-6-right:left-6,recoveryRoom);
+  const extra=Math.min(room,last.distance-distance-(frame-last.frame)*dashSpacingPerTick);
+  if(extra>0){
+    const dx=extra*sign;
+    layout.offsets[support]+=dx;
+    layout.bounds[support]=[left+dx,right+dx];
+  }
+  // A braking crouch can briefly require more room than the dash itself.
+  // Keep that extra room for the following guard cel as well.
+  if(extra>0||frame<=last.keepUntil)dashSpacingPlayback.set(owner,{...last,frame,distance:distance+Math.max(0,extra)});
+  else dashSpacingPlayback.delete(owner);
+  return layout;
+}
+
 export function getDuoLayoutDebug(f:Fighter,frame:number) {
   const actors=duoActors(f),samples=actors.map((actor,i)=>sample(actor,frame,false,bodyAtlasIds(f.id)[i],i/bodyAtlasIds(f.id).length));
-  const {bounds,offsets}=duoLayout(f,actors,samples);return {bounds,offsets};
+  const {bounds,offsets,dashClearance}=duoLayout(f,actors,samples,frame);return {bounds,offsets,dashClearance};
 }
 /** QA only (scripts/sheet-render-qa.mjs): a sub-pixel offset added to every fighter
  * sprite, so a render comparison can move fighters without moving the stage. Always 0 in play. */
@@ -809,7 +974,7 @@ export function drawPoseAtlas(c: CanvasRenderingContext2D, f: Fighter, frame: nu
     if(bodyAtlasIds(f.id).some(id=>!atlases.has(id)))return false;
     const actors=duoActors(f),order=actors.map((_,i)=>i);if(duoLeadSide(f)===-1)order.reverse();
     const samples=actors.map((actor,i)=>sample(actor,frame,frozen,bodyAtlasIds(f.id)[i],i/bodyAtlasIds(f.id).length));
-    const layout=duoLayout(f,actors,samples);
+    const layout=duoLayout(f,actors,samples,frame);
     for(const i of order){const id=bodyAtlasIds(f.id)[i];paint(c,actors[i],samples[i].slot,ghost,samples[i],id,layout.offsets[i]);}
     return true;
   }
