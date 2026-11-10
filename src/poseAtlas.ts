@@ -771,7 +771,7 @@ function pairedMovementLimits(owner:Fighter,neutral:MovementFormation,dash:Movem
 /** Falling bodies are wider than standing bodies. Separate their complete
  * silhouettes as one camera-bounded formation, without changing hit/throw state.
  * The low feet/floor anchors remain untouched. */
-function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
+function baseDuoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
   const data=actors.map((actor,i)=>paintData(actor,samples[i].slot,samples[i],bodyAtlasIds(owner.id)[i])!);
   const bounds=data.map(paintBounds),offsets=actors.map(()=>0);
   const locomotion=!owner.move&&!owner.stun&&!owner.blockstun&&!owner.reaction&&!throwScene?.fighters.includes(owner);
@@ -788,7 +788,10 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
       const [l,r]=pairedMovementLimits(owner,neutral,dash);
       const left=6-l,right=WIDTH-6-r;
       const x=Math.max(left,Math.min(right,owner.x));
-      const distance=(owner.dashDirection===owner.facing?schedule.closing:schedule.opening)[phase];
+      // A second dash input can buffer another direction while this dash is
+      // still committed. Only the current dash's velocity drives its layout.
+      const direction=Math.sign(owner.vx)||owner.dashDirection;
+      const distance=(direction===owner.facing?schedule.closing:schedule.opening)[phase];
       const shift=x-owner.x;
       const positions=duoLeadIndex(owner)===0?[shift,shift+distance]:[shift-distance,shift];
       return {data,offsets:positions,bounds:bounds.map(([l,r],i)=>[l+positions[i],r+positions[i]]),dashClearance:schedule.rawGaps[phase]+distance};
@@ -887,9 +890,45 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
   }
   return finish();
 }
+interface DashSpacingSample { frame:number; id:Fighter['id']; facing:number; distance:number; keepUntil:number }
+const dashSpacingPlayback=new WeakMap<Fighter,DashSpacingSample>();
+
+function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[],frame:number) {
+  const layout=baseDuoLayout(owner,actors,samples);
+  const last=dashSpacingPlayback.get(owner);
+  if(actors.length!==2||(!last&&layout.dashClearance===undefined))return layout;
+  const lead=duoLeadIndex(owner),support=1-lead,sign=lead===0?1:-1;
+  const distance=(layout.offsets[support]-layout.offsets[lead])*sign;
+  if(layout.dashClearance!==undefined){
+    if(owner.vx)dashSpacingPlayback.set(owner,{frame,id:owner.id,facing:owner.facing,distance,keepUntil:frame+3});
+    else dashSpacingPlayback.delete(owner);
+    return layout;
+  }
+  if(!last||last.id!==owner.id||last.facing!==owner.facing||last.frame>frame||
+    owner.move||owner.stun||owner.blockstun||owner.reaction||throwScene?.fighters.includes(owner)){
+    dashSpacingPlayback.delete(owner);
+    return layout;
+  }
+  // Close the extra dash space over several cels after a brake or a wall
+  // stop. The lead keeps its authored anchor, and the support stays in frame.
+  const [left,right]=layout.bounds[support];
+  const room=sign===1?WIDTH-6-right:left-6;
+  const extra=Math.min(room,last.distance-distance-(frame-last.frame)*dashSpacingPerTick);
+  if(extra>0){
+    const dx=extra*sign;
+    layout.offsets[support]+=dx;
+    layout.bounds[support]=[left+dx,right+dx];
+  }
+  // A braking crouch can briefly require more room than the dash itself.
+  // Keep that extra room for the following guard cel as well.
+  if(extra>0||frame<=last.keepUntil)dashSpacingPlayback.set(owner,{...last,frame,distance:distance+Math.max(0,extra)});
+  else dashSpacingPlayback.delete(owner);
+  return layout;
+}
+
 export function getDuoLayoutDebug(f:Fighter,frame:number) {
   const actors=duoActors(f),samples=actors.map((actor,i)=>sample(actor,frame,false,bodyAtlasIds(f.id)[i],i/bodyAtlasIds(f.id).length));
-  const {bounds,offsets,dashClearance}=duoLayout(f,actors,samples);return {bounds,offsets,dashClearance};
+  const {bounds,offsets,dashClearance}=duoLayout(f,actors,samples,frame);return {bounds,offsets,dashClearance};
 }
 /** QA only (scripts/sheet-render-qa.mjs): a sub-pixel offset added to every fighter
  * sprite, so a render comparison can move fighters without moving the stage. Always 0 in play. */
@@ -926,7 +965,7 @@ export function drawPoseAtlas(c: CanvasRenderingContext2D, f: Fighter, frame: nu
     if(bodyAtlasIds(f.id).some(id=>!atlases.has(id)))return false;
     const actors=duoActors(f),order=actors.map((_,i)=>i);if(duoLeadSide(f)===-1)order.reverse();
     const samples=actors.map((actor,i)=>sample(actor,frame,frozen,bodyAtlasIds(f.id)[i],i/bodyAtlasIds(f.id).length));
-    const layout=duoLayout(f,actors,samples);
+    const layout=duoLayout(f,actors,samples,frame);
     for(const i of order){const id=bodyAtlasIds(f.id)[i];paint(c,actors[i],samples[i].slot,ghost,samples[i],id,layout.offsets[i]);}
     return true;
   }
