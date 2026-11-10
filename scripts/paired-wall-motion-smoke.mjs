@@ -34,7 +34,7 @@ for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing 
   f.dash=dash;
   const layout=getDuoLayoutDebug(f,12-dash);
   const lead=facing===1?layout.offsets.length-1:0;
-  assert.equal(layout.offsets[lead],start[lead],`${id}: dash keeps the lead anchor`);
+  assert.ok(Math.abs(layout.offsets[lead]-start[lead])<1e-7,`${id}: dash keeps the lead anchor`);
   if(dash===0)assert.deepEqual(layout.offsets,start,`${id}: returns to compact guard after dash`);
   assert.ok(layout.bounds.every(([l,r],i)=>l>=6-.01&&r<=core.WIDTH-6+.01&&(i===0||l>=layout.bounds[i-1][1]+5.99)),
     `${id} facing ${facing}, edge ${edge}: separate silhouettes stay in frame`);
@@ -48,3 +48,34 @@ for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing 
  }
 }
 console.log('Stable guard/walk spacing and anchored dash formations across the paired roster.');
+
+// Step a real dash and check world-space travel of both bodies once the
+// dash silhouette is established. The support must never moonwalk.
+for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const facing of [-1,1])for(const dir of [-1,1]){
+ const s=createState(id,'dummy','rivet'),[f,b]=s.fighters;
+ f.x=640;f.facing=facing;b.x=facing===1?1130:150;
+ let prior;
+ for(let t=0;t<12;t++){
+  step(s,[t===0?(dir===1?A.right:A.left)|A.dash:0,0]);
+  if(f.dash===0)break;
+  const x=getDuoLayoutDebug(f,s.frame).offsets.map(offset=>f.x+offset);
+  if(prior)assert.ok(x.every((body,i)=>(body-prior[i])*dir>=-1e-7),`${id}: dash bodies must travel together`);
+  prior=x;
+ }
+}
+for(const id of PLAYABLE_FIGHTERS.filter(core.isPairedFighter))for(const side of [-1,1]){
+ const s=createState(id,'dummy','rivet'),[f,b]=s.fighters;
+ f.x=side===-1?core.fighterWall(id):core.WIDTH-core.fighterWall(id);
+ f.facing=-side;
+ b.x=side===-1?1130:150;
+ const lead=side===-1?core.bodyAtlasIds(id).length-1:0;
+ const guard=getDuoLayoutDebug(f,0).offsets[lead];
+ let airborne=false;
+ for(let t=0;t<50;t++){
+  step(s,[t===0?A.up:0,0]);
+  airborne ||= f.y<FLOOR;
+  assert.ok(Math.abs(getDuoLayoutDebug(f,s.frame).offsets[lead]-guard)<1e-7,
+    `${id}: wall jump keeps the lead anchor through anticipation, takeoff and landing`);
+ }
+ assert.ok(airborne,`${id}: the wall-jump fixture must leave the ground`);
+}

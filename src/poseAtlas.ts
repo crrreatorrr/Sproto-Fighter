@@ -665,8 +665,6 @@ function paintBounds(data:PaintData):[number,number] {
 interface MovementFormation {
   envelopes: number[][];
   offsets: number[];
-  left: number;
-  right: number;
 }
 /** Keep guard and walk compact. Dash uses its own envelope because wide
  * silhouettes would spread a standing team farther apart than necessary. */
@@ -697,13 +695,19 @@ function pairedMovementFormation(owner:Fighter,dashing:boolean):MovementFormatio
     const clearance=envelopes[i][0]-envelopes[i-1][1]-offsets[i-1]-gap;
     offsets[i]=-Math.min(60,clearance);
   }
-  const formation={
-    envelopes,offsets,
-    left:Math.min(...envelopes.map((bounds,i)=>bounds[0]+offsets[i])),
-    right:Math.max(...envelopes.map((bounds,i)=>bounds[1]+offsets[i])),
-  };
+  const formation={envelopes,offsets};
   movementFormations.set(key,formation);
   return formation;
+}
+/** Cover both formations and their small easing range even during a jump
+ * beside a wall, so swapping pose families cannot move the lead anchor. */
+function pairedMovementLimits(neutral:MovementFormation,dash:MovementFormation):[number,number] {
+  return [
+    Math.min(...neutral.envelopes.map(([left],i)=>
+      Math.min(left,dash.envelopes[i][0])+Math.min(neutral.offsets[i],dash.offsets[i]))),
+    Math.max(...neutral.envelopes.map(([,right],i)=>
+      Math.max(right,dash.envelopes[i][1])+Math.max(neutral.offsets[i],dash.offsets[i]))),
+  ];
 }
 /** Falling bodies are wider than standing bodies. Separate their complete
  * silhouettes as one camera-bounded formation, without changing hit/throw state.
@@ -716,7 +720,11 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
     (sample.sequence==='poses'&&sample.slot<=POSE_SLOTS.dash));
   if(locomotion&&usesMovementFormation){
     const neutral=pairedMovementFormation(owner,false),dash=pairedMovementFormation(owner,true);
-    const blend=Math.min(1,Math.max(0,11-owner.dash)/3,owner.dash/3);
+    // Large silhouette differences cannot be eased across a short dash
+    // without making the trailing body travel opposite the lead. Establish
+    // those formations on the first dash cel, then keep them together.
+    const travel=Math.max(...offsets.map((_,i)=>Math.abs(dash.offsets[i]-neutral.offsets[i])));
+    const blend=owner.dash>0?(travel<=12?Math.min(1,(11-owner.dash)/3,owner.dash/3):1):0;
     const eased=blend*blend*(3-2*blend);
     for(let i=0;i<offsets.length;i++)offsets[i]=neutral.offsets[i]+(dash.offsets[i]-neutral.offsets[i])*eased;
     // Start and end close to the walking formation, but give a wider cel
@@ -726,10 +734,9 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
     for(let i=lead+1;i<offsets.length;i++)offsets[i]=Math.max(offsets[i],bounds[i-1][1]+offsets[i-1]-bounds[i][0]+gap);
     // Reserve room for both footprints, including the blend between their
     // offsets. A cel change should not move the lead at a wall.
-    const left=Math.min(...bounds.map(([l],i)=>Math.min(l+offsets[i],owner.x+
-      Math.min(neutral.envelopes[i][0],dash.envelopes[i][0])+Math.min(neutral.offsets[i],dash.offsets[i]))));
-    const right=Math.max(...bounds.map(([,r],i)=>Math.max(r+offsets[i],owner.x+
-      Math.max(neutral.envelopes[i][1],dash.envelopes[i][1])+Math.max(neutral.offsets[i],dash.offsets[i]))));
+    const [limitLeft,limitRight]=pairedMovementLimits(neutral,dash);
+    const left=Math.min(owner.x+limitLeft,...bounds.map(([l],i)=>l+offsets[i]));
+    const right=Math.max(owner.x+limitRight,...bounds.map(([,r],i)=>r+offsets[i]));
     const shift=left<6?6-left:right>WIDTH-6?WIDTH-6-right:0;
     return {data,offsets:offsets.map(offset=>offset+shift),bounds:bounds.map(([l,r],i)=>[l+offsets[i]+shift,r+offsets[i]+shift])};
   }
@@ -758,8 +765,9 @@ function duoLayout(owner:Fighter,actors:Fighter[],samples:PoseAtlasDebug[]) {
       let left=Math.min(...bounds.map((b,i)=>b[0]+offsets[i])),right=Math.max(...bounds.map((b,i)=>b[1]+offsets[i]));
       if(locomotion){
         const neutral=pairedMovementFormation(owner,false),dash=pairedMovementFormation(owner,true);
-        left=Math.min(left,owner.x+neutral.left,owner.x+dash.left);
-        right=Math.max(right,owner.x+neutral.right,owner.x+dash.right);
+        const [limitLeft,limitRight]=pairedMovementLimits(neutral,dash);
+        left=Math.min(left,owner.x+limitLeft);
+        right=Math.max(right,owner.x+limitRight);
       }
       const shift=left<6?6-left:right>WIDTH-6?WIDTH-6-right:0;
       for(let i=0;i<offsets.length;i++)offsets[i]+=shift;
