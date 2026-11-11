@@ -123,5 +123,7 @@ export interface CpuMemory {
     /** Consecutive frames spent backing away with nothing incoming, and the cooldown after that is cut short. */
     retreat: number; advance: number;
     observations: CpuObservation[];
-    habits: { attacks: number; lows: number; jumps: number; projectiles: number };
+    /** `guarded` and `struck` count this CPU's own attacks that the rival guarded or took. */
+    habits: { attacks: number; lows: number; jumps: number; projectiles: number; guarded: number; struck: number };
+    rivalBlockstun: number; rivalHp: number;
 }

@@ -37,7 +37,7 @@ is a late rival. Every story win, including a God Mode win, recruits the defeate
 fighter and opens the next encounter. Locked fighters can be previewed but
 cannot be P1 until recruited; CPU rival selection is unrestricted.
 
-The first rival plays at CPU skill 3 and the route rises to 10 (`STORY_START_SKILL`
+The first rival plays at CPU skill 2 and the route rises to 10 (`STORY_START_SKILL`
 in `src/difficulty.ts`). Every third cleared encounter also recruits one fighter
 from far down the route (never from the last two chapters, a gauntlet or a
 Relic-only fighter), so the roster opens faster than one fighter per win; that

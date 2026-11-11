@@ -124,9 +124,9 @@ try {
       assert.equal(createStoryProgress(t.disk).snapshot().nextIndex,1);
     }
   });
-  await check('the campaign opens at skill three and three losses there offer a real easier retry',async()=>{
+  await check('the campaign opens at skill two and three losses there offer a real easier retry',async()=>{
     const t=fresh();await t.begin();const saved=progressView(t.progress);
-    assert.equal(t.launches().at(-1).rest[0].skill,3);
+    assert.equal(t.launches().at(-1).rest[0].skill,2);
     for(let loss=1;loss<=3;loss++){
       await finishWave(t,1);
       const labels=t.$('journey-actions').children.map(button=>button.textContent);
@@ -135,10 +135,10 @@ try {
       if(loss<3){await t.action(0);await flush();}
     }
     await t.action(0);await flush();
-    assert.deepEqual(t.launches().at(-1).rest[0],{skill:3,assisted:false},'a plain retry keeps the published skill');
+    assert.deepEqual(t.launches().at(-1).rest[0],{skill:2,assisted:false},'a plain retry keeps the published skill');
   });
   await check('a reducible fractional encounter offers optional easier CPU without promising an exact one-skill drop',async()=>{
-    const encounter=STORY_ENCOUNTERS.find(e=>{const skill=storyDifficulty(e,STORY_ENCOUNTERS);return skill>3&&skill<4;});
+    const encounter=STORY_ENCOUNTERS.find(e=>{const skill=storyDifficulty(e,STORY_ENCOUNTERS);return skill>2&&skill<3;});
     assert.ok(encounter,'installed route has a fractional opening difficulty');
     const t=fresh(before(encounter.index));await t.begin();const saved=progressView(t.progress),base=storyDifficulty(encounter,STORY_ENCOUNTERS);
     for(let loss=1;loss<=3;loss++){
@@ -155,7 +155,7 @@ try {
     const help=t.$('journey-actions').children.findIndex(button=>button.textContent==='Retry with easier CPU');assert.ok(help>=0);
     await t.action(help);await flush();
     const selected=t.launches().at(-1).rest[0];assert.deepEqual(selected,{skill:base-1,assisted:true});
-    assert.ok(selected.skill>=2,'the campaign now opens at skill three, so help never reaches the skill-1 floor here');
+    assert.ok(selected.skill>1,'the campaign opens at skill two, so help on a later rival never reaches the skill-1 floor');
     assert.equal(t.story.snapshot().assisted,true);assert.equal(t.story.snapshot().cpuSkill,base-1);
     assert.deepEqual(progressView(t.progress),saved,'taking help itself grants no progression/recruit');
   });

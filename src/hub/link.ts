@@ -48,13 +48,25 @@ export class HubLink {
     let belt = false;
     for (const call of calls) {
       try {
+        // The vendored SDK's reportEvent returns only `{ granted }`: it drops the `tickets` the server
+        // credited. So the toast is built from the Ticket balance read before and after the report,
+        // and when either read fails it makes no claim about payment at all.
+        const boss = call.eventId === BOSS_EVENT;
+        const before = boss ? await this.readBalance() : null;
         const reported = await this.api.reportEvent(call.eventId, call.data, call.key);
-        // The server reports the Tickets it credited for a boss; 0 means this boss already paid today.
-        const tickets = (reported as { tickets?: unknown }).tickets;
-        if (call.eventId === BOSS_EVENT) {
-          const paid = typeof tickets === 'number' && tickets > 0 ? tickets : 0;
-          title = paid ? `+${paid} Tickets` : 'Boss defeated';
-          sub = paid ? 'Story boss defeated · pays once per boss per day' : 'No Tickets this time: each boss pays once per day';
+        if (boss) {
+          const after = await this.readBalance();
+          if (after !== null) this.balance = after;
+          if (before === null || after === null) {
+            title = 'Boss defeated';
+            sub = 'Reported to the hub';
+          } else if (after > before) {
+            title = `+${after - before} Tickets`;
+            sub = `Story boss defeated · Balance ${after}`;
+          } else {
+            title = 'Boss defeated';
+            sub = `No Tickets credited: each boss pays once per day · Balance ${after}`;
+          }
         }
         if (reported.granted === BELT_RELIC) {
           belt = true;
@@ -72,6 +84,16 @@ export class HubLink {
     }
     if (title) notify(title, sub);
     return belt;
+  }
+
+  /** This game's Ticket balance from the hub, or null when it cannot be read. */
+  private async readBalance(): Promise<number | null> {
+    try {
+      const result = await this.api.getTicketBalance();
+      return typeof result?.balance === 'number' && Number.isFinite(result.balance) ? result.balance : null;
+    } catch {
+      return null;
+    }
   }
 
   /** Close the hub session and go back to the Bar's arcade cabinet. */

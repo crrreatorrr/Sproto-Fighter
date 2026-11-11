@@ -14,13 +14,15 @@ export const CPU_DIFFICULTIES = [
 // guard..combo are the published reaction model. The last four are reads of a rival's
 // habits: `wake` holds guard while recovering from a hit or knockdown, `shot` guards a
 // projectile that has been seen coming, `read` acts on a repeated pattern (stop-hit a
-// walk-in, jump a crouching low poke, dash through a projectile gap) and `repeat` is the
-// least punish chance once the same move has been blocked twice in three seconds.
+// walk-in, jump a crouching low poke, dash through a projectile gap, stop a guarded string) and
+// `repeat` is the least punish chance once the same move has been blocked twice in three seconds.
+// `track` is how many frames stale the rival's position may be when judging range: recognising a
+// move always takes `reaction` frames, but Easy also misjudges distance and Expert barely does.
 const anchors = [
-    { skill: 1, reaction: 28, guard: .25, low: .20, punish: 0, antiAir: 0, tech: 0, combo: .40, wake: .30, shot: .45, read: .15, repeat: .20 },
-    { skill: 4, reaction: 18, guard: .50, low: .45, punish: .30, antiAir: .25, tech: .20, combo: .70, wake: .60, shot: .75, read: .60, repeat: .60 },
-    { skill: 7, reaction: 12, guard: .70, low: .70, punish: .65, antiAir: .60, tech: .50, combo: .90, wake: .85, shot: .92, read: .85, repeat: .90 },
-    { skill: 10, reaction: 8, guard: .85, low: .90, punish: .90, antiAir: .85, tech: .75, combo: 1, wake: .97, shot: .99, read: .97, repeat: .98 },
+    { skill: 1, reaction: 28, guard: .25, low: .20, punish: 0, antiAir: 0, tech: 0, combo: .40, wake: .30, shot: .45, read: .15, repeat: .20, track: 28 },
+    { skill: 4, reaction: 18, guard: .50, low: .45, punish: .30, antiAir: .32, tech: .20, combo: .70, wake: .60, shot: .75, read: .40, repeat: .60, track: 10 },
+    { skill: 7, reaction: 12, guard: .70, low: .70, punish: .65, antiAir: .72, tech: .50, combo: .90, wake: .75, shot: .92, read: .48, repeat: .90, track: 7 },
+    { skill: 10, reaction: 8, guard: .85, low: .90, punish: .90, antiAir: .85, tech: .75, combo: 1, wake: .97, shot: .99, read: .97, repeat: .98, track: 6 },
 ] as const;
 export function cpuTuning(skill = 4) {
     const level = Math.max(1, Math.min(10, Number.isFinite(skill) ? skill : 4));
@@ -29,11 +31,9 @@ export function cpuTuning(skill = 4) {
     const mix = (key: Exclude<keyof typeof a, 'skill'>) => a[key] + (b[key] - a[key]) * t;
     return { skill: level, reaction: Math.round(mix('reaction')), guard: mix('guard'), low: mix('low'),
         punish: mix('punish'), antiAir: mix('antiAir'), tech: mix('tech'), combo: mix('combo'),
-        wake: mix('wake'), shot: mix('shot'), read: mix('read'), repeat: mix('repeat') };
+        wake: mix('wake'), shot: mix('shot'), read: mix('read'), repeat: mix('repeat'), track: Math.round(mix('track')) };
 }
 
-/** How stale the rival's position may be when judging range. Recognising what they are doing still takes `reaction` frames. */
-const TRACKING_FRAMES = 6;
 /** Frames between a retreat being cut short and the next one being allowed. */
 const ADVANCE_FRAMES = 45;
 /** The longest the CPU backs away with nothing coming at it. */
@@ -101,6 +101,10 @@ export function advanceCpuState(s: CombatState): void {
             if (memory.blocks.length > 8) memory.blocks.shift();
         }
         memory.blockstun = f.blockstun;
+        // Our own attacks are felt too: how often this rival guards them, and how often they land.
+        if (p.blockstun > memory.rivalBlockstun) memory.habits.guarded++;
+        else if (p.hp < memory.rivalHp && p.stun > 0) memory.habits.struck++;
+        memory.rivalBlockstun = p.blockstun; memory.rivalHp = p.hp;
         const arrival = shotArrival(f, s.projectiles, slot);
         memory.shotSeen = arrival.eta >= 0;
         // Backing away with nothing incoming is capped; see cpuInput.
@@ -164,14 +168,16 @@ function decide(s: CombatState, slot: 0 | 1, skill: number): number {
     // Recognising a move takes the full reaction time, but where a rival stands is tracked
     // continuously: range is judged from a much fresher sighting, and a rival seen walking in
     // is assumed to have kept walking since. A hit or guard we just landed is felt at once.
-    const tracked = memory.observations.find(o => o.frame >= s.frame - Math.min(tuning.reaction, TRACKING_FRAMES)) ?? seen;
+    const tracked = memory.observations.find(o => o.frame >= s.frame - Math.min(tuning.reaction, tuning.track)) ?? seen;
     const closing = tracked.y >= FLOOR && !tracked.move && !current.stun && !current.blockstun ? Math.max(0, tracked.x < f.x ? tracked.vx : -tracked.vx) : 0;
     const distance = Math.max(0, Math.abs(tracked.x - f.x) - spread - closing * (s.frame - tracked.frame));
     const pulse = s.frame - memory.decisionAt < 2;
     const light = getMove(f, 'light'), medium = getMove(f, 'medium'), heavy = getMove(f, 'heavy');
     const meleeGap = (range: number) => range - bodySpread(f.id) - 4;
     const lowHabit = seen.attacks > 0 && seen.lows / seen.attacks > .5;
-    const grabChance = lowHabit || (seen.input & toward) ? .30 : .16;
+    // A rival who guards more of our attacks than they take is thrown more often (from Normal up).
+    const turtle = tuning.skill >= 4 && memory.habits.guarded >= 2 && memory.habits.guarded > memory.habits.struck;
+    const grabChance = turtle ? .42 : lowHabit || (seen.input & toward) ? .30 : .16;
     // Forecast defense is separate from the published visible-attack guard
     // probability. Disjoint intervals reserve space for guard, jab and throw.
     const forecastGuardShare = tuning.guard * (1 - grabChance) * .9;
@@ -239,11 +245,17 @@ function decide(s: CombatState, slot: 0 | 1, skill: number): number {
     function habitOrFinisher(id: keyof typeof MOVES): boolean {
         return MOVES[id].rank >= 4 || guardedLately(id) >= 2;
     }
-    if (f.move?.connected && memory.comboRoll < tuning.combo) {
+    // A read also means confirming the hit: a guarded jab is not followed into an unsafe finisher.
+    const confirmed = !!f.move?.hitConfirmed || memory.readRoll >= tuning.read;
+    if (f.move?.connected && confirmed && memory.comboRoll < tuning.combo) {
         if (f.move.id === 'launcher' && grounded(f)) return A.up | toward;
         const rank = MOVES[f.move.id].rank;
-        if (rank === 1) return approach | A.medium;
-        if (rank === 2) return approach | A.heavy;
+        // Follow up only with a button that will still reach once the hit's pushback has played out.
+        // Throwing the finisher regardless whiffed for every kit but the long-reach ones, who were
+        // the only fighters to convert a hit landed at the edge of medium range.
+        const settled = Math.abs(current.x - f.x) - spread + Math.abs(current.vx) * 5.25;
+        if (rank === 1) return approach | (settled < meleeGap(medium.range) + 10 ? A.medium : 0);
+        if (rank === 2) return approach | (settled < Math.min(meleeGap(heavy.range), meleeGap(medium.range) + 30) + 10 ? A.heavy : 0);
     }
     if (f.move) return 0;
     const incoming = seen.move && projectedAge < seen.startup + seen.active;
@@ -263,7 +275,8 @@ function decide(s: CombatState, slot: 0 | 1, skill: number): number {
         if (shotKnown && distance > 30) return toward;
     }
     if (seen.y < FLOOR - 35 && seen.vy >= 0 && distance < 145 && seen.jumpRoll < tuning.antiAir)
-        return pulse ? A.launcher : 0;
+        // From Hard up the anti-air comes out as soon as the jump is read, not on the next decision beat.
+        return pulse || tuning.skill >= 7 ? A.launcher : 0;
     const unsafe = seen.move && projectedAge >= seen.startup + seen.active && remaining >= light.startup;
     // A dash cannot guard, so it is not used while a shot is about to arrive.
     const dashIn = shotKnown && shotEta < 20 ? toward : toward | A.dash;
@@ -326,7 +339,8 @@ function decide(s: CombatState, slot: 0 | 1, skill: number): number {
             // grounded jab variant within its own interval, regardless of the
             // older strategic label (which may still say "defend").
             const variant = (memory.choice - forecastGuardShare) / (jabEnd - forecastGuardShare);
-            return variant < .25 || crouched ? A.down | A.light : A.light;
+            // Against a rival who keeps guarding, more of the jabs go low.
+            return variant < (turtle ? .6 : .25) || crouched ? A.down | A.light : A.light;
         }
         return (memory.intent === 'pressure' && memory.choice < .25) || crouched ? A.down | A.light : A.light;
     }

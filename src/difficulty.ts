@@ -1,6 +1,9 @@
 /** Campaign difficulty uses installed encounters, never the historical rival count. */
-/** The first rival's CPU skill. The campaign used to open at 1, which a new player beat without learning to block. */
-export const STORY_START_SKILL = 3;
+/**
+ * The first rival's CPU skill. 1 was beaten without learning to block; 3 sat two thirds of the way to
+ * Normal, which is no longer a soft target. 2 keeps the opener clearly winnable for a new player.
+ */
+export const STORY_START_SKILL = 2;
 export interface DifficultyEncounter { id: string; index: number; chapter: number; gauntlet?: string }
 export function storyDifficulty(encounter: DifficultyEncounter, route: readonly DifficultyEncounter[], assisted = false): number {
     const denominator = Math.max(1, route.length - 1);

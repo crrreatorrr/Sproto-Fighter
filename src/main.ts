@@ -41,7 +41,12 @@ crashGuard.install(window, document);
 crashGuard.onFatal(report => showCrashPanel(report));
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
-$('roster-count').textContent=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · UNLIMITED ROUND TIME`;
+/** The footer names the round rule in force: the menu's choice while choosing, the match's own once it starts. */
+function updateFooter(timed:boolean){
+    const text=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · ${timed?'BEST OF 3 · 60-SECOND ROUNDS':'UNLIMITED ROUND TIME'}`,footer=$('roster-count');
+    if(footer.textContent!==text)footer.textContent=text;
+}
+updateFooter(false);
 const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: 'ShiftLeft' };
 // Controller defaults for both players; see PAD_DEFAULTS for the reasoning.
 const padDefaults: Partial<Record<Action, number>> = PAD_DEFAULTS;
@@ -807,7 +812,7 @@ async function queueOnline(setup: SelectionSetup, rematchOf?: string) {
 function onlineFailureText(reason?: string) {
     const known: Record<string, string> = {
         insufficient_tickets: 'One player has fewer than 10 Tickets. Story bosses pay Tickets.',
-        not_eligible: 'Wagers open after 3 CPU wins. Win a few CPU matches first.',
+        not_eligible: 'This account cannot place wagers yet. Unwagered online play is open.',
         pair_limit: 'You two have played 5 wagered matches today. Try another opponent or play unwagered.',
         daily_wager_cap: 'Daily wager winnings limit reached. Unwagered online play is still open.',
         sim_mismatch: 'The other player is on a different game version. Reload to update.',
@@ -962,12 +967,17 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         reportRound();
         if (story.onRoundEnd(state.winner!)) return;
         if (mode === 'versus') {
-            showOverlay(state.winner === 2 ? 'DOUBLE K.O.' : `PLAYER ${state.winner! + 1} WINS`, `Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch', 'LOCAL VERSUS');
+            const rounds = state.matchDepth?.rounds ? state.matchDepth.wins : null;
+            const victor = rounds ? (rounds[0] === rounds[1] ? 2 : rounds[0] > rounds[1] ? 0 : 1) : state.winner!;
+            showOverlay(victor === 2 ? (rounds ? 'MATCH DRAWN' : 'DOUBLE K.O.') : `PLAYER ${victor + 1} WINS`, `${rounds ? `Rounds ${rounds[0]}–${rounds[1]}. ` : ''}Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch', rounds ? 'LOCAL VERSUS / BEST OF 3' : 'LOCAL VERSUS');
             return;
         }
-        const won = state.winner === 0, drawn = state.winner === 2;
-        // The headline says who won; the flavour line sits under it.
-        showOverlay(drawn ? 'DOUBLE K.O.' : won ? 'YOU WIN' : 'YOU LOSE', `${drawn ? 'Nobody left standing.' : won ? 'You found your flow.' : 'Run it back.'} Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again', 'ROUND COMPLETE');
+        // Best of 3 reports the match, not its last round: who took more rounds, and the score.
+        const series = state.matchDepth?.rounds ? state.matchDepth.wins : null;
+        const result = series ? (series[0] === series[1] ? 2 : series[0] > series[1] ? 0 : 1) : state.winner;
+        const won = result === 0, drawn = result === 2;
+        const score = series ? `Rounds ${series[0]}–${series[1]}. ` : '';
+        showOverlay(drawn ? (series ? 'MATCH DRAWN' : 'DOUBLE K.O.') : won ? 'YOU WIN' : 'YOU LOSE', `${score}${drawn ? 'Nobody left standing.' : won ? 'You found your flow.' : 'Run it back.'} Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again', series ? 'MATCH COMPLETE / BEST OF 3' : 'ROUND COMPLETE');
         return;
     }
     if (presentation.phase !== 'fight') return;
@@ -1052,6 +1062,8 @@ function frameJudged(steps: number | null): boolean { return steps === null || s
 function frameTick(now: number): boolean {
     const steps = stepTo(now);
     updateAudio();
+    if(selection.isOpen){const picked=selection.getSetup();updateFooter(picked.rules==='bo3'&&(picked.mode==='cpu'||picked.mode==='versus'));}
+    else updateFooter(!!state.matchDepth);
     sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
     const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
     const recovery=storyBoss&&storyBoss.entryHp<1000&&state.winner===null&&bossAge<54

@@ -6,6 +6,67 @@ This records the implementation of
 change was made (Phase C), so the simulation fingerprint moved and the hub's bundle has to
 follow before online play.
 
+## 0. QA follow-up: the retune (read this first)
+
+QA found the first CPU rewrite closed the exploits but left Hard a wall for ordinary play, and
+that Weapon fighters had drifted to about 58% CPU against CPU. The CPU was retuned in a second
+simulation change. **The current fingerprint is `a23b4cb178899af9`**; where sections 2 to 4
+below say `0caf6cd9cf7c1c5c`, or quote the first rewrite's tuning, tournament and story skill,
+they describe the build QA rejected and are kept as the record of it.
+
+What changed in `src/sim/cpu.ts`:
+
+- **Range tracking scales with skill** (`track`: 28, 10, 7, 6 frames for Easy, Normal, Hard,
+  Expert). The first rewrite gave every difficulty a six-frame-old view of where the rival
+  stood, which was most of what made Easy and Normal hard to walk up to.
+- **Fewer reads below Expert** (`read` 0.15 / 0.40 / 0.48 / 0.97) and less wake-up guard at Hard
+  (`wake` 0.75). Anti-air is a little more likely (0.32 at Normal, 0.72 at Hard) and from Hard
+  up comes out as soon as the jump is read.
+- **A read also confirms the hit**: a guarded jab is not followed into an unsafe finisher.
+- **A rival who guards more than they are hit** is thrown more often and jabbed low more often.
+- **Weapon bias, found and fixed.** After a medium landed at the edge of its range the CPU always
+  threw the finisher. It whiffed for every kit except the long-reach ones, which were the only
+  fighters to convert a stop-hit. The CPU now follows up only with a button that will still
+  reach after the pushback, and does not use a finisher follow-up from further than a standard
+  kit could. Weapon fighters win 54.0% CPU against CPU at skill 7 (480 bouts; 51.0% on main by
+  the same measure, about 60% before the fix). No kit numbers changed.
+
+Bot win rate after the retune, on the fixed sample in `tests/cpu-exploits.test.ts` (48 matches
+per cell; Easy / Normal / Hard / Expert):
+
+| Bot | Rate | Band |
+| --- | --- | --- |
+| Ranged (exploit) | 0 / 0 / 0 / 0 | at most 70 / 45 / 25 / 10 |
+| Mash (exploit) | 85 / 46 / 23 / 2 | at most 90 / 60 / 30 / 10 |
+| Sweep (exploit) | 88 / 15 / 4 / 0 | at most 95 / 50 / 20 / 10 |
+| Walker: walks in, guards half, light-light-medium-finisher | 100 / 79 / 33 / 17 | 85-100 / 60-80 / 30-50 / below Hard |
+| Jumper: jumps in, never guards | 88 / 42 / 35 / 4 | at least 55 / 30-50 / 15-40 / below Hard |
+| Blocker: guards two in three, punishes | 98 / 73 / 44 / 2 | 85-100 / 60-80 / 30-50 / below Hard |
+
+The three sensible-play bots were rebuilt from QA's descriptions, so they are not QA's bots.
+On the rejected build they scored walker 90 / 63 / 25, jumper 44 / 17 / 15 and blocker
+77 / 60 / 27 where QA measured 92 / 58 / 14, 36 / 14 / 8 and 89 / 53 / 3: close, and a few
+points kinder at Hard. The jumper's Hard ceiling in the test is 40 rather than QA's 35 for that
+reason; on a 120-match sample it lands at 31. These bands have floors, so a later CPU change
+that makes Hard a wall again fails the test.
+
+Also changed:
+
+- **Story opens at skill 2**, not 3. Easy (skill 1) is beaten 88-100% of the time by all three
+  sensible bots and Normal (4) 42-79%; 2 keeps the opener clearly winnable while no longer
+  being the old skill-1 walkover.
+- **Boss Tickets toast.** The vendored SDK's `reportEvent` returns only `{ granted }` and drops
+  the `tickets` the server credited, so the first version announced every paid boss win as
+  unpaid. The client now reads the Ticket balance before and after the report and toasts the
+  real difference; if the balance cannot be read it says only "Boss defeated / Reported to the
+  hub". The test's fake SDK now has the real SDK's return shape. **The hub SDK should return
+  `tickets` from `reportEvent`** so the client does not need two extra balance calls.
+- Best of 3 results show the match winner and the round score; the footer names the round rule
+  in force; the wager eligibility message no longer mentions CPU wins; the pause move list has
+  room for its last row.
+
+The balance tournament in section 2 was not re-run after the retune.
+
 ## 1. Status by item
 
 | Item | Status | Where | Notes |
@@ -21,7 +82,7 @@ follow before online play.
 | C3 exploit tests | Done | `tests/cpu-exploits.test.ts` | Bands hold and fall with skill; see section 2. |
 | D1 archetype rules, health spread | **Not done** | | A second simulation change that needs a full balance tournament and tuning rounds. It could not be completed and measured in this session, so nothing was started. |
 | D2 tutorial and move list | Done | `src/tutorial.ts`, `src/moveList.ts`, `src/main.ts` | Six lessons; the pause menu lists the fighter's moves with the player's bindings. |
-| D3 story | Done | `src/difficulty.ts`, `src/storyProgress.ts`, `src/main.ts` | Opens at skill 3, chapter-end rules by default, a bonus recruit with every third new clear (never on load, so fighters added to an already cleared route still have to be earned). The save stays version 3. Decision 8.4 (remap the whole curve) is still open: see section 5. |
+| D3 story | Done | `src/difficulty.ts`, `src/storyProgress.ts`, `src/main.ts` | Opens at skill 2 (3 before the retune), chapter-end rules by default, a bonus recruit with every third new clear (never on load, so fighters added to an already cleared route still have to be earned). The save stays version 3. Decision 8.4 (remap the whole curve) is still open: see section 5. |
 | D4 Tickets | Partly | `src/hub/config.ts`, `src/hub/report.ts`, `src/hub/link.ts` | The client now sends the one event the server pays for and no longer sends the call it refuses. Scaling by difficulty and a first-clear bonus need server rules that do not exist: see section 4. |
 
 ## 2. The CPU change (Phase C)
@@ -153,7 +214,7 @@ around 30 on 4 cores, which is why the timings are long):
 | `npm run build` | Pass |
 | `npm run test:fast` | Pass: vitest 28 files, 294 tests; `scripts/run-all.mjs --fast` 69 of 69 |
 | Slow audits after the sim change | `game-qa.mjs`, `throw-smoke.mjs` and `sheet-render-qa.mjs` pass (the first two took 55 minutes here). `sprite-scale-qa.mjs` did not finish inside a 30-minute limit and was not re-run; it reads art, not the simulation. So `npm run test:all` was not completed as one command. |
-| `node scripts/build-sim-bundle.mjs --check` | Pass: `0caf6cd9cf7c1c5c` |
+| `node scripts/build-sim-bundle.mjs --check` | Pass (`a23b4cb178899af9` after the retune in section 0) |
 
 Two earlier full runs under that load failed for reasons that were not the code: one ended with
 a vitest worker RPC timeout after every test had passed (the exploit test now yields between
@@ -178,7 +239,7 @@ What the client does now:
   `sproto3152`, `rivet`, `sproto865`, `sproto943`, `nick`, `guest07`, `vela`, `vaudream`)
   reports `fighter.boss_defeated` with `{ boss, world, stage, fighter, difficulty, skill,
   firstClear }` and a key that is stable per win. The server pays 20 Tickets once per boss per
-  player per UTC day; the toast shows the amount from the response (`tickets`).
+  player per UTC day; the toast shows the change in the Ticket balance (section 0).
 - The Tidebreaker Belt event is unchanged: `fighter.story_level_complete` with `{ world: 1 }`
   after defeating Halloween 2008.
 
@@ -188,7 +249,7 @@ What the hub has to do:
    `node scripts/build-sim-bundle.mjs --out <hub>/server/modules/vendor/sproto-sim.js`, update
    `sproto-sim.pin.json`, and deploy the hub close to the game release. Until then online duels
    between a new client and the hub fail with `sim_mismatch`. The new fingerprint is
-   `0caf6cd9cf7c1c5c` (from commit `5f842ad9` on) and stays that as long as nothing the bundle
+   `a23b4cb178899af9` (after the retune in section 0) and stays that as long as nothing the bundle
    reaches changes before the merge: `src/sim`, `src/core.ts`, `src/net/matchLog.ts` and
    `src/net/serverEntry.ts`. `node scripts/build-sim-bundle.mjs --check` confirms it.
 2. **Decide the difficulty scale** (plan D4: 10 / 20 / 30 / 40 Tickets by difficulty, plus a
@@ -203,7 +264,8 @@ What the hub has to do:
 4. **Wager eligibility.** `not_eligible` asks for three `fighter_win` earns, which can no
    longer happen. The wager flag is off, so nothing breaks today, but the rule has to count
    boss events or be removed before `sproto_duel_wager` is switched on.
-5. Optional: add `tickets` to `EventResult` in the SDK. The client reads it through a cast.
+5. Return `tickets` from the SDK's `reportEvent` and add it to `EventResult`. The live SDK drops
+   it today, so the client reads the balance before and after instead.
 6. The ten boss ids still match the story (`STORY_BOSSES` in `src/hub/config.ts` is tested
    against the route). Halloween 2008 (`zephyr`), the Belt rival, is not one of them and pays no
    Tickets.
@@ -227,7 +289,7 @@ What the hub has to do:
 2. **Listen.** Every sound is synthesised and has only been checked for "plays without error".
    Balance between effects and music, harshness of the heavy hit and K.O., and whether the
    loops get tiring all need ears. Volumes are in Settings.
-3. **Story, first three fights and one chapter end.** The opener is skill 3 with the new CPU.
+3. **Story, first three fights and one chapter end.** The opener is skill 2 with the new CPU.
    The last standard rival of each chapter now has a 60-second clock and a modifier
    (specials only and sudden death are the two most likely to confuse).
 4. **The tutorial end to end** on keyboard and on a controller. Lesson 5 asks the player to be

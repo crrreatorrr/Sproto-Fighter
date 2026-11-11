@@ -16,7 +16,7 @@ export const CPU_CHECK_EVERY = 120;
  * melee, projectiles and paired fighters. */
 export const CPU_MATCHES = [
   { id: 'cpu-rivet-vela-s4s7', p1: 'rivet', p2: 'vela', skills: [4, 7], seeds: [7919, 104723], maxFrames: 7200 },
-  { id: 'cpu-rune-duo-s10s7', p1: 'rune', p2: 'duo', skills: [10, 7], seeds: [2147483629, 65537], maxFrames: 7200 },
+  { id: 'cpu-rune-duo-s10s10', p1: 'rune', p2: 'duo', skills: [10, 10], seeds: [2147483629, 65537], maxFrames: 7200 },
   { id: 'cpu-vamp-guest11-depth-s7s10', p1: 'vamp', p2: 'guest11', skills: [7, 10], seeds: [31337, 271828], maxFrames: 10800, matchDepth: true },
 ];
 

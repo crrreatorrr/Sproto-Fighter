@@ -7,7 +7,7 @@ export const createCpuMemory = (seed: number): CpuMemory => ({
     combo: 0, comboRoll: 1, airborne: false, readRoll: 1, wakeRoll: 1,
     stunned: false, shotSeen: false, blockstun: 0, blocks: [],
     retreat: 0, advance: 0, observations: [],
-    habits: { attacks: 0, lows: 0, jumps: 0, projectiles: 0 },
+    habits: { attacks: 0, lows: 0, jumps: 0, projectiles: 0, guarded: 0, struck: 0 }, rivalBlockstun: 0, rivalHp: 1000,
 });
 
 /** Park–Miller: the product remains below 2^53; no approximate math or clock. */
