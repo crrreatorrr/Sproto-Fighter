@@ -26,6 +26,7 @@ import {createStoryAnimation,storyAnimationPlan} from './storyAnimation';
 import { createStoryMode } from './storyMode';
 import {createPartnerPicker} from './partnerPicker';
 import { connectHub, hubConfigured, type HubLink } from './hub/link';
+import { BELT_OPPONENT, BELT_WORLD } from './hub/config';
 import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
@@ -169,9 +170,8 @@ void connectHub().then(link=>{
 function reportRound(){
  if(!hub?.connected||state.winner===null)return;
  const current=story.snapshot(),encounter=current.encounter;
- const chapterComplete=!!encounter&&current.wave===encounter.opponents.length-1&&
-  STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter).every(e=>storyProgress.isCleared(e.index));
- void hub.onRoundEnd({winner:state.winner,mode,storyWorld:chapterComplete?encounter!.chapter:null,
+ const beltVictory=encounter?.opponent===BELT_OPPONENT&&current.wave===0;
+ void hub.onRoundEnd({winner:state.winner,mode,storyWorld:beltVictory?BELT_WORLD:null,
   stage:current.active??selection.getSetup().stage,fighter:chosen,assisted:matchGodMode||godModeChanges.some(change=>change.enabled)},hubToast);
 }
 function updateStage(stage:StageId) {

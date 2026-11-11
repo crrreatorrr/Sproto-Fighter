@@ -13,6 +13,8 @@ export const TICKETS_PER_VERSE = 10;
 
 /** Relic trigger. The server grants the Tidebreaker Belt for `{ world: 1 }` only. */
 export const STORY_EVENT = 'fighter.story_level_complete';
+/** Halloween 2008, the first story rival. Keep the existing world-1 wire contract. */
+export const BELT_OPPONENT = 'zephyr';
 export const BELT_WORLD = 1;
 export const BELT_RELIC = 'tidebreaker_belt';
 export const BELT_NAME = 'Tidebreaker Belt';

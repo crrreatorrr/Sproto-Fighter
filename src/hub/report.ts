@@ -7,7 +7,7 @@ export interface FighterWin {
   assisted?: boolean;
   /** `cpu` fights back. `dummy` and `guard` are practice and report nothing. */
   mode: string;
-  /** Story world number for a story match, or null for free play. */
+  /** Legacy world-1 reward marker for the Halloween 2008 encounter; null otherwise. */
   storyWorld: number | null;
   stage: string;
   fighter: string;
@@ -33,9 +33,9 @@ export type HubCall = EarnCall | EventCall;
 
 /**
  * What a finished round reports to the hub. Losses, draws and practice dummies report nothing.
- * A win against the CPU earns flat Tickets. Winning Story World 1 also reports the Relic event;
+ * A win against the CPU earns flat Tickets. Defeating Halloween 2008 in story also reports the Relic event;
  * the server decides whether that grants the Tidebreaker Belt (it does once per player).
- * Other story worlds only earn Tickets.
+ * Other story encounters only earn Tickets.
  */
 export function planFighterWin(win: FighterWin): HubCall[] {
   if (win.winner !== 0 || win.mode !== 'cpu' || win.assisted) return [];
