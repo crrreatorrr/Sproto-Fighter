@@ -104,6 +104,10 @@ export interface CpuObservation {
     frame: number; combatTick: number; x: number; y: number; vy: number; hp: number;
     move: MoveId | null; age: number; startup: number; active: number; recovery: number;
     low: boolean; input: number; attackRoll: number; lowRoll: number; jumpRoll: number; shot: boolean;
+    /** Rival's horizontal speed, so a walk-in can be extrapolated across the reaction delay. */
+    vx: number;
+    /** Frames until the nearest rival projectile arrives (-1: none) and whether it is a straight shot that can be jumped. */
+    shotEta: number; shotClear: boolean;
     /** Habit counts at observation time, so anticipation cannot read future attacks. */
     attacks: number; lows: number; projectiles: number;
 }
@@ -111,6 +115,15 @@ export interface CpuMemory {
     seed: number; combatTicks: number; intent: CpuIntent; nextDecision: number; decisionAt: number; choice: number;
     attackKey: string; attackRoll: number; lowRoll: number; jumpRoll: number;
     throwKey: number; throwRoll: number; combo: number; comboRoll: number; airborne: boolean;
+    /** Seeded rolls for a pattern read and for holding guard through recovery. */
+    readRoll: number; wakeRoll: number;
+    stunned: boolean; shotSeen: boolean; blockstun: number;
+    /** The last few guards (move and combat tick), so a move guarded twice in three seconds is a known habit. */
+    blocks: { move: MoveId; tick: number }[];
+    /** Consecutive frames spent backing away with nothing incoming, and the cooldown after that is cut short. */
+    retreat: number; advance: number;
     observations: CpuObservation[];
-    habits: { attacks: number; lows: number; jumps: number; projectiles: number };
+    /** `guarded` and `struck` count this CPU's own attacks that the rival guarded or took. */
+    habits: { attacks: number; lows: number; jumps: number; projectiles: number; guarded: number; struck: number };
+    rivalBlockstun: number; rivalHp: number;
 }

@@ -37,6 +37,16 @@ is a late rival. Every story win, including a God Mode win, recruits the defeate
 fighter and opens the next encounter. Locked fighters can be previewed but
 cannot be P1 until recruited; CPU rival selection is unrestricted.
 
+The first rival plays at CPU skill 2 and the route rises to 10 (`STORY_START_SKILL`
+in `src/difficulty.ts`). Every third cleared encounter also recruits one fighter
+from far down the route (never from the last two chapters, a gauntlet or a
+Relic-only fighter), so the roster opens faster than one fighter per win; that
+fighter still has to be beaten to clear their own encounter. The bonus comes
+with the win itself, so loading an existing save recruits nobody. The last standard rival of each chapter fights under
+that chapter's rule (double meter, low gravity, specials only, sudden death or
+reflected projectiles) with a 60-second clock; the transformed bosses keep their
+own rules.
+
 The route runs Trenches → City → Yacht → Castle → Bar → Verse → Hatchery,
 using the existing approved stage variations. The end of Verse is a sequential
 Artdude → Artchick encounter. The final encounter is Morelight → VMU. Each
@@ -176,11 +186,27 @@ Free fights have Easy, Normal, Hard and Expert CPU choices (Normal by default).
 Story difficulty follows the actual 247-encounter route and offers an optional
 easier retry after three losses on an encounter.
 
-For the local experimental rules, open `/?matchDepth`: best of three round wins,
-a 60-second combat clock, counter-hits, defense meter and just-defend. Open
-`/?training` with a practice dummy for exact collision rectangles, input/advantage
-readouts and route recording. These flags do not enable the experimental round
-rules online. [Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
+The fighter select's **Rules** choice switches CPU and local versus fights between
+Classic (one untimed round) and **Best of 3**: best of three round wins, a
+60-second combat clock, counter-hits, defense meter and just-defend. **Rival
+behavior** also offers the **Tutorial** (six guided lessons on the practice dummy:
+move and block, chain to a finisher, throw and tech, dash cancel, jump cancel and
+quick rise, Team Special) and **Training** (exact collision rectangles,
+input/advantage readouts and route recording on a standing dummy). Pausing lists
+the current fighter's moves with your bindings. `/?matchDepth` and `/?training`
+still switch these on by URL. Online play stays on classic rules.
+[Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
+
+Sound is synthesised in the browser with Web Audio (`src/audio.ts`): hits by
+strength, guard, throws, projectiles, K.O., menus and three music loops. It
+starts after the first key, click or button press, and Settings has master,
+effects and music volume. No audio files ship apart from one voice clip.
+
+The CPU guards a projectile in place and walks in between shots, punishes a move
+it has guarded twice in three seconds, holds guard as it gets up, and stop-hits a
+rival who walks in swinging. `tests/cpu-exploits.test.ts` keeps three scripted
+exploits (projectile spam, walk-in mashing, crouch-and-sweep) inside win-rate
+bands that must fall as difficulty rises.
 
 ## Architecture and verification
 
@@ -299,7 +325,7 @@ NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/on
 
 ## Metaverse Hub integration
 
-The optional hub adapter uses the vendored `@metaverse/hub-sdk` 0.7.0 (see `vendor/hub-sdk/VENDOR.md`). A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after defeating the first story enemy, Halloween 2008. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
+The optional hub adapter uses the vendored `@metaverse/hub-sdk` 0.7.0 (see `vendor/hub-sdk/VENDOR.md`). A linked visit can return to the hub, earn Tickets for defeating a story boss, and earn the Tidebreaker Belt after defeating the first story enemy, Halloween 2008. The client reports `fighter.boss_defeated` for the ten bosses the hub lists (`STORY_BOSSES` in `src/hub/config.ts`: the three Relic guardians, Golden Sproto, the art duo, Nick, Juicy, Morelight and VMU); the server pays 20 Tickets once per boss per day and the toast shows what it credited. Ordinary CPU wins report nothing, because the hub has no rule that pays them (its `fighter_win` ceiling is 0). CPU difficulty and first-clear travel as event data for a future per-difficulty rule. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
 
 Five fighters require Hub Relics for new player recruitment:
 

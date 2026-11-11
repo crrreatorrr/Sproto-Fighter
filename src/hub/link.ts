@@ -1,5 +1,5 @@
 import { createHubSdk, HubSdkError, type HubSdk, type InitResult } from '@metaverse/hub-sdk';
-import { BELT_NAME, BELT_RELIC, HUB_GAME_ID } from './config';
+import { BELT_NAME, BELT_RELIC, BOSS_EVENT, HUB_GAME_ID } from './config';
 import { planFighterWin, type FighterWin } from './report';
 import { pageServerKey } from '../net/serverKey';
 
@@ -41,7 +41,7 @@ export class HubLink {
   }
 
   /**
-   * Report a finished round. Standalone visits, losses and practice do nothing.
+   * Report a finished round. Standalone visits, losses, practice and CPU wins the hub has no rule for do nothing.
    * The match id is the operation id, so a queued call the SDK resends on the next init keeps it.
    * Returns true when this call granted the Tidebreaker Belt.
    */
@@ -53,19 +53,31 @@ export class HubLink {
     let belt = false;
     for (const call of calls) {
       try {
-        if (call.kind === 'earn') {
-          const earned = await this.api.earnTickets(call.amount, call.reason, call.key);
-          this.balance = earned.balance;
-          title = earned.capped ? 'Tickets capped' : `+${call.amount} Tickets`;
-          sub = earned.capped ? `Daily cap reached · Balance ${earned.balance}` : `Balance ${earned.balance}`;
-        } else {
-          const reported = await this.api.reportEvent(call.eventId, call.data, call.key);
-          if (reported.granted === BELT_RELIC) {
-            belt = true;
-            if (!this.relics.includes(BELT_RELIC)) this.relics.push(BELT_RELIC);
-            title = `Relic: ${BELT_NAME}`;
-            sub = sub ? `${sub} · On its plinth in the Bar` : 'On its plinth in the Bar';
+        // The vendored SDK's reportEvent returns only `{ granted }`: it drops the `tickets` the server
+        // credited. So the toast is built from the Ticket balance read before and after the report,
+        // and when either read fails it makes no claim about payment at all.
+        const boss = call.eventId === BOSS_EVENT;
+        const before = boss ? await this.readBalance() : null;
+        const reported = await this.api.reportEvent(call.eventId, call.data, call.key);
+        if (boss) {
+          const after = await this.readBalance();
+          if (after !== null) this.balance = after;
+          if (before === null || after === null) {
+            title = 'Boss defeated';
+            sub = 'Reported to the hub';
+          } else if (after > before) {
+            title = `+${after - before} Tickets`;
+            sub = `Story boss defeated · Balance ${after}`;
+          } else {
+            title = 'Boss defeated';
+            sub = `No Tickets credited: each boss pays once per day · Balance ${after}`;
           }
+        }
+        if (reported.granted === BELT_RELIC) {
+          belt = true;
+          if (!this.relics.includes(BELT_RELIC)) this.relics.push(BELT_RELIC);
+          title = `Relic: ${BELT_NAME}`;
+          sub = sub ? `${sub} · On its plinth in the Bar` : 'On its plinth in the Bar';
         }
       } catch (err) {
         const message = err instanceof HubSdkError && err.code === 'queued'
@@ -77,6 +89,16 @@ export class HubLink {
     }
     if (title) notify(title, sub);
     return belt;
+  }
+
+  /** This game's Ticket balance from the hub, or null when it cannot be read. */
+  private async readBalance(): Promise<number | null> {
+    try {
+      const result = await this.api.getTicketBalance();
+      return typeof result?.balance === 'number' && Number.isFinite(result.balance) ? result.balance : null;
+    } catch {
+      return null;
+    }
   }
 
   /** Close the hub session and go back to the Bar's arcade cabinet. */

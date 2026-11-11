@@ -1,5 +1,7 @@
 import { enableMatchDepth, nextMatchRound, chapterBossModifier, type MatchModifier } from './core';
 import { TrainingRecorder, drawTrainingGeometry, trainingReadout } from './training';
+import { TutorialCoach, drawTutorial } from './tutorial';
+import { fighterMoves, sharedTechniques, type MoveRow } from './moveList';
 import { ensurePoseAtlases, ensurePosePreviews, getPoseAtlasLoadStatus } from './poseAtlas';
 import { createSelectionMenu, type MenuMode, type SelectionSetup } from './selectionMenu';
 import './style.css';
@@ -31,6 +33,8 @@ import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 import { crashGuard, createFrameLoop } from './crash';
+import { createAudio } from './audio';
+import { SoundTracker } from './audioEvents';
 import { showCrashPanel } from './crashPanel';
 import { setupFeedback, type FeedbackFighter, type FeedbackSnapshot } from './feedback';
 // Uncaught errors and rejections share the frame loop's counter; the panel opens once the game pauses.
@@ -38,7 +42,12 @@ crashGuard.install(window, document);
 crashGuard.onFatal(report => showCrashPanel(report));
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = $<HTMLCanvasElement>('game'), ctx = canvas.getContext('2d')!;
-$('roster-count').textContent=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · UNLIMITED ROUND TIME`;
+/** The footer names the round rule in force: the menu's choice while choosing, the match's own once it starts. */
+function updateFooter(timed:boolean){
+    const text=`${PLAYABLE_FIGHTERS.length} FIGHTERS · ${STAGES.length} STAGES · ${timed?'BEST OF 3 · 60-SECOND ROUNDS':'UNLIMITED ROUND TIME'}`,footer=$('roster-count');
+    if(footer.textContent!==text)footer.textContent=text;
+}
+updateFooter(false);
 const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: 'ShiftLeft' };
 // Controller defaults for both players; see PAD_DEFAULTS for the reasoning.
 const padDefaults: Partial<Record<Action, number>> = PAD_DEFAULTS;
@@ -76,7 +85,11 @@ const depthEnabled = depthParams.has('matchDepth');
 const depthModifiers: MatchModifier[] = ['none','double-meter','low-gravity','specials-only','sudden-death','reflect-projectiles'];
 const depthModifier = depthModifiers.find(m => m === depthParams.get('modifier')) ?? 'none';
 const depthRoundStarts: number[] = [];
-const training = depthParams.has('training') ? new TrainingRecorder() : null;
+// Training (hitbox overlay, input and advantage readouts, route recording) is a menu entry; `?training` still turns it on for every practice round.
+const trainingFlag = depthParams.has('training'), trainingRecorder = new TrainingRecorder();
+const tutorialCoach = new TutorialCoach();
+/** What drives the practice dummy this round: the recorder in Training, the coach in the Tutorial, otherwise null. */
+let training: TrainingRecorder | TutorialCoach | null = trainingFlag ? trainingRecorder : null;
 let matchDepthOptions: { rounds: boolean; modifier: MatchModifier } | null = null;
 let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
     action: Action;
@@ -86,6 +99,8 @@ let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: M
 /** Which player's mappings the Controls panel is showing. */
 let controlsPlayer: 1 | 2 = 1;
 let matchCpuSkill=4,matchDifficultyAssist=false;
+/** True while the story encounter being played has never been cleared on this save. */
+let matchFirstClear=false;
 let matchGodMode=false, matchEarnedGodMode=false, testingGodMode=false, matchTesting=false;
 let presentation = createRoundPresentation();
 let padNeedsRelease=true;
@@ -97,6 +112,9 @@ let padP2: PadView | null = null;
 let lastDevice: 'key' | 'pad' = 'key';
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousPad2: number[] = [], previousStart = false;
 let visualFrame = 0;
+/** Presentation only: the final hit plays at reduced speed. Fixed steps and replay inputs are unchanged. */
+const KO_SLOW_FRAMES = 20, KO_SLOW_RATE = .4;
+let koSlow = 0, koSeen = false;
 const held = new Set<string>();
 const blockedKeys = new Set<string>();
 let queued = 0, queued2 = 0; // presses since the last frame, per playerqueued2=0;
@@ -123,6 +141,37 @@ const frames: [
 ][] = [];
 const storage = (() => { try { return window.localStorage; } catch { return null; } })();
 let hubRelics: string[] = readRelicCache(storage);
+// ---- Sound (src/audio.ts): synthesised, presentation only, unlocked by the first input ----
+const audio = createAudio(storage), sounds = new SoundTracker();
+let soundPhase: RoundPresentation['phase'] | null = null, lastMenuSound = 0;
+for (const type of ['keydown', 'pointerdown'] as const) window.addEventListener(type, () => { audio.unlock(); }, { capture: true });
+/** Menu feedback follows focus and clicks, so keyboard, mouse and controller all sound alike. */
+function menuSound(name: 'menuMove' | 'menuConfirm' | 'menuBack') {
+    if (feedbackHold) return;
+    const now = performance.now();
+    if (name === 'menuMove' && now - lastMenuSound < 45) return;
+    lastMenuSound = now; audio.play(name, { volume: .8 });
+}
+document.addEventListener('focusin', e => { if (e.target instanceof HTMLElement && e.target.matches('button,select,input')) menuSound('menuMove'); });
+document.addEventListener('click', e => { if (e.target instanceof HTMLElement && e.target.closest('button')) menuSound('menuConfirm'); });
+document.addEventListener('change', e => { if (e.target instanceof HTMLSelectElement) menuSound('menuMove'); });
+/** Once per rendered frame: pick the music and voice whatever the fight just did. */
+function updateAudio() {
+    // The feedback window freezes a local match: the music stops with it and returns when it closes.
+    audio.music(feedbackHold ? null : selection.isOpen ? 'menu' : story.isOpen ? 'story' : 'fight');
+    if (!started || selection.isOpen) { sounds.reset(); soundPhase = null; return; }
+    if (presentation.phase === 'fight' && soundPhase !== null && soundPhase !== 'fight') audio.play('roundStart');
+    soundPhase = presentation.phase;
+    // Against the CPU the player is seat 0; online it is the local seat; in local versus the winner hears the win.
+    const listener = online?.start ? online.start.seat : mode === 'versus' ? state.winner ?? 0 : 0;
+    for (const cue of sounds.collect(state, listener)) audio.play(cue.name, cue);
+}
+for (const key of ['master', 'sfx', 'music'] as const) {
+    const slider = document.getElementById(`volume-${key}`) as HTMLInputElement | null;
+    if (!slider) continue;
+    slider.value = String(Math.round(audio.volume()[key] * 100));
+    slider.oninput = () => { audio.setVolume({ [key]: Number(slider.value) / 100 }); if (key !== 'music') menuSound('menuMove'); };
+}
 let hub: HubLink | null = null;
 /** The current online duel, from queue to result; null in every local mode. */
 let online: OnlineMatch | null = null;
@@ -265,7 +314,10 @@ function reportRound(){
  if(!hub?.connected||state.winner===null)return;
  const current=story.snapshot(),encounter=current.encounter;
  const beltVictory=encounter?.opponent===BELT_OPPONENT&&current.wave===0;
+ // The rival actually beaten this round; a gauntlet reports each of its fighters in turn.
+ const rival=encounter?state.fighters?.[1]?.id:undefined;
  void hub.onRoundEnd({winner:state.winner,mode,storyWorld:beltVictory?BELT_WORLD:null,
+  storyRival:rival&&encounter!.opponents.includes(rival)?rival:null,chapter:encounter?.chapter,skill:matchCpuSkill,firstClear:matchFirstClear,
   stage:current.active??selection.getSetup().stage,fighter:chosen,assisted:matchGodMode||godModeChanges.some(change=>change.enabled)},hubToast);
 }
 let currentStage:StageId=STAGES[0].id;
@@ -277,7 +329,8 @@ function updateStage(stage:StageId) {
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
 async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{skill:number;assisted:boolean}) {
-    let requestedMatchDepthOptions = depthEnabled && !isStory && (setup.mode === 'cpu' || setup.mode === 'versus') ? { rounds: true, modifier: depthModifier } : null;
+    // Best of 3 is the menu's Rules choice; `?matchDepth` still forces it for every CPU and local versus round.
+    let requestedMatchDepthOptions = (depthEnabled || setup.rules === 'bo3') && !isStory && (setup.mode === 'cpu' || setup.mode === 'versus') ? { rounds: true, modifier: depthModifier } : null;
     if(!isStory&&(setup.mode==='online'||setup.mode==='online-wager')){void queueOnline(setup);return true;}
     // Reconcile wins from another tab or a restored page before the final P1 gate.
     storyProgress.sync();
@@ -291,9 +344,10 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
         return false;
     }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
-    // Standard chapter-end encounters can opt into rule variety. Transformed boss forms
+    // Standard chapter-end encounters carry their chapter's rule (double meter, low gravity, specials only,
+    // sudden death, reflected projectiles) and a 60-second clock. Transformed boss forms
     // use a separate combat controller and keep their existing campaign rules.
-    if(depthEnabled && encounter && STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter && !storyAnimationPlan(e.opponents.at(-1)!,true).form).at(-1)?.index===encounter.index && setup.opponent===encounter.opponents.at(-1))
+    if(encounter && STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter && !storyAnimationPlan(e.opponents.at(-1)!,true).form).at(-1)?.index===encounter.index && setup.opponent===encounter.opponents.at(-1))
         requestedMatchDepthOptions = { rounds: false, modifier: chapterBossModifier(encounter.chapter-1) };
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
     const selectedPartner=setup.partner;
@@ -312,17 +366,22 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     catch(error){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(error);return false;}
     matchDepthOptions = requestedMatchDepthOptions;
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
-    chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode as Mode;
+    const trainingRound=!isStory&&setup.mode==='training';
+    const tutorialRound=!isStory&&setup.mode==='tutorial';
+    trainingRecorder.stop();training=tutorialRound?tutorialCoach:trainingFlag||trainingRound?trainingRecorder:null;
+    if(tutorialRound)tutorialCoach.begin();
+    chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':trainingRound||tutorialRound?'dummy':setup.mode as Mode;
     matchCpuSkill=difficulty?.skill??setup.cpuSkill??4;matchDifficultyAssist=!!difficulty?.assisted;
+    matchFirstClear=!!encounter&&!storyProgress.isCleared(encounter.index);
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);setActiveStoryLocation(scenery);
     if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
-    selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
+    selection.setSetup({...setup,mode:trainingRound?'training':tutorialRound?'tutorial':mode});selection.hide();$('fight-view').hidden=false;
     started=false;restart();
     delete state.fighters[0].partner;
     if(selectedPartner&&selectedPartner!==ROSTER[chosen].partner)state.fighters[0].partner=selectedPartner;
     start();
-    $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
+    $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':trainingRound?'TRAINING':tutorialRound?'TUTORIAL':'COMBO PRACTICE';
     if(encounter&&encounter.opponents.length>1){
         const bout=encounter.opponents.indexOf(setup.opponent)+1;
         const gauntletName=encounter.gauntlet==='art'?'ART DUO':encounter.gauntlet==='nick-juicy'?'NICK → JUICY':'FINAL GAUNTLET';
@@ -399,13 +458,17 @@ function bind(value: string | number) {
     updateControls();
     $('binding-status').textContent = 'Saved on this browser.';
 }
-function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') {
+function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED', moveList = false) {
     // Buttons held as the overlay opens (attacks mashed through a KO, the Start that paused) act only after release.
     padInput.holdCurrent(Array.from(navigator.getGamepads?.() || []));
     // The pause and result screens offer the hub wherever the header does; online screens leave through fighter select.
     $('overlay-hub').hidden = $('return-hub').hidden || !!online;
     // Restart sits in the pause menu of a local round in progress (the footer's Restart, reachable by controller).
     $('overlay-restart').hidden = !started || !!online || (presentation.phase === 'result' && !storyAnimation.active);
+    const moves = document.getElementById('overlay-moves'); if (moves) moves.hidden = true;
+    if (moveList) showMoveList();
+    // A special action (online queue, tutorial replay) belongs to the overlay that set it; callers set theirs after this.
+    overlayAction = null;
     running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; $('overlay-hint').textContent = state.matchDepth ? (state.matchDepth.rounds ? 'First to two round wins · 60-second combat clock' : 'Chapter rule · 60-second combat clock') : 'Play your way · No round timer'; if(!selection.isOpen)$('start').focus(); }
 /** The pause / result overlay's buttons that can be used right now, top to bottom. */
 function overlayChoices(): HTMLButtonElement[] {
@@ -438,13 +501,34 @@ function pause() {
     if (!started || (presentation.phase === 'result'&&!storyAnimation.active) || online)
         return;
     if (running)
-        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume');
+        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume', 'COMBAT LAB / PAUSED', true);
     else
         start();
 }
+/** The pause menu's move list: the player's fighter with the current bindings, then the shared techniques. */
+function showMoveList() {
+    const panel = document.getElementById('overlay-moves');
+    if (!panel || storyBoss) return;
+    const fighter = state.fighters[0].id;
+    const table = (heading: string, rows: MoveRow[]) => {
+        const section = document.createElement('section'), title = document.createElement('h3'), list = document.createElement('dl');
+        title.textContent = heading;
+        for (const row of rows) {
+            const name = document.createElement('dt'), detail = document.createElement('dd'), keys = document.createElement('kbd');
+            name.textContent = row.name; keys.textContent = row.input;
+            detail.append(keys, document.createTextNode(' ' + row.detail));
+            list.append(name, detail);
+        }
+        section.append(title, list);
+        return section;
+    };
+    panel.replaceChildren(table(`${ROSTER[fighter].name} · MOVES`.toUpperCase(), fighterMoves(fighter, controlPrompt)), table('EVERY FIGHTER', sharedTechniques(controlPrompt)));
+    panel.hidden = false;
+}
 function restart() {
     storyAnimation.reset();storyBoss=null;bossStarts.length=0;godModeChanges.length=0;
-    matchTesting=testingGodMode&&mode!=='versus';matchGodMode=(testingGodMode||matchEarnedGodMode)&&mode!=='versus';
+    matchTesting=testingGodMode&&mode!=='versus';// The tutorial keeps the player alive with a full meter: a practice God Mode, recorded like any other for replays.
+    matchGodMode=(testingGodMode||matchEarnedGodMode||!!(training&&'invulnerable' in training))&&mode!=='versus';
     const partner=state.fighters[0].id===chosen?state.fighters[0].partner:undefined;
     state = createState(chosen, mode, opponent);
     depthRoundStarts.length = 0;
@@ -452,6 +536,7 @@ function restart() {
     if(partner)state.fighters[0].partner=partner;
     if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
+    koSlow = 0; koSeen = false;
     countdown.hide();
     versus.show(chosen,state.fighters[1].id);
     frames.length = 0;
@@ -464,7 +549,7 @@ function restart() {
         start();
 }
 function updateGodModeLabel(){
-    const label=$('mode-label');label.textContent=(label.textContent??'').replace(/ \/ GOD MODE(?: TEST)?$/,'')+(state.godMode?(matchTesting?' / GOD MODE TEST':' / GOD MODE'):'');
+    const label=$('mode-label'),lesson=!!(training&&'invulnerable' in training);label.textContent=(label.textContent??'').replace(/ \/ GOD MODE(?: TEST)?$/,'')+(state.godMode&&!lesson?(matchTesting?' / GOD MODE TEST':' / GOD MODE'):'');
 }
 function applyGodMode(target:CombatState,enabled:boolean){
     if(enabled)target.godMode=true;
@@ -506,7 +591,7 @@ const story = createStoryMode({
 });
 $('start').onclick = () => overlayAction ? overlayAction() : start();
 $('pause').onclick = pause;
-$('reset').onclick = ()=>{storyAnimation.cancel();if(!story.retryMatch())restart();};
+$('reset').onclick = ()=>{storyAnimation.cancel();if(training===tutorialCoach&&tutorialCoach.complete)tutorialCoach.begin();if(!story.retryMatch())restart();};
 $('overlay-restart').onclick = () => $('reset').click();
 const dialog = $<HTMLDialogElement>('controls-dialog');
 $('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
@@ -522,6 +607,7 @@ $('settings').onclick = () => {
     dialog.showModal();
 };
 function closeSettings() {
+    menuSound('menuBack');
     remapping = null;
     dialog.close();
     updateControls();
@@ -564,8 +650,10 @@ window.addEventListener('keydown', e => {
     if (selection.isOpen) return;
     if (e.code === 'Escape') {
         e.preventDefault();
-        if (!e.repeat)
+        if (!e.repeat) {
+            menuSound('menuBack');
             pause();
+        }
         return;
     }
     if (!running) {
@@ -739,16 +827,19 @@ function noteDevice(device: 'key' | 'pad') {
 window.addEventListener('keydown', () => noteDevice('key'));
 // Optional, visible read-only diagnostics for manual QA; never changes combat state.
 const qaPanel = new URLSearchParams(location.search).has('qa') ? document.createElement('pre') : null;
-const trainingPanel = training ? document.createElement('pre') : null;
+const trainingPanel = document.createElement('pre'), trainingControls = document.createElement('div');
 let trainingPlayButton: HTMLButtonElement | null = null;
-if (training && trainingPanel) {
-    const controls = document.createElement('div'); controls.id = 'training-controls';
-    for (const [label, action] of [['Record P1 route', () => training.record()], ['Stop', () => training.stop()], ['Loop on standing dummy', () => { if(mode==='dummy')training.play(); }]] as const) {
+{
+    const controls = trainingControls; controls.id = 'training-controls';
+    for (const [label, action] of [['Record P1 route', () => trainingRecorder.record()], ['Stop', () => trainingRecorder.stop()], ['Loop on standing dummy', () => { if(mode==='dummy')trainingRecorder.play(); }]] as const) {
         const button = document.createElement('button'); button.textContent = label; button.onclick = action; if(label==='Loop on standing dummy')trainingPlayButton=button; controls.append(button);
     }
     trainingPanel.id = 'training-readout'; trainingPanel.style.cssText = 'white-space:pre-wrap;font:14px monospace;padding:12px';
+    controls.hidden = trainingPanel.hidden = true;
     document.querySelector('#app')!.append(controls, trainingPanel);
 }
+/** Training tools show only in a practice round (standing or guard dummy) outside story and online. */
+const trainingActive = () => training === trainingRecorder && !selection.isOpen && !online && !story.isActive && (mode === 'dummy' || mode === 'guard');
 
 // `?perf`: read-only art-loading status for scripts/perf-baseline.mjs.
 if (new URLSearchParams(location.search).has('perf')) (window as unknown as {sprotoAtlasStatus:typeof getPoseAtlasLoadStatus}).sprotoAtlasStatus = getPoseAtlasLoadStatus;
@@ -775,6 +866,7 @@ function qaRecord(before:string){
 // ---- Online duels (src/net/onlineMatch.ts; hub match sproto_duel) ----
 /** Overlay button action while an online overlay is up (queue, failure, result). */
 let overlayAction: (() => void) | null = null;
+let tutorialCleared = -1;
 const ONLINE_DELAY_KEY = 'sproto-arena-online-delay';
 $<HTMLSelectElement>('online-delay').value = String(onlineInputDelay());
 $<HTMLSelectElement>('online-delay').onchange = e => { try { localStorage.setItem(ONLINE_DELAY_KEY, (e.target as HTMLSelectElement).value); } catch { /* not saved */ } };
@@ -819,8 +911,8 @@ async function queueOnline(setup: SelectionSetup, rematchOf?: string) {
 }
 function onlineFailureText(reason?: string) {
     const known: Record<string, string> = {
-        insufficient_tickets: 'One player has fewer than 10 Tickets. Win CPU matches to earn more.',
-        not_eligible: 'Wagers open after 3 CPU wins. Win a few CPU matches first.',
+        insufficient_tickets: 'One player has fewer than 10 Tickets. Story bosses pay Tickets.',
+        not_eligible: 'This account cannot place wagers yet. Unwagered online play is open.',
         pair_limit: 'You two have played 5 wagered matches today. Try another opponent or play unwagered.',
         daily_wager_cap: 'Daily wager winnings limit reached. Unwagered online play is still open.',
         sim_mismatch: 'The other player is on a different game version. Reload to update.',
@@ -975,11 +1067,17 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         reportRound();
         if (story.onRoundEnd(state.winner!)) return;
         if (mode === 'versus') {
-            showOverlay(state.winner === 2 ? 'Double knockout.' : `Player ${state.winner! + 1} wins.`, `Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch', 'LOCAL VERSUS');
+            const rounds = state.matchDepth?.rounds ? state.matchDepth.wins : null;
+            const victor = rounds ? (rounds[0] === rounds[1] ? 2 : rounds[0] > rounds[1] ? 0 : 1) : state.winner!;
+            showOverlay(victor === 2 ? (rounds ? 'MATCH DRAWN' : 'DOUBLE K.O.') : `PLAYER ${victor + 1} WINS`, `${rounds ? `Rounds ${rounds[0]}–${rounds[1]}. ` : ''}Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch', rounds ? 'LOCAL VERSUS / BEST OF 3' : 'LOCAL VERSUS');
             return;
         }
-        const won = state.winner === 0;
-        showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again', 'ROUND COMPLETE');
+        // Best of 3 reports the match, not its last round: who took more rounds, and the score.
+        const series = state.matchDepth?.rounds ? state.matchDepth.wins : null;
+        const result = series ? (series[0] === series[1] ? 2 : series[0] > series[1] ? 0 : 1) : state.winner;
+        const won = result === 0, drawn = result === 2;
+        const score = series ? `Rounds ${series[0]}–${series[1]}. ` : '';
+        showOverlay(drawn ? (series ? 'MATCH DRAWN' : 'DOUBLE K.O.') : won ? 'YOU WIN' : 'YOU LOSE', `${score}${drawn ? 'Nobody left standing.' : won ? 'You found your flow.' : 'Run it back.'} Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again', series ? 'MATCH COMPLETE / BEST OF 3' : 'ROUND COMPLETE');
         return;
     }
     if (presentation.phase !== 'fight') return;
@@ -1027,7 +1125,7 @@ function stepTo(now: number): number | null {
     // While the feedback window holds a local match, the controller must not resume or steer it.
     const pad = feedbackHold ? 0 : pollPad();
     if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen && !partnerPicker.isOpen)) && (!qaFrozen||qaSingleStep)) {
-        accumulator = qaSingleStep?1/60:accumulator+elapsed;
+        accumulator = qaSingleStep?1/60:accumulator+elapsed*(koSlow>0&&!online?KO_SLOW_RATE:1);
         qaSingleStep=false;
         let steps = 0;
         while (accumulator >= 1 / 60) {
@@ -1044,6 +1142,11 @@ function stepTo(now: number): number | null {
             accumulator -= 1 / 60;
             advanceRoundFrame(input, p2);
             steps++;
+            // The final hit plays slowly for a moment; a new round (everyone standing again) re-arms it.
+            const downed = !storyBoss && state.fighters.some(f => f.hp <= 0);
+            if (koSlow > 0) koSlow--;
+            if (downed && !koSeen) koSlow = KO_SLOW_FRAMES;
+            koSeen = downed;
             if (!running || (presentation.phase === 'result'&&!storyAnimation.active)) break;
         }
         return steps;
@@ -1059,6 +1162,9 @@ function frameJudged(steps: number | null): boolean { return steps === null || s
 /** One rendered frame. The loop below runs it through the crash guard (crash.ts). */
 function frameTick(now: number): boolean {
     const steps = stepTo(now);
+    updateAudio();
+    if(selection.isOpen){const picked=selection.getSetup();updateFooter(picked.rules==='bo3'&&(picked.mode==='cpu'||picked.mode==='versus'));}
+    else updateFooter(!!state.matchDepth);
     trackFeedbackEvents();
     sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
     const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
@@ -1096,10 +1202,23 @@ function frameTick(now: number): boolean {
         ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.restore();
     }
-    if (training && !selection.isOpen && !online && !story.isActive && (mode === 'dummy' || mode === 'guard')) drawTrainingGeometry(ctx, state);
+    const showTraining = trainingActive();
+    trainingControls.hidden = trainingPanel.hidden = !showTraining;
+    if (showTraining) drawTrainingGeometry(ctx, state);
+    if (training === tutorialCoach && started && !selection.isOpen && !online && !story.isActive) {
+        const lesson = tutorialCoach.view(controlPrompt);
+        drawTutorial(ctx, lesson);
+        if (lesson.cleared === 1 && tutorialCleared !== lesson.index) { tutorialCleared = lesson.index; audio.play('charge'); }
+        if (lesson.cleared === 0) tutorialCleared = -1;
+        if (lesson.complete && running) {
+            showOverlay('TUTORIAL COMPLETE', 'Block, chain into a finisher, throw and tech, dash cancel, jump cancel, quick rise and Team Special: that is the whole toolkit. The pause menu lists every move.', 'Run it again', 'TUTORIAL');
+            audio.play('win');
+            overlayAction = () => { overlayAction = null; tutorialCoach.begin(); restart(); start(); };
+        }
+    }
     if (online) updateOnlineStatus();
     if(trainingPlayButton)trainingPlayButton.disabled = mode!=='dummy' || story.isActive || !!online;
-    if (trainingPanel) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${training?.recording ? 'ON' : 'off'} · ${training?.frames.length ?? 0} frames · playback ${training?.playing ? 'ON' : 'off'}`;
+    if (showTraining) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${trainingRecorder.recording ? 'ON' : 'off'} · ${trainingRecorder.frames.length} frames · playback ${trainingRecorder.playing ? 'ON' : 'off'}`;
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     const padName = (a: Action) => padButtonName(padKeys[a]);
     $('coach').textContent = storyBoss ? (lastDevice === 'pad' ? `Auto-fire · stick / D-pad move · ↑ or ${padName('launcher')} double-jump · ${padName('dash')} dash · ${padName('light')} beam · ${padName('medium')} ball · ${padName('heavy')} shield · Start pauses (Restart is in the menu)` : `Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · ${keyName(keys.light)} or C beam · ${keyName(keys.medium)} or V ball · ${keyName(keys.heavy)} or X shield · R retry`) : mode === 'versus' && lastDevice === 'pad' ? `Controller 1 plays P1, controller 2 plays P2 · ${padName('light')} ${padName('medium')} ${padName('heavy')} attack · either Start pauses. Remap both in Settings.` : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${controlPrompt('special')} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
@@ -1116,7 +1235,7 @@ document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
-Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, cpuSkill:matchCpuSkill, difficultyAssisted:matchDifficultyAssist, ...(state.fighters[0].partner?{partner:state.fighters[0].partner}:{}), godMode:matchGodMode, ...(matchDepthOptions?{matchDepth:{...matchDepthOptions,roundStarts:[...depthRoundStarts]}}:{}), ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {
+Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), audioStatus: audio.status, storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, cpuSkill:matchCpuSkill, difficultyAssisted:matchDifficultyAssist, ...(state.fighters[0].partner?{partner:state.fighters[0].partner}:{}), godMode:matchGodMode, ...(matchDepthOptions?{matchDepth:{...matchDepthOptions,roundStarts:[...depthRoundStarts]}}:{}), ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {
             const replay = createState(chosen, mode, opponent);
             if(matchDepthOptions)enableMatchDepth(replay,matchDepthOptions);
             if(state.fighters[0].partner)replay.fighters[0].partner=state.fighters[0].partner;
