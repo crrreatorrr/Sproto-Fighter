@@ -11,7 +11,7 @@ import './versusScreen.css';
 import {createVersusScreen} from './versusScreen';
 import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';
-import { P2_KEYS, PAD_DEFAULTS, UNBOUND, keyboardMask, menuKeyDirection, pressedMask, padMask, rebindKey, rebindPad, resolveKeyConflicts } from './localInput';
+import { FEEDBACK_KEY, P2_KEYS, PAD_DEFAULTS, UNBOUND, keyboardMask, menuKeyDirection, pressedMask, padMask, rebindKey, rebindPad, resolveKeyConflicts } from './localInput';
 import { PAD, PadInput, MenuRepeat, menuDirection, padButtonName, canBindPadButton, type MenuDirection, type PadView } from './gamepad';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
@@ -32,6 +32,7 @@ import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 import { crashGuard, createFrameLoop } from './crash';
 import { showCrashPanel } from './crashPanel';
+import { setupFeedback, type FeedbackFighter, type FeedbackSnapshot } from './feedback';
 // Uncaught errors and rejections share the frame loop's counter; the panel opens once the game pauses.
 crashGuard.install(window, document);
 crashGuard.onFatal(report => showCrashPanel(report));
@@ -67,6 +68,8 @@ try {
     }
 }
 catch { /* Storage may be disabled. Defaults still work. */ }
+// N twice opens feedback: a saved mapping can never hold it.
+for (const a of Object.keys(defaults) as Action[]) if (keys[a] === FEEDBACK_KEY) keys[a] = defaults[a];
 resolveKeyConflicts(keys, keys2);
 const depthParams = new URLSearchParams(location.search);
 const depthEnabled = depthParams.has('matchDepth');
@@ -159,13 +162,104 @@ function hubToast(title:string,sub:string){
 }
 $('return-hub').onclick=$('overlay-hub').onclick=()=>{if(hub)hub.exitHub();};
 if(hubConfigured())$('return-hub').hidden=false;
-void connectHub().then(link=>{
+const hubLink=connectHub();
+void hubLink.then(link=>{
  hub=link;
  if(link.connected){
   hubRelics=link.relics;writeRelicCache(storage,hubRelics);selection.refreshLocks();
   $('return-hub').hidden=false;$('hub-label').textContent='● HUB LINKED / BAR ARCADE';$('hub-label').classList.add('linked');
  }else if(link.error){$('hub-label').textContent='● HUB OFFLINE / 1V1';console.warn('Hub connection unavailable:',link.error);}
 });
+// ---- In-game feedback: N twice, or the pause menu's button (src/feedback.ts) ----
+/** True while the feedback window has frozen a local match. No pause overlay is shown for it. */
+let feedbackHold = false;
+/**
+ * Freeze for the feedback window. A running local match stops through the loop's own `running`
+ * flag, without the pause overlay; a match that is already paused, finished or behind a menu is
+ * left exactly as it is. Online matches cannot pause: `false` tells the window so.
+ */
+function pauseForFeedback(): false | { resume: boolean } {
+    // Keys held as the window opens never reach keyup here (the window takes the keyboard).
+    held.clear(); blockedKeys.clear(); queued = 0; queued2 = 0;
+    if (online) return false;
+    const resume = running;
+    feedbackHold = true;
+    if (running) { running = false; versus.suspend(true); countdown.suspend(true); }
+    return { resume };
+}
+function resumeFromFeedback(token: unknown) {
+    feedbackHold = false;
+    held.clear(); blockedKeys.clear(); queued = 0; queued2 = 0; padNeedsRelease = true;
+    previousPad = []; previousPad2 = []; previousStart = true;
+    if (!(token as { resume?: boolean } | null)?.resume) return;
+    // Only a match this window stopped is restarted, and only if nothing else took over meanwhile.
+    if (running || !started || online || selection.isOpen || !$('overlay').hidden || crashGuard.paused) return;
+    running = true; accumulator = 0;
+    versus.suspend(false); countdown.suspend(false);
+    if (document.activeElement === document.body || document.activeElement === null) canvas.focus();
+    // The tab lost focus while the window was up: hand over to the normal pause instead of fighting unseen.
+    if (document.hidden || !document.hasFocus()) pause();
+}
+function feedbackFighter(index: number): FeedbackFighter {
+    const f = state.fighters[index];
+    return { character: f.id, partner: f.partner, x: f.x, y: f.y, health: Math.round(f.hp), meter: f.pips, combo: f.combo, bestCombo: f.best, move: f.move?.id ?? null };
+}
+function feedbackSnapshot(): FeedbackSnapshot {
+    const seat = online?.start?.seat ?? 0, journey = story.snapshot(), net = online?.phase === 'playing' ? online.status() : null;
+    const paused = !running && started && !online && !(presentation.phase === 'result' && !storyAnimation.active);
+    return {
+        screen: selection.isOpen ? 'menu' : 'fight', mode,
+        story: story.isActive && journey.encounter ? { stage: journey.encounter.stage, encounter: journey.encounter.index + 1, bout: journey.wave + 1 } : null,
+        online: online ? { seat, wager: !!online.start?.wager, phase: online.phase, ...(net ? { link: net.link, pingMs: net.pingMs === null ? null : Math.round(net.pingMs), rollback: net.rollback } : {}) } : null,
+        stage: selection.isOpen ? selection.getSetup().stage : currentStage,
+        stageName: $('stage-title').textContent ?? '',
+        frame: state.frame,
+        player: feedbackFighter(seat), opponent: feedbackFighter(1 - seat),
+        round: state.matchDepth?.round ?? null, wins: state.matchDepth ? [...state.matchDepth.wins] : null,
+        winner: state.winner, phase: storyAnimation.active ? `scene:${storyAnimation.active}` : presentation.phase,
+        // Taken before the window freezes anything, so this is the state the player was looking at.
+        running, paused,
+        cpuSkill: mode === 'cpu' && !online ? matchCpuSkill : null, assisted: matchDifficultyAssist,
+        godMode: !!state.godMode, boss: storyBoss?.form ?? null, modifier: state.matchDepth?.modifier ?? null,
+    };
+}
+const feedback = setupFeedback({
+    sdk: hubLink.then(link => (link.connected ? link.sdk : null)),
+    canvas,
+    pause: pauseForFeedback,
+    resume: resumeFromFeedback,
+    snapshot: feedbackSnapshot,
+    // The Controls remapper is waiting for a key: let it see N and refuse it.
+    enabled: () => !(dialog.open && remapping?.device === 'key'),
+});
+$('overlay-feedback').onclick = () => feedback.open();
+/**
+ * Breadcrumbs for feedback notes, read off the page's own state once per rendered frame, so the
+ * match flow and the simulation carry no feedback calls. The SDK keeps the last 24.
+ */
+const crumbs = { menu: true, match: '', frame: 0, round: 0, winner: null as number | null, phase: '', boss: '', paused: false };
+function trackFeedbackEvents() {
+    const inMatch = started && !selection.isOpen;
+    if (selection.isOpen !== crumbs.menu) { crumbs.menu = selection.isOpen; if (crumbs.menu) { crumbs.match = ''; feedback.breadcrumb('fighter_select', { fighter: selection.getSetup().fighter }); } }
+    if (!inMatch) return;
+    const seat = online?.start?.seat ?? 0, kind = online ? (online.start?.wager ? 'online-wager' : 'online') : story.isActive ? 'story' : mode === 'cpu' ? 'arcade' : mode;
+    const match = [kind, currentStage, state.fighters[0].id, state.fighters[1].id, seat].join('|'), round = state.matchDepth?.round ?? 1;
+    if (match !== crumbs.match) {
+        Object.assign(crumbs, { match, frame: state.frame, round, winner: null, phase: '', boss: '', paused: false });
+        feedback.breadcrumb('match_start', { mode: kind, stage: currentStage, fighter: state.fighters[seat].id, opponent: state.fighters[1 - seat].id, ...(online ? { seat } : kind === 'arcade' || kind === 'story' ? { cpuSkill: matchCpuSkill } : {}) });
+    } else if (state.frame < crumbs.frame || round !== crumbs.round) {
+        // A restart or rematch begins a new state at frame 0; a match-depth round keeps counting.
+        Object.assign(crumbs, { round, winner: null, phase: '', boss: '' });
+        feedback.breadcrumb('round_start', { round, ...(state.matchDepth ? { wins: state.matchDepth.wins.join('-') } : {}) });
+    }
+    crumbs.frame = state.frame;
+    const boss = storyBoss?.form ?? '';
+    if (boss !== crumbs.boss) { crumbs.boss = boss; if (boss) feedback.breadcrumb('boss_start', { form: boss, frame: state.frame }); }
+    if (state.winner !== crumbs.winner) { crumbs.winner = state.winner; if (state.winner !== null) feedback.breadcrumb('ko', { winner: state.winner, frame: state.frame, health: state.fighters.map(f => Math.round(f.hp)).join('-') }); }
+    if (presentation.phase !== crumbs.phase) { crumbs.phase = presentation.phase; if (presentation.phase === 'result') feedback.breadcrumb('round_end', { winner: state.winner, frame: state.frame }); }
+    const paused = !running && !feedbackHold && !online && presentation.phase !== 'result';
+    if (paused !== crumbs.paused) { crumbs.paused = paused; feedback.breadcrumb(paused ? 'pause' : 'resume', { frame: state.frame }); }
+}
 /** Called exactly once at result; story saves are already settled at KO. */
 function reportRound(){
  if(!hub?.connected||state.winner===null)return;
@@ -174,7 +268,9 @@ function reportRound(){
  void hub.onRoundEnd({winner:state.winner,mode,storyWorld:beltVictory?BELT_WORLD:null,
   stage:current.active??selection.getSetup().stage,fighter:chosen,assisted:matchGodMode||godModeChanges.some(change=>change.enabled)},hubToast);
 }
+let currentStage:StageId=STAGES[0].id;
 function updateStage(stage:StageId) {
+    currentStage=stage;
     setStage(stage);setActiveStoryLocation(null);
     const location=STAGES.find(s=>s.id===stage)!;
     $('stage-title').textContent=location.name.toUpperCase();
@@ -313,7 +409,7 @@ function showOverlay(title: string, copy: string, button: string, kicker = 'COMB
     running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; $('overlay-hint').textContent = state.matchDepth ? (state.matchDepth.rounds ? 'First to two round wins · 60-second combat clock' : 'Chapter rule · 60-second combat clock') : 'Play your way · No round timer'; if(!selection.isOpen)$('start').focus(); }
 /** The pause / result overlay's buttons that can be used right now, top to bottom. */
 function overlayChoices(): HTMLButtonElement[] {
-    const choices = ['start', 'overlay-restart', 'overlay-select', 'overlay-hub'].map(id => $<HTMLButtonElement>(id)).filter(b => b && !b.hidden && !b.disabled);
+    const choices = ['start', 'overlay-restart', 'overlay-select', 'overlay-feedback', 'overlay-hub'].map(id => $<HTMLButtonElement>(id)).filter(b => b && !b.hidden && !b.disabled);
     // While an unsettled online match is up, Fighter select would forfeit through a browser confirm; the controller skips it.
     return online?.phase === 'playing' ? choices.filter(b => b.id !== 'overlay-select') : choices;
 }
@@ -458,6 +554,8 @@ window.addEventListener('keydown', e => {
                 remapping = null;
                 updateControls();
             }
+            else if (e.code === FEEDBACK_KEY)
+                $('binding-status').textContent = 'N is reserved: press it twice to send feedback. Choose another key.';
             else if (!['Tab', 'Enter'].includes(e.code))
                 bind(e.code);
         }
@@ -926,7 +1024,8 @@ function stepTo(now: number): number | null {
     lastTime = now;
     // Keep KO icon rotation alive on the result screen without advancing combat.
     visualFrame += qaFrozen ? (qaSingleStep ? 1 : 0) : elapsed * 60;
-    const pad = pollPad();
+    // While the feedback window holds a local match, the controller must not resume or steer it.
+    const pad = feedbackHold ? 0 : pollPad();
     if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen && !partnerPicker.isOpen)) && (!qaFrozen||qaSingleStep)) {
         accumulator = qaSingleStep?1/60:accumulator+elapsed;
         qaSingleStep=false;
@@ -960,6 +1059,7 @@ function frameJudged(steps: number | null): boolean { return steps === null || s
 /** One rendered frame. The loop below runs it through the crash guard (crash.ts). */
 function frameTick(now: number): boolean {
     const steps = stepTo(now);
+    trackFeedbackEvents();
     sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
     const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
     const recovery=storyBoss&&storyBoss.entryHp<1000&&state.winner===null&&bossAge<54

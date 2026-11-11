@@ -75,6 +75,9 @@ export function menuKeyDirection(code: string): MenuDirection {
   }
 }
 
+/** N twice opens the feedback window (src/feedback.ts), so no action may be bound to it. */
+export const FEEDBACK_KEY = 'KeyN';
+
 /** Unbound key slot: shown as "—" and never matched. */
 export const UNBOUND = '';
 
@@ -84,6 +87,7 @@ export const UNBOUND = '';
  * previous key instead (a swap). Mutates `sets`.
  */
 export function rebindKey(sets: Record<Action, string>[], player: number, action: Action, code: string): void {
+  if (code === FEEDBACK_KEY) return;
   const previous = sets[player][action];
   for (const [p, set] of sets.entries())
     for (const a of ACTIONS)
@@ -98,8 +102,9 @@ export function rebindPad(map: Partial<Record<Action, number>>, action: Action, 
   map[action] = button;
 }
 
-/** After loading or resetting, unbind player 2 keys that player 1 already uses (player 1 wins). Mutates `p2`. */
+/** After loading or resetting, unbind player 2 keys that player 1 already uses (player 1 wins) or that is the reserved feedback key. Mutates `p2`. */
 export function resolveKeyConflicts(p1: Readonly<Record<Action, string>>, p2: Record<Action, string>): void {
+  for (const a of ACTIONS) if (p2[a] === FEEDBACK_KEY) p2[a] = UNBOUND;
   const taken = new Set(Object.values(p1));
   for (const a of ACTIONS) if (taken.has(p2[a])) p2[a] = UNBOUND;
 }

@@ -23,6 +23,11 @@ export class HubLink {
 
   constructor(private readonly api: HubSdk = createBrowserSdk()) {}
 
+  /** The SDK behind this visit, for features the SDK ships whole (the feedback window). */
+  get sdk(): HubSdk {
+    return this.api;
+  }
+
   attach(session: InitResult | null): void {
     this.connected = session !== null;
     this.relics = [...(session?.relics ?? [])];
