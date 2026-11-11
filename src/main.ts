@@ -31,6 +31,8 @@ import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 import { crashGuard, createFrameLoop } from './crash';
+import { createAudio } from './audio';
+import { SoundTracker } from './audioEvents';
 import { showCrashPanel } from './crashPanel';
 // Uncaught errors and rejections share the frame loop's counter; the panel opens once the game pauses.
 crashGuard.install(window, document);
@@ -74,8 +76,9 @@ const depthModifiers: MatchModifier[] = ['none','double-meter','low-gravity','sp
 const depthModifier = depthModifiers.find(m => m === depthParams.get('modifier')) ?? 'none';
 const depthRoundStarts: number[] = [];
 // Training (hitbox overlay, input and advantage readouts, route recording) is a menu entry; `?training` still turns it on for every practice round.
-const trainingFlag = depthParams.has('training'), training = new TrainingRecorder();
-let trainingOn = trainingFlag;
+const trainingFlag = depthParams.has('training'), trainingRecorder = new TrainingRecorder();
+/** The recorder while Training is on for this round, otherwise null. */
+let training: TrainingRecorder | null = trainingFlag ? trainingRecorder : null;
 let matchDepthOptions: { rounds: boolean; modifier: MatchModifier } | null = null;
 let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
     action: Action;
@@ -125,6 +128,35 @@ const frames: [
 ][] = [];
 const storage = (() => { try { return window.localStorage; } catch { return null; } })();
 let hubRelics: string[] = readRelicCache(storage);
+// ---- Sound (src/audio.ts): synthesised, presentation only, unlocked by the first input ----
+const audio = createAudio(storage), sounds = new SoundTracker();
+let soundPhase: RoundPresentation['phase'] | null = null, lastMenuSound = 0;
+for (const type of ['keydown', 'pointerdown'] as const) window.addEventListener(type, () => { audio.unlock(); }, { capture: true });
+/** Menu feedback follows focus and clicks, so keyboard, mouse and controller all sound alike. */
+function menuSound(name: 'menuMove' | 'menuConfirm' | 'menuBack') {
+    const now = performance.now();
+    if (name === 'menuMove' && now - lastMenuSound < 45) return;
+    lastMenuSound = now; audio.play(name, { volume: .8 });
+}
+document.addEventListener('focusin', e => { if (e.target instanceof HTMLElement && e.target.matches('button,select,input')) menuSound('menuMove'); });
+document.addEventListener('click', e => { if (e.target instanceof HTMLElement && e.target.closest('button')) menuSound('menuConfirm'); });
+document.addEventListener('change', e => { if (e.target instanceof HTMLSelectElement) menuSound('menuMove'); });
+/** Once per rendered frame: pick the music and voice whatever the fight just did. */
+function updateAudio() {
+    audio.music(selection.isOpen ? 'menu' : story.isOpen ? 'story' : 'fight');
+    if (!started || selection.isOpen) { sounds.reset(); soundPhase = null; return; }
+    if (presentation.phase === 'fight' && soundPhase !== null && soundPhase !== 'fight') audio.play('roundStart');
+    soundPhase = presentation.phase;
+    // Against the CPU the player is seat 0; online it is the local seat; in local versus the winner hears the win.
+    const listener = online?.start ? online.start.seat : mode === 'versus' ? state.winner ?? 0 : 0;
+    for (const cue of sounds.collect(state, listener)) audio.play(cue.name, cue);
+}
+for (const key of ['master', 'sfx', 'music'] as const) {
+    const slider = document.getElementById(`volume-${key}`) as HTMLInputElement | null;
+    if (!slider) continue;
+    slider.value = String(Math.round(audio.volume()[key] * 100));
+    slider.oninput = () => { audio.setVolume({ [key]: Number(slider.value) / 100 }); if (key !== 'music') menuSound('menuMove'); };
+}
 let hub: HubLink | null = null;
 /** The current online duel, from queue to result; null in every local mode. */
 let online: OnlineMatch | null = null;
@@ -223,7 +255,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     matchDepthOptions = requestedMatchDepthOptions;
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     const trainingRound=!isStory&&setup.mode==='training';
-    trainingOn=trainingFlag||trainingRound;training.stop();
+    trainingRecorder.stop();training=trainingFlag||trainingRound?trainingRecorder:null;
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':trainingRound?'dummy':setup.mode as Mode;
     matchCpuSkill=difficulty?.skill??setup.cpuSkill??4;matchDifficultyAssist=!!difficulty?.assisted;
     if(!isStory){story.leaveStory();freePlayMode=null;}
@@ -435,6 +467,7 @@ $('settings').onclick = () => {
     dialog.showModal();
 };
 function closeSettings() {
+    menuSound('menuBack');
     remapping = null;
     dialog.close();
     updateControls();
@@ -475,8 +508,10 @@ window.addEventListener('keydown', e => {
     if (selection.isOpen) return;
     if (e.code === 'Escape') {
         e.preventDefault();
-        if (!e.repeat)
+        if (!e.repeat) {
+            menuSound('menuBack');
             pause();
+        }
         return;
     }
     if (!running) {
@@ -654,7 +689,7 @@ const trainingPanel = document.createElement('pre'), trainingControls = document
 let trainingPlayButton: HTMLButtonElement | null = null;
 {
     const controls = trainingControls; controls.id = 'training-controls';
-    for (const [label, action] of [['Record P1 route', () => training.record()], ['Stop', () => training.stop()], ['Loop on standing dummy', () => { if(mode==='dummy')training.play(); }]] as const) {
+    for (const [label, action] of [['Record P1 route', () => trainingRecorder.record()], ['Stop', () => trainingRecorder.stop()], ['Loop on standing dummy', () => { if(mode==='dummy')trainingRecorder.play(); }]] as const) {
         const button = document.createElement('button'); button.textContent = label; button.onclick = action; if(label==='Loop on standing dummy')trainingPlayButton=button; controls.append(button);
     }
     trainingPanel.id = 'training-readout'; trainingPanel.style.cssText = 'white-space:pre-wrap;font:14px monospace;padding:12px';
@@ -662,7 +697,7 @@ let trainingPlayButton: HTMLButtonElement | null = null;
     document.querySelector('#app')!.append(controls, trainingPanel);
 }
 /** Training tools show only in a practice round (standing or guard dummy) outside story and online. */
-const trainingActive = () => trainingOn && !selection.isOpen && !online && !story.isActive && (mode === 'dummy' || mode === 'guard');
+const trainingActive = () => !!training && !selection.isOpen && !online && !story.isActive && (mode === 'dummy' || mode === 'guard');
 
 // `?perf`: read-only art-loading status for scripts/perf-baseline.mjs.
 if (new URLSearchParams(location.search).has('perf')) (window as unknown as {sprotoAtlasStatus:typeof getPoseAtlasLoadStatus}).sprotoAtlasStatus = getPoseAtlasLoadStatus;
@@ -881,7 +916,6 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         if (nextMatchRound(state)) {
             depthRoundStarts.push(state.frame);
             presentation = createRoundPresentation();
-            koSlow = 0; koSeen = false;
             countdown.hide(); versus.show(state.fighters[0].id, state.fighters[1].id);
             held.clear(); queued = 0; queued2 = 0;
             return;
@@ -901,7 +935,7 @@ function advanceRoundFrame(input: number, p2Input?: number) {
     if (presentation.phase !== 'fight') return;
     if (online) { advanceOnlineFrame(input); return; }
     const pair: [number, number] = [input, storyBoss?0:p2Input ?? cpuInput(state,1,matchCpuSkill)];
-    if (trainingOn && !story.isActive && !online && (mode === 'dummy' || mode === 'guard')) {
+    if (training && !story.isActive && !online && (mode === 'dummy' || mode === 'guard')) {
         if(mode==='guard' && training.playing)training.stop();
         pair[1] = training.input(state, pair[0], pair[1]);
     }
@@ -912,8 +946,6 @@ function advanceRoundFrame(input: number, p2Input?: number) {
     else step(state, pair);
     for(const [i,f] of state.fighters.entries())if(f.id==='michael'&&f.move!==previousMoves[i]&&(f.move?.id==='bolt'||f.move?.id==='special'))playRetainCallout();
     qaRecord(qaBefore);
-    if (koSlow > 0) koSlow--;
-    if (!koSeen && !storyBoss && state.fighters.some(f => f.hp <= 0)) { koSeen = true; koSlow = KO_SLOW_FRAMES; }
     if (state.winner !== null) {
         const nextPhase=state.winner===0&&storyAnimation.bossForm?
             (!storyBoss?'boss':storyBoss.form==='giant'?'mecha':null):null;
@@ -961,6 +993,11 @@ function stepTo(now: number): number | null {
             accumulator -= 1 / 60;
             advanceRoundFrame(input, p2);
             steps++;
+            // The final hit plays slowly for a moment; a new round (everyone standing again) re-arms it.
+            const downed = !storyBoss && state.fighters.some(f => f.hp <= 0);
+            if (koSlow > 0) koSlow--;
+            if (downed && !koSeen) koSlow = KO_SLOW_FRAMES;
+            koSeen = downed;
             if (!running || (presentation.phase === 'result'&&!storyAnimation.active)) break;
         }
         return steps;
@@ -976,6 +1013,7 @@ function frameJudged(steps: number | null): boolean { return steps === null || s
 /** One rendered frame. The loop below runs it through the crash guard (crash.ts). */
 function frameTick(now: number): boolean {
     const steps = stepTo(now);
+    updateAudio();
     sceneSkip.hidden=!storyAnimation.active;sceneSkip.disabled=!running||dialog.open||story.isOpen;
     const bossAge=storyBoss?state.frame-storyBoss.startFrame:0;
     const recovery=storyBoss&&storyBoss.entryHp<1000&&state.winner===null&&bossAge<54
@@ -1017,7 +1055,7 @@ function frameTick(now: number): boolean {
     if (showTraining) drawTrainingGeometry(ctx, state);
     if (online) updateOnlineStatus();
     if(trainingPlayButton)trainingPlayButton.disabled = mode!=='dummy' || story.isActive || !!online;
-    if (showTraining) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${training.recording ? 'ON' : 'off'} · ${training.frames.length} frames · playback ${training.playing ? 'ON' : 'off'}`;
+    if (showTraining) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${trainingRecorder.recording ? 'ON' : 'off'} · ${trainingRecorder.frames.length} frames · playback ${trainingRecorder.playing ? 'ON' : 'off'}`;
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     const padName = (a: Action) => padButtonName(padKeys[a]);
     $('coach').textContent = storyBoss ? (lastDevice === 'pad' ? `Auto-fire · stick / D-pad move · ↑ or ${padName('launcher')} double-jump · ${padName('dash')} dash · ${padName('light')} beam · ${padName('medium')} ball · ${padName('heavy')} shield · Start pauses (Restart is in the menu)` : `Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · ${keyName(keys.light)} or C beam · ${keyName(keys.medium)} or V ball · ${keyName(keys.heavy)} or X shield · R retry`) : mode === 'versus' && lastDevice === 'pad' ? `Controller 1 plays P1, controller 2 plays P2 · ${padName('light')} ${padName('medium')} ${padName('heavy')} attack · either Start pauses. Remap both in Settings.` : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${controlPrompt('special')} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
@@ -1034,7 +1072,7 @@ document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
-Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, cpuSkill:matchCpuSkill, difficultyAssisted:matchDifficultyAssist, ...(state.fighters[0].partner?{partner:state.fighters[0].partner}:{}), godMode:matchGodMode, ...(matchDepthOptions?{matchDepth:{...matchDepthOptions,roundStarts:[...depthRoundStarts]}}:{}), ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {
+Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), audioStatus: audio.status, storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, cpuSkill:matchCpuSkill, difficultyAssisted:matchDifficultyAssist, ...(state.fighters[0].partner?{partner:state.fighters[0].partner}:{}), godMode:matchGodMode, ...(matchDepthOptions?{matchDepth:{...matchDepthOptions,roundStarts:[...depthRoundStarts]}}:{}), ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {
             const replay = createState(chosen, mode, opponent);
             if(matchDepthOptions)enableMatchDepth(replay,matchDepthOptions);
             if(state.fighters[0].partner)replay.fighters[0].partner=state.fighters[0].partner;

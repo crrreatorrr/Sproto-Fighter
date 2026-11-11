@@ -17,3 +17,4 @@
 .partner-lineup span { align-self: end; color: #c4b7a4; font-size: 12px; }
 .partner-lineup strong { color: #ffe8b2; font-family: "Pixelify Sans",monospace; }
 #partner-picker .partner-actions { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.sound-settings label{justify-content:space-between;margin:8px 0;font-weight:600}.sound-settings input[type=range]{width:55%}
