@@ -4,7 +4,9 @@ import type { CombatState, CpuMemory } from './types';
 export const createCpuMemory = (seed: number): CpuMemory => ({
     seed, combatTicks: 0, intent: 'approach', nextDecision: 0, decisionAt: -1, choice: 0,
     attackKey: '', attackRoll: 1, lowRoll: 1, jumpRoll: 1, throwKey: -1, throwRoll: 1,
-    combo: 0, comboRoll: 1, airborne: false, observations: [],
+    combo: 0, comboRoll: 1, airborne: false, readRoll: 1, wakeRoll: 1,
+    stunned: false, shotSeen: false, blockstun: 0, blocks: [],
+    retreat: 0, advance: 0, observations: [],
     habits: { attacks: 0, lows: 0, jumps: 0, projectiles: 0 },
 });
 
