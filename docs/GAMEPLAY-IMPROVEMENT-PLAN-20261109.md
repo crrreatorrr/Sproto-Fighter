@@ -2,7 +2,10 @@
 
 ## 1. Status
 
-Plan only. No game code has changed.
+Implemented on 2026-11-11 except D1; see
+[GAMEPLAY-IMPROVEMENT-IMPLEMENTATION-20261111.md](GAMEPLAY-IMPROVEMENT-IMPLEMENTATION-20261111.md)
+for what shipped, what was measured and what the hub still has to change. The text
+below is the plan as written; its line numbers refer to `d1a1d9c6`.
 
 - Audited 2026-11-09 at `1d47c2c9`. Re-read 2026-11-11 at `d1a1d9c6`: two commits landed in
   between (movement-pose alignment, and the Tidebreaker Belt story event after defeating Halloween
