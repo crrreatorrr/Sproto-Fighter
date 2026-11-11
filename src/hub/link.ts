@@ -1,5 +1,5 @@
 import { createHubSdk, HubSdkError, type HubSdk, type InitResult } from '@metaverse/hub-sdk';
-import { BELT_NAME, BELT_RELIC, HUB_GAME_ID } from './config';
+import { BELT_NAME, BELT_RELIC, BOSS_EVENT, HUB_GAME_ID } from './config';
 import { planFighterWin, type FighterWin } from './report';
 import { pageServerKey } from '../net/serverKey';
 
@@ -36,7 +36,7 @@ export class HubLink {
   }
 
   /**
-   * Report a finished round. Standalone visits, losses and practice do nothing.
+   * Report a finished round. Standalone visits, losses, practice and CPU wins the hub has no rule for do nothing.
    * The match id is the operation id, so a queued call the SDK resends on the next init keeps it.
    * Returns true when this call granted the Tidebreaker Belt.
    */
@@ -48,19 +48,19 @@ export class HubLink {
     let belt = false;
     for (const call of calls) {
       try {
-        if (call.kind === 'earn') {
-          const earned = await this.api.earnTickets(call.amount, call.reason, call.key);
-          this.balance = earned.balance;
-          title = earned.capped ? 'Tickets capped' : `+${call.amount} Tickets`;
-          sub = earned.capped ? `Daily cap reached · Balance ${earned.balance}` : `Balance ${earned.balance}`;
-        } else {
-          const reported = await this.api.reportEvent(call.eventId, call.data, call.key);
-          if (reported.granted === BELT_RELIC) {
-            belt = true;
-            if (!this.relics.includes(BELT_RELIC)) this.relics.push(BELT_RELIC);
-            title = `Relic: ${BELT_NAME}`;
-            sub = sub ? `${sub} · On its plinth in the Bar` : 'On its plinth in the Bar';
-          }
+        const reported = await this.api.reportEvent(call.eventId, call.data, call.key);
+        // The server reports the Tickets it credited for a boss; 0 means this boss already paid today.
+        const tickets = (reported as { tickets?: unknown }).tickets;
+        if (call.eventId === BOSS_EVENT) {
+          const paid = typeof tickets === 'number' && tickets > 0 ? tickets : 0;
+          title = paid ? `+${paid} Tickets` : 'Boss defeated';
+          sub = paid ? 'Story boss defeated · pays once per boss per day' : 'No Tickets this time: each boss pays once per day';
+        }
+        if (reported.granted === BELT_RELIC) {
+          belt = true;
+          if (!this.relics.includes(BELT_RELIC)) this.relics.push(BELT_RELIC);
+          title = `Relic: ${BELT_NAME}`;
+          sub = sub ? `${sub} · On its plinth in the Bar` : 'On its plinth in the Bar';
         }
       } catch (err) {
         const message = err instanceof HubSdkError && err.code === 'queued'

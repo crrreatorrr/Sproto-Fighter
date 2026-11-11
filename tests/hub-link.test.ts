@@ -3,13 +3,13 @@ import { HubLink } from '../src/hub/link';
 import { isFighterAvailable } from '../src/hub/roster';
 import type { HubSdk } from '@metaverse/hub-sdk';
 
-function fakeSdk(granted?: string): HubSdk & { calls: string[] } {
+function fakeSdk(granted?: string, tickets?: number): HubSdk & { calls: string[] } {
   const calls: string[] = [];
   return {
     calls,
     redeemTicket: vi.fn(),
     init: vi.fn(),
-    reportEvent: vi.fn(async (eventId: string) => { calls.push(eventId); return granted ? { granted } : {}; }),
+    reportEvent: vi.fn(async (eventId: string, data: { boss?: string }) => { calls.push(data.boss ? `${eventId}:${data.boss}` : eventId); return { ...(granted && !data.boss ? { granted } : {}), ...(data.boss && tickets !== undefined ? { tickets } : {}) }; }),
     submitScore: vi.fn(),
     earnTickets: vi.fn(async (amount: number, reason: string) => { calls.push(`${reason}:${amount}`); return { balance: 40, capped: false }; }),
     exchange: vi.fn(),
@@ -31,13 +31,14 @@ describe('HubLink', () => {
     expect(sdk.calls).toEqual([]);
   });
 
-  it('earns Tickets, then claims the Belt and adds it to the visit', async () => {
+  it('claims the Belt, adds it to the visit, and never sends the refused fighter_win earn', async () => {
     const sdk = fakeSdk('tidebreaker_belt');
     const link = new HubLink(sdk);
     link.attach({ playerId: 'p', ranked: false, relics: ['cones_tip'], effects: {}, ticketsCapLeft: 200, serverTime: 0 });
     const notes: string[] = [];
     expect(await link.onRoundEnd(win, (t) => notes.push(t))).toBe(true);
-    expect(sdk.calls).toEqual(['fighter_win:20', 'fighter.story_level_complete']);
+    expect(sdk.calls).toEqual(['fighter.story_level_complete']);
+    expect(sdk.earnTickets).not.toHaveBeenCalled();
     expect(link.relics).toEqual(['cones_tip', 'tidebreaker_belt']);
     expect(notes).toEqual(['Relic: Tidebreaker Belt']);
   });
@@ -52,12 +53,39 @@ describe('HubLink', () => {
     expect(link.relics).toEqual(['breakwater_coin', 'tidebreaker_belt']);
   });
 
-  it('keeps Tickets news when the Belt was already owned', async () => {
+  it('says nothing when the Belt was already owned and no boss was beaten', async () => {
     const sdk = fakeSdk();
     const link = new HubLink(sdk);
     link.attach({ playerId: 'p', ranked: false, relics: ['tidebreaker_belt'], effects: {}, ticketsCapLeft: 200, serverTime: 0 });
     const notes: string[] = [];
     expect(await link.onRoundEnd(win, (t) => notes.push(t))).toBe(false);
-    expect(notes).toEqual(['+20 Tickets']);
+    expect(notes).toEqual([]);
+  });
+
+  it('reports a story boss and shows the Tickets the server credited', async () => {
+    const sdk = fakeSdk(undefined, 20);
+    const link = new HubLink(sdk);
+    link.attach({ playerId: 'p', ranked: false, relics: [], effects: {}, ticketsCapLeft: 200, serverTime: 0 });
+    const notes: string[] = [];
+    await link.onRoundEnd({ ...win, storyWorld: null, storyRival: 'vela', chapter: 7, skill: 9 }, (t, sub) => notes.push(`${t} | ${sub}`));
+    expect(sdk.calls).toEqual(['fighter.boss_defeated:vela']);
+    expect(notes).toEqual(['+20 Tickets | Story boss defeated · pays once per boss per day']);
+  });
+
+  it('is honest when a boss has already paid today', async () => {
+    const sdk = fakeSdk(undefined, 0);
+    const link = new HubLink(sdk);
+    link.attach({ playerId: 'p', ranked: false, relics: [], effects: {}, ticketsCapLeft: 200, serverTime: 0 });
+    const notes: string[] = [];
+    await link.onRoundEnd({ ...win, storyWorld: null, storyRival: 'nick' }, (t, sub) => notes.push(`${t} | ${sub}`));
+    expect(notes).toEqual(['Boss defeated | No Tickets this time: each boss pays once per day']);
+  });
+
+  it('sends nothing at all for an ordinary CPU win', async () => {
+    const sdk = fakeSdk();
+    const link = new HubLink(sdk);
+    link.attach({ playerId: 'p', ranked: false, relics: [], effects: {}, ticketsCapLeft: 200, serverTime: 0 });
+    expect(await link.onRoundEnd({ ...win, storyWorld: null })).toBe(false);
+    expect(sdk.calls).toEqual([]);
   });
 });

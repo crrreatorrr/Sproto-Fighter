@@ -91,6 +91,8 @@ let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: M
 /** Which player's mappings the Controls panel is showing. */
 let controlsPlayer: 1 | 2 = 1;
 let matchCpuSkill=4,matchDifficultyAssist=false;
+/** True while the story encounter being played has never been cleared on this save. */
+let matchFirstClear=false;
 let matchGodMode=false, matchEarnedGodMode=false, testingGodMode=false, matchTesting=false;
 let presentation = createRoundPresentation();
 let padNeedsRelease=true;
@@ -211,7 +213,10 @@ function reportRound(){
  if(!hub?.connected||state.winner===null)return;
  const current=story.snapshot(),encounter=current.encounter;
  const beltVictory=encounter?.opponent===BELT_OPPONENT&&current.wave===0;
+ // The rival actually beaten this round; a gauntlet reports each of its fighters in turn.
+ const rival=encounter?state.fighters?.[1]?.id:undefined;
  void hub.onRoundEnd({winner:state.winner,mode,storyWorld:beltVictory?BELT_WORLD:null,
+  storyRival:rival&&encounter!.opponents.includes(rival)?rival:null,chapter:encounter?.chapter,skill:matchCpuSkill,firstClear:matchFirstClear,
   stage:current.active??selection.getSetup().stage,fighter:chosen,assisted:matchGodMode||godModeChanges.some(change=>change.enabled)},hubToast);
 }
 function updateStage(stage:StageId) {
@@ -263,6 +268,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     if(tutorialRound)tutorialCoach.begin();
     chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':trainingRound||tutorialRound?'dummy':setup.mode as Mode;
     matchCpuSkill=difficulty?.skill??setup.cpuSkill??4;matchDifficultyAssist=!!difficulty?.assisted;
+    matchFirstClear=!!encounter&&!storyProgress.isCleared(encounter.index);
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);setActiveStoryLocation(scenery);
     if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
@@ -797,7 +803,7 @@ async function queueOnline(setup: SelectionSetup, rematchOf?: string) {
 }
 function onlineFailureText(reason?: string) {
     const known: Record<string, string> = {
-        insufficient_tickets: 'One player has fewer than 10 Tickets. Win CPU matches to earn more.',
+        insufficient_tickets: 'One player has fewer than 10 Tickets. Story bosses pay Tickets.',
         not_eligible: 'Wagers open after 3 CPU wins. Win a few CPU matches first.',
         pair_limit: 'You two have played 5 wagered matches today. Try another opponent or play unwagered.',
         daily_wager_cap: 'Daily wager winnings limit reached. Unwagered online play is still open.',
