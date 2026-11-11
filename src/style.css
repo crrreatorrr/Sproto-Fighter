@@ -18,3 +18,4 @@
 .partner-lineup strong { color: #ffe8b2; font-family: "Pixelify Sans",monospace; }
 #partner-picker .partner-actions { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .sound-settings label{justify-content:space-between;margin:8px 0;font-weight:600}.sound-settings input[type=range]{width:55%}
+.move-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px;max-height:42vh;overflow:auto;text-align:left;border-top:1px solid #607386;padding-top:14px}.move-list h3{font-size:13px;letter-spacing:1px;margin:0 0 8px;color:#f4e8c5}.move-list dl{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;margin:0;font-size:13px;line-height:1.45}.move-list dt{font-weight:700;color:#eaf0f7;white-space:nowrap}.move-list dd{margin:0;color:#b9cbdc}.move-list kbd{font-size:12px}@media(max-width:900px){.move-list{grid-template-columns:1fr}}

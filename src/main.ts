@@ -1,5 +1,7 @@
 import { enableMatchDepth, nextMatchRound, chapterBossModifier, type MatchModifier } from './core';
 import { TrainingRecorder, drawTrainingGeometry, trainingReadout } from './training';
+import { TutorialCoach, drawTutorial } from './tutorial';
+import { fighterMoves, sharedTechniques, type MoveRow } from './moveList';
 import { ensurePoseAtlases, ensurePosePreviews, getPoseAtlasLoadStatus } from './poseAtlas';
 import { createSelectionMenu, type MenuMode, type SelectionSetup } from './selectionMenu';
 import './style.css';
@@ -77,8 +79,9 @@ const depthModifier = depthModifiers.find(m => m === depthParams.get('modifier')
 const depthRoundStarts: number[] = [];
 // Training (hitbox overlay, input and advantage readouts, route recording) is a menu entry; `?training` still turns it on for every practice round.
 const trainingFlag = depthParams.has('training'), trainingRecorder = new TrainingRecorder();
-/** The recorder while Training is on for this round, otherwise null. */
-let training: TrainingRecorder | null = trainingFlag ? trainingRecorder : null;
+const tutorialCoach = new TutorialCoach();
+/** What drives the practice dummy this round: the recorder in Training, the coach in the Tutorial, otherwise null. */
+let training: TrainingRecorder | TutorialCoach | null = trainingFlag ? trainingRecorder : null;
 let matchDepthOptions: { rounds: boolean; modifier: MatchModifier } | null = null;
 let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
     action: Action;
@@ -255,18 +258,20 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     matchDepthOptions = requestedMatchDepthOptions;
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     const trainingRound=!isStory&&setup.mode==='training';
-    trainingRecorder.stop();training=trainingFlag||trainingRound?trainingRecorder:null;
-    chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':trainingRound?'dummy':setup.mode as Mode;
+    const tutorialRound=!isStory&&setup.mode==='tutorial';
+    trainingRecorder.stop();training=tutorialRound?tutorialCoach:trainingFlag||trainingRound?trainingRecorder:null;
+    if(tutorialRound)tutorialCoach.begin();
+    chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':trainingRound||tutorialRound?'dummy':setup.mode as Mode;
     matchCpuSkill=difficulty?.skill??setup.cpuSkill??4;matchDifficultyAssist=!!difficulty?.assisted;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);setActiveStoryLocation(scenery);
     if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
-    selection.setSetup({...setup,mode:trainingRound?'training':mode});selection.hide();$('fight-view').hidden=false;
+    selection.setSetup({...setup,mode:trainingRound?'training':tutorialRound?'tutorial':mode});selection.hide();$('fight-view').hidden=false;
     started=false;restart();
     delete state.fighters[0].partner;
     if(selectedPartner&&selectedPartner!==ROSTER[chosen].partner)state.fighters[0].partner=selectedPartner;
     start();
-    $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':trainingRound?'TRAINING':'COMBO PRACTICE';
+    $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':trainingRound?'TRAINING':tutorialRound?'TUTORIAL':'COMBO PRACTICE';
     if(encounter&&encounter.opponents.length>1){
         const bout=encounter.opponents.indexOf(setup.opponent)+1;
         const gauntletName=encounter.gauntlet==='art'?'ART DUO':encounter.gauntlet==='nick-juicy'?'NICK → JUICY':'FINAL GAUNTLET';
@@ -343,13 +348,15 @@ function bind(value: string | number) {
     updateControls();
     $('binding-status').textContent = 'Saved on this browser.';
 }
-function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED') {
+function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED', moveList = false) {
     // Buttons held as the overlay opens (attacks mashed through a KO, the Start that paused) act only after release.
     padInput.holdCurrent(Array.from(navigator.getGamepads?.() || []));
     // The pause and result screens offer the hub wherever the header does; online screens leave through fighter select.
     $('overlay-hub').hidden = $('return-hub').hidden || !!online;
     // Restart sits in the pause menu of a local round in progress (the footer's Restart, reachable by controller).
     $('overlay-restart').hidden = !started || !!online || (presentation.phase === 'result' && !storyAnimation.active);
+    const moves = document.getElementById('overlay-moves'); if (moves) moves.hidden = true;
+    if (moveList) showMoveList();
     running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; $('overlay-hint').textContent = state.matchDepth ? (state.matchDepth.rounds ? 'First to two round wins · 60-second combat clock' : 'Chapter rule · 60-second combat clock') : 'Play your way · No round timer'; if(!selection.isOpen)$('start').focus(); }
 /** The pause / result overlay's buttons that can be used right now, top to bottom. */
 function overlayChoices(): HTMLButtonElement[] {
@@ -382,13 +389,34 @@ function pause() {
     if (!started || (presentation.phase === 'result'&&!storyAnimation.active) || online)
         return;
     if (running)
-        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume');
+        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume', 'COMBAT LAB / PAUSED', true);
     else
         start();
 }
+/** The pause menu's move list: the player's fighter with the current bindings, then the shared techniques. */
+function showMoveList() {
+    const panel = document.getElementById('overlay-moves');
+    if (!panel || storyBoss) return;
+    const fighter = state.fighters[0].id;
+    const table = (heading: string, rows: MoveRow[]) => {
+        const section = document.createElement('section'), title = document.createElement('h3'), list = document.createElement('dl');
+        title.textContent = heading;
+        for (const row of rows) {
+            const name = document.createElement('dt'), detail = document.createElement('dd'), keys = document.createElement('kbd');
+            name.textContent = row.name; keys.textContent = row.input;
+            detail.append(keys, document.createTextNode(' ' + row.detail));
+            list.append(name, detail);
+        }
+        section.append(title, list);
+        return section;
+    };
+    panel.replaceChildren(table(`${ROSTER[fighter].name} · MOVES`.toUpperCase(), fighterMoves(fighter, controlPrompt)), table('EVERY FIGHTER', sharedTechniques(controlPrompt)));
+    panel.hidden = false;
+}
 function restart() {
     storyAnimation.reset();storyBoss=null;bossStarts.length=0;godModeChanges.length=0;
-    matchTesting=testingGodMode&&mode!=='versus';matchGodMode=(testingGodMode||matchEarnedGodMode)&&mode!=='versus';
+    matchTesting=testingGodMode&&mode!=='versus';// The tutorial keeps the player alive with a full meter: a practice God Mode, recorded like any other for replays.
+    matchGodMode=(testingGodMode||matchEarnedGodMode||!!(training&&'invulnerable' in training))&&mode!=='versus';
     const partner=state.fighters[0].id===chosen?state.fighters[0].partner:undefined;
     state = createState(chosen, mode, opponent);
     depthRoundStarts.length = 0;
@@ -409,7 +437,7 @@ function restart() {
         start();
 }
 function updateGodModeLabel(){
-    const label=$('mode-label');label.textContent=(label.textContent??'').replace(/ \/ GOD MODE(?: TEST)?$/,'')+(state.godMode?(matchTesting?' / GOD MODE TEST':' / GOD MODE'):'');
+    const label=$('mode-label'),lesson=!!(training&&'invulnerable' in training);label.textContent=(label.textContent??'').replace(/ \/ GOD MODE(?: TEST)?$/,'')+(state.godMode&&!lesson?(matchTesting?' / GOD MODE TEST':' / GOD MODE'):'');
 }
 function applyGodMode(target:CombatState,enabled:boolean){
     if(enabled)target.godMode=true;
@@ -697,7 +725,7 @@ let trainingPlayButton: HTMLButtonElement | null = null;
     document.querySelector('#app')!.append(controls, trainingPanel);
 }
 /** Training tools show only in a practice round (standing or guard dummy) outside story and online. */
-const trainingActive = () => !!training && !selection.isOpen && !online && !story.isActive && (mode === 'dummy' || mode === 'guard');
+const trainingActive = () => training === trainingRecorder && !selection.isOpen && !online && !story.isActive && (mode === 'dummy' || mode === 'guard');
 
 // `?perf`: read-only art-loading status for scripts/perf-baseline.mjs.
 if (new URLSearchParams(location.search).has('perf')) (window as unknown as {sprotoAtlasStatus:typeof getPoseAtlasLoadStatus}).sprotoAtlasStatus = getPoseAtlasLoadStatus;
@@ -724,6 +752,7 @@ function qaRecord(before:string){
 // ---- Online duels (src/net/onlineMatch.ts; hub match sproto_duel) ----
 /** Overlay button action while an online overlay is up (queue, failure, result). */
 let overlayAction: (() => void) | null = null;
+let tutorialCleared = -1;
 const ONLINE_DELAY_KEY = 'sproto-arena-online-delay';
 $<HTMLSelectElement>('online-delay').value = String(onlineInputDelay());
 $<HTMLSelectElement>('online-delay').onchange = e => { try { localStorage.setItem(ONLINE_DELAY_KEY, (e.target as HTMLSelectElement).value); } catch { /* not saved */ } };
@@ -1053,6 +1082,17 @@ function frameTick(now: number): boolean {
     const showTraining = trainingActive();
     trainingControls.hidden = trainingPanel.hidden = !showTraining;
     if (showTraining) drawTrainingGeometry(ctx, state);
+    if (training === tutorialCoach && started && !selection.isOpen && !online && !story.isActive) {
+        const lesson = tutorialCoach.view(controlPrompt);
+        drawTutorial(ctx, lesson);
+        if (lesson.cleared === 1 && tutorialCleared !== lesson.index) { tutorialCleared = lesson.index; audio.play('charge'); }
+        if (lesson.cleared === 0) tutorialCleared = -1;
+        if (lesson.complete && running) {
+            showOverlay('TUTORIAL COMPLETE', 'Block, chain into a finisher, throw and tech, dash cancel, jump cancel, quick rise and Team Special: that is the whole toolkit. The pause menu lists every move.', 'Run it again', 'TUTORIAL');
+            audio.play('win');
+            overlayAction = () => { overlayAction = null; tutorialCoach.begin(); restart(); start(); };
+        }
+    }
     if (online) updateOnlineStatus();
     if(trainingPlayButton)trainingPlayButton.disabled = mode!=='dummy' || story.isActive || !!online;
     if (showTraining) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${trainingRecorder.recording ? 'ON' : 'off'} · ${trainingRecorder.frames.length} frames · playback ${trainingRecorder.playing ? 'ON' : 'off'}`;
