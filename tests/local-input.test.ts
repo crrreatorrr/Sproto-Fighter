@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { A } from '../src/core';
-import { P2_KEYS, PAD_DEFAULTS, UNBOUND, keyboardMask, menuKeyDirection, padMask, pressedMask, rebindKey, rebindPad, resolveKeyConflicts } from '../src/localInput';
+import { FEEDBACK_KEY, P2_KEYS, PAD_DEFAULTS, UNBOUND, keyboardMask, menuKeyDirection, padMask, pressedMask, rebindKey, rebindPad, resolveKeyConflicts } from '../src/localInput';
 import { PAD, canBindPadButton } from '../src/gamepad';
 
 const P1_DEFAULTS = ['KeyA', 'KeyD', 'KeyW', 'KeyS', 'KeyJ', 'KeyK', 'KeyL', 'KeyU', 'KeyI', 'KeyO', 'KeyP', 'ShiftLeft'];
@@ -86,5 +86,15 @@ describe('per-player remapping', () => {
     resolveKeyConflicts(p1(), p2);
     expect(p2.light).toBe(UNBOUND);
     expect(p2.medium).toBe('Period');
+  });
+  it('keeps the feedback key (N) out of every mapping', () => {
+    expect([...Object.values(p1()), ...Object.values(P2_KEYS)]).not.toContain(FEEDBACK_KEY);
+    const sets = [p1(), { ...P2_KEYS }];
+    rebindKey(sets, 0, 'light', FEEDBACK_KEY);
+    rebindKey(sets, 1, 'dash', FEEDBACK_KEY);
+    expect(sets).toEqual([p1(), { ...P2_KEYS }]);
+    const p2 = { ...P2_KEYS, grab: FEEDBACK_KEY };
+    resolveKeyConflicts(p1(), p2);
+    expect(p2.grab).toBe(UNBOUND);
   });
 });
