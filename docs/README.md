@@ -10,6 +10,7 @@ by relative path. Use this page to find the current material first.
 | --- | --- |
 | [../README.md](../README.md) | How to run, play and check the game; architecture; hub notes |
 | [GAMEPLAY-PLAN-20261105.md](GAMEPLAY-PLAN-20261105.md), [balance/README.md](balance/README.md) | Gameplay phases and reproducible balance measurements |
+| [GAMEPLAY-IMPROVEMENT-PLAN-20261109.md](GAMEPLAY-IMPROVEMENT-PLAN-20261109.md) | Plan only: sound, CPU exploits, hidden rules, presentation and onboarding, from the 2026-11-09 gameplay audit |
 | [GAMEPLAY-IMPLEMENTATION-20261105.md](GAMEPLAY-IMPLEMENTATION-20261105.md) | Draft PR chain, verified coverage, calibration failures and remaining acceptance work |
 | [GAMEPLAY-CALIBRATION-DECISIONS-20261105.md](GAMEPLAY-CALIBRATION-DECISIONS-20261105.md), [GAMEPLAY-HUMAN-PLAYTEST-20261105.md](GAMEPLAY-HUMAN-PLAYTEST-20261105.md) | Unmet gates, proposed decisions and blank human playtest protocol |
 | [WEAPON-SCALE-QA-20261104.md](WEAPON-SCALE-QA-20261104.md) | Weapon-wielder sprite size repair, `walkRegistration`, Anni size and the GodsSon rename |
