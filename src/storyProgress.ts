@@ -89,11 +89,11 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
     const empty=():Save=>({version:3,cleared:[],unlocked:[...starterIds],godModeUnlocked:false});
     const routeComplete=(cleared:ReadonlySet<string>)=>encounters.length>0&&encounters.every(e=>cleared.has(e.id));
     // Bonus recruits come from the far end of the route, working backwards, and skip gauntlets, the
-    // last two chapters and Relic-only fighters. The n-th bonus is always the n-th entry, so applying
-    // the rule twice (another tab, a reload, an older save) can never recruit more than it should.
+    // last two chapters and Relic-only fighters. One is granted by the win that brings the cleared
+    // count to a multiple of three, never on load: a save that already cleared a route keeps every
+    // later-added fighter to earn, and reloads or other tabs cannot recruit anyone.
     const lastOpenChapter=Math.max(0,...encounters.map(e=>e.chapter))-BONUS_PROTECTED_CHAPTERS;
     const bonusPool=encounters.filter(e=>!e.gauntlet&&e.opponents.length===1&&e.chapter<=lastOpenChapter&&isStoryRecruitable(e.opponent)).map(e=>e.opponent).reverse();
-    const bonusRecruits=(cleared:ReadonlySet<string>)=>bonusPool.slice(0,Math.floor(encounters.filter(e=>cleared.has(e.id)).length/BONUS_RECRUIT_EVERY));
     function normalize(value:unknown):Save{
         const data=record(value,3);if(!data)return empty();
         // Retain syntactically valid future IDs in storage so a stale tab cannot erase
@@ -105,7 +105,6 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
         // Keep the original IDs too so older open tabs cannot erase earned progress.
         for(const encounter of encounters)if(encounter.opponents.length>1&&encounter.opponents.every(id=>cleared.has(singleId(id))))cleared.add(encounter.id);
         for(const encounter of encounters)if(cleared.has(encounter.id))for(const id of encounter.opponents)if(isStoryRecruitable(id))unlocked.add(id);
-        for(const id of bonusRecruits(cleared))unlocked.add(id);
         return {version:3,cleared:[...cleared],unlocked:[...unlocked],godModeUnlocked:data.godModeUnlocked===true||routeComplete(cleared)};
     }
     function migrate(value:unknown,version:1|2):Save{
@@ -160,8 +159,12 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
             const opponent=encounter.opponents[wave];if(isStoryRecruitable(opponent)&&!save.unlocked.includes(opponent))save.unlocked.push(opponent);
             lastBonus=null;
             if(wave===encounter.opponents.length-1){
-                if(!save.cleared.includes(encounter.id))save.cleared.push(encounter.id);run=null;save.godModeUnlocked||=routeComplete(new Set(save.cleared));
-                for(const id of bonusRecruits(new Set(save.cleared)))if(!save.unlocked.includes(id)){save.unlocked.push(id);lastBonus=id;}
+                const firstClear=!save.cleared.includes(encounter.id);
+                if(firstClear)save.cleared.push(encounter.id);run=null;save.godModeUnlocked||=routeComplete(new Set(save.cleared));
+                if(firstClear&&encounters.filter(e=>save.cleared.includes(e.id)).length%BONUS_RECRUIT_EVERY===0){
+                    const bonus=bonusPool.find(id=>isAvailable(id)&&!save.unlocked.includes(id));
+                    if(bonus){save.unlocked.push(bonus);lastBonus=bonus;}
+                }
             }
             else run={id:encounter.id,wave:wave+1,open:run.open};
             write();return true;

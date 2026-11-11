@@ -27,14 +27,20 @@ describe('bonus recruits', () => {
     // 30 wins used to recruit 30 fighters; now 40 join the two starters.
     expect(progress.snapshot().unlocked).toHaveLength(STARTER_FIGHTERS.length + 30 + 10);
   });
-  it('gives an existing version-3 save its bonus recruits on load, once', async () => {
+  it('leaves an existing save alone on load and recruits on its next third clear', async () => {
     const { STORY_ENCOUNTERS, STORY_SAVE_KEY, createStoryProgress } = await import('../src/storyProgress');
-    const saved = new Map([[STORY_SAVE_KEY, JSON.stringify({ version: 3, cleared: STORY_ENCOUNTERS.slice(0, 9).map(e => e.id), unlocked: [], godModeUnlocked: false })]]);
+    const saved = new Map([[STORY_SAVE_KEY, JSON.stringify({ version: 3, cleared: STORY_ENCOUNTERS.slice(0, 8).map(e => e.id), unlocked: [], godModeUnlocked: false })]]);
     const storage = { getItem: (key: string) => saved.get(key) ?? null, setItem: (key: string, value: string) => { saved.set(key, value); } };
-    const first = createStoryProgress(storage).snapshot().unlocked;
-    expect(first).toHaveLength(2 + 9 + 3);
-    // Loading, syncing and reloading apply the same rule again and add nothing.
-    const again = createStoryProgress(storage); again.sync();
-    expect(again.snapshot().unlocked.sort()).toEqual([...first].sort());
+    const progress = createStoryProgress(storage);
+    // Loading and syncing recruit nobody: two starters and the eight fighters already beaten.
+    progress.sync();
+    expect(progress.snapshot().unlocked).toHaveLength(2 + 8);
+    expect(progress.begin(8)).toBe(true); expect(progress.win(8)).toBe(true);
+    expect(progress.lastBonus()).not.toBeNull();
+    expect(progress.snapshot().unlocked).toHaveLength(2 + 9 + 1);
+    // Beating the same rival again clears nothing new and recruits nobody.
+    expect(progress.begin(8)).toBe(true); expect(progress.win(8)).toBe(true);
+    expect(progress.lastBonus()).toBeNull();
+    expect(createStoryProgress(storage).snapshot().unlocked).toHaveLength(2 + 9 + 1);
   });
 });

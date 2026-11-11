@@ -41,8 +41,8 @@ The first rival plays at CPU skill 3 and the route rises to 10 (`STORY_START_SKI
 in `src/difficulty.ts`). Every third cleared encounter also recruits one fighter
 from far down the route (never from the last two chapters, a gauntlet or a
 Relic-only fighter), so the roster opens faster than one fighter per win; that
-fighter still has to be beaten to clear their own encounter. Existing saves get
-their bonus recruits on load. The last standard rival of each chapter fights under
+fighter still has to be beaten to clear their own encounter. The bonus comes
+with the win itself, so loading an existing save recruits nobody. The last standard rival of each chapter fights under
 that chapter's rule (double meter, low gravity, specials only, sudden death or
 reflected projectiles) with a 60-second clock; the transformed bosses keep their
 own rules.
@@ -177,11 +177,27 @@ Free fights have Easy, Normal, Hard and Expert CPU choices (Normal by default).
 Story difficulty follows the actual 247-encounter route and offers an optional
 easier retry after three losses on an encounter.
 
-For the local experimental rules, open `/?matchDepth`: best of three round wins,
-a 60-second combat clock, counter-hits, defense meter and just-defend. Open
-`/?training` with a practice dummy for exact collision rectangles, input/advantage
-readouts and route recording. These flags do not enable the experimental round
-rules online. [Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
+The fighter select's **Rules** choice switches CPU and local versus fights between
+Classic (one untimed round) and **Best of 3**: best of three round wins, a
+60-second combat clock, counter-hits, defense meter and just-defend. **Rival
+behavior** also offers the **Tutorial** (six guided lessons on the practice dummy:
+move and block, chain to a finisher, throw and tech, dash cancel, jump cancel and
+quick rise, Team Special) and **Training** (exact collision rectangles,
+input/advantage readouts and route recording on a standing dummy). Pausing lists
+the current fighter's moves with your bindings. `/?matchDepth` and `/?training`
+still switch these on by URL. Online play stays on classic rules.
+[Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
+
+Sound is synthesised in the browser with Web Audio (`src/audio.ts`): hits by
+strength, guard, throws, projectiles, K.O., menus and three music loops. It
+starts after the first key, click or button press, and Settings has master,
+effects and music volume. No audio files ship apart from one voice clip.
+
+The CPU guards a projectile in place and walks in between shots, punishes a move
+it has guarded twice in three seconds, holds guard as it gets up, and stop-hits a
+rival who walks in swinging. `tests/cpu-exploits.test.ts` keeps three scripted
+exploits (projectile spam, walk-in mashing, crouch-and-sweep) inside win-rate
+bands that must fall as difficulty rises.
 
 ## Architecture and verification
 
