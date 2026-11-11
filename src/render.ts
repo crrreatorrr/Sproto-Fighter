@@ -7,7 +7,7 @@ import { drawPelvicAttacks } from './pelvicAttack';
 import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
 import { drawSprite } from './spriteRoster';
 import { drawStage } from './stage';
-import { FLOOR, ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, hashText, DUO_SPREAD, bodyOffsets, isPairedFighter, isDown, getMove, type CombatState, type Fighter } from './core';
+import { FLOOR, ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, hashText, DUO_SPREAD, bodyOffsets, isPairedFighter, isDown, getMove, type CombatState, type Effect, type Fighter } from './core';
 // Shuffle once by fighter identity, then deal all 48 sprites before reusing any.
 const genericRanged=new Set(['orb','spark','prism','ring','coin']);
 const sharedRangedAssignments=new Map(
@@ -65,11 +65,50 @@ function fighter(c: CanvasRenderingContext2D, f: Fighter, frame: number, ghost =
     }
 }
 type HealthRecovery={from:number;progress:number};
+/**
+ * Impact feedback is presentation only. It is derived from hit stop (`s.freeze`) and the
+ * effects the simulation already emits, and nothing here is read back by the simulation.
+ * Hit stop is 4, 6, 9 and 12 frames by strength, so it doubles as the strength of a hit.
+ */
+export function impactShake(freeze: number, special = false): { amp: number; frames: number } | null {
+    if (freeze >= 12) return { amp: 8, frames: 10 };
+    if (freeze >= 9) return { amp: 5, frames: 7 };
+    return special ? { amp: 4, frames: 6 } : null;
+}
+/** Spark size by the hit stop seen when the effect first appeared. */
+export const sparkScale = (freeze: number): number => freeze >= 12 ? 1.7 : freeze >= 9 ? 1.4 : freeze >= 6 ? 1.12 : .85;
+const sparkStrength = new WeakMap<Effect, number>();
+let shake = { start: 0, frames: 0, amp: 0 };
+function trackImpacts(s: CombatState, visualFrame: number): [number, number] {
+    for (const e of s.effects) {
+        if (sparkStrength.has(e)) continue;
+        const fresh = e.life >= e.max - 2, contact = e.kind === 'hit' || e.kind === 'special';
+        sparkStrength.set(e, contact && fresh ? Math.max(4, s.freeze) : 4);
+        const hit = contact && fresh ? impactShake(s.freeze, e.kind === 'special') : null;
+        if (hit && hit.amp >= shake.amp * Math.max(0, 1 - (visualFrame - shake.start) / (shake.frames || 1))) shake = { start: visualFrame, ...hit };
+    }
+    const age = visualFrame - shake.start;
+    if (age < 0 || age >= shake.frames) return [0, 0];
+    const fade = shake.amp * (1 - age / shake.frames);
+    return [Math.round(Math.sin(age * 1.9 + 1) * fade), Math.round(Math.cos(age * 2.7) * fade * .6)];
+}
+/** The round-deciding call: large, centred and on its own dark band so it reads over any stage. */
+function drawKoBanner(c: CanvasRenderingContext2D, label: string, age: number) {
+    const enter = Math.min(1, age / 8), size = Math.round(96 * (1.35 - .35 * enter));
+    c.save();
+    c.globalAlpha = enter;
+    c.fillStyle = '#050a14d9'; c.fillRect(0, 276, 1280, 108);
+    c.fillStyle = '#f4e8c5'; c.fillRect(0, 276, 1280, 3); c.fillRect(0, 381, 1280, 3);
+    c.textBaseline = 'middle';
+    text(c, label, 644, 336, size, '#0b0f18', 'center', 900);
+    text(c, label, 640, 332, size, '#f4e8c5', 'center', 900);
+    c.restore();
+}
 
 function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string, bossTitle?:string, recovery?:HealthRecovery, meterUnits=0) {
     const x = right ? 765 : 55, width = 460, color = ROSTER[f.id].color;
     text(c, bossTitle??ROSTER[f.id].name, right ? 1225 : 55, 55, 24, '#eaf0f7', right ? 'right' : 'left', 850);
-    text(c, (mode === 'versus' ? (right ? 'P2 / ' : 'P1 / ') : right ? (mode === 'cpu' ? 'CPU / ' : 'DUMMY / ') : 'YOU / ') + ROSTER[f.id].role, right ? 1225 : 55, 74, 10, color, right ? 'right' : 'left');
+    text(c, (mode === 'versus' ? (right ? 'P2 / ' : 'P1 / ') : right ? (mode === 'cpu' ? 'CPU / ' : 'DUMMY / ') : 'YOU / ') + ROSTER[f.id].role, right ? 1225 : 55, 76, 12, color, right ? 'right' : 'left');
     c.fillStyle = '#2b3547';
     c.fillRect(x, 88, width, 19);
     c.fillStyle = color;
@@ -84,7 +123,7 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     }
     for (let i = 1; i < 10; i++)
         line(c, x + i * 46, 88, x + i * 46, 107, '#101b2b55');
-    text(c, `${hp} / 1000`, right ? x : x + width, 126, 10, '#c3d2e5', right ? 'left' : 'right');
+    text(c, `${hp} / 1000`, right ? x : x + width, 131, 16, '#e3ecf7', right ? 'left' : 'right', 700);
     for (let i = 0; i < 3; i++) {
         const px = right ? x + width - 34 - i * 41 : x + i * 41;
         c.fillStyle = i < f.pips ? color : '#25354a';
@@ -94,15 +133,18 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
             poly(c,[[px+5,120],[px+34,120],[px+29,130],[px,130]],color);c.restore();
         }
     }
-    text(c, recovery?'RECOVERING HEALTH':f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 151, 9, recovery?'#bdffdf':f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
+    text(c, recovery?'RECOVERING HEALTH':f.pips === 3 ? 'TEAM SPECIAL READY' : 'RELAY CHARGE', right ? x + width : x, 153, 13, recovery?'#bdffdf':f.pips === 3 ? color : '#a9bed6', right ? 'right' : 'left');
 }
 export function render(c: CanvasRenderingContext2D, s: CombatState, presentation?:RoundPresentation, visualFrame=s.frame+(presentation?.frame??0), storyAnimation?:(ctx:CanvasRenderingContext2D,x:number,y:number,defeatFacing:number)=>boolean, bossAttacks?:(ctx:CanvasRenderingContext2D)=>void,bossTitle?:string, portal?:{x:number;y:number;progress:number}, recovery?:HealthRecovery) {
     setPoseAtlasThrowState(s.throwState,s.fighters);
     setPoseAtlasPresentation(presentation??null,s.fighters);
+    const [shakeX, shakeY] = trackImpacts(s, visualFrame);
+    c.save();
+    c.translate(shakeX, shakeY);
     if(!drawActiveStoryLocation(c))drawStage(c, s.frame);
     // Keep the HUD legible over the bright sky and moon without covering fighters.
-    c.fillStyle='#071224b8';c.fillRect(0,0,1280,162);
-    c.fillStyle='#07122455';c.fillRect(0,162,1280,10);
+    c.fillStyle='#071224b8';c.fillRect(-16,-16,1312,178);
+    c.fillStyle='#07122455';c.fillRect(-16,162,1312,10);
     for (const f of s.fighters) {
         if(portal&&f===s.fighters[0])continue;
         c.fillStyle = '#040b1366';
@@ -204,8 +246,10 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         c.translate(e.x, e.y);
         c.strokeStyle = e.color;
         c.fillStyle = e.color;
-        const r = (1 - life) * 65 + 10;
-        c.lineWidth = 2 + life * 4;
+        const contact = e.kind === 'hit' || e.kind === 'special';
+        const power = contact ? sparkStrength.get(e) ?? 4 : 4, scale = contact ? sparkScale(power) : 1;
+        const r = ((1 - life) * 65 + 10) * scale;
+        c.lineWidth = (2 + life * 4) * Math.min(1.5, scale);
         if (e.kind === 'charge') {
             text(c, '+ RELAY', 0, -(1 - life) * 35, 15, e.color, 'center', 800);
         }
@@ -222,17 +266,26 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
                     const a = i * Math.PI / 4;
                     line(c, Math.cos(a) * r * .5, Math.sin(a) * r * .5, Math.cos(a) * r * 1.5, Math.sin(a) * r * 1.5, e.color, 3);
                 }
+            if (contact && power >= 9) {
+                // Heavy and special hits throw longer shards and flash white at the point of contact.
+                for (let i = 0; i < 6; i++) {
+                    const a = i * Math.PI / 3 + .5;
+                    line(c, Math.cos(a) * r * 1.6, Math.sin(a) * r * 1.6, Math.cos(a) * r * 2.1, Math.sin(a) * r * 2.1, '#fff6d8', 2);
+                }
+                if (life > .75) { c.globalAlpha = (life - .75) * 4; c.fillStyle = '#fffbe9'; c.beginPath(); c.arc(0, 0, 22 * scale, 0, Math.PI * 2); c.fill(); }
+            }
         }
         c.restore();
     }
+    c.restore();
     if(portal)return;
     health(c, s.fighters[0], false, s.mode,undefined,recovery,s.matchDepth?.meter[0]);
     health(c, s.fighters[1], true, s.mode,bossTitle,undefined,s.matchDepth?.meter[1]);
-    text(c, s.matchDepth ? 'ROUND '+s.matchDepth.round : 'ROUND 01', 640, 116, 9, '#b9cbdc', 'center');
+    text(c, s.matchDepth ? 'ROUND '+s.matchDepth.round : 'ROUND 01', 640, 117, 14, '#b9cbdc', 'center');
     if(s.matchDepth){
         text(c, String(Math.ceil(s.matchDepth.remaining/60)),640,96,28,'#fff3ad','center');
-        text(c, s.matchDepth.wins[0]+' — '+s.matchDepth.wins[1],640,136,13,'#eaf0f7','center');
-        if(s.matchDepth.modifier!=='none')text(c,s.matchDepth.modifier.replaceAll('-',' ').toUpperCase(),640,153,8,'#fff3ad','center');
+        text(c, s.matchDepth.wins[0]+' — '+s.matchDepth.wins[1],640,137,14,'#eaf0f7','center');
+        if(s.matchDepth.modifier!=='none')text(c,s.matchDepth.modifier.replaceAll('-',' ').toUpperCase(),640,155,12,'#fff3ad','center');
     }
     for (let i = 0; i < 2; i++) {
         const f = s.fighters[i];
@@ -245,14 +298,16 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         if (f.combo > 1) {
             const x = i === 0 ? 65 : 1215;
             c.fillStyle = '#17202bd9';
-            c.fillRect(i === 0 ? 48 : 1022, 188, 210, 138);
+            c.fillRect(i === 0 ? 48 : 972, 188, 260, 146);
             text(c, String(f.combo).padStart(2, '0'), x, 244, 61, ROSTER[f.id].color, i === 0 ? 'left' : 'right', 900);
-            text(c, 'HIT COMBO', x, 266, 12, '#d8e4f0', i === 0 ? 'left' : 'right');
-            text(c, f.comboDamage + ' DAMAGE', x, 287, 11, '#7d93ab', i === 0 ? 'left' : 'right');
-            text(c,!f.chargeEligible?'TEAM SPECIAL · NO RECHARGE':f.combo>=3&&f.lastFinisher?'CLEAN FINISH · +1 AT END':f.combo>=3?'FINISHER TO EARN CHARGE':'EXTEND → FINISH',x,309,9,f.lastFinisher?'#b4f8c8':'#efd69b',i===0?'left':'right');
+            text(c, 'HIT COMBO', x, 268, 14, '#d8e4f0', i === 0 ? 'left' : 'right');
+            text(c, f.comboDamage + ' DAMAGE', x, 291, 13, '#9db0c6', i === 0 ? 'left' : 'right');
+            text(c,!f.chargeEligible?'TEAM SPECIAL · NO RECHARGE':f.combo>=3&&f.lastFinisher?'CLEAN FINISH · +1 AT END':f.combo>=3?'FINISHER TO EARN CHARGE':'EXTEND → FINISH',x,315,13,f.lastFinisher?'#b4f8c8':'#efd69b',i===0?'left':'right');
         }
     }
-    if (s.noticeLife > 0 && !s.fighters.some(f=>f.move?.id==='special')) {
+    const ending = presentation?.phase==='outro' || presentation?.phase==='result';
+    // The K.O. banner owns the centre of the screen once a round is decided.
+    if (s.noticeLife > 0 && !ending && !s.fighters.some(f=>f.move?.id==='special')) {
         c.globalAlpha = Math.min(1, s.noticeLife / 20);
         c.fillStyle = '#17202bce';
         c.fillRect(390, 176, 500, 32);
@@ -260,15 +315,14 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         c.globalAlpha = 1;
     }
     c.fillStyle = '#18202cba';
-    c.fillRect(425, 678, 430, 25);
-    text(c, 'HOLD AWAY: BLOCK  /  DOWN: CROUCH', 640, 694, 9, '#b4c3d3', 'center', 500);
+    c.fillRect(425, 676, 430, 29);
+    text(c, 'HOLD AWAY: BLOCK  /  DOWN: CROUCH', 640, 696, 13, '#c8d5e3', 'center', 500);
     drawVitalikDefeatCaption(c,s.fighters);
     if(presentation?.phase==='intro'){
         c.fillStyle='#101725e0';c.fillRect(435,175,410,66);
         text(c,'GET READY',640,204,24,'#f4e8c5','center',900);
         text(c,'PREPARE FOR THE OPENING EXCHANGE',640,227,10,'#b4c3d3','center');
     }else if(presentation?.phase==='outro'){
-        const draw=presentation.winner===2;
-        text(c,draw?'DOUBLE DOWN':'K.O.',640,220,40,'#f4e8c5','center',900);
+        drawKoBanner(c,presentation.winner===2?'DOUBLE K.O.':'K.O.',presentation.frame);
     }
 }

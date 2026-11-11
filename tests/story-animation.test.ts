@@ -41,7 +41,8 @@ async function harness(id:string,win=0){
         let storyBoss=null;const bossStarts=[];const stepStoryBoss=()=>{state.winner=win;};
         const versus={advance:()=>false};const countdown={advance:()=>false,show:()=>calls.push('countdown')};
         const held=new Set();let queued=0,queued2=0,padNeedsRelease=false;
-        const training=null,depthRoundStarts=[];
+        const training=null,trainingOn=false,depthRoundStarts=[];
+        const KO_SLOW_FRAMES=20;let koSlow=0,koSeen=false;
         const online=null,mode='cpu',qaPanel=null,qaRecord=()=>{},qaStopAtOutro=()=>{};
         const matchCpuSkill=4,cpuInput=()=>0,playRetainCallout=()=>{},reportRound=()=>calls.push('report');
         const story={finishMatch:()=>calls.push('save'),onRoundEnd:()=>{calls.push('result');return true;}};

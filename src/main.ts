@@ -73,7 +73,9 @@ const depthEnabled = depthParams.has('matchDepth');
 const depthModifiers: MatchModifier[] = ['none','double-meter','low-gravity','specials-only','sudden-death','reflect-projectiles'];
 const depthModifier = depthModifiers.find(m => m === depthParams.get('modifier')) ?? 'none';
 const depthRoundStarts: number[] = [];
-const training = depthParams.has('training') ? new TrainingRecorder() : null;
+// Training (hitbox overlay, input and advantage readouts, route recording) is a menu entry; `?training` still turns it on for every practice round.
+const trainingFlag = depthParams.has('training'), training = new TrainingRecorder();
+let trainingOn = trainingFlag;
 let matchDepthOptions: { rounds: boolean; modifier: MatchModifier } | null = null;
 let state = createState('highsproto'), chosen: FighterId = 'highsproto', mode: Mode = 'cpu', opponent: FighterId | undefined = 'vela', running = false, started = false, remapping: {
     action: Action;
@@ -94,6 +96,9 @@ let padP2: PadView | null = null;
 let lastDevice: 'key' | 'pad' = 'key';
 let resumeAfterSettings = false, accumulator = 0, lastTime = 0, previousPad: number[] = [], previousPad2: number[] = [], previousStart = false;
 let visualFrame = 0;
+/** Presentation only: the final hit plays at reduced speed. Fixed steps and replay inputs are unchanged. */
+const KO_SLOW_FRAMES = 20, KO_SLOW_RATE = .4;
+let koSlow = 0, koSeen = false;
 const held = new Set<string>();
 const blockedKeys = new Set<string>();
 let queued = 0, queued2 = 0; // presses since the last frame, per playerqueued2=0;
@@ -181,7 +186,8 @@ function updateStage(stage:StageId) {
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
 async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{skill:number;assisted:boolean}) {
-    let requestedMatchDepthOptions = depthEnabled && !isStory && (setup.mode === 'cpu' || setup.mode === 'versus') ? { rounds: true, modifier: depthModifier } : null;
+    // Best of 3 is the menu's Rules choice; `?matchDepth` still forces it for every CPU and local versus round.
+    let requestedMatchDepthOptions = (depthEnabled || setup.rules === 'bo3') && !isStory && (setup.mode === 'cpu' || setup.mode === 'versus') ? { rounds: true, modifier: depthModifier } : null;
     if(!isStory&&(setup.mode==='online'||setup.mode==='online-wager')){void queueOnline(setup);return true;}
     // Reconcile wins from another tab or a restored page before the final P1 gate.
     storyProgress.sync();
@@ -216,17 +222,19 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     catch(error){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(error);return false;}
     matchDepthOptions = requestedMatchDepthOptions;
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
-    chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':setup.mode as Mode;
+    const trainingRound=!isStory&&setup.mode==='training';
+    trainingOn=trainingFlag||trainingRound;training.stop();
+    chosen=setup.fighter;opponent=setup.opponent;mode=isStory?'cpu':trainingRound?'dummy':setup.mode as Mode;
     matchCpuSkill=difficulty?.skill??setup.cpuSkill??4;matchDifficultyAssist=!!difficulty?.assisted;
     if(!isStory){story.leaveStory();freePlayMode=null;}
     updateStage(setup.stage);setActiveStoryLocation(scenery);
     if(scenery)$('stage-subtitle').textContent=' / '+scenery.title.toUpperCase();
-    selection.setSetup({...setup,mode});selection.hide();$('fight-view').hidden=false;
+    selection.setSetup({...setup,mode:trainingRound?'training':mode});selection.hide();$('fight-view').hidden=false;
     started=false;restart();
     delete state.fighters[0].partner;
     if(selectedPartner&&selectedPartner!==ROSTER[chosen].partner)state.fighters[0].partner=selectedPartner;
     start();
-    $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':'COMBO PRACTICE';
+    $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':trainingRound?'TRAINING':'COMBO PRACTICE';
     if(encounter&&encounter.opponents.length>1){
         const bout=encounter.opponents.indexOf(setup.opponent)+1;
         const gauntletName=encounter.gauntlet==='art'?'ART DUO':encounter.gauntlet==='nick-juicy'?'NICK → JUICY':'FINAL GAUNTLET';
@@ -356,6 +364,7 @@ function restart() {
     if(partner)state.fighters[0].partner=partner;
     if(matchGodMode){state.godMode=true;state.fighters[0].pips=3;}
     presentation = createRoundPresentation();
+    koSlow = 0; koSeen = false;
     countdown.hide();
     versus.show(chosen,state.fighters[1].id);
     frames.length = 0;
@@ -641,16 +650,19 @@ function noteDevice(device: 'key' | 'pad') {
 window.addEventListener('keydown', () => noteDevice('key'));
 // Optional, visible read-only diagnostics for manual QA; never changes combat state.
 const qaPanel = new URLSearchParams(location.search).has('qa') ? document.createElement('pre') : null;
-const trainingPanel = training ? document.createElement('pre') : null;
+const trainingPanel = document.createElement('pre'), trainingControls = document.createElement('div');
 let trainingPlayButton: HTMLButtonElement | null = null;
-if (training && trainingPanel) {
-    const controls = document.createElement('div'); controls.id = 'training-controls';
+{
+    const controls = trainingControls; controls.id = 'training-controls';
     for (const [label, action] of [['Record P1 route', () => training.record()], ['Stop', () => training.stop()], ['Loop on standing dummy', () => { if(mode==='dummy')training.play(); }]] as const) {
         const button = document.createElement('button'); button.textContent = label; button.onclick = action; if(label==='Loop on standing dummy')trainingPlayButton=button; controls.append(button);
     }
     trainingPanel.id = 'training-readout'; trainingPanel.style.cssText = 'white-space:pre-wrap;font:14px monospace;padding:12px';
+    controls.hidden = trainingPanel.hidden = true;
     document.querySelector('#app')!.append(controls, trainingPanel);
 }
+/** Training tools show only in a practice round (standing or guard dummy) outside story and online. */
+const trainingActive = () => trainingOn && !selection.isOpen && !online && !story.isActive && (mode === 'dummy' || mode === 'guard');
 
 // `?perf`: read-only art-loading status for scripts/perf-baseline.mjs.
 if (new URLSearchParams(location.search).has('perf')) (window as unknown as {sprotoAtlasStatus:typeof getPoseAtlasLoadStatus}).sprotoAtlasStatus = getPoseAtlasLoadStatus;
@@ -869,6 +881,7 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         if (nextMatchRound(state)) {
             depthRoundStarts.push(state.frame);
             presentation = createRoundPresentation();
+            koSlow = 0; koSeen = false;
             countdown.hide(); versus.show(state.fighters[0].id, state.fighters[1].id);
             held.clear(); queued = 0; queued2 = 0;
             return;
@@ -877,17 +890,18 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         reportRound();
         if (story.onRoundEnd(state.winner!)) return;
         if (mode === 'versus') {
-            showOverlay(state.winner === 2 ? 'Double knockout.' : `Player ${state.winner! + 1} wins.`, `Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch', 'LOCAL VERSUS');
+            showOverlay(state.winner === 2 ? 'DOUBLE K.O.' : `PLAYER ${state.winner! + 1} WINS`, `Best combos: P1 ${state.fighters[0].best} hits, P2 ${state.fighters[1].best} hits.`, 'Rematch', 'LOCAL VERSUS');
             return;
         }
-        const won = state.winner === 0;
-        showOverlay(state.winner === 2 ? 'Double knockout.' : won ? 'You found your flow.' : 'Run it back.', `Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again', 'ROUND COMPLETE');
+        const won = state.winner === 0, drawn = state.winner === 2;
+        // The headline says who won; the flavour line sits under it.
+        showOverlay(drawn ? 'DOUBLE K.O.' : won ? 'YOU WIN' : 'YOU LOSE', `${drawn ? 'Nobody left standing.' : won ? 'You found your flow.' : 'Run it back.'} Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again', 'ROUND COMPLETE');
         return;
     }
     if (presentation.phase !== 'fight') return;
     if (online) { advanceOnlineFrame(input); return; }
     const pair: [number, number] = [input, storyBoss?0:p2Input ?? cpuInput(state,1,matchCpuSkill)];
-    if (training && !story.isActive && !online && (mode === 'dummy' || mode === 'guard')) {
+    if (trainingOn && !story.isActive && !online && (mode === 'dummy' || mode === 'guard')) {
         if(mode==='guard' && training.playing)training.stop();
         pair[1] = training.input(state, pair[0], pair[1]);
     }
@@ -898,6 +912,8 @@ function advanceRoundFrame(input: number, p2Input?: number) {
     else step(state, pair);
     for(const [i,f] of state.fighters.entries())if(f.id==='michael'&&f.move!==previousMoves[i]&&(f.move?.id==='bolt'||f.move?.id==='special'))playRetainCallout();
     qaRecord(qaBefore);
+    if (koSlow > 0) koSlow--;
+    if (!koSeen && !storyBoss && state.fighters.some(f => f.hp <= 0)) { koSeen = true; koSlow = KO_SLOW_FRAMES; }
     if (state.winner !== null) {
         const nextPhase=state.winner===0&&storyAnimation.bossForm?
             (!storyBoss?'boss':storyBoss.form==='giant'?'mecha':null):null;
@@ -928,7 +944,7 @@ function stepTo(now: number): number | null {
     visualFrame += qaFrozen ? (qaSingleStep ? 1 : 0) : elapsed * 60;
     const pad = pollPad();
     if (running && !selection.isOpen && (online || (!dialog.open && !story.isOpen && !partnerPicker.isOpen)) && (!qaFrozen||qaSingleStep)) {
-        accumulator = qaSingleStep?1/60:accumulator+elapsed;
+        accumulator = qaSingleStep?1/60:accumulator+elapsed*(koSlow>0&&!online?KO_SLOW_RATE:1);
         qaSingleStep=false;
         let steps = 0;
         while (accumulator >= 1 / 60) {
@@ -996,10 +1012,12 @@ function frameTick(now: number): boolean {
         ctx.fillRect(0,0,canvas.width,canvas.height);
         ctx.restore();
     }
-    if (training && !selection.isOpen && !online && !story.isActive && (mode === 'dummy' || mode === 'guard')) drawTrainingGeometry(ctx, state);
+    const showTraining = trainingActive();
+    trainingControls.hidden = trainingPanel.hidden = !showTraining;
+    if (showTraining) drawTrainingGeometry(ctx, state);
     if (online) updateOnlineStatus();
     if(trainingPlayButton)trainingPlayButton.disabled = mode!=='dummy' || story.isActive || !!online;
-    if (trainingPanel) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${training?.recording ? 'ON' : 'off'} · ${training?.frames.length ?? 0} frames · playback ${training?.playing ? 'ON' : 'off'}`;
+    if (showTraining) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${training.recording ? 'ON' : 'off'} · ${training.frames.length} frames · playback ${training.playing ? 'ON' : 'off'}`;
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     const padName = (a: Action) => padButtonName(padKeys[a]);
     $('coach').textContent = storyBoss ? (lastDevice === 'pad' ? `Auto-fire · stick / D-pad move · ↑ or ${padName('launcher')} double-jump · ${padName('dash')} dash · ${padName('light')} beam · ${padName('medium')} ball · ${padName('heavy')} shield · Start pauses (Restart is in the menu)` : `Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · ${keyName(keys.light)} or C beam · ${keyName(keys.medium)} or V ball · ${keyName(keys.heavy)} or X shield · R retry`) : mode === 'versus' && lastDevice === 'pad' ? `Controller 1 plays P1, controller 2 plays P2 · ${padName('light')} ${padName('medium')} ${padName('heavy')} attack · either Start pauses. Remap both in Settings.` : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${controlPrompt('special')} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
