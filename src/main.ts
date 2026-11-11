@@ -364,6 +364,8 @@ function showOverlay(title: string, copy: string, button: string, kicker = 'COMB
     $('overlay-restart').hidden = !started || !!online || (presentation.phase === 'result' && !storyAnimation.active);
     const moves = document.getElementById('overlay-moves'); if (moves) moves.hidden = true;
     if (moveList) showMoveList();
+    // A special action (online queue, tutorial replay) belongs to the overlay that set it; callers set theirs after this.
+    overlayAction = null;
     running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; $('overlay-hint').textContent = state.matchDepth ? (state.matchDepth.rounds ? 'First to two round wins · 60-second combat clock' : 'Chapter rule · 60-second combat clock') : 'Play your way · No round timer'; if(!selection.isOpen)$('start').focus(); }
 /** The pause / result overlay's buttons that can be used right now, top to bottom. */
 function overlayChoices(): HTMLButtonElement[] {
@@ -486,7 +488,7 @@ const story = createStoryMode({
 });
 $('start').onclick = () => overlayAction ? overlayAction() : start();
 $('pause').onclick = pause;
-$('reset').onclick = ()=>{storyAnimation.cancel();if(!story.retryMatch())restart();};
+$('reset').onclick = ()=>{storyAnimation.cancel();if(training===tutorialCoach&&tutorialCoach.complete)tutorialCoach.begin();if(!story.retryMatch())restart();};
 $('overlay-restart').onclick = () => $('reset').click();
 const dialog = $<HTMLDialogElement>('controls-dialog');
 $('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
