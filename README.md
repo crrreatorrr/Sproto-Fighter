@@ -290,7 +290,7 @@ NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/on
 
 ## Metaverse Hub integration
 
-The optional hub adapter uses the vendored `@metaverse/hub-sdk` 0.6.4 (see `vendor/hub-sdk/VENDOR.md`). A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after completing the first story chapter. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
+The optional hub adapter uses the vendored `@metaverse/hub-sdk` 0.6.4 (see `vendor/hub-sdk/VENDOR.md`). A linked visit can return to the hub, earn 20 Tickets for an unassisted CPU win, and earn the Tidebreaker Belt after defeating the first story enemy, Halloween 2008. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
 
 Five fighters require Hub Relics for new player recruitment:
 
