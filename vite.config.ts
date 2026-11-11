@@ -1,3 +1,4 @@
+import {execSync} from 'node:child_process';
 import {readFileSync, statSync} from 'node:fs';
 import {fileURLToPath} from 'node:url';
 import type {Plugin} from 'vite';
@@ -46,8 +47,23 @@ function poseAtlasSplit(): Plugin {
   };
 }
 
+/** `<package version>+<short commit>` for feedback notes (src/feedback.ts): CI's GITHUB_SHA, else git, else `dev`. */
+function buildId(): string {
+  const version = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')).version as string;
+  let commit = (process.env.GITHUB_SHA ?? '').slice(0, 7);
+  if (!commit) {
+    try {
+      commit = execSync('git rev-parse --short HEAD', {cwd: fileURLToPath(new URL('.', import.meta.url)), stdio: ['ignore', 'pipe', 'ignore']}).toString().trim();
+    } catch {
+      commit = '';
+    }
+  }
+  return `${version}+${commit || 'dev'}`;
+}
+
 export default defineConfig({
   base: './',
+  define: {__BUILD_ID__: JSON.stringify(buildId())},
   plugins: [poseAtlasSplit()],
   test: {include: ['tests/**/*.test.ts'], environment: 'node'},
   optimizeDeps: {entries: ['index.html']},

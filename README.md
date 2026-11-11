@@ -114,6 +114,7 @@ combat starts on FIGHT. Escape pauses either introduction. Rounds have no time l
 | Team Special | P | RT |
 | Dash | Left Shift | LT |
 | Pause / resume | Escape | Start (either controller in local versus) |
+| Send feedback | N twice | **Send feedback** in the pause menu |
 
 | Menus | Keyboard | Controller |
 | --- | --- | --- |
@@ -129,12 +130,20 @@ Launcher sits on A like those games' launcher button. The left index finger
 dashes on LT while the right thumb keeps attacking, so dash cancels never take
 the thumb off the face buttons. Ranged power and Grab are the bumpers and the
 Team Special is RT. Movement is the stick or D-pad (radial deadzone 0.2).
-The pause menu has **Resume**, **Restart**, **Fighter select** and, when the
-game was opened from the hub, **Return to hub**; the fighter select reaches the
+The pause menu has **Resume**, **Restart**, **Fighter select**, **Send feedback**
+and, when the game was opened from the hub, **Return to hub**; the fighter select reaches the
 header (Story worlds, Settings, Return to hub) by moving up past Random Stage.
 Fight-screen prompts follow the device you used last. On the keyboard, player 1
 stays on W A S D with the attacks under the right hand; the arrow keys belong to
 player 2 in local versus (the story-boss forms and menus accept both).
+
+**N twice: send feedback.** Pressing N twice (within 400 ms) freezes a local
+match and opens a small feedback window with a screenshot from just before it;
+closing it (Esc) puts the game back exactly where it was — fighting, paused or in a
+menu. Online matches cannot pause, so there the match keeps running behind the
+window. Notes go to the hub, so the window only sends when the game was opened
+from the hub while signed in; standalone play shows a one-line message instead.
+N cannot be bound to an action. The adapter is `src/feedback.ts`.
 
 Plug in a controller at any time; the browser shows it after its first press.
 Buttons held while a controller appears (such as the A that entered the game
@@ -316,7 +325,7 @@ NAKAMA_URL=http://127.0.0.1:7350 HUB_DATABASE_URL=postgres://... node scripts/on
 
 ## Metaverse Hub integration
 
-The optional hub adapter uses the vendored `@metaverse/hub-sdk` 0.6.4 (see `vendor/hub-sdk/VENDOR.md`). A linked visit can return to the hub, earn Tickets for defeating a story boss, and earn the Tidebreaker Belt after defeating the first story enemy, Halloween 2008. The client reports `fighter.boss_defeated` for the ten bosses the hub lists (`STORY_BOSSES` in `src/hub/config.ts`: the three Relic guardians, Golden Sproto, the art duo, Nick, Juicy, Morelight and VMU); the server pays 20 Tickets once per boss per day and the toast shows what it credited. Ordinary CPU wins report nothing, because the hub has no rule that pays them (its `fighter_win` ceiling is 0). CPU difficulty and first-clear travel as event data for a future per-difficulty rule. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
+The optional hub adapter uses the vendored `@metaverse/hub-sdk` 0.7.0 (see `vendor/hub-sdk/VENDOR.md`). A linked visit can return to the hub, earn Tickets for defeating a story boss, and earn the Tidebreaker Belt after defeating the first story enemy, Halloween 2008. The client reports `fighter.boss_defeated` for the ten bosses the hub lists (`STORY_BOSSES` in `src/hub/config.ts`: the three Relic guardians, Golden Sproto, the art duo, Nick, Juicy, Morelight and VMU); the server pays 20 Tickets once per boss per day and the toast shows what it credited. Ordinary CPU wins report nothing, because the hub has no rule that pays them (its `fighter_win` ceiling is 0). CPU difficulty and first-clear travel as event data for a future per-difficulty rule. Losses, draws, practice and God Mode award no hub rewards. God Mode still saves local story progression normally.
 
 Five fighters require Hub Relics for new player recruitment:
 
