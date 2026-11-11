@@ -16,6 +16,8 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     const total=STORY_ENCOUNTERS.length;
     const difficultyRetry=createDifficultyRetry();
     let assisted=false;
+    /** Every third clear also recruits a fighter from further down the route. */
+    const bonusNote=()=>{const bonus=progress.lastBonus();return bonus?`Bonus recruit: ${ROSTER[bonus].name} joins your roster early. `:'';};
     const recruitNote=(encounter:Encounter)=>encounter.opponents.every(isStoryRecruitable)?'Victory recruits each defeated fighter.':'Relic guardian: victory advances the story; player selection still requires the matching Hub Relic.';
     const names=(encounter:Encounter)=>encounter.opponents.map(id=>ROSTER[id].name).join(' → ');
     const gauntletNote=(encounter:Encounter)=>encounter.opponents.length>1?`${names(encounter)}. Health refills between bouts. Beat both without losing, restarting or leaving; the second bout has no saved checkpoint. `:'';
@@ -129,7 +131,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
             const finaleWon=encounter.opponents[finishedWave]==='vaudream';
             if(!finaleWon&&next&&next.stage!==encounter.stage){scene(next,true);return true;}
             $('journey-title').textContent=save.completed||finaleWon?'Congratulations! You beat Sproto Fighter!':`${names(encounter)} ${encounter.opponents.every(isStoryRecruitable)?'recruited':'defeated'}!`;
-            $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode is unlocked and stays unlocked as the roster grows. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. ${recruitNote(encounter)} ${storageNote()}`;
+            $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode is unlocked and stays unlocked as the roster grows. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. ${bonusNote()}${recruitNote(encounter)} ${storageNote()}`;
             buttons(next?[{label:`Next: ${ROSTER[next.opponent].name}`,run:()=>{void launch(next.stage,next);}},{label:'Story route',run:()=>selector(true)}]:[{label:'Story route',run:()=>selector(true)},{label:'Free-play levels',run:()=>selector(false)}]);
         }else{
             $('journey-title').textContent=result===2?'Draw — try this encounter again.':'Retry this encounter.';

@@ -16,6 +16,10 @@ export const CAMPAIGN_RECRUITS:readonly string[]=['satoshi','xalt','potocaicai']
 // Existing earned recruits from older saves remain valid.
 export const RELIC_ONLY_RECRUITS:readonly string[]=['captain','sproto2616','sproto3152','sproto3215','sproto1870'];
 export const isStoryRecruitable=(id:string)=>!RELIC_ONLY_RECRUITS.includes(id);
+/** Every third cleared encounter also recruits a rival from far down the route, so the roster opens faster than one fighter per win. */
+export const BONUS_RECRUIT_EVERY=3;
+/** The last two chapters (the Hatchery and Verse Gate) keep their fighters as rewards for beating them. */
+const BONUS_PROTECTED_CHAPTERS=2;
 const curatedRivals=new Set(CAMPAIGN_RIVAL_IDS);
 // Frozen orders are migration schemas, never the source of the live campaign roster.
 export const LEGACY_STORY_OPPONENTS:readonly PlayableFighterId[]=['zephyr', 'mox', 'rune', 'guest07', 'guest08', 'guest09', 'guest10', 'guest11', 'guest12', 'guest13', 'guest14', 'dumpstar', 'crapto', 'vamp', 'alpha777', 'mandela', 'bigswole', 'nate', 'nick', 'captain', 'highsproto', 'erik', 'bimba', 'gpm', 'leviosa', 'lifeisameme', 'thxobama', 'rlarsson', 'blorfo', 'michael', 'freshprince', 'mlk', 'sproto102', 'sproto215', 'sproto313', 'sproto651', 'sproto763', 'sproto818', 'sproto831', 'sproto834', 'sproto837', 'sproto865', 'sproto943', 'sproto999', 'sproto1011', 'sproto1093', 'sproto1187', 'sproto1335', 'sproto1345', 'sproto1414', 'sproto1477', 'sproto1601', 'sproto1668', 'sproto1815', 'sproto1870', 'sproto2101', 'sproto2177', 'sproto2322', 'sproto2381', 'sproto2531', 'sproto2569', 'sproto2616', 'sproto2789', 'sproto2884', 'sproto3106', 'sproto3152', 'sproto3215', 'uncmasterflex', 'vitaliketh', 'urmometh', 'chaton', 'loadthebags', 'sisma', 'captainhowdy', 'sprotosales', 'sprog', 'jasper', 'aaron', 'brainsprot', 'sober', 'olnoname', 'greatcharly', 'sproto282', 'sproto704', 'sproto832', 'sproto1499', 'sproto1625', 'sproto2010', 'sproto2075', 'sproto2210', 'sproto2344', 'sproto3181', 'sproto3224', 'sproto3235', 'gryph', 'godmod3d', 'nosmileclown', 'duo', 'vela', 'vaudream'];
@@ -84,6 +88,12 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
     const isAvailable=(id:string):id is PlayableFighterId=>available.has(id);
     const empty=():Save=>({version:3,cleared:[],unlocked:[...starterIds],godModeUnlocked:false});
     const routeComplete=(cleared:ReadonlySet<string>)=>encounters.length>0&&encounters.every(e=>cleared.has(e.id));
+    // Bonus recruits come from the far end of the route, working backwards, and skip gauntlets, the
+    // last two chapters and Relic-only fighters. The n-th bonus is always the n-th entry, so applying
+    // the rule twice (another tab, a reload, an older save) can never recruit more than it should.
+    const lastOpenChapter=Math.max(0,...encounters.map(e=>e.chapter))-BONUS_PROTECTED_CHAPTERS;
+    const bonusPool=encounters.filter(e=>!e.gauntlet&&e.opponents.length===1&&e.chapter<=lastOpenChapter&&isStoryRecruitable(e.opponent)).map(e=>e.opponent).reverse();
+    const bonusRecruits=(cleared:ReadonlySet<string>)=>bonusPool.slice(0,Math.floor(encounters.filter(e=>cleared.has(e.id)).length/BONUS_RECRUIT_EVERY));
     function normalize(value:unknown):Save{
         const data=record(value,3);if(!data)return empty();
         // Retain syntactically valid future IDs in storage so a stale tab cannot erase
@@ -95,6 +105,7 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
         // Keep the original IDs too so older open tabs cannot erase earned progress.
         for(const encounter of encounters)if(encounter.opponents.length>1&&encounter.opponents.every(id=>cleared.has(singleId(id))))cleared.add(encounter.id);
         for(const encounter of encounters)if(cleared.has(encounter.id))for(const id of encounter.opponents)if(isStoryRecruitable(id))unlocked.add(id);
+        for(const id of bonusRecruits(cleared))unlocked.add(id);
         return {version:3,cleared:[...cleared],unlocked:[...unlocked],godModeUnlocked:data.godModeUnlocked===true||routeComplete(cleared)};
     }
     function migrate(value:unknown,version:1|2):Save{
@@ -117,7 +128,7 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
     }
     // God Mode opens every encounter. A run started on the open route can finish
     // even if God Mode is switched off mid-gauntlet.
-    let save=empty(),persistent=!!storage,run:{id:string;wave:number;open?:boolean}|null=null,openRoute=false;
+    let save=empty(),persistent=!!storage,run:{id:string;wave:number;open?:boolean}|null=null,openRoute=false,lastBonus:PlayableFighterId|null=null;
     const listeners=new Set<()=>void>();
     function read(){
         if(!storage)return empty();
@@ -147,10 +158,16 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
             if(wave===0){if(run?.id===encounter.id&&run.wave!==0)return false;run={id:encounter.id,wave:0,open:(run?.id===encounter.id&&run.open)||(openRoute&&!onRoute(index))};}
             else if(run?.id!==encounter.id||run.wave!==wave)return false;
             const opponent=encounter.opponents[wave];if(isStoryRecruitable(opponent)&&!save.unlocked.includes(opponent))save.unlocked.push(opponent);
-            if(wave===encounter.opponents.length-1){if(!save.cleared.includes(encounter.id))save.cleared.push(encounter.id);run=null;save.godModeUnlocked||=routeComplete(new Set(save.cleared));}
+            lastBonus=null;
+            if(wave===encounter.opponents.length-1){
+                if(!save.cleared.includes(encounter.id))save.cleared.push(encounter.id);run=null;save.godModeUnlocked||=routeComplete(new Set(save.cleared));
+                for(const id of bonusRecruits(new Set(save.cleared)))if(!save.unlocked.includes(id)){save.unlocked.push(id);lastBonus=id;}
+            }
             else run={id:encounter.id,wave:wave+1,open:run.open};
             write();return true;
         },
+        /** The fighter the last win recruited as a bonus, or null. */
+        lastBonus:()=>lastBonus,
         abandonRun,abandonFinale:abandonRun,
         sync(){merge();emit();},
         subscribe(listener:()=>void){listeners.add(listener);return ()=>listeners.delete(listener);},

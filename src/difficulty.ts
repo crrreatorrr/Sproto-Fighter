@@ -1,4 +1,6 @@
 /** Campaign difficulty uses installed encounters, never the historical rival count. */
+/** The first rival's CPU skill. The campaign used to open at 1, which a new player beat without learning to block. */
+export const STORY_START_SKILL = 3;
 export interface DifficultyEncounter { id: string; index: number; chapter: number; gauntlet?: string }
 export function storyDifficulty(encounter: DifficultyEncounter, route: readonly DifficultyEncounter[], assisted = false): number {
     const denominator = Math.max(1, route.length - 1);
@@ -9,7 +11,7 @@ export function storyDifficulty(encounter: DifficultyEncounter, route: readonly 
     const smooth = progress * progress * (3 - 2 * progress);
     const index = first + (last - first) * smooth;
     const markedBoss = !!encounter.gauntlet || encounter.index >= route.length - 15;
-    const base = Math.min(10, 1 + 9 * index / denominator + Number(markedBoss));
+    const base = Math.min(10, STORY_START_SKILL + (10 - STORY_START_SKILL) * index / denominator + Number(markedBoss));
     return Math.max(1, base - Number(assisted));
 }
 

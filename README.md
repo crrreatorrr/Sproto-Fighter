@@ -37,6 +37,16 @@ is a late rival. Every story win, including a God Mode win, recruits the defeate
 fighter and opens the next encounter. Locked fighters can be previewed but
 cannot be P1 until recruited; CPU rival selection is unrestricted.
 
+The first rival plays at CPU skill 3 and the route rises to 10 (`STORY_START_SKILL`
+in `src/difficulty.ts`). Every third cleared encounter also recruits one fighter
+from far down the route (never from the last two chapters, a gauntlet or a
+Relic-only fighter), so the roster opens faster than one fighter per win; that
+fighter still has to be beaten to clear their own encounter. Existing saves get
+their bonus recruits on load. The last standard rival of each chapter fights under
+that chapter's rule (double meter, low gravity, specials only, sudden death or
+reflected projectiles) with a 60-second clock; the transformed bosses keep their
+own rules.
+
 The route runs Trenches → City → Yacht → Castle → Bar → Verse → Hatchery,
 using the existing approved stage variations. The end of Verse is a sequential
 Artdude → Artchick encounter. The final encounter is Morelight → VMU. Each

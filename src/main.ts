@@ -241,9 +241,10 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
         return false;
     }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
-    // Standard chapter-end encounters can opt into rule variety. Transformed boss forms
+    // Standard chapter-end encounters carry their chapter's rule (double meter, low gravity, specials only,
+    // sudden death, reflected projectiles) and a 60-second clock. Transformed boss forms
     // use a separate combat controller and keep their existing campaign rules.
-    if(depthEnabled && encounter && STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter && !storyAnimationPlan(e.opponents.at(-1)!,true).form).at(-1)?.index===encounter.index && setup.opponent===encounter.opponents.at(-1))
+    if(encounter && STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter && !storyAnimationPlan(e.opponents.at(-1)!,true).form).at(-1)?.index===encounter.index && setup.opponent===encounter.opponents.at(-1))
         requestedMatchDepthOptions = { rounds: false, modifier: chapterBossModifier(encounter.chapter-1) };
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
     const selectedPartner=setup.partner;

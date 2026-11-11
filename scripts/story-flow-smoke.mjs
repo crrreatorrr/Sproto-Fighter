@@ -124,22 +124,21 @@ try {
       assert.equal(createStoryProgress(t.disk).snapshot().nextIndex,1);
     }
   });
-  await check('three losses at the story skill floor do not offer a no-op easier retry',async()=>{
+  await check('the campaign opens at skill three and three losses there offer a real easier retry',async()=>{
     const t=fresh();await t.begin();const saved=progressView(t.progress);
-    assert.equal(t.launches().at(-1).rest[0].skill,1);
+    assert.equal(t.launches().at(-1).rest[0].skill,3);
     for(let loss=1;loss<=3;loss++){
       await finishWave(t,1);
       const labels=t.$('journey-actions').children.map(button=>button.textContent);
-      assert.equal(labels.some(label=>/easier CPU/i.test(label)),false,'the skill-1 floor cannot be reduced');
-      assert.doesNotMatch(t.$('journey-copy').textContent,/Optional help|reduced by one|−1 skill/);
+      assert.equal(labels.some(label=>/easier CPU/i.test(label)),loss===3,'offer only after three straight losses; the first rival is no longer at the skill floor');
       assert.deepEqual(progressView(t.progress),saved,'losses do not change recruitment or progression');
       if(loss<3){await t.action(0);await flush();}
     }
     await t.action(0);await flush();
-    assert.deepEqual(t.launches().at(-1).rest[0],{skill:1,assisted:false});
+    assert.deepEqual(t.launches().at(-1).rest[0],{skill:3,assisted:false},'a plain retry keeps the published skill');
   });
   await check('a reducible fractional encounter offers optional easier CPU without promising an exact one-skill drop',async()=>{
-    const encounter=STORY_ENCOUNTERS.find(e=>{const skill=storyDifficulty(e,STORY_ENCOUNTERS);return skill>1&&skill<2;});
+    const encounter=STORY_ENCOUNTERS.find(e=>{const skill=storyDifficulty(e,STORY_ENCOUNTERS);return skill>3&&skill<4;});
     assert.ok(encounter,'installed route has a fractional opening difficulty');
     const t=fresh(before(encounter.index));await t.begin();const saved=progressView(t.progress),base=storyDifficulty(encounter,STORY_ENCOUNTERS);
     for(let loss=1;loss<=3;loss++){
@@ -155,9 +154,9 @@ try {
     await finishWave(t,1);
     const help=t.$('journey-actions').children.findIndex(button=>button.textContent==='Retry with easier CPU');assert.ok(help>=0);
     await t.action(help);await flush();
-    const selected=t.launches().at(-1).rest[0];assert.deepEqual(selected,{skill:1,assisted:true});
-    assert.ok(base-selected.skill>0&&base-selected.skill<1,'the floor clamps the fractional reduction');
-    assert.equal(t.story.snapshot().assisted,true);assert.equal(t.story.snapshot().cpuSkill,1);
+    const selected=t.launches().at(-1).rest[0];assert.deepEqual(selected,{skill:base-1,assisted:true});
+    assert.ok(selected.skill>=2,'the campaign now opens at skill three, so help never reaches the skill-1 floor here');
+    assert.equal(t.story.snapshot().assisted,true);assert.equal(t.story.snapshot().cpuSkill,base-1);
     assert.deepEqual(progressView(t.progress),saved,'taking help itself grants no progression/recruit');
   });
   await check('restart of a settled ordinary round accepts a new outcome once',async()=>{
@@ -260,7 +259,7 @@ try {
     assert.ok(start>=0&&end>start,'actual createStoryMode hook block found');
     const code=compile(functions.map(node=>node.getText(parsed)).join('\n')+'\n'+main.slice(start,end));
     const fixture=new Function('dependencies',`
-      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth}=dependencies;
+      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth,chapterBossModifier}=dependencies;
       const canPlayFighter=id=>storyProgress.isUnlocked(id),lockedFighter=()=> 'Defeat this fighter in story mode to recruit them.';
       let setup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'guard',godMode:false};
       let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};
@@ -273,7 +272,9 @@ try {
       const held=new Set(),frames=[],qaEvents=[],assetRequests=[],versusCalls=[];
       const countdown={hide(){}};
       const storyAnimation={load:async()=>{},reset(){},clear(){},active:null};
-      const storyAnimationPlan=()=>({intro:[],outro:[]});
+      // The five transformed bosses keep their own rules; every other chapter-end rival now carries its chapter's modifier.
+      const BOSS_FORMS=['nick','guest07','sproto943','vela','vaudream'];
+      const storyAnimationPlan=(id,story)=>({intro:[],outro:[],...(story&&BOSS_FORMS.includes(id)?{form:'boss'}:{})});const loadStoryBossArt=async()=>null;
       const versus={show:(...ids)=>versusCalls.push(ids),hide(){}};
       const ensurePoseAtlases=async(ids)=>{assetRequests.push([...ids]);if(assetFailure)throw Error('asset failure');},ensurePowerArt=async()=>{};
       const setStage=id=>selectedStage=id,setActiveStoryLocation=value=>selectedLocation=value,loadStoryLocation=async()=>{};
@@ -295,7 +296,7 @@ try {
         mapPick(index){if(!mapChoose)throw Error('Map not mounted');mapChoose(STORY_ENCOUNTERS[index]);},
         inspect:()=>({setup,mode,matchDepthOptions,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
     `)({createStoryMode:hooks=>createStoryMode(hooks,progress),storyProgress:progress,STAGES,ROSTER,$:d.$,createRoundPresentation,createState,
-      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth});
+      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth,chapterBossModifier:core.chapterBossModifier});
     return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);await d.action(0);await flush();}};
   }
   await check('failed launch preserves the active experimental match and replay options',async()=>{
