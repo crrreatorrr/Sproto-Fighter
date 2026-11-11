@@ -12,27 +12,19 @@
     },
     {
       "id": "nick",
-      "phase": "boss",
-      "seen": [
-        "nick-mount"
-      ],
-      "frames": 60,
-      "visible": 3,
-      "boundaryChecks": []
-    },
-    {
-      "id": "nick",
       "phase": "outro",
       "seen": [
+        "nick-mount",
+        "nick-dragon",
         "nick-flight"
       ],
-      "frames": 30,
-      "visible": 2,
+      "frames": 259,
+      "visible": 13,
       "boundaryChecks": []
     },
     {
       "id": "guest07",
-      "phase": "boss",
+      "phase": "outro",
       "seen": [
         "juicy-robot"
       ],
@@ -42,52 +34,27 @@
     },
     {
       "id": "sproto943",
-      "phase": "boss",
+      "phase": "outro",
       "seen": [
         "art-fusion",
         "mega-woman-growth"
       ],
-      "frames": 660,
-      "visible": 33,
-      "boundaryChecks": [
-        "fusion/growth",
-        "growth/boss idle"
-      ]
-    },
-    {
-      "id": "vela",
-      "phase": "boss",
-      "seen": [
-        "morelight-smoke"
-      ],
-      "frames": 332,
-      "visible": 17,
+      "frames": 240,
+      "visible": 12,
       "boundaryChecks": []
-    },
-    {
-      "id": "vela",
-      "phase": "mecha",
-      "seen": [
-        "morelight-shrink",
-        "morelight-mecha"
-      ],
-      "frames": 970,
-      "visible": 49,
-      "boundaryChecks": [
-        "shrink/boarding",
-        "boarding/boss warning"
-      ]
     },
     {
       "id": "vela",
       "phase": "outro",
       "seen": [
+        "morelight-smoke",
+        "morelight-mecha",
         "morelight-ejection",
         "morelight-wizard",
         "morelight-exit"
       ],
-      "frames": 928,
-      "visible": 46,
+      "frames": 1972,
+      "visible": 98,
       "boundaryChecks": [
         "mecha/ejection",
         "ejection/wizard"
@@ -103,51 +70,17 @@
         "vmu-shield",
         "vmu-black-hole"
       ],
-      "frames": 360,
-      "visible": 18,
+      "frames": 289,
+      "visible": 15,
       "boundaryChecks": []
     }
   ],
-  "regularBouts": [
-    {
-      "opponent": "vela",
-      "outcome": "ko",
-      "attempts": 69,
-      "combatFrames": 414,
-      "elapsedMs": 9906,
-      "frame": 415
-    },
-    {
-      "opponent": "vaudream",
-      "outcome": "ko",
-      "attempts": 82,
-      "combatFrames": 495,
-      "elapsedMs": 11310,
-      "frame": 496
-    }
-  ],
-  "blackoutPaint": {
-    "frame": 415,
-    "blackout": 89,
-    "pixel": [
-      0,
-      0,
-      0,
-      255
-    ]
-  },
   "nickIntro": {
     "pause": true,
     "skip": true,
     "retry": true,
     "combatFrames": 0,
     "failedLoadRetry": true
-  },
-  "morelightBoss": {
-    "progression": true,
-    "keyboardWeapons": true,
-    "replay": true,
-    "liveGodModeToggle": true
   },
   "errors": [],
   "failures": []
