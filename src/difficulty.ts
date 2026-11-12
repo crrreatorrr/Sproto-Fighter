@@ -63,8 +63,10 @@ export function storyDifficulty(encounter: DifficultyEncounter, route: readonly 
     const ramped = STORY_START_SKILL + (STORY_ROUTE_END - STORY_START_SKILL) * (1 - (1 - t) ** STORY_ROUTE_CURVE);
     const boss = storyBossEncounter(encounter, route);
     const base = Math.min(10, ramped + (boss ? STORY_BOSS_STEP + (STORY_BOSS_OFFSETS[encounter.id] ?? 0) : 0));
-    // Rounded so a calibrated 4 is not a hair under the CPU's skill-4 thresholds.
-    return Math.max(1, Math.round((base - Number(assisted)) * 1e6) / 1e6);
+    // Round the published skill first, then drop one for help, so a calibrated 4
+    // stays on the skill-4 threshold and help equals that published skill minus one.
+    const published = Math.round(base * 1e6) / 1e6;
+    return Math.max(1, published - Number(assisted));
 }
 
 /** Session-only, optional help. A draw or victory ends a straight-loss streak. */

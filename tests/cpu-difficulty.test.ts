@@ -182,6 +182,10 @@ describe('story difficulty and optional retry', () => {
             previous = n;
         }
         expect(storyDifficulty(STORY_ENCOUNTERS.at(-1)!, STORY_ENCOUNTERS, true)).toBe(2.95);
+        for (const encounter of STORY_ENCOUNTERS) {
+            const skill = skills[encounter.index];
+            expect(storyDifficulty(encounter, STORY_ENCOUNTERS, true)).toBe(Math.max(1, skill - 1));
+        }
     });
     it('offers help after three losses, never activates it, and resets on another encounter or a draw', () => {
         const retry = createDifficultyRetry();retry.begin('first');
