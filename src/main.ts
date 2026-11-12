@@ -34,7 +34,7 @@ import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 import { crashGuard, createFrameLoop } from './crash';
-import { createAudio, fightMusicCue } from './audio';
+import { createAudio, fightBedForZone, fightMusicCue } from './audio';
 import { SoundTracker } from './audioEvents';
 import { showCrashPanel } from './crashPanel';
 import { setupFeedback, type FeedbackFighter, type FeedbackSnapshot } from './feedback';
@@ -163,7 +163,7 @@ function updateAudio() {
     const musicCue = fightMusicCue({
         feedbackHold, selectionOpen: selection.isOpen, storyOpen: story.isOpen,
         fightOver: started && presentation.phase === 'result' && !storyAnimation.active,
-        trenches: stageZone(currentStage) === 'trenches',
+        bed: fightBedForZone(stageZone(currentStage)),
     });
     audio.fightBed(musicCue.bed);
     audio.music(musicCue.track);

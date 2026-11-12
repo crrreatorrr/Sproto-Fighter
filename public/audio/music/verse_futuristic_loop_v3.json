@@ -1,0 +1,17 @@
+{
+  "id": "verse_futuristic_loop_v3",
+  "filename": "verse_futuristic_loop_v3.mp3",
+  "zone": "verse",
+  "bpm": 125,
+  "beats_per_bar": 4,
+  "bars": 32,
+  "duration_seconds": 61.44,
+  "file_duration_seconds": 61.464,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bitrate_kbps": 192,
+  "gain": 1,
+  "file_size_bytes": 1475756,
+  "notes": "32 bars at 125 BPM is 61.44 s (2,949,120 samples at 48 kHz). The container is 61.464 s because of MP3 priming (1105 samples, start time 0.023021 s). Chrome and ffmpeg drop that priming and return 2,949,069 samples, 51 samples (1.0625 ms) short of 61.44 s, with no tail left to cut. loopStart is 0 and loopEnd is the end of that buffer (61.4389375 s). Both channels wrap inside a normal sample step. No loudness trim. Hatchery is not part of this file."
+}
