@@ -1,17 +1,28 @@
 /**
  * Sound for the client. Combat effects are recorded clips, decoded before they are needed.
- * Win, lose, round start, the fight loop and the story loop stay synthesised.
- * The front-end menus play a recorded theme and one recorded click.
- * Presentation only. The simulation never imports this module and nothing here feeds back
- * into combat. Browsers block audio until the player does something, so the context is
- * created (or resumed) on the first key, click or controller press.
+ * Win, lose, round start and the story loop stay synthesised. Other fight stages do too.
+ * The front-end menus play a recorded theme and one recorded click. Trenches fights play
+ * a recorded loop. Presentation only. The simulation never imports this module and nothing
+ * here feeds back into combat. Browsers block audio until the player does something, so
+ * the context is created (or resumed) on the first key, click or controller press.
  */
 import type { SoundName } from './audioEvents';
 import { combatClip, combatClipPaths } from './combatSfx';
 
 export type MusicTrack = 'menu' | 'fight' | 'story';
+/** Recorded bed for the fight track. Other stages keep the synthesised fight loop. */
+export type FightBed = 'synth' | 'trenches';
 export interface Volume { master: number; sfx: number; music: number }
 export interface PlayOptions { volume?: number; pan?: number; delay?: number; /** Fighter whose team-special recording should play. */ fighterId?: string }
+
+/** 24 bars of 4/4 at 128 BPM. The Trenches fight theme loops for exactly this long. */
+export const TRENCHES_LOOP_SECONDS = 45.000687;
+/** Priming samples ffmpeg wrote into trenches_fight_loop.mp3 (start time 0.023021 s at 48 kHz). */
+export const TRENCHES_ENCODER_DELAY_SAMPLES = 1105;
+export const TRENCHES_MUSIC_RATE = 48000;
+export const TRENCHES_MUSIC_PATH = 'audio/music/trenches_fight_loop.mp3';
+/** Fade the recorded fight theme in when a fight starts and out when it ends or the player leaves. */
+const FIGHT_FADE = .6;
 
 export const DEFAULT_VOLUME: Volume = { master: .8, sfx: .9, music: .45 };
 export const AUDIO_SETTINGS_KEY = 'sproto-arena-audio';
@@ -37,20 +48,44 @@ export function readVolume(raw: string | null | undefined): Volume {
 }
 
 /**
- * Loop region for the menu theme. Decoders that already dropped the MP3 priming leave a
- * short tail, so the loop starts at 0 and ends at 57.6s. Decoders that keep the priming
- * (about 1105 samples) skip that head and the same length of music, so the loop is still
- * 57.6s and the extra frame of padding stays outside it.
+ * Trim MP3 encoder padding so a recorded loop lasts `loopSeconds`.
+ * Chrome's decodeAudioData (and ffmpeg) drop the priming delay and one trailing MP3 frame,
+ * leaving a short tail after the musical length. A decoder that keeps the priming has those
+ * samples at the head (1105 at 48 kHz). When the buffer is at least one delay longer than
+ * the loop, that head is skipped. Otherwise the loop starts at 0 and the tail is cut.
  */
-export function menuLoopRegion(bufferLength: number, sampleRate: number): { loopStart: number; loopEnd: number } {
-    const rate = sampleRate > 0 ? sampleRate : MENU_MUSIC_RATE;
-    const loopSamples = Math.round(MENU_LOOP_SECONDS * rate);
-    const delaySamples = Math.round(MENU_ENCODER_DELAY_SAMPLES * rate / MENU_MUSIC_RATE);
+export function sampleLoopRegion(bufferLength: number, sampleRate: number, loopSeconds: number, encoderDelaySamples: number, nominalRate: number): { loopStart: number; loopEnd: number } {
+    const rate = sampleRate > 0 ? sampleRate : nominalRate;
+    const loopSamples = Math.round(loopSeconds * rate);
+    const delaySamples = Math.round(encoderDelaySamples * rate / nominalRate);
     const length = Math.max(0, Math.floor(bufferLength));
     const extra = length - loopSamples;
     const head = extra >= delaySamples ? delaySamples : 0;
     const end = Math.min(length, head + loopSamples);
     return { loopStart: head / rate, loopEnd: end / rate };
+}
+/** Menu theme: 57.6 s, priming skipped only when the decoder kept it. */
+export const menuLoopRegion = (bufferLength: number, sampleRate: number) =>
+    sampleLoopRegion(bufferLength, sampleRate, MENU_LOOP_SECONDS, MENU_ENCODER_DELAY_SAMPLES, MENU_MUSIC_RATE);
+export const trenchesLoopRegion = (bufferLength: number, sampleRate: number) =>
+    sampleLoopRegion(bufferLength, sampleRate, TRENCHES_LOOP_SECONDS, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_MUSIC_RATE);
+
+export interface MusicCueInput {
+    feedbackHold: boolean;
+    selectionOpen: boolean;
+    storyOpen: boolean;
+    /** Result screen, with no story cinematic still playing. */
+    fightOver: boolean;
+    trenches: boolean;
+}
+/** Which bed and track to play. Menus win over the story map, and the map wins over a finished fight. */
+export function fightMusicCue(input: MusicCueInput): { track: MusicTrack | null; bed: FightBed } {
+    const bed: FightBed = input.trenches ? 'trenches' : 'synth';
+    if (input.feedbackHold) return { track: null, bed };
+    if (input.selectionOpen) return { track: 'menu', bed };
+    if (input.storyOpen) return { track: 'story', bed };
+    if (input.fightOver) return { track: null, bed };
+    return { track: 'fight', bed };
 }
 
 const assetUrl = (path: string): string => {
@@ -154,6 +189,10 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     let menuBytes: ArrayBuffer | null = null, uiBytes: ArrayBuffer | null = null;
     let menuSource: AudioBufferSourceNode | null = null, menuGain: GainNode | null = null;
     let menuStarts = 0, samplesRequested = false, menuFailed = false, uiFailed = false, decoding = false;
+    let fightBed: FightBed = 'synth';
+    let fightSource: AudioBufferSourceNode | null = null, fightFade: GainNode | null = null, fightLevel: GainNode | null = null;
+    let fightBuffer: AudioBuffer | null = null, fightBytes: ArrayBuffer | null = null;
+    let fightStarts = 0, fightFailed = false;
     const lastAt = new Map<SoundName, number>();
     const combatBytes = new Map<string, ArrayBuffer>(), combatBuffers = new Map<string, AudioBuffer>(), combatFailed = new Set<string>();
     const applyVolume = () => {
@@ -163,15 +202,18 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         musicBus.gain.setTargetAtTime(volume.music * .5, ctx.currentTime, .05);
         // Leave a fade-out alone. menuSource is cleared when the fade starts.
         if (menuGain && menuSource) menuGain.gain.setTargetAtTime(volume.music, ctx.currentTime, .05);
+        // The fade envelope owns fightFade. fightLevel follows the music slider, including mute.
+        if (fightLevel && fightSource) fightLevel.gain.setTargetAtTime(volume.music, ctx.currentTime, .05);
     };
     function requestSamples(): void {
         if (samplesRequested || typeof fetch !== 'function') return;
         samplesRequested = true;
         const pull = (path: string) => fetch(assetUrl(path)).then(response => response.ok ? response.arrayBuffer() : Promise.reject(new Error(path))).catch(() => null);
-        void Promise.all([pull(MENU_MUSIC_PATH), pull(UI_SELECT_PATH)]).then(([menu, click]) => {
-            menuBytes = menu; uiBytes = click;
+        void Promise.all([pull(MENU_MUSIC_PATH), pull(UI_SELECT_PATH), pull(TRENCHES_MUSIC_PATH)]).then(([menu, click, fight]) => {
+            menuBytes = menu; uiBytes = click; fightBytes = fight;
             if (!menu) menuFailed = true;
             if (!click) uiFailed = true;
+            if (!fight) fightFailed = true;
             if (ctx) void decodeReady();
         });
         // Combat clips start downloading with the menu theme so a hit does not wait on the network.
@@ -185,8 +227,9 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     }
     async function decodeReady(): Promise<void> {
         const combatReady = [...combatBytes.keys()].filter(path => !combatBuffers.has(path) && !combatFailed.has(path));
-        if (!ctx || decoding || ((!menuBytes && !menuFailed) && combatReady.length === 0)) return;
-        // Held across the awaits so a second unlock cannot start a second copy of the theme.
+        if (!ctx || decoding) return;
+        if (!menuBytes && !menuFailed && !uiBytes && !uiFailed && !fightBytes && !fightFailed && combatReady.length === 0) return;
+        // Held across the awaits so a second unlock cannot start a second copy of a loop.
         decoding = true;
         try {
             if (menuBytes && !menuBuffer && !menuFailed) {
@@ -197,7 +240,13 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
                 try { uiBuffer = await ctx.decodeAudioData(uiBytes.slice(0)); }
                 catch { uiFailed = true; }
             }
+            if (fightBytes && !fightBuffer && !fightFailed) {
+                try { fightBuffer = await ctx.decodeAudioData(fightBytes.slice(0)); }
+                catch { fightFailed = true; }
+            }
+            // Start the loops before the combat clips, so a long decode does not hold the theme.
             if (track === 'menu') ensureMenu();
+            if (track === 'fight') ensureFight();
             for (const path of combatReady) {
                 const bytes = combatBytes.get(path);
                 if (!bytes || combatBuffers.has(path) || combatFailed.has(path)) continue;
@@ -208,7 +257,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         const moreCombat = [...combatBytes.keys()].some(path => !combatBuffers.has(path) && !combatFailed.has(path));
         const menuWaiting = !!menuBytes && !menuBuffer && !menuFailed;
         const uiWaiting = !!uiBytes && !uiBuffer && !uiFailed;
-        if (moreCombat || menuWaiting || uiWaiting) void decodeReady();
+        const fightWaiting = !!fightBytes && !fightBuffer && !fightFailed;
+        if (moreCombat || menuWaiting || uiWaiting || fightWaiting) void decodeReady();
     }
     /** One decoded combat clip through the effects bus. `level` may exceed 1 for a quiet file. */
     function playCombat(buffer: AudioBuffer, at: number, level: number, pan: number): void {
@@ -242,6 +292,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         const pending = ctx.state === 'suspended' ? ctx.resume().then(() => undefined, () => undefined) : Promise.resolve();
         void pending.then(() => decodeReady());
         if (track === 'menu') ensureMenu();
+        else if (track === 'fight') ensureFight();
         else if (track && !timer) startMusic();
         return ctx.state === 'running';
     }
@@ -296,13 +347,53 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (lead) tone(ctx, musicBus, at, song.leadWave, semitone(song.root, lead), semitone(song.root, lead), sixteenth * 1.5, .14, .01);
         if (hat) noise(ctx, musicBus, at, 'highpass', hat === 2 ? 1800 : 6000, hat === 2 ? 900 : 7000, hat === 2 ? .09 : .03, hat === 2 ? .22 : .1);
     }
+    function stopFightSample(fade: number): void {
+        if (!fightSource || !fightFade || !ctx) { fightSource = null; fightFade = null; fightLevel = null; return; }
+        const source = fightSource, fadeNode = fightFade;
+        fightSource = null; fightFade = null; fightLevel = null;
+        const now = ctx.currentTime;
+        fadeNode.gain.cancelScheduledValues(now);
+        fadeNode.gain.setValueAtTime(Math.max(0, Math.min(1, fadeNode.gain.value)), now);
+        try {
+            if (fade <= 0) source.stop();
+            else { fadeNode.gain.linearRampToValueAtTime(0, now + fade); source.stop(now + fade + .02); }
+        } catch { /* already stopped */ }
+    }
+    /** Start the recorded fight loop once, faded in. Calling it again while it plays does not restart it. */
+    function startFightSample(): void {
+        if (!ctx || !master || !fightBuffer || fightSource || track !== 'fight' || fightBed !== 'trenches' || ctx.state !== 'running') return;
+        const region = trenchesLoopRegion(fightBuffer.length, fightBuffer.sampleRate);
+        if (!(region.loopEnd > region.loopStart)) return;
+        if (timer) { clearInterval(timer); timer = undefined; playing = null; }
+        const source = ctx.createBufferSource(), fade = ctx.createGain(), level = ctx.createGain();
+        source.buffer = fightBuffer;
+        source.loop = true;
+        source.loopStart = region.loopStart;
+        source.loopEnd = region.loopEnd;
+        const now = ctx.currentTime;
+        fade.gain.setValueAtTime(0, now);
+        fade.gain.linearRampToValueAtTime(1, now + FIGHT_FADE);
+        level.gain.value = volume.music;
+        source.connect(fade).connect(level).connect(master);
+        source.start(now, region.loopStart);
+        fightSource = source; fightFade = fade; fightLevel = level; fightStarts++;
+    }
+    /** Recorded Trenches theme when the file decoded; the synthesised fight loop if it did not. */
+    function ensureFight(): void {
+        if (track !== 'fight') return;
+        if (fightBed === 'trenches' && fightBuffer) { startFightSample(); return; }
+        if (fightBed === 'trenches' && !fightFailed) return;
+        if (ctx && !timer) startMusic();
+    }
     function startMusic(): void {
-        // The recorded theme replaces the menu pattern. The pattern is only the fallback when that file never decodes.
+        // A recorded loop replaces its pattern. The pattern is only the fallback when that file never decodes.
         if (!ctx || timer || (track === 'menu' && menuBuffer)) return;
+        if (track === 'fight' && fightBed === 'trenches' && !fightFailed) return;
         nextStep = ctx.currentTime + .08; step = 0; playing = track;
         // Look a little ahead of the clock so a busy frame never drops a note.
         timer = setInterval(() => {
             if (!ctx || !track || ctx.state !== 'running' || (track === 'menu' && menuBuffer)) return;
+            if (track === 'fight' && fightBed === 'trenches' && !fightFailed) return;
             if (playing !== track) { playing = track; step = 0; nextStep = Math.max(nextStep, ctx.currentTime + .05); }
             if (nextStep < ctx.currentTime - .5) nextStep = ctx.currentTime + .05;
             const song = SONGS[track];
@@ -345,13 +436,33 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     }
     /** Switch the looping track; `null` stops music. Safe to call every frame. */
     function music(next: MusicTrack | null): void {
-        if (next === track) { if (next === 'menu') ensureMenu(); return; }
+        if (next === track) {
+            if (next === 'menu') ensureMenu();
+            if (next === 'fight') ensureFight();
+            return;
+        }
         const previous = track;
         track = next;
         if (previous === 'menu') stopMenuSample(MENU_FADE_OUT);
+        if (previous === 'fight') stopFightSample(FIGHT_FADE);
         if (!next) { clearInterval(timer); timer = undefined; playing = null; return; }
         if (next === 'menu') { clearInterval(timer); timer = undefined; playing = null; ensureMenu(); return; }
+        if (next === 'fight' && fightBed === 'trenches' && !fightFailed) {
+            clearInterval(timer); timer = undefined; playing = null;
+            ensureFight();
+            return;
+        }
         if (ctx && !timer) startMusic();
+    }
+    /** Which fight bed the current stage uses. Safe to call every frame. Ignored until the track is `fight`. */
+    function fightBedSet(next: FightBed): void {
+        if (next === fightBed) { if (track === 'fight') ensureFight(); return; }
+        fightBed = next;
+        if (track !== 'fight') return;
+        stopFightSample(FIGHT_FADE);
+        clearInterval(timer); timer = undefined; playing = null;
+        if (next === 'trenches' && !fightFailed) { ensureFight(); return; }
+        if (ctx) startMusic();
     }
     function setVolume(next: Partial<Volume>): void {
         volume = { master: clamp01(next.master, volume.master), sfx: clamp01(next.sfx, volume.sfx), music: clamp01(next.music, volume.music) };
@@ -361,12 +472,16 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     if (typeof window !== 'undefined') requestSamples();
     return {
         unlock, play, music, setVolume,
+        fightBed: fightBedSet,
         volume: (): Volume => ({ ...volume }),
         /** Read-only state for QA and the browser smoke check. */
         status: () => ({
             context: ctx?.state ?? 'none', unlocked: ctx?.state === 'running', track, played, lastSound, menuStarts,
             menuLoop: menuSource ? { start: menuSource.loopStart, end: menuSource.loopEnd } : null,
             combatReady: combatBuffers.size, combatClips: combatClipPaths().length,
+            fightBed, fightStarts,
+            fightMusic: fightLevel && fightSource ? fightLevel.gain.value : null,
+            fightLoop: fightSource && fightBuffer ? { start: fightSource.loopStart, end: fightSource.loopEnd, rate: fightBuffer.sampleRate, samples: fightBuffer.length } : null,
         }),
     };
 }

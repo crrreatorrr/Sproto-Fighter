@@ -21,6 +21,7 @@ import { ensurePowerArt } from './powerArt';
 import { playRetainCallout } from './characterVoice';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
 import { STAGES, setStage, loadStageArt, loadStagePreviews, getStageArtStatus, type StageId } from './stage';
+import { stageZone } from './stageGroups';
 import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
 import {bossFightInput,bossKeyInput,drawMovingStoryBoss,drawStoryBossAttacks,drawStoryBossPose,loadStoryBossArt,startStoryBoss,stepStoryBoss,storyBossPlayerPose,storyBossTitle,type StoryBoss,type BossForm} from './storyBoss';
@@ -33,7 +34,7 @@ import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 import { crashGuard, createFrameLoop } from './crash';
-import { createAudio } from './audio';
+import { createAudio, fightMusicCue } from './audio';
 import { SoundTracker } from './audioEvents';
 import { showCrashPanel } from './crashPanel';
 import { setupFeedback, type FeedbackFighter, type FeedbackSnapshot } from './feedback';
@@ -141,7 +142,7 @@ const frames: [
 ][] = [];
 const storage = (() => { try { return window.localStorage; } catch { return null; } })();
 let hubRelics: string[] = readRelicCache(storage);
-// ---- Sound (src/audio.ts): recorded menu theme, UI click and combat clips. Win, lose and round start stay synthesised. ----
+// ---- Sound (src/audio.ts): recorded menu theme, UI click, combat clips, and the Trenches fight theme. ----
 const audio = createAudio(storage), sounds = new SoundTracker();
 let soundPhase: RoundPresentation['phase'] | null = null, lastMenuSound = 0;
 for (const type of ['keydown', 'pointerdown'] as const) window.addEventListener(type, () => { audio.unlock(); }, { capture: true });
@@ -176,7 +177,14 @@ document.addEventListener('sproto-menu-ui', () => { if (!chainedUi()) menuSound(
 /** Once per rendered frame: pick the music and voice whatever the fight just did. */
 function updateAudio() {
     // The feedback window freezes a local match: the music stops with it and returns when it closes.
-    audio.music(feedbackHold ? null : selection.isOpen ? 'menu' : story.isOpen ? 'story' : 'fight');
+    // A finished fight fades out; the story map and the menus keep their own tracks.
+    const musicCue = fightMusicCue({
+        feedbackHold, selectionOpen: selection.isOpen, storyOpen: story.isOpen,
+        fightOver: started && presentation.phase === 'result' && !storyAnimation.active,
+        trenches: stageZone(currentStage) === 'trenches',
+    });
+    audio.fightBed(musicCue.bed);
+    audio.music(musicCue.track);
     if (!started || selection.isOpen) { sounds.reset(); soundPhase = null; return; }
     if (presentation.phase === 'fight' && soundPhase !== null && soundPhase !== 'fight') audio.play('roundStart');
     soundPhase = presentation.phase;

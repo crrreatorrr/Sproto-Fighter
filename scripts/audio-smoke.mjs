@@ -1,7 +1,8 @@
 // Browser check for src/audio.ts: no audio context exists before the player does anything,
 // the first input unlocks it, menu feedback then plays, the recorded menu theme loops
 // for 57.6s without restarting when options opens, and the volume sliders save.
-// It cannot tell how anything sounds.
+// The Trenches fight theme is a recorded loop. This checks that it starts, wraps on the
+// musical length, and stops when the player leaves. It cannot tell how anything sounds.
 import {chromium} from 'playwright';
 import {createServer} from 'vite';
 import assert from 'node:assert/strict';
@@ -59,6 +60,59 @@ try{
  await page.reload();
  await page.waitForFunction(()=>window.neonRelay&&document.querySelector('#start-fight')?.disabled===false,null,{timeout:60000});
  check('saved volumes are restored after a reload',await page.$eval('#volume-music',slider=>slider.value)==='20');
+ await page.keyboard.press('ArrowRight');
+ await page.waitForFunction(()=>window.neonRelay.audioStatus().unlocked,null,{timeout:5000});
+ await page.click('#zone-rail button[data-zone="trenches"]');
+ const duringMenu=await status();
+ check('choosing Trenches does not start the fight theme while the menu is open',duringMenu.track==='menu'&&duringMenu.fightLoop===null);
+ await page.click('#start-fight');
+ await page.waitForSelector('#partner-confirm',{timeout:15000});
+ check('the partner screen is still the menu, so the fight theme stays stopped',(await status()).track==='menu');
+ await page.click('#partner-confirm');
+ await page.waitForFunction(()=>{
+  const audio=window.neonRelay.audioStatus();
+  return audio.track==='fight'&&audio.fightBed==='trenches'&&audio.fightLoop&&audio.fightLoop.end>audio.fightLoop.start;
+ },null,{timeout:60000});
+ const playing=await status();
+ const span=playing.fightLoop.end-playing.fightLoop.start;
+ check('a Trenches fight plays the recorded loop for the musical length',Math.abs(span-45.000687)<1e-3&&playing.fightStarts===1);
+ const seam=await page.evaluate(async()=>{
+  const loop=window.neonRelay.audioStatus().fightLoop;
+  const ctx=new AudioContext({sampleRate:loop.rate});
+  const buf=await ctx.decodeAudioData(await (await fetch('audio/music/trenches_fight_loop.mp3')).arrayBuffer());
+  const channel=buf.getChannelData(0);
+  const start=Math.round(loop.start*buf.sampleRate), end=Math.round(loop.end*buf.sampleRate);
+  const deltas=[];
+  for(let i=Math.max(1,end-400);i<end;i++)deltas.push(Math.abs(channel[i]-channel[i-1]));
+  deltas.sort((a,b)=>a-b);
+  const p95=deltas[Math.floor(deltas.length*0.95)]||0;
+  const jump=Math.abs(channel[end-1]-channel[start]);
+  await ctx.close();
+  return {samples:buf.length,start,end,jump,p95,rate:buf.sampleRate};
+ });
+ check('the loop points sit inside the decoded buffer',seam.samples===playing.fightLoop.samples&&seam.end<=seam.samples&&seam.end>seam.start);
+ check('the wrap is no louder than a normal sample step',seam.jump<=seam.p95*2.5+1e-4);
+ await page.$eval('#volume-music',slider=>{slider.value='0';slider.dispatchEvent(new Event('input',{bubbles:true}));});
+ await page.waitForFunction(()=>{const level=window.neonRelay.audioStatus().fightMusic;return level!==null&&level<0.02;},null,{timeout:2000});
+ check('the music slider mutes the Trenches theme',(await status()).fightMusic<0.02);
+ await page.$eval('#volume-music',slider=>{slider.value='20';slider.dispatchEvent(new Event('input',{bubbles:true}));});
+ await page.keyboard.press('Enter');
+ await page.waitForFunction(()=>document.querySelector('.versus-screen')?.hidden!==false,null,{timeout:5000});
+ const afterIntro=await status();
+ check('the matchup screen does not restart the Trenches loop',afterIntro.track==='fight'&&afterIntro.fightStarts===1&&afterIntro.fightLoop);
+ await page.click('#back-select');
+ await page.waitForFunction(()=>window.neonRelay.audioStatus().track==='menu'&&window.neonRelay.audioStatus().fightLoop===null,null,{timeout:5000});
+ const left=await status();
+ check('leaving the fight stops the Trenches theme',left.track==='menu'&&left.fightLoop===null&&left.fightStarts===1);
+ await page.click('#zone-rail button[data-zone="ranch"]');
+ await page.click('#start-fight');
+ await page.waitForSelector('#partner-confirm',{timeout:15000});
+ await page.click('#partner-confirm');
+ await page.waitForFunction(()=>{
+  const audio=window.neonRelay.audioStatus();
+  return audio.track==='fight'&&audio.fightBed==='synth'&&audio.fightLoop===null;
+ },null,{timeout:60000});
+ check('a Ranch fight keeps the synthesised loop',(await status()).fightBed==='synth'&&(await status()).fightLoop===null);
  assert.deepEqual(errors,[],'no page errors');
  console.log(`${checks} audio checks passed in headless Chromium. Output quality is for human ears.`);
 }finally{await browser.close();await server?.close();}
