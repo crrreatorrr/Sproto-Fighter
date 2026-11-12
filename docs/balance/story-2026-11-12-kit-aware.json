@@ -1,0 +1,315 @@
+{
+  "instrument": "reference-v2-persistent-delay18, High Sproto, seed 20261105, 3600-frame cap, scripts/lib/balance-curve.mjs runCurve on single encounters of the installed 247-encounter route; counts are for the reference in the first seat (the reverse seats agreed in every row)",
+  "limitations": [
+    "The reference bot is not a validated model of a person.",
+    "Regular fighter bouts only; boss forms and chapter-end rules are not simulated.",
+    "A gauntlet counts as a reference win only when every wave is won."
+  ],
+  "main": {
+    "commit": "4c6de7fd013b291400fb88ec4f8ea357b22c0144",
+    "simVersion": "a23b4cb178899af9",
+    "encounters": [
+      {
+        "index": 1,
+        "id": "story-v1-zephyr",
+        "opponents": [
+          "zephyr"
+        ],
+        "skill": 2,
+        "repeats": 256,
+        "referenceWinsNaturalSeat": 254,
+        "cpuWinsNaturalSeat": 2,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0.9921875,
+        "wilson95": "97.2-99.8",
+        "referenceRateBothSeats": 0.9921875
+      },
+      {
+        "index": 124,
+        "id": "story-v1-rektina",
+        "opponents": [
+          "rektina"
+        ],
+        "skill": 5.96,
+        "repeats": 256,
+        "referenceWinsNaturalSeat": 104,
+        "cpuWinsNaturalSeat": 152,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0.40625,
+        "wilson95": "34.8-46.7",
+        "referenceRateBothSeats": 0.40625
+      },
+      {
+        "index": 247,
+        "id": "story-v3-gauntlet-vela+vaudream",
+        "opponents": [
+          "vela",
+          "vaudream"
+        ],
+        "skill": 10,
+        "repeats": 256,
+        "referenceWinsNaturalSeat": 0,
+        "cpuWinsNaturalSeat": 256,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0,
+        "wilson95": "0.0-1.5",
+        "referenceRateBothSeats": 0
+      }
+    ]
+  },
+  "kitAware": {
+    "commit": "4e80e9364ed116ae30025cc3ec02ce54576cb2aa",
+    "simVersion": "84f964848ca02602",
+    "encounters": [
+      {
+        "index": 1,
+        "id": "story-v1-zephyr",
+        "opponents": [
+          "zephyr"
+        ],
+        "skill": 2,
+        "repeats": 256,
+        "referenceWinsNaturalSeat": 255,
+        "cpuWinsNaturalSeat": 1,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0.99609375,
+        "wilson95": "97.8-99.9",
+        "referenceRateBothSeats": 0.99609375
+      },
+      {
+        "index": 124,
+        "id": "story-v1-rektina",
+        "opponents": [
+          "rektina"
+        ],
+        "skill": 5.96,
+        "repeats": 256,
+        "referenceWinsNaturalSeat": 67,
+        "cpuWinsNaturalSeat": 188,
+        "drawsNaturalSeat": 1,
+        "referenceRateNaturalSeat": 0.26171875,
+        "wilson95": "21.2-31.9",
+        "referenceRateBothSeats": 0.26171875
+      },
+      {
+        "index": 247,
+        "id": "story-v3-gauntlet-vela+vaudream",
+        "opponents": [
+          "vela",
+          "vaudream"
+        ],
+        "skill": 10,
+        "repeats": 256,
+        "referenceWinsNaturalSeat": 0,
+        "cpuWinsNaturalSeat": 256,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0,
+        "wilson95": "0.0-1.5",
+        "referenceRateBothSeats": 0
+      }
+    ],
+    "skillOverrideSweep": [
+      {
+        "index": 1,
+        "id": "story-v1-zephyr",
+        "opponents": [
+          "zephyr"
+        ],
+        "skill": 1,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 64,
+        "cpuWinsNaturalSeat": 0,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 1,
+        "wilson95": "94.3-100.0",
+        "referenceRateBothSeats": 1
+      },
+      {
+        "index": 1,
+        "id": "story-v1-zephyr",
+        "opponents": [
+          "zephyr"
+        ],
+        "skill": 2,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 64,
+        "cpuWinsNaturalSeat": 0,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 1,
+        "wilson95": "94.3-100.0",
+        "referenceRateBothSeats": 1
+      },
+      {
+        "index": 1,
+        "id": "story-v1-zephyr",
+        "opponents": [
+          "zephyr"
+        ],
+        "skill": 3,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 58,
+        "cpuWinsNaturalSeat": 6,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0.90625,
+        "wilson95": "81.0-95.6",
+        "referenceRateBothSeats": 0.90625
+      },
+      {
+        "index": 1,
+        "id": "story-v1-zephyr",
+        "opponents": [
+          "zephyr"
+        ],
+        "skill": 4,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 27,
+        "cpuWinsNaturalSeat": 37,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0.421875,
+        "wilson95": "30.9-54.4",
+        "referenceRateBothSeats": 0.421875
+      },
+      {
+        "index": 1,
+        "id": "story-v1-zephyr",
+        "opponents": [
+          "zephyr"
+        ],
+        "skill": 5,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 23,
+        "cpuWinsNaturalSeat": 40,
+        "drawsNaturalSeat": 1,
+        "referenceRateNaturalSeat": 0.359375,
+        "wilson95": "25.3-48.2",
+        "referenceRateBothSeats": 0.359375
+      },
+      {
+        "index": 1,
+        "id": "story-v1-zephyr",
+        "opponents": [
+          "zephyr"
+        ],
+        "skill": 7,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 20,
+        "cpuWinsNaturalSeat": 44,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0.3125,
+        "wilson95": "21.2-43.4",
+        "referenceRateBothSeats": 0.3125
+      },
+      {
+        "index": 1,
+        "id": "story-v1-zephyr",
+        "opponents": [
+          "zephyr"
+        ],
+        "skill": 10,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 0,
+        "cpuWinsNaturalSeat": 64,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0,
+        "wilson95": "0.0-5.7",
+        "referenceRateBothSeats": 0
+      },
+      {
+        "index": 247,
+        "id": "story-v3-gauntlet-vela+vaudream",
+        "opponents": [
+          "vela",
+          "vaudream"
+        ],
+        "skill": 2,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 61,
+        "cpuWinsNaturalSeat": 3,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0.953125,
+        "wilson95": "87.1-98.4",
+        "referenceRateBothSeats": 0.953125
+      },
+      {
+        "index": 247,
+        "id": "story-v3-gauntlet-vela+vaudream",
+        "opponents": [
+          "vela",
+          "vaudream"
+        ],
+        "skill": 3,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 52,
+        "cpuWinsNaturalSeat": 12,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0.8125,
+        "wilson95": "70.0-88.9",
+        "referenceRateBothSeats": 0.8125
+      },
+      {
+        "index": 247,
+        "id": "story-v3-gauntlet-vela+vaudream",
+        "opponents": [
+          "vela",
+          "vaudream"
+        ],
+        "skill": 4,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 5,
+        "cpuWinsNaturalSeat": 58,
+        "drawsNaturalSeat": 1,
+        "referenceRateNaturalSeat": 0.078125,
+        "wilson95": "3.4-17.0",
+        "referenceRateBothSeats": 0.078125
+      },
+      {
+        "index": 247,
+        "id": "story-v3-gauntlet-vela+vaudream",
+        "opponents": [
+          "vela",
+          "vaudream"
+        ],
+        "skill": 5,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 1,
+        "cpuWinsNaturalSeat": 63,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0.015625,
+        "wilson95": "0.3-8.3",
+        "referenceRateBothSeats": 0.015625
+      },
+      {
+        "index": 247,
+        "id": "story-v3-gauntlet-vela+vaudream",
+        "opponents": [
+          "vela",
+          "vaudream"
+        ],
+        "skill": 7,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 0,
+        "cpuWinsNaturalSeat": 64,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0,
+        "wilson95": "0.0-5.7",
+        "referenceRateBothSeats": 0
+      },
+      {
+        "index": 247,
+        "id": "story-v3-gauntlet-vela+vaudream",
+        "opponents": [
+          "vela",
+          "vaudream"
+        ],
+        "skill": 10,
+        "repeats": 64,
+        "referenceWinsNaturalSeat": 0,
+        "cpuWinsNaturalSeat": 64,
+        "drawsNaturalSeat": 0,
+        "referenceRateNaturalSeat": 0,
+        "wilson95": "0.0-5.7",
+        "referenceRateBothSeats": 0
+      }
+    ]
+  }
+}

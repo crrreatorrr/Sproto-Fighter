@@ -10,6 +10,7 @@ by relative path. Use this page to find the current material first.
 | --- | --- |
 | [../README.md](../README.md) | How to run, play and check the game; architecture; hub notes |
 | [GAMEPLAY-PLAN-20261105.md](GAMEPLAY-PLAN-20261105.md), [balance/README.md](balance/README.md) | Gameplay phases and reproducible balance measurements |
+| [balance/CPU-KIT-AWARE-20261112.md](balance/CPU-KIT-AWARE-20261112.md) | The balance tournament re-run after PR #54 at Normal, Hard and Expert, the CPU behaviours that favoured particular kits and their fix (new `SIM_VERSION` `84f964848ca02602`), the six-bot regression table and the story encounter measurements |
 | [GAMEPLAY-IMPROVEMENT-IMPLEMENTATION-20261111.md](GAMEPLAY-IMPROVEMENT-IMPLEMENTATION-20261111.md) | What shipped from the 2026-11-09 plan: presentation, sound, the CPU change (new `SIM_VERSION`), tutorial, story and hub rewards; measurements and open items |
 | [GAMEPLAY-IMPROVEMENT-PLAN-20261109.md](GAMEPLAY-IMPROVEMENT-PLAN-20261109.md) | The plan those changes follow: sound, CPU exploits, hidden rules, presentation and onboarding, from the 2026-11-09 gameplay audit |
 | [GAMEPLAY-IMPLEMENTATION-20261105.md](GAMEPLAY-IMPLEMENTATION-20261105.md) | Draft PR chain, verified coverage, calibration failures and remaining acceptance work |

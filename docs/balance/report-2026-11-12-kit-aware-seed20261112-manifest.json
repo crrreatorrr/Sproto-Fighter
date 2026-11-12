@@ -1,0 +1,48 @@
+{
+  "source": {
+    "commit": "4e80e9364ed116ae30025cc3ec02ce54576cb2aa",
+    "sourceSha256": "38ae377905409b90b4d957b3b384aa8e75408bba6976890eede23d639aa838a5",
+    "simVersion": "84f964848ca02602",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "config": {
+    "seed": 20261112,
+    "samples": 40,
+    "maxFrames": 3600,
+    "skills": [
+      7
+    ],
+    "bot": "cpu",
+    "repeats": 1,
+    "matchDepth": false,
+    "roster": "254 fighters",
+    "schedule": "9371 pairs"
+  },
+  "harnessVersion": "balance-v2-seeded-repeats",
+  "note": "second seed, Hard only; summary without per-bout records",
+  "summary": [
+    {
+      "skill": 7,
+      "bouts": 18742,
+      "rawDraws": 22,
+      "timeouts": 0,
+      "meanSeconds": 29.9,
+      "fightersOutside35to65": 2,
+      "archetypes": {
+        "Brawler": 52.3,
+        "Counter": 49.7,
+        "Footwork": 48.4,
+        "Hover": 50.3,
+        "Paired": 51.2,
+        "Pressure": 48.8,
+        "Weapon": 51.5,
+        "Zoning": 52.8
+      }
+    }
+  ],
+  "rawBytes": 764681,
+  "compressedBytes": 63441,
+  "rawSha256": "0521d0675e688386a153e2b05d4b1982521bd3f695af130f5d28286a67ba3cb9",
+  "compressedSha256": "d722c335c84d328ef21c50706fca7b66ddd6dee0dc80c762143808c447990125"
+}
