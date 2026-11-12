@@ -32,3 +32,8 @@ passing a sampled gate alone does not establish them.
 No assets, atlas registrations, clip lengths or historical `art/` fixtures are
 changed by measurement. Human feel and human round-duration targets require
 human playtesting. Browser automation and numerical checks do not approve feel.
+
+The most recent full tournament is recorded in
+[CPU-KIT-AWARE-20261112.md](CPU-KIT-AWARE-20261112.md). Its section 3 explains how much of a
+"fighters outside 35-65%" count is sampling: the two seats of a pair nearly always agree, so a
+fighter's bouts are about half as many independent results as they look.

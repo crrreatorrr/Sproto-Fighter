@@ -3,7 +3,7 @@ import { matchGravity, matchInput, nextMatchRound, tickMatchDepth } from './matc
 import { act, beginThrow, breakThrow, canGuard, clamp, damage, effect, finishCombo, getMove, grounded, isDown, updateThrow } from './combat';
 import { clashProjectiles, getHitbox, getHurtbox, getProjectileHitbox, rectanglesOverlap } from './geometry';
 import { A, FLOOR, GRAVITY, WIDTH } from './constants';
-import { BACK_THROW_LIFT_FRAMES, COMBAT_STYLES, CROUCH_SPIT_ORIGINS, GETUP_FRAMES, KNOCKDOWN_FRAMES, MOVES, Move, MoveId, ROSTER, THROW_RECOVERY_FRAMES, bodySpread, fighterWall, isCrouchingSpit, isHorizontalSpit, isPairedFighter, isPracticeMode } from './roster';
+import { BACK_THROW_LIFT_FRAMES, COMBAT_STYLES, GETUP_FRAMES, KNOCKDOWN_FRAMES, MOVES, Move, MoveId, ROSTER, THROW_RECOVERY_FRAMES, bodySpread, fighterWall, isCrouchingSpit, isHorizontalSpit, isPairedFighter, isPracticeMode, shotOrigin } from './roster';
 import { CombatState, Fighter } from './types';
 import { advanceCpuState } from './cpu';
 /**
@@ -249,7 +249,7 @@ export function step(s: CombatState, inputs: [
             speed=style.speed;
             // Reviewed emitting points in the complete-body cast release cels.
             // Keep this immutable combat data; rendering never moves a hitbox.
-            const origin=isCrouchingSpit(f)?CROUCH_SPIT_ORIGINS[f.id]!:rawStyle.originByFacing?.[f.facing===1?'right':'left']??rawStyle.origin??(f.id==='rivet'?{forward:44,height:109}:f.id==='vela'?{forward:59,height:103}:isPairedFighter(f.id)?{forward:bodySpread(f.id)+65,height:75}:{forward:34,height:95});
+            const origin=shotOrigin(f);
             const {secondaryOrigin, ...projectileStyle} = style;
             const origins = secondaryOrigin ? [origin, secondaryOrigin] : [origin];
             for (const [shot, emitter] of origins.entries()) {

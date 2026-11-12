@@ -1165,6 +1165,11 @@ mrgoldrobe:{"forward": 45, "height": 62},
     guest07:{forward:65,height:79}, guest13:{forward:30,height:78}, crapto:{forward:39,height:80},
 };
 export const isCrouchingSpit = (f:Fighter) => isHorizontalSpit(f.id) && f.y>=FLOOR && f.move?.id==='bolt' && f.move.aim==='down';
+/** Where a cast leaves its fighter, relative to the root. Combat data shared by the step and by the CPU's guard timing. */
+export const shotOrigin = (f:Fighter):{forward:number;height:number} => {
+    const style=COMBAT_STYLES[f.id].projectile;
+    return isCrouchingSpit(f)?CROUCH_SPIT_ORIGINS[f.id]!:style.originByFacing?.[f.facing===1?'right':'left']??style.origin??(f.id==='rivet'?{forward:44,height:109}:f.id==='vela'?{forward:59,height:103}:isPairedFighter(f.id)?{forward:bodySpread(f.id)+65,height:75}:{forward:34,height:95});
+};
 
 /** Effective kits are independent of generated intake-list tuning values. */
 export const BALANCE_KITS = Object.fromEntries(PLAYABLE_FIGHTERS.map(id=>{

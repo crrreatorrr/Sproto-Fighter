@@ -1,0 +1,86 @@
+{
+  "source": {
+    "commit": "4e80e9364ed116ae30025cc3ec02ce54576cb2aa",
+    "sourceSha256": "38ae377905409b90b4d957b3b384aa8e75408bba6976890eede23d639aa838a5",
+    "simVersion": "84f964848ca02602",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "config": {
+    "seed": 20261105,
+    "samples": 40,
+    "maxFrames": 3600,
+    "skills": [
+      4,
+      7,
+      10
+    ],
+    "bot": "cpu",
+    "repeats": 1,
+    "matchDepth": false,
+    "roster": "254 fighters",
+    "schedule": "9347 pairs"
+  },
+  "harnessVersion": "balance-v2-seeded-repeats",
+  "note": "kit-aware CPU; same driver and schedule as report-2026-11-12-main",
+  "summary": [
+    {
+      "skill": 4,
+      "bouts": 18694,
+      "rawDraws": 22,
+      "timeouts": 0,
+      "meanSeconds": 26.48,
+      "fightersOutside35to65": 6,
+      "archetypes": {
+        "Brawler": 48,
+        "Counter": 50.6,
+        "Footwork": 48.8,
+        "Hover": 47.6,
+        "Paired": 48.3,
+        "Pressure": 48.5,
+        "Weapon": 49.8,
+        "Zoning": 55.3
+      }
+    },
+    {
+      "skill": 7,
+      "bouts": 18694,
+      "rawDraws": 21,
+      "timeouts": 0,
+      "meanSeconds": 29.85,
+      "fightersOutside35to65": 3,
+      "archetypes": {
+        "Brawler": 51.5,
+        "Counter": 49.3,
+        "Footwork": 49.6,
+        "Hover": 44.8,
+        "Paired": 49.1,
+        "Pressure": 49.8,
+        "Weapon": 48,
+        "Zoning": 52.3
+      }
+    },
+    {
+      "skill": 10,
+      "bouts": 18694,
+      "rawDraws": 192,
+      "timeouts": 22,
+      "meanSeconds": 35.27,
+      "fightersOutside35to65": 6,
+      "archetypes": {
+        "Brawler": 51.4,
+        "Counter": 54.5,
+        "Footwork": 45.9,
+        "Hover": 55.9,
+        "Paired": 52.7,
+        "Pressure": 49.4,
+        "Weapon": 53.5,
+        "Zoning": 50.4
+      }
+    }
+  ],
+  "rawBytes": 78336180,
+  "compressedBytes": 4105771,
+  "rawSha256": "b2d6437916ada5c31fcfc7ca3819d34313741c73288cbce7cb0e8e55d750fe60",
+  "compressedSha256": "dec1f3d149355b9d2b556ae0f9bc9a1610fed39afed26966a4b6afffb68bcffb"
+}

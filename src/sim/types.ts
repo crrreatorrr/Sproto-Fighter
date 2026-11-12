@@ -108,6 +108,8 @@ export interface CpuObservation {
     vx: number;
     /** Frames until the nearest rival projectile arrives (-1: none) and whether it is a straight shot that can be jumped. */
     shotEta: number; shotClear: boolean;
+    /** Frames until that projectile has passed the far side of the body (-1: none), standing still. */
+    shotPass: number;
     /** Habit counts at observation time, so anticipation cannot read future attacks. */
     attacks: number; lows: number; projectiles: number;
 }

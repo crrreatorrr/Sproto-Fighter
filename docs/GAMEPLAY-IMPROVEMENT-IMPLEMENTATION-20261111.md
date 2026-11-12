@@ -8,6 +8,12 @@ follow before online play.
 
 ## 0. QA follow-up: the retune (read this first)
 
+**Update, 2026-11-12.** The tournament has since been re-run on the retuned build and the CPU
+changed again so that it reads both kits' numbers:
+[balance/CPU-KIT-AWARE-20261112.md](balance/CPU-KIT-AWARE-20261112.md). The fingerprint is now
+`84f964848ca02602`, `read` is 0.35 at Normal and 0.40 at Hard, and the bot table below has moved
+by a few points. The rest of this section describes the build as merged in PR #54.
+
 QA found the first CPU rewrite closed the exploits but left Hard a wall for ordinary play, and
 that Weapon fighters had drifted to about 58% CPU against CPU. The CPU was retuned in a second
 simulation change. **The current fingerprint is `a23b4cb178899af9`**; where sections 2 to 4

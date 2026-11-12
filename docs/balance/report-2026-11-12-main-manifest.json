@@ -1,0 +1,86 @@
+{
+  "source": {
+    "commit": "4c6de7fd013b291400fb88ec4f8ea357b22c0144",
+    "sourceSha256": "6ff4717b2f6f23bffd2db987312eb9b70cddf31b4926c1d52804f91262e097b9",
+    "simVersion": "a23b4cb178899af9",
+    "harnessSha256": "9d0114188482dce4eba0cc438a8d4585f772a3c948750cd1fdffcde3300812f9",
+    "cpuHasSkillParameter": true
+  },
+  "config": {
+    "seed": 20261105,
+    "samples": 40,
+    "maxFrames": 3600,
+    "skills": [
+      4,
+      7,
+      10
+    ],
+    "bot": "cpu",
+    "repeats": 1,
+    "matchDepth": false,
+    "roster": "254 fighters",
+    "schedule": "9347 pairs"
+  },
+  "harnessVersion": "balance-v2-seeded-repeats",
+  "note": "main after PR #54; run in four processes by a driver that calls the repository's makeSchedule, matchSeeds, playMatch, resolveSeatPair and summarize",
+  "summary": [
+    {
+      "skill": 4,
+      "bouts": 18694,
+      "rawDraws": 10,
+      "timeouts": 0,
+      "meanSeconds": 26.74,
+      "fightersOutside35to65": 13,
+      "archetypes": {
+        "Brawler": 53.8,
+        "Counter": 53.2,
+        "Footwork": 45.1,
+        "Hover": 44.8,
+        "Paired": 50.8,
+        "Pressure": 49.2,
+        "Weapon": 53.6,
+        "Zoning": 54.2
+      }
+    },
+    {
+      "skill": 7,
+      "bouts": 18694,
+      "rawDraws": 37,
+      "timeouts": 0,
+      "meanSeconds": 29.67,
+      "fightersOutside35to65": 8,
+      "archetypes": {
+        "Brawler": 53.1,
+        "Counter": 51.5,
+        "Footwork": 47.6,
+        "Hover": 49.7,
+        "Paired": 51.7,
+        "Pressure": 45.8,
+        "Weapon": 51.6,
+        "Zoning": 53.9
+      }
+    },
+    {
+      "skill": 10,
+      "bouts": 18694,
+      "rawDraws": 191,
+      "timeouts": 17,
+      "meanSeconds": 34.14,
+      "fightersOutside35to65": 16,
+      "archetypes": {
+        "Brawler": 55.2,
+        "Counter": 54.6,
+        "Footwork": 44,
+        "Hover": 51.7,
+        "Paired": 51.4,
+        "Pressure": 53.4,
+        "Weapon": 55.6,
+        "Zoning": 49.6
+      }
+    }
+  ],
+  "rawBytes": 78362295,
+  "compressedBytes": 4122489,
+  "rawSha256": "bc1b4bf73b754b06424c732b665b34d82e84e463e248a935f6aafae5c53b11da",
+  "compressedSha256": "ae1046c3845583227ec7049ea4716953a1cd7d778c6c35bbe9c5e4ddb829b1ea"
+}
