@@ -201,12 +201,12 @@ Sound is Web Audio (`src/audio.ts`). The main menu, character select, options
 and the other front-end menus share one recorded loop
 (`public/audio/music/menu_theme_loop.mp3`, 30 bars at 125 BPM). Every menu
 press plays `public/audio/sfx/ui_select.mp3`. Trenches, the City, the Yacht,
-the Castle, the Verse and the Bar each play a recorded fight theme on every
-level in that zone, in Story and in Level Select. The theme fades in when the
-fight starts and fades out when it ends or the player leaves. Loop points trim
-MP3 encoder padding: the menu wraps at 57.6 seconds, Trenches at 45.000687
-seconds, and Yacht, City, Castle, Verse and Bar on the 61.44 second bar (32 bars
-at 125 BPM).
+the Castle, the Verse, the Bar and the Ranch each play a recorded fight theme
+on every level in that zone, in Story and in Level Select. The theme fades in
+when the fight starts and fades out when it ends or the player leaves. Loop
+points trim MP3 encoder padding: the menu wraps at 57.6 seconds, Trenches at
+45.000687 seconds, and Yacht, City, Castle, Verse, Bar and Ranch on the 61.44
+second bar (32 bars at 125 BPM).
 The yacht master is about 0.4 dB quieter, so that theme plays a little hotter.
 Hits, guard, throws, projectiles, K.O. and the other fight and story music are
 synthesised. Playback starts after the first key, click or button press.

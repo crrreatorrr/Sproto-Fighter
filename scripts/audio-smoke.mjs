@@ -102,7 +102,7 @@ try{
  await page.waitForFunction(()=>window.neonRelay.audioStatus().track==='menu'&&window.neonRelay.audioStatus().fightLoop===null,null,{timeout:5000});
  const left=await status();
  check('leaving the fight stops the Trenches theme',left.track==='menu'&&left.fightLoop===null&&left.fightStarts===1);
- await page.click('#zone-rail button[data-zone="ranch"]');
+ await page.click('#zone-rail button[data-zone="hatchery"]');
  await page.click('#start-fight');
  await page.waitForSelector('#partner-confirm',{timeout:15000});
  await page.click('#partner-confirm');
@@ -110,7 +110,7 @@ try{
   const audio=window.neonRelay.audioStatus();
   return audio.track==='fight'&&audio.fightBed==='synth'&&audio.fightLoop===null;
  },null,{timeout:60000});
- check('a Ranch fight keeps the synthesised loop',(await status()).fightBed==='synth'&&(await status()).fightLoop===null);
+ check('a Hatchery fight keeps the synthesised loop',(await status()).fightBed==='synth'&&(await status()).fightLoop===null);
  await page.keyboard.press('Enter');
  await page.waitForFunction(()=>document.querySelector('.versus-screen')?.hidden!==false,null,{timeout:5000});
  await page.click('#back-select');
@@ -119,8 +119,9 @@ try{
   {zone:'yacht',bed:'yacht',seconds:61.44,gain:10**(0.4/20),seam:true,file:'audio/music/yacht_groove_loop.mp3'},
   {zone:'circuit',bed:'city',seconds:61.44,gain:1,seam:false,file:'audio/music/city_house_loop_v2.mp3'},
   {zone:'throne',bed:'castle',seconds:61.44,gain:1,seam:true,file:'audio/music/castle_vampire_loop_v2.mp3'},
-  {zone:'verse',bed:'verse',seconds:61.44,gain:1,seam:true,file:'audio/music/verse_futuristic_loop_v3.mp3'},
+  {zone:'verse',bed:'verse',seconds:61.44,gain:1,seam:true,file:'audio/music/verse_alien_electro_loop.mp3'},
   {zone:'bar',bed:'bar',seconds:61.44,gain:1,seam:true,file:'audio/music/bar_rock_loop.mp3'},
+  {zone:'ranch',bed:'ranch',seconds:61.44,gain:1,seam:true,file:'audio/music/ranch_country_loop_v2.mp3'},
  ];
  for(const spec of grooves){
   await page.click(`#zone-rail button[data-zone="${spec.zone}"]`);

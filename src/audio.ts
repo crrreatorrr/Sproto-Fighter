@@ -1,7 +1,7 @@
 /**
  * Sound for the client. Combat effects and the story loop are synthesised on Web Audio.
  * The front-end menus play a recorded theme and one recorded click. Trenches, City, Yacht,
- * Castle, Verse and Bar fights play recorded loops. Presentation only. The simulation never
+ * Castle, Verse, Bar and Ranch fights play recorded loops. Presentation only. The simulation never
  * imports this module and nothing here feeds back into combat. Browsers block audio until
  * the player does something, so the context is created (or resumed) on the first key,
  * click or controller press.
@@ -10,7 +10,7 @@ import type { SoundName } from './audioEvents';
 
 export type MusicTrack = 'menu' | 'fight' | 'story';
 /** Recorded bed for the fight track. Other stages keep the synthesised fight loop. */
-export type FightBed = 'synth' | 'trenches' | 'yacht' | 'city' | 'castle' | 'verse' | 'bar';
+export type FightBed = 'synth' | 'trenches' | 'yacht' | 'city' | 'castle' | 'verse' | 'bar' | 'ranch';
 export type RecordedBed = Exclude<FightBed, 'synth'>;
 export interface Volume { master: number; sfx: number; music: number }
 export interface PlayOptions { volume?: number; pan?: number; delay?: number }
@@ -21,7 +21,7 @@ export const TRENCHES_LOOP_SECONDS = 45.000687;
 export const TRENCHES_ENCODER_DELAY_SAMPLES = 1105;
 export const TRENCHES_MUSIC_RATE = 48000;
 export const TRENCHES_MUSIC_PATH = 'audio/music/trenches_fight_loop.mp3';
-/** 32 bars of 4/4 at 125 BPM. Yacht, City, Castle, Verse and Bar fight themes are written to this length. */
+/** 32 bars of 4/4 at 125 BPM. Yacht, City, Castle, Verse, Bar and Ranch fight themes are written to this length. */
 export const GROOVE_LOOP_SECONDS = 61.44;
 /** The same ffmpeg priming (start time 0.023021 s at 48 kHz) sits on each of those masters. */
 export const GROOVE_ENCODER_DELAY_SAMPLES = 1105;
@@ -93,11 +93,12 @@ export const FIGHT_BED_SPECS: Record<RecordedBed, FightBedSpec> = {
     yacht: { path: 'audio/music/yacht_groove_loop.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: YACHT_TRIM_GAIN },
     city: { path: 'audio/music/city_house_loop_v2.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
     castle: { path: 'audio/music/castle_vampire_loop_v2.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
-    verse: { path: 'audio/music/verse_futuristic_loop_v3.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
+    verse: { path: 'audio/music/verse_alien_electro_loop.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
     bar: { path: 'audio/music/bar_rock_loop.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
+    ranch: { path: 'audio/music/ranch_country_loop_v2.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
 };
 /** Menu zone id to fight bed. City's zone is `circuit` and Castle's is `throne`. Hatchery stays synthesised. */
-const ZONE_BEDS: Record<string, FightBed> = { trenches: 'trenches', yacht: 'yacht', circuit: 'city', throne: 'castle', verse: 'verse', bar: 'bar' };
+const ZONE_BEDS: Record<string, FightBed> = { trenches: 'trenches', yacht: 'yacht', circuit: 'city', throne: 'castle', verse: 'verse', bar: 'bar', ranch: 'ranch' };
 export function fightBedForZone(zone: string): FightBed {
     return ZONE_BEDS[zone] ?? 'synth';
 }
@@ -345,7 +346,9 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (!ctx) {
             const Context = (window as unknown as AudioWindow).AudioContext ?? (window as unknown as AudioWindow).webkitAudioContext;
             if (!Context) return false;
-            try { ctx = new Context(); } catch { return false; }
+            // The recorded loops are 48 kHz. Playing them at another rate resamples the wrap and can click.
+            try { ctx = new Context({ sampleRate: GROOVE_MUSIC_RATE }); }
+            catch { try { ctx = new Context(); } catch { return false; } }
             master = ctx.createGain(); sfx = ctx.createGain(); musicBus = ctx.createGain();
             // A gentle limiter keeps stacked impacts from clipping.
             const limiter = ctx.createDynamicsCompressor();
