@@ -1,0 +1,21 @@
+{
+  "menu_theme_loop": {
+    "file": "menu_theme_loop.mp3",
+    "role": "Main menu, character select, options, partner select and the other front-end menus",
+    "bpm": 125,
+    "beats_per_bar": 4,
+    "bars": 30,
+    "loop_seconds": 57.6,
+    "sample_rate": 48000,
+    "channels": 2,
+    "encoder_delay_samples": 1105,
+    "file_duration_seconds": 57.648,
+    "notes": "30 bars at 125 BPM is 57.6 seconds. The file was cut on zero crossings with a short overlap so the musical loop is seamless. FFmpeg's MP3 priming is 1105 samples (start time 0.023021s). Playback decodes to an AudioBuffer and sets loopStart/loopEnd so the loop is 57.6s."
+  },
+  "ui_select": {
+    "file": "../sfx/ui_select.mp3",
+    "role": "Every menu move, confirm, open, close, character choice and cancel",
+    "duration_seconds": 0.267,
+    "notes": "Soft bassy UI click. Each press starts its own one-shot so fast navigation overlaps instead of restarting the sample."
+  }
+}
