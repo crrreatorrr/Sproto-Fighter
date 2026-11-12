@@ -1,0 +1,15 @@
+{
+  "id": "trenches_fight.loop",
+  "filename": "trenches_fight_loop.mp3",
+  "intended_use": "Sproto Fighter Trenches stage fight theme (all Trenches levels and maps, Story and Level Select), seamless loop",
+  "bpm": 128,
+  "beats_per_bar": 4,
+  "bars": 24.000367,
+  "duration_seconds": 45.000687,
+  "file_duration_seconds": 45.048,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "output_format": "mp3_48000_192",
+  "file_size_bytes": 1081772,
+  "notes": "Post-processed from trenches_fight_raw.mp3. Source region is 24 bars at 128 BPM plus a 30 ms overlap, snapped to zero crossings. Equal-power overlap-add of the tail into the head sits at the top of the musical audio, so a hard wrap of that region has no click or gap. The file is 45.048 s because the MP3 container keeps encoder priming and one frame of padding. A decoder that drops the priming (Chrome decodeAudioData, ffmpeg) returns 45.000979 s, with 14 extra samples at the end. A decoder that keeps the priming has 1105 samples of delay at the head. Loop the musical 45.000687 s and leave both paddings outside the loop."
+}

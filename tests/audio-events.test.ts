@@ -2,7 +2,9 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, step, type CombatState, type Effect } from '../src/core';
 import { SOUND_NAMES, SoundTracker, effectSound, hitSound, panFor, whooshSound } from '../src/audioEvents';
-import { DEFAULT_VOLUME, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, SONGS, SOUND_VOICES, createAudio, menuLoopRegion, readVolume } from '../src/audio';
+import { DEFAULT_VOLUME, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, createAudio, fightMusicCue, menuLoopRegion, readVolume, trenchesLoopRegion } from '../src/audio';
+import { STAGES } from '../src/stage';
+import { stageZone } from '../src/stageGroups';
 
 const EFFECT_KINDS: Effect['kind'][] = ['hit', 'block', 'charge', 'dash', 'special', 'pumpkin'];
 
@@ -107,6 +109,49 @@ describe('audio settings and songs', () => {
         for (const song of Object.values(SONGS)) {
             expect(song.bass.length % 16).toBe(0); expect(song.lead.length % 16).toBe(0); expect(song.hat.length % 16).toBe(0);
         }
+    });
+    it('trims encoder padding so the Trenches theme loops for exactly 24 bars', () => {
+        expect(TRENCHES_LOOP_SECONDS / (60 / 128)).toBeCloseTo(96, 2);
+        const rate = TRENCHES_MUSIC_RATE;
+        const loopSamples = Math.round(TRENCHES_LOOP_SECONDS * rate);
+        // Chrome and ffmpeg drop the priming and one MP3 frame: 14 samples remain after the music.
+        const decoded = trenchesLoopRegion(loopSamples + 14, rate);
+        expect(decoded.loopStart).toBe(0);
+        expect(decoded.loopEnd - decoded.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 5);
+        // A decoder that keeps the priming has 1105 samples at the head, then the music, then the tail.
+        const withPriming = trenchesLoopRegion(TRENCHES_ENCODER_DELAY_SAMPLES + loopSamples + 14 + 1152, rate);
+        expect(withPriming.loopStart).toBeCloseTo(TRENCHES_ENCODER_DELAY_SAMPLES / rate, 6);
+        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 5);
+        const at44100 = trenchesLoopRegion(Math.round((loopSamples + 14) * 44100 / rate), 44100);
+        expect(at44100.loopStart).toBe(0);
+        expect(at44100.loopEnd - at44100.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 4);
+    });
+    it('plays the recorded bed on every Trenches stage and only while the fight is on', () => {
+        const trenches = STAGES.filter(stage => stageZone(stage.id) === 'trenches').map(stage => stage.id);
+        expect(trenches).toEqual(expect.arrayContaining([
+            'trenches', 'rainworks', 'scrapyard', 'rustcanal', 'ashstation', 'culvertgarden',
+            '00-trenches-drainage-floodgate', 'nov04-trenches-6',
+        ]));
+        expect(trenches.every(id => /trench/i.test(id) || /trench/i.test(STAGES.find(stage => stage.id === id)!.theme))).toBe(true);
+        expect(stageZone('ranch')).toBe('ranch');
+        expect(stageZone('circuit')).toBe('circuit');
+        const fight = { feedbackHold: false, selectionOpen: false, storyOpen: false, fightOver: false };
+        expect(fightMusicCue({ ...fight, trenches: true })).toEqual({ track: 'fight', bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, trenches: false })).toEqual({ track: 'fight', bed: 'synth' });
+        expect(fightMusicCue({ ...fight, trenches: true, selectionOpen: true })).toEqual({ track: 'menu', bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, trenches: true, storyOpen: true })).toEqual({ track: 'story', bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, trenches: true, fightOver: true })).toEqual({ track: null, bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, trenches: true, feedbackHold: true })).toEqual({ track: null, bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, trenches: true, storyOpen: true, fightOver: true })).toEqual({ track: 'story', bed: 'trenches' });
+    });
+    it('ships the Trenches fight loop next to its metadata', () => {
+        const bytes = readFileSync(new URL('../public/audio/music/trenches_fight_loop.mp3', import.meta.url));
+        const meta = JSON.parse(readFileSync(new URL('../public/audio/music/trenches_fight_loop.json', import.meta.url), 'utf8'));
+        expect(bytes.subarray(0, 3).toString('ascii')).toBe('ID3');
+        expect(bytes.length).toBe(meta.file_size_bytes);
+        expect(meta.duration_seconds).toBe(TRENCHES_LOOP_SECONDS);
+        expect(meta.encoder_delay_samples).toBe(TRENCHES_ENCODER_DELAY_SAMPLES);
+        expect(meta.bpm).toBe(128);
     });
     it('trims encoder padding so the menu theme loops for exactly 30 bars', () => {
         expect(MENU_LOOP_SECONDS).toBeCloseTo(60 / 125 * 4 * 30, 6);
