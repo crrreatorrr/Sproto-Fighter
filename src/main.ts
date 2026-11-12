@@ -141,7 +141,7 @@ const frames: [
 ][] = [];
 const storage = (() => { try { return window.localStorage; } catch { return null; } })();
 let hubRelics: string[] = readRelicCache(storage);
-// ---- Sound (src/audio.ts): recorded menu theme and click, synthesised fight audio, unlocked by the first input ----
+// ---- Sound (src/audio.ts): recorded menu theme, UI click and combat clips. Win, lose and round start stay synthesised. ----
 const audio = createAudio(storage), sounds = new SoundTracker();
 let soundPhase: RoundPresentation['phase'] | null = null, lastMenuSound = 0;
 for (const type of ['keydown', 'pointerdown'] as const) window.addEventListener(type, () => { audio.unlock(); }, { capture: true });

@@ -51,22 +51,25 @@ describe('sound tracker', () => {
         }
         return { heard, s, tracker };
     };
-    it('voices a whiffed light once, and a blocked or landed hit once per contact', () => {
+    it('voices a whiffed light once, and a blocked or landed attack once', () => {
         const { heard } = run(s => [s.frame === 5 ? A.light : 0, 0], 40);
         expect(heard).toEqual(['whooshLight']);
         const close = createState('rivet', 'versus', 'vela'); close.fighters[1].x = close.fighters[0].x + 70;
         const hit = run(s => [s.frame === 5 ? A.heavy : 0, 0], 60, close).heard;
-        expect(hit.filter(name => name === 'hitHeavy')).toHaveLength(1);
+        // The heavy file already contains the impact, so contact does not play it again.
+        expect(hit.filter(name => name === 'whooshHeavy')).toHaveLength(1);
+        expect(hit).not.toContain('hitHeavy');
         expect(hit[0]).toBe('whooshHeavy');
         const guard = createState('rivet', 'versus', 'vela'); guard.fighters[1].x = guard.fighters[0].x + 70;
         const blocked = run(s => [s.frame === 5 ? A.heavy : 0, s.frame >= 14 ? A.right : 0], 60, guard).heard;
+        expect(blocked).toContain('whooshHeavy');
         expect(blocked).toContain('block');
         expect(blocked).not.toContain('hitHeavy');
     });
-    it('voices a projectile leaving and landing, a throw, and the K.O.', () => {
+    it('voices a projectile once when it leaves, a throw, and the K.O.', () => {
         const shot = run(s => [s.frame === 5 ? A.bolt : 0, 0], 120).heard;
         expect(shot.filter(name => name === 'shot')).toHaveLength(1);
-        expect(shot).toContain('shotImpact');
+        expect(shot).not.toContain('shotImpact');
         const close = createState('rivet', 'versus', 'vela'); close.fighters[1].x = close.fighters[0].x + 60;
         expect(run(s => [s.frame === 5 ? A.grab : 0, 0], 80, close).heard).toContain('throw');
         const last = createState('rivet', 'versus', 'vela'); last.fighters[1].x = last.fighters[0].x + 70; last.fighters[1].hp = 10;
@@ -84,6 +87,36 @@ describe('sound tracker', () => {
             expect(JSON.stringify(s)).toBe(before);
         }
         expect(tracker.collect(createState('rivet', 'cpu', 'vela'))).toEqual([]);
+    });
+    it('plays a team special once and names the fighter', () => {
+        const s = createState('rivet', 'versus', 'vela');
+        s.fighters[0].pips = 3;
+        s.fighters[1].x = s.fighters[0].x + 70;
+        const tracker = new SoundTracker();
+        tracker.reset(s);
+        const cues: { name: string; fighterId?: string }[] = [];
+        for (let n = 0; n < 160 && s.winner === null; n++) {
+            step(s, [n === 5 ? A.special : 0, 0]);
+            cues.push(...tracker.collect(s));
+        }
+        const specials = cues.filter(cue => cue.name === 'teamSpecial');
+        expect(specials).toHaveLength(1);
+        expect(specials[0].fighterId).toBe('rivet');
+        expect(cues.some(cue => cue.name === 'hitSpecial')).toBe(false);
+    });
+    it('still voices a body landing, which is not the attack clip', () => {
+        const s = createState('rivet', 'versus', 'vela');
+        s.fighters[1].y = 400;
+        s.fighters[1].vy = 8;
+        s.fighters[1].reaction = { kind: 'knockdown', phase: 'flight', t: 2, direction: 1 };
+        const tracker = new SoundTracker();
+        tracker.reset(s);
+        const heard: string[] = [];
+        for (let n = 0; n < 90 && !heard.includes('hitMedium'); n++) {
+            step(s, [0, 0]);
+            for (const cue of tracker.collect(s)) heard.push(cue.name);
+        }
+        expect(heard).toContain('hitMedium');
     });
 });
 

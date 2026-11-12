@@ -1,15 +1,17 @@
 /**
- * Sound for the client. Combat effects, the fight loop and the story loop are synthesised
- * on Web Audio. The front-end menus play a recorded theme and one recorded click.
+ * Sound for the client. Combat effects are recorded clips, decoded before they are needed.
+ * Win, lose, round start, the fight loop and the story loop stay synthesised.
+ * The front-end menus play a recorded theme and one recorded click.
  * Presentation only. The simulation never imports this module and nothing here feeds back
  * into combat. Browsers block audio until the player does something, so the context is
  * created (or resumed) on the first key, click or controller press.
  */
 import type { SoundName } from './audioEvents';
+import { combatClip, combatClipPaths } from './combatSfx';
 
 export type MusicTrack = 'menu' | 'fight' | 'story';
 export interface Volume { master: number; sfx: number; music: number }
-export interface PlayOptions { volume?: number; pan?: number; delay?: number }
+export interface PlayOptions { volume?: number; pan?: number; delay?: number; /** Fighter whose team-special recording should play. */ fighterId?: string }
 
 export const DEFAULT_VOLUME: Volume = { master: .8, sfx: .9, music: .45 };
 export const AUDIO_SETTINGS_KEY = 'sproto-arena-audio';
@@ -153,6 +155,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     let menuSource: AudioBufferSourceNode | null = null, menuGain: GainNode | null = null;
     let menuStarts = 0, samplesRequested = false, menuFailed = false, uiFailed = false, decoding = false;
     const lastAt = new Map<SoundName, number>();
+    const combatBytes = new Map<string, ArrayBuffer>(), combatBuffers = new Map<string, AudioBuffer>(), combatFailed = new Set<string>();
     const applyVolume = () => {
         if (!ctx || !master || !sfx || !musicBus) return;
         master.gain.setTargetAtTime(volume.master, ctx.currentTime, .02);
@@ -171,9 +174,18 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
             if (!click) uiFailed = true;
             if (ctx) void decodeReady();
         });
+        // Combat clips start downloading with the menu theme so a hit does not wait on the network.
+        for (const path of combatClipPaths()) {
+            void pull(path).then(bytes => {
+                if (!bytes) { combatFailed.add(path); return; }
+                combatBytes.set(path, bytes);
+                if (ctx) void decodeReady();
+            });
+        }
     }
     async function decodeReady(): Promise<void> {
-        if (!ctx || decoding || (!menuBytes && !menuFailed)) return;
+        const combatReady = [...combatBytes.keys()].filter(path => !combatBuffers.has(path) && !combatFailed.has(path));
+        if (!ctx || decoding || ((!menuBytes && !menuFailed) && combatReady.length === 0)) return;
         // Held across the awaits so a second unlock cannot start a second copy of the theme.
         decoding = true;
         try {
@@ -185,8 +197,33 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
                 try { uiBuffer = await ctx.decodeAudioData(uiBytes.slice(0)); }
                 catch { uiFailed = true; }
             }
+            if (track === 'menu') ensureMenu();
+            for (const path of combatReady) {
+                const bytes = combatBytes.get(path);
+                if (!bytes || combatBuffers.has(path) || combatFailed.has(path)) continue;
+                try { combatBuffers.set(path, await ctx.decodeAudioData(bytes.slice(0))); }
+                catch { combatFailed.add(path); }
+            }
         } finally { decoding = false; }
-        if (track === 'menu') ensureMenu();
+        const moreCombat = [...combatBytes.keys()].some(path => !combatBuffers.has(path) && !combatFailed.has(path));
+        const menuWaiting = !!menuBytes && !menuBuffer && !menuFailed;
+        const uiWaiting = !!uiBytes && !uiBuffer && !uiFailed;
+        if (moreCombat || menuWaiting || uiWaiting) void decodeReady();
+    }
+    /** One decoded combat clip through the effects bus. `level` may exceed 1 for a quiet file. */
+    function playCombat(buffer: AudioBuffer, at: number, level: number, pan: number): void {
+        if (!ctx || !sfx) return;
+        const source = ctx.createBufferSource(), gain = ctx.createGain();
+        source.buffer = buffer;
+        gain.gain.value = level;
+        source.connect(gain);
+        let out: AudioNode = gain;
+        if (pan && typeof ctx.createStereoPanner === 'function') {
+            const panner = ctx.createStereoPanner(); panner.pan.value = Math.max(-1, Math.min(1, pan));
+            gain.connect(panner); out = panner;
+        }
+        out.connect(sfx);
+        source.start(at);
     }
     /** Create or resume the context. Returns false where Web Audio is missing or still blocked. */
     function unlock(): boolean {
@@ -233,6 +270,14 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         // The same combat sound twice inside 30 ms (both fighters trading) is one sound.
         if (!options.delay && at - (lastAt.get(name) ?? -1) < .03) return;
         lastAt.set(name, at);
+        const clip = combatClip(name, options.fighterId);
+        const buffer = clip ? combatBuffers.get(clip.path) : undefined;
+        if (clip && buffer) {
+            // Per-clip gain sits after the cue level. The bus limiter keeps a boosted file from clipping.
+            playCombat(buffer, at, level * clip.gain, options.pan ?? 0);
+            played++; lastSound = name;
+            return;
+        }
         const gain = ctx.createGain(); gain.gain.value = level;
         let out: AudioNode = gain;
         if (options.pan && typeof ctx.createStereoPanner === 'function') {
@@ -321,6 +366,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         status: () => ({
             context: ctx?.state ?? 'none', unlocked: ctx?.state === 'running', track, played, lastSound, menuStarts,
             menuLoop: menuSource ? { start: menuSource.loopStart, end: menuSource.loopEnd } : null,
+            combatReady: combatBuffers.size, combatClips: combatClipPaths().length,
         }),
     };
 }

@@ -15,7 +15,7 @@ export const SOUND_NAMES = [
     'dash', 'charge', 'teamSpecial',
 ] as const;
 export type SoundName = typeof SOUND_NAMES[number];
-export interface SoundCue { name: SoundName; /** -1 is the left wall, 1 the right. */ pan: number; volume?: number; /** Seconds to wait before it sounds. */ delay?: number }
+export interface SoundCue { name: SoundName; /** -1 is the left wall, 1 the right. */ pan: number; volume?: number; /** Seconds to wait before it sounds. */ delay?: number; /** Set on a team special so the recording follows that fighter. */ fighterId?: string }
 
 /** The colour the simulation gives a just-defend guard spark. */
 const JUST_DEFEND = '#fff3ad';
@@ -37,7 +37,10 @@ export function effectSound(effect: Pick<Effect, 'kind' | 'color'>, freeze: numb
         case 'pumpkin': return 'shotImpact';
     }
 }
-/** The swing of a move as it starts. Projectiles and throws have their own sounds. */
+/**
+ * The swing of a move as it starts. The recorded file already contains the impact,
+ * so a later hit does not play it again. Projectiles and throws have their own sounds.
+ */
 export function whooshSound(id: MoveId): SoundName | null {
     switch (id) {
         case 'light': case 'low': case 'airLight': return 'whooshLight';
@@ -58,6 +61,10 @@ export class SoundTracker {
     private winner: number | null = null;
     private down = false;
     private frame = -1;
+    /** This fighter's current move already played a clip that includes the impact. */
+    private attackCovered = [false, false];
+    /** This fighter's shot clip already includes the projectile impact. */
+    private shotCovered = [false, false];
 
     /** Forget everything: a new round or a new match must not replay the old one's sounds. */
     reset(s?: CombatState): void {
@@ -65,6 +72,7 @@ export class SoundTracker {
         this.moves = s ? s.fighters.map(f => f.move ? { id: f.move.id, t: f.move.t } : null) : [null, null];
         this.throwing = !!s?.throwState; this.notice = s && s.noticeLife > 0 ? s.notice : ''; this.winner = s?.winner ?? null;
         this.down = !!s?.fighters.some(f => f.hp <= 0); this.frame = s?.frame ?? -1;
+        this.attackCovered = [false, false]; this.shotCovered = [false, false];
         if (s) for (const e of s.effects) this.effects.set(effectKey(e, s.frame), s.frame);
     }
 
@@ -79,15 +87,25 @@ export class SoundTracker {
             const move = f.move, before = this.moves[i];
             if (move) {
                 const fresh = !before || before.id !== move.id || move.t < before.t;
+                if (fresh) this.attackCovered[i] = false;
                 const name = fresh ? whooshSound(move.id) : null;
-                if (name) cues.push({ name, pan: panFor(f.x), volume: .7 });
-                if (move.id === 'grab' && fresh && !s.throwState) cues.push({ name: 'whooshLight', pan: panFor(f.x), volume: .7 });
-                if (move.id === 'bolt') {
-                    // The shot leaves when startup ends; `connected` marks its landing.
-                    const startup = getMove(f, 'bolt').startup;
-                    if (move.t >= startup && (fresh || before!.t < startup)) cues.push({ name: 'shot', pan: panFor(f.x) });
+                // The file is the whole attack, so it plays at full level rather than as a quiet swing under a second hit.
+                if (name) {
+                    const cue: SoundCue = { name, pan: panFor(f.x), volume: 1 };
+                    if (name === 'teamSpecial') cue.fighterId = f.id;
+                    cues.push(cue);
+                    this.attackCovered[i] = true;
                 }
-            }
+                if (move.id === 'grab' && fresh && !s.throwState) cues.push({ name: 'whooshLight', pan: panFor(f.x), volume: 1 });
+                if (move.id === 'bolt') {
+                    // The shot leaves when startup ends. The same file contains the landing.
+                    const startup = getMove(f, 'bolt').startup;
+                    if (move.t >= startup && (fresh || before!.t < startup)) {
+                        cues.push({ name: 'shot', pan: panFor(f.x) });
+                        this.shotCovered[i] = true;
+                    }
+                }
+            } else this.attackCovered[i] = false;
             this.moves[i] = move ? { id: move.id, t: move.t } : null;
         });
         for (const e of s.effects) {
@@ -99,10 +117,17 @@ export class SoundTracker {
             // A throw catch and a throw break both emit a guard spark; they are voiced below.
             if (e.kind === 'block' && (s.throwState || (s.notice === 'THROW BREAK' && s.noticeLife >= 58))) continue;
             // A hit with no melee move behind it came from a projectile (or is a body landing on the floor).
-            const victim = Math.abs(s.fighters[0].x - e.x) <= Math.abs(s.fighters[1].x - e.x) ? 0 : 1, striker = s.fighters[1 - victim].move;
+            const victim = Math.abs(s.fighters[0].x - e.x) <= Math.abs(s.fighters[1].x - e.x) ? 0 : 1, strikerIndex = 1 - victim, striker = s.fighters[strikerIndex].move;
+            const floorBody = e.kind === 'hit' && e.y >= FLOOR - 20;
             const ranged = e.kind === 'hit' && e.y < FLOOR - 20 && !(striker && striker.id !== 'bolt' && striker.hit);
-            const name = e.kind === 'hit' && e.y >= FLOOR - 20 ? 'hitMedium' : effectSound(e, s.freeze, ranged);
-            if (name) cues.push({ name, pan: panFor(e.x) });
+            const name = floorBody ? 'hitMedium' : effectSound(e, s.freeze, ranged);
+            if (!name) continue;
+            // A body landing is not the attack that already played. Everything else from that attack is in the clip.
+            if (!floorBody && ranged && this.shotCovered[strikerIndex]) continue;
+            if (!floorBody && !ranged && this.attackCovered[strikerIndex] && (name === 'hitLight' || name === 'hitMedium' || name === 'hitHeavy' || name === 'hitSpecial')) continue;
+            const cue: SoundCue = { name, pan: panFor(e.x) };
+            if (name === 'hitSpecial') cue.fighterId = s.fighters[strikerIndex].id;
+            cues.push(cue);
         }
         if (this.effects.size > 64) for (const [key, born] of this.effects) if (born < s.frame - 90) this.effects.delete(key);
         const throwing = !!s.throwState;
