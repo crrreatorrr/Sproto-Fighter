@@ -205,14 +205,15 @@ try{
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().wave),0);
  await page.locator('#story-animation-skip').click();
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.length===1);
- await page.locator('#settings').click();
+ // A fight fills the window, so Settings is reached through the pause menu.
+ await page.keyboard.press('Escape');await page.locator('#overlay-settings').click();
  const pausedFrame=await page.evaluate(()=>window.neonRelay.snapshot().frame);
  await page.locator('#testing-god-mode').uncheck();
  assert.equal(await page.evaluate(()=>!!window.neonRelay.snapshot().godMode),false);
  assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().frame),pausedFrame);
  await page.locator('#testing-god-mode').check();
  assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().frame),pausedFrame);
- await page.locator('#close-settings').click();
+ await page.locator('#close-settings').click();await page.locator('#start').click();
  const floor=await page.evaluate(()=>window.neonRelay.snapshot().fighters[0].y);
  await page.keyboard.down('KeyW');
  await page.waitForFunction(floor=>window.neonRelay.snapshot().fighters[0].y<floor,floor);
