@@ -1,0 +1,17 @@
+{
+  "id": "yacht_groove_loop",
+  "filename": "yacht_groove_loop.mp3",
+  "zone": "yacht",
+  "bpm": 125,
+  "beats_per_bar": 4,
+  "bars": 32,
+  "duration_seconds": 61.44,
+  "file_duration_seconds": 61.464,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bitrate_kbps": 192,
+  "gain": 1.0471285480508996,
+  "file_size_bytes": 1475756,
+  "notes": "32 bars at 125 BPM is 61.44 s (2,949,120 samples at 48 kHz). The container is 61.464 s because of MP3 priming (1105 samples, start time 0.023021 s). ffmpeg and Chrome drop that priming and land on exactly 61.44 s. Both ends sit on a zero crossing, so the wrap step is far smaller than a normal sample step. Playback still sets loopStart/loopEnd to that 61.44 s region. The master is about 0.4 dB quieter than the other loops, so the bed gain is +0.4 dB."
+}

@@ -151,7 +151,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     };const levelSelect=document.getElementById('free-levels');
     if(levelSelect)levelSelect.onclick=()=>selector(false);
     $('journey-back').onclick=()=>back();
-    modal.addEventListener('cancel',e=>{e.preventDefault();back();});progress.subscribe(status);status();
+    modal.addEventListener('cancel',e=>{e.preventDefault();if(typeof document.dispatchEvent==='function'&&typeof CustomEvent==='function')document.dispatchEvent(new CustomEvent('sproto-menu-ui',{bubbles:true}));back();});progress.subscribe(status);status();
     return {
         get isOpen(){return modal.open;},get isActive(){return !!active;},finishMatch,onRoundEnd,
         retryMatch(){

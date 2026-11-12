@@ -197,10 +197,23 @@ the current fighter's moves with your bindings. `/?matchDepth` and `/?training`
 still switch these on by URL. Online play stays on classic rules.
 [Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
 
-Sound is synthesised in the browser with Web Audio (`src/audio.ts`): hits by
-strength, guard, throws, projectiles, K.O., menus and three music loops. It
-starts after the first key, click or button press, and Settings has master,
-effects and music volume. No audio files ship apart from one voice clip.
+Sound is Web Audio (`src/audio.ts`). The main menu, character select, options
+and the other front-end menus share one recorded loop
+(`public/audio/music/menu_theme_loop.mp3`, 30 bars at 125 BPM). Every menu
+press plays `public/audio/sfx/ui_select.mp3`. Trenches, the City, the Yacht,
+the Castle, the Verse, the Bar and the Ranch each play a recorded fight theme
+on every level in that zone, in Story and in Level Select. The theme fades in
+when the fight starts and fades out when it ends or the player leaves. Loop
+points trim MP3 encoder padding: the menu wraps at 57.6 seconds, Trenches at
+45.000687 seconds, and Yacht, City, Castle, Verse, Bar and Ranch on the 61.44
+second bar (32 bars at 125 BPM).
+The yacht master is about 0.4 dB quieter, so that theme plays a little hotter.
+Combat effects are recorded clips in `public/audio/sfx/combat/`: one file per
+attack, so a swing and its impact play once, and a fighter with their own
+team-special recording uses it. Win, lose, round start and the story music stay
+synthesised. Stages without a recorded theme keep the synthesised fight loop.
+Playback starts after the first key, click or button press. Settings has master,
+effects and music volume.
 
 The CPU guards a projectile in place and walks in between shots, punishes a move
 it has guarded twice in three seconds, holds guard as it gets up, and stop-hits a

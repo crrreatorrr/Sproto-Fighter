@@ -94,7 +94,7 @@ export function createSelectionMenu(hooks:{start:(setup:SelectionSetup)=>void;pr
   catch(error){if(request!==assetRequest)return;ready=false;artLoading=false;loadFailed=true;launchState();el('selection-loading').textContent='Selected fighter art could not load. Choose again to retry.';console.error(error);}
  }
  function choose(id:PlayableFighterId){storyProgress.sync();if(target==='fighter'&&setup.fighter!==id)delete setup.partner;setup[target]=id;update();void prepareSelection();}
- function selectSide(side:typeof target){storyProgress.sync();target=side;update();focusSelected();}
+ function selectSide(side:typeof target){const before=document.activeElement;storyProgress.sync();target=side;update();focusSelected();noteUi(before);}
  el<HTMLInputElement>('god-mode').onchange=()=>{setup.godMode=storyProgress.snapshot().godModeUnlocked&&el<HTMLInputElement>('god-mode').checked;update();};
  el<HTMLSelectElement>('cpu-difficulty').onchange=()=>{setup.cpuSkill=Number(el<HTMLSelectElement>('cpu-difficulty').value);update();};
  el<HTMLSelectElement>('rules').onchange=()=>{setup.rules=el<HTMLSelectElement>('rules').value as MatchRules;update();launchState();};
@@ -102,7 +102,8 @@ export function createSelectionMenu(hooks:{start:(setup:SelectionSetup)=>void;pr
  el('choose-player').onclick=()=>selectSide('fighter');el('choose-rival').onclick=()=>selectSide('opponent');
  el('random-stage').onclick=()=>{setup.stage=STAGES[Math.floor(Math.random()*STAGES.length)].id;update();};el<HTMLSelectElement>('mode').onchange=()=>{setup.mode=el<HTMLSelectElement>('mode').value as MenuMode;update();};
  el('start-fight').onclick=()=>{storyProgress.sync();if(ready&&!artLoading&&open&&canSelect(setup.fighter))hooks.start({...setup});};
- function back(){if(rail.contains(document.activeElement)){Array.from(zoneRail.querySelectorAll<HTMLButtonElement>('button')).find(b=>b.dataset.zone===stageZone(setup.stage))?.focus();return;}selectSide('fighter');}
+ function noteUi(before:Element|null){if(document.activeElement!==before||typeof document.dispatchEvent!=='function'||typeof CustomEvent!=='function')return;document.dispatchEvent(new CustomEvent('sproto-menu-ui',{bubbles:true}));}
+ function back(){const before=document.activeElement;if(rail.contains(before)){Array.from(zoneRail.querySelectorAll<HTMLButtonElement>('button')).find(b=>b.dataset.zone===stageZone(setup.stage))?.focus();noteUi(before);return;}selectSide('fighter');noteUi(before);}
  function columns(){const first=portraits[0].getBoundingClientRect().top;return Math.max(1,portraits.filter(b=>Math.abs(b.getBoundingClientRect().top-first)<5).length);}
  function navigate(direction:string){const active=document.activeElement as HTMLElement,index=portraits.indexOf(active as HTMLButtonElement),stageButtons=Array.from(rail.querySelectorAll<HTMLButtonElement>('button')).filter(b=>!b.hidden),zoneButtons=Array.from(zoneRail.querySelectorAll<HTMLButtonElement>('button')),selectedStage=()=>stageButtons.find(b=>b.dataset.stage===setup.stage)?.focus();
  if(index>=0){const cols=columns();if(direction==='up'&&index<cols){el(target==='fighter'?'choose-player':'choose-rival').focus();return;}if(direction==='down'&&index+cols>=portraits.length){selectedStage();return;}const offset=direction==='left'?-1:direction==='right'?1:direction==='up'?-cols:cols;portraits[(index+offset+portraits.length)%portraits.length].focus();return;}

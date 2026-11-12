@@ -1,7 +1,10 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, step, type CombatState, type Effect } from '../src/core';
 import { SOUND_NAMES, SoundTracker, effectSound, hitSound, panFor, whooshSound } from '../src/audioEvents';
-import { DEFAULT_VOLUME, SONGS, SOUND_VOICES, createAudio, readVolume } from '../src/audio';
+import { DEFAULT_VOLUME, FIGHT_BED_SPECS, GROOVE_ENCODER_DELAY_SAMPLES, GROOVE_LOOP_SECONDS, GROOVE_MUSIC_RATE, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, SEAM_CROSSFADE_SECONDS, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, YACHT_TRIM_GAIN, createAudio, crossfadeChannel, fightBedForZone, fightBedLoopRegion, fightMusicCue, menuLoopRegion, readVolume, seamIsClick, softenLoopSeam, trenchesLoopRegion } from '../src/audio';
+import { STAGES } from '../src/stage';
+import { stageZone } from '../src/stageGroups';
 
 const EFFECT_KINDS: Effect['kind'][] = ['hit', 'block', 'charge', 'dash', 'special', 'pumpkin'];
 
@@ -50,22 +53,25 @@ describe('sound tracker', () => {
         }
         return { heard, s, tracker };
     };
-    it('voices a whiffed light once, and a blocked or landed hit once per contact', () => {
+    it('voices a whiffed light once, and a blocked or landed attack once', () => {
         const { heard } = run(s => [s.frame === 5 ? A.light : 0, 0], 40);
         expect(heard).toEqual(['whooshLight']);
         const close = createState('rivet', 'versus', 'vela'); close.fighters[1].x = close.fighters[0].x + 70;
         const hit = run(s => [s.frame === 5 ? A.heavy : 0, 0], 60, close).heard;
-        expect(hit.filter(name => name === 'hitHeavy')).toHaveLength(1);
+        // The heavy file already contains the impact, so contact does not play it again.
+        expect(hit.filter(name => name === 'whooshHeavy')).toHaveLength(1);
+        expect(hit).not.toContain('hitHeavy');
         expect(hit[0]).toBe('whooshHeavy');
         const guard = createState('rivet', 'versus', 'vela'); guard.fighters[1].x = guard.fighters[0].x + 70;
         const blocked = run(s => [s.frame === 5 ? A.heavy : 0, s.frame >= 14 ? A.right : 0], 60, guard).heard;
+        expect(blocked).toContain('whooshHeavy');
         expect(blocked).toContain('block');
         expect(blocked).not.toContain('hitHeavy');
     });
-    it('voices a projectile leaving and landing, a throw, and the K.O.', () => {
+    it('voices a projectile once when it leaves, a throw, and the K.O.', () => {
         const shot = run(s => [s.frame === 5 ? A.bolt : 0, 0], 120).heard;
         expect(shot.filter(name => name === 'shot')).toHaveLength(1);
-        expect(shot).toContain('shotImpact');
+        expect(shot).not.toContain('shotImpact');
         const close = createState('rivet', 'versus', 'vela'); close.fighters[1].x = close.fighters[0].x + 60;
         expect(run(s => [s.frame === 5 ? A.grab : 0, 0], 80, close).heard).toContain('throw');
         const last = createState('rivet', 'versus', 'vela'); last.fighters[1].x = last.fighters[0].x + 70; last.fighters[1].hp = 10;
@@ -83,6 +89,36 @@ describe('sound tracker', () => {
             expect(JSON.stringify(s)).toBe(before);
         }
         expect(tracker.collect(createState('rivet', 'cpu', 'vela'))).toEqual([]);
+    });
+    it('plays a team special once and names the fighter', () => {
+        const s = createState('rivet', 'versus', 'vela');
+        s.fighters[0].pips = 3;
+        s.fighters[1].x = s.fighters[0].x + 70;
+        const tracker = new SoundTracker();
+        tracker.reset(s);
+        const cues: { name: string; fighterId?: string }[] = [];
+        for (let n = 0; n < 160 && s.winner === null; n++) {
+            step(s, [n === 5 ? A.special : 0, 0]);
+            cues.push(...tracker.collect(s));
+        }
+        const specials = cues.filter(cue => cue.name === 'teamSpecial');
+        expect(specials).toHaveLength(1);
+        expect(specials[0].fighterId).toBe('rivet');
+        expect(cues.some(cue => cue.name === 'hitSpecial')).toBe(false);
+    });
+    it('still voices a body landing, which is not the attack clip', () => {
+        const s = createState('rivet', 'versus', 'vela');
+        s.fighters[1].y = 400;
+        s.fighters[1].vy = 8;
+        s.fighters[1].reaction = { kind: 'knockdown', phase: 'flight', t: 2, direction: 1 };
+        const tracker = new SoundTracker();
+        tracker.reset(s);
+        const heard: string[] = [];
+        for (let n = 0; n < 90 && !heard.includes('hitMedium'); n++) {
+            step(s, [0, 0]);
+            for (const cue of tracker.collect(s)) heard.push(cue.name);
+        }
+        expect(heard).toContain('hitMedium');
     });
 });
 
@@ -106,5 +142,165 @@ describe('audio settings and songs', () => {
         for (const song of Object.values(SONGS)) {
             expect(song.bass.length % 16).toBe(0); expect(song.lead.length % 16).toBe(0); expect(song.hat.length % 16).toBe(0);
         }
+    });
+    it('trims encoder padding so the Trenches theme loops for exactly 24 bars', () => {
+        expect(TRENCHES_LOOP_SECONDS / (60 / 128)).toBeCloseTo(96, 2);
+        const rate = TRENCHES_MUSIC_RATE;
+        const loopSamples = Math.round(TRENCHES_LOOP_SECONDS * rate);
+        // Chrome and ffmpeg drop the priming and one MP3 frame: 14 samples remain after the music.
+        const decoded = trenchesLoopRegion(loopSamples + 14, rate);
+        expect(decoded.loopStart).toBe(0);
+        expect(decoded.loopEnd - decoded.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 5);
+        // A decoder that keeps the priming has 1105 samples at the head, then the music, then the tail.
+        const withPriming = trenchesLoopRegion(TRENCHES_ENCODER_DELAY_SAMPLES + loopSamples + 14 + 1152, rate);
+        expect(withPriming.loopStart).toBeCloseTo(TRENCHES_ENCODER_DELAY_SAMPLES / rate, 6);
+        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 5);
+        const at44100 = trenchesLoopRegion(Math.round((loopSamples + 14) * 44100 / rate), 44100);
+        expect(at44100.loopStart).toBe(0);
+        expect(at44100.loopEnd - at44100.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 4);
+    });
+    it('plays the recorded bed on every Trenches stage and only while the fight is on', () => {
+        const trenches = STAGES.filter(stage => stageZone(stage.id) === 'trenches').map(stage => stage.id);
+        expect(trenches).toEqual(expect.arrayContaining([
+            'trenches', 'rainworks', 'scrapyard', 'rustcanal', 'ashstation', 'culvertgarden',
+            '00-trenches-drainage-floodgate', 'nov04-trenches-6',
+        ]));
+        expect(trenches.every(id => /trench/i.test(id) || /trench/i.test(STAGES.find(stage => stage.id === id)!.theme))).toBe(true);
+        expect(stageZone('ranch')).toBe('ranch');
+        expect(stageZone('circuit')).toBe('circuit');
+        const fight = { feedbackHold: false, selectionOpen: false, storyOpen: false, fightOver: false, bed: 'trenches' as const };
+        expect(fightMusicCue(fight)).toEqual({ track: 'fight', bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, bed: 'synth' })).toEqual({ track: 'fight', bed: 'synth' });
+        expect(fightMusicCue({ ...fight, selectionOpen: true })).toEqual({ track: 'menu', bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, storyOpen: true })).toEqual({ track: 'story', bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, fightOver: true })).toEqual({ track: null, bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, feedbackHold: true })).toEqual({ track: null, bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, storyOpen: true, fightOver: true })).toEqual({ track: 'story', bed: 'trenches' });
+    });
+    it('trims encoder padding so yacht, city and castle loop for exactly 32 bars', () => {
+        expect(GROOVE_LOOP_SECONDS).toBeCloseTo(32 * 4 * 60 / 125, 8);
+        expect(Math.round(GROOVE_LOOP_SECONDS * GROOVE_MUSIC_RATE)).toBe(2_949_120);
+        expect(YACHT_TRIM_GAIN).toBeCloseTo(10 ** (0.4 / 20), 8);
+        expect(FIGHT_BED_SPECS.yacht.gain).toBe(YACHT_TRIM_GAIN);
+        expect(FIGHT_BED_SPECS.city.gain).toBe(1);
+        expect(FIGHT_BED_SPECS.castle.gain).toBe(1);
+        expect(FIGHT_BED_SPECS.trenches.gain).toBe(1);
+        const rate = GROOVE_MUSIC_RATE;
+        const loopSamples = Math.round(GROOVE_LOOP_SECONDS * rate);
+        for (const bed of ['yacht', 'city', 'castle', 'verse', 'bar', 'ranch'] as const) {
+            expect(fightBedLoopRegion(bed, loopSamples, rate)).toEqual({ loopStart: 0, loopEnd: GROOVE_LOOP_SECONDS });
+            // ffmpeg leaves City 47 samples past the music. That tail is outside the loop.
+            const tail = fightBedLoopRegion(bed, loopSamples + 47, rate);
+            expect(tail.loopStart).toBe(0);
+            expect(tail.loopEnd - tail.loopStart).toBeCloseTo(GROOVE_LOOP_SECONDS, 6);
+            const primed = fightBedLoopRegion(bed, GROOVE_ENCODER_DELAY_SAMPLES + loopSamples + 47, rate);
+            expect(primed.loopStart).toBeCloseTo(GROOVE_ENCODER_DELAY_SAMPLES / rate, 6);
+            expect(primed.loopEnd - primed.loopStart).toBeCloseTo(GROOVE_LOOP_SECONDS, 6);
+        }
+        // Chrome drops the priming and returns 10 samples less than 32 bars, so the Bar loop is the whole buffer.
+        const barDecoded = fightBedLoopRegion('bar', 2_949_110, GROOVE_MUSIC_RATE);
+        expect(barDecoded.loopStart).toBe(0);
+        expect(barDecoded.loopEnd).toBeCloseTo(2_949_110 / GROOVE_MUSIC_RATE, 8);
+        expect(GROOVE_LOOP_SECONDS - barDecoded.loopEnd).toBeCloseTo(10 / GROOVE_MUSIC_RATE, 8);
+    });
+    it('plays yacht, city, castle and verse beds on those zones and nowhere else', () => {
+        const ids = (zone: 'yacht' | 'circuit' | 'throne') => STAGES.filter(stage => stageZone(stage.id) === zone).map(stage => stage.id);
+        const yacht = ids('yacht'), city = ids('circuit'), castle = ids('throne');
+        expect(yacht).toEqual(expect.arrayContaining(['yacht', 'sundeck', '09-sunlit-cargo-pier', 'nov04-yacht-6']));
+        expect(city).toEqual(expect.arrayContaining(['circuit', 'retro', 'skyrail', '03-circuit-checkpoint-lockdown', 'nov04-circuit-6']));
+        expect(castle).toEqual(expect.arrayContaining(['throne', 'castle', 'glassgarden', '12-throne-furnace-relay-vault', 'nov04-throne-6']));
+        const verse = STAGES.filter(stage => stageZone(stage.id) === 'verse').map(stage => stage.id);
+        expect(verse).toEqual(expect.arrayContaining(['verse', 'starbridge', 'observatory', 'nov04-verse-6']));
+        expect(yacht.every(id => fightBedForZone(stageZone(id)) === 'yacht')).toBe(true);
+        expect(city.every(id => fightBedForZone(stageZone(id)) === 'city')).toBe(true);
+        expect(castle.every(id => fightBedForZone(stageZone(id)) === 'castle')).toBe(true);
+        expect(verse.every(id => fightBedForZone(stageZone(id)) === 'verse')).toBe(true);
+        const bar = STAGES.filter(stage => stageZone(stage.id) === 'bar').map(stage => stage.id);
+        expect(bar).toEqual(expect.arrayContaining(['bar', 'cellar', 'rooftop', 'bluebar', 'nov04-bar-6']));
+        expect(bar.every(id => fightBedForZone(stageZone(id)) === 'bar')).toBe(true);
+        const ranch = STAGES.filter(stage => stageZone(stage.id) === 'ranch').map(stage => stage.id);
+        expect(ranch).toEqual(expect.arrayContaining(['ranch', 'ranch-orchard', '21-ranch-lantern-lit-barn', 'nov04-ranch-6']));
+        expect(ranch.every(id => fightBedForZone(stageZone(id)) === 'ranch')).toBe(true);
+        expect(fightBedForZone('hatchery')).toBe('synth');
+        const fight = { feedbackHold: false, selectionOpen: false, storyOpen: false, fightOver: false, bed: 'yacht' as const };
+        expect(fightMusicCue(fight)).toEqual({ track: 'fight', bed: 'yacht' });
+        expect(fightMusicCue({ ...fight, bed: 'city', fightOver: true })).toEqual({ track: null, bed: 'city' });
+        expect(fightMusicCue({ ...fight, bed: 'castle', selectionOpen: true })).toEqual({ track: 'menu', bed: 'castle' });
+        expect(fightMusicCue({ ...fight, bed: 'verse', storyOpen: true })).toEqual({ track: 'story', bed: 'verse' });
+        expect(fightMusicCue({ ...fight, bed: 'bar', feedbackHold: true })).toEqual({ track: null, bed: 'bar' });
+        expect(fightMusicCue({ ...fight, bed: 'synth', storyOpen: true })).toEqual({ track: 'story', bed: 'synth' });
+    });
+    it('crossfades a clicking wrap onto the first sample and leaves a quiet seam alone', () => {
+        const rate = 48000;
+        const click = new Float32Array(1000);
+        click[0] = 0.4; click[999] = -0.2;
+        const region = { loopStart: 0, loopEnd: 1000 / rate };
+        const buffer = { numberOfChannels: 1, sampleRate: rate, getChannelData: () => click };
+        expect(seamIsClick(Math.abs(click[0] - click[999]), 0.01)).toBe(true);
+        expect(softenLoopSeam(buffer, region)).toBe(true);
+        expect(click[999]).toBeCloseTo(0.4, 5);
+        expect(Math.round(SEAM_CROSSFADE_SECONDS * rate)).toBe(384);
+        const quiet = new Float32Array(1000);
+        quiet[0] = 0.0002; quiet[999] = -0.0001;
+        const before = Float32Array.from(quiet);
+        expect(seamIsClick(Math.abs(quiet[0] - quiet[999]), 0.01)).toBe(false);
+        expect(softenLoopSeam({ numberOfChannels: 1, sampleRate: rate, getChannelData: () => quiet }, region)).toBe(false);
+        expect(Array.from(quiet)).toEqual(Array.from(before));
+        const manual = new Float32Array([1, 2, 3, 4, 9]);
+        crossfadeChannel(manual, 0, 5, 2);
+        expect(manual[4]).toBeCloseTo(1, 5);
+    });
+    it('ships the Trenches fight loop next to its metadata', () => {
+        const bytes = readFileSync(new URL('../public/audio/music/trenches_fight_loop.mp3', import.meta.url));
+        const meta = JSON.parse(readFileSync(new URL('../public/audio/music/trenches_fight_loop.json', import.meta.url), 'utf8'));
+        expect(bytes.subarray(0, 3).toString('ascii')).toBe('ID3');
+        expect(bytes.length).toBe(meta.file_size_bytes);
+        expect(meta.duration_seconds).toBe(TRENCHES_LOOP_SECONDS);
+        expect(meta.encoder_delay_samples).toBe(TRENCHES_ENCODER_DELAY_SAMPLES);
+        expect(meta.bpm).toBe(128);
+    });
+    it('ships the yacht, city, castle and verse fight loops next to their metadata', () => {
+        for (const spec of [
+            { file: 'yacht_groove_loop.mp3', meta: 'yacht_groove_loop.json', gain: YACHT_TRIM_GAIN },
+            { file: 'city_house_loop_v2.mp3', meta: 'city_house_loop_v2.json', gain: 1 },
+            { file: 'castle_vampire_loop_v2.mp3', meta: 'castle_vampire_loop_v2.json', gain: 1 },
+            { file: 'verse_alien_electro_loop.mp3', meta: 'verse_alien_electro_loop.json', gain: 1 },
+            { file: 'ranch_country_loop_v2.mp3', meta: 'ranch_country_loop_v2.json', gain: 1 },
+            { file: 'bar_rock_loop.mp3', meta: 'bar_rock_loop.json', gain: 1 },
+        ]) {
+            const bytes = readFileSync(new URL(`../public/audio/music/${spec.file}`, import.meta.url));
+            const meta = JSON.parse(readFileSync(new URL(`../public/audio/music/${spec.meta}`, import.meta.url), 'utf8'));
+            expect(bytes.subarray(0, 3).toString('ascii')).toBe('ID3');
+            expect(bytes.length).toBe(meta.file_size_bytes);
+            expect(meta.duration_seconds).toBe(GROOVE_LOOP_SECONDS);
+            expect(meta.encoder_delay_samples).toBe(GROOVE_ENCODER_DELAY_SAMPLES);
+            expect(meta.sample_rate).toBe(GROOVE_MUSIC_RATE);
+            expect(meta.bpm).toBe(125);
+            expect(meta.bars).toBe(32);
+            expect(meta.gain).toBe(spec.gain);
+        }
+    });
+    it('trims encoder padding so the menu theme loops for exactly 30 bars', () => {
+        expect(MENU_LOOP_SECONDS).toBeCloseTo(60 / 125 * 4 * 30, 6);
+        const rate = MENU_MUSIC_RATE;
+        const loopSamples = Math.round(MENU_LOOP_SECONDS * rate);
+        const withPriming = menuLoopRegion(Math.round(57.648 * rate), rate);
+        expect(withPriming.loopStart).toBeCloseTo(MENU_ENCODER_DELAY_SAMPLES / rate, 6);
+        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(MENU_LOOP_SECONDS, 6);
+        // A decoder that already dropped the priming leaves only a short tail.
+        const trimmed = menuLoopRegion(loopSamples + 47, rate);
+        expect(trimmed.loopStart).toBe(0);
+        expect(trimmed.loopEnd).toBeCloseTo(MENU_LOOP_SECONDS, 6);
+        const exact = menuLoopRegion(loopSamples, rate);
+        expect(exact).toEqual({ loopStart: 0, loopEnd: MENU_LOOP_SECONDS });
+    });
+    it('commits the recorded menu loop and the ui click', () => {
+        const music = readFileSync('public/audio/music/menu_theme_loop.mp3');
+        const click = readFileSync('public/audio/sfx/ui_select.mp3');
+        expect(music.subarray(0, 3).toString()).toBe('ID3');
+        expect(click.subarray(0, 3).toString()).toBe('ID3');
+        expect(music.length).toBeGreaterThan(1_000_000);
+        expect(click.length).toBeGreaterThan(1_000);
+        expect(click.length).toBeLessThan(20_000);
     });
 });
