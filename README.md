@@ -208,9 +208,12 @@ points trim MP3 encoder padding: the menu wraps at 57.6 seconds, Trenches at
 45.000687 seconds, and Yacht, City, Castle, Verse, Bar and Ranch on the 61.44
 second bar (32 bars at 125 BPM).
 The yacht master is about 0.4 dB quieter, so that theme plays a little hotter.
-Hits, guard, throws, projectiles, K.O. and the other fight and story music are
-synthesised. Playback starts after the first key, click or button press.
-Settings has master, effects and music volume.
+Combat effects are recorded clips in `public/audio/sfx/combat/`: one file per
+attack, so a swing and its impact play once, and a fighter with their own
+team-special recording uses it. Win, lose, round start and the story music stay
+synthesised. Stages without a recorded theme keep the synthesised fight loop.
+Playback starts after the first key, click or button press. Settings has master,
+effects and music volume.
 
 The CPU guards a projectile in place and walks in between shots, punishes a move
 it has guarded twice in three seconds, holds guard as it gets up, and stop-hits a
