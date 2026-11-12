@@ -23,6 +23,8 @@ try{
  await page.keyboard.press('ArrowRight');
  await page.waitForFunction(()=>window.neonRelay.audioStatus().unlocked,null,{timeout:5000});
  check('the first key press unlocks the context',(await status()).context==='running');
+ await page.waitForFunction(()=>{const s=window.neonRelay.audioStatus();return s.combatClips>30&&s.combatReady===s.combatClips;},null,{timeout:15000});
+ check('combat clips are decoded before a fight so hits are not late',(await status()).combatReady===(await status()).combatClips);
  const unlocked=(await status()).played;
  await page.focus('#start-fight');await page.waitForTimeout(120);
  await page.keyboard.press('ArrowUp');await page.waitForTimeout(120);
