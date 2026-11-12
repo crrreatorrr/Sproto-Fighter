@@ -1,7 +1,8 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, step, type CombatState, type Effect } from '../src/core';
 import { SOUND_NAMES, SoundTracker, effectSound, hitSound, panFor, whooshSound } from '../src/audioEvents';
-import { DEFAULT_VOLUME, SONGS, SOUND_VOICES, createAudio, readVolume } from '../src/audio';
+import { DEFAULT_VOLUME, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, SONGS, SOUND_VOICES, createAudio, menuLoopRegion, readVolume } from '../src/audio';
 
 const EFFECT_KINDS: Effect['kind'][] = ['hit', 'block', 'charge', 'dash', 'special', 'pumpkin'];
 
@@ -106,5 +107,28 @@ describe('audio settings and songs', () => {
         for (const song of Object.values(SONGS)) {
             expect(song.bass.length % 16).toBe(0); expect(song.lead.length % 16).toBe(0); expect(song.hat.length % 16).toBe(0);
         }
+    });
+    it('trims encoder padding so the menu theme loops for exactly 30 bars', () => {
+        expect(MENU_LOOP_SECONDS).toBeCloseTo(60 / 125 * 4 * 30, 6);
+        const rate = MENU_MUSIC_RATE;
+        const loopSamples = Math.round(MENU_LOOP_SECONDS * rate);
+        const withPriming = menuLoopRegion(Math.round(57.648 * rate), rate);
+        expect(withPriming.loopStart).toBeCloseTo(MENU_ENCODER_DELAY_SAMPLES / rate, 6);
+        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(MENU_LOOP_SECONDS, 6);
+        // A decoder that already dropped the priming leaves only a short tail.
+        const trimmed = menuLoopRegion(loopSamples + 47, rate);
+        expect(trimmed.loopStart).toBe(0);
+        expect(trimmed.loopEnd).toBeCloseTo(MENU_LOOP_SECONDS, 6);
+        const exact = menuLoopRegion(loopSamples, rate);
+        expect(exact).toEqual({ loopStart: 0, loopEnd: MENU_LOOP_SECONDS });
+    });
+    it('commits the recorded menu loop and the ui click', () => {
+        const music = readFileSync('public/audio/music/menu_theme_loop.mp3');
+        const click = readFileSync('public/audio/sfx/ui_select.mp3');
+        expect(music.subarray(0, 3).toString()).toBe('ID3');
+        expect(click.subarray(0, 3).toString()).toBe('ID3');
+        expect(music.length).toBeGreaterThan(1_000_000);
+        expect(click.length).toBeGreaterThan(1_000);
+        expect(click.length).toBeLessThan(20_000);
     });
 });
