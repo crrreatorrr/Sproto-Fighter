@@ -37,7 +37,7 @@ import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 import { crashGuard, createFrameLoop } from './crash';
-import { createAudio, fightMusicCue } from './audio';
+import { createAudio, fightBedForZone, fightMusicCue } from './audio';
 import { SoundTracker } from './audioEvents';
 import { showCrashPanel } from './crashPanel';
 import { setupFeedback, type FeedbackFighter, type FeedbackSnapshot } from './feedback';
@@ -125,7 +125,7 @@ const frames: [
 ][] = [];
 const storage = (() => { try { return window.localStorage; } catch { return null; } })();
 let hubRelics: string[] = readRelicCache(storage);
-// ---- Sound (src/audio.ts): recorded menu theme and click, synthesised fight audio, unlocked by the first input ----
+// ---- Sound (src/audio.ts): recorded menu theme, UI click, combat clips, and recorded fight themes. Win, lose and round start stay synthesised. ----
 const audio = createAudio(storage), sounds = new SoundTracker();
 let soundPhase: RoundPresentation['phase'] | null = null, lastMenuSound = 0;
 for (const type of ['keydown', 'pointerdown'] as const) window.addEventListener(type, () => { audio.unlock(); }, { capture: true });
@@ -164,7 +164,7 @@ function updateAudio() {
     const musicCue = fightMusicCue({
         feedbackHold, selectionOpen: selection.isOpen, storyOpen: story.isOpen,
         fightOver: started && presentation.phase === 'result' && !storyAnimation.active,
-        trenches: stageZone(currentStage) === 'trenches',
+        bed: fightBedForZone(stageZone(currentStage)),
     });
     audio.fightBed(musicCue.bed);
     audio.music(musicCue.track);
