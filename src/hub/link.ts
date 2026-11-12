@@ -53,24 +53,29 @@ export class HubLink {
     let belt = false;
     for (const call of calls) {
       try {
-        // The vendored SDK's reportEvent returns only `{ granted }`: it drops the `tickets` the server
-        // credited. So the toast is built from the Ticket balance read before and after the report,
-        // and when either read fails it makes no claim about payment at all.
+        // Since hub SDK 0.7.1, reportEvent returns the `tickets` the server credited for a story boss.
+        // A server that predates it leaves the field out, so the balance is still read before and after
+        // the report: the difference is the fallback when `tickets` is absent, and when neither is
+        // available the toast makes no claim about payment at all.
         const boss = call.eventId === BOSS_EVENT;
         const before = boss ? await this.readBalance() : null;
         const reported = await this.api.reportEvent(call.eventId, call.data, call.key);
         if (boss) {
           const after = await this.readBalance();
           if (after !== null) this.balance = after;
-          if (before === null || after === null) {
+          const credited = typeof reported.tickets === 'number' && Number.isFinite(reported.tickets)
+            ? reported.tickets
+            : before !== null && after !== null ? after - before : null;
+          const balance = after !== null ? ` · Balance ${after}` : '';
+          if (credited === null) {
             title = 'Boss defeated';
             sub = 'Reported to the hub';
-          } else if (after > before) {
-            title = `+${after - before} Tickets`;
-            sub = `Story boss defeated · Balance ${after}`;
+          } else if (credited > 0) {
+            title = `+${credited} Tickets`;
+            sub = `Story boss defeated${balance}`;
           } else {
             title = 'Boss defeated';
-            sub = `No Tickets credited: each boss pays once per day · Balance ${after}`;
+            sub = `No Tickets credited: each boss pays once per day${balance}`;
           }
         }
         if (reported.granted === BELT_RELIC) {

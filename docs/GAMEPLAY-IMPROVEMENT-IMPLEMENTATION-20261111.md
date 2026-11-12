@@ -65,8 +65,10 @@ Also changed:
   the `tickets` the server credited, so the first version announced every paid boss win as
   unpaid. The client now reads the Ticket balance before and after the report and toasts the
   real difference; if the balance cannot be read it says only "Boss defeated / Reported to the
-  hub". The test's fake SDK now has the real SDK's return shape. **The hub SDK should return
-  `tickets` from `reportEvent`** so the client does not need two extra balance calls.
+  hub". The test's fake SDK now has the real SDK's return shape. Update 2026-11-12: hub SDK
+  0.7.1 (vendored from hub `main` e19c27a) returns `tickets` from `reportEvent`, and the toast
+  now uses it directly. The balance difference remains only as the fallback for a server that
+  leaves `tickets` out.
 - Best of 3 results show the match winner and the round score; the footer names the round rule
   in force; the wager eligibility message no longer mentions CPU wins; the pause move list has
   room for its last row.
@@ -270,8 +272,8 @@ What the hub has to do:
 4. **Wager eligibility.** `not_eligible` asks for three `fighter_win` earns, which can no
    longer happen. The wager flag is off, so nothing breaks today, but the rule has to count
    boss events or be removed before `sproto_duel_wager` is switched on.
-5. Return `tickets` from the SDK's `reportEvent` and add it to `EventResult`. The live SDK drops
-   it today, so the client reads the balance before and after instead.
+5. Done 2026-11-12: hub SDK 0.7.1 returns `tickets` from `reportEvent` (`EventResult.tickets`),
+   and `src/hub/link.ts` uses it, keeping the before/after balance difference as a fallback.
 6. The ten boss ids still match the story (`STORY_BOSSES` in `src/hub/config.ts` is tested
    against the route). Halloween 2008 (`zephyr`), the Belt rival, is not one of them and pays no
    Tickets.

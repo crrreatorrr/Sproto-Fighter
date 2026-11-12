@@ -1,19 +1,19 @@
 # Vendored @metaverse/hub-sdk
 
 - repo: https://github.com/crrreatorrr/metaverse-hub
-- branch: claude/festive-ptolemy-4mg8oe
-- sha: 93a9188
-- package: packages/hub-sdk @ 0.7.0
+- branch: main
+- sha: e19c27a
+- package: packages/hub-sdk @ 0.7.1
 - built with: `node scripts/vendor-sdk.mjs`
 - iife: dist/hub-sdk.iife.js (global HubSDK; classic script, not a CDN import)
-- iife sha256: 092603b61a3511fbbcaa3b674b16f02b24d581752e1fa1dc69eeb577bc5ae5e8
+- iife sha256: 70475113ffc2f4f84c856cfd415eae6f81c13d7458d9bf53312903943ce252c0
 - source src/createHubSdk.ts: 4ae184ef8b4a6e97192769a4118ea855fcd4463176ee7bac295a884e449ebcdf
 - source src/env.ts: c3a8eb38ea73539fa4d971da705e004355bed8258079a73a2ecbda912c35ef46
 - source src/errors.ts: 4eaba836a4dfad994b3926d90b66a158c4384ce6f100bf8a0791877c0646b541
 - source src/events.ts: 584d264acb48d7e63746bc63b56767577dd4370a0b5fbdf4ddd73fc0fd2b9f64
 - source src/feedback.ts: f3670ed8604dd94df22260e54cde3802fb9310f96504f4e031ee9944f052f4ca
 - source src/index.ts: 4f1d93041a8b2fb275e4a25761a2c4ed465e88ac4692c2fc856c704b3cd90767
-- source src/live.ts: 1ceddf637cccbb7c346509a9c17b4e29db75097bb1d07ff5c9a27ade5410624c
+- source src/live.ts: 9272fe0acd8c0b8171028f163df42f7e9545408d28194da7de19e037f0417527
 - source src/nakama.ts: 67a701b47178244f1a63b433f8d715aea824b1599a49f140b35b401950ee266a
 - source src/pbShop.ts: 3bbeff5bcf3b6e2c724409eadce9907432e1e52b02988938ff5e6f2ebdfe0faf
 - source src/realtime/chatRules.ts: 26913facb5c4c28c0a3529a4ecb6a3a50fadfe067736c74fb571184a9aa81b0e
@@ -25,12 +25,10 @@
 - source src/save.ts: 098fb0a6834e43bdad620c2729b0abf28a9551b8c4ab8cc7cb3428ebba8aea98
 - source src/storage.ts: 7a1f52e2f432026590ed99e85c318ea21ef10c6fe83b9e0c1ebe8c173ced5344
 - source src/ticket.ts: b01e1635c7031dd0e6855ecb22b99af1654395c41f0296863b627a31ded41033
-- source src/types.ts: ab27892b60750a4dc4ea50c2aec33e17034f4d2d91f774d038cc0501675e2a5c
+- source src/types.ts: b3ac546d5c67e094d2755de3940d2c4a061a665b9974f1f574786f925a1c39df
 
-`src/` holds the SDK source from that same hub commit (`93a9188e666a2743409f802c91a0da583029195a`).
-That commit is on the hub branch `claude/festive-ptolemy-4mg8oe`, which is **not merged to hub
-`main` yet**; `packages/hub-sdk` is unchanged since `b9ac308`, the commit that added the in-game
-feedback window (0.7.0). Re-vendor from hub `main` once that branch merges.
+`src/` holds the SDK source from that same hub commit (`e19c27ab86f7ff2a6c70e9d1eaaa4b41ccf531b6`,
+hub `main` after PR #179). 0.7.1 adds the optional `tickets` field to `reportEvent`'s result.
 `tsconfig.build.json` is this repo's standalone copy (the hub's extends a base config that is not
 vendored, and turns on source maps). `npm run build:hub-sdk` rebuilds the ESM `dist/` from `src/`
 and matches the vendored JavaScript and declarations. `dist/hub-sdk.iife.js` is the esbuild classic
