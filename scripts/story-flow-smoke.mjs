@@ -154,9 +154,9 @@ try {
     await finishWave(t,1);
     const help=t.$('journey-actions').children.findIndex(button=>button.textContent==='Retry with easier CPU');assert.ok(help>=0);
     await t.action(help);await flush();
-    const selected=t.launches().at(-1).rest[0];assert.deepEqual(selected,{skill:base-1,assisted:true});
+    const selected=t.launches().at(-1).rest[0],easier=storyDifficulty(encounter,STORY_ENCOUNTERS,true);assert.equal(easier,base-1,'help is exactly one skill lower');assert.deepEqual(selected,{skill:easier,assisted:true});
     assert.ok(selected.skill>1,'the campaign opens at skill two, so help on a later rival never reaches the skill-1 floor');
-    assert.equal(t.story.snapshot().assisted,true);assert.equal(t.story.snapshot().cpuSkill,base-1);
+    assert.equal(t.story.snapshot().assisted,true);assert.equal(t.story.snapshot().cpuSkill,easier);
     assert.deepEqual(progressView(t.progress),saved,'taking help itself grants no progression/recruit');
   });
   await check('restart of a settled ordinary round accepts a new outcome once',async()=>{
