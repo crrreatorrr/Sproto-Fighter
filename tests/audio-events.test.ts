@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, step, type CombatState, type Effect } from '../src/core';
 import { SOUND_NAMES, SoundTracker, effectSound, hitSound, panFor, whooshSound } from '../src/audioEvents';
-import { DEFAULT_VOLUME, FIGHT_BED_SPECS, GROOVE_ENCODER_DELAY_SAMPLES, GROOVE_LOOP_SECONDS, GROOVE_MUSIC_RATE, SEAM_CROSSFADE_SECONDS, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, YACHT_TRIM_GAIN, createAudio, crossfadeChannel, fightBedForZone, fightBedLoopRegion, fightMusicCue, readVolume, seamIsClick, softenLoopSeam, trenchesLoopRegion } from '../src/audio';
+import { DEFAULT_VOLUME, FIGHT_BED_SPECS, GROOVE_ENCODER_DELAY_SAMPLES, GROOVE_LOOP_SECONDS, GROOVE_MUSIC_RATE, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, SEAM_CROSSFADE_SECONDS, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, YACHT_TRIM_GAIN, createAudio, crossfadeChannel, fightBedForZone, fightBedLoopRegion, fightMusicCue, menuLoopRegion, readVolume, seamIsClick, softenLoopSeam, trenchesLoopRegion } from '../src/audio';
 import { STAGES } from '../src/stage';
 import { stageZone } from '../src/stageGroups';
 
@@ -219,7 +219,7 @@ describe('audio settings and songs', () => {
         expect(meta.encoder_delay_samples).toBe(TRENCHES_ENCODER_DELAY_SAMPLES);
         expect(meta.bpm).toBe(128);
     });
-    it('ships the yacht, city and castle fight loops next to their metadata', () => {
+    it('ships the yacht, city, castle and verse fight loops next to their metadata', () => {
         for (const spec of [
             { file: 'yacht_groove_loop.mp3', meta: 'yacht_groove_loop.json', gain: YACHT_TRIM_GAIN },
             { file: 'city_house_loop_v2.mp3', meta: 'city_house_loop_v2.json', gain: 1 },
@@ -237,5 +237,28 @@ describe('audio settings and songs', () => {
             expect(meta.bars).toBe(32);
             expect(meta.gain).toBe(spec.gain);
         }
+    });
+    it('trims encoder padding so the menu theme loops for exactly 30 bars', () => {
+        expect(MENU_LOOP_SECONDS).toBeCloseTo(60 / 125 * 4 * 30, 6);
+        const rate = MENU_MUSIC_RATE;
+        const loopSamples = Math.round(MENU_LOOP_SECONDS * rate);
+        const withPriming = menuLoopRegion(Math.round(57.648 * rate), rate);
+        expect(withPriming.loopStart).toBeCloseTo(MENU_ENCODER_DELAY_SAMPLES / rate, 6);
+        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(MENU_LOOP_SECONDS, 6);
+        // A decoder that already dropped the priming leaves only a short tail.
+        const trimmed = menuLoopRegion(loopSamples + 47, rate);
+        expect(trimmed.loopStart).toBe(0);
+        expect(trimmed.loopEnd).toBeCloseTo(MENU_LOOP_SECONDS, 6);
+        const exact = menuLoopRegion(loopSamples, rate);
+        expect(exact).toEqual({ loopStart: 0, loopEnd: MENU_LOOP_SECONDS });
+    });
+    it('commits the recorded menu loop and the ui click', () => {
+        const music = readFileSync('public/audio/music/menu_theme_loop.mp3');
+        const click = readFileSync('public/audio/sfx/ui_select.mp3');
+        expect(music.subarray(0, 3).toString()).toBe('ID3');
+        expect(click.subarray(0, 3).toString()).toBe('ID3');
+        expect(music.length).toBeGreaterThan(1_000_000);
+        expect(click.length).toBeGreaterThan(1_000);
+        expect(click.length).toBeLessThan(20_000);
     });
 });

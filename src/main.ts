@@ -142,20 +142,38 @@ const frames: [
 ][] = [];
 const storage = (() => { try { return window.localStorage; } catch { return null; } })();
 let hubRelics: string[] = readRelicCache(storage);
-// ---- Sound (src/audio.ts): synthesised, presentation only, unlocked by the first input ----
+// ---- Sound (src/audio.ts): recorded menu theme and click, synthesised fight audio, unlocked by the first input ----
 const audio = createAudio(storage), sounds = new SoundTracker();
 let soundPhase: RoundPresentation['phase'] | null = null, lastMenuSound = 0;
 for (const type of ['keydown', 'pointerdown'] as const) window.addEventListener(type, () => { audio.unlock(); }, { capture: true });
-/** Menu feedback follows focus and clicks, so keyboard, mouse and controller all sound alike. */
+/** Same recorded click for every menu action. A second event in the same turn (focus, then the click that caused it) is one press. */
+const UI_CHAIN_MS = 16;
 function menuSound(name: 'menuMove' | 'menuConfirm' | 'menuBack') {
     if (feedbackHold) return;
-    const now = performance.now();
-    if (name === 'menuMove' && now - lastMenuSound < 45) return;
-    lastMenuSound = now; audio.play(name, { volume: .8 });
+    lastMenuSound = performance.now(); audio.play(name, { volume: .8 });
 }
-document.addEventListener('focusin', e => { if (e.target instanceof HTMLElement && e.target.matches('button,select,input')) menuSound('menuMove'); });
-document.addEventListener('click', e => { if (e.target instanceof HTMLElement && e.target.closest('button')) menuSound('menuConfirm'); });
-document.addEventListener('change', e => { if (e.target instanceof HTMLSelectElement) menuSound('menuMove'); });
+const chainedUi = () => performance.now() - lastMenuSound < UI_CHAIN_MS;
+let pointerArmed = false, focusedByPointer: EventTarget | null = null;
+document.addEventListener('pointerdown', () => { pointerArmed = true; focusedByPointer = null; }, true);
+document.addEventListener('focusin', e => {
+    if (!(e.target instanceof HTMLElement) || !e.target.matches('button,select,input') || chainedUi()) return;
+    if (pointerArmed) focusedByPointer = e.target;
+    menuSound('menuMove');
+});
+document.addEventListener('click', e => {
+    const button = e.target instanceof Element ? e.target.closest('button') : null;
+    const fromPress = pointerArmed && button !== null && button === focusedByPointer;
+    pointerArmed = false;
+    if (!button || fromPress || chainedUi()) return;
+    menuSound('menuConfirm');
+});
+document.addEventListener('change', e => {
+    const target = e.target;
+    const ui = target instanceof HTMLSelectElement || (target instanceof HTMLInputElement && (target.type === 'checkbox' || target.type === 'radio'));
+    if (!ui || chainedUi()) return;
+    menuSound('menuMove');
+});
+document.addEventListener('sproto-menu-ui', () => { if (!chainedUi()) menuSound('menuBack'); });
 /** Once per rendered frame: pick the music and voice whatever the fight just did. */
 function updateAudio() {
     // The feedback window freezes a local match: the music stops with it and returns when it closes.
@@ -178,7 +196,16 @@ for (const key of ['master', 'sfx', 'music'] as const) {
     const slider = document.getElementById(`volume-${key}`) as HTMLInputElement | null;
     if (!slider) continue;
     slider.value = String(Math.round(audio.volume()[key] * 100));
-    slider.oninput = () => { audio.setVolume({ [key]: Number(slider.value) / 100 }); if (key !== 'music') menuSound('menuMove'); };
+    let lastSliderSound = 0;
+    slider.oninput = () => {
+        audio.setVolume({ [key]: Number(slider.value) / 100 });
+        // The music slider is the music. Other sliders click, but not on every pointer sample.
+        if (key === 'music') return;
+        const now = performance.now();
+        if (now - lastSliderSound < 120) return;
+        lastSliderSound = now;
+        menuSound('menuMove');
+    };
 }
 let hub: HubLink | null = null;
 /** The current online duel, from queue to result; null in every local mode. */
@@ -614,15 +641,16 @@ $('settings').onclick = () => {
     queued = 0;queued2=0;
     dialog.showModal();
 };
-function closeSettings() {
-    menuSound('menuBack');
+function closeSettings(fromCancel = false) {
+    // The close button already clicks. Escape and the controller's Back arrive as cancel.
+    if (fromCancel) menuSound('menuBack');
     remapping = null;
     dialog.close();
     updateControls();
     if (resumeAfterSettings)
         start();
 }
-$('close-settings').onclick = closeSettings;
+$('close-settings').onclick = () => closeSettings();
 dialog.addEventListener('cancel', e => {
     e.preventDefault();
     if (remapping) {
@@ -630,7 +658,7 @@ dialog.addEventListener('cancel', e => {
         updateControls();
     }
     else
-        closeSettings();
+        closeSettings(true);
 });
 $('defaults').onclick = () => {
     if (controlsPlayer === 1) { keys = { ...defaults }; padKeys = { ...padDefaults }; }
@@ -732,6 +760,8 @@ function pollPad(): number {
     }
     if (!online) $('device').textContent = frame.count > 1 ? '2 CONTROLLERS CONNECTED' : 'CONTROLLER CONNECTED';
     const buttons = pad.buttons.map(b => b.pressed ? 1 : 0);
+    // `typeof` so the versus harness can run this function without the audio module.
+    if ((buttons.some(Boolean) || menuDirection(buttons, pad.axes)) && typeof audio !== 'undefined') audio.unlock();
     if(document.querySelector?.('#partner-picker:not([hidden])')){
         if(wasPartnerOpen)partnerPicker.pollPad(pad,buttons,previousPad);
         previousPad=buttons;
