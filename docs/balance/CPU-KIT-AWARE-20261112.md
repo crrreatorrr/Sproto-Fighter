@@ -312,3 +312,35 @@ One process takes about 40 minutes per difficulty for the full schedule on this 
 Not done: a human has not played the changed CPU; the 33,472-bout calibration panel of
 2026-11-05 was not rebuilt; Easy was not run through the tournament (the jab and casting
 changes do not apply below Normal, the guard hold does).
+
+## 9. Story mapping after the owner's decision
+
+The owner decided the finale must be beatable, so the decision section 7 left open is now made:
+the finale no longer runs at Expert. `src/difficulty.ts` keeps the opener at skill 2 and the
+within-chapter smoothing, but the route now ends at `STORY_FINAL_SKILL` 3.75 instead of 10. Gauntlets
+and the last fifteen encounters still get a boss step, now 0.25 instead of 1, and the ramp stops
+0.25 short of the finale so that no encounter is set above it. Encounter 124 is now 2.74,
+encounter 233 (first of the last fifteen) 3.67, the two earlier gauntlets 3.74, and the finale
+3.75. The largest step between unmarked neighbours is 0.009; with help accepted the finale is 2.75.
+No CPU or kit number changed, so the simulation fingerprint and the hub bundle are unaffected.
+
+Reference bot as in section 7 (reference v2, High Sproto, seed 20261105, reference in the first
+seat, the same per-encounter seed streams), on `ea15e9db` with the new mapping:
+
+| Encounter | Skill | Reference wins |
+| --- | ---: | ---: |
+| 1, Zephyr | 2.00 | 255/256 = 99.6% (section 7; skill unchanged) |
+| 124, Rektina | 2.74 | 122/128 = 95.3% |
+| 233, Gryph | 3.67 | 84/128 = 65.6% |
+| 246, Nick then Guest07 (gauntlet) | 3.74 | 76/128 = 59.4% |
+| 247, Vela then Vaudream (finale) | 3.75 | 34/128 = 26.6% |
+
+The finale value was chosen from a sweep of the finale alone, 64 seeds each: skill 3.0 81.3%,
+3.2 62.5%, 3.4 50.0%, 3.5 34.4%, 3.6 31.3%, 3.7 25.0%, 3.8 20.3%, 4.0 7.8% (3.0 and 4.0
+reproduce section 7's sweep). The win rate falls about 15 points per 0.1 of skill around 3.5 and
+about 5 per 0.1 around 3.75, so 3.75 sits in the flatter part, inside the 15-30% the owner asked
+for. The same limits as section 7 apply: the reference bot is not a validated person, these are
+regular bouts without boss forms, and 128 seeds give roughly ±8 points. The test suites were not
+run for this change (owner's instruction for this round); `tests/cpu-difficulty.test.ts` was
+edited to pin the new ends (2 and 3.75, assisted finale 2.75, every encounter at or below the
+finale, steps below 0.02 unmarked and 0.3 marked).

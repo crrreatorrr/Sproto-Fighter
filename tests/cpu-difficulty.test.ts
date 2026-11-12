@@ -164,15 +164,16 @@ describe('seeded CPU controller', () => {
 });
 
 describe('story difficulty and optional retry', () => {
-    it('opens at skill two, uses the actual route and reaches skill ten without unmarked jumps', () => {
+    it('opens at skill two, uses the actual route and ends at a winnable 3.75 finale without unmarked jumps', () => {
         const skills = STORY_ENCOUNTERS.map(encounter => storyDifficulty(encounter, STORY_ENCOUNTERS));
-        expect(skills[0]).toBe(2); expect(skills.at(-1)).toBe(10);
+        expect(skills[0]).toBe(2); expect(skills.at(-1)).toBe(3.75);
+        expect(Math.max(...skills)).toBe(3.75);
         for (let n = 1; n < skills.length; n++) {
             expect(skills[n]).toBeGreaterThanOrEqual(skills[n - 1]);
             const marked = !!STORY_ENCOUNTERS[n].gauntlet || n >= STORY_ENCOUNTERS.length - 15;
-            expect(skills[n] - skills[n - 1]).toBeLessThan(marked ? 1.5 : .2);
+            expect(skills[n] - skills[n - 1]).toBeLessThan(marked ? .3 : .02);
         }
-        expect(storyDifficulty(STORY_ENCOUNTERS.at(-1)!, STORY_ENCOUNTERS, true)).toBe(9);
+        expect(storyDifficulty(STORY_ENCOUNTERS.at(-1)!, STORY_ENCOUNTERS, true)).toBe(2.75);
     });
     it('offers help after three losses, never activates it, and resets on another encounter or a draw', () => {
         const retry = createDifficultyRetry();retry.begin('first');

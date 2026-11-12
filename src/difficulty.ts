@@ -4,6 +4,14 @@
  * Normal, which is no longer a soft target. 2 keeps the opener clearly winnable for a new player.
  */
 export const STORY_START_SKILL = 2;
+/**
+ * The finale's CPU skill. Until 2026-11-12 the route ran to 10 (Expert), where the reference bot
+ * won the finale gauntlet 0 of 256. The owner chose a hard but winnable finale: at 3.75 the
+ * reference bot wins it about one time in five (docs/balance/CPU-KIT-AWARE-20261112.md, section 9).
+ */
+export const STORY_FINAL_SKILL = 3.75;
+/** Added to gauntlets and the last fifteen encounters; the ramp stops short by this much so no encounter passes the finale. */
+export const STORY_BOSS_STEP = .25;
 export interface DifficultyEncounter { id: string; index: number; chapter: number; gauntlet?: string }
 export function storyDifficulty(encounter: DifficultyEncounter, route: readonly DifficultyEncounter[], assisted = false): number {
     const denominator = Math.max(1, route.length - 1);
@@ -14,7 +22,8 @@ export function storyDifficulty(encounter: DifficultyEncounter, route: readonly 
     const smooth = progress * progress * (3 - 2 * progress);
     const index = first + (last - first) * smooth;
     const markedBoss = !!encounter.gauntlet || encounter.index >= route.length - 15;
-    const base = Math.min(10, STORY_START_SKILL + (10 - STORY_START_SKILL) * index / denominator + Number(markedBoss));
+    const ramp = STORY_FINAL_SKILL - STORY_BOSS_STEP - STORY_START_SKILL;
+    const base = Math.min(STORY_FINAL_SKILL, STORY_START_SKILL + ramp * index / denominator + STORY_BOSS_STEP * Number(markedBoss));
     return Math.max(1, base - Number(assisted));
 }
 
