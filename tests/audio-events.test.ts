@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, step, type CombatState, type Effect } from '../src/core';
 import { SOUND_NAMES, SoundTracker, effectSound, hitSound, panFor, whooshSound } from '../src/audioEvents';
-import { DEFAULT_VOLUME, FIGHT_BED_SPECS, GROOVE_ENCODER_DELAY_SAMPLES, GROOVE_LOOP_SECONDS, GROOVE_MUSIC_RATE, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, SEAM_CROSSFADE_SECONDS, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, YACHT_TRIM_GAIN, createAudio, crossfadeChannel, fightBedForZone, fightBedLoopRegion, fightMusicCue, menuLoopRegion, readVolume, seamIsClick, softenLoopSeam, trenchesLoopRegion } from '../src/audio';
+import { AUDIO_MIX_VERSION, AUDIO_SETTINGS_KEY, DEFAULT_VOLUME, FIGHT_BED_SPECS, GROOVE_ENCODER_DELAY_SAMPLES, GROOVE_LOOP_SECONDS, GROOVE_MUSIC_RATE, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, OUTPUT_LIMIT, PREVIOUS_DEFAULT_VOLUME, SEAM_CROSSFADE_SECONDS, SFX_LIMIT, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, YACHT_TRIM_GAIN, createAudio, crossfadeChannel, fightBedForZone, fightBedLoopRegion, fightMusicCue, limitDb, menuLoopRegion, readVolume, seamIsClick, softenLoopSeam, trenchesLoopRegion } from '../src/audio';
 import { STAGES } from '../src/stage';
 import { stageZone } from '../src/stageGroups';
 
@@ -123,16 +123,54 @@ describe('sound tracker', () => {
 });
 
 describe('audio settings and songs', () => {
+    const db = (linear: number) => 20 * Math.log10(linear);
+    const fromDb = (value: number) => 10 ** (value / 20);
     it('reads stored volumes defensively', () => {
         expect(readVolume(null)).toEqual(DEFAULT_VOLUME);
         expect(readVolume('not json')).toEqual(DEFAULT_VOLUME);
         expect(readVolume('{"master":2,"sfx":-1,"music":"loud"}')).toEqual({ master: 1, sfx: 0, music: DEFAULT_VOLUME.music });
     });
+    it('makes music the louder category and keeps both gains at or under 1', () => {
+        expect(DEFAULT_VOLUME).toEqual({ master: .8, sfx: .7, music: .8 });
+        const musicDb = db(DEFAULT_VOLUME.music / PREVIOUS_DEFAULT_VOLUME.music);
+        const sfxDb = db(DEFAULT_VOLUME.sfx / PREVIOUS_DEFAULT_VOLUME.sfx);
+        expect(musicDb).toBeGreaterThanOrEqual(4);
+        expect(musicDb).toBeLessThanOrEqual(6);
+        expect(sfxDb).toBeLessThanOrEqual(-2);
+        expect(sfxDb).toBeGreaterThanOrEqual(-3);
+        expect(DEFAULT_VOLUME.music * YACHT_TRIM_GAIN).toBeLessThanOrEqual(1);
+        expect(DEFAULT_VOLUME.sfx).toBeLessThanOrEqual(1);
+    });
+    it('replaces a saved copy of the old mix and keeps a mix the player chose', () => {
+        expect(readVolume(JSON.stringify(PREVIOUS_DEFAULT_VOLUME))).toEqual(DEFAULT_VOLUME);
+        expect(readVolume(JSON.stringify({ master: .5, sfx: .9, music: .45 }))).toEqual({ master: .5, sfx: .7, music: .8 });
+        expect(readVolume(JSON.stringify({ master: .8, sfx: .5, music: .45 }))).toEqual({ master: .8, sfx: .5, music: .45 });
+        expect(readVolume(JSON.stringify({ master: .8, sfx: .9, music: .6 }))).toEqual({ master: .8, sfx: .9, music: .6 });
+        expect(readVolume(JSON.stringify({ ...PREVIOUS_DEFAULT_VOLUME, mix: AUDIO_MIX_VERSION }))).toEqual(PREVIOUS_DEFAULT_VOLUME);
+    });
+    it('keeps the louder music linear and holds a stack of hits under full scale', () => {
+        // The effects curve is the previous output limiter, not a weaker one.
+        expect(SFX_LIMIT).toEqual({ threshold: -10, knee: 30, ratio: 8, attack: .003, release: .15 });
+        // A full-scale loop, yacht trim included, stays under the output knee at the default mix.
+        const fullScaleMusic = db(DEFAULT_VOLUME.music * YACHT_TRIM_GAIN * DEFAULT_VOLUME.master);
+        expect(fullScaleMusic).toBeLessThan(OUTPUT_LIMIT.threshold - OUTPUT_LIMIT.knee / 2);
+        expect(limitDb(fullScaleMusic, OUTPUT_LIMIT)).toBeCloseTo(fullScaleMusic, 5);
+        // Two full-scale effects, in phase, after the effects limiter and the master fader.
+        const limitedHits = limitDb(db(2 * DEFAULT_VOLUME.sfx), SFX_LIMIT) + db(DEFAULT_VOLUME.master);
+        const sum = db(fromDb(fullScaleMusic) + fromDb(limitedHits));
+        // Headroom before the ceiling: a full-scale loop plus two in-phase hits stays under 0 dB.
+        expect(sum).toBeLessThan(0);
+        expect(limitDb(sum, OUTPUT_LIMIT)).toBeLessThan(0);
+        expect(limitDb(6, OUTPUT_LIMIT)).toBeLessThan(0);
+    });
     it('saves volume changes and stays inert without a browser', () => {
         const saved: Record<string, string> = {};
         const audio = createAudio({ getItem: key => saved[key] ?? null, setItem: (key, value) => { saved[key] = value; } });
         audio.setVolume({ music: .2 });
-        expect(readVolume(saved['sproto-arena-audio']).music).toBe(.2);
+        expect(readVolume(saved[AUDIO_SETTINGS_KEY]).music).toBe(.2);
+        expect(JSON.parse(saved[AUDIO_SETTINGS_KEY]).mix).toBe(AUDIO_MIX_VERSION);
+        audio.setVolume({ music: PREVIOUS_DEFAULT_VOLUME.music, sfx: PREVIOUS_DEFAULT_VOLUME.sfx });
+        expect(readVolume(saved[AUDIO_SETTINGS_KEY])).toEqual(PREVIOUS_DEFAULT_VOLUME);
         expect(audio.unlock()).toBe(false);
         audio.play('hitHeavy'); audio.music('fight');
         expect(audio.status()).toMatchObject({ context: 'none', unlocked: false, played: 0, track: 'fight' });

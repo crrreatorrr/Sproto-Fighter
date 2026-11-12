@@ -35,8 +35,38 @@ const FIGHT_FADE = .6;
 /** Equal-power join used only when a trimmed wrap would click. Eight milliseconds at 48 kHz. */
 export const SEAM_CROSSFADE_SECONDS = 0.008;
 
-export const DEFAULT_VOLUME: Volume = { master: .8, sfx: .9, music: .45 };
+/** The mix before music was brought forward. A save that still has both of these was never chosen. */
+export const PREVIOUS_DEFAULT_VOLUME: Volume = { master: .8, sfx: .9, music: .45 };
+/**
+ * Music is the bed: +5 dB (0.45 to 0.80). Effects ease back -2.2 dB (0.90 to 0.70).
+ * Both stay under 1. The menu theme, every fight loop and the story bed use the music
+ * category; UI clicks, hits, blocks, K.O. and the other combat sounds use the effects category.
+ */
+export const DEFAULT_VOLUME: Volume = { master: .8, sfx: .7, music: .8 };
+/** Written with a save. An older save upgrades only when its music and effects are still the previous defaults. */
+export const AUDIO_MIX_VERSION = 2;
 export const AUDIO_SETTINGS_KEY = 'sproto-arena-audio';
+/**
+ * Effects-bus compressor. These are the previous output-limiter settings, moved onto effects
+ * so a louder music bed is not squeezed. Stacked hits still meet this curve instead of clipping.
+ */
+export const SFX_LIMIT = { threshold: -10, knee: 30, ratio: 8, attack: .003, release: .15 } as const;
+/**
+ * Output ceiling above the music bed. A full-scale loop at the default mix lands near -3.5 dB,
+ * under the knee, so the score stays linear. Only a sum that clears the knee is held under 0 dB.
+ */
+export const OUTPUT_LIMIT = { threshold: -1, knee: 2, ratio: 20, attack: .002, release: .05 } as const;
+/** Static dynamics-compressor curve, in dB. The same knee the Web Audio node applies. */
+export function limitDb(inputDb: number, limit: { threshold: number; knee: number; ratio: number } = SFX_LIMIT): number {
+    const slope = 1 / limit.ratio;
+    if (!(limit.knee > 0)) return inputDb <= limit.threshold ? inputDb : limit.threshold + (inputDb - limit.threshold) * slope;
+    const half = limit.knee / 2, start = limit.threshold - half;
+    if (inputDb <= start) return inputDb;
+    const end = limit.threshold + half;
+    if (inputDb >= end) return limit.threshold + (inputDb - limit.threshold) * slope;
+    const into = inputDb - start;
+    return inputDb + (slope - 1) * into * into / (2 * limit.knee);
+}
 /** 30 bars of 4/4 at 125 BPM. The menu theme loops for exactly this long. */
 export const MENU_LOOP_SECONDS = 57.6;
 /** Priming samples ffmpeg wrote into menu_theme_loop.mp3 (start time 0.023021s at 48 kHz). */
@@ -50,11 +80,25 @@ const UI_SELECT_GAIN = 3.2;
 const MENU_FADE_OUT = .45;
 
 const clamp01 = (v: unknown, fallback: number) => typeof v === 'number' && Number.isFinite(v) ? Math.max(0, Math.min(1, v)) : fallback;
-/** Stored volumes, tolerant of a missing or damaged entry. */
+const nearGain = (value: number, target: number) => Math.abs(value - target) < 1e-3;
+/**
+ * Stored volumes, tolerant of a missing or damaged entry.
+ * A save from the previous mix that still has that mix's music and effects (the player never
+ * moved those sliders) takes the new balance. A value they chose, including choosing the old
+ * numbers again after this mix, is left as stored.
+ */
 export function readVolume(raw: string | null | undefined): Volume {
     try {
         const saved = raw ? JSON.parse(raw) : null;
-        return { master: clamp01(saved?.master, DEFAULT_VOLUME.master), sfx: clamp01(saved?.sfx, DEFAULT_VOLUME.sfx), music: clamp01(saved?.music, DEFAULT_VOLUME.music) };
+        const master = clamp01(saved?.master, DEFAULT_VOLUME.master);
+        let sfx = clamp01(saved?.sfx, DEFAULT_VOLUME.sfx);
+        let music = clamp01(saved?.music, DEFAULT_VOLUME.music);
+        const mix = typeof saved?.mix === 'number' && Number.isFinite(saved.mix) ? saved.mix : 0;
+        if (mix < AUDIO_MIX_VERSION && nearGain(sfx, PREVIOUS_DEFAULT_VOLUME.sfx) && nearGain(music, PREVIOUS_DEFAULT_VOLUME.music)) {
+            sfx = DEFAULT_VOLUME.sfx;
+            music = DEFAULT_VOLUME.music;
+        }
+        return { master, sfx, music };
     } catch { return { ...DEFAULT_VOLUME }; }
 }
 
@@ -288,6 +332,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (!ctx || !master || !sfx || !musicBus) return;
         master.gain.setTargetAtTime(volume.master, ctx.currentTime, .02);
         sfx.gain.setTargetAtTime(volume.sfx, ctx.currentTime, .02);
+        // Synthesised beds (the story loop, and a fight whose file never loads) sit on this bus.
+        // Recorded menu and stage loops use the same music category, so one default moves every track.
         musicBus.gain.setTargetAtTime(volume.music * .5, ctx.currentTime, .05);
         // Leave a fade-out alone. menuSource is cleared when the fade starts.
         if (menuGain && menuSource) menuGain.gain.setTargetAtTime(volume.music, ctx.currentTime, .05);
@@ -388,10 +434,17 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
             try { ctx = new Context({ sampleRate: GROOVE_MUSIC_RATE }); }
             catch { try { ctx = new Context(); } catch { return false; } }
             master = ctx.createGain(); sfx = ctx.createGain(); musicBus = ctx.createGain();
-            // A gentle limiter keeps stacked impacts from clipping.
-            const limiter = ctx.createDynamicsCompressor();
-            limiter.threshold.value = -10; limiter.ratio.value = 8; limiter.attack.value = .003; limiter.release.value = .15;
-            sfx.connect(master); musicBus.connect(master); master.connect(limiter).connect(ctx.destination);
+            // Effects are limited on their own bus, with the curve that used to sit on the output.
+            // Music joins after that, so a stack of hits cannot pump the bed. The ceiling only
+            // catches a sum that would clip; the default music level stays under its knee.
+            const sfxLimiter = ctx.createDynamicsCompressor();
+            const ceiling = ctx.createDynamicsCompressor();
+            const shape = (node: DynamicsCompressorNode, limit: { threshold: number; knee: number; ratio: number; attack: number; release: number }) => {
+                node.threshold.value = limit.threshold; node.knee.value = limit.knee; node.ratio.value = limit.ratio;
+                node.attack.value = limit.attack; node.release.value = limit.release;
+            };
+            shape(sfxLimiter, SFX_LIMIT); shape(ceiling, OUTPUT_LIMIT);
+            sfx.connect(sfxLimiter); sfxLimiter.connect(master); musicBus.connect(master); master.connect(ceiling).connect(ctx.destination);
             master.gain.value = volume.master; sfx.gain.value = volume.sfx; musicBus.gain.value = volume.music * .5;
         }
         const pending = ctx.state === 'suspended' ? ctx.resume().then(() => undefined, () => undefined) : Promise.resolve();
@@ -573,7 +626,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     }
     function setVolume(next: Partial<Volume>): void {
         volume = { master: clamp01(next.master, volume.master), sfx: clamp01(next.sfx, volume.sfx), music: clamp01(next.music, volume.music) };
-        try { storage?.setItem(AUDIO_SETTINGS_KEY, JSON.stringify(volume)); } catch { /* not saved */ }
+        try { storage?.setItem(AUDIO_SETTINGS_KEY, JSON.stringify({ ...volume, mix: AUDIO_MIX_VERSION })); } catch { /* not saved */ }
         applyVolume();
     }
     if (typeof window !== 'undefined') requestSamples();
