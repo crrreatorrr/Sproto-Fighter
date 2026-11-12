@@ -1,0 +1,158 @@
+/*
+ * Full window. The game fills the browser window and the page never scrolls: the menus are
+ * viewport-sized with their long sections scrolling inside their own panels, and a fight's
+ * canvas scales to the space left (letterboxed, never stretched or cropped). Loaded after
+ * the citadel skin, so it changes layout only; the art and controls keep their look.
+ */
+html, body { height: 100%; overflow: hidden; }
+body { overscroll-behavior: none; }
+#app {
+  height: 100vh; height: 100dvh; min-height: 0;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+#app > .arena-header {
+  flex: none; width: 100%; max-width: none; margin: 0;
+  min-height: 0; padding: 6px clamp(10px, 2vw, 28px); flex-wrap: nowrap;
+}
+#app > .arena-header .brand { flex: none; }
+.top-navigation { flex-wrap: wrap; justify-content: center; min-width: 0; }
+#app .top-navigation .quiet { min-width: 0; min-height: 40px; padding: 10px 30px; font-size: 12px; white-space: nowrap; }
+#app main {
+  flex: 1 1 auto; min-height: 0; width: 100%; max-width: none; margin: 0;
+  padding: 6px clamp(8px, 1.6vw, 24px) 0; display: flex; flex-direction: column;
+}
+#app main > footer { flex: none; padding: 3px 0 5px; }
+#training-controls, #training-readout, #qa-status { flex: none; max-height: 24vh; overflow: auto; margin: 0; }
+
+/* Shared menu options (Main menu, Controller settings, Full screen, hub) beside each menu's own. */
+.system-menu { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; align-items: center; }
+#app .system-menu .quiet, dialog .system-menu .quiet { min-height: 38px; padding: 9px 30px; font-size: 12px; white-space: nowrap; margin: 0; }
+
+/* ---- Fighter select (the main menu) ---- */
+#selection-view:not([hidden]) {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  padding: 0 clamp(6px, 1vw, 16px) 8px;
+}
+#selection-view::before { inset: 64px 4px 4px; }
+#selection-view .selection-heading { min-height: 0; padding: 6px 0 8px; }
+#selection-view .selection-heading h1 { font-size: clamp(22px, 2.3vw, 34px); margin: 0; }
+.arcade-echoes img { top: 70px; height: min(400px, 60%); }
+.selection-setup { display: flex; flex-direction: column; min-width: 0; }
+#selection-view .selection-launch { flex-wrap: wrap; row-gap: 10px; }
+#selection-view .selection-launch label { min-width: 170px; flex: 1 1 170px; }
+#selection-view .selection-launch .god-mode-control { flex: 0 1 240px; min-width: 0; }
+#selection-view .selection-launch .start-fight { flex: 1 1 260px; min-height: 56px; }
+#selection-view #selection-loading { margin: 6px 0; }
+#selection-view .selection-roster { display: flex; flex-direction: column; min-height: 0; margin-top: 12px; }
+#selection-view .selection-roster > .selection-section-heading { flex: none; margin-bottom: 8px; }
+#selection-view .selection-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); padding: 2px 4px 4px; }
+#selection-view .selection-grid { grid-auto-rows: clamp(112px, 13vh, 136px); }
+#selection-view .selection-grid .portrait-choice { height: auto; aspect-ratio: auto; }
+#selection-view #selection-announcement { flex: none; margin: 6px 0 0; }
+
+@media (min-width: 900px) and (min-height: 500px) {
+  /* Two panels: stage, rules and the preview on the left; the roster scrolls on its own on the right. */
+  #selection-view:not([hidden]) {
+    overflow: hidden; display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas: "heading heading" "setup roster";
+    column-gap: clamp(10px, 1.2vw, 20px);
+  }
+  #selection-view .selection-heading { grid-area: heading; }
+  #selection-view .selection-setup { grid-area: setup; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-right: 2px; }
+  #selection-view .match-preview { flex: 1 0 clamp(180px, 30vh, 440px); height: auto; min-height: clamp(180px, 30vh, 440px); }
+  #selection-view .selection-roster { grid-area: roster; margin: 0; }
+  #selection-view .selection-grid { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; align-content: start; }
+  #selection-view .fighter-summary { width: 22%; min-width: 128px; top: 10px; bottom: 10px; overflow: hidden; }
+}
+@media (min-width: 900px) and (max-height: 820px) {
+  #selection-view .stage-choice { height: 54px; }
+  #selection-view .selection-locations { padding-block: 8px 6px; }
+  #selection-view .selection-locations .selection-section-heading { min-height: 30px; margin-bottom: 4px; }
+  #selection-view .stage-swipe-cue { display: none; }
+  #selection-view .selection-launch { padding-block: 8px 10px; gap: 10px 14px; }
+  #selection-view .menu-instructions, #selection-view #god-mode-help { display: none; }
+  #selection-view .selection-heading { padding: 2px 0 4px; }
+  #selection-view .stage-choice > span { padding: 3px 5px; }
+  #selection-view .selection-launch .start-fight { min-height: 50px; padding-block: 10px; font-size: 20px; }
+  #selection-view .fighter-summary h2 { margin: 4px 0 2px; }
+  #selection-view .fighter-summary > p { margin-bottom: 6px; }
+  #selection-view .fighter-summary dl > div { min-height: 22px; padding: 3px 5px; }
+  #selection-view .fighter-summary dd { font-size: 13px; }
+}
+@media (max-width: 899px), (max-height: 499px) {
+  #selection-view .match-preview { height: clamp(240px, 46vh, 412px); }
+  #selection-view .selection-grid { max-height: none; }
+}
+
+/* ---- Partner select ---- */
+#partner-picker:not([hidden]) { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 12px; }
+#partner-picker .selection-heading { min-height: 0; padding: 6px 0 10px; }
+#partner-picker .partner-actions { align-items: center; }
+#partner-picker .selection-grid { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); }
+#partner-picker .selection-grid { grid-auto-rows: clamp(118px, 15vh, 150px); }
+#partner-picker .portrait-choice { height: auto; aspect-ratio: auto; }
+
+/* ---- Fight: the canvas takes the window ---- */
+body:has(#fight-view:not([hidden])) #app > .arena-header,
+body:has(#fight-view:not([hidden])) #app main > footer { display: none; }
+body:has(#fight-view:not([hidden])) #app main { padding: 0; }
+#fight-view:not([hidden]) {
+  flex: 1 1 auto; min-height: 0;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto;
+}
+/* One top bar: Main menu and the story status, then the stage name and device. */
+#fight-view .fight-heading { grid-column: 1; grid-row: 1; padding: 4px 8px; gap: 12px; background: #101222ee; }
+#fight-view .fight-heading .quiet { min-height: 34px; padding: 7px 22px; font-size: 12px; }
+#fight-view .arena-shell { display: contents; }
+#fight-view .arena-bar { grid-column: 2; grid-row: 1; align-items: center; padding: 6px 14px; min-width: 0; gap: 12px; }
+#fight-view .arena-bar > div { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#fight-view .canvas-wrap {
+  grid-column: 1 / -1; grid-row: 2; min-height: 0; overflow: hidden;
+  background: #04060c; border-block: 1px solid #8a735366;
+}
+#fight-view #game { width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; }
+#fight-view .arena-footer { grid-column: 1 / -1; grid-row: 3; padding: 5px 12px; gap: 12px; }
+#fight-view .arena-footer > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#fight-view .arena-footer .quiet { min-height: 34px; padding: 7px 18px; }
+#fight-view .fight-notes, #fight-view .controls-strip { display: none; }
+#story-animation-skip { position: absolute; right: 12px; bottom: 12px; z-index: 30; }
+
+/* Pause and result menu: everything fits the fight area; the move list scrolls in its panel. */
+#overlay { padding: clamp(8px, 2vh, 20px); overflow: hidden; }
+#overlay > div { max-height: 100%; max-width: min(1100px, 100%); overflow-y: auto; overscroll-behavior: contain; padding: clamp(12px, 2.4vh, 24px) clamp(14px, 2vw, 28px); }
+#overlay h2 { font-size: clamp(22px, 4.2vh, 40px); margin: 6px 0; }
+#overlay p { margin: 6px auto; }
+#overlay #start { margin: 8px 0 0; min-width: min(320px, 100%); }
+#overlay .overlay-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(196px, 1fr)); gap: 6px; margin: 10px auto 0; max-width: 840px; }
+#overlay .overlay-menu .quiet { margin: 0; min-height: 40px; padding: 9px 30px; font-size: 12px; white-space: nowrap; }
+#overlay small { margin-top: 10px; }
+#overlay .move-list { max-height: none; margin-top: 10px; }
+@media (min-height: 700px) { #overlay .move-list { max-height: 34vh; } }
+
+/* ---- Dialogs: Settings, Controller settings, Story worlds ---- */
+dialog { max-height: calc(100dvh - 24px); max-width: calc(100vw - 24px); overflow-y: auto; overscroll-behavior: contain; }
+#controls-dialog { width: min(900px, calc(100vw - 24px)); }
+#controls-dialog .dialog-top, #journey-dialog .dialog-top { flex-wrap: wrap; align-items: flex-start; }
+#controls-dialog[data-page=settings] .settings-page[data-page=controls],
+#controls-dialog[data-page=controls] .settings-page[data-page=settings] { display: none; }
+#controls-dialog .fixed-controls h3 { margin: 18px 0 6px; }
+#controls-dialog .fixed-row { font-size: 13px; }
+#controls-dialog .fixed-row > span:first-child { color: #f3deb3; }
+#controls-dialog .stick-settings label { flex-wrap: wrap; }
+#controls-dialog .stick-settings input[type=range] { flex: 1 1 200px; width: auto; }
+#journey-dialog { width: min(980px, calc(100vw - 24px)); }
+#journey-dialog:has(.campaign) { width: min(1280px, calc(100vw - 24px)); }
+#journey-dialog[open]:has(.campaign) { height: calc(100dvh - 24px); max-height: calc(100dvh - 24px); }
+@media (max-width: 1100px) {
+  #app .top-navigation { gap: 4px; }
+  #app .top-navigation .quiet { min-height: 34px; padding: 8px 24px; font-size: 11px; }
+  #app > .arena-header .brand { font-size: 15px; gap: 8px; }
+  #app > .arena-header .hub-label { font-size: 9px; }
+}
+@media (max-width: 1000px) {
+  /* Keep the header to one row: the S/A crest stands in for the name, and the link status hides. */
+  #app > .arena-header .brand > span:not(.brand-icon), #app > .arena-header .hub-label { display: none; }
+  #app .top-navigation .quiet { padding: 8px 22px; }
+}

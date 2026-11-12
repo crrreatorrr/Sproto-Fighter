@@ -128,13 +128,31 @@ export interface PadView {
     readonly buttons: readonly { readonly pressed: boolean; readonly value: number }[];
 }
 
-export function padView(axes: readonly number[], buttons: readonly number[]): PadView {
-    const [x, y] = radialDeadzone(axes[0] ?? 0, axes[1] ?? 0, LEFT_STICK_DEADZONE) as [number, number];
-    // Keep the raw reading outside the deadzone: gameplay compares it against its own
-    // direction thresholds (all larger than the deadzone), so they are unchanged.
-    const inside = x === 0 && y === 0;
+/** The player's choice range for the left-stick dead zone (Controller settings). */
+export const MIN_STICK_DEADZONE = .05, MAX_STICK_DEADZONE = .6;
+export const clampDeadzone = (value: number): number =>
+    Number.isFinite(value) ? Math.min(MAX_STICK_DEADZONE, Math.max(MIN_STICK_DEADZONE, Math.round(value * 100) / 100)) : LEFT_STICK_DEADZONE;
+
+/**
+ * Left stick as the rest of the game reads it. At the default dead zone the raw reading is kept
+ * outside the dead zone: gameplay and menus compare it against their own direction thresholds
+ * (all larger than the dead zone). Another dead zone is mapped onto the default's scale, so a
+ * threshold keeps the same place in the stick's live travel: a larger dead zone needs a longer
+ * push, a smaller one a shorter push, and the default reads exactly as it always has.
+ */
+export function stickAxes(x: number, y: number, deadzone = LEFT_STICK_DEADZONE): [number, number] {
+    const [dx, dy] = radialDeadzone(x, y, deadzone);
+    if (dx === 0 && dy === 0) return [0, 0];
+    if (deadzone === LEFT_STICK_DEADZONE) return [x, y];
+    const length = Math.hypot(x, y), live = Math.min(1, (length - deadzone) / (1 - deadzone));
+    const scale = (LEFT_STICK_DEADZONE + live * (1 - LEFT_STICK_DEADZONE)) / length;
+    return [x * scale, y * scale];
+}
+
+export function padView(axes: readonly number[], buttons: readonly number[], deadzone = LEFT_STICK_DEADZONE): PadView {
+    const [x, y] = stickAxes(axes[0] ?? 0, axes[1] ?? 0, deadzone);
     return {
-        axes: [inside ? 0 : axes[0] ?? 0, inside ? 0 : axes[1] ?? 0, ...axes.slice(2)],
+        axes: [x, y, ...axes.slice(2)],
         buttons: buttons.map(down => ({ pressed: !!down, value: down ? 1 : 0 })),
     };
 }
@@ -157,6 +175,8 @@ export class PadInput {
     private slots: [number | null, number | null] = [null, null];
     private readonly latch = new PadLatch();
     private previous: [number[], number[]] = [[], []];
+    /** Left-stick dead zone for both players' pads (Controller settings); applies from the next poll. */
+    deadzone = LEFT_STICK_DEADZONE;
 
     poll(pads: readonly (PadLike | null | undefined)[], promote: boolean): PadFrame {
         const before = this.slots;
@@ -174,9 +194,10 @@ export class PadInput {
             const pad = pads[index]!;
             const buttons = this.latch.read(index, readButtons(pad));
             if (buttons.some((down, i) => down && !this.previous[p][i])) active = true;
-            if (Math.max(Math.abs(pad.axes[0] ?? 0), Math.abs(pad.axes[1] ?? 0)) >= MENU_STICK) active = true;
+            const view = padView(pad.axes, buttons, this.deadzone);
+            if (Math.max(Math.abs(view.axes[0] ?? 0), Math.abs(view.axes[1] ?? 0)) >= MENU_STICK) active = true;
             this.previous[p] = buttons;
-            return padView(pad.axes, buttons);
+            return view;
         });
         return { p1: views[0], p2: views[1], lost, active, count: this.slots.filter(s => s !== null).length };
     }

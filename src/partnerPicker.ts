@@ -13,6 +13,7 @@ export function createPartnerPicker(canPlay:(id:PlayableFighterId)=>boolean){
         </div>
         <div class="partner-actions">
             <button class="quiet" type="button" id="partner-back">Back</button>
+            <div class="system-menu" role="group" aria-label="Menu options"><button class="quiet" type="button" id="partner-main-menu">Main menu</button><button class="quiet" type="button" id="partner-controls">Controller settings</button><button class="quiet" type="button" id="partner-fullscreen">Full screen: Off</button><button class="quiet" type="button" id="partner-hub">Return to hub</button></div>
             <button class="start-fight" type="button" id="partner-confirm">Continue</button>
         </div>
         <section class="selection-roster" aria-label="Choose your partner">
@@ -43,8 +44,13 @@ export function createPartnerPicker(canPlay:(id:PlayableFighterId)=>boolean){
         const entries=[...buttons.values()];
         const current=entries.indexOf(document.activeElement as HTMLButtonElement);
         if(current<0){
+            // The action row: Back, the menu options (Main menu, Controller settings, Full screen, hub), Continue.
+            const row=Array.from(screen.querySelectorAll<HTMLButtonElement>('.partner-actions button')).filter(button=>!button.hidden&&!button.disabled);
             if(direction==='down')buttons.get(selected)?.focus();
-            else if(direction==='left'||direction==='right')(document.activeElement===back?confirm:back).focus();
+            else if(direction==='left'||direction==='right'){
+                const at=row.indexOf(document.activeElement as HTMLButtonElement);
+                row[at<0?0:(at+(direction==='left'?-1:1)+row.length)%row.length]?.focus();
+            }
             return;
         }
         const first=entries[0].offsetTop;

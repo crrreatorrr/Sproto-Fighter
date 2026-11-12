@@ -130,9 +130,23 @@ Launcher sits on A like those games' launcher button. The left index finger
 dashes on LT while the right thumb keeps attacking, so dash cancels never take
 the thumb off the face buttons. Ranged power and Grab are the bumpers and the
 Team Special is RT. Movement is the stick or D-pad (radial deadzone 0.2).
-The pause menu has **Resume**, **Restart**, **Fighter select**, **Send feedback**
-and, when the game was opened from the hub, **Return to hub**; the fighter select reaches the
-header (Story worlds, Settings, Return to hub) by moving up past Random Stage.
+**Full window and menus.** The game fills the browser window and the page never
+scrolls: the fighter select is two panels (stage, rules and preview on the left;
+the roster scrolls on its own on the right), dialogs scroll inside themselves,
+and a fight hides the page header so the 1280 × 720 canvas scales to the
+window (letterboxed, never stretched or cropped). Every menu also offers
+**Main menu** (the fighter select; leaving a live online match still asks
+first), **Return to hub** (the hub session's exit, or the hub page when the game
+was opened on its own), **Controller settings** and **Full screen** (browser
+full screen, shown where the browser allows it; Escape or F11 leaves it, and an
+Escape that leaves full screen does nothing else, except pausing a running
+round). The pause and result menu has **Resume** (or the result's own action),
+**Restart**, **Main menu**, **Story worlds**, **Settings**, **Controller
+settings**, **Full screen**, **Send feedback** and **Return to hub**; the
+fighter select reaches the header (Story worlds, Settings, Controller settings,
+Full screen, Return to hub) by moving up past Random Stage. Settings, Story
+worlds and the partner select carry the same four options. Layout:
+`src/fullscreen.css`; full screen: `src/fullscreen.ts`.
 Fight-screen prompts follow the device you used last. On the keyboard, player 1
 stays on W A S D with the attacks under the right hand; the arrow keys belong to
 player 2 in local versus (the story-boss forms and menus accept both).
@@ -163,12 +177,18 @@ then pick player 2's fighter on the rival tab. Player 2 uses the arrow keys,
 first controller stays player 1 and drives the menus). Local versus never
 earns hub rewards and has no God Mode.
 
-**Settings → Controls** has a tab for each player, with separate keyboard and
+**Controller settings** (from any menu, or Settings) has a tab for each player, with separate keyboard and
 controller mappings. A key can belong to only one action across both players:
 binding a key the other player uses swaps it. Player 2's controller buttons
 are remapped from the second connected controller; Start cancels a controller
-remap. Mappings save in the browser, and a saved mapping is kept as it is when
-the defaults change. The online multiplayer plan is in [docs/MULTIPLAYER-PLAN.md](docs/MULTIPLAYER-PLAN.md). W jumps once per press. W+J gives a rising strike;
+remap. It also sets the left-stick dead zone (5–60 %, default 20 %, both
+players and the menus; the default reads the stick exactly as before), lists
+every fixed key and button (pause, feedback, menu keys, story-boss keys), and
+has Back and Restore defaults. The game has no controller vibration, so there
+is no vibration switch. Mappings and the dead zone save in the browser under
+`sproto-arena-controls` (`src/controlsStorage.ts`), and a saved mapping is kept
+as it is when the defaults change. Remapping happens in the input layer: the
+simulation still only receives action bits. The online multiplayer plan is in [docs/MULTIPLAYER-PLAN.md](docs/MULTIPLAYER-PLAN.md). W jumps once per press. W+J gives a rising strike;
 W+forward+K gives a diagonal strike. S+J/K gives low attacks, S+L sweeps, and
 S+K/L in the air dives. O plus forward/back/W/S selects a directional throw.
 Three damaging hits ending in a finisher earn one pip when the combo ends;

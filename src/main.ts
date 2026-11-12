@@ -10,11 +10,14 @@ import './pixelUI.css';
 import './mysticUI.css';
 import './campaignMap.css';
 import './versusScreen.css';
+import './fullscreen.css';
 import {createVersusScreen} from './versusScreen';
 import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';
 import { FEEDBACK_KEY, P2_KEYS, PAD_DEFAULTS, UNBOUND, keyboardMask, menuKeyDirection, pressedMask, padMask, rebindKey, rebindPad, resolveKeyConflicts } from './localInput';
-import { PAD, PadInput, MenuRepeat, menuDirection, padButtonName, canBindPadButton, type MenuDirection, type PadView } from './gamepad';
+import { PAD, PadInput, MenuRepeat, menuDirection, padButtonName, canBindPadButton, clampDeadzone, LEFT_STICK_DEADZONE, type MenuDirection, type PadView } from './gamepad';
+import { FIXED_CONTROLS, loadControls, saveControls } from './controlsStorage';
+import { bindFullscreenButtons, escapeLeavesFullscreenOnly } from './fullscreen';
 import { A, ROSTER, PLAYABLE_FIGHTERS, createState, cpuInput, step, type Action, type PlayableFighterId as FighterId, type Mode, type CombatState } from './core';
 import { render } from './render';
 import { ensurePowerArt } from './powerArt';
@@ -28,7 +31,7 @@ import {bossFightInput,bossKeyInput,drawMovingStoryBoss,drawStoryBossAttacks,dra
 import {createStoryAnimation,storyAnimationPlan} from './storyAnimation';
 import { createStoryMode } from './storyMode';
 import {createPartnerPicker} from './partnerPicker';
-import { connectHub, hubConfigured, type HubLink } from './hub/link';
+import { connectHub, hubExitUrl, type HubLink } from './hub/link';
 import { BELT_OPPONENT, BELT_WORLD } from './hub/config';
 import { OnlineMatch } from './net/onlineMatch';
 import type { DuelOutcome } from './net/hubDuel';
@@ -53,34 +56,13 @@ const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'Key
 // Controller defaults for both players; see PAD_DEFAULTS for the reasoning.
 const padDefaults: Partial<Record<Action, number>> = PAD_DEFAULTS;
 const labels: Record<Action, string> = { left: 'Move left', right: 'Move right', up: 'Jump', down: 'Crouch', light: 'Light', medium: 'Medium', heavy: 'Finisher', launcher: 'Launcher', bolt: 'Ranged power', grab: 'Grab', special: 'Team special', dash: 'Dash' };
-// Player 1 and player 2 (local versus) each have their own keyboard and gamepad mappings.
-let keys = { ...defaults }, padKeys = { ...padDefaults };
-let keys2: Record<Action, string> = { ...P2_KEYS }, padKeys2 = { ...padDefaults };
-// Saved under the project's old working name until this release; read it once
-// so remapped controls survive, then save under the new key.
-const CONTROLS_KEY = 'sproto-arena-controls', LEGACY_CONTROLS_KEY = 'neon-relay-controls';
-try {
-    const saved = JSON.parse(localStorage.getItem(CONTROLS_KEY) ?? localStorage.getItem(LEGACY_CONTROLS_KEY) ?? 'null');
-    if (saved) {
-        for (const a of Object.keys(defaults) as Action[])
-            if (typeof saved.keys?.[a] === 'string')
-                keys[a] = saved.keys[a];
-        for (const a of Object.keys(padDefaults) as Action[])
-            if (Number.isInteger(saved.padKeys?.[a]))
-                padKeys[a] = saved.padKeys[a];
-        if ((saved.controlsVersion??0)<3 && ['Space','ArrowUp'].includes(keys.up) && !Object.entries(keys).some(([a,k]) => a !== 'up' && k === 'KeyW')) keys.up = 'KeyW';
-        for (const a of Object.keys(defaults) as Action[])
-            if (typeof saved.keys2?.[a] === 'string')
-                keys2[a] = saved.keys2[a];
-        for (const a of Object.keys(padDefaults) as Action[])
-            if (Number.isInteger(saved.padKeys2?.[a]))
-                padKeys2[a] = saved.padKeys2[a];
-    }
-}
-catch { /* Storage may be disabled. Defaults still work. */ }
-// N twice opens feedback: a saved mapping can never hold it.
-for (const a of Object.keys(defaults) as Action[]) if (keys[a] === FEEDBACK_KEY) keys[a] = defaults[a];
-resolveKeyConflicts(keys, keys2);
+// Player 1 and player 2 (local versus) each have their own keyboard and gamepad mappings,
+// saved with the left-stick dead zone on this browser (src/controlsStorage.ts).
+const controlsStore = (() => { try { return window.localStorage; } catch { return null; } })();
+const savedControls = loadControls(controlsStore, { keys: { ...defaults }, padKeys: { ...padDefaults }, keys2: { ...P2_KEYS }, padKeys2: { ...padDefaults } });
+let keys: Record<Action, string> = savedControls.keys, padKeys = savedControls.padKeys;
+let keys2: Record<Action, string> = savedControls.keys2, padKeys2 = savedControls.padKeys2;
+let stickDeadzone = savedControls.stickDeadzone;
 const depthParams = new URLSearchParams(location.search);
 const depthEnabled = depthParams.has('matchDepth');
 const depthModifiers: MatchModifier[] = ['none','double-meter','low-gravity','specials-only','sudden-death','reflect-projectiles'];
@@ -107,6 +89,7 @@ let presentation = createRoundPresentation();
 let padNeedsRelease=true;
 /** Every connected controller, read once per frame: sticky P1/P2 assignment and latch-on-connect. */
 const padInput = new PadInput(), menuRepeat = new MenuRepeat();
+padInput.deadzone = stickDeadzone;
 /** Player 2's controller as of the last poll (local versus). */
 let padP2: PadView | null = null;
 /** The device the player last used; decides which prompts the fight screen shows. */
@@ -244,14 +227,20 @@ function hubToast(title:string,sub:string){
  toast.append(heading,document.createTextNode(sub));toast.hidden=false;
  clearTimeout(toastTimer);toastTimer=window.setTimeout(()=>{toast.hidden=true;},6000);
 }
-$('return-hub').onclick=$('overlay-hub').onclick=()=>{if(hub)hub.exitHub();};
-if(hubConfigured())$('return-hub').hidden=false;
+/** Leaving a live online match forfeits it: the browser asks first, as the fighter select always has. */
+function confirmLeaveOnline(){return online?.phase!=='playing'||window.confirm('Leave this online match? Leaving forfeits it.');}
+/** Every menu's hub option: the hub session's own exit, or the hub page when the game was opened on its own. */
+function goToHub(){
+ if(!confirmLeaveOnline())return;
+ if(hub)hub.exitHub();else window.location.assign(hubExitUrl());
+}
+for(const id of ['return-hub','overlay-hub','settings-hub','journey-hub','partner-hub'])$(id).onclick=goToHub;
 const hubLink=connectHub();
 void hubLink.then(link=>{
  hub=link;
  if(link.connected){
   hubRelics=link.relics;writeRelicCache(storage,hubRelics);selection.refreshLocks();
-  $('return-hub').hidden=false;$('hub-label').textContent='● HUB LINKED / BAR ARCADE';$('hub-label').classList.add('linked');
+  $('hub-label').textContent='● HUB LINKED / BAR ARCADE';$('hub-label').classList.add('linked');
  }else if(link.error){$('hub-label').textContent='● HUB OFFLINE / 1V1';console.warn('Hub connection unavailable:',link.error);}
 });
 // ---- In-game feedback: N twice, or the pause menu's button (src/feedback.ts) ----
@@ -426,8 +415,9 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     updateGodModeLabel();
     return true;
 }
-function returnToSelection() {
-    if(online){if(online.phase==='playing'&&!window.confirm('Leave this online match? Leaving forfeits it.'))return;void online.leave();online=null;stopHiddenClock();}
+/** Back to the fighter select (the main menu). `confirmed` when the caller already asked about forfeiting. */
+function returnToSelection(confirmed = false) {
+    if(online){if(!confirmed&&online.phase==='playing'&&!window.confirm('Leave this online match? Leaving forfeits it.'))return;void online.leave();online=null;stopHiddenClock();}
     storyAnimation.clear();storyBoss=null;storyBossArt=null;bossStarts.length=0;
     versus.hide();
     countdown.hide();
@@ -437,15 +427,22 @@ function returnToSelection() {
     $('fight-view').hidden=true;$('overlay').hidden=true;
     selection.show();
 }
-$('back-select').onclick=returnToSelection;$('overlay-select').onclick=returnToSelection;
+$('back-select').onclick=()=>returnToSelection();$('overlay-select').onclick=()=>returnToSelection();
+/** Main menu from any menu: close whatever is open over the game, then go to the fighter select. */
+function goToMainMenu(){
+    if(!selection.isOpen&&!confirmLeaveOnline())return;
+    remapping=null;resumeAfterSettings=false;
+    if(dialog.open)dialog.close();
+    const journey=$<HTMLDialogElement>('journey-dialog');
+    if(journey.open)journey.close();
+    if(partnerPicker.isOpen)$('partner-back').click();
+    if(!selection.isOpen)returnToSelection(true);
+}
+for(const id of ['settings-main-menu','journey-main-menu','partner-main-menu'])$(id).onclick=goToMainMenu;
 const KEY_SYMBOLS: Record<string, string> = { ArrowLeft: '←', ArrowRight: '→', ArrowUp: '↑', ArrowDown: '↓', BracketLeft: '[', BracketRight: ']', Comma: ',', Period: '.', Slash: '/', Backslash: '\\', Semicolon: ';', Quote: "'", Backquote: '`', Minus: '-', Equal: '=', ShiftLeft: 'L-Shift', ShiftRight: 'R-Shift', ControlLeft: 'L-Ctrl', ControlRight: 'R-Ctrl', AltLeft: 'L-Alt', AltRight: 'R-Alt', Space: 'Space', Enter: 'Enter' };
 function keyName(code: string) { return KEY_SYMBOLS[code] ?? code.replace('Key', '').replace('Digit', '').replace('Numpad', 'Num '); }
 function save() {
-    try {
-        localStorage.setItem(CONTROLS_KEY, JSON.stringify({ controlsVersion: 4, keys, padKeys, keys2, padKeys2 }));
-        localStorage.removeItem(LEGACY_CONTROLS_KEY);
-    }
-    catch { /* Nonpersistent mode. */ }
+    saveControls(controlsStore, { keys, padKeys, keys2, padKeys2, stickDeadzone });
 }
 /** Player 1's control for `action` in the current prompt device (keyboard key or controller button). */
 function controlPrompt(action: Action): string {
@@ -496,8 +493,8 @@ function bind(value: string | number) {
 function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED', moveList = false) {
     // Buttons held as the overlay opens (attacks mashed through a KO, the Start that paused) act only after release.
     padInput.holdCurrent(Array.from(navigator.getGamepads?.() || []));
-    // The pause and result screens offer the hub wherever the header does; online screens leave through fighter select.
-    $('overlay-hub').hidden = $('return-hub').hidden || !!online;
+    // Story worlds belongs to local play; the hub, settings and full screen are on every pause and result screen.
+    $('overlay-story').hidden = !!online;
     // Restart sits in the pause menu of a local round in progress (the footer's Restart, reachable by controller).
     $('overlay-restart').hidden = !started || !!online || (presentation.phase === 'result' && !storyAnimation.active);
     const moves = document.getElementById('overlay-moves'); if (moves) moves.hidden = true;
@@ -507,9 +504,9 @@ function showOverlay(title: string, copy: string, button: string, kicker = 'COMB
     running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; $('overlay-hint').textContent = state.matchDepth ? (state.matchDepth.rounds ? 'First to two round wins · 60-second combat clock' : 'Chapter rule · 60-second combat clock') : 'Play your way · No round timer'; if(!selection.isOpen)$('start').focus(); }
 /** The pause / result overlay's buttons that can be used right now, top to bottom. */
 function overlayChoices(): HTMLButtonElement[] {
-    const choices = ['start', 'overlay-restart', 'overlay-select', 'overlay-feedback', 'overlay-hub'].map(id => $<HTMLButtonElement>(id)).filter(b => b && !b.hidden && !b.disabled);
-    // While an unsettled online match is up, Fighter select would forfeit through a browser confirm; the controller skips it.
-    return online?.phase === 'playing' ? choices.filter(b => b.id !== 'overlay-select') : choices;
+    const choices = ['start', 'overlay-restart', 'overlay-select', 'overlay-story', 'overlay-settings', 'overlay-controls', 'overlay-fullscreen', 'overlay-feedback', 'overlay-hub'].map(id => $<HTMLButtonElement>(id)).filter(b => b && !b.hidden && !b.disabled);
+    // While an unsettled online match is up, Main menu and the hub would forfeit through a browser confirm; the controller skips them.
+    return online?.phase === 'playing' ? choices.filter(b => b.id !== 'overlay-select' && b.id !== 'overlay-hub') : choices;
 }
 /** Menu-style focus movement between the overlay's buttons (keyboard arrows / W S, controller D-pad / stick). */
 function moveOverlayFocus(direction: MenuDirection) {
@@ -630,17 +627,52 @@ $('reset').onclick = ()=>{storyAnimation.cancel();if(training===tutorialCoach&&t
 $('overlay-restart').onclick = () => $('reset').click();
 const dialog = $<HTMLDialogElement>('controls-dialog');
 $('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
-$('settings').onclick = () => {
-    const godMode=$<HTMLInputElement>('testing-god-mode');
-    godMode.checked=started&&!selection.isOpen?!!state.godMode:testingGodMode;
-    godMode.disabled=!!online||(started&&!selection.isOpen&&mode==='versus');
-    resumeAfterSettings = running;
-    if (running)
-        pause();
-    held.clear();
-    queued = 0;queued2=0;
-    dialog.showModal();
-};
+/** The Settings dialog has two pages: Settings (sound, online, testing) and Controller settings. */
+type SettingsPage = 'settings' | 'controls';
+let settingsPage: SettingsPage = 'settings', controlsBackTo: 'settings' | 'close' = 'close';
+function showSettingsPage(page: SettingsPage) {
+    settingsPage = page; dialog.dataset.page = page;
+    $('settings-title').textContent = page === 'controls' ? 'Controller settings' : 'Settings';
+    $('settings-kicker').textContent = page === 'controls' ? 'KEYBOARD AND CONTROLLER' : 'MAKE IT YOURS';
+    $('settings-controls').hidden = page === 'controls';
+    $('controls-back').hidden = page !== 'controls';
+    remapping = null;
+    updateControls();
+    dialog.scrollTop = 0;
+}
+/** Open Settings or Controller settings from any menu; a running round pauses until it closes. */
+function openSettings(page: SettingsPage) {
+    const wasOpen = dialog.open;
+    if (!wasOpen) {
+        const godMode=$<HTMLInputElement>('testing-god-mode');
+        godMode.checked=started&&!selection.isOpen?!!state.godMode:testingGodMode;
+        godMode.disabled=!!online||(started&&!selection.isOpen&&mode==='versus');
+        resumeAfterSettings = running;
+        if (running)
+            pause();
+        held.clear();
+        queued = 0;queued2=0;
+        dialog.showModal();
+    }
+    // Back from Controller settings returns to Settings only when it was opened from there.
+    controlsBackTo = wasOpen && settingsPage === 'settings' && page === 'controls' ? 'settings' : 'close';
+    showSettingsPage(page);
+    (page === 'controls' ? $(`controls-p${controlsPlayer}`) : $('close-settings')).focus();
+}
+$('settings').onclick = () => openSettings('settings');
+for (const id of ['controller-settings', 'overlay-controls', 'settings-controls', 'journey-controls', 'partner-controls']) $(id).onclick = () => openSettings('controls');
+$('overlay-settings').onclick = () => openSettings('settings');
+$('overlay-story').onclick = () => $('story-worlds').click();
+/** Back from Controller settings: to Settings when it came from there, otherwise out of the dialog. */
+function controlsBack(fromCancel = false) {
+    if (controlsBackTo === 'settings') {
+        if (fromCancel) menuSound('menuBack');
+        showSettingsPage('settings');
+        $('settings-controls').focus();
+    }
+    else closeSettings(fromCancel);
+}
+$('controls-back').onclick = () => controlsBack();
 function closeSettings(fromCancel = false) {
     // The close button already clicks. Escape and the controller's Back arrive as cancel.
     if (fromCancel) menuSound('menuBack');
@@ -657,18 +689,38 @@ dialog.addEventListener('cancel', e => {
         remapping = null;
         updateControls();
     }
+    else if (settingsPage === 'controls')
+        controlsBack(true);
     else
         closeSettings(true);
 });
 $('defaults').onclick = () => {
     if (controlsPlayer === 1) { keys = { ...defaults }; padKeys = { ...padDefaults }; }
     else { keys2 = { ...P2_KEYS }; padKeys2 = { ...padDefaults }; }
+    stickDeadzone = LEFT_STICK_DEADZONE; syncDeadzone();
     resolveKeyConflicts(keys, keys2); remapping = null; save(); updateControls();
 };
+// ---- Controller settings: left-stick dead zone (both players and the menus) and the fixed keys and buttons ----
+const deadzoneSlider = $<HTMLInputElement>('stick-deadzone');
+function syncDeadzone() {
+    padInput.deadzone = stickDeadzone;
+    deadzoneSlider.value = String(Math.round(stickDeadzone * 100));
+    $('stick-deadzone-value').textContent = `${Math.round(stickDeadzone * 100)}%`;
+}
+deadzoneSlider.oninput = () => { stickDeadzone = clampDeadzone(Number(deadzoneSlider.value) / 100); syncDeadzone(); save(); };
+syncDeadzone();
+$('fixed-controls').replaceChildren(...FIXED_CONTROLS.map(row => {
+    const line = document.createElement('div'); line.className = 'binding-row fixed-row';
+    for (const text of [row.action, row.keyboard, row.controller]) { const cell = document.createElement('span'); cell.textContent = text; line.append(cell); }
+    return line;
+}));
+// ---- Full screen: every menu's toggle (the Fullscreen API needs the click or key press itself) ----
+bindFullscreenButtons(['fullscreen-toggle', 'overlay-fullscreen', 'settings-fullscreen', 'journey-fullscreen', 'partner-fullscreen'].map(id => $<HTMLButtonElement>(id)),
+    () => hubToast('Full screen needs a click or a key press.', ' Choose Full screen with the mouse, Enter or Space, or press F11.'));
+
 for (const p of [1, 2] as const) $(`controls-p${p}`).onclick = () => { controlsPlayer = p; remapping = null; updateControls(); };
 $('controls-tabs').onkeydown = e => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); controlsPlayer = controlsPlayer === 1 ? 2 : 1; remapping = null; updateControls(); $(`controls-p${controlsPlayer}`).focus(); } };
 window.addEventListener('keydown', e => {
-    if (story.isOpen||(typeof document!=='undefined'&&document.querySelector?.('#partner-picker:not([hidden])'))) return;
     if (dialog.open) {
         if (remapping?.device === 'key') {
             e.preventDefault();
@@ -683,6 +735,7 @@ window.addEventListener('keydown', e => {
         }
         return;
     }
+    if (story.isOpen||(typeof document!=='undefined'&&document.querySelector?.('#partner-picker:not([hidden])'))) return;
     if (selection.isOpen) return;
     if (e.code === 'Escape') {
         e.preventDefault();
@@ -728,6 +781,15 @@ window.addEventListener('keydown', e => {
     }
 });
 window.addEventListener('keyup', e => {held.delete(e.code);blockedKeys.delete(e.code);});
+// Escape while full screen only leaves full screen (and cancels a pending remap): it does not also close
+// the menu it was pressed in. A running round still pauses, so the fight never carries on unseen.
+window.addEventListener('keydown', e => {
+    if (!escapeLeavesFullscreenOnly(e)) return;
+    e.preventDefault(); e.stopImmediatePropagation();
+    void document.exitFullscreen?.().catch(() => undefined);
+    if (remapping) { remapping = null; updateControls(); }
+    if (running && started && !online) pause();
+}, { capture: true });
 window.addEventListener('blur', () => {
     blockedKeys.clear();
     held.clear();
@@ -751,7 +813,7 @@ function pollPad(): number {
     if (running && started && (frame.lost.includes(1) || (mode === 'versus' && frame.lost.includes(2)))) pause();
     const pad = frame.p1, second = frame.p2;
     const wasSelection=selection.isOpen,wasModal=story.isOpen||dialog.open,wasOverlay=!running&&!selection.isOpen;
-    const wasPartnerOpen=!!document.querySelector?.('#partner-picker:not([hidden])');
+    const wasPartnerOpen=!!document.querySelector?.('#partner-picker:not([hidden])')&&!dialog.open;
     selection.pollPad(pad);
     if (!pad) {
         if (!online) $('device').textContent = 'KEYBOARD READY';
@@ -762,7 +824,7 @@ function pollPad(): number {
     const buttons = pad.buttons.map(b => b.pressed ? 1 : 0);
     // `typeof` so the versus harness can run this function without the audio module.
     if ((buttons.some(Boolean) || menuDirection(buttons, pad.axes)) && typeof audio !== 'undefined') audio.unlock();
-    if(document.querySelector?.('#partner-picker:not([hidden])')){
+    if(document.querySelector?.('#partner-picker:not([hidden])')&&!dialog.open){
         if(wasPartnerOpen)partnerPicker.pollPad(pad,buttons,previousPad);
         previousPad=buttons;
         previousStart=!!buttons[PAD.start];
@@ -789,7 +851,8 @@ function pollPad(): number {
     const secondStart = mode === 'versus' && !!secondButtons[PAD.start] && !previousPad2[PAD.start];
     previousPad2 = secondButtons;
     if(wasModal&&(story.isOpen||dialog.open)&&!remapping&&!boundPadThisFrame){
-        const activeDialog=document.querySelector<HTMLDialogElement>('dialog[open]')!;
+        // Settings can open over Story worlds: the dialog on top takes the controller.
+        const activeDialog=dialog.open?dialog:document.querySelector<HTMLDialogElement>('dialog[open]')!;
         const direction=menuDirection(buttons,pad.axes);
         if(menuRepeat.next(direction,performance.now()))navigateDialog(activeDialog,direction);
         if(buttons[PAD.b]&&!previousPad[PAD.b])activeDialog.dispatchEvent(new Event('cancel',{cancelable:true}));
@@ -926,7 +989,7 @@ async function queueOnline(setup: SelectionSetup, rematchOf?: string) {
                     showOnlineOverlay('No rematch', 'Your opponent didn’t choose Rematch.', 'Find another opponent', 'ONLINE', () => void queueOnline(setup));
                 }, 30000);
             }
-            else if (phase === 'queued') showOnlineOverlay('Finding an opponent…', wager ? 'Both players stake 10 Tickets; the winner takes 20. The hub verifies the result before paying.' : 'Looking for another player. Pick “Fighter select” to stop searching.', 'Searching…', 'ONLINE', null);
+            else if (phase === 'queued') showOnlineOverlay('Finding an opponent…', wager ? 'Both players stake 10 Tickets; the winner takes 20. The hub verifies the result before paying.' : 'Looking for another player. Pick “Main menu” to stop searching.', 'Searching…', 'ONLINE', null);
             if (phase === 'failed' && presentation.phase !== 'result') showOnlineOverlay('Online match unavailable', onlineFailureText(detail), 'Back to fighter select', 'ONLINE', returnToSelection);
         },
         onStart: start => { if (match === online) void beginOnline(match, start.fighters as [FighterId, FighterId], start.stage, !!start.wager); },
