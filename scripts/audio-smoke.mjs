@@ -104,7 +104,7 @@ try{
  await page.waitForFunction(()=>window.neonRelay.audioStatus().track==='menu'&&window.neonRelay.audioStatus().fightLoop===null,null,{timeout:5000});
  const left=await status();
  check('leaving the fight stops the Trenches theme',left.track==='menu'&&left.fightLoop===null&&left.fightStarts===1);
- await page.click('#zone-rail button[data-zone="ranch"]');
+ await page.click('#zone-rail button[data-zone="hatchery"]');
  await page.click('#start-fight');
  await page.waitForSelector('#partner-confirm',{timeout:15000});
  await page.click('#partner-confirm');
@@ -112,7 +112,58 @@ try{
   const audio=window.neonRelay.audioStatus();
   return audio.track==='fight'&&audio.fightBed==='synth'&&audio.fightLoop===null;
  },null,{timeout:60000});
- check('a Ranch fight keeps the synthesised loop',(await status()).fightBed==='synth'&&(await status()).fightLoop===null);
+ check('a Hatchery fight keeps the synthesised loop',(await status()).fightBed==='synth'&&(await status()).fightLoop===null);
+ await page.keyboard.press('Enter');
+ await page.waitForFunction(()=>document.querySelector('.versus-screen')?.hidden!==false,null,{timeout:5000});
+ await page.click('#back-select');
+ await page.waitForFunction(()=>window.neonRelay.audioStatus().track==='menu'&&window.neonRelay.audioStatus().fightLoop===null,null,{timeout:5000});
+ const grooves=[
+  {zone:'yacht',bed:'yacht',seconds:61.44,gain:10**(0.4/20),seam:true,file:'audio/music/yacht_groove_loop.mp3'},
+  {zone:'circuit',bed:'city',seconds:61.44,gain:1,seam:false,file:'audio/music/city_house_loop_v2.mp3'},
+  {zone:'throne',bed:'castle',seconds:61.44,gain:1,seam:true,file:'audio/music/castle_vampire_loop_v2.mp3'},
+  {zone:'verse',bed:'verse',seconds:61.44,gain:1,seam:true,file:'audio/music/verse_alien_electro_loop.mp3'},
+  {zone:'bar',bed:'bar',seconds:61.44,gain:1,seam:true,file:'audio/music/bar_rock_loop.mp3'},
+  {zone:'ranch',bed:'ranch',seconds:61.44,gain:1,seam:true,file:'audio/music/ranch_country_loop_v2.mp3'},
+ ];
+ for(const spec of grooves){
+  await page.click(`#zone-rail button[data-zone="${spec.zone}"]`);
+  await page.click('#start-fight');
+  await page.waitForSelector('#partner-confirm',{timeout:15000});
+  await page.click('#partner-confirm');
+  await page.waitForFunction(bed=>{
+   const audio=window.neonRelay.audioStatus();
+   return audio.track==='fight'&&audio.fightBed===bed&&audio.fightLoop&&audio.fightLoop.end>audio.fightLoop.start;
+  },spec.bed,{timeout:60000});
+  const playing=await status();
+  const span=playing.fightLoop.end-playing.fightLoop.start;
+  const musical=Math.min(spec.seconds, playing.fightLoop.samples/playing.fightLoop.rate);
+  check(`${spec.bed} loops the trimmed musical length`,Math.abs(span-musical)<1e-4);
+  const music=await page.$eval('#volume-music',slider=>Number(slider.value)/100);
+  check(`${spec.bed} follows the music slider and its trim`,Math.abs(playing.fightMusic-music*spec.gain)<0.02);
+  const seam=await page.evaluate(async file=>{
+   const loop=window.neonRelay.audioStatus().fightLoop;
+   const ctx=new AudioContext({sampleRate:loop.rate});
+   const buf=await ctx.decodeAudioData(await (await fetch(file)).arrayBuffer());
+   const channel=buf.getChannelData(0);
+   const start=Math.round(loop.start*buf.sampleRate), end=Math.round(loop.end*buf.sampleRate);
+   const deltas=[];
+   for(let i=Math.max(1,end-400);i<end;i++)deltas.push(Math.abs(channel[i]-channel[i-1]));
+   deltas.sort((a,b)=>a-b);
+   const p95=deltas[Math.floor(deltas.length*0.95)]||0;
+   const jump=Math.abs((end>0?channel[end-1]:0)-(start<channel.length?channel[start]:0));
+   await ctx.close();
+   return {samples:buf.length,start,end,jump,p95};
+  },spec.file);
+  const capped=Math.min(spec.seconds, seam.samples/playing.fightLoop.rate);
+  check(`${spec.bed} loop points sit inside the decoded buffer`,seam.end<=seam.samples&&seam.end>seam.start&&Math.abs((seam.end-seam.start)/playing.fightLoop.rate-capped)<1e-4);
+  if(spec.seam)check(`${spec.bed} wrap is no louder than a normal sample step`,seam.jump<=seam.p95*2.5+1e-4);
+  else check(`${spec.bed} keeps the musical length and leaves the encoder tail outside it`,seam.samples>=seam.end&&seam.end-seam.start===Math.round(spec.seconds*playing.fightLoop.rate));
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(()=>document.querySelector('.versus-screen')?.hidden!==false,null,{timeout:5000});
+  await page.click('#back-select');
+  await page.waitForFunction(()=>window.neonRelay.audioStatus().track==='menu'&&window.neonRelay.audioStatus().fightLoop===null,null,{timeout:5000});
+  check(`leaving a ${spec.bed} fight stops the theme`,(await status()).track==='menu'&&(await status()).fightLoop===null);
+ }
  assert.deepEqual(errors,[],'no page errors');
  console.log(`${checks} audio checks passed in headless Chromium. Output quality is for human ears.`);
 }finally{await browser.close();await server?.close();}

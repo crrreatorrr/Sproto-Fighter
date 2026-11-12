@@ -1,0 +1,17 @@
+{
+  "id": "castle_vampire_loop_v2",
+  "filename": "castle_vampire_loop_v2.mp3",
+  "zone": "throne",
+  "bpm": 125,
+  "beats_per_bar": 4,
+  "bars": 32,
+  "duration_seconds": 61.44,
+  "file_duration_seconds": 61.464,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bitrate_kbps": 192,
+  "gain": 1,
+  "file_size_bytes": 1475756,
+  "notes": "Same 32-bar 125 BPM loop and the same 1105-sample priming as the yacht master. ffmpeg and Chrome drop the priming and land on exactly 61.44 s, on a zero crossing. No loudness trim. This is the only Castle file; no Verse track ships with it."
+}

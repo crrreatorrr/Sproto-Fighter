@@ -1,0 +1,17 @@
+{
+  "id": "city_house_loop_v2",
+  "filename": "city_house_loop_v2.mp3",
+  "zone": "circuit",
+  "bpm": 125,
+  "beats_per_bar": 4,
+  "bars": 32,
+  "duration_seconds": 61.44,
+  "file_duration_seconds": 61.488,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bitrate_kbps": 192,
+  "gain": 1,
+  "file_size_bytes": 1476332,
+  "notes": "Same 32-bar 125 BPM loop and the same 1105-sample priming. After the priming is dropped, 47 samples remain past 61.44 s. loopEnd cuts those off. The cut is a click (the groove does not sit on a zero crossing), so playback ramps that one step out over the last 8 ms. The loop length stays 61.44 s. No loudness trim."
+}
