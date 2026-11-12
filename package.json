@@ -24,7 +24,7 @@
     "stage-catalog-smoke": "node scripts/stage-catalog-smoke.mjs",
     "reaction-size-smoke": "node scripts/reaction-size-smoke.mjs",
     "test": "vitest run",
-    "build:hub-sdk": "tsc -p vendor/hub-sdk/tsconfig.build.json",
+    "build:hub-sdk": "tsc -p vendor/hub-sdk/tsconfig.build.json && node vendor/hub-sdk/scripts/copy-third-party.mjs",
     "test:all": "vitest run && node scripts/run-all.mjs",
     "test:fast": "vitest run && node scripts/run-all.mjs --fast",
     "build:release": "npm run build && python3 scripts/build-sheets.py dist --verify"
