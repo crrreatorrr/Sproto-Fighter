@@ -197,14 +197,17 @@ the current fighter's moves with your bindings. `/?matchDepth` and `/?training`
 still switch these on by URL. Online play stays on classic rules.
 [Options and validation limits](docs/MATCH-DEPTH-EXPERIMENT.md).
 
-Sound is Web Audio (`src/audio.ts`): hits by strength, guard, throws,
-projectiles, K.O., menus and three synthesised music loops. Every Trenches
-level, in Story and in Level Select, plays a recorded fight theme
+Sound is Web Audio (`src/audio.ts`). The main menu, character select, options
+and the other front-end menus share one recorded loop
+(`public/audio/music/menu_theme_loop.mp3`, 30 bars at 125 BPM). Every menu
+press plays `public/audio/sfx/ui_select.mp3`. Every Trenches level, in Story
+and in Level Select, plays a recorded fight theme
 (`public/audio/music/trenches_fight_loop.mp3`) that fades in when the fight
 starts and fades out when it ends or the player leaves. The loop points trim
-the MP3 encoder padding so the wrap is the musical 45.000687 seconds. Sound
-starts after the first key, click or button press, and Settings has master,
-effects and music volume. The only other shipped audio file is one voice clip.
+the MP3 encoder padding so the wrap is the musical 45.000687 seconds. Hits,
+guard, throws, projectiles, K.O. and the other fight and story music are
+synthesised. Playback starts after the first key, click or button press.
+Settings has master, effects and music volume.
 
 The CPU guards a projectile in place and walks in between shots, punishes a move
 it has guarded twice in three seconds, holds guard as it gets up, and stop-hits a
