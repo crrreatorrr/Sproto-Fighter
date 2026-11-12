@@ -1,8 +1,8 @@
 # Vendored @metaverse/hub-sdk
 
 - repo: https://github.com/crrreatorrr/metaverse-hub
-- branch: claude/nifty-einstein-ptgr08
-- sha: 5099cb5
+- branch: main
+- sha: bb0017c
 - package: packages/hub-sdk @ 0.7.2
 - built with: `node scripts/vendor-sdk.mjs`
 - iife: dist/hub-sdk.iife.js (global HubSDK; classic script, not a CDN import)
@@ -30,8 +30,8 @@
 - source src/ticket.ts: b01e1635c7031dd0e6855ecb22b99af1654395c41f0296863b627a31ded41033
 - source src/types.ts: b3ac546d5c67e094d2755de3940d2c4a061a665b9974f1f574786f925a1c39df
 
-`src/` holds the SDK source from that same hub commit (`5099cb504944edc11a377ef956760455dd1223ea`,
-hub branch `claude/nifty-einstein-ptgr08`). 0.7.2's feedback screenshot draws the page's HTML (menus,
+`src/` holds the SDK source from that same hub commit (`bb0017c879af2a0df0456b4f99e87cee317377b9`,
+hub `main` after PR #183). 0.7.2's feedback screenshot draws the page's HTML (menus,
 HUD, dialogs) over the canvases with a vendored copy of modern-screenshot (`src/third_party/`,
 `src/pageShot.ts`); before, it copied only `<canvas>` elements. 0.7.1 added the optional `tickets`
 field to `reportEvent`'s result. `tsconfig.build.json` is this repo's standalone copy (the hub's
