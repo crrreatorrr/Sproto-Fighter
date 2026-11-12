@@ -315,63 +315,93 @@ changes do not apply below Normal, the guard hold does).
 
 ## 9. Story mapping after the owner's decision
 
-The owner decided the finale must be very difficult but beatable, with a firmer middle and clear
-boss spikes, so the decision section 7 left open is now made: the finale no longer runs at
-Expert. No CPU or kit number changed, so the simulation fingerprint and the hub bundle are
-unaffected. `src/difficulty.ts` now:
+The owner decided the finale must be very difficult but beatable, with a firmer middle and the
+chapter bosses as clear spikes, so the decision section 7 left open is now made: the finale no
+longer runs at Expert. No CPU or kit number changed, so the simulation fingerprint and the hub
+bundle are unaffected. `src/difficulty.ts` now has three parts:
 
-- starts at skill 2 (unchanged) and ends at `STORY_FINAL_SKILL` 3.95 (was 10);
-- keeps the smoothing inside each chapter, then shapes route progress t as 1 - (1 - t)^5
-  (`STORY_ROUTE_CURVE`), so the route leaves the opener gently and spends its second half near its
-  top (encounter 37 3.00, 124 3.77, 233 3.83);
-- adds `STORY_BOSS_STEP` 0.12 to each chapter's closing encounter and every gauntlet
-  (`storyBossEncounter`: encounters 36, 72, 108, 144, 181, 217, 245, 246, 247), replacing the old
-  +1 on gauntlets and the last fifteen encounters. The ramp ends one step below the finale, so no
-  encounter is set above 3.95; the two earlier gauntlets and the last two chapter bosses reach it.
-  The encounter after a boss drops back to the route.
-- Largest step between neighbouring non-boss encounters: 0.044. With help accepted the finale is 2.95.
+- **Route** (every encounter that is not a boss): skill 2 at the opener (unchanged), the existing
+  smoothing inside each chapter, then progress t shaped as 1 - (1 - t)^5 (`STORY_ROUTE_CURVE`) up
+  to `STORY_ROUTE_END` 3.83. It leaves the opener gently and spends its second half near the top:
+  encounter 37 3.00, 124 3.77, 233 3.83. Largest step between neighbouring route encounters 0.044.
+- **Boss step:** `STORY_BOSS_STEP` 0.12 on each chapter's closing encounter and every gauntlet
+  (`storyBossEncounter`: encounters 36, 72, 108, 144, 181, 217, 245, 246, 247). It replaces the
+  old +1 on gauntlets and the last fifteen encounters.
+- **Per-boss calibration:** `STORY_BOSS_OFFSETS`, keyed by encounter id and added on top. At one
+  skill the reference bot's win rate differs by about 30 points from one rival to the next, so one
+  curve cannot make every boss a spike; each offset puts its boss at roughly 20-35% for the
+  reference bot and the finale at 10-18%.
 
-The skill range is narrow because the CPU's difficulty is not linear in skill: against the
-reference bot a single bout or a gauntlet loses most of its winnability between 3.5 and 4.0
-(Normal is 4). Sweeps on the new mapping's points, 64 seeds each, reference wins:
+With help accepted every encounter is one skill lower (the finale 2.95).
 
-- 124, Rektina: 3.0 92.2%, 3.25 95.3%, 3.5 92.2%, 3.75 84.4%, 4.0 51.6%.
-- 233, Gryph: 3.75 65.6%, 4.0 39.1%, 4.25 34.4%, 4.5 39.1%.
-- 247, the finale: 3.0 81.3%, 3.2 62.5%, 3.4 50.0%, 3.5 34.4%, 3.6 31.3%, 3.7 25.0%,
-  3.8 20.3%, 3.85 18.8%, 3.9 21.9%, 3.95 15.6%, 4.0 7.8%, 4.1 7.8%, 4.25 9.4%.
+**Why the bosses' skills are not ordered like their difficulty.** Against the reference bot a
+single bout loses most of its winnability between skill 3.5 and 4, then flattens at about 35-40%
+until skill 5-6, and falls again towards 7-8. A two-wave gauntlet is much harder than a single bout
+at the same skill. Several CPU behaviours switch on at exactly skill 4, so a gauntlet at 3.99 is
+about twice as winnable as at 4.00 (Sproto865 then Sproto943: 50.0% and 24.2%; Nick then Guest07:
+38.3% and 20.3%); the skill is rounded to six decimals so a calibrated 4 is never a hair under.
+So the single-bout chapter bosses sit at skills 4.5-7 and the two earlier gauntlets at 4.0, all
+above the finale's 3.95, yet every one of them is measured easier than the finale. The finale stays
+at 3.95 because 4.0 drops it to about 8%.
+
+Calibration sweeps (reference wins, 64 seeds each unless marked):
+
+- Chapter 1 boss Sproto837: 3.8 76.6%, 3.9 68.8%, 4.0 45.3%, 4.2-5.0 40.6%, 5.5 39.1%, 6 29.7%,
+  7 26.6%, 8 4.7%.
+- Chapter 2 boss Reverend: 3.8 85.9%, 3.9 76.6%, 4.0 51.6%, 4.2 45.3%, 4.5 50.0%, 5 45.3%,
+  5.5 39.1%, 6 32.8%, 7 28.1%, 8 4.7%.
+- Chapter 3 boss Sproto3215: 3.8 79.7%, 4.0 45.3%, 4.2 37.5%, 4.5 54.7%, 5 35.9%, 5.5 54.7%,
+  6 43.8%, 7 23.4%, 8 6.3%.
+- Chapter 4 boss Zippy: 3.8 60.9%, 3.9 67.2%, 4.0 42.2%, 4.2 31.3%, 4.5 43.8%, 5 29.7%, 6 20.3%.
+- Chapter 5 boss Sproto2616: 3.8 34.4%, 3.9 31.3%, 4.0 39.1%, 4.2 42.2%, 4.5 34.4%, 5 25.0%, 6 28.1%.
+- Chapter 6 boss Sproto3152: 3.8 37.5%, 3.9 35.9%, 4.0 32.8%, 4.2 32.8%, 4.5 31.3%, 5 20.3%, 6 10.9%.
+- Chapter 7 gauntlet: 3.6 75.0%, 3.7 70.3%, 3.8 62.5%, 3.9 65.6%, 3.95 56.3%, 4.0 20.3%,
+  4.1 14.1%, 4.25 14.1%, 4.5 26.6%; 128 seeds: 3.98 49.2%, 3.99 50.0%, 4.0 24.2%, 4.02 24.2%.
+- Chapter 8 gauntlet: 3.6 62.5%, 3.7 56.3%, 3.8 57.8%, 3.9 40.6%, 3.95 39.1%, 4.0 14.1%;
+  128 seeds: 3.97 39.1%, 3.98 38.3%, 3.99 38.3%, 4.0 20.3%, 4.05 21.1%, 4.5 18.8%.
+- Finale: 3.0 81.3%, 3.2 62.5%, 3.4 50.0%, 3.5 34.4%, 3.6 31.3%, 3.7 25.0%, 3.8 20.3%,
+  3.85 18.8%, 3.9 21.9%, 3.95 15.6%, 4.0 7.8%, 4.1 7.8%, 4.25 9.4%; 128 seeds: 3.99 11.7%.
+- Route: Rektina (124) 3.0 92.2%, 3.25 95.3%, 3.5 92.2%, 3.75 84.4%, 4.0 51.6%; Gryph (233)
+  3.75 65.6%, 4.0 39.1%, 4.25 34.4%, 4.5 39.1%.
 
 Reference bot as in section 7 (reference v2, High Sproto, seed 20261105, reference in the first
-seat, the same per-encounter seed streams), at the mapped skills on `45507626` plus this change,
-128 seeds each:
+seat, the same per-encounter seed streams) at the mapped skills, 128 seeds each:
 
 | Encounter | Kind | Skill | Reference wins |
 | --- | --- | ---: | ---: |
 | 1, Zephyr | opener | 2.00 | 255/256 = 99.6% (section 7; skill unchanged) |
+| 36, Sproto837 | chapter 1 boss | 6.00 | 35/128 = 27.3% |
+| 72, Reverend | chapter 2 boss | 6.50 | 34/128 = 26.6% |
+| 108, Sproto3215 | chapter 3 boss | 7.00 | 30/128 = 23.4% |
 | 124, Rektina | route | 3.77 | 99/128 = 77.3% |
 | 143, Sprotomichaelsaylor | route, before a boss | 3.81 | 41/128 = 32.0% |
-| 144, Zippy | chapter 4 boss | 3.93 | 80/128 = 62.5% |
+| 144, Zippy | chapter 4 boss | 5.00 | 33/128 = 25.8% |
+| 181, Sproto2616 | chapter 5 boss | 5.00 | 38/128 = 29.7% |
 | 216, Bgbadger | route, before a boss | 3.83 | 44/128 = 34.4% |
-| 217, Sproto3152 | chapter 6 boss | 3.95 | 39/128 = 30.5% |
+| 217, Sproto3152 | chapter 6 boss | 4.50 | 40/128 = 31.3% |
 | 233, Gryph | route | 3.83 | 78/128 = 60.9% |
-| 246, Nick then Guest07 | gauntlet | 3.95 | 50/128 = 39.1% |
+| 245, Sproto865 then Sproto943 | chapter 7 gauntlet | 4.00 | 31/128 = 24.2% |
+| 246, Nick then Guest07 | chapter 8 gauntlet | 4.00 | 26/128 = 20.3% |
 | 247, Vela then Vaudream | finale | 3.95 | 17/128 = 13.3% |
 
-- **Met:** the opener stays clearly winnable, encounter 124 is in the asked 70-80%, and the
-  finale is in 10-18% and is the hardest point measured by a wide margin. No encounter is set
-  above the finale's skill, and every boss is set at least 0.1 above the encounter before it.
-- **Short of the ask:** encounter 233 reads 60.9%, above the 45-55% aimed for. Raising the late
-  route further would mean a smaller boss step, because the route has to end one step below the
-  finale and the finale cannot rise past 3.95 without falling under 10%.
-- **Boss spikes are set, but the opponent matters more than the step.** At one skill the reference
-  bot's win rate varies by roughly 30 points from one rival to the next: Sprotomichaelsaylor (a
-  Zoning outlier in section 1) at 3.81 is harder than the Zippy boss after it at 3.93, and
-  Bgbadger is about level with the chapter 6 boss. The measured spikes in those two chapters are
-  therefore not visible; against the same rival a 0.12 step near 3.8-3.95 is worth roughly 10-15
-  points (Rektina and Gryph rows above). A single skill per encounter cannot remove that; it would
-  need per-rival offsets or reordering the route, which this change does not do.
+- **Met:** the opener stays clearly winnable; encounter 124 is in the asked 70-80%; every chapter
+  boss and gauntlet is between 20.3% and 31.3%; the finale is 13.3%, the hardest point measured.
+  With the route running 60-95% around them in the middle of the route (Rektina, Gryph and the
+  section 7 sweeps), the bosses are clear spikes there.
+- **Close calls:** two route rivals are themselves hard. Sprotomichaelsaylor (143, a Zoning outlier
+  in section 1) reads 32.0% before Zippy's 25.8%, and Bgbadger (216) 34.4% before Sproto3152's 31.3%.
+  The bosses are below them, but by less than the sampling error. The Chapter 8 gauntlet (20.3%) is
+  above the finale (13.3%) by about one sampling error; the next skill down that differs, 3.99,
+  reads 38.3%.
+- **Not met:** encounter 233 reads 60.9%, above the 45-55% aimed for. Ending the route at 3.9
+  instead of 3.83 (curve exponent 3.9, which keeps encounter 124 at 3.77 and 77.3%) gave 62.5%, so
+  it was left at 3.83. Gryph moves from about 61% to 39% across 3.9-4.0, where route rivals would
+  start to rival the bosses.
 - The usual limits apply: the reference bot is not a validated person, these are regular bouts
-  without boss forms, and 128 seeds give roughly ±8 points. The test suites were not run for this
-  change (owner's instruction for this round); `tests/cpu-difficulty.test.ts` was edited to pin the
-  start (2), the finale (3.95, assisted 2.95), nothing above the finale, nine boss encounters each
-  more than 0.05 above the encounter before, encounter 124 between 3.7 and 3.8, and steps below
-  0.05 between non-boss neighbours.
+  without boss forms, 128 seeds give roughly ±8 points, and the offsets are fitted to this
+  instrument, so they need recalibrating whenever the CPU, the kits or the route change. The test
+  suites were not run for this change (owner's instruction for this round);
+  `tests/cpu-difficulty.test.ts` was edited to pin the opener (2), the finale (3.95, assisted 2.95),
+  encounter 124 between 3.7 and 3.8, one offset for each of the nine bosses and nothing else, the
+  bosses' calibrated skills, every boss more than 0.05 above the route encounter before it, and the
+  route rising in steps below 0.05 and staying below the finale.
