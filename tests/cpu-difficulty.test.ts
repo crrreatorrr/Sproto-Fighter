@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, cpuTuning, hashState, loadState, saveState, step } from '../src/core';
-import { createDifficultyRetry, storyDifficulty } from '../src/difficulty';
+import { createDifficultyRetry, storyBossEncounter, storyDifficulty } from '../src/difficulty';
 import { STORY_ENCOUNTERS } from '../src/storyProgress';
 
 describe('seeded CPU controller', () => {
@@ -164,16 +164,21 @@ describe('seeded CPU controller', () => {
 });
 
 describe('story difficulty and optional retry', () => {
-    it('opens at skill two, uses the actual route and ends at a winnable 3.75 finale without unmarked jumps', () => {
+    it('opens at skill two, rises without unmarked jumps, spikes at chapter bosses and peaks at a 3.95 finale', () => {
         const skills = STORY_ENCOUNTERS.map(encounter => storyDifficulty(encounter, STORY_ENCOUNTERS));
-        expect(skills[0]).toBe(2); expect(skills.at(-1)).toBe(3.75);
-        expect(Math.max(...skills)).toBe(3.75);
+        const boss = STORY_ENCOUNTERS.map(encounter => storyBossEncounter(encounter, STORY_ENCOUNTERS));
+        expect(skills[0]).toBe(2); expect(skills.at(-1)).toBeCloseTo(3.95, 9);
+        expect(Math.max(...skills)).toBeLessThanOrEqual(skills.at(-1)! + 1e-9);
+        expect(boss.filter(Boolean)).toHaveLength(9);
+        expect(skills[123]).toBeGreaterThan(3.7); expect(skills[123]).toBeLessThan(3.8);
+        let previous = 0;
         for (let n = 1; n < skills.length; n++) {
-            expect(skills[n]).toBeGreaterThanOrEqual(skills[n - 1]);
-            const marked = !!STORY_ENCOUNTERS[n].gauntlet || n >= STORY_ENCOUNTERS.length - 15;
-            expect(skills[n] - skills[n - 1]).toBeLessThan(marked ? .3 : .02);
+            if (boss[n]) { expect(skills[n]).toBeGreaterThan(skills[previous] + .05); continue; }
+            expect(skills[n]).toBeGreaterThanOrEqual(skills[previous]);
+            expect(skills[n] - skills[previous]).toBeLessThan(.05);
+            previous = n;
         }
-        expect(storyDifficulty(STORY_ENCOUNTERS.at(-1)!, STORY_ENCOUNTERS, true)).toBe(2.75);
+        expect(storyDifficulty(STORY_ENCOUNTERS.at(-1)!, STORY_ENCOUNTERS, true)).toBeCloseTo(2.95, 9);
     });
     it('offers help after three losses, never activates it, and resets on another encounter or a draw', () => {
         const retry = createDifficultyRetry();retry.begin('first');

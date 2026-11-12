@@ -315,32 +315,63 @@ changes do not apply below Normal, the guard hold does).
 
 ## 9. Story mapping after the owner's decision
 
-The owner decided the finale must be beatable, so the decision section 7 left open is now made:
-the finale no longer runs at Expert. `src/difficulty.ts` keeps the opener at skill 2 and the
-within-chapter smoothing, but the route now ends at `STORY_FINAL_SKILL` 3.75 instead of 10. Gauntlets
-and the last fifteen encounters still get a boss step, now 0.25 instead of 1, and the ramp stops
-0.25 short of the finale so that no encounter is set above it. Encounter 124 is now 2.74,
-encounter 233 (first of the last fifteen) 3.67, the two earlier gauntlets 3.74, and the finale
-3.75. The largest step between unmarked neighbours is 0.009; with help accepted the finale is 2.75.
-No CPU or kit number changed, so the simulation fingerprint and the hub bundle are unaffected.
+The owner decided the finale must be very difficult but beatable, with a firmer middle and clear
+boss spikes, so the decision section 7 left open is now made: the finale no longer runs at
+Expert. No CPU or kit number changed, so the simulation fingerprint and the hub bundle are
+unaffected. `src/difficulty.ts` now:
+
+- starts at skill 2 (unchanged) and ends at `STORY_FINAL_SKILL` 3.95 (was 10);
+- keeps the smoothing inside each chapter, then shapes route progress t as 1 - (1 - t)^5
+  (`STORY_ROUTE_CURVE`), so the route leaves the opener gently and spends its second half near its
+  top (encounter 37 3.00, 124 3.77, 233 3.83);
+- adds `STORY_BOSS_STEP` 0.12 to each chapter's closing encounter and every gauntlet
+  (`storyBossEncounter`: encounters 36, 72, 108, 144, 181, 217, 245, 246, 247), replacing the old
+  +1 on gauntlets and the last fifteen encounters. The ramp ends one step below the finale, so no
+  encounter is set above 3.95; the two earlier gauntlets and the last two chapter bosses reach it.
+  The encounter after a boss drops back to the route.
+- Largest step between neighbouring non-boss encounters: 0.044. With help accepted the finale is 2.95.
+
+The skill range is narrow because the CPU's difficulty is not linear in skill: against the
+reference bot a single bout or a gauntlet loses most of its winnability between 3.5 and 4.0
+(Normal is 4). Sweeps on the new mapping's points, 64 seeds each, reference wins:
+
+- 124, Rektina: 3.0 92.2%, 3.25 95.3%, 3.5 92.2%, 3.75 84.4%, 4.0 51.6%.
+- 233, Gryph: 3.75 65.6%, 4.0 39.1%, 4.25 34.4%, 4.5 39.1%.
+- 247, the finale: 3.0 81.3%, 3.2 62.5%, 3.4 50.0%, 3.5 34.4%, 3.6 31.3%, 3.7 25.0%,
+  3.8 20.3%, 3.85 18.8%, 3.9 21.9%, 3.95 15.6%, 4.0 7.8%, 4.1 7.8%, 4.25 9.4%.
 
 Reference bot as in section 7 (reference v2, High Sproto, seed 20261105, reference in the first
-seat, the same per-encounter seed streams), on `ea15e9db` with the new mapping:
+seat, the same per-encounter seed streams), at the mapped skills on `45507626` plus this change,
+128 seeds each:
 
-| Encounter | Skill | Reference wins |
-| --- | ---: | ---: |
-| 1, Zephyr | 2.00 | 255/256 = 99.6% (section 7; skill unchanged) |
-| 124, Rektina | 2.74 | 122/128 = 95.3% |
-| 233, Gryph | 3.67 | 84/128 = 65.6% |
-| 246, Nick then Guest07 (gauntlet) | 3.74 | 76/128 = 59.4% |
-| 247, Vela then Vaudream (finale) | 3.75 | 34/128 = 26.6% |
+| Encounter | Kind | Skill | Reference wins |
+| --- | --- | ---: | ---: |
+| 1, Zephyr | opener | 2.00 | 255/256 = 99.6% (section 7; skill unchanged) |
+| 124, Rektina | route | 3.77 | 99/128 = 77.3% |
+| 143, Sprotomichaelsaylor | route, before a boss | 3.81 | 41/128 = 32.0% |
+| 144, Zippy | chapter 4 boss | 3.93 | 80/128 = 62.5% |
+| 216, Bgbadger | route, before a boss | 3.83 | 44/128 = 34.4% |
+| 217, Sproto3152 | chapter 6 boss | 3.95 | 39/128 = 30.5% |
+| 233, Gryph | route | 3.83 | 78/128 = 60.9% |
+| 246, Nick then Guest07 | gauntlet | 3.95 | 50/128 = 39.1% |
+| 247, Vela then Vaudream | finale | 3.95 | 17/128 = 13.3% |
 
-The finale value was chosen from a sweep of the finale alone, 64 seeds each: skill 3.0 81.3%,
-3.2 62.5%, 3.4 50.0%, 3.5 34.4%, 3.6 31.3%, 3.7 25.0%, 3.8 20.3%, 4.0 7.8% (3.0 and 4.0
-reproduce section 7's sweep). The win rate falls about 15 points per 0.1 of skill around 3.5 and
-about 5 per 0.1 around 3.75, so 3.75 sits in the flatter part, inside the 15-30% the owner asked
-for. The same limits as section 7 apply: the reference bot is not a validated person, these are
-regular bouts without boss forms, and 128 seeds give roughly ±8 points. The test suites were not
-run for this change (owner's instruction for this round); `tests/cpu-difficulty.test.ts` was
-edited to pin the new ends (2 and 3.75, assisted finale 2.75, every encounter at or below the
-finale, steps below 0.02 unmarked and 0.3 marked).
+- **Met:** the opener stays clearly winnable, encounter 124 is in the asked 70-80%, and the
+  finale is in 10-18% and is the hardest point measured by a wide margin. No encounter is set
+  above the finale's skill, and every boss is set at least 0.1 above the encounter before it.
+- **Short of the ask:** encounter 233 reads 60.9%, above the 45-55% aimed for. Raising the late
+  route further would mean a smaller boss step, because the route has to end one step below the
+  finale and the finale cannot rise past 3.95 without falling under 10%.
+- **Boss spikes are set, but the opponent matters more than the step.** At one skill the reference
+  bot's win rate varies by roughly 30 points from one rival to the next: Sprotomichaelsaylor (a
+  Zoning outlier in section 1) at 3.81 is harder than the Zippy boss after it at 3.93, and
+  Bgbadger is about level with the chapter 6 boss. The measured spikes in those two chapters are
+  therefore not visible; against the same rival a 0.12 step near 3.8-3.95 is worth roughly 10-15
+  points (Rektina and Gryph rows above). A single skill per encounter cannot remove that; it would
+  need per-rival offsets or reordering the route, which this change does not do.
+- The usual limits apply: the reference bot is not a validated person, these are regular bouts
+  without boss forms, and 128 seeds give roughly ±8 points. The test suites were not run for this
+  change (owner's instruction for this round); `tests/cpu-difficulty.test.ts` was edited to pin the
+  start (2), the finale (3.95, assisted 2.95), nothing above the finale, nine boss encounters each
+  more than 0.05 above the encounter before, encounter 124 between 3.7 and 3.8, and steps below
+  0.05 between non-boss neighbours.
