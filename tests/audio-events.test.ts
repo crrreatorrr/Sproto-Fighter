@@ -154,7 +154,7 @@ describe('audio settings and songs', () => {
         expect(FIGHT_BED_SPECS.trenches.gain).toBe(1);
         const rate = GROOVE_MUSIC_RATE;
         const loopSamples = Math.round(GROOVE_LOOP_SECONDS * rate);
-        for (const bed of ['yacht', 'city', 'castle', 'verse'] as const) {
+        for (const bed of ['yacht', 'city', 'castle', 'verse', 'bar'] as const) {
             expect(fightBedLoopRegion(bed, loopSamples, rate)).toEqual({ loopStart: 0, loopEnd: GROOVE_LOOP_SECONDS });
             // ffmpeg leaves City 47 samples past the music. That tail is outside the loop.
             const tail = fightBedLoopRegion(bed, loopSamples + 47, rate);
@@ -169,6 +169,11 @@ describe('audio settings and songs', () => {
         expect(verseDecoded.loopStart).toBe(0);
         expect(verseDecoded.loopEnd).toBeCloseTo(2_949_069 / GROOVE_MUSIC_RATE, 8);
         expect(GROOVE_LOOP_SECONDS - verseDecoded.loopEnd).toBeCloseTo(51 / GROOVE_MUSIC_RATE, 8);
+        // Chrome drops the priming and returns 10 samples less than 32 bars, so the Bar loop is the whole buffer.
+        const barDecoded = fightBedLoopRegion('bar', 2_949_110, GROOVE_MUSIC_RATE);
+        expect(barDecoded.loopStart).toBe(0);
+        expect(barDecoded.loopEnd).toBeCloseTo(2_949_110 / GROOVE_MUSIC_RATE, 8);
+        expect(GROOVE_LOOP_SECONDS - barDecoded.loopEnd).toBeCloseTo(10 / GROOVE_MUSIC_RATE, 8);
     });
     it('plays yacht, city, castle and verse beds on those zones and nowhere else', () => {
         const ids = (zone: 'yacht' | 'circuit' | 'throne') => STAGES.filter(stage => stageZone(stage.id) === zone).map(stage => stage.id);
@@ -182,12 +187,16 @@ describe('audio settings and songs', () => {
         expect(city.every(id => fightBedForZone(stageZone(id)) === 'city')).toBe(true);
         expect(castle.every(id => fightBedForZone(stageZone(id)) === 'castle')).toBe(true);
         expect(verse.every(id => fightBedForZone(stageZone(id)) === 'verse')).toBe(true);
-        for (const zone of ['bar', 'hatchery', 'ranch'] as const) expect(fightBedForZone(zone)).toBe('synth');
+        const bar = STAGES.filter(stage => stageZone(stage.id) === 'bar').map(stage => stage.id);
+        expect(bar).toEqual(expect.arrayContaining(['bar', 'cellar', 'rooftop', 'bluebar', 'nov04-bar-6']));
+        expect(bar.every(id => fightBedForZone(stageZone(id)) === 'bar')).toBe(true);
+        for (const zone of ['hatchery', 'ranch'] as const) expect(fightBedForZone(zone)).toBe('synth');
         const fight = { feedbackHold: false, selectionOpen: false, storyOpen: false, fightOver: false, bed: 'yacht' as const };
         expect(fightMusicCue(fight)).toEqual({ track: 'fight', bed: 'yacht' });
         expect(fightMusicCue({ ...fight, bed: 'city', fightOver: true })).toEqual({ track: null, bed: 'city' });
         expect(fightMusicCue({ ...fight, bed: 'castle', selectionOpen: true })).toEqual({ track: 'menu', bed: 'castle' });
         expect(fightMusicCue({ ...fight, bed: 'verse', storyOpen: true })).toEqual({ track: 'story', bed: 'verse' });
+        expect(fightMusicCue({ ...fight, bed: 'bar', feedbackHold: true })).toEqual({ track: null, bed: 'bar' });
         expect(fightMusicCue({ ...fight, bed: 'synth', storyOpen: true })).toEqual({ track: 'story', bed: 'synth' });
     });
     it('crossfades a clicking wrap onto the first sample and leaves a quiet seam alone', () => {
@@ -225,6 +234,7 @@ describe('audio settings and songs', () => {
             { file: 'city_house_loop_v2.mp3', meta: 'city_house_loop_v2.json', gain: 1 },
             { file: 'castle_vampire_loop_v2.mp3', meta: 'castle_vampire_loop_v2.json', gain: 1 },
             { file: 'verse_futuristic_loop_v3.mp3', meta: 'verse_futuristic_loop_v3.json', gain: 1 },
+            { file: 'bar_rock_loop.mp3', meta: 'bar_rock_loop.json', gain: 1 },
         ]) {
             const bytes = readFileSync(new URL(`../public/audio/music/${spec.file}`, import.meta.url));
             const meta = JSON.parse(readFileSync(new URL(`../public/audio/music/${spec.meta}`, import.meta.url), 'utf8'));

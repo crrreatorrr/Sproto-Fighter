@@ -120,6 +120,7 @@ try{
   {zone:'circuit',bed:'city',seconds:61.44,gain:1,seam:false,file:'audio/music/city_house_loop_v2.mp3'},
   {zone:'throne',bed:'castle',seconds:61.44,gain:1,seam:true,file:'audio/music/castle_vampire_loop_v2.mp3'},
   {zone:'verse',bed:'verse',seconds:61.44,gain:1,seam:true,file:'audio/music/verse_futuristic_loop_v3.mp3'},
+  {zone:'bar',bed:'bar',seconds:61.44,gain:1,seam:true,file:'audio/music/bar_rock_loop.mp3'},
  ];
  for(const spec of grooves){
   await page.click(`#zone-rail button[data-zone="${spec.zone}"]`);
