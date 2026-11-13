@@ -1,4 +1,5 @@
-import { enableMatchDepth, nextMatchRound, chapterBossModifier, type MatchModifier } from './core';
+import { enableMatchDepth, nextMatchRound, type MatchModifier } from './core';
+import { storyChapterRule } from './storyRules';
 import { TrainingRecorder, drawTrainingGeometry, trainingReadout } from './training';
 import { TutorialCoach, drawTutorial } from './tutorial';
 import { fighterMoves, sharedTechniques, type MoveRow } from './moveList';
@@ -368,11 +369,9 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
         return false;
     }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
-    // Standard chapter-end encounters carry their chapter's rule (double meter, low gravity, specials only,
-    // sudden death, reflected projectiles) and a 60-second clock. Transformed boss forms
-    // use a separate combat controller and keep their existing campaign rules.
-    if(encounter && STORY_ENCOUNTERS.filter(e=>e.chapter===encounter.chapter && !storyAnimationPlan(e.opponents.at(-1)!,true).form).at(-1)?.index===encounter.index && setup.opponent===encounter.opponents.at(-1))
-        requestedMatchDepthOptions = { rounds: false, modifier: chapterBossModifier(encounter.chapter-1) };
+    // Standard chapter-end encounters carry their chapter's rule and a 60-second clock (see storyChapterRule).
+    const chapterRule=encounter?storyChapterRule(setup.opponent,id=>!!storyAnimationPlan(id,true).form):null;
+    if(chapterRule)requestedMatchDepthOptions = { rounds: false, modifier: chapterRule };
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
     const selectedPartner=setup.partner;
     if(selectedPartner&&selectedPartner!==ROSTER[setup.fighter].partner&&PLAYABLE_FIGHTERS.includes(selectedPartner as FighterId))requiredFighters.push(selectedPartner as FighterId);

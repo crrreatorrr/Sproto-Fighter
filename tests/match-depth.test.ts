@@ -65,6 +65,8 @@ describe('optional match depth', () => {
     const specials=createState();enableMatchDepth(specials,{modifier:'specials-only'});expect(matchInput(specials,A.light|A.right|A.special)).toBe(A.right|A.special);expect(specials.fighters[0].pips).toBe(3);
     const sudden=createState();enableMatchDepth(sudden,{modifier:'sudden-death'});expect(sudden.fighters.map(f=>f.hp)).toEqual([300,300]);
     expect(new Set([0,1,2,3,4].map(chapterBossModifier)).size).toBe(5);
+    // Specials-only refills both meters every frame; the campaign must never hand it to a story CPU.
+    expect([0,1,2,3,4,5,6,7,8,9].map(chapterBossModifier)).not.toContain('specials-only');
   });
   it('reflects a guarded ordinary projectile and preserves both fighters HP', () => {
     const s=createState();enableMatchDepth(s,{modifier:'reflect-projectiles'});const b=s.fighters[1];

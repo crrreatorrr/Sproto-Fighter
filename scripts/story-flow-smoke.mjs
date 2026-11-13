@@ -13,7 +13,7 @@ const compile=s=>ts.transpileModule(s,{compilerOptions:{module:ts.ModuleKind.ES2
 const temp=mkdtempSync(join(tmpdir(),'sproto-story-flow-'));
 let checks=0;
 try {
-  assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/storyProgress.ts','src/storyMode.ts','src/animationEvents.ts','src/stageVariants.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0,'compile actual campaign modules');
+  assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),'src/storyProgress.ts','src/storyMode.ts','src/storyRules.ts','src/animationEvents.ts','src/stageVariants.ts','--outDir',temp,'--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0,'compile actual campaign modules');
   const req=createRequire(import.meta.url);
   const progressModule=req(join(temp,'storyProgress.js'));
   const {createStoryProgress,STORY_ENCOUNTERS,STARTER_FIGHTERS,LEGACY_STORY_SAVE_KEY,LEGACY_STORY_OPPONENTS}=progressModule;
@@ -24,6 +24,7 @@ try {
   const {storyDifficulty}=req(join(temp,'difficulty.js'));
   const {storyLocationForEncounter}=req(join(temp,'stageVariants.js'));
   const {createRoundPresentation}=req(join(temp,'animationEvents.js'));
+  const {storyChapterRule}=req(join(temp,'storyRules.js'));
   const TOTAL=STORY_ENCOUNTERS.length;
   const ART=STORY_ENCOUNTERS.find(e=>e.gauntlet==='art');
   const NICK_JUICY=STORY_ENCOUNTERS.find(e=>e.gauntlet==='nick-juicy');
@@ -259,7 +260,7 @@ try {
     assert.ok(start>=0&&end>start,'actual createStoryMode hook block found');
     const code=compile(functions.map(node=>node.getText(parsed)).join('\n')+'\n'+main.slice(start,end));
     const fixture=new Function('dependencies',`
-      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth,chapterBossModifier}=dependencies;
+      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth,storyChapterRule}=dependencies;
       const canPlayFighter=id=>storyProgress.isUnlocked(id),lockedFighter=()=> 'Defeat this fighter in story mode to recruit them.';
       let setup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'guard',godMode:false};
       let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};
@@ -296,7 +297,7 @@ try {
         mapPick(index){if(!mapChoose)throw Error('Map not mounted');mapChoose(STORY_ENCOUNTERS[index]);},
         inspect:()=>({setup,mode,matchDepthOptions,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
     `)({createStoryMode:hooks=>createStoryMode(hooks,progress),storyProgress:progress,STAGES,ROSTER,$:d.$,createRoundPresentation,createState,
-      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth,chapterBossModifier:core.chapterBossModifier});
+      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth,storyChapterRule});
     return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);await d.action(0);await flush();}};
   }
   await check('failed launch preserves the active experimental match and replay options',async()=>{
