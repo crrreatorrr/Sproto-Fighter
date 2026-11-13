@@ -22,14 +22,16 @@ export const TRENCHES_LOOP_SECONDS = 360;
 export const TRENCHES_ENCODER_DELAY_SAMPLES = 1105;
 export const TRENCHES_MUSIC_RATE = 48000;
 export const TRENCHES_MUSIC_PATH = 'audio/music/trenches_fight_loop_6min.mp3';
-/** 192 bars of 4/4 at 125 BPM. The City fight theme loops for exactly this long. */
+/** 192 bars of 4/4 at 125 BPM. The City and Marina fight themes each loop for exactly this long. */
 export const CITY_LOOP_SECONDS = 368.64;
-/** 32 bars of 4/4 at 125 BPM. Yacht, Castle, Verse, Bar and Ranch fight themes are written to this length. */
+/** Same 192-bar length as the City theme. The Marina master uses it. */
+export const YACHT_LOOP_SECONDS = CITY_LOOP_SECONDS;
+/** 32 bars of 4/4 at 125 BPM. Castle, Verse, Bar and Ranch fight themes are written to this length. */
 export const GROOVE_LOOP_SECONDS = 61.44;
 /** The same ffmpeg priming (start time 0.023021 s at 48 kHz) sits on each of those masters. */
 export const GROOVE_ENCODER_DELAY_SAMPLES = 1105;
 export const GROOVE_MUSIC_RATE = 48000;
-/** The yacht master is about 0.4 dB quieter than the other fight loops. */
+/** The Marina master is about 0.4 dB quieter. This trim leaves its true peak under 0 dBFS. */
 export const YACHT_TRIM_DB = 0.4;
 export const YACHT_TRIM_GAIN = 10 ** (YACHT_TRIM_DB / 20);
 /** Fade the recorded fight theme in when a fight starts and out when it ends or the player leaves. */
@@ -137,15 +139,15 @@ export interface FightBedSpec {
 }
 export const FIGHT_BED_SPECS: Record<RecordedBed, FightBedSpec> = {
     trenches: { path: TRENCHES_MUSIC_PATH, loopSeconds: TRENCHES_LOOP_SECONDS, encoderDelaySamples: TRENCHES_ENCODER_DELAY_SAMPLES, sampleRate: TRENCHES_MUSIC_RATE, gain: 1 },
-    yacht: { path: 'audio/music/yacht_groove_loop.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: YACHT_TRIM_GAIN },
+    yacht: { path: 'audio/music/yacht_groove_loop_6min.mp3', loopSeconds: YACHT_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: YACHT_TRIM_GAIN },
     city: { path: 'audio/music/city_house_loop_6min.mp3', loopSeconds: CITY_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
     castle: { path: 'audio/music/castle_vampire_loop_v2.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
     verse: { path: 'audio/music/verse_alien_electro_loop.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
     bar: { path: 'audio/music/bar_rock_loop.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
     ranch: { path: 'audio/music/ranch_country_loop_v2.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
 };
-/** Trenches and City are six-minute files. They download and decode after the shorter beds unless that fight is already waiting. */
-const LONG_FIGHT_BEDS = new Set<RecordedBed>(['trenches', 'city']);
+/** Trenches, City and Marina are six-minute files. One decoded buffer is kept: the stage that is selected. */
+const LONG_FIGHT_BEDS = new Set<RecordedBed>(['trenches', 'city', 'yacht']);
 /** Menu zone id to fight bed. City's zone is `circuit` and Castle's is `throne`. Hatchery stays synthesised. */
 const ZONE_BEDS: Record<string, FightBed> = { trenches: 'trenches', yacht: 'yacht', circuit: 'city', throne: 'castle', verse: 'verse', bar: 'bar', ranch: 'ranch' };
 export function fightBedForZone(zone: string): FightBed {
@@ -362,8 +364,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
             row.bytes = bytes;
             if (!bytes) row.failed = true;
         };
-        // Trenches is 8.6 MB and City is 8.8 MB. They download beside this batch, not inside it,
-        // so the menu, the click and the shorter fight themes are not waiting on either file.
+        // Trenches is 8.6 MB. City and Marina are 8.8 MB each. They download beside this
+        // batch, so the menu, the click and the shorter fight themes are not waiting on them.
         void Promise.all([
             pull(MENU_MUSIC_PATH),
             pull(UI_SELECT_PATH),
@@ -397,17 +399,27 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         try { row.buffer = await ctx.decodeAudioData(row.bytes.slice(0)); }
         catch { row.failed = true; }
     }
+    /** Drop decoded PCM for six-minute beds other than the selected stage. The file bytes stay. */
+    function releaseIdleLongBeds(): void {
+        for (const bed of LONG_FIGHT_BEDS) {
+            if (bed === fightBed) continue;
+            const row = slot(bed);
+            if (!row.buffer || playingBuffer === row.buffer) continue;
+            row.buffer = null;
+            row.softened = false;
+        }
+    }
     async function decodeReady(): Promise<void> {
         const combatReady = [...combatBytes.keys()].filter(path => !combatBuffers.has(path) && !combatFailed.has(path));
         if (!ctx || decoding) return;
         const beds = (Object.keys(FIGHT_BED_SPECS) as RecordedBed[]).filter(bed => slot(bed).bytes && !slot(bed).buffer && !slot(bed).failed);
         if (!menuBytes && !menuFailed && !uiBytes && !uiFailed && !beds.length && combatReady.length === 0) return;
-        // Each six-minute bed is about 132 MB of stereo float and about a second to decode.
-        // Hold both until the shorter files have settled, unless that fight is already waiting.
+        // Each six-minute bed is about 132–142 MB of stereo float. All three together are
+        // about 402 MB, so only the selected stage is decoded. The other two keep their files.
         const longUrgent = (bed: RecordedBed) => track === 'fight' && fightBed === bed;
         const holdLong = (bed: RecordedBed) => {
             const row = slot(bed);
-            return LONG_FIGHT_BEDS.has(bed) && !longUrgent(bed) && !catalogSettled && !!row.bytes && !row.buffer && !row.failed;
+            return bed === fightBed && LONG_FIGHT_BEDS.has(bed) && !longUrgent(bed) && !catalogSettled && !!row.bytes && !row.buffer && !row.failed;
         };
         // Held across the awaits so a second unlock cannot start a second copy of a loop.
         decoding = true;
@@ -434,9 +446,10 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
                 catch { combatFailed.add(path); }
             }
             for (const bed of LONG_FIGHT_BEDS) {
-                if (holdLong(bed) || longUrgent(bed)) continue;
+                if (bed !== fightBed || holdLong(bed) || longUrgent(bed)) continue;
                 await decodeBed(bed);
             }
+            releaseIdleLongBeds();
             if (track === 'fight') ensureFight();
         } finally { decoding = false; }
         const moreCombat = [...combatBytes.keys()].some(path => !combatBuffers.has(path) && !combatFailed.has(path));
@@ -445,8 +458,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         const bedsWaiting = (Object.keys(FIGHT_BED_SPECS) as RecordedBed[]).some(bed => {
             const row = slot(bed);
             if (!row.bytes || row.buffer || row.failed) return false;
-            // Same hold as above: a long file still waiting on the shorter beds is not more work.
-            if (LONG_FIGHT_BEDS.has(bed) && !(track === 'fight' && fightBed === bed) && !catalogSettled) return false;
+            // Only the selected stage's long file is decoded. The others stay compressed.
+            if (LONG_FIGHT_BEDS.has(bed) && (bed !== fightBed || (track !== 'fight' && !catalogSettled))) return false;
             return true;
         });
         if (moreCombat || menuWaiting || uiWaiting || bedsWaiting) { void decodeReady(); return; }
@@ -638,9 +651,10 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (menuBuffer) { startMenuSample(); return; }
         if (menuFailed && ctx && !timer) startMusic();
     }
-    /** A fight whose file is already downloaded should decode now, including a Trenches loop that was being held. */
+    /** Decode the selected bed when its file is already here. A long bed can start during the menus. */
     function kickFightDecode(): void {
-        if (track !== 'fight' || !isRecordedBed(fightBed)) return;
+        if (!isRecordedBed(fightBed)) return;
+        if (track !== 'fight' && !LONG_FIGHT_BEDS.has(fightBed)) return;
         const row = slot(fightBed);
         if (row.bytes && !row.buffer && !row.failed) void decodeReady();
     }
@@ -665,13 +679,14 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         }
         if (ctx && !timer) startMusic();
     }
-    /** Which fight bed the current stage uses. Safe to call every frame. Ignored until the track is `fight`. */
+    /** Which fight bed the current stage uses. Safe to call every frame. */
     function fightBedSet(next: FightBed): void {
         if (next === fightBed) { if (track === 'fight') ensureFight(); return; }
         fightBed = next;
-        if (track !== 'fight') return;
+        if (track !== 'fight') { releaseIdleLongBeds(); kickFightDecode(); return; }
         stopFightSample(FIGHT_FADE);
         clearInterval(timer); timer = undefined; playing = null;
+        releaseIdleLongBeds();
         if (wantsRecorded(next)) { ensureFight(); kickFightDecode(); return; }
         if (ctx) startMusic();
     }
