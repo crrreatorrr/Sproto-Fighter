@@ -1,8 +1,8 @@
 # Vendored @metaverse/hub-sdk
 
 - repo: https://github.com/crrreatorrr/metaverse-hub
-- branch: claude/account-progress
-- sha: c9d01b3
+- branch: main
+- sha: b7921f2
 - package: packages/hub-sdk @ 0.8.0
 - built with: `node scripts/vendor-sdk.mjs`
 - iife: dist/hub-sdk.iife.js (global HubSDK; classic script, not a CDN import)
@@ -31,8 +31,8 @@
 - source src/ticket.ts: b01e1635c7031dd0e6855ecb22b99af1654395c41f0296863b627a31ded41033
 - source src/types.ts: 90b551a3fe2b4e85f81b82bc7c9c1909654715f2a45a85cb7d683f6f05d309ab
 
-`src/` holds the SDK source from that same hub commit (`c9d01b3`, hub branch
-`claude/account-progress`; re-vendor from hub `main` once that PR merges). 0.8.0 adds
+`src/` holds the SDK source from that same hub commit (`b7921f2`, hub
+`main` after PR #187). 0.8.0 adds
 `createProgressStore` (story progress per hub account, synced through the cloud save) and raises the
 cloud save limit to 16384 bytes. 0.7.2's feedback screenshot draws the page's HTML (menus,
 HUD, dialogs) over the canvases with a vendored copy of modern-screenshot (`src/third_party/`,
