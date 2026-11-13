@@ -260,7 +260,7 @@ try {
     assert.ok(start>=0&&end>start,'actual createStoryMode hook block found');
     const code=compile(functions.map(node=>node.getText(parsed)).join('\n')+'\n'+main.slice(start,end));
     const fixture=new Function('dependencies',`
-      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth,storyChapterRule}=dependencies;
+      const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth,storyChapterRule,PLAYABLE_FIGHTERS}=dependencies;
       const canPlayFighter=id=>storyProgress.isUnlocked(id),lockedFighter=()=> 'Defeat this fighter in story mode to recruit them.';
       let setup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'guard',godMode:false};
       let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};
@@ -297,7 +297,7 @@ try {
         mapPick(index){if(!mapChoose)throw Error('Map not mounted');mapChoose(STORY_ENCOUNTERS[index]);},
         inspect:()=>({setup,mode,matchDepthOptions,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
     `)({createStoryMode:hooks=>createStoryMode(hooks,progress),storyProgress:progress,STAGES,ROSTER,$:d.$,createRoundPresentation,createState,
-      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth,storyChapterRule});
+      STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth,storyChapterRule,PLAYABLE_FIGHTERS});
     return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);await d.action(0);await flush();}};
   }
   await check('failed launch preserves the active experimental match and replay options',async()=>{
