@@ -127,6 +127,16 @@ body:has(#fight-view:not([hidden])) #app main { padding: 0; }
 #overlay #start { margin: 8px 0 0; min-width: min(320px, 100%); }
 #overlay .overlay-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(196px, 1fr)); gap: 6px; margin: 10px auto 0; max-width: 840px; }
 #overlay .overlay-menu .quiet { margin: 0; min-height: 40px; padding: 9px 30px; font-size: 12px; white-space: nowrap; }
+#overlay .overlay-songs { margin: 10px auto 0; max-width: 840px; text-align: center; }
+#overlay .overlay-songs-label { display: block; margin-bottom: 6px; font-size: 12px; letter-spacing: 1px; color: #f3deb3; }
+#overlay .overlay-song-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+#overlay .overlay-song-list .quiet { margin: 0; min-height: 36px; padding: 8px 14px; font-size: 12px; }
+#overlay .overlay-song-list .quiet[aria-pressed="true"] {
+  --mystic-button: url('/menu/higgsfield/mystic/button-amber.png');
+  background: var(--mystic-button) center / 100% 100% no-repeat;
+  color: #fff0b1; border-color: #fff0a1 #a67d2b #a67d2b #fff0a1;
+}
+#overlay .overlay-songs small { display: block; margin-top: 6px; color: #c7bdcd; }
 #overlay small { margin-top: 10px; }
 #overlay .move-list { max-height: none; margin-top: 10px; }
 @media (min-height: 700px) { #overlay .move-list { max-height: 34vh; } }

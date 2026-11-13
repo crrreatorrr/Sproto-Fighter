@@ -279,6 +279,8 @@ try {
       const versus={show:(...ids)=>versusCalls.push(ids),hide(){}};
       const ensurePoseAtlases=async(ids)=>{assetRequests.push([...ids]);if(assetFailure)throw Error('asset failure');},ensurePowerArt=async()=>{};
       const setStage=id=>selectedStage=id,setActiveStoryLocation=value=>selectedLocation=value,loadStoryLocation=async()=>{};
+      // updateStage now tells the pause-menu song pick the stage changed. This harness does not play audio.
+      const fightSongs={movedTo(){}};
       const stageRequests=[],stageErrors={};
       const loadStageArt=async(ids)=>{stageRequests.push([...ids]);},getStageArtStatus=()=>({errors:stageErrors});
       const partnerPicker={isOpen:false,choose:async id=>ROSTER[id].partner};

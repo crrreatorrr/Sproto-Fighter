@@ -40,6 +40,7 @@ import type { DuelOutcome } from './net/hubDuel';
 import { isFighterAvailable, fighterLockReason, readRelicCache, writeRelicCache } from './hub/roster';
 import { crashGuard, createFrameLoop } from './crash';
 import { createAudio, fightBedForZone, fightMusicCue } from './audio';
+import { createFightSongChoice, fightLoops } from './fightSong';
 import { SoundTracker } from './audioEvents';
 import { showCrashPanel } from './crashPanel';
 import { setupFeedback, type FeedbackFighter, type FeedbackSnapshot } from './feedback';
@@ -131,6 +132,8 @@ const storage = (() => { try { return window.localStorage; } catch { return null
 let hubRelics: string[] = readRelicCache(storage);
 // ---- Sound (src/audio.ts): recorded menu theme, UI click, combat clips, and recorded fight themes. Win, lose and round start stay synthesised. ----
 const audio = createAudio(storage), sounds = new SoundTracker();
+/** Pause-menu fight song. Session only: it is not saved, and it never enters the sim or a replay. */
+const fightSongs = createFightSongChoice();
 let soundPhase: RoundPresentation['phase'] | null = null, lastMenuSound = 0;
 for (const type of ['keydown', 'pointerdown'] as const) window.addEventListener(type, () => { audio.unlock(); }, { capture: true });
 /** Same recorded click for every menu action. A second event in the same turn (focus, then the click that caused it) is one press. */
@@ -165,12 +168,14 @@ document.addEventListener('sproto-menu-ui', () => { if (!chainedUi()) menuSound(
 function updateAudio() {
     // The feedback window freezes a local match: the music stops with it and returns when it closes.
     // A finished fight fades out; the story map and the menus keep their own tracks.
-    // Between story fights in the same zone (retry, next bout, next rival) the song keeps going instead of restarting.
-    const bed = fightBedForZone(stageZone(currentStage)), carry = story.musicCarry;
+    // Between story fights in the same stage and zone (retry, next bout, next rival) the song keeps going.
+    // A pause-menu pick rides that same area. A different stage or zone drops it, and the loop is not restarted while it holds.
+    const carry = story.musicCarry;
+    const bed = online ? fightBedForZone(stageZone(currentStage)) : fightSongs.bedFor(currentStage);
     const musicCue = fightMusicCue({
         feedbackHold, selectionOpen: selection.isOpen, storyOpen: story.isOpen,
         fightOver: started && presentation.phase === 'result' && !storyAnimation.active,
-        bed, carryFight: started && !!carry && fightBedForZone(stageZone(carry)) === bed,
+        bed, carryFight: !online && started && !!carry && fightSongs.sameArea(currentStage, carry),
     });
     audio.fightBed(musicCue.bed);
     audio.music(musicCue.track);
@@ -355,6 +360,8 @@ function reportRound(){
 let currentStage:StageId=STAGES[0].id;
 function updateStage(stage:StageId) {
     currentStage=stage;
+    // Online matches keep the zone song. A local stage or zone change drops a pause-menu pick.
+    if(!online) fightSongs.movedTo(stage);
     setStage(stage);setActiveStoryLocation(null);
     const location=STAGES.find(s=>s.id===stage)!;
     $('stage-title').textContent=location.name.toUpperCase();
@@ -501,7 +508,7 @@ function bind(value: string | number) {
     updateControls();
     $('binding-status').textContent = 'Saved on this browser.';
 }
-function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED', moveList = false) {
+function showOverlay(title: string, copy: string, button: string, kicker = 'COMBAT LAB / PAUSED', moveList = false, songPicker = false) {
     // Buttons held as the overlay opens (attacks mashed through a KO, the Start that paused) act only after release.
     padInput.holdCurrent(Array.from(navigator.getGamepads?.() || []));
     // Story worlds belongs to local play; the hub, settings and full screen are on every pause and result screen.
@@ -510,12 +517,22 @@ function showOverlay(title: string, copy: string, button: string, kicker = 'COMB
     $('overlay-restart').hidden = !started || !!online || (presentation.phase === 'result' && !storyAnimation.active);
     const moves = document.getElementById('overlay-moves'); if (moves) moves.hidden = true;
     if (moveList) showMoveList();
+    const songs = document.getElementById('overlay-songs');
+    if (songs) {
+        songs.hidden = !songPicker || !!online;
+        if (!songs.hidden) paintFightSongs();
+        else if (songs.contains(document.activeElement)) $('start').focus();
+    }
     // A special action (online queue, tutorial replay) belongs to the overlay that set it; callers set theirs after this.
     overlayAction = null;
     running = false; versus.suspend(true);countdown.suspend(true);held.clear(); queued = 0;queued2=0; $('overlay').hidden = false; $('overlay-title').textContent = title; $('overlay-copy').textContent = copy; $('start').textContent = button; $('overlay-kicker').textContent = kicker; $('overlay-hint').textContent = state.matchDepth ? (state.matchDepth.rounds ? 'First to two round wins · 60-second combat clock' : 'Chapter rule · 60-second combat clock') : 'Play your way · No round timer'; if(!selection.isOpen)$('start').focus(); }
 /** The pause / result overlay's buttons that can be used right now, top to bottom. */
 function overlayChoices(): HTMLButtonElement[] {
-    const choices = ['start', 'overlay-restart', 'overlay-select', 'overlay-story', 'overlay-settings', 'overlay-controls', 'overlay-fullscreen', 'overlay-feedback', 'overlay-hub'].map(id => $<HTMLButtonElement>(id)).filter(b => b && !b.hidden && !b.disabled);
+    const menu = ['start', 'overlay-restart', 'overlay-select', 'overlay-story', 'overlay-settings', 'overlay-controls', 'overlay-fullscreen', 'overlay-feedback', 'overlay-hub'].map(id => $<HTMLButtonElement>(id)).filter(b => b && !b.hidden && !b.disabled);
+    const songGroup = document.getElementById('overlay-songs');
+    const songButtons = songGroup && !songGroup.hidden ? Array.from(songGroup.querySelectorAll<HTMLButtonElement>('button')).filter(b => !b.hidden && !b.disabled) : [];
+    const restartAt = menu.findIndex(button => button.id === 'overlay-restart');
+    const choices = restartAt >= 0 ? [...menu.slice(0, restartAt + 1), ...songButtons, ...menu.slice(restartAt + 1)] : [...menu.slice(0, 1), ...songButtons, ...menu.slice(1)];
     // While an unsettled online match is up, Main menu and the hub would forfeit through a browser confirm; the controller skips them.
     return online?.phase === 'playing' ? choices.filter(b => b.id !== 'overlay-select' && b.id !== 'overlay-hub') : choices;
 }
@@ -546,7 +563,7 @@ function pause() {
     if (!started || (presentation.phase === 'result'&&!storyAnimation.active) || online)
         return;
     if (running)
-        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume', 'COMBAT LAB / PAUSED', true);
+        showOverlay('Take a breath.', 'Your round is paused. Resume when you’re ready.', 'Resume', 'COMBAT LAB / PAUSED', true, true);
     else
         start();
 }
@@ -623,7 +640,7 @@ const story = createStoryMode({
     testing:()=>matchTesting,
     godMode:()=>testingGodMode||(storyProgress.snapshot().godModeUnlocked&&!!selection.getSetup().godMode),
     ready: () => !($('start') as HTMLButtonElement).disabled,
-    pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume'); },
+    pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume', 'COMBAT LAB / PAUSED', false, true); },
     resume: () => { if (resumeAfterJourney && started && (presentation.phase !== 'result'||storyAnimation.active)) start(); },
     launch: (stage, isStory, storyOpponent, difficulty) => {
         if(isStory)freePlayMode??=selection.getSetup().mode;
@@ -638,6 +655,23 @@ $('start').onclick = () => overlayAction ? overlayAction() : start();
 $('pause').onclick = pause;
 $('reset').onclick = ()=>{storyAnimation.cancel();if(training===tutorialCoach&&tutorialCoach.complete)tutorialCoach.begin();if(!story.retryMatch())restart();};
 $('overlay-restart').onclick = () => $('reset').click();
+const songList = document.getElementById('overlay-song-list');
+if (songList) {
+    for (const loop of fightLoops()) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'quiet';
+        button.dataset.fightSong = loop.bed;
+        button.textContent = loop.name;
+        button.onclick = () => { fightSongs.choose(loop.bed, currentStage); paintFightSongs(); updateAudio(); };
+        songList.append(button);
+    }
+}
+/** Mark the song this area is using. The same bed leaves the playing loop alone. */
+function paintFightSongs() {
+    const bed = online ? fightBedForZone(stageZone(currentStage)) : fightSongs.bedFor(currentStage);
+    document.querySelectorAll<HTMLButtonElement>('#overlay-song-list button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.fightSong === bed)));
+}
 const dialog = $<HTMLDialogElement>('controls-dialog');
 $('testing-god-mode').onchange=()=>setTestingGodMode($<HTMLInputElement>('testing-god-mode').checked);
 /** The Settings dialog has two pages: Settings (sound, online, testing) and Controller settings. */
