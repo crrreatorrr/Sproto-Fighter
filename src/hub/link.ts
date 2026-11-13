@@ -16,6 +16,8 @@ const HUB_SESSION_KEY = `hub:${HUB_GAME_ID}:session`;
  */
 export class HubLink {
   connected = false;
+  /** The hub account playing this visit, or null when standalone. Progress is saved under it. */
+  playerId: string | null = null;
   /** Relics from the hub init result. Empty when standalone. Nothing in the game writes these back. */
   relics: string[] = [];
   balance: number | null = null;
@@ -30,12 +32,14 @@ export class HubLink {
 
   attach(session: InitResult | null): void {
     this.connected = session !== null;
+    this.playerId = session?.playerId || null;
     this.relics = [...(session?.relics ?? [])];
     this.error = null;
   }
 
   fail(err: unknown): void {
     this.connected = false;
+    this.playerId = null;
     this.relics = [];
     this.error = err instanceof Error ? err.message : String(err);
   }

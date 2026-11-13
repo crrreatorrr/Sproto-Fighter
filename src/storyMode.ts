@@ -2,11 +2,11 @@ import {createDifficultyRetry,storyDifficulty} from './difficulty';
 import {storySceneryChoices,setStorySceneryChoice,getStorySceneryChoice} from './stageVariants';
 import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
 import {ROSTER,type PlayableFighterId} from './core';
-import {STORY_ENCOUNTERS,STORY_OPPONENTS,storyProgress,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
+import {STORY_ENCOUNTERS,STORY_OPPONENTS,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
 
 type Hooks={beforeStory?:()=>Promise<boolean>;pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId,difficulty?:{skill:number;assisted:boolean})=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;godMode?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
 /** Real progression; chapter scenes remain placeholders pending script approval. */
-export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress){
+export function createStoryMode(hooks:Hooks,progress:StoryProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
     const modal=$<HTMLDialogElement>('journey-dialog');
     const worlds=STORY_STAGE_IDS.map(id=>STAGES.find(s=>s.id===id)!);
@@ -21,7 +21,13 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     const recruitNote=(encounter:Encounter)=>encounter.opponents.every(isStoryRecruitable)?'Victory recruits each defeated fighter.':'Relic guardian: victory advances the story; player selection still requires the matching Hub Relic.';
     const names=(encounter:Encounter)=>encounter.opponents.map(id=>ROSTER[id].name).join(' → ');
     const gauntletNote=(encounter:Encounter)=>encounter.opponents.length>1?`${names(encounter)}. Health refills between bouts. Beat both without losing, restarting or leaving; the second bout has no saved checkpoint. `:'';
-    const storageNote=()=>progress.snapshot().persistent?'Progress saves on this browser.':'Browser saving is unavailable. Progress lasts only while this page stays open.';
+    const storageNote=()=>{
+        const save=progress.snapshot();
+        if(save.owner==='pending')return 'Connecting to the hub. Your account\'s progress loads in a moment.';
+        if(!save.persistent)return 'Browser saving is unavailable. Progress lasts only while this page stays open.';
+        if(save.owner==='account')return save.cloud==='offline'||save.cloud==='error'?'Progress saves to your hub account. It will sync when the hub is reachable.':'Progress saves to your hub account and loads on any device.';
+        return 'Progress saves on this browser. Play from the hub to save it to your account.';
+    };
     const status=()=>{$('journey-status').textContent=active?`STORY / ${STAGES.find(s=>s.id===active!.stage)!.name.toUpperCase()} / ENCOUNTER ${active.index+1} OF ${total}${active.opponents.length>1?` / BOUT ${wave+1} OF ${active.opponents.length}`:''} / ${progress.snapshot().cleared.length} CLEARED`:'FREE PLAY / '+storageNote();};
     // The first action (Continue, Fight, Next opponent, Retry) is the default: Enter or controller A presses it.
     let primary:HTMLButtonElement|null=null;

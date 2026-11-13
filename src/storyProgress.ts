@@ -74,7 +74,54 @@ export const FINALE_START=STORY_ENCOUNTERS.findIndex(e=>e.gauntlet==='final');
 export const STORY_ROSTER_COUNTS={installed:PLAYABLE_FIGHTERS.length,target:STORY_TARGET_ROSTER,missing:Math.max(0,STORY_RIVAL_TARGET-STORY_OPPONENTS.length),rivals:STORY_OPPONENTS.length,encounters:STORY_ENCOUNTERS.length} as const;
 
 type Save={version:3;cleared:string[];unlocked:string[];godModeUnlocked:boolean};
-export type SaveStorage=Pick<Storage,'getItem'|'setItem'>;
+type KeyValue={getItem(key:string):string|null;setItem(key:string,value:string):void;removeItem(key:string):void};
+/** The hub cloud save calls the account store uses (the hub SDK's `ProgressCloud`). */
+export type StoryCloud={loadSave?():Promise<{data:Record<string,unknown>|null;updatedAt:number}>;writeSave?(data:Record<string,unknown>):Promise<{data:Record<string,unknown>|null;updatedAt:number}>};
+export type StoryOwner={kind:'device'}|{kind:'pending'}|{kind:'account';playerId:string};
+/** The part of the hub SDK's `ProgressStore` story progress uses. */
+export interface StoryStore<T>{
+    get():T;owner():StoryOwner;sync():'local'|'syncing'|'synced'|'offline'|'error';persistent():boolean;
+    update(advance:(current:T)=>T):T;refresh():void;watches(key:string|null):boolean;subscribe(listener:()=>void):()=>void;
+    hold():void;attach(cloud:StoryCloud,playerId:string):Promise<void>;release():void;flush():Promise<void>;
+}
+export interface StoryStoreOptions<T>{
+    key:string;storage:KeyValue|null;model:{empty():T;normalize(raw:unknown):T;merge(a:T,b:T):T};
+    readLegacy?(storage:KeyValue):unknown;onError?(error:unknown):void;
+}
+/** Builds the store that keeps the progress: the hub SDK's `createProgressStore` in the browser (src/accountProgress.ts). */
+export type StoryStoreFactory=<T>(options:StoryStoreOptions<T>)=>StoryStore<T>;
+
+/**
+ * This browser's progress only, with no hub accounts. Tests and Node tools use it; the game
+ * itself uses the hub SDK's store, which adds accounts and the cloud save on the same terms.
+ */
+export const browserOnlyStore:StoryStoreFactory=<T,>(o:StoryStoreOptions<T>):StoryStore<T>=>{
+    const {storage,model,key}=o,listeners=new Set<()=>void>();
+    let persistent=!!storage;
+    const read=():T=>{
+        if(!storage)return model.empty();
+        let raw:string|null=null;
+        try{raw=storage.getItem(key);}catch{persistent=false;}
+        let value=model.normalize((()=>{try{return JSON.parse(raw||'null') as unknown;}catch{return null;}})());
+        if(o.readLegacy)value=model.merge(value,model.normalize(o.readLegacy(storage)));
+        return value;
+    };
+    let value=read();
+    const emit=()=>{for(const listener of listeners)listener();};
+    return {
+        get:()=>value,owner:()=>({kind:'device'}),sync:()=>'local',persistent:()=>persistent,
+        update(advance){
+            value=model.merge(model.merge(value,read()),model.normalize(advance(value)));
+            try{if(!storage)throw new Error('Storage unavailable');storage.setItem(key,JSON.stringify(value));persistent=true;}catch{persistent=false;}
+            emit();return value;
+        },
+        refresh(){value=model.merge(value,read());emit();},
+        watches:changed=>changed===null||changed===key,
+        subscribe(listener){listeners.add(listener);return ()=>{listeners.delete(listener);};},
+        hold(){},attach:async()=>{throw new Error('Hub accounts need the hub SDK progress store.');},release(){},flush:async()=>{},
+    };
+};
+export type SaveStorage=Pick<Storage,'getItem'|'setItem'>&Partial<Pick<Storage,'removeItem'>>;
 const fighterToken=(value:unknown):value is string=>typeof value==='string'&&/^[a-z0-9_-]{1,100}$/.test(value);
 const encounterToken=(value:unknown):value is string=>typeof value==='string'&&/^story-(?:v1-[a-z0-9_-]+|v3-gauntlet-[a-z0-9_+\-]+)$/.test(value)&&value.length<=300;
 function record(value:unknown,version:number){
@@ -83,7 +130,7 @@ function record(value:unknown,version:number){
 }
 
 /** The optional route/registry parameters support isolated migration and expansion checks. */
-export function createStoryProgress(storage?:SaveStorage,encounters:readonly Encounter[]=STORY_ENCOUNTERS,registered:readonly PlayableFighterId[]=PLAYABLE_FIGHTERS){
+export function createStoryProgress(storage?:SaveStorage|null,encounters:readonly Encounter[]=STORY_ENCOUNTERS,registered:readonly PlayableFighterId[]=PLAYABLE_FIGHTERS,createStore:StoryStoreFactory=browserOnlyStore){
     const available=new Set<string>(registered),starterIds=STARTER_FIGHTERS.filter(id=>available.has(id));
     const isAvailable=(id:string):id is PlayableFighterId=>available.has(id);
     const empty=():Save=>({version:3,cleared:[],unlocked:[...starterIds],godModeUnlocked:false});
@@ -125,28 +172,34 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
     function combine(...saves:Save[]):Save{
         return normalize({version:3,cleared:saves.flatMap(s=>s.cleared),unlocked:saves.flatMap(s=>s.unlocked),godModeUnlocked:saves.some(s=>s.godModeUnlocked)});
     }
+    const parse=(source:KeyValue,key:string)=>{try{return JSON.parse(source.getItem(key)||'null') as unknown;}catch{return null;}};
+    // One copy per owner (this browser outside the hub, or each hub account), kept and
+    // synced by the hub SDK. Every copy only grows: combine() unions clears and unlocks.
+    const store:StoryStore<Save>=createStore<Save>({
+        key:STORY_SAVE_KEY,
+        storage:storage?{getItem:k=>storage.getItem(k),setItem:(k,v)=>storage.setItem(k,v),removeItem:k=>storage.removeItem?.(k)}:null,
+        model:{empty,normalize,merge:(a,b)=>combine(a,b)},
+        // Progress from before v3 belongs to this browser, never to an account.
+        readLegacy:source=>combine(migrate(parse(source,PREVIOUS_STORY_SAVE_KEY),2),migrate(parse(source,LEGACY_STORY_SAVE_KEY),1)),
+        onError:error=>console.warn('Story progress could not sync with the hub:',error),
+    });
     // God Mode opens every encounter. A run started on the open route can finish
     // even if God Mode is switched off mid-gauntlet.
-    let save=empty(),persistent=!!storage,run:{id:string;wave:number;open?:boolean}|null=null,openRoute=false,lastBonus:PlayableFighterId|null=null;
+    let run:{id:string;wave:number;open?:boolean}|null=null,openRoute=false,lastBonus:PlayableFighterId|null=null;
     const listeners=new Set<()=>void>();
-    function read(){
-        if(!storage)return empty();
-        const get=(key:string)=>{try{const raw=storage!.getItem(key);try{return JSON.parse(raw||'null');}catch{return null;}}catch{persistent=false;return null;}};
-        return combine(normalize(get(STORY_SAVE_KEY)),migrate(get(PREVIOUS_STORY_SAVE_KEY),2),migrate(get(LEGACY_STORY_SAVE_KEY),1));
-    }
-    save=read();
-    const merge=()=>{save=combine(save,read());};
     const emit=()=>{for(const notify of listeners)notify();};
-    function write(){try{if(!storage)throw new Error('Storage unavailable');storage.setItem(STORY_SAVE_KEY,JSON.stringify(save));persistent=true;}catch{persistent=false;}emit();}
-    const isCleared=(index:number)=>!!encounters[index]&&save.cleared.includes(encounters[index].id);
+    store.subscribe(emit);
+    const current=()=>store.get();
+    const merge=()=>store.refresh();
+    const isCleared=(index:number)=>!!encounters[index]&&current().cleared.includes(encounters[index].id);
     const nextIndex=()=>{const index=encounters.findIndex((_,i)=>!isCleared(i));return index<0?null:index;};
     const onRoute=(index:number)=>isCleared(index)||index===nextIndex();
     const canPlay=(index:number)=>Number.isInteger(index)&&index>=0&&index<encounters.length&&(openRoute||onRoute(index)||(!!run?.open&&run.id===encounters[index].id));
     const currentWave=(index:number)=>run&&run.id===encounters[index]?.id?run.wave:0;
     function abandonRun(){run=null;emit();}
     return {
-        snapshot:()=>({version:3 as const,cleared:encounters.filter((_,i)=>isCleared(i)).map(e=>e.id),unlocked:save.unlocked.filter(isAvailable),persistent,completed:routeComplete(new Set(save.cleared)),godModeUnlocked:save.godModeUnlocked,nextIndex:nextIndex(),activeRun:run?{id:run.id,wave:run.wave}:null,openRoute,finaleReady:!!run&&run.wave>0&&encounters.find(e=>e.id===run!.id)?.gauntlet==='final'}),
-        isUnlocked:(id:PlayableFighterId)=>available.has(id)&&save.unlocked.includes(id),isCleared,canPlay,currentWave,
+        snapshot:()=>({version:3 as const,cleared:encounters.filter((_,i)=>isCleared(i)).map(e=>e.id),unlocked:current().unlocked.filter(isAvailable),persistent:store.persistent(),owner:store.owner().kind,cloud:store.sync(),completed:routeComplete(new Set(current().cleared)),godModeUnlocked:current().godModeUnlocked,nextIndex:nextIndex(),activeRun:run?{id:run.id,wave:run.wave}:null,openRoute,finaleReady:!!run&&run.wave>0&&encounters.find(e=>e.id===run!.id)?.gauntlet==='final'}),
+        isUnlocked:(id:PlayableFighterId)=>available.has(id)&&current().unlocked.includes(id),isCleared,canPlay,currentWave,
         /** True when the encounter is playable without God Mode's open route. */
         isOnRoute:(index:number)=>Number.isInteger(index)&&index>=0&&index<encounters.length&&onRoute(index),
         setOpenRoute(enabled:boolean){if(openRoute===enabled)return;openRoute=enabled;emit();},
@@ -156,6 +209,8 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
             merge();const encounter=encounters[index];if(!canPlay(index)||!encounter||!Number.isInteger(wave)||wave<0||wave>=encounter.opponents.length)return false;
             if(wave===0){if(run?.id===encounter.id&&run.wave!==0)return false;run={id:encounter.id,wave:0,open:(run?.id===encounter.id&&run.open)||(openRoute&&!onRoute(index))};}
             else if(run?.id!==encounter.id||run.wave!==wave)return false;
+            // Progress advances only through the store, which saves it for the current owner.
+            const save={...current(),cleared:[...current().cleared],unlocked:[...current().unlocked]};
             const opponent=encounter.opponents[wave];if(isStoryRecruitable(opponent)&&!save.unlocked.includes(opponent))save.unlocked.push(opponent);
             lastBonus=null;
             if(wave===encounter.opponents.length-1){
@@ -167,21 +222,24 @@ export function createStoryProgress(storage?:SaveStorage,encounters:readonly Enc
                 }
             }
             else run={id:encounter.id,wave:wave+1,open:run.open};
-            write();return true;
+            store.update(()=>save);return true;
         },
         /** The fighter the last win recruited as a bonus, or null. */
         lastBonus:()=>lastBonus,
         abandonRun,abandonFinale:abandonRun,
         sync(){merge();emit();},
         subscribe(listener:()=>void){listeners.add(listener);return ()=>listeners.delete(listener);},
+        /** Whose progress this is: the browser, a hub visit still starting, or a hub account. */
+        owner:()=>store.owner(),
+        /** True when a `storage` event for this key changes the progress shown. */
+        watches:(key:string|null)=>store.watches(key),
+        /** A hub visit is starting: wins are held until the account is known. */
+        hold:()=>{run=null;store.hold();},
+        /** Show and save `playerId`'s progress, synced with their hub cloud save. */
+        attach:(cloud:StoryCloud,playerId:string)=>{run=null;return store.attach(cloud,playerId);},
+        /** Back to this browser's own progress, for play without a hub session. */
+        release:()=>{run=null;store.release();},
+        flush:()=>store.flush(),
     };
-}
-let browserStorage:SaveStorage|undefined;
-try{browserStorage=globalThis.localStorage;}catch{/* The UI reports session-only progress. */}
-export const storyProgress=createStoryProgress(browserStorage);
-if(typeof window!=='undefined'){
-    window.addEventListener('storage',event=>{if([STORY_SAVE_KEY,PREVIOUS_STORY_SAVE_KEY,LEGACY_STORY_SAVE_KEY,null].includes(event.key))storyProgress.sync();});
-    window.addEventListener('focus',()=>storyProgress.sync());
-    window.addEventListener('pageshow',()=>storyProgress.sync());
 }
 export type StoryProgress=ReturnType<typeof createStoryProgress>;

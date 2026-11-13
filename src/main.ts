@@ -25,7 +25,8 @@ import { playRetainCallout } from './characterVoice';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
 import { STAGES, setStage, loadStageArt, loadStagePreviews, getStageArtStatus, type StageId } from './stage';
 import { stageZone } from './stageGroups';
-import {storyProgress,STORY_ENCOUNTERS} from './storyProgress';
+import {STORY_ENCOUNTERS} from './storyProgress';
+import {storyProgress} from './accountProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
 import {bossFightInput,bossKeyInput,drawMovingStoryBoss,drawStoryBossAttacks,drawStoryBossPose,loadStoryBossArt,startStoryBoss,stepStoryBoss,storyBossPlayerPose,storyBossTitle,type StoryBoss,type BossForm} from './storyBoss';
 import {createStoryAnimation,storyAnimationPlan} from './storyAnimation';
@@ -238,6 +239,8 @@ for(const id of ['return-hub','overlay-hub','settings-hub','journey-hub','partne
 const hubLink=connectHub();
 void hubLink.then(link=>{
  hub=link;
+ // Story progress belongs to the hub account playing this visit, and to this browser otherwise.
+ if(link.connected&&link.playerId)void storyProgress.attach(link.sdk,link.playerId);else storyProgress.release();
  if(link.connected){
   hubRelics=link.relics;writeRelicCache(storage,hubRelics);selection.refreshLocks();
   $('hub-label').textContent='● HUB LINKED / BAR ARCADE';$('hub-label').classList.add('linked');
@@ -620,7 +623,7 @@ const story = createStoryMode({
         if(!isStory)freePlayMode=null;
         return launchSelection(setup,isStory,difficulty);
     },
-});
+},storyProgress);
 $('start').onclick = () => overlayAction ? overlayAction() : start();
 $('pause').onclick = pause;
 $('reset').onclick = ()=>{storyAnimation.cancel();if(training===tutorialCoach&&tutorialCoach.complete)tutorialCoach.begin();if(!story.retryMatch())restart();};
