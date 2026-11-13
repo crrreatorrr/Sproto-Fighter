@@ -1,6 +1,6 @@
 import {CPU_DIFFICULTIES} from './core';
 import {STAGE_ZONES,stageZone,stagesInZone} from './stageGroups';
-import {storyProgress} from './storyProgress';
+import {storyProgress} from './accountProgress';
 import {MenuRepeat,PAD,menuDirection,readButtons,type PadLike} from './gamepad';
 import {menuKeyDirection} from './localInput';
 import { ROSTER, COMBAT_STYLES, PLAYABLE_FIGHTERS, specialPartnerIds, PARTNER_ATTACKS, bodyAtlasIds, isPairedFighter, createState, getMove, FLOOR, type PlayableFighterId, type FighterId, type Mode } from './core';
