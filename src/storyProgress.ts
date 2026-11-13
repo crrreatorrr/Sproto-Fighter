@@ -9,9 +9,19 @@ export const PREVIOUS_STORY_SAVE_KEY='sproto-arena-story-v2';
 export const STORY_SAVE_KEY='sproto-arena-story-v3';
 export const STORY_TARGET_ROSTER=STORY_RIVAL_TARGET;
 export const STARTER_FIGHTERS:readonly PlayableFighterId[]=['highsproto','bront'];
-// Optional user-supplied rivals stay late in the Hatchery only when actually registered.
+// Optional user-supplied rivals come late in the route (just before the moved opening rivals) only when actually registered.
 // String pins keep this module compatible with the original 102-fighter registry.
 export const CAMPAIGN_RECRUITS:readonly string[]=['satoshi','xalt','potocaicai'];
+/**
+ * Former opening rivals fought late, just before the twins: FreshPrinceOfBellend back to Yoyo
+ * (battles 26 down to 4 of the earlier order), then Bongraker, then Halloween 2008. Only the battle
+ * order changes; each battle number keeps its stage, map marker and difficulty.
+ */
+export const LATE_ROUTE_RIVALS:readonly string[]=[
+    'freshprince','blorfo','rlarsson','thxobama','lifeisameme','leviosa','gpm','bimba','erik','nate','bigswole','mandela',
+    'alpha777','vamp','crapto','dumpstar','guest14','guest13','guest12','guest11','guest10','guest09','guest08',
+    'rune','zephyr',
+];
 // Player recruitment remains Hub-only for all five; three are story guardians.
 // Existing earned recruits from older saves remain valid.
 export const RELIC_ONLY_RECRUITS:readonly string[]=['captain','sproto2616','sproto3152','sproto3215','sproto1870'];
@@ -20,6 +30,9 @@ export const isStoryRecruitable=(id:string)=>!RELIC_ONLY_RECRUITS.includes(id);
 export const BONUS_RECRUIT_EVERY=3;
 /** The last two chapters (the Hatchery and Verse Gate) keep their fighters as rewards for beating them. */
 const BONUS_PROTECTED_CHAPTERS=2;
+/** Hatchery pins and the supplied recruits stay rewards for beating them, even where the battle order puts them in an earlier chapter's slots. */
+export const HATCHERY_PINS:readonly string[]=['michael','buddhashadow','theo'];
+const BONUS_PROTECTED_FIGHTERS=new Set<string>([...HATCHERY_PINS,...CAMPAIGN_RECRUITS]);
 const curatedRivals=new Set(CAMPAIGN_RIVAL_IDS);
 // Frozen orders are migration schemas, never the source of the live campaign roster.
 export const LEGACY_STORY_OPPONENTS:readonly PlayableFighterId[]=['zephyr', 'mox', 'rune', 'guest07', 'guest08', 'guest09', 'guest10', 'guest11', 'guest12', 'guest13', 'guest14', 'dumpstar', 'crapto', 'vamp', 'alpha777', 'mandela', 'bigswole', 'nate', 'nick', 'captain', 'highsproto', 'erik', 'bimba', 'gpm', 'leviosa', 'lifeisameme', 'thxobama', 'rlarsson', 'blorfo', 'michael', 'freshprince', 'mlk', 'sproto102', 'sproto215', 'sproto313', 'sproto651', 'sproto763', 'sproto818', 'sproto831', 'sproto834', 'sproto837', 'sproto865', 'sproto943', 'sproto999', 'sproto1011', 'sproto1093', 'sproto1187', 'sproto1335', 'sproto1345', 'sproto1414', 'sproto1477', 'sproto1601', 'sproto1668', 'sproto1815', 'sproto1870', 'sproto2101', 'sproto2177', 'sproto2322', 'sproto2381', 'sproto2531', 'sproto2569', 'sproto2616', 'sproto2789', 'sproto2884', 'sproto3106', 'sproto3152', 'sproto3215', 'uncmasterflex', 'vitaliketh', 'urmometh', 'chaton', 'loadthebags', 'sisma', 'captainhowdy', 'sprotosales', 'sprog', 'jasper', 'aaron', 'brainsprot', 'sober', 'olnoname', 'greatcharly', 'sproto282', 'sproto704', 'sproto832', 'sproto1499', 'sproto1625', 'sproto2010', 'sproto2075', 'sproto2210', 'sproto2344', 'sproto3181', 'sproto3224', 'sproto3235', 'gryph', 'godmod3d', 'nosmileclown', 'duo', 'vela', 'vaudream'];
@@ -38,7 +51,7 @@ export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,regi
     if(stages.length<3)throw new Error('Campaign requires at least three story locations.');
     const available=new Set(registered),starters=new Set<PlayableFighterId>(STARTER_FIGHTERS);
     const pinned=CAMPAIGN_RECRUITS.flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
-    const hatchery=['michael','buddhashadow','theo'].flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
+    const hatchery=HATCHERY_PINS.flatMap(pin=>{const id=registered.find(candidate=>candidate===pin);return id?[id]:[];});
     const tail=new Set<PlayableFighterId>([...hatchery,...pinned,'rivet','sproto865','sproto943','nick','guest07','vela','vaudream']);
     const relicOnly=new Set<string>(RELIC_ONLY_RECRUITS);
     const ordered=[...new Set([...PREVIOUS_STORY_OPPONENTS,...CAMPAIGN_RIVAL_IDS])].filter((id):id is PlayableFighterId=>available.has(id as PlayableFighterId)&&curatedRivals.has(id)&&!starters.has(id as PlayableFighterId)&&!relicOnly.has(id));
@@ -63,7 +76,22 @@ export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,regi
         const insertion=route.reduce((last,e,index)=>e.stage===stage?index+1:last,0);
         route.splice(insertion,0,{id:singleId(opponent),index:0,opponent,opponents:[opponent],stage,chapter:stages.indexOf(stage)+1});
     }
-    return route.map((encounter,index)=>({...encounter,index}));
+    return battleOrder(route).map((encounter,index)=>({...encounter,index}));
+}
+/**
+ * Reorders who is fought at each battle number while every slot keeps its place: its stage, chapter and
+ * map marker stay where the route put them. Before Golden Sproto the order ends with the recruits, the
+ * moved opening rivals (LATE_ROUTE_RIVALS) and then every twin; everyone else keeps their order.
+ */
+function battleOrder(route:readonly Encounter[]):Encounter[]{
+    const golden=route.findIndex(e=>e.opponent==='rivet'),end=golden<0?route.length:golden;
+    const single=(e:Encounter)=>e.opponents.length===1&&!e.gauntlet;
+    const pick=(ids:readonly string[])=>ids.flatMap(id=>route.slice(0,end).filter(e=>single(e)&&e.opponent===id));
+    const recruits=pick(CAMPAIGN_RECRUITS),late=pick(LATE_ROUTE_RIVALS);
+    const twins=route.slice(0,end).filter(e=>single(e)&&isPairedFighter(e.opponent));
+    const moved=new Set([...recruits,...late,...twins]);
+    const order=[...route.slice(0,end).filter(e=>!moved.has(e)),...recruits,...late,...twins,...route.slice(end)];
+    return route.map((slot,index)=>({...order[index],stage:slot.stage,chapter:slot.chapter}));
 }
 export const STORY_ENCOUNTERS=campaignForStages();
 export const STORY_OPPONENTS:readonly PlayableFighterId[]=STORY_ENCOUNTERS.flatMap(e=>e.opponents);
@@ -140,7 +168,7 @@ export function createStoryProgress(storage?:SaveStorage|null,encounters:readonl
     // count to a multiple of three, never on load: a save that already cleared a route keeps every
     // later-added fighter to earn, and reloads or other tabs cannot recruit anyone.
     const lastOpenChapter=Math.max(0,...encounters.map(e=>e.chapter))-BONUS_PROTECTED_CHAPTERS;
-    const bonusPool=encounters.filter(e=>!e.gauntlet&&e.opponents.length===1&&e.chapter<=lastOpenChapter&&isStoryRecruitable(e.opponent)).map(e=>e.opponent).reverse();
+    const bonusPool=encounters.filter(e=>!e.gauntlet&&e.opponents.length===1&&e.chapter<=lastOpenChapter&&isStoryRecruitable(e.opponent)&&!BONUS_PROTECTED_FIGHTERS.has(e.opponent)).map(e=>e.opponent).reverse();
     function normalize(value:unknown):Save{
         const data=record(value,3);if(!data)return empty();
         // Retain syntactically valid future IDs in storage so a stale tab cannot erase

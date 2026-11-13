@@ -13,9 +13,9 @@ try{
  const ids=['satoshi','xalt','potocaicai'],indices=ids.map(id=>STORY_ENCOUNTERS.findIndex(e=>e.opponents.includes(id)));
  assert.deepEqual(CAMPAIGN_RECRUITS,ids);assert.deepEqual(indices,[indices[0],indices[0]+1,indices[0]+2]);
  for(const [i,id]of ids.entries()){
-  assert.equal(STORY_OPPONENTS.filter(x=>x===id).length,1);assert.deepEqual(STORY_ENCOUNTERS[indices[i]].opponents,[id]);assert.equal(STORY_ENCOUNTERS[indices[i]].stage,'hatchery');assert.equal(isFreePlayAddition(id),false);
+  assert.equal(STORY_OPPONENTS.filter(x=>x===id).length,1);assert.deepEqual(STORY_ENCOUNTERS[indices[i]].opponents,[id]);assert.equal(isFreePlayAddition(id),false);
  }
- assert.equal(STORY_ENCOUNTERS[indices[2]+1].opponent,'rivet');
+ assert.equal(STORY_ENCOUNTERS[indices[2]+1].opponent,'freshprince');
  const storage=(data={})=>{const entries=new Map(Object.entries(data));return {getItem:k=>entries.get(k)??null,setItem:(k,v)=>entries.set(k,v)};};
  const clear=(p,index)=>{assert.ok(p.begin(index));for(let wave=0;wave<STORY_ENCOUNTERS[index].opponents.length;wave++)assert.ok(p.win(index,wave));};
  const disk=storage(),p=createStoryProgress(disk);
@@ -49,6 +49,8 @@ try{
  const mergedDisk=storage({[PREVIOUS_STORY_SAVE_KEY]:old}),a=createStoryProgress(mergedDisk),b=createStoryProgress(mergedDisk);
  while(a.snapshot().nextIndex!==null&&a.snapshot().nextIndex<indices[0])clear(a,a.snapshot().nextIndex);
  clear(a,indices[0]);b.sync();assert.ok(b.isUnlocked('satoshi'));clear(b,indices[1]);a.sync();clear(a,indices[2]);
+ // Twins added after the v2 route now follow the recruits; clear whatever remains.
+ while(a.snapshot().nextIndex!==null)clear(a,a.snapshot().nextIndex);
  const restored=createStoryProgress(mergedDisk);for(const id of ids)assert.ok(restored.isUnlocked(id));assert.ok(restored.snapshot().godModeUnlocked);assert.ok(restored.snapshot().completed);
  mergedDisk.setItem(PREVIOUS_STORY_SAVE_KEY,JSON.stringify({version:2,cleared:[],unlocked:[]}));for(const id of ids)assert.ok(createStoryProgress(mergedDisk).isUnlocked(id),'old-tab writes cannot erase current recruits');
  console.log('PASS: stale-tab merges retain all three recruits and earned God Mode; banked old wins skip unnecessary replays.');
