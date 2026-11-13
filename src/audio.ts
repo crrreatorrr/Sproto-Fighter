@@ -201,12 +201,18 @@ export interface MusicCueInput {
     /** Result screen, with no story cinematic still playing. */
     fightOver: boolean;
     bed: FightBed;
+    /**
+     * Story mode: the next fight (a retry, the next bout, or the next rival) is in the same zone.
+     * The fight loop keeps playing through the result screen and the load, so the song never restarts.
+     */
+    carryFight?: boolean;
 }
 /** Which bed and track to play. Menus win over the story map, and the map wins over a finished fight. */
 export function fightMusicCue(input: MusicCueInput): { track: MusicTrack | null; bed: FightBed } {
     const bed = input.bed;
     if (input.feedbackHold) return { track: null, bed };
     if (input.selectionOpen) return { track: 'menu', bed };
+    if (input.carryFight) return { track: 'fight', bed };
     if (input.storyOpen) return { track: 'story', bed };
     if (input.fightOver) return { track: null, bed };
     return { track: 'fight', bed };

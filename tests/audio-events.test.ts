@@ -214,6 +214,11 @@ describe('audio settings and songs', () => {
         expect(fightMusicCue({ ...fight, fightOver: true })).toEqual({ track: null, bed: 'trenches' });
         expect(fightMusicCue({ ...fight, feedbackHold: true })).toEqual({ track: null, bed: 'trenches' });
         expect(fightMusicCue({ ...fight, storyOpen: true, fightOver: true })).toEqual({ track: 'story', bed: 'trenches' });
+        // Between story fights in the same zone the fight loop carries on through the result screen and the load.
+        expect(fightMusicCue({ ...fight, carryFight: true, fightOver: true })).toEqual({ track: 'fight', bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, carryFight: true, storyOpen: true, fightOver: true })).toEqual({ track: 'fight', bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, carryFight: true, selectionOpen: true })).toEqual({ track: 'menu', bed: 'trenches' });
+        expect(fightMusicCue({ ...fight, carryFight: true, feedbackHold: true })).toEqual({ track: null, bed: 'trenches' });
     });
     it('trims encoder padding so yacht, city and castle loop for exactly 32 bars', () => {
         expect(GROOVE_LOOP_SECONDS).toBeCloseTo(32 * 4 * 60 / 125, 8);
