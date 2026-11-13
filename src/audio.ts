@@ -22,11 +22,13 @@ export const TRENCHES_LOOP_SECONDS = 360;
 export const TRENCHES_ENCODER_DELAY_SAMPLES = 1105;
 export const TRENCHES_MUSIC_RATE = 48000;
 export const TRENCHES_MUSIC_PATH = 'audio/music/trenches_fight_loop_6min.mp3';
-/** 192 bars of 4/4 at 125 BPM. The City and Marina fight themes each loop for exactly this long. */
+/** 192 bars of 4/4 at 125 BPM. City, Marina and Ranch fight themes each loop for exactly this long. */
 export const CITY_LOOP_SECONDS = 368.64;
 /** Same 192-bar length as the City theme. The Marina master uses it. */
 export const YACHT_LOOP_SECONDS = CITY_LOOP_SECONDS;
-/** 32 bars of 4/4 at 125 BPM. Castle, Verse, Bar and Ranch fight themes are written to this length. */
+/** Same 192-bar length as the City theme. The Ranch master uses it. */
+export const RANCH_LOOP_SECONDS = CITY_LOOP_SECONDS;
+/** 32 bars of 4/4 at 125 BPM. Castle, Verse and Bar fight themes are written to this length. */
 export const GROOVE_LOOP_SECONDS = 61.44;
 /** The same ffmpeg priming (start time 0.023021 s at 48 kHz) sits on each of those masters. */
 export const GROOVE_ENCODER_DELAY_SAMPLES = 1105;
@@ -144,10 +146,10 @@ export const FIGHT_BED_SPECS: Record<RecordedBed, FightBedSpec> = {
     castle: { path: 'audio/music/castle_vampire_loop_v2.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
     verse: { path: 'audio/music/verse_alien_electro_loop.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
     bar: { path: 'audio/music/bar_rock_loop.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
-    ranch: { path: 'audio/music/ranch_country_loop_v2.mp3', loopSeconds: GROOVE_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
+    ranch: { path: 'audio/music/ranch_country_loop_6min.mp3', loopSeconds: RANCH_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: 1 },
 };
-/** Trenches, City and Marina are six-minute files. One decoded buffer is kept: the stage that is selected. */
-const LONG_FIGHT_BEDS = new Set<RecordedBed>(['trenches', 'city', 'yacht']);
+/** Trenches, City, Marina and Ranch are six-minute files. One decoded buffer is kept: the stage that is selected. */
+const LONG_FIGHT_BEDS = new Set<RecordedBed>(['trenches', 'city', 'yacht', 'ranch']);
 /** Menu zone id to fight bed. City's zone is `circuit` and Castle's is `throne`. Hatchery stays synthesised. */
 const ZONE_BEDS: Record<string, FightBed> = { trenches: 'trenches', yacht: 'yacht', circuit: 'city', throne: 'castle', verse: 'verse', bar: 'bar', ranch: 'ranch' };
 export function fightBedForZone(zone: string): FightBed {
@@ -163,7 +165,7 @@ export function fightBedLoopRegion(bed: RecordedBed, bufferLength: number, sampl
 
 /**
  * A wrap step well above the groove's own sample-to-sample motion is a click.
- * Quiet zero-crossing seams (Trenches, City, Yacht, Castle) stay under the floor.
+ * Quiet zero-crossing seams (Trenches, City, Marina, Ranch, Castle) stay under the floor.
  */
 export function seamIsClick(jump: number, p95: number): boolean {
     return jump > 0.02 && jump > p95 * 2.5 + 1e-4;
@@ -364,8 +366,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
             row.bytes = bytes;
             if (!bytes) row.failed = true;
         };
-        // Trenches is 8.6 MB. City and Marina are 8.8 MB each. They download beside this
-        // batch, so the menu, the click and the shorter fight themes are not waiting on them.
+        // Trenches is 8.6 MB. City, Marina and Ranch are 8.8 MB each. They download beside
+        // this batch, so the menu, the click and the shorter fight themes are not waiting on them.
         void Promise.all([
             pull(MENU_MUSIC_PATH),
             pull(UI_SELECT_PATH),
@@ -414,8 +416,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (!ctx || decoding) return;
         const beds = (Object.keys(FIGHT_BED_SPECS) as RecordedBed[]).filter(bed => slot(bed).bytes && !slot(bed).buffer && !slot(bed).failed);
         if (!menuBytes && !menuFailed && !uiBytes && !uiFailed && !beds.length && combatReady.length === 0) return;
-        // Each six-minute bed is about 132–142 MB of stereo float. All three together are
-        // about 402 MB, so only the selected stage is decoded. The other two keep their files.
+        // Each six-minute bed is about 132–142 MB of stereo float. All four together are
+        // about 563 MB, so only the selected stage is decoded. The others keep their files.
         const longUrgent = (bed: RecordedBed) => track === 'fight' && fightBed === bed;
         const holdLong = (bed: RecordedBed) => {
             const row = slot(bed);
