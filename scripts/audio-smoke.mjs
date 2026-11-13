@@ -104,26 +104,14 @@ try{
  await page.waitForFunction(()=>window.neonRelay.audioStatus().track==='menu'&&window.neonRelay.audioStatus().fightLoop===null,null,{timeout:5000});
  const left=await status();
  check('leaving the fight stops the Trenches theme',left.track==='menu'&&left.fightLoop===null&&left.fightStarts===1);
- await page.click('#zone-rail button[data-zone="hatchery"]');
- await page.click('#start-fight');
- await page.waitForSelector('#partner-confirm',{timeout:15000});
- await page.click('#partner-confirm');
- await page.waitForFunction(()=>{
-  const audio=window.neonRelay.audioStatus();
-  return audio.track==='fight'&&audio.fightBed==='synth'&&audio.fightLoop===null;
- },null,{timeout:60000});
- check('a Hatchery fight keeps the synthesised loop',(await status()).fightBed==='synth'&&(await status()).fightLoop===null);
- await page.keyboard.press('Enter');
- await page.waitForFunction(()=>document.querySelector('.versus-screen')?.hidden!==false,null,{timeout:5000});
- await page.click('#back-select');
- await page.waitForFunction(()=>window.neonRelay.audioStatus().track==='menu'&&window.neonRelay.audioStatus().fightLoop===null,null,{timeout:5000});
  const grooves=[
   {zone:'yacht',bed:'yacht',seconds:368.64,gain:10**(0.4/20),seam:true,file:'audio/music/yacht_groove_loop_6min.mp3'},
   {zone:'circuit',bed:'city',seconds:368.64,gain:1,seam:true,file:'audio/music/city_house_loop_6min.mp3'},
   {zone:'throne',bed:'castle',seconds:368.64,gain:1,seam:true,file:'audio/music/castle_vampire_loop_6min.mp3'},
-  {zone:'verse',bed:'verse',seconds:61.44,gain:1,seam:true,file:'audio/music/verse_alien_electro_loop.mp3'},
+  {zone:'verse',bed:'verse',seconds:368.64,gain:1,seam:true,file:'audio/music/verse_alien_loop_6min.mp3'},
   {zone:'bar',bed:'bar',seconds:307.2,gain:1,seam:true,file:'audio/music/bar_rock_loop_5min.mp3'},
   {zone:'ranch',bed:'ranch',seconds:368.64,gain:1,seam:true,file:'audio/music/ranch_country_loop_6min.mp3'},
+  {zone:'hatchery',bed:'hatchery',seconds:368.64,gain:10**(-0.5/20),seam:true,file:'audio/music/hatchery_alien_loop_6min.mp3'},
  ];
  for(const spec of grooves){
   await page.click(`#zone-rail button[data-zone="${spec.zone}"]`);

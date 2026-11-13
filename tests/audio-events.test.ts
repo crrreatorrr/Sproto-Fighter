@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, step, type CombatState, type Effect } from '../src/core';
 import { SOUND_NAMES, SoundTracker, effectSound, hitSound, panFor, whooshSound } from '../src/audioEvents';
-import { AUDIO_MIX_VERSION, AUDIO_SETTINGS_KEY, BAR_LOOP_SECONDS, CASTLE_LOOP_SECONDS, CITY_LOOP_SECONDS, DEFAULT_VOLUME, FIGHT_BED_SPECS, GROOVE_ENCODER_DELAY_SAMPLES, GROOVE_LOOP_SECONDS, GROOVE_MUSIC_RATE, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, OUTPUT_LIMIT, PREVIOUS_DEFAULT_VOLUME, RANCH_LOOP_SECONDS, SEAM_CROSSFADE_SECONDS, SFX_LIMIT, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, YACHT_LOOP_SECONDS, YACHT_TRIM_GAIN, createAudio, crossfadeChannel, fightBedForZone, fightBedLoopRegion, fightMusicCue, limitDb, menuLoopRegion, readVolume, seamIsClick, softenLoopSeam, trenchesLoopRegion } from '../src/audio';
+import { AUDIO_MIX_VERSION, AUDIO_SETTINGS_KEY, BAR_LOOP_SECONDS, CASTLE_LOOP_SECONDS, CITY_LOOP_SECONDS, DEFAULT_VOLUME, FIGHT_BED_SPECS, GROOVE_ENCODER_DELAY_SAMPLES, GROOVE_MUSIC_RATE, HATCHERY_LOOP_SECONDS, HATCHERY_TRIM_GAIN, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, OUTPUT_LIMIT, PREVIOUS_DEFAULT_VOLUME, RANCH_LOOP_SECONDS, SEAM_CROSSFADE_SECONDS, SFX_LIMIT, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, VERSE_LOOP_SECONDS, YACHT_LOOP_SECONDS, YACHT_TRIM_GAIN, createAudio, crossfadeChannel, fightBedForZone, fightBedLoopRegion, fightMusicCue, limitDb, menuLoopRegion, readVolume, seamIsClick, softenLoopSeam, trenchesLoopRegion } from '../src/audio';
 import { STAGES } from '../src/stage';
 import { stageZone } from '../src/stageGroups';
 
@@ -306,24 +306,40 @@ describe('audio settings and songs', () => {
         expect(FIGHT_BED_SPECS.bar.gain).toBe(1);
         expect(FIGHT_BED_SPECS.bar.loopSeconds).toBe(BAR_LOOP_SECONDS);
     });
-    it('trims encoder padding so the Verse theme loops for exactly 32 bars', () => {
-        expect(GROOVE_LOOP_SECONDS).toBeCloseTo(32 * 4 * 60 / 125, 8);
-        expect(Math.round(GROOVE_LOOP_SECONDS * GROOVE_MUSIC_RATE)).toBe(2_949_120);
-        expect(FIGHT_BED_SPECS.trenches.gain).toBe(1);
+    it('trims encoder padding so the Verse theme loops for exactly 192 bars', () => {
+        expect(VERSE_LOOP_SECONDS).toBe(368.64);
+        expect(VERSE_LOOP_SECONDS).toBe(CITY_LOOP_SECONDS);
         const rate = GROOVE_MUSIC_RATE;
-        const loopSamples = Math.round(GROOVE_LOOP_SECONDS * rate);
-        expect(fightBedLoopRegion('verse', loopSamples, rate)).toEqual({ loopStart: 0, loopEnd: GROOVE_LOOP_SECONDS });
+        const loopSamples = Math.round(VERSE_LOOP_SECONDS * rate);
+        expect(loopSamples).toBe(17_694_720);
+        expect(fightBedLoopRegion('verse', loopSamples, rate)).toEqual({ loopStart: 0, loopEnd: VERSE_LOOP_SECONDS });
         const tail = fightBedLoopRegion('verse', loopSamples + 47, rate);
         expect(tail.loopStart).toBe(0);
-        expect(tail.loopEnd - tail.loopStart).toBeCloseTo(GROOVE_LOOP_SECONDS, 6);
-        const primed = fightBedLoopRegion('verse', GROOVE_ENCODER_DELAY_SAMPLES + loopSamples + 47, rate);
-        expect(primed.loopStart).toBeCloseTo(GROOVE_ENCODER_DELAY_SAMPLES / rate, 6);
-        expect(primed.loopEnd - primed.loopStart).toBeCloseTo(GROOVE_LOOP_SECONDS, 6);
-        // A decoder that returns 10 samples under 32 bars loops the whole buffer.
-        const short = fightBedLoopRegion('verse', 2_949_110, GROOVE_MUSIC_RATE);
+        expect(tail.loopEnd - tail.loopStart).toBeCloseTo(VERSE_LOOP_SECONDS, 6);
+        const withPriming = fightBedLoopRegion('verse', GROOVE_ENCODER_DELAY_SAMPLES + loopSamples + 1152, rate);
+        expect(withPriming.loopStart).toBeCloseTo(GROOVE_ENCODER_DELAY_SAMPLES / rate, 6);
+        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(VERSE_LOOP_SECONDS, 6);
+        expect(FIGHT_BED_SPECS.verse.gain).toBe(1);
+        // A decoder that returns fewer samples than the music loops the whole buffer.
+        const short = fightBedLoopRegion('verse', loopSamples - 10, rate);
         expect(short.loopStart).toBe(0);
-        expect(short.loopEnd).toBeCloseTo(2_949_110 / GROOVE_MUSIC_RATE, 8);
-        expect(GROOVE_LOOP_SECONDS - short.loopEnd).toBeCloseTo(10 / GROOVE_MUSIC_RATE, 8);
+        expect(short.loopEnd).toBeCloseTo((loopSamples - 10) / rate, 8);
+    });
+    it('trims encoder padding so the Hatchery theme loops for exactly 192 bars', () => {
+        expect(HATCHERY_LOOP_SECONDS).toBe(368.64);
+        expect(HATCHERY_TRIM_GAIN).toBeCloseTo(10 ** (-0.5 / 20), 8);
+        const rate = GROOVE_MUSIC_RATE;
+        const loopSamples = Math.round(HATCHERY_LOOP_SECONDS * rate);
+        expect(loopSamples).toBe(17_694_720);
+        expect(fightBedLoopRegion('hatchery', loopSamples, rate)).toEqual({ loopStart: 0, loopEnd: HATCHERY_LOOP_SECONDS });
+        const tail = fightBedLoopRegion('hatchery', loopSamples + 47, rate);
+        expect(tail.loopStart).toBe(0);
+        expect(tail.loopEnd - tail.loopStart).toBeCloseTo(HATCHERY_LOOP_SECONDS, 6);
+        const withPriming = fightBedLoopRegion('hatchery', GROOVE_ENCODER_DELAY_SAMPLES + loopSamples + 1152, rate);
+        expect(withPriming.loopStart).toBeCloseTo(GROOVE_ENCODER_DELAY_SAMPLES / rate, 6);
+        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(HATCHERY_LOOP_SECONDS, 6);
+        expect(FIGHT_BED_SPECS.hatchery.gain).toBe(HATCHERY_TRIM_GAIN);
+        expect(FIGHT_BED_SPECS.hatchery.loopSeconds).toBe(HATCHERY_LOOP_SECONDS);
     });
     it('plays yacht, city, castle and verse beds on those zones and nowhere else', () => {
         const ids = (zone: 'yacht' | 'circuit' | 'throne') => STAGES.filter(stage => stageZone(stage.id) === zone).map(stage => stage.id);
@@ -343,7 +359,9 @@ describe('audio settings and songs', () => {
         const ranch = STAGES.filter(stage => stageZone(stage.id) === 'ranch').map(stage => stage.id);
         expect(ranch).toEqual(expect.arrayContaining(['ranch', 'ranch-orchard', '21-ranch-lantern-lit-barn', 'nov04-ranch-6']));
         expect(ranch.every(id => fightBedForZone(stageZone(id)) === 'ranch')).toBe(true);
-        expect(fightBedForZone('hatchery')).toBe('synth');
+        const hatchery = STAGES.filter(stage => stageZone(stage.id) === 'hatchery').map(stage => stage.id);
+        expect(hatchery).toEqual(expect.arrayContaining(['hatchery', 'nov04-hatchery-6']));
+        expect(hatchery.every(id => fightBedForZone(stageZone(id)) === 'hatchery')).toBe(true);
         const fight = { feedbackHold: false, selectionOpen: false, storyOpen: false, fightOver: false, bed: 'yacht' as const };
         expect(fightMusicCue(fight)).toEqual({ track: 'fight', bed: 'yacht' });
         expect(fightMusicCue({ ...fight, bed: 'city', fightOver: true })).toEqual({ track: null, bed: 'city' });
@@ -456,21 +474,26 @@ describe('audio settings and songs', () => {
         expect(FIGHT_BED_SPECS.castle.path).toBe('audio/music/castle_vampire_loop_6min.mp3');
         expect(FIGHT_BED_SPECS.bar.path).toBe('audio/music/bar_rock_loop_5min.mp3');
     });
-    it('ships the Verse fight loop next to its metadata', () => {
+    it('ships the Verse and Hatchery fight loops next to their metadata', () => {
         for (const spec of [
-            { file: 'verse_alien_electro_loop.mp3', meta: 'verse_alien_electro_loop.json', gain: 1 },
+            { file: 'verse_alien_loop_6min.mp3', meta: 'verse_alien_loop_6min.json', seconds: VERSE_LOOP_SECONDS, gain: 1, gone: ['verse_alien_electro_loop.mp3', 'verse_alien_electro_loop.json'] },
+            { file: 'hatchery_alien_loop_6min.mp3', meta: 'hatchery_alien_loop_6min.json', seconds: HATCHERY_LOOP_SECONDS, gain: HATCHERY_TRIM_GAIN, gone: [] as string[] },
         ]) {
             const bytes = readFileSync(new URL(`../public/audio/music/${spec.file}`, import.meta.url));
             const meta = JSON.parse(readFileSync(new URL(`../public/audio/music/${spec.meta}`, import.meta.url), 'utf8'));
             expect(bytes.subarray(0, 3).toString('ascii')).toBe('ID3');
             expect(bytes.length).toBe(meta.file_size_bytes);
-            expect(meta.duration_seconds).toBe(GROOVE_LOOP_SECONDS);
+            expect(meta.filename).toBe(spec.file);
+            expect(meta.duration_seconds).toBe(spec.seconds);
             expect(meta.encoder_delay_samples).toBe(GROOVE_ENCODER_DELAY_SAMPLES);
             expect(meta.sample_rate).toBe(GROOVE_MUSIC_RATE);
             expect(meta.bpm).toBe(125);
-            expect(meta.bars).toBe(32);
+            expect(meta.bars).toBe(192);
             expect(meta.gain).toBe(spec.gain);
+            for (const old of spec.gone) expect(existsSync(new URL(`../public/audio/music/${old}`, import.meta.url))).toBe(false);
         }
+        expect(FIGHT_BED_SPECS.verse.path).toBe('audio/music/verse_alien_loop_6min.mp3');
+        expect(FIGHT_BED_SPECS.hatchery.path).toBe('audio/music/hatchery_alien_loop_6min.mp3');
     });
     it('trims encoder padding so the menu theme loops for exactly 30 bars', () => {
         expect(MENU_LOOP_SECONDS).toBeCloseTo(60 / 125 * 4 * 30, 6);
