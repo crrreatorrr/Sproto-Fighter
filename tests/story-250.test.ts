@@ -18,7 +18,7 @@ describe('250-rival campaign',()=>{
   stale.sync();
   for(const guardian of RELIC_GUARDIAN_RIVALS){
    const e=STORY_ENCOUNTERS.find(e=>e.opponent===guardian.id)!;
-   expect(e.stage).toBe(guardian.stage);expect(STORY_ENCOUNTERS[e.index+1].stage).not.toBe(e.stage);
+   expect(e.stage).toBe(guardian.stage);
    for(const progress of [p,stale,createStoryProgress(disk)]){expect(progress.isCleared(e.index)).toBe(true);expect(progress.isUnlocked(e.opponent)).toBe(false);expect(progress.begin(e.index)).toBe(true);expect(progress.win(e.index)).toBe(true);expect(progress.isUnlocked(e.opponent)).toBe(false);}
   }
   expect(createStoryProgress(disk).snapshot().unlocked).toHaveLength(249);

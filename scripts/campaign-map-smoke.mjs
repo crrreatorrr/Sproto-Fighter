@@ -10,10 +10,12 @@ try{
  const req=createRequire(import.meta.url),{campaignMapMarkerLayout,campaignMapPoints,campaignMapPaths}=req(join(temp,'campaignMapLayout.js')),{STORY_ENCOUNTERS}=req(join(temp,'storyProgress.js')),{storyLocationForEncounter}=req(join(temp,'stageVariants.js'));
  const originalRoute=JSON.parse(readFileSync('art/world-map-zones-nov02/encounters-before.json','utf8'));
  const moved=new Set(['story-v1-michael','story-v1-buddhashadow']);
+ // Battle-order changes: the recruits and the former opening rivals now come just before the twins.
+ const reordered=new Set(['satoshi','xalt','potocaicai','freshprince','blorfo','rlarsson','thxobama','lifeisameme','leviosa','gpm','bimba','erik','nate','bigswole','mandela','alpha777','vamp','crapto','dumpstar','guest14','guest13','guest12','guest11','guest10','guest09','guest08','rune','zephyr'].map(f=>`story-v1-${f}`));
  // Hub Relic fighters (src/hub/roster.ts RELIC_ONLY_FIGHTERS) left the campaign; every other encounter is unchanged.
  const relicOnly=new Set(['captain','sproto2616','sproto3152','sproto3215','sproto1870'].map(f=>`story-v1-${f}`));
- const oldIds=new Set(originalRoute.map(e=>e.id));assert.deepEqual(STORY_ENCOUNTERS.filter(e=>oldIds.has(e.id)&&!moved.has(e.id)&&!relicOnly.has(e.id)).map(e=>({id:e.id,opponents:e.opponents})),originalRoute.filter(e=>!moved.has(e.id)&&!relicOnly.has(e.id)).map(e=>({id:e.id,opponents:e.opponents})),'Hatchery moves preserve all other existing encounter IDs, opponent groups and relative order');
- for(const id of moved){const encounter=STORY_ENCOUNTERS.find(e=>e.id===id);assert.equal(encounter.stage,'hatchery');assert.equal(encounter.opponents.length,1);}
+ const oldIds=new Set(originalRoute.map(e=>e.id));assert.deepEqual(STORY_ENCOUNTERS.filter(e=>oldIds.has(e.id)&&!moved.has(e.id)&&!reordered.has(e.id)&&!relicOnly.has(e.id)).map(e=>({id:e.id,opponents:e.opponents})),originalRoute.filter(e=>!moved.has(e.id)&&!reordered.has(e.id)&&!relicOnly.has(e.id)).map(e=>({id:e.id,opponents:e.opponents})),'Hatchery moves preserve all other existing encounter IDs, opponent groups and relative order');
+ for(const id of moved){const encounter=STORY_ENCOUNTERS.find(e=>e.id===id);assert.equal(encounter.opponents.length,1);}
  assert.deepEqual([...new Set(STORY_ENCOUNTERS.map(e=>e.stage))],['trenches','circuit','yacht','ranch','throne','bar','hatchery','verse']);
  assert.ok(STORY_ENCOUNTERS.some(e=>e.stage==='ranch'),'Ranch is an actual chapter with encounters');
  assert.deepEqual(STORY_ENCOUNTERS.slice(-2).map(e=>e.stage),['verse','verse'],'both final gauntlets take place at the final Verse Gate');

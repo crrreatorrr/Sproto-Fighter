@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, cpuTuning, hashState, loadState, saveState, step } from '../src/core';
-import { createDifficultyRetry, STORY_BOSS_OFFSETS, storyBossEncounter, storyDifficulty } from '../src/difficulty';
+import { createDifficultyRetry, STORY_BOSS_OFFSETS, storyBossEncounter, storyBossSlot, storyDifficulty } from '../src/difficulty';
 import { STORY_ENCOUNTERS } from '../src/storyProgress';
 
 describe('seeded CPU controller', () => {
@@ -170,7 +170,7 @@ describe('story difficulty and optional retry', () => {
         expect(skills[0]).toBe(2); expect(skills.at(-1)).toBe(3.95);
         expect(skills[123]).toBeGreaterThan(3.7); expect(skills[123]).toBeLessThan(3.8);
         const bosses = STORY_ENCOUNTERS.filter((_, n) => boss[n]);
-        expect(Object.keys(STORY_BOSS_OFFSETS).sort()).toEqual(bosses.map(encounter => encounter.id).sort());
+        expect(Object.keys(STORY_BOSS_OFFSETS).sort()).toEqual(bosses.map(encounter => storyBossSlot(encounter, STORY_ENCOUNTERS)).sort());
         // Calibrated against the reference bot (docs/balance/CPU-KIT-AWARE-20261112.md, section 9).
         expect(bosses.map(encounter => Math.round(skills[encounter.index] * 100) / 100)).toEqual([6, 6.5, 7, 5, 5, 4.5, 4, 4, 3.95]);
         let previous = 0;

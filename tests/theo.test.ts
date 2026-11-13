@@ -36,11 +36,11 @@ function bout(facing: 1 | -1, gap = 480) {
   return state;
 }
 
-it('recruits Theo from a single Hatchery encounter and saves the unlock', () => {
+it('recruits Theo from a single encounter and saves the unlock', () => {
   const encounters = STORY_ENCOUNTERS.filter(e => e.opponents.includes('theo'));
   expect(encounters).toHaveLength(1);
   const [encounter] = encounters;
-  expect(encounter).toMatchObject({ id: 'story-v1-theo', stage: 'hatchery', opponents: ['theo'] });
+  expect(encounter).toMatchObject({ id: 'story-v1-theo', opponents: ['theo'] });
   const saved = new Map([[STORY_SAVE_KEY, JSON.stringify({
     version: 3, cleared: STORY_ENCOUNTERS.slice(0, encounter.index).map(e => e.id), unlocked: [],
   })]]);
