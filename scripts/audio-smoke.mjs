@@ -75,11 +75,11 @@ try{
  },null,{timeout:60000});
  const playing=await status();
  const span=playing.fightLoop.end-playing.fightLoop.start;
- check('a Trenches fight plays the recorded loop for the musical length',Math.abs(span-45.000687)<1e-3&&playing.fightStarts===1);
+ check('a Trenches fight plays the recorded loop for the musical length',playing.fightLoop.start===0&&Math.abs(span-360)<1e-3&&playing.fightStarts===1);
  const seam=await page.evaluate(async()=>{
   const loop=window.neonRelay.audioStatus().fightLoop;
   const ctx=new AudioContext({sampleRate:loop.rate});
-  const buf=await ctx.decodeAudioData(await (await fetch('audio/music/trenches_fight_loop.mp3')).arrayBuffer());
+  const buf=await ctx.decodeAudioData(await (await fetch('audio/music/trenches_fight_loop_6min.mp3')).arrayBuffer());
   const channel=buf.getChannelData(0);
   const start=Math.round(loop.start*buf.sampleRate), end=Math.round(loop.end*buf.sampleRate);
   const deltas=[];
@@ -118,8 +118,8 @@ try{
  await page.click('#back-select');
  await page.waitForFunction(()=>window.neonRelay.audioStatus().track==='menu'&&window.neonRelay.audioStatus().fightLoop===null,null,{timeout:5000});
  const grooves=[
-  {zone:'yacht',bed:'yacht',seconds:61.44,gain:10**(0.4/20),seam:true,file:'audio/music/yacht_groove_loop.mp3'},
-  {zone:'circuit',bed:'city',seconds:61.44,gain:1,seam:false,file:'audio/music/city_house_loop_v2.mp3'},
+  {zone:'yacht',bed:'yacht',seconds:368.64,gain:10**(0.4/20),seam:true,file:'audio/music/yacht_groove_loop_6min.mp3'},
+  {zone:'circuit',bed:'city',seconds:368.64,gain:1,seam:true,file:'audio/music/city_house_loop_6min.mp3'},
   {zone:'throne',bed:'castle',seconds:61.44,gain:1,seam:true,file:'audio/music/castle_vampire_loop_v2.mp3'},
   {zone:'verse',bed:'verse',seconds:61.44,gain:1,seam:true,file:'audio/music/verse_alien_electro_loop.mp3'},
   {zone:'bar',bed:'bar',seconds:61.44,gain:1,seam:true,file:'audio/music/bar_rock_loop.mp3'},

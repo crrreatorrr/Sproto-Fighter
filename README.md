@@ -229,8 +229,9 @@ the Castle, the Verse, the Bar and the Ranch each play a recorded fight theme
 on every level in that zone, in Story and in Level Select. The theme fades in
 when the fight starts and fades out when it ends or the player leaves. Loop
 points trim MP3 encoder padding: the menu wraps at 57.6 seconds, Trenches at
-45.000687 seconds, and Yacht, City, Castle, Verse, Bar and Ranch on the 61.44
-second bar (32 bars at 125 BPM).
+360 seconds (192 bars at 128 BPM), the City and the Marina at 368.64 seconds
+(192 bars at 125 BPM), and Castle, Verse, Bar and Ranch on the 61.44 second bar
+(32 bars at 125 BPM).
 The yacht master is about 0.4 dB quieter, so that theme plays a little hotter.
 Combat effects are recorded clips in `public/audio/sfx/combat/`: one file per
 attack, so a swing and its impact play once, and a fighter with their own

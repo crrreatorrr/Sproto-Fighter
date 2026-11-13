@@ -1,0 +1,21 @@
+{
+  "id": "trenches_fight_loop_6min",
+  "filename": "trenches_fight_loop_6min.mp3",
+  "zone": "trenches",
+  "intended_use": "Sproto Fighter Trenches stage fight theme (all Trenches levels and maps, Story and Level Select), seamless loop",
+  "bpm": 128,
+  "beats_per_bar": 4,
+  "bars": 192,
+  "duration_seconds": 360,
+  "file_duration_seconds": 360.024,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bitrate_kbps": 192,
+  "gain": 1,
+  "loudness_lufs": -12.3,
+  "true_peak_dbtp": -1.2,
+  "file_size_bytes": 8641196,
+  "decoded_pcm_bytes": 138240000,
+  "notes": "192 bars of 4/4 at 128 BPM is 360 s (17,280,000 samples at 48 kHz). The container is 360.024 s because of MP3 priming (1105 samples, start time 0.023021 s) and one trailing frame. Chrome decodeAudioData and ffmpeg drop that priming and land on exactly 17,280,000 samples, so loopStart is 0 and loopEnd is 360 s. The wrap step is about 0.0007, under a normal sample step, so no seam ramp is applied. Decoded stereo float PCM is 138,240,000 bytes. That one buffer is acceptable: the file is fetched ahead of the fight and decoded on the shared AudioBuffer player, and a media element would not keep this MP3 gapless. A failed decode still falls back to the synthesised fight loop. No loudness trim."
+}

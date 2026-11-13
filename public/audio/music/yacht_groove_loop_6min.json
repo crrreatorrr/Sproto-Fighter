@@ -1,0 +1,21 @@
+{
+  "id": "yacht_groove_loop_6min",
+  "filename": "yacht_groove_loop_6min.mp3",
+  "zone": "yacht",
+  "intended_use": "Sproto Fighter Marina (yacht) stage fight theme, all Tidebreak Marina levels, Story and Level Select, seamless loop",
+  "bpm": 125,
+  "beats_per_bar": 4,
+  "bars": 192,
+  "duration_seconds": 368.64,
+  "file_duration_seconds": 368.664,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bitrate_kbps": 192,
+  "gain": 1.0471285480508996,
+  "loudness_lufs": -12.6,
+  "true_peak_dbtp": -0.9,
+  "file_size_bytes": 8848556,
+  "decoded_pcm_bytes": 141557760,
+  "notes": "192 bars of 4/4 at 125 BPM is 368.64 s (17,694,720 samples at 48 kHz). The container is 368.664 s because of MP3 priming (1105 samples, start time 0.023021 s) and one trailing frame. Chrome decodeAudioData and ffmpeg drop that priming and land on exactly 17,694,720 samples, so loopStart is 0 and loopEnd is 368.64 s. The wrap step is about 0.0008, under a normal sample step, so no seam ramp is applied. The first minute is the previous Marina loop. Playback keeps the +0.4 dB trim (gain 1.0471285480508996). The file's true peak is -0.9 dBTP, so the trim lands near -0.5 dBTP, under 0 dBFS. Decoded stereo float PCM is 141,557,760 bytes. With Trenches (138,240,000) and City (141,557,760) the three buffers would be 421,355,520 bytes, so only the selected stage's long bed stays decoded and the other two keep the compressed file. A failed decode still falls back to the synthesised fight loop. Replaces yacht_groove_loop.mp3."
+}
