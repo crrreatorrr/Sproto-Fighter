@@ -1,0 +1,21 @@
+{
+  "id": "hatchery_alien_loop_6min",
+  "filename": "hatchery_alien_loop_6min.mp3",
+  "zone": "hatchery",
+  "bpm": 125,
+  "beats_per_bar": 4,
+  "bars": 192,
+  "duration_seconds": 368.64,
+  "file_duration_seconds": 368.664,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bitrate_kbps": 192,
+  "gain": 0.9440608762859234,
+  "loudness_lufs": -11.9,
+  "true_peak_dbtp": -1.0,
+  "trim_db": -0.5,
+  "file_size_bytes": 8848556,
+  "decoded_pcm_bytes": 141557760,
+  "notes": "192 bars of 4/4 at 125 BPM is 368.64 s (17,694,720 samples at 48 kHz). The container is 368.664 s because of MP3 priming (1105 samples, start time 0.023021 s) and one trailing frame. Chrome decodeAudioData and ffmpeg drop that priming and land on exactly 17,694,720 samples, so loopStart is 0 and loopEnd is 368.64 s. The wrap step is about 0.0017, under a normal sample step, so no seam ramp is applied. The master is about 0.5 dB louder than the other fight loops, so playback applies -0.5 dB (gain 0.9440608762859234). The file's true peak is -1.0 dBTP, so the trim lands near -1.5 dBTP, under 0 dBFS. Decoded stereo float PCM is 141,557,760 bytes. Only the selected stage's long bed stays decoded. A failed decode still falls back to the synthesised fight loop. This is the first recorded Hatchery fight theme."
+}

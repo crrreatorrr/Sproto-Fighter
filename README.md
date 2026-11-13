@@ -225,14 +225,15 @@ Sound is Web Audio (`src/audio.ts`). The main menu, character select, options
 and the other front-end menus share one recorded loop
 (`public/audio/music/menu_theme_loop.mp3`, 30 bars at 125 BPM). Every menu
 press plays `public/audio/sfx/ui_select.mp3`. Trenches, the City, the Yacht,
-the Castle, the Verse, the Bar and the Ranch each play a recorded fight theme
+the Castle, the Verse, the Bar, the Ranch and the Hatchery each play a recorded fight theme
 on every level in that zone, in Story and in Level Select. The theme fades in
 when the fight starts and fades out when it ends or the player leaves. Loop
 points trim MP3 encoder padding: the menu wraps at 57.6 seconds, Trenches at
-360 seconds (192 bars at 128 BPM), the City, the Marina, the Ranch and the Castle
-at 368.64 seconds (192 bars at 125 BPM), the Bar at 307.2 seconds (160 bars at
-125 BPM), and Verse on the 61.44 second bar (32 bars at 125 BPM).
+360 seconds (192 bars at 128 BPM), the City, the Marina, the Ranch, the Castle,
+the Verse and the Hatchery at 368.64 seconds (192 bars at 125 BPM), and the Bar
+at 307.2 seconds (160 bars at 125 BPM).
 The yacht master is about 0.4 dB quieter, so that theme plays a little hotter.
+The Hatchery master is about 0.5 dB louder, so that theme plays a little quieter.
 Combat effects are recorded clips in `public/audio/sfx/combat/`: one file per
 attack, so a swing and its impact play once, and a fighter with their own
 team-special recording uses it. Win, lose, round start and the story music stay
