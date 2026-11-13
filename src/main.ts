@@ -14,7 +14,7 @@ import './fullscreen.css';
 import {createVersusScreen} from './versusScreen';
 import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';
-import { FEEDBACK_KEY, P2_KEYS, PAD_DEFAULTS, UNBOUND, keyboardMask, menuKeyDirection, pressedMask, padMask, rebindKey, rebindPad, resolveKeyConflicts } from './localInput';
+import { DoubleTapDash, FEEDBACK_KEY, P2_KEYS, PAD_ACTIONS, PAD_DEFAULTS, UNBOUND, keyboardMask, menuKeyDirection, pressedMask, padMask, rebindKey, rebindPad, resolveKeyConflicts } from './localInput';
 import { PAD, PadInput, MenuRepeat, menuDirection, padButtonName, canBindPadButton, clampDeadzone, LEFT_STICK_DEADZONE, type MenuDirection, type PadView } from './gamepad';
 import { FIXED_CONTROLS, loadControls, saveControls } from './controlsStorage';
 import { bindFullscreenButtons, escapeLeavesFullscreenOnly } from './fullscreen';
@@ -52,10 +52,10 @@ function updateFooter(timed:boolean){
     if(footer.textContent!==text)footer.textContent=text;
 }
 updateFooter(false);
-const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: 'ShiftLeft' };
+const defaults: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: UNBOUND, block: 'ShiftLeft' };
 // Controller defaults for both players; see PAD_DEFAULTS for the reasoning.
 const padDefaults: Partial<Record<Action, number>> = PAD_DEFAULTS;
-const labels: Record<Action, string> = { left: 'Move left', right: 'Move right', up: 'Jump', down: 'Crouch', light: 'Light', medium: 'Medium', heavy: 'Finisher', launcher: 'Launcher', bolt: 'Ranged power', grab: 'Grab', special: 'Team special', dash: 'Dash' };
+const labels: Record<Action, string> = { left: 'Move left', right: 'Move right', up: 'Jump', down: 'Crouch', light: 'Light', medium: 'Medium', heavy: 'Finisher', launcher: 'Launcher', bolt: 'Ranged power', grab: 'Grab', special: 'Team special', block: 'Block', dash: 'Dash (or double-tap ← / →)' };
 // Player 1 and player 2 (local versus) each have their own keyboard and gamepad mappings,
 // saved with the left-stick dead zone on this browser (src/controlsStorage.ts).
 const controlsStore = (() => { try { return window.localStorage; } catch { return null; } })();
@@ -102,6 +102,8 @@ let koSlow = 0, koSeen = false;
 const held = new Set<string>();
 const blockedKeys = new Set<string>();
 let queued = 0, queued2 = 0; // presses since the last frame, per playerqueued2=0;
+/** Double-tap dash detection per player (src/localInput.ts), fed every simulation frame. */
+const doubleTapP1 = new DoubleTapDash(), doubleTapP2 = new DoubleTapDash();
 const storyAnimation=createStoryAnimation();
 let storyBoss:StoryBoss|null=null;
 let storyBossArt:Awaited<ReturnType<typeof loadStoryBossArt>>|null=null;
@@ -451,12 +453,17 @@ function controlPrompt(action: Action): string {
     if (action === 'up' || action === 'down') return action === 'up' ? '↑' : '↓';
     return padButtonName(padKeys[action]);
 }
+/** How player 1 dashes: a double-tap, plus the optional Dash button when one is mapped. */
+function dashPrompt(direction = '← / →'): string {
+    const button = lastDevice === 'key' ? (keys.dash === UNBOUND ? '' : keyName(keys.dash)) : (padKeys.dash === undefined ? '' : padButtonName(padKeys.dash));
+    return `double-tap ${direction}${button ? ' or ' + button : ''}`;
+}
 /** The fight screen's prompts, which follow the device the player last used. */
 function updatePrompts() {
     const p = controlPrompt;
-    $('directional-help').textContent = `${p('up')} + ${p('light')}: Rising strike · ${p('up')} + forward + ${p('medium')}: Diagonal · ${p('down')} + ${p('medium')}/${p('heavy')}: Low / dive · ${p('bolt')}: Horizontal spit (${p('down')}: crouch low / ${p('up')}: jump high) / aim other powers · ${p('dash')} after hit: Dash cancel`;
+    $('directional-help').textContent = `${p('up')} + ${p('light')}: Rising strike · ${p('up')} + forward + ${p('medium')}: Diagonal · ${p('down')} + ${p('medium')}/${p('heavy')}: Low / dive · ${p('bolt')}: Horizontal spit (${p('down')}: crouch low / ${p('up')}: jump high) / aim other powers · ${p('block')} or hold away: Block · ${dashPrompt()}: Dash (${dashPrompt('forward')} after a hit: Dash cancel)`;
 
-    $('controls-strip').innerHTML = `<span class="control"><kbd>${lastDevice === 'pad' ? 'Stick / D-pad' : keyName(keys.left) + ' ' + keyName(keys.right)}</kbd> Move / block</span>` + (['up', 'down', 'light', 'medium', 'heavy', 'launcher', 'bolt', 'grab', 'special', 'dash'] as Action[]).map(a => `<span class="control"><kbd>${lastDevice === 'pad' && (a === 'up' || a === 'down') ? 'Stick ' + p(a) : p(a)}</kbd>${labels[a]}</span>`).join('') + (lastDevice === 'pad' ? '<span class="control"><kbd>Start</kbd>Pause</span>' : '');
+    $('controls-strip').innerHTML = `<span class="control"><kbd>${lastDevice === 'pad' ? 'Stick / D-pad' : keyName(keys.left) + ' ' + keyName(keys.right)}</kbd> Move · double-tap: Dash</span>` + (['up', 'down', 'light', 'medium', 'heavy', 'launcher', 'bolt', 'grab', 'special', 'block'] as Action[]).map(a => `<span class="control"><kbd>${lastDevice === 'pad' && (a === 'up' || a === 'down') ? 'Stick ' + p(a) : p(a)}</kbd>${labels[a]}</span>`).join('') + (lastDevice === 'pad' ? '<span class="control"><kbd>Start</kbd>Pause</span>' : '');
     $('controls-strip').setAttribute('aria-label', lastDevice === 'pad' ? 'Current controller bindings' : 'Current keyboard bindings');
     $('pause').innerHTML = `Pause <kbd>${lastDevice === 'pad' ? 'Start' : 'Esc'}</kbd>`;
 }
@@ -471,7 +478,7 @@ function updateControls() {
     const pending = (a: string, device: 'key' | 'pad') => remapping?.player === controlsPlayer && remapping.action === a && remapping.device === device;
     // Rebuilding the rows must not drop keyboard or controller focus from the binding being changed.
     const focused = document.activeElement instanceof HTMLElement && document.activeElement.dataset.map ? document.activeElement : null;
-    $('bindings').innerHTML = Object.entries(labels).map(([a, label]) => `<div class="binding-row ${remapping?.player === controlsPlayer && remapping.action === a ? 'pending' : ''}"><span>${label}</span><button class="quiet" data-map="${a}" data-device="key">${pending(a, 'key') ? 'Press a key…' : playerKeys[a as Action] === UNBOUND ? '—' : keyName(playerKeys[a as Action])}</button>${a in padDefaults ? `<button class="quiet" data-map="${a}" data-device="pad">${pending(a, 'pad') ? 'Press a button…' : padButtonName(playerPad[a as Action])}</button>` : '<span class="micro">D-pad / left stick</span>'}</div>`).join('');
+    $('bindings').innerHTML = Object.entries(labels).map(([a, label]) => `<div class="binding-row ${remapping?.player === controlsPlayer && remapping.action === a ? 'pending' : ''}"><span>${label}</span><button class="quiet" data-map="${a}" data-device="key">${pending(a, 'key') ? 'Press a key…' : playerKeys[a as Action] === UNBOUND ? '—' : keyName(playerKeys[a as Action])}</button>${PAD_ACTIONS.includes(a as Action) ? `<button class="quiet" data-map="${a}" data-device="pad">${pending(a, 'pad') ? 'Press a button…' : padButtonName(playerPad[a as Action])}</button>` : '<span class="micro">D-pad / left stick</span>'}</div>`).join('');
     document.querySelectorAll<HTMLButtonElement>('[data-map]').forEach(b => b.onclick = () => { remapping = { action: b.dataset.map as Action, device: b.dataset.device as 'key' | 'pad', player: controlsPlayer }; $('binding-status').textContent = b.dataset.device === 'pad' ? 'Start cancels. A button another action uses is swapped.' : 'Escape cancels. A key another action or player uses is swapped.'; updateControls(); });
     if (focused) document.querySelector<HTMLButtonElement>(`[data-map="${focused.dataset.map}"][data-device="${focused.dataset.device}"]`)?.focus();
 }
@@ -526,6 +533,8 @@ function start() {
     accumulator = 0;
     held.clear();
     queued = 0;queued2=0;
+    // A tap before the pause and one after it are not a double-tap.
+    doubleTapP1.reset(); doubleTapP2.reset();
     $('overlay').hidden = true;
     canvas.focus();
 }
@@ -1178,7 +1187,7 @@ function advanceRoundFrame(input: number, p2Input?: number) {
         const result = series ? (series[0] === series[1] ? 2 : series[0] > series[1] ? 0 : 1) : state.winner;
         const won = result === 0, drawn = result === 2;
         const score = series ? `Rounds ${series[0]}–${series[1]}. ` : '';
-        showOverlay(drawn ? (series ? 'MATCH DRAWN' : 'DOUBLE K.O.') : won ? 'YOU WIN' : 'YOU LOSE', `${score}${drawn ? 'Nobody left standing.' : won ? 'You found your flow.' : 'Run it back.'} Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : 'Use away to block, and punish the recovery.'}`, 'Fight again', series ? 'MATCH COMPLETE / BEST OF 3' : 'ROUND COMPLETE');
+        showOverlay(drawn ? (series ? 'MATCH DRAWN' : 'DOUBLE K.O.') : won ? 'YOU WIN' : 'YOU LOSE', `${score}${drawn ? 'Nobody left standing.' : won ? 'You found your flow.' : 'Run it back.'} Best combo: ${state.fighters[0].best} hits. ${won ? 'Keep exploring your routes.' : `Hold away or ${controlPrompt('block')} to block, and punish the recovery.`}`, 'Fight again', series ? 'MATCH COMPLETE / BEST OF 3' : 'ROUND COMPLETE');
         return;
     }
     if (presentation.phase !== 'fight') return;
@@ -1232,7 +1241,7 @@ function stepTo(now: number): number | null {
         while (accumulator >= 1 / 60) {
             // Boss forms reuse the fight buttons and keys for their own actions (see bossFightInput).
             let input = (storyBoss ? bossFightInput(pad) : pad) | queued;
-            const p2 = mode === 'versus' ? padMask(padP2, padKeys2) | queued2 | keyboardMask(held, withoutP1Keys(keys2)) : undefined;
+            let p2 = mode === 'versus' ? padMask(padP2, padKeys2) | queued2 | keyboardMask(held, withoutP1Keys(keys2)) : undefined;
             queued = 0;queued2=0;
             if(storyBoss){
                 for(const code of held)input|=bossKeyInput(code,keys);
@@ -1240,6 +1249,9 @@ function stepTo(now: number): number | null {
                 for(const a of Object.keys(A) as Action[])
                     if(held.has(keys[a]))input|=A[a];
             }
+            // A double-tap of left or right dashes; boss forms read the same Dash bit.
+            input = doubleTapP1.apply(input);
+            if (p2 !== undefined) p2 = doubleTapP2.apply(p2);
             accumulator -= 1 / 60;
             advanceRoundFrame(input, p2);
             steps++;
@@ -1322,7 +1334,7 @@ function frameTick(now: number): boolean {
     if (showTraining) trainingPanel.textContent = 'TRAINING · looping requires Standing dummy\nGreen: hurtbox · red: active hitbox · blue: projectile · gray: strike invulnerability\n' + trainingReadout(state) + `\nRecording ${trainingRecorder.recording ? 'ON' : 'off'} · ${trainingRecorder.frames.length} frames · playback ${trainingRecorder.playing ? 'ON' : 'off'}`;
     if(qaPanel)qaPanel.textContent=`MANUAL QA · frame ${state.frame} · ${qaFrozen?'QA frozen':running?'running':'paused'}\n`+state.fighters.map((f,i)=>`P${i+1} ${f.id}: x=${f.x.toFixed(1)} y=${f.y.toFixed(1)} vx=${f.vx.toFixed(2)} vy=${f.vy.toFixed(2)} ${f.move?.id??'neutral'} t=${f.move?.t??0} input=${f.input} hp=${f.hp} combo=${f.combo} best=${f.best} pips=${f.pips} reaction=${f.reaction?.kind??'-'}/${f.reaction?.phase??'-'}:${f.reaction?.t??0}`).join('\n')+'\nPresentation: '+JSON.stringify(presentation)+'\nReplay frames: '+frames.length+'\nThrow: '+JSON.stringify(state.throwState)+'\nProjectiles: '+state.projectiles.map(p=>`${p.shape} x=${p.x.toFixed(1)} y=${p.y.toFixed(1)} vx=${p.vx.toFixed(2)} vy=${p.vy.toFixed(2)}`).join('; ')+'\n'+qaEvents.join('\n');
     const padName = (a: Action) => padButtonName(padKeys[a]);
-    $('coach').textContent = storyBoss ? (lastDevice === 'pad' ? `Auto-fire · stick / D-pad move · ↑ or ${padName('launcher')} double-jump · ${padName('dash')} dash · ${padName('light')} beam · ${padName('medium')} ball · ${padName('heavy')} shield · Start pauses (Restart is in the menu)` : `Auto-fire · A/D or arrows move · W or ↑ double-jump · Shift dash · ${keyName(keys.light)} or C beam · ${keyName(keys.medium)} or V ball · ${keyName(keys.heavy)} or X shield · R retry`) : mode === 'versus' && lastDevice === 'pad' ? `Controller 1 plays P1, controller 2 plays P2 · ${padName('light')} ${padName('medium')} ${padName('heavy')} attack · either Start pauses. Remap both in Settings.` : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${controlPrompt('special')} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
+    $('coach').textContent = storyBoss ? (lastDevice === 'pad' ? `Auto-fire · stick / D-pad move · ↑ or ${padName('launcher')} double-jump · double-tap ← / → dash · ${padName('light')} beam · ${padName('medium')} ball · ${padName('heavy')} or ${padName('block')} shield · Start pauses (Restart is in the menu)` : `Auto-fire · A/D or arrows move · W or ↑ double-jump · double-tap ← / → dash · ${keyName(keys.light)} or C beam · ${keyName(keys.medium)} or V ball · ${keyName(keys.heavy)}, ${keyName(keys.block)} or X shield · R retry`) : mode === 'versus' && lastDevice === 'pad' ? `Controller 1 plays P1, controller 2 plays P2 · ${padName('light')} ${padName('medium')} ${padName('heavy')} attack · ${padName('block')} block · double-tap to dash · either Start pauses. Remap both in Settings.` : mode === 'versus' ? `P1: ${keyName(keys.left)}/${keyName(keys.right)} move, ${keyName(keys.light)} ${keyName(keys.medium)} ${keyName(keys.heavy)} attack, ${keyName(keys.block)} block · P2: ${keyName(keys2.left)}/${keyName(keys2.right)} move, ${keyName(keys2.light)} ${keyName(keys2.medium)} ${keyName(keys2.heavy)} attack, ${keyName(keys2.block)} block · double-tap a direction to dash. A second controller plays P2. Remap both in Settings.` : state.fighters[0].pips === 3 ? `Relay ready — press ${controlPrompt('special')} for your Team Special.` : mode === 'guard' ? 'Throws beat guard. Crouch bolts. Air attacks beat low guard.' : 'Light → Medium → Finisher earns one charge.';
     return frameJudged(steps);
 }
 /** Always reschedules, even when a frame throws; a throw ends that frame's fixed steps.

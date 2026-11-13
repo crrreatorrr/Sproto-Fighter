@@ -5,7 +5,7 @@
 // [player 1 mask, player 2 mask]; held inputs repeat for many frames, so a
 // minute of play is typically well under 2 KB. Pure JavaScript (no atob,
 // Buffer or TextEncoder), so it also runs in Nakama's JavaScript runtime.
-import { createState, hashState, step, PLAYABLE_FIGHTERS, type PlayableFighterId } from '../core';
+import { ALL_INPUTS, createState, hashState, step, PLAYABLE_FIGHTERS, type PlayableFighterId } from '../core';
 
 export const MAX_LOG_FRAMES = 60 * 60 * 10; // 10 minutes
 
@@ -76,7 +76,7 @@ export function decodeInputs(text: string, maxFrames = MAX_LOG_FRAMES): [number,
   const pairs: [number, number][] = [];
   for (let i = 0; i < bytes.length; i += 6) {
     const run = bytes[i] | (bytes[i + 1] << 8), a = bytes[i + 2] | (bytes[i + 3] << 8), b = bytes[i + 4] | (bytes[i + 5] << 8);
-    if (run === 0 || a > 4095 || b > 4095 || pairs.length + run > maxFrames) return null;
+    if (run === 0 || a > ALL_INPUTS || b > ALL_INPUTS || pairs.length + run > maxFrames) return null;
     for (let r = 0; r < run; r++) pairs.push([a, b]);
   }
   return pairs;

@@ -106,13 +106,15 @@ combat starts on FIGHT. Escape pauses either introduction. Rounds have no time l
 | Action | Keyboard | Controller (standard mapping) |
 | --- | --- | --- |
 | Move / hold away to block | A / D | Left stick / D-pad |
+| Dash (toward: forward dash, away: back dash; keep holding forward to run) | Double-tap A or D | Double-tap the stick or D-pad left / right |
 | Jump / crouch | W / S | Up / down |
 | Light / medium / finisher | J / K / L | X / Y / B |
 | Launcher | U | A |
 | Ranged power | I | RB |
 | Grab | O | LB |
 | Team Special | P | RT |
-| Dash | Left Shift | LT |
+| Block (guards without walking; add crouch for lows) | Left Shift | LT |
+| Dash button (optional, unbound by default) | — | — |
 | Pause / resume | Escape | Start (either controller in local versus) |
 | Send feedback | N twice | **Send feedback** in the pause menu |
 
@@ -127,8 +129,9 @@ combat starts on FIGHT. Escape pauses either introduction. Rounds have no time l
 The controller layout follows four-button tag fighters: Light → Medium →
 Finisher rolls clockwise over X → Y → B so a chain is one thumb sweep, and the
 Launcher sits on A like those games' launcher button. The left index finger
-dashes on LT while the right thumb keeps attacking, so dash cancels never take
-the thumb off the face buttons. Ranged power and Grab are the bumpers and the
+blocks on LT while the right thumb keeps attacking, and dashing is a double-tap
+of a direction (within 15 frames, about a quarter second), so dash cancels never take
+the thumb off the face buttons. Settings can still map a Dash button. Ranged power and Grab are the bumpers and the
 Team Special is RT. Movement is the stick or D-pad (radial deadzone 0.2).
 **Full window and menus.** The game fills the browser window and the page never
 scrolls: the fighter select is two panels (stage, rules and preview on the left;
@@ -166,14 +169,14 @@ mid-round pauses the round. The first controller is player 1 and drives the
 menus, the second is player 2; a player who reconnects keeps their side.
 
 In a transformed story-boss form the fight controls carry over: Light or
-Ranged fires the beam, Medium throws the ball, Finisher raises the shield and
-Launcher (or up) jumps. The original boss keys still work: C beam, V ball, X
-shield, R retry, and the arrow keys also move.
+Ranged fires the beam, Medium throws the ball, Finisher or Block raises the shield,
+Launcher (or up) jumps and a double-tap of left or right dashes. The original boss keys still work: C beam, V ball, X
+or Shift shield, R retry, and the arrow keys also move.
 
 **Local versus:** choose *Local versus · Second player* as the rival behavior,
 then pick player 2's fighter on the rival tab. Player 2 uses the arrow keys,
 `,` `.` `/` (light, medium, finisher), `;` (launcher), `'` (ranged), `[`
-(grab), `]` (Team Special) and Right Shift (dash), or a second controller (the
+(grab), `]` (Team Special) and Right Shift (block), double-tapping the arrows to dash, or a second controller (the
 first controller stays player 1 and drives the menus). Local versus never
 earns hub rewards and has no God Mode.
 

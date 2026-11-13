@@ -26,8 +26,8 @@ interface Lesson {
 
 export const TUTORIAL_LESSONS: readonly Lesson[] = [
     { title: 'MOVE AND BLOCK',
-        hint: p => `Walk with ${p('left')} / ${p('right')}. Hold the direction away from your rival to block.`,
-        goals: [() => 'Walk around', () => 'Block two jabs by holding away'],
+        hint: p => `Walk with ${p('left')} / ${p('right')}; double-tap either to dash. Hold ${p('block')}, or the direction away from your rival, to block.`,
+        goals: [() => 'Walk around', p => `Block two jabs with ${p('block')} or by holding away`],
         script: open => open === 1 ? 'jab' : 'idle' },
     { title: 'CHAIN TO A FINISHER',
         hint: p => `Each hit cancels into a stronger one: ${p('light')} → ${p('medium')} → ${p('heavy')}. Three hits ending in a finisher earn a relay charge.`,
@@ -38,8 +38,8 @@ export const TUTORIAL_LESSONS: readonly Lesson[] = [
         goals: [p => `Throw the dummy with ${p('grab')}`, p => `Break the dummy's throw with ${p('grab')}`],
         script: open => open === 1 ? 'grab' : 'idle' },
     { title: 'DASH CANCEL',
-        hint: p => `After a hit connects, ${p('dash')} cuts the recovery short so you can keep attacking. Once per combo.`,
-        goals: [p => `Hit, press ${p('dash')}, then hit again in the same combo`],
+        hint: () => 'After a hit connects, double-tap forward to dash: it cuts the recovery short so you can keep attacking. Once per combo.',
+        goals: [() => 'Hit, double-tap forward, then hit again in the same combo'],
         script: () => 'idle' },
     { title: 'JUMP CANCEL AND QUICK RISE',
         hint: p => `${p('launcher')} sends a rival up: press ${p('up')} as it connects to chase. When you are knocked down, hold ${p('down')} as you land to get up fast.`,

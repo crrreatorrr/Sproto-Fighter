@@ -18,21 +18,22 @@ export const BOSS_BEAM=1<<12,BOSS_BALL=1<<13,BOSS_SHIELD=1<<14;
 export const BOSS_KEYS:Readonly<Record<string,number>>={
     KeyA:A.left,ArrowLeft:A.left,KeyD:A.right,ArrowRight:A.right,
     KeyW:A.up,ArrowUp:A.up,
-    ShiftLeft:A.dash,ShiftRight:A.dash,KeyX:BOSS_SHIELD,KeyC:BOSS_BEAM,KeyV:BOSS_BALL,
+    ShiftLeft:BOSS_SHIELD,ShiftRight:BOSS_SHIELD,KeyX:BOSS_SHIELD,KeyC:BOSS_BEAM,KeyV:BOSS_BALL,
 };
 /**
  * A boss form's actions from the player's fight controls, so the same buttons
- * and keys work in both: movement and dash carry over, Launcher also jumps,
- * Light and Ranged power fire the beam, Medium throws the ball and Finisher
- * raises the shield (controller defaults: A jump, X/RB beam, Y ball, B shield,
- * LT dash; keyboard defaults: U jump, J/I beam, K ball, L shield).
+ * and keys work in both: movement and dash carry over (a double-tap of left
+ * or right, or a mapped Dash button), Launcher also jumps, Light and Ranged
+ * power fire the beam, Medium throws the ball, and Finisher or Block raises the
+ * shield (controller defaults: A jump, X/RB beam, Y ball, B/LT shield;
+ * keyboard defaults: U jump, J/I beam, K ball, L/Shift shield).
  */
 export function bossFightInput(mask:number):number{
     let input=mask&(A.left|A.right|A.up|A.down|A.dash);
     if(mask&A.launcher)input|=A.up;
     if(mask&(A.light|A.bolt))input|=BOSS_BEAM;
     if(mask&A.medium)input|=BOSS_BALL;
-    if(mask&A.heavy)input|=BOSS_SHIELD;
+    if(mask&(A.heavy|A.block))input|=BOSS_SHIELD;
     return input;
 }
 /** Boss-form input for one key: its fixed BOSS_KEYS action, or else what its fight binding means in the form. */

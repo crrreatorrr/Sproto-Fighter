@@ -6,7 +6,7 @@ import { LEFT_STICK_DEADZONE, MAX_STICK_DEADZONE, MIN_STICK_DEADZONE, PAD, PadIn
 import { FEEDBACK_KEY, P2_KEYS, PAD_DEFAULTS, UNBOUND, padMask } from '../src/localInput';
 import { bindFullscreenButtons, escapeLeavesFullscreenOnly, fullscreenLabel, fullscreenSupported, toggleFullscreen, type FullscreenDocument } from '../src/fullscreen';
 
-const KEYS: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: 'ShiftLeft' };
+const KEYS: Record<Action, string> = { left: 'KeyA', right: 'KeyD', up: 'KeyW', down: 'KeyS', light: 'KeyJ', medium: 'KeyK', heavy: 'KeyL', launcher: 'KeyU', bolt: 'KeyI', grab: 'KeyO', special: 'KeyP', dash: UNBOUND, block: 'ShiftLeft' };
 const defaults = () => ({ keys: { ...KEYS }, padKeys: { ...PAD_DEFAULTS }, keys2: { ...P2_KEYS }, padKeys2: { ...PAD_DEFAULTS } });
 function memoryStore(initial: Record<string, string> = {}) {
   const data = new Map(Object.entries(initial));
@@ -27,7 +27,7 @@ describe('controller settings storage', () => {
   it('round-trips both players, both devices and the dead zone under its own key', () => {
     const store = memoryStore({ [LEGACY_CONTROLS_KEY]: '{}' });
     const controls = { ...defaults(), stickDeadzone: .35 };
-    controls.keys.light = 'KeyH'; controls.padKeys.light = PAD.rb; controls.padKeys.bolt = PAD.x; controls.keys2.heavy = 'KeyM'; controls.padKeys2.dash = PAD.lb;
+    controls.keys.light = 'KeyH'; controls.padKeys.light = PAD.rb; controls.padKeys.bolt = PAD.x; controls.keys2.heavy = 'KeyM'; controls.padKeys2.dash = PAD.lb; controls.keys.dash = 'KeyQ';
     expect(saveControls(store, controls)).toBe(true);
     expect(store.data.has(LEGACY_CONTROLS_KEY)).toBe(false);
     const raw = JSON.parse(store.data.get(CONTROLS_KEY)!);
@@ -55,6 +55,18 @@ describe('controller settings storage', () => {
     expect(loaded.keys2.grab).toBe(UNBOUND);
   });
 
+  it('turns a Dash binding saved before version 5 into the Block binding, leaving Dash unbound', () => {
+    const saved = { controlsVersion: 4, keys: { ...KEYS, dash: 'ShiftLeft', block: undefined }, padKeys: { light: PAD.x, dash: PAD.lt }, keys2: { dash: 'KeyM' }, padKeys2: { dash: PAD.lb } };
+    const loaded = loadControls(memoryStore({ [CONTROLS_KEY]: JSON.stringify(saved) }), defaults());
+    expect([loaded.keys.block, loaded.keys.dash]).toEqual(['ShiftLeft', UNBOUND]);
+    expect([loaded.padKeys.block, loaded.padKeys.dash]).toEqual([PAD.lt, undefined]);
+    expect([loaded.keys2.block, loaded.keys2.dash]).toEqual(['KeyM', UNBOUND]);
+    expect([loaded.padKeys2.block, loaded.padKeys2.dash]).toEqual([PAD.lb, undefined]);
+    // A version 5 save keeps a Dash button the player chose.
+    const chosen = loadControls(memoryStore({ [CONTROLS_KEY]: JSON.stringify({ controlsVersion: 5, keys: { dash: 'KeyQ' }, padKeys: { dash: PAD.rightStick } }) }), defaults());
+    expect([chosen.keys.dash, chosen.keys.block, chosen.padKeys.dash, chosen.padKeys.block]).toEqual(['KeyQ', 'ShiftLeft', PAD.rightStick, PAD.lt]);
+  });
+
   it('ignores unreadable saves, wrong types and out-of-range dead zones; storage errors never throw', () => {
     expect(loadControls(memoryStore({ [CONTROLS_KEY]: '{not json' }), defaults()).keys).toEqual(KEYS);
     const odd = loadControls(memoryStore({ [CONTROLS_KEY]: JSON.stringify({ keys: { light: 7 }, padKeys: { light: 'A' }, stickDeadzone: 4 }) }), defaults());
@@ -69,7 +81,7 @@ describe('controller settings storage', () => {
 
   it('lists every fixed key and button beside the remappable actions', () => {
     const text = FIXED_CONTROLS.map(row => `${row.action} ${row.keyboard} ${row.controller}`).join('\n');
-    for (const needle of ['Pause', 'Escape', 'Start', 'N twice', 'Enter', 'confirm', 'back', 'D-pad', 'X', 'C / V / X / R']) expect(text).toContain(needle);
+    for (const needle of ['Pause', 'Escape', 'Start', 'N twice', 'Enter', 'confirm', 'back', 'D-pad', 'X', 'C / V / X or Shift / R', 'Double-tap']) expect(text).toContain(needle);
   });
 });
 

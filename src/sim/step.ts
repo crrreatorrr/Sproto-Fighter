@@ -70,8 +70,9 @@ export function step(s: CombatState, inputs: [
         const pressed = f.input & ~f.prev;
         if (brokeThrow) { f.prev = f.input; continue; }
         if (s.matchDepth) {
-            const back = f.facing === 1 ? A.left : A.right;
-            if ((f.input & back) && !(f.prev & back)) s.matchDepth.backPressed[i] = s.frame;
+            // Just defend times the start of a guard: away or the Block button, whichever came first.
+            const guardBits = (f.facing === 1 ? A.left : A.right) | A.block;
+            if ((f.input & guardBits) && !(f.prev & guardBits)) s.matchDepth.backPressed[i] = s.frame;
             if (grounded(f) && !f.stun) s.matchDepth.juggles[i] = 0;
             if (s.matchDepth.modifier === 'specials-only') f.pips = 3;
         }
@@ -133,7 +134,7 @@ export function step(s: CombatState, inputs: [
         if(f.dash>0&&f.dash<=8&&((f.input&A.down)||(horizontal&&horizontal*f.vx<0))){
             f.dash=0;f.dashBuffer=0;
         }
-        if (!(f.input&A.dash) || horizontal!==f.runDirection || horizontal*f.facing<=0 || (f.input&(A.down|A.up)) || f.stun || f.blockstun || f.move) f.runDirection=0;
+        if (!(f.input&A.dash) || horizontal!==f.runDirection || horizontal*f.facing<=0 || (f.input&(A.down|A.up|A.block)) || f.stun || f.blockstun || f.move) f.runDirection=0;
         act(s, f);
         if (f.dash > 0) {
             f.dash--;
@@ -152,7 +153,8 @@ export function step(s: CombatState, inputs: [
                 else f.vx *= .995;
             } else if (!f.move) {
                 const running=f.runDirection!==0 && dir===f.runDirection;
-                const target = (f.input & A.down) ? 0 : dir * speed * (running?1.35:1);
+                // Crouching and the Block button both hold ground instead of walking.
+                const target = (f.input & (A.down|A.block)) ? 0 : dir * speed * (running?1.35:1);
                 const acceleration = target === 0 ? speed * .7 : target * f.vx < 0 ? speed * 1.45 : speed * .55;
                 approach(target, acceleration);
             } else if(f.move.id==='special' && f.move.t>=6 && f.move.t<=COMBAT_STYLES[f.id].specialFrames.at(-1)!){f.vx=f.facing*Math.min(COMBAT_STYLES[f.id].advance??0,Math.max(0,(other.x-f.x)*f.facing-65));}
