@@ -161,10 +161,12 @@ document.addEventListener('sproto-menu-ui', () => { if (!chainedUi()) menuSound(
 function updateAudio() {
     // The feedback window freezes a local match: the music stops with it and returns when it closes.
     // A finished fight fades out; the story map and the menus keep their own tracks.
+    // Between story fights in the same zone (retry, next bout, next rival) the song keeps going instead of restarting.
+    const bed = fightBedForZone(stageZone(currentStage)), carry = story.musicCarry;
     const musicCue = fightMusicCue({
         feedbackHold, selectionOpen: selection.isOpen, storyOpen: story.isOpen,
         fightOver: started && presentation.phase === 'result' && !storyAnimation.active,
-        bed: fightBedForZone(stageZone(currentStage)),
+        bed, carryFight: started && !!carry && fightBedForZone(stageZone(carry)) === bed,
     });
     audio.fightBed(musicCue.bed);
     audio.music(musicCue.track);

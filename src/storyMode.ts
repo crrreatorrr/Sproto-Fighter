@@ -12,6 +12,8 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     const worlds=STORY_STAGE_IDS.map(id=>STAGES.find(s=>s.id===id)!);
     let active:Encounter|null=null,wave=0,settled:number|null=null,launching=false;
     let view:'worlds'|'levels'|'scene'|'result'='worlds';
+    /** Stage of the fight the result screen leads straight into (retry, next bout, next rival). Keeps that zone's song going. */
+    let carryStage:StageId|null=null;
     let back:()=>void=()=>{};
     const total=STORY_ENCOUNTERS.length;
     const difficultyRetry=createDifficultyRetry();
@@ -29,7 +31,14 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     const open=()=>{if(!modal.open){hooks.pause();modal.showModal();}focusDefault();};
     // God Mode (earned or testing) lets the player choose any encounter on the map.
     const syncRoute=()=>{progress.sync();progress.setOpenRoute(!!hooks.godMode?.());};
-    const close=()=>{modal.close();hooks.resume();};
+    const close=()=>{carryStage=null;modal.close();hooks.resume();};
+    /** After a settled fight: where the default next fight happens, or null when the run stops here. */
+    function nextFightStage(encounter:Encounter,result:number,finishedWave:number):StageId|null{
+        if(result!==0||finishedWave+1<encounter.opponents.length)return encounter.stage;
+        if(encounter.opponents[finishedWave]==='vaudream')return null;
+        const save=progress.snapshot(),next=save.openRoute?STORY_ENCOUNTERS[encounter.index+1]??null:save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
+        return next?.stage??null;
+    }
     function buttons(actions:{label:string;run:()=>void}[]){
         const area=$('journey-actions');area.replaceChildren();primary=null;
         for(const action of actions){const button=document.createElement('button');button.className='quiet';button.textContent=action.label;button.onclick=action.run;area.append(button);primary??=button;}
@@ -52,9 +61,9 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
         launching=true;modal.close();
         try{
             if(!await hooks.launch(id,!!encounter,encounter?.opponents[nextWave],encounter?{skill:storyDifficulty(encounter,STORY_ENCOUNTERS,assist),assisted:assist}:undefined))throw new Error('Fighter art could not load.');
-            active=encounter??null;wave=nextWave;settled=null;assisted=assist;status();
+            active=encounter??null;wave=nextWave;settled=null;assisted=assist;carryStage=null;status();
         }catch(error){
-            progress.abandonRun();active=null;settled=null;wave=0;
+            progress.abandonRun();active=null;settled=null;wave=0;carryStage=null;
             $('journey-title').textContent='This match could not load.';
             $('journey-copy').textContent=`Your earned progress is unchanged. ${encounter&&encounter.opponents.length>1?'The two-bout encounter restarts from its first opponent. ':''}Try again or choose another destination.`;
             buttons([{label:encounter?'Retry encounter':'Retry match',run:()=>{void launch(id,encounter);}},{label:'Story route',run:()=>selector(true)}]);
@@ -90,7 +99,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     const firstInRegion=(encounter:Encounter)=>encounter.index===0||STORY_ENCOUNTERS[encounter.index-1].stage!==encounter.stage;
     function showEncounter(encounter:Encounter,between=false){if(firstInRegion(encounter))scene(encounter,between);else encounterPreview(encounter);}
     function selector(story:boolean){
-        syncRoute();
+        syncRoute();carryStage=null;
         view=story?'worlds':'levels';modal.classList.toggle('story-map-open',story);const save=progress.snapshot();
         $('journey-kicker').textContent=story?`STORY / ${save.cleared.length} OF ${total} ENCOUNTERS CLEARED`:'FREE PLAY / LEVEL SELECT';
         $('journey-title').textContent=story?'The road to Verse Gate.':'Pick a place to fight.';
@@ -123,7 +132,8 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     function onRoundEnd(winner:number):boolean{
         if(!active||launching)return false;
         if(settled===null&&!finishMatch(winner))return false;
-        const encounter=active,result=settled,finishedWave=wave;active=null;settled=null;
+        const encounter=active,result=settled!,finishedWave=wave;active=null;settled=null;
+        carryStage=nextFightStage(encounter,result,finishedWave);
         view='result';$('journey-content').replaceChildren();$('journey-kicker').textContent=`STORY / ENCOUNTER ${encounter.index+1} OF ${total}`;
         if(result===0){
             if(finishedWave+1<encounter.opponents.length){void launch(encounter.stage,encounter,finishedWave+1,assisted);return true;}
@@ -154,12 +164,14 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress=storyProgress
     modal.addEventListener('cancel',e=>{e.preventDefault();if(typeof document.dispatchEvent==='function'&&typeof CustomEvent==='function')document.dispatchEvent(new CustomEvent('sproto-menu-ui',{bubbles:true}));back();});progress.subscribe(status);status();
     return {
         get isOpen(){return modal.open;},get isActive(){return !!active;},finishMatch,onRoundEnd,
+        /** Stage of the next story fight while the player is between two fights, else null. Main keeps the song when its zone matches. */
+        get musicCarry():StageId|null{return active&&settled!==null?nextFightStage(active,settled,wave):carryStage;},
         retryMatch(){
             if(launching)return true;
             if(active){const encounter=active;progress.abandonRun();settled=null;void launch(encounter.stage,encounter);return true;}
             settled=null;progress.abandonRun();return false;
         },
-        leaveStory(){progress.abandonRun();active=null;settled=null;wave=0;status();},
+        leaveStory(){progress.abandonRun();active=null;settled=null;wave=0;carryStage=null;status();},
         snapshot:()=>({active:active?.stage??null,encounter:active?{...active,opponents:[...active.opponents]}:null,wave,assisted,cpuSkill:active?storyDifficulty(active,STORY_ENCOUNTERS,assisted):null,opponent:active?.opponents[wave]??null,view,launching,...progress.snapshot()}),
     };
 }
