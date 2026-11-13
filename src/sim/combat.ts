@@ -126,10 +126,10 @@ export function throwDirection(input:number,facing:number):ThrowDirection {
     return horizontal*facing<0?'back':'forward';
 }
 export const isDown = (f:Fighter) => !!f.reaction && f.reaction.phase!=='flight';
-/** Shared guard eligibility for damage resolution and optional projectile reflection. */
+/** Shared guard eligibility for damage resolution and optional projectile reflection. Holding away or the Block button guards. */
 export function canGuard(s: CombatState, index: number, m: Move, kind: MoveId): boolean {
     const b=s.fighters[1-index],back=b.facing===1?A.left:A.right;
-    return s.throwState?.attacker!==1-index && kind!=='grab' && b.stun===0 && !b.move && b.dash===0 && (b.input&back)!==0 && (!m.low || (b.input&A.down)!==0) && (!m.air || (b.input&A.down)===0);
+    return s.throwState?.attacker!==1-index && kind!=='grab' && b.stun===0 && !b.move && b.dash===0 && (b.input&(back|A.block))!==0 && (!m.low || (b.input&A.down)!==0) && (!m.air || (b.input&A.down)===0);
 }
 export function damage(s: CombatState, index: number, m: Move, kind: MoveId, projectile = false): boolean {
     const a = s.fighters[index], b = s.fighters[1 - index];

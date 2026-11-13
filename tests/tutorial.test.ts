@@ -111,6 +111,6 @@ describe('pause move list', () => {
         }
     });
     it('teaches the shared techniques the fight screen never explains', () => {
-        expect(sharedTechniques(prompt).map(row => row.name)).toEqual(['Block', 'Chain', 'Dash cancel', 'Jump cancel', 'Throw tech', 'Quick rise']);
+        expect(sharedTechniques(prompt).map(row => row.name)).toEqual(['Block', 'Dash', 'Chain', 'Dash cancel', 'Jump cancel', 'Throw tech', 'Quick rise']);
     });
 });

@@ -21,7 +21,7 @@ export function enableMatchDepth(s: CombatState, options: { rounds?: boolean; mo
 }
 export const matchGravity = (s: CombatState): number => s.matchDepth?.modifier === 'low-gravity' ? .6 : GRAVITY;
 export function matchInput(s: CombatState, input: number): number {
-    return s.matchDepth?.modifier === 'specials-only' ? input & (A.left | A.right | A.up | A.down | A.dash | A.bolt | A.special) : input;
+    return s.matchDepth?.modifier === 'specials-only' ? input & (A.left | A.right | A.up | A.down | A.dash | A.block | A.bolt | A.special) : input;
 }
 /** Fixed-point meter, in 1/10000 of a pip; no progress is discarded at integer boundaries. */
 export function grantMeter(s: CombatState, slot: number, units: number): void {

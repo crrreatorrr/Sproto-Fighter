@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { A, FLOOR, GETUP_FRAMES, createState, getHitbox, getHurtbox, getMove, step } from '../src/core';
+import { A, ALL_INPUTS, FLOOR, GETUP_FRAMES, createState, enableMatchDepth, getHitbox, getHurtbox, getMove, step } from '../src/core';
 import { beginThrow, damage } from '../src/sim/combat';
 import { clashProjectiles, getProjectileHitbox, rectanglesOverlap } from '../src/sim/geometry';
 import type { CombatState, Projectile } from '../src/core';
@@ -65,6 +65,56 @@ describe('numeric hitboxes and hurtboxes', () => {
         step(s, [0, 0]);
         expect(s.fighters[0].hp).toBeLessThan(1000);
         expect(s.fighters[1].hp).toBeLessThan(1000);
+    });
+});
+
+describe('Block button', () => {
+    it('guards like holding away, without any direction held', () => {
+        const blocked = fresh(); attack(blocked, 'light'); step(blocked, [0, A.block]);
+        expect(blocked.fighters[1].hp).toBe(1000);
+        expect(blocked.fighters[1].blockstun).toBeGreaterThan(0);
+        const open = fresh(); attack(open, 'light'); step(open, [0, 0]);
+        expect(open.fighters[1].hp).toBeLessThan(1000);
+    });
+    it('guards even while holding toward the rival, and stands still instead of walking in', () => {
+        const s = fresh(); attack(s, 'light'); step(s, [0, A.left | A.block]);
+        expect(s.fighters[1].hp).toBe(1000);
+        const still = fresh(), b = still.fighters[1], x = b.x;
+        for (let i = 0; i < 20; i++) step(still, [0, A.left | A.block]);
+        expect(b.x).toBe(x);
+        const walking = fresh();
+        for (let i = 0; i < 20; i++) step(walking, [0, A.left]);
+        expect(walking.fighters[1].x).toBeLessThan(x);
+    });
+    it('needs crouch against lows, like holding away', () => {
+        const high = fresh(); attack(high, 'low'); step(high, [0, A.block]);
+        expect(high.fighters[1].hp).toBeLessThan(1000);
+        const low = fresh(); attack(low, 'low'); step(low, [0, A.block | A.down]);
+        expect(low.fighters[1].hp).toBe(1000);
+    });
+    it('cannot guard while attacking, and stops a run', () => {
+        const busy = fresh(), b = busy.fighters[1];
+        attack(busy, 'light');
+        b.move = { id: 'light', t: 0, hit: false, connected: false, wave: -1 };
+        step(busy, [0, A.block]);
+        expect(b.hp).toBeLessThan(1000);
+        const run = createState('rivet', 'versus', 'bront'), f = run.fighters[0];
+        f.x = 300; run.fighters[1].x = 900;
+        for (let i = 0; i < 20; i++) step(run, [A.right | A.dash, 0]);
+        expect(f.runDirection).toBe(1);
+        step(run, [A.right | A.dash | A.block, 0]);
+        expect(f.runDirection).toBe(0);
+    });
+    it('starts a just defend the frame it is pressed, and survives the specials-only rule', () => {
+        const s = createState('rivet', 'versus', 'bront'); enableMatchDepth(s, { modifier: 'specials-only' });
+        s.fighters[0].x = 500; s.fighters[1].x = 560;
+        step(s, [0, A.block]);
+        expect(s.matchDepth!.backPressed[1]).toBe(s.frame);
+        expect(s.fighters[1].input & A.block).toBeTruthy();
+    });
+    it('is a valid input bit for match logs', () => {
+        expect(ALL_INPUTS).toBe(8191);
+        expect(ALL_INPUTS & A.block).toBe(A.block);
     });
 });
 

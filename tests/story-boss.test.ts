@@ -158,7 +158,7 @@ describe('fixed-screen story bosses',()=>{
 });
 
 describe('boss-form controls from the fight bindings',()=>{
-    const keys={left:'KeyA',right:'KeyD',up:'KeyW',down:'KeyS',light:'KeyJ',medium:'KeyK',heavy:'KeyL',launcher:'KeyU',bolt:'KeyI',grab:'KeyO',special:'KeyP',dash:'ShiftLeft'};
+    const keys={left:'KeyA',right:'KeyD',up:'KeyW',down:'KeyS',light:'KeyJ',medium:'KeyK',heavy:'KeyL',launcher:'KeyU',bolt:'KeyI',grab:'KeyO',special:'KeyP',dash:'',block:'ShiftLeft'};
     it('maps Light/Ranged to the beam, Medium to the ball, Finisher to the shield and Launcher to a jump',()=>{
         expect(bossFightInput(A.light)).toBe(BOSS_BEAM);
         expect(bossFightInput(A.bolt)).toBe(BOSS_BEAM);
@@ -166,9 +166,11 @@ describe('boss-form controls from the fight bindings',()=>{
         expect(bossFightInput(A.heavy)).toBe(BOSS_SHIELD);
         expect(bossFightInput(A.launcher)).toBe(A.up);
         expect(bossFightInput(A.left|A.dash|A.grab|A.special)).toBe(A.left|A.dash);
+        // Block raises the shield, and its bit never leaks through as a boss beam (both are 1 << 12).
+        expect(bossFightInput(A.block)).toBe(BOSS_SHIELD);
     });
     it('keeps the fixed boss keys and adds the fight keys alongside them',()=>{
-        expect(['KeyX','KeyC','KeyV','KeyW','ArrowUp','ShiftRight'].map(code=>bossKeyInput(code,keys))).toEqual([BOSS_SHIELD,BOSS_BEAM,BOSS_BALL,A.up,A.up,A.dash]);
+        expect(['KeyX','KeyC','KeyV','KeyW','ArrowUp','ShiftRight','ShiftLeft'].map(code=>bossKeyInput(code,keys))).toEqual([BOSS_SHIELD,BOSS_BEAM,BOSS_BALL,A.up,A.up,BOSS_SHIELD,BOSS_SHIELD]);
         expect(['KeyJ','KeyK','KeyL','KeyU','KeyI','KeyP','KeyZ'].map(code=>bossKeyInput(code,keys))).toEqual([BOSS_BEAM,BOSS_BALL,BOSS_SHIELD,A.up,BOSS_BEAM,0,0]);
         // A remapped fight key follows the player's binding; a fixed boss key keeps its meaning.
         expect(bossKeyInput('KeyX',{...keys,light:'KeyX'})).toBe(BOSS_SHIELD);

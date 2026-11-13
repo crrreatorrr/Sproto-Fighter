@@ -7,7 +7,7 @@
 export { createState, getMove, grounded, isDown, THROW_BREAK_FRAMES } from './sim/combat';
 export { getHitbox, getHurtbox, getProjectileHitbox, rectanglesOverlap, HITBOX_DATA } from './sim/geometry';
 export type { CombatRect } from './sim/geometry';
-export { A, FLOOR, GRAVITY, TICK_RATE, WALL, WIDTH } from './sim/constants';
+export { A, ALL_INPUTS, FLOOR, GRAVITY, TICK_RATE, WALL, WIDTH } from './sim/constants';
 export { cpuInput, cpuTuning, CPU_SKILLS, CPU_SKILL_VERSION, CPU_DIFFICULTIES } from './sim/cpu';
 export { BALANCE_TEMPLATES, archetypeFor, budgetScore, buildBalancedKit, specialContactDamage } from './sim/balance';
 export { BALANCE_KITS } from './sim/roster';

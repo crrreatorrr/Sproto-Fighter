@@ -36,9 +36,10 @@ export function fighterMoves(id: FighterId, p: Prompt): MoveRow[] {
 /** Techniques that work the same for the whole roster. */
 export function sharedTechniques(p: Prompt): MoveRow[] {
     return [
-        { name: 'Block', input: 'Hold away', detail: `add ${p('down')} against lows; blocked heavies still chip` },
+        { name: 'Block', input: `${p('block')} or hold away`, detail: `add ${p('down')} against lows; ${p('block')} holds your ground; blocked heavies still chip` },
+        { name: 'Dash', input: 'Double-tap ← or →', detail: 'toward the rival dashes in, away dashes back; keep holding forward to run' },
         { name: 'Chain', input: `${p('light')} → ${p('medium')} → ${p('heavy')}`, detail: 'three hits ending in a finisher earn a relay charge' },
-        { name: 'Dash cancel', input: `${p('dash')} after a hit`, detail: 'cuts recovery so the combo can continue; once per combo' },
+        { name: 'Dash cancel', input: 'Double-tap forward after a hit', detail: 'cuts recovery so the combo can continue; once per combo' },
         { name: 'Jump cancel', input: `${p('up')} after Launcher or Medium hits`, detail: 'follow the rival into the air' },
         { name: 'Throw tech', input: `${p('grab')} when caught`, detail: `inside the first ${THROW_BREAK_FRAMES} frames` },
         { name: 'Quick rise', input: `Hold ${p('down')} as you land`, detail: `hold ${p('up')} instead to stay down longer` },
