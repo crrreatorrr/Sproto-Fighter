@@ -1,0 +1,20 @@
+{
+  "id": "bar_rock_loop_5min",
+  "filename": "bar_rock_loop_5min.mp3",
+  "zone": "bar",
+  "bpm": 125,
+  "beats_per_bar": 4,
+  "bars": 160,
+  "duration_seconds": 307.2,
+  "file_duration_seconds": 307.224,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bitrate_kbps": 192,
+  "gain": 1,
+  "loudness_lufs": -12.3,
+  "true_peak_dbtp": -1.3,
+  "file_size_bytes": 7373996,
+  "decoded_pcm_bytes": 117964800,
+  "notes": "160 bars of 4/4 at 125 BPM is 307.2 s (14,745,600 samples at 48 kHz). The container is 307.224 s because of MP3 priming (1105 samples, start time 0.023021 s) and one trailing frame. Chrome decodeAudioData and ffmpeg drop that priming and land on exactly 14,745,600 samples, so loopStart is 0 and loopEnd is 307.2 s. The wrap step is about 0.001, under a normal sample step, so no seam ramp is applied. No loudness trim: the true peak is -1.3 dBTP. Decoded stereo float PCM is 117,964,800 bytes. Only the selected stage's long bed stays decoded. A failed decode still falls back to the synthesised fight loop. Replaces bar_rock_loop.mp3. Hatchery does not use this file."
+}

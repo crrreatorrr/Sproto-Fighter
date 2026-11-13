@@ -120,10 +120,10 @@ try{
  const grooves=[
   {zone:'yacht',bed:'yacht',seconds:368.64,gain:10**(0.4/20),seam:true,file:'audio/music/yacht_groove_loop_6min.mp3'},
   {zone:'circuit',bed:'city',seconds:368.64,gain:1,seam:true,file:'audio/music/city_house_loop_6min.mp3'},
-  {zone:'throne',bed:'castle',seconds:61.44,gain:1,seam:true,file:'audio/music/castle_vampire_loop_v2.mp3'},
+  {zone:'throne',bed:'castle',seconds:368.64,gain:1,seam:true,file:'audio/music/castle_vampire_loop_6min.mp3'},
   {zone:'verse',bed:'verse',seconds:61.44,gain:1,seam:true,file:'audio/music/verse_alien_electro_loop.mp3'},
-  {zone:'bar',bed:'bar',seconds:61.44,gain:1,seam:true,file:'audio/music/bar_rock_loop.mp3'},
-  {zone:'ranch',bed:'ranch',seconds:61.44,gain:1,seam:true,file:'audio/music/ranch_country_loop_v2.mp3'},
+  {zone:'bar',bed:'bar',seconds:307.2,gain:1,seam:true,file:'audio/music/bar_rock_loop_5min.mp3'},
+  {zone:'ranch',bed:'ranch',seconds:368.64,gain:1,seam:true,file:'audio/music/ranch_country_loop_6min.mp3'},
  ];
  for(const spec of grooves){
   await page.click(`#zone-rail button[data-zone="${spec.zone}"]`);
