@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, step, type CombatState, type Effect } from '../src/core';
 import { SOUND_NAMES, SoundTracker, effectSound, hitSound, panFor, whooshSound } from '../src/audioEvents';
@@ -181,19 +181,24 @@ describe('audio settings and songs', () => {
             expect(song.bass.length % 16).toBe(0); expect(song.lead.length % 16).toBe(0); expect(song.hat.length % 16).toBe(0);
         }
     });
-    it('trims encoder padding so the Trenches theme loops for exactly 24 bars', () => {
-        expect(TRENCHES_LOOP_SECONDS / (60 / 128)).toBeCloseTo(96, 2);
+    it('trims encoder padding so the Trenches theme loops for exactly 192 bars', () => {
+        expect(TRENCHES_LOOP_SECONDS).toBe(360);
+        expect(TRENCHES_LOOP_SECONDS / (60 / 128)).toBe(768);
+        expect(TRENCHES_LOOP_SECONDS / (60 / 128) / 4).toBe(192);
         const rate = TRENCHES_MUSIC_RATE;
         const loopSamples = Math.round(TRENCHES_LOOP_SECONDS * rate);
-        // Chrome and ffmpeg drop the priming and one MP3 frame: 14 samples remain after the music.
-        const decoded = trenchesLoopRegion(loopSamples + 14, rate);
-        expect(decoded.loopStart).toBe(0);
-        expect(decoded.loopEnd - decoded.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 5);
-        // A decoder that keeps the priming has 1105 samples at the head, then the music, then the tail.
-        const withPriming = trenchesLoopRegion(TRENCHES_ENCODER_DELAY_SAMPLES + loopSamples + 14 + 1152, rate);
+        expect(loopSamples).toBe(17_280_000);
+        // Chrome and ffmpeg drop the priming and the trailing frame and land on this length.
+        expect(trenchesLoopRegion(loopSamples, rate)).toEqual({ loopStart: 0, loopEnd: TRENCHES_LOOP_SECONDS });
+        // A short tail still stays outside the loop.
+        const tail = trenchesLoopRegion(loopSamples + 47, rate);
+        expect(tail.loopStart).toBe(0);
+        expect(tail.loopEnd - tail.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 6);
+        // A decoder that keeps the priming has 1105 samples at the head, then the music, then one frame.
+        const withPriming = trenchesLoopRegion(TRENCHES_ENCODER_DELAY_SAMPLES + loopSamples + 1152, rate);
         expect(withPriming.loopStart).toBeCloseTo(TRENCHES_ENCODER_DELAY_SAMPLES / rate, 6);
-        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 5);
-        const at44100 = trenchesLoopRegion(Math.round((loopSamples + 14) * 44100 / rate), 44100);
+        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 6);
+        const at44100 = trenchesLoopRegion(Math.round(loopSamples * 44100 / rate), 44100);
         expect(at44100.loopStart).toBe(0);
         expect(at44100.loopEnd - at44100.loopStart).toBeCloseTo(TRENCHES_LOOP_SECONDS, 4);
     });
@@ -294,13 +299,20 @@ describe('audio settings and songs', () => {
         expect(manual[4]).toBeCloseTo(1, 5);
     });
     it('ships the Trenches fight loop next to its metadata', () => {
-        const bytes = readFileSync(new URL('../public/audio/music/trenches_fight_loop.mp3', import.meta.url));
-        const meta = JSON.parse(readFileSync(new URL('../public/audio/music/trenches_fight_loop.json', import.meta.url), 'utf8'));
+        const bytes = readFileSync(new URL('../public/audio/music/trenches_fight_loop_6min.mp3', import.meta.url));
+        const meta = JSON.parse(readFileSync(new URL('../public/audio/music/trenches_fight_loop_6min.json', import.meta.url), 'utf8'));
         expect(bytes.subarray(0, 3).toString('ascii')).toBe('ID3');
         expect(bytes.length).toBe(meta.file_size_bytes);
+        expect(meta.filename).toBe('trenches_fight_loop_6min.mp3');
         expect(meta.duration_seconds).toBe(TRENCHES_LOOP_SECONDS);
         expect(meta.encoder_delay_samples).toBe(TRENCHES_ENCODER_DELAY_SAMPLES);
+        expect(meta.sample_rate).toBe(TRENCHES_MUSIC_RATE);
         expect(meta.bpm).toBe(128);
+        expect(meta.bars).toBe(192);
+        expect(FIGHT_BED_SPECS.trenches.path).toBe('audio/music/trenches_fight_loop_6min.mp3');
+        expect(FIGHT_BED_SPECS.trenches.loopSeconds).toBe(TRENCHES_LOOP_SECONDS);
+        expect(existsSync(new URL('../public/audio/music/trenches_fight_loop.mp3', import.meta.url))).toBe(false);
+        expect(existsSync(new URL('../public/audio/music/trenches_fight_loop.json', import.meta.url))).toBe(false);
     });
     it('ships the yacht, city, castle and verse fight loops next to their metadata', () => {
         for (const spec of [

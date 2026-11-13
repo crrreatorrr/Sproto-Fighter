@@ -75,11 +75,11 @@ try{
  },null,{timeout:60000});
  const playing=await status();
  const span=playing.fightLoop.end-playing.fightLoop.start;
- check('a Trenches fight plays the recorded loop for the musical length',Math.abs(span-45.000687)<1e-3&&playing.fightStarts===1);
+ check('a Trenches fight plays the recorded loop for the musical length',playing.fightLoop.start===0&&Math.abs(span-360)<1e-3&&playing.fightStarts===1);
  const seam=await page.evaluate(async()=>{
   const loop=window.neonRelay.audioStatus().fightLoop;
   const ctx=new AudioContext({sampleRate:loop.rate});
-  const buf=await ctx.decodeAudioData(await (await fetch('audio/music/trenches_fight_loop.mp3')).arrayBuffer());
+  const buf=await ctx.decodeAudioData(await (await fetch('audio/music/trenches_fight_loop_6min.mp3')).arrayBuffer());
   const channel=buf.getChannelData(0);
   const start=Math.round(loop.start*buf.sampleRate), end=Math.round(loop.end*buf.sampleRate);
   const deltas=[];

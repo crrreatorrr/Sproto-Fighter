@@ -16,12 +16,12 @@ export type RecordedBed = Exclude<FightBed, 'synth'>;
 export interface Volume { master: number; sfx: number; music: number }
 export interface PlayOptions { volume?: number; pan?: number; delay?: number; /** Fighter whose team-special recording should play. */ fighterId?: string }
 
-/** 24 bars of 4/4 at 128 BPM. The Trenches fight theme loops for exactly this long. */
-export const TRENCHES_LOOP_SECONDS = 45.000687;
-/** Priming samples ffmpeg wrote into trenches_fight_loop.mp3 (start time 0.023021 s at 48 kHz). */
+/** 192 bars of 4/4 at 128 BPM. The Trenches fight theme loops for exactly this long. */
+export const TRENCHES_LOOP_SECONDS = 360;
+/** Priming samples ffmpeg wrote into trenches_fight_loop_6min.mp3 (start time 0.023021 s at 48 kHz). */
 export const TRENCHES_ENCODER_DELAY_SAMPLES = 1105;
 export const TRENCHES_MUSIC_RATE = 48000;
-export const TRENCHES_MUSIC_PATH = 'audio/music/trenches_fight_loop.mp3';
+export const TRENCHES_MUSIC_PATH = 'audio/music/trenches_fight_loop_6min.mp3';
 /** 32 bars of 4/4 at 125 BPM. Yacht, City, Castle, Verse, Bar and Ranch fight themes are written to this length. */
 export const GROOVE_LOOP_SECONDS = 61.44;
 /** The same ffmpeg priming (start time 0.023021 s at 48 kHz) sits on each of those masters. */
@@ -319,6 +319,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     let menuBytes: ArrayBuffer | null = null, uiBytes: ArrayBuffer | null = null;
     let menuSource: AudioBufferSourceNode | null = null, menuGain: GainNode | null = null;
     let menuStarts = 0, samplesRequested = false, menuFailed = false, uiFailed = false, decoding = false;
+    /** Menu, click and the shorter fight beds have finished downloading (or failed). */
+    let catalogSettled = false;
     let fightBed: FightBed = 'synth';
     let fightSource: AudioBufferSourceNode | null = null, fightFade: GainNode | null = null, fightLevel: GainNode | null = null;
     let playingBuffer: AudioBuffer | null = null;
@@ -350,7 +352,14 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (samplesRequested || typeof fetch !== 'function') return;
         samplesRequested = true;
         const pull = (path: string) => fetch(assetUrl(path)).then(response => response.ok ? response.arrayBuffer() : Promise.reject(new Error(path))).catch(() => null);
-        const beds = Object.keys(FIGHT_BED_SPECS) as RecordedBed[];
+        const beds = (Object.keys(FIGHT_BED_SPECS) as RecordedBed[]).filter(bed => bed !== 'trenches');
+        const remember = (bed: RecordedBed, bytes: ArrayBuffer | null) => {
+            const row = slot(bed);
+            row.bytes = bytes;
+            if (!bytes) row.failed = true;
+        };
+        // The Trenches file is 8.6 MB. It downloads beside this batch, not inside it,
+        // so the menu, the click and the shorter fight themes are not waiting on it.
         void Promise.all([
             pull(MENU_MUSIC_PATH),
             pull(UI_SELECT_PATH),
@@ -359,11 +368,12 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
             menuBytes = menu; uiBytes = click;
             if (!menu) menuFailed = true;
             if (!click) uiFailed = true;
-            beds.forEach((bed, index) => {
-                const row = slot(bed);
-                row.bytes = fights[index];
-                if (!fights[index]) row.failed = true;
-            });
+            beds.forEach((bed, index) => remember(bed, fights[index]));
+            catalogSettled = true;
+            if (ctx) void decodeReady();
+        });
+        void pull(FIGHT_BED_SPECS.trenches.path).then(bytes => {
+            remember('trenches', bytes);
             if (ctx) void decodeReady();
         });
         // Combat clips start downloading with the menu theme so a hit does not wait on the network.
@@ -375,11 +385,23 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
             });
         }
     }
+    async function decodeBed(bed: RecordedBed): Promise<void> {
+        const row = slot(bed);
+        if (!ctx || !row.bytes || row.buffer || row.failed) return;
+        try { row.buffer = await ctx.decodeAudioData(row.bytes.slice(0)); }
+        catch { row.failed = true; }
+    }
     async function decodeReady(): Promise<void> {
         const combatReady = [...combatBytes.keys()].filter(path => !combatBuffers.has(path) && !combatFailed.has(path));
         if (!ctx || decoding) return;
         const beds = (Object.keys(FIGHT_BED_SPECS) as RecordedBed[]).filter(bed => slot(bed).bytes && !slot(bed).buffer && !slot(bed).failed);
         if (!menuBytes && !menuFailed && !uiBytes && !uiFailed && !beds.length && combatReady.length === 0) return;
+        const trench = slot('trenches');
+        const trenchWaiting = !!trench.bytes && !trench.buffer && !trench.failed;
+        // 360 s of stereo float is about 132 MB and takes about a second to decode.
+        // Hold it until the shorter files have settled, unless a Trenches fight is already waiting.
+        const trenchesUrgent = track === 'fight' && fightBed === 'trenches';
+        const holdTrenches = trenchWaiting && !trenchesUrgent && !catalogSettled;
         // Held across the awaits so a second unlock cannot start a second copy of a loop.
         decoding = true;
         try {
@@ -392,10 +414,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
                 catch { uiFailed = true; }
             }
             for (const bed of beds) {
-                const row = slot(bed);
-                if (!row.bytes || row.buffer || row.failed) continue;
-                try { row.buffer = await ctx.decodeAudioData(row.bytes.slice(0)); }
-                catch { row.failed = true; }
+                if (bed === 'trenches' && !trenchesUrgent) continue;
+                await decodeBed(bed);
             }
             // Start the loops before the combat clips, so a long decode does not hold the theme.
             if (track === 'menu') ensureMenu();
@@ -406,11 +426,19 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
                 try { combatBuffers.set(path, await ctx.decodeAudioData(bytes.slice(0))); }
                 catch { combatFailed.add(path); }
             }
+            if (!holdTrenches && !trenchesUrgent) await decodeBed('trenches');
+            if (track === 'fight') ensureFight();
         } finally { decoding = false; }
         const moreCombat = [...combatBytes.keys()].some(path => !combatBuffers.has(path) && !combatFailed.has(path));
         const menuWaiting = !!menuBytes && !menuBuffer && !menuFailed;
         const uiWaiting = !!uiBytes && !uiBuffer && !uiFailed;
-        const bedsWaiting = (Object.keys(FIGHT_BED_SPECS) as RecordedBed[]).some(bed => slot(bed).bytes && !slot(bed).buffer && !slot(bed).failed);
+        const bedsWaiting = (Object.keys(FIGHT_BED_SPECS) as RecordedBed[]).some(bed => {
+            const row = slot(bed);
+            if (!row.bytes || row.buffer || row.failed) return false;
+            // Same hold as above: a Trenches file still waiting on the shorter beds is not more work.
+            if (bed === 'trenches' && !(track === 'fight' && fightBed === 'trenches') && !catalogSettled) return false;
+            return true;
+        });
         if (moreCombat || menuWaiting || uiWaiting || bedsWaiting) { void decodeReady(); return; }
         if (track === 'menu') ensureMenu();
         if (track === 'fight') ensureFight();
@@ -600,11 +628,17 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (menuBuffer) { startMenuSample(); return; }
         if (menuFailed && ctx && !timer) startMusic();
     }
+    /** A fight whose file is already downloaded should decode now, including a Trenches loop that was being held. */
+    function kickFightDecode(): void {
+        if (track !== 'fight' || !isRecordedBed(fightBed)) return;
+        const row = slot(fightBed);
+        if (row.bytes && !row.buffer && !row.failed) void decodeReady();
+    }
     /** Switch the looping track; `null` stops music. Safe to call every frame. */
     function music(next: MusicTrack | null): void {
         if (next === track) {
             if (next === 'menu') ensureMenu();
-            if (next === 'fight') ensureFight();
+            if (next === 'fight') { ensureFight(); kickFightDecode(); }
             return;
         }
         const previous = track;
@@ -616,6 +650,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (next === 'fight' && wantsRecorded(fightBed)) {
             clearInterval(timer); timer = undefined; playing = null;
             ensureFight();
+            kickFightDecode();
             return;
         }
         if (ctx && !timer) startMusic();
@@ -627,7 +662,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (track !== 'fight') return;
         stopFightSample(FIGHT_FADE);
         clearInterval(timer); timer = undefined; playing = null;
-        if (wantsRecorded(next)) { ensureFight(); return; }
+        if (wantsRecorded(next)) { ensureFight(); kickFightDecode(); return; }
         if (ctx) startMusic();
     }
     function setVolume(next: Partial<Volume>): void {
