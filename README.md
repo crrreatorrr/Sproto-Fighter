@@ -227,7 +227,10 @@ and the other front-end menus share one recorded loop
 press plays `public/audio/sfx/ui_select.mp3`. Trenches, the City, the Yacht,
 the Castle, the Verse, the Bar, the Ranch and the Hatchery each play a recorded fight theme
 on every level in that zone, in Story and in Level Select. The theme fades in
-when the fight starts and fades out when it ends or the player leaves. Loop
+when the fight starts and fades out when it ends or the player leaves. The pause
+menu lists those songs by zone name. A pick keeps playing through a retry, the
+next bout and the next rival on that stage and zone, and the zone's own song
+returns when the stage or zone changes. Loop
 points trim MP3 encoder padding: the menu wraps at 57.6 seconds, Trenches at
 360 seconds (192 bars at 128 BPM), the City, the Marina, the Ranch, the Castle,
 the Verse and the Hatchery at 368.64 seconds (192 bars at 125 BPM), and the Bar
