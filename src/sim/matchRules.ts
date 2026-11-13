@@ -65,6 +65,9 @@ export function nextMatchRound(s: CombatState): boolean {
     s.frame = frame; if (godMode) s.godMode = true;
     return true;
 }
-export const CHAPTER_BOSS_MODIFIERS: readonly MatchModifier[] = ['double-meter', 'low-gravity', 'specials-only', 'sudden-death', 'reflect-projectiles'];
+// Chapter 3 (and every fifth chapter after it) keeps standard rules with the chapter clock. It used to be
+// specials-only, which refills both meters every frame and so gave the story CPU unlimited Team Specials.
+// Outside God Mode, which fills only P1, nobody in the campaign gets meter they have not earned.
+export const CHAPTER_BOSS_MODIFIERS: readonly MatchModifier[] = ['double-meter', 'low-gravity', 'none', 'sudden-death', 'reflect-projectiles'];
 /** Chapter index comes from the campaign; these rules never change fighter health/damage secretly. */
 export const chapterBossModifier = (chapterIndex: number): MatchModifier => CHAPTER_BOSS_MODIFIERS[((chapterIndex % 5) + 5) % 5];

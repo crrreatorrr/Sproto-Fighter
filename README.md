@@ -42,10 +42,11 @@ in `src/difficulty.ts`). Every third cleared encounter also recruits one fighter
 from far down the route (never from the last two chapters, a gauntlet or a
 Relic-only fighter), so the roster opens faster than one fighter per win; that
 fighter still has to be beaten to clear their own encounter. The bonus comes
-with the win itself, so loading an existing save recruits nobody. The last standard rival of each chapter fights under
-that chapter's rule (double meter, low gravity, specials only, sudden death or
-reflected projectiles) with a 60-second clock; the transformed bosses keep their
-own rules.
+with the win itself, so loading an existing save recruits nobody. The last standard rival of each chapter fights with a 60-second clock under
+that chapter's rule (double meter, low gravity, sudden death or reflected
+projectiles; chapter 3 keeps standard rules); the transformed bosses keep their
+own rules. No CPU rival gets Team Special meter it has not earned: God Mode
+fills only P1's meter.
 
 The route runs Trenches → City → Yacht → Castle → Bar → Verse → Hatchery,
 using the existing approved stage variations. The end of Verse is a sequential
