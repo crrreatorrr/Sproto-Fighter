@@ -1,0 +1,21 @@
+{
+  "id": "city_house_loop_6min",
+  "filename": "city_house_loop_6min.mp3",
+  "zone": "circuit",
+  "intended_use": "Sproto Fighter City stage fight theme (all City levels and maps, zone circuit, Story and Level Select), seamless loop",
+  "bpm": 125,
+  "beats_per_bar": 4,
+  "bars": 192,
+  "duration_seconds": 368.64,
+  "file_duration_seconds": 368.664,
+  "encoder_delay_samples": 1105,
+  "sample_rate": 48000,
+  "channels": 2,
+  "bitrate_kbps": 192,
+  "gain": 1,
+  "loudness_lufs": -12.3,
+  "true_peak_dbtp": -1.4,
+  "file_size_bytes": 8848556,
+  "decoded_pcm_bytes": 141557760,
+  "notes": "192 bars of 4/4 at 125 BPM is 368.64 s (17,694,720 samples at 48 kHz). The container is 368.664 s because of MP3 priming (1105 samples, start time 0.023021 s) and one trailing frame. Chrome decodeAudioData and ffmpeg drop that priming and land on exactly 17,694,720 samples, so loopStart is 0 and loopEnd is 368.64 s. The wrap step is about 0.0006, under a normal sample step, so no seam ramp is applied. Decoded stereo float PCM is 141,557,760 bytes. With the Trenches bed (138,240,000 bytes) both long buffers are 279,797,760 bytes. They download and decode after the shorter beds unless that fight is already waiting. A failed decode still falls back to the synthesised fight loop. No loudness trim. Replaces city_house_loop_v2.mp3."
+}

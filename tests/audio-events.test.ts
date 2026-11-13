@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { A, createState, cpuInput, step, type CombatState, type Effect } from '../src/core';
 import { SOUND_NAMES, SoundTracker, effectSound, hitSound, panFor, whooshSound } from '../src/audioEvents';
-import { AUDIO_MIX_VERSION, AUDIO_SETTINGS_KEY, DEFAULT_VOLUME, FIGHT_BED_SPECS, GROOVE_ENCODER_DELAY_SAMPLES, GROOVE_LOOP_SECONDS, GROOVE_MUSIC_RATE, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, OUTPUT_LIMIT, PREVIOUS_DEFAULT_VOLUME, SEAM_CROSSFADE_SECONDS, SFX_LIMIT, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, YACHT_TRIM_GAIN, createAudio, crossfadeChannel, fightBedForZone, fightBedLoopRegion, fightMusicCue, limitDb, menuLoopRegion, readVolume, seamIsClick, softenLoopSeam, trenchesLoopRegion } from '../src/audio';
+import { AUDIO_MIX_VERSION, AUDIO_SETTINGS_KEY, CITY_LOOP_SECONDS, DEFAULT_VOLUME, FIGHT_BED_SPECS, GROOVE_ENCODER_DELAY_SAMPLES, GROOVE_LOOP_SECONDS, GROOVE_MUSIC_RATE, MENU_ENCODER_DELAY_SAMPLES, MENU_LOOP_SECONDS, MENU_MUSIC_RATE, OUTPUT_LIMIT, PREVIOUS_DEFAULT_VOLUME, SEAM_CROSSFADE_SECONDS, SFX_LIMIT, SONGS, SOUND_VOICES, TRENCHES_ENCODER_DELAY_SAMPLES, TRENCHES_LOOP_SECONDS, TRENCHES_MUSIC_RATE, YACHT_TRIM_GAIN, createAudio, crossfadeChannel, fightBedForZone, fightBedLoopRegion, fightMusicCue, limitDb, menuLoopRegion, readVolume, seamIsClick, softenLoopSeam, trenchesLoopRegion } from '../src/audio';
 import { STAGES } from '../src/stage';
 import { stageZone } from '../src/stageGroups';
 
@@ -225,19 +225,34 @@ describe('audio settings and songs', () => {
         expect(fightMusicCue({ ...fight, carryFight: true, selectionOpen: true })).toEqual({ track: 'menu', bed: 'trenches' });
         expect(fightMusicCue({ ...fight, carryFight: true, feedbackHold: true })).toEqual({ track: null, bed: 'trenches' });
     });
-    it('trims encoder padding so yacht, city and castle loop for exactly 32 bars', () => {
+    it('trims encoder padding so the City theme loops for exactly 192 bars', () => {
+        expect(CITY_LOOP_SECONDS).toBe(368.64);
+        expect(CITY_LOOP_SECONDS).toBeCloseTo(192 * 4 * 60 / 125, 8);
+        const rate = GROOVE_MUSIC_RATE;
+        const loopSamples = Math.round(CITY_LOOP_SECONDS * rate);
+        expect(loopSamples).toBe(17_694_720);
+        expect(fightBedLoopRegion('city', loopSamples, rate)).toEqual({ loopStart: 0, loopEnd: CITY_LOOP_SECONDS });
+        const tail = fightBedLoopRegion('city', loopSamples + 47, rate);
+        expect(tail.loopStart).toBe(0);
+        expect(tail.loopEnd - tail.loopStart).toBeCloseTo(CITY_LOOP_SECONDS, 6);
+        const withPriming = fightBedLoopRegion('city', GROOVE_ENCODER_DELAY_SAMPLES + loopSamples + 1152, rate);
+        expect(withPriming.loopStart).toBeCloseTo(GROOVE_ENCODER_DELAY_SAMPLES / rate, 6);
+        expect(withPriming.loopEnd - withPriming.loopStart).toBeCloseTo(CITY_LOOP_SECONDS, 6);
+        expect(FIGHT_BED_SPECS.city.gain).toBe(1);
+        expect(FIGHT_BED_SPECS.city.loopSeconds).toBe(CITY_LOOP_SECONDS);
+    });
+    it('trims encoder padding so yacht, castle, verse, bar and ranch loop for exactly 32 bars', () => {
         expect(GROOVE_LOOP_SECONDS).toBeCloseTo(32 * 4 * 60 / 125, 8);
         expect(Math.round(GROOVE_LOOP_SECONDS * GROOVE_MUSIC_RATE)).toBe(2_949_120);
         expect(YACHT_TRIM_GAIN).toBeCloseTo(10 ** (0.4 / 20), 8);
         expect(FIGHT_BED_SPECS.yacht.gain).toBe(YACHT_TRIM_GAIN);
-        expect(FIGHT_BED_SPECS.city.gain).toBe(1);
         expect(FIGHT_BED_SPECS.castle.gain).toBe(1);
         expect(FIGHT_BED_SPECS.trenches.gain).toBe(1);
         const rate = GROOVE_MUSIC_RATE;
         const loopSamples = Math.round(GROOVE_LOOP_SECONDS * rate);
-        for (const bed of ['yacht', 'city', 'castle', 'verse', 'bar', 'ranch'] as const) {
+        for (const bed of ['yacht', 'castle', 'verse', 'bar', 'ranch'] as const) {
             expect(fightBedLoopRegion(bed, loopSamples, rate)).toEqual({ loopStart: 0, loopEnd: GROOVE_LOOP_SECONDS });
-            // ffmpeg leaves City 47 samples past the music. That tail is outside the loop.
+            // A short tail stays outside the loop.
             const tail = fightBedLoopRegion(bed, loopSamples + 47, rate);
             expect(tail.loopStart).toBe(0);
             expect(tail.loopEnd - tail.loopStart).toBeCloseTo(GROOVE_LOOP_SECONDS, 6);
@@ -314,10 +329,24 @@ describe('audio settings and songs', () => {
         expect(existsSync(new URL('../public/audio/music/trenches_fight_loop.mp3', import.meta.url))).toBe(false);
         expect(existsSync(new URL('../public/audio/music/trenches_fight_loop.json', import.meta.url))).toBe(false);
     });
-    it('ships the yacht, city, castle and verse fight loops next to their metadata', () => {
+    it('ships the City fight loop next to its metadata', () => {
+        const bytes = readFileSync(new URL('../public/audio/music/city_house_loop_6min.mp3', import.meta.url));
+        const meta = JSON.parse(readFileSync(new URL('../public/audio/music/city_house_loop_6min.json', import.meta.url), 'utf8'));
+        expect(bytes.subarray(0, 3).toString('ascii')).toBe('ID3');
+        expect(bytes.length).toBe(meta.file_size_bytes);
+        expect(meta.filename).toBe('city_house_loop_6min.mp3');
+        expect(meta.duration_seconds).toBe(CITY_LOOP_SECONDS);
+        expect(meta.encoder_delay_samples).toBe(GROOVE_ENCODER_DELAY_SAMPLES);
+        expect(meta.sample_rate).toBe(GROOVE_MUSIC_RATE);
+        expect(meta.bpm).toBe(125);
+        expect(meta.bars).toBe(192);
+        expect(FIGHT_BED_SPECS.city.path).toBe('audio/music/city_house_loop_6min.mp3');
+        expect(existsSync(new URL('../public/audio/music/city_house_loop_v2.mp3', import.meta.url))).toBe(false);
+        expect(existsSync(new URL('../public/audio/music/city_house_loop_v2.json', import.meta.url))).toBe(false);
+    });
+    it('ships the yacht, castle and verse fight loops next to their metadata', () => {
         for (const spec of [
             { file: 'yacht_groove_loop.mp3', meta: 'yacht_groove_loop.json', gain: YACHT_TRIM_GAIN },
-            { file: 'city_house_loop_v2.mp3', meta: 'city_house_loop_v2.json', gain: 1 },
             { file: 'castle_vampire_loop_v2.mp3', meta: 'castle_vampire_loop_v2.json', gain: 1 },
             { file: 'verse_alien_electro_loop.mp3', meta: 'verse_alien_electro_loop.json', gain: 1 },
             { file: 'ranch_country_loop_v2.mp3', meta: 'ranch_country_loop_v2.json', gain: 1 },
