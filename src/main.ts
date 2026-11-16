@@ -1255,8 +1255,10 @@ function advanceRoundFrame(input: number, p2Input?: number) {
             if(nextPhase==='boss')storyAnimation.startBossBlackout();
             else if(nextPhase&&storyAnimation.start(nextPhase))
                 presentation.phase='result';
-            else if(!nextPhase&&(storyAnimation.replaceDefeat||storyBoss)&&storyAnimation.start('outro'))
-                presentation.phase='result';
+            else if(!nextPhase&&(storyAnimation.replaceDefeat||storyBoss)){
+                const playOutro=()=>{if(storyAnimation.start('outro'))presentation.phase='result';};
+                if(storyBoss?.form!=='mecha'||!story.beforeMorelightEjection(playOutro))playOutro();
+            }
         }
         qaStopAtOutro();
         held.clear(); queued = 0;queued2=0;

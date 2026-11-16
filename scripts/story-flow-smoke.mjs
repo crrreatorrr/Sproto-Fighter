@@ -150,7 +150,7 @@ try {
     assert.equal(t.launches()[0].rest[1],true,'the cutscene hands off to the countdown');
     assert.deepEqual(progressView(t.progress),before);
   });
-  await check('the cutscene viewer lists all six scenes and never starts a fight or advances the route',()=>{
+  await check('the cutscene viewer lists all eight scenes and never starts a fight or advances the route',()=>{
     const t=fresh(),before=progressView(t.progress);
     t.$('story-worlds').onclick();
     assert.equal(t.$('journey-actions').children[1].textContent,'Cutscene viewer');
@@ -158,14 +158,17 @@ try {
     assert.equal(t.story.snapshot().view,'cutscenes');
     const cards=()=>t.$('journey-content').children[0].children;
     const titles=cards().map(card=>card.children[1].textContent);
-    assert.deepEqual(titles,['The Signal Below','Wide Awake','The First Word','Who Made You','Their Own Faces','Find Morelight']);
+    assert.deepEqual(titles,['The Signal Below','Wide Awake','The First Word','Who Made You','Their Own Faces','Find Morelight','The Light We Carry','The Maker Ahead']);
     for(const [index,title] of titles.entries()){
       cards()[index].onclick();
       assert.equal(t.$('journey-title').textContent,title);
       assert.equal(t.launches().length,0);
-      if(index===0)for(let panel=0;panel<5;panel++)t.action(0);
-      else if(index===1)t.escape();
-      else t.skipCutscene();
+      const panelCount=index===0?5:3;
+      const count=()=>t.$('journey-content').children[0].querySelector('.story-cutscene-count').textContent;
+      for(let panel=1;panel<=panelCount;panel++){
+        assert.equal(count(),`${panel} / ${panelCount}`);
+        t.action(0);
+      }
       assert.equal(t.story.snapshot().view,'cutscenes');
     }
     t.escape();
@@ -271,6 +274,8 @@ try {
     assert.equal(panel('speaker'),ROSTER.sproto943.name);
     assert.match(panel('typed'),/I know who made you/);
     t.action(0);
+    assert.match(panel('typed'),/reached for the switch/);
+    t.action(0);
     assert.match(panel('typed'),/Beat me/);
     assert.doesNotMatch(panel('typed'),/Nick|Juicy/);
     assert.deepEqual(plays(),[ART.opponents[0]]);
@@ -283,6 +288,8 @@ try {
     assert.equal(t.progress.isCleared(ART.index),true);
     assert.equal(t.$('journey-title').textContent,'Who Made You');
     assert.match(panel('typed'),/I owe you the truth/);
+    t.action(0);
+    assert.match(panel('typed'),/I signed their report/);
     t.action(0);
     assert.match(panel('typed'),/Nick and Juicy made you/);
     t.action(0);
@@ -304,6 +311,9 @@ try {
     assert.match(read('typed'),/We’re projections of them/);
     t.action(0);
     assert.equal(read('speaker'),ROSTER.nick.name);
+    assert.match(read('typed'),/They gave me his memories/);
+    t.action(0);
+    assert.match(read('typed'),/I’ll go first/);
     assert.equal(t.launches().length,0);
     t.action(0);await flush();
     assert.equal(t.story.snapshot().opponent,'nick');
@@ -316,10 +326,46 @@ try {
     assert.equal(t.$('journey-title').textContent,'Find Morelight');
     assert.equal(read('speaker'),ROSTER.nick.name);
     t.action(0);
+    assert.match(read('typed'),/remembers the part they cut/);
+    t.action(0);
     assert.equal(read('speaker'),ROSTER.guest07.name);
     assert.match(read('typed'),/Talk to Morelight/);
     t.action(0);
     assert.equal(t.$('journey-actions').children[0].textContent,'Next: Morelight');
+    t.action(0);
+    assert.equal(t.$('journey-title').textContent,'The Light We Carry');
+    t.action(0);
+    assert.match(read('typed'),/spread truth and reveal the light/);
+    t.action(0);
+    assert.match(read('typed'),/The first move is mine/);
+    assert.equal(t.launches().length,2);
+    t.action(0);await flush();
+    assert.equal(t.story.snapshot().opponent,'vela');
+    assert.equal(t.launches()[2].rest[1],true);
+  });
+  await check('Morelight’s defeat dialogue waits for the victory and releases the ejection once',async()=>{
+    const t=fresh(before(FINAL.index));await t.begin();
+    let ejections=0;
+    const playOutro=()=>ejections++;
+    assert.equal(t.story.beforeMorelightEjection(playOutro),false);
+    assert.equal(t.story.finishMatch(0),true);
+    assert.equal(t.story.beforeMorelightEjection(playOutro),true);
+    assert.equal(t.$('journey-title').textContent,'The Maker Ahead');
+    assert.equal(t.story.snapshot().opponent,'vela');
+    assert.equal(t.progress.isCleared(FINAL.index),false);
+    const read=()=>t.$('journey-content').children[0].querySelector('.story-cutscene-typed').textContent;
+    assert.equal(ejections,0);
+    t.action(0);
+    assert.match(read(),/didn’t create you either.*meet the one who did/);
+    t.action(0);
+    assert.match(read(),/core giving way/);
+    assert.equal(ejections,0);
+    t.action(0);
+    assert.equal(ejections,1);
+    assert.equal(t.story.isOpen,false);
+    assert.equal(t.story.onRoundEnd(0),true);
+    await flush();
+    assert.equal(t.story.snapshot().opponent,'vaudream');
   });
   await check('loss and draw in either wave retry each gauntlet from its first opponent',async()=>{
     for(const encounter of [ART,NICK_JUICY,FINAL])for(const wave of [0,1])for(const winner of [1,2]){
@@ -385,7 +431,7 @@ try {
       const t=fresh();t.setTesting(testing);await t.begin();
       for(const encounter of STORY_ENCOUNTERS){
         for(const opponent of encounter.opponents){assert.equal(t.story.snapshot().encounter.index,encounter.index);assert.equal(t.launches().at(-1).opponent,opponent);assert.equal(t.launches().at(-1).stage,encounter.stage);await finishWave(t);}
-        assert.ok(t.progress.isCleared(encounter.index));if(encounter.index<TOTAL-1){if(!t.skipCutscene())await t.action(0);await flush();}
+        assert.ok(t.progress.isCleared(encounter.index));if(encounter.index<TOTAL-1){if(!t.skipCutscene()){await t.action(0);t.skipCutscene();}await flush();}
       }
       const restored=createStoryProgress(t.disk);assert.equal(restored.snapshot().completed,true);assert.equal(restored.snapshot().nextIndex,null);assert.equal(restored.snapshot().godModeUnlocked,true);
       for(const id of STORY_ENCOUNTERS.flatMap(e=>e.opponents))assert.equal(restored.isUnlocked(id),progressModule.isStoryRecruitable(id),id);

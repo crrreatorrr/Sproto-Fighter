@@ -142,8 +142,17 @@ try{
  });
  await page.reload();await page.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
  await page.locator('#settings').click();await page.locator('#testing-god-mode').check();await page.locator('#close-settings').click();
- await page.locator('#story-worlds').click();await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
+ await page.locator('#story-worlds').click();await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();
+ await page.getByRole('heading',{name:'The Light We Carry'}).waitFor();
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ const dialogue=page.locator('.story-cutscene-transcript');
+ await page.waitForFunction(()=>document.querySelector('.story-cutscene-transcript')?.textContent.includes('spread truth and reveal the light'));
+ assert.equal(await page.locator('.story-cutscene-count').textContent(),'2 / 3');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ assert.equal(await page.locator('.story-cutscene-count').textContent(),'3 / 3');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vela'&&!window.neonRelay.storySnapshot().launching);
+ assert.match(await page.locator('#stage-subtitle').textContent(),/ICEBLUE EVENT HORIZON/);
  const regularBouts=[];
  async function winRegularBout({opponent}){
   const maxCombatFrames=7200,wallCapMs=120000,started=Date.now(),recent=[];
@@ -157,7 +166,7 @@ try{
   });
   const diagnostic=()=>JSON.stringify({opponent,attempts,elapsedMs:Date.now()-started,initialFrame,maxCombatFrames,recent});
   try{
-   await page.bringToFront();await page.keyboard.press('Enter');
+   await page.bringToFront();if(await page.locator('.versus-skip').isVisible())await page.keyboard.press('Enter');
    await page.waitForFunction(()=>window.neonRelay.snapshot().frame>0||window.neonRelay.replay().bossStarts?.length,null,{timeout:Math.min(30000,wallCapMs)});
    while(Date.now()-started<wallCapMs){
     last=await read();initialFrame??=last.frame;recent.push(last);if(recent.length>6)recent.shift();
@@ -231,6 +240,16 @@ try{
  await page.locator('#story-animation-skip').click();
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.length===2);
  assert.equal(await page.evaluate(()=>window.neonRelay.verifyReplay()),true);
+ await page.getByRole('heading',{name:'The Maker Ahead'}).waitFor();
+ assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().clip),null);
+ assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().winner),0);
+ assert.equal(await page.evaluate(()=>window.neonRelay.replay().bossStarts?.at(-1)?.form),'mecha');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelector('.story-cutscene-transcript')?.textContent.includes('meet the one who did'));
+ assert.match(await dialogue.textContent(),/didn’t create you either/);
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().clip),null);
+ await page.getByRole('button',{name:'Next',exact:true}).click();
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='morelight-ejection');
  await page.locator('#story-animation-skip').click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vaudream'&&!window.neonRelay.storySnapshot().launching);

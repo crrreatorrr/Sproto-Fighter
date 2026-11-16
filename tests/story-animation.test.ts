@@ -36,20 +36,24 @@ async function harness(id:string,win=0){
     const animation=createStoryAnimation();await animation.load(storyAnimationPlan(id,true));
     const state=createState('highsproto','cpu',id as any),presentation=createRoundPresentation();presentation.phase='fight';
     const calls:string[]=[],frames:number[][]=[];
+    let finishMechaDialogue:(()=>void)|undefined;
+    const beforeMorelightEjection=(finish:()=>void)=>{
+        calls.push('dialogue');finishMechaDialogue=finish;return true;
+    };
     const run=new Function('deps',`
-        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound}=deps;
+        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound,beforeMorelightEjection}=deps;
         let storyBoss=null;const bossStarts=[];const stepStoryBoss=()=>{state.winner=win;};
         const versus={advance:()=>false};const countdown={advance:()=>false,show:()=>calls.push('countdown')};
         const held=new Set();let queued=0,queued2=0,padNeedsRelease=false;
         const training=null,depthRoundStarts=[];
         const online=null,mode='cpu',qaPanel=null,qaRecord=()=>{},qaStopAtOutro=()=>{};
         const matchCpuSkill=4,cpuInput=()=>0,playRetainCallout=()=>{},reportRound=()=>calls.push('report');
-        const story={finishMatch:()=>calls.push('save'),onRoundEnd:()=>{calls.push('result');return true;}};
+        const story={beforeMorelightEjection,finishMatch:()=>calls.push('save'),onRoundEnd:()=>{calls.push('result');return true;}};
         const step=()=>{state.winner=win;};
         ${compiled}
         return advanceRoundFrame;
-    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound});
-    return {animation,state,presentation,calls,frames,run,endBlackout(){for(let i=0;i<90;i++)run(0);}};
+    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound,beforeMorelightEjection});
+    return {animation,state,presentation,calls,frames,run,advanceMechaDialogue:()=>finishMechaDialogue?.(),endBlackout(){for(let i=0;i<90;i++)run(0);}};
 }
 
 describe('story animation ordering and lifecycle',()=>{
@@ -118,12 +122,14 @@ describe('story animation ordering and lifecycle',()=>{
         t.animation.skip();t.run(0);
         expect(t.state.winner).toBe(null);
         t.run(0);
+        expect(t.animation.active).toBeNull();
+        expect(t.calls).toEqual(['save','dialogue']);
+        t.advanceMechaDialogue();
         expect(t.animation.snapshot().clip).toBe('morelight-ejection');
-        expect(t.calls).toEqual(['save']);
         const seen:string[]=[];
         while(t.animation.active){const id=t.animation.snapshot().clip!;if(seen.at(-1)!==id)seen.push(id);t.run(0);}
         expect(seen).toEqual(storyAnimationPlan('vela',true).outro);
-        expect(t.calls).toEqual(['save','report','result']);
+        expect(t.calls).toEqual(['save','dialogue','report','result']);
         expect(t.frames).toHaveLength(3);
     });
     it.each([['nick','nick-mount'],['guest07','juicy-robot'],['sproto943','art-fusion']])(
