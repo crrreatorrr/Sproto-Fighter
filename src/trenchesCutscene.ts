@@ -31,7 +31,7 @@ const panels = [
     },
 ];
 
-const characterDelay = 29;
+const characterDelay = 38;
 
 export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonElement, finish: () => void) {
     const scene = document.createElement('section');
@@ -80,7 +80,6 @@ export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonEl
         revealed = length;
         typed.textContent = line.slice(0, length);
         untyped.textContent = line.slice(length);
-        advance.textContent = length < line.length ? 'Show full line' : index < panels.length - 1 ? 'Next panel' : 'Continue';
     }
 
     function showPanel() {
@@ -100,8 +99,7 @@ export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonEl
 
     advance.onclick = () => {
         stopTyping();
-        if (revealed < panels[index].line.length) reveal(panels[index].line.length);
-        else if (index < panels.length - 1) {
+        if (index < panels.length - 1) {
             index++;
             showPanel();
         } else finish();

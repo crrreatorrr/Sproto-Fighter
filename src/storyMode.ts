@@ -113,7 +113,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         $('journey-kicker').textContent='STORY / MUDLINE TRENCHES';
         $('journey-title').textContent='The Signal Below';
         $('journey-copy').textContent='';
-        buttons([{label:'Continue'},{label:'Skip cutscene',run:finish}]);
+        buttons([{label:'Next'},{label:'Skip cutscene',run:finish}]);
         stopCutscene=mountTrenchesCutscene($('journey-content'),primary!,finish);
         back=()=>selector(true);open();modal.scrollTop=0;
     }

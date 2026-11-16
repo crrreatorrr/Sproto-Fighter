@@ -121,6 +121,7 @@ try {
     const panel=()=>t.$('journey-content').children[0].querySelector('.trenches-cutscene-count').textContent;
     for(let i=1;i<=5;i++){
       assert.equal(panel(),i+' / 5');
+      assert.equal(globalThis.document.activeElement?.textContent,'Next');
       t.action(0);
     }
     assert.equal(t.$('journey-actions').children[0].textContent,'Start encounter');
