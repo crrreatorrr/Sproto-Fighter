@@ -120,9 +120,19 @@ try {
     const before=progressView(t.progress);
     t.$('story-worlds').onclick();
     t.action(0);
-    const panel=()=>t.$('journey-content').children[0].querySelector('.trenches-cutscene-count').textContent;
+    const query=selector=>t.$('journey-content').children[0].querySelector(selector);
+    const panel=()=>query('.trenches-cutscene-count').textContent;
+    assert.equal(query('.trenches-cutscene-speaker').textContent,ROSTER.highsproto.name);
     for(let i=1;i<=5;i++){
       assert.equal(panel(),i+' / 5');
+      if(i===3){
+        const line=query('.trenches-cutscene-typed').textContent;
+        const alt=query('.trenches-cutscene-image').children[0].alt;
+        for(const id of ['mox','sproto102','sproto1187','sproto763']){
+          assert.ok(line.includes(ROSTER[id].name),id+' displays its roster name in dialogue');
+          assert.ok(alt.includes(ROSTER[id].name),id+' displays its roster name in the art description');
+        }
+      }
       assert.equal(globalThis.document.activeElement?.textContent,'Next');
       t.action(0);
     }

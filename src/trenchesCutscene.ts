@@ -1,33 +1,36 @@
+import { ROSTER } from './core';
+
+const highSproto = ROSTER.highsproto.name;
+const yannix = ROSTER.mox.name;
+const collector = ROSTER.sproto102.name;
+const dad = ROSTER.sproto1187.name;
+const snarf = ROSTER.sproto763.name;
+
 const panels = [
     {
         art: '01-wake',
-        description: 'Under a distant skyline, High Sproto stands ankle-deep in the flooded trench.',
-        speaker: 'High Sproto',
-        line: 'I woke up down here with my name in my mouth. High Sproto. I can’t remember who said it first.',
+        description: `Under a distant skyline, ${highSproto} stands ankle-deep in the flooded trench.`,
+        line: `I woke up down here with my name in my mouth. ${highSproto}. I can’t remember who said it first.`,
     },
     {
         art: '02-reflection',
-        description: 'High Sproto peers into a puddle. A magenta band cuts across the eyes of his reflection.',
-        speaker: 'High Sproto',
+        description: `${highSproto} peers into a puddle. A magenta band cuts across the eyes of his reflection.`,
         line: 'I blinked. The face in the water didn’t. If it knows my name too… which one of us is real?',
     },
     {
         art: '03-march',
-        description: 'Mox and three other Sprotos march in lockstep past High Sproto’s hiding place, their eyes glowing magenta.',
-        speaker: 'High Sproto',
-        line: 'Every boot hits the water on the same beat. Mox is crying. His feet keep moving.',
+        description: `${yannix}, ${collector}, ${dad}, and ${snarf} march in lockstep past ${highSproto}’s hiding place, their eyes glowing magenta.`,
+        line: `${collector}, ${dad}, ${snarf}… every boot hits the water on the same beat. ${yannix} is crying. His feet keep moving.`,
     },
     {
         art: '04-relay',
-        description: 'A relay sends a magenta signal to Mox and Sproto #102. The receiver beside High Sproto’s ear glows the same color.',
-        speaker: 'Ascension Relay',
-        line: 'Receivers linked. Overwriting intent. Repeat as your own thought: I want to fight. I have always wanted to fight.',
+        description: `A relay sends a magenta signal to ${yannix} and ${collector}. The receiver beside ${highSproto}’s ear glows the same color.`,
+        line: 'The signal is in my head too. It sounds like my own voice saying, “I want to fight. I have always wanted to fight.”',
     },
     {
         art: '05-choice',
-        description: 'High Sproto pulls out his receiver and reaches for Mox, who still stares ahead with a glowing magenta eye.',
-        speaker: 'High Sproto',
-        line: 'I pulled the receiver. The orders stopped. I’m the only one awake down here. I still don’t know if I’m real, Mox. But I’m staying with you.',
+        description: `${highSproto} pulls out his receiver and reaches for ${yannix}, who still stares ahead with a glowing magenta eye.`,
+        line: `I pulled the receiver. The orders stopped. I’m the only one awake down here. I still don’t know if I’m real, ${yannix}. But I’m staying with you.`,
     },
 ];
 
@@ -55,8 +58,7 @@ export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonEl
 
     const art = scene.querySelector('.trenches-cutscene-image')!;
     const status = scene.querySelector<HTMLElement>('.trenches-cutscene-status')!;
-    const caption = scene.querySelector('.trenches-cutscene-caption') as HTMLElement;
-    const speaker = scene.querySelector('.trenches-cutscene-speaker')!;
+    scene.querySelector('.trenches-cutscene-speaker')!.textContent = highSproto;
     const count = scene.querySelector('.trenches-cutscene-count')!;
     const transcript = scene.querySelector('.trenches-cutscene-transcript')!;
     const typed = scene.querySelector('.trenches-cutscene-typed')!;
@@ -99,8 +101,6 @@ export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonEl
         status.hidden = false;
         status.textContent = 'Loading artwork…';
         advance.setAttribute('aria-disabled', 'true');
-        caption.dataset.speaker = panel.art === '04-relay' ? 'relay' : 'high-sproto';
-        speaker.textContent = panel.speaker;
         count.textContent = `${index + 1} / ${panels.length}`;
         transcript.textContent = '';
         reveal(0);
@@ -112,7 +112,7 @@ export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonEl
             status.hidden = hasArtwork;
             if (!hasArtwork) status.textContent = panel.description;
             advance.removeAttribute('aria-disabled');
-            transcript.textContent = `${panel.speaker}. ${panel.line}`;
+            transcript.textContent = `${highSproto}. ${panel.line}`;
             if (reducedMotion) {
                 reveal(panel.line.length);
                 return;

@@ -54,7 +54,6 @@
   text-transform: uppercase;
 }
 .trenches-cutscene-speaker { color: #f9c88c; }
-.trenches-cutscene-caption[data-speaker="relay"] .trenches-cutscene-speaker { color: #ff96db; }
 .trenches-cutscene-count { color: #afbad0; white-space: nowrap; }
 #journey-dialog .trenches-cutscene-line {
   position: relative;
