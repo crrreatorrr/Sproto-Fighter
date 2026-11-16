@@ -12,6 +12,7 @@ import './mysticUI.css';
 import './campaignMap.css';
 import './versusScreen.css';
 import './fullscreen.css';
+import './trenchesCutscene.css';
 import {createVersusScreen} from './versusScreen';
 import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';

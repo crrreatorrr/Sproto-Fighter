@@ -39,6 +39,7 @@ try{
    await page.locator('#story-worlds').click();await page.locator('#partner-confirm').click();
    await page.locator('.campaign-node[data-encounter="'+encounter.id+'"]').click();
    await page.locator('.campaign-rival .primary').click();
+   if(encounter.index===0)await page.getByRole('button',{name:'Skip cutscene'}).click();
    const picker=page.getByRole('combobox',{name:'Story scenery'});await picker.selectOption(location.id);
    await page.locator('#journey-actions button').first().click();
    await page.waitForFunction(title=>document.querySelector('#stage-subtitle').textContent.includes(title.toUpperCase()),location.title);

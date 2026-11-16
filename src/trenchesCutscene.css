@@ -1,0 +1,92 @@
+#journey-dialog:has(.trenches-cutscene) {
+  --cutscene-width: min(100%, max(530px, calc(52dvh * 16 / 9)));
+  width: min(960px, calc(100vw - 24px));
+  padding: clamp(12px, 2vw, 23px);
+}
+#journey-dialog:has(.trenches-cutscene) #journey-copy { display: none; }
+#journey-dialog:has(.trenches-cutscene) #journey-kicker { color: #e4b780; }
+#journey-dialog:has(.trenches-cutscene) #journey-title {
+  font-size: clamp(21px, 3vw, 32px);
+  margin: 4px 0 0;
+}
+.trenches-cutscene {
+  width: var(--cutscene-width);
+  margin: 12px auto 0;
+  background: #0b0d18;
+  border: 1px solid #7d6046;
+  box-shadow: 0 0 0 3px #0a0a13;
+}
+.trenches-cutscene-art {
+  aspect-ratio: 16 / 9;
+  background: #09121e;
+}
+.trenches-cutscene-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.trenches-cutscene-caption {
+  border-top: 2px solid #7d6046;
+  padding: 12px clamp(12px, 2.6vw, 22px) 15px;
+}
+.trenches-cutscene-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font: 700 13px/1.35 ui-monospace, monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.trenches-cutscene-speaker { color: #f9c88c; }
+.trenches-cutscene-caption[data-speaker="relay"] .trenches-cutscene-speaker { color: #ff96db; }
+.trenches-cutscene-count { color: #afbad0; white-space: nowrap; }
+#journey-dialog .trenches-cutscene-line {
+  position: relative;
+  color: #f3f0f7;
+  font: 400 clamp(14px, 2vw, 19px)/1.5 ui-monospace, monospace;
+  margin: 6px 0 0;
+  min-height: 3em;
+}
+.trenches-cutscene-untyped { color: transparent; }
+.trenches-cutscene-transcript {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+#journey-dialog:has(.trenches-cutscene) #journey-actions {
+  width: var(--cutscene-width);
+  margin: 12px auto 0;
+  gap: 8px;
+}
+#journey-dialog:has(.trenches-cutscene) #journey-actions button {
+  min-height: 44px;
+  padding: 8px 26px;
+  font-size: 13px;
+  white-space: normal;
+}
+#journey-dialog:has(.trenches-cutscene) #journey-actions button:first-child { min-width: 148px; }
+@media (max-width: 620px) {
+  #journey-dialog:has(.trenches-cutscene) .dialog-top { display: grid; gap: 8px; }
+  #journey-dialog:has(.trenches-cutscene) .system-menu {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+  }
+  #journey-dialog:has(.trenches-cutscene) .system-menu .quiet {
+    min-height: 38px;
+    padding: 4px 14px;
+    font-size: 11px;
+    white-space: normal;
+  }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  #journey-dialog:has(.trenches-cutscene) {
+    --cutscene-width: min(100%, max(315px, calc((100dvh - 172px) * 16 / 9)));
+  }
+}

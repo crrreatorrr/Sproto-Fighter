@@ -45,11 +45,16 @@ try {
     return disk;
   }
   class Element {
-    classList={toggle(){}};children=[];open=false;disabled=false;hidden=false;dataset={};textContent='';value='';events={};style={setProperty(){}};
+    classList={toggle(){},remove(){}};children=[];open=false;disabled=false;hidden=false;dataset={};textContent='';value='';events={};style={setProperty(){}};
     set innerHTML(value){this.html=value;this.children=[];}
     get innerHTML(){return this.html??'';}
     replaceChildren(...nodes){this.children=nodes;this.html='';}
     append(...nodes){this.children.push(...nodes);}
+    querySelector(selector){
+      this.selectors??=new Map();
+      if(!this.selectors.has(selector))this.selectors.set(selector,new Element());
+      return this.selectors.get(selector);
+    }
     setAttribute(name,value){this[name]=value;}
     showModal(){assert.equal(this.open,false);this.open=true;}
     close(){this.open=false;}
@@ -60,8 +65,13 @@ try {
     const elements=new Map([...(read('index.html')+read('src/selectionMenu.ts')).matchAll(/\bid="([^"]+)"/g)].map(m=>[m[1],new Element()]));
     elements.set('free-levels',new Element());
     const $=id=>{assert.ok(elements.has(id),'missing #'+id);return elements.get(id);};
-    globalThis.document={getElementById:$,createElement:()=>new Element()};
-    return {$,pick:i=>$('journey-content').children[0].children[i].onclick(),action:i=>$('journey-actions').children[i].onclick(),escape:()=>$('journey-dialog').events.cancel({preventDefault(){}})};
+    globalThis.document={getElementById:$,createElement:()=>new Element(),querySelector:()=>null};
+    globalThis.Image=Element;
+    globalThis.matchMedia=()=>({matches:true});
+    const actions=()=>$('journey-actions').children;
+    return {$,pick:i=>$('journey-content').children[0].children[i].onclick(),action:i=>actions()[i].onclick(),
+      skipCutscene:()=>actions().find(button=>button.textContent==='Skip cutscene')?.onclick(),
+      escape:()=>$('journey-dialog').events.cancel({preventDefault(){}})};
   }
   function fresh(disk=storage()) {
     const d=dom(),progress=createStoryProgress(disk),events=[];
@@ -77,7 +87,7 @@ try {
     return {...d,disk,progress,story,events,setReady:value=>ready=value,setTesting:value=>testing=value,setLaunch:value=>launchResult=value,
       launches:()=>events.filter(event=>typeof event==='object'),
       mapPick:index=>{assert.ok(mapChoose);mapChoose(STORY_ENCOUNTERS[index]);},
-      async begin(){d.$('story-worlds').onclick();await d.action(0);await d.action(0);await flush();},
+      async begin(){d.$('story-worlds').onclick();await d.action(0);d.skipCutscene();await d.action(0);await flush();},
     };
   }
   async function finishWave(t,winner=0) {
@@ -102,6 +112,26 @@ try {
     for(let i=1;i<cards.length;i++){assert.equal(cards[i].disabled,true);await t.pick(i);}
     assert.equal(t.launches().length,0);
     t.$('free-levels').onclick();for(const card of t.$('journey-content').children[0].children)assert.equal(card.disabled,false);
+  });
+  await check('the Trenches opening plays exactly five panels and can be replayed without touching progression',()=>{
+    const t=fresh();
+    const before=progressView(t.progress);
+    t.$('story-worlds').onclick();
+    t.action(0);
+    const panel=()=>t.$('journey-content').children[0].querySelector('.trenches-cutscene-count').textContent;
+    for(let i=1;i<=5;i++){
+      assert.equal(panel(),i+' / 5');
+      t.action(0);
+    }
+    assert.equal(t.$('journey-actions').children[0].textContent,'Start encounter');
+    assert.equal(t.launches().length,0);
+    t.escape();
+    assert.equal(t.$('journey-actions').children[1].textContent,'Replay Trenches opening');
+    t.action(1);
+    assert.equal(panel(),'1 / 5');
+    t.skipCutscene();
+    assert.equal(t.story.snapshot().view,'worlds');
+    assert.deepEqual(progressView(t.progress),before);
   });
   await check('normal and God Mode controller wins persist identical recruitment and continuation',async()=>{
     const outcomes=[];
@@ -207,7 +237,7 @@ try {
   });
   await check('double-clicked encounter launch submits once while assets load',async()=>{
     const t=fresh();let release;t.setLaunch(()=>new Promise(resolve=>release=resolve));
-    t.$('story-worlds').onclick();await t.action(0);t.action(0);t.action(0);assert.equal(t.launches().length,1);assert.equal(t.story.snapshot().launching,true);
+    t.$('story-worlds').onclick();await t.action(0);t.skipCutscene();t.action(0);t.action(0);assert.equal(t.launches().length,1);assert.equal(t.story.snapshot().launching,true);
     release(true);await flush();assert.equal(t.story.snapshot().launching,false);assert.equal(t.story.snapshot().encounter.index,0);
   });
   await check('free play, Back and Escape do not award story progress',async()=>{
@@ -300,7 +330,7 @@ try {
         inspect:()=>({setup,mode,matchDepthOptions,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
     `)({createStoryMode:hooks=>createStoryMode(hooks,progress),storyProgress:progress,STAGES,ROSTER,$:d.$,createRoundPresentation,createState,
       STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth,storyChapterRule,PLAYABLE_FIGHTERS});
-    return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);await d.action(0);await flush();}};
+    return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);d.skipCutscene();await d.action(0);await flush();}};
   }
   await check('failed launch preserves the active experimental match and replay options',async()=>{
     const t=integration({depth:true});

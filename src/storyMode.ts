@@ -1,3 +1,4 @@
+import {mountTrenchesCutscene} from './trenchesCutscene';
 import {createDifficultyRetry,storyDifficulty} from './difficulty';
 import {storySceneryChoices,setStorySceneryChoice,getStorySceneryChoice} from './stageVariants';
 import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
@@ -5,7 +6,6 @@ import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,STORY_OPPONENTS,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
 
 type Hooks={beforeStory?:()=>Promise<boolean>;pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId,difficulty?:{skill:number;assisted:boolean})=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;godMode?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
-/** Real progression; chapter scenes remain placeholders pending script approval. */
 export function createStoryMode(hooks:Hooks,progress:StoryProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
     const modal=$<HTMLDialogElement>('journey-dialog');
@@ -33,6 +33,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
     const status=()=>{$('journey-status').textContent=active?`STORY / ${STAGES.find(s=>s.id===active!.stage)!.name.toUpperCase()} / ENCOUNTER ${active.index+1} OF ${total}${active.opponents.length>1?` / BOUT ${wave+1} OF ${active.opponents.length}`:''} / ${progress.snapshot().cleared.length} CLEARED`:'FREE PLAY / '+storageNote();};
     // The first action (Continue, Fight, Next opponent, Retry) is the default: Enter or controller A presses it.
     let primary:HTMLButtonElement|null=null;
+    let stopCutscene:(()=>void)|null=null;
     const focusDefault=()=>primary?.focus({preventScroll:true});
     const open=()=>{if(!modal.open){hooks.pause();modal.showModal();}focusDefault();};
     // God Mode (earned or testing) lets the player choose any encounter on the map.
@@ -45,9 +46,10 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         const save=progress.snapshot(),next=save.openRoute?STORY_ENCOUNTERS[encounter.index+1]??null:save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
         return next?.stage??null;
     }
-    function buttons(actions:{label:string;run:()=>void}[]){
+    function buttons(actions:{label:string;run?:()=>void}[]){
+        stopCutscene?.();stopCutscene=null;
         const area=$('journey-actions');area.replaceChildren();primary=null;
-        for(const action of actions){const button=document.createElement('button');button.className='quiet';button.textContent=action.label;button.onclick=action.run;area.append(button);primary??=button;}
+        for(const action of actions){const button=document.createElement('button');button.className='quiet';button.textContent=action.label;button.onclick=action.run??null;area.append(button);primary??=button;}
         focusDefault();
     }
     async function launch(id:StageId,encounter?:Encounter,nextWave=0,assist=false){
@@ -86,6 +88,9 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         label.append(select);$('journey-content').append(label);
     }
     function scene(encounter:Encounter,between=false){
+        if(encounter.index===0&&encounter.stage==='trenches'){
+            trenchesIntro(()=>encounterPreview(encounter));return;
+        }
         view='scene';const level=STAGES.find(s=>s.id===encounter.stage)!;
         $('journey-kicker').textContent='PLACEHOLDER CUTSCENE / MAJOR STAGE';
         $('journey-title').textContent=between?`Next stop: ${level.name}`:encounter.gauntlet==='final'?`Final gauntlet: ${level.name}`:encounter.index===0?`${level.name}: the journey begins`:`Return to ${level.name}`;
@@ -103,6 +108,15 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         buttons([{label:'Start encounter',run:()=>{void launch(encounter.stage,encounter);}},{label:'Story route',run:()=>selector(true)}]);back=()=>selector(true);open();
     }
     const firstInRegion=(encounter:Encounter)=>encounter.index===0||STORY_ENCOUNTERS[encounter.index-1].stage!==encounter.stage;
+    function trenchesIntro(finish:()=>void){
+        view='scene';modal.classList.remove('story-map-open');carryStage=null;
+        $('journey-kicker').textContent='STORY / MUDLINE TRENCHES';
+        $('journey-title').textContent='The Signal Below';
+        $('journey-copy').textContent='';
+        buttons([{label:'Continue'},{label:'Skip cutscene',run:finish}]);
+        stopCutscene=mountTrenchesCutscene($('journey-content'),primary!,finish);
+        back=()=>selector(true);open();modal.scrollTop=0;
+    }
     function showEncounter(encounter:Encounter,between=false){if(firstInRegion(encounter))scene(encounter,between);else encounterPreview(encounter);}
     function selector(story:boolean){
         syncRoute();carryStage=null;
@@ -124,6 +138,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         if(story)hooks.map?.(content,progress,encounter=>showEncounter(encounter));
         buttons(story?[
             {label:save.completed?'Replay from the beginning':'Continue story',run:()=>showEncounter(STORY_ENCOUNTERS[save.nextIndex??0],true)},
+            {label:'Replay Trenches opening',run:()=>trenchesIntro(()=>selector(true))},
             {label:'Free-play levels',run:()=>selector(false)},{label:'Back to arena',run:close},
         ]:[{label:'Story route',run:()=>selector(true)},{label:'Back to arena',run:close}]);
         back=close;open();
@@ -167,6 +182,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
     };const levelSelect=document.getElementById('free-levels');
     if(levelSelect)levelSelect.onclick=()=>selector(false);
     $('journey-back').onclick=()=>back();
+    modal.addEventListener('close',()=>{if(!modal.open){stopCutscene?.();stopCutscene=null;}});
     modal.addEventListener('cancel',e=>{e.preventDefault();if(typeof document.dispatchEvent==='function'&&typeof CustomEvent==='function')document.dispatchEvent(new CustomEvent('sproto-menu-ui',{bubbles:true}));back();});progress.subscribe(status);status();
     return {
         get isOpen(){return modal.open;},get isActive(){return !!active;},finishMatch,onRoundEnd,
