@@ -1,4 +1,6 @@
-import {mountTrenchesCutscene} from './trenchesCutscene';
+import {mountStoryCutscene,type StoryCutscene} from './storyCutscene';
+import {trenchesCutscene} from './trenchesCutscene';
+import {afterArtchick,ARTCHICK,beforeArtchick} from './artchickCutscenes';
 import {createDifficultyRetry,storyDifficulty} from './difficulty';
 import {storySceneryChoices,setStorySceneryChoice,getStorySceneryChoice} from './stageVariants';
 import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
@@ -72,7 +74,12 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
             if(nextWave===0){if(!progress.begin(encounter.index))return;difficultyRetry.begin(encounter.id);}
             else if(progress.currentWave(encounter.index)!==nextWave)return;
         }
-        launching=true;modal.close();
+        launching=true;
+        if(stopCutscene){
+            stopCutscene();stopCutscene=null;
+            $('journey-content').replaceChildren();
+        }
+        modal.close();
         try{
             if(!await hooks.launch(id,!!encounter,encounter?.opponents[nextWave],encounter?{skill:storyDifficulty(encounter,STORY_ENCOUNTERS,assist),assisted:assist}:undefined,startWithCountdown))throw new Error('Fighter art could not load.');
             active=encounter??null;wave=nextWave;settled=null;assisted=assist;carryStage=null;status();
@@ -113,20 +120,24 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
     }
     const firstInRegion=(encounter:Encounter)=>encounter.index===0||STORY_ENCOUNTERS[encounter.index-1].stage!==encounter.stage;
     function trenchesIntro(encounter:Encounter){
+        carryStage=null;
         const finish=()=>{
             if(launching||!modal.open)return;
             // Keep the encounter controls available if the launch gate needs another attempt.
             encounterPreview(encounter,true);
             void launch(encounter.stage,encounter,{startWithCountdown:true});
         };
-        view='scene';modal.classList.remove('story-map-open');carryStage=null;
-        $('journey-kicker').textContent='STORY / MUDLINE TRENCHES';
-        $('journey-title').textContent='The Signal Below';
+        showCutscene(trenchesCutscene,'The Signal Below','MUDLINE TRENCHES',finish,()=>selector(true),encounter);
+    }
+    function showCutscene(script:StoryCutscene,title:string,location:string,finish:()=>void,leave:()=>void,scenery?:Encounter){
+        view='scene';modal.classList.remove('story-map-open');
+        $('journey-kicker').textContent=`STORY / ${location}`;
+        $('journey-title').textContent=title;
         $('journey-copy').textContent='';
         buttons([{label:'Next'},{label:'Skip cutscene',run:finish}]);
-        sceneryPicker(encounter,$('journey-actions'));
-        stopCutscene=mountTrenchesCutscene($('journey-content'),primary!,finish);
-        back=()=>selector(true);open();modal.scrollTop=0;
+        if(scenery)sceneryPicker(scenery,$('journey-actions'));
+        stopCutscene=mountStoryCutscene($('journey-content'),primary!,script,finish);
+        back=leave;open();modal.scrollTop=0;
     }
     function showEncounter(encounter:Encounter,between=false){if(encounter===trenchesOpening||firstInRegion(encounter))scene(encounter,between);else encounterPreview(encounter);}
     function selector(story:boolean){
@@ -166,12 +177,31 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         if(settled===null&&!finishMatch(winner))return false;
         const encounter=active,result=settled!,finishedWave=wave;active=null;settled=null;
         carryStage=nextFightStage(encounter,result,finishedWave);
+        if(result===0){
+            const nextWave=finishedWave+1;
+            if(nextWave<encounter.opponents.length){
+                if(encounter.gauntlet==='art'&&encounter.opponents[nextWave]===ARTCHICK){
+                    showCutscene(beforeArtchick,'The First Word','THE HATCHERY',
+                        ()=>{void launch(encounter.stage,encounter,{nextWave,assist:assisted,startWithCountdown:true});},
+                        ()=>{progress.abandonRun();selector(true);});
+                }else void launch(encounter.stage,encounter,{nextWave,assist:assisted});
+                return true;
+            }
+            if(encounter.gauntlet==='art'&&encounter.opponents[finishedWave]===ARTCHICK){
+                showCutscene(afterArtchick,'Who Made You','THE HATCHERY',
+                    ()=>showResult(encounter,result,finishedWave),()=>selector(true));
+                return true;
+            }
+        }
+        showResult(encounter,result,finishedWave);
+        return true;
+    }
+    function showResult(encounter:Encounter,result:number,finishedWave:number){
         view='result';$('journey-content').replaceChildren();$('journey-kicker').textContent=`STORY / ENCOUNTER ${encounter.index+1} OF ${total}`;
         if(result===0){
-            if(finishedWave+1<encounter.opponents.length){void launch(encounter.stage,encounter,{nextWave:finishedWave+1,assist:assisted});return true;}
             const save=progress.snapshot(),next=save.openRoute?STORY_ENCOUNTERS[encounter.index+1]??null:save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
             const finaleWon=encounter.opponents[finishedWave]==='vaudream';
-            if(!finaleWon&&next&&next.stage!==encounter.stage){scene(next,true);return true;}
+            if(!finaleWon&&next&&next.stage!==encounter.stage){scene(next,true);return;}
             $('journey-title').textContent=save.completed||finaleWon?'Congratulations! You beat Sproto Fighter!':`${names(encounter)} ${encounter.opponents.every(isStoryRecruitable)?'recruited':'defeated'}!`;
             $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode is unlocked and stays unlocked as the roster grows. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. ${bonusNote()}${recruitNote(encounter)} ${storageNote()}`;
             buttons(next?[{label:`Next: ${ROSTER[next.opponent].name}`,run:()=>{void launch(next.stage,next);}},{label:'Story route',run:()=>selector(true)}]:[{label:'Story route',run:()=>selector(true)},{label:'Free-play levels',run:()=>selector(false)}]);
@@ -185,7 +215,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
             }
             buttons(actions);
         }
-        status();back=()=>selector(true);open();return true;
+        status();back=()=>selector(true);open();
     }
     $('story-worlds').onclick=()=>{
         if(hooks.beforeStory)void hooks.beforeStory().then(confirmed=>{if(confirmed)selector(true);});

@@ -100,6 +100,7 @@ try {
   async function finishWave(t,winner=0) {
     assert.equal(t.story.finishMatch(winner),true);
     assert.equal(t.story.onRoundEnd(winner),true);
+    t.skipCutscene();
     await flush();
   }
   const progressView=p=>{const s=p.snapshot();return {cleared:s.cleared,unlocked:s.unlocked,completed:s.completed,godModeUnlocked:s.godModeUnlocked,nextIndex:s.nextIndex};};
@@ -126,19 +127,19 @@ try {
     t.$('story-worlds').onclick();
     t.action(0);
     const query=selector=>t.$('journey-content').children[0].querySelector(selector);
-    const panel=()=>query('.trenches-cutscene-count').textContent;
-    assert.equal(query('.trenches-cutscene-speaker').textContent,ROSTER.highsproto.name);
+    const panel=()=>query('.story-cutscene-count').textContent;
+    assert.equal(query('.story-cutscene-speaker').textContent,ROSTER.highsproto.name);
     for(let i=1;i<=5;i++){
       assert.equal(panel(),i+' / 5');
       if(i===3){
-        const line=query('.trenches-cutscene-typed').textContent;
-        const alt=query('.trenches-cutscene-image').children[0].alt;
+        const line=query('.story-cutscene-typed').textContent;
+        const alt=query('.story-cutscene-image').children[0].alt;
         for(const id of ['mox','sproto102','sproto1187','sproto763']){
           assert.ok(line.includes(ROSTER[id].name),id+' displays its roster name in dialogue');
           assert.ok(alt.includes(ROSTER[id].name),id+' displays its roster name in the art description');
         }
       }
-      if(i===5)assert.match(query('.trenches-cutscene-typed').textContent,/Yannix, I’m taking yours off too[.].*free you/);
+      if(i===5)assert.match(query('.story-cutscene-typed').textContent,/Yannix, I’m taking yours off too[.].*free you/);
       assert.equal(globalThis.document.activeElement?.textContent,'Next');
       assert.equal(t.launches().length,0);
       t.action(0);
@@ -218,15 +219,49 @@ try {
   await check('restart of a settled ordinary round accepts a new outcome once',async()=>{
     const t=fresh();await t.begin();t.story.finishMatch(1);assert.equal(t.story.retryMatch(),true);await flush();t.story.finishMatch(0);assert.ok(t.progress.isCleared(0));
   });
-  await check('all three gauntlets recruit wave one but save no halfway checkpoint; wave two auto-launches',async()=>{
+  await check('all three gauntlets recruit wave one but save no halfway checkpoint; wave two follows',async()=>{
     for(const encounter of [ART,NICK_JUICY,FINAL]){
       const t=fresh(before(encounter.index));await t.begin();assert.equal(t.launches().at(-1).opponent,encounter.opponents[0]);
       assert.equal(t.story.finishMatch(0),true);
       assert.equal(t.story.finishMatch(0),false,'duplicate KO must not recruit wave two');
       const restored=createStoryProgress(t.disk);assert.ok(restored.isUnlocked(encounter.opponents[0]));assert.equal(restored.isCleared(encounter.index),false);assert.equal(restored.snapshot().nextIndex,encounter.index);
-      assert.equal(t.story.onRoundEnd(0),true);assert.equal(t.story.onRoundEnd(0),false,'duplicate outro while loading must not skip the next bout');await flush();assert.equal(t.launches().at(-1).opponent,encounter.opponents[1]);assert.equal(t.story.snapshot().encounter.index,encounter.index);
+      assert.equal(t.story.onRoundEnd(0),true);assert.equal(t.story.onRoundEnd(0),false,'duplicate outro must not skip to the next bout');t.skipCutscene();await flush();assert.equal(t.launches().at(-1).opponent,encounter.opponents[1]);assert.equal(t.story.snapshot().encounter.index,encounter.index);
       await finishWave(t);assert.ok(createStoryProgress(t.disk).isCleared(encounter.index));assert.ok(t.progress.isUnlocked(encounter.opponents[1]));
     }
+  });
+  await check('Artchick challenges the player between bouts and reveals Nick and Juicy only after victory',async()=>{
+    const t=fresh(before(ART.index));await t.begin();
+    const panel=selector=>t.$('journey-content').children[0].querySelector('.story-cutscene-'+selector).textContent;
+    const plays=()=>t.launches().map(launch=>launch.opponent);
+    assert.deepEqual(plays(),[ART.opponents[0]]);
+    assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.$('journey-title').textContent,'The First Word');
+    assert.equal(panel('speaker'),ROSTER.sproto943.name);
+    assert.match(panel('typed'),/I know who made you/);
+    t.action(0);
+    assert.match(panel('typed'),/Beat me/);
+    assert.doesNotMatch(panel('typed'),/Nick|Juicy/);
+    assert.deepEqual(plays(),[ART.opponents[0]]);
+    assert.equal(t.progress.isCleared(ART.index),false);
+    t.action(0);await flush();
+    assert.deepEqual(plays(),ART.opponents);
+    assert.equal(t.launches().at(-1).rest[1],true);
+    assert.equal(t.story.snapshot().wave,1);
+    assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.progress.isCleared(ART.index),true);
+    assert.equal(t.$('journey-title').textContent,'Who Made You');
+    assert.match(panel('typed'),/I owe you the truth/);
+    t.action(0);
+    assert.match(panel('typed'),/Nick and Juicy made you/);
+    t.action(0);
+    assert.match(t.$('journey-title').textContent,/Verse Gate/);
+
+    const leaving=fresh(before(ART.index));await leaving.begin();
+    assert.equal(leaving.story.onRoundEnd(0),true);
+    leaving.escape();
+    assert.equal(leaving.progress.currentWave(ART.index),0,'leaving the cutscene abandons the unsaved second bout');
+    await leaving.begin();
+    assert.equal(leaving.story.snapshot().wave,0);
   });
   await check('loss and draw in either wave retry each gauntlet from its first opponent',async()=>{
     for(const encounter of [ART,NICK_JUICY,FINAL])for(const wave of [0,1])for(const winner of [1,2]){
