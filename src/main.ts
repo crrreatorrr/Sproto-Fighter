@@ -12,6 +12,7 @@ import './mysticUI.css';
 import './campaignMap.css';
 import './versusScreen.css';
 import './fullscreen.css';
+import './trenchesCutscene.css';
 import {createVersusScreen} from './versusScreen';
 import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';
@@ -367,7 +368,7 @@ function updateStage(stage:StageId) {
     $('stage-title').textContent=location.name.toUpperCase();
     $('stage-subtitle').textContent=stage==='ranch'?' / BONUS STAGE':' / '+location.theme.toUpperCase();
 }
-async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{skill:number;assisted:boolean}) {
+async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{skill:number;assisted:boolean},startWithCountdown=false) {
     // Best of 3 is the menu's Rules choice; `?matchDepth` still forces it for every CPU and local versus round.
     let requestedMatchDepthOptions = (depthEnabled || setup.rules === 'bo3') && !isStory && (setup.mode === 'cpu' || setup.mode === 'versus') ? { rounds: true, modifier: depthModifier } : null;
     if(!isStory&&(setup.mode==='online'||setup.mode==='online-wager')){void queueOnline(setup);return true;}
@@ -418,6 +419,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     delete state.fighters[0].partner;
     if(selectedPartner&&selectedPartner!==ROSTER[chosen].partner)state.fighters[0].partner=selectedPartner;
     start();
+    if(startWithCountdown)versus.skip();
     $('mode-label').textContent=isStory?'STORY / WORLD '+STAGES.find(s=>s.id===setup.stage)!.chapter:mode==='cpu'?'CPU SPARRING':mode==='versus'?'LOCAL VERSUS':mode==='guard'?'GUARD PRACTICE':trainingRound?'TRAINING':tutorialRound?'TUTORIAL':'COMBO PRACTICE';
     if(encounter&&encounter.opponents.length>1){
         const bout=encounter.opponents.indexOf(setup.opponent)+1;
@@ -642,13 +644,13 @@ const story = createStoryMode({
     ready: () => !($('start') as HTMLButtonElement).disabled,
     pause: () => { resumeAfterJourney = running; showOverlay('Choose your next destination.', 'Your current round is paused while you browse worlds and levels.', 'Resume', 'COMBAT LAB / PAUSED', false, true); },
     resume: () => { if (resumeAfterJourney && started && (presentation.phase !== 'result'||storyAnimation.active)) start(); },
-    launch: (stage, isStory, storyOpponent, difficulty) => {
+    launch: (stage, isStory, storyOpponent, difficulty, startWithCountdown) => {
         if(isStory)freePlayMode??=selection.getSetup().mode;
         const setup=selection.getSetup();
         if(storyOpponent)setup.opponent=storyOpponent;
         setup.stage=stage;setup.mode=isStory?'cpu':freePlayMode??setup.mode;
         if(!isStory)freePlayMode=null;
-        return launchSelection(setup,isStory,difficulty);
+        return launchSelection(setup,isStory,difficulty,startWithCountdown);
     },
 },storyProgress);
 $('start').onclick = () => overlayAction ? overlayAction() : start();

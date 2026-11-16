@@ -45,12 +45,19 @@ try {
     return disk;
   }
   class Element {
-    classList={toggle(){}};children=[];open=false;disabled=false;hidden=false;dataset={};textContent='';value='';events={};style={setProperty(){}};
+    classList={toggle(){},remove(){}};children=[];open=false;disabled=false;hidden=false;dataset={};textContent='';value='';events={};style={setProperty(){}};
     set innerHTML(value){this.html=value;this.children=[];}
     get innerHTML(){return this.html??'';}
     replaceChildren(...nodes){this.children=nodes;this.html='';}
     append(...nodes){this.children.push(...nodes);}
+    querySelector(selector){
+      this.selectors??=new Map();
+      if(!this.selectors.has(selector))this.selectors.set(selector,new Element());
+      return this.selectors.get(selector);
+    }
     setAttribute(name,value){this[name]=value;}
+    getAttribute(name){return this[name]??null;}
+    removeAttribute(name){delete this[name];}
     showModal(){assert.equal(this.open,false);this.open=true;}
     close(){this.open=false;}
     addEventListener(event,fn){this.events[event]=fn;}
@@ -60,8 +67,18 @@ try {
     const elements=new Map([...(read('index.html')+read('src/selectionMenu.ts')).matchAll(/\bid="([^"]+)"/g)].map(m=>[m[1],new Element()]));
     elements.set('free-levels',new Element());
     const $=id=>{assert.ok(elements.has(id),'missing #'+id);return elements.get(id);};
-    globalThis.document={getElementById:$,createElement:()=>new Element()};
-    return {$,pick:i=>$('journey-content').children[0].children[i].onclick(),action:i=>$('journey-actions').children[i].onclick(),escape:()=>$('journey-dialog').events.cancel({preventDefault(){}})};
+    globalThis.document={getElementById:$,createElement:()=>new Element(),querySelector:()=>null};
+    globalThis.Image=class extends Element {complete=true;naturalWidth=832;};
+    globalThis.matchMedia=()=>({matches:true});
+    const actions=()=>$('journey-actions').children;
+    return {$,pick:i=>$('journey-content').children[0].children[i].onclick(),action:i=>actions()[i].onclick(),
+      skipCutscene(){
+        const button=actions().find(button=>button.textContent==='Skip cutscene');
+        if(!button)return false;
+        button.onclick();
+        return true;
+      },
+      escape:()=>$('journey-dialog').events.cancel({preventDefault(){}})};
   }
   function fresh(disk=storage()) {
     const d=dom(),progress=createStoryProgress(disk),events=[];
@@ -77,7 +94,7 @@ try {
     return {...d,disk,progress,story,events,setReady:value=>ready=value,setTesting:value=>testing=value,setLaunch:value=>launchResult=value,
       launches:()=>events.filter(event=>typeof event==='object'),
       mapPick:index=>{assert.ok(mapChoose);mapChoose(STORY_ENCOUNTERS[index]);},
-      async begin(){d.$('story-worlds').onclick();await d.action(0);await d.action(0);await flush();},
+      async begin(){d.$('story-worlds').onclick();await d.action(0);if(!d.skipCutscene())await d.action(0);await flush();},
     };
   }
   async function finishWave(t,winner=0) {
@@ -102,6 +119,44 @@ try {
     for(let i=1;i<cards.length;i++){assert.equal(cards[i].disabled,true);await t.pick(i);}
     assert.equal(t.launches().length,0);
     t.$('free-levels').onclick();for(const card of t.$('journey-content').children[0].children)assert.equal(card.disabled,false);
+  });
+  await check('the fifth Trenches panel starts Yannix’s fight directly, including on replay',async()=>{
+    const t=fresh();
+    const before=progressView(t.progress);
+    t.$('story-worlds').onclick();
+    t.action(0);
+    const query=selector=>t.$('journey-content').children[0].querySelector(selector);
+    const panel=()=>query('.trenches-cutscene-count').textContent;
+    assert.equal(query('.trenches-cutscene-speaker').textContent,ROSTER.highsproto.name);
+    for(let i=1;i<=5;i++){
+      assert.equal(panel(),i+' / 5');
+      if(i===3){
+        const line=query('.trenches-cutscene-typed').textContent;
+        const alt=query('.trenches-cutscene-image').children[0].alt;
+        for(const id of ['mox','sproto102','sproto1187','sproto763']){
+          assert.ok(line.includes(ROSTER[id].name),id+' displays its roster name in dialogue');
+          assert.ok(alt.includes(ROSTER[id].name),id+' displays its roster name in the art description');
+        }
+      }
+      if(i===5)assert.match(query('.trenches-cutscene-typed').textContent,/Yannix, I’m taking yours off too[.].*free you/);
+      assert.equal(globalThis.document.activeElement?.textContent,'Next');
+      assert.equal(t.launches().length,0);
+      t.action(0);
+    }
+    await flush();
+    assert.equal(t.story.isOpen,false);
+    assert.equal(t.story.snapshot().opponent,'mox');
+    assert.equal(t.launches()[0].rest[1],true,'the cutscene hands off to the countdown');
+    t.story.leaveStory();
+    t.$('story-worlds').onclick();
+    assert.equal(t.$('journey-actions').children[1].textContent,'Replay Trenches opening');
+    t.action(1);
+    assert.equal(panel(),'1 / 5');
+    t.skipCutscene();
+    await flush();
+    assert.equal(t.story.isOpen,false);
+    assert.equal(t.story.snapshot().opponent,'mox');
+    assert.deepEqual(progressView(t.progress),before);
   });
   await check('normal and God Mode controller wins persist identical recruitment and continuation',async()=>{
     const outcomes=[];
@@ -207,7 +262,7 @@ try {
   });
   await check('double-clicked encounter launch submits once while assets load',async()=>{
     const t=fresh();let release;t.setLaunch(()=>new Promise(resolve=>release=resolve));
-    t.$('story-worlds').onclick();await t.action(0);t.action(0);t.action(0);assert.equal(t.launches().length,1);assert.equal(t.story.snapshot().launching,true);
+    t.$('story-worlds').onclick();await t.action(0);t.skipCutscene();t.action(0);t.action(0);assert.equal(t.launches().length,1);assert.equal(t.story.snapshot().launching,true);
     release(true);await flush();assert.equal(t.story.snapshot().launching,false);assert.equal(t.story.snapshot().encounter.index,0);
   });
   await check('free play, Back and Escape do not award story progress',async()=>{
@@ -270,13 +325,13 @@ try {
       const trainingFlag=false,trainingRecorder={stop(){}},tutorialCoach={begin(){}},menuSound=()=>{};let training=null,koSlow=0,koSeen=false;
       let state=createState(),presentation=createRoundPresentation(),accumulator=0,queued=0,qaSingleStep=false,resumeAfterSettings=false,remapping=null;
       let selectedStage='ranch',selectedLocation=null,assetFailure=false,mapChoose=null;
-      const held=new Set(),frames=[],qaEvents=[],assetRequests=[],versusCalls=[];
+      const held=new Set(),frames=[],qaEvents=[],assetRequests=[],versusCalls=[];let skippedVersus=0;
       const countdown={hide(){}};
       const storyAnimation={load:async()=>{},reset(){},clear(){},active:null};
       // The five transformed bosses keep their own rules; every other chapter-end rival now carries its chapter's modifier.
       const BOSS_FORMS=['nick','guest07','sproto943','vela','vaudream'];
       const storyAnimationPlan=(id,story)=>({intro:[],outro:[],...(story&&BOSS_FORMS.includes(id)?{form:'boss'}:{})});const loadStoryBossArt=async()=>null;
-      const versus={show:(...ids)=>versusCalls.push(ids),hide(){}};
+      const versus={show:(...ids)=>versusCalls.push(ids),hide(){},skip(){skippedVersus++;}};
       const ensurePoseAtlases=async(ids)=>{assetRequests.push([...ids]);if(assetFailure)throw Error('asset failure');},ensurePowerArt=async()=>{};
       const setStage=id=>selectedStage=id,setActiveStoryLocation=value=>selectedLocation=value,loadStoryLocation=async()=>{};
       // updateStage now tells the pause-menu song pick the stage changed. This harness does not play audio.
@@ -297,10 +352,10 @@ try {
         openSettings(){resumeAfterSettings=running;running=false;dialog.open=true;},
         openResultSettings(){running=false;presentation.phase='result';dialog.open=true;resumeAfterSettings=false;$('overlay').hidden=false;},
         mapPick(index){if(!mapChoose)throw Error('Map not mounted');mapChoose(STORY_ENCOUNTERS[index]);},
-        inspect:()=>({setup,mode,matchDepthOptions,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,selectionOpen:selection.isOpen})};
+        inspect:()=>({setup,mode,matchDepthOptions,running,matchGodMode,matchTesting,state,selectedStage,selectedLocation,stageRequests,assetRequests,versusCalls,skippedVersus,selectionOpen:selection.isOpen})};
     `)({createStoryMode:hooks=>createStoryMode(hooks,progress),storyProgress:progress,STAGES,ROSTER,$:d.$,createRoundPresentation,createState,
       STORY_ENCOUNTERS,STORY_OPPONENTS:progressModule.STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled:depth,enableMatchDepth:core.enableMatchDepth,storyChapterRule,PLAYABLE_FIGHTERS});
-    return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);await d.action(0);await flush();}};
+    return {...d,...fixture,progress,disk,async begin(){d.$('story-worlds').onclick();await flush();await d.action(0);if(!d.skipCutscene())await d.action(0);await flush();}};
   }
   await check('failed launch preserves the active experimental match and replay options',async()=>{
     const t=integration({depth:true});
@@ -386,8 +441,10 @@ try {
   await check('actual main story scenery follows the node and standalone arenas clear the variant',async()=>{
     const t=integration();await t.begin();const expected=storyLocationForEncounter(STORY_ENCOUNTERS[0],STORY_ENCOUNTERS);
     assert.equal(t.inspect().selectedLocation?.id,expected.id);assert.ok(t.$('stage-subtitle').textContent.includes(expected.title.toUpperCase()));
+    assert.equal(t.inspect().skippedVersus,1,'the opening starts the countdown after launch');
     await t.launchSelection({fighter:'highsproto',opponent:'vela',stage:'bar',mode:'dummy'});
     assert.equal(t.inspect().selectedLocation,null);assert.equal(t.inspect().selectedStage,'bar');assert.equal(t.story.isActive,false);
+    assert.equal(t.inspect().skippedVersus,1,'standalone matches still show the versus preview');
   });
   await check('actual main asset failure preserves the current state and premature God Mode remains gated',async()=>{
     const t=integration();assert.equal(await t.launchSelection({fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'cpu',godMode:true}),true);

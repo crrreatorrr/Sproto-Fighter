@@ -40,10 +40,11 @@ try{
    await page.locator('.campaign-node[data-encounter="'+encounter.id+'"]').click();
    await page.locator('.campaign-rival .primary').click();
    const picker=page.getByRole('combobox',{name:'Story scenery'});await picker.selectOption(location.id);
-   await page.locator('#journey-actions button').first().click();
+   if(encounter.index===0)await page.getByRole('button',{name:'Skip cutscene'}).click();
+   else await page.locator('#journey-actions button').first().click();
    await page.waitForFunction(title=>document.querySelector('#stage-subtitle').textContent.includes(title.toUpperCase()),location.title);
    assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().encounter.id),encounter.id);
-   await page.locator('.versus-skip').click();
+   if(encounter.index!==0)await page.locator('.versus-skip').click();
    if(location.id.endsWith('-1')){
     await page.locator('#reset').click();await page.waitForFunction(()=>!window.neonRelay.storySnapshot().launching);
     assert.ok((await page.locator('#stage-subtitle').textContent()).includes(location.title.toUpperCase()));
