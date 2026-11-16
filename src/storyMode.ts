@@ -1,6 +1,8 @@
-import {mountStoryCutscene,type StoryCutscene} from './storyCutscene';
+import {mountStoryCutscene,storyCutsceneArt,type StoryCutscene} from './storyCutscene';
 import {trenchesCutscene} from './trenchesCutscene';
 import {afterArtchick,ARTCHICK,beforeArtchick} from './artchickCutscenes';
+import {afterNickJuicy,beforeNickJuicy} from './nickJuicyCutscenes';
+import {afterYannix} from './yannixCutscene';
 import {createDifficultyRetry,storyDifficulty} from './difficulty';
 import {storySceneryChoices,setStorySceneryChoice,getStorySceneryChoice} from './stageVariants';
 import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
@@ -8,12 +10,22 @@ import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,STORY_OPPONENTS,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
 
 type Hooks={beforeStory?:()=>Promise<boolean>;pause:()=>void;resume:()=>void;launch:(stage:StageId,story:boolean,opponent?:PlayableFighterId,difficulty?:{skill:number;assisted:boolean},startWithCountdown?:boolean)=>boolean|Promise<boolean>;ready:()=>boolean;testing?:()=>boolean;godMode?:()=>boolean;selectedFighter?:()=>PlayableFighterId;canPlayFighter?:(id:PlayableFighterId)=>boolean;map?:(parent:HTMLElement,progress:StoryProgress,choose:(encounter:Encounter)=>void)=>void};
+type Cutscene = {title:string;location:string;script:StoryCutscene};
+const cutscenes = {
+    trenches: {title:'The Signal Below',location:'Mudline Trenches',script:trenchesCutscene},
+    yannix: {title:'Wide Awake',location:'Drainage Floodgate',script:afterYannix},
+    artchickBefore: {title:'The First Word',location:'Mint Starlit Nursery',script:beforeArtchick},
+    artchickAfter: {title:'Who Made You',location:'Mint Starlit Nursery',script:afterArtchick},
+    nickJuicyBefore: {title:'Their Own Faces',location:'Red-sun Asteroid Causeway',script:beforeNickJuicy},
+    nickJuicyAfter: {title:'Find Morelight',location:'Event Horizon Observatory',script:afterNickJuicy},
+} satisfies Record<string,Cutscene>;
+
 export function createStoryMode(hooks:Hooks,progress:StoryProgress){
     const $=<T extends HTMLElement>(id:string)=>document.getElementById(id) as T;
     const modal=$<HTMLDialogElement>('journey-dialog');
     const worlds=STORY_STAGE_IDS.map(id=>STAGES.find(s=>s.id===id)!);
     let active:Encounter|null=null,wave=0,settled:number|null=null,launching=false;
-    let view:'worlds'|'levels'|'scene'|'result'='worlds';
+    let view:'worlds'|'levels'|'cutscenes'|'scene'|'result'='worlds';
     /** Stage of the fight the result screen leads straight into (retry, next bout, next rival). Keeps that zone's song going. */
     let carryStage:StageId|null=null;
     let back:()=>void=()=>{};
@@ -101,7 +113,12 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         label.append(select);parent.append(label);
     }
     function scene(encounter:Encounter,between=false){
-        if(encounter===trenchesOpening){trenchesIntro(encounter);return;}
+        if(encounter===trenchesOpening){
+            openingCutscene(encounter,cutscenes.trenches);return;
+        }
+        if(encounter.gauntlet==='nick-juicy'){
+            openingCutscene(encounter,cutscenes.nickJuicyBefore);return;
+        }
         view='scene';const level=STAGES.find(s=>s.id===encounter.stage)!;
         $('journey-kicker').textContent='PLACEHOLDER CUTSCENE / MAJOR STAGE';
         $('journey-title').textContent=between?`Next stop: ${level.name}`:encounter.gauntlet==='final'?`Final gauntlet: ${level.name}`:encounter.index===0?`${level.name}: the journey begins`:`Return to ${level.name}`;
@@ -119,7 +136,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         buttons([{label:'Start encounter',run:()=>{void launch(encounter.stage,encounter,{startWithCountdown});}},{label:'Story route',run:()=>selector(true)}]);back=()=>selector(true);open();
     }
     const firstInRegion=(encounter:Encounter)=>encounter.index===0||STORY_ENCOUNTERS[encounter.index-1].stage!==encounter.stage;
-    function trenchesIntro(encounter:Encounter){
+    function openingCutscene(encounter:Encounter,cutscene:Cutscene){
         carryStage=null;
         const finish=()=>{
             if(launching||!modal.open)return;
@@ -127,11 +144,11 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
             encounterPreview(encounter,true);
             void launch(encounter.stage,encounter,{startWithCountdown:true});
         };
-        showCutscene(trenchesCutscene,'The Signal Below','MUDLINE TRENCHES',finish,()=>selector(true),encounter);
+        showCutscene(cutscene,finish,()=>selector(true),encounter);
     }
-    function showCutscene(script:StoryCutscene,title:string,location:string,finish:()=>void,leave:()=>void,scenery?:Encounter){
+    function showCutscene({script,title,location}:Cutscene,finish:()=>void,leave:()=>void,scenery?:Encounter){
         view='scene';modal.classList.remove('story-map-open');
-        $('journey-kicker').textContent=`STORY / ${location}`;
+        $('journey-kicker').textContent=`STORY / ${location.toUpperCase()}`;
         $('journey-title').textContent=title;
         $('journey-copy').textContent='';
         buttons([{label:'Next'},{label:'Skip cutscene',run:finish}]);
@@ -139,7 +156,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         stopCutscene=mountStoryCutscene($('journey-content'),primary!,script,finish);
         back=leave;open();modal.scrollTop=0;
     }
-    function showEncounter(encounter:Encounter,between=false){if(encounter===trenchesOpening||firstInRegion(encounter))scene(encounter,between);else encounterPreview(encounter);}
+    function showEncounter(encounter:Encounter,between=false){if(encounter===trenchesOpening||encounter.gauntlet==='nick-juicy'||firstInRegion(encounter))scene(encounter,between);else encounterPreview(encounter);}
     function selector(story:boolean){
         syncRoute();carryStage=null;
         view=story?'worlds':'levels';modal.classList.toggle('story-map-open',story);const save=progress.snapshot();
@@ -160,10 +177,31 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         if(story)hooks.map?.(content,progress,encounter=>showEncounter(encounter));
         buttons(story?[
             {label:save.completed?'Replay from the beginning':'Continue story',run:()=>showEncounter(STORY_ENCOUNTERS[save.nextIndex??0],true)},
-            ...(trenchesOpening&&progress.canPlay(trenchesOpening.index)?[{label:'Replay Trenches opening',run:()=>trenchesIntro(trenchesOpening)}]:[]),
+            {label:'Cutscene viewer',run:cutsceneViewer},
             {label:'Free-play levels',run:()=>selector(false)},{label:'Back to arena',run:close},
         ]:[{label:'Story route',run:()=>selector(true)},{label:'Back to arena',run:close}]);
         back=close;open();
+    }
+    function cutsceneViewer(){
+        view='cutscenes';carryStage=null;modal.classList.remove('story-map-open');
+        $('journey-kicker').textContent='STORY';
+        $('journey-title').textContent='Cutscene viewer';
+        $('journey-copy').textContent='';
+        const grid=document.createElement('div');grid.className='story-cutscene-gallery';
+        const cards=Object.values(cutscenes).map(cutscene=>{
+            const button=document.createElement('button');button.type='button';button.className='story-cutscene-card';
+            const image=document.createElement('img');image.alt='';image.loading='lazy';image.decoding='async';
+            image.src=storyCutsceneArt(cutscene.script.folder,cutscene.script.panels[0].art);
+            const title=document.createElement('strong');title.textContent=cutscene.title;
+            const location=document.createElement('small');location.textContent=cutscene.location;
+            button.append(image,title,location);
+            button.onclick=()=>showCutscene(cutscene,cutsceneViewer,cutsceneViewer);
+            return button;
+        });
+        grid.append(...cards);$('journey-content').replaceChildren(grid);
+        back=()=>selector(true);
+        buttons([{label:'Story map',run:back}]);
+        primary=cards[0];open();modal.scrollTop=0;
     }
     // Save a victory at KO. A second callback cannot award another bout or rival.
     function finishMatch(winner:number){
@@ -181,15 +219,24 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
             const nextWave=finishedWave+1;
             if(nextWave<encounter.opponents.length){
                 if(encounter.gauntlet==='art'&&encounter.opponents[nextWave]===ARTCHICK){
-                    showCutscene(beforeArtchick,'The First Word','THE HATCHERY',
+                    showCutscene(cutscenes.artchickBefore,
                         ()=>{void launch(encounter.stage,encounter,{nextWave,assist:assisted,startWithCountdown:true});},
                         ()=>{progress.abandonRun();selector(true);});
                 }else void launch(encounter.stage,encounter,{nextWave,assist:assisted});
                 return true;
             }
+            const finish=()=>showResult(encounter,result,finishedWave);
+            const leave=()=>selector(true);
             if(encounter.gauntlet==='art'&&encounter.opponents[finishedWave]===ARTCHICK){
-                showCutscene(afterArtchick,'Who Made You','THE HATCHERY',
-                    ()=>showResult(encounter,result,finishedWave),()=>selector(true));
+                showCutscene(cutscenes.artchickAfter,finish,leave);
+                return true;
+            }
+            if(encounter.gauntlet==='nick-juicy'){
+                showCutscene(cutscenes.nickJuicyAfter,finish,leave);
+                return true;
+            }
+            if(encounter===trenchesOpening){
+                showCutscene(cutscenes.yannix,finish,leave);
                 return true;
             }
         }
@@ -201,7 +248,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         if(result===0){
             const save=progress.snapshot(),next=save.openRoute?STORY_ENCOUNTERS[encounter.index+1]??null:save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
             const finaleWon=encounter.opponents[finishedWave]==='vaudream';
-            if(!finaleWon&&next&&next.stage!==encounter.stage){scene(next,true);return;}
+            if(!finaleWon&&next&&(next.stage!==encounter.stage||next.gauntlet==='nick-juicy')){scene(next,true);return;}
             $('journey-title').textContent=save.completed||finaleWon?'Congratulations! You beat Sproto Fighter!':`${names(encounter)} ${encounter.opponents.every(isStoryRecruitable)?'recruited':'defeated'}!`;
             $('journey-copy').textContent=save.completed?`All ${STORY_OPPONENTS.length} installed rivals defeated. God Mode is unlocked and stays unlocked as the roster grows. ${storageNote()}`:`${save.cleared.length} of ${total} encounters cleared. ${bonusNote()}${recruitNote(encounter)} ${storageNote()}`;
             buttons(next?[{label:`Next: ${ROSTER[next.opponent].name}`,run:()=>{void launch(next.stage,next);}},{label:'Story route',run:()=>selector(true)}]:[{label:'Story route',run:()=>selector(true)},{label:'Free-play levels',run:()=>selector(false)}]);

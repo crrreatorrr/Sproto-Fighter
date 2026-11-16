@@ -126,3 +126,37 @@
   #journey-dialog[open]:has(.story-cutscene) { display: block; overflow-y: auto; }
   #journey-dialog:has(.story-cutscene) #journey-content { overflow: visible; }
 }
+
+.story-cutscene-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 12px 0 0;
+}
+.story-cutscene-card {
+  display: grid;
+  align-content: start;
+  gap: 3px;
+  min-width: 0;
+  padding: 0 0 9px;
+  overflow: hidden;
+  border: 1px solid #7d6046;
+  background: #0b0d18;
+  color: #f9c88c;
+  text-align: start;
+}
+.story-cutscene-card:hover, .story-cutscene-card:focus-visible { border-color: #f9c88c; }
+.story-cutscene-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  image-rendering: pixelated;
+  margin-bottom: 5px;
+  background: #09121e;
+}
+.story-cutscene-card strong, .story-cutscene-card small { padding-inline: 9px; }
+.story-cutscene-card strong { font-size: 16px; line-height: 1.15; }
+.story-cutscene-card small { color: #afbad0; font-size: 11px; }
+@media (max-width: 620px) {
+  .story-cutscene-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

@@ -121,7 +121,7 @@ try {
     assert.equal(t.launches().length,0);
     t.$('free-levels').onclick();for(const card of t.$('journey-content').children[0].children)assert.equal(card.disabled,false);
   });
-  await check('the fifth Trenches panel starts Yannix’s fight directly, including on replay',async()=>{
+  await check('the fifth Trenches panel starts Yannix’s fight directly from the campaign',async()=>{
     const t=fresh();
     const before=progressView(t.progress);
     t.$('story-worlds').onclick();
@@ -148,16 +148,48 @@ try {
     assert.equal(t.story.isOpen,false);
     assert.equal(t.story.snapshot().opponent,'mox');
     assert.equal(t.launches()[0].rest[1],true,'the cutscene hands off to the countdown');
-    t.story.leaveStory();
-    t.$('story-worlds').onclick();
-    assert.equal(t.$('journey-actions').children[1].textContent,'Replay Trenches opening');
-    t.action(1);
-    assert.equal(panel(),'1 / 5');
-    t.skipCutscene();
-    await flush();
-    assert.equal(t.story.isOpen,false);
-    assert.equal(t.story.snapshot().opponent,'mox');
     assert.deepEqual(progressView(t.progress),before);
+  });
+  await check('the cutscene viewer lists all six scenes and never starts a fight or advances the route',()=>{
+    const t=fresh(),before=progressView(t.progress);
+    t.$('story-worlds').onclick();
+    assert.equal(t.$('journey-actions').children[1].textContent,'Cutscene viewer');
+    t.action(1);
+    assert.equal(t.story.snapshot().view,'cutscenes');
+    const cards=()=>t.$('journey-content').children[0].children;
+    const titles=cards().map(card=>card.children[1].textContent);
+    assert.deepEqual(titles,['The Signal Below','Wide Awake','The First Word','Who Made You','Their Own Faces','Find Morelight']);
+    for(const [index,title] of titles.entries()){
+      cards()[index].onclick();
+      assert.equal(t.$('journey-title').textContent,title);
+      assert.equal(t.launches().length,0);
+      if(index===0)for(let panel=0;panel<5;panel++)t.action(0);
+      else if(index===1)t.escape();
+      else t.skipCutscene();
+      assert.equal(t.story.snapshot().view,'cutscenes');
+    }
+    t.escape();
+    assert.equal(t.story.snapshot().view,'worlds');
+    assert.equal(t.launches().length,0);
+    assert.deepEqual(progressView(t.progress),before);
+  });
+  await check('Yannix joins after a win and points toward the makers',async()=>{
+    const t=fresh();await t.begin();
+    assert.equal(t.story.onRoundEnd(1),true);
+    assert.equal(t.$('journey-title').textContent,'Retry this encounter.');
+    await t.action(0);await flush();
+    assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.$('journey-title').textContent,'Wide Awake');
+    assert.ok(t.progress.isUnlocked('mox'));
+    const read=part=>t.$('journey-content').children[0].querySelector('.story-cutscene-'+part).textContent;
+    assert.equal(read('speaker'),ROSTER.mox.name);
+    assert.match(read('typed'),/You woke me up/);
+    t.action(0);
+    assert.match(read('typed'),/crypto market/);
+    t.action(0);
+    assert.match(read('typed'),/built this world.*wake the others and find our makers/);
+    t.action(0);
+    assert.match(t.$('journey-actions').children[0].textContent,/^Next:/);
   });
   await check('normal and God Mode controller wins persist identical recruitment and continuation',async()=>{
     const outcomes=[];
@@ -254,7 +286,7 @@ try {
     t.action(0);
     assert.match(panel('typed'),/Nick and Juicy made you/);
     t.action(0);
-    assert.match(t.$('journey-title').textContent,/Verse Gate/);
+    assert.equal(t.$('journey-title').textContent,'Their Own Faces');
 
     const leaving=fresh(before(ART.index));await leaving.begin();
     assert.equal(leaving.story.onRoundEnd(0),true);
@@ -262,6 +294,32 @@ try {
     assert.equal(leaving.progress.currentWave(ART.index),0,'leaving the cutscene abandons the unsaved second bout');
     await leaving.begin();
     assert.equal(leaving.story.snapshot().wave,0);
+  });
+  await check('the projections send the player to Morelight only after both bouts',async()=>{
+    const t=fresh(before(NICK_JUICY.index));
+    const read=part=>t.$('journey-content').children[0].querySelector('.story-cutscene-'+part).textContent;
+    t.$('story-worlds').onclick();t.action(0);
+    assert.equal(t.$('journey-title').textContent,'Their Own Faces');
+    assert.equal(read('speaker'),ROSTER.guest07.name);
+    assert.match(read('typed'),/We’re projections of them/);
+    t.action(0);
+    assert.equal(read('speaker'),ROSTER.nick.name);
+    assert.equal(t.launches().length,0);
+    t.action(0);await flush();
+    assert.equal(t.story.snapshot().opponent,'nick');
+    assert.equal(t.launches()[0].rest[1],true);
+    assert.equal(t.story.onRoundEnd(0),true);await flush();
+    assert.equal(t.story.snapshot().opponent,'guest07');
+    assert.equal(t.story.isOpen,false);
+    assert.equal(t.progress.isCleared(NICK_JUICY.index),false);
+    assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.$('journey-title').textContent,'Find Morelight');
+    assert.equal(read('speaker'),ROSTER.nick.name);
+    t.action(0);
+    assert.equal(read('speaker'),ROSTER.guest07.name);
+    assert.match(read('typed'),/Talk to Morelight/);
+    t.action(0);
+    assert.equal(t.$('journey-actions').children[0].textContent,'Next: Morelight');
   });
   await check('loss and draw in either wave retry each gauntlet from its first opponent',async()=>{
     for(const encounter of [ART,NICK_JUICY,FINAL])for(const wave of [0,1])for(const winner of [1,2]){
@@ -327,7 +385,7 @@ try {
       const t=fresh();t.setTesting(testing);await t.begin();
       for(const encounter of STORY_ENCOUNTERS){
         for(const opponent of encounter.opponents){assert.equal(t.story.snapshot().encounter.index,encounter.index);assert.equal(t.launches().at(-1).opponent,opponent);assert.equal(t.launches().at(-1).stage,encounter.stage);await finishWave(t);}
-        assert.ok(t.progress.isCleared(encounter.index));if(encounter.index<TOTAL-1){await t.action(0);await flush();}
+        assert.ok(t.progress.isCleared(encounter.index));if(encounter.index<TOTAL-1){if(!t.skipCutscene())await t.action(0);await flush();}
       }
       const restored=createStoryProgress(t.disk);assert.equal(restored.snapshot().completed,true);assert.equal(restored.snapshot().nextIndex,null);assert.equal(restored.snapshot().godModeUnlocked,true);
       for(const id of STORY_ENCOUNTERS.flatMap(e=>e.opponents))assert.equal(restored.isUnlocked(id),progressModule.isStoryRecruitable(id),id);

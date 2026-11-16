@@ -1,10 +1,15 @@
 export interface StoryCutscene {
     folder: string;
     speaker: string;
-    panels: readonly { art: string; description: string; line: string }[];
+    panels: readonly { art: string; description: string; line: string; speaker?: string }[];
 }
 
 const characterDelay = 38;
+
+export function storyCutsceneArt(folder: string, art: string) {
+    const base = document.querySelector<HTMLMetaElement>('meta[name="sproto-asset-base"]')?.content || './';
+    return `${base}story/${folder}/${art}.webp`;
+}
 
 export function mountStoryCutscene(parent: HTMLElement, advance: HTMLButtonElement, { folder, speaker, panels }: StoryCutscene, finish: () => void) {
     const scene = document.createElement('section');
@@ -28,17 +33,16 @@ export function mountStoryCutscene(parent: HTMLElement, advance: HTMLButtonEleme
 
     const art = scene.querySelector('.story-cutscene-image')!;
     const status = scene.querySelector<HTMLElement>('.story-cutscene-status')!;
-    scene.querySelector('.story-cutscene-speaker')!.textContent = speaker;
+    const speakerLabel = scene.querySelector('.story-cutscene-speaker')!;
     const count = scene.querySelector('.story-cutscene-count')!;
     const transcript = scene.querySelector('.story-cutscene-transcript')!;
     const typed = scene.querySelector('.story-cutscene-typed')!;
     const untyped = scene.querySelector('.story-cutscene-untyped')!;
-    const base = document.querySelector<HTMLMetaElement>('meta[name="sproto-asset-base"]')?.content || './';
     const images = panels.map((panel, index) => {
         const image = new Image();
         image.alt = panel.description;
         image.fetchPriority = index === 0 ? 'high' : 'low';
-        image.src = `${base}story/${folder}/${panel.art}.webp`;
+        image.src = storyCutsceneArt(folder, panel.art);
         return image;
     });
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -71,6 +75,8 @@ export function mountStoryCutscene(parent: HTMLElement, advance: HTMLButtonEleme
         status.hidden = false;
         status.textContent = 'Loading artwork…';
         advance.setAttribute('aria-disabled', 'true');
+        const name = panel.speaker ?? speaker;
+        speakerLabel.textContent = name;
         count.textContent = `${index + 1} / ${panels.length}`;
         transcript.textContent = '';
         reveal(0);
@@ -82,7 +88,7 @@ export function mountStoryCutscene(parent: HTMLElement, advance: HTMLButtonEleme
             status.hidden = hasArtwork;
             if (!hasArtwork) status.textContent = panel.description;
             advance.removeAttribute('aria-disabled');
-            transcript.textContent = `${speaker}. ${panel.line}`;
+            transcript.textContent = `${name}. ${panel.line}`;
             if (reducedMotion) {
                 reveal(panel.line.length);
                 return;
