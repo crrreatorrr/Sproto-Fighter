@@ -27,8 +27,8 @@ export const trenchesCutscene: StoryCutscene = {
             line: `${collector}. ${dad}. ${snarf}. Every boot hits the water on the same beat. ${yannix} has a tear on his cheek. He keeps marching.`,
         },
         {
-            art: '04-relay',
-            description: `A relay sends a magenta signal to ${yannix} and ${collector}. The receiver beside ${highSproto}’s ear glows the same color.`,
+            art: '06-signal-under-the-relay',
+            description: `From water level, ${highSproto} touches his receiver as the relay sends magenta pulses toward ${yannix} and ${collector}.`,
             line: 'Those receivers are feeding them orders. Mine’s doing it too. I hear my own voice say, “Fight him.” I never opened my mouth.',
         },
         {

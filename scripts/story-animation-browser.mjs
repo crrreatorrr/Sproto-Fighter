@@ -252,7 +252,17 @@ try{
  await page.getByRole('button',{name:'Next',exact:true}).click();
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='morelight-ejection');
  await page.locator('#story-animation-skip').click();
+ await page.getByRole('heading',{name:'Beyond the Threshold',exact:true}).waitFor();
+ assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+ await page.waitForFunction(()=>document.querySelector('.story-cutscene-transcript')?.textContent.includes('My maker is yours'));
+ assert.equal(await page.locator('.story-cutscene-count').textContent(),'1 / 3');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelector('.story-cutscene-transcript')?.textContent.includes('I know where to find THE CREATOR'));
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ assert.equal(await page.locator('.story-cutscene-count').textContent(),'3 / 3');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vaudream'&&!window.neonRelay.storySnapshot().launching);
+ assert.match(await page.locator('#stage-subtitle').textContent(),/VIOLET FINAL THRESHOLD/);
  await winRegularBout({opponent:'vaudream'});
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.[0]?.form==='vmu');
  assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().phase),null);

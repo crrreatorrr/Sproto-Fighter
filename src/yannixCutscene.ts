@@ -13,8 +13,8 @@ export const afterYannix: StoryCutscene = {
             line: 'You woke me up. Thank you. I could hear myself talking, but I couldn’t stop their words coming out.',
         },
         {
-            art: '02-with-you',
-            description: `${yannix} braces himself to stand beneath the floodgate lamp, his eyes clear and the receiver still dark.`,
+            art: '04-rigged-market',
+            description: `Viewed from above, ${yannix} looks up with the dead receiver in one hand and the floodgate at his feet.`,
             line: 'They rig the crypto market down here. Prices, bets, even who throws the next punch. The signal kept us fighting while they got paid.',
         },
         {

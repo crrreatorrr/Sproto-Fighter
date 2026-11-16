@@ -18,8 +18,8 @@ export const afterMorelightMecha: StoryCutscene = {
             line: 'I didn’t create you either. You’ll meet the one who did soon enough. Ask him why he needed you to doubt what you saw.',
         },
         {
-            art: '03-get-clear',
-            description: `${morelight} holds his position inside the intact mecha as its core begins to glow.`,
+            art: '04-core-failing',
+            description: `A close-up shows the red warning on ${morelight}’s damaged chest panel as he looks down from the cockpit.`,
             line: 'That sound is the core giving way. Get clear. Save your next question for him.',
         },
     ],

@@ -18,8 +18,8 @@ export const beforeMorelight: StoryCutscene = {
             line: 'Sprotos were created to spread truth and reveal the light. Every time one of us speaks plainly, that light reaches someone else.',
         },
         {
-            art: '03-the-test',
-            description: `${morelight} raises his fists on the arena platform and plants his feet by the center ring.`,
+            art: '04-stand-your-ground',
+            description: `Seen from floor level, ${morelight} raises his fists beneath the tilted portal and the black hole.`,
             line: 'Now show me you can carry that light when someone stands in your way. Keep your eyes open. The first move is mine.',
         },
     ],

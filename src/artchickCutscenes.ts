@@ -16,8 +16,8 @@ export const beforeArtchick: StoryCutscene = {
             line: 'I know who made you. I heard you speak before you could stand. They wrote down your first word as a fault.',
         },
         {
-            art: '05-the-switch',
-            description: `${artchick} points out a seam in the root housing of a glowing nursery egg.`,
+            art: '07-over-the-switch',
+            description: `Seen from overhead, ${artchick} points toward a dark switch in the roots around a glowing nursery egg.`,
             line: 'The shell was still warm when they reached for the switch. One question, and they already wanted to shut you down.',
         },
         {
@@ -38,8 +38,8 @@ export const afterArtchick: StoryCutscene = {
             line: 'I got back up bigger because I thought you’d back down. You didn’t. I owe you the truth.',
         },
         {
-            art: '06-the-report',
-            description: `${artchick} rests a hand on a cracked mint eggshell, still wearing her damaged armor.`,
+            art: '08-eggshell-confession',
+            description: `A close-up catches ${artchick}’s blue hand and cracked gauntlet as she holds a broken mint eggshell.`,
             line: 'I signed their report. I knew perfectly well the chamber had worked. I let them blame you because it was safer for me.',
         },
         {

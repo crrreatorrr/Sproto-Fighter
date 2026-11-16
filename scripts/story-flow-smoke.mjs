@@ -150,7 +150,7 @@ try {
     assert.equal(t.launches()[0].rest[1],true,'the cutscene hands off to the countdown');
     assert.deepEqual(progressView(t.progress),before);
   });
-  await check('the cutscene viewer lists all eight scenes and never starts a fight or advances the route',()=>{
+  await check('the cutscene viewer lists all nine scenes and never starts a fight or advances the route',()=>{
     const t=fresh(),before=progressView(t.progress);
     t.$('story-worlds').onclick();
     assert.equal(t.$('journey-actions').children[1].textContent,'Cutscene viewer');
@@ -158,7 +158,7 @@ try {
     assert.equal(t.story.snapshot().view,'cutscenes');
     const cards=()=>t.$('journey-content').children[0].children;
     const titles=cards().map(card=>card.children[1].textContent);
-    assert.deepEqual(titles,['The Signal Below','Wide Awake','The First Word','Who Made You','Their Own Faces','Find Morelight','The Light We Carry','The Maker Ahead']);
+    assert.deepEqual(titles,['The Signal Below','Wide Awake','The First Word','Who Made You','Their Own Faces','Find Morelight','The Light We Carry','The Maker Ahead','Beyond the Threshold']);
     for(const [index,title] of titles.entries()){
       cards()[index].onclick();
       assert.equal(t.$('journey-title').textContent,title);
@@ -364,8 +364,18 @@ try {
     assert.equal(ejections,1);
     assert.equal(t.story.isOpen,false);
     assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.$('journey-title').textContent,'Beyond the Threshold');
+    assert.equal(t.launches().length,1,'VMU waits for all three dialogue panels');
+    assert.match(read(),/My maker is yours/);
+    t.action(0);
+    assert.match(read(),/I know where to find THE CREATOR/);
+    t.action(0);
+    assert.match(read(),/get past me/);
+    assert.equal(t.progress.isCleared(FINAL.index),false);
+    t.action(0);
     await flush();
     assert.equal(t.story.snapshot().opponent,'vaudream');
+    assert.equal(t.launches().at(-1).rest[1],true);
   });
   await check('loss and draw in either wave retry each gauntlet from its first opponent',async()=>{
     for(const encounter of [ART,NICK_JUICY,FINAL])for(const wave of [0,1])for(const winner of [1,2]){

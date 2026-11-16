@@ -5,6 +5,7 @@ import {afterNickJuicy,beforeNickJuicy} from './nickJuicyCutscenes';
 import {afterYannix} from './yannixCutscene';
 import {beforeMorelight} from './morelightCutscene';
 import {afterMorelightMecha} from './morelightMechaCutscene';
+import {beforeVMU} from './vmuCutscene';
 import {createDifficultyRetry,storyDifficulty} from './difficulty';
 import {storySceneryChoices,setStorySceneryChoice,getStorySceneryChoice} from './stageVariants';
 import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
@@ -22,6 +23,7 @@ const cutscenes = {
     nickJuicyAfter: {title:'Find Morelight',location:'Event Horizon Observatory',script:afterNickJuicy},
     morelightBefore: {title:'The Light We Carry',location:'Iceblue Event Horizon',script:beforeMorelight},
     morelightAfter: {title:'The Maker Ahead',location:'Iceblue Event Horizon',script:afterMorelightMecha},
+    vmu: {title:'Beyond the Threshold',location:'Violet Final Threshold',script:beforeVMU},
 } satisfies Record<string,Cutscene>;
 
 export function createStoryMode(hooks:Hooks,progress:StoryProgress){
@@ -236,8 +238,11 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         if(result===0){
             const nextWave=finishedWave+1;
             if(nextWave<encounter.opponents.length){
-                if(encounter.gauntlet==='art'&&encounter.opponents[nextWave]===ARTCHICK){
-                    showCutscene(cutscenes.artchickBefore,
+                const nextOpponent=encounter.opponents[nextWave];
+                const intro=encounter.gauntlet==='art'&&nextOpponent===ARTCHICK?cutscenes.artchickBefore
+                    :encounter.gauntlet==='final'&&nextOpponent==='vaudream'?cutscenes.vmu:undefined;
+                if(intro){
+                    showCutscene(intro,
                         ()=>{void launch(encounter.stage,encounter,{nextWave,assist:assisted,startWithCountdown:true});},
                         ()=>{progress.abandonRun();selector(true);});
                 }else void launch(encounter.stage,encounter,{nextWave,assist:assisted});

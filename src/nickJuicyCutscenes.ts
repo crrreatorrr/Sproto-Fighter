@@ -16,8 +16,8 @@ export const beforeNickJuicy: StoryCutscene = {
             line: `The real ${juicy} and ${nick} made all three of us. We’re projections of them. Nick and I got their faces and names. You were the first to ask why.`,
         },
         {
-            art: '05-borrowed-memories',
-            description: `${nick} studies a red-gloved hand while ${juicy} watches beneath the red sun.`,
+            art: '07-red-glove',
+            description: `Seen over ${nick}’s shoulder, his raised red glove fills the foreground while ${juicy} watches from across the causeway.`,
             line: 'They gave me his memories too. I used to think that remembering a choice was the same as making one.',
         },
         {
@@ -38,8 +38,8 @@ export const afterNickJuicy: StoryCutscene = {
             line: 'You got past both of us. For the record, they never taught me what to say when that happened.',
         },
         {
-            art: '06-missing-memory',
-            description: `${nick} turns toward ${juicy} from his dragon’s saddle as the mecha catches the Observatory’s gold light.`,
+            art: '08-observatory-from-above',
+            description: `From overhead, ${nick} and his dragon face ${juicy} in his mecha across the Observatory’s golden rings.`,
             line: 'We got their memories in pieces. There’s a hole where the answer should be. Somebody was there who remembers the part they cut.',
         },
         {
