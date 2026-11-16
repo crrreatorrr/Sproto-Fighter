@@ -49,7 +49,12 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
     function buttons(actions:{label:string;run?:()=>void}[]){
         stopCutscene?.();stopCutscene=null;
         const area=$('journey-actions');area.replaceChildren();primary=null;
-        for(const action of actions){const button=document.createElement('button');button.className='quiet';button.textContent=action.label;button.onclick=action.run??null;area.append(button);primary??=button;}
+        for(const action of actions){
+            const button=document.createElement('button');button.className='quiet';button.textContent=action.label;button.onclick=action.run??null;
+            // Holding Enter must not activate a newly focused action on the next screen.
+            button.onkeydown=event=>{if(event.key==='Enter'&&event.repeat)event.preventDefault();};
+            area.append(button);primary??=button;
+        }
         focusDefault();
     }
     async function launch(id:StageId,encounter?:Encounter,nextWave=0,assist=false){

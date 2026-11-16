@@ -56,6 +56,8 @@ try {
       return this.selectors.get(selector);
     }
     setAttribute(name,value){this[name]=value;}
+    getAttribute(name){return this[name]??null;}
+    removeAttribute(name){delete this[name];}
     showModal(){assert.equal(this.open,false);this.open=true;}
     close(){this.open=false;}
     addEventListener(event,fn){this.events[event]=fn;}
@@ -66,7 +68,7 @@ try {
     elements.set('free-levels',new Element());
     const $=id=>{assert.ok(elements.has(id),'missing #'+id);return elements.get(id);};
     globalThis.document={getElementById:$,createElement:()=>new Element(),querySelector:()=>null};
-    globalThis.Image=Element;
+    globalThis.Image=class extends Element {complete=true;naturalWidth=832;};
     globalThis.matchMedia=()=>({matches:true});
     const actions=()=>$('journey-actions').children;
     return {$,pick:i=>$('journey-content').children[0].children[i].onclick(),action:i=>actions()[i].onclick(),

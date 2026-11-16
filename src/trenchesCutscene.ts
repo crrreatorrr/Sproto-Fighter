@@ -37,7 +37,10 @@ export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonEl
     const scene = document.createElement('section');
     scene.className = 'trenches-cutscene';
     scene.innerHTML = `
-        <div class="trenches-cutscene-art"></div>
+        <div class="trenches-cutscene-art">
+            <div class="trenches-cutscene-image"></div>
+            <p class="trenches-cutscene-status" aria-live="polite"></p>
+        </div>
         <div class="trenches-cutscene-caption">
             <div class="trenches-cutscene-meta">
                 <strong class="trenches-cutscene-speaker"></strong>
@@ -50,7 +53,8 @@ export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonEl
         </div>`;
     parent.replaceChildren(scene);
 
-    const art = scene.querySelector('.trenches-cutscene-art')!;
+    const art = scene.querySelector('.trenches-cutscene-image')!;
+    const status = scene.querySelector<HTMLElement>('.trenches-cutscene-status')!;
     const caption = scene.querySelector('.trenches-cutscene-caption') as HTMLElement;
     const speaker = scene.querySelector('.trenches-cutscene-speaker')!;
     const count = scene.querySelector('.trenches-cutscene-count')!;
@@ -69,6 +73,12 @@ export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonEl
     let index = 0;
     let revealed = 0;
     let timer: number | undefined;
+    let stopWaitingForArt: (() => void) | undefined;
+
+    function stopPanel() {
+        stopWaitingForArt?.();
+        stopTyping();
+    }
 
     function stopTyping() {
         if (timer !== undefined) window.clearInterval(timer);
@@ -84,31 +94,54 @@ export function mountTrenchesCutscene(parent: HTMLElement, advance: HTMLButtonEl
 
     function showPanel() {
         const panel = panels[index];
-        art.replaceChildren(images[index]);
+        const image = images[index];
+        art.replaceChildren(image);
+        status.hidden = false;
+        status.textContent = 'Loading artwork…';
+        advance.setAttribute('aria-disabled', 'true');
         caption.dataset.speaker = panel.art === '04-relay' ? 'relay' : 'high-sproto';
         speaker.textContent = panel.speaker;
         count.textContent = `${index + 1} / ${panels.length}`;
-        transcript.textContent = `${panel.speaker}. ${panel.line}`;
-        reveal(reducedMotion ? panel.line.length : 0);
-        if (reducedMotion) return;
-        timer = window.setInterval(() => {
-            reveal(revealed + 1);
-            if (revealed === panel.line.length) stopTyping();
-        }, characterDelay);
+        transcript.textContent = '';
+        reveal(0);
+
+        function startDialogue() {
+            stopWaitingForArt?.();
+            const hasArtwork = image.naturalWidth > 0;
+            image.hidden = !hasArtwork;
+            status.hidden = hasArtwork;
+            if (!hasArtwork) status.textContent = panel.description;
+            advance.removeAttribute('aria-disabled');
+            transcript.textContent = `${panel.speaker}. ${panel.line}`;
+            if (reducedMotion) {
+                reveal(panel.line.length);
+                return;
+            }
+            timer = window.setInterval(() => {
+                reveal(revealed + 1);
+                if (revealed === panel.line.length) stopTyping();
+            }, characterDelay);
+        }
+
+        if (image.complete) startDialogue();
+        else {
+            image.onload = image.onerror = startDialogue;
+            stopWaitingForArt = () => {
+                image.onload = image.onerror = null;
+                stopWaitingForArt = undefined;
+            };
+        }
     }
 
     advance.onclick = () => {
-        stopTyping();
+        if (advance.getAttribute('aria-disabled') === 'true') return;
+        stopPanel();
         if (index < panels.length - 1) {
             index++;
             showPanel();
         } else finish();
     };
-    // A held Enter should not move through several panels.
-    advance.onkeydown = event => {
-        if (event.key === 'Enter' && event.repeat) event.preventDefault();
-    };
 
     showPanel();
-    return stopTyping;
+    return stopPanel;
 }
