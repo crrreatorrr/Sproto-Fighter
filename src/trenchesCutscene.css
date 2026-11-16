@@ -74,6 +74,7 @@
 #journey-dialog:has(.trenches-cutscene) #journey-actions {
   width: var(--cutscene-width);
   margin: 12px auto 0;
+  align-items: center;
   gap: 8px;
 }
 #journey-dialog:has(.trenches-cutscene) #journey-actions button {
@@ -81,6 +82,12 @@
   padding: 8px 26px;
   font-size: 13px;
   white-space: normal;
+}
+#journey-dialog:has(.trenches-cutscene) .story-scenery-choice {
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  font-size: 13px;
 }
 #journey-dialog:has(.trenches-cutscene) #journey-actions button:first-child { min-width: 108px; }
 #journey-dialog:has(.trenches-cutscene) #journey-actions [aria-disabled="true"] { opacity: .55; }
