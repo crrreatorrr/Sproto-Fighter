@@ -105,9 +105,9 @@ try{
   localStorage.setItem(STORY_SAVE_KEY,JSON.stringify({version:3,cleared:STORY_ENCOUNTERS.slice(0,index).map(e=>e.id),unlocked:['highsproto','bront'],godModeUnlocked:false}));
  });
  await page.reload();await page.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
- await page.locator('#story-worlds').click();await page.locator('#partner-picker [data-partner=bront]').click();await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
+ await page.locator('#story-worlds').click();await page.locator('#partner-picker [data-partner=bront]').click();await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();await page.getByRole('button',{name:'Skip cutscene'}).click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='nick'&&!window.neonRelay.storySnapshot().launching);
- await page.keyboard.press('Enter');await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='intro');
+ await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='intro');
  assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().fighters[0].partner),'bront');
  const before=await page.evaluate(()=>({state:window.neonRelay.snapshot(),replay:window.neonRelay.replay()}));
  await page.locator('#pause').click();const paused=await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot());
@@ -127,12 +127,12 @@ try{
  const retryContext=await browser.newContext({storageState:await context.storageState()}),retryPage=await retryContext.newPage();
  await retryPage.route('**/story-animations/nick-juicy.png',route=>route.fulfill({status:404,body:'missing test fixture'}));
  await retryPage.goto(base);await retryPage.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
- await retryPage.locator('#story-worlds').click();await retryPage.locator('#partner-confirm').click();await retryPage.locator('#journey-actions button').first().click();await retryPage.locator('#journey-actions button').first().click();
+ await retryPage.locator('#story-worlds').click();await retryPage.locator('#partner-confirm').click();await retryPage.locator('#journey-actions button').first().click();await retryPage.getByRole('button',{name:'Skip cutscene'}).click();
  await retryPage.waitForFunction(()=>document.querySelector('#journey-title').textContent==='This match could not load.');
  assert.equal(await retryPage.locator('#start').isDisabled(),false);
  await retryPage.unroute('**/story-animations/nick-juicy.png');await retryPage.locator('#journey-actions button').first().click();
  await retryPage.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='nick'&&!window.neonRelay.storySnapshot().launching);
- await retryPage.keyboard.press('Enter');await retryPage.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='nick-juicy');
+ await retryPage.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='nick-juicy');
  await retryContext.close();
  // Run the finale through the browser UI with God Mode to isolate progression and inputs.
  await page.evaluate(async()=>{
@@ -142,8 +142,17 @@ try{
  });
  await page.reload();await page.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
  await page.locator('#settings').click();await page.locator('#testing-god-mode').check();await page.locator('#close-settings').click();
- await page.locator('#story-worlds').click();await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();await page.locator('#journey-actions button').first().click();
+ await page.locator('#story-worlds').click();await page.locator('#partner-confirm').click();await page.locator('#journey-actions button').first().click();
+ await page.getByRole('heading',{name:'The Light We Carry'}).waitFor();
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ const dialogue=page.locator('.story-cutscene-transcript');
+ await page.waitForFunction(()=>document.querySelector('.story-cutscene-transcript')?.textContent.includes('spread truth and reveal the light'));
+ assert.equal(await page.locator('.story-cutscene-count').textContent(),'2 / 3');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ assert.equal(await page.locator('.story-cutscene-count').textContent(),'3 / 3');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vela'&&!window.neonRelay.storySnapshot().launching);
+ assert.match(await page.locator('#stage-subtitle').textContent(),/ICEBLUE EVENT HORIZON/);
  const regularBouts=[];
  async function winRegularBout({opponent}){
   const maxCombatFrames=7200,wallCapMs=120000,started=Date.now(),recent=[];
@@ -157,7 +166,7 @@ try{
   });
   const diagnostic=()=>JSON.stringify({opponent,attempts,elapsedMs:Date.now()-started,initialFrame,maxCombatFrames,recent});
   try{
-   await page.bringToFront();await page.keyboard.press('Enter');
+   await page.bringToFront();if(await page.locator('.versus-skip').isVisible())await page.keyboard.press('Enter');
    await page.waitForFunction(()=>window.neonRelay.snapshot().frame>0||window.neonRelay.replay().bossStarts?.length,null,{timeout:Math.min(30000,wallCapMs)});
    while(Date.now()-started<wallCapMs){
     last=await read();initialFrame??=last.frame;recent.push(last);if(recent.length>6)recent.shift();
@@ -231,13 +240,44 @@ try{
  await page.locator('#story-animation-skip').click();
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.length===2);
  assert.equal(await page.evaluate(()=>window.neonRelay.verifyReplay()),true);
+ await page.getByRole('heading',{name:'The Maker Ahead'}).waitFor();
+ assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().clip),null);
+ assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().winner),0);
+ assert.equal(await page.evaluate(()=>window.neonRelay.replay().bossStarts?.at(-1)?.form),'mecha');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelector('.story-cutscene-transcript')?.textContent.includes('meet the one who did'));
+ assert.match(await dialogue.textContent(),/didn’t create you either/);
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().clip),null);
+ await page.getByRole('button',{name:'Next',exact:true}).click();
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='morelight-ejection');
  await page.locator('#story-animation-skip').click();
+ await page.getByRole('heading',{name:'Beyond the Threshold',exact:true}).waitFor();
+ assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+ await page.waitForFunction(()=>document.querySelector('.story-cutscene-transcript')?.textContent.includes('My maker is yours'));
+ assert.equal(await page.locator('.story-cutscene-count').textContent(),'1 / 3');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ await page.waitForFunction(()=>document.querySelector('.story-cutscene-transcript')?.textContent.includes('I know where to find THE CREATOR'));
+ await page.getByRole('button',{name:'Next',exact:true}).click();
+ assert.equal(await page.locator('.story-cutscene-count').textContent(),'3 / 3');
+ await page.getByRole('button',{name:'Next',exact:true}).click();
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vaudream'&&!window.neonRelay.storySnapshot().launching);
+ assert.match(await page.locator('#stage-subtitle').textContent(),/VIOLET FINAL THRESHOLD/);
  await winRegularBout({opponent:'vaudream'});
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.[0]?.form==='vmu');
  assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().phase),null);
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+ await page.getByRole('heading',{name:'You Bore Me',exact:true}).waitFor();
+ assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().winner),0);
+ const vmuLines=['I’m tired. You bore me.','You wanted an audience with my maker.','Go on. Bore him instead.'];
+ for(const [index,line] of vmuLines.entries()){
+   await page.waitForFunction(text=>document.querySelector('.story-cutscene-transcript')?.textContent.includes(text),line);
+   assert.equal(await page.locator('.story-cutscene-count').textContent(),`${index+1} / 3`);
+   assert.ok(await page.locator('.story-cutscene-image img').evaluate(image=>image.naturalWidth>0));
+   assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().clip),null);
+   assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+   await page.getByRole('button',{name:'Next',exact:true}).click();
+ }
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='vmu-shield');
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='vmu-black-hole');
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);

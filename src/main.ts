@@ -12,7 +12,7 @@ import './mysticUI.css';
 import './campaignMap.css';
 import './versusScreen.css';
 import './fullscreen.css';
-import './trenchesCutscene.css';
+import './storyCutscene.css';
 import {createVersusScreen} from './versusScreen';
 import {createFightCountdown} from './fightCountdown';
 import {mountCampaignMap} from './campaignMap';
@@ -1255,8 +1255,10 @@ function advanceRoundFrame(input: number, p2Input?: number) {
             if(nextPhase==='boss')storyAnimation.startBossBlackout();
             else if(nextPhase&&storyAnimation.start(nextPhase))
                 presentation.phase='result';
-            else if(!nextPhase&&(storyAnimation.replaceDefeat||storyBoss)&&storyAnimation.start('outro'))
-                presentation.phase='result';
+            else if(!nextPhase&&(storyAnimation.replaceDefeat||storyBoss)){
+                const playOutro=()=>{if(storyAnimation.start('outro'))presentation.phase='result';};
+                if(!story.beforeBossOutro(storyBoss?.form,playOutro))playOutro();
+            }
         }
         qaStopAtOutro();
         held.clear(); queued = 0;queued2=0;

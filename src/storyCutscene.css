@@ -1,0 +1,162 @@
+#journey-dialog:has(.story-cutscene) {
+  --cutscene-width: min(100%, max(530px, calc(52dvh * 16 / 9)));
+  width: min(960px, calc(100vw - 24px));
+  padding: clamp(12px, 2vw, 23px);
+}
+#journey-dialog:has(.story-cutscene) #journey-copy:empty { display: none; }
+#journey-dialog:has(.story-cutscene) #journey-kicker { color: #e4b780; }
+#journey-dialog:has(.story-cutscene) #journey-title {
+  font-size: clamp(21px, 3vw, 32px);
+  margin: 4px 0 0;
+}
+.story-cutscene {
+  width: var(--cutscene-width);
+  margin: 12px auto 0;
+  background: #0b0d18;
+  border: 1px solid #7d6046;
+  box-shadow: 0 0 0 3px #0a0a13;
+}
+.story-cutscene-art {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #09121e;
+}
+.story-cutscene-image { height: 100%; }
+#journey-dialog .story-cutscene-status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 16px;
+  color: #e9dfd5;
+  font-size: 15px;
+  text-align: center;
+}
+.story-cutscene-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.story-cutscene-caption {
+  border-top: 2px solid #7d6046;
+  padding: 12px clamp(12px, 2.6vw, 22px) 15px;
+}
+.story-cutscene-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font: 700 13px/1.35 ui-monospace, monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.story-cutscene-speaker { color: #f9c88c; }
+.story-cutscene-count { color: #afbad0; white-space: nowrap; }
+#journey-dialog .story-cutscene-line {
+  position: relative;
+  color: #f3f0f7;
+  font: 400 clamp(14px, 2vw, 19px)/1.5 ui-monospace, monospace;
+  margin: 6px 0 0;
+  min-height: 3em;
+}
+.story-cutscene-untyped { color: transparent; }
+.story-cutscene-transcript {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+#journey-dialog:has(.story-cutscene) #journey-actions {
+  width: var(--cutscene-width);
+  margin: 12px auto 0;
+  align-items: center;
+  gap: 8px;
+}
+#journey-dialog:has(.story-cutscene) #journey-actions button {
+  min-height: 44px;
+  padding: 8px 26px;
+  font-size: 13px;
+  white-space: normal;
+}
+#journey-dialog:has(.story-cutscene) .story-scenery-choice {
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+  font-size: 13px;
+}
+#journey-dialog:has(.story-cutscene) #journey-actions button:first-child { min-width: 108px; }
+#journey-dialog:has(.story-cutscene) #journey-actions [aria-disabled="true"] { opacity: .55; }
+@media (max-width: 620px) {
+  #journey-dialog:has(.story-cutscene) .dialog-top { display: grid; gap: 8px; }
+  #journey-dialog:has(.story-cutscene) .system-menu {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4px;
+  }
+  #journey-dialog:has(.story-cutscene) .system-menu .quiet {
+    min-height: 38px;
+    padding: 4px 14px;
+    font-size: 11px;
+    white-space: normal;
+  }
+}
+@media (orientation: landscape) and (max-height: 600px) {
+  #journey-dialog[open]:has(.story-cutscene) {
+    --cutscene-width: min(100%, max(285px, calc((100dvh - 220px) * 16 / 9)));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  #journey-dialog:has(.story-cutscene) #journey-content {
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 3px;
+  }
+  #journey-dialog:has(.story-cutscene) :is(.dialog-top, #journey-actions) { flex-shrink: 0; }
+  #journey-dialog:has(.story-cutscene) #journey-actions { margin-top: 8px; }
+}
+
+@media (orientation: landscape) and (max-height: 320px) {
+  #journey-dialog[open]:has(.story-cutscene) { display: block; overflow-y: auto; }
+  #journey-dialog:has(.story-cutscene) #journey-content { overflow: visible; }
+}
+
+.story-cutscene-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 12px 0 0;
+}
+.story-cutscene-card {
+  display: grid;
+  align-content: start;
+  gap: 3px;
+  min-width: 0;
+  padding: 0 0 9px;
+  overflow: hidden;
+  border: 1px solid #7d6046;
+  background: #0b0d18;
+  color: #f9c88c;
+  text-align: start;
+}
+.story-cutscene-card:hover, .story-cutscene-card:focus-visible { border-color: #f9c88c; }
+.story-cutscene-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  image-rendering: pixelated;
+  margin-bottom: 5px;
+  background: #09121e;
+}
+.story-cutscene-card strong, .story-cutscene-card small { padding-inline: 9px; }
+.story-cutscene-card strong { font-size: 16px; line-height: 1.15; }
+.story-cutscene-card small { color: #afbad0; font-size: 11px; }
+@media (max-width: 620px) {
+  .story-cutscene-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

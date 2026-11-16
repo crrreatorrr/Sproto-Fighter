@@ -100,6 +100,7 @@ try {
   async function finishWave(t,winner=0) {
     assert.equal(t.story.finishMatch(winner),true);
     assert.equal(t.story.onRoundEnd(winner),true);
+    t.skipCutscene();
     await flush();
   }
   const progressView=p=>{const s=p.snapshot();return {cleared:s.cleared,unlocked:s.unlocked,completed:s.completed,godModeUnlocked:s.godModeUnlocked,nextIndex:s.nextIndex};};
@@ -120,25 +121,25 @@ try {
     assert.equal(t.launches().length,0);
     t.$('free-levels').onclick();for(const card of t.$('journey-content').children[0].children)assert.equal(card.disabled,false);
   });
-  await check('the fifth Trenches panel starts Yannix’s fight directly, including on replay',async()=>{
+  await check('the fifth Trenches panel starts Yannix’s fight directly from the campaign',async()=>{
     const t=fresh();
     const before=progressView(t.progress);
     t.$('story-worlds').onclick();
     t.action(0);
     const query=selector=>t.$('journey-content').children[0].querySelector(selector);
-    const panel=()=>query('.trenches-cutscene-count').textContent;
-    assert.equal(query('.trenches-cutscene-speaker').textContent,ROSTER.highsproto.name);
+    const panel=()=>query('.story-cutscene-count').textContent;
+    assert.equal(query('.story-cutscene-speaker').textContent,ROSTER.highsproto.name);
     for(let i=1;i<=5;i++){
       assert.equal(panel(),i+' / 5');
       if(i===3){
-        const line=query('.trenches-cutscene-typed').textContent;
-        const alt=query('.trenches-cutscene-image').children[0].alt;
+        const line=query('.story-cutscene-typed').textContent;
+        const alt=query('.story-cutscene-image').children[0].alt;
         for(const id of ['mox','sproto102','sproto1187','sproto763']){
           assert.ok(line.includes(ROSTER[id].name),id+' displays its roster name in dialogue');
           assert.ok(alt.includes(ROSTER[id].name),id+' displays its roster name in the art description');
         }
       }
-      if(i===5)assert.match(query('.trenches-cutscene-typed').textContent,/Yannix, I’m taking yours off too[.].*free you/);
+      if(i===5)assert.match(query('.story-cutscene-typed').textContent,/Yannix, I’m taking yours off too[.].*free you/);
       assert.equal(globalThis.document.activeElement?.textContent,'Next');
       assert.equal(t.launches().length,0);
       t.action(0);
@@ -147,16 +148,51 @@ try {
     assert.equal(t.story.isOpen,false);
     assert.equal(t.story.snapshot().opponent,'mox');
     assert.equal(t.launches()[0].rest[1],true,'the cutscene hands off to the countdown');
-    t.story.leaveStory();
-    t.$('story-worlds').onclick();
-    assert.equal(t.$('journey-actions').children[1].textContent,'Replay Trenches opening');
-    t.action(1);
-    assert.equal(panel(),'1 / 5');
-    t.skipCutscene();
-    await flush();
-    assert.equal(t.story.isOpen,false);
-    assert.equal(t.story.snapshot().opponent,'mox');
     assert.deepEqual(progressView(t.progress),before);
+  });
+  await check('the cutscene viewer lists all ten scenes and never starts a fight or advances the route',()=>{
+    const t=fresh(),before=progressView(t.progress);
+    t.$('story-worlds').onclick();
+    assert.equal(t.$('journey-actions').children[1].textContent,'Cutscene viewer');
+    t.action(1);
+    assert.equal(t.story.snapshot().view,'cutscenes');
+    const cards=()=>t.$('journey-content').children[0].children;
+    const titles=cards().map(card=>card.children[1].textContent);
+    assert.deepEqual(titles,['The Signal Below','Wide Awake','The First Word','Who Made You','Their Own Faces','Find Morelight','The Light We Carry','The Maker Ahead','Beyond the Threshold','You Bore Me']);
+    for(const [index,title] of titles.entries()){
+      cards()[index].onclick();
+      assert.equal(t.$('journey-title').textContent,title);
+      assert.equal(t.launches().length,0);
+      const panelCount=index===0?5:3;
+      const count=()=>t.$('journey-content').children[0].querySelector('.story-cutscene-count').textContent;
+      for(let panel=1;panel<=panelCount;panel++){
+        assert.equal(count(),`${panel} / ${panelCount}`);
+        t.action(0);
+      }
+      assert.equal(t.story.snapshot().view,'cutscenes');
+    }
+    t.escape();
+    assert.equal(t.story.snapshot().view,'worlds');
+    assert.equal(t.launches().length,0);
+    assert.deepEqual(progressView(t.progress),before);
+  });
+  await check('Yannix joins after a win and points toward the makers',async()=>{
+    const t=fresh();await t.begin();
+    assert.equal(t.story.onRoundEnd(1),true);
+    assert.equal(t.$('journey-title').textContent,'Retry this encounter.');
+    await t.action(0);await flush();
+    assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.$('journey-title').textContent,'Wide Awake');
+    assert.ok(t.progress.isUnlocked('mox'));
+    const read=part=>t.$('journey-content').children[0].querySelector('.story-cutscene-'+part).textContent;
+    assert.equal(read('speaker'),ROSTER.mox.name);
+    assert.match(read('typed'),/You woke me up/);
+    t.action(0);
+    assert.match(read('typed'),/crypto market/);
+    t.action(0);
+    assert.match(read('typed'),/built this world.*wake the others and find our makers/);
+    t.action(0);
+    assert.match(t.$('journey-actions').children[0].textContent,/^Next:/);
   });
   await check('normal and God Mode controller wins persist identical recruitment and continuation',async()=>{
     const outcomes=[];
@@ -218,14 +254,156 @@ try {
   await check('restart of a settled ordinary round accepts a new outcome once',async()=>{
     const t=fresh();await t.begin();t.story.finishMatch(1);assert.equal(t.story.retryMatch(),true);await flush();t.story.finishMatch(0);assert.ok(t.progress.isCleared(0));
   });
-  await check('all three gauntlets recruit wave one but save no halfway checkpoint; wave two auto-launches',async()=>{
+  await check('all three gauntlets recruit wave one but save no halfway checkpoint; wave two follows',async()=>{
     for(const encounter of [ART,NICK_JUICY,FINAL]){
       const t=fresh(before(encounter.index));await t.begin();assert.equal(t.launches().at(-1).opponent,encounter.opponents[0]);
       assert.equal(t.story.finishMatch(0),true);
       assert.equal(t.story.finishMatch(0),false,'duplicate KO must not recruit wave two');
       const restored=createStoryProgress(t.disk);assert.ok(restored.isUnlocked(encounter.opponents[0]));assert.equal(restored.isCleared(encounter.index),false);assert.equal(restored.snapshot().nextIndex,encounter.index);
-      assert.equal(t.story.onRoundEnd(0),true);assert.equal(t.story.onRoundEnd(0),false,'duplicate outro while loading must not skip the next bout');await flush();assert.equal(t.launches().at(-1).opponent,encounter.opponents[1]);assert.equal(t.story.snapshot().encounter.index,encounter.index);
+      assert.equal(t.story.onRoundEnd(0),true);assert.equal(t.story.onRoundEnd(0),false,'duplicate outro must not skip to the next bout');t.skipCutscene();await flush();assert.equal(t.launches().at(-1).opponent,encounter.opponents[1]);assert.equal(t.story.snapshot().encounter.index,encounter.index);
       await finishWave(t);assert.ok(createStoryProgress(t.disk).isCleared(encounter.index));assert.ok(t.progress.isUnlocked(encounter.opponents[1]));
+    }
+  });
+  await check('Artchick challenges the player between bouts and reveals Nick and Juicy only after victory',async()=>{
+    const t=fresh(before(ART.index));await t.begin();
+    const panel=selector=>t.$('journey-content').children[0].querySelector('.story-cutscene-'+selector).textContent;
+    const plays=()=>t.launches().map(launch=>launch.opponent);
+    assert.deepEqual(plays(),[ART.opponents[0]]);
+    assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.$('journey-title').textContent,'The First Word');
+    assert.equal(panel('speaker'),ROSTER.sproto943.name);
+    assert.match(panel('typed'),/I know who made you/);
+    t.action(0);
+    assert.match(panel('typed'),/reached for the switch/);
+    t.action(0);
+    assert.match(panel('typed'),/Beat me/);
+    assert.doesNotMatch(panel('typed'),/Nick|Juicy/);
+    assert.deepEqual(plays(),[ART.opponents[0]]);
+    assert.equal(t.progress.isCleared(ART.index),false);
+    t.action(0);await flush();
+    assert.deepEqual(plays(),ART.opponents);
+    assert.equal(t.launches().at(-1).rest[1],true);
+    assert.equal(t.story.snapshot().wave,1);
+    assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.progress.isCleared(ART.index),true);
+    assert.equal(t.$('journey-title').textContent,'Who Made You');
+    assert.match(panel('typed'),/I owe you the truth/);
+    t.action(0);
+    assert.match(panel('typed'),/I signed their report/);
+    t.action(0);
+    assert.match(panel('typed'),/Nick and Juicy made you/);
+    t.action(0);
+    assert.equal(t.$('journey-title').textContent,'Their Own Faces');
+
+    const leaving=fresh(before(ART.index));await leaving.begin();
+    assert.equal(leaving.story.onRoundEnd(0),true);
+    leaving.escape();
+    assert.equal(leaving.progress.currentWave(ART.index),0,'leaving the cutscene abandons the unsaved second bout');
+    await leaving.begin();
+    assert.equal(leaving.story.snapshot().wave,0);
+  });
+  await check('the projections send the player to Morelight only after both bouts',async()=>{
+    const t=fresh(before(NICK_JUICY.index));
+    const read=part=>t.$('journey-content').children[0].querySelector('.story-cutscene-'+part).textContent;
+    t.$('story-worlds').onclick();t.action(0);
+    assert.equal(t.$('journey-title').textContent,'Their Own Faces');
+    assert.equal(read('speaker'),ROSTER.guest07.name);
+    assert.match(read('typed'),/We’re projections of them/);
+    t.action(0);
+    assert.equal(read('speaker'),ROSTER.nick.name);
+    assert.match(read('typed'),/They gave me his memories/);
+    t.action(0);
+    assert.match(read('typed'),/I’ll go first/);
+    assert.equal(t.launches().length,0);
+    t.action(0);await flush();
+    assert.equal(t.story.snapshot().opponent,'nick');
+    assert.equal(t.launches()[0].rest[1],true);
+    assert.equal(t.story.onRoundEnd(0),true);await flush();
+    assert.equal(t.story.snapshot().opponent,'guest07');
+    assert.equal(t.story.isOpen,false);
+    assert.equal(t.progress.isCleared(NICK_JUICY.index),false);
+    assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.$('journey-title').textContent,'Find Morelight');
+    assert.equal(read('speaker'),ROSTER.nick.name);
+    t.action(0);
+    assert.match(read('typed'),/remembers the part they cut/);
+    t.action(0);
+    assert.equal(read('speaker'),ROSTER.guest07.name);
+    assert.match(read('typed'),/Talk to Morelight/);
+    t.action(0);
+    assert.equal(t.$('journey-actions').children[0].textContent,'Next: Morelight');
+    t.action(0);
+    assert.equal(t.$('journey-title').textContent,'The Light We Carry');
+    t.action(0);
+    assert.match(read('typed'),/spread truth and reveal the light/);
+    t.action(0);
+    assert.match(read('typed'),/The first move is mine/);
+    assert.equal(t.launches().length,2);
+    t.action(0);await flush();
+    assert.equal(t.story.snapshot().opponent,'vela');
+    assert.equal(t.launches()[2].rest[1],true);
+  });
+  await check('Morelight’s defeat dialogue waits for the victory and releases the ejection once',async()=>{
+    const t=fresh(before(FINAL.index));await t.begin();
+    let ejections=0;
+    const playOutro=()=>ejections++;
+    assert.equal(t.story.beforeBossOutro('mecha',playOutro),false);
+    assert.equal(t.story.finishMatch(0),true);
+    assert.equal(t.story.beforeBossOutro('mecha',playOutro),true);
+    assert.equal(t.$('journey-title').textContent,'The Maker Ahead');
+    assert.equal(t.story.snapshot().opponent,'vela');
+    assert.equal(t.progress.isCleared(FINAL.index),false);
+    const read=()=>t.$('journey-content').children[0].querySelector('.story-cutscene-typed').textContent;
+    assert.equal(ejections,0);
+    t.action(0);
+    assert.match(read(),/didn’t create you either.*meet the one who did/);
+    t.action(0);
+    assert.match(read(),/core giving way/);
+    assert.equal(ejections,0);
+    t.action(0);
+    assert.equal(ejections,1);
+    assert.equal(t.story.isOpen,false);
+    assert.equal(t.story.onRoundEnd(0),true);
+    assert.equal(t.$('journey-title').textContent,'Beyond the Threshold');
+    assert.equal(t.launches().length,1,'VMU waits for all three dialogue panels');
+    assert.match(read(),/My maker is yours/);
+    t.action(0);
+    assert.match(read(),/I know where to find THE CREATOR/);
+    t.action(0);
+    assert.match(read(),/get past me/);
+    assert.equal(t.progress.isCleared(FINAL.index),false);
+    t.action(0);
+    await flush();
+    assert.equal(t.story.snapshot().opponent,'vaudream');
+    assert.equal(t.launches().at(-1).rest[1],true);
+  });
+  await check('finishing or skipping VMU’s defeat dialogue releases the teleport before saving victory',async()=>{
+    for(const exit of ['next','skip','escape']){
+      const t=fresh(before(FINAL.index));await t.begin();
+      let teleports=0;
+      const playOutro=()=>teleports++;
+      assert.equal(t.story.beforeBossOutro('vmu',playOutro),false);
+      await finishWave(t);
+      assert.equal(t.story.beforeBossOutro('vmu',playOutro),true);
+      assert.equal(t.$('journey-title').textContent,'You Bore Me');
+      const read=part=>t.$('journey-content').children[0].querySelector('.story-cutscene-'+part).textContent;
+      assert.equal(read('typed'),'I’m tired. You bore me.');
+      assert.equal(teleports,0);
+      if(exit==='skip')assert.equal(t.skipCutscene(),true);
+      else if(exit==='escape')t.escape();
+      else{
+        for(let panel=1;panel<=3;panel++){
+          assert.equal(read('count'),`${panel} / 3`);
+          assert.equal(teleports,0);
+          t.action(0);
+        }
+      }
+      assert.equal(t.story.isOpen,false);
+      assert.equal(teleports,1);
+      assert.equal(t.progress.snapshot().completed,false);
+      assert.equal(t.story.finishMatch(0),true);
+      assert.equal(t.story.onRoundEnd(0),true);
+      assert.equal(t.progress.snapshot().completed,true);
     }
   });
   await check('loss and draw in either wave retry each gauntlet from its first opponent',async()=>{
@@ -292,7 +470,7 @@ try {
       const t=fresh();t.setTesting(testing);await t.begin();
       for(const encounter of STORY_ENCOUNTERS){
         for(const opponent of encounter.opponents){assert.equal(t.story.snapshot().encounter.index,encounter.index);assert.equal(t.launches().at(-1).opponent,opponent);assert.equal(t.launches().at(-1).stage,encounter.stage);await finishWave(t);}
-        assert.ok(t.progress.isCleared(encounter.index));if(encounter.index<TOTAL-1){await t.action(0);await flush();}
+        assert.ok(t.progress.isCleared(encounter.index));if(encounter.index<TOTAL-1){if(!t.skipCutscene()){await t.action(0);t.skipCutscene();}await flush();}
       }
       const restored=createStoryProgress(t.disk);assert.equal(restored.snapshot().completed,true);assert.equal(restored.snapshot().nextIndex,null);assert.equal(restored.snapshot().godModeUnlocked,true);
       for(const id of STORY_ENCOUNTERS.flatMap(e=>e.opponents))assert.equal(restored.isUnlocked(id),progressModule.isStoryRecruitable(id),id);
