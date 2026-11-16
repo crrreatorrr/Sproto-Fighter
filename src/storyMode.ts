@@ -61,13 +61,16 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         const save=progress.snapshot(),next=save.openRoute?STORY_ENCOUNTERS[encounter.index+1]??null:save.nextIndex===null?null:STORY_ENCOUNTERS[save.nextIndex];
         return next?.stage??null;
     }
+    // Holding Enter must not activate a newly focused action on the next screen.
+    const preventRepeatedEnter=(event:KeyboardEvent)=>{
+        if(event.key==='Enter'&&event.repeat)event.preventDefault();
+    };
     function buttons(actions:{label:string;run?:()=>void}[]){
         stopCutscene?.();stopCutscene=null;
         const area=$('journey-actions');area.replaceChildren();primary=null;
         for(const action of actions){
             const button=document.createElement('button');button.className='quiet';button.textContent=action.label;button.onclick=action.run??null;
-            // Holding Enter must not activate a newly focused action on the next screen.
-            button.onkeydown=event=>{if(event.key==='Enter'&&event.repeat)event.preventDefault();};
+            button.onkeydown=preventRepeatedEnter;
             area.append(button);primary??=button;
         }
         focusDefault();
@@ -196,6 +199,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
             const location=document.createElement('small');location.textContent=cutscene.location;
             button.append(image,title,location);
             button.onclick=()=>showCutscene(cutscene,cutsceneViewer,cutsceneViewer);
+            button.onkeydown=preventRepeatedEnter;
             return button;
         });
         grid.append(...cards);$('journey-content').replaceChildren(grid);
