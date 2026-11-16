@@ -267,6 +267,17 @@ try{
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.[0]?.form==='vmu');
  assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().phase),null);
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+ await page.getByRole('heading',{name:'You Bore Me',exact:true}).waitFor();
+ assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().winner),0);
+ const vmuLines=['I’m tired. You bore me.','You wanted an audience with my maker.','Go on. Bore him instead.'];
+ for(const [index,line] of vmuLines.entries()){
+   await page.waitForFunction(text=>document.querySelector('.story-cutscene-transcript')?.textContent.includes(text),line);
+   assert.equal(await page.locator('.story-cutscene-count').textContent(),`${index+1} / 3`);
+   assert.ok(await page.locator('.story-cutscene-image img').evaluate(image=>image.naturalWidth>0));
+   assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().clip),null);
+   assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+   await page.getByRole('button',{name:'Next',exact:true}).click();
+ }
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='vmu-shield');
  await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='vmu-black-hole');
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);

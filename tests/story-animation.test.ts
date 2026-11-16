@@ -36,24 +36,25 @@ async function harness(id:string,win=0){
     const animation=createStoryAnimation();await animation.load(storyAnimationPlan(id,true));
     const state=createState('highsproto','cpu',id as any),presentation=createRoundPresentation();presentation.phase='fight';
     const calls:string[]=[],frames:number[][]=[];
-    let finishMechaDialogue:(()=>void)|undefined;
-    const beforeMorelightEjection=(finish:()=>void)=>{
-        calls.push('dialogue');finishMechaDialogue=finish;return true;
+    let finishDefeatDialogue:(()=>void)|undefined;
+    const beforeBossOutro=(form:string|undefined,finish:()=>void)=>{
+        if(form!=='mecha'&&form!=='vmu')return false;
+        calls.push('dialogue');finishDefeatDialogue=finish;return true;
     };
     const run=new Function('deps',`
-        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound,beforeMorelightEjection}=deps;
+        const {state,presentation,storyAnimation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound,beforeBossOutro}=deps;
         let storyBoss=null;const bossStarts=[];const stepStoryBoss=()=>{state.winner=win;};
         const versus={advance:()=>false};const countdown={advance:()=>false,show:()=>calls.push('countdown')};
         const held=new Set();let queued=0,queued2=0,padNeedsRelease=false;
         const training=null,depthRoundStarts=[];
         const online=null,mode='cpu',qaPanel=null,qaRecord=()=>{},qaStopAtOutro=()=>{};
         const matchCpuSkill=4,cpuInput=()=>0,playRetainCallout=()=>{},reportRound=()=>calls.push('report');
-        const story={beforeMorelightEjection,finishMatch:()=>calls.push('save'),onRoundEnd:()=>{calls.push('result');return true;}};
+        const story={beforeBossOutro,finishMatch:()=>calls.push('save'),onRoundEnd:()=>{calls.push('result');return true;}};
         const step=()=>{state.winner=win;};
         ${compiled}
         return advanceRoundFrame;
-    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound,beforeMorelightEjection});
-    return {animation,state,presentation,calls,frames,run,advanceMechaDialogue:()=>finishMechaDialogue?.(),endBlackout(){for(let i=0;i<90;i++)run(0);}};
+    `)({state,presentation,storyAnimation:animation,calls,frames,advanceRoundPresentation,beginRoundOutro,win,startStoryBoss,nextMatchRound,beforeBossOutro});
+    return {animation,state,presentation,calls,frames,run,advanceDefeatDialogue:()=>finishDefeatDialogue?.(),endBlackout(){for(let i=0;i<90;i++)run(0);}};
 }
 
 describe('story animation ordering and lifecycle',()=>{
@@ -73,7 +74,7 @@ describe('story animation ordering and lifecycle',()=>{
         await a.load(storyAnimationPlan('guest07',true));expect(a.start('intro')).toBe(false);
         a.clear();expect(a.start('outro')).toBe(false);
     });
-    it('starts VMU directly and plays the portal pull before saving victory',async()=>{
+    it('starts VMU directly, then plays defeat dialogue and the portal pull before saving victory',async()=>{
         const t=await harness('vaudream');
         t.run(0);
         for(let i=0;i<89;i++)t.run(0);
@@ -91,8 +92,11 @@ describe('story animation ordering and lifecycle',()=>{
         expect(t.state.winner).toBeNull();
         expect(t.calls).toEqual([]);
         t.run(0);
+        expect(t.animation.active).toBeNull();
+        expect(t.calls).toEqual(['dialogue']);
+        t.advanceDefeatDialogue();
         expect(t.animation.snapshot().clip).toBe('vmu-shield');
-        expect(t.calls).toEqual([]);
+        expect(t.calls).toEqual(['dialogue']);
         let sawPull=false;
         while(t.animation.active){
             const pull=t.animation.portalPull();
@@ -101,7 +105,7 @@ describe('story animation ordering and lifecycle',()=>{
         }
         expect(sawPull).toBe(true);
         expect(t.animation.portalPull()?.progress).toBe(1);
-        expect(t.calls).toEqual(['save','report','result']);
+        expect(t.calls).toEqual(['dialogue','save','report','result']);
         expect(t.frames).toHaveLength(2);
     });
     it('requires both Morelight forms to be cleared before saving or playing the final scenes',async()=>{
@@ -124,7 +128,7 @@ describe('story animation ordering and lifecycle',()=>{
         t.run(0);
         expect(t.animation.active).toBeNull();
         expect(t.calls).toEqual(['save','dialogue']);
-        t.advanceMechaDialogue();
+        t.advanceDefeatDialogue();
         expect(t.animation.snapshot().clip).toBe('morelight-ejection');
         const seen:string[]=[];
         while(t.animation.active){const id=t.animation.snapshot().clip!;if(seen.at(-1)!==id)seen.push(id);t.run(0);}
@@ -145,9 +149,9 @@ describe('story animation ordering and lifecycle',()=>{
             expect(t.calls).toEqual(['save']);
         });
     it('skip completes the result once without leaking input or replay frames',async()=>{
-        const t=await harness('vaudream');t.run(0);t.endBlackout();t.run(0);t.animation.skip();t.run(255);
-        expect(t.calls).toEqual(['save','report','result']);expect(t.frames).toHaveLength(2);
-        t.run(255);expect(t.calls).toEqual(['save','report','result']);
+        const t=await harness('vaudream');t.run(0);t.endBlackout();t.run(0);t.advanceDefeatDialogue();t.animation.skip();t.run(255);
+        expect(t.calls).toEqual(['dialogue','save','report','result']);expect(t.frames).toHaveLength(2);
+        t.run(255);expect(t.calls).toEqual(['dialogue','save','report','result']);
     });
     it.each([1,2])('loss/draw %s keeps normal outro and never plays boss scenes',async winner=>{
         const t=await harness('nick',winner);t.run(0);expect(t.animation.active).toBe(null);
@@ -160,8 +164,8 @@ describe('story animation ordering and lifecycle',()=>{
         expect(t.calls).toEqual(['countdown']);expect(t.frames).toHaveLength(0);expect(t.state.winner).toBe(null);
     });
     it('cancels a result scene during retry without delivering another result',async()=>{
-        const t=await harness('vaudream');t.run(0);t.endBlackout();t.run(0);t.animation.cancel();t.run(0);
-        expect(t.animation.active).toBe(null);expect(t.calls).toEqual([]);
+        const t=await harness('vaudream');t.run(0);t.endBlackout();t.run(0);t.advanceDefeatDialogue();t.animation.cancel();t.run(0);
+        expect(t.animation.active).toBe(null);expect(t.calls).toEqual(['dialogue']);
         t.animation.reset();expect(t.animation.start('outro')).toBe(true);
     });
     it('holds the last sprite after completion instead of flashing the death pose',async()=>{

@@ -150,7 +150,7 @@ try {
     assert.equal(t.launches()[0].rest[1],true,'the cutscene hands off to the countdown');
     assert.deepEqual(progressView(t.progress),before);
   });
-  await check('the cutscene viewer lists all nine scenes and never starts a fight or advances the route',()=>{
+  await check('the cutscene viewer lists all ten scenes and never starts a fight or advances the route',()=>{
     const t=fresh(),before=progressView(t.progress);
     t.$('story-worlds').onclick();
     assert.equal(t.$('journey-actions').children[1].textContent,'Cutscene viewer');
@@ -158,7 +158,7 @@ try {
     assert.equal(t.story.snapshot().view,'cutscenes');
     const cards=()=>t.$('journey-content').children[0].children;
     const titles=cards().map(card=>card.children[1].textContent);
-    assert.deepEqual(titles,['The Signal Below','Wide Awake','The First Word','Who Made You','Their Own Faces','Find Morelight','The Light We Carry','The Maker Ahead','Beyond the Threshold']);
+    assert.deepEqual(titles,['The Signal Below','Wide Awake','The First Word','Who Made You','Their Own Faces','Find Morelight','The Light We Carry','The Maker Ahead','Beyond the Threshold','You Bore Me']);
     for(const [index,title] of titles.entries()){
       cards()[index].onclick();
       assert.equal(t.$('journey-title').textContent,title);
@@ -347,9 +347,9 @@ try {
     const t=fresh(before(FINAL.index));await t.begin();
     let ejections=0;
     const playOutro=()=>ejections++;
-    assert.equal(t.story.beforeMorelightEjection(playOutro),false);
+    assert.equal(t.story.beforeBossOutro('mecha',playOutro),false);
     assert.equal(t.story.finishMatch(0),true);
-    assert.equal(t.story.beforeMorelightEjection(playOutro),true);
+    assert.equal(t.story.beforeBossOutro('mecha',playOutro),true);
     assert.equal(t.$('journey-title').textContent,'The Maker Ahead');
     assert.equal(t.story.snapshot().opponent,'vela');
     assert.equal(t.progress.isCleared(FINAL.index),false);
@@ -376,6 +376,35 @@ try {
     await flush();
     assert.equal(t.story.snapshot().opponent,'vaudream');
     assert.equal(t.launches().at(-1).rest[1],true);
+  });
+  await check('finishing or skipping VMU’s defeat dialogue releases the teleport before saving victory',async()=>{
+    for(const exit of ['next','skip','escape']){
+      const t=fresh(before(FINAL.index));await t.begin();
+      let teleports=0;
+      const playOutro=()=>teleports++;
+      assert.equal(t.story.beforeBossOutro('vmu',playOutro),false);
+      await finishWave(t);
+      assert.equal(t.story.beforeBossOutro('vmu',playOutro),true);
+      assert.equal(t.$('journey-title').textContent,'You Bore Me');
+      const read=part=>t.$('journey-content').children[0].querySelector('.story-cutscene-'+part).textContent;
+      assert.equal(read('typed'),'I’m tired. You bore me.');
+      assert.equal(teleports,0);
+      if(exit==='skip')assert.equal(t.skipCutscene(),true);
+      else if(exit==='escape')t.escape();
+      else{
+        for(let panel=1;panel<=3;panel++){
+          assert.equal(read('count'),`${panel} / 3`);
+          assert.equal(teleports,0);
+          t.action(0);
+        }
+      }
+      assert.equal(t.story.isOpen,false);
+      assert.equal(teleports,1);
+      assert.equal(t.progress.snapshot().completed,false);
+      assert.equal(t.story.finishMatch(0),true);
+      assert.equal(t.story.onRoundEnd(0),true);
+      assert.equal(t.progress.snapshot().completed,true);
+    }
   });
   await check('loss and draw in either wave retry each gauntlet from its first opponent',async()=>{
     for(const encounter of [ART,NICK_JUICY,FINAL])for(const wave of [0,1])for(const winner of [1,2]){

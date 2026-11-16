@@ -1257,7 +1257,7 @@ function advanceRoundFrame(input: number, p2Input?: number) {
                 presentation.phase='result';
             else if(!nextPhase&&(storyAnimation.replaceDefeat||storyBoss)){
                 const playOutro=()=>{if(storyAnimation.start('outro'))presentation.phase='result';};
-                if(storyBoss?.form!=='mecha'||!story.beforeMorelightEjection(playOutro))playOutro();
+                if(!story.beforeBossOutro(storyBoss?.form,playOutro))playOutro();
             }
         }
         qaStopAtOutro();

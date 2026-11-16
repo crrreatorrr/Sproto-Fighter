@@ -6,6 +6,7 @@ import {afterYannix} from './yannixCutscene';
 import {beforeMorelight} from './morelightCutscene';
 import {afterMorelightMecha} from './morelightMechaCutscene';
 import {beforeVMU} from './vmuCutscene';
+import {afterVMU} from './vmuAfterCutscene';
 import {createDifficultyRetry,storyDifficulty} from './difficulty';
 import {storySceneryChoices,setStorySceneryChoice,getStorySceneryChoice} from './stageVariants';
 import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
@@ -24,6 +25,7 @@ const cutscenes = {
     morelightBefore: {title:'The Light We Carry',location:'Iceblue Event Horizon',script:beforeMorelight},
     morelightAfter: {title:'The Maker Ahead',location:'Iceblue Event Horizon',script:afterMorelightMecha},
     vmu: {title:'Beyond the Threshold',location:'Violet Final Threshold',script:beforeVMU},
+    vmuAfter: {title:'You Bore Me',location:'Violet Final Threshold',script:afterVMU},
 } satisfies Record<string,Cutscene>;
 
 export function createStoryMode(hooks:Hooks,progress:StoryProgress){
@@ -214,13 +216,18 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
         buttons([{label:'Story map',run:back}]);
         primary=cards[0];open();modal.scrollTop=0;
     }
-    function beforeMorelightEjection(playOutro:()=>void){
-        if(active?.gauntlet!=='final'||active.opponents[wave]!=='vela'||settled!==0)return false;
+    function beforeBossOutro(form:string|undefined,playOutro:()=>void){
+        if(active?.gauntlet!=='final')return false;
+        const opponent=active.opponents[wave];
+        let cutscene:Cutscene;
+        if(form==='mecha'&&opponent==='vela'&&settled===0)cutscene=cutscenes.morelightAfter;
+        else if(form==='vmu'&&opponent==='vaudream'&&settled===null)cutscene=cutscenes.vmuAfter;
+        else return false;
         const finish=()=>{
             if(!modal.open)return;
             playOutro();close();
         };
-        showCutscene(cutscenes.morelightAfter,finish,finish);
+        showCutscene(cutscene,finish,finish);
         return true;
     }
     // Save a victory at KO. A second callback cannot award another bout or rival.
@@ -296,7 +303,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
     modal.addEventListener('close',()=>{if(!modal.open){stopCutscene?.();stopCutscene=null;}});
     modal.addEventListener('cancel',e=>{e.preventDefault();if(typeof document.dispatchEvent==='function'&&typeof CustomEvent==='function')document.dispatchEvent(new CustomEvent('sproto-menu-ui',{bubbles:true}));back();});progress.subscribe(status);status();
     return {
-        get isOpen(){return modal.open;},get isActive(){return !!active;},finishMatch,onRoundEnd,beforeMorelightEjection,
+        get isOpen(){return modal.open;},get isActive(){return !!active;},finishMatch,onRoundEnd,beforeBossOutro,
         /** Stage of the next story fight while the player is between two fights, else null. Main keeps the song when its zone matches. */
         get musicCarry():StageId|null{return active&&settled!==null?nextFightStage(active,settled,wave):carryStage;},
         retryMatch(){
