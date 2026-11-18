@@ -49,11 +49,13 @@ try{
   assert.equal(baseline.length,102);verifyRoute(baseline,campaignForStages(STORY_STAGE_IDS,baseline));verifyRoute(PLAYABLE_FIGHTERS,STORY_ENCOUNTERS);
   assert.equal(STORY_ROSTER_COUNTS.installed,PLAYABLE_FIGHTERS.length);assert.equal(STORY_ROSTER_COUNTS.rivals,250);assert.equal(STORY_ROSTER_COUNTS.encounters,247);assert.equal(STORY_ROSTER_COUNTS.missing,0);assert.deepEqual(STORY_OPPONENTS,STORY_ENCOUNTERS.flatMap(e=>e.opponents));
  });
- check('the recruits, the moved opening rivals, then every twin come immediately before Golden; recruits only when registered',()=>{
+ check('the recruits, the moved opening rivals except the Bar finale, then every twin come before Golden; recruits only when registered',()=>{
   for(const registry of [baseline,PLAYABLE_FIGHTERS,futureRegistry]){
    const route=campaignForStages(STORY_STAGE_IDS,registry),expected=CAMPAIGN_RECRUITS.filter(id=>registry.includes(id)),golden=route.findIndex(e=>e.opponent==='rivet');
-   const late=LATE_ROUTE_RIVALS.filter(id=>registry.includes(id)),twins=route.filter(e=>isPairedFighter(e.opponent)).map(e=>e.opponent);
-   assert.deepEqual(route.slice(golden-twins.length-late.length-expected.length,golden).map(e=>e.opponent),[...expected,...late,...twins]);
+   const late=LATE_ROUTE_RIVALS.filter(id=>registry.includes(id)&&id!=='guest10'),twins=route.filter(e=>isPairedFighter(e.opponent)).map(e=>e.opponent);
+   const beforeGolden=route.slice(0,golden).filter(e=>e.opponent!=='guest10');
+   assert.deepEqual(beforeGolden.slice(-twins.length-late.length-expected.length).map(e=>e.opponent),[...expected,...late,...twins]);
+   assert.equal(route.filter(e=>e.stage==='bar').at(-1).opponent,'guest10');
    for(const id of CAMPAIGN_RECRUITS.filter(id=>!registry.includes(id)))assert.equal(route.some(e=>e.opponents.includes(id)),false);
   }
  });
