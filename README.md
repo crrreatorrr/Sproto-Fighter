@@ -70,9 +70,10 @@ The curated campaign contains exactly **250 distinct rivals across 247 encounter
 including Artdude → Artchick, Nick → Juicy, and Morelight → VMU as sequential
 pairs. The 254 registered fighters include two starters and two additional
 Hub-only fighters outside the campaign. Captain Green, Sun God and Pissing Sproto
-are new guardians at the ends of the Marina, Castle and Bar chapters; defeating
-them advances the story while their player selection still requires the matching
-Hub Relic. Existing earned recruits, wins, and God Mode rewards remain valid.
+are guardians in the Marina, Castle and Bar chapters; Sprotel Bitcoin is the final
+Bar encounter. Defeating the guardians advances the story while their player
+selection still requires the matching Hub Relic. Existing earned recruits, wins,
+and God Mode rewards remain valid.
 The fixed campaign order is independent of menu registration order.
 
 The expanded 3840 × 2160 Higgsfield map uses the existing world as its reference.

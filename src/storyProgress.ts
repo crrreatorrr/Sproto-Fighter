@@ -16,6 +16,7 @@ export const CAMPAIGN_RECRUITS:readonly string[]=['satoshi','xalt','potocaicai']
  * Former opening rivals fought late, just before the twins: FreshPrinceOfBellend back to Yoyo
  * (battles 26 down to 4 of the earlier order), then Bongraker, then Halloween 2008. Only the battle
  * order changes; each battle number keeps its stage, map marker and difficulty.
+ * Sprotel Bitcoin is then moved to the final Bar slot.
  */
 export const LATE_ROUTE_RIVALS:readonly string[]=[
     'freshprince','blorfo','rlarsson','thxobama','lifeisameme','leviosa','gpm','bimba','erik','nate','bigswole','mandela',
@@ -81,7 +82,8 @@ export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,regi
 /**
  * Reorders who is fought at each battle number while every slot keeps its place: its stage, chapter and
  * map marker stay where the route put them. Before Golden Sproto the order ends with the recruits, the
- * moved opening rivals (LATE_ROUTE_RIVALS) and then every twin; everyone else keeps their order.
+ * moved opening rivals (LATE_ROUTE_RIVALS) and then every twin. Sprotel Bitcoin instead closes the
+ * Bar chapter; everyone else keeps their relative order.
  */
 function battleOrder(route:readonly Encounter[]):Encounter[]{
     const golden=route.findIndex(e=>e.opponent==='rivet'),end=golden<0?route.length:golden;
@@ -91,6 +93,12 @@ function battleOrder(route:readonly Encounter[]):Encounter[]{
     const twins=route.slice(0,end).filter(e=>single(e)&&isPairedFighter(e.opponent));
     const moved=new Set([...recruits,...late,...twins]);
     const order=[...route.slice(0,end).filter(e=>!moved.has(e)),...recruits,...late,...twins,...route.slice(end)];
+    const barFinale=route.reduce((last,e,index)=>e.stage==='bar'?index:last,-1);
+    const sprotel=order.findIndex(e=>e.opponent==='guest10');
+    if(barFinale>=0&&sprotel>=0){
+        const [encounter]=order.splice(sprotel,1);
+        order.splice(barFinale,0,encounter);
+    }
     return route.map((slot,index)=>({...order[index],stage:slot.stage,chapter:slot.chapter}));
 }
 export const STORY_ENCOUNTERS=campaignForStages();
