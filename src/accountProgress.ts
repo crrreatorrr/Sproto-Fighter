@@ -23,8 +23,22 @@ if (typeof window !== 'undefined') {
     if (storyProgress.watches(event.key)) storyProgress.sync();
   });
   window.addEventListener('focus', () => storyProgress.sync());
-  window.addEventListener('pageshow', () => storyProgress.sync());
-  window.addEventListener('pagehide', () => {
-    void storyProgress.flush();
+  window.addEventListener('pageshow', () => {
+    leaving = false;
+    storyProgress.sync();
   });
+  // A plain flush() reads the cloud first, which cannot finish once the page is going away.
+  window.addEventListener('pagehide', saveBeforeLeaving);
+}
+
+let leaving = false;
+/**
+ * Send unsynced account progress with a keepalive request so it outlives the page. Called before
+ * the hub exit (the SDK closes the session as it navigates) and again on `pagehide`, which then
+ * sends nothing more for the same exit.
+ */
+export function saveBeforeLeaving(): void {
+  if (leaving) return;
+  leaving = true;
+  storyProgress.flushKeepalive();
 }

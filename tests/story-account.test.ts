@@ -85,6 +85,23 @@ describe('story progress per hub account', () => {
     expect(createStoryProgress(browser, undefined, undefined, createProgressStore).isCleared(e.index)).toBe(false);
   });
 
+  it('sends unsynced account progress with a keepalive save when the page is left', async () => {
+    const { STORY_ENCOUNTERS, createStoryProgress } = await import('../src/storyProgress');
+    const server = hub(), e = STORY_ENCOUNTERS[0], cloud = server.as('alice'), sent: (boolean | undefined)[] = [];
+    const watched: ProgressCloud = { ...cloud, writeSave: (data, opts) => { sent.push(opts?.keepalive); return cloud.writeSave!(data, opts); } };
+    const p = createStoryProgress(disk(), undefined, undefined, createProgressStore);
+    await p.attach(watched, 'alice');
+    expect(p.flushKeepalive()).toBe(false);
+    expect(p.begin(e.index)).toBe(true);
+    for (let wave = 0; wave < e.opponents.length; wave++) expect(p.win(e.index, wave)).toBe(true);
+    expect(p.flushKeepalive()).toBe(true);
+    await Promise.resolve();
+    expect(sent.at(-1)).toBe(true);
+    expect(server.saves.get('alice')?.data).toMatchObject({ cleared: [e.id] });
+    p.release();
+    expect(p.flushKeepalive()).toBe(false);
+  });
+
   it('fits a fully finished campaign in one cloud save', async () => {
     const { STORY_ENCOUNTERS, createStoryProgress } = await import('../src/storyProgress');
     const { PLAYABLE_FIGHTERS } = await import('../src/core');
