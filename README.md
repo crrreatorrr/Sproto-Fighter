@@ -243,7 +243,10 @@ attack, so a swing and its impact play once, and a fighter with their own
 team-special recording uses it. Win, lose, round start and the story music stay
 synthesised. Stages without a recorded theme keep the synthesised fight loop.
 Playback starts after the first key, click or button press. Settings has master,
-effects and music volume.
+effects and music volume. Only the menu theme, the click and the shared combat
+clips download at boot; a stage's theme downloads with its match's art, and a
+fighter's own Team Special recording when the fighter is picked (the shared
+clip plays until it arrives).
 
 The CPU guards a projectile in place and walks in between shots, punishes a move
 it has guarded twice in three seconds, holds guard as it gets up, and stop-hits a
@@ -281,7 +284,11 @@ bands that must fall as difficulty rises.
   into one sprite sheet with every frame's transparent margin trimmed
   (`scripts/build-sheets.py`), about a quarter of the decoded memory; frame
   metadata is never changed, and `?atlas=frames` loads the individual PNGs
-  instead. The bodies of the match being played are pinned; other bodies are
+  instead (development and unstripped builds only: release builds, `npm run
+  build:release` and the CI artifact, drop the loose frame PNGs and the full
+  manifest with `build-sheets.py --strip-frames`, and the menu's standing poses
+  come from lossless `dist/fighters/previews/<id>.webp`). The bodies of the
+  match being played are pinned; other bodies are
   released past 16 bodies or 160 MB. See [loading measurements](docs/perf/README.md).
 - `src/storyProgress.ts`, `storyMode.ts`, `campaignMap.ts`: saves, progression,
   placeholder scenes and a real 100-node map. `stageVariants.ts` maps approved
@@ -292,9 +299,17 @@ bands that must fall as difficulty rises.
 - `public/`: local runtime art/fonts; no generation service is needed to play.
   The menu uses small generated WebP copies (`public/portraits/`,
   `public/stages/previews/`) instead of the 1000 px portrait PNGs and full
-  stage backgrounds; a fight loads only its own background. After adding or
-  changing a portrait or stage, run `python3 scripts/build-images.py`
-  (needs Pillow); `portraits-smoke` and `stage-previews-smoke` catch stale copies.
+  stage backgrounds; a fight loads only its own background, from a WebP copy
+  (quality 95, original size) next to the PNG original, and story animation
+  sheets, menu frames, buttons and power sprites load lossless WebP copies; the
+  font is WOFF2. The PNG/TTF originals stay in `public/` for the checks and are
+  left out of `dist/` (`DIST_EXCLUDE` in `vite.config.ts`, which also drops
+  check-only manifests). After adding or changing a portrait, stage, animation
+  sheet, menu image or power sprite, run `python3 scripts/build-images.py`
+  (needs Pillow, and fontTools with brotli for the font); `portraits-smoke`,
+  `stage-previews-smoke` and `media-copies-smoke` catch stale copies.
+  `node scripts/dist-content-check.mjs` checks that every fighter and stage
+  resolves in a build (`--release` for a stripped one).
 
 ### Checks
 

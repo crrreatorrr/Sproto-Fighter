@@ -106,7 +106,9 @@ const codeFiles = [join(dist, 'index.html'), ...readdirSync(join(dist, 'assets')
 const literal = new Set();
 for (const path of codeFiles) for (const m of readFileSync(path, 'utf8').matchAll(pattern)) literal.add(m[1]);
 // A PNG path in the code is fine when the build ships the WebP copy the game loads instead.
-for (const path of literal) if (!existsSync(file('/' + path)) && !existsSync(file('/' + webpCopy(path)))) missing.push(`path in built code: /${path}`);
+// The full manifest is the code's fallback for builds without split atlas files; release builds drop it on purpose.
+const fallbackOnly = new Set(['fighters/pose-atlas.json']);
+for (const path of literal) if (!(release && fallbackOnly.has(path)) && !existsSync(file('/' + path)) && !existsSync(file('/' + webpCopy(path)))) missing.push(`path in built code: /${path}`);
 
 // --- Release build -------------------------------------------------------
 const budgetMb = Number(process.env.DIST_BUDGET_MB ?? 700);
