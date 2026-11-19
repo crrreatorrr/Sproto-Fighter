@@ -147,6 +147,31 @@ below 121.
 | 1-2 | `npm run test:fast` | pass: vitest 35 files / 387 tests; 71/71 checks (d4ae4238) |
 | 1-2 | `npm run build:release` (build, pack with `--verify`, strip, `dist-content-check --release`) | pass: 254 fighters, 274 bodies (274 sheets, 274 previews), 121 stages, 112 sceneries; 669.0 MB |
 | 1-2 | `node scripts/build-sim-bundle.mjs` | `21168f77260c4c3c`, unchanged |
+| 3 | `npm run build` + `build-sheets.py dist` (unstripped, for `sheet-render-qa`) + `npm run test:all` | pass: vitest 35 files / 387 tests; 75/75 checks including `sheet-render-qa`, `sprite-scale-qa`, `game-qa`, `throw-smoke` (at 57c0956f) |
+| 3 | `python3 scripts/build-sheets.py dist --verify` rerun on that packed dist | pass, every frame verified (after the fix in the final commits) |
+| final | `npm run check`, `npm run build`, `npm run test:fast` | pass: 387 tests; 71/71 checks (d4f5c529 and the status commit after it) |
+
+Not run here: `hub-duel-smoke` and `online-browser-smoke` need a local hub (Nakama and Postgres;
+`NAKAMA_URL`, `HUB_DATABASE_URL`), and `determinism-smoke` across Firefox and WebKit needs those
+browsers (CI installs them). `src/sim/` is unchanged and the golden hashes pass.
+
+## Review
+
+- `/code-review` (medium) on the branch diff: eight findings. Fixed in 58a8eb8d and 57c0956f: story
+  world cards used the excluded stage PNGs (and `media-copies-smoke` now catches that class of
+  bug), a hidden boot art failure, a failed launch pinning its theme, a failed theme download never
+  retried, a released theme's PCM kept after decoding, `stuns:` URLs, `--strip-frames --verify`
+  skipping the verify. The pre-existing "arena draws the menu preview" finding is recorded above.
+- A fresh, independent subagent review of the full diff: confirmed no runtime request for any
+  excluded or stripped file, `src/sim` and `tests/fixtures` untouched, and that
+  `dist-content-check` resolves 254 fighters, 274 bodies (274 sheets, 274 previews) and 121 stages
+  plus 112 sceneries. Two bugs fixed in the final commits: the last match's theme was never released
+  (`preparedBed`), and `build-sheets.py` refused to re-pack a dist it had packed. Coverage gaps
+  closed: `dist-content-check` now checks the story animation and boss sheets, and `audio-smoke`
+  again checks the fighters' own Team Special clips. Noted, not changed: an old online client starts
+  at 2.5 s while a new one opposite it waits up to 6 s for a READY that never comes; a sprite sheet
+  that fails mid-session now fails the launch with a retry message instead of falling back to loose
+  frames, in stripped builds only.
 
 ## Measurements
 
