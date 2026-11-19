@@ -69,7 +69,10 @@ export class OnlineMatch {
     if (!connection) { this.setPhase('failed', 'Online play needs the hub: open Sproto Fighter from the arcade cabinet.'); return; }
     this.duel = new HubDuel(connection.client, connection.session, {
       onStart: start => this.begin(start),
-      onSignal: message => void this.peer?.handleSignal(message as SignalMessage),
+      onSignal: message => {
+        if ((message as SignalMessage | null)?.kind === 'ready') { this.receiveReady(); return; }
+        void this.peer?.handleSignal(message as SignalMessage);
+      },
       onRelay: packet => this.peer?.handleRelay(packet),
       onOutcome: outcome => { this.outcome = outcome; this.setPhase(outcome.status === 'cancelled' ? 'failed' : 'finished', outcome.reason); this.hooks.onOutcome(outcome); },
       onError: error => { if (this.phase !== 'finished') this.setPhase('failed', error instanceof Error ? error.message : String(error)); },
@@ -108,6 +111,30 @@ export class OnlineMatch {
     });
     this.setPhase('starting');
     this.hooks.onStart(start);
+  }
+
+  /** The other player has loaded the match (their READY arrived). */
+  peerReady = false;
+  private readyWaiters: (() => void)[] = [];
+  private receiveReady(): void {
+    this.peerReady = true;
+    for (const resolve of this.readyWaiters.splice(0)) resolve();
+  }
+
+  /** Tell the other player this side has loaded the match. Sent through the hub, which relays it reliably. */
+  markReady(): void { this.duel?.sendSignal({ kind: 'ready' } satisfies SignalMessage); }
+
+  /**
+   * Resolves true once the other player is ready, or false after `timeoutMs`
+   * (an older client never sends READY; a very slow one should not hold the match).
+   */
+  peerReadyWithin(timeoutMs: number): Promise<boolean> {
+    if (this.peerReady) return Promise.resolve(true);
+    return new Promise(resolve => {
+      const timer = setTimeout(() => { this.readyWaiters = this.readyWaiters.filter(w => w !== done); resolve(false); }, timeoutMs);
+      const done = () => { clearTimeout(timer); resolve(true); };
+      this.readyWaiters.push(done);
+    });
   }
 
   /** The fight has begun on this side (after the countdown). */
