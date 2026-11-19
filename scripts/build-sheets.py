@@ -209,7 +209,9 @@ def main():
         body_id, standing_url, preview_url = r[5], r[6], r[7]
         entry = doc['fighters'][body_id]['preview']
         frame = entry['frame']
-        if (frame if isinstance(frame, str) else frame['url']) != standing_url:
+        current = (frame if isinstance(frame, str) else frame['url']).split('?')[0]
+        # A rerun on a dist this script already packed finds its own preview there.
+        if current not in (standing_url.split('?')[0], f'/fighters/previews/{body_id}.webp'):
             raise SystemExit(f'{body_id}: index preview is not frame 0')
         entry['frame'] = preview_url if isinstance(frame, str) else {**frame, 'url': preview_url}
     index.write_text(json.dumps(doc, separators=(',', ':')))

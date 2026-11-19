@@ -725,6 +725,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     function fightBedSet(next: FightBed): void {
         if (next === fightBed) { if (track === 'fight') ensureFight(); wantBed(track === 'fight'); return; }
         fightBed = next;
+        // The prepared theme is now the fight bed, which keeps it; once the stage moves on it can go.
+        if (next === preparedBed) preparedBed = null;
         if (track !== 'fight') { releaseIdleLongBeds(); kickFightDecode(); return; }
         stopFightSample(FIGHT_FADE);
         clearInterval(timer); timer = undefined; playing = null;
