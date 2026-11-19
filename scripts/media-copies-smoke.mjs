@@ -33,6 +33,16 @@ assert.deepEqual(stale, [], 'copies older than their originals; run python3 scri
 // The game requests the copies, never the originals.
 const source = ['src/storyBoss.ts', 'src/powerArt.ts', 'src/arcadeSelection.css', 'src/fullscreen.css', 'src/mysticUI.css', 'src/versusScreen.css', 'src/pixelUI.css', 'index.html'].map(p => read(p)).join('\n');
 assert.ok(!/\/(menu|fighters\/powers)\/[\w/-]+\.png|-(attacks|projectiles)\.png|PixelifySans\.ttf/.test(source), 'a module still loads an original');
+// Every runtime use of a background path goes through webpCopy (the PNG is not in dist/);
+// the definition and plain comparisons are the only other uses.
+for (const file of readdirSync(new URL('src', root)).filter(f => f.endsWith('.ts'))) {
+  const text = read('src/' + file);
+  for (const m of text.matchAll(/stageImageSource\(|location\.image\b/g)) {
+    const around = text.slice(Math.max(0, m.index - 9), m.index + 40);
+    const ok = around.startsWith('webpCopy(') || /^function /.test(text.slice(m.index - 9, m.index)) || /^location\.image===/.test(text.slice(m.index, m.index + 17));
+    assert.ok(ok, `src/${file}: a background path is used without webpCopy: ...${text.slice(Math.max(0, m.index - 40), m.index + 40)}...`);
+  }
+}
 const requested = [];
 globalThis.document = { querySelector: () => null };
 globalThis.Image = class { set src(url) { requested.push(url); queueMicrotask(() => this.onload()); } };

@@ -9,7 +9,7 @@ import {beforeVMU} from './vmuCutscene';
 import {afterVMU} from './vmuAfterCutscene';
 import {createDifficultyRetry,storyDifficulty} from './difficulty';
 import {storySceneryChoices,setStorySceneryChoice,getStorySceneryChoice} from './stageVariants';
-import {STAGES,STORY_STAGE_IDS,stageImageSource,type StageId} from './stage';
+import {STAGES,STORY_STAGE_IDS,stageImageSource,webpCopy,type StageId} from './stage';
 import {ROSTER,type PlayableFighterId} from './core';
 import {STORY_ENCOUNTERS,STORY_OPPONENTS,isStoryRecruitable,type Encounter,type StoryProgress} from './storyProgress';
 
@@ -182,7 +182,7 @@ export function createStoryMode(hooks:Hooks,progress:StoryProgress){
             const available=encounters.find(e=>progress.canPlay(e.index)&&!progress.isCleared(e.index))??encounters.find(e=>progress.canPlay(e.index));
             const locked=story&&!available,done=story&&encounters.every(e=>progress.isCleared(e.index));
             const button=document.createElement('button');button.className='world-card';button.style.setProperty('--stage-accent',level.accent);button.dataset.stage=level.id;button.disabled=locked;
-            button.style.backgroundImage=`linear-gradient(90deg,#101a2ce8,#101a2c80),url('${stageImageSource(level.id)}')`;button.style.backgroundSize='cover';button.style.backgroundPosition='center';
+            button.style.backgroundImage=`linear-gradient(90deg,#101a2ce8,#101a2c80),url('${webpCopy(stageImageSource(level.id))}')`;button.style.backgroundSize='cover';button.style.backgroundPosition='center';
             button.innerHTML=`<span>${story?`STAGE ${first.chapter} / ENCOUNTERS ${first.index+1}–${last!.index+1}`:'FREE PLAY ARENA'}${done?' / CLEARED':locked?' / LOCKED':''}</span><strong>${level.name}</strong><small>${level.theme}</small><em>${story?(locked?'CLEAR THE PREVIOUS LOCATION':`${encounters.filter(e=>progress.isCleared(e.index)).length} / ${encounters.length} CLEARED`):'FREE PLAY ARENA'}</em>`;
             button.onclick=()=>{if(locked)return;if(!story){void launch(level.id);return;}showEncounter(available!);};grid.append(button);
         }
