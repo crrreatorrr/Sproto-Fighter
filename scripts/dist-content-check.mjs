@@ -99,6 +99,13 @@ for (const stage of stages) {
 }
 for (const location of variants.STORY_LOCATIONS) need(webpCopy(location.image), `story scenery ${location.id}`);
 
+// Story animation and boss sheets are requested by built-up paths the code scan cannot see.
+const storyAnimations = JSON.parse(readFileSync(new URL('../src/storyAnimationManifest.json', import.meta.url), 'utf8'));
+for (const [id, spec] of Object.entries(storyAnimations)) need('/story-animations/' + webpCopy(spec.image), `story animation ${id}`);
+const bossForms = [...readFileSync(new URL('../src/storyBoss.ts', import.meta.url), 'utf8').matchAll(/^export type BossForm=([^;]+);/gm)][0]?.[1].match(/'(\w+)'/g)?.map(f => f.slice(1, -1)) ?? [];
+assert.ok(bossForms.length >= 6, 'boss forms not found in src/storyBoss.ts');
+for (const form of bossForms) for (const sheet of ['attacks', 'projectiles']) need(`/story-animations/${form}-${sheet}.webp`, `boss ${form} ${sheet}`);
+
 // --- Paths written in the built code --------------------------------------
 const roots = ['fighters', 'stages', 'audio', 'story', 'story-animations', 'menu', 'fonts', 'portraits'];
 const pattern = new RegExp(`["'\`(]\\.?/((?:${roots.join('|')})/[\\w./-]+\\.(?:png|webp|jpg|jpeg|json|mp3|ogg|wav|woff2?|ttf))`, 'g');
