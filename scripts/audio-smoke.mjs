@@ -23,8 +23,9 @@ try{
  await page.keyboard.press('ArrowRight');
  await page.waitForFunction(()=>window.neonRelay.audioStatus().unlocked,null,{timeout:5000});
  check('the first key press unlocks the context',(await status()).context==='running');
- await page.waitForFunction(()=>{const s=window.neonRelay.audioStatus();return s.combatClips>30&&s.combatReady===s.combatClips;},null,{timeout:15000});
- check('combat clips are decoded before a fight so hits are not late',(await status()).combatReady===(await status()).combatClips);
+ await page.waitForFunction(()=>{const s=window.neonRelay.audioStatus();return s.combatSharedClips>=10&&s.combatShared===s.combatSharedClips;},null,{timeout:15000});
+ check('shared combat clips are decoded before a fight so hits are not late',(await status()).combatShared===(await status()).combatSharedClips);
+ check('fight themes are not downloaded at boot',(await status()).bedsHeld===0);
  const unlocked=(await status()).played;
  await page.focus('#start-fight');await page.waitForTimeout(120);
  await page.keyboard.press('ArrowUp');await page.waitForTimeout(120);
@@ -74,6 +75,7 @@ try{
   return audio.track==='fight'&&audio.fightBed==='trenches'&&audio.fightLoop&&audio.fightLoop.end>audio.fightLoop.start;
  },null,{timeout:60000});
  const playing=await status();
+ check('a fight holds at most its own theme and one other in memory',playing.fightBedLoaded&&playing.bedsHeld<=2);
  const span=playing.fightLoop.end-playing.fightLoop.start;
  check('a Trenches fight plays the recorded loop for the musical length',playing.fightLoop.start===0&&Math.abs(span-360)<1e-3&&playing.fightStarts===1);
  const seam=await page.evaluate(async()=>{
