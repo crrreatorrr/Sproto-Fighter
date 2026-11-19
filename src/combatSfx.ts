@@ -80,7 +80,23 @@ export function combatClip(name: SoundName, fighterId?: string): CombatClip | nu
     return { path: COMBAT_SFX_DIR + file, gain: file === VAMP_SPECIAL_FILE ? VAMP_SPECIAL_GAIN : 1 };
 }
 
-/** Every clip the player preloads. ko_02 is not included. */
+/** The shared clips every fight can play, loaded with the menu. */
+export function sharedClipPaths(): string[] {
+    return [...new Set(Object.values(SHARED).map(file => COMBAT_SFX_DIR + file))].sort();
+}
+
+/** The Team Special recordings of these fighters, loaded when they are picked. */
+export function fighterClipPaths(fighterIds: readonly string[]): string[] {
+    return [...new Set(fighterIds.map(id => FIGHTER_SPECIAL_FILES[id]).filter(Boolean).map(file => COMBAT_SFX_DIR + file))].sort();
+}
+
+/** The shared clip a fighter's own recording stands in for, played while that recording loads. */
+export function sharedClip(name: SoundName): CombatClip | null {
+    const file = (SHARED as Partial<Record<SoundName, string>>)[name];
+    return file ? { path: COMBAT_SFX_DIR + file, gain: 1 } : null;
+}
+
+/** Every clip the player can play. ko_02 is not included. */
 export function combatClipPaths(): string[] {
     const paths = new Set<string>();
     for (const file of Object.values(SHARED)) paths.add(COMBAT_SFX_DIR + file);

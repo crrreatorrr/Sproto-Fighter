@@ -1,19 +1,19 @@
-import assert from 'node:assert/strict';import{readFileSync}from'node:fs';import{createHash}from'node:crypto';import ts from'typescript';
+import assert from 'node:assert/strict';import{readFileSync}from'node:fs';import{createHash}from'node:crypto';import ts from'typescript';import{imageSize}from'./lib/load.mjs';
 const text=readFileSync(new URL('../src/stage.ts',import.meta.url),'utf8');const code=ts.transpileModule(text,{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;const stage=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
 const newIds=['trenches','circuit','throne','verse','hatchery','ranch'];const loaded=[];
-globalThis.Image=class{set src(url){this.url=url;const b=readFileSync(new URL('../public'+url,import.meta.url));assert.equal(b.toString('ascii',1,4),'PNG');this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);loaded.push(url);queueMicrotask(()=>this.onload());}};
-await stage.loadStageArt();assert.equal(loaded.length,stage.STAGES.length);assert.equal(stage.getStageArtStatus().loaded.length,stage.STAGES.length);assert.deepEqual(stage.getStageArtStatus().errors,{});assert.equal(stage.STAGES.length,121);
+globalThis.Image=class{set src(url){this.url=url;const b=readFileSync(new URL('../public'+url,import.meta.url));assert.ok(url.endsWith('.webp'),'fights load the WebP copy');({width:this.naturalWidth,height:this.naturalHeight}=imageSize(b));loaded.push(url);queueMicrotask(()=>this.onload());}};
+await stage.loadStageArt();assert.equal(loaded.length,stage.STAGES.length);assert.ok(stage.getStageArtStatus().loaded.length<=stage.STAGE_IMAGE_CACHE);assert.deepEqual(stage.getStageArtStatus().errors,{});assert.equal(stage.STAGES.length,121);
 assert.deepEqual(stage.STORY_STAGE_IDS,['trenches','circuit','yacht','ranch','throne','bar','hatchery','verse']);const hashes=new Set();
 for(const id of newIds){const b=readFileSync(new URL('../public/stages/higgsfield/'+id+'.png',import.meta.url));assert.equal(b.readUInt32BE(16),1280);assert.equal(b.readUInt32BE(20),720);hashes.add(createHash('sha256').update(b).digest('hex'));}
 assert.equal(hashes.size,6);
 const calls=[];const ctx={save(){},restore(){},beginPath(){},rect(){},clip(){},translate(){},scale(){},fillRect(){},moveTo(){},lineTo(){},stroke(){},drawImage(image,...rest){calls.push({url:image.url,rest});}};
-stage.setStage('ranch');for(const id of newIds)for(const[w,h]of[[256,110],[1280,420],[1280,720]]){stage.drawStagePreview(ctx,id,w,h);assert.equal(calls.at(-1).url,'/stages/higgsfield/'+id+'.png');assert.equal(stage.getStage(),'ranch','preview must not change active combat arena');}
+await stage.loadStageArt(newIds);stage.setStage('ranch');for(const id of newIds)for(const[w,h]of[[256,110],[1280,420],[1280,720]]){stage.drawStagePreview(ctx,id,w,h);assert.equal(calls.at(-1).url,'/stages/higgsfield/'+id+'.webp');assert.equal(stage.getStage(),'ranch','preview must not change active combat arena');}
 console.log('PASS: 121 selectable stages, ordered eight-chapter story route, six distinct 1280×720 new arenas, all 121 raster backgrounds load, and thumbnails/selection/match use the same stage images.');
 
 // A missing Ranch image must preserve playable procedural scenery without changing stage IDs.
 const fallback=await import('data:text/javascript;base64,'+Buffer.from(code+'\n// fallback module instance').toString('base64'));
-globalThis.Image=class{set src(url){this.url=url;queueMicrotask(()=>url.endsWith('/ranch.png')?this.onerror():this.onload());}};
-await fallback.loadStageArt();assert.equal(fallback.getStageArtStatus().loaded.length,fallback.STAGES.length-1);assert.ok(fallback.getStageArtStatus().errors.ranch);
+globalThis.Image=class{set src(url){this.url=url;queueMicrotask(()=>url.endsWith('/ranch.webp')?this.onerror():this.onload());}};
+await fallback.loadStageArt();assert.ok(fallback.getStageArtStatus().loaded.length<=fallback.STAGE_IMAGE_CACHE&&!fallback.getStageArtStatus().loaded.includes('ranch'));assert.ok(fallback.getStageArtStatus().errors.ranch);
 const noop=()=>{};globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>new Proxy({}, {get:()=>noop})})};
 const fallbackDraws=[];const fallbackCtx=new Proxy({drawImage:(...args)=>fallbackDraws.push(args)}, {get:(o,k)=>o[k]??noop});
 fallback.setStage('ranch');fallback.drawStage(fallbackCtx,0);assert.equal(fallbackDraws.length,1);assert.equal(fallbackDraws[0][0].width,320);assert.equal(fallback.getStage(),'ranch');
@@ -22,6 +22,8 @@ console.log('PASS: Ranch image failure uses the original 320×180 procedural bac
 // Contact and shadow must have margin on the actual floor band, including both corners.
 // Also verify source sampling remains correct for the marina/castle's non-1280 native images.
 const floor=Number(readFileSync(new URL('../src/sim/constants.ts',import.meta.url),'utf8').match(/FLOOR = (\d+)/)[1]);
+globalThis.Image=class{set src(url){this.url=url;({width:this.naturalWidth,height:this.naturalHeight}=imageSize(readFileSync(new URL('../public'+url,import.meta.url))));queueMicrotask(()=>this.onload());}};
+await stage.loadStageArt(['verse','castle','yacht']);
 for(const id of ['verse','castle','yacht']){
     calls.length=0;stage.drawStagePreview(ctx,id,1280,720);
     const floorDraw=calls.findLast(({rest:r})=>r.length===8&&r[4]===0&&r[6]===1280&&r[5]<floor&&r[5]+r[7]>floor);

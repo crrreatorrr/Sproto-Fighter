@@ -20,13 +20,24 @@ It now loads public/stages/previews/<id>.webp (640x360) and downloads a full
 background only for the stage being fought on. Sources are the stage list in
 src/stage.ts; public/stages/previews/manifest.json records their SHA-256.
 
+Fight backgrounds, animations, menu art and the font
+
+The game loads a WebP copy next to each original under public/: every stage
+background and story scenery (quality 95 at the original size, since the arena
+samples them nearest-neighbour), and lossless, exact copies of the story
+animation sheets, menu frames and buttons and power sprites (pixel-identical,
+checked on write). The UI font gets a WOFF2 copy. The originals stay in public/
+for the checks and authoring scripts and are left out of dist/ (DIST_EXCLUDE in
+vite.config.ts). scripts/manifests/media-copies.json records each source's
+SHA-256. The font copy needs fontTools and brotli (pip install fonttools brotli).
+
 Run after adding or changing a portrait or stage:
 
   python3 scripts/build-images.py            # only missing or changed images
   python3 scripts/build-images.py --all      # regenerate everything
 
-scripts/portraits-smoke.mjs and scripts/stage-previews-smoke.mjs report
-missing or stale copies. Requires Pillow with WebP support.
+scripts/portraits-smoke.mjs, scripts/stage-previews-smoke.mjs and
+scripts/media-copies-smoke.mjs report missing or stale copies. Requires Pillow with WebP support.
 """
 import hashlib
 import json
@@ -109,8 +120,80 @@ def render_stage(image, outputs):
     copy.save(outputs[0], 'WEBP', quality=84, method=6)
 
 
+COPY_MANIFEST = ROOT / 'scripts' / 'manifests' / 'media-copies.json'
+STORY_LOCATION_LIST = ROOT / 'src' / 'stageVariants.ts'
+STAGE_QUALITY = 95
+# Lossless, exact copies: every pixel (and the colour under transparent pixels) is
+# unchanged, so the game draws exactly what it drew from the PNG.
+LOSSLESS_GLOBS = ['story-animations/*.png', 'menu/higgsfield/*.png', 'menu/higgsfield/mystic/*.png', 'fighters/powers/*.png']
+FONTS = ['fonts/PixelifySans.ttf']
+
+
+def webp_copy(source):
+    return source.with_suffix('.webp')
+
+
+def copy_sources():
+    """{public-relative source: kind} for every file the game loads as a generated copy."""
+    found = {}
+    stage_images = {str(p.relative_to(ROOT / 'public')) for p in stage_sources().values()}
+    stage_images |= {p.lstrip('/') for p in re.findall(r'"image"\s*:\s*"([^"]+)"', STORY_LOCATION_LIST.read_text())}
+    for path in sorted(stage_images):
+        found[path] = 'stage'
+    for pattern in LOSSLESS_GLOBS:
+        for path in sorted((ROOT / 'public').glob(pattern)):
+            found[str(path.relative_to(ROOT / 'public'))] = 'lossless'
+    for path in FONTS:
+        found[path] = 'font'
+    return found
+
+
+def render_copy(kind, source, output):
+    if kind == 'font':
+        from fontTools.ttLib import TTFont  # pip install fonttools brotli
+        font = TTFont(source)
+        font.flavor = 'woff2'
+        font.save(output)
+        return
+    with Image.open(source) as image:
+        if kind == 'stage':
+            # Fight backgrounds are opaque and drawn nearest-neighbour from their own
+            # size, so they keep it: a smaller copy would sample different pixels.
+            image.convert('RGB').save(output, 'WEBP', quality=STAGE_QUALITY, method=6)
+            return
+        rgba = image.convert('RGBA')
+        rgba.save(output, 'WEBP', lossless=True, exact=True, quality=100, method=6)
+    with Image.open(output) as decoded:
+        if decoded.convert('RGBA').tobytes() != rgba.tobytes():
+            sys.exit(f'{output}: lossless copy differs from {source}')
+
+
+def build_copies(everything):
+    """Generated WebP/WOFF2 copies next to their sources. The sources stay in public/
+    for the checks and authoring scripts; vite.config.ts keeps them out of dist/."""
+    previous = json.loads(COPY_MANIFEST.read_text()) if COPY_MANIFEST.exists() else {}
+    entries, built = {}, 0
+    for path, kind in copy_sources().items():
+        source = ROOT / 'public' / path
+        output = source.with_suffix('.woff2') if kind == 'font' else webp_copy(source)
+        entry = {'kind': kind, 'copy': str(output.relative_to(ROOT / 'public')), 'sha256': hashlib.sha256(source.read_bytes()).hexdigest()}
+        entries[path] = entry
+        if not everything and previous.get(path) == entry and output.exists():
+            continue
+        render_copy(kind, source, output)
+        built += 1
+    for path, entry in previous.items():
+        if path not in entries:
+            (ROOT / 'public' / entry['copy']).unlink(missing_ok=True)
+    COPY_MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+    COPY_MANIFEST.write_text(json.dumps(entries, indent=1, sort_keys=True) + '\n')
+    return built, len(entries)
+
+
 def main():
     everything = '--all' in sys.argv
+    built, total = build_copies(everything)
+    print(f'stage, animation, menu and font copies: {built} regenerated, {total - built} up to date.')
     built, total = generate(sources(), OUT, lambda k: [OUT / name / f'{k}.webp' for name in SIZES], render_portrait, everything)
     print(f'portraits: {built} regenerated, {total - built} up to date.')
     built, total = generate(stage_sources(), STAGE_OUT, lambda k: [STAGE_OUT / f'{k}.webp'], render_stage, everything)

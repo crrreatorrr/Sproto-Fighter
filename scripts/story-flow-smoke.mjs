@@ -496,7 +496,7 @@ try {
       const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth,storyChapterRule,PLAYABLE_FIGHTERS}=dependencies;
       const canPlayFighter=id=>storyProgress.isUnlocked(id),lockedFighter=()=> 'Defeat this fighter in story mode to recruit them.';
       let setup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'guard',godMode:false};
-      let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};
+      let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};const audio={prepareFighters(){},prepareBed(){}};
       let matchCpuSkill=4,matchDifficultyAssist=false,matchFirstClear=false;
       let mode='guard',running=false,started=false,chosen='highsproto',opponent='vela',matchGodMode=false,matchEarnedGodMode=false,testingGodMode=false,matchTesting=false;
       const depthModifier='none',depthRoundStarts=[];let matchDepthOptions=null;
@@ -513,7 +513,7 @@ try {
       const ensurePoseAtlases=async(ids)=>{assetRequests.push([...ids]);if(assetFailure)throw Error('asset failure');},ensurePowerArt=async()=>{};
       const setStage=id=>selectedStage=id,setActiveStoryLocation=value=>selectedLocation=value,loadStoryLocation=async()=>{};
       // updateStage now tells the pause-menu song pick the stage changed. This harness does not play audio.
-      const fightSongs={movedTo(){}};
+      const fightSongs={movedTo(){},bedFor(){return 'synth';}};
       const stageRequests=[],stageErrors={};
       const loadStageArt=async(ids)=>{stageRequests.push([...ids]);},getStageArtStatus=()=>({errors:stageErrors});
       const partnerPicker={isOpen:false,choose:async id=>ROSTER[id].partner};

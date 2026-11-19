@@ -20,15 +20,57 @@ export interface PeerLinkOptions {
 
 export type SignalMessage =
   | { kind: 'offer' | 'answer'; sdp: string }
-  | { kind: 'ice'; candidate: RTCIceCandidateInit };
+  | { kind: 'ice'; candidate: RTCIceCandidateInit }
+  /** This side has loaded the match and is waiting to start (see OnlineMatch.markReady).
+   * Older clients ignore it; PeerLink never acts on it. */
+  | { kind: 'ready' };
 
-/** ICE servers from VITE_ICE_SERVERS (JSON array of RTCIceServer), else a public STUN server. */
+export const DEFAULT_ICE_SERVERS: RTCIceServer[] = [{ urls: 'stun:stun.l.google.com:19302' }];
+
+/**
+ * Parse VITE_ICE_SERVERS: a JSON array of RTCIceServer (a single object is also
+ * accepted), for example a TURN server for players behind strict NATs:
+ *
+ *   [{"urls":"stun:stun.l.google.com:19302"},
+ *    {"urls":["turn:turn.example.com:3478?transport=udp","turns:turn.example.com:5349"],
+ *     "username":"sproto","credential":"<turn password>"}]
+ *
+ * Each entry needs `urls` (a stun:, turn: or turns: URL, or a list of them). A
+ * turn:/turns: entry also needs string `username` and `credential`; an entry
+ * without them is dropped with a warning, since the browser would reject the
+ * whole configuration. Invalid JSON or no valid entry falls back to public STUN.
+ * TURN credentials in a Vite variable are visible to every player: use
+ * short-lived or restricted credentials.
+ */
+export function parseIceServers(configured: string | undefined, warn: (message: string) => void = message => console.warn(message)): RTCIceServer[] {
+  if (!configured?.trim()) return DEFAULT_ICE_SERVERS;
+  let parsed: unknown;
+  try { parsed = JSON.parse(configured); } catch { warn('VITE_ICE_SERVERS is not valid JSON; using public STUN'); return DEFAULT_ICE_SERVERS; }
+  const entries = Array.isArray(parsed) ? parsed : [parsed];
+  const servers: RTCIceServer[] = [];
+  entries.forEach((entry, index) => {
+    const e = entry as { urls?: unknown; username?: unknown; credential?: unknown } | null;
+    const urls = typeof e?.urls === 'string' ? [e.urls] : Array.isArray(e?.urls) ? e.urls : [];
+    // stuns: is in the spec but browsers reject it, which would break the whole list.
+    if (!urls.length || !urls.every(url => typeof url === 'string' && /^(stun|turn|turns):/i.test(url))) {
+      warn(`VITE_ICE_SERVERS entry ${index} has no valid stun:/turn: urls; ignored`); return;
+    }
+    const relay = urls.some(url => /^turns?:/i.test(url));
+    if (relay && (typeof e!.username !== 'string' || typeof e!.credential !== 'string')) {
+      warn(`VITE_ICE_SERVERS entry ${index} is a TURN server without a string username and credential; ignored`); return;
+    }
+    const server: RTCIceServer = { urls: typeof e!.urls === 'string' ? e!.urls : urls as string[] };
+    if (typeof e!.username === 'string') server.username = e!.username;
+    if (typeof e!.credential === 'string') server.credential = e!.credential;
+    servers.push(server);
+  });
+  if (!servers.length) { warn('VITE_ICE_SERVERS has no usable entry; using public STUN'); return DEFAULT_ICE_SERVERS; }
+  return servers;
+}
+
+/** ICE servers from VITE_ICE_SERVERS (see parseIceServers), else a public STUN server. */
 export function defaultIceServers(): RTCIceServer[] {
-  const configured = import.meta.env.VITE_ICE_SERVERS;
-  if (configured) {
-    try { return JSON.parse(configured) as RTCIceServer[]; } catch { console.warn('VITE_ICE_SERVERS is not valid JSON'); }
-  }
-  return [{ urls: 'stun:stun.l.google.com:19302' }];
+  return parseIceServers(import.meta.env.VITE_ICE_SERVERS);
 }
 
 export class PeerLink {

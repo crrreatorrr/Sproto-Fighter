@@ -1,6 +1,8 @@
 import {TICK_RATE,WIDTH} from './core';
 import {STORY_BOSS_X,storyBossX,type BossForm} from './storyBoss';
 import manifest from './storyAnimationManifest.json';
+/** Story animation sheets load their lossless WebP copies (scripts/build-images.py); same rule as webpCopy in stage.ts. */
+const webpCopy=(path:string)=>path.replace(/\.png(?=$|\?)/i,'.webp');
 
 export type StoryClip = keyof typeof manifest;
 export type StoryScenePhase = 'intro'|'outro'|'boss'|'mecha';
@@ -47,7 +49,7 @@ export function createStoryAnimation(){
             const token=++generation;
             const loaded=await Promise.all([...new Set([...next.intro,...next.outro,...(next.boss??[]),...(next.mecha??[]),...(next.form&&bossClips[next.form]?[bossClips[next.form]!]:[])])].map(async id=>{
                 const spec=manifest[id],asset=new Image();
-                asset.src=import.meta.env.BASE_URL+'story-animations/'+spec.image;
+                asset.src=import.meta.env.BASE_URL+'story-animations/'+webpCopy(spec.image);
                 await asset.decode();
                 const atlasFrames='atlasFrames' in spec?spec.atlasFrames:spec.frames;
                 if(asset.naturalWidth!==spec.columns*spec.width||asset.naturalHeight<Math.ceil(atlasFrames/spec.columns)*spec.height)

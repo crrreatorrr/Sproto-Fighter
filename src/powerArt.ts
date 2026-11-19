@@ -18,13 +18,13 @@ export function ensurePowerArt(): Promise<void> {
   image.onerror=()=>reject(new Error('Projectile sprite could not load: '+url));image.src=asset(url);
  });
  return coinReady ??= Promise.all([
-  load('/fighters/powers/chad-retain-coin.png'),
-  load('/fighters/powers/sproto3106-reference-b.png'),
-  load('/fighters/powers/sproto2531-mini.png'),
-  load('/fighters/powers/vitalik-ethereum.png'),
-  load('/fighters/powers/highsproto-weed-leaf.png'),
-  load('/fighters/powers/shared-ranged-atlas.png'),
-  load('/fighters/powers/team-special-effects.png'),
+  load('/fighters/powers/chad-retain-coin.webp'),
+  load('/fighters/powers/sproto3106-reference-b.webp'),
+  load('/fighters/powers/sproto2531-mini.webp'),
+  load('/fighters/powers/vitalik-ethereum.webp'),
+  load('/fighters/powers/highsproto-weed-leaf.webp'),
+  load('/fighters/powers/shared-ranged-atlas.webp'),
+  load('/fighters/powers/team-special-effects.webp'),
  ]).then(([coin,b,mini,eth,leaf,ranged,effects])=>{retainCoin=coin;referenceB=b;miniSproto=mini;ethereum=eth;weedLeaf=leaf;sharedRanged=ranged;specialEffects=effects;}).catch(error=>{coinReady=undefined;throw error;});
 }
 export function drawSharedRanged(c:CanvasRenderingContext2D,index:number){

@@ -243,7 +243,10 @@ attack, so a swing and its impact play once, and a fighter with their own
 team-special recording uses it. Win, lose, round start and the story music stay
 synthesised. Stages without a recorded theme keep the synthesised fight loop.
 Playback starts after the first key, click or button press. Settings has master,
-effects and music volume.
+effects and music volume. Only the menu theme, the click and the shared combat
+clips download at boot; a stage's theme downloads with its match's art, and a
+fighter's own Team Special recording when the fighter is picked (the shared
+clip plays until it arrives).
 
 The CPU guards a projectile in place and walks in between shots, punishes a move
 it has guarded twice in three seconds, holds guard as it gets up, and stop-hits a
@@ -281,7 +284,11 @@ bands that must fall as difficulty rises.
   into one sprite sheet with every frame's transparent margin trimmed
   (`scripts/build-sheets.py`), about a quarter of the decoded memory; frame
   metadata is never changed, and `?atlas=frames` loads the individual PNGs
-  instead. The bodies of the match being played are pinned; other bodies are
+  instead (development and unstripped builds only: release builds, `npm run
+  build:release` and the CI artifact, drop the loose frame PNGs and the full
+  manifest with `build-sheets.py --strip-frames`, and the menu's standing poses
+  come from lossless `dist/fighters/previews/<id>.webp`). The bodies of the
+  match being played are pinned; other bodies are
   released past 16 bodies or 160 MB. See [loading measurements](docs/perf/README.md).
 - `src/storyProgress.ts`, `storyMode.ts`, `campaignMap.ts`: saves, progression,
   placeholder scenes and a real 100-node map. `stageVariants.ts` maps approved
@@ -292,9 +299,17 @@ bands that must fall as difficulty rises.
 - `public/`: local runtime art/fonts; no generation service is needed to play.
   The menu uses small generated WebP copies (`public/portraits/`,
   `public/stages/previews/`) instead of the 1000 px portrait PNGs and full
-  stage backgrounds; a fight loads only its own background. After adding or
-  changing a portrait or stage, run `python3 scripts/build-images.py`
-  (needs Pillow); `portraits-smoke` and `stage-previews-smoke` catch stale copies.
+  stage backgrounds; a fight loads only its own background, from a WebP copy
+  (quality 95, original size) next to the PNG original, and story animation
+  sheets, menu frames, buttons and power sprites load lossless WebP copies; the
+  font is WOFF2. The PNG/TTF originals stay in `public/` for the checks and are
+  left out of `dist/` (`DIST_EXCLUDE` in `vite.config.ts`, which also drops
+  check-only manifests). After adding or changing a portrait, stage, animation
+  sheet, menu image or power sprite, run `python3 scripts/build-images.py`
+  (needs Pillow, and fontTools with brotli for the font); `portraits-smoke`,
+  `stage-previews-smoke` and `media-copies-smoke` catch stale copies.
+  `node scripts/dist-content-check.mjs` checks that every fighter and stage
+  resolves in a build (`--release` for a stripped one).
 
 ### Checks
 
@@ -351,10 +366,28 @@ a result the server verified. Tickets have no real-money value.
   for the result screen, then choose Rematch or press B for fighter select.
 
 Configuration: `VITE_NAKAMA_URL` and `VITE_NAKAMA_SERVER_KEY` as below, and
-optionally `VITE_ICE_SERVERS` (a JSON array of `RTCIceServer`, e.g. with a
-TURN server; the default is a public STUN server). The server side is the
-`sproto_duel` match on the metaverse-hub branch `claude/sproto-online-duels`;
-after changing anything under `src/sim`, run `node scripts/build-sim-bundle.mjs
+optionally `VITE_ICE_SERVERS`, a JSON array of `RTCIceServer` (a single object
+also works; the default is a public STUN server). Production needs a TURN
+server so players behind strict NATs get a direct link instead of the hub relay:
+
+```sh
+VITE_ICE_SERVERS='[{"urls":"stun:stun.l.google.com:19302"},{"urls":["turn:turn.example.com:3478?transport=udp","turns:turn.example.com:5349"],"username":"sproto","credential":"<password>"}]'
+```
+
+Every entry needs `stun:`/`turn:`/`turns:` urls, and a TURN entry needs string
+`username` and `credential`; an invalid entry is dropped with a console
+warning, and invalid JSON falls back to STUN (`parseIceServers` in
+`src/net/peer.ts`). The value is built into the client, so every player can read
+it: use short-lived or restricted TURN credentials.
+
+When both players have loaded the match, each sends READY over the hub's
+signaling relay; the round starts once both are ready and the versus card has
+shown for 2.5 s, or 6 s after loading if the other side never says so (an
+older client), which stays under the hub's 10-second input-stall forfeit.
+
+The server side is the `sproto_duel` match registered by metaverse-hub's
+`server/modules/src/main.ts` (`server/modules/src/sproto_duel.ts`); after
+changing anything under `src/sim`, run `node scripts/build-sim-bundle.mjs
 --out <hub>/server/modules/vendor/sproto-sim.js` so the hub and clients share
 one simulation fingerprint. Design and status:
 [the multiplayer plan](docs/MULTIPLAYER-PLAN.md).

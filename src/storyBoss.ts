@@ -381,14 +381,14 @@ export async function loadStoryBossArt(form:BossForm){
     const [projectiles,poses,custom]=await Promise.all([
         Promise.all(Object.entries(projectileUrls).map(async ([key,url])=>[key,await loadImage(url)] as const)),
         Promise.all(forms.map(async key=>{
-            const image=await loadImage(import.meta.env.BASE_URL+'story-animations/'+key+'-attacks.png');
+            const image=await loadImage(import.meta.env.BASE_URL+'story-animations/'+key+'-attacks.webp');
             const size=key==='dragon'?1536:1024;
             const width=key==='art'?artPose.width*2:size,height=key==='art'?artPose.height*2:size;
             if(image.naturalWidth!==width||image.naturalHeight!==height)throw new Error('Invalid boss attack sheet: '+key);
             return [key,image] as const;
         })),
         Promise.all(forms.map(async key=>{
-            const image=await loadImage(import.meta.env.BASE_URL+'story-animations/'+key+'-projectiles.png');
+            const image=await loadImage(import.meta.env.BASE_URL+'story-animations/'+key+'-projectiles.webp');
             if(image.naturalWidth!==512||image.naturalHeight!==128)throw new Error('Invalid projectile sheet: '+key);
             return [key,image] as const;
         })),

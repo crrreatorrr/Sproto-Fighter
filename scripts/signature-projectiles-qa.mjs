@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import fs from 'node:fs';import ts from 'typescript';
+import fs from 'node:fs';import ts from 'typescript';import { imageSize } from './lib/load.mjs';
 const compile=p=>ts.transpileModule(fs.readFileSync(p,'utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText;
 const module=await import('data:text/javascript;base64,'+Buffer.from(compile('src/powerArt.ts')).toString('base64'));
 const changes=JSON.parse(fs.readFileSync('art/identity-actions/projectile-changes.json','utf8'));
@@ -8,8 +8,8 @@ const seen=new Map();
 for(const[id,shape]of Object.entries(changes)){
  if(shape==='ethereum'){
   const draws=[],c={save(){},restore(){},rotate(){},drawImage(...a){draws.push(a)}};
-  globalThis.Image=class{set src(value){this.srcValue=value;const b=fs.readFileSync('public'+value);this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);this.complete=true;queueMicrotask(()=>this.onload());}};
-  await module.ensurePowerArt();module.drawPower(c,shape,0,'#638aff');assert.equal(draws.length,1);assert.ok(draws[0][0].srcValue.endsWith('vitalik-ethereum.png'));
+  globalThis.Image=class{set src(value){this.srcValue=value;const b=fs.readFileSync('public'+value);({width:this.naturalWidth,height:this.naturalHeight}=imageSize(b));this.complete=true;queueMicrotask(()=>this.onload());}};
+  await module.ensurePowerArt();module.drawPower(c,shape,0,'#638aff');assert.equal(draws.length,1);assert.ok(draws[0][0].srcValue.endsWith('vitalik-ethereum.webp'));
   seen.set('reference-image:ethereum',id);continue;
  }
  const cells=new Set(),colors=new Set();

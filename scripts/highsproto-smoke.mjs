@@ -67,6 +67,6 @@ const context={save(){},restore(){},rotate(){},drawImage(...args){draws.push(arg
 await visual.ensurePowerArt();
 visual.drawPower(context,'joint',0,'#ef473b');
 assert.equal(draws.length,1);
-assert.equal(draws[0][0].url,'/fighters/powers/highsproto-weed-leaf.png');
+assert.equal(draws[0][0].url,'/fighters/powers/highsproto-weed-leaf.webp');
 assert.equal(draws[0][3],42);
 console.log(`PASS: ${cases} projectile ground/air/facing/aim cases; finger-flick emission, straight fast travel, 4 hit/block outcomes and weed-leaf sprite rendering.`);

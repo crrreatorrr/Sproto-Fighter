@@ -132,7 +132,7 @@ body:has(#fight-view:not([hidden])) #app main { padding: 0; }
 #overlay .overlay-song-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
 #overlay .overlay-song-list .quiet { margin: 0; min-height: 36px; padding: 8px 14px; font-size: 12px; }
 #overlay .overlay-song-list .quiet[aria-pressed="true"] {
-  --mystic-button: url('/menu/higgsfield/mystic/button-amber.png');
+  --mystic-button: url('/menu/higgsfield/mystic/button-amber.webp');
   background: var(--mystic-button) center / 100% 100% no-repeat;
   color: #fff0b1; border-color: #fff0a1 #a67d2b #a67d2b #fff0a1;
 }

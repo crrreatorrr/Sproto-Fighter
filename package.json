@@ -27,7 +27,7 @@
     "build:hub-sdk": "tsc -p vendor/hub-sdk/tsconfig.build.json && node vendor/hub-sdk/scripts/copy-third-party.mjs",
     "test:all": "vitest run && node scripts/run-all.mjs",
     "test:fast": "vitest run && node scripts/run-all.mjs --fast",
-    "build:release": "npm run build && python3 scripts/build-sheets.py dist --verify"
+    "build:release": "npm run build && python3 scripts/build-sheets.py dist --verify --strip-frames && node scripts/dist-content-check.mjs dist --release"
   },
   "devDependencies": {
     "esbuild": "0.28.2",

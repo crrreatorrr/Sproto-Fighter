@@ -313,11 +313,23 @@ export function stageImageSource(id:StageId):string {
     if(!stage)throw new Error(`Unknown stage: ${id}`);
     return stage.image??`/stages/higgsfield/${id}.png`;
 }
+/** Fight backgrounds load the WebP copy scripts/build-images.py writes next to each PNG original (scripts/manifests/media-copies.json); the originals are not shipped in dist/. */
+export const webpCopy=(path:string)=>path.replace(/\.png(?=$|\?)/i,'.webp');
 let currentStage:StageId='ranch';
 const placeholderScenery=new Map<StageId,HTMLCanvasElement>();
 const stageImages=new Map<StageId,HTMLImageElement>();
 const stageArtErrors=new Map<StageId,string>();
 const stageArtPending=new Map<StageId,Promise<void>>();
+/** Decoded full backgrounds kept at once (about 4-16 MB each). The active stage is never released. */
+export const STAGE_IMAGE_CACHE=6;
+function rememberStageImage(id:StageId,image:HTMLImageElement){
+    stageImages.delete(id);stageImages.set(id,image);
+    // Map order is least recently loaded first.
+    for(const key of stageImages.keys()){
+        if(stageImages.size<=STAGE_IMAGE_CACHE)break;
+        if(key!==currentStage&&key!==id)stageImages.delete(key);
+    }
+}
 /** Load only requested scenery, deduplicating menu, launch and repeated requests. */
 export function loadStageArt(ids:readonly StageId[]=STAGES.map(stage=>stage.id)):Promise<void>{
     return Promise.all(ids.map(id=>{
@@ -325,8 +337,8 @@ export function loadStageArt(ids:readonly StageId[]=STAGES.map(stage=>stage.id))
         const pending=stageArtPending.get(id);if(pending)return pending;
         const image=new Image();
         const load=new Promise<void>((resolve,reject)=>{
-            image.onload=()=>resolve();image.onerror=()=>reject(new Error(`Stage image could not load: ${id}`));image.src=asset(stageImageSource(id));
-        }).then(()=>{stageImages.set(id,image);stageArtErrors.delete(id);})
+            image.onload=()=>resolve();image.onerror=()=>reject(new Error(`Stage image could not load: ${id}`));image.src=asset(webpCopy(stageImageSource(id)));
+        }).then(()=>{rememberStageImage(id,image);stageArtErrors.delete(id);})
           .catch(error=>{stageArtErrors.set(id,String(error));})
           .finally(()=>{stageArtPending.delete(id);});
         stageArtPending.set(id,load);return load;

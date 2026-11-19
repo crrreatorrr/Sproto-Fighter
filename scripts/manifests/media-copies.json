@@ -1,0 +1,807 @@
+{
+ "fighters/powers/chad-retain-coin.png": {
+  "copy": "fighters/powers/chad-retain-coin.webp",
+  "kind": "lossless",
+  "sha256": "9bbf413e185cd7e3f6787c41b4d7c3ba35c79c69442950e6f25661b60314910a"
+ },
+ "fighters/powers/highsproto-weed-leaf.png": {
+  "copy": "fighters/powers/highsproto-weed-leaf.webp",
+  "kind": "lossless",
+  "sha256": "8e073423cbe91d6996900d19ebf26330d378eea44432d2ee4d279a5e95fa503d"
+ },
+ "fighters/powers/shared-ranged-atlas.png": {
+  "copy": "fighters/powers/shared-ranged-atlas.webp",
+  "kind": "lossless",
+  "sha256": "83c2f149505b3bfdf1224ccda6dfb66df96e90d6f614b7443069172b4b5340c1"
+ },
+ "fighters/powers/sproto2531-mini.png": {
+  "copy": "fighters/powers/sproto2531-mini.webp",
+  "kind": "lossless",
+  "sha256": "a189814471535af87802037935f74d0379e144abdf6c16f588936445882875f4"
+ },
+ "fighters/powers/sproto3106-reference-b.png": {
+  "copy": "fighters/powers/sproto3106-reference-b.webp",
+  "kind": "lossless",
+  "sha256": "bca992842c562066e229db6c636477a7ca725cb6afc2b44f3d634a1c8d0afb1a"
+ },
+ "fighters/powers/team-special-effects.png": {
+  "copy": "fighters/powers/team-special-effects.webp",
+  "kind": "lossless",
+  "sha256": "4d39594fc6114e0e65ea4518fba85939ff9db8d31301e91f7c56efef7405f251"
+ },
+ "fighters/powers/vitalik-ethereum.png": {
+  "copy": "fighters/powers/vitalik-ethereum.webp",
+  "kind": "lossless",
+  "sha256": "928a5c2348ceed7494ea0714a90c27ce01ccc73a83c8e3fc09af185ccbc27554"
+ },
+ "fonts/PixelifySans.ttf": {
+  "copy": "fonts/PixelifySans.woff2",
+  "kind": "font",
+  "sha256": "9ba86cd010a4de309d263ceff8e8044092c9db7efda869620cb9ff1c4389e8a5"
+ },
+ "menu/higgsfield/arcade-frame.png": {
+  "copy": "menu/higgsfield/arcade-frame.webp",
+  "kind": "lossless",
+  "sha256": "5de560152b95005735fbd4b309ae09e8c8c1f97e7c3423c76978bc1c0a160e6d"
+ },
+ "menu/higgsfield/mystic/button-amber.png": {
+  "copy": "menu/higgsfield/mystic/button-amber.webp",
+  "kind": "lossless",
+  "sha256": "df4357411f2094ed00cb685ba6f46d59d4ee26a1a7e39e744bcfa08b8e752b65"
+ },
+ "menu/higgsfield/mystic/button-amethyst.png": {
+  "copy": "menu/higgsfield/mystic/button-amethyst.webp",
+  "kind": "lossless",
+  "sha256": "196f554d28f3d3c75de98a67f01bea0ea96e36a139c1d7ca609d364a7099bf6e"
+ },
+ "menu/higgsfield/mystic/button-ruby.png": {
+  "copy": "menu/higgsfield/mystic/button-ruby.webp",
+  "kind": "lossless",
+  "sha256": "6f8f9644717aae1475c08d359722937afb6d858cc858fdf478471792b96bf8ae"
+ },
+ "menu/higgsfield/mystic/button-sapphire.png": {
+  "copy": "menu/higgsfield/mystic/button-sapphire.webp",
+  "kind": "lossless",
+  "sha256": "4ff03f0e82c3e049f2055a68c38983b8692be3bb54960743dd96d1cd6a45e466"
+ },
+ "menu/higgsfield/mystic/engraved-frame.png": {
+  "copy": "menu/higgsfield/mystic/engraved-frame.webp",
+  "kind": "lossless",
+  "sha256": "566504e9d3b142c5b51e6a54e8599c36dacb50af843a56b445300e401ee11a80"
+ },
+ "stages/higgsfield/ambernursery.png": {
+  "copy": "stages/higgsfield/ambernursery.webp",
+  "kind": "stage",
+  "sha256": "761e87e2006c3835f76d8d5bb0a8fe92ea1538c4d96a78eee88133e5f0fd6133"
+ },
+ "stages/higgsfield/aquariumbar.png": {
+  "copy": "stages/higgsfield/aquariumbar.webp",
+  "kind": "stage",
+  "sha256": "e4afd5c19e265a3678fdf53ec804a08c7c0255cdcabe3925a66d3cad50b417a3"
+ },
+ "stages/higgsfield/ashstation.png": {
+  "copy": "stages/higgsfield/ashstation.webp",
+  "kind": "stage",
+  "sha256": "abed6d264d381365b7d033f42e70d560bcb0e8167d6a02730a8e40e57f6793d5"
+ },
+ "stages/higgsfield/auroragate.png": {
+  "copy": "stages/higgsfield/auroragate.webp",
+  "kind": "stage",
+  "sha256": "f19fa4b9e3d08f1ba7282e9648434d266f618079ab48e2cb1b3593ae2660ff9b"
+ },
+ "stages/higgsfield/backstage.png": {
+  "copy": "stages/higgsfield/backstage.webp",
+  "kind": "stage",
+  "sha256": "93e66d9e2c04691867f93ef772b83ad0502df1f97f092b19e75076681d6e8702"
+ },
+ "stages/higgsfield/bar.png": {
+  "copy": "stages/higgsfield/bar.webp",
+  "kind": "stage",
+  "sha256": "69e1bc1a41c71519fb0471ae0ec7479d4bcaf32d7b0e3aee5f70687b7d5ba745"
+ },
+ "stages/higgsfield/bluebar.png": {
+  "copy": "stages/higgsfield/bluebar.webp",
+  "kind": "stage",
+  "sha256": "0e0983264c052b01cfd7767b31972839044e7e7596b1a8d6ef602fa7407fac44"
+ },
+ "stages/higgsfield/castle.png": {
+  "copy": "stages/higgsfield/castle.webp",
+  "kind": "stage",
+  "sha256": "3ae95bffa16b2868e76f98eb023abad719b34e2e3484dd1818e40cc58b27c977"
+ },
+ "stages/higgsfield/cellar.png": {
+  "copy": "stages/higgsfield/cellar.webp",
+  "kind": "stage",
+  "sha256": "ca17f0854647499746215bd9b4ddbd824b24be697ba17726611af9a8591314a7"
+ },
+ "stages/higgsfield/chainforge.png": {
+  "copy": "stages/higgsfield/chainforge.webp",
+  "kind": "stage",
+  "sha256": "cc0d00acc71dd6dc95ecc9047456ba045153606199235b0a341175143c2be3f9"
+ },
+ "stages/higgsfield/circuit.png": {
+  "copy": "stages/higgsfield/circuit.webp",
+  "kind": "stage",
+  "sha256": "4f62828b1b6f9b021a9a8ed33937bbe7e8d91474d3ed0e834c9ed4567efdb713"
+ },
+ "stages/higgsfield/coralsalon.png": {
+  "copy": "stages/higgsfield/coralsalon.webp",
+  "kind": "stage",
+  "sha256": "992e9c83d49eecf69306fcccdb0f9a6c3dd75b175eafb994cd11b1fb258727f0"
+ },
+ "stages/higgsfield/culvertgarden.png": {
+  "copy": "stages/higgsfield/culvertgarden.webp",
+  "kind": "stage",
+  "sha256": "b9c3031faf1fb30acb0837edc0c468564570b4d5c52c3304e8b218007a13920d"
+ },
+ "stages/higgsfield/datavault.png": {
+  "copy": "stages/higgsfield/datavault.webp",
+  "kind": "stage",
+  "sha256": "fd42f29335123664e173bd3f81b5255ddb21c00666ed9146c7fa901acc002bd0"
+ },
+ "stages/higgsfield/drydock.png": {
+  "copy": "stages/higgsfield/drydock.webp",
+  "kind": "stage",
+  "sha256": "ffc6b3910d0be9554a0838187618498f243797d5aa07df7369794a90bca042fa"
+ },
+ "stages/higgsfield/frostbastion.png": {
+  "copy": "stages/higgsfield/frostbastion.webp",
+  "kind": "stage",
+  "sha256": "ca65bc97e8cdc77f3cbc3757bc81c7e0e589bf9aa3e46f87b8437df03191a57d"
+ },
+ "stages/higgsfield/glassgarden.png": {
+  "copy": "stages/higgsfield/glassgarden.webp",
+  "kind": "stage",
+  "sha256": "be62b8075a61baa1dcbaba44710e6353ae3d7b9f7e66e53633a82684c2026df0"
+ },
+ "stages/higgsfield/gravityarchive.png": {
+  "copy": "stages/higgsfield/gravityarchive.webp",
+  "kind": "stage",
+  "sha256": "46d5ba63bf5753125130c0c0eafe505408e448594b6f7ee4b190e161fb02764e"
+ },
+ "stages/higgsfield/hatchery.png": {
+  "copy": "stages/higgsfield/hatchery.webp",
+  "kind": "stage",
+  "sha256": "8fe70e69585f0922896445efb1fe2e8c523df36c24aef72ea16c933caefba062"
+ },
+ "stages/higgsfield/helipad.png": {
+  "copy": "stages/higgsfield/helipad.webp",
+  "kind": "stage",
+  "sha256": "d6c8caba30386f2b82c155b839dfb769f9a7c6ba5b2494e7271bc1213c570ba4"
+ },
+ "stages/higgsfield/ionplaza.png": {
+  "copy": "stages/higgsfield/ionplaza.webp",
+  "kind": "stage",
+  "sha256": "b686a43e621f8189ce8144604b44929cf529202bdba6afc8776f73685acca6fb"
+ },
+ "stages/higgsfield/lanterncourt.png": {
+  "copy": "stages/higgsfield/lanterncourt.webp",
+  "kind": "stage",
+  "sha256": "ffafb0886454d02f16f30b2bbf81bb016ee82b51c7018f7c05f92a154cf8ef4c"
+ },
+ "stages/higgsfield/lunarchapel.png": {
+  "copy": "stages/higgsfield/lunarchapel.webp",
+  "kind": "stage",
+  "sha256": "27c16457bf4549a67f85239eaa39f7c4027b18917fed5e23c99780475d3f8abe"
+ },
+ "stages/higgsfield/moltinghall.png": {
+  "copy": "stages/higgsfield/moltinghall.webp",
+  "kind": "stage",
+  "sha256": "d98ef7de0b93d78f85dda190f8d6dfa91656f4f6aa00fee991ef9959b7980265"
+ },
+ "stages/higgsfield/nightmarket.png": {
+  "copy": "stages/higgsfield/nightmarket.webp",
+  "kind": "stage",
+  "sha256": "541302ffeaf4003122f2d4921eacb42eee596ea1c10dc2f66fa0cc57dbf0f126"
+ },
+ "stages/higgsfield/observatory.png": {
+  "copy": "stages/higgsfield/observatory.webp",
+  "kind": "stage",
+  "sha256": "b4ac4ec471621627625fe8bd4b8fd6580ea1b98b3f802786c3de07942b9937b2"
+ },
+ "stages/higgsfield/pearlchamber.png": {
+  "copy": "stages/higgsfield/pearlchamber.webp",
+  "kind": "stage",
+  "sha256": "5a68a99d588fa91e8a9a4e2bcb7e6a21360fa5fd65352f69dc86c9cd2a7b8dae"
+ },
+ "stages/higgsfield/rainworks.png": {
+  "copy": "stages/higgsfield/rainworks.webp",
+  "kind": "stage",
+  "sha256": "47bc9cf6e214bf369271e942556d5d3bfd7262313944e8ae11151c5fc7cc44bc"
+ },
+ "stages/higgsfield/ranch-creek.png": {
+  "copy": "stages/higgsfield/ranch-creek.webp",
+  "kind": "stage",
+  "sha256": "0de8a03d8c169af240622fd6da4b88d7a9cef90f9f46c1ed1077141fa035dddf"
+ },
+ "stages/higgsfield/ranch-orchard.png": {
+  "copy": "stages/higgsfield/ranch-orchard.webp",
+  "kind": "stage",
+  "sha256": "ea4689608272c304bba46c4a1960c777dc225e634fe4103da9818b5f043b70bb"
+ },
+ "stages/higgsfield/ranch-windmill.png": {
+  "copy": "stages/higgsfield/ranch-windmill.webp",
+  "kind": "stage",
+  "sha256": "098459599ba2cc021ec6a072e4de267630f5f00382d04a1cb0a4130e26288150"
+ },
+ "stages/higgsfield/ranch.png": {
+  "copy": "stages/higgsfield/ranch.webp",
+  "kind": "stage",
+  "sha256": "d983bd5dec44e324895a6dbbe287f3d50de5999cb6d62fc5caf40b439bd1a8d0"
+ },
+ "stages/higgsfield/regatta.png": {
+  "copy": "stages/higgsfield/regatta.webp",
+  "kind": "stage",
+  "sha256": "8413ace017de14f4b28cd0b8f465b7f5795d34282bdcb5a93d70079b46d78282"
+ },
+ "stages/higgsfield/retro.png": {
+  "copy": "stages/higgsfield/retro.webp",
+  "kind": "stage",
+  "sha256": "7448914cb447f64d0465ea11ae8d667796a7463c36246814f2008587aa25e1c9"
+ },
+ "stages/higgsfield/rooftop.png": {
+  "copy": "stages/higgsfield/rooftop.webp",
+  "kind": "stage",
+  "sha256": "013b7844b8ab5084f99bd188671ef550ac4e1095e22f987889173c36f3614ec9"
+ },
+ "stages/higgsfield/rootreservoir.png": {
+  "copy": "stages/higgsfield/rootreservoir.webp",
+  "kind": "stage",
+  "sha256": "ace52acfbb6287a0bdd1b4d8d637f5b2103f3b491b2b55e0b113e2e1ca5adb1d"
+ },
+ "stages/higgsfield/royallibrary.png": {
+  "copy": "stages/higgsfield/royallibrary.webp",
+  "kind": "stage",
+  "sha256": "8efcca26d29e6f01a1c690260528d6c4c8a7ef65967f504e83c7bde4069a6778"
+ },
+ "stages/higgsfield/rustcanal.png": {
+  "copy": "stages/higgsfield/rustcanal.webp",
+  "kind": "stage",
+  "sha256": "5b4799262138a320ab52bdbc21ada8365bf52a7759fd9f1c65eb63adbc44e815"
+ },
+ "stages/higgsfield/scrapyard.png": {
+  "copy": "stages/higgsfield/scrapyard.webp",
+  "kind": "stage",
+  "sha256": "84894e9da9e366dab5fb8a569479b8b59cb77f0fd71d42958d77ae416a12bedc"
+ },
+ "stages/higgsfield/skyrail.png": {
+  "copy": "stages/higgsfield/skyrail.webp",
+  "kind": "stage",
+  "sha256": "595944236888a3177cebae6d66c70e18b5facce76a99decf948bbf587458e0f4"
+ },
+ "stages/higgsfield/sporegrove.png": {
+  "copy": "stages/higgsfield/sporegrove.webp",
+  "kind": "stage",
+  "sha256": "ae5ad5af18d94613675f4756835d6aa127481cf3b74dd092d37d005d293bca2a"
+ },
+ "stages/higgsfield/starbridge.png": {
+  "copy": "stages/higgsfield/starbridge.webp",
+  "kind": "stage",
+  "sha256": "1e471615087ee0f1e18a195ecfd7f25dd425bf0b97f21c28142727416f3e82af"
+ },
+ "stages/higgsfield/stormarcade.png": {
+  "copy": "stages/higgsfield/stormarcade.webp",
+  "kind": "stage",
+  "sha256": "c2a212b3d57d99f1c860031c1fccf96733e28606999350ecd8cf2123a6b9062f"
+ },
+ "stages/higgsfield/sundeck.png": {
+  "copy": "stages/higgsfield/sundeck.webp",
+  "kind": "stage",
+  "sha256": "e00418dc0e186e8c05ab4d790cc239b56dff25909b83367431aca0339e0dce31"
+ },
+ "stages/higgsfield/sundial.png": {
+  "copy": "stages/higgsfield/sundial.webp",
+  "kind": "stage",
+  "sha256": "24935bbdb84dc09023ad2a49760d551e1ca5cb89e91413b1132f3fe0f51c219f"
+ },
+ "stages/higgsfield/throne.png": {
+  "copy": "stages/higgsfield/throne.webp",
+  "kind": "stage",
+  "sha256": "ed1478a792d8ae479e1d603e91c701912401879a81b6aa3374501a99b0b5485d"
+ },
+ "stages/higgsfield/trenches.png": {
+  "copy": "stages/higgsfield/trenches.webp",
+  "kind": "stage",
+  "sha256": "16bfb68251c26cf15cbf0f13a2100ee4dd130787cda63f35958ac76289639f5a"
+ },
+ "stages/higgsfield/verse.png": {
+  "copy": "stages/higgsfield/verse.webp",
+  "kind": "stage",
+  "sha256": "2ee1328c890b06c429f210a320af88561d3e1d58fde1a4156adf1748a053beab"
+ },
+ "stages/higgsfield/yacht.png": {
+  "copy": "stages/higgsfield/yacht.webp",
+  "kind": "stage",
+  "sha256": "98e774dda60b9cc999dc27eab58e9418a5095311f25590aa0bd3789aad4bc0cd"
+ },
+ "stages/nov04/nov04-bar-1.png": {
+  "copy": "stages/nov04/nov04-bar-1.webp",
+  "kind": "stage",
+  "sha256": "1cfad27ad5d7066988aef0597b10dab3f9a40c9f8502cb41b30e78779b5349de"
+ },
+ "stages/nov04/nov04-bar-2.png": {
+  "copy": "stages/nov04/nov04-bar-2.webp",
+  "kind": "stage",
+  "sha256": "499566c7d0abc335c182024a31b03b01c0729d3cee10f3903520c7f8dfb6641c"
+ },
+ "stages/nov04/nov04-bar-3.png": {
+  "copy": "stages/nov04/nov04-bar-3.webp",
+  "kind": "stage",
+  "sha256": "679ceaf59bb5624d8163e4942de35b073b510619047eb7ef070ecc911baff8f5"
+ },
+ "stages/nov04/nov04-bar-4.png": {
+  "copy": "stages/nov04/nov04-bar-4.webp",
+  "kind": "stage",
+  "sha256": "07007a5b98a18ece138e58eef3c29b5ebf3050bf87b7e6cf9040dfc27fc3de75"
+ },
+ "stages/nov04/nov04-bar-5.png": {
+  "copy": "stages/nov04/nov04-bar-5.webp",
+  "kind": "stage",
+  "sha256": "36fe95e06d66cccd5636deadaed6db98dd2472b50ddb39c164e3dca2898ce4a3"
+ },
+ "stages/nov04/nov04-bar-6.png": {
+  "copy": "stages/nov04/nov04-bar-6.webp",
+  "kind": "stage",
+  "sha256": "4851fd02e88b9826629bbb2d73dff49e24eaa53f70b42a7bd342ab5859bed3e7"
+ },
+ "stages/nov04/nov04-circuit-1.png": {
+  "copy": "stages/nov04/nov04-circuit-1.webp",
+  "kind": "stage",
+  "sha256": "7db9b2447b48eb5cb12dd2e5a859582134814a8a86204c2ab2fea0d5ae467dcb"
+ },
+ "stages/nov04/nov04-circuit-2.png": {
+  "copy": "stages/nov04/nov04-circuit-2.webp",
+  "kind": "stage",
+  "sha256": "44bebcc594181f2193716ce6ff19ee9e184d362176b86c09308c71f5ee164ae2"
+ },
+ "stages/nov04/nov04-circuit-3.png": {
+  "copy": "stages/nov04/nov04-circuit-3.webp",
+  "kind": "stage",
+  "sha256": "419e78091e84d73ef2d829261c5e65f8e0bd7e1475b06a26258596b463cd05d7"
+ },
+ "stages/nov04/nov04-circuit-4.png": {
+  "copy": "stages/nov04/nov04-circuit-4.webp",
+  "kind": "stage",
+  "sha256": "b75f921a32d006aa553925c8920e2478ff6a489c827c3afb3a874f4aed662c7e"
+ },
+ "stages/nov04/nov04-circuit-5.png": {
+  "copy": "stages/nov04/nov04-circuit-5.webp",
+  "kind": "stage",
+  "sha256": "aefb440feca8e1c220738e8b2bf006b461636a826aac3a774d6088ad09b2696a"
+ },
+ "stages/nov04/nov04-circuit-6.png": {
+  "copy": "stages/nov04/nov04-circuit-6.webp",
+  "kind": "stage",
+  "sha256": "b0edaaacd0a676ff1556a66fd974861b40f71a1f25034140e85ea800cee6b397"
+ },
+ "stages/nov04/nov04-hatchery-1.png": {
+  "copy": "stages/nov04/nov04-hatchery-1.webp",
+  "kind": "stage",
+  "sha256": "c3445815ff9b317058e5d4ffd3a60581dac8640ec045db03c1a5c7d02dd9695f"
+ },
+ "stages/nov04/nov04-hatchery-2.png": {
+  "copy": "stages/nov04/nov04-hatchery-2.webp",
+  "kind": "stage",
+  "sha256": "4a2cf064dfa52adc681c84912ba7751a0abba7e3bff663c0f05296e1e6c22f2a"
+ },
+ "stages/nov04/nov04-hatchery-3.png": {
+  "copy": "stages/nov04/nov04-hatchery-3.webp",
+  "kind": "stage",
+  "sha256": "79b8cb77692d4ef5faa8507a41d3cac3558811188f151497ca64ca0080d86112"
+ },
+ "stages/nov04/nov04-hatchery-4.png": {
+  "copy": "stages/nov04/nov04-hatchery-4.webp",
+  "kind": "stage",
+  "sha256": "8092a2bcc072fe102dbdd7943732b497f2aada7fac422b4a105c7182cb4373ff"
+ },
+ "stages/nov04/nov04-hatchery-5.png": {
+  "copy": "stages/nov04/nov04-hatchery-5.webp",
+  "kind": "stage",
+  "sha256": "2b4992fdc7e893eacfc1ddba891a06043feea5bb8dc156f23880055f96a0e18e"
+ },
+ "stages/nov04/nov04-hatchery-6.png": {
+  "copy": "stages/nov04/nov04-hatchery-6.webp",
+  "kind": "stage",
+  "sha256": "d7d29da2be4299dd5add426f482e9a1fedab7bcc7dd63670f3b0cfb1e9b06947"
+ },
+ "stages/nov04/nov04-ranch-1.png": {
+  "copy": "stages/nov04/nov04-ranch-1.webp",
+  "kind": "stage",
+  "sha256": "9e34375be49e377b6d401decce92bd7936b918b56b9e877197adbd8d16b39096"
+ },
+ "stages/nov04/nov04-ranch-2.png": {
+  "copy": "stages/nov04/nov04-ranch-2.webp",
+  "kind": "stage",
+  "sha256": "e0573257c324f15b7f2532f2e8b14a49eb8d89b442e969d4c9306748bc6003d9"
+ },
+ "stages/nov04/nov04-ranch-3.png": {
+  "copy": "stages/nov04/nov04-ranch-3.webp",
+  "kind": "stage",
+  "sha256": "b63a371b0eeb8ee3fff1831bcf6c7856f5b9a13b6436cd38b9193fe2a5617a3f"
+ },
+ "stages/nov04/nov04-ranch-4.png": {
+  "copy": "stages/nov04/nov04-ranch-4.webp",
+  "kind": "stage",
+  "sha256": "5081c51a4218749e8a8de2e6922744236df05b822df903fba265bd0020805f62"
+ },
+ "stages/nov04/nov04-ranch-5.png": {
+  "copy": "stages/nov04/nov04-ranch-5.webp",
+  "kind": "stage",
+  "sha256": "4eff3fb7c73034fe4188b70e7a0f0a3ac8e0527a28a2246df4d725bf064353d4"
+ },
+ "stages/nov04/nov04-ranch-6.png": {
+  "copy": "stages/nov04/nov04-ranch-6.webp",
+  "kind": "stage",
+  "sha256": "d877fc0186694e2c7ff6dc90cae8d6a1e5fb745a4ab812c4eb222442676abef9"
+ },
+ "stages/nov04/nov04-throne-1.png": {
+  "copy": "stages/nov04/nov04-throne-1.webp",
+  "kind": "stage",
+  "sha256": "6ca87de52d0b5e56bd1fda05dda77bed34b9decb39ab1be8add43de2d3dbd4d8"
+ },
+ "stages/nov04/nov04-throne-2.png": {
+  "copy": "stages/nov04/nov04-throne-2.webp",
+  "kind": "stage",
+  "sha256": "ee4343d2ab5d5661362390b8d7413c1225f0e707e1d04f8ffc1d488e813466a1"
+ },
+ "stages/nov04/nov04-throne-3.png": {
+  "copy": "stages/nov04/nov04-throne-3.webp",
+  "kind": "stage",
+  "sha256": "6846a7eb1046ef6fdd0ef65b34359f130a757604e1ce68504fad266e8eef1914"
+ },
+ "stages/nov04/nov04-throne-4.png": {
+  "copy": "stages/nov04/nov04-throne-4.webp",
+  "kind": "stage",
+  "sha256": "4025a4f3183fba400c7ba0fabc695d086d51349e5f6f3bce784d13c56e2e0ed7"
+ },
+ "stages/nov04/nov04-throne-5.png": {
+  "copy": "stages/nov04/nov04-throne-5.webp",
+  "kind": "stage",
+  "sha256": "9871cb4721774bbb898a52c493421c3d978d168c26df2942d93b72da14cde925"
+ },
+ "stages/nov04/nov04-throne-6.png": {
+  "copy": "stages/nov04/nov04-throne-6.webp",
+  "kind": "stage",
+  "sha256": "176640ac163fb34179af733a4500dd00ee03a19a1b7efa0e9d9e670450a2965c"
+ },
+ "stages/nov04/nov04-trenches-1.png": {
+  "copy": "stages/nov04/nov04-trenches-1.webp",
+  "kind": "stage",
+  "sha256": "06b728389afb60f9f9f16f09f89a0971b81be18274b552aa4a34dec3f52d588b"
+ },
+ "stages/nov04/nov04-trenches-2.png": {
+  "copy": "stages/nov04/nov04-trenches-2.webp",
+  "kind": "stage",
+  "sha256": "6274a07c2dade763c5816574a98a7fb1870c30917f0a4913333773095a2f133f"
+ },
+ "stages/nov04/nov04-trenches-3.png": {
+  "copy": "stages/nov04/nov04-trenches-3.webp",
+  "kind": "stage",
+  "sha256": "553a43c3f95b96613b78d1e996cb779a864da4c18e791ca98b792f23a73169f1"
+ },
+ "stages/nov04/nov04-trenches-4.png": {
+  "copy": "stages/nov04/nov04-trenches-4.webp",
+  "kind": "stage",
+  "sha256": "6d3e368e782a44657a0fc8cf00d16a386ca1c884b67d24d8e7285bfed1aee9e9"
+ },
+ "stages/nov04/nov04-trenches-5.png": {
+  "copy": "stages/nov04/nov04-trenches-5.webp",
+  "kind": "stage",
+  "sha256": "1846aec3bf8f7d1f503abf84519ade2489e9fb2d6c5079d6ecb9c0e9b00021fb"
+ },
+ "stages/nov04/nov04-trenches-6.png": {
+  "copy": "stages/nov04/nov04-trenches-6.webp",
+  "kind": "stage",
+  "sha256": "d3a8d2d35d245d8ffd72e7d2ea8a6fe664779e2ed978442bc96e6805555fb214"
+ },
+ "stages/nov04/nov04-verse-1.png": {
+  "copy": "stages/nov04/nov04-verse-1.webp",
+  "kind": "stage",
+  "sha256": "13b4d15b90af1c3d89c0ce0eba9809be8c1a3e376418fa2f5803cb2aee1a5466"
+ },
+ "stages/nov04/nov04-verse-2.png": {
+  "copy": "stages/nov04/nov04-verse-2.webp",
+  "kind": "stage",
+  "sha256": "bc0650b2d497ce991957900d19830eb8360ef0dc38f6fedab238210fece41de1"
+ },
+ "stages/nov04/nov04-verse-3.png": {
+  "copy": "stages/nov04/nov04-verse-3.webp",
+  "kind": "stage",
+  "sha256": "5ad7ee62330d1d305637d80a41b61ae9fa3b8b89c4d32477d8658ad0d7148921"
+ },
+ "stages/nov04/nov04-verse-4.png": {
+  "copy": "stages/nov04/nov04-verse-4.webp",
+  "kind": "stage",
+  "sha256": "6b5dc720328b03822de0c128f6123d9350c5824856446585381fda1cd6717750"
+ },
+ "stages/nov04/nov04-verse-5.png": {
+  "copy": "stages/nov04/nov04-verse-5.webp",
+  "kind": "stage",
+  "sha256": "6ec5bc63e95a22926ec58f69dc8350807f21a644d95a17846a0394ea3673974e"
+ },
+ "stages/nov04/nov04-verse-6.png": {
+  "copy": "stages/nov04/nov04-verse-6.webp",
+  "kind": "stage",
+  "sha256": "2bee1d9d3bedf82717e84b3dc03c06c0115942f590815a74acf4a4004e4b39fa"
+ },
+ "stages/nov04/nov04-yacht-1.png": {
+  "copy": "stages/nov04/nov04-yacht-1.webp",
+  "kind": "stage",
+  "sha256": "02b7eeeb6f59ab95009f9556017ebcc3010dbb16d4516fadcc337093f368e81d"
+ },
+ "stages/nov04/nov04-yacht-2.png": {
+  "copy": "stages/nov04/nov04-yacht-2.webp",
+  "kind": "stage",
+  "sha256": "894e9bc2ea62f399d4ebef038f5488a5ddc9b135add30a0adf84ecebe5d43a89"
+ },
+ "stages/nov04/nov04-yacht-3.png": {
+  "copy": "stages/nov04/nov04-yacht-3.webp",
+  "kind": "stage",
+  "sha256": "67f7df6860134816287b09e1b6848bb22e2995682e3d283919dbf89782c54363"
+ },
+ "stages/nov04/nov04-yacht-4.png": {
+  "copy": "stages/nov04/nov04-yacht-4.webp",
+  "kind": "stage",
+  "sha256": "b1fe05469022ebbebdb06f74d28e001ffbb46d41608b8460349acd33159e60c4"
+ },
+ "stages/nov04/nov04-yacht-5.png": {
+  "copy": "stages/nov04/nov04-yacht-5.webp",
+  "kind": "stage",
+  "sha256": "3443400dd800c8b6bb0b25e7bf06e6385ecfe6f8a1629a23cf61a2d64124e7fc"
+ },
+ "stages/nov04/nov04-yacht-6.png": {
+  "copy": "stages/nov04/nov04-yacht-6.webp",
+  "kind": "stage",
+  "sha256": "13dab559b178f33f248704fdd0e41e064e8a2f307a2784a1279cea5cea942ce4"
+ },
+ "stages/variations-v2/castle/15-castle-stained-glass-great-hall.png": {
+  "copy": "stages/variations-v2/castle/15-castle-stained-glass-great-hall.webp",
+  "kind": "stage",
+  "sha256": "6c796809341a6821ffdcfc8f6c349d5f0c082c30692586bf207eadf198bfbc80"
+ },
+ "stages/variations-v2/castle/16-castle-smoky-armory-forge.png": {
+  "copy": "stages/variations-v2/castle/16-castle-smoky-armory-forge.webp",
+  "kind": "stage",
+  "sha256": "6369beb8e45ba8bfadd9b4153f7cf032be596760e9e2e952e2ffeaf510229a53"
+ },
+ "stages/variations-v2/castle/17-castle-snow-swept-battlements.png": {
+  "copy": "stages/variations-v2/castle/17-castle-snow-swept-battlements.webp",
+  "kind": "stage",
+  "sha256": "93d289f2ddf33e95065a58731989e8834f8cfe2bf0076f203bda4edd0d2aa0c1"
+ },
+ "stages/variations-v2/circuit/03-circuit-checkpoint-lockdown.png": {
+  "copy": "stages/variations-v2/circuit/03-circuit-checkpoint-lockdown.webp",
+  "kind": "stage",
+  "sha256": "52cfa38087007796b1d189e27a302870769496eb5b292d4d7651d82a87b493b8"
+ },
+ "stages/variations-v2/circuit/04-circuit-daylight-maglev-terminal.png": {
+  "copy": "stages/variations-v2/circuit/04-circuit-daylight-maglev-terminal.webp",
+  "kind": "stage",
+  "sha256": "99654ad8b72095b7d77c099a850dec2e2b6d017e013ea8632769e08117a0a512"
+ },
+ "stages/variations-v2/circuit/05-circuit-underground-control-bunker.png": {
+  "copy": "stages/variations-v2/circuit/05-circuit-underground-control-bunker.webp",
+  "kind": "stage",
+  "sha256": "7c8acfc7bc27cd136dc43bde6e1f85b68e52be39af963aed3489f6815168ed85"
+ },
+ "stages/variations-v2/ranch/21-ranch-lantern-lit-barn.png": {
+  "copy": "stages/variations-v2/ranch/21-ranch-lantern-lit-barn.webp",
+  "kind": "stage",
+  "sha256": "2b6d94688144409482ffa7177d00408fcc8eb8ec2af8cda5b5d6aa1f7fa49280"
+ },
+ "stages/variations-v2/ranch/22-ranch-green-paddock-at-midday.png": {
+  "copy": "stages/variations-v2/ranch/22-ranch-green-paddock-at-midday.webp",
+  "kind": "stage",
+  "sha256": "914df5ea2a22367921415a6c8558b9f4af0fe161edff7f1a934fe5786801b063"
+ },
+ "stages/variations-v2/ranch/23-ranch-dusty-farmhouse-yard.png": {
+  "copy": "stages/variations-v2/ranch/23-ranch-dusty-farmhouse-yard.webp",
+  "kind": "stage",
+  "sha256": "ce51225cfbf611091d370a4884c74ac5350fa44d54fb0d6deed8f5ce2bd26102"
+ },
+ "stages/variations-v2/retro/06-midnight-market-alley.png": {
+  "copy": "stages/variations-v2/retro/06-midnight-market-alley.webp",
+  "kind": "stage",
+  "sha256": "68469f5b03cc7b68aed466c93df2be913dffc57ab0005cc6b27a114b78ec9451"
+ },
+ "stages/variations-v2/retro/07-antenna-rooftop-at-dawn.png": {
+  "copy": "stages/variations-v2/retro/07-antenna-rooftop-at-dawn.webp",
+  "kind": "stage",
+  "sha256": "74e7ac518830b27523b0a8608e1d98021e4e7ec6c506604f64b2ee279a5ed74c"
+ },
+ "stages/variations-v2/retro/08-night-transit-tunnel.png": {
+  "copy": "stages/variations-v2/retro/08-night-transit-tunnel.webp",
+  "kind": "stage",
+  "sha256": "02bdd364554154ec08ede6a0b4010e13affb164a19600e1afd3640fa5768e520"
+ },
+ "stages/variations-v2/throne/12-throne-furnace-relay-vault.png": {
+  "copy": "stages/variations-v2/throne/12-throne-furnace-relay-vault.webp",
+  "kind": "stage",
+  "sha256": "d775c64283f008b1b2b621635ac10a036fbc2a82cbb0ae578af14cbac21a077e"
+ },
+ "stages/variations-v2/throne/13-throne-power-conduit-gallery.png": {
+  "copy": "stages/variations-v2/throne/13-throne-power-conduit-gallery.webp",
+  "kind": "stage",
+  "sha256": "6054be5743f4650db23769c960e9df0abe658c1216cdf3bec5c457855129fd52"
+ },
+ "stages/variations-v2/throne/14-throne-broken-crown-sanctuary.png": {
+  "copy": "stages/variations-v2/throne/14-throne-broken-crown-sanctuary.webp",
+  "kind": "stage",
+  "sha256": "21172d9de194e1377952eb22a733a38b9173dbf2b0123400c6bc442495224778"
+ },
+ "stages/variations-v2/trenches/00-trenches-drainage-floodgate.png": {
+  "copy": "stages/variations-v2/trenches/00-trenches-drainage-floodgate.webp",
+  "kind": "stage",
+  "sha256": "943b1d9e04fbe30d1c8d16b48a47af96d14e0d3447c1703834dd956f8a007f81"
+ },
+ "stages/variations-v2/trenches/01-trenches-sun-baked-scrapworks.png": {
+  "copy": "stages/variations-v2/trenches/01-trenches-sun-baked-scrapworks.webp",
+  "kind": "stage",
+  "sha256": "f17d092aef3b72e420a2714a0ec3fb4307ad52f9980ad7fbaacb85cf5e756c0a"
+ },
+ "stages/variations-v2/trenches/02-trenches-canal-underpass.png": {
+  "copy": "stages/variations-v2/trenches/02-trenches-canal-underpass.webp",
+  "kind": "stage",
+  "sha256": "3340125b179712de2c1978bf0d28dab8ab239a85cd7c74eff7f8f17bb2121004"
+ },
+ "stages/variations-v2/verse/18-verse-red-sun-asteroid-causeway.png": {
+  "copy": "stages/variations-v2/verse/18-verse-red-sun-asteroid-causeway.webp",
+  "kind": "stage",
+  "sha256": "7a23999a516d60aaf89eb6276e236ea53586d324095312074869fc5b6527838f"
+ },
+ "stages/variations-v2/verse/19-verse-cosmic-crystal-cavern.png": {
+  "copy": "stages/variations-v2/verse/19-verse-cosmic-crystal-cavern.webp",
+  "kind": "stage",
+  "sha256": "0474620f68e3f1162651ecb725c59cf1ef90973187d9526d6a3f2088a388136d"
+ },
+ "stages/variations-v2/verse/20-verse-beyond-the-dimensional-sea.png": {
+  "copy": "stages/variations-v2/verse/20-verse-beyond-the-dimensional-sea.webp",
+  "kind": "stage",
+  "sha256": "44b96bcc0eac7cf06cd4babb75e6fe77599e3256c3239fac1042d1cb5891d117"
+ },
+ "stages/variations-v2/yacht/09-sunlit-cargo-pier.png": {
+  "copy": "stages/variations-v2/yacht/09-sunlit-cargo-pier.webp",
+  "kind": "stage",
+  "sha256": "7405b48712c15880808c929cffd57e8f0c4d1c4e63412355ca188d1f936fac2d"
+ },
+ "stages/variations-v2/yacht/10-upper-deck-in-a-storm.png": {
+  "copy": "stages/variations-v2/yacht/10-upper-deck-in-a-storm.webp",
+  "kind": "stage",
+  "sha256": "ecbed530faa28f70c35d24ed3741c051b82507573030735934766c30cd9e1d42"
+ },
+ "stages/variations-v2/yacht/11-grand-salon-after-dark.png": {
+  "copy": "stages/variations-v2/yacht/11-grand-salon-after-dark.webp",
+  "kind": "stage",
+  "sha256": "aa118dcfe3944fdb15a308d079119c56ea11b0317d6ec46fd9bfde0f72d0eb34"
+ },
+ "story-animations/art-attacks.png": {
+  "copy": "story-animations/art-attacks.webp",
+  "kind": "lossless",
+  "sha256": "66431cad6432c75535d687728815eb7cf62143dbf05892f167c4349175584c27"
+ },
+ "story-animations/art-fusion.png": {
+  "copy": "story-animations/art-fusion.webp",
+  "kind": "lossless",
+  "sha256": "eb9c48be1e2f72f274edb6faa5c7fc23be85f1799e8bbfa10795ad03db34aa47"
+ },
+ "story-animations/art-projectiles.png": {
+  "copy": "story-animations/art-projectiles.webp",
+  "kind": "lossless",
+  "sha256": "3329dfbce146585fd9cf4be8cbb9163e08205a6bfb93a6d3a25c238d90cd6b01"
+ },
+ "story-animations/dragon-attacks.png": {
+  "copy": "story-animations/dragon-attacks.webp",
+  "kind": "lossless",
+  "sha256": "4e70d6d1897f2d8145be0b88cf2fbf0cb74516785b6f2640835c768adb4811fe"
+ },
+ "story-animations/dragon-projectiles.png": {
+  "copy": "story-animations/dragon-projectiles.webp",
+  "kind": "lossless",
+  "sha256": "d22aa0491f1dcdb3958a3fb6fadeaf1d467a84f87bbb3bd5d65c5f7e109d395b"
+ },
+ "story-animations/giant-attacks.png": {
+  "copy": "story-animations/giant-attacks.webp",
+  "kind": "lossless",
+  "sha256": "1543000950809babbba81ba9655e408341e2047aa1c02cb5410a2ddd2005fc6f"
+ },
+ "story-animations/giant-projectiles.png": {
+  "copy": "story-animations/giant-projectiles.webp",
+  "kind": "lossless",
+  "sha256": "d8631eff34e14eb0f78587b324308bd98bdc2513b3e41b04e08fa1d346152677"
+ },
+ "story-animations/juicy-attacks.png": {
+  "copy": "story-animations/juicy-attacks.webp",
+  "kind": "lossless",
+  "sha256": "4e17c57edd70d26f8b114bd48b06753044cefe7adc7d6c71a7a89b8d1e31deb9"
+ },
+ "story-animations/juicy-projectiles.png": {
+  "copy": "story-animations/juicy-projectiles.webp",
+  "kind": "lossless",
+  "sha256": "7475ce04485dd93e7defa0d4f32a86897bc604418f3573e1156f54d07d7950f8"
+ },
+ "story-animations/juicy-robot.png": {
+  "copy": "story-animations/juicy-robot.webp",
+  "kind": "lossless",
+  "sha256": "694538579aad6bce3cdf05961b4ebb093e9cb7397e591a5e83a928a6c5963a4a"
+ },
+ "story-animations/mecha-attacks.png": {
+  "copy": "story-animations/mecha-attacks.webp",
+  "kind": "lossless",
+  "sha256": "fc025d050da75c540df60c8661e56bbe95715a65e2bb53bae8c3647d6d086bed"
+ },
+ "story-animations/mecha-projectiles.png": {
+  "copy": "story-animations/mecha-projectiles.webp",
+  "kind": "lossless",
+  "sha256": "b06390b99540e39d9fb9ecfff5fd9f7f6d975c9e2647241a70e3cfb1939732b9"
+ },
+ "story-animations/mega-woman-growth.png": {
+  "copy": "story-animations/mega-woman-growth.webp",
+  "kind": "lossless",
+  "sha256": "4ab5243a19cf1c2ddea1b72749c3f9e04df105634fd737b907f85285d80a7395"
+ },
+ "story-animations/morelight-ejection.png": {
+  "copy": "story-animations/morelight-ejection.webp",
+  "kind": "lossless",
+  "sha256": "5c2bfa72b63263e7b4e8c2bdcbcd475ba9dbf47fc33e6a99d59e334d196e7b7c"
+ },
+ "story-animations/morelight-exit.png": {
+  "copy": "story-animations/morelight-exit.webp",
+  "kind": "lossless",
+  "sha256": "c3f3dc8dfdc5006fff75b3bf2b6c0fc1d7c3d4e56481214481f7bb1d88bf8e47"
+ },
+ "story-animations/morelight-mecha.png": {
+  "copy": "story-animations/morelight-mecha.webp",
+  "kind": "lossless",
+  "sha256": "0269d59a7a6a2073bf69865740c7e1707e28c3d874b51534dcdc34555cdc06df"
+ },
+ "story-animations/morelight-shrink.png": {
+  "copy": "story-animations/morelight-shrink.webp",
+  "kind": "lossless",
+  "sha256": "7c396e96d5c3c2303a64edb60437c95cb1aa921009588c739e644d490a618bd9"
+ },
+ "story-animations/morelight-smoke.png": {
+  "copy": "story-animations/morelight-smoke.webp",
+  "kind": "lossless",
+  "sha256": "5d3491a78d6b06d7f9cbe94b705014c3b0838d69360060129a11910ed92fbba2"
+ },
+ "story-animations/morelight-wizard.png": {
+  "copy": "story-animations/morelight-wizard.webp",
+  "kind": "lossless",
+  "sha256": "f52f3abe5161cbf4af3fbf2d6b1e465d86a3e768832abfd36055ac6b73086cac"
+ },
+ "story-animations/nick-flight.png": {
+  "copy": "story-animations/nick-flight.webp",
+  "kind": "lossless",
+  "sha256": "1c0c4c2eec01319940e15178dbaf8ef73bd627feb0acd5b7ea9e57de699d454d"
+ },
+ "story-animations/nick-juicy.png": {
+  "copy": "story-animations/nick-juicy.webp",
+  "kind": "lossless",
+  "sha256": "b63edd686966dc28061979dd01d5c77745805c09591a590049ce1d6f7113169c"
+ },
+ "story-animations/nick-mount.png": {
+  "copy": "story-animations/nick-mount.webp",
+  "kind": "lossless",
+  "sha256": "6678083502e01d8477679e421ae8b889e3e8fc4ca6a4ff2fb5ff485068c8c96d"
+ },
+ "story-animations/vmu-attacks.png": {
+  "copy": "story-animations/vmu-attacks.webp",
+  "kind": "lossless",
+  "sha256": "802077c68be4aa6ef592dacb98a35e0dede11e877d831e5253a474cd44512c94"
+ },
+ "story-animations/vmu-black-hole.png": {
+  "copy": "story-animations/vmu-black-hole.webp",
+  "kind": "lossless",
+  "sha256": "42b72942e5d2b8b3f19e21fe67a7de7e5900925489b9d87f248e159009e15910"
+ },
+ "story-animations/vmu-projectiles.png": {
+  "copy": "story-animations/vmu-projectiles.webp",
+  "kind": "lossless",
+  "sha256": "aeb6151ee7779211854c7adbb34dcd47282490b7a8ccffd041754d8c3625ff0a"
+ },
+ "story-animations/vmu-shield.png": {
+  "copy": "story-animations/vmu-shield.webp",
+  "kind": "lossless",
+  "sha256": "9f03c2611bc160ef8c3e3caa8e13e0bfec0d77db6db31a1d815dbd6ba7b5a6c4"
+ }
+}

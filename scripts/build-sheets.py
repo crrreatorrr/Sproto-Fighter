@@ -4,6 +4,9 @@
     python3 scripts/build-sheets.py dist            pack every body (uses all CPU cores)
     python3 scripts/build-sheets.py dist --verify   also decode each sheet and prove every
                                                     frame is unchanged (see below)
+    python3 scripts/build-sheets.py dist --strip-frames
+                                                    then remove the loose frame PNGs and the
+                                                    full manifest from dist (release builds)
 
 Runs after `vite build`. For every body file the build emitted under
 dist/fighters/pose-atlas/<id>.json, it packs the body's unique frame PNGs
@@ -28,8 +31,12 @@ rectangle is byte-identical to the same rectangle of the PNG and that every
 pixel outside it is fully transparent; and that each body file is unchanged
 apart from `sheet` and the revision.
 
-The individual PNGs stay in dist as the fallback (the game ignores the trim when
-it draws them), and the source repository is unchanged. The revision in the
+It also writes each body's standing pose (frame 0, full size, lossless and exact)
+to dist/fighters/previews/<id>.webp and points the split index's preview at it,
+so the selection menu does not fetch loose PNGs.
+
+Without --strip-frames the individual PNGs stay in dist as the fallback (the
+game ignores the trim when it draws them). The source repository is unchanged. The revision in the
 split index and body files gains the sheets' combined hash, so browsers that
 cached an older build fetch the new body files. Requires Pillow with WebP.
 """
@@ -37,6 +44,7 @@ import hashlib
 import io
 import json
 import os
+import shutil
 import sys
 from multiprocessing import Pool
 from pathlib import Path
@@ -143,11 +151,23 @@ def build(args):
             raise SystemExit(f'{body_id}: body file differs from the source manifest')
     (dist / 'fighters' / 'sheets' / f'{body_id}.webp').write_bytes(data)
     version = hashlib.sha256(data).hexdigest()[:12]
+    # The selection menu's standing pose: frame 0 at its full size (the game checks
+    # the size against the metadata), lossless and exact, so it is the same image.
+    standing = cfg['frames'][0]
+    standing_url = standing if isinstance(standing, str) else standing['url']
+    standing_image = images[urls.index(standing_url)]
+    buffer = io.BytesIO()
+    standing_image.save(buffer, 'WEBP', lossless=True, exact=True, quality=100, method=6)
+    preview = buffer.getvalue()
+    if verify and Image.open(io.BytesIO(preview)).convert('RGBA').tobytes() != standing_image.tobytes():
+        raise SystemExit(f'{body_id}: standing preview differs from {standing_url}')
+    (dist / 'fighters' / 'previews' / f'{body_id}.webp').write_bytes(preview)
+    preview_url = f'/fighters/previews/{body_id}.webp?v={hashlib.sha256(preview).hexdigest()[:12]}'
     cfg['sheet'] = {'url': f'/fighters/sheets/{body_id}.webp?v={version}',
                     'cells': {u: [x, y, p.width, p.height, box[0], box[1]] for u, (x, y), p, box in zip(urls, cells, pieces, crops)}}
     body_file.write_text(json.dumps(doc, separators=(',', ':')))
     frame_pixels = sum(im.width * im.height for im in images)
-    return len(urls), len(data), frame_pixels, width * height, version
+    return len(urls), len(data), frame_pixels, width * height, version, body_id, standing_url, preview_url
 
 
 def set_revision(path, revision):
@@ -164,7 +184,12 @@ def main():
     bodies = sorted(b for b in (dist / 'fighters' / 'pose-atlas').glob('*.json') if b.name != 'index.json')
     if not bodies:
         sys.exit(f'no split atlas files under {dist}/fighters/pose-atlas (run vite build first)')
+    if '--strip-frames' in sys.argv and '--verify' not in sys.argv and all('sheet' in json.loads(b.read_text())['fighters'][b.stem] for b in bodies):
+        # Already packed (CI packs, runs the frame comparisons, then strips).
+        print(f'already packed; removed {strip_frames(dist)} loose frame files and the full manifest')
+        return
     (dist / 'fighters' / 'sheets').mkdir(parents=True, exist_ok=True)
+    (dist / 'fighters' / 'previews').mkdir(parents=True, exist_ok=True)
     verify = '--verify' in sys.argv
     with Pool(os.cpu_count() or 1) as pool:
         results = pool.map(build, [(b, verify) for b in bodies])
@@ -178,9 +203,49 @@ def main():
     revision += '+sheets-' + hashlib.sha256(''.join(r[4] for r in results).encode()).hexdigest()[:12]
     for path in [index, *bodies]:
         set_revision(path, revision)
+    # Point each standing preview in the index at its small WebP copy.
+    doc = json.loads(index.read_text())
+    for r in results:
+        body_id, standing_url, preview_url = r[5], r[6], r[7]
+        entry = doc['fighters'][body_id]['preview']
+        frame = entry['frame']
+        current = (frame if isinstance(frame, str) else frame['url']).split('?')[0]
+        # A rerun on a dist this script already packed finds its own preview there.
+        if current not in (standing_url.split('?')[0], f'/fighters/previews/{body_id}.webp'):
+            raise SystemExit(f'{body_id}: index preview is not frame 0')
+        entry['frame'] = preview_url if isinstance(frame, str) else {**frame, 'url': preview_url}
+    index.write_text(json.dumps(doc, separators=(',', ':')))
+    previews = sum((dist / 'fighters' / 'previews' / f'{r[5]}.webp').stat().st_size for r in results)
+    stripped = strip_frames(dist) if '--strip-frames' in sys.argv else 0
     print(f'{len(bodies)} sprite sheets, {frames} frames, {size / 1e6:.1f} MB; '
           f'decoded {after:.0f} MB instead of {before:.0f} MB ({after / before:.0%})'
-          + (', every frame verified unchanged' if verify else ''))
+          + (', every frame verified unchanged' if verify else '')
+          + f'; {len(results)} standing previews, {previews / 1e6:.1f} MB'
+          + (f'; removed {stripped} loose frame files and the full manifest' if stripped else ''))
+
+
+FRAME_DIRS = ['poses', 'events', 'motion', 'identity', 'walk', 'assist']
+
+
+def strip_frames(dist):
+    """Release builds: the game reads only the sheets, the previews and the split atlas
+    files, so the loose frame PNGs and the monolithic manifest are removed. Without
+    them ?atlas=frames and the per-frame fallback have nothing to load; run checks
+    that compare sheets with frames (scripts/sheet-render-qa.mjs) before this."""
+    fighters = dist / 'fighters'
+    index = json.loads((fighters / 'pose-atlas' / 'index.json').read_text())
+    for body_id in index['fighters']:
+        cfg = json.loads((fighters / 'pose-atlas' / f'{body_id}.json').read_text())['fighters'][body_id]
+        if not cfg.get('sheet') or not (fighters / 'previews' / f'{body_id}.webp').exists():
+            raise SystemExit(f'{body_id}: no sprite sheet or preview; not stripping frames')
+    removed = 0
+    for name in FRAME_DIRS:
+        folder = fighters / name
+        if folder.exists():
+            removed += sum(1 for p in folder.rglob('*') if p.is_file())
+            shutil.rmtree(folder)
+    (fighters / 'pose-atlas.json').unlink(missing_ok=True)
+    return removed
 
 
 if __name__ == '__main__':

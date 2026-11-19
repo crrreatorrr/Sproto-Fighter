@@ -7,7 +7,7 @@
  * so the context is created (or resumed) on the first key, click or controller press.
  */
 import type { SoundName } from './audioEvents';
-import { combatClip, combatClipPaths } from './combatSfx';
+import { combatClip, fighterClipPaths, sharedClip, sharedClipPaths } from './combatSfx';
 
 export type MusicTrack = 'menu' | 'fight' | 'story';
 /** Recorded bed for the fight track. Other stages keep the synthesised fight loop. */
@@ -371,15 +371,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     function requestSamples(): void {
         if (samplesRequested || typeof fetch !== 'function') return;
         samplesRequested = true;
-        const pull = (path: string) => fetch(assetUrl(path)).then(response => response.ok ? response.arrayBuffer() : Promise.reject(new Error(path))).catch(() => null);
         const beds = (Object.keys(FIGHT_BED_SPECS) as RecordedBed[]).filter(bed => !LONG_FIGHT_BEDS.has(bed));
-        const remember = (bed: RecordedBed, bytes: ArrayBuffer | null) => {
-            const row = slot(bed);
-            row.bytes = bytes;
-            if (!bytes) row.failed = true;
-        };
-        // Trenches is 8.6 MB. City, Marina, Ranch, Castle, Verse and Hatchery are 8.8 MB each,
-        // and Bar is 7.4 MB. They download beside this batch, so the menu and the click are not waiting on them.
         void Promise.all([
             pull(MENU_MUSIC_PATH),
             pull(UI_SELECT_PATH),
@@ -388,38 +380,67 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
             menuBytes = menu; uiBytes = click;
             if (!menu) menuFailed = true;
             if (!click) uiFailed = true;
-            beds.forEach((bed, index) => remember(bed, fights[index]));
+            beds.forEach((bed, index) => rememberBed(bed, fights[index]));
             catalogSettled = true;
             if (ctx) void decodeReady();
         });
-        for (const bed of LONG_FIGHT_BEDS) {
-            void pull(FIGHT_BED_SPECS[bed].path).then(bytes => {
-                remember(bed, bytes);
-                if (ctx) void decodeReady();
-            });
-        }
-        // Combat clips start downloading with the menu theme so a hit does not wait on the network.
-        for (const path of combatClipPaths()) {
-            void pull(path).then(bytes => {
-                if (!bytes) { combatFailed.add(path); return; }
-                combatBytes.set(path, bytes);
-                if (ctx) void decodeReady();
-            });
-        }
+        // The shared combat clips start downloading with the menu theme so a hit does not wait on
+        // the network. A fight theme (7-9 MB each) waits for its match (prepareBed), and each
+        // fighter's own Team Special recording for that fighter (prepareFighters).
+        for (const path of sharedClipPaths()) pullClip(path);
+    }
+    const pull = (path: string) => fetch(assetUrl(path)).then(response => response.ok ? response.arrayBuffer() : Promise.reject(new Error(path))).catch(() => null);
+    const clipsRequested = new Set<string>();
+    function pullClip(path: string): void {
+        if (clipsRequested.has(path) || typeof fetch !== 'function') return;
+        clipsRequested.add(path);
+        void pull(path).then(bytes => {
+            if (!bytes) { combatFailed.add(path); return; }
+            combatBytes.set(path, bytes);
+            if (ctx) void decodeReady();
+        });
+    }
+    function rememberBed(bed: RecordedBed, bytes: ArrayBuffer | null): void {
+        const row = slot(bed);
+        row.bytes = bytes;
+        if (!bytes) row.failed = true;
+    }
+    const bedRequests = new Set<RecordedBed>();
+    /** The theme of the match being loaded (prepareBed): kept even before it becomes the fight bed. */
+    let preparedBed: RecordedBed | null = null;
+    /** Download one stage's theme. Trenches is 8.6 MB, Bar 7.4 MB and the others 8.8 MB each. */
+    function pullBed(bed: RecordedBed): void {
+        const row = slot(bed);
+        if (row.bytes || row.failed || bedRequests.has(bed) || typeof fetch !== 'function') return;
+        bedRequests.add(bed);
+        void pull(FIGHT_BED_SPECS[bed].path).then(bytes => {
+            bedRequests.delete(bed);
+            rememberBed(bed, bytes);
+            if (bed !== fightBed && bed !== preparedBed && LONG_FIGHT_BEDS.has(bed)) releaseIdleLongBeds();
+            if (ctx) void decodeReady();
+        });
+    }
+    /** A fight needs its theme now (normally prepareBed already started it with the match's art). */
+    function wantBed(urgent: boolean): void {
+        if (urgent && isRecordedBed(fightBed)) pullBed(fightBed);
     }
     async function decodeBed(bed: RecordedBed): Promise<void> {
         const row = slot(bed);
         if (!ctx || !row.bytes || row.buffer || row.failed) return;
         try { row.buffer = await ctx.decodeAudioData(row.bytes.slice(0)); }
         catch { row.failed = true; }
+        // Released while decoding (the stage changed): do not keep ~130 MB of PCM for it.
+        if (LONG_FIGHT_BEDS.has(bed) && bed !== fightBed && bed !== preparedBed && !row.bytes) row.buffer = null;
     }
-    /** Drop decoded PCM for six-minute beds other than the selected stage. The file bytes stay. */
+    /** Drop the decoded PCM and the file bytes of six-minute beds other than the selected stage.
+     * Returning to one fetches it again, normally from the browser cache. */
     function releaseIdleLongBeds(): void {
         for (const bed of LONG_FIGHT_BEDS) {
-            if (bed === fightBed) continue;
+            if (bed === fightBed || bed === preparedBed) continue;
             const row = slot(bed);
-            if (!row.buffer || playingBuffer === row.buffer) continue;
+            if (row.buffer && playingBuffer === row.buffer) continue;
             row.buffer = null;
+            row.bytes = null;
             row.softened = false;
         }
     }
@@ -550,7 +571,13 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         // The same combat sound twice inside 30 ms (both fighters trading) is one sound.
         if (!options.delay && at - (lastAt.get(name) ?? -1) < .03) return;
         lastAt.set(name, at);
-        const clip = combatClip(name, options.fighterId);
+        let clip = combatClip(name, options.fighterId);
+        if (clip && !combatBuffers.has(clip.path)) {
+            // A fighter's own recording that is still loading: the shared clip stands in.
+            if (options.fighterId) pullClip(clip.path);
+            const shared = sharedClip(name);
+            if (shared && combatBuffers.has(shared.path)) clip = shared;
+        }
         const buffer = clip ? combatBuffers.get(clip.path) : undefined;
         if (clip && buffer) {
             // Per-clip gain sits after the cue level. The bus limiter keeps a boosted file from clipping.
@@ -668,6 +695,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     /** Decode the selected bed when its file is already here. A long bed can start during the menus. */
     function kickFightDecode(): void {
         if (!isRecordedBed(fightBed)) return;
+        wantBed(track === 'fight');
         if (track !== 'fight' && !LONG_FIGHT_BEDS.has(fightBed)) return;
         const row = slot(fightBed);
         if (row.bytes && !row.buffer && !row.failed) void decodeReady();
@@ -695,14 +723,29 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     }
     /** Which fight bed the current stage uses. Safe to call every frame. */
     function fightBedSet(next: FightBed): void {
-        if (next === fightBed) { if (track === 'fight') ensureFight(); return; }
+        if (next === fightBed) { if (track === 'fight') ensureFight(); wantBed(track === 'fight'); return; }
         fightBed = next;
+        // The prepared theme is now the fight bed, which keeps it; once the stage moves on it can go.
+        if (next === preparedBed) preparedBed = null;
         if (track !== 'fight') { releaseIdleLongBeds(); kickFightDecode(); return; }
         stopFightSample(FIGHT_FADE);
         clearInterval(timer); timer = undefined; playing = null;
         releaseIdleLongBeds();
         if (wantsRecorded(next)) { ensureFight(); kickFightDecode(); return; }
         if (ctx) startMusic();
+    }
+    /** Download the theme of the match being loaded, beside its art; null when that launch failed. */
+    function prepareBed(bed: FightBed | null): void {
+        preparedBed = bed && isRecordedBed(bed) ? bed : null;
+        if (!preparedBed) { releaseIdleLongBeds(); return; }
+        // A theme that failed before (a dropped connection) is tried again for a new match.
+        const row = slot(preparedBed);
+        if (row.failed && !row.bytes && !row.buffer) row.failed = false;
+        pullBed(preparedBed);
+    }
+    /** Download the Team Special recordings of the fighters in the coming match. */
+    function prepareFighters(fighterIds: readonly string[]): void {
+        for (const path of fighterClipPaths(fighterIds)) pullClip(path);
     }
     function setVolume(next: Partial<Volume>): void {
         volume = { master: clamp01(next.master, volume.master), sfx: clamp01(next.sfx, volume.sfx), music: clamp01(next.music, volume.music) };
@@ -711,14 +754,17 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     }
     if (typeof window !== 'undefined') requestSamples();
     return {
-        unlock, play, music, setVolume,
+        unlock, play, music, setVolume, prepareFighters, prepareBed,
         fightBed: fightBedSet,
         volume: (): Volume => ({ ...volume }),
         /** Read-only state for QA and the browser smoke check. */
         status: () => ({
             context: ctx?.state ?? 'none', unlocked: ctx?.state === 'running', track, played, lastSound, menuStarts,
             menuLoop: menuSource ? { start: menuSource.loopStart, end: menuSource.loopEnd } : null,
-            combatReady: combatBuffers.size, combatClips: combatClipPaths().length,
+            combatReady: combatBuffers.size, combatClips: clipsRequested.size,
+            combatShared: sharedClipPaths().filter(path => combatBuffers.has(path)).length, combatSharedClips: sharedClipPaths().length,
+            fightBedLoaded: isRecordedBed(fightBed) ? !!slot(fightBed).bytes || !!slot(fightBed).buffer : false,
+            bedsHeld: (Object.keys(FIGHT_BED_SPECS) as RecordedBed[]).filter(bed => slot(bed).bytes || slot(bed).buffer).length,
             fightBed, fightStarts,
             fightMusic: fightLevel && fightSource ? fightLevel.gain.value : null,
             fightLoop: fightSource && playingBuffer ? { start: fightSource.loopStart, end: fightSource.loopEnd, rate: playingBuffer.sampleRate, samples: playingBuffer.length } : null,

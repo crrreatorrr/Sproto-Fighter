@@ -4,6 +4,8 @@ const asset=(path:string)=>{
  return base+path.replace(/^\/+/, '');
 };
 import type {StageId} from './stage';
+/** Same rule as webpCopy in stage.ts (this module stays free of value imports). */
+const webpCopy=(path:string)=>path.replace(/\.png(?=$|\?)/i,'.webp');
 
 export interface StoryLocation {id:string;stage:StageId;title:string;image:string;width:number;height:number}
 /** Higgsfield still panoramas, including the new Ranch countryside stretch. The original stage assets remain intact. */
@@ -598,7 +600,7 @@ const pending=new Map<string,Promise<void>>();
 export function loadStoryLocation(location:StoryLocation):Promise<void>{
  if(images.has(location.id))return Promise.resolve();
  let load=pending.get(location.id);if(load)return load;
- load=new Promise<void>((resolve,reject)=>{const image=new Image();image.onload=()=>{images.set(location.id,image);resolve();};image.onerror=()=>reject(new Error(`Could not load story scenery: ${location.title}`));image.src=asset(location.image);}).finally(()=>pending.delete(location.id));
+ load=new Promise<void>((resolve,reject)=>{const image=new Image();image.onload=()=>{images.set(location.id,image);resolve();};image.onerror=()=>reject(new Error(`Could not load story scenery: ${location.title}`));image.src=asset(webpCopy(location.image));}).finally(()=>pending.delete(location.id));
  pending.set(location.id,load);return load;
 }
 /** All variants have a full-width floor around y=578. Reviewed in the lane lab.

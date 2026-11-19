@@ -6,6 +6,7 @@ import {join,resolve} from 'node:path';
 import {createRequire} from 'node:module';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
+import {imageSize} from './lib/load.mjs';
 
 const root=resolve('.'),temp=mkdtempSync(join(tmpdir(),'sproto-stage-catalog-'));
 try {
@@ -35,30 +36,31 @@ try {
   set src(url){
    this.url=url;loads.push(url);
    if(blocked.has(url)){queueMicrotask(()=>this.onerror());return;}
-   const bytes=readFileSync('public'+url);assert.equal(bytes.toString('ascii',1,4),'PNG');
-   this.naturalWidth=bytes.readUInt32BE(16);this.naturalHeight=bytes.readUInt32BE(20);
+   const bytes=readFileSync('public'+url);assert.ok(url.endsWith('.webp'),'fights load the WebP copy');
+   ({width:this.naturalWidth,height:this.naturalHeight}=imageSize(bytes));
    queueMicrotask(()=>this.onload());
   }
  };
  const ranch=stagesInZone('ranch').map(s=>s.id);
  await Promise.all([stage.loadStageArt(ranch),stage.loadStageArt(ranch)]);
  assert.equal(loads.length,13,'zone requests deduplicate without preloading every large panorama');
- await stage.loadStageArt(ranch);assert.equal(loads.length,13);
- const retry='00-trenches-drainage-floodgate',retryUrl=stage.stageImageSource(retry);
+ // Only STAGE_IMAGE_CACHE backgrounds stay decoded; asking again reloads the released ones once.
+ await stage.loadStageArt(ranch);assert.equal(loads.length,13+(13-stage.STAGE_IMAGE_CACHE));
+ const retry='00-trenches-drainage-floodgate',retryUrl=stage.webpCopy(stage.stageImageSource(retry));
  blocked.add(retryUrl);await stage.loadStageArt([retry]);assert.ok(stage.getStageArtStatus().errors[retry]);
  blocked.delete(retryUrl);await stage.loadStageArt([retry]);assert.equal(stage.getStageArtStatus().errors[retry],undefined);
- await stage.loadStageArt();assert.equal(stage.getStageArtStatus().loaded.length,121);assert.deepEqual(stage.getStageArtStatus().errors,{});
+ const before=loads.length;await stage.loadStageArt();assert.ok(loads.length-before>=121-stage.STAGE_IMAGE_CACHE);assert.ok(stage.getStageArtStatus().loaded.length<=stage.STAGE_IMAGE_CACHE);assert.deepEqual(stage.getStageArtStatus().errors,{});
  const ctx=()=>new Proxy({calls:[]},{get(o,k){return k in o?o[k]:(...args)=>o.calls.push([k,...args]);},set(o,k,v){o[k]=v;return true;}});
  for(const entry of stage.STAGES){
-  stage.setStage('ranch');const preview=ctx();stage.drawStagePreview(preview,entry.id,256,110);
+  await stage.loadStageArt([entry.id]);stage.setStage('ranch');const preview=ctx();stage.drawStagePreview(preview,entry.id,256,110);
   assert.equal(stage.getStage(),'ranch','preview is side-effect-free');
-  const source=preview.calls.find(call=>call[0]==='drawImage')[1];assert.equal(source.url,stage.stageImageSource(entry.id));
+  const source=preview.calls.find(call=>call[0]==='drawImage')[1];assert.equal(source.url,stage.webpCopy(stage.stageImageSource(entry.id)));
   stage.setStage(entry.id);const fight=ctx();stage.drawStage(fight,0);
   assert.equal(fight.calls.find(call=>call[0]==='drawImage')[1],source,'preview and fight use exact same loaded image');
  }
  for(const location of STORY_LOCATIONS){
   await loadStoryLocation(location);const story=ctx();assert.equal(drawStoryLocation(story,location),true);
-  assert.equal(story.calls.find(call=>call[0]==='drawImage')[1].url,location.image);
+  assert.equal(story.calls.find(call=>call[0]==='drawImage')[1].url,stage.webpCopy(location.image));
  }
  console.log('PASS: all 121 preview/fight backgrounds match; all 112 story images load; scoped loading deduplicates and retries failed art.');
 

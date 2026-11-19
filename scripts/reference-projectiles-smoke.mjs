@@ -1,5 +1,5 @@
 // Behavior checks for the requested reference B throw and mouth-spat Sproto.
-import { bundledCore } from './lib/load.mjs';
+import { bundledCore, imageSize } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
@@ -36,9 +36,9 @@ for(const [id,shape]of [['sproto2531','miniSproto'],['sproto3106','referenceB']]
   assert.equal(s.projectiles.length,0);assert.equal(f.pips,0);assert.equal(f.move,null);
  }
 }
-globalThis.Image=class{set src(value){this.srcValue=value;const b=readFileSync(new URL('../public'+value,import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);this.complete=true;queueMicrotask(()=>this.onload());}};
+globalThis.Image=class{set src(value){this.srcValue=value;const b=readFileSync(new URL('../public'+value,import.meta.url));({width:this.naturalWidth,height:this.naturalHeight}=imageSize(b));this.complete=true;queueMicrotask(()=>this.onload());}};
 const art=await import(url(compile('src/powerArt.ts')));await art.ensurePowerArt();
-for(const [shape,file]of [['referenceB','sproto3106-reference-b.png'],['miniSproto','sproto2531-mini.png']]){
+for(const [shape,file]of [['referenceB','sproto3106-reference-b.webp'],['miniSproto','sproto2531-mini.webp']]){
  const images=[],boxes=[];const c={save(){},restore(){},drawImage(...args){images.push(args);},fillRect(...args){boxes.push(args);}};
  art.drawPower(c,shape,10,'#00ff00');assert.equal(images.length,1);assert.ok(images[0][0].srcValue.endsWith(file));assert.equal(boxes.length,0,'actual source sprite, no generic recolored substitute');
  const [image,x,y,w,h]=images[0];assert.ok(Math.abs(w/h-image.naturalWidth/image.naturalHeight)<1e-9,'original aspect ratio');assert.equal(x,-w/2);assert.equal(y,-h/2);

@@ -12,7 +12,7 @@ class FakeImage {
     src='';naturalWidth=0;naturalHeight=0;
     async decode(){
         requests.push(this.src);
-        const spec=Object.values(manifest).find(v=>this.src.endsWith(v.image))!;
+        const spec=Object.values(manifest).find(v=>this.src.endsWith(v.image.replace(/\.png$/,'.webp')))!;
         this.naturalWidth=spec.width*spec.columns;this.naturalHeight=Math.ceil(('atlasFrames' in spec?spec.atlasFrames:spec.frames)/spec.columns)*spec.height;
     }
 }
