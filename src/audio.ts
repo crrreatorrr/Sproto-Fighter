@@ -429,6 +429,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (!ctx || !row.bytes || row.buffer || row.failed) return;
         try { row.buffer = await ctx.decodeAudioData(row.bytes.slice(0)); }
         catch { row.failed = true; }
+        // Released while decoding (the stage changed): do not keep ~130 MB of PCM for it.
+        if (LONG_FIGHT_BEDS.has(bed) && bed !== fightBed && bed !== preparedBed && !row.bytes) row.buffer = null;
     }
     /** Drop the decoded PCM and the file bytes of six-minute beds other than the selected stage.
      * Returning to one fetches it again, normally from the browser cache. */
@@ -730,11 +732,14 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (wantsRecorded(next)) { ensureFight(); kickFightDecode(); return; }
         if (ctx) startMusic();
     }
-    /** Download the theme of the match being loaded, beside its art. */
-    function prepareBed(bed: FightBed): void {
-        if (!isRecordedBed(bed)) return;
-        preparedBed = bed;
-        pullBed(bed);
+    /** Download the theme of the match being loaded, beside its art; null when that launch failed. */
+    function prepareBed(bed: FightBed | null): void {
+        preparedBed = bed && isRecordedBed(bed) ? bed : null;
+        if (!preparedBed) { releaseIdleLongBeds(); return; }
+        // A theme that failed before (a dropped connection) is tried again for a new match.
+        const row = slot(preparedBed);
+        if (row.failed && !row.bytes && !row.buffer) row.failed = false;
+        pullBed(preparedBed);
     }
     /** Download the Team Special recordings of the fighters in the coming match. */
     function prepareFighters(fighterIds: readonly string[]): void {

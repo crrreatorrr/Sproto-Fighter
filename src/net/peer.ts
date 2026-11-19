@@ -51,7 +51,8 @@ export function parseIceServers(configured: string | undefined, warn: (message: 
   entries.forEach((entry, index) => {
     const e = entry as { urls?: unknown; username?: unknown; credential?: unknown } | null;
     const urls = typeof e?.urls === 'string' ? [e.urls] : Array.isArray(e?.urls) ? e.urls : [];
-    if (!urls.length || !urls.every(url => typeof url === 'string' && /^(stun|stuns|turn|turns):/i.test(url))) {
+    // stuns: is in the spec but browsers reject it, which would break the whole list.
+    if (!urls.length || !urls.every(url => typeof url === 'string' && /^(stun|turn|turns):/i.test(url))) {
       warn(`VITE_ICE_SERVERS entry ${index} has no valid stun:/turn: urls; ignored`); return;
     }
     const relay = urls.some(url => /^turns?:/i.test(url));

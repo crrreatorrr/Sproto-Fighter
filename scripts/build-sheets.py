@@ -184,7 +184,7 @@ def main():
     bodies = sorted(b for b in (dist / 'fighters' / 'pose-atlas').glob('*.json') if b.name != 'index.json')
     if not bodies:
         sys.exit(f'no split atlas files under {dist}/fighters/pose-atlas (run vite build first)')
-    if '--strip-frames' in sys.argv and all('sheet' in json.loads(b.read_text())['fighters'][b.stem] for b in bodies):
+    if '--strip-frames' in sys.argv and '--verify' not in sys.argv and all('sheet' in json.loads(b.read_text())['fighters'][b.stem] for b in bodies):
         # Already packed (CI packs, runs the frame comparisons, then strips).
         print(f'already packed; removed {strip_frames(dist)} loose frame files and the full manifest')
         return

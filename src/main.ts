@@ -405,13 +405,13 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
         scenery=null;
         if(getStageArtStatus().errors[setup.stage]){
             $('selection-loading').textContent='Selected stage art could not load. Choose another stage or press Start Fight to retry.';
-            return false;
+            audio.prepareBed(null);return false;
         }
     }
     const fightersFailed=await fightersLoad;
-    if(fightersFailed){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(fightersFailed.error);return false;}
+    if(fightersFailed){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(fightersFailed.error);audio.prepareBed(null);return false;}
     const storyArt=await storyLoad;
-    if('error' in storyArt){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(storyArt.error);return false;}
+    if('error' in storyArt){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(storyArt.error);audio.prepareBed(null);return false;}
     storyBossArt=storyArt.bossArt;
     matchDepthOptions = requestedMatchDepthOptions;
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
@@ -1409,8 +1409,9 @@ $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
 // The menu is ready once the default picks' standing poses are in (one small image each);
 // Start Fight loads the full bodies itself. Resume plays the demo bodies, so it waits for them.
-ensurePosePreviews(['highsproto','vela']).then(()=>selection.setReady(true)).catch(error=>console.warn('Standing previews unavailable; waiting for the full bodies.',error));
-ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);crashGuard.report(error,'boot');});
+let bootArtFailed=false;
+ensurePosePreviews(['highsproto','vela']).then(()=>{if(!bootArtFailed)selection.setReady(true);}).catch(error=>console.warn('Standing previews unavailable; waiting for the full bodies.',error));
+ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{bootArtFailed=true;const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);crashGuard.report(error,'boot');});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 // The zone rail shows one preview per zone; the open zone's own stages load with the menu (selectionMenu.ts).
 loadStagePreviews(STAGE_ZONES.map(zone=>zone.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
