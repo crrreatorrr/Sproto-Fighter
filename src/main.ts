@@ -385,7 +385,7 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
     const selectedPartner=setup.partner;
     if(selectedPartner&&selectedPartner!==ROSTER[setup.fighter].partner&&PLAYABLE_FIGHTERS.includes(selectedPartner as FighterId))requiredFighters.push(selectedPartner as FighterId);
-    audio.prepareFighters(requiredFighters);
+    audio.prepareFighters(requiredFighters);audio.prepareBed(fightSongs.bedFor(setup.stage));
     // Everything the fight needs loads at once. Story scenery replaces the stage's own
     // background, so that is fetched only when there is no scenery or it fails to load.
     $('selection-loading').textContent='Loading selected fighters…';
@@ -1094,7 +1094,7 @@ async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId],
     const stage = (STAGES.some(s => s.id === stageId) ? stageId : 'ranch') as StageId;
     showOnlineOverlay('Opponent found!', 'Loading fighters…', 'Loading…', 'ONLINE', null);
     // Starts on the hub's START, while WebRTC is still gathering candidates.
-    audio.prepareFighters(fighters);
+    audio.prepareFighters(fighters); audio.prepareBed(fightBedForZone(stageZone(stage)));
     await Promise.all([
         loadStageArt([stage]),ensurePoseAtlases(fighters,{pin:true}).catch(()=>undefined),
         ensurePowerArt().catch(()=>undefined),

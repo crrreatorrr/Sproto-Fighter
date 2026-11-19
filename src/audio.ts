@@ -161,8 +161,6 @@ export const FIGHT_BED_SPECS: Record<RecordedBed, FightBedSpec> = {
     hatchery: { path: 'audio/music/hatchery_alien_loop_6min.mp3', loopSeconds: HATCHERY_LOOP_SECONDS, encoderDelaySamples: GROOVE_ENCODER_DELAY_SAMPLES, sampleRate: GROOVE_MUSIC_RATE, gain: HATCHERY_TRIM_GAIN },
 };
 /** The long fight files. One decoded buffer is kept: the stage that is selected. */
-/** How long a stage stays selected in the menus before its theme downloads. */
-export const BED_SETTLE_MS = 1500;
 const LONG_FIGHT_BEDS = new Set<RecordedBed>(['trenches', 'city', 'yacht', 'ranch', 'castle', 'bar', 'verse', 'hatchery']);
 /** Menu zone id to fight bed. City's zone is `circuit` and Castle's is `throne`. */
 const ZONE_BEDS: Record<string, FightBed> = { trenches: 'trenches', yacht: 'yacht', circuit: 'city', throne: 'castle', verse: 'verse', bar: 'bar', ranch: 'ranch', hatchery: 'hatchery' };
@@ -387,8 +385,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
             if (ctx) void decodeReady();
         });
         // The shared combat clips start downloading with the menu theme so a hit does not wait on
-        // the network. Fight themes (7-9 MB each) wait for their stage, and each fighter's own Team
-        // Special recording for that fighter (prepareFighters).
+        // the network. A fight theme (7-9 MB each) waits for its match (prepareBed), and each
+        // fighter's own Team Special recording for that fighter (prepareFighters).
         for (const path of sharedClipPaths()) pullClip(path);
     }
     const pull = (path: string) => fetch(assetUrl(path)).then(response => response.ok ? response.arrayBuffer() : Promise.reject(new Error(path))).catch(() => null);
@@ -408,7 +406,8 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (!bytes) row.failed = true;
     }
     const bedRequests = new Set<RecordedBed>();
-    let bedTimer: ReturnType<typeof setTimeout> | undefined, bedTimerFor: RecordedBed | null = null;
+    /** The theme of the match being loaded (prepareBed): kept even before it becomes the fight bed. */
+    let preparedBed: RecordedBed | null = null;
     /** Download one stage's theme. Trenches is 8.6 MB, Bar 7.4 MB and the others 8.8 MB each. */
     function pullBed(bed: RecordedBed): void {
         const row = slot(bed);
@@ -417,20 +416,13 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         void pull(FIGHT_BED_SPECS[bed].path).then(bytes => {
             bedRequests.delete(bed);
             rememberBed(bed, bytes);
-            if (bed !== fightBed && LONG_FIGHT_BEDS.has(bed)) releaseIdleLongBeds();
+            if (bed !== fightBed && bed !== preparedBed && LONG_FIGHT_BEDS.has(bed)) releaseIdleLongBeds();
             if (ctx) void decodeReady();
         });
     }
-    /** The selected stage's theme: at once for a fight, otherwise once the player has stayed on
-     * that stage for BED_SETTLE_MS after the first input, so browsing stages does not pull them all. */
+    /** A fight needs its theme now (normally prepareBed already started it with the match's art). */
     function wantBed(urgent: boolean): void {
-        if (!isRecordedBed(fightBed)) return;
-        const bed = fightBed;
-        if (urgent) { clearTimeout(bedTimer); bedTimer = undefined; bedTimerFor = null; pullBed(bed); return; }
-        if (!ctx || slot(bed).bytes || slot(bed).failed || bedRequests.has(bed) || bedTimerFor === bed) return;
-        clearTimeout(bedTimer);
-        bedTimerFor = bed;
-        bedTimer = setTimeout(() => { bedTimer = undefined; bedTimerFor = null; if (fightBed === bed) pullBed(bed); }, BED_SETTLE_MS);
+        if (urgent && isRecordedBed(fightBed)) pullBed(fightBed);
     }
     async function decodeBed(bed: RecordedBed): Promise<void> {
         const row = slot(bed);
@@ -442,7 +434,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
      * Returning to one fetches it again, normally from the browser cache. */
     function releaseIdleLongBeds(): void {
         for (const bed of LONG_FIGHT_BEDS) {
-            if (bed === fightBed) continue;
+            if (bed === fightBed || bed === preparedBed) continue;
             const row = slot(bed);
             if (row.buffer && playingBuffer === row.buffer) continue;
             row.buffer = null;
@@ -738,6 +730,12 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
         if (wantsRecorded(next)) { ensureFight(); kickFightDecode(); return; }
         if (ctx) startMusic();
     }
+    /** Download the theme of the match being loaded, beside its art. */
+    function prepareBed(bed: FightBed): void {
+        if (!isRecordedBed(bed)) return;
+        preparedBed = bed;
+        pullBed(bed);
+    }
     /** Download the Team Special recordings of the fighters in the coming match. */
     function prepareFighters(fighterIds: readonly string[]): void {
         for (const path of fighterClipPaths(fighterIds)) pullClip(path);
@@ -749,7 +747,7 @@ export function createAudio(storage: Pick<Storage, 'getItem' | 'setItem'> | null
     }
     if (typeof window !== 'undefined') requestSamples();
     return {
-        unlock, play, music, setVolume, prepareFighters,
+        unlock, play, music, setVolume, prepareFighters, prepareBed,
         fightBed: fightBedSet,
         volume: (): Volume => ({ ...volume }),
         /** Read-only state for QA and the browser smoke check. */
