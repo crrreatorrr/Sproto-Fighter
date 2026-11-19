@@ -351,10 +351,28 @@ a result the server verified. Tickets have no real-money value.
   for the result screen, then choose Rematch or press B for fighter select.
 
 Configuration: `VITE_NAKAMA_URL` and `VITE_NAKAMA_SERVER_KEY` as below, and
-optionally `VITE_ICE_SERVERS` (a JSON array of `RTCIceServer`, e.g. with a
-TURN server; the default is a public STUN server). The server side is the
-`sproto_duel` match on the metaverse-hub branch `claude/sproto-online-duels`;
-after changing anything under `src/sim`, run `node scripts/build-sim-bundle.mjs
+optionally `VITE_ICE_SERVERS`, a JSON array of `RTCIceServer` (a single object
+also works; the default is a public STUN server). Production needs a TURN
+server so players behind strict NATs get a direct link instead of the hub relay:
+
+```sh
+VITE_ICE_SERVERS='[{"urls":"stun:stun.l.google.com:19302"},{"urls":["turn:turn.example.com:3478?transport=udp","turns:turn.example.com:5349"],"username":"sproto","credential":"<password>"}]'
+```
+
+Every entry needs `stun:`/`turn:`/`turns:` urls, and a TURN entry needs string
+`username` and `credential`; an invalid entry is dropped with a console
+warning, and invalid JSON falls back to STUN (`parseIceServers` in
+`src/net/peer.ts`). The value is built into the client, so every player can read
+it: use short-lived or restricted TURN credentials.
+
+When both players have loaded the match, each sends READY over the hub's
+signaling relay; the round starts once both are ready and the versus card has
+shown for 2.5 s, or 6 s after loading if the other side never says so (an
+older client), which stays under the hub's 10-second input-stall forfeit.
+
+The server side is the `sproto_duel` match registered by metaverse-hub's
+`server/modules/src/main.ts` (`server/modules/src/sproto_duel.ts`); after
+changing anything under `src/sim`, run `node scripts/build-sim-bundle.mjs
 --out <hub>/server/modules/vendor/sproto-sim.js` so the hub and clients share
 one simulation fingerprint. Design and status:
 [the multiplayer plan](docs/MULTIPLAYER-PLAN.md).

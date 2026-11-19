@@ -1086,9 +1086,15 @@ function showOnlineOverlay(title: string, copy: string, button: string, kicker: 
     overlayAction = action;
     ($('start') as HTMLButtonElement).disabled = !action;
 }
+/** The longest a loaded player waits for the opponent's READY. Below the hub's 10 s input-stall forfeit. */
+const ONLINE_READY_TIMEOUT_MS = 6000;
+/** The shortest the versus card shows before an online round starts. */
+const ONLINE_VERSUS_MS = 2500;
 async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId], stageId: string, wager: boolean) {
     const stage = (STAGES.some(s => s.id === stageId) ? stageId : 'ranch') as StageId;
     showOnlineOverlay('Opponent found!', 'Loading fighters…', 'Loading…', 'ONLINE', null);
+    // Starts on the hub's START, while WebRTC is still gathering candidates.
+    audio.prepareFighters(fighters);
     await Promise.all([
         loadStageArt([stage]),ensurePoseAtlases(fighters,{pin:true}).catch(()=>undefined),
         ensurePowerArt().catch(()=>undefined),
@@ -1109,8 +1115,13 @@ async function beginOnline(match: OnlineMatch, fighters: [FighterId, FighterId],
     versus.suspend(false); countdown.suspend(false);
     $('overlay').hidden = true;
     canvas.focus();
-    // Both players start together: skip the versus card after a moment instead of waiting for Enter.
-    setTimeout(() => { if (match === online && versus.isOpen) versus.skip(); }, 2500);
+    // Both players start together: once both have loaded (READY barrier, or the timeout for an
+    // opponent that never says so) and the card has shown for a moment, skip it instead of waiting for Enter.
+    const shown = performance.now();
+    match.markReady();
+    void match.peerReadyWithin(ONLINE_READY_TIMEOUT_MS).then(() => {
+        setTimeout(() => { if (match === online && versus.isOpen) versus.skip(); }, Math.max(0, ONLINE_VERSUS_MS - (performance.now() - shown)));
+    });
     if (document.hidden) startHiddenClock();
 }
 /** One online fight frame: the rollback session owns the state; the outro waits for a KO both inputs confirm. */
