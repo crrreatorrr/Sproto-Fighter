@@ -1,5 +1,5 @@
 /* Shared arcade skin: menu, dialogs, controls and combat overlays. */
-@font-face { font-family: 'Pixelify Sans'; src: url('/fonts/PixelifySans.ttf') format('truetype'); font-weight: 400 700; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Pixelify Sans'; src: url('/fonts/PixelifySans.woff2') format('woff2'); font-weight: 400 700; font-style: normal; font-display: swap; }
 :root { font-family: 'Pixelify Sans', monospace; --pixel-ink: #050913; --pixel-edge: #5c7295; }
 body { background: #080d1b; }
 #app, #app * { font-family: 'Pixelify Sans', monospace; border-radius: 0; font-style: normal; font-synthesis: none; }

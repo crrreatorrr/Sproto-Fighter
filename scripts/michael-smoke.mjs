@@ -1,5 +1,5 @@
 // Focused Michael D. Sproto - Chad Dev integration checks. Reference identity are visually reviewed separately.
-import { bundledCore } from './lib/load.mjs';
+import { bundledCore, imageSize } from './lib/load.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import ts from 'typescript';
@@ -10,7 +10,7 @@ const core=await import(cu);
 const poses=await import(url(compile('../src/poseAtlas.ts').replace("from './core'",`from '${cu}'`).replace("from './animationEvents'",`from '${eu}'`)));
 const manifest=JSON.parse(readFileSync(new URL('../public/fighters/pose-atlas.json',import.meta.url),'utf8'));
 globalThis.fetch=async()=>({ok:true,status:200,headers:{get:()=> 'application/json'},json:async()=>structuredClone(manifest)});
-globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));this.naturalWidth=b.readUInt32BE(16);this.naturalHeight=b.readUInt32BE(20);this.complete=true;queueMicrotask(()=>this.onload());}};
+globalThis.Image=class{set src(value){const b=readFileSync(new URL('../public'+value.split('?')[0],import.meta.url));({width:this.naturalWidth,height:this.naturalHeight}=imageSize(b));this.complete=true;queueMicrotask(()=>this.onload());}};
 const {A,FLOOR,ROSTER,COMBAT_STYLES,PLAYABLE_FIGHTERS,bodyAtlasIds,createState,step}=core;
 assert.ok(PLAYABLE_FIGHTERS.includes('michael'));
 assert.equal(ROSTER.michael.name,'Michael D. Sproto - Chad Dev');

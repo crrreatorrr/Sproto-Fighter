@@ -70,7 +70,32 @@ export const DIST_EXCLUDE = [
   'stages/previews/manifest.json',
   'stages/nov04/manifest.json',
   'stages/variations-v2/manifest.json',
+  // Originals of the WebP/WOFF2 copies the game loads (scripts/build-images.py,
+  // scripts/manifests/media-copies.json): fight backgrounds and story sceneries,
+  // story animation sheets, menu frames and buttons, power sprites and the font.
+  'stages/higgsfield/*.png',
+  'stages/nov04/*.png',
+  'stages/variations-v2/*/*.png',
+  'story-animations/*.png',
+  'menu/higgsfield/*.png',
+  'menu/higgsfield/mystic/*.png',
+  'fighters/powers/*.png',
+  'fonts/PixelifySans.ttf',
 ];
+
+/** Expand a public-relative pattern whose segments may contain `*` (within one segment). */
+function expandPattern(out: string, pattern: string): string[] {
+  let paths = [''];
+  for (const segment of pattern.split('/')) {
+    if (!segment.includes('*')) { paths = paths.map(p => join(p, segment)); continue; }
+    const re = new RegExp('^' + segment.split('*').map(part => part.replace(/[.+?^${}()|[\]\\]/g, '\\$&')).join('[^/]*') + '$');
+    paths = paths.flatMap(p => {
+      const dir = join(out, p);
+      return existsSync(dir) && statSync(dir).isDirectory() ? readdirSync(dir).filter(name => re.test(name)).map(name => join(p, name)) : [];
+    });
+  }
+  return paths;
+}
 
 function distExclude(patterns: readonly string[]): Plugin {
   let outDir = 'dist';
@@ -81,13 +106,7 @@ function distExclude(patterns: readonly string[]): Plugin {
     closeBundle() {
       const root = fileURLToPath(new URL('.', import.meta.url));
       const out = isAbsolute(outDir) ? outDir : join(root, outDir);
-      for (const pattern of patterns) {
-        const wild = /^(.*)\/\*(\.[\w]+)$/.exec(pattern);
-        const targets = wild
-          ? (existsSync(join(out, wild[1])) ? readdirSync(join(out, wild[1])).filter(f => f.endsWith(wild[2])).map(f => join(wild[1], f)) : [])
-          : [pattern];
-        for (const target of targets) rmSync(join(out, target), {force: true});
-      }
+      for (const pattern of patterns) for (const target of expandPattern(out, pattern)) rmSync(join(out, target), {force: true});
     },
   };
 }

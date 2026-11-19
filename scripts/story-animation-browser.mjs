@@ -125,12 +125,12 @@ try{
  assert.equal(before.replay.frames.length,0);
  // A failed scene load must leave the controller's retry gate usable.
  const retryContext=await browser.newContext({storageState:await context.storageState()}),retryPage=await retryContext.newPage();
- await retryPage.route('**/story-animations/nick-juicy.png',route=>route.fulfill({status:404,body:'missing test fixture'}));
+ await retryPage.route('**/story-animations/nick-juicy.webp',route=>route.fulfill({status:404,body:'missing test fixture'}));
  await retryPage.goto(base);await retryPage.waitForFunction(()=>document.querySelector('#start-fight')?.disabled===false);
  await retryPage.locator('#story-worlds').click();await retryPage.locator('#partner-confirm').click();await retryPage.locator('#journey-actions button').first().click();await retryPage.getByRole('button',{name:'Skip cutscene'}).click();
  await retryPage.waitForFunction(()=>document.querySelector('#journey-title').textContent==='This match could not load.');
  assert.equal(await retryPage.locator('#start').isDisabled(),false);
- await retryPage.unroute('**/story-animations/nick-juicy.png');await retryPage.locator('#journey-actions button').first().click();
+ await retryPage.unroute('**/story-animations/nick-juicy.webp');await retryPage.locator('#journey-actions button').first().click();
  await retryPage.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='nick'&&!window.neonRelay.storySnapshot().launching);
  await retryPage.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().clip==='nick-juicy');
  await retryContext.close();

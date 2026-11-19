@@ -8,15 +8,17 @@ globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>ctx()})
 globalThis.Image=class {set src(url){this.url=url;queueMicrotask(()=>this.onload());}};
 const stage=await import('data:text/javascript;base64,'+Buffer.from(code).toString('base64'));
 await stage.loadStageArt();
-assert.deepEqual(stage.getStageArtStatus().loaded,stage.STAGES.map(s=>s.id));
+// Every background loads; at most STAGE_IMAGE_CACHE stay decoded (the active stage always does).
+assert.ok(stage.getStageArtStatus().loaded.length<=stage.STAGE_IMAGE_CACHE);
 assert.deepEqual(stage.getStageArtStatus().errors,{});
 stage.setStage('ranch');
 for(const id of stage.STAGES.map(s=>s.id)){
+ await stage.loadStageArt([id]);
  const preview=ctx();stage.drawStagePreview(preview,id,320,180);
  assert.equal(stage.getStage(),'ranch','preview must not switch the fight stage');
  assert.deepEqual(preview.calls.find(x=>x[0]==='scale'),['scale',.25,.25]);
  const image=preview.calls.find(x=>x[0]==='drawImage')[1];
- assert.equal(image.url,stage.stageImageSource(id));
+ assert.equal(image.url,stage.webpCopy(stage.stageImageSource(id)));
  stage.setStage(id);const arena=ctx();stage.drawStage(arena,100);
  assert.equal(arena.calls.find(x=>x[0]==='drawImage')[1],image,'arena and preview must share the exact loaded image');
  assert.equal(arena.calls.filter(x=>x[0]==='fillText').length,0,'loaded art must not show a placeholder warning');
