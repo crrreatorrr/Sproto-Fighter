@@ -56,6 +56,12 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Gameplay, art and story checks
         run: node scripts/run-all.mjs
+      # The shipped game reads only the sheets, standing previews and split atlas
+      # files; drop the loose frame PNGs (the comparisons above needed them) and the
+      # full manifest, then prove every fighter and stage still resolves and the
+      # build is under budget.
+      - run: python3 scripts/build-sheets.py dist --strip-frames
+      - run: node scripts/dist-content-check.mjs dist --release
       - uses: actions/upload-artifact@v4
         with:
           name: web-build
