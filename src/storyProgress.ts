@@ -112,13 +112,15 @@ export const STORY_ROSTER_COUNTS={installed:PLAYABLE_FIGHTERS.length,target:STOR
 type Save={version:3;cleared:string[];unlocked:string[];godModeUnlocked:boolean};
 type KeyValue={getItem(key:string):string|null;setItem(key:string,value:string):void;removeItem(key:string):void};
 /** The hub cloud save calls the account store uses (the hub SDK's `ProgressCloud`). */
-export type StoryCloud={loadSave?():Promise<{data:Record<string,unknown>|null;updatedAt:number}>;writeSave?(data:Record<string,unknown>):Promise<{data:Record<string,unknown>|null;updatedAt:number}>};
+export type StoryCloud={loadSave?():Promise<{data:Record<string,unknown>|null;updatedAt:number}>;writeSave?(data:Record<string,unknown>,opts?:{keepalive?:boolean}):Promise<{data:Record<string,unknown>|null;updatedAt:number}>};
 export type StoryOwner={kind:'device'}|{kind:'pending'}|{kind:'account';playerId:string};
 /** The part of the hub SDK's `ProgressStore` story progress uses. */
 export interface StoryStore<T>{
     get():T;owner():StoryOwner;sync():'local'|'syncing'|'synced'|'offline'|'error';persistent():boolean;
     update(advance:(current:T)=>T):T;refresh():void;watches(key:string|null):boolean;subscribe(listener:()=>void):()=>void;
     hold():void;attach(cloud:StoryCloud,playerId:string):Promise<void>;release():void;flush():Promise<void>;
+    /** Page exit: one keepalive `save.put` of unsynced account progress (SDK 0.9.0). False when nothing was sent. */
+    flushKeepalive():boolean;
 }
 export interface StoryStoreOptions<T>{
     key:string;storage:KeyValue|null;model:{empty():T;normalize(raw:unknown):T;merge(a:T,b:T):T};
@@ -154,7 +156,7 @@ export const browserOnlyStore:StoryStoreFactory=<T,>(o:StoryStoreOptions<T>):Sto
         refresh(){value=model.merge(value,read());emit();},
         watches:changed=>changed===null||changed===key,
         subscribe(listener){listeners.add(listener);return ()=>{listeners.delete(listener);};},
-        hold(){},attach:async()=>{throw new Error('Hub accounts need the hub SDK progress store.');},release(){},flush:async()=>{},
+        hold(){},attach:async()=>{throw new Error('Hub accounts need the hub SDK progress store.');},release(){},flush:async()=>{},flushKeepalive:()=>false,
     };
 };
 export type SaveStorage=Pick<Storage,'getItem'|'setItem'>&Partial<Pick<Storage,'removeItem'>>;
@@ -276,6 +278,8 @@ export function createStoryProgress(storage?:SaveStorage|null,encounters:readonl
         /** Back to this browser's own progress, for play without a hub session. */
         release:()=>{run=null;store.release();},
         flush:()=>store.flush(),
+        /** Leaving the page: send unsynced account progress with a request that outlives it. */
+        flushKeepalive:()=>store.flushKeepalive(),
     };
 }
 export type StoryProgress=ReturnType<typeof createStoryProgress>;

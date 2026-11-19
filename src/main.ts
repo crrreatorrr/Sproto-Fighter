@@ -28,7 +28,7 @@ import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, typ
 import { STAGES, setStage, loadStageArt, loadStagePreviews, getStageArtStatus, type StageId } from './stage';
 import { STAGE_ZONES, stageZone } from './stageGroups';
 import {STORY_ENCOUNTERS} from './storyProgress';
-import {storyProgress} from './accountProgress';
+import {saveBeforeLeaving,storyProgress} from './accountProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
 import {bossFightInput,bossKeyInput,drawMovingStoryBoss,drawStoryBossAttacks,drawStoryBossPose,loadStoryBossArt,startStoryBoss,stepStoryBoss,storyBossPlayerPose,storyBossTitle,type StoryBoss,type BossForm} from './storyBoss';
 import {createStoryAnimation,storyAnimationPlan} from './storyAnimation';
@@ -244,6 +244,7 @@ function confirmLeaveOnline(){return online?.phase!=='playing'||window.confirm('
 /** Every menu's hub option: the hub session's own exit, or the hub page when the game was opened on its own. */
 function goToHub(){
  if(!confirmLeaveOnline())return;
+ saveBeforeLeaving();
  if(hub)hub.exitHub();else window.location.assign(hubExitUrl());
 }
 for(const id of ['return-hub','overlay-hub','settings-hub','journey-hub','partner-hub'])$(id).onclick=goToHub;
