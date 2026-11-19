@@ -26,7 +26,7 @@ import { ensurePowerArt } from './powerArt';
 import { playRetainCallout } from './characterVoice';
 import { createRoundPresentation, advanceRoundPresentation, beginRoundOutro, type RoundPresentation } from './animationEvents';
 import { STAGES, setStage, loadStageArt, loadStagePreviews, getStageArtStatus, type StageId } from './stage';
-import { stageZone } from './stageGroups';
+import { STAGE_ZONES, stageZone } from './stageGroups';
 import {STORY_ENCOUNTERS} from './storyProgress';
 import {storyProgress} from './accountProgress';
 import {storyLocationForEncounter,loadStoryLocation,setActiveStoryLocation} from './stageVariants';
@@ -220,7 +220,7 @@ async function prepareSelectionArt(ids:FighterId[]):Promise<void>{
     await ensurePosePreviews(ids);
     // An earlier pick's preview can finish after a later pick started: only the latest arms the prefetch.
     if(generation!==pickGeneration)return;
-    pickPrefetch=setTimeout(()=>{void ensurePoseAtlases(ids).catch(error=>console.warn('Fighter art prefetch failed; Start will retry.',error));},PICK_SETTLE_MS);
+    pickPrefetch=setTimeout(()=>{audio.prepareFighters(ids);void ensurePoseAtlases(ids).catch(error=>console.warn('Fighter art prefetch failed; Start will retry.',error));},PICK_SETTLE_MS);
 }
 const partnerPicker=createPartnerPicker(canPlayFighter);
 const selection = createSelectionMenu({
@@ -378,11 +378,6 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
         $('selection-announcement').textContent=`${ROSTER[setup.fighter]?.name??'This fighter'} is not recruited for P1 yet. ${lockedFighter(setup.fighter)} Or choose an unlocked P1 fighter.`;
         return false;
     }
-    await loadStageArt([setup.stage]);
-    if(getStageArtStatus().errors[setup.stage]){
-        $('selection-loading').textContent='Selected stage art could not load. Choose another stage or press Start Fight to retry.';
-        return false;
-    }
     const encounter=isStory?STORY_ENCOUNTERS.find(e=>e.opponents.includes(setup.opponent)):undefined;
     // Standard chapter-end encounters carry their chapter's rule and a 60-second clock (see storyChapterRule).
     const chapterRule=encounter?storyChapterRule(setup.opponent,id=>!!storyAnimationPlan(id,true).form):null;
@@ -390,18 +385,34 @@ async function launchSelection(setup:SelectionSetup,isStory=false,difficulty?:{s
     const requiredFighters=[setup.fighter,...(encounter?.opponents??[setup.opponent])];
     const selectedPartner=setup.partner;
     if(selectedPartner&&selectedPartner!==ROSTER[setup.fighter].partner&&PLAYABLE_FIGHTERS.includes(selectedPartner as FighterId))requiredFighters.push(selectedPartner as FighterId);
-    // Usually already prefetched; otherwise the rest of the bodies load now.
+    audio.prepareFighters(requiredFighters);
+    // Everything the fight needs loads at once. Story scenery replaces the stage's own
+    // background, so that is fetched only when there is no scenery or it fails to load.
     $('selection-loading').textContent='Loading selected fighters…';
-    try{await Promise.all([ensurePoseAtlases(requiredFighters,{pin:true}),ensurePowerArt()]);}catch(error){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(error);return false;}
     let scenery=encounter?storyLocationForEncounter(encounter,STORY_ENCOUNTERS,encounter.opponents.indexOf(setup.opponent)):null;
-    if(scenery){try{await loadStoryLocation(scenery);}catch(error){console.warn('Story scenery unavailable; using the original arena.',error);scenery=null;}}
-    try{
-        const plan=storyAnimationPlan(setup.opponent,isStory);
+    const plan=storyAnimationPlan(setup.opponent,isStory);
+    const sceneryLoad=scenery?loadStoryLocation(scenery).then(()=>true,error=>{console.warn('Story scenery unavailable; using the original arena.',error);return false;}):Promise.resolve(false);
+    const stageLoad=sceneryLoad.then(ok=>ok?undefined:loadStageArt([setup.stage]));
+    // Usually already prefetched; otherwise the rest of the bodies load now.
+    const fightersLoad=Promise.all([ensurePoseAtlases(requiredFighters,{pin:true}),ensurePowerArt()]).then(()=>null,(error:unknown)=>({error}));
+    const storyLoad=(async()=>{
         const bossArt=plan.form?await loadStoryBossArt(plan.form):null;
         await storyAnimation.load(plan);
-        storyBossArt=bossArt;
+        return bossArt;
+    })().then(bossArt=>({bossArt}),(error:unknown)=>({error}));
+    const [sceneryLoaded]=await Promise.all([sceneryLoad,stageLoad,fightersLoad,storyLoad]);
+    if(!sceneryLoaded){
+        scenery=null;
+        if(getStageArtStatus().errors[setup.stage]){
+            $('selection-loading').textContent='Selected stage art could not load. Choose another stage or press Start Fight to retry.';
+            return false;
+        }
     }
-    catch(error){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(error);return false;}
+    const fightersFailed=await fightersLoad;
+    if(fightersFailed){selection.setReady(false,'Selected fighter art could not load. Choose again to retry.');console.error(fightersFailed.error);return false;}
+    const storyArt=await storyLoad;
+    if('error' in storyArt){$('selection-loading').textContent='Story animation could not load. Retry this encounter to load it again.';console.error(storyArt.error);return false;}
+    storyBossArt=storyArt.bossArt;
     matchDepthOptions = requestedMatchDepthOptions;
     matchEarnedGodMode=storyProgress.snapshot().godModeUnlocked&&!!setup.godMode;
     const trainingRound=!isStory&&setup.mode==='training';
@@ -1385,9 +1396,13 @@ const tick = createFrameLoop(frameTick);
 updateControls();
 $('start').setAttribute('disabled','');
 $('start').textContent='Loading fighter sprites…';
+// The menu is ready once the default picks' standing poses are in (one small image each);
+// Start Fight loads the full bodies itself. Resume plays the demo bodies, so it waits for them.
+ensurePosePreviews(['highsproto','vela']).then(()=>selection.setReady(true)).catch(error=>console.warn('Standing previews unavailable; waiting for the full bodies.',error));
 ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);crashGuard.report(error,'boot');});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
-loadStagePreviews(STAGES.filter(stage=>!stage.parent).map(stage=>stage.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
+// The zone rail shows one preview per zone; the open zone's own stages load with the menu (selectionMenu.ts).
+loadStagePreviews(STAGE_ZONES.map(zone=>zone.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
 requestAnimationFrame(tick);
 // Read-only snapshots and replay export for development. No debug meter injection.
 Object.assign(window, { neonRelay: { snapshot: (): CombatState => structuredClone(state), presentationSnapshot: () => structuredClone(presentation), audioStatus: audio.status, storySnapshot: story.snapshot, storyAnimationSnapshot:storyAnimation.snapshot, replay: () => ({ version: 2, fighter: chosen, mode, opponent, cpuSkill:matchCpuSkill, difficultyAssisted:matchDifficultyAssist, ...(state.fighters[0].partner?{partner:state.fighters[0].partner}:{}), godMode:matchGodMode, ...(matchDepthOptions?{matchDepth:{...matchDepthOptions,roundStarts:[...depthRoundStarts]}}:{}), ...(bossStarts.length?{bossStarts:bossStarts.map(entry=>({...entry}))}:{}), ...(godModeChanges.length?{godModeChanges:godModeChanges.map(entry=>({...entry}))}:{}), frames: frames.map(f => [...f]) }), verifyReplay: () => {

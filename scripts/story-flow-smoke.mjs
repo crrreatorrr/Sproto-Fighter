@@ -496,7 +496,7 @@ try {
       const {createStoryMode,storyProgress,STAGES,ROSTER,$,createRoundPresentation,createState,STORY_ENCOUNTERS,STORY_OPPONENTS,storyLocationForEncounter,isFreePlayAddition,depthEnabled,enableMatchDepth,storyChapterRule,PLAYABLE_FIGHTERS}=dependencies;
       const canPlayFighter=id=>storyProgress.isUnlocked(id),lockedFighter=()=> 'Defeat this fighter in story mode to recruit them.';
       let setup={fighter:'highsproto',opponent:'vela',stage:'ranch',mode:'guard',godMode:false};
-      let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};
+      let online=null,queued2=0,storyBoss=null,storyBossArt=null;const bossStarts=[],godModeChanges=[];const stopHiddenClock=()=>{};const audio={prepareFighters(){}};
       let matchCpuSkill=4,matchDifficultyAssist=false,matchFirstClear=false;
       let mode='guard',running=false,started=false,chosen='highsproto',opponent='vela',matchGodMode=false,matchEarnedGodMode=false,testingGodMode=false,matchTesting=false;
       const depthModifier='none',depthRoundStarts=[];let matchDepthOptions=null;
