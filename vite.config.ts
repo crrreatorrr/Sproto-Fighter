@@ -1,5 +1,6 @@
 import {execSync} from 'node:child_process';
-import {readFileSync, statSync} from 'node:fs';
+import {existsSync, readFileSync, readdirSync, rmSync, statSync} from 'node:fs';
+import {isAbsolute, join} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import type {Plugin} from 'vite';
 import {defineConfig} from 'vitest/config';
@@ -47,6 +48,50 @@ function poseAtlasSplit(): Plugin {
   };
 }
 
+/**
+ * Files under public/ that checks and authoring scripts read but the game never
+ * requests. They stay in the repository; this keeps Vite's public-folder copy
+ * from shipping them in dist/. Paths are relative to public/; a trailing `*.ext`
+ * matches every file with that extension directly in the folder.
+ * scripts/dist-content-check.mjs proves the build still has every runtime file.
+ */
+export const DIST_EXCLUDE = [
+  // Superseded campaign maps; src/campaignMap.ts loads only campaign-map-250.webp.
+  // campaign-map-smoke keeps the originals in the repository.
+  'story/campaign-map.webp',
+  'story/campaign-map-expanded.webp',
+  // Shipped but never played (src/combatSfx.ts), and the clip inventory tests read.
+  'audio/sfx/combat/ko_02.mp3',
+  'audio/sfx/combat/manifest.csv',
+  // Loop metadata read by tests/audio-events.test.ts; the player has its own constants.
+  'audio/music/*.json',
+  // Source hashes and approval lists read by the image and stage checks.
+  'portraits/manifest.json',
+  'stages/previews/manifest.json',
+  'stages/nov04/manifest.json',
+  'stages/variations-v2/manifest.json',
+];
+
+function distExclude(patterns: readonly string[]): Plugin {
+  let outDir = 'dist';
+  return {
+    name: 'dist-exclude',
+    apply: 'build',
+    configResolved(config) { outDir = config.build.outDir; },
+    closeBundle() {
+      const root = fileURLToPath(new URL('.', import.meta.url));
+      const out = isAbsolute(outDir) ? outDir : join(root, outDir);
+      for (const pattern of patterns) {
+        const wild = /^(.*)\/\*(\.[\w]+)$/.exec(pattern);
+        const targets = wild
+          ? (existsSync(join(out, wild[1])) ? readdirSync(join(out, wild[1])).filter(f => f.endsWith(wild[2])).map(f => join(wild[1], f)) : [])
+          : [pattern];
+        for (const target of targets) rmSync(join(out, target), {force: true});
+      }
+    },
+  };
+}
+
 /** `<package version>+<short commit>` for feedback notes (src/feedback.ts): CI's GITHUB_SHA, else git, else `dev`. */
 function buildId(): string {
   const version = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf8')).version as string;
@@ -64,7 +109,7 @@ function buildId(): string {
 export default defineConfig({
   base: './',
   define: {__BUILD_ID__: JSON.stringify(buildId())},
-  plugins: [poseAtlasSplit()],
+  plugins: [poseAtlasSplit(), distExclude(DIST_EXCLUDE)],
   test: {include: ['tests/**/*.test.ts'], environment: 'node'},
   optimizeDeps: {entries: ['index.html']},
   server: {
