@@ -19,6 +19,7 @@ export const CPU_DIFFICULTIES = [
 // `repeat` is the least punish chance once the same move has been blocked twice in three seconds.
 // `track` is how many frames stale the rival's position may be when judging range: recognising a
 // move always takes `reaction` frames, but Easy also misjudges distance and Expert barely does.
+// Two reads sit outside the table: repeated lows (`LOW_SPAM_*`) and a rival who only guards (`sustainedGuard`).
 // What the CPU knows about either kit (jab reach and startup, where a cast leaves the body, how
 // fast it flies, how long it commits its owner) is read from the kit data, never assumed from a
 // standard fighter: see `outJabbed`, `shotArrival`, the wind-up estimate and `castSafe` below.
@@ -46,6 +47,14 @@ export const CPU_RETREAT_LIMIT = 30;
 const LONG_POKE_SHARE = .5;
 /** Two guards of the same move inside this many combat ticks are a habit to punish. */
 const REPEAT_WINDOW = 180;
+/**
+ * Repeated lows (see `lowSpam` in `decide`). The read starts after this many lows and is complete
+ * `LOW_SPAM_SPAN` lows later; from then on the CPU guards, guards low and punishes the guarded low
+ * at least this often, whatever its difficulty. Normal's own low guard and punish are below these,
+ * but it already beat the pattern. Measured with a bot that walks in and only sweeps (60 matches a
+ * skill): Easy 60 wins before and 48 after, skill 2.5 (story chapter 1) 51 and 28, Normal 1 and 0.
+ */
+const LOW_SPAM_FROM = 2, LOW_SPAM_SPAN = 6, LOW_SPAM_GUARD = .7, LOW_SPAM_LOW = .9, LOW_SPAM_PUNISH = .6;
 
 /**
  * Where the nearest rival projectile is in time: `eta` frames until it reaches this fighter (-1 when
@@ -77,6 +86,18 @@ function shotArrival(f: Fighter, shots: readonly Projectile[], slot: number): { 
         }
     }
     return { eta, clear, pass };
+}
+
+/**
+ * A rival who has guarded at least four of our attacks (ten at Easy), and more of them than they have
+ * been hit by plus attacks of their own, is sitting behind their guard. Chip from across the screen
+ * takes minutes against that and a throw cannot be guarded, so such a rival is walked down instead of
+ * zoned. Until 2026-11-24 a life lead kept the CPU casting from range: three quarters of matches
+ * against a player who only held away were undecided after three minutes, at every difficulty.
+ */
+function sustainedGuard(memory: CpuMemory, rivalAttacks: number, skill: number): boolean {
+    const patience = 4 + 2 * Math.max(0, 4 - skill);
+    return memory.habits.guarded >= patience && memory.habits.guarded > 2 * memory.habits.struck + rivalAttacks;
 }
 
 /** Called exactly once per simulation tick, even when neither seat is CPU controlled. */
@@ -203,21 +224,27 @@ function decide(s: CombatState, slot: 0 | 1, skill: number): number {
     const pokeGap = tuning.skill >= 4 && outJabbed && closing > 2 && !jumpy && memory.readRoll >= 1 - LONG_POKE_SHARE
         ? Math.max(jabGap, meleeGap(lowJab.range)) : jabGap;
     const lowHabit = seen.attacks > 0 && seen.lows / seen.attacks > .5;
+    // The same low over and over is felt before it is read: from the third one on, each further low
+    // raises the least chance of guarding, of guarding low and of answering the guard, at every
+    // difficulty. A rival who mixes lows into other attacks (half or fewer) never triggers it.
+    const lowSpam = lowHabit ? Math.min(1, Math.max(0, seen.lows - LOW_SPAM_FROM) / LOW_SPAM_SPAN) : 0;
+    const guardChance = Math.max(tuning.guard, LOW_SPAM_GUARD * lowSpam), lowChance = Math.max(tuning.low, LOW_SPAM_LOW * lowSpam);
     // A rival who guards more of our attacks than they take is thrown more often (from Normal up).
     const turtle = tuning.skill >= 4 && memory.habits.guarded >= 2 && memory.habits.guarded > memory.habits.struck;
     const grabChance = turtle ? .42 : lowHabit || (seen.input & toward) ? .30 : .16;
     // Forecast defense is separate from the published visible-attack guard
     // probability. Disjoint intervals reserve space for guard, jab and throw.
-    const forecastGuardShare = tuning.guard * (1 - grabChance) * .9;
+    const forecastGuardShare = guardChance * (1 - grabChance) * .9;
     // A throw read has to close beyond jab spacing. Keep that seeded plan for
     // the decision interval instead of stopping forever outside grab reach.
     const grabGap = meleeGap(getMove(f, 'grab').range);
     const grabPlan = memory.choice > 1 - grabChance && grounded(f) && seen.y >= FLOOR && distance < 160;
     const pressureGap = grabPlan ? grabGap : jabGap;
-    const approach = memory.intent === 'zone' && distance > 200
+    const shell = sustainedGuard(memory, seen.attacks, tuning.skill);
+    const approach = memory.intent === 'zone' && !shell && distance > 200
         ? distance < 310 ? away : 0 : distance > pressureGap ? toward : 0;
     const expectsLow = seen.low || (seen.attacks > 0 && seen.lows / seen.attacks > .2);
-    const guard = away | (expectsLow && seen.lowRoll < tuning.low ? A.down : 0);
+    const guard = away | (expectsLow && seen.lowRoll < lowChance ? A.down : 0);
     // A standing jab passes over a crouching rival; a low jab or a medium does not.
     const crouched = tracked.y >= FLOOR - 1 && !!(tracked.input & A.down);
     const jab = crouched ? A.down | A.light : A.light;
@@ -252,7 +279,7 @@ function decide(s: CombatState, slot: 0 | 1, skill: number): number {
         // keeps swinging meets a block. Crouching early would change the rise timing.
         const rising = !f.reaction || f.reaction.kind !== 'knockdown' || f.reaction.phase === 'rise';
         if (memory.wakeRoll >= tuning.wake || (distance > 240 && !shotDue)) return 0;
-        return away | (rising && expectsLow && seen.lowRoll < tuning.low ? A.down : 0);
+        return away | (rising && expectsLow && seen.lowRoll < lowChance ? A.down : 0);
     }
     // Finishing our own guard stun is a tactile opportunity, not a peek at the
     // rival's future input. Buffer a short punish only at the end of that stun.
@@ -260,7 +287,7 @@ function decide(s: CombatState, slot: 0 | 1, skill: number): number {
         if (f.blockstun > 2) return guard;
         // The same move guarded twice in three seconds is a habit: punish it reliably.
         const habit = !!current.move && guardedLately(current.move.id) >= 2;
-        if (memory.choice >= (habit ? Math.max(tuning.punish, tuning.repeat) : tuning.punish)) return guard;
+        if (memory.choice >= (habit ? Math.max(tuning.punish, tuning.repeat, LOW_SPAM_PUNISH * lowSpam) : tuning.punish)) return guard;
         return guard | punishButton();
     }
     /** The strongest answer that reaches the move just guarded before its owner recovers. */
@@ -309,8 +336,8 @@ function decide(s: CombatState, slot: 0 | 1, skill: number): number {
     if (f.move) return 0;
     const incoming = seen.move && projectedAge < seen.startup + seen.active;
     // A cast is answered below, by its arrival time: backing off from the wind-up only hands over space.
-    if (incoming && !casting && distance < 220 && seen.attackRoll < tuning.guard) {
-        return away | (seen.low && seen.lowRoll < tuning.low ? A.down : 0);
+    if (incoming && !casting && distance < 220 && seen.attackRoll < guardChance) {
+        return away | (seen.low && seen.lowRoll < lowChance ? A.down : 0);
     }
     if (!grounded(f)) {
         // In the air: guard a shot that is about to arrive, otherwise keep the jump going
@@ -400,7 +427,7 @@ function decide(s: CombatState, slot: 0 | 1, skill: number): number {
     // at which a rival casting at the same moment would land theirs before ours has recovered. That
     // depends on both kits: how long our cast commits us, how early theirs releases, how fast it
     // flies and where it starts. Two level shots at the same height cancel each other and are safe.
-    if (distance > 240 && castSafe() && !projectileActive && !shotKnown && memory.choice < .65) return A.bolt | (f.hp > seen.hp && distance < 340 ? away : 0);
+    if (distance > 240 && castSafe() && !projectileActive && !shotKnown && memory.choice < .65) return A.bolt | (f.hp > seen.hp && distance < 340 && !shell ? away : 0);
     if (distance > 200 && memory.choice > .65 && f.dashLock === 0) return dashIn;
     return approach;
 }

@@ -40,6 +40,15 @@ export function bossFightInput(mask:number):number{
 export function bossKeyInput(code:string,bindings:Readonly<Record<Action,string>>):number{
     return BOSS_KEYS[code]??bossFightInput(pressedMask(code,bindings));
 }
+/**
+ * Damage of the player's three weapons in a boss form: auto-fire every 12 frames, the beam every 90
+ * and the ball every 120. A form has 1000 health and each of its hits takes 200 of the player's 1000.
+ * Until 2026-11-24 these were 17, 68 and 51: auto-fire alone cleared a form in 12 seconds, before
+ * its attacks could land five times, so every form but Mega Artchick lost to a player who pressed
+ * nothing. Now auto-fire alone needs 67 seconds and all three weapons about 30, so a form has to be
+ * dodged or shielded to be beaten, and the beam and ball do more than half of the work.
+ */
+export const BOSS_PLAYER_DAMAGE:Readonly<{auto:number;beam:number;ball:number}>={auto:3,beam:20,ball:15};
 const projectileUrls={missile,laser,bolt,diamond,orb,roller,seed};
 type Art=keyof typeof projectileUrls;
 const artSize:Record<Art,readonly [number,number]>={
@@ -280,12 +289,12 @@ export function stepStoryBoss(state:CombatState,boss:StoryBoss,input:number){
     const shots=state.projectiles as Shot[];
     const fire=(shape:string,art:Art,vx:number,vy:number,damage:number,options:Partial<Shot>={})=>
         shots.push({owner:0,shape,art,x:p.x+p.facing*23,y:p.y-89,vx,vy,damage,life:150,...options});
-    if(age%12===0)fire('bossAutoShot','seed',p.facing*16,0,17);
+    if(age%12===0)fire('bossAutoShot','seed',p.facing*16,0,BOSS_PLAYER_DAMAGE.auto);
     if((pressed&BOSS_BEAM)&&age>=boss.beamReadyAt){
-        fire('bossBeam','bolt',p.facing*28,0,68,{life:180});boss.beamReadyAt=age+90;
+        fire('bossBeam','bolt',p.facing*28,0,BOSS_PLAYER_DAMAGE.beam,{life:180});boss.beamReadyAt=age+90;
     }
     if((pressed&BOSS_BALL)&&age>=boss.ballReadyAt){
-        fire('bossBall','orb',p.facing*8,2,51,{gravity:.4,bounces:3,life:180});boss.ballReadyAt=age+120;
+        fire('bossBall','orb',p.facing*8,2,BOSS_PLAYER_DAMAGE.ball,{gravity:.4,bounces:3,life:180});boss.ballReadyAt=age+120;
     }
 
     const pattern=attacks[boss.form],beat=age%config.period;
@@ -431,7 +440,8 @@ export function drawStoryBossPose(ctx:CanvasRenderingContext2D,state:CombatState
     return true;
 }
 
-export function drawStoryBossAttacks(ctx:CanvasRenderingContext2D,state:CombatState,boss:StoryBoss,images:Awaited<ReturnType<typeof loadStoryBossArt>>){
+/** `prompts` names the shield, beam and ball controls on the cooldown line; the default is the fixed boss keys. */
+export function drawStoryBossAttacks(ctx:CanvasRenderingContext2D,state:CombatState,boss:StoryBoss,images:Awaited<ReturnType<typeof loadStoryBossArt>>,prompts:{shield:string;beam:string;ball:string}={shield:'X',beam:'C',ball:'V'}){
     if(state.winner!==null)return;
     const age=state.frame-boss.startFrame,p=state.fighters[0];
     ctx.save();ctx.imageSmoothingEnabled=false;
@@ -470,6 +480,6 @@ export function drawStoryBossAttacks(ctx:CanvasRenderingContext2D,state:CombatSt
     }
     const cooldown=(readyAt:number)=>readyAt<=age?'READY':((readyAt-age)/60).toFixed(1)+'s';
     ctx.font='bold 15px monospace';ctx.fillStyle='#eaf0f7';ctx.textAlign='center';
-    ctx.fillText(`X SHIELD ${cooldown(boss.shieldReadyAt)}   C BEAM ${cooldown(boss.beamReadyAt)}   V BALL ${cooldown(boss.ballReadyAt)}`,640,150);
+    ctx.fillText(`${prompts.shield} SHIELD ${cooldown(boss.shieldReadyAt)}   ${prompts.beam} BEAM ${cooldown(boss.beamReadyAt)}   ${prompts.ball} BALL ${cooldown(boss.ballReadyAt)}`,640,150);
     ctx.restore();
 }

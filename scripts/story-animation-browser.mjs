@@ -2,6 +2,10 @@ import {chromium} from 'playwright';
 import {createServer} from 'vite';
 import assert from 'node:assert/strict';
 import {writeFileSync} from 'node:fs';
+// The recorded evidence (nick-intro.png, browser.json) is tracked. It is rewritten only when asked:
+//   STORY_EVIDENCE=1 node scripts/story-animation-browser.mjs
+// or STORY_EVIDENCE=<directory> to write somewhere else. A normal run leaves the tree clean.
+const evidenceDir=!process.env.STORY_EVIDENCE?null:process.env.STORY_EVIDENCE==='1'?'docs/evidence/story-animations-20261104':process.env.STORY_EVIDENCE;
 const server=process.env.BASE_URL?null:await createServer({server:{host:'127.0.0.1',port:0}});
 if(server)await server.listen();
 const base=process.env.BASE_URL||'http://127.0.0.1:'+server.httpServer.address().port+'/';
@@ -112,7 +116,7 @@ try{
  const before=await page.evaluate(()=>({state:window.neonRelay.snapshot(),replay:window.neonRelay.replay()}));
  await page.locator('#pause').click();const paused=await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot());
  await page.waitForTimeout(250);assert.deepEqual(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot()),paused);
- await page.locator('#game').screenshot({path:'docs/evidence/story-animations-20261104/nick-intro.png'});
+ await page.locator('#game').screenshot(evidenceDir?{path:evidenceDir+'/nick-intro.png'}:{});
  // Capture while paused: a loaded CI host can finish the short intro during
  // screenshot encoding, hiding the skip button before the next action.
  await page.locator('#start').click();
@@ -154,6 +158,14 @@ try{
  await page.waitForFunction(()=>window.neonRelay.storySnapshot().opponent==='vela'&&!window.neonRelay.storySnapshot().launching);
  assert.match(await page.locator('#stage-subtitle').textContent(),/ICEBLUE EVENT HORIZON/);
  const regularBouts=[];
+ // A boss form takes about half a minute of beam and ball fire, even in God Mode (auto-fire alone: over a minute).
+ async function fireUntil(done,timeoutMs=150000){
+  const started=Date.now();
+  while(!(await done())){
+   if(Date.now()-started>timeoutMs)throw new Error('Boss form not cleared within '+timeoutMs+' ms: '+JSON.stringify(await page.evaluate(()=>window.neonRelay.snapshot().fighters.map(f=>f.hp))));
+   await page.keyboard.press('KeyC');await page.keyboard.press('KeyV');await page.waitForTimeout(150);
+  }
+ }
  async function winRegularBout({opponent}){
   const maxCombatFrames=7200,wallCapMs=120000,started=Date.now(),recent=[];
   let initialFrame=null,heldWalk=null,attempts=0,last=null;
@@ -235,11 +247,12 @@ try{
  await page.waitForFunction(()=>['bossBeam','bossBall'].every(shape=>window.neonRelay.snapshot().projectiles.some(p=>p.shape===shape)));
  await page.keyboard.up('KeyC');await page.keyboard.up('KeyV');
  assert.equal(await page.evaluate(()=>window.neonRelay.verifyReplay()),true);
- await page.waitForFunction(()=>window.neonRelay.storyAnimationSnapshot().phase==='mecha');
+ await fireUntil(()=>page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().phase==='mecha'));
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().wave),0);
  await page.locator('#story-animation-skip').click();
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.length===2);
  assert.equal(await page.evaluate(()=>window.neonRelay.verifyReplay()),true);
+ await fireUntil(()=>page.getByRole('heading',{name:'The Maker Ahead'}).isVisible());
  await page.getByRole('heading',{name:'The Maker Ahead'}).waitFor();
  assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().clip),null);
  assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().winner),0);
@@ -267,6 +280,7 @@ try{
  await page.waitForFunction(()=>window.neonRelay.replay().bossStarts?.[0]?.form==='vmu');
  assert.equal(await page.evaluate(()=>window.neonRelay.storyAnimationSnapshot().phase),null);
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),false);
+ await fireUntil(()=>page.getByRole('heading',{name:'You Bore Me',exact:true}).isVisible());
  await page.getByRole('heading',{name:'You Bore Me',exact:true}).waitFor();
  assert.equal(await page.evaluate(()=>window.neonRelay.snapshot().winner),0);
  const vmuLines=['I’m tired. You bore me.','You wanted an audience with my maker.','Go on. Bore him instead.'];
@@ -285,6 +299,6 @@ try{
  assert.equal(await page.evaluate(()=>window.neonRelay.storySnapshot().completed),true);
  assert.equal(await page.evaluate(()=>window.neonRelay.verifyReplay()),true);
  assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
- writeFileSync('docs/evidence/story-animations-20261104/browser.json',JSON.stringify({playback,regularBouts,blackoutPaint:await page.evaluate(()=>window.blackoutPaint),nickIntro:{pause:true,skip:true,retry:true,combatFrames:0,failedLoadRetry:true},morelightBoss:{progression:true,keyboardWeapons:true,replay:true,liveGodModeToggle:true},errors,failures},null,2)+'\n');
+ if(evidenceDir)writeFileSync(evidenceDir+'/browser.json',JSON.stringify({playback,regularBouts,blackoutPaint:await page.evaluate(()=>window.blackoutPaint),nickIntro:{pause:true,skip:true,retry:true,combatFrames:0,failedLoadRetry:true},morelightBoss:{progression:true,keyboardWeapons:true,replay:true,liveGodModeToggle:true},errors,failures},null,2)+'\n');
  console.log('PASS: all cinematic and attack atlases decoded and rendered in Chrome; nine bounded scene playlists; actual Nick intro pause, skip, retry and input/replay isolation; actual Morelight and VMU boss progression, C/V, replay, and portal victory.');
 }finally{await browser.close();await server?.close();}

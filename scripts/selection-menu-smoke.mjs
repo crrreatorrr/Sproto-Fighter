@@ -123,6 +123,14 @@ check('actual main pollPad blocks menu-confirm and held controls until a neutral
 });
 check('actual main overlay pad navigation can return to selection without leaking attacks',()=>{context.running=false;context.previousPad=[];$('start').focus();currentPad=pad([13]);assert.equal(context.pollPad(),0);assert.equal(document.activeElement,$('overlay-select'));$('overlay-select').onclick=context.returnToSelection;currentPad=pad();context.pollPad();currentPad=pad([0]);assert.equal(context.pollPad(),0);assert.equal(menu.isOpen,true);assert.equal(context.running,false);});
 check('actual main settings confirm toggles the testing checkbox once per controller press',()=>{const checkbox=new Element('input','testing-god-mode');checkbox.checked=false;let changes=0;checkbox.onchange=()=>changes++;context.dialog.open=true;document.querySelector=selector=>selector==='dialog[open]'?context.dialog:null;document.activeElement=checkbox;context.previousPad=[];currentPad=pad([0]);assert.equal(context.pollPad(),0);assert.equal(checkbox.checked,true);assert.equal(changes,1);context.pollPad();assert.equal(changes,1);context.dialog.open=false;document.querySelector=()=>null;});
+check('actual main Start on an overlay that has its own action runs it instead of resuming a fight that never began',()=>{
+ menu.hide();context.running=false;context.previousPad=[];let ran=0;context.overlayAction=()=>{ran++;};
+ currentPad=pad();context.pollPad();currentPad=pad([9]);assert.equal(context.pollPad(),0);assert.equal(ran,1);assert.equal(context.running,false,'the overlay stays in charge');
+ context.online={phase:'playing'};currentPad=pad();context.pollPad();currentPad=pad([9]);context.pollPad();assert.equal(ran,1,'a live online overlay ignores Start');
+ context.online={phase:'failed'};currentPad=pad();context.pollPad();currentPad=pad([9]);context.pollPad();assert.equal(ran,2,'a failed online notice goes back');
+ context.online=null;context.overlayAction=null;currentPad=pad();context.pollPad();currentPad=pad([9]);context.pollPad();assert.equal(context.running,true,'a plain pause still resumes');
+ context.running=false;currentPad=pad();context.pollPad();menu.show();
+});
 check('saved recruits refresh before preview/start and the actual hook receives that fighter',()=>{
  menu.show();$('choose-player').click();const recruit=portraits.find(p=>p.dataset.fighter==='guest07');
  recruit.click();assert.equal($('start-fight').disabled,true);const before=launches;$('start-fight').onclick();assert.equal(launches,before);

@@ -39,7 +39,10 @@ export const STORY_BOSS_STEP = .12;
  */
 export const STORY_BOSS_OFFSETS: Readonly<Record<string, number>> = {
     'chapter-1': 2.90, // chapter 1 boss, 6.00
-    'chapter-2': 2.88, // chapter 2 boss, 6.50
+    // Chapter 2's boss fights under low gravity, where the reference bot's win rate stays near 15% from
+    // skill 5 to 6.5 (5-7 of 40) and only recovers below 4.75: 12 of 40 at 4.5. At 6.5 it was the hardest
+    // wall in the story, harder than every later chapter boss (2026-11-24).
+    'chapter-2': .88, // chapter 2 boss, 4.50
     'chapter-3': 3.16, // chapter 3 boss, 7.00
     'chapter-4': 1.07, // chapter 4 boss, 5.00
     'chapter-5': 1.05, // chapter 5 boss, 5.00

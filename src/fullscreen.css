@@ -91,7 +91,8 @@ body { overscroll-behavior: none; }
 #partner-picker .selection-heading { min-height: 0; padding: 6px 0 10px; }
 #partner-picker .partner-actions { align-items: center; }
 #partner-picker .selection-grid { grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); }
-#partner-picker .selection-grid { grid-auto-rows: clamp(118px, 15vh, 150px); }
+/* A row grows past its usual height when a tile's name takes two lines, so the name is never cut off. */
+#partner-picker .selection-grid { grid-auto-rows: minmax(clamp(118px, 15vh, 150px), auto); }
 #partner-picker .portrait-choice { height: auto; aspect-ratio: auto; }
 
 /* ---- Fight: the canvas takes the window ---- */

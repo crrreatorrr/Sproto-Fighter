@@ -105,7 +105,7 @@ function drawKoBanner(c: CanvasRenderingContext2D, label: string, age: number) {
     c.restore();
 }
 
-function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string, bossTitle?:string, recovery?:HealthRecovery, meterUnits=0) {
+function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: string, bossTitle?:string, recovery?:HealthRecovery, meterUnits=0, bossForm=false) {
     const x = right ? 765 : 55, width = 460, color = ROSTER[f.id].color;
     text(c, bossTitle??ROSTER[f.id].name, right ? 1225 : 55, 55, 24, '#eaf0f7', right ? 'right' : 'left', 850);
     text(c, (mode === 'versus' ? (right ? 'P2 / ' : 'P1 / ') : right ? (mode === 'cpu' ? 'CPU / ' : 'DUMMY / ') : 'YOU / ') + ROSTER[f.id].role, right ? 1225 : 55, 76, 12, color, right ? 'right' : 'left');
@@ -124,6 +124,11 @@ function health(c: CanvasRenderingContext2D, f: Fighter, right: boolean, mode: s
     for (let i = 1; i < 10; i++)
         line(c, x + i * 46, 88, x + i * 46, 107, '#101b2b55');
     text(c, `${hp} / 1000`, right ? x : x + width, 131, 16, '#e3ecf7', right ? 'left' : 'right', 700);
+    // A boss form has no Team Special: the relay pips and their label would promise one.
+    if(bossForm){
+        if(recovery)text(c,'RECOVERING HEALTH',x,153,13,'#bdffdf','left');
+        return;
+    }
     for (let i = 0; i < 3; i++) {
         const px = right ? x + width - 34 - i * 41 : x + i * 41;
         c.fillStyle = i < f.pips ? color : '#25354a';
@@ -279,8 +284,10 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
     }
     c.restore();
     if(portal)return;
-    health(c, s.fighters[0], false, s.mode,undefined,recovery,s.matchDepth?.meter[0]);
-    health(c, s.fighters[1], true, s.mode,bossTitle,undefined,s.matchDepth?.meter[1]);
+    // `bossTitle` is set exactly while a transformed story boss form is being played.
+    const bossForm=bossTitle!==undefined;
+    health(c, s.fighters[0], false, s.mode,undefined,recovery,s.matchDepth?.meter[0],bossForm);
+    health(c, s.fighters[1], true, s.mode,bossTitle,undefined,s.matchDepth?.meter[1],bossForm);
     text(c, s.matchDepth ? 'ROUND '+s.matchDepth.round : 'ROUND 01', 640, 117, 14, '#b9cbdc', 'center');
     if(s.matchDepth){
         text(c, String(Math.ceil(s.matchDepth.remaining/60)),640,96,28,'#fff3ad','center');
@@ -314,9 +321,12 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         text(c, s.notice, 640, 197, 13, '#c6dfd5', 'center', 750);
         c.globalAlpha = 1;
     }
-    c.fillStyle = '#18202cba';
-    c.fillRect(425, 676, 430, 29);
-    text(c, 'HOLD AWAY: BLOCK  /  DOWN: CROUCH', 640, 696, 13, '#c8d5e3', 'center', 500);
+    // Neither blocking nor crouching exists in a boss form; its own controls are on the coach line.
+    if(!bossForm){
+        c.fillStyle = '#18202cba';
+        c.fillRect(425, 676, 430, 29);
+        text(c, 'HOLD AWAY: BLOCK  /  DOWN: CROUCH', 640, 696, 13, '#c8d5e3', 'center', 500);
+    }
     drawVitalikDefeatCaption(c,s.fighters);
     if(presentation?.phase==='intro'){
         c.fillStyle='#101725e0';c.fillRect(435,175,410,66);
