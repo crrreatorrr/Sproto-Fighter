@@ -928,7 +928,14 @@ function pollPad(): number {
         // Leaving an online match the hub has not settled asks a browser confirm a controller cannot answer, so B waits.
         const paused=started&&!online&&!(presentation.phase==='result'&&!storyAnimation.active);
         if(buttons[PAD.b]&&!previousPad[PAD.b]){if(paused)start();else if(online?.phase!=='playing')returnToSelection();}
-        else if((buttons[PAD.start]&&!previousPad[PAD.start])||secondStart)start();
+        else if((buttons[PAD.start]&&!previousPad[PAD.start])||secondStart){
+            // Start presses the overlay's own button. An overlay with its own action (online notice, tutorial replay)
+            // runs that action: start() there would hide an "Online match unavailable" notice over a fight that never begins.
+            // `typeof` so the selection harness can run this function without main's module state.
+            const action=typeof overlayAction!=='undefined'?overlayAction:null;
+            if(!action)start();
+            else if(!online||online.phase==='failed')action();
+        }
         else if(buttons[PAD.a]&&!previousPad[PAD.a]){const active=document.activeElement as HTMLButtonElement,choices=overlayChoices();if(choices.includes(active))active.click();else (choices[0]??$('start')).focus();}
     }
     if(wasSelection||wasModal||wasOverlay||selection.isOpen||story.isOpen||dialog.open){padNeedsRelease=true;previousStart=!!buttons[PAD.start];previousPad=buttons;return 0;}
@@ -1412,7 +1419,7 @@ $('start').textContent='Loading fighter sprites…';
 // Start Fight loads the full bodies itself. Resume plays the demo bodies, so it waits for them.
 let bootArtFailed=false;
 ensurePosePreviews(['highsproto','vela']).then(()=>{if(!bootArtFailed)selection.setReady(true);}).catch(error=>console.warn('Standing previews unavailable; waiting for the full bodies.',error));
-ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{$('start').removeAttribute('disabled');$('start').textContent='Resume';selection.setReady(true);}).catch(error=>{bootArtFailed=true;const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);crashGuard.report(error,'boot');});
+ensurePoseAtlases(['highsproto','vela'],{pin:true}).then(()=>{if(!online){$('start').removeAttribute('disabled');$('start').textContent='Resume';}selection.setReady(true);}).catch(error=>{bootArtFailed=true;const message='Fighter art could not load. Restart the local server and reload.';$('overlay-copy').textContent=message;selection.setReady(false,message);crashGuard.report(error,'boot');});
 document.fonts.load('600 16px "Pixelify Sans"').then(()=>selection.refresh());
 // The zone rail shows one preview per zone; the open zone's own stages load with the menu (selectionMenu.ts).
 loadStagePreviews(STAGE_ZONES.map(zone=>zone.id)).then(()=>selection.refresh()).catch(error=>console.warn('Stage preview uses local fallback.',error));
