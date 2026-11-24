@@ -431,7 +431,8 @@ export function drawStoryBossPose(ctx:CanvasRenderingContext2D,state:CombatState
     return true;
 }
 
-export function drawStoryBossAttacks(ctx:CanvasRenderingContext2D,state:CombatState,boss:StoryBoss,images:Awaited<ReturnType<typeof loadStoryBossArt>>){
+/** `prompts` names the shield, beam and ball controls on the cooldown line; the default is the fixed boss keys. */
+export function drawStoryBossAttacks(ctx:CanvasRenderingContext2D,state:CombatState,boss:StoryBoss,images:Awaited<ReturnType<typeof loadStoryBossArt>>,prompts:{shield:string;beam:string;ball:string}={shield:'X',beam:'C',ball:'V'}){
     if(state.winner!==null)return;
     const age=state.frame-boss.startFrame,p=state.fighters[0];
     ctx.save();ctx.imageSmoothingEnabled=false;
@@ -470,6 +471,6 @@ export function drawStoryBossAttacks(ctx:CanvasRenderingContext2D,state:CombatSt
     }
     const cooldown=(readyAt:number)=>readyAt<=age?'READY':((readyAt-age)/60).toFixed(1)+'s';
     ctx.font='bold 15px monospace';ctx.fillStyle='#eaf0f7';ctx.textAlign='center';
-    ctx.fillText(`X SHIELD ${cooldown(boss.shieldReadyAt)}   C BEAM ${cooldown(boss.beamReadyAt)}   V BALL ${cooldown(boss.ballReadyAt)}`,640,150);
+    ctx.fillText(`${prompts.shield} SHIELD ${cooldown(boss.shieldReadyAt)}   ${prompts.beam} BEAM ${cooldown(boss.beamReadyAt)}   ${prompts.ball} BALL ${cooldown(boss.ballReadyAt)}`,640,150);
     ctx.restore();
 }

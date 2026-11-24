@@ -1374,7 +1374,8 @@ function frameTick(now: number): boolean {
             }
             return storyAnimation.draw(c,x,y,facing,boss?.form);
         },
-        storyBoss&&storyBossArt?(c)=>drawStoryBossAttacks(c,state,storyBoss!,storyBossArt!):undefined,
+        // On a controller the fixed boss keys (X shield, C beam, V ball) would name the wrong buttons: X fires the beam there.
+        storyBoss&&storyBossArt?(c)=>drawStoryBossAttacks(c,state,storyBoss!,storyBossArt!,lastDevice==='pad'?{shield:padButtonName(padKeys.heavy),beam:padButtonName(padKeys.light),ball:padButtonName(padKeys.medium)}:undefined):undefined,
         storyBoss?storyBossTitle(storyBoss.form):undefined,storyAnimation.portalPull(),recovery);
     if(!selection.isOpen&&storyAnimation.bossRevealOpacity>0){
         const opacity=storyAnimation.bossRevealOpacity;
