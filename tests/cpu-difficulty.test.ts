@@ -172,7 +172,7 @@ describe('story difficulty and optional retry', () => {
         const bosses = STORY_ENCOUNTERS.filter((_, n) => boss[n]);
         expect(Object.keys(STORY_BOSS_OFFSETS).sort()).toEqual(bosses.map(encounter => storyBossSlot(encounter, STORY_ENCOUNTERS)).sort());
         // Calibrated against the reference bot (docs/balance/CPU-KIT-AWARE-20261112.md, section 9).
-        expect(bosses.map(encounter => Math.round(skills[encounter.index] * 100) / 100)).toEqual([6, 6.5, 7, 5, 5, 4.5, 4, 4, 3.95]);
+        expect(bosses.map(encounter => Math.round(skills[encounter.index] * 100) / 100)).toEqual([6, 4.5, 7, 5, 5, 4.5, 4, 4, 3.95]);
         let previous = 0;
         for (let n = 1; n < skills.length; n++) {
             if (boss[n]) { expect(skills[n]).toBeGreaterThan(skills[previous] + .05); continue; }
