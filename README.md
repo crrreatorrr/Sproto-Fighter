@@ -172,7 +172,10 @@ menus, the second is player 2; a player who reconnects keeps their side.
 
 In a transformed story-boss form the fight controls carry over: Light or
 Ranged fires the beam, Medium throws the ball, Finisher or Block raises the shield,
-Launcher (or up) jumps and a double-tap of left or right dashes. The original boss keys still work: C beam, V ball, X
+Launcher (or up) jumps and a double-tap of left or right dashes. Auto-fire alone
+does not clear a form before its attacks do (about a minute against roughly 15
+seconds): the beam and ball do most of the damage, and its volleys have to be
+dodged or shielded. The original boss keys still work: C beam, V ball, X
 or Shift shield, R retry, and the arrow keys also move.
 
 **Local versus:** choose *Local versus · Second player* as the rival behavior,
@@ -250,7 +253,9 @@ clip plays until it arrives).
 
 The CPU guards a projectile in place and walks in between shots, punishes a move
 it has guarded twice in three seconds, holds guard as it gets up, and stop-hits a
-rival who walks in swinging. `tests/cpu-exploits.test.ts` keeps three scripted
+rival who walks in swinging. A rival who repeats lows is guarded low and punished
+more with each one at every difficulty, and a rival who only guards is walked
+down and thrown instead of chipped from range (after four guarded attacks; ten at Easy). `tests/cpu-exploits.test.ts` keeps three scripted
 exploits (projectile spam, walk-in mashing, crouch-and-sweep) inside win-rate
 bands that must fall as difficulty rises.
 
