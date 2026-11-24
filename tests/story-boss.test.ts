@@ -157,6 +157,21 @@ describe('fixed-screen story bosses',()=>{
     });
 });
 
+describe('boss forms need more than auto-fire',()=>{
+    it.each(['giant','mecha','dragon','juicy','art','vmu'] as const)('%s beats a player who presses nothing',form=>{
+        const {state,tick}=fight(form);
+        while(state.winner===null&&state.frame<3600)tick();
+        expect(state.winner).toBe(1);
+        // Not a photo finish: the form keeps most of its health.
+        expect(state.fighters[1].hp).toBeGreaterThan(600);
+    });
+    it.each(['giant','mecha','dragon','juicy','art','vmu'] as const)('%s also beats a player who fires everything and never dodges',form=>{
+        const {state,tick}=fight(form);
+        while(state.winner===null&&state.frame<3600)tick(state.frame%6<3?BOSS_BEAM|BOSS_BALL:0);
+        expect(state.winner).toBe(1);
+    });
+});
+
 describe('boss-form controls from the fight bindings',()=>{
     const keys={left:'KeyA',right:'KeyD',up:'KeyW',down:'KeyS',light:'KeyJ',medium:'KeyK',heavy:'KeyL',launcher:'KeyU',bolt:'KeyI',grab:'KeyO',special:'KeyP',dash:'',block:'ShiftLeft'};
     it('maps Light/Ranged to the beam, Medium to the ball, Finisher to the shield and Launcher to a jump',()=>{
