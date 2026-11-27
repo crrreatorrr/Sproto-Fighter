@@ -1,6 +1,7 @@
 import { type FighterId } from './core';
 /** Original user-supplied fighter references only. No rigging diagram. */
 export const originalPortraits:Record<FighterId,string> = {
+ stonedalabamahuman: new URL('../art/stonedalabamahuman/reference.png',import.meta.url).href,
 /* NOV03 LATE PORTRAITS BEGIN */
     "sprotopia": new URL('../art/roster-intake-nov03-late/sprotopia/reference.png', import.meta.url).href,
     "lestrange": new URL('../art/roster-intake-nov03-late/lestrange/reference.png', import.meta.url).href,

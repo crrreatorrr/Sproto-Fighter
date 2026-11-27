@@ -58,6 +58,6 @@ try{
  assert.ok(readFileSync('public/story/campaign-map.webp').length>0);
  assert.ok(readFileSync('public/story/campaign-map-expanded.webp').length>0);
  assert.ok(readFileSync('public/story/campaign-map-250.webp').length>0);
- assert.equal(points.length,247);assert.equal(new Set(STORY_ENCOUNTERS.flatMap(e=>e.opponents)).size,250);
+ assert.equal(points.length,248);assert.equal(new Set(STORY_ENCOUNTERS.flatMap(e=>e.opponents)).size,251);
  console.log(`PASS: whole-map initial fit at 5 desktop/mobile sizes; aspect/zoom bounds and readable detail; ${points.length} actual unique/bounded/separated map nodes; synthetic 150-node geometry (minimum gap ${expandedGap.toFixed(2)}px); stable encounter IDs; 102 scenes mapped across all eight regions; original map retained.`);
 }finally{rmSync(temp,{recursive:true,force:true});}

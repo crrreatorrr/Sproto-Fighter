@@ -13,7 +13,7 @@ export function createState(id: PlayableFighterId = 'rivet', mode: Mode = 'cpu',
     throw new Error('Unknown roster selection.'); return { cpu:[createCpuMemory(104729),createCpuMemory(130363)], throwState:null, frame: 0, fighters: [makeFighter(id, 380, 1), makeFighter(opponent ?? (id === 'rivet' ? 'vela' : 'rivet'), 900, -1)], projectiles: [], effects: [], freeze: 0, mode, winner: null, notice: 'LIGHT → MEDIUM → FINISHER', noticeLife: 220 }; }
 export const grounded = (f: Fighter) => f.y >= FLOOR;
 export const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
-export function effect(s: CombatState, x: number, y: number, kind: Effect['kind'], color: string) { const life = kind === 'charge' ? 45 : kind === 'special' ? 28 : 16; s.effects.push({ x, y, kind, color, life, max: life }); }
+export function effect(s: CombatState, x: number, y: number, kind: Exclude<Effect['kind'], 'catScratch'>, color: string) { const life = kind === 'charge' ? 45 : kind === 'special' ? 28 : 16; s.effects.push({ x, y, kind, color, life, max: life }); }
 export function finishCombo(s: CombatState, attacker: Fighter) {
     if (!attacker.combo)
         return;

@@ -11,6 +11,7 @@ let ethereum: HTMLImageElement | undefined;
 let weedLeaf: HTMLImageElement | undefined;
 let sharedRanged:HTMLImageElement|undefined;
 let specialEffects:HTMLImageElement|undefined;
+let alabamaCat: HTMLImageElement | undefined;
 let coinReady: Promise<void> | undefined;
 export function ensurePowerArt(): Promise<void> {
  const load=(url:string)=>new Promise<HTMLImageElement>((resolve,reject)=>{
@@ -25,7 +26,17 @@ export function ensurePowerArt(): Promise<void> {
   load('/fighters/powers/highsproto-weed-leaf.webp'),
   load('/fighters/powers/shared-ranged-atlas.webp'),
   load('/fighters/powers/team-special-effects.webp'),
- ]).then(([coin,b,mini,eth,leaf,ranged,effects])=>{retainCoin=coin;referenceB=b;miniSproto=mini;ethereum=eth;weedLeaf=leaf;sharedRanged=ranged;specialEffects=effects;}).catch(error=>{coinReady=undefined;throw error;});
+  load('/fighters/powers/alabama-cat.webp'),
+ ]).then(([coin,b,mini,eth,leaf,ranged,effects,cat])=>{alabamaCat=cat;retainCoin=coin;referenceB=b;miniSproto=mini;ethereum=eth;weedLeaf=leaf;sharedRanged=ranged;specialEffects=effects;}).catch(error=>{coinReady=undefined;throw error;});
+}
+/** Two four-cel rows: airborne on top and alternating paw strikes below. */
+export function drawAlabamaCat(c: CanvasRenderingContext2D, age: number, scratching: boolean) {
+ if (!alabamaCat?.naturalWidth) return;
+ const frame = Math.floor(age / (scratching ? 6 : 4)) % 4;
+ c.save();
+ c.imageSmoothingEnabled = false;
+ c.drawImage(alabamaCat, frame * 64, scratching ? 64 : 0, 64, 64, -32, -32, 64, 64);
+ c.restore();
 }
 export function drawSharedRanged(c:CanvasRenderingContext2D,index:number){
  if(!sharedRanged?.naturalWidth)return false;
@@ -75,7 +86,8 @@ export function drawVitalikDefeatCaption(c:CanvasRenderingContext2D,fighters:rea
 export function drawPower(c:CanvasRenderingContext2D,shape:string,age:number,color:string){
  c.save();c.imageSmoothingEnabled=false;c.fillStyle=color;c.strokeStyle=color;c.lineWidth=3;
  const box=(x:number,y:number,w:number,h:number,fill:string)=>{c.fillStyle=fill;c.fillRect(x,y,w,h);};
- if(shape==='painting'){
+ if(shape==='catToss')drawAlabamaCat(c,age,false);
+ else if(shape==='painting'){
   box(-23,-18,46,36,'#40221c');box(-21,-16,42,32,'#eab34d');box(-17,-12,34,24,'#fff0ce');
   box(-14,-10,12,13,'#2655da');box(-2,-8,15,8,'#ec3e42');box(-8,3,20,6,'#e3b42c');box(6,-4,5,15,'#252744');
  }

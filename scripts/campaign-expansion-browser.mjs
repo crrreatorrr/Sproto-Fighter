@@ -16,7 +16,7 @@ try{
   localStorage.setItem(STORY_SAVE_KEY,JSON.stringify({version:3,cleared:STORY_ENCOUNTERS.map(e=>e.id),unlocked:[...STARTER_FIGHTERS,...STORY_ENCOUNTERS.flatMap(e=>e.opponents).filter(id=>!['sproto2616','sproto3152','sproto3215'].includes(id))],godModeUnlocked:true}));
   return {route:STORY_ENCOUNTERS,locations:STORY_LOCATIONS.filter(l=>l.id.startsWith('nov04-'))};
  });
- assert.equal(data.locations.length,48);assert.equal(new Set(data.route.flatMap(e=>e.opponents)).size,250);
+ assert.equal(data.locations.length,48);assert.equal(new Set(data.route.flatMap(e=>e.opponents)).size,251);
  await page.reload();await page.waitForFunction(()=>window.neonRelay&&!document.querySelector('#start-fight').disabled);
  assert.equal(await page.locator('.stage-rail[aria-labelledby="variations-heading"] .stage-choice').count(),121);
  const selected=[];
@@ -61,7 +61,7 @@ try{
   await page.setViewportSize({width,height});await page.locator('.campaign-fit').click();
   await page.waitForFunction(()=>document.querySelector('.campaign-art').complete&&document.querySelector('.campaign-art').naturalWidth===3840);
   const fit=await page.locator('.campaign-window').evaluate(el=>{const land=el.querySelector('.campaign-land');return {windowWidth:el.clientWidth,windowHeight:el.clientHeight,width:land.clientWidth,height:land.clientHeight,count:el.querySelectorAll('.campaign-node').length};});
-  assert.equal(fit.count,247);assert.ok(fit.width<=fit.windowWidth&&fit.height<=fit.windowHeight);
+  assert.equal(fit.count,248);assert.ok(fit.width<=fit.windowWidth&&fit.height<=fit.windowHeight);
   if(out)await page.locator('#journey-dialog').screenshot({path:out+'/map-'+width+'.png'});
   await page.locator('.campaign-current').click();assert.ok(Number(await page.locator('.campaign-zoom').inputValue())>100);
   assert.equal(await page.locator('.campaign-node[aria-pressed="true"]').count(),1);
@@ -70,5 +70,5 @@ try{
  }
  assert.deepEqual(errors,[]);assert.deepEqual(failures,[]);
  if(out)writeFileSync(out+'/verification.json',JSON.stringify({selected,storyChoices,sizes,errors,failures},null,2));
- console.log('PASS: all48 new stages launched from the actual main menu and story scenery chooser;121 selector entries;247 map nodes fit desktop/mobile; no failed requests or browser errors.');
+ console.log('PASS: all48 new stages launched from the actual main menu and story scenery chooser;121 selector entries;248 map nodes fit desktop/mobile; no failed requests or browser errors.');
 }finally{await context.close();await browser.close();await server.close();}

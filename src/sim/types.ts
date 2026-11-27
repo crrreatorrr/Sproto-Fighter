@@ -57,14 +57,17 @@ export interface Fighter {
     best: number;
     flash: number;
 }
-export interface Effect {
+type EffectLocation = {
     x: number;
     y: number;
     life: number;
     max: number;
-    kind: 'hit' | 'block' | 'charge' | 'dash' | 'special' | 'pumpkin';
     color: string;
-}
+};
+export type Effect = EffectLocation & (
+    { kind: 'hit' | 'block' | 'charge' | 'dash' | 'special' | 'pumpkin' }
+    | { kind: 'catScratch'; target: number; facing: number; offsetX: number; offsetY: number }
+);
 export interface Projectile {
     owner: number;
     x: number;

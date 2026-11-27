@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-27",
+  "facings": [
+    -1,
+    1
+  ],
+  "states": [
+    "Guard",
+    "Light punch contact",
+    "Heavy strike contact",
+    "Cat Toss release",
+    "Launcher contact",
+    "Crimson Combination first contact"
+  ],
+  "observationCount": 12,
+  "countUnit": "inspected in-browser renderer samples",
+  "gaps": [
+    "Six states sampled in both directions against a plain background. This record covers pose selection and registration, not the timing of continuous match playback."
+  ],
+  "findings": [
+    "Each planted pose meets the same floor in both directions. The front glove reaches toward the rival at release, the launcher lifts one glove above the head, and the red cross remains readable at native match scale."
+  ]
+}

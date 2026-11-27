@@ -21,7 +21,7 @@ export const CAMPAIGN_RECRUITS:readonly string[]=['satoshi','xalt','potocaicai']
 export const LATE_ROUTE_RIVALS:readonly string[]=[
     'freshprince','blorfo','rlarsson','thxobama','lifeisameme','leviosa','gpm','bimba','erik','nate','bigswole','mandela',
     'alpha777','vamp','crapto','dumpstar','guest14','guest13','guest12','guest11','guest10','guest09','guest08',
-    'rune','zephyr',
+    'rune','zephyr','stonedalabamahuman',
 ];
 // Player recruitment remains Hub-only for all five; three are story guardians.
 // Existing earned recruits from older saves remain valid.
@@ -32,7 +32,7 @@ export const BONUS_RECRUIT_EVERY=3;
 /** The last two chapters (the Hatchery and Verse Gate) keep their fighters as rewards for beating them. */
 const BONUS_PROTECTED_CHAPTERS=2;
 /** Hatchery pins and the supplied recruits stay rewards for beating them, even where the battle order puts them in an earlier chapter's slots. */
-export const HATCHERY_PINS:readonly string[]=['michael','buddhashadow','theo'];
+export const HATCHERY_PINS:readonly string[]=['michael','buddhashadow','theo','stonedalabamahuman'];
 const BONUS_PROTECTED_FIGHTERS=new Set<string>([...HATCHERY_PINS,...CAMPAIGN_RECRUITS]);
 const curatedRivals=new Set(CAMPAIGN_RIVAL_IDS);
 // Frozen orders are migration schemas, never the source of the live campaign roster.
@@ -83,7 +83,7 @@ export function campaignForStages(stages:readonly StageId[]=STORY_STAGE_IDS,regi
  * Reorders who is fought at each battle number while every slot keeps its place: its stage, chapter and
  * map marker stay where the route put them. Before Golden Sproto the order ends with the recruits, the
  * moved opening rivals (LATE_ROUTE_RIVALS) and then every twin. Sprotel Bitcoin instead closes the
- * Bar chapter; everyone else keeps their relative order.
+ * Bar chapter. StonedAlabamaHuman closes the single-body stretch before the twins.
  */
 function battleOrder(route:readonly Encounter[]):Encounter[]{
     const golden=route.findIndex(e=>e.opponent==='rivet'),end=golden<0?route.length:golden;

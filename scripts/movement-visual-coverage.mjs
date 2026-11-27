@@ -39,8 +39,10 @@ for(const f of pc.fighters){
   const seen=f.actual_facing_visually_sampled;
   add(f.id,'live-pairs-c',Object.keys(seen).filter(k=>seen[k].length).map(Number),Object.values(seen).flat().map(i=>itinerary[i].label),Object.values(seen).reduce((n,s)=>n+s.length,0),'scenario/facing combinations with visual samples',[...pc.limitations,...(pc.captured_only_or_unobserved??[])],[...f.observations,...(f.unresolved_contact_findings??[]),...(pc.residuals??[])]);
 }
-const theo=load('live-theo');
-add('theo','live-theo',theo.facings,theo.states,theo.observationCount,theo.countUnit,theo.gaps,theo.findings);
+for(const id of ['theo','stonedalabamahuman']){
+  const record='live-'+id, review=load(record);
+  add(id,record,review.facings,review.states,review.observationCount,review.countUnit,review.gaps,review.findings);
+}
 const batch=load('live-batch-nov03');
 for(const entry of [...batch.fighters,...batch.mergeBaseFighters]){
   add(entry.id,'live-batch-nov03',[-1,1],batch.states,entry.samples,'inspected atlas samples',

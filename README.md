@@ -1,6 +1,6 @@
 # Sproto Arena
 
-A local TypeScript / Canvas 2D fighting game with **254 installed fighters**,
+A local TypeScript / Canvas 2D fighting game with **255 installed fighters**,
 CPU/practice opponents, 70 selectable arenas and a campaign that grows with the installed roster.
 No game engine, multiplayer transport or deployment.
 
@@ -66,18 +66,19 @@ current encounter. Story wins persist in either mode; free-play wins do not.
 Testing mode turns off on reload. Completing the campaign also grants a durable
 God Mode selection reward. God Mode does not bypass P1 recruitment locks.
 
-The curated campaign contains exactly **250 distinct rivals across 247 encounters**,
+The curated campaign contains exactly **251 distinct rivals across 248 encounters**,
 including Artdude → Artchick, Nick → Juicy, and Morelight → VMU as sequential
-pairs. The 254 registered fighters include two starters and two additional
+pairs. The 255 registered fighters include two starters and two additional
 Hub-only fighters outside the campaign. Captain Green, Sun God and Pissing Sproto
 are guardians in the Marina, Castle and Bar chapters; Sprotel Bitcoin is the final
-Bar encounter. Defeating the guardians advances the story while their player
+Bar encounter. StonedAlabamaHuman is the last single-body rival before the Hatchery twins.
+Defeating him recruits him. Defeating the guardians advances the story while their player
 selection still requires the matching Hub Relic. Existing earned recruits, wins,
 and God Mode rewards remain valid.
 The fixed campaign order is independent of menu registration order.
 
 The expanded 3840 × 2160 Higgsfield map uses the existing world as its reference.
-All 247 encounter markers follow newly traced roads across the same eight regions;
+All 248 encounter markers follow newly traced roads across the same eight regions;
 region shortcuts and “Find next fight” zoom to readable detail. Original map
 assets are retained. Boss animation sequences and the Nick/Juicy pre-fight scene
 remain in their established order.
@@ -211,7 +212,7 @@ own trajectories. All rounds are untimed.
 Gameplay changes are being evaluated in staged drafts described in
 [the gameplay plan](docs/GAMEPLAY-PLAN-20261105.md) and [measurement notes](docs/balance/README.md).
 Free fights have Easy, Normal, Hard and Expert CPU choices (Normal by default).
-Story difficulty follows the actual 247-encounter route and offers an optional
+Story difficulty follows the actual 248-encounter route and offers an optional
 easier retry after three losses on an encounter.
 
 The fighter select's **Rules** choice switches CPU and local versus fights between

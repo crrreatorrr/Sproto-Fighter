@@ -35,6 +35,7 @@ export function effectSound(effect: Pick<Effect, 'kind' | 'color'>, freeze: numb
         case 'charge': return 'charge';
         case 'dash': return 'dash';
         case 'pumpkin': return 'shotImpact';
+        case 'catScratch': return null; // The confirmed hit already supplies the impact sound.
     }
 }
 /**
