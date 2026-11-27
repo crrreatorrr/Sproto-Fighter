@@ -1,16 +1,33 @@
 import {describe,it,expect} from 'vitest';
-import {PLAYABLE_FIGHTERS} from '../src/core';
+import {PLAYABLE_FIGHTERS,isPairedFighter} from '../src/core';
 import {campaignForStages,createStoryProgress,STORY_ENCOUNTERS,STORY_OPPONENTS,RELIC_GUARDIAN_RIVALS,STORY_SAVE_KEY,STARTER_FIGHTERS} from '../src/storyProgress';
 import {STORY_STAGE_IDS} from '../src/stage';
 import {storyChapterRule} from '../src/storyRules';
 import {storyAnimationPlan} from '../src/storyAnimation';
 
-describe('250-rival campaign',()=>{
- it('has exactly 250 registered identities, 247 nodes, and the three final pairs in order',()=>{
-  expect(STORY_OPPONENTS).toHaveLength(250);expect(new Set(STORY_OPPONENTS).size).toBe(250);expect(STORY_ENCOUNTERS).toHaveLength(247);
+describe('251-rival campaign',()=>{
+ it('has exactly 251 registered identities, 248 nodes, and the three final pairs in order',()=>{
+  expect(STORY_OPPONENTS).toHaveLength(251);expect(new Set(STORY_OPPONENTS).size).toBe(251);expect(STORY_ENCOUNTERS).toHaveLength(248);
   expect(STORY_OPPONENTS.every(id=>PLAYABLE_FIGHTERS.includes(id))).toBe(true);
   expect(STORY_ENCOUNTERS.slice(-3).map(e=>e.opponents)).toEqual([['sproto865','sproto943'],['nick','guest07'],['vela','vaudream']]);
   expect(campaignForStages(STORY_STAGE_IDS,[...PLAYABLE_FIGHTERS].reverse())).toEqual(STORY_ENCOUNTERS);
+ });
+ it('adds the final solo Hatchery recruit before the twins and preserves completed saves',()=>{
+  const id='stonedalabamahuman', previous=campaignForStages(STORY_STAGE_IDS,PLAYABLE_FIGHTERS.filter(f=>f!==id));
+  const twins=STORY_ENCOUNTERS.findIndex(e=>isPairedFighter(e.opponent)), encounter=STORY_ENCOUNTERS[twins-1];
+  expect(encounter).toMatchObject({id:'story-v1-'+id,stage:'hatchery',opponents:[id]});
+  expect(STORY_ENCOUNTERS.filter(e=>e!==encounter).map((e,index)=>({...e,index}))).toEqual(previous);
+  const values=new Map([[STORY_SAVE_KEY,JSON.stringify({version:3,cleared:previous.map(e=>e.id),unlocked:[],godModeUnlocked:true})]]);
+  const disk={getItem:(key:string)=>values.get(key)??null,setItem:(key:string,value:string)=>{values.set(key,value);}};
+  const progress=createStoryProgress(disk);
+  expect(progress.snapshot().nextIndex).toBe(encounter.index);
+  expect(progress.snapshot().godModeUnlocked).toBe(true);
+  expect(progress.isUnlocked(id)).toBe(false);
+  expect(progress.begin(encounter.index)).toBe(true);
+  expect(progress.win(encounter.index)).toBe(true);
+  const saved=createStoryProgress(disk);
+  expect(saved.isUnlocked(id)).toBe(true);
+  expect(saved.snapshot().completed).toBe(true);
  });
  it('ends the Bar chapter with Sprotel Bitcoin before proceeding to the Hatchery',()=>{
   const bar=STORY_ENCOUNTERS.filter(e=>e.stage==='bar'),finale=bar.at(-1)!;
@@ -45,7 +62,7 @@ describe('250-rival campaign',()=>{
    expect(e.stage).toBe(guardian.stage);
    for(const progress of [p,stale,createStoryProgress(disk)]){expect(progress.isCleared(e.index)).toBe(true);expect(progress.isUnlocked(e.opponent)).toBe(false);expect(progress.begin(e.index)).toBe(true);expect(progress.win(e.index)).toBe(true);expect(progress.isUnlocked(e.opponent)).toBe(false);}
   }
-  expect(createStoryProgress(disk).snapshot().unlocked).toHaveLength(249);
+  expect(createStoryProgress(disk).snapshot().unlocked).toHaveLength(250);
  });
  it('preserves every previous clear and earned reward when the three new guardian gaps are inserted',()=>{
   const guardians=new Set(RELIC_GUARDIAN_RIVALS.map(g=>g.id));

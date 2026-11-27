@@ -1,10 +1,10 @@
 {
   "date": "2026-11-03",
   "pending": [],
-  "owners": 254,
-  "singleBodyOwners": 234,
+  "owners": 255,
+  "singleBodyOwners": 235,
   "pairedOwners": 20,
-  "bodyAtlases": 274,
+  "bodyAtlases": 275,
   "everyFrameVisuallyApproved": 0,
   "limits": [
     "Counts use different explicit units; do not add them as comparable frames.",
@@ -11057,6 +11057,36 @@
         "Inspected combat and animation contact sheets. The batch runtime QA covers both facings and all supported movement and combat families."
       ],
       "record": "docs/evidence/movement-followup-20261102/live-batch-nov03-late.json"
+    },
+    {
+      "id": "stonedalabamahuman",
+      "name": "StonedAlabamaHuman",
+      "bodies": [
+        "stonedalabamahuman"
+      ],
+      "reviewer": "live-stonedalabamahuman",
+      "status": "sampled browser observations; not every-frame or full-match approval",
+      "facings": [
+        -1,
+        1
+      ],
+      "states": [
+        "Guard",
+        "Light punch contact",
+        "Heavy strike contact",
+        "Cat Toss release",
+        "Launcher contact",
+        "Crimson Combination first contact"
+      ],
+      "observationCount": 12,
+      "countUnit": "inspected in-browser renderer samples",
+      "gaps": [
+        "Six states sampled in both directions against a plain background. This record covers pose selection and registration, not the timing of continuous match playback."
+      ],
+      "findings": [
+        "Each planted pose meets the same floor in both directions. The front glove reaches toward the rival at release, the launcher lifts one glove above the head, and the red cross remains readable at native match scale."
+      ],
+      "record": "docs/evidence/movement-followup-20261102/live-stonedalabamahuman.json"
     }
   ]
 }

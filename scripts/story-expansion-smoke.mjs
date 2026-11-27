@@ -47,7 +47,7 @@ try{
 
  check('registered baseline102 and current roster each produce exact distinct opponents and grouped boss nodes',()=>{
   assert.equal(baseline.length,102);verifyRoute(baseline,campaignForStages(STORY_STAGE_IDS,baseline));verifyRoute(PLAYABLE_FIGHTERS,STORY_ENCOUNTERS);
-  assert.equal(STORY_ROSTER_COUNTS.installed,PLAYABLE_FIGHTERS.length);assert.equal(STORY_ROSTER_COUNTS.rivals,250);assert.equal(STORY_ROSTER_COUNTS.encounters,247);assert.equal(STORY_ROSTER_COUNTS.missing,0);assert.deepEqual(STORY_OPPONENTS,STORY_ENCOUNTERS.flatMap(e=>e.opponents));
+  assert.equal(STORY_ROSTER_COUNTS.installed,PLAYABLE_FIGHTERS.length);assert.equal(STORY_ROSTER_COUNTS.rivals,251);assert.equal(STORY_ROSTER_COUNTS.encounters,248);assert.equal(STORY_ROSTER_COUNTS.missing,0);assert.deepEqual(STORY_OPPONENTS,STORY_ENCOUNTERS.flatMap(e=>e.opponents));
  });
  check('the recruits, the moved opening rivals except the Bar finale, then every twin come before Golden; recruits only when registered',()=>{
   for(const registry of [baseline,PLAYABLE_FIGHTERS,futureRegistry]){
@@ -74,9 +74,9 @@ try{
   writeFileSync(join(fixture,'storyProgress.ts'),readFileSync(resolve('src/storyProgress.ts'),'utf8'));
   assert.equal(spawnSync(process.execPath,[resolve('node_modules/typescript/bin/tsc'),join(fixture,'storyProgress.ts'),'--noEmit','--module','commonjs','--target','ES2022','--skipLibCheck','--resolveJsonModule','--esModuleInterop'],{stdio:'inherit'}).status,0);
  });
- check('future registrations leave the curated 250 rivals unchanged',()=>{
+ check('future registrations leave the curated 251 rivals unchanged',()=>{
   assert.equal(futureRegistry.length,futureSize);const route=campaignForStages(STORY_STAGE_IDS,futureRegistry);verifyRoute(futureRegistry,route);
-  assert.equal(route.flatMap(e=>e.opponents).length,250);assert.equal(route.length,247);assert.ok(PLAYABLE_FIGHTERS.every(f=>!f.startsWith('qa_registered_fixture_')));
+  assert.equal(route.flatMap(e=>e.opponents).length,251);assert.equal(route.length,248);assert.ok(PLAYABLE_FIGHTERS.every(f=>!f.startsWith('qa_registered_fixture_')));
   const p=createStoryProgress(disk(),route,futureRegistry);finish(p,route);assert.equal(p.snapshot().completed,true);assert.equal(p.snapshot().unlocked.length,PLAYABLE_FIGHTERS.length-relicCount(PLAYABLE_FIGHTERS));
  });
  check('absent references never become opponents and duplicate registry inputs are harmless',()=>{
@@ -160,5 +160,5 @@ try{
  check('unavailable storage retains session progress and reports that it is not persistent',()=>{
   const p=createStoryProgress({getItem(){throw Error('blocked');},setItem(){throw Error('quota');}});assert.equal(p.snapshot().persistent,false);assert.ok(p.win(0));assert.ok(p.win(1));assert.equal(p.snapshot().cleared.length,2);assert.equal(p.snapshot().persistent,false);
  });
- console.log(`${groups} expanded campaign groups passed; actual installed ${PLAYABLE_FIGHTERS.length}, rivals ${STORY_OPPONENTS.length}, encounters ${STORY_ENCOUNTERS.length}, missing to250 ${STORY_ROSTER_COUNTS.missing}.`);
+ console.log(`${groups} expanded campaign groups passed; actual installed ${PLAYABLE_FIGHTERS.length}, rivals ${STORY_OPPONENTS.length}, encounters ${STORY_ENCOUNTERS.length}, missing to target ${STORY_ROSTER_COUNTS.missing}.`);
 }finally{rmSync(temp,{recursive:true,force:true});}

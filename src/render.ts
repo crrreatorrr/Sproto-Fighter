@@ -1,7 +1,7 @@
 import {drawActiveStoryLocation} from './stageVariants';
 import { setPoseAtlasThrowState, setPoseAtlasPresentation } from './poseAtlas';
 import type { RoundPresentation } from './animationEvents';
-import { drawPower, drawSharedRanged, drawRetainDefeat, drawVitalikDefeatCaption } from './powerArt';
+import { drawAlabamaCat, drawPower, drawSharedRanged, drawRetainDefeat, drawVitalikDefeatCaption } from './powerArt';
 import { drawMindBeams } from './mindBeamArt';
 import { drawPelvicAttacks } from './pelvicAttack';
 import { drawTeamSpecialBack, drawTeamSpecialFront } from './teamSpecial';
@@ -225,7 +225,7 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         const chestLaser=p.shape==='eyeLaser'&&owner.id==='theo';
         c.save();
         c.translate(p.shape==='retain'?Math.round(p.x):p.x,p.shape==='retain'?Math.round(p.y):p.y);
-        if(p.shape==='miniSproto'||chestLaser)c.scale(p.vx<0?-1:1,1);
+        if(p.shape==='catToss'||p.shape==='miniSproto'||chestLaser)c.scale(p.vx<0?-1:1,1);
         else if(p.shape!=='retain'&&p.shape!=='referenceB'&&p.shape!=='yellowEight'&&p.shape!=='ethereum')c.rotate(Math.atan2(p.vy,p.vx));
         const shared=sharedRangedAssignments.get(owner.id as typeof PLAYABLE_FIGHTERS[number]);
         if(shared===undefined||p.shape!==COMBAT_STYLES[owner.id].projectile.shape||!drawSharedRanged(c,shared))
@@ -245,6 +245,20 @@ export function render(c: CanvasRenderingContext2D, s: CombatState, presentation
         for(const contact of COMBAT_STYLES[f.id].specialFrames){const age=f.move.t-contact;if(age>=0&&age<18){c.save();c.translate(Math.round(f.x+f.facing*(110+age*24)),Math.round(f.y-105));c.globalAlpha=Math.min(1,(18-age)/5);drawPower(c,'retain',age,ROSTER[f.id].color);c.restore();}}
     }
     for (const e of s.effects) {
+        if (e.kind === 'catScratch') {
+            // The simulation can stop mid-scratch on KO. Finish the remaining
+            // cels on the round-outro clock instead of pinning a cat to the loser.
+            const outroAge = presentation?.phase === 'outro' || presentation?.phase === 'result' ? presentation.frame : 0;
+            const age = e.max - e.life + outroAge;
+            if (age >= e.max) continue;
+            const target = s.fighters[e.target];
+            c.save();
+            c.translate(Math.round(target.x + e.offsetX), Math.round(target.y + e.offsetY));
+            c.scale(e.facing, 1);
+            drawAlabamaCat(c, age, true);
+            c.restore();
+            continue;
+        }
         const life = e.life / e.max;
         c.save();
         c.globalAlpha = life;

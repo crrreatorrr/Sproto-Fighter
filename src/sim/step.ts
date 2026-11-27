@@ -325,7 +325,15 @@ export function step(s: CombatState, inputs: [
             if(s.matchDepth?.modifier==='reflect-projectiles' && canGuard(s,p.owner,getMove(s.fighters[p.owner],'bolt'),'bolt') && !p.beamLength){
                 p.owner=1-p.owner;p.vx=-p.vx;p.vy=-p.vy;p.x=target.x+target.facing*(bodySpread(target.id)+40);continue;
             }
-            damage(s, p.owner, { ...getMove(s.fighters[p.owner],'bolt'), damage: p.damage }, 'bolt', true);
+            const hit = damage(s, p.owner, { ...getMove(s.fighters[p.owner],'bolt'), damage: p.damage }, 'bolt', true);
+            if (hit && p.shape === 'catToss') {
+                const facing = p.vx < 0 ? -1 : 1;
+                s.effects.push({
+                    kind: 'catScratch', target: 1 - p.owner, facing, color: '#ffffff',
+                    x: p.x, y: p.y, offsetX: p.x - target.x, offsetY: p.y - target.y,
+                    life: 24, max: 24,
+                });
+            }
             if(p.beamLength)p.beamHit=true;else p.life=0;
         }
     }

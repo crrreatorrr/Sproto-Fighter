@@ -1,5 +1,5 @@
 /** Curated story identities; menu/asset registration order must not reshuffle saves. */
-export const STORY_RIVAL_TARGET=250;
+export const STORY_RIVAL_TARGET=251;
 export const CAMPAIGN_RIVAL_IDS:readonly string[]=[
     'rivet','vela','zephyr','mox','rune','guest07',
     'guest08','guest09','guest10','guest11','guest12','guest13',
@@ -42,7 +42,7 @@ export const CAMPAIGN_RIVAL_IDS:readonly string[]=[
     'laserbach','freedfrida','contresens','sprotomidnightfx','mildtacos','sprotosurvivor',
     'd86','cantankerous','autistophrenicsprotagonist','sprotolg','kerrieanne','yusuf',
     'bobdobbs','gluttony','slakesly','jameskaminski','86gwei','sidelinereferee',
-    'zebracorn','corn','zakarum','bgbadger',
+    'zebracorn','corn','zakarum','bgbadger','stonedalabamahuman',
 ];
 /** Existing Relic fighters can be rivals while their P1 unlock remains Hub-only. */
 export const RELIC_GUARDIAN_RIVALS:readonly {id:string;stage:string}[]=[
